@@ -16,7 +16,7 @@ export class FakeBillingRepository implements BillingRepository {
   readonly users = new Set<string>();
   readonly events = new Map<string, StoredBillingEvent & { providerEventId: string; outcome: string | null }>();
   readonly ledger: LedgerRow[] = [];
-  readonly entitlements = new Map<string, Entitlement & { subscriptionId: string | null; providerUpdatedAt: Date | null }>();
+  readonly entitlements = new Map<string, Entitlement & { subscriptionId: string | null; orderId: string | null; providerUpdatedAt: Date | null }>();
 
   recordEvent(_tx: never, event: { providerEventId: string; type: string; payload: unknown }): Promise<string | null> {
     if ([...this.events.values()].some((e) => e.providerEventId === event.providerEventId)) return Promise.resolve(null);
@@ -64,13 +64,22 @@ export class FakeBillingRepository implements BillingRepository {
     return Promise.resolve(this.insert({ userId: input.userId, delta, reason: 'refund', externalRef: `${input.orderRef}:refund:${target}` }) ? 'applied' : 'duplicate');
   }
 
-  upsertSubscription(input: { userId: string; subscriptionId: string; entitlement: Entitlement; providerUpdatedAt: Date }): Promise<'applied' | 'stale' | 'unknown_user'> {
+  upsertSubscription(input: {
+    userId: string;
+    subscriptionId: string;
+    orderId: string;
+    entitlement: Entitlement;
+    providerUpdatedAt: Date;
+    now: Date;
+  }): Promise<'applied' | 'stale' | 'other_subscription' | 'unknown_user'> {
     if (!this.users.has(input.userId)) return Promise.resolve('unknown_user');
     const current = this.entitlements.get(input.userId);
-    if (current?.providerUpdatedAt && current.subscriptionId === input.subscriptionId && current.providerUpdatedAt >= input.providerUpdatedAt) {
-      return Promise.resolve('stale');
+    if (current?.subscriptionId === input.subscriptionId) {
+      if (current.providerUpdatedAt && current.providerUpdatedAt >= input.providerUpdatedAt) return Promise.resolve('stale');
+    } else if (current?.subscriptionId && current.periodEnd > input.now && input.entitlement.periodEnd <= current.periodEnd) {
+      return Promise.resolve('other_subscription');
     }
-    this.entitlements.set(input.userId, { ...input.entitlement, subscriptionId: input.subscriptionId, providerUpdatedAt: input.providerUpdatedAt });
+    this.entitlements.set(input.userId, { ...input.entitlement, subscriptionId: input.subscriptionId, orderId: input.orderId, providerUpdatedAt: input.providerUpdatedAt });
     return Promise.resolve('applied');
   }
 
@@ -84,8 +93,14 @@ export class FakeBillingRepository implements BillingRepository {
     return Promise.resolve(null);
   }
 
-  subscriptionOf(userId: string): Promise<string | null> {
-    return Promise.resolve(this.entitlements.get(userId)?.subscriptionId ?? null);
+  endSubscriptionForOrder(orderId: string, entitlement: Entitlement): Promise<string | null> {
+    for (const [userId, e] of this.entitlements) {
+      if (e.orderId === orderId) {
+        Object.assign(e, { periodStart: entitlement.periodStart, periodEnd: entitlement.periodEnd });
+        return Promise.resolve(userId);
+      }
+    }
+    return Promise.resolve(null);
   }
 
   async reservePath(input: { userId: string; pathRef: string }, decide: (state: LockedQuotaState) => Promise<PathCharge>): Promise<PathCharge> {

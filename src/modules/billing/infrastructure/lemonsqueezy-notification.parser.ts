@@ -30,6 +30,7 @@ const subscription = z.object({
   type: z.literal('subscriptions'),
   id: providerId,
   attributes: z.object({
+    order_id: providerId,
     variant_id: providerId,
     status: z.enum(['on_trial', 'active', 'paused', 'past_due', 'unpaid', 'cancelled', 'expired']),
     renews_at: isoDate.nullable(),
@@ -91,6 +92,7 @@ export class LemonSqueezyNotificationParser implements NotificationParser {
         kind: 'subscription',
         event,
         subscriptionId: s.data.id,
+        orderId: a.order_id,
         userId,
         variantId: a.variant_id,
         status: a.status,
