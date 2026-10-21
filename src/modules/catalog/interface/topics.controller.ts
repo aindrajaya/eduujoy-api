@@ -35,6 +35,6 @@ export class TopicsController {
   @ApiProblem(429)
   @ApiServiceUnavailable()
   resolve(@CurrentUser() user: AuthUser, @Body() body: TopicResolveRequestDto): Promise<ResolveTopicView> {
-    return this.resolveTopic.execute(user.userId, body.text);
+    return this.resolveTopic.execute(user.userId, body.text, { createNew: body.createNew === true });
   }
 }

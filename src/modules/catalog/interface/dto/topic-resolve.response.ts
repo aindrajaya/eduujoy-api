@@ -23,7 +23,11 @@ export class TopicChoiceDto extends TopicDto {
 }
 
 /** Contract TopicResolveResponse. */
-@ApiSchema({ name: 'TopicResolveResponse', description: '`matched` (similarity ≥ 0.88), `choices` (0.75–0.88, at most 3), or `created` (new topic).' })
+@ApiSchema({
+  name: 'TopicResolveResponse',
+  description:
+    "`matched` (similarity at or above the server's match threshold), `choices` (at most 3, between the choice and match thresholds), or `created` (new topic). Thresholds are server-side and may be tuned.",
+})
 export class TopicResolveResponseDto {
   @ApiProperty({ enum: ['matched', 'choices', 'created'] }) @Expose() status!: 'matched' | 'choices' | 'created';
   @ApiPropertyOptional({ type: TopicDto }) @Expose() @Type(() => TopicDto) topic?: TopicDto;

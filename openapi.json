@@ -632,6 +632,11 @@
       "TopicResolveRequest": {
         "additionalProperties": false,
         "properties": {
+          "createNew": {
+            "default": false,
+            "description": "Skip matching and create a topic from `text` (after the learner rejected the choices). Subject to the daily new-topic cap (429).",
+            "type": "boolean"
+          },
           "text": {
             "maxLength": 120,
             "minLength": 2,
@@ -644,7 +649,7 @@
         "type": "object"
       },
       "TopicResolveResponse": {
-        "description": "`matched` (similarity ≥ 0.88), `choices` (0.75–0.88, at most 3), or `created` (new topic).",
+        "description": "`matched` (similarity at or above the server's match threshold), `choices` (at most 3, between the choice and match thresholds), or `created` (new topic). Thresholds are server-side and may be tuned.",
         "properties": {
           "choices": {
             "items": {
@@ -715,7 +720,7 @@
     "contact": {},
     "description": "Generated from the NestJS app; checked against docs/contract/openapi.v0.yaml by `pnpm openapi:check`.",
     "title": "Eduujoy API",
-    "version": "0.4.0-v0"
+    "version": "0.5.0-v0"
   },
   "openapi": "3.1.0",
   "paths": {

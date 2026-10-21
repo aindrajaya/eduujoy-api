@@ -225,6 +225,40 @@ describe('ResolveTopic', () => {
     expect(t.events).toEqual([]);
   });
 
+  it('carries the method and top two similarities on TopicResolved for re-tuning', async () => {
+    const t = setup();
+    t.embedder.queries.set('frontend state', at(similarityAngle(0.69)));
+
+    await t.resolve.execute('u1', 'hooks');
+    await t.resolve.execute('u1', 'frontend state');
+
+    expect(t.events[0]).toMatchObject({ method: 'exact', topSimilarity: 1, secondSimilarity: null });
+    expect(t.events[1]).toMatchObject({ method: 'vector', topSimilarity: 0.69, secondSimilarity: expect.closeTo(0.67, 2) as unknown });
+  });
+
+  describe('createNew (contract 0.5.0)', () => {
+    it('skips matching and creates from the text, even when it would offer choices', async () => {
+      const t = setup();
+      t.embedder.queries.set('frontend state', at(similarityAngle(0.69)));
+      t.normalizer.result = { canonicalName: 'Frontend state management', domain: 'software', description: 'State in UIs.', aliases: [] };
+
+      const view = await t.resolve.execute('u1', 'frontend state', { createNew: true });
+
+      expect(view).toMatchObject({ status: 'created', topic: { canonicalName: 'Frontend state management' } });
+      expect(t.embedder.requests.map((r) => r.kind)).toEqual(['document']);
+      expect(t.events[0]).toMatchObject({ status: 'created', method: 'create_new', topSimilarity: null });
+    });
+
+    it('still returns an existing visible topic instead of a duplicate, and keeps the daily cap', async () => {
+      const t = setup();
+      t.normalizer.result = { canonicalName: 'React hooks', domain: 'software', description: 'x', aliases: [] };
+      await expect(t.resolve.execute('u1', 'hookz in react', { createNew: true })).resolves.toMatchObject({ status: 'matched', topic: { id: t.topics.hooks.id } });
+
+      for (let i = 0; i < DAILY_TOPIC_CREATE_LIMIT; i++) t.repo.add({ slug: `mine-${i}`, canonicalName: `Mine ${i}`, createdBy: 'u1' });
+      await expect(t.resolve.execute('u1', 'pottery', { createNew: true })).rejects.toBeInstanceOf(TopicCreateLimitError);
+    });
+  });
+
   it('rejects text with nothing left after normalising', async () => {
     await expect(setup().resolve.execute('u1', '?!')).rejects.toBeInstanceOf(TopicTextInvalidError);
   });
