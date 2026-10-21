@@ -1,12 +1,10 @@
 import { Global, Inject, Logger, Module, type OnApplicationShutdown, type OnModuleInit } from '@nestjs/common';
-import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import { ReadinessRegistry } from '../common/health';
 import { AppConfig } from '../config';
+import { createDatabase, type Database } from './database';
 import { describeError } from './redact';
-import * as schema from './schema';
 
-export type Database = NodePgDatabase<typeof schema>;
 export const DATABASE = Symbol('DATABASE');
 export const PG_POOL = Symbol('PG_POOL');
 
@@ -30,7 +28,7 @@ export function poolConfig(config: AppConfig): ConstructorParameters<typeof Pool
     {
       provide: DATABASE,
       inject: [PG_POOL],
-      useFactory: (pool: Pool): Database => drizzle(pool, { schema, casing: 'snake_case' }),
+      useFactory: (pool: Pool): Database => createDatabase(pool),
     },
   ],
   exports: [DATABASE],

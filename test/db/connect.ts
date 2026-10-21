@@ -1,8 +1,7 @@
-import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { Client } from 'pg';
-import * as schema from '../../src/shared/db/schema';
+import { createDatabase, type Database } from '../../src/shared/db/database';
 
-export type TestDb = NodePgDatabase<typeof schema>;
+export type TestDb = Database;
 
 export function testSchema(): string {
   const name = process.env['EDUUJOY_TEST_SCHEMA'];
@@ -21,5 +20,5 @@ export async function connectTestClient(schemaName = testSchema()): Promise<Clie
 }
 
 export function testDb(client: Client): TestDb {
-  return drizzle(client, { schema, casing: 'snake_case' });
+  return createDatabase(client);
 }
