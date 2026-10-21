@@ -715,7 +715,7 @@
     "contact": {},
     "description": "Generated from the NestJS app; checked against docs/contract/openapi.v0.yaml by `pnpm openapi:check`.",
     "title": "Eduujoy API",
-    "version": "0.3.0-v0"
+    "version": "0.4.0-v0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -1438,6 +1438,7 @@
     },
     "/v1/topics/resolve": {
       "post": {
+        "description": "If the embedding provider is unavailable, the API falls back to a name and alias search\nand returns `choices` when any are close enough; it never creates a topic during an\noutage. If nothing is close, it returns 503 with Retry-After.\n",
         "operationId": "topicsResolve",
         "parameters": [
           {
@@ -1506,6 +1507,25 @@
             "headers": {
               "Retry-After": {
                 "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "503": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "A dependency is briefly unavailable (code SERVICE_UNAVAILABLE). Retry after the given wait.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying (30 for topic resolve). Exposed to allow-listed origins via CORS.",
+                "schema": {
+                  "minimum": 1,
                   "type": "integer"
                 }
               }

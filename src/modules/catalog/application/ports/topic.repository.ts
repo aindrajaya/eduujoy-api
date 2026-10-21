@@ -55,6 +55,11 @@ export interface TopicRepository {
    * Like nearest(), only topics `viewerId` may see: a topic flagged needs_review is its creator's alone.
    */
   findExact(normalised: string, slug: string, viewerId: string): Promise<TopicView[]>;
+  /**
+   * Visible topics whose name or an alias is trigram-similar to `normalised` (pg_trgm, 0..1), best first:
+   * the fallback when the embedding provider is down.
+   */
+  similarNames(normalised: string, minimum: number, limit: number, viewerId: string): Promise<NearTopic[]>;
   /** Nearest visible topics embedded with the same model and version, most similar first. */
   nearest(query: TopicEmbedding, limit: number, viewerId: string): Promise<NearTopic[]>;
   /**

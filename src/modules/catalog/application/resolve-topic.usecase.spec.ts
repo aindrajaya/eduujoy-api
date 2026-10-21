@@ -3,7 +3,7 @@ import { type AiBudgetGuard, AiBudgetExceededError, type Embedder, type Embeddin
 import { EventBus } from '../../../shared/events/event-bus';
 import { type TopicResolved } from '../domain/events/topic-resolved.event';
 import { FakeTopicRepository } from './catalog.fakes';
-import { TopicCreateLimitError, TopicTextInvalidError } from './errors';
+import { TopicCreateLimitError, TopicSearchUnavailableError, TopicTextInvalidError } from './errors';
 import { type NormalisedTopic, type TopicNormalizer } from './ports/topic-normalizer';
 import { DAILY_TOPIC_CREATE_LIMIT, ResolveTopic } from './resolve-topic.usecase';
 
@@ -17,10 +17,12 @@ class ScriptedEmbedder implements Embedder {
   readonly requests: EmbeddingRequest[] = [];
   queries = new Map<string, number[]>();
   failDocuments = false;
+  failQueries = false;
 
   embed(request: EmbeddingRequest) {
     this.requests.push(request);
     if (request.kind === 'document' && this.failDocuments) return Promise.reject(new Error('gemini down'));
+    if (request.kind === 'query' && this.failQueries) return Promise.reject(new Error('gemini down'));
     const vectors = request.texts.map((t) => (request.kind === 'query' ? (this.queries.get(t) ?? [0, 0, 1]) : at(3)));
     const call = { provider: 'google' as const, model: MODEL.model, usage: { inputTokens: 1, cacheWriteTokens: 0, cacheReadTokens: 0, outputTokens: 0 }, latencyMs: 1 };
     return Promise.resolve({ vectors, ...MODEL, call });
@@ -197,6 +199,29 @@ describe('ResolveTopic', () => {
 
     await expect(t.resolve.execute('u1', 'hooks')).resolves.toMatchObject({ status: 'matched', topic: { id: t.topics.hooks.id } });
     expect(t.embedder.requests).toHaveLength(1);
+  });
+
+  it('falls back to name search during an embedding outage, offering close names as choices', async () => {
+    const t = setup();
+    t.embedder.failQueries = true;
+    t.repo.nameScores.set('react-hooks', 0.62).set('react', 0.41).set('vue', 0.1);
+
+    const view = await t.resolve.execute('u1', 'reakt hookz');
+
+    expect(view).toEqual({ status: 'choices', choices: [expect.objectContaining({ id: t.topics.hooks.id, similarity: 0.62 }), expect.objectContaining({ id: t.topics.react.id, similarity: 0.41 })] });
+    expect(t.normalizer.calls).toEqual([]);
+  });
+
+  it('answers 503 with Retry-After 30 during an outage when no name is close, and creates nothing', async () => {
+    const t = setup();
+    t.embedder.failQueries = true;
+
+    const error = await t.resolve.execute('u1', 'sourdough baking').catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(TopicSearchUnavailableError);
+    expect((error as TopicSearchUnavailableError).retryAfterSeconds).toBe(30);
+    expect(t.repo.topics.size).toBe(3);
+    expect(t.events).toEqual([]);
   });
 
   it('rejects text with nothing left after normalising', async () => {

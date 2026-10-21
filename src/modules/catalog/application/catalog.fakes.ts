@@ -68,6 +68,18 @@ export class FakeTopicRepository implements TopicRepository {
     return Promise.resolve(hits.map(view));
   }
 
+  /** Tests set this to stand in for pg_trgm scores. */
+  nameScores = new Map<string, number>();
+
+  similarNames(_normalised: string, minimum: number, limit: number, viewerId: string): Promise<NearTopic[]> {
+    const hits = [...this.topics.values()]
+      .filter((t) => visible(t, viewerId) && (this.nameScores.get(t.slug) ?? 0) >= minimum)
+      .map((t) => ({ topic: view(t), similarity: this.nameScores.get(t.slug) ?? 0 }))
+      .sort((a, b) => b.similarity - a.similarity)
+      .slice(0, limit);
+    return Promise.resolve(hits);
+  }
+
   nearest(query: TopicEmbedding, limit: number, viewerId: string): Promise<NearTopic[]> {
     const near = [...this.topics.values()]
       .filter((t) => visible(t, viewerId) && t.embedding && t.embedding.model === query.model && t.embedding.version === query.version)
