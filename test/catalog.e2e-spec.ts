@@ -192,6 +192,19 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
     expect(await db.select().from(topics).where(eq(topics.createdBy, userId))).toEqual([]);
   });
 
+  it('creates a topic with createNew when the learner rejects the choices (contract 0.5.0)', async () => {
+    const { userId, cookie } = await signedInUser();
+    // A recorded golden phrase that lands in the choices band.
+    const offered = await resolve(cookie, { text: 'storing documents in mongodb' }).expect(200);
+    expect((offered.body as ResolveBody).status).toBe('choices');
+
+    const created = await resolve(cookie, { text: 'storing documents in mongodb', createNew: true }).expect(200);
+
+    expect(created.body).toMatchObject({ status: 'created', topic: { canonicalName: 'Storing documents in mongodb' } });
+    expect(await db.select().from(topics).where(eq(topics.createdBy, userId))).toHaveLength(1);
+    await resolve(cookie, { text: 'storing documents in mongodb', createNew: 'yes' }).expect(400);
+  });
+
   it('validates input and enforces CSRF and auth', async () => {
     const { cookie } = await signedInUser();
 

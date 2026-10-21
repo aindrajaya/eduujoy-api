@@ -11,7 +11,7 @@ import {
   slugify,
   topicDocument,
 } from '../domain/resolution';
-import { TopicResolved } from '../domain/events/topic-resolved.event';
+import { type ResolveMethod, TopicResolved } from '../domain/events/topic-resolved.event';
 import { TopicCreateLimitError, TopicSearchUnavailableError, TopicTextInvalidError } from './errors';
 import { TOPIC_NORMALIZER, type NormalisedTopic, type TopicNormalizer } from './ports/topic-normalizer';
 import { type NewTopic, TOPIC_REPOSITORY, type TopicRepository, type TopicView } from './ports/topic.repository';
@@ -29,12 +29,28 @@ export type ResolveTopicView =
   | { status: 'choices'; choices: (TopicView & { similarity: number })[] }
   | { status: 'created'; topic: TopicView };
 
+/** What decided a resolution, for the TopicResolved event and the per-resolve log line. */
+interface Signal {
+  method: ResolveMethod;
+  top: number | null;
+  second: number | null;
+}
+
 interface Resolution {
   view: ResolveTopicView;
   needsReview: boolean;
+  signal: Signal;
 }
 
-const found = (view: ResolveTopicView): Resolution => ({ view, needsReview: false });
+const EXACT: Signal = { method: 'exact', top: 1, second: null };
+const CREATE_NEW: Signal = { method: 'create_new', top: null, second: null };
+
+const found = (view: ResolveTopicView, signal: Signal): Resolution => ({ view, needsReview: false, signal });
+
+export interface ResolveOptions {
+  /** Contract 0.5.0: skip matching and create from `text` (the learner rejected the choices). */
+  createNew?: boolean;
+}
 
 /** POST /v1/topics/resolve (FR-01, FR-02): exact name or alias, then vector search, then create. */
 @Injectable()
@@ -49,18 +65,21 @@ export class ResolveTopic {
     private readonly events: EventBus,
   ) {}
 
-  async execute(userId: string, text: string): Promise<ResolveTopicView> {
+  async execute(userId: string, text: string, options: ResolveOptions = {}): Promise<ResolveTopicView> {
     const key = normaliseTopicText(text);
     if (key.length === 0) throw new TopicTextInvalidError('Topic text has no letters or digits');
-    const { view, needsReview } = await this.resolve(userId, text, key);
-    await this.events.publish(new TopicResolved(userId, view.status, view.status === 'choices' ? null : view.topic.id, needsReview));
+    const { view, needsReview, signal } = options.createNew ? await this.create(userId, text, CREATE_NEW) : await this.resolve(userId, text, key);
+    const topicId = view.status === 'choices' ? null : view.topic.id;
+    // Scores only, never the learner's text: enough to re-tune thresholds from the score distribution.
+    this.logger.log({ status: view.status, method: signal.method, topSimilarity: signal.top, secondSimilarity: signal.second, topicId }, 'Topic resolved');
+    await this.events.publish(new TopicResolved(userId, view.status, topicId, needsReview, signal.method, signal.top, signal.second));
     return view;
   }
 
   private async resolve(userId: string, text: string, key: string): Promise<Resolution> {
     // An exact name, alias or slug costs no embedding call; an alias shared by two topics falls through.
     const exact = await this.topics.findExact(key, slugify(key), userId);
-    if (exact.length === 1 && exact[0]) return found({ status: 'matched', topic: exact[0] });
+    if (exact.length === 1 && exact[0]) return found({ status: 'matched', topic: exact[0] }, EXACT);
 
     let embedded;
     try {
@@ -73,10 +92,12 @@ export class ResolveTopic {
     const near = await this.topics.nearest({ vector, model: embedded.model, version: embedded.version }, NEIGHBOURS, userId);
     const byId = new Map(near.map((n) => [n.topic.id, n.topic] as const));
     const decision = decide(near.map((n) => ({ topicId: n.topic.id, similarity: clampSimilarity(n.similarity) })));
+    const scores = near.map((n) => clampSimilarity(n.similarity)).sort((a, b) => b - a);
+    const signal: Signal = { method: 'vector', top: scores[0] ?? null, second: scores[1] ?? null };
 
     if (decision.kind === 'matched') {
       const topic = byId.get(decision.topicId);
-      if (topic) return found({ status: 'matched', topic });
+      if (topic) return found({ status: 'matched', topic }, signal);
     }
     if (decision.kind === 'choices') {
       return found({
@@ -85,9 +106,9 @@ export class ResolveTopic {
           const topic = byId.get(c.topicId);
           return topic ? [{ ...topic, similarity: c.similarity }] : [];
         }),
-      });
+      }, signal);
     }
-    return this.create(userId, text);
+    return this.create(userId, text, signal);
   }
 
   /** Embedding outage: close names become choices; nothing is ever created, since that would duplicate topics. */
@@ -95,10 +116,11 @@ export class ResolveTopic {
     this.logger.warn({ err: error }, 'Query embedding failed; falling back to name search');
     const near = await this.topics.similarNames(key, NAME_FALLBACK_MINIMUM, MAX_CHOICES, userId);
     if (near.length === 0) throw new TopicSearchUnavailableError(OUTAGE_RETRY_AFTER_SECONDS);
-    return found({ status: 'choices', choices: near.map((n) => ({ ...n.topic, similarity: clampSimilarity(n.similarity) })) });
+    const choices = near.map((n) => ({ ...n.topic, similarity: clampSimilarity(n.similarity) }));
+    return found({ status: 'choices', choices }, { method: 'name_fallback', top: choices[0]?.similarity ?? null, second: choices[1]?.similarity ?? null });
   }
 
-  private async create(userId: string, text: string): Promise<Resolution> {
+  private async create(userId: string, text: string, signal: Signal): Promise<Resolution> {
     const now = new Date();
     const dayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
     const limited = (): TopicCreateLimitError => new TopicCreateLimitError(Math.max(1, Math.ceil((dayStart.getTime() + 86_400_000 - now.getTime()) / 1000)));
@@ -111,7 +133,7 @@ export class ResolveTopic {
       const names = [normalised.topic.canonicalName, ...normalised.topic.aliases].map(normaliseTopicText);
       for (const name of names) {
         const existing = await this.topics.findExact(name, slugify(name), userId);
-        if (existing.length === 1 && existing[0]) return found({ status: 'matched', topic: existing[0] });
+        if (existing.length === 1 && existing[0]) return found({ status: 'matched', topic: existing[0] }, signal);
       }
     }
 
@@ -128,8 +150,8 @@ export class ResolveTopic {
     };
     const result = await this.topics.create(topic, { since: dayStart, max: DAILY_TOPIC_CREATE_LIMIT });
     if (result.outcome === 'limited') throw limited();
-    if (result.outcome === 'exists') return found({ status: 'matched', topic: result.topic });
-    return { view: { status: 'created', topic: result.topic }, needsReview: topic.needsReview };
+    if (result.outcome === 'exists') return found({ status: 'matched', topic: result.topic }, signal);
+    return { view: { status: 'created', topic: result.topic }, needsReview: topic.needsReview, signal };
   }
 
   /** Haiku when the budget allows; otherwise the learner's own words, flagged for review. Never fails. */
