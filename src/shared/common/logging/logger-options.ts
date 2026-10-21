@@ -58,3 +58,20 @@ export function buildPinoOptions(env: Pick<Env, 'LOG_LEVEL' | 'NODE_ENV'>): Logg
       : {}),
   };
 }
+
+interface LoggableRequest {
+  route?: { path?: unknown };
+  baseUrl?: string;
+  user?: { userId?: unknown };
+}
+
+/**
+ * Extra fields on each request log line (PRD-API §12): the matched route pattern (never raw IDs or
+ * query strings) and the signed-in user, which JwtAuthGuard sets before the response is logged.
+ */
+export function requestLogProps(req: LoggableRequest): { route?: string; userId?: string } {
+  const pattern = typeof req.route?.path === 'string' ? `${req.baseUrl ?? ''}${req.route.path}` : undefined;
+  const userId = typeof req.user?.userId === 'string' ? req.user.userId : undefined;
+  return { ...(pattern ? { route: pattern } : {}), ...(userId ? { userId } : {}) };
+}
+

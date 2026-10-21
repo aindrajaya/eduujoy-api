@@ -2,7 +2,7 @@ import { type IncomingMessage, type ServerResponse } from 'node:http';
 import { Module } from '@nestjs/common';
 import { LoggerModule } from 'nestjs-pino';
 import { AppConfig } from '../../config';
-import { buildPinoOptions, REQUEST_ID_HEADER, resolveRequestId, sanitizeUrl } from './logger-options';
+import { buildPinoOptions, REQUEST_ID_HEADER, requestLogProps, resolveRequestId, sanitizeUrl } from './logger-options';
 
 const QUIET_PATHS = new Set(['/health']);
 
@@ -19,6 +19,7 @@ const QUIET_PATHS = new Set(['/health']);
             return id;
           },
           quietReqLogger: true,
+          customProps: (req: IncomingMessage) => requestLogProps(req as Parameters<typeof requestLogProps>[0]),
           customAttributeKeys: { reqId: 'requestId', responseTime: 'latencyMs' },
           autoLogging: { ignore: (req: IncomingMessage) => QUIET_PATHS.has(sanitizeUrl(req.url)) },
           serializers: {
