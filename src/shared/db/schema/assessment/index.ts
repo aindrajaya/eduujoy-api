@@ -26,6 +26,8 @@ export const diagnosticItemKind = pgEnum('diagnostic_item_kind', [
 ]);
 export const diagnosticStatus = pgEnum('diagnostic_status', ['in_progress', 'completed']);
 export const submissionStatus = pgEnum('submission_status', ['queued', 'grading', 'graded', 'failed']);
+/** How a placement was reached: graded items, or the self-report alone (no item bank yet). */
+export const placementBasis = pgEnum('placement_basis', ['items', 'self_report']);
 
 /** `body` holds { prompt, options?, answerKey? }; answer keys never leave the API. */
 export const diagnosticItems = pgTable(
@@ -111,6 +113,8 @@ export const placements = pgTable(
     bloom: bloomLevel('bloom').notNull(),
     confidence: real('confidence').notNull(),
     reason: text('reason').notNull(),
+    /** `self_report` placements are re-placed once the topic has an item bank. */
+    basis: placementBasis('basis').notNull().default('items'),
     ...withCreatedAt,
   },
   (t) => [
