@@ -1,6 +1,7 @@
 import { sql } from 'drizzle-orm';
 import {
   type AnyPgColumn,
+  boolean,
   check,
   index,
   integer,
@@ -13,6 +14,7 @@ import {
   vector,
 } from 'drizzle-orm/pg-core';
 import { EMBEDDING_DIMENSIONS, withCreatedAt, withUpdatedAt } from '../common';
+import { users } from '../identity';
 
 export const topicDomain = pgEnum('topic_domain', ['software', 'stem', 'non_technical']);
 export const topicOrigin = pgEnum('topic_origin', ['seed', 'learner', 'reviewer']);
@@ -28,6 +30,10 @@ export const topics = pgTable(
     domain: topicDomain('domain'),
     parentId: uuid('parent_id').references((): AnyPgColumn => topics.id, { onDelete: 'set null' }),
     origin: topicOrigin('origin').notNull().default('seed'),
+    /** The learner whose text created the topic (FR-02 create path); caps creates per user and day. */
+    createdBy: uuid('created_by').references(() => users.id, { onDelete: 'set null' }),
+    /** Created without the normaliser or without an embedding; a reviewer checks the name and domain. */
+    needsReview: boolean('needs_review').notNull().default(false),
     embedding: vector('embedding', { dimensions: EMBEDDING_DIMENSIONS }),
     embeddingModel: text('embedding_model'),
     embeddingVersion: integer('embedding_version'),
@@ -37,6 +43,7 @@ export const topics = pgTable(
   (t) => [
     uniqueIndex('topics_slug_key').on(t.slug),
     index('topics_parent_id_idx').on(t.parentId),
+    index('topics_created_by_idx').on(t.createdBy, t.createdAt),
     index('topics_embedding_hnsw_idx').using('hnsw', t.embedding.op('vector_cosine_ops')),
   ],
 );
