@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Eduujoy API
-  version: 0.3.0-v0
+  version: 0.4.0-v0
   summary: Frozen v0 contract for the Eduujoy MVP.
   description: |
     Frozen v0 contract, written from PRD-API Section 7 (endpoints), Section 8 and master PRD
@@ -178,6 +178,10 @@ paths:
       tags: [catalog]
       operationId: topicsResolve
       summary: Resolve free text to a canonical topic or up to 3 choices (FR-01, FR-02).
+      description: |
+        If the embedding provider is unavailable, the API falls back to a name and alias search
+        and returns `choices` when any are close enough; it never creates a topic during an
+        outage. If nothing is close, it returns 503 with Retry-After.
       parameters:
         - $ref: '#/components/parameters/XRequestedWith'
       requestBody:
@@ -194,6 +198,7 @@ paths:
         '400': { $ref: '#/components/responses/ValidationError' }
         '401': { $ref: '#/components/responses/Unauthorized' }
         '429': { $ref: '#/components/responses/TooManyRequests' }
+        '503': { $ref: '#/components/responses/ServiceUnavailable' }
 
   /v1/diagnostics:
     post:
@@ -785,6 +790,15 @@ components:
       headers:
         Retry-After:
           description: Whole seconds until the next UTC midnight, when the daily budget resets (at least 1). Exposed to allow-listed origins via CORS.
+          schema: { type: integer, minimum: 1 }
+      content:
+        application/problem+json:
+          schema: { $ref: '#/components/schemas/Problem' }
+    ServiceUnavailable:
+      description: A dependency is briefly unavailable (code SERVICE_UNAVAILABLE). Retry after the given wait.
+      headers:
+        Retry-After:
+          description: Whole seconds to wait before retrying (30 for topic resolve). Exposed to allow-listed origins via CORS.
           schema: { type: integer, minimum: 1 }
       content:
         application/problem+json:
