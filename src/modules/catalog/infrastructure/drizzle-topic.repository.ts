@@ -56,6 +56,18 @@ export class DrizzleTopicRepository implements TopicRepository {
       .limit(5);
   }
 
+  async similarNames(normalised: string, minimum: number, limit: number, viewerId: string): Promise<NearTopic[]> {
+    // Best of the name and every alias; the catalog is small, so no trigram index yet.
+    const score = sql<number>`greatest(similarity(lower(${topics.canonicalName}), ${normalised}), coalesce((select max(similarity(lower(alias), ${normalised})) from unnest(${topics.aliases}) as alias), 0))`;
+    const rows = await this.db
+      .select({ ...VIEW, score })
+      .from(topics)
+      .where(and(visibleTo(viewerId), sql`${score} >= ${minimum}`))
+      .orderBy(sql`${score} desc`, asc(topics.slug))
+      .limit(limit);
+    return rows.map(({ score: s, ...topic }) => ({ topic, similarity: s }));
+  }
+
   async nearest(query: TopicEmbedding, limit: number, viewerId: string): Promise<NearTopic[]> {
     const distance = cosineDistance(topics.embedding, query.vector);
     const rows = await this.db

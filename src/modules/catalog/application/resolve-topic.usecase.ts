@@ -5,13 +5,14 @@ import {
   clampSimilarity,
   decide,
   fallbackTopicName,
+  MAX_CHOICES,
   normaliseTopicText,
   queryText,
   slugify,
   topicDocument,
 } from '../domain/resolution';
 import { TopicResolved } from '../domain/events/topic-resolved.event';
-import { TopicCreateLimitError, TopicTextInvalidError } from './errors';
+import { TopicCreateLimitError, TopicSearchUnavailableError, TopicTextInvalidError } from './errors';
 import { TOPIC_NORMALIZER, type NormalisedTopic, type TopicNormalizer } from './ports/topic-normalizer';
 import { type NewTopic, TOPIC_REPOSITORY, type TopicRepository, type TopicView } from './ports/topic.repository';
 
@@ -19,6 +20,9 @@ import { type NewTopic, TOPIC_REPOSITORY, type TopicRepository, type TopicView }
 export const DAILY_TOPIC_CREATE_LIMIT = 10;
 /** Nearest neighbours fetched from the HNSW index before applying the thresholds. */
 const NEIGHBOURS = 5;
+/** Outage fallback (contract 0.4.0-v0): pg_trgm name/alias similarity that still offers choices. */
+export const NAME_FALLBACK_MINIMUM = 0.3;
+export const OUTAGE_RETRY_AFTER_SECONDS = 30;
 
 export type ResolveTopicView =
   | { status: 'matched'; topic: TopicView }
@@ -58,9 +62,14 @@ export class ResolveTopic {
     const exact = await this.topics.findExact(key, slugify(key), userId);
     if (exact.length === 1 && exact[0]) return found({ status: 'matched', topic: exact[0] });
 
-    const embedded = await this.embedder.embed({ stage: 'topic-resolve', texts: [queryText(text)], kind: 'query' });
+    let embedded;
+    try {
+      embedded = await this.embedder.embed({ stage: 'topic-resolve', texts: [queryText(text)], kind: 'query' });
+    } catch (error) {
+      return this.withoutEmbeddings(userId, key, error);
+    }
     const vector = embedded.vectors[0];
-    if (!vector) throw new Error('Embedder returned no vector');
+    if (!vector) return this.withoutEmbeddings(userId, key, new Error('Embedder returned no vector'));
     const near = await this.topics.nearest({ vector, model: embedded.model, version: embedded.version }, NEIGHBOURS, userId);
     const byId = new Map(near.map((n) => [n.topic.id, n.topic] as const));
     const decision = decide(near.map((n) => ({ topicId: n.topic.id, similarity: clampSimilarity(n.similarity) })));
@@ -79,6 +88,14 @@ export class ResolveTopic {
       });
     }
     return this.create(userId, text);
+  }
+
+  /** Embedding outage: close names become choices; nothing is ever created, since that would duplicate topics. */
+  private async withoutEmbeddings(userId: string, key: string, error: unknown): Promise<Resolution> {
+    this.logger.warn({ err: error }, 'Query embedding failed; falling back to name search');
+    const near = await this.topics.similarNames(key, NAME_FALLBACK_MINIMUM, MAX_CHOICES, userId);
+    if (near.length === 0) throw new TopicSearchUnavailableError(OUTAGE_RETRY_AFTER_SECONDS);
+    return found({ status: 'choices', choices: near.map((n) => ({ ...n.topic, similarity: clampSimilarity(n.similarity) })) });
   }
 
   private async create(userId: string, text: string): Promise<Resolution> {

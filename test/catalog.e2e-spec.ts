@@ -175,6 +175,23 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
     expect(Object.keys(body).sort()).toEqual(['status', 'topic']);
   });
 
+  // Queries without a recorded vector fail like a Gemini outage, so they exercise the contract 0.4.0 fallback.
+  it('falls back to name search during an embedding outage, and otherwise answers 503 with Retry-After', async () => {
+    const { userId, cookie } = await signedInUser();
+    const before = await db.select({ id: topics.id }).from(topics);
+
+    const typo = await resolve(cookie, { text: 'kubernetis' }).expect(200);
+    const body = typo.body as ResolveBody;
+    expect(body.status).toBe('choices');
+    expect(slugById.get(body.choices?.[0]?.id ?? '')).toBe('kubernetes');
+
+    const none = await resolve(cookie, { text: 'zqxv wkpj' }).expect(503);
+    expect((none.body as { code: string }).code).toBe('SERVICE_UNAVAILABLE');
+    expect(none.headers['retry-after']).toBe('30');
+    expect(await db.select({ id: topics.id }).from(topics)).toHaveLength(before.length);
+    expect(await db.select().from(topics).where(eq(topics.createdBy, userId))).toEqual([]);
+  });
+
   it('validates input and enforces CSRF and auth', async () => {
     const { cookie } = await signedInUser();
 

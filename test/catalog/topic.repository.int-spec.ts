@@ -47,6 +47,17 @@ describe('DrizzleTopicRepository (integration)', () => {
     expect(await repo.findExact(`react hook ${tag}`, 'x', VIEWER)).toEqual([]);
   });
 
+  it('scores names and aliases by trigram similarity for the outage fallback', async () => {
+    const near = await repo.similarNames(`react hookz ${tag}`, 0.3, 3, VIEWER);
+    expect(near[0]?.topic.canonicalName).toBe(`React hooks ${tag}`);
+    expect(near[0]?.similarity).toBeGreaterThan(0.5);
+    expect(near.every((n, i) => i === 0 || (near[i - 1]?.similarity ?? 0) >= n.similarity)).toBe(true);
+
+    const byAlias = await repo.similarNames(`usestat-${tag}`, 0.3, 3, VIEWER);
+    expect(byAlias[0]?.topic.canonicalName).toBe(`React hooks ${tag}`);
+    expect(await repo.similarNames('zzqx vvkj', 0.3, 3, VIEWER)).toEqual([]);
+  });
+
   it('returns nearest topics by cosine for the same model and version only', async () => {
     const near = await repo.nearest({ vector: at(Math.acos(0.9)), ...MODEL }, 50, VIEWER);
     const mine = near.filter((n) => n.topic.canonicalName.endsWith(tag));
