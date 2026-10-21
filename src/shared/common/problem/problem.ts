@@ -7,6 +7,8 @@ export type ProblemCode =
   | 'VALIDATION_FAILED'
   | 'UNAUTHENTICATED'
   | 'SESSION_REVOKED'
+  // Pending contract approval (docs/status/api.md, Contract change requests, 21 Oct 2026).
+  | 'REFRESH_CONCURRENT'
   | 'FORBIDDEN'
   | 'NOT_FOUND'
   | 'CONFLICT'

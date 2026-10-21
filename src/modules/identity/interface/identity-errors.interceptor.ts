@@ -28,6 +28,11 @@ export function toIdentityProblem(error: unknown): unknown {
     });
   }
   if (error instanceof SessionInvalidError) {
+    if (error.reason === 'concurrent') {
+      return new ProblemException(409, 'REFRESH_CONCURRENT', 'Refresh already in progress', {
+        detail: 'Another request rotated this session a moment ago; retry the original request once.',
+      });
+    }
     return error.reason === 'reuse'
       ? new ProblemException(401, 'SESSION_REVOKED', 'Session revoked', {
           detail: 'This sign-in was used elsewhere, so all its sessions were signed out.',

@@ -2,6 +2,17 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IDENTITY_CLOCK, type Clock, SECRET_HASHER, type SecretHasher } from './ports/crypto';
 import { SESSION_REPOSITORY, type SessionRepository } from './ports/session.repository';
 
+export interface LogoutCommand {
+  /** `sid` from a valid access token, when one was sent. */
+  sessionId?: string;
+  /** The `ej_rt` cookie, when one was sent. */
+  refreshToken?: string;
+}
+
+/**
+ * Works without a valid access token: an expired `ej_at` must not stop sign-out. Presenting a
+ * refresh token proves possession of its session, so revoking that session is always safe.
+ */
 @Injectable()
 export class Logout {
   constructor(
@@ -10,14 +21,12 @@ export class Logout {
     @Inject(IDENTITY_CLOCK) private readonly clock: Clock,
   ) {}
 
-  /** Revokes the access token's session and, if it belongs to the same user, the refresh cookie's. */
-  async execute(userId: string, sessionId: string, refreshToken: string | undefined): Promise<void> {
+  async execute(command: LogoutCommand): Promise<void> {
     const now = this.clock();
-    await this.sessions.revoke(sessionId, now);
-    if (!refreshToken) return;
-    const fromCookie = await this.sessions.findByRefreshHash(this.secrets.hashRefreshToken(refreshToken));
-    if (fromCookie && fromCookie.userId === userId && fromCookie.id !== sessionId) {
-      await this.sessions.revoke(fromCookie.id, now);
+    if (command.refreshToken) {
+      const session = await this.sessions.findByRefreshHash(this.secrets.hashRefreshToken(command.refreshToken));
+      if (session) await this.sessions.revoke(session.id, now);
     }
+    if (command.sessionId) await this.sessions.revoke(command.sessionId, now);
   }
 }

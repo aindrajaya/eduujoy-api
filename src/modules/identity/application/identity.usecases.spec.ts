@@ -163,25 +163,32 @@ describe('RefreshSession', () => {
 });
 
 describe('Logout', () => {
-  it('revokes the current session so its refresh token stops working', async () => {
+  it('revokes the session by its refresh cookie without an access token', async () => {
     const t = setup();
     const issued = await t.register.execute({ email: 'ada@example.com', password: 'correct horse' }, meta);
-    const claims = await t.tokens.verify(issued.accessToken, t.clock.now);
 
-    await t.logout.execute(issued.user.id, claims?.sessionId ?? '', issued.refreshToken);
+    await t.logout.execute({ refreshToken: issued.refreshToken });
 
     await expect(t.refresh.execute(issued.refreshToken, meta)).rejects.toMatchObject({ reason: 'revoked' });
   });
 
-  it("does not revoke another user's session through a planted refresh cookie", async () => {
+  it('revokes the access token session when only the access token is present', async () => {
     const t = setup();
-    const ada = await t.register.execute({ email: 'ada@example.com', password: 'correct horse' }, meta);
-    const bob = await t.register.execute({ email: 'bob@example.com', password: 'correct horse' }, meta);
-    const adaClaims = await t.tokens.verify(ada.accessToken, t.clock.now);
+    const issued = await t.register.execute({ email: 'ada@example.com', password: 'correct horse' }, meta);
+    const claims = await t.tokens.verify(issued.accessToken, t.clock.now);
 
-    await t.logout.execute(ada.user.id, adaClaims?.sessionId ?? '', bob.refreshToken);
+    await t.logout.execute({ sessionId: claims?.sessionId ?? '' });
 
-    await expect(t.refresh.execute(bob.refreshToken, meta)).resolves.toBeDefined();
+    await expect(t.refresh.execute(issued.refreshToken, meta)).rejects.toMatchObject({ reason: 'revoked' });
+  });
+
+  it('is a no-op for an unknown refresh token or no credentials at all', async () => {
+    const t = setup();
+    const issued = await t.register.execute({ email: 'ada@example.com', password: 'correct horse' }, meta);
+
+    await expect(t.logout.execute({ refreshToken: 'unknown' })).resolves.toBeUndefined();
+    await expect(t.logout.execute({})).resolves.toBeUndefined();
+    await expect(t.refresh.execute(issued.refreshToken, meta)).resolves.toBeDefined();
   });
 });
 
