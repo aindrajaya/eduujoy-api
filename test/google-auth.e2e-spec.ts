@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import request, { type Response } from 'supertest';
 import { GOOGLE_OAUTH_CLIENT, type GoogleIdentity, type GoogleOAuthClient } from '../src/modules/identity/application/ports/google';
 import { createTestApp, type TestApp } from './app';
+import { secretKeyPaths } from './leaks';
 
 const csrf = { Origin: 'http://localhost:5173', 'X-Requested-With': 'eduujoy' };
 
@@ -66,6 +67,8 @@ describe('Google OAuth (e2e)', () => {
     expect(cookie(res, 'ej_oauth')).toMatch(/ej_oauth=;/);
     const me = await http().get('/v1/auth/me').set('Cookie', `ej_at=${value(res, 'ej_at')}`).expect(200);
     expect((me.body as { user: { email: string } }).user.email).toBe(google.identity.email);
+    expect(secretKeyPaths(me.body)).toEqual([]);
+    expect(JSON.stringify(me.body)).not.toContain(google.identity.sub);
     expect(google.exchanged[0]?.codeVerifier).toMatch(/^[A-Za-z0-9_-]{64}$/);
   });
 
