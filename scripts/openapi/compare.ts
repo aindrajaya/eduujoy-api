@@ -214,6 +214,31 @@ export function compareToContract(api: OpenApiDoc, contract: OpenApiDoc, excepti
     }
   }
 
+  errors.push(...staleExceptions(api, contract, apiOps, contractOps, exceptions));
   const notImplemented = [...contractOps.keys()].filter((key) => !apiOps.has(key)).sort();
   return { errors, notImplemented, excepted };
+}
+
+/**
+ * An exception must keep suppressing a real difference: it is stale once the contract drops the
+ * parameter or the API implements it. Exceptions for operations not built yet stay valid.
+ */
+function staleExceptions(
+  api: OpenApiDoc,
+  contract: OpenApiDoc,
+  apiOps: Map<string, Obj>,
+  contractOps: Map<string, Obj>,
+  exceptions: ContractException[],
+): string[] {
+  return exceptions.flatMap((e) => {
+    const key = `${e.method.toUpperCase()} ${e.path}`;
+    const param = `${e.parameter.in}:${e.parameter.name}`;
+    const label = `exception ${key} ${param} is no longer needed`;
+    const fix = 'remove it from CONTRACT_EXCEPTIONS';
+    const contractOp = contractOps.get(key);
+    if (!contractOp || !parameters(contract, contractOp).has(param)) return [`${label} (not in the contract): ${fix}`];
+    const apiOp = apiOps.get(key);
+    if (apiOp && parameters(api, apiOp).has(param)) return [`${label} (the API implements it): ${fix}`];
+    return [];
+  });
 }

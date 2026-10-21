@@ -142,4 +142,45 @@ describe('compareToContract', () => {
     expect(result.errors).toEqual([expect.stringContaining('POST /logout parameter header:X-Requested-With')]);
     expect(result.excepted).toEqual(['GET /paths parameter query:status: lands in A9']);
   });
+
+  describe('stale exceptions', () => {
+    const exception = (path: string, name: string) => ({
+      method: 'get',
+      path,
+      parameter: { in: 'query', name },
+      reason: 'lands in A9',
+    });
+
+    it('keeps an exception for an operation that is not built yet', () => {
+      expect(compareToContract(api(), contract, [exception('/paths', 'status')]).errors).toEqual([]);
+    });
+
+    it('fails once the API implements the excepted parameter', () => {
+      const doc = api();
+      doc.paths = {
+        ...doc.paths,
+        '/paths': {
+          get: {
+            operationId: 'pathsList',
+            security: [{ cookieAuth: [] }],
+            parameters: [{ name: 'status', in: 'query', required: false, schema: { type: 'string' } }],
+            responses: { '200': { description: 'ok' } },
+          },
+        },
+      };
+
+      expect(compareToContract(doc, contract, [exception('/paths', 'status')]).errors).toEqual([
+        'exception GET /paths query:status is no longer needed (the API implements it): remove it from CONTRACT_EXCEPTIONS',
+      ]);
+    });
+
+    it('fails when the contract no longer has the operation or parameter', () => {
+      const errors = compareToContract(api(), contract, [exception('/gone', 'x'), exception('/paths', 'nope')]).errors;
+
+      expect(errors).toEqual([
+        'exception GET /gone query:x is no longer needed (not in the contract): remove it from CONTRACT_EXCEPTIONS',
+        'exception GET /paths query:nope is no longer needed (not in the contract): remove it from CONTRACT_EXCEPTIONS',
+      ]);
+    });
+  });
 });
