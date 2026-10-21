@@ -68,22 +68,42 @@ describe('DrizzleTopicRepository (integration)', () => {
       embedding: { vector: at(2), ...MODEL },
     };
 
-    const first = await repo.create(input);
-    const again = await repo.create({ ...input, canonicalName: 'Different name' });
+    const limit = { since: new Date(Date.now() - 60_000), max: 10 };
+    const first = await repo.create(input, limit);
+    const again = await repo.create({ ...input, canonicalName: 'Different name' }, limit);
 
-    expect(first).toMatchObject({ created: true, topic: { canonicalName: `Pottery ${tag}`, aliases: ['ceramics'], description: 'Shaping clay.' } });
-    expect(again).toEqual({ created: false, topic: first.topic });
+    expect(first).toMatchObject({ outcome: 'created', topic: { canonicalName: `Pottery ${tag}`, aliases: ['ceramics'], description: 'Shaping clay.' } });
+    expect(again).toEqual({ outcome: 'exists', topic: first.outcome === 'limited' ? null : first.topic });
     expect(await repo.countCreatedBy(userId, new Date(Date.now() - 60_000))).toBe(1);
     expect(await repo.countCreatedBy(userId, new Date(Date.now() + 60_000))).toBe(0);
   });
 
+  it('never lets parallel creates by one learner pass the cap', async () => {
+    const [user] = await db.insert(users).values({ email: `cap-${randomUUID()}@example.com` }).returning();
+    const createdBy = user?.id ?? '';
+    const limit = { since: new Date(Date.now() - 60_000), max: 3 };
+    const topic = (i: number) => ({ slug: slug(`cap-${i}`), canonicalName: `Cap ${i} ${tag}`, aliases: [], description: null, domain: null, createdBy, needsReview: false, embedding: null });
+
+    // Separate connections, so the creates really race; the advisory lock serialises them.
+    const clients = await Promise.all(Array.from({ length: 6 }, () => connectTestClient()));
+    try {
+      const results = await Promise.all(clients.map((c, i) => new DrizzleTopicRepository(testDb(c)).create(topic(i), limit)));
+      expect(results.filter((r) => r.outcome === 'created')).toHaveLength(3);
+      expect(results.filter((r) => r.outcome === 'limited')).toHaveLength(3);
+    } finally {
+      await Promise.all(clients.map((c) => c.end()));
+    }
+    expect(await repo.countCreatedBy(createdBy, limit.since)).toBe(3);
+  });
+
   it('lists topics without a current embedding and stores new ones', async () => {
-    const pending = (await repo.listUnembedded(MODEL.model, MODEL.version, 1000)).filter((t) => t.canonicalName.endsWith(tag));
+    const mine = (t: { canonicalName: string }) => t.canonicalName.endsWith(tag) && !t.canonicalName.startsWith('Cap ');
+    const pending = (await repo.listUnembedded(MODEL.model, MODEL.version, 1000)).filter(mine);
     expect(pending.map((t) => t.canonicalName).sort()).toEqual([`No embedding ${tag}`, `Old model ${tag}`]);
 
     for (const t of pending) await repo.setEmbedding(t.id, { vector: at(3), ...MODEL });
 
-    expect((await repo.listUnembedded(MODEL.model, MODEL.version, 1000)).filter((t) => t.canonicalName.endsWith(tag))).toEqual([]);
+    expect((await repo.listUnembedded(MODEL.model, MODEL.version, 1000)).filter(mine)).toEqual([]);
     expect((await repo.listUnembedded(MODEL.model, MODEL.version + 1, 1000)).some((t) => t.canonicalName === `React ${tag}`)).toBe(true);
   });
 });

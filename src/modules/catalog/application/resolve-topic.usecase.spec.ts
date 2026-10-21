@@ -165,6 +165,16 @@ describe('ResolveTopic', () => {
     }
   });
 
+  it('rejects a create that loses the race to the cap after passing the pre-check', async () => {
+    const t = setup();
+    for (let i = 0; i < DAILY_TOPIC_CREATE_LIMIT; i++) t.repo.add({ slug: `mine-${i}`, canonicalName: `Mine ${i}`, createdBy: 'u1' });
+    // A parallel request created the last topics between the pre-check and the insert.
+    t.repo.countCreatedBy = () => Promise.resolve(0);
+
+    await expect(t.resolve.execute('u1', 'pottery')).rejects.toBeInstanceOf(TopicCreateLimitError);
+    expect([...t.repo.topics.values()].filter((x) => x.createdBy === 'u1')).toHaveLength(DAILY_TOPIC_CREATE_LIMIT);
+  });
+
   it('falls through to vector search when an alias is shared by two topics', async () => {
     const t = setup();
     t.repo.add({ slug: 'react-native', canonicalName: 'React Native', aliases: ['hooks'] });

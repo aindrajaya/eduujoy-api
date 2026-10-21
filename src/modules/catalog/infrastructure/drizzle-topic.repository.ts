@@ -3,6 +3,8 @@ import { and, asc, cosineDistance, eq, gte, isNotNull, ne, or, sql } from 'drizz
 import { DATABASE, type Database } from '../../../shared/db';
 import { topics } from '../../../shared/db/schema/catalog';
 import {
+  type CreateLimit,
+  type CreateResult,
   type NearTopic,
   type NewTopic,
   type TopicEmbedding,
@@ -55,8 +57,16 @@ export class DrizzleTopicRepository implements TopicRepository {
     return rows.map(({ distance: d, ...topic }) => ({ topic, similarity: 1 - d }));
   }
 
-  async create(topic: NewTopic): Promise<{ topic: TopicView; created: boolean }> {
-    const [row] = await this.db
+  create(topic: NewTopic, limit: CreateLimit): Promise<CreateResult> {
+    return this.db.transaction(async (tx) => {
+      // Serialises one creator's count + insert, so parallel requests can't pass the daily cap.
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtextextended(${`topic-create:${topic.createdBy}`}, 0))`);
+      const [count] = await tx
+        .select({ n: sql<number>`count(*)::int` })
+        .from(topics)
+        .where(and(eq(topics.createdBy, topic.createdBy), gte(topics.createdAt, limit.since)));
+      if ((count?.n ?? 0) >= limit.max) return { outcome: 'limited' as const };
+      const [row] = await tx
       .insert(topics)
       .values({
         slug: topic.slug,
@@ -73,10 +83,11 @@ export class DrizzleTopicRepository implements TopicRepository {
       })
       .onConflictDoNothing({ target: topics.slug })
       .returning(VIEW);
-    if (row) return { topic: row, created: true };
-    const [existing] = await this.db.select(VIEW).from(topics).where(eq(topics.slug, topic.slug));
-    if (!existing) throw new Error(`Topic ${topic.slug} vanished during create`);
-    return { topic: existing, created: false };
+      if (row) return { outcome: 'created' as const, topic: row };
+      const [existing] = await tx.select(VIEW).from(topics).where(eq(topics.slug, topic.slug));
+      if (!existing) throw new Error(`Topic ${topic.slug} vanished during create`);
+      return { outcome: 'exists' as const, topic: existing };
+    });
   }
 
   async countCreatedBy(userId: string, since: Date): Promise<number> {

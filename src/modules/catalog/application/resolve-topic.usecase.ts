@@ -84,10 +84,9 @@ export class ResolveTopic {
   private async create(userId: string, text: string): Promise<Resolution> {
     const now = new Date();
     const dayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
-    if ((await this.topics.countCreatedBy(userId, dayStart)) >= DAILY_TOPIC_CREATE_LIMIT) {
-      const nextDay = dayStart.getTime() + 86_400_000;
-      throw new TopicCreateLimitError(Math.max(1, Math.ceil((nextDay - now.getTime()) / 1000)));
-    }
+    const limited = (): TopicCreateLimitError => new TopicCreateLimitError(Math.max(1, Math.ceil((dayStart.getTime() + 86_400_000 - now.getTime()) / 1000)));
+    // Cheap pre-check so a capped learner costs no Haiku call; create() enforces the cap atomically.
+    if ((await this.topics.countCreatedBy(userId, dayStart)) >= DAILY_TOPIC_CREATE_LIMIT) throw limited();
 
     const normalised = await this.normalise(text);
     // The normalised name may be one the catalog already has ("reactjs hooks" → "React hooks").
@@ -110,8 +109,9 @@ export class ResolveTopic {
       needsReview: normalised.topic === null,
       embedding: await this.embedDocument(fields),
     };
-    const result = await this.topics.create(topic);
-    if (!result.created) return found({ status: 'matched', topic: result.topic });
+    const result = await this.topics.create(topic, { since: dayStart, max: DAILY_TOPIC_CREATE_LIMIT });
+    if (result.outcome === 'limited') throw limited();
+    if (result.outcome === 'exists') return found({ status: 'matched', topic: result.topic });
     return { view: { status: 'created', topic: result.topic }, needsReview: topic.needsReview };
   }
 
