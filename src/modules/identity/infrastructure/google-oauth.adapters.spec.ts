@@ -119,7 +119,10 @@ describe('JoseOAuthStateStore', () => {
     await expect(store.open(`${sealed.slice(0, -2)}xx`)).resolves.toBeNull();
   });
 
-  it('rejects a protocol-relative returnTo even if correctly signed', async () => {
-    await expect(store.open(await store.seal({ ...state, returnTo: '//evil.example' }))).resolves.toBeNull();
-  });
+  it.each(['//evil.example', '/a\\b', 'https://evil.example', '/today\n'])(
+    'rejects an unsafe returnTo %j even if correctly signed',
+    async (returnTo) => {
+      await expect(store.open(await store.seal({ ...state, returnTo }))).resolves.toBeNull();
+    },
+  );
 });

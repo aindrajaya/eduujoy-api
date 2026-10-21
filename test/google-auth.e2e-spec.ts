@@ -72,12 +72,12 @@ describe('Google OAuth (e2e)', () => {
   it('returns to an allow-listed origin taken from the Referer, and ignores foreign ones', async () => {
     const staging = await start('', 'https://eduujoy.aindrajaya.my.id/start');
     const fromStaging = await callback(`code=abc&state=${staging.state}`, staging.oauthCookie);
-    expect(fromStaging.headers.location).toBe('https://eduujoy.aindrajaya.my.id/');
+    expect(fromStaging.headers.location).toBe('https://eduujoy.aindrajaya.my.id/today');
 
     google.identity = { ...google.identity, sub: `g-${randomUUID()}`, email: `g-${randomUUID()}@example.com` };
     const evil = await start('', 'https://evil.example/phish');
     const fromEvil = await callback(`code=abc&state=${evil.state}`, evil.oauthCookie);
-    expect(fromEvil.headers.location).toBe('http://localhost:5173/');
+    expect(fromEvil.headers.location).toBe('http://localhost:5173/today');
   });
 
   it('rejects a mismatched state with ?error=oauth_state and sets no session', async () => {
@@ -98,12 +98,41 @@ describe('Google OAuth (e2e)', () => {
     expect(res.headers.location).toBe('http://localhost:5173/?error=oauth_denied');
   });
 
-  it.each(['//evil.example', '/\\evil.example', 'https://evil.example', 'paths'])(
-    'refuses returnTo=%s (open redirect)',
-    async (returnTo) => {
-      await http().get(`/v1/auth/google?returnTo=${encodeURIComponent(returnTo)}`).expect(400);
-    },
-  );
+  it.each([
+    '//evil.example',
+    '//evil.example/today',
+    '/\\evil.example',
+    '/a\\b',
+    'https://evil.example',
+    'javascript:alert(1)',
+    'paths',
+    '/\t/evil.example',
+    '/today\r\nSet-Cookie: x=y',
+    '/today\u0000',
+    '',
+  ])('never redirects to returnTo=%j; falls back to /today', async (returnTo) => {
+    const { state, oauthCookie } = await start(`?returnTo=${encodeURIComponent(returnTo)}`);
+
+    const res = await callback(`code=abc&state=${state}`, oauthCookie);
+
+    expect(res.headers.location).toBe('http://localhost:5173/today');
+  });
+
+  it('falls back to /today when returnTo is repeated', async () => {
+    const { state, oauthCookie } = await start('?returnTo=/a&returnTo=//evil.example');
+
+    const res = await callback(`code=abc&state=${state}`, oauthCookie);
+
+    expect(res.headers.location).toBe('http://localhost:5173/today');
+  });
+
+  it('defaults to /today without returnTo', async () => {
+    const { state, oauthCookie } = await start('');
+
+    const res = await callback(`code=abc&state=${state}`, oauthCookie);
+
+    expect(res.headers.location).toBe('http://localhost:5173/today');
+  });
 
   it('links an existing password account by verified email and disables its password', async () => {
     const email = `link-${randomUUID()}@example.com`;

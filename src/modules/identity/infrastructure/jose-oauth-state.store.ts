@@ -2,6 +2,7 @@ import { createHmac } from 'node:crypto';
 import { errors, jwtVerify, SignJWT } from 'jose';
 import { z } from 'zod';
 import { OAUTH_STATE_TTL_SECONDS, type OAuthState, type OAuthStateStore } from '../application/ports/google';
+import { isSafeReturnTo } from '../domain/return-to';
 
 const AUDIENCE = 'eduujoy-oauth-state';
 
@@ -10,7 +11,7 @@ const stateSchema = z.object({
   codeVerifier: z.string().min(43).max(128),
   nonce: z.string().min(32).max(128),
   origin: z.url(),
-  returnTo: z.string().regex(/^\/(?![/\\])/).max(512),
+  returnTo: z.string().refine(isSafeReturnTo, { error: 'returnTo must be a safe same-site path' }),
 });
 
 /** Signs the OAuth round-trip state; the key is derived so it can never verify as an access token. */

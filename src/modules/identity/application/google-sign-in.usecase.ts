@@ -36,7 +36,7 @@ export class StartGoogleSignIn {
     @Inject(OAUTH_STATE_STORE) private readonly states: OAuthStateStore,
   ) {}
 
-  /** `origin` must already be validated against APP_ORIGIN and `returnTo` be a same-site path. */
+  /** `origin` must already be validated against APP_ORIGIN and `returnTo` passed through safeReturnTo. */
   async execute(input: { origin: string; returnTo: string }): Promise<{ redirectUrl: string; sealedState: string }> {
     const state = random(32);
     const codeVerifier = random(48);
