@@ -1,4 +1,4 @@
-/** Plan allowance and credits are both used up (429 QUOTA_EXCEEDED, contract QuotaExceeded). */
+/** Plan allowance and credits are both used up (402 QUOTA_EXCEEDED on POST /v1/paths, contract QuotaExceeded). */
 export class QuotaExceededError extends Error {
   override name = 'QuotaExceededError';
 
