@@ -1,16 +1,15 @@
-import { Controller, Get, HttpStatus, Req, Res } from '@nestjs/common';
-import { type Request, type Response } from 'express';
+import { Controller, Get, HttpStatus, SerializeOptions } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AppConfig } from '../../config';
 import { Public } from '../auth/decorators';
+import { ApiProblem } from '../openapi/decorators';
+import { ProblemException } from '../problem/problem';
+import { HealthResponseDto } from './health.response';
 import { ReadinessRegistry } from './readiness.registry';
 
-interface HealthBody {
-  status: 'ok';
-  version: string;
-  checks?: Record<string, string>;
-}
-
+@ApiTags('health')
 @Public()
+@SerializeOptions({ type: HealthResponseDto })
 @Controller()
 export class HealthController {
   constructor(
@@ -19,29 +18,25 @@ export class HealthController {
   ) {}
 
   @Get('health')
-  health(): HealthBody {
+  @ApiOperation({ operationId: 'health', summary: 'Liveness.' })
+  @ApiOkResponse({ description: 'Alive.', type: HealthResponseDto })
+  health(): HealthResponseDto {
     return { status: 'ok', version: this.version };
   }
 
   @Get('ready')
-  async ready(@Req() req: Request, @Res({ passthrough: true }) res: Response): Promise<HealthBody | undefined> {
+  @ApiOperation({ operationId: 'ready', summary: 'Readiness; checks the database.' })
+  @ApiOkResponse({ description: 'Ready.', type: HealthResponseDto })
+  @ApiProblem(503, 'Not ready (a dependency check failed). Code `SERVICE_UNAVAILABLE`, type `/problems/not-ready`.')
+  async ready(): Promise<HealthResponseDto> {
     const { ready, checks } = await this.readiness.run();
     if (ready) return { status: 'ok', version: this.version, checks };
 
-    res
-      .status(HttpStatus.SERVICE_UNAVAILABLE)
-      .type('application/problem+json')
-      .json({
-        type: `${this.config.env.API_PUBLIC_URL}/problems/not-ready`,
-        title: 'Service not ready',
-        status: HttpStatus.SERVICE_UNAVAILABLE,
-        detail: `Failing checks: ${Object.keys(checks)
-          .filter((name) => checks[name] !== 'ok')
-          .join(', ')}`,
-        code: 'INTERNAL',
-        requestId: typeof req.id === 'string' ? req.id : '',
-      });
-    return undefined;
+    const failing = Object.keys(checks).filter((name) => checks[name] !== 'ok');
+    throw new ProblemException(HttpStatus.SERVICE_UNAVAILABLE, 'SERVICE_UNAVAILABLE', 'Service not ready', {
+      detail: `Failing checks: ${failing.join(', ')}`,
+      typeSlug: 'not-ready',
+    });
   }
 
   private get version(): string {

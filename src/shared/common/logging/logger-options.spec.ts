@@ -1,6 +1,6 @@
 import { Writable } from 'node:stream';
 import pino from 'pino';
-import { buildPinoOptions, REDACTED, resolveRequestId, sanitizeUrl } from './logger-options';
+import { buildPinoOptions, REDACTED, requestLogProps, resolveRequestId, sanitizeUrl } from './logger-options';
 
 function capture(): { stream: Writable; lines: () => Record<string, unknown>[] } {
   const chunks: string[] = [];
@@ -73,3 +73,17 @@ describe('resolveRequestId', () => {
     expect(resolveRequestId(['x', 'y'])).toMatch(uuid);
   });
 });
+
+describe('requestLogProps', () => {
+  it('logs the route pattern and the signed-in user', () => {
+    expect(requestLogProps({ route: { path: '/v1/paths/:id' }, user: { userId: 'u-1' } })).toEqual({
+      route: '/v1/paths/:id',
+      userId: 'u-1',
+    });
+  });
+
+  it('omits both for unmatched routes and anonymous requests', () => {
+    expect(requestLogProps({})).toEqual({});
+  });
+});
+

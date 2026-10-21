@@ -39,8 +39,9 @@ describe('health (e2e)', () => {
       title: 'Service not ready',
       status: 503,
       detail: 'Failing checks: probe',
-      code: 'INTERNAL',
+      code: 'SERVICE_UNAVAILABLE',
       requestId: 'req-ready-1',
+      instance: '/ready',
     });
     expect(res.headers['x-request-id']).toBe('req-ready-1');
   });

@@ -5,6 +5,7 @@ import { AccessTokenService } from '../src/shared/common/auth';
 import { DATABASE, type Database } from '../src/shared/db';
 import { loginAttempts, sessions } from '../src/shared/db/schema/identity';
 import { createTestApp, type TestApp } from './app';
+import { secretKeyPaths } from './leaks';
 
 const ORIGIN = 'http://localhost:5173';
 const csrf = { Origin: ORIGIN, 'X-Requested-With': 'eduujoy' };
@@ -52,6 +53,19 @@ describe('auth (e2e)', () => {
   const http = () => request(app.getHttpServer());
   const register = (address: string) => http().post('/v1/auth/register').set(csrf).send({ email: address, password });
   const login = (address: string, pw = password) => http().post('/v1/auth/login').set(csrf).send({ email: address, password: pw });
+
+  it('never returns credential fields in register, login or /me bodies', async () => {
+    const address = email();
+    const registered = await register(address).expect(201);
+    const loggedIn = await login(address).expect(200);
+    const meRes = await http().get('/v1/auth/me').set('Cookie', `ej_at=${cookieValue(loggedIn, 'ej_at')}`).expect(200);
+
+    for (const res of [registered, loggedIn, meRes]) {
+      expect(secretKeyPaths(res.body)).toEqual([]);
+      expect(JSON.stringify(res.body)).not.toContain(password);
+      expect(JSON.stringify(res.body)).not.toContain('$argon2id$');
+    }
+  });
 
   describe('register', () => {
     it('creates the account, returns Me and sets host-only Secure HttpOnly SameSite=Lax cookies', async () => {

@@ -2,24 +2,26 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 import { ThrottlerException } from '@nestjs/throttler';
 import { type ValidationError } from 'class-validator';
 
-/** ProblemCode from the frozen contract. */
-export type ProblemCode =
-  | 'VALIDATION_FAILED'
-  | 'UNAUTHENTICATED'
-  | 'SESSION_REVOKED'
-  // Pending contract approval (docs/status/api.md, Contract change requests, 21 Oct 2026).
-  | 'REFRESH_CONCURRENT'
-  | 'FORBIDDEN'
-  | 'NOT_FOUND'
-  | 'CONFLICT'
-  | 'EMAIL_TAKEN'
-  | 'IDEMPOTENCY_MISMATCH'
-  | 'QUOTA_EXCEEDED'
-  | 'RATE_LIMITED'
-  | 'AI_BUDGET_EXCEEDED'
-  | 'NO_REPLACEMENT'
-  | 'CSRF_REJECTED'
-  | 'INTERNAL';
+/** ProblemCode from the frozen contract (0.1.1-v0); also emitted as the OpenAPI enum. */
+export const PROBLEM_CODES = [
+  'VALIDATION_FAILED',
+  'UNAUTHENTICATED',
+  'SESSION_REVOKED',
+  'REFRESH_CONCURRENT',
+  'FORBIDDEN',
+  'NOT_FOUND',
+  'CONFLICT',
+  'EMAIL_TAKEN',
+  'IDEMPOTENCY_MISMATCH',
+  'QUOTA_EXCEEDED',
+  'RATE_LIMITED',
+  'AI_BUDGET_EXCEEDED',
+  'NO_REPLACEMENT',
+  'CSRF_REJECTED',
+  'SERVICE_UNAVAILABLE',
+  'INTERNAL',
+] as const;
+export type ProblemCode = (typeof PROBLEM_CODES)[number];
 
 export interface FieldError {
   field: string;
@@ -39,6 +41,8 @@ export interface ProblemBody {
 
 export interface ProblemOptions {
   detail?: string;
+  /** Overrides the `type` URL slug when the contract names it (e.g. `not-ready` for /ready). */
+  typeSlug?: string;
   errors?: FieldError[];
   headers?: Record<string, string>;
 }
@@ -116,7 +120,7 @@ export function toProblem(exception: unknown, ctx: ProblemContext): RenderedProb
   }
 
   const body: ProblemBody = {
-    type: problemType(ctx.baseUrl, code),
+    type: options.typeSlug ? `${ctx.baseUrl}/problems/${options.typeSlug}` : problemType(ctx.baseUrl, code),
     title,
     status,
     ...(options.detail === undefined ? {} : { detail: options.detail }),

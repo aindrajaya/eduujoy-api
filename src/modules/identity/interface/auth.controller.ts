@@ -1,4 +1,5 @@
-import { Body, Controller, Get, HttpCode, Post, Req, Res, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Req, Res, SerializeOptions, UseInterceptors } from '@nestjs/common';
+import { ApiNoContentResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import { type Request, type Response } from 'express';
 import {
@@ -12,6 +13,13 @@ import {
   refreshCookieOptions,
 } from '../../../shared/common/auth';
 import { SessionInvalidError } from '../application/errors';
+import {
+  ApiAccessCookieAuth,
+  ApiCsrfHeader,
+  ApiProblem,
+  ApiRefreshCookieAuth,
+  SESSION_COOKIES_HEADER,
+} from '../../../shared/common/openapi';
 import { GetMe, type MeView } from '../application/get-me.query';
 import { LoginWithPassword } from '../application/login.usecase';
 import { Logout } from '../application/logout.usecase';
@@ -19,6 +27,7 @@ import { RefreshSession } from '../application/refresh.usecase';
 import { RegisterUser } from '../application/register.usecase';
 import { type IssuedSession, type RequestMeta } from '../application/session-issuer';
 import { LoginRequestDto, RegisterRequestDto } from './dto/auth.dto';
+import { MeResponseDto } from './dto/me.response';
 import { IdentityErrorsInterceptor, toIdentityProblem } from './identity-errors.interceptor';
 
 /** PRD-API §6: 5 attempts per minute per IP on credential endpoints. */
@@ -46,6 +55,7 @@ function readCookie(req: Request, name: string): string | undefined {
 
 const refreshCookie = (req: Request): string | undefined => readCookie(req, REFRESH_COOKIE);
 
+@ApiTags('auth')
 @Controller('v1/auth')
 @UseInterceptors(IdentityErrorsInterceptor)
 export class AuthController {
@@ -62,6 +72,13 @@ export class AuthController {
   @Throttle(CREDENTIAL_THROTTLE)
   @Post('register')
   @HttpCode(201)
+  @SerializeOptions({ type: MeResponseDto })
+  @ApiOperation({ operationId: 'authRegister', summary: 'Register with email and password; sets session cookies.' })
+  @ApiCsrfHeader()
+  @ApiResponse({ status: 201, description: 'Registered and signed in.', type: MeResponseDto, headers: SESSION_COOKIES_HEADER })
+  @ApiProblem(400)
+  @ApiProblem(409, 'Email already registered (code EMAIL_TAKEN).')
+  @ApiProblem(429)
   async register(
     @Body() body: RegisterRequestDto,
     @Req() req: Request,
@@ -76,6 +93,13 @@ export class AuthController {
   @Throttle(CREDENTIAL_THROTTLE)
   @Post('login')
   @HttpCode(200)
+  @SerializeOptions({ type: MeResponseDto })
+  @ApiOperation({ operationId: 'authLogin', summary: 'Email and password sign-in; sets session cookies.' })
+  @ApiCsrfHeader()
+  @ApiOkResponse({ description: 'Signed in.', type: MeResponseDto, headers: SESSION_COOKIES_HEADER })
+  @ApiProblem(400)
+  @ApiProblem(401)
+  @ApiProblem(429, 'Rate limited or account locked (code RATE_LIMITED).')
   async signIn(
     @Body() body: LoginRequestDto,
     @Req() req: Request,
@@ -89,6 +113,12 @@ export class AuthController {
   @Public()
   @Post('refresh')
   @HttpCode(204)
+  @ApiOperation({ operationId: 'authRefresh', summary: 'Rotate the refresh token and issue a new access cookie.' })
+  @ApiRefreshCookieAuth()
+  @ApiCsrfHeader()
+  @ApiNoContentResponse({ description: 'Rotated.', headers: SESSION_COOKIES_HEADER })
+  @ApiProblem(401, 'Missing, expired or revoked refresh token; reuse returns SESSION_REVOKED.')
+  @ApiProblem(409, 'The refresh token was rotated by a concurrent request; cookies are unchanged. Code `REFRESH_CONCURRENT`.')
   async rotate(@Req() req: Request, @Res({ passthrough: true }) res: Response): Promise<void> {
     try {
       setSessionCookies(res, await this.refresh.execute(refreshCookie(req), requestMeta(req)));
@@ -107,6 +137,10 @@ export class AuthController {
   @Public()
   @Post('logout')
   @HttpCode(204)
+  @ApiOperation({ operationId: 'authLogout', summary: 'Clear both cookies and revoke the session.' })
+  @ApiCsrfHeader()
+  @ApiNoContentResponse({ description: 'Signed out (always, including when no session matched).', headers: SESSION_COOKIES_HEADER })
+  @ApiProblem(403, 'CSRF headers missing or wrong (code CSRF_REJECTED).')
   async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response): Promise<void> {
     try {
       const accessToken = readCookie(req, ACCESS_COOKIE);
@@ -118,6 +152,11 @@ export class AuthController {
   }
 
   @Get('me')
+  @SerializeOptions({ type: MeResponseDto })
+  @ApiOperation({ operationId: 'authMe', summary: "Session bootstrap; the UI's single source of session truth." })
+  @ApiAccessCookieAuth()
+  @ApiOkResponse({ description: 'Current user.', type: MeResponseDto })
+  @ApiProblem(401)
   me(@CurrentUser() user: AuthUser): Promise<MeView> {
     return this.getMe.execute(user.userId);
   }

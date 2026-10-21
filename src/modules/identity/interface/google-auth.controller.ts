@@ -1,6 +1,8 @@
 import { Controller, Get, Logger, Query, Req, Res } from '@nestjs/common';
+import { ApiFoundResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { type CookieOptions, type Request, type Response } from 'express';
 import { Public } from '../../../shared/common/auth';
+import { SESSION_COOKIES_HEADER } from '../../../shared/common/openapi';
 import { AppConfig } from '../../../shared/config';
 import { CompleteGoogleSignIn, OAuthFailedError, StartGoogleSignIn } from '../application/google-sign-in.usecase';
 import { OAUTH_STATE_TTL_SECONDS } from '../application/ports/google';
@@ -18,6 +20,7 @@ const oauthCookieOptions: CookieOptions = {
   maxAge: OAUTH_STATE_TTL_SECONDS * 1000,
 };
 
+@ApiTags('auth')
 @Public()
 @Controller('v1/auth/google')
 export class GoogleAuthController {
@@ -33,6 +36,11 @@ export class GoogleAuthController {
   }
 
   @Get()
+  @ApiOperation({ operationId: 'authGoogleStart', summary: 'Start Google OAuth (authorization code with PKCE).' })
+  @ApiFoundResponse({
+    description: 'Redirect to Google.',
+    headers: { Location: { schema: { type: 'string', format: 'uri' } } },
+  })
   async start(@Query() query: GoogleStartQueryDto, @Req() req: Request, @Res() res: Response): Promise<void> {
     const { redirectUrl, sealedState } = await this.startSignIn.execute({
       origin: this.originFromReferer(req.get('referer')),
@@ -43,6 +51,11 @@ export class GoogleAuthController {
   }
 
   @Get('callback')
+  @ApiOperation({ operationId: 'authGoogleCallback', summary: 'OAuth callback; sets cookies and redirects to APP_ORIGIN.' })
+  @ApiFoundResponse({
+    description: 'Redirect back to APP_ORIGIN (with `?error=<code>` on failure).',
+    headers: { Location: { schema: { type: 'string', format: 'uri' } }, ...SESSION_COOKIES_HEADER },
+  })
   async callback(@Query() query: GoogleCallbackQueryDto, @Req() req: Request, @Res() res: Response): Promise<void> {
     const sealed = (req.cookies as Record<string, unknown> | undefined)?.[OAUTH_COOKIE];
     res.clearCookie(OAUTH_COOKIE, { ...oauthCookieOptions, maxAge: undefined });

@@ -2,7 +2,7 @@ import { type ArgumentsHost, Catch, type ExceptionFilter, HttpException, Logger 
 import { type Request, type Response } from 'express';
 import { AppConfig } from '../../config';
 import { sanitizeUrl } from '../logging/logger-options';
-import { toProblem } from './problem';
+import { ProblemException, toProblem } from './problem';
 
 /** Every error leaves the API as application/problem+json (PRD-API §7). */
 @Catch()
@@ -21,7 +21,7 @@ export class ProblemFilter implements ExceptionFilter {
       instance: sanitizeUrl(req.originalUrl),
     });
 
-    if (problem.status >= 500) {
+    if (problem.status >= 500 && !(exception instanceof ProblemException)) {
       const error = exception instanceof Error ? exception : new Error(String(exception));
       this.logger.error({ err: error, requestId: problem.body.requestId }, 'Unhandled error');
     } else if (!(exception instanceof HttpException)) {

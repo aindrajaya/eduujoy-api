@@ -19,12 +19,15 @@
     "db:migrate": "tsx src/shared/db/cli/migrate.ts",
     "test:int": "jest --config test/jest-int.config.ts --runInBand",
     "db:seed": "tsx src/shared/db/cli/seed.ts",
-    "db:test:cleanup": "tsx test/db/cleanup.ts"
+    "db:test:cleanup": "tsx test/db/cleanup.ts",
+    "openapi:export": "node -r ts-node/register/transpile-only scripts/openapi/export.ts",
+    "openapi:check": "node -r ts-node/register/transpile-only scripts/openapi/check.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.2.7",
     "@nestjs/core": "^11.2.7",
     "@nestjs/platform-express": "^11.2.7",
+    "@nestjs/swagger": "^11.4.7",
     "@nestjs/throttler": "^6.7.1",
     "@node-rs/argon2": "^2.2.2",
     "class-transformer": "^0.5.1",
@@ -64,6 +67,7 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.23.15",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.72.0"
+    "typescript-eslint": "^8.72.0",
+    "yaml": "^2.9.1"
   }
 }
