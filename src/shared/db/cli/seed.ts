@@ -12,10 +12,15 @@ import { loadDirectDatabaseUrl } from './env';
 // Usage: pnpm db:seed [--dir seed] [--expect-topics 150]
 async function main(): Promise<void> {
   const { values } = parseArgs({
-    options: { dir: { type: 'string', default: 'seed' }, 'expect-topics': { type: 'string' } },
+    options: { dir: { type: 'string', default: 'seed' }, 'expect-topics': { type: 'string' }, check: { type: 'boolean', default: false } },
   });
   const dir = resolve(values.dir);
   const data = parseSeed(readSeedFiles(dir));
+  // `--check` validates the seed and proves the script loads under its runner, without connecting.
+  if (values.check) {
+    process.stdout.write(`db:seed: ok (${data.topics.length} topics)\n`);
+    return;
+  }
 
   const client = new Client({ connectionString: loadDirectDatabaseUrl() });
   await client.connect();
