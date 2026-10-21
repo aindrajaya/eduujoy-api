@@ -102,6 +102,28 @@ export const diagnosticAnswers = pgTable(
   ],
 );
 
+/**
+ * Stored 200 responses of `POST /v1/diagnostics/:id/answers` sent with an `Idempotency-Key`
+ * (contract 0.3.0-v0). Keys are scoped per user; `request_hash` covers the diagnostic id and body.
+ */
+export const diagnosticAnswerReplays = pgTable(
+  'diagnostic_answer_replays',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    sessionId: uuid('session_id')
+      .notNull()
+      .references(() => diagnosticSessions.id, { onDelete: 'cascade' }),
+    idempotencyKey: text('idempotency_key').notNull(),
+    requestHash: text('request_hash').notNull(),
+    response: jsonb('response').notNull(),
+    ...withCreatedAt,
+  },
+  (t) => [uniqueIndex('diagnostic_answer_replays_user_key').on(t.userId, t.idempotencyKey)],
+);
+
 export const placements = pgTable(
   'placements',
   {
