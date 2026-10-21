@@ -38,6 +38,16 @@ describe('toProblem', () => {
     });
   });
 
+  it('uses a contract-named type slug when given', () => {
+    const exception = new ProblemException(503, 'SERVICE_UNAVAILABLE', 'Service not ready', { typeSlug: 'not-ready' });
+
+    expect(toProblem(exception, ctx).body).toMatchObject({
+      type: 'https://api.example/problems/not-ready',
+      code: 'SERVICE_UNAVAILABLE',
+      status: 503,
+    });
+  });
+
   it('keeps headers such as Retry-After from a ProblemException', () => {
     const exception = new ProblemException(429, 'RATE_LIMITED', 'Too many attempts', { headers: { 'Retry-After': '900' } });
 

@@ -7,7 +7,6 @@ export type ProblemCode =
   | 'VALIDATION_FAILED'
   | 'UNAUTHENTICATED'
   | 'SESSION_REVOKED'
-  // Pending contract approval (docs/status/api.md, Contract change requests, 21 Oct 2026).
   | 'REFRESH_CONCURRENT'
   | 'FORBIDDEN'
   | 'NOT_FOUND'
@@ -19,6 +18,7 @@ export type ProblemCode =
   | 'AI_BUDGET_EXCEEDED'
   | 'NO_REPLACEMENT'
   | 'CSRF_REJECTED'
+  | 'SERVICE_UNAVAILABLE'
   | 'INTERNAL';
 
 export interface FieldError {
@@ -39,6 +39,8 @@ export interface ProblemBody {
 
 export interface ProblemOptions {
   detail?: string;
+  /** Overrides the `type` URL slug when the contract names it (e.g. `not-ready` for /ready). */
+  typeSlug?: string;
   errors?: FieldError[];
   headers?: Record<string, string>;
 }
@@ -116,7 +118,7 @@ export function toProblem(exception: unknown, ctx: ProblemContext): RenderedProb
   }
 
   const body: ProblemBody = {
-    type: problemType(ctx.baseUrl, code),
+    type: options.typeSlug ? `${ctx.baseUrl}/problems/${options.typeSlug}` : problemType(ctx.baseUrl, code),
     title,
     status,
     ...(options.detail === undefined ? {} : { detail: options.detail }),
