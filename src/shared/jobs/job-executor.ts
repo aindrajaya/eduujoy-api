@@ -22,6 +22,8 @@ export interface ExecutorOptions {
    * and scheduling the retry, so a run and its retry don't overlap.
    */
   abortGraceMs?: number;
+  /** Finished jobs (and their events) are pruned after this long; checked on start and daily. */
+  retentionMs?: number;
   clock?: () => Date;
   random?: () => number;
 }
@@ -49,6 +51,7 @@ export class JobExecutor {
   private readonly listeners: JobEventListener[] = [];
   private timer: NodeJS.Timeout | undefined;
   private staleTimer: NodeJS.Timeout | undefined;
+  private pruneTimer: NodeJS.Timeout | undefined;
   private pumping = false;
   private pumpAgain = false;
   private stopped = true;
@@ -78,7 +81,20 @@ export class JobExecutor {
   async start(): Promise<void> {
     this.stopped = false;
     await this.recoverStale();
+    await this.prune();
+    this.pruneTimer = setInterval(() => void this.prune(), 24 * 60 * 60 * 1000);
+    this.pruneTimer.unref();
     await this.pump();
+  }
+
+  /** Best effort: a failed prune is logged and retried on the next daily tick. */
+  private async prune(): Promise<void> {
+    try {
+      const pruned = await this.repo.pruneFinished(this.options.retentionMs ?? 30 * 24 * 60 * 60 * 1000);
+      if (pruned > 0) this.logger.log({ pruned }, `Pruned ${pruned} finished job(s) and their events`);
+    } catch (error) {
+      this.logger.error({ err: error instanceof Error ? error : new Error(String(error)) }, 'Job prune failed');
+    }
   }
 
   /**
@@ -89,6 +105,7 @@ export class JobExecutor {
     this.stopped = true;
     clearTimeout(this.timer);
     clearTimeout(this.staleTimer);
+    clearInterval(this.pruneTimer);
     const deadline = new Promise<void>((resolve) => setTimeout(resolve, this.options.stopTimeoutMs ?? 10_000).unref());
     await Promise.race([Promise.allSettled([...this.inFlight.keys()]), deadline]);
     const unfinished = [...this.inFlight.values()];
