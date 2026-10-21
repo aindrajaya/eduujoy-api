@@ -64,6 +64,14 @@ export interface ProblemContext {
   baseUrl: string;
   requestId: string;
   instance: string;
+  /** Defaults to the current time; injected in tests. */
+  now?: Date;
+}
+
+/** Whole seconds until the next UTC midnight, when the daily AI budget resets (at least 1). */
+export function secondsUntilUtcMidnight(now: Date): number {
+  const midnight = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1);
+  return Math.max(1, Math.ceil((midnight - now.getTime()) / 1000));
 }
 
 export interface RenderedProblem {
@@ -112,7 +120,10 @@ export function toProblem(exception: unknown, ctx: ProblemContext): RenderedProb
     // Spend figures stay in the logs; learners only need to know cold topics are paused today.
     status = HttpStatus.SERVICE_UNAVAILABLE;
     [code, title] = ['AI_BUDGET_EXCEEDED', 'Daily AI budget reached'];
-    options = { detail: 'New topics are paused until tomorrow (UTC); topics we already know still work.' };
+    options = {
+      detail: 'New topics are paused until tomorrow (UTC); topics we already know still work.',
+      headers: { 'Retry-After': String(secondsUntilUtcMidnight(ctx.now ?? new Date())) },
+    };
   } else if (exception instanceof ThrottlerException) {
     status = HttpStatus.TOO_MANY_REQUESTS;
     [code, title] = ['RATE_LIMITED', 'Too many requests'];
