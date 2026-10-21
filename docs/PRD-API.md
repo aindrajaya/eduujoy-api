@@ -283,6 +283,8 @@ The master PRD's tables stand; the API adds session, job, submission and billing
 | `credit_ledger` | id, user\_id, delta, reason (purchase, path, refund), external\_ref, created\_at |
 | `billing_events` | id, provider\_event\_id (unique), type, payload (jsonb), processed\_at |
 
+**Added in slice A1** (implied by the contract): `diagnostic_sessions`, `diagnostic_answers`, `placements`, `review_items`, `topic_prerequisites`, `discovery_results`, `login_attempts` (lockout rule). All table definitions live in `src/shared/db/schema/<module>/`; a lint rule stops a module from importing another module's tables. Migrations run through a small in-repo runner that applies drizzle-kit SQL into any schema (production `public`, tests `test_*`) and rejects edited migrations. Seed files follow `api/docs/seed-format.md` (v1).
+
 **Embeddings**
 
 - Model: `gemini-embedding-2` with `output_dimensionality: 768`; it normalises truncated vectors itself and accepts up to 8,192 input tokens ([Gemini embeddings](https://ai.google.dev/gemini-api/docs/embeddings)).
