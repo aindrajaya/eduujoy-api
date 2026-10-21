@@ -1,8 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { z } from 'zod';
 import { MODELS, type TokenUsage } from '../catalog';
 import { AiCallError, classifyStatus } from '../errors';
 import { toStructuredSchema } from '../json-schema';
-import { type StructuredGenerator, type StructuredRequest, type StructuredResult } from '../ports';
+import { type CallPart, type CallRecord, type StructuredGenerator, type StructuredRequest, type StructuredResult } from '../ports';
 import { UNTRUSTED_DATA_RULE } from '../untrusted';
 
 /** Below the ~16K output threshold where non-streaming requests risk SDK HTTP timeouts. */
@@ -11,7 +12,14 @@ const DEFAULT_MAX_TOKENS = 16_000;
 const FALLBACK_BETA = 'server-side-fallback-2026-07-01';
 const FALLBACK_MODELS = new Set<string>(['claude-sonnet-5-5']);
 
-export function anthropicUsage(usage: Anthropic.Beta.BetaUsage): TokenUsage {
+interface RawUsage {
+  input_tokens: number;
+  output_tokens: number;
+  cache_creation_input_tokens?: number | null;
+  cache_read_input_tokens?: number | null;
+}
+
+export function anthropicUsage(usage: RawUsage): TokenUsage {
   const cacheWrite = usage.cache_creation_input_tokens ?? 0;
   return {
     inputTokens: usage.input_tokens + cacheWrite,
@@ -19,6 +27,37 @@ export function anthropicUsage(usage: Anthropic.Beta.BetaUsage): TokenUsage {
     cacheReadTokens: usage.cache_read_input_tokens ?? 0,
     outputTokens: usage.output_tokens,
   };
+}
+
+// usage.iterations lists every attempt when a server-side fallback ran; `model: null` is the requested model.
+const iterationsSchema = z.array(
+  z.object({
+    model: z.string().nullable().optional(),
+    input_tokens: z.number().int().nonnegative(),
+    output_tokens: z.number().int().nonnegative(),
+    cache_creation_input_tokens: z.number().int().nonnegative().nullable().optional(),
+    cache_read_input_tokens: z.number().int().nonnegative().nullable().optional(),
+  }),
+);
+
+function sumUsage(parts: CallPart[]): TokenUsage {
+  return parts.reduce<TokenUsage>(
+    (total, { usage }) => ({
+      inputTokens: total.inputTokens + usage.inputTokens,
+      cacheWriteTokens: total.cacheWriteTokens + usage.cacheWriteTokens,
+      cacheReadTokens: total.cacheReadTokens + usage.cacheReadTokens,
+      outputTokens: total.outputTokens + usage.outputTokens,
+    }),
+    { inputTokens: 0, cacheWriteTokens: 0, cacheReadTokens: 0, outputTokens: 0 },
+  );
+}
+
+/** Usage for metering: per-attempt parts when iterations are present, else the top-level usage. */
+export function callUsage(usage: Anthropic.Beta.BetaUsage, requestedModel: string): Pick<CallRecord, 'usage' | 'parts'> {
+  const iterations = iterationsSchema.safeParse((usage as { iterations?: unknown }).iterations);
+  if (!iterations.success || iterations.data.length === 0) return { usage: anthropicUsage(usage) };
+  const parts = iterations.data.map((it) => ({ model: it.model ?? requestedModel, usage: anthropicUsage(it) }));
+  return { usage: sumUsage(parts), parts };
 }
 
 function toAiError(error: unknown): AiCallError {
@@ -71,10 +110,10 @@ export class ClaudeStructuredGenerator implements StructuredGenerator {
       throw toAiError(error);
     }
 
-    const call = {
-      provider: 'anthropic' as const,
+    const call: CallRecord = {
+      provider: 'anthropic',
       model: message.model,
-      usage: anthropicUsage(message.usage),
+      ...callUsage(message.usage, request.model),
       latencyMs: Math.round(this.now() - started),
     };
     if (message.stop_reason === 'refusal') throw new AiCallError('refused', 'Claude declined the request', undefined, call);

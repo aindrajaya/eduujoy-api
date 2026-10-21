@@ -50,12 +50,11 @@ class Meter {
   }
 
   private fromCall(call: CallRecord): Pick<LlmCallEntry, 'model' | 'usage' | 'costUsd' | 'latencyMs'> {
-    return {
-      model: call.model,
-      usage: call.usage,
-      costUsd: costUsd(call.model, call.usage, this.clock()),
-      latencyMs: call.latencyMs,
-    };
+    const at = this.clock();
+    // A fallback call bills every attempt at its own model's rates.
+    const parts = call.parts ?? [{ model: call.model, usage: call.usage }];
+    const cost = parts.reduce((total, part) => total + costUsd(part.model, part.usage, at), 0);
+    return { model: call.model, usage: call.usage, costUsd: Math.round(cost * 1_000_000) / 1_000_000, latencyMs: call.latencyMs };
   }
 
   /** Metering must never break the AI call it describes; a failed insert is logged instead. */
