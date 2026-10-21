@@ -4,6 +4,7 @@ import { Public } from '../../../shared/common/auth';
 import { AppConfig } from '../../../shared/config';
 import { CompleteGoogleSignIn, OAuthFailedError, StartGoogleSignIn } from '../application/google-sign-in.usecase';
 import { OAUTH_STATE_TTL_SECONDS } from '../application/ports/google';
+import { safeReturnTo } from '../domain/return-to';
 import { clearSessionCookies, requestMeta, setSessionCookies } from './auth.controller';
 import { GoogleCallbackQueryDto, GoogleStartQueryDto } from './dto/google.dto';
 
@@ -35,7 +36,7 @@ export class GoogleAuthController {
   async start(@Query() query: GoogleStartQueryDto, @Req() req: Request, @Res() res: Response): Promise<void> {
     const { redirectUrl, sealedState } = await this.startSignIn.execute({
       origin: this.originFromReferer(req.get('referer')),
-      returnTo: query.returnTo ?? '/',
+      returnTo: safeReturnTo(query.returnTo),
     });
     res.cookie(OAUTH_COOKIE, sealedState, oauthCookieOptions);
     res.redirect(302, redirectUrl);

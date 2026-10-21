@@ -1,14 +1,9 @@
-import { IsOptional, IsString, Matches, MaxLength } from 'class-validator';
-
-/** Same-site path only: starts with one "/" and is not "//host" or "/\host" (no open redirect). */
-export const SAFE_RETURN_TO = /^\/(?![/\\])[^\s]*$/;
+import { Allow, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class GoogleStartQueryDto {
-  @IsOptional()
-  @IsString()
-  @MaxLength(512)
-  @Matches(SAFE_RETURN_TO, { message: 'returnTo must be a path on this site' })
-  returnTo?: string;
+  /** Never rejected: anything that isn't a safe same-site path falls back (see safeReturnTo). */
+  @Allow()
+  returnTo?: unknown;
 }
 
 /** Google appends scope, authuser, prompt, hd and iss; they are accepted and ignored. */
