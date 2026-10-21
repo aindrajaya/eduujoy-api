@@ -1,4 +1,4 @@
-import { clampSimilarity, decide, fallbackTopicName, normaliseTopicText, slugify, topicDocument } from './index';
+import { clampSimilarity, decide, fallbackTopicName, normaliseTopicText, queryText, slugify, topicDocument } from './index';
 
 describe('decide', () => {
   it('auto-matches the nearest topic at 0.88 or above', () => {
@@ -48,6 +48,10 @@ describe('topic text', () => {
     expect(slugify('Café crème')).toBe('cafe-creme');
     expect(slugify('!!!')).toBe('topic');
     expect(slugify('a'.repeat(100)).length).toBe(80);
+  });
+
+  it('embeds the learner text with spacing collapsed but case kept', () => {
+    expect(queryText('  Learn   React\tHooks ')).toBe('Learn React Hooks');
   });
 
   it('builds a fallback display name from learner text', () => {
