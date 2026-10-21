@@ -11,6 +11,8 @@ const call = (model: string): CallRecord => ({
   latencyMs: 42,
 });
 
+const NOW = new Date('2026-10-21T10:00:00Z');
+
 class FakeRecorder implements LlmCallRecorder {
   entries: LlmCallEntry[] = [];
   fail = false;
@@ -37,7 +39,7 @@ function setup(outcome: (model: string) => Promise<unknown>) {
   });
   const anthropic = make();
   const google = make();
-  return { recorder, generator: new MeteredStructuredGenerator({ anthropic, google }, recorder, () => 0) };
+  return { recorder, generator: new MeteredStructuredGenerator({ anthropic, google }, recorder, () => 0, () => NOW) };
 }
 
 describe('MeteredStructuredGenerator', () => {
@@ -98,8 +100,8 @@ describe('MeteredEmbedder', () => {
         Promise.resolve({ vectors: [[0]], model: 'gemini-embedding-2', version: 1, call: call('gemini-embedding-2') }),
     };
 
-    await new MeteredEmbedder(inner, 'gemini-embedding-2', recorder, () => 0).embed({ stage: 'embed', texts: ['a'], kind: 'query' });
+    await new MeteredEmbedder(inner, 'gemini-embedding-2', recorder, () => 0, () => NOW).embed({ stage: 'embed', texts: ['a'], kind: 'query' });
 
-    expect(recorder.entries[0]).toMatchObject({ stage: 'embed', provider: 'google', model: 'gemini-embedding-2', costUsd: 0.15, promptName: null });
+    expect(recorder.entries[0]).toMatchObject({ stage: 'embed', provider: 'google', model: 'gemini-embedding-2', costUsd: 0.2, promptName: null });
   });
 });

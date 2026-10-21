@@ -26,6 +26,7 @@ class Meter {
   constructor(
     private readonly recorder: LlmCallRecorder,
     private readonly now: () => number,
+    private readonly clock: () => Date,
   ) {}
 
   async run<R extends { call: CallRecord }>(
@@ -49,7 +50,12 @@ class Meter {
   }
 
   private fromCall(call: CallRecord): Pick<LlmCallEntry, 'model' | 'usage' | 'costUsd' | 'latencyMs'> {
-    return { model: call.model, usage: call.usage, costUsd: costUsd(call.model, call.usage), latencyMs: call.latencyMs };
+    return {
+      model: call.model,
+      usage: call.usage,
+      costUsd: costUsd(call.model, call.usage, this.clock()),
+      latencyMs: call.latencyMs,
+    };
   }
 
   /** Metering must never break the AI call it describes; a failed insert is logged instead. */
@@ -70,8 +76,9 @@ export class MeteredStructuredGenerator implements StructuredGenerator {
     private readonly providers: Record<Provider, StructuredGenerator>,
     recorder: LlmCallRecorder,
     now: () => number = () => performance.now(),
+    clock: () => Date = () => new Date(),
   ) {
-    this.meter = new Meter(recorder, now);
+    this.meter = new Meter(recorder, now, clock);
   }
 
   generate<T>(request: StructuredRequest<T>): Promise<StructuredResult<T>> {
@@ -98,8 +105,9 @@ export class MeteredEmbedder implements Embedder {
     private readonly model: string,
     recorder: LlmCallRecorder,
     now: () => number = () => performance.now(),
+    clock: () => Date = () => new Date(),
   ) {
-    this.meter = new Meter(recorder, now);
+    this.meter = new Meter(recorder, now, clock);
   }
 
   embed(request: EmbeddingRequest): Promise<EmbeddingResult> {
