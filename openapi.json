@@ -641,7 +641,7 @@
     "contact": {},
     "description": "Generated from the NestJS app; checked against docs/contract/openapi.v0.yaml by `pnpm openapi:check`.",
     "title": "Eduujoy API",
-    "version": "0.2.1-v0"
+    "version": "0.3.0-v0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -1243,6 +1243,7 @@
     },
     "/v1/diagnostics/{id}/answers": {
       "post": {
+        "description": "Send the same optional `Idempotency-Key` on every retry of one batch. A replay with the same key and body returns the stored 200 response and records nothing twice; the same key with a different body returns 409 CONFLICT.",
         "operationId": "diagnosticsSubmitAnswers",
         "parameters": [
           {
@@ -1251,6 +1252,17 @@
             "required": true,
             "schema": {
               "maxLength": 64,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Optional; when sent, retries of the same request reuse it (see the operation).",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 128,
+              "minLength": 8,
               "type": "string"
             }
           },
@@ -1336,7 +1348,7 @@
                 }
               }
             },
-            "description": "The diagnostic is complete, or the answers do not match the current batch."
+            "description": "The diagnostic is complete, the answers do not match the current batch, or the Idempotency-Key was used with a different request."
           }
         },
         "security": [

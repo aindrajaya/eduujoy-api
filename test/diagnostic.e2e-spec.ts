@@ -4,7 +4,7 @@ import request from 'supertest';
 import { cellIndex } from '../src/modules/assessment/domain/diagnostic';
 import { AccessTokenService } from '../src/shared/common/auth';
 import { DATABASE, type Database } from '../src/shared/db';
-import { diagnosticItems, placements } from '../src/shared/db/schema/assessment';
+import { diagnosticAnswers, diagnosticItems, placements } from '../src/shared/db/schema/assessment';
 import { topics } from '../src/shared/db/schema/catalog';
 import { users } from '../src/shared/db/schema/identity';
 import { learnerPositions } from '../src/shared/db/schema/progress';
@@ -62,8 +62,14 @@ describe('diagnostics (e2e, PRD-API §13 A7 Verify)', () => {
   }
 
   const start = (cookie: string, body: Record<string, unknown>) => http().post('/v1/diagnostics').set(csrf).set('Cookie', cookie).send(body);
-  const answer = (cookie: string, id: string, answers: unknown[]) =>
-    http().post(`/v1/diagnostics/${id}/answers`).set(csrf).set('Cookie', cookie).send({ answers });
+  const answer = (cookie: string, id: string, answers: unknown[], idempotencyKey?: string) =>
+    http()
+      .post(`/v1/diagnostics/${id}/answers`)
+      .set(csrf)
+      .set('Cookie', cookie)
+      .set(idempotencyKey === undefined ? {} : { 'Idempotency-Key': idempotencyKey })
+      .send({ answers });
+  const recorded = async (sessionId: string) => (await db.select().from(diagnosticAnswers).where(eq(diagnosticAnswers.sessionId, sessionId))).length;
 
   it.each(FIXTURE_LEARNERS.map((l) => [l.name, l] as const))('places fixture learner %s as expected', async (_name, learner) => {
     const { userId, cookie } = await signedInUser();
@@ -143,6 +149,46 @@ describe('diagnostics (e2e, PRD-API §13 A7 Verify)', () => {
     const got = await http().get(`/v1/diagnostics/${body.diagnosticId}`).set('Cookie', cookie).expect(200);
     expect(got.body).toMatchObject({ status: 'completed', placement: { id: body.placement?.id } });
     expect((got.body as { items?: unknown }).items).toBeUndefined();
+  });
+
+  it('replays a retried batch with the same Idempotency-Key and rejects a reused key with another body (contract 0.3.0)', async () => {
+    const { cookie } = await signedInUser();
+    let body = (await start(cookie, { topicId, goal: 'Retries', weeklyHours: 2 }).expect(201)).body as BatchBody;
+    const skipAll = (b: BatchBody) => (b.items ?? []).map((i) => ({ itemId: i.id, skipped: true }));
+    const key = `retry-${randomUUID()}`;
+
+    const first = (await answer(cookie, body.diagnosticId, skipAll(body), key).expect(200)).body as BatchBody;
+    const retry = await answer(cookie, body.diagnosticId, skipAll(body), key).expect(200);
+    expect(retry.body).toEqual(first);
+    expect(await recorded(body.diagnosticId)).toBe(4);
+
+    const reused = await answer(cookie, body.diagnosticId, skipAll(first), key).expect(409);
+    expect((reused.body as { code: string }).code).toBe('CONFLICT');
+    expect(await recorded(body.diagnosticId)).toBe(4);
+
+    // Concurrent retries of one batch serialise on the session lock: one records, the other replays.
+    const [one, two] = await Promise.all([answer(cookie, body.diagnosticId, skipAll(first), `${key}-2`), answer(cookie, body.diagnosticId, skipAll(first), `${key}-2`)]);
+    expect([one.status, two.status]).toEqual([200, 200]);
+    expect(one.body).toEqual(two.body);
+    expect(await recorded(body.diagnosticId)).toBe(8);
+
+    // The final batch replays its placement after the diagnostic completes.
+    let last = `${key}-2`;
+    let lastAnswers: unknown[] = skipAll(first);
+    body = one.body as BatchBody;
+    while (body.status === 'in_progress') {
+      last = `${key}-${body.progress.answered}`;
+      lastAnswers = skipAll(body);
+      body = (await answer(cookie, body.diagnosticId, lastAnswers, last).expect(200)).body as BatchBody;
+    }
+    const replayed = await answer(cookie, body.diagnosticId, lastAnswers, last).expect(200);
+    expect(replayed.body).toEqual(body);
+    expect(await db.select().from(placements).where(eq(placements.sessionId, body.diagnosticId))).toHaveLength(1);
+
+    for (const bad of ['short', 'k'.repeat(129)]) {
+      const res = await answer(cookie, body.diagnosticId, lastAnswers, bad).expect(400);
+      expect((res.body as { errors: { field: string }[] }).errors[0]?.field).toBe('Idempotency-Key');
+    }
   });
 
   it('places from the self-report at once, flagged, when the topic has no item bank', async () => {

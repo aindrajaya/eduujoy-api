@@ -83,4 +83,20 @@ describe('DrizzleDiagnosticRepository (integration)', () => {
     expect(await repo.findPlacement(id)).toMatchObject({ placement: { cell: 5, position: { stage: 'competent', bloom: 'C4' }, confidence: 0.87 } });
     await expect(repo.findOpen(userId, topicId)).resolves.toBeNull();
   });
+
+  it('stores one replay per user and key, and reads it back inside a transaction', async () => {
+    const state = { engine: { estimate: 0, current: [], served: [], results: [], estimates: [] }, progress: { answered: 0, estimatedTotal: 8 } };
+    const [other] = await db.insert(users).values({ email: `diag-replay-${randomUUID()}@example.com` }).returning();
+    const session = await db.transaction((tx) =>
+      repo.create(tx, { userId: other?.id ?? '', topicId, goal: 'g', weeklyHours: 1, preferredFormats: [], selfReport: null, state, completed: false }),
+    );
+    const sessionId = session?.id ?? '';
+    const response = { diagnosticId: sessionId, status: 'in_progress' as const, progress: { answered: 4, estimatedTotal: 8 }, items: [] };
+    const input = { userId: other?.id ?? '', idempotencyKey: 'replay-key-1', sessionId, requestHash: 'h1', response };
+
+    expect(await db.transaction((tx) => repo.saveReplay(tx, input))).toBe(true);
+    expect(await db.transaction((tx) => repo.saveReplay(tx, { ...input, requestHash: 'h2' }))).toBe(false);
+    expect(await db.transaction((tx) => repo.findReplay(tx, input.userId, 'replay-key-1'))).toEqual({ sessionId, requestHash: 'h1', response });
+    expect(await db.transaction((tx) => repo.findReplay(tx, userId, 'replay-key-1'))).toBeNull();
+  });
 });

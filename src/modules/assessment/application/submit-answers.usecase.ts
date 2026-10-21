@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { UnitOfWork } from '../../../shared/events';
 import { type Answer, BatchMismatchError, isCorrect, submit } from '../domain/diagnostic';
@@ -17,6 +18,14 @@ export interface SubmitAnswersCommand {
   userId: string;
   diagnosticId: string;
   answers: (Answer & { text?: string })[];
+  /** Optional `Idempotency-Key` (contract 0.3.0-v0); retries of one batch reuse it. */
+  idempotencyKey?: string;
+}
+
+/** Hash of the diagnostic id and body, with fields in a fixed order so equal bodies hash equal. */
+export function answersRequestHash(command: SubmitAnswersCommand): string {
+  const body = command.answers.map((a) => [a.itemId, a.optionIds ?? null, a.skipped ?? null, a.text ?? null]);
+  return createHash('sha256').update(JSON.stringify([command.diagnosticId, body])).digest('hex');
 }
 
 /** POST /v1/diagnostics/:id/answers: grades the batch and returns the next batch or the placement. */
@@ -38,6 +47,24 @@ export class SubmitDiagnosticAnswers {
     return this.uow.run(async (tx, scope) => {
       const session = await this.repo.lock(tx, command.diagnosticId);
       if (!session) throw new DiagnosticNotFoundError();
+
+      const key = command.idempotencyKey;
+      const requestHash = key === undefined ? '' : answersRequestHash(command);
+      if (key !== undefined) {
+        // Checked under the session lock, so a concurrent retry waits and then replays.
+        const replay = await this.repo.findReplay(tx, command.userId, key);
+        if (replay) {
+          if (replay.requestHash !== requestHash) throw new DiagnosticConflictError('This Idempotency-Key was used with a different request');
+          return replay.response;
+        }
+      }
+      const remember = async (response: DiagnosticBatchView): Promise<DiagnosticBatchView> => {
+        if (key === undefined) return response;
+        const saved = await this.repo.saveReplay(tx, { userId: command.userId, idempotencyKey: key, sessionId: session.id, requestHash, response });
+        if (!saved) throw new DiagnosticConflictError('This Idempotency-Key was used with a different request');
+        return response;
+      };
+
       if (session.status === 'completed') throw new DiagnosticConflictError('This diagnostic is already complete');
 
       let step;
@@ -61,7 +88,7 @@ export class SubmitDiagnosticAnswers {
 
       if (!step.done) {
         const next = step.batch.map((i) => byId.get(i.id)).filter((s): s is ServedItem => s !== undefined);
-        return { diagnosticId: session.id, status: 'in_progress', progress: step.progress, items: itemsView(next) };
+        return remember({ diagnosticId: session.id, status: 'in_progress', progress: step.progress, items: itemsView(next) });
       }
       const placementId = await this.repo.createPlacement(tx, {
         sessionId: session.id,
@@ -72,7 +99,7 @@ export class SubmitDiagnosticAnswers {
       });
       const { stage, bloom } = step.placement.position;
       scope.publish(new PlacementComputed(placementId, session.userId, session.topicId, stage, bloom, step.placement.confidence, step.basis));
-      return { diagnosticId: session.id, status: 'completed', progress: step.progress, placement: placementView(placementId, step.placement) };
+      return remember({ diagnosticId: session.id, status: 'completed', progress: step.progress, placement: placementView(placementId, step.placement) });
     });
   }
 }

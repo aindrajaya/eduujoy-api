@@ -8,9 +8,9 @@ import { LADDER } from '../domain/diagnostic';
 import { type PlacementComputed } from '../domain/events/placement-computed.event';
 import { DiagnosticConflictError, DiagnosticNotFoundError, NotDiagnosticOwnerError, TopicNotFoundError } from './errors';
 import { GetDiagnostic } from './get-diagnostic.query';
-import { type DiagnosticRepository, type NewSession, type PlacementRecord, type ServedItem, type SessionRecord } from './ports/diagnostic.repository';
+import { type AnswerReplay, type DiagnosticRepository, type NewSession, type PlacementRecord, type ServedItem, type SessionRecord } from './ports/diagnostic.repository';
 import { StartDiagnostic } from './start-diagnostic.usecase';
-import { SubmitDiagnosticAnswers } from './submit-answers.usecase';
+import { answersRequestHash, SubmitDiagnosticAnswers } from './submit-answers.usecase';
 
 const TOPIC = { id: '0b1c6a1e-7f43-4c3c-9d39-5f2f6a1f0a11', canonicalName: 'React hooks', aliases: [], parentId: null, description: null };
 
@@ -29,6 +29,7 @@ class FakeRepo implements DiagnosticRepository {
   sessions = new Map<string, SessionRecord>();
   placements = new Map<string, PlacementRecord & { basis: string }>();
   answers: { sessionId: string; itemId: string; score: number }[] = [];
+  replays = new Map<string, AnswerReplay>();
   raceOnCreate = false;
 
   loadBank(): Promise<ServedItem[]> {
@@ -77,6 +78,15 @@ class FakeRepo implements DiagnosticRepository {
   }
   findPlacement(sessionId: string): Promise<PlacementRecord | null> {
     return Promise.resolve(this.placements.get(sessionId) ?? null);
+  }
+  findReplay(_tx: never, userId: string, key: string): Promise<AnswerReplay | null> {
+    return Promise.resolve(this.replays.get(`${userId}:${key}`) ?? null);
+  }
+  saveReplay(_tx: never, input: AnswerReplay & { userId: string; idempotencyKey: string }): Promise<boolean> {
+    const id = `${input.userId}:${input.idempotencyKey}`;
+    if (this.replays.has(id)) return Promise.resolve(false);
+    this.replays.set(id, { sessionId: input.sessionId, requestHash: input.requestHash, response: JSON.parse(JSON.stringify(input.response)) as AnswerReplay['response'] });
+    return Promise.resolve(true);
   }
 }
 
@@ -175,6 +185,81 @@ describe('SubmitDiagnosticAnswers', () => {
     const session = t.repo.sessions.get(view.diagnosticId);
     if (session) t.repo.sessions.set(session.id, { ...session, status: 'completed' });
     await expect(t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers })).rejects.toThrow('already complete');
+  });
+});
+
+describe('SubmitDiagnosticAnswers with an Idempotency-Key', () => {
+  const KEY = 'batch-key-0001';
+
+  it('replays the stored response for the same key and body without recording twice', async () => {
+    const t = setup();
+    const view = await t.start.execute(startCommand());
+    const answers = (view.items ?? []).map((i) => ({ itemId: i.id, optionIds: ['b'] }));
+
+    const first = await t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers, idempotencyKey: KEY });
+    const retry = await t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers, idempotencyKey: KEY });
+
+    expect(retry).toEqual(first);
+    expect(t.repo.answers).toHaveLength(4);
+    expect(t.repo.sessions.get(view.diagnosticId)?.state.progress.answered).toBe(4);
+  });
+
+  it('replays the final batch after completion, with one placement and one event', async () => {
+    const t = setup();
+    let view = await t.start.execute(startCommand());
+    let last: Parameters<SubmitDiagnosticAnswers['execute']>[0] | undefined;
+    let n = 0;
+    while (view.status === 'in_progress') {
+      last = { userId: 'u1', diagnosticId: view.diagnosticId, answers: (view.items ?? []).map((i) => ({ itemId: i.id, optionIds: ['b'] })), idempotencyKey: `key-batch-${++n}` };
+      view = await t.submit.execute(last);
+    }
+    if (!last) throw new Error('no batch submitted');
+
+    await expect(t.submit.execute(last)).resolves.toEqual(view);
+    expect(t.repo.placements.size).toBe(1);
+    expect(t.events).toHaveLength(1);
+  });
+
+  it('returns 409 for the same key with a different body and records nothing', async () => {
+    const t = setup();
+    const view = await t.start.execute(startCommand());
+    const answers = (view.items ?? []).map((i) => ({ itemId: i.id, optionIds: ['b'] }));
+    await t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers, idempotencyKey: KEY });
+
+    const changed = answers.map((a) => ({ ...a, optionIds: ['a'] }));
+    await expect(t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers: changed, idempotencyKey: KEY })).rejects.toThrow(
+      'different request',
+    );
+    expect(t.repo.answers).toHaveLength(4);
+  });
+
+  it('scopes keys per user', async () => {
+    const t = setup();
+    const a = await t.start.execute(startCommand('u1'));
+    const b = await t.start.execute(startCommand('u2'));
+    const answersFor = (v: typeof a) => (v.items ?? []).map((i) => ({ itemId: i.id, optionIds: ['b'] }));
+
+    await t.submit.execute({ userId: 'u1', diagnosticId: a.diagnosticId, answers: answersFor(a), idempotencyKey: KEY });
+    const second = await t.submit.execute({ userId: 'u2', diagnosticId: b.diagnosticId, answers: answersFor(b), idempotencyKey: KEY });
+
+    expect(second.diagnosticId).toBe(b.diagnosticId);
+    expect(t.repo.answers).toHaveLength(8);
+  });
+});
+
+describe('answersRequestHash', () => {
+  it('is stable for equal bodies and differs when any field or the diagnostic changes', () => {
+    const base = { userId: 'u1', diagnosticId: 'd1', answers: [{ itemId: 'i1', optionIds: ['a'] }] };
+
+    expect(answersRequestHash({ ...base })).toBe(answersRequestHash({ ...base, answers: [{ optionIds: ['a'], itemId: 'i1' }] }));
+    for (const variant of [
+      { ...base, diagnosticId: 'd2' },
+      { ...base, answers: [{ itemId: 'i1', optionIds: ['b'] }] },
+      { ...base, answers: [{ itemId: 'i1', optionIds: ['a'], skipped: true }] },
+      { ...base, answers: [{ itemId: 'i1', optionIds: ['a'], text: 'x' }] },
+    ]) {
+      expect(answersRequestHash(variant)).not.toBe(answersRequestHash(base));
+    }
   });
 });
 
