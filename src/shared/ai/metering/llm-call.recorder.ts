@@ -40,6 +40,7 @@ export class DrizzleLlmCallRecorder implements LlmCallRecorder {
       inputTokens: entry.usage.inputTokens,
       outputTokens: entry.usage.outputTokens,
       cacheReadTokens: entry.usage.cacheReadTokens,
+      cacheWriteTokens: entry.usage.cacheWriteTokens,
       costUsd: entry.costUsd.toFixed(6),
       latencyMs: entry.latencyMs,
       status: entry.status,

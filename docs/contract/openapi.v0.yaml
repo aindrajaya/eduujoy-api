@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Eduujoy API
-  version: 0.1.1-v0
+  version: 0.2.1-v0
   summary: Frozen v0 contract for the Eduujoy MVP.
   description: |
     Frozen v0 contract, written from PRD-API Section 7 (endpoints), Section 8 and master PRD
@@ -212,6 +212,25 @@ paths:
             application/json:
               schema: { $ref: '#/components/schemas/DiagnosticBatchResponse' }
         '400': { $ref: '#/components/responses/ValidationError' }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+  /v1/diagnostics/{id}:
+    get:
+      tags: [assessment]
+      operationId: diagnosticsGet
+      summary: Read my diagnostic so the UI can resume it after a reload (US-02).
+      description: |
+        Owner only. `items` is the batch issued last and not answered yet (empty once completed), so a
+        reloaded client continues exactly where it stopped; `placement` is set once `status` is
+        `completed`. Another user's diagnostic answers 404, so IDs can't be probed.
+      parameters:
+        - $ref: '#/components/parameters/IdPath'
+      responses:
+        '200':
+          description: The diagnostic with its outstanding batch and progress.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/DiagnosticResponse' }
         '401': { $ref: '#/components/responses/Unauthorized' }
         '404': { $ref: '#/components/responses/NotFound' }
   /v1/diagnostics/{id}/answers:
@@ -748,6 +767,10 @@ components:
           schema: { $ref: '#/components/schemas/Problem' }
     BudgetExceeded:
       description: Daily AI budget reached for cold topics (code AI_BUDGET_EXCEEDED).
+      headers:
+        Retry-After:
+          description: Whole seconds until the next UTC midnight, when the daily budget resets (at least 1).
+          schema: { type: integer, minimum: 1 }
       content:
         application/problem+json:
           schema: { $ref: '#/components/schemas/Problem' }
@@ -970,6 +993,16 @@ components:
         position: { $ref: '#/components/schemas/Position' }
         confidence: { type: number, minimum: 0, maximum: 1 }
         reason: { type: string, description: One-line reason (US-02). }
+    DiagnosticResponse:
+      description: GET /v1/diagnostics/{id}. The batch shape plus the topic and timestamps.
+      allOf:
+        - $ref: '#/components/schemas/DiagnosticBatchResponse'
+        - type: object
+          required: [topic, createdAt]
+          properties:
+            topic: { $ref: '#/components/schemas/Topic' }
+            createdAt: { type: string, format: date-time }
+            completedAt: { type: [string, 'null'], format: date-time }
     DiagnosticBatchResponse:
       type: object
       required: [diagnosticId, status, progress]
