@@ -130,7 +130,10 @@ describe('diagnostics (e2e, PRD-API §13 A7 Verify)', () => {
 
     await http().get(`/v1/diagnostics/${first.diagnosticId}`).set('Cookie', other.cookie).expect(404);
     await http().get('/v1/diagnostics/not-a-uuid').set('Cookie', owner.cookie).expect(404);
-    await answer(other.cookie, first.diagnosticId, (first.items ?? []).map((i) => ({ itemId: i.id, skipped: true }))).expect(403);
+    // Answering someone else's diagnostic is 404 too, so ids aren't probeable.
+    const skipped = (first.items ?? []).map((i) => ({ itemId: i.id, skipped: true }));
+    await answer(other.cookie, first.diagnosticId, skipped).expect(404);
+    await answer(owner.cookie, 'not-a-uuid', skipped).expect(404);
   });
 
   it('answers 409 for a mismatched batch and for a finished diagnostic', async () => {
