@@ -21,6 +21,8 @@ interface MeBody {
   quota: { monthlyPaths: number; usedPaths: number; credits: number; periodEnd: string };
 }
 
+jest.setTimeout(60_000);
+
 describe('billing (e2e, PRD-API §13 A12 Verify)', () => {
   let app: TestApp;
   let db: Database;
@@ -57,7 +59,8 @@ describe('billing (e2e, PRD-API §13 A12 Verify)', () => {
 
   /** The billing-event job runs on the real executor; wait until every stored event is processed. */
   async function settled(): Promise<void> {
-    for (let i = 0; i < 200; i++) {
+    // Up to 30 s: the executor's claim and the job's writes are each Neon round trips.
+    for (let i = 0; i < 600; i++) {
       if ((await db.$count(billingEvents, isNull(billingEvents.processedAt))) === 0) return;
       await sleep(50);
     }
