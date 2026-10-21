@@ -8,6 +8,7 @@ import { type SeedTopic } from '../../src/shared/db/seed/seed-data';
 import { collectBatch, replyJson, submitBatch } from './batch';
 import { assertWithinCap, logSpend, openRun, reject, ROOT, SEED_DIR, writeJson } from './ledger';
 import { addUsage, estimate, estimateTokens, formatEstimate, fromApiUsage, SEED_MODEL, usd, ZERO_USAGE, type Usage } from './pricing';
+import { spread } from './sample';
 
 // seed:taxonomy. Input: seed/_taxonomy-proposal.json (slug, name, domain, parent; reviewed by a human).
 // Claude adds aliases, a description and prerequisite edges per topic; the result is seed/topics.json in
@@ -113,19 +114,6 @@ function estimateFor(topics: ProposedTopic[], pending: ProposedTopic[], batch: b
   const prefixTokens = estimateTokens(PROMPT.text) + estimateTokens(catalogText(topics)) + 600; // + output schema with the slug enum
   const suffixTokens = Math.max(...pending.map((t) => estimateTokens(userTurn(t)))) + 10;
   return estimate(pending.length, { prefixTokens, suffixTokens, outputTokens: EXPECTED_OUTPUT_TOKENS }, batch);
-}
-
-/** Round-robin across domains so a small sample covers all three. */
-function spread(topics: ProposedTopic[], n: number): ProposedTopic[] {
-  const byDomain = ['software', 'stem', 'non_technical'].map((d) => topics.filter((t) => t.domain === d));
-  const out: ProposedTopic[] = [];
-  for (let i = 0; out.length < n && byDomain.some((list) => i < list.length); i++) {
-    for (const list of byDomain) {
-      const topic = list[i];
-      if (topic && out.length < n) out.push(topic);
-    }
-  }
-  return out;
 }
 
 export async function runTaxonomy(options: TaxonomyOptions): Promise<void> {

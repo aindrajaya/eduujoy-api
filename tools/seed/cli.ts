@@ -1,6 +1,7 @@
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { parseSeed, readSeedFiles } from '../../src/shared/db/seed/seed-data';
+import { runItems } from './items';
 import { runTaxonomy } from './taxonomy';
 import { SEED_DIR, totalSpentUsd } from './ledger';
 import { SPEND_CAP_USD, usd } from './pricing';
@@ -9,6 +10,7 @@ import { SPEND_CAP_USD, usd } from './pricing';
 // with node --env-file; this tool never reads or prints env files or keys.
 //
 //   pnpm seed:taxonomy [--dry-run] [--sample N] [--go]
+//   pnpm seed:items [--dry-run] [--sample N] [--go]     (--sample N: N topics, all five stages)
 //   pnpm seed:validate [--dir seed] [--expect-topics N]
 //
 // Paid runs need --go and print their estimate first; --dry-run never calls the API.
@@ -33,12 +35,17 @@ async function main(): Promise<void> {
       await runTaxonomy({ dryRun: values['dry-run'], go: values.go, sample });
       return;
     }
+    case 'items': {
+      const sample = values.sample === undefined ? undefined : positiveInt(values.sample, '--sample');
+      await runItems({ dryRun: values['dry-run'], go: values.go, sample });
+      return;
+    }
     case 'validate': {
       validate(values.dir ? resolve(values.dir) : SEED_DIR, values['expect-topics']);
       return;
     }
     default:
-      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, validate`);
+      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, items, validate`);
   }
 }
 
