@@ -40,8 +40,19 @@ export const envSchema = z
     // Daily AI spend cap in US$ (PRD-API §5); no default, so the operator must choose it.
     AI_DAILY_BUDGET_USD: z.coerce.number().positive().max(1000),
     API_PUBLIC_URL: z.url({ protocol: /^https?$/ }).transform((value) => value.replace(/\/+$/, '')),
+    // Billing (A12, FR-23). LEMONSQUEEZY_MODE has no default: a test-mode event must never credit in a
+    // live deployment, or the other way round, so the operator states which one this is.
+    LEMONSQUEEZY_API_KEY: z.string().min(1),
+    LEMONSQUEEZY_STORE_ID: z.string().regex(/^\d{1,12}$/, { error: 'must be a numeric store id' }),
+    LEMONSQUEEZY_WEBHOOK_SECRET: z.string().min(16, { error: 'must be at least 16 characters' }),
+    LEMONSQUEEZY_VARIANT_SUBSCRIPTION: z.string().regex(/^\d{1,12}$/, { error: 'must be a numeric variant id' }),
+    LEMONSQUEEZY_VARIANT_CREDIT_PACK: z.string().regex(/^\d{1,12}$/, { error: 'must be a numeric variant id' }),
+    LEMONSQUEEZY_MODE: z.enum(['test', 'live']),
   })
   .superRefine((env, ctx) => {
+    if (env.LEMONSQUEEZY_VARIANT_SUBSCRIPTION === env.LEMONSQUEEZY_VARIANT_CREDIT_PACK) {
+      ctx.addIssue({ code: 'custom', path: ['LEMONSQUEEZY_VARIANT_CREDIT_PACK'], message: 'must differ from the subscription variant' });
+    }
     if (env.NODE_ENV !== 'production') return;
     if (env.APP_ORIGIN.some((origin) => !origin.startsWith('https://'))) {
       ctx.addIssue({ code: 'custom', path: ['APP_ORIGIN'], message: 'must use https in production' });

@@ -19,6 +19,12 @@ function config(overrides: Partial<Env>): AppConfig {
     ANTHROPIC_API_KEY: 'a',
     GEMINI_API_KEY: 'g',
     AI_DAILY_BUDGET_USD: 5,
+    LEMONSQUEEZY_API_KEY: 'ls',
+    LEMONSQUEEZY_STORE_ID: '1',
+    LEMONSQUEEZY_WEBHOOK_SECRET: 'w'.repeat(40),
+    LEMONSQUEEZY_VARIANT_SUBSCRIPTION: '2',
+    LEMONSQUEEZY_VARIANT_CREDIT_PACK: '3',
+    LEMONSQUEEZY_MODE: 'test',
     ...overrides,
   });
 }
