@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX "diagnostic_sessions_open_key" ON "diagnostic_sessions" USING btree ("user_id","topic_id") WHERE "diagnostic_sessions"."status" = 'in_progress';

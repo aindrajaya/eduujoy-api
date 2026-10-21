@@ -72,7 +72,13 @@ export const diagnosticSessions = pgTable(
     ...withCreatedAt,
     completedAt: timestamp('completed_at', { withTimezone: true }),
   },
-  (t) => [index('diagnostic_sessions_user_idx').on(t.userId, t.createdAt)],
+  (t) => [
+    index('diagnostic_sessions_user_idx').on(t.userId, t.createdAt),
+    // One in-progress diagnostic per user and topic; a second start resumes it.
+    uniqueIndex('diagnostic_sessions_open_key')
+      .on(t.userId, t.topicId)
+      .where(sql`${t.status} = 'in_progress'`),
+  ],
 );
 
 export const diagnosticAnswers = pgTable(
