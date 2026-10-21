@@ -21,6 +21,24 @@ export function ApiProblem(status: number, description = PROBLEM_DESCRIPTIONS[st
   });
 }
 
+/**
+ * 503 AI_BUDGET_EXCEEDED (contract `BudgetExceeded`, 0.2.1-v0) with its `Retry-After` response header:
+ * whole seconds until the next UTC midnight, when the daily budget resets. For cold-topic AI routes.
+ */
+export function ApiBudgetExceeded(): MethodDecorator {
+  return ApiResponse({
+    status: 503,
+    description: 'Daily AI budget reached for cold topics (code AI_BUDGET_EXCEEDED).',
+    headers: {
+      'Retry-After': {
+        description: 'Whole seconds until the next UTC midnight, when the daily budget resets (at least 1).',
+        schema: { type: 'integer', minimum: 1 },
+      },
+    },
+    content: { 'application/problem+json': { schema: schemaRef('Problem') } },
+  });
+}
+
 /** CsrfGuard header required on unsafe methods (PRD-API §6). */
 export const ApiCsrfHeader = (): MethodDecorator & ClassDecorator =>
   ApiHeader({
