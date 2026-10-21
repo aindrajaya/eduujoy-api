@@ -45,8 +45,9 @@ export class JobExecutor {
     });
   }
 
-  register(handler: JobHandler): void {
+  register<P>(handler: JobHandler<P>): void {
     if (this.handlers.has(handler.type)) throw new Error(`Job handler already registered: ${handler.type}`);
+    // run() only ever receives what this handler's own parse() returned.
     this.handlers.set(handler.type, handler);
   }
 
