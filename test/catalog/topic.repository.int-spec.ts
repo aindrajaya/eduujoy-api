@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { eq } from 'drizzle-orm';
 import { type Client } from 'pg';
 import { DrizzleTopicRepository } from '../../src/modules/catalog/infrastructure/drizzle-topic.repository';
 import { topics } from '../../src/shared/db/schema/catalog';
@@ -14,6 +15,7 @@ const at = (angle: number): number[] => {
   return v;
 };
 const MODEL = { model: 'gemini-embedding-2', version: 1 };
+const VIEWER = randomUUID();
 
 describe('DrizzleTopicRepository (integration)', () => {
   let client: Client;
@@ -39,14 +41,14 @@ describe('DrizzleTopicRepository (integration)', () => {
   });
 
   it('finds exact names, aliases and slugs ignoring case', async () => {
-    expect((await repo.findExact(`react hooks ${tag}`, 'x')).map((t) => t.canonicalName)).toEqual([`React hooks ${tag}`]);
-    expect((await repo.findExact(`usestate-${tag}`, 'x')).map((t) => t.canonicalName)).toEqual([`React hooks ${tag}`]);
-    expect((await repo.findExact('nothing', slug('react'))).map((t) => t.canonicalName)).toEqual([`React ${tag}`]);
-    expect(await repo.findExact(`react hook ${tag}`, 'x')).toEqual([]);
+    expect((await repo.findExact(`react hooks ${tag}`, 'x', VIEWER)).map((t) => t.canonicalName)).toEqual([`React hooks ${tag}`]);
+    expect((await repo.findExact(`usestate-${tag}`, 'x', VIEWER)).map((t) => t.canonicalName)).toEqual([`React hooks ${tag}`]);
+    expect((await repo.findExact('nothing', slug('react'), VIEWER)).map((t) => t.canonicalName)).toEqual([`React ${tag}`]);
+    expect(await repo.findExact(`react hook ${tag}`, 'x', VIEWER)).toEqual([]);
   });
 
   it('returns nearest topics by cosine for the same model and version only', async () => {
-    const near = await repo.nearest({ vector: at(Math.acos(0.9)), ...MODEL }, 50);
+    const near = await repo.nearest({ vector: at(Math.acos(0.9)), ...MODEL }, 50, VIEWER);
     const mine = near.filter((n) => n.topic.canonicalName.endsWith(tag));
 
     expect(mine.map((n) => n.topic.canonicalName)).toEqual([`React hooks ${tag}`, `React ${tag}`]);
@@ -96,8 +98,32 @@ describe('DrizzleTopicRepository (integration)', () => {
     expect(await repo.countCreatedBy(createdBy, limit.since)).toBe(3);
   });
 
+  it("keeps another learner's flagged topic out of matches, choices and their slug", async () => {
+    const [owner, other] = await db.insert(users).values([{ email: `flag-a-${randomUUID()}@example.com` }, { email: `flag-b-${randomUUID()}@example.com` }]).returning();
+    const ownerId = owner?.id ?? '';
+    const otherId = other?.id ?? '';
+    const limit = { since: new Date(Date.now() - 60_000), max: 10 };
+    const flagged = { slug: slug('raw'), canonicalName: `Raw words ${tag}`, aliases: [], description: null, domain: null, needsReview: true, embedding: { vector: at(2.5), ...MODEL } };
+
+    const mine = await repo.create({ ...flagged, createdBy: ownerId }, limit);
+    expect(mine.outcome).toBe('created');
+    expect(await repo.findExact(`raw words ${tag}`, 'x', ownerId)).toHaveLength(1);
+    expect(await repo.findExact(`raw words ${tag}`, 'x', otherId)).toEqual([]);
+    const nearFor = async (viewer: string) => (await repo.nearest({ vector: at(2.5), ...MODEL }, 50, viewer)).map((n) => n.topic.canonicalName);
+    expect(await nearFor(ownerId)).toContain(`Raw words ${tag}`);
+    expect(await nearFor(otherId)).not.toContain(`Raw words ${tag}`);
+
+    // The same text from another learner makes their own topic instead of revealing the owner's.
+    const theirs = await repo.create({ ...flagged, createdBy: otherId }, limit);
+    expect(theirs.outcome).toBe('created');
+    const theirRow = await db.select({ slug: topics.slug }).from(topics).where(eq(topics.createdBy, otherId));
+    expect(theirRow.map((r) => r.slug)).toEqual([`${slug('raw')}-2`]);
+    // Its creator re-resolving the same slug gets the existing topic back.
+    expect((await repo.create({ ...flagged, createdBy: ownerId }, limit)).outcome).toBe('exists');
+  });
+
   it('lists topics without a current embedding and stores new ones', async () => {
-    const mine = (t: { canonicalName: string }) => t.canonicalName.endsWith(tag) && !t.canonicalName.startsWith('Cap ');
+    const mine = (t: { canonicalName: string }) => t.canonicalName.endsWith(tag) && !/^(Cap |Raw words )/.test(t.canonicalName);
     const pending = (await repo.listUnembedded(MODEL.model, MODEL.version, 1000)).filter(mine);
     expect(pending.map((t) => t.canonicalName).sort()).toEqual([`No embedding ${tag}`, `Old model ${tag}`]);
 

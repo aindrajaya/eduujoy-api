@@ -61,16 +61,16 @@ export class FakeTopicRepository implements TopicRepository {
     return Promise.resolve(t ? view(t) : null);
   }
 
-  findExact(normalised: string, slug: string): Promise<TopicView[]> {
+  findExact(normalised: string, slug: string, viewerId: string): Promise<TopicView[]> {
     const hits = [...this.topics.values()].filter(
-      (t) => t.slug === slug || normaliseTopicText(t.canonicalName) === normalised || t.aliases.some((a) => a.toLowerCase() === normalised),
+      (t) => visible(t, viewerId) && (t.slug === slug || normaliseTopicText(t.canonicalName) === normalised || t.aliases.some((a) => a.toLowerCase() === normalised)),
     );
     return Promise.resolve(hits.map(view));
   }
 
-  nearest(query: TopicEmbedding, limit: number): Promise<NearTopic[]> {
+  nearest(query: TopicEmbedding, limit: number, viewerId: string): Promise<NearTopic[]> {
     const near = [...this.topics.values()]
-      .filter((t) => t.embedding && t.embedding.model === query.model && t.embedding.version === query.version)
+      .filter((t) => visible(t, viewerId) && t.embedding && t.embedding.model === query.model && t.embedding.version === query.version)
       .map((t) => ({ topic: view(t), similarity: cosine(t.embedding?.vector ?? [], query.vector) }))
       .sort((a, b) => b.similarity - a.similarity)
       .slice(0, limit);
@@ -80,9 +80,13 @@ export class FakeTopicRepository implements TopicRepository {
   create(topic: NewTopic, limit: CreateLimit): Promise<CreateResult> {
     const mine = [...this.topics.values()].filter((t) => t.createdBy === topic.createdBy && t.createdAt >= limit.since).length;
     if (mine >= limit.max) return Promise.resolve({ outcome: 'limited' });
-    const existing = [...this.topics.values()].find((t) => t.slug === topic.slug);
-    if (existing) return Promise.resolve({ outcome: 'exists', topic: view(existing) });
-    return Promise.resolve({ outcome: 'created', topic: view(this.add(topic)) });
+    for (let n = 1; n <= 20; n++) {
+      const slug = n === 1 ? topic.slug : `${topic.slug}-${n}`;
+      const existing = [...this.topics.values()].find((t) => t.slug === slug);
+      if (!existing) return Promise.resolve({ outcome: 'created', topic: view(this.add({ ...topic, slug })) });
+      if (visible(existing, topic.createdBy)) return Promise.resolve({ outcome: 'exists', topic: view(existing) });
+    }
+    return Promise.reject(new Error('no free slug'));
   }
 
   countCreatedBy(userId: string, since: Date): Promise<number> {
@@ -102,6 +106,10 @@ export class FakeTopicRepository implements TopicRepository {
     if (t) t.embedding = embedding;
     return Promise.resolve();
   }
+}
+
+function visible(t: FakeTopic, viewerId: string): boolean {
+  return !t.needsReview || t.createdBy === viewerId;
 }
 
 function view(t: FakeTopic): TopicView {

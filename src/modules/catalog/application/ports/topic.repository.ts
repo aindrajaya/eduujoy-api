@@ -50,13 +50,17 @@ export interface TopicToEmbed {
 
 export interface TopicRepository {
   findById(id: string): Promise<TopicView | null>;
-  /** Topics whose slug equals `slug`, or whose canonical name or an alias equals `normalised` ignoring case. */
-  findExact(normalised: string, slug: string): Promise<TopicView[]>;
-  /** Nearest topics embedded with the same model and version, most similar first. */
-  nearest(query: TopicEmbedding, limit: number): Promise<NearTopic[]>;
+  /**
+   * Topics whose slug equals `slug`, or whose canonical name or an alias equals `normalised` ignoring case.
+   * Like nearest(), only topics `viewerId` may see: a topic flagged needs_review is its creator's alone.
+   */
+  findExact(normalised: string, slug: string, viewerId: string): Promise<TopicView[]>;
+  /** Nearest visible topics embedded with the same model and version, most similar first. */
+  nearest(query: TopicEmbedding, limit: number, viewerId: string): Promise<NearTopic[]>;
   /**
    * Inserts the topic unless its creator already has `limit.max` topics since `limit.since`; the count and
-   * the insert are serialised per creator. A taken slug returns the existing topic.
+   * the insert are serialised per creator. A slug taken by a visible topic returns that topic; a slug
+   * taken by another learner's flagged topic gets a numeric suffix, so flagged text never leaks.
    */
   create(topic: NewTopic, limit: CreateLimit): Promise<CreateResult>;
   countCreatedBy(userId: string, since: Date): Promise<number>;
