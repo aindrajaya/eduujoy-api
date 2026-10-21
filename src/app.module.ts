@@ -8,6 +8,7 @@ import { ProblemModule } from './shared/common/problem';
 import { SerializationModule } from './shared/common/serialization';
 import { ConfigModule } from './shared/config';
 import { DbModule } from './shared/db';
+import { EventsModule } from './shared/events';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { DbModule } from './shared/db';
     AuthKernelModule,
     HealthModule,
     DbModule,
+    EventsModule,
     AiModule,
     IdentityModule,
   ],
