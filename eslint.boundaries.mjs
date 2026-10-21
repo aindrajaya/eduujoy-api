@@ -86,6 +86,11 @@ export default [
               from: { element: { type: 'module-root' } },
               allow: { to: [...layers([...LAYERS]), { element: { type: 'shared' } }] },
             },
+            // Nest wiring: a module may import another module's *.module.ts (its public surface).
+            {
+              from: { element: { type: 'module-root' } },
+              allow: { to: { element: { type: 'module-root' } } },
+            },
             { from: { element: { type: 'shared' } }, allow: { to: { element: { type: 'shared' } } } },
             {
               from: { element: { type: 'app' } },
