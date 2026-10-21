@@ -35,9 +35,8 @@ jobs:
         env:
           DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}
       - run: pnpm build
-      # The contract lives outside this repo (../docs/contract), so CI only checks that openapi.json is
-      # current; the full contract diff runs locally in each slice's Verify.
-      - run: pnpm openapi:check --fresh-only
+      # Full diff against the vendored contract (docs/contract/openapi.v0.yaml).
+      - run: pnpm openapi:check
       - name: Audit production dependencies
         run: pnpm audit --prod --audit-level high
       - name: Audit all dependencies (report only; dev tooling has unpatched DoS advisories)

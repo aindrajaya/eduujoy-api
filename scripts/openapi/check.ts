@@ -7,9 +7,10 @@ import { compareToContract, type OpenApiDoc } from './compare';
 import { CONTRACT_EXCEPTIONS } from './exceptions';
 
 // pnpm openapi:check — fails when openapi.json is stale or the API drifts from the frozen contract.
-// --fresh-only skips the contract diff (CI checks out api/ alone, without ../docs/contract).
+// The contract is the vendored copy in docs/contract (re-copied from ../docs/contract on every bump);
+// OPENAPI_CONTRACT overrides the path. --fresh-only skips the contract diff.
 const ROOT = join(__dirname, '..', '..');
-const CONTRACT = process.env['OPENAPI_CONTRACT'] ?? join(ROOT, '..', 'docs', 'contract', 'openapi.v0.yaml');
+const CONTRACT = process.env['OPENAPI_CONTRACT'] ?? join(ROOT, 'docs', 'contract', 'openapi.v0.yaml');
 
 async function main(): Promise<void> {
   const failures: string[] = [];
