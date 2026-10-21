@@ -596,6 +596,80 @@
         ],
         "type": "object"
       },
+      "TopicChoiceDto": {
+        "properties": {
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "canonicalName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "parentId": {
+            "nullable": true,
+            "type": "string"
+          },
+          "similarity": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "canonicalName"
+        ],
+        "type": "object"
+      },
+      "TopicResolveRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "maxLength": 120,
+            "minLength": 2,
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "type": "object"
+      },
+      "TopicResolveResponse": {
+        "description": "`matched` (similarity ≥ 0.88), `choices` (0.75–0.88, at most 3), or `created` (new topic).",
+        "properties": {
+          "choices": {
+            "items": {
+              "$ref": "#/components/schemas/TopicChoiceDto"
+            },
+            "maxItems": 3,
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "matched",
+              "choices",
+              "created"
+            ],
+            "type": "string"
+          },
+          "topic": {
+            "$ref": "#/components/schemas/Topic"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "type": "object"
+      },
       "ValidationProblem": {
         "allOf": [
           {
@@ -1359,6 +1433,93 @@
         "summary": "Submit a batch of answers; returns the next batch or the placement (FR-04).",
         "tags": [
           "assessment"
+        ]
+      }
+    },
+    "/v1/topics/resolve": {
+      "post": {
+        "operationId": "topicsResolve",
+        "parameters": [
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TopicResolveRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopicResolveResponse"
+                }
+              }
+            },
+            "description": "Resolution result."
+          },
+          "400": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            },
+            "description": "Validation failed; `errors` maps to form fields."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "429": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Rate limited (code RATE_LIMITED).",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Resolve free text to a canonical topic or up to 3 choices (FR-01, FR-02).",
+        "tags": [
+          "catalog"
         ]
       }
     }
