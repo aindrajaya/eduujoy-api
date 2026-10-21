@@ -1,6 +1,6 @@
-import { Body, Controller, Headers, HttpCode, Post, type RawBodyRequest, Req, SerializeOptions, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Headers, HttpCode, Post, type RawBodyRequest, Req, Res, SerializeOptions, UseInterceptors } from '@nestjs/common';
 import { ApiBody, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { type Request } from 'express';
+import { type Request, type Response } from 'express';
 import { type AuthUser, CurrentUser, Public, SkipCsrf } from '../../../shared/common/auth';
 import { ApiAccessCookieAuth, ApiCsrfHeader, ApiProblem } from '../../../shared/common/openapi';
 import { CreateCheckout } from '../application/create-checkout.usecase';
@@ -40,7 +40,13 @@ export class BillingController {
   @ApiBody({ required: true, schema: { type: 'object', additionalProperties: true } })
   @ApiOkResponse({ description: 'Processed, or already processed (replay ignored).' })
   @ApiProblem(401)
-  async webhook(@Req() req: RawBodyRequest<Request>, @Headers('x-signature') signature: string | undefined): Promise<void> {
+  async webhook(
+    @Req() req: RawBodyRequest<Request>,
+    @Headers('x-signature') signature: string | undefined,
+    @Res() res: Response,
+  ): Promise<void> {
     await this.webhooks.execute(req.rawBody, signature);
+    // An empty 200 tells Lemon Squeezy the event is captured (any other status makes it retry).
+    res.status(200).end();
   }
 }

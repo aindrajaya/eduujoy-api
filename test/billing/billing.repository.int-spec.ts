@@ -97,11 +97,13 @@ describe('DrizzleBillingRepository (integration)', () => {
     const clients = await Promise.all(Array.from({ length: 6 }, () => connectTestClient()));
     try {
       const charges = await Promise.all(clients.map((c, i) => new DrizzleBillingRepository(testDb(c)).reservePath({ userId, pathRef: `p${i}` }, decide)));
-      expect(charges.sort()).toEqual(['credit', 'credit', 'exceeded', 'exceeded', 'exceeded', 'plan']);
+      expect([...charges].sort()).toEqual(['credit', 'credit', 'exceeded', 'exceeded', 'exceeded', 'plan']);
+      // Charging a path again returns its earlier charge without writing another row.
+      const charged = charges.findIndex((c) => c !== 'exceeded');
+      await expect(repo.reservePath({ userId, pathRef: `p${charged}` }, decide)).resolves.toBe(charges[charged]);
     } finally {
       await Promise.all(clients.map((c) => c.end()));
     }
-    await expect(repo.reservePath({ userId, pathRef: 'p0' }, decide)).resolves.toMatch(/^(plan|credit)$/);
     expect(await balance(userId)).toBe(0);
   });
 });
