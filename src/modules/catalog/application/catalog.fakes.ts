@@ -1,6 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import { normaliseTopicText } from '../domain/resolution';
 import {
+  type CreateLimit,
+  type CreateResult,
   type NearTopic,
   type NewTopic,
   type TopicEmbedding,
@@ -75,10 +77,12 @@ export class FakeTopicRepository implements TopicRepository {
     return Promise.resolve(near);
   }
 
-  create(topic: NewTopic): Promise<{ topic: TopicView; created: boolean }> {
+  create(topic: NewTopic, limit: CreateLimit): Promise<CreateResult> {
+    const mine = [...this.topics.values()].filter((t) => t.createdBy === topic.createdBy && t.createdAt >= limit.since).length;
+    if (mine >= limit.max) return Promise.resolve({ outcome: 'limited' });
     const existing = [...this.topics.values()].find((t) => t.slug === topic.slug);
-    if (existing) return Promise.resolve({ topic: view(existing), created: false });
-    return Promise.resolve({ topic: view(this.add(topic)), created: true });
+    if (existing) return Promise.resolve({ outcome: 'exists', topic: view(existing) });
+    return Promise.resolve({ outcome: 'created', topic: view(this.add(topic)) });
   }
 
   countCreatedBy(userId: string, since: Date): Promise<number> {

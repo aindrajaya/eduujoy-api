@@ -34,6 +34,13 @@ export interface NewTopic {
   embedding: TopicEmbedding | null;
 }
 
+export interface CreateLimit {
+  since: Date;
+  max: number;
+}
+
+export type CreateResult = { outcome: 'created' | 'exists'; topic: TopicView } | { outcome: 'limited' };
+
 export interface TopicToEmbed {
   id: string;
   canonicalName: string;
@@ -47,8 +54,11 @@ export interface TopicRepository {
   findExact(normalised: string, slug: string): Promise<TopicView[]>;
   /** Nearest topics embedded with the same model and version, most similar first. */
   nearest(query: TopicEmbedding, limit: number): Promise<NearTopic[]>;
-  /** Inserts the topic; when the slug is taken, returns the existing topic with `created: false`. */
-  create(topic: NewTopic): Promise<{ topic: TopicView; created: boolean }>;
+  /**
+   * Inserts the topic unless its creator already has `limit.max` topics since `limit.since`; the count and
+   * the insert are serialised per creator. A taken slug returns the existing topic.
+   */
+  create(topic: NewTopic, limit: CreateLimit): Promise<CreateResult>;
   countCreatedBy(userId: string, since: Date): Promise<number>;
   /** Topics without an embedding for this model and version, oldest first. */
   listUnembedded(model: string, version: number, limit: number): Promise<TopicToEmbed[]>;
