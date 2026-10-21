@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { IdentityModule } from './modules/identity/identity.module';
+import { AiModule } from './shared/ai';
 import { AuthKernelModule } from './shared/common/auth';
 import { HealthModule } from './shared/common/health';
 import { LoggingModule } from './shared/common/logging';
@@ -17,6 +18,7 @@ import { DbModule } from './shared/db';
     AuthKernelModule,
     HealthModule,
     DbModule,
+    AiModule,
     IdentityModule,
   ],
 })

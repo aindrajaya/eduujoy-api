@@ -11,6 +11,9 @@ const valid = {
   GOOGLE_OAUTH_CLIENT_ID: 'client.apps.googleusercontent.com',
   GOOGLE_OAUTH_CLIENT_SECRET: 'google-secret',
   GOOGLE_OAUTH_REDIRECT_URI: 'https://api.eduujoy.aindrajaya.my.id/v1/auth/google/callback',
+  ANTHROPIC_API_KEY: 'sk-ant-test',
+  GEMINI_API_KEY: 'gemini-test',
+  AI_DAILY_BUDGET_USD: '5',
 };
 
 describe('parseEnv', () => {
@@ -51,9 +54,12 @@ describe('parseEnv', () => {
     } catch (error) {
       expect(error).toBeInstanceOf(EnvValidationError);
       expect((error as EnvValidationError).keys).toEqual([
+        'AI_DAILY_BUDGET_USD',
+        'ANTHROPIC_API_KEY',
         'API_PUBLIC_URL',
         'APP_ORIGIN',
         'DATABASE_URL',
+        'GEMINI_API_KEY',
         'GOOGLE_OAUTH_CLIENT_ID',
         'GOOGLE_OAUTH_CLIENT_SECRET',
         'GOOGLE_OAUTH_REDIRECT_URI',
@@ -119,5 +125,12 @@ describe('parseEnv', () => {
 
     expect(message).toContain('JWT_ACCESS_SECRET: must be at least 32 characters');
     expect(message).not.toContain('tooshort-secret-value');
+  });
+
+  it('requires a positive AI_DAILY_BUDGET_USD of at most 1000 and parses it as a number', () => {
+    expect(parseEnv({ ...valid, AI_DAILY_BUDGET_USD: '7.5' }).AI_DAILY_BUDGET_USD).toBe(7.5);
+    for (const bad of ['0', '-1', 'abc', '5000']) {
+      expect(() => parseEnv({ ...valid, AI_DAILY_BUDGET_USD: bad })).toThrow(EnvValidationError);
+    }
   });
 });

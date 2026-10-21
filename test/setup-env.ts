@@ -12,4 +12,8 @@ Object.assign(process.env, {
   GOOGLE_OAUTH_CLIENT_ID: 'e2e-client.apps.googleusercontent.com',
   GOOGLE_OAUTH_CLIENT_SECRET: 'e2e-google-secret',
   GOOGLE_OAUTH_REDIRECT_URI: 'http://localhost:3000/v1/auth/google/callback',
+  // Fake AI keys: e2e never reaches a provider (AI calls are covered by offline contract tests).
+  ANTHROPIC_API_KEY: 'e2e-anthropic-key',
+  GEMINI_API_KEY: 'e2e-gemini-key',
+  AI_DAILY_BUDGET_USD: '5',
 });
