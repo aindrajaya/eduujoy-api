@@ -66,6 +66,19 @@ describe('HTTP hardening (e2e)', () => {
       .post('/health')
       .set('Content-Type', 'application/json')
       .send(body)
-      .expect(413);
+      .expect(413)
+      .expect('Content-Type', /application\/problem\+json/);
+  });
+
+  it('rejects malformed JSON with a 400 problem', async () => {
+    const res = await request(app.getHttpServer())
+      .post('/health')
+      .set('Content-Type', 'application/json')
+      .send('{"a": ')
+      .expect(400)
+      .expect('Content-Type', /application\/problem\+json/);
+
+    expect(res.body).toMatchObject({ status: 400, code: 'VALIDATION_FAILED' });
+    expect(JSON.stringify(res.body)).not.toMatch(/Unexpected|JSON at position/);
   });
 });
