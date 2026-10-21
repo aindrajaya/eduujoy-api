@@ -1,0 +1,112 @@
+[
+  {
+    "name": "fresh-beginner",
+    "note": "No self-report, knows nothing yet.",
+    "knowsUpTo": -1,
+    "expected": {
+      "stage": "novice",
+      "bloom": "C1",
+      "minConfidence": 0.05,
+      "maxConfidence": 0.99
+    }
+  },
+  {
+    "name": "novice-understands",
+    "note": "Brand new (no years, no projects) but understands the basics.",
+    "selfReport": {
+      "years": 0,
+      "projectsShipped": 0
+    },
+    "knowsUpTo": 1,
+    "expected": {
+      "stage": "novice",
+      "bloom": "C2",
+      "minConfidence": 0.8,
+      "maxConfidence": 0.99
+    }
+  },
+  {
+    "name": "advanced-beginner",
+    "note": "A year of practice; can apply the basics.",
+    "selfReport": {
+      "years": 1
+    },
+    "knowsUpTo": 3,
+    "expected": {
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "minConfidence": 0.8,
+      "maxConfidence": 0.99
+    }
+  },
+  {
+    "name": "competent",
+    "note": "Three shipped projects; can analyse at the competent level.",
+    "selfReport": {
+      "projectsShipped": 3
+    },
+    "knowsUpTo": 5,
+    "expected": {
+      "stage": "competent",
+      "bloom": "C4",
+      "minConfidence": 0.8,
+      "maxConfidence": 0.99
+    }
+  },
+  {
+    "name": "proficient-with-a-slip",
+    "note": "Six years; one careless miss on a proficient C4 item should not drag the placement down.",
+    "selfReport": {
+      "years": 6
+    },
+    "knowsUpTo": 7,
+    "slipAt": 6,
+    "expected": {
+      "stage": "proficient",
+      "bloom": "C5",
+      "minConfidence": 0.7,
+      "maxConfidence": 0.99
+    }
+  },
+  {
+    "name": "expert",
+    "note": "Twelve years and 25 projects; creates at the expert level.",
+    "selfReport": {
+      "years": 12,
+      "projectsShipped": 25
+    },
+    "knowsUpTo": 9,
+    "expected": {
+      "stage": "expert",
+      "bloom": "C6",
+      "minConfidence": 0.6,
+      "maxConfidence": 0.99
+    }
+  },
+  {
+    "name": "over-claimer",
+    "note": "EDGE CASE for review. Claims expert experience but only knows advanced beginner C3. 12 items walk down at most 3 cells from expert C5, so the learner is never tested at their level; the rules then fall back to novice C1 at low confidence. The first checkpoint's auto-correction (master \u00a712) is the safety net.",
+    "selfReport": {
+      "years": 10,
+      "projectsShipped": 20
+    },
+    "knowsUpTo": 3,
+    "expected": {
+      "stage": "novice",
+      "bloom": "C1",
+      "minConfidence": 0.05,
+      "maxConfidence": 0.99
+    }
+  },
+  {
+    "name": "silent-expert",
+    "note": "EDGE CASE for review. A real expert who skips the self-report starts at novice C1 and climbs one cell per batch (estimates 1, 2, 3), so 12 items are only ever tested up to advanced beginner C3, which is where the placement lands. The self-report matters.",
+    "knowsUpTo": 9,
+    "expected": {
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "minConfidence": 0.05,
+      "maxConfidence": 0.99
+    }
+  }
+]
