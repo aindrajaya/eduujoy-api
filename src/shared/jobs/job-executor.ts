@@ -53,6 +53,8 @@ export class JobExecutor {
   private staleTimer: NodeJS.Timeout | undefined;
   private pruneTimer: NodeJS.Timeout | undefined;
   private pumping = false;
+  /** The pump in progress, so stop() can wait for its queries instead of racing the pool shutdown. */
+  private pumpTask: Promise<void> = Promise.resolve();
   private pumpAgain = false;
   private stopped = true;
 
@@ -107,6 +109,8 @@ export class JobExecutor {
     clearTimeout(this.staleTimer);
     clearInterval(this.pruneTimer);
     const deadline = new Promise<void>((resolve) => setTimeout(resolve, this.options.stopTimeoutMs ?? 10_000).unref());
+    // A pump mid-query must finish (and release anything it claims after stopping) before the pool closes.
+    await Promise.race([this.pumpTask, deadline]);
     await Promise.race([Promise.allSettled([...this.inFlight.keys()]), deadline]);
     const unfinished = [...this.inFlight.values()];
     if (unfinished.length === 0) return;
@@ -150,6 +154,11 @@ export class JobExecutor {
       return;
     }
     this.pumping = true;
+    this.pumpTask = this.pumpLoop();
+    await this.pumpTask;
+  }
+
+  private async pumpLoop(): Promise<void> {
     try {
       // scheduleNext runs inside the loop: a wake-up that lands while it queries must pump again,
       // because due-now jobs get no timer.
@@ -158,8 +167,14 @@ export class JobExecutor {
         for (;;) {
           const job = await this.repo.claimNext(this.typesWithFreeSlots());
           if (!job) break;
+          if (this.stopped) {
+            // Claimed while stop() ran: hand it straight back rather than start work during shutdown.
+            if (job.lockedAt) await this.repo.release([{ id: job.id, lockedAt: job.lockedAt }]);
+            return;
+          }
           this.launch(job);
         }
+        if (this.stopped) return;
         await this.scheduleNext();
       } while (this.wokenWhilePumping());
     } catch (error) {
