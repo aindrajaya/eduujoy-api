@@ -9,14 +9,32 @@ export function testSchema(): string {
   return name;
 }
 
-/** A direct client whose search_path is the run's schema, with public for pgvector. */
+const CONNECT_ATTEMPTS = 3;
+const TRANSIENT = /ECONNRESET|ETIMEDOUT|EADDRNOTAVAIL|ECONNREFUSED|Connection terminated|timeout/i;
+
+/**
+ * A direct client whose search_path is the run's schema, with public for pgvector. Test-only resilience
+ * for the Neon test branch over flaky networks: a connect timeout (instead of hanging a hook for 30 s),
+ * TCP keep-alive, and up to 3 connect attempts on transient errors. Production pool settings are
+ * unchanged (src/shared/db/db.module.ts). Queries are never retried: they may not be idempotent.
+ */
 export async function connectTestClient(schemaName = testSchema()): Promise<Client> {
-  const client = new Client({
-    connectionString: process.env['DATABASE_URL'],
-    options: `-c search_path="${schemaName}",public`,
-  });
-  await client.connect();
-  return client;
+  for (let attempt = 1; ; attempt++) {
+    const client = new Client({
+      connectionString: process.env['DATABASE_URL'],
+      options: `-c search_path="${schemaName}",public`,
+      connectionTimeoutMillis: 10_000,
+      keepAlive: true,
+    });
+    try {
+      await client.connect();
+      return client;
+    } catch (error) {
+      await client.end().catch(() => undefined);
+      if (attempt >= CONNECT_ATTEMPTS || !TRANSIENT.test(error instanceof Error ? error.message : String(error))) throw error;
+      await new Promise((resolve) => setTimeout(resolve, 500 * attempt));
+    }
+  }
 }
 
 export function testDb(client: Client): TestDb {
