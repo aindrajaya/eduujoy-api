@@ -1,12 +1,27 @@
-export type AiFailure = 'rate_limited' | 'server' | 'timeout' | 'refused' | 'invalid_output' | 'bad_request' | 'auth';
+import { type CallRecord } from './ports';
 
-/** Normalised provider failure. Only rate limits, server errors and timeouts are worth retrying. */
+export type AiFailure =
+  | 'rate_limited'
+  | 'server'
+  | 'timeout'
+  | 'refused'
+  | 'invalid_output'
+  | 'bad_request'
+  | 'auth'
+  | 'billing';
+
+/**
+ * Normalised provider failure. Only rate limits, server errors and timeouts are worth retrying.
+ * `call` is set when the provider answered (refusal, truncation, invalid output): those tokens are
+ * billed and must still be metered.
+ */
 export class AiCallError extends Error {
   override name = 'AiCallError';
   constructor(
     readonly failure: AiFailure,
     message: string,
     readonly status?: number,
+    readonly call?: CallRecord,
   ) {
     super(message);
   }
@@ -30,6 +45,8 @@ export class AiBudgetExceededError extends Error {
 export function classifyStatus(status: number | undefined): AiFailure {
   if (status === 429) return 'rate_limited';
   if (status === 401 || status === 403) return 'auth';
+  // Prepaid credits exhausted or billing disabled: retrying can't help.
+  if (status === 402) return 'billing';
   if (status === 408) return 'timeout';
   if (status !== undefined && status >= 500) return 'server';
   return 'bad_request';
