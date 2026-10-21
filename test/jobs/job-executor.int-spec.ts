@@ -83,12 +83,26 @@ describe('JobExecutor (integration)', () => {
   it('never runs more than `concurrency` jobs of a type at once', async () => {
     let active = 0;
     let peak = 0;
+    const waiters: (() => void)[] = [];
+    // Each run waits (up to 2 s) until a second run is active, so reaching 2 doesn't depend on
+    // Neon round trips being faster than the handler; a third concurrent run would still show up.
+    const together = () =>
+      new Promise<void>((resolve) => {
+        if (active >= 2) {
+          for (const w of waiters.splice(0)) w();
+          resolve();
+          return;
+        }
+        waiters.push(resolve);
+        setTimeout(resolve, 2_000).unref();
+      });
     const h = handler({
       concurrency: 2,
       run: async () => {
         active += 1;
         peak = Math.max(peak, active);
-        await sleep(80);
+        await together();
+        await sleep(20);
         active -= 1;
         return { resultRef: '/x' };
       },
@@ -101,6 +115,7 @@ describe('JobExecutor (integration)', () => {
     );
     for (const id of ids) await waitFor(id, ['succeeded']);
 
+    // Upper bound: never more than `concurrency`. Lower bound: the executor did run two at once.
     expect(peak).toBe(2);
   });
 
@@ -177,14 +192,47 @@ describe('JobExecutor (integration)', () => {
   });
 
   it('wakes on a timer for a future run_after without any enqueue signal', async () => {
-    const h = handler({ run: () => Promise.resolve({ resultRef: '/timer' }) });
+    const wakes = jest.spyOn(signals, 'wake');
+    let ranAt: Date | undefined;
+    const h = handler({
+      run: async () => {
+        ranAt = (await client.query<{ at: Date }>('select now() as at')).rows[0]?.at;
+        return { resultRef: '/timer' };
+      },
+    });
     executor.register(h);
-    // Insert directly (no JobQueue, so no wake signal) with a run_after shortly in the future.
-    const { job } = await repo.enqueue({ type: h.type, idempotencyKey: randomUUID(), payload: { n: 1 }, runAfter: new Date(Date.now() + 300) });
+    // run_after on the database clock (the executor claims with `run_after <= now()`), so local clock
+    // skew and Neon latency can't decide the outcome. Inserted through the repository: no wake signal.
+    const { rows } = await client.query<{ at: Date }>(`select now() + interval '1500 milliseconds' as at`);
+    const runAfter = rows[0]?.at ?? new Date(Date.now() + 1500);
+    const { job } = await repo.enqueue({ type: h.type, idempotencyKey: randomUUID(), payload: { n: 1 }, runAfter });
     await executor.start();
 
-    expect((await repo.findById(job.id))?.status).toBe('queued');
-    await waitFor(job.id, ['succeeded'], 5_000);
+    const done = await waitFor(job.id, ['succeeded'], 10_000);
+
+    // Ordering, not timing: it ran no earlier than run_after, both on the database clock, with no signal.
+    expect(ranAt?.getTime()).toBeGreaterThanOrEqual(runAfter.getTime());
+    expect(done.attempts).toBe(1);
+    expect(wakes).not.toHaveBeenCalled();
+  });
+
+  it('stop() waits for an in-flight pump, so no query outlives it and nothing is left running', async () => {
+    const errors = jest.spyOn(Logger.prototype, 'error');
+    const h = handler({ concurrency: 1, run: () => Promise.resolve({ resultRef: '/stop' }) });
+    executor.register(h);
+    await executor.start();
+    const ids = await Promise.all(
+      [1, 2, 3].map(async (n) => (await queue.enqueue({ type: h.type, idempotencyKey: randomUUID(), payload: { n } })).job.id),
+    );
+
+    // Stop while the wake-up pumps are still claiming; the client closes right after (afterEach).
+    await executor.stop();
+    await sleep(50);
+
+    const statuses = await Promise.all(ids.map(async (id) => (await repo.findById(id))?.status));
+    expect(statuses.every((st) => st === 'queued' || st === 'succeeded')).toBe(true);
+    expect(errors.mock.calls.filter(([, msg]) => msg === 'Job pump failed')).toEqual([]);
+    errors.mockRestore();
   });
 
   it('reports a spent AI budget as AI_BUDGET_EXCEEDED', async () => {
