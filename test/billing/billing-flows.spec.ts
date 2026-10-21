@@ -156,6 +156,20 @@ describe('subscriptions', () => {
     expect(t.changes.map((c) => c.reason)).toEqual(['subscription', 'subscription', 'subscription']);
   });
 
+  it('ignores events for a second subscription that would downgrade the running one, and refunds by order', async () => {
+    const t = setup();
+    await expect(t.deliver(subscriptionEvent({ userId: USER, subscriptionId: 1 }))).resolves.toBe('subscription:active');
+
+    // An older subscription of the same learner expires: the running plan stays.
+    await expect(t.deliver(subscriptionEvent({ event: 'subscription_expired', userId: USER, subscriptionId: 2, status: 'expired', updatedAt: '2026-10-23T10:00:00Z' }))).resolves.toBe('ignored:other_subscription');
+    expect(t.repo.entitlements.get(USER)).toMatchObject({ subscriptionId: '1', periodEnd: new Date('2099-11-22T10:00:00Z') });
+
+    // Refunding an order that didn't start the stored subscription ends nothing.
+    const refund = (orderId: number) => orderEvent({ event: 'order_refunded', userId: USER, orderId, variantId: VARIANTS.subscription, status: 'refunded', refunded: true, refundedAmount: 999, total: 999 });
+    await expect(t.deliver(refund(9999))).resolves.toBe('ignored:unknown_subscription');
+    await expect(t.deliver(refund(5002))).resolves.toBe('subscription:ended_refund');
+  });
+
   it('ends the plan at once on a full subscription refund, and only logs a partial one', async () => {
     const t = setup();
     await t.deliver(subscriptionEvent({ userId: USER }));

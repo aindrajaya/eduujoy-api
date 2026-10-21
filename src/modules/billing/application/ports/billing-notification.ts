@@ -20,6 +20,8 @@ export type BillingNotification =
       kind: 'subscription';
       event: string;
       subscriptionId: string;
+      /** The order that started the subscription. */
+      orderId: string;
       userId: string | null;
       variantId: string;
       status: SubscriptionStatus;

@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { eq } from 'drizzle-orm';
 import { type Client } from 'pg';
 import { DrizzleBillingRepository } from '../../src/modules/billing/infrastructure/drizzle-billing.repository';
-import { billingEvents, creditLedger } from '../../src/shared/db/schema/billing';
+import { billingEvents, creditLedger, entitlements } from '../../src/shared/db/schema/billing';
 import { users } from '../../src/shared/db/schema/identity';
 import { connectTestClient, testDb, type TestDb } from '../db/connect';
 
@@ -69,19 +69,52 @@ describe('DrizzleBillingRepository (integration)', () => {
     expect(await balance(userId)).toBe(0);
   });
 
-  it('moves a subscription forward in provider time only, and ends it by subscription id', async () => {
+  it('moves a subscription forward in provider time only, and ends it by subscription or order id', async () => {
     const userId = await user();
     const subscriptionId = `sub-${randomUUID()}`;
+    const orderId = `ord-${randomUUID()}`;
     const t1 = new Date('2026-10-22T10:00:00Z');
-
-    await expect(repo.upsertSubscription({ userId, subscriptionId, entitlement: sub(FUTURE), providerUpdatedAt: t1 })).resolves.toBe('applied');
-    await expect(repo.upsertSubscription({ userId, subscriptionId, entitlement: sub(new Date()), providerUpdatedAt: t1 })).resolves.toBe('stale');
-    await expect(repo.subscriptionOf(userId)).resolves.toBe(subscriptionId);
-    await expect(repo.upsertSubscription({ userId: randomUUID(), subscriptionId: 'x', entitlement: sub(FUTURE), providerUpdatedAt: t1 })).resolves.toBe('unknown_user');
-
     const now = new Date();
-    await expect(repo.endSubscription(subscriptionId, { ...sub(now) })).resolves.toBe(userId);
+    const base = { userId, subscriptionId, orderId, now };
+
+    await expect(repo.upsertSubscription({ ...base, entitlement: sub(FUTURE), providerUpdatedAt: t1 })).resolves.toBe('applied');
+    await expect(repo.upsertSubscription({ ...base, entitlement: sub(new Date()), providerUpdatedAt: t1 })).resolves.toBe('stale');
+    await expect(repo.upsertSubscription({ ...base, userId: randomUUID(), entitlement: sub(FUTURE), providerUpdatedAt: t1 })).resolves.toBe('unknown_user');
+
+    await expect(repo.endSubscriptionForOrder('ord-other', sub(now))).resolves.toBeNull();
+    await expect(repo.endSubscriptionForOrder(orderId, sub(now))).resolves.toBe(userId);
     await expect(repo.endSubscription('nope', sub(now))).resolves.toBeNull();
+    await expect(repo.endSubscription(subscriptionId, sub(now))).resolves.toBe(userId);
+  });
+
+  it('never lets events for a second subscription drop a paying learner to free (lead gate finding 1)', async () => {
+    const userId = await user();
+    const [a, b] = [`sub-a-${randomUUID()}`, `sub-b-${randomUUID()}`];
+    const now = new Date();
+    const day = 24 * 60 * 60 * 1000;
+    const at = (h: number) => new Date(Date.UTC(2026, 9, 22, h));
+    const periodEnd = async () => (await db.select().from(entitlements).where(eq(entitlements.userId, userId)))[0];
+
+    // A is active for 30 days.
+    await expect(repo.upsertSubscription({ userId, subscriptionId: a, orderId: 'ord-a', entitlement: sub(new Date(now.getTime() + 30 * day)), providerUpdatedAt: at(1), now })).resolves.toBe('applied');
+    // B (an older, lapsed subscription) expires, or a late B update arrives: A is untouched.
+    await expect(repo.upsertSubscription({ userId, subscriptionId: b, orderId: 'ord-b', entitlement: sub(now), providerUpdatedAt: at(2), now })).resolves.toBe('other_subscription');
+    await expect(repo.upsertSubscription({ userId, subscriptionId: b, orderId: 'ord-b', entitlement: sub(new Date(now.getTime() + 10 * day)), providerUpdatedAt: at(3), now })).resolves.toBe('other_subscription');
+    expect((await periodEnd())?.providerSubscriptionId).toBe(a);
+    // B's order is refunded: A still runs.
+    await expect(repo.endSubscriptionForOrder('ord-b', sub(now))).resolves.toBeNull();
+    expect(((await periodEnd())?.periodEnd.getTime() ?? 0) > now.getTime()).toBe(true);
+
+    // A new subscription C that runs longer takes over; then A's expiry is another subscription's event.
+    const c = `sub-c-${randomUUID()}`;
+    await expect(repo.upsertSubscription({ userId, subscriptionId: c, orderId: 'ord-c', entitlement: sub(new Date(now.getTime() + 60 * day)), providerUpdatedAt: at(4), now })).resolves.toBe('applied');
+    await expect(repo.upsertSubscription({ userId, subscriptionId: a, orderId: 'ord-a', entitlement: sub(now), providerUpdatedAt: at(5), now })).resolves.toBe('other_subscription');
+    expect(await periodEnd()).toMatchObject({ providerSubscriptionId: c, providerOrderId: 'ord-c' });
+
+    // Once the stored subscription has ended, any other subscription may replace it.
+    await repo.endSubscription(c, sub(now));
+    const later = new Date(now.getTime() + 1000);
+    await expect(repo.upsertSubscription({ userId, subscriptionId: b, orderId: 'ord-b', entitlement: sub(new Date(now.getTime() + 5 * day)), providerUpdatedAt: at(6), now: later })).resolves.toBe('applied');
   });
 
   it('charges each path once and never oversells credits under parallel requests', async () => {

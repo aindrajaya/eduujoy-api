@@ -14,6 +14,8 @@ export const entitlements = pgTable('entitlements', {
   periodStart: timestamp('period_start', { withTimezone: true }).notNull(),
   periodEnd: timestamp('period_end', { withTimezone: true }).notNull(),
   providerSubscriptionId: text('provider_subscription_id'),
+  /** The order that started the stored subscription, so a refunded order ends that subscription only. */
+  providerOrderId: text('provider_order_id'),
   /** The provider's `updated_at` of the last applied subscription event; older, out-of-order events are skipped. */
   providerUpdatedAt: timestamp('provider_updated_at', { withTimezone: true }),
   ...withUpdatedAt,

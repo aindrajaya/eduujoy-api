@@ -37,17 +37,24 @@ export interface BillingRepository {
     input: { userId: string; orderRef: string },
     decide: (state: { balance: number; alreadyClawedBack: number }) => { target: number; delta: number },
   ): Promise<'applied' | 'duplicate'>;
-  /** Applies a subscription state unless an event with a newer provider `updated_at` already did. */
+  /**
+   * Applies a subscription state. For the stored subscription, only events newer in provider time apply
+   * (`stale` otherwise). Another subscription of the same learner replaces the stored one only when it
+   * grants more (a later period end) or the stored one has already ended (`other_subscription` otherwise),
+   * so an event for a second, lapsed subscription can never drop a paying learner to free.
+   */
   upsertSubscription(input: {
     userId: string;
     subscriptionId: string;
+    orderId: string;
     entitlement: Entitlement;
     providerUpdatedAt: Date;
-  }): Promise<'applied' | 'stale' | 'unknown_user'>;
-  /** Ends a subscription's entitlement now (refunds); returns its learner, or null when unknown. */
+    now: Date;
+  }): Promise<'applied' | 'stale' | 'other_subscription' | 'unknown_user'>;
+  /** Ends the stored subscription now if it is this one (refunds); returns its learner, else null. */
   endSubscription(subscriptionId: string, entitlement: Entitlement): Promise<string | null>;
-  /** The learner's subscription id, if any (subscription orders refunded from the order event). */
-  subscriptionOf(userId: string): Promise<string | null>;
+  /** Ends the stored subscription now if this order started it (refunded first order); else null. */
+  endSubscriptionForOrder(orderId: string, entitlement: Entitlement): Promise<string | null>;
   /**
    * Charges one path once per `pathRef`: `decide` picks plan allowance, a credit or exceeded under the
    * learner's lock; the ledger row is written in the same transaction. A repeated `pathRef` returns the

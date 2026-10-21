@@ -101,10 +101,10 @@ export class ProcessBillingEvent implements JobHandler<{ eventId: string }> {
   private async orderRefunded(n: Extract<BillingNotification, { kind: 'order' }>, now: Date): Promise<Effect> {
     const product = this.variant(n.variantId);
     if (product === 'subscription') {
-      // A refunded first subscription order ends the plan at once (user decision, 22 Oct 2026).
-      if (!n.refunded || !n.userId) return { outcome: 'logged:partial_subscription_refund' };
-      const subscriptionId = await this.repo.subscriptionOf(n.userId);
-      const userId = subscriptionId ? await this.repo.endSubscription(subscriptionId, ended(now)) : null;
+      // A refunded first subscription order ends that order's subscription at once (user decision,
+      // 22 Oct 2026), found by the order, never by the learner, who may hold another subscription.
+      if (!n.refunded) return { outcome: 'logged:partial_subscription_refund' };
+      const userId = await this.repo.endSubscriptionForOrder(n.orderId, ended(now));
       return userId ? { outcome: 'subscription:ended_refund', changed: { userId, reason: 'refund' } } : { outcome: 'ignored:unknown_subscription' };
     }
     if (product !== 'credit_pack') return { outcome: 'ignored:unknown_variant' };
@@ -127,10 +127,13 @@ export class ProcessBillingEvent implements JobHandler<{ eventId: string }> {
     const result = await this.repo.upsertSubscription({
       userId: n.userId,
       subscriptionId: n.subscriptionId,
+      orderId: n.orderId,
       entitlement: entitlementFor(n, now),
       providerUpdatedAt: n.updatedAt,
+      now,
     });
     if (result === 'applied') return { outcome: `subscription:${n.status}`, changed: { userId: n.userId, reason: 'subscription' } };
+    if (result === 'other_subscription') return { outcome: 'ignored:other_subscription' };
     return { outcome: result === 'stale' ? 'ignored:stale_subscription_update' : 'held:unknown_user' };
   }
 }

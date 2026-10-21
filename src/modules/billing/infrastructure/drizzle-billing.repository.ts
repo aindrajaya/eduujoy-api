@@ -91,17 +91,27 @@ export class DrizzleBillingRepository implements BillingRepository {
     });
   }
 
-  upsertSubscription(input: { userId: string; subscriptionId: string; entitlement: Entitlement; providerUpdatedAt: Date }): Promise<'applied' | 'stale' | 'unknown_user'> {
+  upsertSubscription(input: {
+    userId: string;
+    subscriptionId: string;
+    orderId: string;
+    entitlement: Entitlement;
+    providerUpdatedAt: Date;
+    now: Date;
+  }): Promise<'applied' | 'stale' | 'other_subscription' | 'unknown_user'> {
     return this.db
       .transaction(async (tx) => {
         await lockUser(tx, input.userId);
         const [current] = await tx
-          .select({ providerUpdatedAt: entitlements.providerUpdatedAt, subscriptionId: entitlements.providerSubscriptionId })
+          .select({ providerUpdatedAt: entitlements.providerUpdatedAt, subscriptionId: entitlements.providerSubscriptionId, periodEnd: entitlements.periodEnd })
           .from(entitlements)
           .where(eq(entitlements.userId, input.userId));
-        // Webhooks can arrive out of order; the same subscription only moves forward in provider time.
-        if (current?.providerUpdatedAt && current.subscriptionId === input.subscriptionId && current.providerUpdatedAt >= input.providerUpdatedAt) {
-          return 'stale' as const;
+        if (current?.subscriptionId === input.subscriptionId) {
+          // Webhooks can arrive out of order; the same subscription only moves forward in provider time.
+          if (current.providerUpdatedAt && current.providerUpdatedAt >= input.providerUpdatedAt) return 'stale' as const;
+        } else if (current?.subscriptionId && current.periodEnd > input.now && input.entitlement.periodEnd <= current.periodEnd) {
+          // A second subscription that grants no more than the running one leaves it untouched.
+          return 'other_subscription' as const;
         }
         const values = {
           plan: input.entitlement.plan,
@@ -109,6 +119,7 @@ export class DrizzleBillingRepository implements BillingRepository {
           periodStart: input.entitlement.periodStart,
           periodEnd: input.entitlement.periodEnd,
           providerSubscriptionId: input.subscriptionId,
+          providerOrderId: input.orderId,
           providerUpdatedAt: input.providerUpdatedAt,
         };
         await tx
@@ -132,12 +143,13 @@ export class DrizzleBillingRepository implements BillingRepository {
     return row?.userId ?? null;
   }
 
-  async subscriptionOf(userId: string): Promise<string | null> {
+  async endSubscriptionForOrder(orderId: string, entitlement: Entitlement): Promise<string | null> {
     const [row] = await this.db
-      .select({ id: entitlements.providerSubscriptionId })
-      .from(entitlements)
-      .where(eq(entitlements.userId, userId));
-    return row?.id ?? null;
+      .update(entitlements)
+      .set({ periodStart: entitlement.periodStart, periodEnd: entitlement.periodEnd, updatedAt: sql`now()` })
+      .where(eq(entitlements.providerOrderId, orderId))
+      .returning({ userId: entitlements.userId });
+    return row?.userId ?? null;
   }
 
   reservePath(input: { userId: string; pathRef: string }, decide: (state: LockedQuotaState) => Promise<PathCharge>): Promise<PathCharge> {
