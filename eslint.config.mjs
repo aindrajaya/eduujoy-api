@@ -27,6 +27,8 @@ export default tseslint.config(
     files: ['**/*.spec.ts', '**/*.e2e-spec.ts', 'test/**/*.ts'],
     rules: {
       '@typescript-eslint/unbound-method': 'off',
+      // Test-local factories return inferred fixture bags; spelling those types out adds noise.
+      '@typescript-eslint/explicit-function-return-type': 'off',
     },
   },
   ...boundariesConfig,
