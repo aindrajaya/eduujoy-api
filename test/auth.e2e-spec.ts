@@ -186,6 +186,20 @@ describe('auth (e2e)', () => {
       expect(problem(after).code).toBe('UNAUTHENTICATED');
     });
 
+    it('answers a concurrent refresh inside the grace window with 409 and no Set-Cookie', async () => {
+      const signedIn = await register(email()).expect(201);
+      const original = cookieValue(signedIn, 'ej_rt');
+
+      const first = await refresh(original).expect(204);
+      const second = await refresh(original).expect(409).expect('Content-Type', /application\/problem\+json/);
+
+      expect(problem(second).code).toBe('REFRESH_CONCURRENT');
+      expect(second.headers['set-cookie']).toBeUndefined();
+      // The winner's cookies stay valid.
+      await http().get('/v1/auth/me').set('Cookie', `ej_at=${cookieValue(first, 'ej_at')}`).expect(200);
+      await refresh(cookieValue(first, 'ej_rt')).expect(204);
+    });
+
     it('rejects refresh without CSRF headers or without a cookie', async () => {
       await http().post('/v1/auth/refresh').set('Cookie', 'ej_rt=x').expect(403);
       await http().post('/v1/auth/refresh').set(csrf).expect(401);

@@ -11,6 +11,7 @@ import {
   REFRESH_COOKIE,
   refreshCookieOptions,
 } from '../../../shared/common/auth';
+import { SessionInvalidError } from '../application/errors';
 import { GetMe, type MeView } from '../application/get-me.query';
 import { LoginWithPassword } from '../application/login.usecase';
 import { Logout } from '../application/logout.usecase';
@@ -92,8 +93,9 @@ export class AuthController {
     try {
       setSessionCookies(res, await this.refresh.execute(refreshCookie(req), requestMeta(req)));
     } catch (error) {
-      // A dead refresh token is useless; clear both cookies so the UI goes straight to sign-in.
-      clearSessionCookies(res);
+      // A concurrent refresh lost to another tab: leave its fresh cookies alone (no Set-Cookie).
+      // Any other failure means a dead token, so clear both and let the UI go to sign-in.
+      if (!(error instanceof SessionInvalidError && error.reason === 'concurrent')) clearSessionCookies(res);
       throw toIdentityProblem(error);
     }
   }
