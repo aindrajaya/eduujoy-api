@@ -1,11 +1,9 @@
-import { type INestApplication } from '@nestjs/common';
 import request from 'supertest';
-import { type App } from 'supertest/types';
 import { ReadinessRegistry } from '../src/shared/common/health';
-import { createTestApp } from './app';
+import { createTestApp, type TestApp } from './app';
 
 describe('health (e2e)', () => {
-  let app: INestApplication<App>;
+  let app: TestApp;
 
   beforeEach(async () => {
     app = await createTestApp();

@@ -1,16 +1,26 @@
 import 'reflect-metadata';
+import { existsSync } from 'node:fs';
 import { NestFactory } from '@nestjs/core';
+import { type NestExpressApplication } from '@nestjs/platform-express';
 import { Logger } from 'nestjs-pino';
 import { AppModule } from './app.module';
+import { configureApp } from './shared/common/http';
 import { AppConfig } from './shared/config';
 
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule, { bufferLogs: true });
+  // Local development only: production images ship without a .env and read the platform env.
+  if (existsSync('.env')) process.loadEnvFile('.env');
+
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    bufferLogs: true,
+    bodyParser: false,
+  });
   app.useLogger(app.get(Logger));
   app.enableShutdownHooks();
 
-  const { env } = app.get(AppConfig);
-  await app.listen(env.PORT, '0.0.0.0');
+  const config = app.get(AppConfig);
+  configureApp(app, config);
+  await app.listen(config.env.PORT, '0.0.0.0');
 }
 
 void bootstrap();

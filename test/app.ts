@@ -1,11 +1,15 @@
-import { type INestApplication } from '@nestjs/common';
+import { type NestExpressApplication } from '@nestjs/platform-express';
 import { Test } from '@nestjs/testing';
-import { type App } from 'supertest/types';
 import { AppModule } from '../src/app.module';
+import { configureApp } from '../src/shared/common/http';
+import { AppConfig } from '../src/shared/config';
 
-export async function createTestApp(): Promise<INestApplication<App>> {
+export type TestApp = NestExpressApplication;
+
+export async function createTestApp(): Promise<TestApp> {
   const moduleRef = await Test.createTestingModule({ imports: [AppModule] }).compile();
-  const app = moduleRef.createNestApplication<INestApplication<App>>();
+  const app = moduleRef.createNestApplication<TestApp>({ bodyParser: false });
+  configureApp(app, app.get(AppConfig));
   await app.init();
   return app;
 }
