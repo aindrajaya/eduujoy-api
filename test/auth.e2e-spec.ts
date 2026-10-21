@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { eq, sql } from 'drizzle-orm';
 import request, { type Response } from 'supertest';
+import { AccessTokenService } from '../src/shared/common/auth';
 import { DATABASE, type Database } from '../src/shared/db';
 import { loginAttempts, sessions } from '../src/shared/db/schema/identity';
 import { createTestApp, type TestApp } from './app';
@@ -203,8 +204,37 @@ describe('auth (e2e)', () => {
       expect(row?.revokedAt).toBeInstanceOf(Date);
     });
 
-    it('requires a signed-in user to log out', async () => {
-      await http().post('/v1/auth/logout').set(csrf).expect(401);
+    it('logs out with an expired access token: 204, session revoked, old refresh token dead', async () => {
+      const signedIn = await register(email()).expect(201);
+      const expired = await app.get(AccessTokenService).sign(
+        { userId: me(signedIn).user.id, sessionId: randomUUID(), roles: ['learner'], plan: 'free' },
+        new Date(Date.now() - 16 * 60 * 1000),
+      );
+
+      const res = await http()
+        .post('/v1/auth/logout')
+        .set(csrf)
+        .set('Cookie', `ej_at=${expired}; ej_rt=${cookieValue(signedIn, 'ej_rt')}`)
+        .expect(204);
+
+      expect(cookie(res, 'ej_at')).toMatch(/ej_at=;/);
+      expect(cookie(res, 'ej_rt')).toMatch(/ej_rt=;/);
+      const [row] = await db.select().from(sessions).where(eq(sessions.userId, me(signedIn).user.id));
+      expect(row?.revokedAt).toBeInstanceOf(Date);
+      await refresh(cookieValue(signedIn, 'ej_rt')).expect(401);
+    });
+
+    it('always clears both cookies, even without any credentials', async () => {
+      const res = await http().post('/v1/auth/logout').set(csrf).expect(204);
+
+      expect(cookie(res, 'ej_at')).toMatch(/ej_at=;/);
+      expect(cookie(res, 'ej_rt')).toMatch(/ej_rt=;/);
+    });
+
+    it('still requires the CSRF headers to log out', async () => {
+      const res = await http().post('/v1/auth/logout').expect(403);
+
+      expect(problem(res).code).toBe('CSRF_REJECTED');
     });
   });
 });

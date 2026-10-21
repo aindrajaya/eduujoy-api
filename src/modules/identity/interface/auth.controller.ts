@@ -4,6 +4,7 @@ import { type Request, type Response } from 'express';
 import {
   ACCESS_COOKIE,
   accessCookieOptions,
+  AccessTokenService,
   type AuthUser,
   CurrentUser,
   Public,
@@ -37,10 +38,12 @@ export function clearSessionCookies(res: Response): void {
   res.clearCookie(REFRESH_COOKIE, { ...refreshCookieOptions, maxAge: undefined });
 }
 
-function refreshCookie(req: Request): string | undefined {
-  const value = (req.cookies as Record<string, unknown> | undefined)?.[REFRESH_COOKIE];
+function readCookie(req: Request, name: string): string | undefined {
+  const value = (req.cookies as Record<string, unknown> | undefined)?.[name];
   return typeof value === 'string' ? value : undefined;
 }
+
+const refreshCookie = (req: Request): string | undefined => readCookie(req, REFRESH_COOKIE);
 
 @Controller('v1/auth')
 @UseInterceptors(IdentityErrorsInterceptor)
@@ -51,6 +54,7 @@ export class AuthController {
     private readonly refresh: RefreshSession,
     private readonly logoutUser: Logout,
     private readonly getMe: GetMe,
+    private readonly accessTokens: AccessTokenService,
   ) {}
 
   @Public()
@@ -94,15 +98,21 @@ export class AuthController {
     }
   }
 
+  /**
+   * Public so an expired access token can't block sign-out (CsrfGuard still applies). Revokes what
+   * the cookies identify and always clears both, even when nothing matched.
+   */
+  @Public()
   @Post('logout')
   @HttpCode(204)
-  async logout(
-    @CurrentUser() user: AuthUser,
-    @Req() req: Request,
-    @Res({ passthrough: true }) res: Response,
-  ): Promise<void> {
-    await this.logoutUser.execute(user.userId, user.sessionId, refreshCookie(req));
-    clearSessionCookies(res);
+  async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response): Promise<void> {
+    try {
+      const accessToken = readCookie(req, ACCESS_COOKIE);
+      const claims = accessToken ? await this.accessTokens.verify(accessToken) : null;
+      await this.logoutUser.execute({ sessionId: claims?.sessionId, refreshToken: refreshCookie(req) });
+    } finally {
+      clearSessionCookies(res);
+    }
   }
 
   @Get('me')
