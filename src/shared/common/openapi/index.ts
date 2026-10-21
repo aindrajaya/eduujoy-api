@@ -1,5 +1,6 @@
 export {
   ApiAccessCookieAuth,
+  ApiBudgetExceeded,
   ApiCsrfHeader,
   ApiProblem,
   ApiRefreshCookieAuth,
