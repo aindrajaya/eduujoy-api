@@ -24,6 +24,9 @@ export default [
           capture: ['module'],
         })),
         { type: 'module-root', partialMatch: false, pattern: 'src/modules/*', capture: ['module'] },
+        // Tables are grouped by owning module; matched before the generic shared kernel.
+        { type: 'db-schema', partialMatch: false, pattern: 'src/shared/db/schema/*', capture: ['module'] },
+        { type: 'db-schema-barrel', partialMatch: false, pattern: 'src/shared/db/schema' },
         { type: 'shared', partialMatch: false, pattern: 'src/shared/**' },
         { type: 'app', partialMatch: false, pattern: 'src' },
       ],
@@ -62,6 +65,22 @@ export default [
             {
               from: { element: { types: { anyOf: ['application', 'infrastructure'] } } },
               allow: { to: layers(['domain'], otherModule) },
+            },
+            // A module's repositories use only its own tables (plus shared enums); never another module's.
+            {
+              from: { element: { type: 'infrastructure' } },
+              allow: {
+                to: [
+                  { element: { type: 'db-schema', captured: { module: '{{from.element.captured.module}}' } } },
+                  { element: { type: 'db-schema', captured: { module: 'common' } } },
+                ],
+              },
+            },
+            // Schema folders reference each other for foreign keys; the shared kernel (db client,
+            // jobs, ai metering) may use any table.
+            {
+              from: { element: { types: { anyOf: ['db-schema', 'db-schema-barrel', 'shared'] } } },
+              allow: { to: { element: { types: { anyOf: ['db-schema', 'db-schema-barrel'] } } } },
             },
             {
               from: { element: { type: 'module-root' } },
