@@ -44,7 +44,7 @@ The MVP runs as one NestJS process on Koyeb's free instance, with jobs in the sa
 | Validation | `class-validator` DTOs at the edge; Zod for AI outputs and env | Strict input and strict model output |
 | Docs and types | `@nestjs/swagger` → `openapi.json` → `openapi-typescript` in the UI repo | One contract for two repos |
 | Logging and errors | `nestjs-pino` (JSON logs, request IDs), Sentry | Searchable logs, alerting |
-| Tests | Jest unit tests, Supertest e2e, Testcontainers Postgres with pgvector | Real database in CI |
+| Tests | Jest unit tests, Supertest e2e, a Neon test branch (one schema per run, no Docker) | Real database in CI |
 | Deploy | Dockerfile → Koyeb (Frankfurt or Washington, D.C.), GitHub Actions CI | Push-to-deploy |
 
 **Free-tier constraints and how the design absorbs them**
@@ -441,10 +441,24 @@ Cold start on the free instance adds 1–5 s; the UI covers it with a wake-up st
 | Level | Tool | Gate |
 | --- | --- | --- |
 | Unit (domain + use cases) | Jest | ≥ 80% line coverage on `domain/` and `application/` |
-| Integration (repositories, vector queries) | Jest + Testcontainers (`pgvector/pgvector` image) | All pass |
+| Integration (repositories, vector queries) | Jest against the Neon test branch; each run uses its own schema (no Docker) | All pass |
 | e2e (HTTP, guards, SSE) | Supertest against the app with recorded AI fixtures | All pass |
 | Contract | `openapi.json` diff in CI | Breaking changes need a version bump |
 | AI quality | Golden-set eval script (master PRD Section 11) | Mean ≥ 4.0 before prompt changes merge |
+
+**Databases (decided 21 Oct 2026, no local Docker)**
+
+| Neon project | Region | Branch | Used by | Variable |
+| --- | --- | --- | --- | --- |
+| `eduujoy-prod` | AWS Frankfurt (next to Koyeb) | `main` | Production API | `DATABASE_URL`, `DATABASE_URL_DIRECT` in Koyeb |
+| `eduujoy-dev` | AWS Singapore (close to the developer) | `main` | Local development | `DATABASE_URL`, `DATABASE_URL_DIRECT` in `.secrets.env` |
+| `eduujoy-dev` | AWS Singapore | `test` | Integration and e2e tests, locally and in CI | `DATABASE_URL_TEST` (direct string, never pooled) |
+
+- Tests use the direct connection because `SET search_path` does not survive the pooler's transaction mode.
+- The test harness refuses to run unless `DATABASE_URL_TEST` differs from `DATABASE_URL` and `DATABASE_URL_DIRECT`, and it only creates or drops schemas named `test_*`.
+- `pgvector` is installed once in the `public` schema of each branch; per-run schemas keep `public` on their search path.
+- A cleanup step drops `test_*` schemas older than 24 hours, so crashed runs do not pile up.
+- The Dockerfile is built and smoke-tested only in CI and on Koyeb.
 
 ## 13. Build plan for Claude Code
 
