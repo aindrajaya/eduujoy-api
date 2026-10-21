@@ -25,11 +25,22 @@ export interface StructuredRequest<T> {
   jobId?: string;
 }
 
+export interface CallPart {
+  model: string;
+  usage: TokenUsage;
+}
+
 export interface CallRecord {
   provider: Provider;
   /** The model that actually answered (a server-side fallback can differ from the request). */
   model: string;
+  /** Total tokens across every attempt in the call. */
   usage: TokenUsage;
+  /**
+   * Per-attempt usage when a server-side fallback ran (a refused attempt plus the fallback's). Each
+   * part is priced at its own model's rates; absent for single-attempt calls.
+   */
+  parts?: CallPart[];
   latencyMs: number;
 }
 
