@@ -1,4 +1,4 @@
-import { index, integer, jsonb, pgEnum, pgTable, text, timestamp, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
+import { bigserial, index, integer, jsonb, pgEnum, pgTable, text, timestamp, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
 import { withCreatedAt, withUpdatedAt } from '../common';
 import { users } from '../identity';
 
@@ -30,3 +30,24 @@ export const jobs = pgTable(
     index('jobs_user_idx').on(t.userId),
   ],
 );
+
+export const jobEventType = pgEnum('job_event_type', ['progress', 'partial', 'completed', 'failed']);
+
+/**
+ * Append-only event log per job (PRD-API §9). The bigserial id is the SSE event id, so a reconnect
+ * replays everything after Last-Event-ID.
+ */
+export const jobEvents = pgTable(
+  'job_events',
+  {
+    id: bigserial('id', { mode: 'number' }).primaryKey(),
+    jobId: uuid('job_id')
+      .notNull()
+      .references(() => jobs.id, { onDelete: 'cascade' }),
+    type: jobEventType('type').notNull(),
+    data: jsonb('data').notNull(),
+    ...withCreatedAt,
+  },
+  (t) => [index('job_events_job_id_idx').on(t.jobId, t.id)],
+);
+
