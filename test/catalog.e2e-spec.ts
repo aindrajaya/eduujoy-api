@@ -22,6 +22,7 @@ interface GoldenCase {
   text: string;
   expect: 'topic' | 'choices' | 'new';
   slugs?: string[];
+  exact?: boolean;
 }
 
 interface ResolveBody {
@@ -114,33 +115,51 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
       await db.update(topics).set({ embedding: vector, embeddingModel: recording.model, embeddingVersion: recording.version }).where(eq(topics.slug, t.slug));
     }
 
-    const results: { text: string; expect: string; got: string; ok: boolean }[] = [];
+    const results: { case: GoldenCase; got: string; strict: boolean; lenient: boolean }[] = [];
     for (const c of golden.cases as GoldenCase[]) {
       const { cookie } = await signedInUser();
+      const misses = embedder.misses.length;
       const res = await resolve(cookie, { text: c.text }).expect(200);
       const body = res.body as ResolveBody;
       const matched = body.topic ? slugById.get(body.topic.id) : undefined;
       const offered = (body.choices ?? []).map((ch) => slugById.get(ch.id) ?? '?');
-      const ok =
-        c.expect === 'new'
-          ? body.status === 'created'
-          : c.expect === 'topic'
-            ? (body.status === 'matched' && matched === c.slugs?.[0]) || (body.status === 'choices' && offered.includes(c.slugs?.[0] ?? ''))
-            : (body.status === 'choices' && offered.some((s) => c.slugs?.includes(s))) || (body.status === 'matched' && c.slugs?.includes(matched ?? '') === true);
+      const inSet = (slug: string | undefined) => slug !== undefined && (c.slugs ?? []).includes(slug);
+      let strict: boolean;
+      let lenient: boolean;
+      if (c.expect === 'new') {
+        strict = lenient = body.status === 'created';
+      } else if (c.expect === 'topic') {
+        strict = body.status === 'matched' && matched === c.slugs?.[0];
+        lenient = strict || (body.status === 'choices' && offered.includes(c.slugs?.[0] ?? ''));
+      } else {
+        strict = lenient = (body.status === 'choices' && offered.some(inSet)) || (body.status === 'matched' && inSet(matched));
+      }
+      if (c.exact) {
+        // Exact names and unique aliases must match without touching the embedder.
+        expect({ text: c.text, status: body.status, matched, embedded: embedder.misses.length !== misses }).toEqual({ text: c.text, status: 'matched', matched: c.slugs?.[0], embedded: false });
+      }
       const got = body.status === 'choices' ? `choices ${offered.join(', ')}` : `${body.status} ${matched ?? body.topic?.canonicalName ?? ''}`;
-      results.push({ text: c.text, expect: `${c.expect} ${c.slugs?.join('|') ?? ''}`.trim(), got, ok });
+      results.push({ case: c, got, strict, lenient });
     }
 
-    const failures = results.filter((r) => !r.ok);
-    const accuracy = (results.length - failures.length) / results.length;
-    const strict = results.filter((r, i) => (golden.cases[i] as GoldenCase).expect === 'topic' && r.got.startsWith('matched ') && r.ok).length;
+    const scored = results.filter((r) => !r.case.exact);
+    const rate = (n: number) => `${n}/${scored.length} (${((n / scored.length) * 100).toFixed(1)}%)`;
+    const strictN = scored.filter((r) => r.strict).length;
+    const lenientN = scored.filter((r) => r.lenient).length;
+    const topicCases = scored.filter((r) => r.case.expect === 'topic');
+    const misses = scored.filter((r) => !r.lenient);
+    const picks = scored.filter((r) => r.lenient && !r.strict);
     process.stdout.write(
-      `Golden set: ${results.length - failures.length}/${results.length} correct (${(accuracy * 100).toFixed(1)}%), ` +
-        `${strict} auto-matched.\n${failures.map((f) => `  MISS "${f.text}": expected ${f.expect}, got ${f.got}`).join('\n')}\n`,
+      `Golden set (${scored.length} scored, ${results.length - scored.length} exact checked separately):\n` +
+        `  lenient ${rate(lenientN)}  strict ${rate(strictN)}  auto-matched topic phrases ${topicCases.filter((r) => r.strict).length}/${topicCases.length}\n` +
+        misses.map((r) => `  MISS "${r.case.text}": expected ${r.case.expect} ${r.case.slugs?.join('|') ?? ''}, got ${r.got}`).join('\n') +
+        (misses.length ? '\n' : '') +
+        picks.map((r) => `  PICK "${r.case.text}": learner chooses from ${r.got}`).join('\n') +
+        '\n',
     );
     // Every golden query was recorded; only created topics' document embeddings miss (left for the backfill).
     expect(embedder.misses.filter((m) => m.startsWith('query:'))).toEqual([]);
-    expect(accuracy).toBeGreaterThanOrEqual(0.95);
+    expect(lenientN / scored.length).toBeGreaterThanOrEqual(0.95);
     // 150 vector writes and ~100 resolves, each a round trip to the Neon test branch.
   }, 180_000);
 
