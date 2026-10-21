@@ -14,6 +14,8 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bufferLogs: true,
     bodyParser: false,
+    // Keeps req.rawBody beside the parsed JSON: the billing webhook's HMAC is over the exact bytes.
+    rawBody: true,
   });
   app.useLogger(app.get(Logger));
   app.enableShutdownHooks();

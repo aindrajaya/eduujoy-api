@@ -11,7 +11,7 @@ export async function createTestApp(
   override: (builder: TestingModuleBuilder) => TestingModuleBuilder = (builder) => builder,
 ): Promise<TestApp> {
   const moduleRef = await override(Test.createTestingModule({ imports: [AppModule] })).compile();
-  const app = moduleRef.createNestApplication<TestApp>({ bodyParser: false });
+  const app = moduleRef.createNestApplication<TestApp>({ bodyParser: false, rawBody: true });
   configureApp(app, app.get(AppConfig));
   await app.init();
   return app;
