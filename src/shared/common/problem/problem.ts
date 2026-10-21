@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { ThrottlerException } from '@nestjs/throttler';
 import { type ValidationError } from 'class-validator';
+import { AiBudgetExceededError } from '../../ai/errors';
 
 /** ProblemCode from the frozen contract (0.1.1-v0); also emitted as the OpenAPI enum. */
 export const PROBLEM_CODES = [
@@ -107,6 +108,11 @@ export function toProblem(exception: unknown, ctx: ProblemContext): RenderedProb
   if (exception instanceof ProblemException) {
     status = exception.getStatus();
     ({ code, title, problem: options } = exception);
+  } else if (exception instanceof AiBudgetExceededError) {
+    // Spend figures stay in the logs; learners only need to know cold topics are paused today.
+    status = HttpStatus.SERVICE_UNAVAILABLE;
+    [code, title] = ['AI_BUDGET_EXCEEDED', 'Daily AI budget reached'];
+    options = { detail: 'New topics are paused until tomorrow (UTC); topics we already know still work.' };
   } else if (exception instanceof ThrottlerException) {
     status = HttpStatus.TOO_MANY_REQUESTS;
     [code, title] = ['RATE_LIMITED', 'Too many requests'];
