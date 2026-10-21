@@ -6,7 +6,7 @@ import { UnitOfWork } from '../../../shared/events/unit-of-work';
 import { type GetTopicQuery } from '../../catalog/application/get-topic.query';
 import { LADDER } from '../domain/diagnostic';
 import { type PlacementComputed } from '../domain/events/placement-computed.event';
-import { DiagnosticConflictError, DiagnosticNotFoundError, NotDiagnosticOwnerError, TopicNotFoundError } from './errors';
+import { DiagnosticConflictError, DiagnosticNotFoundError, TopicNotFoundError } from './errors';
 import { GetDiagnostic } from './get-diagnostic.query';
 import { type AnswerReplay, type DiagnosticRepository, type NewSession, type PlacementRecord, type ServedItem, type SessionRecord } from './ports/diagnostic.repository';
 import { StartDiagnostic } from './start-diagnostic.usecase';
@@ -176,7 +176,8 @@ describe('SubmitDiagnosticAnswers', () => {
     const view = await t.start.execute(startCommand());
     const answers = (view.items ?? []).map((i) => ({ itemId: i.id, optionIds: ['b'] }));
 
-    await expect(t.submit.execute({ userId: 'intruder', diagnosticId: view.diagnosticId, answers })).rejects.toBeInstanceOf(NotDiagnosticOwnerError);
+    await expect(t.submit.execute({ userId: 'intruder', diagnosticId: view.diagnosticId, answers })).rejects.toBeInstanceOf(DiagnosticNotFoundError);
+    await expect(t.submit.execute({ userId: 'u1', diagnosticId: 'not-a-uuid', answers })).rejects.toBeInstanceOf(DiagnosticNotFoundError);
     await expect(t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers: answers.slice(1) })).rejects.toBeInstanceOf(
       DiagnosticConflictError,
     );

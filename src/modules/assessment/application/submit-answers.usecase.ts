@@ -4,7 +4,8 @@ import { UnitOfWork } from '../../../shared/events';
 import { type Answer, BatchMismatchError, isCorrect, submit } from '../domain/diagnostic';
 import { PlacementComputed } from '../domain/events/placement-computed.event';
 import { type DiagnosticBatchView, itemsView, placementView } from './diagnostic.view';
-import { DiagnosticConflictError, DiagnosticNotFoundError, NotDiagnosticOwnerError } from './errors';
+import { DiagnosticConflictError, DiagnosticNotFoundError } from './errors';
+import { isUuid } from './ids';
 import { DIAGNOSTIC_REPOSITORY, type DiagnosticRepository, type ServedItem, type SessionRecord } from './ports/diagnostic.repository';
 
 /** The outstanding batch of an open session, or just its progress once complete. */
@@ -37,9 +38,9 @@ export class SubmitDiagnosticAnswers {
   ) {}
 
   async execute(command: SubmitAnswersCommand): Promise<DiagnosticBatchView> {
-    const existing = await this.repo.findById(command.diagnosticId);
-    if (!existing) throw new DiagnosticNotFoundError();
-    if (existing.userId !== command.userId) throw new NotDiagnosticOwnerError();
+    // Someone else's diagnostic is 404, as on GET, so ids aren't probeable.
+    const existing = isUuid(command.diagnosticId) ? await this.repo.findById(command.diagnosticId) : null;
+    if (!existing || existing.userId !== command.userId) throw new DiagnosticNotFoundError();
     const bank = await this.repo.loadBank(existing.topicId);
     const items = bank.map((s) => s.item);
     const byId = new Map(bank.map((s) => [s.item.id, s] as const));

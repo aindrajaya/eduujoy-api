@@ -3,6 +3,7 @@ import { GetTopicQuery } from '../../catalog/application/get-topic.query';
 import { type TopicView } from '../../catalog/application/ports/topic.repository';
 import { type DiagnosticBatchView, placementView } from './diagnostic.view';
 import { DiagnosticNotFoundError } from './errors';
+import { isUuid } from './ids';
 import { DIAGNOSTIC_REPOSITORY, type DiagnosticRepository } from './ports/diagnostic.repository';
 import { currentView } from './submit-answers.usecase';
 
@@ -13,7 +14,6 @@ export interface DiagnosticDetailView extends DiagnosticBatchView {
   completedAt: Date | null;
 }
 
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /** GET /v1/diagnostics/:id: owner only; anyone else gets 404, so ids can't be probed. */
 @Injectable()
@@ -24,7 +24,7 @@ export class GetDiagnostic {
   ) {}
 
   async execute(userId: string, diagnosticId: string): Promise<DiagnosticDetailView> {
-    const session = UUID.test(diagnosticId) ? await this.repo.findById(diagnosticId) : null;
+    const session = isUuid(diagnosticId) ? await this.repo.findById(diagnosticId) : null;
     if (!session || session.userId !== userId) throw new DiagnosticNotFoundError();
     const topic = await this.topics.execute(session.topicId);
     if (!topic) throw new DiagnosticNotFoundError();
