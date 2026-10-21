@@ -85,6 +85,19 @@ describe('parseSeed', () => {
     }
   });
 
+  it('accepts multiple-choice scenario items with an answer key, and open scenarios without options', () => {
+    const scenarioChoice = item('s1', { kind: 'scenario' });
+    const openScenario = item('s2', { kind: 'scenario', options: undefined, answerKey: undefined });
+
+    expect(() => parseSeed(files([topic('js')], { js: { version: 1, topic: 'js', items: [scenarioChoice, openScenario] } }))).not.toThrow();
+    expect(() =>
+      parseSeed(files([topic('js')], { js: { version: 1, topic: 'js', items: [item('s3', { kind: 'scenario', answerKey: undefined })] } })),
+    ).toThrow(/multiple-choice scenario/);
+    expect(() =>
+      parseSeed(files([topic('js')], { js: { version: 1, topic: 'js', items: [item('s4', { kind: 'short_answer' })] } })),
+    ).toThrow(/only for choice or scenario/);
+  });
+
   it('rejects duplicate item keys within a topic', () => {
     expect(() =>
       parseSeed(files([topic('js')], { js: { version: 1, topic: 'js', items: [item('q1'), item('q1')] } })),
