@@ -1,10 +1,13 @@
 import { Controller, Get, HttpStatus, SerializeOptions } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AppConfig } from '../../config';
 import { Public } from '../auth/decorators';
+import { ApiProblem } from '../openapi/decorators';
 import { ProblemException } from '../problem/problem';
 import { HealthResponseDto } from './health.response';
 import { ReadinessRegistry } from './readiness.registry';
 
+@ApiTags('health')
 @Public()
 @SerializeOptions({ type: HealthResponseDto })
 @Controller()
@@ -15,11 +18,16 @@ export class HealthController {
   ) {}
 
   @Get('health')
+  @ApiOperation({ operationId: 'health', summary: 'Liveness.' })
+  @ApiOkResponse({ description: 'Alive.', type: HealthResponseDto })
   health(): HealthResponseDto {
     return { status: 'ok', version: this.version };
   }
 
   @Get('ready')
+  @ApiOperation({ operationId: 'ready', summary: 'Readiness; checks the database.' })
+  @ApiOkResponse({ description: 'Ready.', type: HealthResponseDto })
+  @ApiProblem(503, 'Not ready (a dependency check failed). Code `SERVICE_UNAVAILABLE`, type `/problems/not-ready`.')
   async ready(): Promise<HealthResponseDto> {
     const { ready, checks } = await this.readiness.run();
     if (ready) return { status: 'ok', version: this.version, checks };

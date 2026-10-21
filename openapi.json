@@ -1,0 +1,768 @@
+{
+  "components": {
+    "schemas": {
+      "FieldError": {
+        "properties": {
+          "field": {
+            "description": "Dot path, e.g. answers.3.value",
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "field",
+          "message"
+        ],
+        "type": "object"
+      },
+      "HealthResponse": {
+        "properties": {
+          "checks": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "ok"
+            ],
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "type": "object"
+      },
+      "LoginRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "format": "email",
+            "maxLength": 254,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 128,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object"
+      },
+      "Me": {
+        "properties": {
+          "plan": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Plan"
+              }
+            ]
+          },
+          "quota": {
+            "$ref": "#/components/schemas/Quota"
+          },
+          "roles": {
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            },
+            "type": "array"
+          },
+          "user": {
+            "$ref": "#/components/schemas/MeUser"
+          }
+        },
+        "required": [
+          "user",
+          "roles",
+          "plan",
+          "quota"
+        ],
+        "type": "object"
+      },
+      "MeUser": {
+        "properties": {
+          "email": {
+            "format": "email",
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "locale": {
+            "default": "en",
+            "type": "string"
+          },
+          "name": {
+            "nullable": true,
+            "type": "string"
+          },
+          "weeklyHoursDefault": {
+            "nullable": true,
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "email"
+        ],
+        "type": "object"
+      },
+      "Plan": {
+        "enum": [
+          "free",
+          "subscription"
+        ],
+        "type": "string"
+      },
+      "Problem": {
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/ProblemCode"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/FieldError"
+            },
+            "type": "array"
+          },
+          "instance": {
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "title",
+          "status",
+          "code",
+          "requestId"
+        ],
+        "type": "object"
+      },
+      "ProblemCode": {
+        "enum": [
+          "VALIDATION_FAILED",
+          "UNAUTHENTICATED",
+          "SESSION_REVOKED",
+          "REFRESH_CONCURRENT",
+          "FORBIDDEN",
+          "NOT_FOUND",
+          "CONFLICT",
+          "EMAIL_TAKEN",
+          "IDEMPOTENCY_MISMATCH",
+          "QUOTA_EXCEEDED",
+          "RATE_LIMITED",
+          "AI_BUDGET_EXCEEDED",
+          "NO_REPLACEMENT",
+          "CSRF_REJECTED",
+          "SERVICE_UNAVAILABLE",
+          "INTERNAL"
+        ],
+        "type": "string"
+      },
+      "Quota": {
+        "properties": {
+          "credits": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "monthlyPaths": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "periodEnd": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "usedPaths": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "monthlyPaths",
+          "usedPaths",
+          "credits",
+          "periodEnd"
+        ],
+        "type": "object"
+      },
+      "RegisterRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "format": "email",
+            "maxLength": 254,
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 80,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 128,
+            "minLength": 10,
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object"
+      },
+      "Role": {
+        "enum": [
+          "learner",
+          "reviewer",
+          "admin"
+        ],
+        "type": "string"
+      },
+      "ValidationProblem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Problem"
+          },
+          {
+            "properties": {
+              "code": {
+                "enum": [
+                  "VALIDATION_FAILED"
+                ]
+              },
+              "status": {
+                "enum": [
+                  400
+                ]
+              }
+            },
+            "required": [
+              "errors"
+            ],
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "description": "Access JWT, 15 min.",
+        "in": "cookie",
+        "name": "ej_at",
+        "type": "apiKey"
+      },
+      "refreshCookie": {
+        "description": "Opaque refresh token, 30 days, rotated.",
+        "in": "cookie",
+        "name": "ej_rt",
+        "type": "apiKey"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "description": "Generated from the NestJS app; checked against docs/contract/openapi.v0.yaml by `pnpm openapi:check`.",
+    "title": "Eduujoy API",
+    "version": "0.1.1-v0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "health",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Alive."
+          }
+        },
+        "summary": "Liveness.",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/ready": {
+      "get": {
+        "operationId": "ready",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Ready."
+          },
+          "503": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not ready (a dependency check failed). Code `SERVICE_UNAVAILABLE`, type `/problems/not-ready`."
+          }
+        },
+        "summary": "Readiness; checks the database.",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/v1/auth/google": {
+      "get": {
+        "operationId": "authGoogleStart",
+        "parameters": [
+          {
+            "description": "Path on APP_ORIGIN to land on after sign-in. Unsafe or missing values fall back to /today.",
+            "in": "query",
+            "name": "returnTo",
+            "required": false,
+            "schema": {
+              "maxLength": 512,
+              "pattern": "^/",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirect to Google.",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Start Google OAuth (authorization code with PKCE).",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/google/callback": {
+      "get": {
+        "operationId": "authGoogleCallback",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "state",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirect back to APP_ORIGIN (with `?error=<code>` on failure).",
+            "headers": {
+              "Location": {
+                "schema": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "Set-Cookie": {
+                "description": "Sets or clears `ej_at` and `ej_rt`.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "OAuth callback; sets cookies and redirects to APP_ORIGIN.",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/login": {
+      "post": {
+        "operationId": "authLogin",
+        "parameters": [
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Me"
+                }
+              }
+            },
+            "description": "Signed in.",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Sets or clears `ej_at` and `ej_rt`.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            },
+            "description": "Validation failed; `errors` maps to form fields."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "429": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Rate limited or account locked (code RATE_LIMITED).",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Email and password sign-in; sets session cookies.",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/logout": {
+      "post": {
+        "operationId": "authLogout",
+        "parameters": [
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Signed out (always, including when no session matched).",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Sets or clears `ej_at` and `ej_rt`.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "CSRF headers missing or wrong (code CSRF_REJECTED)."
+          }
+        },
+        "summary": "Clear both cookies and revoke the session.",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/me": {
+      "get": {
+        "operationId": "authMe",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Me"
+                }
+              }
+            },
+            "description": "Current user."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Session bootstrap; the UI's single source of session truth.",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/refresh": {
+      "post": {
+        "operationId": "authRefresh",
+        "parameters": [
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Rotated.",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Sets or clears `ej_at` and `ej_rt`.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Missing, expired or revoked refresh token; reuse returns SESSION_REVOKED."
+          },
+          "409": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "The refresh token was rotated by a concurrent request; cookies are unchanged. Code `REFRESH_CONCURRENT`."
+          }
+        },
+        "security": [
+          {
+            "refreshCookie": []
+          }
+        ],
+        "summary": "Rotate the refresh token and issue a new access cookie.",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/register": {
+      "post": {
+        "operationId": "authRegister",
+        "parameters": [
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Me"
+                }
+              }
+            },
+            "description": "Registered and signed in.",
+            "headers": {
+              "Set-Cookie": {
+                "description": "Sets or clears `ej_at` and `ej_rt`.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            },
+            "description": "Validation failed; `errors` maps to form fields."
+          },
+          "409": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Email already registered (code EMAIL_TAKEN)."
+          },
+          "429": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Rate limited (code RATE_LIMITED).",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Register with email and password; sets session cookies.",
+        "tags": [
+          "auth"
+        ]
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "Production (Koyeb)",
+      "url": "https://api.eduujoy.aindrajaya.my.id"
+    },
+    {
+      "description": "Local",
+      "url": "http://localhost:3000"
+    }
+  ],
+  "tags": []
+}

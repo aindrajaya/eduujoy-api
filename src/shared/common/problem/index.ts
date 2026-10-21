@@ -1,6 +1,7 @@
 export {
   type FieldError,
   flattenValidationErrors,
+  PROBLEM_CODES,
   type ProblemBody,
   type ProblemCode,
   ProblemException,

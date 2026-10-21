@@ -2,24 +2,26 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 import { ThrottlerException } from '@nestjs/throttler';
 import { type ValidationError } from 'class-validator';
 
-/** ProblemCode from the frozen contract. */
-export type ProblemCode =
-  | 'VALIDATION_FAILED'
-  | 'UNAUTHENTICATED'
-  | 'SESSION_REVOKED'
-  | 'REFRESH_CONCURRENT'
-  | 'FORBIDDEN'
-  | 'NOT_FOUND'
-  | 'CONFLICT'
-  | 'EMAIL_TAKEN'
-  | 'IDEMPOTENCY_MISMATCH'
-  | 'QUOTA_EXCEEDED'
-  | 'RATE_LIMITED'
-  | 'AI_BUDGET_EXCEEDED'
-  | 'NO_REPLACEMENT'
-  | 'CSRF_REJECTED'
-  | 'SERVICE_UNAVAILABLE'
-  | 'INTERNAL';
+/** ProblemCode from the frozen contract (0.1.1-v0); also emitted as the OpenAPI enum. */
+export const PROBLEM_CODES = [
+  'VALIDATION_FAILED',
+  'UNAUTHENTICATED',
+  'SESSION_REVOKED',
+  'REFRESH_CONCURRENT',
+  'FORBIDDEN',
+  'NOT_FOUND',
+  'CONFLICT',
+  'EMAIL_TAKEN',
+  'IDEMPOTENCY_MISMATCH',
+  'QUOTA_EXCEEDED',
+  'RATE_LIMITED',
+  'AI_BUDGET_EXCEEDED',
+  'NO_REPLACEMENT',
+  'CSRF_REJECTED',
+  'SERVICE_UNAVAILABLE',
+  'INTERNAL',
+] as const;
+export type ProblemCode = (typeof PROBLEM_CODES)[number];
 
 export interface FieldError {
   field: string;
