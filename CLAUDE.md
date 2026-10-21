@@ -10,3 +10,5 @@ Specs: ../docs/PRD-MASTER.md (product, wins on scope) and docs/PRD-API.md (imple
 - Run the slice's Verify commands; do not mark done until they pass.
 - If the PRD is ambiguous, stop and list the question instead of guessing.
 - Env: APP_ORIGIN=https://eduujoy.aindrajaya.my.id; cookies are host-only on api.eduujoy.aindrajaya.my.id with SameSite=Lax.
+
+- Micro-commits: one logical task per commit, Conventional Commits with the slice ID, e.g. `feat(scope): summary [A6]`; merge each slice with --no-ff.
