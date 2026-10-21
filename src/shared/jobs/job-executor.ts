@@ -17,6 +17,11 @@ export interface ExecutorOptions {
    * timeout plus this margin. Recent locks may belong to an overlapping deploy and are left alone.
    */
   staleGraceMs?: number;
+  /**
+   * After a timeout aborts a run, wait up to this long for it to settle before recording the failure
+   * and scheduling the retry, so a run and its retry don't overlap.
+   */
+  abortGraceMs?: number;
   clock?: () => Date;
   random?: () => number;
 }
@@ -190,6 +195,7 @@ export class JobExecutor {
     }
     const controller = new AbortController();
     let timer: NodeJS.Timeout | undefined;
+    let run: Promise<unknown> | undefined;
     try {
       const payload = handler.parse(job.payload);
       const timeout = new Promise<never>((_resolve, reject) => {
@@ -198,17 +204,16 @@ export class JobExecutor {
           reject(new TimeoutError(`Job ${job.type} timed out after ${handler.timeoutMs} ms`));
         }, handler.timeoutMs);
       });
-      const outcome = await Promise.race([
-        handler.run(payload, {
-          jobId: job.id,
-          attempt: job.attempts,
-          maxAttempts: job.maxAttempts,
-          signal: controller.signal,
-          progress: (stage, done, total, message) => this.progress(job.id, stage, done, total, message),
-          partial: (data) => this.emit(job.id, 'partial', { jobId: job.id, ...data }),
-        }),
-        timeout,
-      ]);
+      const running = handler.run(payload, {
+        jobId: job.id,
+        attempt: job.attempts,
+        maxAttempts: job.maxAttempts,
+        signal: controller.signal,
+        progress: (stage, done, total, message) => this.progress(job.id, stage, done, total, message),
+        partial: (data) => this.emit(job.id, 'partial', { jobId: job.id, ...data }),
+      });
+      run = running;
+      const outcome = await Promise.race([running, timeout]);
       if (!(await this.repo.succeed(claim, outcome))) {
         this.logger.warn({ jobId: job.id }, 'Job finished after another instance took it over; result dropped');
         return;
@@ -216,11 +221,30 @@ export class JobExecutor {
       await this.emit(job.id, 'completed', { jobId: job.id, ...outcome });
       this.logger.log({ jobId: job.id, type: job.type, attempt: job.attempts, ms: this.now().getTime() - started }, 'Job succeeded');
     } catch (error) {
+      if (error instanceof TimeoutError && run) await this.settleOrGrace(job.id, run);
       const retryable = !(error instanceof NonRetryableJobError) && job.attempts < job.maxAttempts;
       await this.finishFailed(job, claim, error, retryable);
     } finally {
       clearTimeout(timer);
     }
+  }
+
+  /** Waits for an aborted run to settle, at most abortGraceMs; its late outcome is ignored either way. */
+  private async settleOrGrace(jobId: string, run: Promise<unknown>): Promise<void> {
+    let grace: NodeJS.Timeout | undefined;
+    const settled = await Promise.race([
+      run.then(
+        () => true,
+        () => true,
+      ),
+      new Promise<false>((resolve) => {
+        grace = setTimeout(() => {
+          resolve(false);
+        }, this.options.abortGraceMs ?? 10_000);
+      }),
+    ]);
+    clearTimeout(grace);
+    if (!settled) this.logger.warn({ jobId }, 'Timed-out job ignored its abort signal; scheduling the retry anyway');
   }
 
   private async finishFailed(job: JobRecord, claim: Claim, error: unknown, retryable: boolean): Promise<void> {
@@ -247,7 +271,7 @@ export class JobExecutor {
     await this.emit(job.id, 'failed', { jobId: job.id, retryable: false, problem: body });
   }
 
-  /** Exponential backoff with full jitter in [0.5, 1.5), capped. */
+  /** Exponential backoff, capped, with ±50% jitter (factor in [0.5, 1.5)). */
   private backoff(attempt: number): number {
     const base = this.options.retryBaseMs ?? 5_000;
     const cap = this.options.retryMaxMs ?? 5 * 60_000;

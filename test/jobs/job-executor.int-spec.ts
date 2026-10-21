@@ -199,3 +199,78 @@ describe('JobExecutor (integration)', () => {
     expect(events.find((e) => e.type === 'failed')?.data).toMatchObject({ problem: { code: 'AI_BUDGET_EXCEEDED', status: 503 } });
   });
 });
+
+describe('JobExecutor timeouts (integration)', () => {
+  let client: Client;
+  let repo: JobRepository;
+
+  beforeAll(async () => {
+    client = await connectTestClient();
+    repo = new JobRepository(testDb(client));
+  });
+
+  afterAll(async () => {
+    await client.end();
+  });
+
+  async function waitForStatus(id: string, status: string, ms = 10_000) {
+    const until = Date.now() + ms;
+    for (;;) {
+      const job = await repo.findById(id);
+      if (job?.status === status) return job;
+      if (Date.now() > until) throw new Error(`job ${id} stuck in ${job?.status ?? 'missing'}`);
+      await sleep(25);
+    }
+  }
+
+  it('waits for a run that ignores its abort signal to settle before the retry starts', async () => {
+    const executor = new JobExecutor(repo, new JobSignals(), {
+      problemBaseUrl: 'http://x',
+      retryBaseMs: 0,
+      abortGraceMs: 5_000,
+    });
+    let active = 0;
+    let peak = 0;
+    const type = `ignore-${randomUUID().slice(0, 8)}`;
+    executor.register({
+      type,
+      concurrency: 2,
+      timeoutMs: 50,
+      parse: (p) => p,
+      // Ignores ctx.signal on attempt 1 and finishes 400 ms later; attempt 2 is quick.
+      run: async (_p, ctx) => {
+        active += 1;
+        peak = Math.max(peak, active);
+        await sleep(ctx.attempt === 1 ? 400 : 0);
+        active -= 1;
+        return { resultRef: `/attempt-${ctx.attempt}` };
+      },
+    });
+    const { job } = await repo.enqueue({ type, idempotencyKey: randomUUID(), payload: {}, maxAttempts: 2 });
+    await executor.start();
+
+    const done = await waitForStatus(job.id, 'succeeded');
+
+    expect(peak).toBe(1);
+    // The late result of the timed-out attempt is ignored; the retry's result is kept.
+    expect(done).toMatchObject({ attempts: 2, result: { resultRef: '/attempt-2' } });
+    await executor.stop();
+  });
+
+  it('schedules the retry after the grace period when the aborted run never settles', async () => {
+    const executor = new JobExecutor(repo, new JobSignals(), { problemBaseUrl: 'http://x', retryBaseMs: 0, abortGraceMs: 150 });
+    const type = `hang-${randomUUID().slice(0, 8)}`;
+    executor.register({
+      type,
+      concurrency: 2,
+      timeoutMs: 50,
+      parse: (p) => p,
+      run: (_p, ctx) => (ctx.attempt === 1 ? new Promise(() => undefined) : Promise.resolve({ resultRef: '/second' })),
+    });
+    const { job } = await repo.enqueue({ type, idempotencyKey: randomUUID(), payload: {}, maxAttempts: 2 });
+    await executor.start();
+
+    expect(await waitForStatus(job.id, 'succeeded')).toMatchObject({ attempts: 2, result: { resultRef: '/second' } });
+    await executor.stop();
+  });
+});

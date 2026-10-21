@@ -8,7 +8,11 @@ export interface JobContext {
   /** 1 on the first try. */
   attempt: number;
   maxAttempts: number;
-  /** Aborted when the handler's timeout passes; pass it to network calls. */
+  /**
+   * Aborted when the handler's timeout passes. run() MUST stop when it aborts: pass it to every fetch
+   * and SDK call and check `signal.aborted` between steps. The retry waits for the aborted run to
+   * settle (or a grace period), but a run that ignores the signal still holds a slot until it does.
+   */
   signal: AbortSignal;
   progress(stage: JobStage, done: number, total: number, message?: string): Promise<void>;
   /** Early results, e.g. the first SOP step before the rest (contract JobPartialEvent). */
@@ -21,7 +25,10 @@ export interface JobOutcome {
   result?: unknown;
 }
 
-/** One handler per job type (PRD-API §5 jobs table). Handlers must be idempotent. */
+/**
+ * One handler per job type (PRD-API §5 jobs table). Handlers must be idempotent and must stop when
+ * `ctx.signal` aborts (see JobContext.signal).
+ */
 export interface JobHandler<P = unknown> {
   type: string;
   concurrency: number;
