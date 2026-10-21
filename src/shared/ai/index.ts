@@ -2,6 +2,7 @@ export { AiModule } from './ai.module';
 export { AiBudgetGuard, type BudgetStatus, type WorkKind } from './budget/budget.guard';
 export { costUsd, MODELS, type ModelId, type TokenUsage } from './catalog';
 export { AiBudgetExceededError, AiCallError, type AiFailure } from './errors';
+export { EMBEDDING_MODEL, EMBEDDING_VERSION } from './gemini/gemini.adapters';
 export {
   EMBEDDER,
   type Embedder,

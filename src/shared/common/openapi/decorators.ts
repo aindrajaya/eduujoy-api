@@ -39,6 +39,21 @@ export function ApiBudgetExceeded(): MethodDecorator {
   });
 }
 
+/** Contract `ServiceUnavailable` (0.4.0-v0): 503 SERVICE_UNAVAILABLE with Retry-After. */
+export function ApiServiceUnavailable(): MethodDecorator {
+  return ApiResponse({
+    status: 503,
+    description: 'A dependency is briefly unavailable (code SERVICE_UNAVAILABLE). Retry after the given wait.',
+    headers: {
+      'Retry-After': {
+        description: 'Whole seconds to wait before retrying (30 for topic resolve). Exposed to allow-listed origins via CORS.',
+        schema: { type: 'integer', minimum: 1 },
+      },
+    },
+    content: { 'application/problem+json': { schema: schemaRef('Problem') } },
+  });
+}
+
 /** CsrfGuard header required on unsafe methods (PRD-API §6). */
 export const ApiCsrfHeader = (): MethodDecorator & ClassDecorator =>
   ApiHeader({

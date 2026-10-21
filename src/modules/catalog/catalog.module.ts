@@ -1,11 +1,23 @@
 import { Module } from '@nestjs/common';
+import { EmbedTopics } from './application/embed-topics.usecase';
 import { GetTopicQuery } from './application/get-topic.query';
+import { TOPIC_NORMALIZER } from './application/ports/topic-normalizer';
 import { TOPIC_REPOSITORY } from './application/ports/topic.repository';
+import { ResolveTopic } from './application/resolve-topic.usecase';
 import { DrizzleTopicRepository } from './infrastructure/drizzle-topic.repository';
+import { HaikuTopicNormalizer } from './infrastructure/haiku-topic-normalizer';
+import { TopicsController } from './interface/topics.controller';
 
-/** Catalog (PRD-API §4). A7 needs topic lookups; A6 adds resolution with embeddings. */
+/** Catalog (PRD-API §4): topic lookups, resolution with embeddings (FR-01, FR-02) and the embedding backfill. */
 @Module({
-  providers: [GetTopicQuery, { provide: TOPIC_REPOSITORY, useClass: DrizzleTopicRepository }],
-  exports: [GetTopicQuery],
+  controllers: [TopicsController],
+  providers: [
+    GetTopicQuery,
+    ResolveTopic,
+    EmbedTopics,
+    { provide: TOPIC_REPOSITORY, useClass: DrizzleTopicRepository },
+    { provide: TOPIC_NORMALIZER, useClass: HaikuTopicNormalizer },
+  ],
+  exports: [GetTopicQuery, EmbedTopics],
 })
 export class CatalogModule {}

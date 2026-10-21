@@ -1,4 +1,4 @@
-import { Global, Inject, Logger, Module, type OnApplicationShutdown, type OnModuleInit } from '@nestjs/common';
+import { Global, Inject, Logger, Module, type OnApplicationShutdown, type OnModuleInit, Optional } from '@nestjs/common';
 import { Pool } from 'pg';
 import { ReadinessRegistry } from '../common/health';
 import { AppConfig } from '../config';
@@ -38,14 +38,15 @@ export class DbModule implements OnModuleInit, OnApplicationShutdown {
 
   constructor(
     @Inject(PG_POOL) private readonly pool: Pool,
-    private readonly readiness: ReadinessRegistry,
+    // Absent in contexts without the HTTP health stack (workers, CLIs); /ready then has nothing to check.
+    @Optional() @Inject(ReadinessRegistry) private readonly readiness?: ReadinessRegistry,
   ) {}
 
   onModuleInit(): void {
     this.pool.on('error', (error) => {
       this.logger.error(`Idle database client error: ${describeError(error)}`);
     });
-    this.readiness.register('db', () => this.pool.query('SELECT 1'));
+    this.readiness?.register('db', () => this.pool.query('SELECT 1'));
   }
 
   async onApplicationShutdown(): Promise<void> {
