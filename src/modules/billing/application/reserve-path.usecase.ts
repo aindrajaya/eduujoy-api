@@ -5,7 +5,7 @@ import { BILLING_REPOSITORY, type BillingRepository } from './ports/billing.repo
 
 /**
  * Charges one generated path (FR-23): the plan allowance first, then a credit. Pathing (A9) calls this
- * before enqueueing `generate-path`; once both are used up it throws QuotaExceededError (429). The
+ * before enqueueing `generate-path`; once both are used up it throws QuotaExceededError (402). The
  * charge is idempotent per `pathRef`, so a retried request never charges twice.
  */
 @Injectable()
