@@ -1,15 +1,46 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module, type OnModuleInit } from '@nestjs/common';
+import { AppConfig } from '../../shared/config';
+import { JobExecutor } from '../../shared/jobs';
+import { CreateCheckout } from './application/create-checkout.usecase';
 import { GetQuotaQuery } from './application/get-quota.query';
+import { BILLING_PROVIDER } from './application/ports/billing-provider';
+import { NOTIFICATION_PARSER } from './application/ports/billing-notification';
+import { BILLING_REPOSITORY } from './application/ports/billing.repository';
 import { BILLING_CLOCK } from './application/ports/clock';
 import { QUOTA_REPOSITORY } from './application/ports/quota.repository';
+import { ProcessBillingEvent } from './application/process-billing-event.handler';
+import { ReceiveWebhook } from './application/receive-webhook.usecase';
+import { ReservePath } from './application/reserve-path.usecase';
+import { DrizzleBillingRepository } from './infrastructure/drizzle-billing.repository';
 import { DrizzleQuotaRepository } from './infrastructure/drizzle-quota.repository';
+import { LemonSqueezyNotificationParser } from './infrastructure/lemonsqueezy-notification.parser';
+import { LemonSqueezyProvider } from './infrastructure/lemonsqueezy.provider';
+import { BillingController } from './interface/billing.controller';
 
+/** Billing (PRD-API §4, A12): Lemon Squeezy checkout and webhooks, entitlements and the credit ledger. */
 @Module({
+  controllers: [BillingController],
   providers: [
     GetQuotaQuery,
+    CreateCheckout,
+    ReceiveWebhook,
+    ProcessBillingEvent,
+    ReservePath,
     { provide: QUOTA_REPOSITORY, useClass: DrizzleQuotaRepository },
+    { provide: BILLING_REPOSITORY, useClass: DrizzleBillingRepository },
+    { provide: NOTIFICATION_PARSER, useClass: LemonSqueezyNotificationParser },
+    { provide: BILLING_PROVIDER, inject: [AppConfig], useFactory: (config: AppConfig) => new LemonSqueezyProvider(config) },
     { provide: BILLING_CLOCK, useValue: () => new Date() },
   ],
-  exports: [GetQuotaQuery],
+  exports: [GetQuotaQuery, ReservePath],
 })
-export class BillingModule {}
+export class BillingModule implements OnModuleInit {
+  constructor(
+    @Inject(JobExecutor) private readonly executor: JobExecutor,
+    @Inject(ProcessBillingEvent) private readonly processBillingEvent: ProcessBillingEvent,
+  ) {}
+
+  onModuleInit(): void {
+    this.executor.register(this.processBillingEvent);
+  }
+}
