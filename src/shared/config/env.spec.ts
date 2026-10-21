@@ -14,6 +14,12 @@ const valid = {
   ANTHROPIC_API_KEY: 'sk-ant-test',
   GEMINI_API_KEY: 'gemini-test',
   AI_DAILY_BUDGET_USD: '5',
+  LEMONSQUEEZY_API_KEY: 'ls-api-key',
+  LEMONSQUEEZY_STORE_ID: '123456',
+  LEMONSQUEEZY_WEBHOOK_SECRET: 'w'.repeat(40),
+  LEMONSQUEEZY_VARIANT_SUBSCRIPTION: '1111111',
+  LEMONSQUEEZY_VARIANT_CREDIT_PACK: '2222222',
+  LEMONSQUEEZY_MODE: 'live',
 };
 
 describe('parseEnv', () => {
@@ -64,6 +70,12 @@ describe('parseEnv', () => {
         'GOOGLE_OAUTH_CLIENT_SECRET',
         'GOOGLE_OAUTH_REDIRECT_URI',
         'JWT_ACCESS_SECRET',
+        'LEMONSQUEEZY_API_KEY',
+        'LEMONSQUEEZY_MODE',
+        'LEMONSQUEEZY_STORE_ID',
+        'LEMONSQUEEZY_VARIANT_CREDIT_PACK',
+        'LEMONSQUEEZY_VARIANT_SUBSCRIPTION',
+        'LEMONSQUEEZY_WEBHOOK_SECRET',
         'REFRESH_TOKEN_PEPPER',
       ]);
       expect((error as Error).message).toContain('APP_ORIGIN');
@@ -125,6 +137,26 @@ describe('parseEnv', () => {
 
     expect(message).toContain('JWT_ACCESS_SECRET: must be at least 32 characters');
     expect(message).not.toContain('tooshort-secret-value');
+  });
+
+  it('requires an explicit LEMONSQUEEZY_MODE, numeric ids and two different variants', () => {
+    expect(parseEnv(valid).LEMONSQUEEZY_MODE).toBe('live');
+    expect(() => parseEnv({ ...valid, LEMONSQUEEZY_MODE: undefined })).toThrow(EnvValidationError);
+    expect(() => parseEnv({ ...valid, LEMONSQUEEZY_MODE: 'sandbox' })).toThrow(EnvValidationError);
+    expect(() => parseEnv({ ...valid, LEMONSQUEEZY_STORE_ID: 'store-1' })).toThrow(EnvValidationError);
+    expect(() => parseEnv({ ...valid, NODE_ENV: 'development', LEMONSQUEEZY_VARIANT_CREDIT_PACK: '1111111' })).toThrow(EnvValidationError);
+  });
+
+  it('rejects a short webhook secret without echoing it', () => {
+    let message = '';
+    try {
+      parseEnv({ ...valid, LEMONSQUEEZY_WEBHOOK_SECRET: 'shortsecret' });
+    } catch (error) {
+      message = (error as Error).message;
+    }
+
+    expect(message).toContain('LEMONSQUEEZY_WEBHOOK_SECRET');
+    expect(message).not.toContain('shortsecret');
   });
 
   it('requires a positive AI_DAILY_BUDGET_USD of at most 1000 and parses it as a number', () => {
