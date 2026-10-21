@@ -1,36 +1,50 @@
-import { clampSimilarity, decide, fallbackTopicName, normaliseTopicText, queryText, slugify, topicDocument } from './index';
+import {
+  CHOICE_THRESHOLD,
+  clampSimilarity,
+  decide,
+  fallbackTopicName,
+  MATCH_THRESHOLD,
+  normaliseTopicText,
+  queryText,
+  slugify,
+  topicDocument,
+} from './index';
 
 describe('decide', () => {
-  it('auto-matches the nearest topic at 0.88 or above', () => {
-    expect(decide([{ topicId: 'b', similarity: 0.8 }, { topicId: 'a', similarity: 0.88 }])).toEqual({ kind: 'matched', topicId: 'a', similarity: 0.88 });
+  it('uses the thresholds tuned on the golden set', () => {
+    expect([MATCH_THRESHOLD, CHOICE_THRESHOLD]).toEqual([0.7, 0.66]);
   });
 
-  it('offers at most 3 choices between 0.75 and 0.88, nearest first', () => {
+  it('auto-matches the nearest topic at the match threshold or above', () => {
+    expect(decide([{ topicId: 'b', similarity: 0.68 }, { topicId: 'a', similarity: MATCH_THRESHOLD }])).toEqual({ kind: 'matched', topicId: 'a', similarity: MATCH_THRESHOLD });
+  });
+
+  it('offers at most 3 choices between the thresholds, nearest first', () => {
     const decision = decide([
-      { topicId: 'a', similarity: 0.76 },
-      { topicId: 'b', similarity: 0.87 },
-      { topicId: 'c', similarity: 0.75 },
-      { topicId: 'd', similarity: 0.8 },
-      { topicId: 'e', similarity: 0.74 },
+      { topicId: 'a', similarity: 0.67 },
+      { topicId: 'b', similarity: 0.6999 },
+      { topicId: 'c', similarity: CHOICE_THRESHOLD },
+      { topicId: 'd', similarity: 0.68 },
+      { topicId: 'e', similarity: 0.6599 },
     ]);
 
     expect(decision).toEqual({
       kind: 'choices',
       choices: [
-        { topicId: 'b', similarity: 0.87 },
-        { topicId: 'd', similarity: 0.8 },
-        { topicId: 'a', similarity: 0.76 },
+        { topicId: 'b', similarity: 0.6999 },
+        { topicId: 'd', similarity: 0.68 },
+        { topicId: 'a', similarity: 0.67 },
       ],
     });
   });
 
-  it('creates below 0.75 and when there are no candidates', () => {
-    expect(decide([{ topicId: 'a', similarity: 0.7499 }])).toEqual({ kind: 'create' });
+  it('creates below the choice threshold and when there are no candidates', () => {
+    expect(decide([{ topicId: 'a', similarity: 0.6599 }])).toEqual({ kind: 'create' });
     expect(decide([])).toEqual({ kind: 'create' });
   });
 
   it('breaks similarity ties by id so results are stable', () => {
-    expect(decide([{ topicId: 'z', similarity: 0.9 }, { topicId: 'a', similarity: 0.9 }])).toMatchObject({ topicId: 'a' });
+    expect(decide([{ topicId: 'z', similarity: 0.8 }, { topicId: 'a', similarity: 0.8 }])).toMatchObject({ topicId: 'a' });
   });
 });
 

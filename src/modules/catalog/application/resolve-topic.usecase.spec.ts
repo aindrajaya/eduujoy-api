@@ -2,6 +2,7 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { type AiBudgetGuard, AiBudgetExceededError, type Embedder, type EmbeddingRequest } from '../../../shared/ai';
 import { EventBus } from '../../../shared/events/event-bus';
 import { type TopicResolved } from '../domain/events/topic-resolved.event';
+import { CHOICE_THRESHOLD, MATCH_THRESHOLD } from '../domain/resolution';
 import { FakeTopicRepository } from './catalog.fakes';
 import { TopicCreateLimitError, TopicSearchUnavailableError, TopicTextInvalidError } from './errors';
 import { type NormalisedTopic, type TopicNormalizer } from './ports/topic-normalizer';
@@ -50,7 +51,7 @@ function setup() {
   const events: TopicResolved[] = [];
   bus.on<TopicResolved>('TopicResolved', (e) => events.push(e));
   const hooks = repo.add({ slug: 'react-hooks', canonicalName: 'React hooks', aliases: ['hooks', 'useState'], embedding: { vector: at(0), ...MODEL } });
-  const react = repo.add({ slug: 'react', canonicalName: 'React', embedding: { vector: at(1.2), ...MODEL } });
+  const react = repo.add({ slug: 'react', canonicalName: 'React', embedding: { vector: at(1.645), ...MODEL } });
   const vue = repo.add({ slug: 'vue', canonicalName: 'Vue', embedding: { vector: at(-1.2), ...MODEL } });
   return {
     repo,
@@ -76,9 +77,9 @@ describe('ResolveTopic', () => {
     expect(t.events.map((e) => e.status)).toEqual(['matched', 'matched', 'matched']);
   });
 
-  it('auto-matches the nearest topic at 0.88 or above, embedding the learner text as a query', async () => {
+  it('auto-matches the nearest topic at the match threshold or above, embedding the learner text as a query', async () => {
     const t = setup();
-    t.embedder.queries.set('Learning hooks in React', at(similarityAngle(0.9)));
+    t.embedder.queries.set('Learning hooks in React', at(similarityAngle(0.75)));
 
     const view = await t.resolve.execute('u1', '  Learning   hooks in React ');
 
@@ -86,18 +87,18 @@ describe('ResolveTopic', () => {
     expect(t.embedder.requests).toEqual([expect.objectContaining({ stage: 'topic-resolve', kind: 'query', texts: ['Learning hooks in React'] })]);
   });
 
-  it('offers nearest-first choices with similarity between 0.75 and 0.88', async () => {
+  it('offers nearest-first choices with similarity between the thresholds', async () => {
     const t = setup();
-    // 0.85 to React hooks (angle 0) and ~0.80 to React (angle 1.2); Vue is far below 0.75.
-    t.embedder.queries.set('frontend state', at(similarityAngle(0.85)));
+    // 0.69 to React hooks (angle 0) and 0.67 to React (angle 1.645); Vue (angle -1.2) is far below.
+    t.embedder.queries.set('frontend state', at(similarityAngle(0.69)));
 
     const view = await t.resolve.execute('u1', 'frontend state');
 
     expect(view.status).toBe('choices');
     if (view.status !== 'choices') throw new Error('expected choices');
     expect(view.choices.map((c) => c.id)).toEqual([t.topics.hooks.id, t.topics.react.id]);
-    expect(view.choices[0]?.similarity).toBe(0.85);
-    expect(view.choices.every((c) => c.similarity >= 0.75 && c.similarity < 0.88)).toBe(true);
+    expect(view.choices[0]?.similarity).toBe(0.69);
+    expect(view.choices.every((c) => c.similarity >= CHOICE_THRESHOLD && c.similarity < MATCH_THRESHOLD)).toBe(true);
     expect(view.choices.length).toBeLessThanOrEqual(3);
     expect(t.events[0]).toMatchObject({ status: 'choices', topicId: null });
   });
