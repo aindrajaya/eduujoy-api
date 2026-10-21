@@ -12,8 +12,8 @@ export type Decision =
   | { kind: 'create' };
 
 /**
- * FR-02: ≥ 0.88 auto-matches the nearest topic; 0.75–0.88 offers up to 3 choices, nearest first;
- * anything lower creates a new topic.
+ * FR-02: at or above MATCH_THRESHOLD auto-matches the nearest topic; from CHOICE_THRESHOLD up to it offers
+ * up to 3 choices, nearest first; anything lower creates a new topic.
  */
 export function decide(candidates: Candidate[]): Decision {
   const sorted = [...candidates].sort((a, b) => b.similarity - a.similarity || a.topicId.localeCompare(b.topicId));
