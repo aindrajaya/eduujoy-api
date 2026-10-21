@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { ThrottlerException } from '@nestjs/throttler';
 import { type ValidationError } from 'class-validator';
+import { AiBudgetExceededError } from '../../ai/errors';
 import { flattenValidationErrors, ProblemException, problemType, toProblem } from './problem';
 
 const ctx = { baseUrl: 'https://api.example', requestId: 'req-1', instance: '/v1/auth/login' };
@@ -84,6 +85,13 @@ describe('toProblem', () => {
     });
     expect(toProblem(malformed, ctx).body).toMatchObject({ status: 400, title: 'Malformed request body' });
     expect(JSON.stringify(toProblem(malformed, ctx).body)).not.toContain('Unexpected token');
+  });
+
+  it('maps a spent AI budget to 503 AI_BUDGET_EXCEEDED without revealing spend', () => {
+    const problem = toProblem(new AiBudgetExceededError(5.12, 5), ctx);
+
+    expect(problem).toMatchObject({ status: 503, body: { code: 'AI_BUDGET_EXCEEDED', title: 'Daily AI budget reached' } });
+    expect(JSON.stringify(problem.body)).not.toMatch(/5\.12|\$/);
   });
 
   it('hides the details of unknown errors behind a generic 500', () => {
