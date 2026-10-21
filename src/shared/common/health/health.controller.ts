@@ -1,16 +1,12 @@
-import { Controller, Get, HttpStatus } from '@nestjs/common';
+import { Controller, Get, HttpStatus, SerializeOptions } from '@nestjs/common';
 import { AppConfig } from '../../config';
 import { Public } from '../auth/decorators';
 import { ProblemException } from '../problem/problem';
+import { HealthResponseDto } from './health.response';
 import { ReadinessRegistry } from './readiness.registry';
 
-interface HealthBody {
-  status: 'ok';
-  version: string;
-  checks?: Record<string, string>;
-}
-
 @Public()
+@SerializeOptions({ type: HealthResponseDto })
 @Controller()
 export class HealthController {
   constructor(
@@ -19,12 +15,12 @@ export class HealthController {
   ) {}
 
   @Get('health')
-  health(): HealthBody {
+  health(): HealthResponseDto {
     return { status: 'ok', version: this.version };
   }
 
   @Get('ready')
-  async ready(): Promise<HealthBody> {
+  async ready(): Promise<HealthResponseDto> {
     const { ready, checks } = await this.readiness.run();
     if (ready) return { status: 'ok', version: this.version, checks };
 

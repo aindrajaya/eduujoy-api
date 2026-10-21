@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post, Req, Res, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Req, Res, SerializeOptions, UseInterceptors } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { type Request, type Response } from 'express';
 import {
@@ -19,6 +19,7 @@ import { RefreshSession } from '../application/refresh.usecase';
 import { RegisterUser } from '../application/register.usecase';
 import { type IssuedSession, type RequestMeta } from '../application/session-issuer';
 import { LoginRequestDto, RegisterRequestDto } from './dto/auth.dto';
+import { MeResponseDto } from './dto/me.response';
 import { IdentityErrorsInterceptor, toIdentityProblem } from './identity-errors.interceptor';
 
 /** PRD-API §6: 5 attempts per minute per IP on credential endpoints. */
@@ -62,6 +63,7 @@ export class AuthController {
   @Throttle(CREDENTIAL_THROTTLE)
   @Post('register')
   @HttpCode(201)
+  @SerializeOptions({ type: MeResponseDto })
   async register(
     @Body() body: RegisterRequestDto,
     @Req() req: Request,
@@ -76,6 +78,7 @@ export class AuthController {
   @Throttle(CREDENTIAL_THROTTLE)
   @Post('login')
   @HttpCode(200)
+  @SerializeOptions({ type: MeResponseDto })
   async signIn(
     @Body() body: LoginRequestDto,
     @Req() req: Request,
@@ -118,6 +121,7 @@ export class AuthController {
   }
 
   @Get('me')
+  @SerializeOptions({ type: MeResponseDto })
   me(@CurrentUser() user: AuthUser): Promise<MeView> {
     return this.getMe.execute(user.userId);
   }
