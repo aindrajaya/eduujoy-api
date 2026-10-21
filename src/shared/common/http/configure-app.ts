@@ -1,4 +1,5 @@
 import { type NestExpressApplication } from '@nestjs/platform-express';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { type AppConfig } from '../../config';
 
@@ -20,6 +21,7 @@ export function configureApp(app: NestExpressApplication, config: AppConfig): vo
   // Koyeb terminates TLS at one proxy hop; this makes req.ip and req.secure reflect the client.
   app.set('trust proxy', 1);
   app.use(helmet());
+  app.use(cookieParser());
   app.useBodyParser('json', { limit: BODY_LIMIT });
   app.useBodyParser('urlencoded', { limit: BODY_LIMIT, extended: false });
   app.enableCors({

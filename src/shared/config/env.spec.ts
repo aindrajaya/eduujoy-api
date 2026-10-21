@@ -6,6 +6,11 @@ const valid = {
   APP_ORIGIN: 'https://eduujoy.aindrajaya.my.id,https://staging.eduujoy.aindrajaya.my.id',
   API_PUBLIC_URL: 'https://api.eduujoy.aindrajaya.my.id',
   DATABASE_URL: 'postgresql://app:pw@ep-x-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require',
+  JWT_ACCESS_SECRET: 'j'.repeat(64),
+  REFRESH_TOKEN_PEPPER: 'p'.repeat(64),
+  GOOGLE_OAUTH_CLIENT_ID: 'client.apps.googleusercontent.com',
+  GOOGLE_OAUTH_CLIENT_SECRET: 'google-secret',
+  GOOGLE_OAUTH_REDIRECT_URI: 'https://api.eduujoy.aindrajaya.my.id/v1/auth/google/callback',
 };
 
 describe('parseEnv', () => {
@@ -23,11 +28,7 @@ describe('parseEnv', () => {
   });
 
   it('applies defaults for PORT and NODE_ENV', () => {
-    const env = parseEnv({
-      APP_ORIGIN: valid.APP_ORIGIN,
-      API_PUBLIC_URL: valid.API_PUBLIC_URL,
-      DATABASE_URL: valid.DATABASE_URL,
-    });
+    const env = parseEnv({ ...valid, NODE_ENV: undefined, PORT: undefined });
 
     expect(env.PORT).toBe(3000);
     expect(env.NODE_ENV).toBe('development');
@@ -49,7 +50,16 @@ describe('parseEnv', () => {
       parseEnv({});
     } catch (error) {
       expect(error).toBeInstanceOf(EnvValidationError);
-      expect((error as EnvValidationError).keys).toEqual(['API_PUBLIC_URL', 'APP_ORIGIN', 'DATABASE_URL']);
+      expect((error as EnvValidationError).keys).toEqual([
+        'API_PUBLIC_URL',
+        'APP_ORIGIN',
+        'DATABASE_URL',
+        'GOOGLE_OAUTH_CLIENT_ID',
+        'GOOGLE_OAUTH_CLIENT_SECRET',
+        'GOOGLE_OAUTH_REDIRECT_URI',
+        'JWT_ACCESS_SECRET',
+        'REFRESH_TOKEN_PEPPER',
+      ]);
       expect((error as Error).message).toContain('APP_ORIGIN');
     }
   });
@@ -97,5 +107,17 @@ describe('parseEnv', () => {
       'test_20261021100000_ab12cd34',
     );
     expect(() => parseEnv({ ...valid, DATABASE_SCHEMA: 'x"; drop schema public; --' })).toThrow(EnvValidationError);
+  });
+
+  it('rejects short secrets without echoing them', () => {
+    let message = '';
+    try {
+      parseEnv({ ...valid, JWT_ACCESS_SECRET: 'tooshort-secret-value' });
+    } catch (error) {
+      message = (error as Error).message;
+    }
+
+    expect(message).toContain('JWT_ACCESS_SECRET: must be at least 32 characters');
+    expect(message).not.toContain('tooshort-secret-value');
   });
 });

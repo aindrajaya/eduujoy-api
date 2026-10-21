@@ -1,6 +1,7 @@
 import { Controller, Get, HttpStatus, Req, Res } from '@nestjs/common';
 import { type Request, type Response } from 'express';
 import { AppConfig } from '../../config';
+import { Public } from '../auth/decorators';
 import { ReadinessRegistry } from './readiness.registry';
 
 interface HealthBody {
@@ -9,6 +10,7 @@ interface HealthBody {
   checks?: Record<string, string>;
 }
 
+@Public()
 @Controller()
 export class HealthController {
   constructor(

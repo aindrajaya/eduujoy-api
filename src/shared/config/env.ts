@@ -30,6 +30,11 @@ export const envSchema = z
       .string()
       .regex(/^[a-z_][a-z0-9_]{0,62}$/)
       .default('public'),
+    JWT_ACCESS_SECRET: z.string().min(32, { error: 'must be at least 32 characters' }),
+    REFRESH_TOKEN_PEPPER: z.string().min(32, { error: 'must be at least 32 characters' }),
+    GOOGLE_OAUTH_CLIENT_ID: z.string().min(1),
+    GOOGLE_OAUTH_CLIENT_SECRET: z.string().min(1),
+    GOOGLE_OAUTH_REDIRECT_URI: z.url({ protocol: /^https?$/ }),
     API_PUBLIC_URL: z.url({ protocol: /^https?$/ }).transform((value) => value.replace(/\/+$/, '')),
   })
   .superRefine((env, ctx) => {

@@ -11,6 +11,11 @@ function config(overrides: Partial<Env>): AppConfig {
     API_PUBLIC_URL: 'http://localhost:3000',
     DATABASE_URL: 'postgresql://u:p@h/db',
     DATABASE_SCHEMA: 'public',
+    JWT_ACCESS_SECRET: 'j'.repeat(64),
+    REFRESH_TOKEN_PEPPER: 'p'.repeat(64),
+    GOOGLE_OAUTH_CLIENT_ID: 'id',
+    GOOGLE_OAUTH_CLIENT_SECRET: 'secret',
+    GOOGLE_OAUTH_REDIRECT_URI: 'http://localhost:3000/v1/auth/google/callback',
     ...overrides,
   });
 }

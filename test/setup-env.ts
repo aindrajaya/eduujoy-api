@@ -6,4 +6,10 @@ Object.assign(process.env, {
   APP_ORIGIN: 'http://localhost:5173,https://eduujoy.aindrajaya.my.id',
   API_PUBLIC_URL: 'http://localhost:3000',
   APP_VERSION: 'e2e',
+  // Test-only values; e2e never talks to Google (the OAuth client is replaced with a fake).
+  JWT_ACCESS_SECRET: 'e2e-access-secret-'.padEnd(64, 'x'),
+  REFRESH_TOKEN_PEPPER: 'e2e-refresh-pepper-'.padEnd(64, 'y'),
+  GOOGLE_OAUTH_CLIENT_ID: 'e2e-client.apps.googleusercontent.com',
+  GOOGLE_OAUTH_CLIENT_SECRET: 'e2e-google-secret',
+  GOOGLE_OAUTH_REDIRECT_URI: 'http://localhost:3000/v1/auth/google/callback',
 });
