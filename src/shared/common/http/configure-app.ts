@@ -2,6 +2,7 @@ import { type NestExpressApplication } from '@nestjs/platform-express';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { type AppConfig } from '../../config';
+import { createCompression } from './compression';
 
 export const BODY_LIMIT = '256kb';
 export const CORS_ALLOWED_HEADERS = [
@@ -12,6 +13,8 @@ export const CORS_ALLOWED_HEADERS = [
   'If-None-Match',
   'Last-Event-ID',
 ];
+/** Readable cross-origin by allow-listed origins (contract 0.3.0-v0): Retry-After on 429 and 503 AI_BUDGET_EXCEEDED. */
+export const CORS_EXPOSED_HEADERS = ['X-Request-Id', 'Retry-After'];
 
 /** HTTP hardening shared by main.ts and the e2e harness, so tests exercise the real stack. */
 export function configureApp(app: NestExpressApplication, config: AppConfig): void {
@@ -21,6 +24,7 @@ export function configureApp(app: NestExpressApplication, config: AppConfig): vo
   // Koyeb terminates TLS at one proxy hop; this makes req.ip and req.secure reflect the client.
   app.set('trust proxy', 1);
   app.use(helmet());
+  app.use(createCompression());
   app.use(cookieParser());
   app.useBodyParser('json', { limit: BODY_LIMIT });
   app.useBodyParser('urlencoded', { limit: BODY_LIMIT, extended: false });
@@ -31,7 +35,7 @@ export function configureApp(app: NestExpressApplication, config: AppConfig): vo
     credentials: true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     allowedHeaders: CORS_ALLOWED_HEADERS,
-    exposedHeaders: ['X-Request-Id'],
+    exposedHeaders: CORS_EXPOSED_HEADERS,
     maxAge: 600,
   });
 }

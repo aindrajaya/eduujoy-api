@@ -27,7 +27,7 @@ describe('HTTP hardening (e2e)', () => {
     expect(res.headers['x-request-id']).toMatch(/^[0-9a-f-]{36}$/);
   });
 
-  it('allows an APP_ORIGIN origin with credentials and exposes X-Request-Id', async () => {
+  it('allows an APP_ORIGIN origin with credentials and exposes X-Request-Id and Retry-After', async () => {
     const res = await request(app.getHttpServer())
       .get('/health')
       .set('Origin', 'https://eduujoy.aindrajaya.my.id')
@@ -35,7 +35,7 @@ describe('HTTP hardening (e2e)', () => {
 
     expect(res.headers['access-control-allow-origin']).toBe('https://eduujoy.aindrajaya.my.id');
     expect(res.headers['access-control-allow-credentials']).toBe('true');
-    expect(res.headers['access-control-expose-headers']).toBe('X-Request-Id');
+    expect(res.headers['access-control-expose-headers']).toBe('X-Request-Id,Retry-After');
   });
 
   it('answers a preflight from an allowed origin with the allowed methods and headers', async () => {
@@ -57,6 +57,15 @@ describe('HTTP hardening (e2e)', () => {
       .expect(200);
 
     expect(res.headers['access-control-allow-origin']).toBeUndefined();
+    expect(res.headers['access-control-expose-headers']).toBeUndefined();
+  });
+
+  it('runs compression in the real stack: Vary is set, and bodies under 1 KB stay uncompressed', async () => {
+    // Size and SSE behaviour are covered against the same middleware in compression.spec.ts.
+    const res = await request(app.getHttpServer()).get('/health').set('Accept-Encoding', 'gzip, br').expect(200);
+
+    expect(res.headers.vary).toMatch(/Accept-Encoding/i);
+    expect(res.headers['content-encoding']).toBeUndefined();
   });
 
   it('rejects JSON bodies over 256 KB with 413', async () => {
