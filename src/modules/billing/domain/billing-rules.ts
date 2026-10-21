@@ -33,7 +33,9 @@ export interface SubscriptionState {
 export function entitlementFor(sub: SubscriptionState, now: Date): Entitlement {
   const until = (end: Date | null): Entitlement => {
     const periodEnd = end && end > now ? end : now;
-    return { plan: 'subscription', monthlyPathQuota: SUBSCRIPTION_MONTHLY_PATHS, periodStart: monthBefore(periodEnd), periodEnd };
+    // The cycle started a month before it ends, but never after now (a trial can end more than a month out).
+    const start = monthBefore(periodEnd);
+    return { plan: 'subscription', monthlyPathQuota: SUBSCRIPTION_MONTHLY_PATHS, periodStart: start > now ? now : start, periodEnd };
   };
   switch (sub.status) {
     case 'on_trial':
