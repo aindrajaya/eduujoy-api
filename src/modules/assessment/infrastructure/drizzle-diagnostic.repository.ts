@@ -2,8 +2,10 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { and, eq, ne, sql } from 'drizzle-orm';
 import { z } from 'zod';
 import { DATABASE, type Database, type Tx } from '../../../shared/db';
-import { diagnosticAnswers, diagnosticItems, diagnosticSessions, placements } from '../../../shared/db/schema/assessment';
+import { diagnosticAnswerReplays, diagnosticAnswers, diagnosticItems, diagnosticSessions, placements } from '../../../shared/db/schema/assessment';
+import { type DiagnosticBatchView } from '../application/diagnostic.view';
 import {
+  type AnswerReplay,
   type DiagnosticRepository,
   type NewSession,
   type PlacementRecord,
@@ -140,6 +142,30 @@ export class DrizzleDiagnosticRepository implements DiagnosticRepository {
     // `real` is float4; round back to the 2 decimals the placement was computed with.
     const confidence = Math.round(row.confidence * 100) / 100;
     return { id: row.id, placement: { cell, position: cellAt(cell), confidence, reason: row.reason } };
+  }
+
+  async findReplay(tx: Tx, userId: string, idempotencyKey: string): Promise<AnswerReplay | null> {
+    const [row] = await tx
+      .select()
+      .from(diagnosticAnswerReplays)
+      .where(and(eq(diagnosticAnswerReplays.userId, userId), eq(diagnosticAnswerReplays.idempotencyKey, idempotencyKey)));
+    // Written only by saveReplay from a DiagnosticBatchView.
+    return row ? { sessionId: row.sessionId, requestHash: row.requestHash, response: row.response as DiagnosticBatchView } : null;
+  }
+
+  async saveReplay(tx: Tx, input: AnswerReplay & { userId: string; idempotencyKey: string }): Promise<boolean> {
+    const rows = await tx
+      .insert(diagnosticAnswerReplays)
+      .values({
+        userId: input.userId,
+        sessionId: input.sessionId,
+        idempotencyKey: input.idempotencyKey,
+        requestHash: input.requestHash,
+        response: input.response,
+      })
+      .onConflictDoNothing({ target: [diagnosticAnswerReplays.userId, diagnosticAnswerReplays.idempotencyKey] })
+      .returning({ id: diagnosticAnswerReplays.id });
+    return rows.length > 0;
   }
 }
 

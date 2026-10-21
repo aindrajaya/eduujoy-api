@@ -1,5 +1,6 @@
 import { type Tx } from '../../../../shared/db';
 import { type BankItem, type Bloom, type DiagnosticState, type Placement, type Progress, type SelfReport } from '../../domain/diagnostic';
+import { type DiagnosticBatchView } from '../diagnostic.view';
 
 export const DIAGNOSTIC_REPOSITORY = Symbol('DiagnosticRepository');
 
@@ -42,6 +43,13 @@ export interface NewSession {
   completed: boolean;
 }
 
+/** A stored answers response, replayed for a retry with the same `Idempotency-Key`. */
+export interface AnswerReplay {
+  sessionId: string;
+  requestHash: string;
+  response: DiagnosticBatchView;
+}
+
 export interface DiagnosticRepository {
   /** Gradable items (choice kinds with an answer key) for the topic. */
   loadBank(topicId: string): Promise<ServedItem[]>;
@@ -55,4 +63,7 @@ export interface DiagnosticRepository {
   update(tx: Tx, id: string, state: StoredState, completed: boolean): Promise<void>;
   createPlacement(tx: Tx, input: { sessionId: string; userId: string; topicId: string; placement: Placement; basis: 'items' | 'self_report' }): Promise<string>;
   findPlacement(sessionId: string): Promise<PlacementRecord | null>;
+  findReplay(tx: Tx, userId: string, idempotencyKey: string): Promise<AnswerReplay | null>;
+  /** False when another request stored this user's key first. */
+  saveReplay(tx: Tx, input: AnswerReplay & { userId: string; idempotencyKey: string }): Promise<boolean>;
 }

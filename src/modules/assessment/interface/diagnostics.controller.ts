@@ -1,7 +1,8 @@
 import { Body, Controller, Get, HttpCode, Param, Post, SerializeOptions, UseInterceptors } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { type AuthUser, CurrentUser } from '../../../shared/common/auth';
-import { ApiAccessCookieAuth, ApiCsrfHeader, ApiProblem } from '../../../shared/common/openapi';
+import { IdempotencyKey } from '../../../shared/common/http';
+import { ApiAccessCookieAuth, ApiCsrfHeader, ApiIdempotencyKeyHeader, ApiProblem } from '../../../shared/common/openapi';
 import { type DiagnosticBatchView } from '../application/diagnostic.view';
 import { type DiagnosticDetailView, GetDiagnostic } from '../application/get-diagnostic.query';
 import { StartDiagnostic } from '../application/start-diagnostic.usecase';
@@ -57,16 +58,28 @@ export class DiagnosticsController {
   @Post(':id/answers')
   @HttpCode(200)
   @SerializeOptions({ type: DiagnosticBatchResponseDto })
-  @ApiOperation({ operationId: 'diagnosticsSubmitAnswers', summary: 'Submit a batch of answers; returns the next batch or the placement (FR-04).' })
+  @ApiOperation({
+    operationId: 'diagnosticsSubmitAnswers',
+    summary: 'Submit a batch of answers; returns the next batch or the placement (FR-04).',
+    description:
+      'Send the same optional `Idempotency-Key` on every retry of one batch. A replay with the same key and body returns the stored 200 ' +
+      'response and records nothing twice; the same key with a different body returns 409 CONFLICT.',
+  })
   @ApiCsrfHeader()
+  @ApiIdempotencyKeyHeader()
   @ApiParam(ID_PARAM)
   @ApiOkResponse({ description: 'Next batch, or the placement when complete.', type: DiagnosticBatchResponseDto })
   @ApiProblem(400)
   @ApiProblem(401)
   @ApiProblem(403)
   @ApiProblem(404)
-  @ApiProblem(409, 'The diagnostic is complete, or the answers do not match the current batch.')
-  submit(@CurrentUser() user: AuthUser, @Param('id') id: string, @Body() body: DiagnosticAnswersRequestDto): Promise<DiagnosticBatchView> {
-    return this.answers.execute({ userId: user.userId, diagnosticId: id, answers: body.answers });
+  @ApiProblem(409, 'The diagnostic is complete, the answers do not match the current batch, or the Idempotency-Key was used with a different request.')
+  submit(
+    @CurrentUser() user: AuthUser,
+    @Param('id') id: string,
+    @Body() body: DiagnosticAnswersRequestDto,
+    @IdempotencyKey() idempotencyKey: string | undefined,
+  ): Promise<DiagnosticBatchView> {
+    return this.answers.execute({ userId: user.userId, diagnosticId: id, answers: body.answers, ...(idempotencyKey === undefined ? {} : { idempotencyKey }) });
   }
 }
