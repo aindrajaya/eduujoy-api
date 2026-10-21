@@ -34,7 +34,7 @@ The MVP runs as one NestJS process on Koyeb's free instance, with jobs in the sa
 
 | Concern | Choice | Why |
 | --- | --- | --- |
-| Runtime | Node.js LTS, TypeScript `strict`, pnpm | Matches the existing stack |
+| Runtime | Node.js LTS, TypeScript `strict`, pnpm; Nest 11, TypeScript 5.9, jose 5 | Matches the existing stack; these majors stay CommonJS (or keep the compiler API) so Jest can load them |
 | Framework | NestJS, modular monolith | DI, guards, pipes, interceptors, gateways out of the box |
 | Database | Neon Postgres (free) + `pgvector` | Serverless Postgres; vectors live next to relational data |
 | ORM and migrations | Drizzle ORM + drizzle-kit | First-class `vector` column type, typed SQL, plain-SQL migrations |
@@ -470,8 +470,8 @@ Fourteen slices, each sized for one Claude Code session and one pull request, in
 | --- | --- | --- | --- | --- |
 | A0 | Repo bootstrap: Nest app, strict TS, ESLint boundaries rule, Zod env config, pino, helmet, health endpoints, Dockerfile, CI | — | App deploys to Koyeb and serves at api.eduujoy.aindrajaya.my.id with a valid certificate; `/health` returns 200 | `pnpm lint && pnpm test && pnpm build`; `curl /health` |
 | A1 | Database: Drizzle schema for all master + API tables, `pgvector` extension, HNSW indexes, seed loader for `seed/*.json` | Data model | Migrations apply on a Neon branch; seed loads 150 topics | `pnpm db:migrate && pnpm db:seed`; integration tests |
-| A2 | Identity: register, login, refresh rotation, logout, Google OAuth, `auth/me`, guard chain, roles | FR-23, Section 6 | Cookies set with correct flags; reuse detection revokes family | e2e: `auth.e2e-spec.ts` |
-| A3 | Contract layer: `ValidationPipe`, problem+json filter, serializer, Swagger export, request IDs | Section 7 | `openapi.json` committed; invalid DTO returns 400 with field errors | `pnpm openapi:check` |
+| A2 | Identity: register, login, refresh rotation, logout, Google OAuth, `auth/me`, guard chain, roles, problem+json filter and `ValidationPipe` | FR-23, Section 6 | Cookies set with correct flags; reuse detection revokes family | e2e: `auth.e2e-spec.ts` |
+| A3 | Contract layer: serializer, Swagger export, `openapi:check`, request IDs; reuses A2's problem+json filter and `ValidationPipe` | Section 7 | `openapi.json` committed; invalid DTO returns 400 with field errors | `pnpm openapi:check` |
 | A4 | AI shared kernel: ports, Claude and Gemini adapters, `llm_calls` metering, budget guard, fixtures | Section 11 | Adapters pass contract tests offline | `pnpm test ai` |
 | A5 | Jobs and events: `jobs` table, executor, resume on boot, event bus with `afterCommit` | Section 5 | Killed process resumes a running job | `jobs.int-spec.ts` |
 | A6 | Catalog: topic resolve with embeddings and thresholds | FR-01, FR-02 | Golden topic phrases resolve correctly ≥ 95% | `catalog.e2e-spec.ts` |
