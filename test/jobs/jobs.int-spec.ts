@@ -51,7 +51,7 @@ describe('jobs: a killed process resumes its running job (PRD-API §13 A5 Verify
     await client.end();
   });
 
-  it('requeues a job left running by SIGKILL and completes it on the next boot', async () => {
+  it('requeues a job left running by SIGKILL once its lock is stale and completes it on the next boot', async () => {
     const type = `kill-${randomUUID().slice(0, 8)}`;
     const { job } = await repo.enqueue({ type, idempotencyKey: randomUUID(), payload: { topic: 'react-hooks' }, maxAttempts: 3 });
 
@@ -64,11 +64,13 @@ describe('jobs: a killed process resumes its running job (PRD-API §13 A5 Verify
     // The process died mid-run: the row is stranded in `running`, with the first attempt counted.
     expect(await repo.findById(job.id)).toMatchObject({ status: 'running', attempts: 1, progress: { stage: 'analyse', done: 1 } });
 
-    const executor = new JobExecutor(repo, new JobSignals(), { problemBaseUrl: 'http://localhost:3000' });
+    // A lock is only treated as abandoned once it is older than the longest handler timeout plus
+    // staleGraceMs (overlapping deploys keep their jobs). Short values let the test see it go stale.
+    const executor = new JobExecutor(repo, new JobSignals(), { problemBaseUrl: 'http://localhost:3000', staleGraceMs: 0 });
     executor.register({
       type,
       concurrency: 1,
-      timeoutMs: 5_000,
+      timeoutMs: 500,
       parse: (p): { topic: string } => p as { topic: string },
       run: async (p, ctx) => {
         await ctx.progress('design', 3, 3);
@@ -76,6 +78,8 @@ describe('jobs: a killed process resumes its running job (PRD-API §13 A5 Verify
       },
     });
     await executor.start();
+    const until = Date.now() + 10_000;
+    while ((await repo.findById(job.id))?.status !== 'succeeded' && Date.now() < until) await new Promise((r) => setTimeout(r, 50));
     await executor.idle();
     await executor.stop();
 
