@@ -8,7 +8,7 @@ import {
 import { ThrottlerException } from '@nestjs/throttler';
 import { type ValidationError } from 'class-validator';
 import { AiBudgetExceededError } from '../../ai/errors';
-import { flattenValidationErrors, ProblemException, problemType, toProblem } from './problem';
+import { flattenValidationErrors, ProblemException, problemType, secondsUntilUtcMidnight, toProblem } from './problem';
 
 const ctx = { baseUrl: 'https://api.example', requestId: 'req-1', instance: '/v1/auth/login' };
 
@@ -92,6 +92,18 @@ describe('toProblem', () => {
 
     expect(problem).toMatchObject({ status: 503, body: { code: 'AI_BUDGET_EXCEEDED', title: 'Daily AI budget reached' } });
     expect(JSON.stringify(problem.body)).not.toMatch(/5\.12|\$/);
+  });
+
+  it('tells clients to retry at the next UTC midnight, when the budget resets', () => {
+    const problem = toProblem(new AiBudgetExceededError(3, 3), { ...ctx, now: new Date('2026-10-21T22:30:00Z') });
+
+    expect(problem.headers).toEqual({ 'Retry-After': String(90 * 60) });
+  });
+
+  it('counts down to UTC midnight from any time zone offset, never below 1 second', () => {
+    expect(secondsUntilUtcMidnight(new Date('2026-10-22T05:00:00+07:00'))).toBe(2 * 3600);
+    expect(secondsUntilUtcMidnight(new Date('2026-10-21T23:59:59.900Z'))).toBe(1);
+    expect(secondsUntilUtcMidnight(new Date('2026-10-22T00:00:00Z'))).toBe(86_400);
   });
 
   it('hides the details of unknown errors behind a generic 500', () => {
