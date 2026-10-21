@@ -76,4 +76,9 @@ describe('parseEnv', () => {
       parseEnv({ ...valid, NODE_ENV: 'development', APP_ORIGIN: 'http://localhost:5173' }),
     ).not.toThrow();
   });
+
+  it('accepts a short APP_VERSION and rejects unsafe ones', () => {
+    expect(parseEnv({ ...valid, APP_VERSION: '1.2.3+abc123' }).APP_VERSION).toBe('1.2.3+abc123');
+    expect(() => parseEnv({ ...valid, APP_VERSION: 'v1 <script>' })).toThrow(EnvValidationError);
+  });
 });

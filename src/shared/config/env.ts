@@ -24,6 +24,7 @@ export const envSchema = z
     PORT: z.coerce.number().int().min(1).max(65535).default(3000),
     LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).default('info'),
     APP_ORIGIN: originList,
+    APP_VERSION: z.string().regex(/^[\w.+-]{1,64}$/).optional(),
     API_PUBLIC_URL: z.url({ protocol: /^https?$/ }).transform((value) => value.replace(/\/+$/, '')),
   })
   .superRefine((env, ctx) => {

@@ -7,6 +7,7 @@ const config: Config = {
   testRegex: '\\.e2e-spec\\.ts$',
   transform: { '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }] },
   moduleFileExtensions: ['ts', 'js', 'json'],
+  setupFiles: ['<rootDir>/test/setup-env.ts'],
 };
 
 export default config;
