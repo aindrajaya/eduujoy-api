@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Eduujoy API
-  version: 0.4.0-v0
+  version: 0.5.0-v0
   summary: Frozen v0 contract for the Eduujoy MVP.
   description: |
     Frozen v0 contract, written from PRD-API Section 7 (endpoints), Section 8 and master PRD
@@ -933,6 +933,10 @@ components:
       required: [text]
       properties:
         text: { type: string, minLength: 2, maxLength: 120 }
+        createNew:
+          type: boolean
+          default: false
+          description: Skip matching and create a topic from `text` (after the learner rejected the choices). Subject to the daily new-topic cap (429).
     Topic:
       type: object
       required: [id, canonicalName]
@@ -945,7 +949,7 @@ components:
     TopicResolveResponse:
       type: object
       required: [status]
-      description: '`matched` (similarity ≥ 0.88), `choices` (0.75–0.88, at most 3), or `created` (new topic).'
+      description: '`matched` (similarity at or above the server''s match threshold), `choices` (at most 3, between the choice and match thresholds), or `created` (new topic). Thresholds are server-side and may be tuned.'
       properties:
         status: { type: string, enum: [matched, choices, created] }
         topic: { $ref: '#/components/schemas/Topic' }
