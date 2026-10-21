@@ -4,6 +4,11 @@ import { describeError } from '../redact';
 import { loadDirectDatabaseUrl } from './env';
 
 async function main(): Promise<void> {
+  // `--check` proves the script loads under its runner (test/cli/cli-boot.int-spec.ts) without connecting.
+  if (process.argv.includes('--check')) {
+    process.stdout.write('db:migrate: ok\n');
+    return;
+  }
   const client = new Client({ connectionString: loadDirectDatabaseUrl() });
   await client.connect();
   try {
