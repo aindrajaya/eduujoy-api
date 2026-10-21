@@ -1,5 +1,6 @@
 import { Body, Controller, Headers, HttpCode, Post, type RawBodyRequest, Req, Res, SerializeOptions, UseInterceptors } from '@nestjs/common';
 import { ApiBody, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { SkipThrottle } from '@nestjs/throttler';
 import { type Request, type Response } from 'express';
 import { type AuthUser, CurrentUser, Public, SkipCsrf } from '../../../shared/common/auth';
 import { ApiAccessCookieAuth, ApiCsrfHeader, ApiProblem } from '../../../shared/common/openapi';
@@ -34,6 +35,8 @@ export class BillingController {
   @Post('webhook')
   @Public()
   @SkipCsrf()
+  // Lemon Squeezy retries any non-200, so a 429 would only add noise; the HMAC check is cheap.
+  @SkipThrottle()
   @HttpCode(200)
   @ApiOperation({ operationId: 'billingWebhook', summary: 'Lemon Squeezy webhook; verified by HMAC in X-Signature. Exempt from CsrfGuard.' })
   @ApiHeader({ name: 'X-Signature', required: true, schema: { type: 'string' } })
