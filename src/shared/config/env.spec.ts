@@ -5,6 +5,7 @@ const valid = {
   PORT: '8000',
   APP_ORIGIN: 'https://eduujoy.aindrajaya.my.id,https://staging.eduujoy.aindrajaya.my.id',
   API_PUBLIC_URL: 'https://api.eduujoy.aindrajaya.my.id',
+  DATABASE_URL: 'postgresql://app:pw@ep-x-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require',
 };
 
 describe('parseEnv', () => {
@@ -22,7 +23,11 @@ describe('parseEnv', () => {
   });
 
   it('applies defaults for PORT and NODE_ENV', () => {
-    const env = parseEnv({ APP_ORIGIN: valid.APP_ORIGIN, API_PUBLIC_URL: valid.API_PUBLIC_URL });
+    const env = parseEnv({
+      APP_ORIGIN: valid.APP_ORIGIN,
+      API_PUBLIC_URL: valid.API_PUBLIC_URL,
+      DATABASE_URL: valid.DATABASE_URL,
+    });
 
     expect(env.PORT).toBe(3000);
     expect(env.NODE_ENV).toBe('development');
@@ -44,7 +49,7 @@ describe('parseEnv', () => {
       parseEnv({});
     } catch (error) {
       expect(error).toBeInstanceOf(EnvValidationError);
-      expect((error as EnvValidationError).keys).toEqual(['API_PUBLIC_URL', 'APP_ORIGIN']);
+      expect((error as EnvValidationError).keys).toEqual(['API_PUBLIC_URL', 'APP_ORIGIN', 'DATABASE_URL']);
       expect((error as Error).message).toContain('APP_ORIGIN');
     }
   });
@@ -80,5 +85,17 @@ describe('parseEnv', () => {
   it('accepts a short APP_VERSION and rejects unsafe ones', () => {
     expect(parseEnv({ ...valid, APP_VERSION: '1.2.3+abc123' }).APP_VERSION).toBe('1.2.3+abc123');
     expect(() => parseEnv({ ...valid, APP_VERSION: 'v1 <script>' })).toThrow(EnvValidationError);
+  });
+
+  it('requires a postgres DATABASE_URL and defaults DATABASE_SCHEMA to public', () => {
+    expect(parseEnv(valid).DATABASE_SCHEMA).toBe('public');
+    expect(() => parseEnv({ ...valid, DATABASE_URL: 'mysql://x@h/db' })).toThrow(EnvValidationError);
+  });
+
+  it('accepts only safe identifiers for DATABASE_SCHEMA', () => {
+    expect(parseEnv({ ...valid, DATABASE_SCHEMA: 'test_20261021100000_ab12cd34' }).DATABASE_SCHEMA).toBe(
+      'test_20261021100000_ab12cd34',
+    );
+    expect(() => parseEnv({ ...valid, DATABASE_SCHEMA: 'x"; drop schema public; --' })).toThrow(EnvValidationError);
   });
 });

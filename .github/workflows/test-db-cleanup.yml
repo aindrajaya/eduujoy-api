@@ -1,0 +1,26 @@
+name: Test DB cleanup
+
+# Drops test_* schemas older than 24 hours on the Neon test branch, even on days without CI runs.
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm db:test:cleanup
+        env:
+          DATABASE_URL_TEST: ${{ secrets.DATABASE_URL_TEST }}

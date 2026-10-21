@@ -25,6 +25,11 @@ export const envSchema = z
     LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).default('info'),
     APP_ORIGIN: originList,
     APP_VERSION: z.string().regex(/^[\w.+-]{1,64}$/).optional(),
+    DATABASE_URL: z.string().regex(/^postgres(ql)?:\/\/\S+$/, { error: 'must be a postgres:// connection string' }),
+    DATABASE_SCHEMA: z
+      .string()
+      .regex(/^[a-z_][a-z0-9_]{0,62}$/)
+      .default('public'),
     API_PUBLIC_URL: z.url({ protocol: /^https?$/ }).transform((value) => value.replace(/\/+$/, '')),
   })
   .superRefine((env, ctx) => {

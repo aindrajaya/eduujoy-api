@@ -1,4 +1,5 @@
-// Deterministic, secret-free env for e2e runs; a local .env is never loaded in tests.
+// Deterministic env for e2e runs; a local .env is never loaded into the app. DATABASE_URL and
+// DATABASE_SCHEMA come from test/db/global-setup.ts (the run's schema on the Neon test branch).
 Object.assign(process.env, {
   NODE_ENV: 'test',
   LOG_LEVEL: 'silent',
