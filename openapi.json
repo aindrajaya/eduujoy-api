@@ -1,6 +1,256 @@
 {
   "components": {
     "schemas": {
+      "BloomLevel": {
+        "enum": [
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6"
+        ],
+        "type": "string"
+      },
+      "DiagnosticAnswer": {
+        "additionalProperties": false,
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "optionIds": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "type": "array"
+          },
+          "skipped": {
+            "default": false,
+            "type": "boolean"
+          },
+          "text": {
+            "maxLength": 4000,
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId"
+        ],
+        "type": "object"
+      },
+      "DiagnosticAnswersRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "answers": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticAnswer"
+            },
+            "maxItems": 50,
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "answers"
+        ],
+        "type": "object"
+      },
+      "DiagnosticBatchResponse": {
+        "properties": {
+          "diagnosticId": {
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticItem"
+            },
+            "maxItems": 4,
+            "type": "array"
+          },
+          "placement": {
+            "$ref": "#/components/schemas/Placement"
+          },
+          "progress": {
+            "$ref": "#/components/schemas/DiagnosticProgress"
+          },
+          "status": {
+            "enum": [
+              "in_progress",
+              "completed"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "diagnosticId",
+          "status",
+          "progress"
+        ],
+        "type": "object"
+      },
+      "DiagnosticItem": {
+        "properties": {
+          "bloom": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BloomLevel"
+              }
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "single_choice",
+              "multi_choice",
+              "short_answer",
+              "scenario"
+            ],
+            "type": "string"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticItemOption"
+            },
+            "type": "array"
+          },
+          "prompt": {
+            "description": "Markdown; may contain KaTeX math.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "bloom",
+          "prompt"
+        ],
+        "type": "object"
+      },
+      "DiagnosticItemOption": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label"
+        ],
+        "type": "object"
+      },
+      "DiagnosticProgress": {
+        "properties": {
+          "answered": {
+            "type": "integer"
+          },
+          "estimatedTotal": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "answered",
+          "estimatedTotal"
+        ],
+        "type": "object"
+      },
+      "DiagnosticResponse": {
+        "properties": {
+          "completedAt": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "diagnosticId": {
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/DiagnosticItem"
+            },
+            "maxItems": 4,
+            "type": "array"
+          },
+          "placement": {
+            "$ref": "#/components/schemas/Placement"
+          },
+          "progress": {
+            "$ref": "#/components/schemas/DiagnosticProgress"
+          },
+          "status": {
+            "enum": [
+              "in_progress",
+              "completed"
+            ],
+            "type": "string"
+          },
+          "topic": {
+            "$ref": "#/components/schemas/Topic"
+          }
+        },
+        "required": [
+          "diagnosticId",
+          "status",
+          "progress",
+          "topic",
+          "createdAt"
+        ],
+        "type": "object"
+      },
+      "DiagnosticStartRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "goal": {
+            "maxLength": 500,
+            "minLength": 3,
+            "type": "string"
+          },
+          "preferredFormats": {
+            "items": {
+              "$ref": "#/components/schemas/ResourceFormat"
+            },
+            "maxItems": 3,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "selfReport": {
+            "$ref": "#/components/schemas/SelfReportDto"
+          },
+          "topicId": {
+            "type": "string"
+          },
+          "weeklyHours": {
+            "maximum": 40,
+            "minimum": 1,
+            "type": "number"
+          }
+        },
+        "required": [
+          "topicId",
+          "goal",
+          "weeklyHours"
+        ],
+        "type": "object"
+      },
+      "DreyfusStage": {
+        "enum": [
+          "novice",
+          "advanced_beginner",
+          "competent",
+          "proficient",
+          "expert"
+        ],
+        "type": "string"
+      },
       "FieldError": {
         "properties": {
           "field": {
@@ -118,12 +368,61 @@
         ],
         "type": "object"
       },
+      "Placement": {
+        "properties": {
+          "confidence": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "id": {
+            "type": "string"
+          },
+          "position": {
+            "$ref": "#/components/schemas/Position"
+          },
+          "reason": {
+            "description": "One-line reason (US-02).",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "position",
+          "confidence",
+          "reason"
+        ],
+        "type": "object"
+      },
       "Plan": {
         "enum": [
           "free",
           "subscription"
         ],
         "type": "string"
+      },
+      "Position": {
+        "properties": {
+          "bloom": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BloomLevel"
+              }
+            ]
+          },
+          "stage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DreyfusStage"
+              }
+            ]
+          }
+        },
+        "required": [
+          "stage",
+          "bloom"
+        ],
+        "type": "object"
       },
       "Problem": {
         "properties": {
@@ -237,6 +536,14 @@
         ],
         "type": "object"
       },
+      "ResourceFormat": {
+        "enum": [
+          "video",
+          "text",
+          "papers"
+        ],
+        "type": "string"
+      },
       "Role": {
         "enum": [
           "learner",
@@ -244,6 +551,50 @@
           "admin"
         ],
         "type": "string"
+      },
+      "SelfReportDto": {
+        "additionalProperties": false,
+        "properties": {
+          "projectsShipped": {
+            "maximum": 1000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "years": {
+            "maximum": 50,
+            "minimum": 0,
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "Topic": {
+        "properties": {
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "canonicalName": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "parentId": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "canonicalName"
+        ],
+        "type": "object"
       },
       "ValidationProblem": {
         "allOf": [
@@ -750,6 +1101,252 @@
         "summary": "Register with email and password; sets session cookies.",
         "tags": [
           "auth"
+        ]
+      }
+    },
+    "/v1/diagnostics": {
+      "post": {
+        "operationId": "diagnosticsStart",
+        "parameters": [
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiagnosticStartRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticBatchResponse"
+                }
+              }
+            },
+            "description": "Diagnostic started (or the open one resumed)."
+          },
+          "400": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            },
+            "description": "Validation failed; `errors` maps to form fields."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Topic not found (code NOT_FOUND)."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Start a diagnostic for a topic; returns the first batch of 4 items (FR-03).",
+        "tags": [
+          "assessment"
+        ]
+      }
+    },
+    "/v1/diagnostics/{id}": {
+      "get": {
+        "operationId": "diagnosticsGet",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticResponse"
+                }
+              }
+            },
+            "description": "The diagnostic."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not found (code NOT_FOUND)."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Read a diagnostic (resume after a reload); owner only.",
+        "tags": [
+          "assessment"
+        ]
+      }
+    },
+    "/v1/diagnostics/{id}/answers": {
+      "post": {
+        "operationId": "diagnosticsSubmitAnswers",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "type": "string"
+            }
+          },
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiagnosticAnswersRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiagnosticBatchResponse"
+                }
+              }
+            },
+            "description": "Next batch, or the placement when complete."
+          },
+          "400": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            },
+            "description": "Validation failed; `errors` maps to form fields."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "403": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not the owner, missing role or CSRF rejected."
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not found (code NOT_FOUND)."
+          },
+          "409": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "The diagnostic is complete, or the answers do not match the current batch."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Submit a batch of answers; returns the next batch or the placement (FR-04).",
+        "tags": [
+          "assessment"
         ]
       }
     }
