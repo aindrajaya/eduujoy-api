@@ -89,17 +89,42 @@ describe('Gemini adapters (contract, synthetic fixtures until re-recorded)', () 
     expect(error.call?.usage.inputTokens).toBe(32);
   });
 
-  it('embeds documents at 768 dimensions with the document task type', async () => {
+  it('batches one request per text at 768 dimensions, with document prefixes and no task_type', async () => {
     server.enqueue(loadFixture('gemini-embedding-2.embed').response);
 
-    const result = await embedder.embed({ stage: 'embed', texts: ['react hooks', 'linear algebra'], kind: 'document' });
+    const result = await embedder.embed({
+      stage: 'embed',
+      texts: ['Managing state in function components', 'Vectors and matrices'],
+      kind: 'document',
+      titles: ['React hooks', null],
+    });
 
     expect(result.vectors).toHaveLength(2);
     expect(result.vectors.every((v) => v.length === 768)).toBe(true);
     expect(result).toMatchObject({ model: 'gemini-embedding-2', version: 1 });
-    expect(server.received[0]?.path).toContain('/models/gemini-embedding-2:batchEmbedContents');
-    expect(JSON.stringify(server.received[0]?.body)).toContain('RETRIEVAL_DOCUMENT');
-    expect(JSON.stringify(server.received[0]?.body)).toContain('"outputDimensionality":768');
+    const sent = server.received[0];
+    expect(sent?.path).toContain('/models/gemini-embedding-2:batchEmbedContents');
+    const requests = (sent?.body as { requests: { content: { parts: { text: string }[] }; outputDimensionality?: number }[] }).requests;
+    // Two separate requests, each a single-part content: the API returns one embedding per request.
+    expect(requests).toHaveLength(2);
+    expect(requests.map((r) => r.content.parts.map((p) => p.text))).toEqual([
+      ['title: React hooks | text: Managing state in function components'],
+      ['title: none | text: Vectors and matrices'],
+    ]);
+    expect(requests.every((r) => r.outputDimensionality === 768)).toBe(true);
+    expect(JSON.stringify(sent?.body)).not.toMatch(/taskType|task_type/);
+  });
+
+  it('prefixes queries for asymmetric search retrieval', async () => {
+    server.enqueue({
+      ...loadFixture('gemini-embedding-2.embed').response,
+      body: { embeddings: [(loadFixture('gemini-embedding-2.embed').response.body as { embeddings: unknown[] }).embeddings[0]] },
+    });
+
+    await embedder.embed({ stage: 'resolve', texts: ['react hooks'], kind: 'query' });
+
+    const requests = (server.received[0]?.body as { requests: { content: { parts: { text: string }[] } }[] }).requests;
+    expect(requests.map((r) => r.content.parts[0]?.text)).toEqual(['task: search result | query: react hooks']);
   });
 
   it('rejects an embedding reply with the wrong vector count', async () => {

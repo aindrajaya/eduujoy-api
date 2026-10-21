@@ -127,6 +127,18 @@ export class GeminiStructuredGenerator implements StructuredGenerator {
   }
 }
 
+/**
+ * gemini-embedding-2 takes no task_type; asymmetric retrieval uses text prefixes instead
+ * (ai.google.dev/gemini-api/docs/embeddings). A document without a title uses `title: none`.
+ */
+export function formatEmbeddingInput(request: Pick<EmbeddingRequest, 'texts' | 'kind' | 'titles'>): string[] {
+  return request.texts.map((text, i) =>
+    request.kind === 'query'
+      ? `task: search result | query: ${text}`
+      : `title: ${request.titles?.[i]?.trim() || 'none'} | text: ${text}`,
+  );
+}
+
 export class GeminiEmbedder implements Embedder {
   constructor(
     private readonly client: GoogleGenAI,
@@ -141,9 +153,10 @@ export class GeminiEmbedder implements Embedder {
         try {
           return await this.client.models.embedContent({
             model: EMBEDDING_MODEL,
-            contents: request.texts,
+            // One Content per text: plain strings (or parts of one Content) are combined into a single
+            // embedding by gemini-embedding-2. Truncated 768-dim vectors come back already normalised.
+            contents: formatEmbeddingInput(request).map((text) => ({ parts: [{ text }] })),
             config: {
-              taskType: request.kind === 'query' ? 'RETRIEVAL_QUERY' : 'RETRIEVAL_DOCUMENT',
               outputDimensionality: EMBEDDING_DIMENSIONS,
               httpOptions: { timeout: MODELS[EMBEDDING_MODEL].timeoutMs },
             },
