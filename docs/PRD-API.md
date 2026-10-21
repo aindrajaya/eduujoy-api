@@ -214,7 +214,7 @@ Sessions live only in HttpOnly cookies, so the UI and API share one registrable 
 | Edit diagnostic items, topics, domain allow/deny lists | — | ✓ | ✓ |
 | Cost and latency dashboard, user management, budget settings | — | — | ✓ |
 
-**CORS:** allow only `APP_ORIGIN`, `credentials: true`, methods `GET, POST, PATCH, DELETE`, and expose `X-Request-Id`.
+**CORS:** allow only `APP_ORIGIN`, `credentials: true`, methods `GET, POST, PATCH, DELETE`, and expose `X-Request-Id` and `Retry-After`.
 
 ## 7. API contract
 
