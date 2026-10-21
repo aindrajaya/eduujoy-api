@@ -2,9 +2,10 @@
 import eslint from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import boundariesConfig from './eslint.boundaries.mjs';
 
 export default tseslint.config(
-  { ignores: ['dist/**', 'coverage/**', 'node_modules/**', 'eslint.config.mjs'] },
+  { ignores: ['dist/**', 'coverage/**', 'node_modules/**', 'eslint.config.mjs', 'eslint.boundaries.mjs'] },
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   {
@@ -28,4 +29,5 @@ export default tseslint.config(
       '@typescript-eslint/unbound-method': 'off',
     },
   },
+  ...boundariesConfig,
 );
