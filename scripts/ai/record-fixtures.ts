@@ -1,14 +1,14 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { parseEnv } from 'node:util';
 import Anthropic from '@anthropic-ai/sdk';
 import { z } from 'zod';
 import { ClaudeStructuredGenerator } from '../../src/shared/ai/claude/claude.generator';
 import { AiCallError } from '../../src/shared/ai/errors';
 import { createGeminiClient, GeminiEmbedder, GeminiStructuredGenerator } from '../../src/shared/ai/gemini/gemini.adapters';
 
-// pnpm ai:record-fixtures — makes a few tiny real calls (well under US$0.01 in total) and saves the
-// HTTP exchanges to test/fixtures/ai for the offline contract tests. Never saves headers or keys.
+// Run by the user: `pnpm ai:record-fixtures` (node --env-file=.env). Makes a few tiny real calls (well
+// under US$0.01) and saves the HTTP exchanges to test/fixtures/ai for the offline contract tests.
+// Keys come from process.env only; this script never reads .env itself, and never saves headers or keys.
 
 const ROOT = join(__dirname, '..', '..');
 const OUT = join(ROOT, 'test', 'fixtures', 'ai');
@@ -19,11 +19,11 @@ interface Exchange {
 }
 
 function keys(): { anthropic: string; gemini: string } {
-  const file = join(ROOT, '.env');
-  const local = existsSync(file) ? parseEnv(readFileSync(file, 'utf8')) : {};
-  const anthropic = process.env['ANTHROPIC_API_KEY'] ?? local['ANTHROPIC_API_KEY'];
-  const gemini = process.env['GEMINI_API_KEY'] ?? local['GEMINI_API_KEY'];
-  if (!anthropic || !gemini) throw new Error('ANTHROPIC_API_KEY and GEMINI_API_KEY are required');
+  const anthropic = process.env['ANTHROPIC_API_KEY'];
+  const gemini = process.env['GEMINI_API_KEY'];
+  if (!anthropic || !gemini) {
+    throw new Error('ANTHROPIC_API_KEY and GEMINI_API_KEY must be in the environment (run with node --env-file=.env)');
+  }
   return { anthropic, gemini };
 }
 
