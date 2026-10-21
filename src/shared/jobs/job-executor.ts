@@ -91,9 +91,7 @@ export class JobExecutor {
       do {
         this.pumpAgain = false;
         for (;;) {
-          const types = [...this.handlers.values()]
-            .filter((h) => (this.running.get(h.type) ?? 0) < h.concurrency)
-            .map((h) => h.type);
+          const types = this.typesWithFreeSlots();
           const job = await this.repo.claimNext(types, this.now());
           if (!job) break;
           this.launch(job);
@@ -112,10 +110,17 @@ export class JobExecutor {
     return this.pumpAgain && !this.stopped;
   }
 
+  private typesWithFreeSlots(): string[] {
+    return [...this.handlers.values()].filter((h) => (this.running.get(h.type) ?? 0) < h.concurrency).map((h) => h.type);
+  }
+
+  /**
+   * Arms one timer for the earliest *future* run_after among types with a free slot. Saturated types
+   * need no timer (a finishing job pumps), and due-now jobs were just claimed, so this can't spin.
+   */
   private async scheduleNext(): Promise<void> {
     clearTimeout(this.timer);
-    const types = [...this.handlers.keys()];
-    const next = await this.repo.nextDue(types);
+    const next = await this.repo.nextDue(this.typesWithFreeSlots(), this.now());
     if (!next || this.stopped) return;
     const delay = Math.max(0, Math.min(next.getTime() - this.now().getTime(), 2 ** 31 - 1));
     this.timer = setTimeout(() => void this.pump(), delay);

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { and, asc, eq, gt, inArray, isNotNull, lte, min, sql } from 'drizzle-orm';
+import { and, asc, eq, gt, inArray, lte, min, sql } from 'drizzle-orm';
 import { DATABASE, type Database, type DbExecutor } from '../db';
 import { jobEvents, jobs } from '../db/schema/jobs';
 import { type EnqueueRequest, type EnqueueResult, type JobEvent, type JobEventType, type JobRecord } from './job.types';
@@ -84,13 +84,17 @@ export class JobRepository {
     return rows.map((r) => r.id);
   }
 
-  /** The earliest future run_after among waiting jobs, for the executor's next timer. */
-  async nextDue(types: string[]): Promise<Date | null> {
+  /**
+   * The earliest run_after strictly after `after` among waiting jobs of `types`, for the executor's
+   * next timer. Jobs already due are not returned: either a slot frees up (and the finishing job
+   * pumps) or they were just claimed.
+   */
+  async nextDue(types: string[], after: Date): Promise<Date | null> {
     if (types.length === 0) return null;
     const [row] = await this.db
       .select({ at: min(jobs.runAfter) })
       .from(jobs)
-      .where(and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types), isNotNull(jobs.runAfter)));
+      .where(and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types), gt(jobs.runAfter, after)));
     return row?.at ?? null;
   }
 
