@@ -27,6 +27,7 @@ describe('classifyStatus', () => {
     [408, 'timeout', true],
     [400, 'bad_request', false],
     [401, 'auth', false],
+    [402, 'billing', false],
   ] as const)('maps %i to %s (retryable: %s)', (status, failure, retryable) => {
     expect(classifyStatus(status)).toBe(failure);
     expect(new AiCallError(classifyStatus(status), 'x', status).retryable).toBe(retryable);
