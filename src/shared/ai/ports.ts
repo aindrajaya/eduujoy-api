@@ -59,6 +59,8 @@ export interface EmbeddingRequest {
   texts: string[];
   /** Topic phrases are queries; topics and ResourceCards are documents. */
   kind: 'query' | 'document';
+  /** Document titles aligned with `texts` (e.g. a topic's canonical name); missing ones become `none`. */
+  titles?: (string | null)[];
   jobId?: string;
 }
 
