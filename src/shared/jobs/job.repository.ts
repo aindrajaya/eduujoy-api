@@ -144,6 +144,23 @@ export class JobRepository {
     return row?.ms == null ? null : Number(row.ms);
   }
 
+  /**
+   * Deletes finished jobs (succeeded or dead) last updated more than `olderThanMs` ago; their
+   * job_events go with them (ON DELETE CASCADE). Keeps the Neon free tier's 1 GB in check.
+   */
+  async pruneFinished(olderThanMs: number): Promise<number> {
+    const rows = await this.db
+      .delete(jobs)
+      .where(
+        and(
+          inArray(jobs.status, ['succeeded', 'dead']),
+          lt(jobs.updatedAt, sql`now() - make_interval(secs => ${olderThanMs / 1000})`),
+        ),
+      )
+      .returning({ id: jobs.id });
+    return rows.length;
+  }
+
   async appendEvent(jobId: string, type: JobEventType, data: unknown): Promise<JobEvent> {
     const [row] = await this.db.insert(jobEvents).values({ jobId, type, data }).returning();
     if (!row) throw new Error('job_events insert returned no row');

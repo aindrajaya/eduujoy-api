@@ -2,7 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { eq } from 'drizzle-orm';
 import { type Client } from 'pg';
-import { jobs } from '../../src/shared/db/schema/jobs';
+import { jobEvents, jobs } from '../../src/shared/db/schema/jobs';
 import { EventBus } from '../../src/shared/events/event-bus';
 import { UnitOfWork } from '../../src/shared/events/unit-of-work';
 import { JobQueue, JobSignals } from '../../src/shared/jobs/job-queue';
@@ -142,5 +142,30 @@ describe('JobRepository and JobQueue (integration)', () => {
     expect(second.id).toBeGreaterThan(first.id);
     expect((await repo.eventsAfter(job.id, first.id)).map((e) => e.id)).toEqual([second.id, third.id]);
     expect(await repo.eventsAfter(job.id)).toHaveLength(3);
+  });
+
+  it('prunes finished jobs older than the retention, with their events, and keeps the rest', async () => {
+    const t = type();
+    const make = async (status: 'succeeded' | 'dead' | 'queued' | 'running', ageMs: number) => {
+      const { job } = await repo.enqueue({ type: t, idempotencyKey: randomUUID(), payload: {} });
+      await repo.appendEvent(job.id, 'progress', { n: 1 });
+      await db.update(jobs).set({ status, updatedAt: new Date(Date.now() - ageMs) }).where(eq(jobs.id, job.id));
+      return job.id;
+    };
+    const day = 86_400_000;
+    const oldDone = await make('succeeded', 40 * day);
+    const oldDead = await make('dead', 40 * day);
+    const recentDone = await make('succeeded', day);
+    const oldQueued = await make('queued', 40 * day);
+
+    const pruned = await repo.pruneFinished(30 * day);
+
+    expect(pruned).toBeGreaterThanOrEqual(2);
+    expect(await repo.findById(oldDone)).toBeUndefined();
+    expect(await repo.findById(oldDead)).toBeUndefined();
+    expect(await repo.findById(recentDone)).toBeDefined();
+    expect(await repo.findById(oldQueued)).toBeDefined();
+    expect(await db.select().from(jobEvents).where(eq(jobEvents.jobId, oldDone))).toHaveLength(0);
+    expect(await db.select().from(jobEvents).where(eq(jobEvents.jobId, recentDone))).toHaveLength(1);
   });
 });
