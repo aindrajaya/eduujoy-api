@@ -8,6 +8,11 @@ export function normaliseTopicText(text: string): string {
     .replace(/^[\s"'`.,;:!?()[\]{}-]+|[\s"'`.,;:!?()[\]{}-]+$/g, '');
 }
 
+/** The learner text that is embedded as a query: NFKC, single spaces, trimmed, case kept. */
+export function queryText(text: string): string {
+  return text.normalize('NFKC').replace(/\s+/g, ' ').trim();
+}
+
 /** Learner text as a display name when no normaliser is available: trimmed, single-spaced, first letter upper. */
 export function fallbackTopicName(text: string): string {
   const name = text.normalize('NFKC').replace(/\s+/g, ' ').trim();

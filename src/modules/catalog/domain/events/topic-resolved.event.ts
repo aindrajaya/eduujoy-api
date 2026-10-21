@@ -1,6 +1,7 @@
 /** Published after a resolution commits (PRD-API §4 catalog event). */
 export class TopicResolved {
   readonly type = 'TopicResolved';
+  readonly occurredAt = new Date();
 
   constructor(
     readonly userId: string,

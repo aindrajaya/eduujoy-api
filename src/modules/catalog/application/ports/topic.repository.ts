@@ -1,3 +1,5 @@
+import { type TopicDomain } from './topic-normalizer';
+
 export const TOPIC_REPOSITORY = Symbol('TopicRepository');
 
 /** Contract schema Topic. */
@@ -9,6 +11,46 @@ export interface TopicView {
   description: string | null;
 }
 
+export interface NearTopic {
+  topic: TopicView;
+  /** Cosine similarity, 1 - pgvector cosine distance. */
+  similarity: number;
+}
+
+export interface TopicEmbedding {
+  vector: number[];
+  model: string;
+  version: number;
+}
+
+export interface NewTopic {
+  slug: string;
+  canonicalName: string;
+  aliases: string[];
+  description: string | null;
+  domain: TopicDomain | null;
+  createdBy: string;
+  needsReview: boolean;
+  embedding: TopicEmbedding | null;
+}
+
+export interface TopicToEmbed {
+  id: string;
+  canonicalName: string;
+  aliases: string[];
+  description: string | null;
+}
+
 export interface TopicRepository {
   findById(id: string): Promise<TopicView | null>;
+  /** Topics whose slug equals `slug`, or whose canonical name or an alias equals `normalised` ignoring case. */
+  findExact(normalised: string, slug: string): Promise<TopicView[]>;
+  /** Nearest topics embedded with the same model and version, most similar first. */
+  nearest(query: TopicEmbedding, limit: number): Promise<NearTopic[]>;
+  /** Inserts the topic; when the slug is taken, returns the existing topic with `created: false`. */
+  create(topic: NewTopic): Promise<{ topic: TopicView; created: boolean }>;
+  countCreatedBy(userId: string, since: Date): Promise<number>;
+  /** Topics without an embedding for this model and version, oldest first. */
+  listUnembedded(model: string, version: number, limit: number): Promise<TopicToEmbed[]>;
+  setEmbedding(id: string, embedding: TopicEmbedding): Promise<void>;
 }
