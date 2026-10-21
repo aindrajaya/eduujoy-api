@@ -40,8 +40,13 @@ const itemSchema = z
   })
   .superRefine((item, ctx) => {
     const choice = item.kind === 'single_choice' || item.kind === 'multi_choice';
+    // Scenario items may be multiple choice (diagnostics only serve them that way); open scenarios stay valid.
+    const scenarioChoice = item.kind === 'scenario' && item.options !== undefined;
     if (choice && !item.options) ctx.addIssue({ code: 'custom', path: ['options'], message: 'required for choice items' });
-    if (!choice && item.options) ctx.addIssue({ code: 'custom', path: ['options'], message: 'only for choice items' });
+    if (item.kind === 'short_answer' && item.options) ctx.addIssue({ code: 'custom', path: ['options'], message: 'only for choice or scenario items' });
+    if (scenarioChoice && !item.answerKey?.optionIds) {
+      ctx.addIssue({ code: 'custom', path: ['answerKey', 'optionIds'], message: 'required for multiple-choice scenario items' });
+    }
     const keyed = item.answerKey?.optionIds ?? [];
     const ids = new Set(item.options?.map((option) => option.id));
     if (keyed.some((id) => !ids.has(id))) {

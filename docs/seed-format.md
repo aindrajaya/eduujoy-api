@@ -66,8 +66,8 @@ seed/
 | `stage` | `novice`, `advanced_beginner`, `competent`, `proficient` or `expert` |
 | `bloom` | `C1`–`C6` |
 | `kind` | `single_choice`, `multi_choice`, `short_answer` or `scenario` |
-| `options` | 2–8 options, required for choice kinds and not allowed otherwise |
-| `answerKey` | `optionIds` must reference options (exactly one for `single_choice`); `text` is a model answer for open kinds. Answer keys are never returned by the API |
+| `options` | 2–8 options. Required for `single_choice` and `multi_choice`; allowed on `scenario` (multiple-choice scenarios, the only scenarios diagnostics serve); not allowed on `short_answer` |
+| `answerKey` | `optionIds` must reference options (exactly one for `single_choice`; required for a `scenario` with options); `text` is a model answer for open kinds. Answer keys are never returned by the API |
 | `rubric` | optional, ≤ 10 criteria |
 | `reviewed` | defaults to `false` |
 

@@ -2,6 +2,7 @@ export {
   ApiAccessCookieAuth,
   ApiBudgetExceeded,
   ApiCsrfHeader,
+  ApiIdempotencyKeyHeader,
   ApiProblem,
   ApiRefreshCookieAuth,
   SESSION_COOKIES_HEADER,

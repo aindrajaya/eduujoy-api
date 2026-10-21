@@ -49,6 +49,15 @@ export const ApiCsrfHeader = (): MethodDecorator & ClassDecorator =>
     schema: { type: 'string', enum: ['eduujoy'] },
   });
 
+/** Contract `IdempotencyKey` (required) or `IdempotencyKeyOptional`; read with `@IdempotencyKey()`. */
+export const ApiIdempotencyKeyHeader = (required = false): MethodDecorator & ClassDecorator =>
+  ApiHeader({
+    name: 'Idempotency-Key',
+    required,
+    description: required ? 'Retries of the same request reuse it.' : 'Optional; when sent, retries of the same request reuse it (see the operation).',
+    schema: { type: 'string', minLength: 8, maxLength: 128 },
+  });
+
 export const ApiAccessCookieAuth = (): MethodDecorator & ClassDecorator => ApiSecurity('cookieAuth');
 export const ApiRefreshCookieAuth = (): MethodDecorator & ClassDecorator => ApiSecurity('refreshCookie');
 

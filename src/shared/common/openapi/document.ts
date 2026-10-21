@@ -3,7 +3,7 @@ import { DocumentBuilder, type OpenAPIObject, SwaggerModule } from '@nestjs/swag
 import { PROBLEM_SCHEMAS } from './schemas';
 
 /** The frozen contract version this build implements (docs/contract/openapi.v0.yaml). */
-export const CONTRACT_VERSION = '0.2.1-v0';
+export const CONTRACT_VERSION = '0.3.0-v0';
 
 function sortKeys(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(sortKeys);
@@ -15,19 +15,35 @@ function sortKeys(value: unknown): unknown {
   );
 }
 
-/** Input DTOs reject unknown fields (ValidationPipe forbidNonWhitelisted), so say so in the schema. */
+/**
+ * Input DTOs reject unknown fields at every depth (ValidationPipe forbidNonWhitelisted with nested
+ * validation), so every object schema reachable from a request body is closed.
+ */
 function closeRequestSchemas(document: OpenAPIObject): void {
-  const schemas = document.components?.schemas ?? {};
-  for (const item of Object.values(document.paths)) {
-    for (const operation of Object.values(item as Record<string, { requestBody?: unknown }>)) {
-      const content = (operation.requestBody as { content?: Record<string, { schema?: { $ref?: string } }> } | undefined)
-        ?.content;
-      for (const media of Object.values(content ?? {})) {
-        const name = media.schema?.$ref?.split('/').pop();
-        const schema = name ? schemas[name] : undefined;
-        if (schema && !('$ref' in schema)) schema.additionalProperties = false;
-      }
+  const schemas = (document.components?.schemas ?? {}) as Record<string, Record<string, unknown>>;
+  const visited = new Set<string>();
+  const visit = (node: unknown): void => {
+    if (Array.isArray(node)) {
+      node.forEach(visit);
+      return;
     }
+    if (node === null || typeof node !== 'object') return;
+    const obj = node as Record<string, unknown>;
+    const ref = typeof obj['$ref'] === 'string' ? obj['$ref'].split('/').pop() : undefined;
+    if (ref !== undefined) {
+      if (visited.has(ref)) return;
+      visited.add(ref);
+      const target = schemas[ref];
+      if (target) {
+        if (target['type'] === 'object' && target['enum'] === undefined) target['additionalProperties'] = false;
+        visit(target);
+      }
+      return;
+    }
+    for (const value of Object.values(obj)) visit(value);
+  };
+  for (const item of Object.values(document.paths)) {
+    for (const operation of Object.values(item as Record<string, { requestBody?: unknown }>)) visit(operation.requestBody);
   }
 }
 
