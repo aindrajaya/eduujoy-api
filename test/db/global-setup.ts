@@ -1,7 +1,8 @@
 import { Client } from 'pg';
 import { runMigrations } from '../../src/shared/db/migrate';
 import { readDatabaseEnv } from './database-env';
-import { assertSafeTestDatabase, isTestSchema, newTestSchemaName, staleTestSchemas } from './test-database';
+import { sweepStaleTestSchemas } from './sweep';
+import { assertSafeTestDatabase, isTestSchema, newTestSchemaName } from './test-database';
 
 /** Jest globalSetup: a fresh, migrated schema per run on the Neon test branch. */
 export default async function globalSetup(): Promise<void> {
@@ -13,12 +14,7 @@ export default async function globalSetup(): Promise<void> {
   const client = new Client({ connectionString: testUrl });
   try {
     await client.connect();
-    const { rows } = await client.query<{ name: string }>(
-      "SELECT nspname AS name FROM pg_namespace WHERE nspname LIKE 'test\\_%'",
-    );
-    for (const stale of staleTestSchemas(rows.map((row) => row.name))) {
-      await client.query(`DROP SCHEMA "${stale}" CASCADE`);
-    }
+    await sweepStaleTestSchemas(client);
     if (!isTestSchema(schema)) throw new Error(`Generated an invalid test schema name: ${schema}`);
     await runMigrations(client, { schema });
   } finally {
