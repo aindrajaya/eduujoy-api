@@ -66,11 +66,11 @@ describe('JobRepository and JobQueue (integration)', () => {
     await repo.enqueue({ type: t, idempotencyKey: randomUUID(), payload: { n: 'later' }, runAfter: new Date(Date.now() + 60_000) });
     const due = await repo.enqueue({ type: t, idempotencyKey: randomUUID(), payload: { n: 'now' }, runAfter: past });
 
-    await expect(repo.claimNext([type()], new Date())).resolves.toBeUndefined();
-    const claimed = await repo.claimNext([t], new Date());
+    await expect(repo.claimNext([type()])).resolves.toBeUndefined();
+    const claimed = await repo.claimNext([t]);
 
     expect(claimed).toMatchObject({ id: due.job.id, status: 'running', attempts: 1 });
-    await expect(repo.claimNext([t], new Date())).resolves.toBeUndefined();
+    await expect(repo.claimNext([t])).resolves.toBeUndefined();
   });
 
   it('never hands the same job to two concurrent claimers (SKIP LOCKED)', async () => {
@@ -79,8 +79,8 @@ describe('JobRepository and JobQueue (integration)', () => {
     const [c1, c2] = await Promise.all([connectTestClient(), connectTestClient()]);
     try {
       const [a, b] = await Promise.all([
-        new JobRepository(testDb(c1)).claimNext([t], new Date()),
-        new JobRepository(testDb(c2)).claimNext([t], new Date()),
+        new JobRepository(testDb(c1)).claimNext([t]),
+        new JobRepository(testDb(c2)).claimNext([t]),
       ]);
       expect(a?.id).toBeDefined();
       expect(b?.id).toBeDefined();
@@ -90,28 +90,47 @@ describe('JobRepository and JobQueue (integration)', () => {
     }
   });
 
+  const claimOf = (row: { id: string; lockedAt: Date | null } | undefined) => ({ id: row?.id ?? '', lockedAt: row?.lockedAt ?? new Date(0) });
+
   it('moves a failed attempt to failed (retry at run_after) and the last one to dead', async () => {
     const t = type();
     const { job } = await repo.enqueue({ type: t, idempotencyKey: randomUUID(), payload: {}, runAfter: past });
-    await repo.claimNext([t], new Date());
+    const first = claimOf(await repo.claimNext([t]));
 
-    await repo.fail(job.id, 'boom', new Date(Date.now() - 1));
+    await expect(repo.fail(first, 'boom', 0)).resolves.toBe(true);
     expect(await repo.findById(job.id)).toMatchObject({ status: 'failed', error: 'boom' });
-    expect(await repo.claimNext([t], new Date())).toMatchObject({ id: job.id, attempts: 2 });
+    const second = await repo.claimNext([t]);
+    expect(second).toMatchObject({ id: job.id, attempts: 2 });
 
-    await repo.fail(job.id, 'boom again', null);
+    await expect(repo.fail(claimOf(second), 'boom again', null)).resolves.toBe(true);
     expect(await repo.findById(job.id)).toMatchObject({ status: 'dead', error: 'boom again', lockedAt: null });
   });
 
-  it('requeues jobs left running by a crash, keeping their attempt count', async () => {
+  it('only lets the run that holds the lock write the outcome', async () => {
     const t = type();
     const { job } = await repo.enqueue({ type: t, idempotencyKey: randomUUID(), payload: {}, runAfter: past });
-    await repo.claimNext([t], new Date());
+    const claim = claimOf(await repo.claimNext([t]));
+    const zombie = { id: job.id, lockedAt: new Date(claim.lockedAt.getTime() - 60_000) };
 
-    const requeued = await repo.requeueRunning();
+    await expect(repo.succeed(zombie, { resultRef: '/zombie' })).resolves.toBe(false);
+    await expect(repo.succeed(claim, { resultRef: '/owner' })).resolves.toBe(true);
+    expect(await repo.findById(job.id)).toMatchObject({ status: 'succeeded', result: { resultRef: '/owner' } });
+  });
 
-    expect(requeued).toContain(job.id);
-    expect(await repo.findById(job.id)).toMatchObject({ status: 'queued', attempts: 1, lockedAt: null });
+  it('requeues only stale running jobs, keeping their attempt count', async () => {
+    const t = type();
+    const fresh = await repo.enqueue({ type: t, idempotencyKey: randomUUID(), payload: {}, runAfter: past });
+    const stale = await repo.enqueue({ type: t, idempotencyKey: randomUUID(), payload: {}, runAfter: past });
+    await repo.claimNext([t]);
+    await repo.claimNext([t]);
+    await db.update(jobs).set({ lockedAt: new Date(Date.now() - 10 * 60_000) }).where(eq(jobs.id, stale.job.id));
+
+    const requeued = await repo.requeueStale(5 * 60_000);
+
+    expect(requeued).toContain(stale.job.id);
+    expect(requeued).not.toContain(fresh.job.id);
+    expect(await repo.findById(stale.job.id)).toMatchObject({ status: 'queued', attempts: 1, lockedAt: null });
+    expect(await repo.findById(fresh.job.id)).toMatchObject({ status: 'running' });
   });
 
   it('appends events with increasing ids and replays those after a given id', async () => {

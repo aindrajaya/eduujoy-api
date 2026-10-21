@@ -17,9 +17,9 @@ class CountingRepository extends JobRepository {
     this.claims += 1;
     return super.claimNext(...args);
   }
-  override nextDue(...args: Parameters<JobRepository['nextDue']>): ReturnType<JobRepository['nextDue']> {
+  override msUntilNextDue(...args: Parameters<JobRepository['msUntilNextDue']>): ReturnType<JobRepository['msUntilNextDue']> {
     this.nextDues += 1;
-    return super.nextDue(...args);
+    return super.msUntilNextDue(...args);
   }
 }
 
