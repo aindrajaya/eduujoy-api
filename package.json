@@ -22,7 +22,9 @@
     "db:test:cleanup": "node --env-file-if-exists=.env --import tsx test/db/cleanup.ts",
     "openapi:export": "node -r ts-node/register/transpile-only scripts/openapi/export.ts",
     "openapi:check": "node -r ts-node/register/transpile-only scripts/openapi/check.ts",
-    "ai:record-fixtures": "node --env-file=.env --import tsx scripts/ai/record-fixtures.ts"
+    "ai:record-fixtures": "node --env-file=.env --import tsx scripts/ai/record-fixtures.ts",
+    "seed:taxonomy": "node --env-file=../api/.env --import tsx tools/seed/cli.ts taxonomy",
+    "seed:validate": "tsx tools/seed/cli.ts validate"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.135.0",
