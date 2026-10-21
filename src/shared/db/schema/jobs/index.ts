@@ -1,0 +1,32 @@
+import { index, integer, jsonb, pgEnum, pgTable, text, timestamp, uniqueIndex, uuid } from 'drizzle-orm/pg-core';
+import { withCreatedAt, withUpdatedAt } from '../common';
+import { users } from '../identity';
+
+export const jobStatus = pgEnum('job_status', ['queued', 'running', 'succeeded', 'failed', 'dead']);
+
+/** Durable jobs; written in the same transaction as the state change, so it doubles as the outbox. */
+export const jobs = pgTable(
+  'jobs',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    type: text('type').notNull(),
+    idempotencyKey: text('idempotency_key').notNull(),
+    userId: uuid('user_id').references(() => users.id, { onDelete: 'set null' }),
+    payload: jsonb('payload').notNull(),
+    status: jobStatus('status').notNull().default('queued'),
+    progress: jsonb('progress'),
+    attempts: integer('attempts').notNull().default(0),
+    maxAttempts: integer('max_attempts').notNull().default(3),
+    runAfter: timestamp('run_after', { withTimezone: true }).notNull().defaultNow(),
+    lockedAt: timestamp('locked_at', { withTimezone: true }),
+    result: jsonb('result'),
+    error: text('error'),
+    ...withCreatedAt,
+    ...withUpdatedAt,
+  },
+  (t) => [
+    uniqueIndex('jobs_idempotency_key').on(t.idempotencyKey),
+    index('jobs_status_run_after_idx').on(t.status, t.runAfter),
+    index('jobs_user_idx').on(t.userId),
+  ],
+);
