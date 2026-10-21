@@ -8,6 +8,9 @@ const config: Config = {
   transform: { '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }] },
   moduleFileExtensions: ['ts', 'js', 'json'],
   setupFiles: ['<rootDir>/test/setup-env.ts'],
+  globalSetup: '<rootDir>/test/db/global-setup.ts',
+  globalTeardown: '<rootDir>/test/db/global-teardown.ts',
+  testTimeout: 30_000,
 };
 
 export default config;

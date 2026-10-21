@@ -19,16 +19,14 @@ describe('health (e2e)', () => {
     expect(res.body).toEqual({ status: 'ok', version: 'e2e' });
   });
 
-  it('GET /ready returns 200 with check results when all checks pass', async () => {
-    app.get(ReadinessRegistry).register('db', () => Promise.resolve());
-
+  it('GET /ready returns 200 with the database check when it is reachable', async () => {
     const res = await request(app.getHttpServer()).get('/ready').expect(200);
 
     expect(res.body).toEqual({ status: 'ok', version: 'e2e', checks: { db: 'ok' } });
   });
 
   it('GET /ready returns 503 problem+json when a check fails', async () => {
-    app.get(ReadinessRegistry).register('db', () => Promise.reject(new Error('down')));
+    app.get(ReadinessRegistry).register('probe', () => Promise.reject(new Error('down')));
 
     const res = await request(app.getHttpServer())
       .get('/ready')
@@ -40,7 +38,7 @@ describe('health (e2e)', () => {
       type: 'http://localhost:3000/problems/not-ready',
       title: 'Service not ready',
       status: 503,
-      detail: 'Failing checks: db',
+      detail: 'Failing checks: probe',
       code: 'INTERNAL',
       requestId: 'req-ready-1',
     });
