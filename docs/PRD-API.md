@@ -249,6 +249,8 @@ All routes live under `/v1`, every input is a validated DTO, every error is `app
 - Response DTOs are explicit classes serialised with `ClassSerializerInterceptor`; entities are never returned directly.
 - AI outputs are parsed with Zod schemas that mirror the ResourceCard and Path contracts in the master PRD; a parse failure counts as a job failure.
 
+JSON field names are camelCase in every request and response (decision, 21 Oct 2026). The snake\_case shapes in master PRD Section 8 describe internal model output; adapters map them before anything leaves the API. The frozen contract is `docs/contract/openapi.v0.yaml` in the workspace root; only the lead session edits it.
+
 **Error format** (RFC 9457 problem details)
 
 ```json
