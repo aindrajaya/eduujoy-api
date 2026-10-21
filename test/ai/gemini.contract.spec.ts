@@ -18,7 +18,7 @@ const apiError = (status: number, code: string): FixtureResponse => ({
   body: { error: { code: status, message: code, status: code } },
 });
 
-describe('Gemini adapters (contract, synthetic fixtures until re-recorded)', () => {
+describe('Gemini adapters (contract: recorded generateContent, synthetic embeddings until re-recorded)', () => {
   let server: FixtureServer;
   let sleeps: number[];
   let generator: GeminiStructuredGenerator;
@@ -40,13 +40,13 @@ describe('Gemini adapters (contract, synthetic fixtures until re-recorded)', () 
     await server.stop();
   });
 
-  it('requests JSON with the schema and maps usage, counting thinking tokens as output', async () => {
+  it('requests JSON with the schema and parses the recorded reply', async () => {
     server.enqueue(loadFixture('gemini-3.5-flash-lite.structured').response);
 
     const result = await generator.generate(request);
 
     expect(result.output).toEqual({ canonicalName: 'React Hooks', domain: 'software' });
-    expect(result.call.usage).toEqual({ inputTokens: 32, cacheWriteTokens: 0, cacheReadTokens: 10, outputTokens: 20 });
+    expect(result.call.usage).toEqual({ inputTokens: 38, cacheWriteTokens: 0, cacheReadTokens: 0, outputTokens: 21 });
     const sent = server.received[0];
     expect(sent?.path).toContain('/models/gemini-3.5-flash-lite:generateContent');
     expect(sent?.body).toMatchObject({
@@ -57,6 +57,17 @@ describe('Gemini adapters (contract, synthetic fixtures until re-recorded)', () 
         responseJsonSchema: { type: 'object', additionalProperties: false },
       },
     });
+  });
+
+  it('maps cached prompt tokens to cache reads and counts thinking tokens as output', async () => {
+    const fixture = loadFixture('gemini-3.5-flash-lite.structured').response;
+    const body = structuredClone(fixture.body) as { usageMetadata: Record<string, number> };
+    body.usageMetadata = { ...body.usageMetadata, promptTokenCount: 38, cachedContentTokenCount: 10, candidatesTokenCount: 21, thoughtsTokenCount: 6 };
+    server.enqueue({ ...fixture, body });
+
+    const result = await generator.generate(request);
+
+    expect(result.call.usage).toEqual({ inputTokens: 28, cacheWriteTokens: 0, cacheReadTokens: 10, outputTokens: 27 });
   });
 
   it('retries 429 and 503 with growing jittered delays, then succeeds', async () => {
@@ -86,7 +97,7 @@ describe('Gemini adapters (contract, synthetic fixtures until re-recorded)', () 
 
     const error = (await generator.generate(request).catch((e: unknown) => e)) as AiCallError;
     expect(error).toMatchObject({ failure: 'refused' });
-    expect(error.call?.usage.inputTokens).toBe(32);
+    expect(error.call?.usage.inputTokens).toBe(38);
   });
 
   it('batches one request per text at 768 dimensions, with document prefixes and no task_type', async () => {
