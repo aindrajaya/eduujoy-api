@@ -17,6 +17,9 @@ const PLACEHOLDER_ENV: Record<string, string> = {
   GOOGLE_OAUTH_CLIENT_ID: 'openapi-export.apps.googleusercontent.com',
   GOOGLE_OAUTH_CLIENT_SECRET: 'openapi-export-placeholder',
   GOOGLE_OAUTH_REDIRECT_URI: 'http://localhost:3000/v1/auth/google/callback',
+  ANTHROPIC_API_KEY: 'openapi-export-placeholder',
+  GEMINI_API_KEY: 'openapi-export-placeholder',
+  AI_DAILY_BUDGET_USD: '1',
 };
 
 /** Boots the real AppModule (routes, DTOs, decorators) and returns its OpenAPI document. */

@@ -35,6 +35,10 @@ export const envSchema = z
     GOOGLE_OAUTH_CLIENT_ID: z.string().min(1),
     GOOGLE_OAUTH_CLIENT_SECRET: z.string().min(1),
     GOOGLE_OAUTH_REDIRECT_URI: z.url({ protocol: /^https?$/ }),
+    ANTHROPIC_API_KEY: z.string().min(1),
+    GEMINI_API_KEY: z.string().min(1),
+    // Daily AI spend cap in US$ (PRD-API §5); no default, so the operator must choose it.
+    AI_DAILY_BUDGET_USD: z.coerce.number().positive().max(1000),
     API_PUBLIC_URL: z.url({ protocol: /^https?$/ }).transform((value) => value.replace(/\/+$/, '')),
   })
   .superRefine((env, ctx) => {

@@ -16,6 +16,9 @@ function config(overrides: Partial<Env>): AppConfig {
     GOOGLE_OAUTH_CLIENT_ID: 'id',
     GOOGLE_OAUTH_CLIENT_SECRET: 'secret',
     GOOGLE_OAUTH_REDIRECT_URI: 'http://localhost:3000/v1/auth/google/callback',
+    ANTHROPIC_API_KEY: 'a',
+    GEMINI_API_KEY: 'g',
+    AI_DAILY_BUDGET_USD: 5,
     ...overrides,
   });
 }
