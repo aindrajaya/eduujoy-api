@@ -45,6 +45,12 @@ describe('entitlementFor', () => {
     }
   });
 
+  it('starts the period no later than now when the cycle ends more than a month out (long trials)', () => {
+    const e = entitlementFor({ status: 'on_trial', renewsAt: new Date('2027-02-01T00:00:00Z'), endsAt: null }, NOW);
+    expect(e.periodStart).toEqual(NOW);
+    expect(computeQuota({ entitlement: e, creditBalance: 0, usedPaths: 0, now: NOW }).plan).toBe('subscription');
+  });
+
   it('treats an end date already in the past as ended now', () => {
     const e = entitlementFor({ status: 'active', renewsAt: new Date('2026-10-01T00:00:00Z'), endsAt: null }, NOW);
     expect(computeQuota({ entitlement: e, creditBalance: 0, usedPaths: 0, now: NOW }).plan).toBe('free');
