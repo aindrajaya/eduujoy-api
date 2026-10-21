@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { and, asc, cosineDistance, eq, gte, isNotNull, ne, or, sql } from 'drizzle-orm';
+import { and, asc, cosineDistance, eq, gte, isNotNull, ne, or, type SQL, sql } from 'drizzle-orm';
 import { DATABASE, type Database } from '../../../shared/db';
 import { topics } from '../../../shared/db/schema/catalog';
 import {
@@ -12,6 +12,14 @@ import {
   type TopicToEmbed,
   type TopicView,
 } from '../application/ports/topic.repository';
+
+/** Learners whose identical text hits someone else's flagged topic get `-2`, `-3`, ... until a reviewer merges them. */
+const MAX_SLUG_SUFFIX = 20;
+
+/** A needs_review topic carries a learner's raw words; only its creator sees it until a reviewer clears it. */
+function visibleTo(viewerId: string): SQL {
+  return sql`(${topics.needsReview} = false or ${topics.createdBy} = ${viewerId})`;
+}
 
 const VIEW = {
   id: topics.id,
@@ -30,27 +38,37 @@ export class DrizzleTopicRepository implements TopicRepository {
     return row ?? null;
   }
 
-  findExact(normalised: string, slug: string): Promise<TopicView[]> {
+  findExact(normalised: string, slug: string, viewerId: string): Promise<TopicView[]> {
     return this.db
       .select(VIEW)
       .from(topics)
       .where(
-        or(
-          eq(topics.slug, slug),
-          sql`lower(${topics.canonicalName}) = ${normalised}`,
-          sql`exists (select 1 from unnest(${topics.aliases}) as alias where lower(alias) = ${normalised})`,
+        and(
+          visibleTo(viewerId),
+          or(
+            eq(topics.slug, slug),
+            sql`lower(${topics.canonicalName}) = ${normalised}`,
+            sql`exists (select 1 from unnest(${topics.aliases}) as alias where lower(alias) = ${normalised})`,
+          ),
         ),
       )
       .orderBy(asc(topics.slug))
       .limit(5);
   }
 
-  async nearest(query: TopicEmbedding, limit: number): Promise<NearTopic[]> {
+  async nearest(query: TopicEmbedding, limit: number, viewerId: string): Promise<NearTopic[]> {
     const distance = cosineDistance(topics.embedding, query.vector);
     const rows = await this.db
       .select({ ...VIEW, distance: sql<number>`${distance}` })
       .from(topics)
-      .where(and(isNotNull(topics.embedding), eq(topics.embeddingModel, query.model), eq(topics.embeddingVersion, query.version)))
+      .where(
+        and(
+          isNotNull(topics.embedding),
+          eq(topics.embeddingModel, query.model),
+          eq(topics.embeddingVersion, query.version),
+          visibleTo(viewerId),
+        ),
+      )
       // ORDER BY the distance expression so the HNSW cosine index serves the query.
       .orderBy(distance)
       .limit(limit);
@@ -66,10 +84,12 @@ export class DrizzleTopicRepository implements TopicRepository {
         .from(topics)
         .where(and(eq(topics.createdBy, topic.createdBy), gte(topics.createdAt, limit.since)));
       if ((count?.n ?? 0) >= limit.max) return { outcome: 'limited' as const };
-      const [row] = await tx
+      for (let n = 1; n <= MAX_SLUG_SUFFIX; n++) {
+        const slug = n === 1 ? topic.slug : `${topic.slug.slice(0, 76)}-${n}`;
+        const [row] = await tx
       .insert(topics)
       .values({
-        slug: topic.slug,
+        slug,
         canonicalName: topic.canonicalName,
         aliases: topic.aliases,
         description: topic.description,
@@ -83,10 +103,12 @@ export class DrizzleTopicRepository implements TopicRepository {
       })
       .onConflictDoNothing({ target: topics.slug })
       .returning(VIEW);
-      if (row) return { outcome: 'created' as const, topic: row };
-      const [existing] = await tx.select(VIEW).from(topics).where(eq(topics.slug, topic.slug));
-      if (!existing) throw new Error(`Topic ${topic.slug} vanished during create`);
-      return { outcome: 'exists' as const, topic: existing };
+        if (row) return { outcome: 'created' as const, topic: row };
+        const [existing] = await tx.select(VIEW).from(topics).where(and(eq(topics.slug, slug), visibleTo(topic.createdBy)));
+        if (existing) return { outcome: 'exists' as const, topic: existing };
+        // Another learner's flagged topic holds this slug: try the next suffix.
+      }
+      throw new Error(`No free slug for ${topic.slug} after ${MAX_SLUG_SUFFIX} tries`);
     });
   }
 

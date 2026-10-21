@@ -55,13 +55,13 @@ export class ResolveTopic {
 
   private async resolve(userId: string, text: string, key: string): Promise<Resolution> {
     // An exact name, alias or slug costs no embedding call; an alias shared by two topics falls through.
-    const exact = await this.topics.findExact(key, slugify(key));
+    const exact = await this.topics.findExact(key, slugify(key), userId);
     if (exact.length === 1 && exact[0]) return found({ status: 'matched', topic: exact[0] });
 
     const embedded = await this.embedder.embed({ stage: 'topic-resolve', texts: [queryText(text)], kind: 'query' });
     const vector = embedded.vectors[0];
     if (!vector) throw new Error('Embedder returned no vector');
-    const near = await this.topics.nearest({ vector, model: embedded.model, version: embedded.version }, NEIGHBOURS);
+    const near = await this.topics.nearest({ vector, model: embedded.model, version: embedded.version }, NEIGHBOURS, userId);
     const byId = new Map(near.map((n) => [n.topic.id, n.topic] as const));
     const decision = decide(near.map((n) => ({ topicId: n.topic.id, similarity: clampSimilarity(n.similarity) })));
 
@@ -93,7 +93,7 @@ export class ResolveTopic {
     if (normalised.topic) {
       const names = [normalised.topic.canonicalName, ...normalised.topic.aliases].map(normaliseTopicText);
       for (const name of names) {
-        const existing = await this.topics.findExact(name, slugify(name));
+        const existing = await this.topics.findExact(name, slugify(name), userId);
         if (existing.length === 1 && existing[0]) return found({ status: 'matched', topic: existing[0] });
       }
     }

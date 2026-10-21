@@ -165,6 +165,21 @@ describe('ResolveTopic', () => {
     }
   });
 
+  it("never shows a learner another learner's flagged topic, and gives them their own", async () => {
+    const t = setup();
+    t.normalizer.fail = true;
+    const first = await t.resolve.execute('u1', 'knitting socks');
+    t.embedder.queries.set('knitting socks', at(3));
+
+    const second = await t.resolve.execute('u2', 'knitting socks');
+    const own = await t.resolve.execute('u1', 'knitting socks');
+
+    expect(second.status).toBe('created');
+    expect(second.status === 'created' && first.status === 'created' && second.topic.id !== first.topic.id).toBe(true);
+    expect([...t.repo.topics.values()].filter((x) => x.slug.startsWith('knitting-socks')).map((x) => x.slug).sort()).toEqual(['knitting-socks', 'knitting-socks-2']);
+    expect(own).toMatchObject({ status: 'matched', topic: { id: first.status === 'created' ? first.topic.id : '' } });
+  });
+
   it('rejects a create that loses the race to the cap after passing the pre-check', async () => {
     const t = setup();
     for (let i = 0; i < DAILY_TOPIC_CREATE_LIMIT; i++) t.repo.add({ slug: `mine-${i}`, canonicalName: `Mine ${i}`, createdBy: 'u1' });
