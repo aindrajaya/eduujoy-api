@@ -16,6 +16,12 @@ export class TopicDto {
   @Expose()
   @Transform(({ value }: { value: unknown }) => (value === null ? undefined : value))
   description?: string;
+  @ApiPropertyOptional({
+    type: Boolean,
+    description: 'True when the topic has a diagnostic item bank; false for new or learner-created topics until one is generated.',
+  })
+  @Expose()
+  hasDiagnostic?: boolean;
 }
 
 export class TopicChoiceDto extends TopicDto {
@@ -32,4 +38,14 @@ export class TopicResolveResponseDto {
   @ApiProperty({ enum: ['matched', 'choices', 'created'] }) @Expose() status!: 'matched' | 'choices' | 'created';
   @ApiPropertyOptional({ type: TopicDto }) @Expose() @Type(() => TopicDto) topic?: TopicDto;
   @ApiPropertyOptional({ type: TopicChoiceDto, isArray: true, maxItems: 3 }) @Expose() @Type(() => TopicChoiceDto) choices?: TopicChoiceDto[];
+  @ApiPropertyOptional({
+    type: TopicDto,
+    isArray: true,
+    maxItems: 3,
+    description:
+      'Only with status `created`. The catalog topics nearest to the text (below the choice threshold), so the UI can offer them before a diagnostic without questions.',
+  })
+  @Expose()
+  @Type(() => TopicDto)
+  related?: TopicDto[];
 }

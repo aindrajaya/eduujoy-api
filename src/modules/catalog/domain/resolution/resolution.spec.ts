@@ -6,6 +6,9 @@ import {
   MATCH_MARGIN,
   MATCH_THRESHOLD,
   normaliseTopicText,
+  pickRelated,
+  RELATED_FLOOR,
+  relatedCandidates,
   queryText,
   slugify,
   topicDocument,
@@ -104,3 +107,26 @@ describe('topic text', () => {
     expect(clampSimilarity(0.876543)).toBe(0.8765);
   });
 });
+
+describe('related (contract 0.9.0)', () => {
+  const n = (topicId: string, similarity: number, domain: 'software' | 'stem' | 'non_technical' | null) => ({ topicId, similarity, domain });
+  const near = [n('spanish', 0.679, 'non_technical'), n('java', 0.667, 'software'), n('grammar', 0.651, 'non_technical'), n('weak', 0.59, 'non_technical'), n('self', 0.9, 'non_technical')];
+
+  it('keeps the domain, the floor and never the created topic', () => {
+    expect(RELATED_FLOOR).toBe(0.6);
+    expect(relatedCandidates(near, 'non_technical', 'self').map((c) => c.topicId)).toEqual(['spanish', 'grammar']);
+    expect(relatedCandidates(near, 'software', 'self').map((c) => c.topicId)).toEqual(['java']);
+  });
+
+  it("uses the nearest neighbour's domain when the topic's is unknown", () => {
+    expect(relatedCandidates(near, null, 'self').map((c) => c.topicId)).toEqual(['spanish', 'grammar']);
+    expect(relatedCandidates([n('x', 0.61, null)], null, 'self').map((c) => c.topicId)).toEqual(['x']);
+    expect(relatedCandidates([n('x', 0.5, 'stem')], null, 'self')).toEqual([]);
+  });
+
+  it('prefers topics with a bank, then similarity, at most 3', () => {
+    const picked = pickRelated([n('a', 0.7, null), n('b', 0.65, null), n('c', 0.64, null), n('d', 0.63, null)], new Set(['d']));
+    expect(picked.map((c) => c.topicId)).toEqual(['d', 'a', 'b']);
+  });
+});
+

@@ -123,7 +123,7 @@ describe('diagnostics (e2e, PRD-API §13 A7 Verify)', () => {
     expect(got.body).toMatchObject({
       diagnosticId: first.diagnosticId,
       status: 'in_progress',
-      topic: { id: topicId, canonicalName: 'Diagnostic e2e topic' },
+      topic: { id: topicId, canonicalName: 'Diagnostic e2e topic', hasDiagnostic: true },
       completedAt: null,
     });
     expect((got.body as { createdAt: string }).createdAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);

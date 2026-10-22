@@ -17,7 +17,7 @@ import { decodeVector, loadGoldenEmbeddings, loadHoldoutEmbeddings, RecordedEmbe
 import golden from './fixtures/catalog/golden.json';
 
 const csrf = { Origin: 'http://localhost:5173', 'X-Requested-With': 'eduujoy' };
-const TOPIC_FIELDS = ['aliases', 'canonicalName', 'description', 'id', 'parentId'];
+const TOPIC_FIELDS = ['aliases', 'canonicalName', 'description', 'hasDiagnostic', 'id', 'parentId'];
 
 interface GoldenCase {
   text: string;
@@ -40,9 +40,11 @@ const holdout = JSON.parse(readFileSync(join(__dirname, '..', 'seed', '_eval', '
   cases: (GoldenCase & { kind: string; nearSlugs?: string[] })[];
 };
 
-/** Normaliser stand-in: the learner's words as the name, so created topics stay distinct. */
+/** Normaliser stand-in: the learner's words as the name, so created topics stay distinct; a domain like Haiku's. */
+const SOFTWARE_WORDS = /mongodb|python|javascript|react|kubernetes|database|code|api/i;
 const normalizer: TopicNormalizer = {
-  normalise: (text) => Promise.resolve({ canonicalName: fallbackTopicName(text), domain: 'non_technical', description: 'A learner topic.', aliases: [] }),
+  normalise: (text) =>
+    Promise.resolve({ canonicalName: fallbackTopicName(text), domain: SOFTWARE_WORDS.test(text) ? 'software' : 'non_technical', description: 'A learner topic.', aliases: [] }),
 };
 
 describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
@@ -254,7 +256,11 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
 
     const created = await resolve(cookie, { text: 'storing documents in mongodb', createNew: true }).expect(200);
 
-    expect(created.body).toMatchObject({ status: 'created', topic: { canonicalName: 'Storing documents in mongodb' } });
+    expect(created.body).toMatchObject({ status: 'created', topic: { canonicalName: 'Storing documents in mongodb', hasDiagnostic: false } });
+    // Contract 0.9.0: the rejected choice comes back as a related topic in the same (software) domain.
+    const related = (created.body as { related?: { id: string; hasDiagnostic?: unknown }[] }).related ?? [];
+    expect(related.map((r) => slugById.get(r.id))).toContain('nosql-databases');
+    for (const r of related) expect(typeof r.hasDiagnostic).toBe('boolean');
     expect(await db.select().from(topics).where(eq(topics.createdBy, userId))).toHaveLength(1);
     await resolve(cookie, { text: 'storing documents in mongodb', createNew: 'yes' }).expect(400);
   });
