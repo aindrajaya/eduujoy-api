@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { type Entitlement } from '../domain/quota';
 import { type BillingProvider } from './ports/billing-provider';
+import { type QuotaRepository } from './ports/quota.repository';
 import { type BillingRepository, type LockedQuotaState, type PathCharge, type StoredBillingEvent } from './ports/billing.repository';
 
 interface LedgerRow {
@@ -118,14 +119,25 @@ export class FakeBillingRepository implements BillingRepository {
   }
 }
 
+/** QuotaRepository over the fake billing state (entitlement and balance only). */
+export function fakeQuotaRepository(repo: FakeBillingRepository): QuotaRepository {
+  return {
+    findEntitlement: (userId) => Promise.resolve(repo.entitlements.get(userId) ?? null),
+    creditBalance: (userId) => Promise.resolve(repo.balance(userId)),
+    countPlanCoveredPaths: () => Promise.resolve(0),
+  };
+}
+
 /** Scripted provider: checkout URLs and order items by order id. */
 export class FakeBillingProvider implements BillingProvider {
   checkoutUrl = 'https://eduujoy.lemonsqueezy.com/checkout/custom/abc';
-  readonly checkouts: { storeId: string; variantId: string; userId: string; testMode: boolean }[] = [];
+  readonly checkouts: { storeId: string; variantId: string; userId: string; testMode: boolean; redirectUrl: string }[] = [];
+  failCheckout = false;
   readonly orderItems = new Map<string, { variantId: string; quantity: number }[]>();
   failOrderItems = false;
 
-  createCheckout(input: { storeId: string; variantId: string; userId: string; testMode: boolean }): Promise<{ url: string }> {
+  createCheckout(input: { storeId: string; variantId: string; userId: string; testMode: boolean; redirectUrl: string }): Promise<{ url: string }> {
+    if (this.failCheckout) return Promise.reject(new Error('Lemon Squeezy API returned HTTP 500'));
     this.checkouts.push(input);
     return Promise.resolve({ url: this.checkoutUrl });
   }

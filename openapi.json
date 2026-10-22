@@ -509,6 +509,7 @@
           "NO_REPLACEMENT",
           "CSRF_REJECTED",
           "SERVICE_UNAVAILABLE",
+          "REAUTH_REQUIRED",
           "INTERNAL"
         ],
         "type": "string"
@@ -748,7 +749,7 @@
     "contact": {},
     "description": "Generated from the NestJS app; checked against docs/contract/openapi.v0.yaml by `pnpm openapi:check`.",
     "title": "Eduujoy API",
-    "version": "0.5.0-v0"
+    "version": "0.6.0-v0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -1213,6 +1214,7 @@
     },
     "/v1/billing/checkout": {
       "post": {
+        "description": "After payment, Lemon Squeezy sends the learner back to `{origin}/account?checkout=success`,\nwhere `{origin}` is the request's allow-listed Origin. The flag is only a hint: the plan\nchanges when the webhook is processed (`entitlement.changed`, or `GET /v1/auth/me`).\nA `subscription` checkout while a subscription is active returns 409 `CONFLICT`; credit\npacks are unaffected. 503 when the payment provider is unavailable.\n",
         "operationId": "billingCheckout",
         "parameters": [
           {
@@ -1268,6 +1270,35 @@
               }
             },
             "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "409": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Conflict."
+          },
+          "503": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "A dependency is briefly unavailable (code SERVICE_UNAVAILABLE). Retry after the given wait.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying (30 for topic resolve). Exposed to allow-listed origins via CORS.",
+                "schema": {
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              }
+            }
           }
         },
         "security": [
