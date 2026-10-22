@@ -73,6 +73,9 @@ export const MODELS = {
 
 export type ModelId = keyof typeof MODELS;
 
+/** Claude's server-side web search: US$10 per 1,000 searches, on top of tokens (errored searches are free). */
+export const WEB_SEARCH_USD_PER_REQUEST = 0.01;
+
 /**
  * Server-side refusal fallbacks may answer from a model outside the catalog; meter those at the most
  * expensive current Claude tier so spend is never under-reported.

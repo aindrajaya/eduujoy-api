@@ -40,6 +40,10 @@ export const envSchema = z
     GOOGLE_OAUTH_REDIRECT_URI: z.url({ protocol: /^https?$/ }),
     ANTHROPIC_API_KEY: z.string().min(1),
     GEMINI_API_KEY: z.string().min(1),
+    // Discovery (A8): the Google API key is used only for the YouTube Data API (PRD-API §11); OpenAlex
+    // sends its key as the api_key query parameter.
+    YOUTUBE_API_KEY: z.string().min(1),
+    OPENALEX_API_KEY: z.string().min(1),
     // Daily AI spend cap in US$ (PRD-API §5); no default, so the operator must choose it.
     AI_DAILY_BUDGET_USD: z.coerce.number().positive().max(1000),
     API_PUBLIC_URL: z.url({ protocol: /^https?$/ }).transform((value) => value.replace(/\/+$/, '')),

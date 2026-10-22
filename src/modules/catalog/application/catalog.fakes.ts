@@ -7,6 +7,7 @@ import {
   type NewTopic,
   type TopicEmbedding,
   type TopicRepository,
+  type TopicProfile,
   type TopicToEmbed,
   type TopicView,
 } from './ports/topic.repository';
@@ -59,6 +60,11 @@ export class FakeTopicRepository implements TopicRepository {
     this.findByIdCalls.push(id);
     const t = this.topics.get(id);
     return Promise.resolve(t ? view(t) : null);
+  }
+
+  findProfile(id: string): Promise<TopicProfile | null> {
+    const t = this.topics.get(id);
+    return Promise.resolve(t ? { ...view(t), domain: t.domain ?? null } : null);
   }
 
   findExact(normalised: string, slug: string, viewerId: string): Promise<TopicView[]> {

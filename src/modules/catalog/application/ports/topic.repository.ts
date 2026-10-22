@@ -13,6 +13,11 @@ export interface TopicView {
   hasDiagnostic?: boolean;
 }
 
+/** What other modules need to work on a topic, beyond the public view (for example discovery queries). */
+export interface TopicProfile extends TopicView {
+  domain: TopicDomain | null;
+}
+
 export interface NearTopic {
   topic: TopicView;
   /** Cosine similarity, 1 - pgvector cosine distance. */
@@ -54,6 +59,7 @@ export interface TopicToEmbed {
 
 export interface TopicRepository {
   findById(id: string): Promise<TopicView | null>;
+  findProfile(id: string): Promise<TopicProfile | null>;
   /**
    * Topics whose slug equals `slug`, or whose canonical name or an alias equals `normalised` ignoring case.
    * Like nearest(), only topics `viewerId` may see: a topic flagged needs_review is its creator's alone.

@@ -14,6 +14,7 @@ export interface LlmCallEntry {
   promptName: string | null;
   promptVersion: string | null;
   usage: TokenUsage;
+  webSearchRequests: number;
   costUsd: number;
   latencyMs: number;
   status: LlmCallStatus;
@@ -41,6 +42,7 @@ export class DrizzleLlmCallRecorder implements LlmCallRecorder {
       outputTokens: entry.usage.outputTokens,
       cacheReadTokens: entry.usage.cacheReadTokens,
       cacheWriteTokens: entry.usage.cacheWriteTokens,
+      webSearchRequests: entry.webSearchRequests,
       costUsd: entry.costUsd.toFixed(6),
       latencyMs: entry.latencyMs,
       status: entry.status,

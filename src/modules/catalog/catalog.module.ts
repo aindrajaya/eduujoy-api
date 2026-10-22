@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { EmbedTopics } from './application/embed-topics.usecase';
+import { GetTopicProfileQuery } from './application/get-topic-profile.query';
 import { GetTopicQuery } from './application/get-topic.query';
 import { TOPIC_NORMALIZER } from './application/ports/topic-normalizer';
 import { TOPIC_REPOSITORY } from './application/ports/topic.repository';
@@ -16,6 +17,7 @@ import { CatalogAccountData } from './infrastructure/catalog-account-data';
   controllers: [TopicsController],
   providers: [
     GetTopicQuery,
+    GetTopicProfileQuery,
     ResolveTopic,
     EmbedTopics,
     { provide: TOPIC_REPOSITORY, useClass: DrizzleTopicRepository },
@@ -23,6 +25,6 @@ import { CatalogAccountData } from './infrastructure/catalog-account-data';
     { provide: TOPIC_BANKS, useClass: DrizzleTopicBanks },
     { provide: ACCOUNT_DATA.catalog, useClass: CatalogAccountData },
   ],
-  exports: [GetTopicQuery, EmbedTopics, ACCOUNT_DATA.catalog],
+  exports: [GetTopicQuery, GetTopicProfileQuery, EmbedTopics, ACCOUNT_DATA.catalog],
 })
 export class CatalogModule {}

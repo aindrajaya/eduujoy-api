@@ -26,6 +26,7 @@ describe('DrizzleLlmCallRecorder (integration)', () => {
       promptName: 'path-designer',
       promptVersion: 'v1',
       usage: { inputTokens: 1200, cacheWriteTokens: 200, cacheReadTokens: 300, outputTokens: 40 },
+      webSearchRequests: 3,
       costUsd: 0.002860,
       latencyMs: 812,
       status: 'refused',
@@ -42,6 +43,7 @@ describe('DrizzleLlmCallRecorder (integration)', () => {
       cacheReadTokens: 300,
       cacheWriteTokens: 200,
       outputTokens: 40,
+      webSearchRequests: 3,
       costUsd: '0.002860',
       latencyMs: 812,
     });

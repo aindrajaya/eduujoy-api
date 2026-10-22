@@ -3,6 +3,7 @@ import { type ModelId, type Provider, type TokenUsage } from './catalog';
 
 export const STRUCTURED_GENERATOR = Symbol('StructuredGenerator');
 export const EMBEDDER = Symbol('Embedder');
+export const WEB_SEARCHER = Symbol('WebSearcher');
 
 export interface PromptRef {
   name: string;
@@ -22,7 +23,14 @@ export interface StructuredRequest<T> {
   schema: ZodType<T>;
   maxTokens?: number;
   effort?: 'low' | 'medium' | 'high';
+  /**
+   * A public YouTube video the model watches with the prompt (Gemini only; master PRD §8). `fps` lowers
+   * the frame rate and `endOffsetSec` clips the video, to keep long videos inside the analysis cap.
+   */
+  media?: { youtubeUrl: string; fps?: number; endOffsetSec?: number };
   jobId?: string;
+  /** Aborts the provider call (a job's timeout signal). */
+  signal?: AbortSignal;
 }
 
 export interface CallPart {
@@ -41,6 +49,8 @@ export interface CallRecord {
    * part is priced at its own model's rates; absent for single-attempt calls.
    */
   parts?: CallPart[];
+  /** Server-side web searches the call ran (billed per search on top of tokens). */
+  webSearchRequests?: number;
   latencyMs: number;
 }
 
@@ -74,4 +84,40 @@ export interface EmbeddingResult {
 
 export interface Embedder {
   embed(request: EmbeddingRequest): Promise<EmbeddingResult>;
+}
+
+export interface WebSearchRequest {
+  stage: string;
+  model: ModelId;
+  prompt: PromptRef;
+  /** The user turn: what to find. Wrap untrusted content with wrapUntrusted() before passing it. */
+  input: string;
+  /** Hard cap on searches in the call (the tool's `max_uses`). */
+  maxUses: number;
+  /** Domains the search never returns (content farms); sent as the tool's `blocked_domains`. */
+  blockedDomains?: string[];
+  maxTokens?: number;
+  jobId?: string;
+  signal?: AbortSignal;
+}
+
+/** One search result as the tool returned it; `encrypted_content` is never kept (PRD-API §11). */
+export interface WebSearchHit {
+  url: string;
+  title: string;
+  pageAge: string | null;
+}
+
+export interface WebSearchResult<T> {
+  /** Every distinct result the searches returned, in order. */
+  hits: WebSearchHit[];
+  /** The model's final answer, parsed with the request's schema; null when it was missing or invalid. */
+  answer: T | null;
+  queries: string[];
+  call: CallRecord;
+}
+
+/** A model call with server-side web search (the master PRD's `WebDiscovery` search step). */
+export interface WebSearcher {
+  search<T>(request: WebSearchRequest & { schema: ZodType<T> }): Promise<WebSearchResult<T>>;
 }

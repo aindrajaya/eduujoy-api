@@ -149,4 +149,55 @@ describe('Gemini adapters (contract: recorded generateContent, synthetic embeddi
       failure: 'invalid_output',
     });
   });
+
+  describe('YouTube video input (synthetic stream in the documented SSE shape)', () => {
+    const chunk = (body: unknown) => `data: ${JSON.stringify(body)}\r\n\r\n`;
+    const stream = (parts: string[], finishReason = 'STOP'): FixtureResponse => ({
+      status: 200,
+      contentType: 'text/event-stream',
+      raw: true,
+      body: parts
+        .map((text, i) =>
+          chunk({
+            candidates: [{ content: { role: 'model', parts: [{ text }] }, ...(i === parts.length - 1 ? { finishReason } : {}) }],
+            modelVersion: 'gemini-3.8-flash',
+            ...(i === parts.length - 1 ? { usageMetadata: { promptTokenCount: 31000, candidatesTokenCount: 900, thoughtsTokenCount: 100 } } : {}),
+          }),
+        )
+        .join(''),
+    });
+    const video = { ...request, model: 'gemini-3.8-flash' as const, media: { youtubeUrl: 'https://www.youtube.com/watch?v=abc123DEF45' } };
+
+    it('streams with the URL as file data at low media resolution, and joins the chunks', async () => {
+      server.enqueue(stream(['{"canonicalName":"React', ' Hooks","domain":"software"}']));
+
+      const result = await generator.generate(video);
+
+      expect(result.output).toEqual({ canonicalName: 'React Hooks', domain: 'software' });
+      expect(result.call).toMatchObject({ model: 'gemini-3.8-flash', usage: { inputTokens: 31000, outputTokens: 1000 } });
+      const sent = server.received[0];
+      expect(sent?.path).toContain('/models/gemini-3.8-flash:streamGenerateContent');
+      expect(sent?.body).toMatchObject({
+        contents: [{ role: 'user', parts: [{ fileData: { fileUri: 'https://www.youtube.com/watch?v=abc123DEF45' } }, { text: 'react hooks' }] }],
+        generationConfig: { mediaResolution: 'MEDIA_RESOLUTION_LOW', responseMimeType: 'application/json' },
+      });
+    });
+
+    it('sends a lower frame rate and an end offset as videoMetadata when asked (the analysis cap)', async () => {
+      server.enqueue(stream(['{"canonicalName":"React Hooks","domain":"software"}']));
+
+      await generator.generate({ ...video, media: { ...video.media, fps: 0.25, endOffsetSec: 2969 } });
+
+      expect(server.received[0]?.body).toMatchObject({
+        contents: [{ role: 'user', parts: [{ fileData: { fileUri: video.media.youtubeUrl }, videoMetadata: { fps: 0.25, startOffset: '0s', endOffset: '2969s' } }, { text: 'react hooks' }] }],
+      });
+    });
+
+    it('reports a truncated stream as invalid output, with its usage', async () => {
+      server.enqueue(stream(['{"canonicalName":"Re'], 'MAX_TOKENS'));
+
+      await expect(generator.generate(video)).rejects.toMatchObject({ failure: 'invalid_output', call: { usage: { inputTokens: 31000 } } });
+    });
+  });
 });
+

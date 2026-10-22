@@ -20,6 +20,8 @@ export const llmCalls = pgTable(
     cacheReadTokens: integer('cache_read_tokens').notNull().default(0),
     /** Of input_tokens, how many were written to the prompt cache (billed at 1.25x input). */
     cacheWriteTokens: integer('cache_write_tokens').notNull().default(0),
+    /** Server-side web searches in the call (US$0.01 each, included in cost_usd). */
+    webSearchRequests: integer('web_search_requests').notNull().default(0),
     costUsd: numeric('cost_usd', { precision: 12, scale: 6 }).notNull().default('0'),
     latencyMs: integer('latency_ms').notNull(),
     status: llmCallStatus('status').notNull(),

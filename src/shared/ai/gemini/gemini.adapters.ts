@@ -1,4 +1,4 @@
-import { ApiError, FinishReason, type GenerateContentResponse, GoogleGenAI } from '@google/genai';
+import { ApiError, type Content, FinishReason, type GenerateContentConfig, type GenerateContentResponse, GoogleGenAI, MediaResolution } from '@google/genai';
 import { MODELS, type TokenUsage } from '../catalog';
 import { AiCallError, classifyStatus } from '../errors';
 import { toStructuredSchema } from '../json-schema';
@@ -70,6 +70,21 @@ export function geminiUsage(response: GenerateContentResponse): TokenUsage {
   };
 }
 
+/** Folds a streamed reply into one response: the text joined, usage and finish reason from the last chunk. */
+async function collect(stream: AsyncGenerator<GenerateContentResponse>): Promise<GenerateContentResponse> {
+  let text = '';
+  let last: GenerateContentResponse | undefined;
+  for await (const chunk of stream) {
+    text += chunk.text ?? '';
+    last = chunk;
+  }
+  if (!last) throw new AiCallError('server', 'Gemini returned an empty stream');
+  const candidate = last.candidates?.[0];
+  return Object.assign(Object.create(Object.getPrototypeOf(last) as object) as GenerateContentResponse, last, {
+    candidates: [{ ...candidate, content: { role: 'model', parts: [{ text }] } }],
+  });
+}
+
 export class GeminiStructuredGenerator implements StructuredGenerator {
   constructor(
     private readonly client: GoogleGenAI,
@@ -82,20 +97,31 @@ export class GeminiStructuredGenerator implements StructuredGenerator {
     if (spec.provider !== 'google') throw new Error(`${request.model} is not a Gemini model`);
     const started = this.now();
 
+    const config: GenerateContentConfig = {
+      systemInstruction: `${request.prompt.text}\n\n${UNTRUSTED_DATA_RULE}`,
+      responseMimeType: 'application/json',
+      responseJsonSchema: toStructuredSchema(request.schema),
+      maxOutputTokens: request.maxTokens ?? DEFAULT_MAX_TOKENS,
+      httpOptions: { timeout: spec.timeoutMs },
+      ...(request.signal ? { abortSignal: request.signal } : {}),
+      // Low resolution cuts video tokens roughly threefold; tags and timestamps come mostly from audio.
+      ...(request.media ? { mediaResolution: MediaResolution.MEDIA_RESOLUTION_LOW } : {}),
+    };
     const response = await withRetry(
       async () => {
         try {
-          return await this.client.models.generateContent({
-            model: request.model,
-            contents: request.input,
-            config: {
-              systemInstruction: `${request.prompt.text}\n\n${UNTRUSTED_DATA_RULE}`,
-              responseMimeType: 'application/json',
-              responseJsonSchema: toStructuredSchema(request.schema),
-              maxOutputTokens: request.maxTokens ?? DEFAULT_MAX_TOKENS,
-              httpOptions: { timeout: spec.timeoutMs },
-            },
-          });
+          if (!request.media) return await this.client.models.generateContent({ model: request.model, contents: request.input, config });
+          // A public YouTube URL goes in as file data (ai.google.dev/gemini-api/docs/video-understanding);
+          // video calls stream so a long analysis never sits on an idle connection (PRD-API §11).
+          const { youtubeUrl, fps, endOffsetSec } = request.media;
+          const videoMetadata = {
+            ...(fps === undefined ? {} : { fps }),
+            ...(endOffsetSec === undefined ? {} : { startOffset: '0s', endOffset: `${endOffsetSec}s` }),
+          };
+          const contents: Content[] = [
+            { role: 'user', parts: [{ fileData: { fileUri: youtubeUrl }, ...(Object.keys(videoMetadata).length ? { videoMetadata } : {}) }, { text: request.input }] },
+          ];
+          return await collect(await this.client.models.generateContentStream({ model: request.model, contents, config }));
         } catch (error) {
           throw toAiError(error);
         }

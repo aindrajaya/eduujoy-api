@@ -5,8 +5,8 @@ import { type Env } from '../config/env';
 import { DATABASE } from '../db';
 import { AiModule } from './ai.module';
 import { AiBudgetGuard } from './budget/budget.guard';
-import { MeteredEmbedder, MeteredStructuredGenerator } from './metering/metered';
-import { EMBEDDER, STRUCTURED_GENERATOR } from './ports';
+import { MeteredEmbedder, MeteredStructuredGenerator, MeteredWebSearcher } from './metering/metered';
+import { EMBEDDER, STRUCTURED_GENERATOR, WEB_SEARCHER } from './ports';
 import { PromptRegistry } from './prompts/prompt-registry';
 
 @Global()
@@ -22,6 +22,7 @@ describe('AiModule', () => {
 
     expect(moduleRef.get(STRUCTURED_GENERATOR)).toBeInstanceOf(MeteredStructuredGenerator);
     expect(moduleRef.get(EMBEDDER)).toBeInstanceOf(MeteredEmbedder);
+    expect(moduleRef.get(WEB_SEARCHER)).toBeInstanceOf(MeteredWebSearcher);
     expect(moduleRef.get(AiBudgetGuard)).toBeInstanceOf(AiBudgetGuard);
     expect(moduleRef.get(PromptRegistry)).toBeInstanceOf(PromptRegistry);
     await moduleRef.close();

@@ -19,6 +19,8 @@ const CLIS = [
   { script: 'db:seed', file: 'src/shared/db/cli/seed.ts', args: ['--dir', 'seed'], out: 'db:seed: ok (160 topics)' },
   { script: 'catalog:embed-topics', file: 'scripts/catalog/embed-topics.ts', args: [], out: 'catalog:embed-topics: ok (EmbedTopics)' },
   { script: 'billing:reprocess', file: 'scripts/billing/reprocess.ts', args: [], out: 'billing:reprocess: ok (ReprocessBillingEvent)' },
+  { script: 'discovery:smoke', file: 'scripts/discovery/smoke.ts', args: [], out: 'discovery:smoke: ok (DiscoverResources, AnalyseResource)' },
+  { script: 'discovery:verify-video', file: 'scripts/discovery/verify-video.ts', args: [], out: 'discovery:verify-video: ok (GeminiResourceAnalyzer)' },
 ];
 
 describe('CLI boot (integration)', () => {
@@ -47,6 +49,8 @@ describe('CLI boot (integration)', () => {
       LEMONSQUEEZY_VARIANT_SUBSCRIPTION: '200001',
       LEMONSQUEEZY_VARIANT_CREDIT_PACK: '200002',
       LEMONSQUEEZY_MODE: 'test',
+      YOUTUBE_API_KEY: 'test-youtube-key',
+      OPENALEX_API_KEY: 'test-openalex-key',
     })) {
       process.env[name] ??= value;
     }
