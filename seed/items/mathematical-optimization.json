@@ -194,24 +194,19 @@
         },
         {
           "id": "c",
-          "label": "Decision variables"
+          "label": "A learning rate"
         },
         {
           "id": "d",
-          "label": "A learning rate"
+          "label": "A starting point for the solver"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "Every formulation has decision variables, an objective, and constraints (possibly none).",
-        "A learning rate belongs to gradient methods, not to the problem formulation."
-      ],
       "reviewed": false
     },
     {
@@ -258,19 +253,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The gradient points to the steepest increase, so its negative is the steepest decrease"
+          "label": "The gradient points toward steepest increase, so its negative is steepest decrease"
         },
         {
           "id": "b",
-          "label": "The negative gradient always has smaller length"
+          "label": "The gradient points toward the nearest minimum, so following it reaches the minimum"
         },
         {
           "id": "c",
-          "label": "The gradient is zero away from the minimum"
+          "label": "The negative gradient has a smaller length, so each step stays safely small"
         },
         {
           "id": "d",
-          "label": "The gradient points toward the nearest minimum"
+          "label": "The gradient is zero away from the minimum, so the negative gradient fills that gap"
         }
       ],
       "answerKey": {
@@ -363,19 +358,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The value of f at the optimum"
+          "label": "The value that the objective f reaches at the optimum"
         },
         {
           "id": "b",
-          "label": "The rate the optimal value changes per unit change in c"
+          "label": "How fast the optimal value changes as c changes"
         },
         {
           "id": "c",
-          "label": "The step size needed to reach the optimum"
+          "label": "The step size a gradient method needs to reach the optimum"
         },
         {
           "id": "d",
-          "label": "The distance from the optimum to the constraint"
+          "label": "The distance from the unconstrained peak to the constraint"
         }
       ],
       "answerKey": {
@@ -398,7 +393,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A maximum, since f'(2) = 0"
+          "label": "A maximum, since f'(2) = 0 and f''(x) = 2 > 0"
         },
         {
           "id": "b",
@@ -406,11 +401,11 @@
         },
         {
           "id": "c",
-          "label": "A saddle point, since f(2) = 3"
+          "label": "A saddle point, since f'(2) = 0 and f(2) = 3 is not zero"
         },
         {
           "id": "d",
-          "label": "A minimum only locally, since f is not convex"
+          "label": "A local minimum only, since f'(2) = 0 and f''(x) = 2 holds near 2"
         }
       ],
       "answerKey": {
@@ -469,19 +464,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The starting point is a maximum"
+          "label": "The starting point x = 1 is a maximum, so steps move away"
         },
         {
           "id": "b",
-          "label": "The gradient was computed with the wrong sign"
+          "label": "The gradient was computed with the wrong sign, so steps go uphill"
         },
         {
           "id": "c",
-          "label": "The function is not convex"
+          "label": "The function is not convex, so descent has no minimum to reach"
         },
         {
           "id": "d",
-          "label": "The step size is too large, so each step overshoots the minimum"
+          "label": "The step size is too large, so each step overshoots"
         }
       ],
       "answerKey": {
@@ -1299,7 +1294,7 @@
         },
         {
           "id": "d",
-          "label": "The step is too large in x, so the iterates overshoot there and bounce back and forth"
+          "label": "The step is too large for the x direction, so iterates overshoot the minimum in x and bounce back and forth there"
         }
       ],
       "answerKey": {
@@ -1638,7 +1633,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Inconclusive: the gradient vanishes, and the second-derivative test cannot settle a quadratic's stationary point"
+          "label": "Inconclusive: the Hessian determinant is 5, which is nonzero but too small to decide the type of point"
         },
         {
           "id": "b",
@@ -1646,11 +1641,11 @@
         },
         {
           "id": "c",
-          "label": "A minimum: both diagonal Hessian entries are positive, so f curves upward in every direction from the origin"
+          "label": "A minimum: both diagonal Hessian entries are positive, so f curves upward along the axes and the cross term is negligible"
         },
         {
           "id": "d",
-          "label": "A maximum: the cross term 3xy outweighs both square terms, so f falls in every direction from the origin"
+          "label": "A maximum: the cross term 3xy is larger than either square term, so the Hessian is negative definite near the origin"
         }
       ],
       "answerKey": {
@@ -2095,19 +2090,19 @@
       "options": [
         {
           "id": "a",
-          "label": "L-BFGS with about ten stored update pairs, for curvature information at linear memory"
+          "label": "L-BFGS with about ten stored update pairs, giving curvature at linear memory"
         },
         {
           "id": "b",
-          "label": "Random search over directions, for its freedom from gradient computation"
+          "label": "Coordinate-wise random search over directions, which avoids computing any gradients at all"
         },
         {
           "id": "c",
-          "label": "Gradient descent with fixed step 1/L, for its guaranteed monotone descent"
+          "label": "Gradient descent with fixed step 1/L, which guarantees monotone descent at linear memory"
         },
         {
           "id": "d",
-          "label": "Newton's method with the exact Hessian, for its quadratic local convergence"
+          "label": "Newton's method with the exact Hessian, which gives quadratic local convergence near the optimum"
         }
       ],
       "answerKey": {
@@ -2349,15 +2344,15 @@
         },
         {
           "id": "b",
-          "label": "Minimise sum x_i subject to Ax=b and x >= 0"
+          "label": "Minimise sum x_i subject to Ax=b and x >= 0, since |x_i| = x_i"
         },
         {
           "id": "c",
-          "label": "Minimise sum t_i subject to `x_i^2 <= t_i` and Ax=b"
+          "label": "Minimise sum t_i subject to `x_i^2 <= t_i` and Ax=b, a smooth bound"
         },
         {
           "id": "d",
-          "label": "Minimise sum t_i subject to `x_i <= t_i` and Ax=b"
+          "label": "Minimise sum t_i subject to `x_i <= t_i` and Ax=b, bounding above only"
         }
       ],
       "answerKey": {

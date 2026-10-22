@@ -186,32 +186,27 @@
       "options": [
         {
           "id": "a",
-          "label": "Edge list"
-        },
-        {
-          "id": "b",
           "label": "Adjacency list"
         },
         {
+          "id": "b",
+          "label": "Adjacency matrix"
+        },
+        {
           "id": "c",
-          "label": "Truth table"
+          "label": "Degree sequence listing only each vertex's number of neighbours"
         },
         {
           "id": "d",
-          "label": "Adjacency matrix"
+          "label": "Vertex coloring table"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "d"
+          "b"
         ]
       },
-      "rubric": [
-        "Adjacency lists, matrices and edge lists all store a graph.",
-        "A truth table represents logic functions, not graphs."
-      ],
       "reviewed": false
     },
     {
@@ -293,19 +288,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Each vertex must have degree exactly two, giving n edges minus one"
+          "label": "Each vertex must have degree exactly two, so the degree sum is 2n and n edges remain after halving, minus one"
         },
         {
           "id": "b",
-          "label": "Each edge added to connect a new vertex links it once, and any extra edge would create a cycle"
+          "label": "Each new vertex joins the tree by one edge, and any extra edge would close a cycle"
         },
         {
           "id": "c",
-          "label": "Each edge removed from a tree leaves it connected, so n-1 is the maximum"
+          "label": "Removing any edge from a tree leaves it connected, so n-1 edges is the most a tree can keep"
         },
         {
           "id": "d",
-          "label": "Trees must be drawn without crossing, which limits edges to n-1"
+          "label": "Trees must be drawn without crossing edges, and planar drawings limit edges to n-1 for n vertices"
         }
       ],
       "answerKey": {
@@ -470,19 +465,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The shortest path between courses"
+          "label": "The shortest chain of courses linking any two students"
         },
         {
           "id": "b",
-          "label": "A spanning tree of exam rooms"
+          "label": "A spanning tree connecting every course to one exam room"
         },
         {
           "id": "c",
-          "label": "A matching of students to courses"
+          "label": "A matching that pairs each student with a single course"
         },
         {
           "id": "d",
-          "label": "A valid assignment of time slots, with colors as slots"
+          "label": "A conflict-free assignment of time slots to courses"
         }
       ],
       "answerKey": {
@@ -967,15 +962,15 @@
       "options": [
         {
           "id": "a",
-          "label": "4 slots, because each course must get its own slot"
+          "label": "4 slots, because D conflicts with A so it needs a fourth slot of its own"
         },
         {
           "id": "b",
-          "label": "1 slot, because D conflicts with only one other course"
+          "label": "2 slots, because the graph is a triangle with one pendant vertex, so two colours alternate"
         },
         {
           "id": "c",
-          "label": "2 slots, because the conflict graph has only four vertices"
+          "label": "2 slots, because the longest path in the graph has just four vertices"
         },
         {
           "id": "d",
@@ -1287,19 +1282,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It counts the edge back to the vertex's own parent as a back edge, so the tree edge just used looks like a cycle."
+          "label": "It treats the edge back to the vertex's parent as a back edge, so the tree edge just used looks like a cycle."
         },
         {
           "id": "b",
-          "label": "It marks vertices visited too late, so some components are never explored and some edges get counted twice."
+          "label": "It marks vertices as visited only after exploring all their neighbours, so some edges are met twice and look like repeats."
         },
         {
           "id": "c",
-          "label": "Recursive DFS cannot run on undirected graphs, since it only follows edge direction when it explores."
+          "label": "It starts the search from a single root vertex, so edges in other components are skipped and later reached from both ends."
         },
         {
           "id": "d",
-          "label": "It should use BFS instead, because DFS can only find cycles in directed graphs and never undirected ones."
+          "label": "It uses recursion rather than an explicit stack, so a vertex on the call stack is wrongly treated as already finished."
         }
       ],
       "answerKey": {
@@ -1357,11 +1352,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Greedy colouring is always optimal, so the chromatic number is 3 and the bipartite claim must be wrong."
+          "label": "Greedy colouring gives the minimum number of colours here, so the chromatic number is 3 and the bipartite claim is wrong."
         },
         {
           "id": "b",
-          "label": "The graph is not truly bipartite, since a correct colouring algorithm never needs more than the chromatic number."
+          "label": "The graph is not bipartite, since a correct colouring algorithm should not need more colours than the chromatic number."
         },
         {
           "id": "c",
@@ -1369,7 +1364,7 @@
         },
         {
           "id": "d",
-          "label": "The graph must contain an odd cycle, because any proper colouring with 3 colours proves one exists."
+          "label": "The graph has an odd cycle, because a proper colouring with 3 colours indicates that one exists in the graph."
         }
       ],
       "answerKey": {
@@ -1475,11 +1470,11 @@
         },
         {
           "id": "c",
-          "label": "Dijkstra picks B before A because B is nearer to S, so the update of A through B is skipped by its tie-breaking rule."
+          "label": "Dijkstra picks B before A because B is nearer to S, so the update of A through B is skipped by its tie-breaking rule when distances are compared."
         },
         {
           "id": "d",
-          "label": "Dijkstra finalizes A at distance 2 and never revisits it, assuming no later path can be shorter, which fails with a negative edge."
+          "label": "Dijkstra finalizes A at distance 2 and never revisits it, which fails with a negative edge."
         }
       ],
       "answerKey": {
@@ -1537,15 +1532,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It guarantees a triangle, because the shortest odd closed walk has length 3"
+          "label": "It guarantees a triangle, because the shortest possible odd closed walk has length 3 and must be a triangle"
         },
         {
           "id": "b",
-          "label": "It is itself a cycle, because every closed walk returns to its start vertex"
+          "label": "It is itself a cycle, because every closed walk returns to its start vertex without repeating any edge"
         },
         {
           "id": "c",
-          "label": "It guarantees nothing, because walks may repeat edges and so occur in bipartite graphs"
+          "label": "It guarantees nothing, because walks may repeat edges and so odd closed walks occur in bipartite graphs"
         },
         {
           "id": "d",
@@ -1607,19 +1602,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A negative edge always creates a negative cycle, so shortest paths no longer exist"
+          "label": "A negative edge creates a negative cycle, so shortest paths are not well defined here"
         },
         {
           "id": "b",
-          "label": "Relaxation only works when the weights along every path add up to a positive total"
+          "label": "Relaxation is valid only for positive totals, so it skips edges that would lower a distance"
         },
         {
           "id": "c",
-          "label": "A vertex is finalised when popped, yet a later path through the negative edge could still shorten it"
+          "label": "A vertex is finalised when popped, but a negative edge can later shorten its distance"
         },
         {
           "id": "d",
-          "label": "The priority queue cannot store negative keys, so the extraction order becomes undefined"
+          "label": "The priority queue is unable to hold negative keys, so the extraction order is undefined"
         }
       ],
       "answerKey": {
@@ -1818,15 +1813,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Kruskal with full sorting, since O(E log E) beats vertex-based methods on any input"
+          "label": "Kruskal with full sorting, since O(E log E) is competitive and the union-find step adds little cost"
         },
         {
           "id": "b",
-          "label": "Prim with a binary heap, since O(E log V) is always faster than O(V^2) on dense graphs"
+          "label": "Prim with a binary heap, since O(E log V) grows more slowly than O(V^2) once the graph has many edges"
         },
         {
           "id": "c",
-          "label": "Dijkstra from one vertex, since its shortest-path tree is always a minimum spanning tree"
+          "label": "Dijkstra from one vertex, since the shortest-path tree it builds is a minimum spanning tree when weights are positive"
         },
         {
           "id": "d",
@@ -2034,7 +2029,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Wrong: only bipartite graphs satisfy the bound, so any graph containing a triangle needs more than D colours to be coloured properly."
+          "label": "Wrong: graphs containing a triangle need more than D colours, and Brooks' theorem guarantees D colours just for triangle-free connected graphs."
         },
         {
           "id": "b",
@@ -2042,11 +2037,11 @@
         },
         {
           "id": "c",
-          "label": "Right: Brooks' theorem gives D colours for all connected graphs, and its exceptions apply only to disconnected inputs with several components."
+          "label": "Right: Brooks' theorem gives D colours for connected graphs, and its exceptions arise for disconnected inputs with several components."
         },
         {
           "id": "d",
-          "label": "Right: greedy colouring in any vertex order never needs more than D colours, because each vertex has at most D neighbours to avoid."
+          "label": "Right: greedy colouring in a suitable vertex order needs at most D colours, because each vertex has at most D neighbours to avoid."
         }
       ],
       "answerKey": {
@@ -2069,7 +2064,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A matching covering A exists only if |A| = |B|, because Hall's condition needs both sides equal for every subset S."
+          "label": "A matching covering A need not exist, since Hall's condition needs |A| = |B| and the degree bounds do not force that."
         },
         {
           "id": "b",
@@ -2077,11 +2072,11 @@
         },
         {
           "id": "c",
-          "label": "A perfect matching exists, because the degree bounds force |A| = |B| and then every vertex has exactly the same degree k."
+          "label": "A matching covering A exists only when every vertex of B also has degree exactly k, so that edges and vertices balance."
         },
         {
           "id": "d",
-          "label": "No matching is guaranteed: the degree bounds do not limit how neighbourhoods overlap, since two A-vertices may share their only B-neighbour."
+          "label": "A matching covering A is not guaranteed, since two A-vertices of degree k may share all neighbours and so violate Hall's condition."
         }
       ],
       "answerKey": {
@@ -2323,7 +2318,7 @@
         },
         {
           "id": "c",
-          "label": "Take the Petersen graph, which has girth 5 and therefore needs four colours in any proper colouring."
+          "label": "Take the Petersen graph, which has girth 5 and so should need four colours once its odd cycles are counted."
         },
         {
           "id": "d",

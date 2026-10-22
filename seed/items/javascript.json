@@ -198,20 +198,15 @@
         },
         {
           "id": "d",
-          "label": "undefined"
+          "label": "object"
         }
       ],
       "answerKey": {
         "optionIds": [
           "b",
-          "c",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "number, boolean and undefined are primitives.",
-        "Arrays are objects, not primitives."
-      ],
       "reviewed": false
     },
     {
@@ -297,11 +292,11 @@
         },
         {
           "id": "b",
-          "label": "null is an instance of Object"
+          "label": "null is an instance of Object, so typeof reports it"
         },
         {
           "id": "c",
-          "label": "null is converted to {} before checking"
+          "label": "null is converted to {} before typeof checks it"
         },
         {
           "id": "d",
@@ -469,19 +464,19 @@
       "options": [
         {
           "id": "a",
-          "label": "\"Rex\", because the constructor stored it on the new object"
+          "label": "\"Rex\", because the constructor set it on the new object"
         },
         {
           "id": "b",
-          "label": "\"Dog\", because it is the class name"
+          "label": "\"Dog\", because a property read on an instance returns the class name"
         },
         {
           "id": "c",
-          "label": "undefined, because constructors cannot set properties"
+          "label": "undefined, because constructors cannot set properties on the object"
         },
         {
           "id": "d",
-          "label": "An error, because `this` is not available in constructors"
+          "label": "An error, because `this` is not available inside constructors"
         }
       ],
       "answerKey": {
@@ -539,15 +534,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`\"undefined\"`, since null means no value"
+          "label": "`\"undefined\"`, since null means a variable holds no value"
         },
         {
           "id": "b",
-          "label": "`\"null\"`, since null is its own type name"
+          "label": "`\"null\"`, since null is a primitive with its own type name"
         },
         {
           "id": "c",
-          "label": "`\"number\"`, since null converts to 0"
+          "label": "`\"number\"`, since null is converted to 0 in comparisons"
         },
         {
           "id": "d",
@@ -574,15 +569,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Array literals are always converted to strings before comparing"
+          "label": "Array literals are converted to strings before comparing, and the two strings differ in type"
         },
         {
           "id": "b",
-          "label": "Arrays can only be compared with `==`, not with `===`"
+          "label": "Arrays are compared with `==` rather than `===`, which gives a different result"
         },
         {
           "id": "c",
-          "label": "The two arrays hold numbers, which `===` cannot compare"
+          "label": "The two arrays hold numbers, and `===` cannot compare numbers inside arrays"
         },
         {
           "id": "d",
@@ -1248,19 +1243,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`push` always changes a prototype that every object spread from `user` shares"
+          "label": "`push` mutates a prototype array that `copy` inherits from `user`, so both objects see the change"
         },
         {
           "id": "b",
-          "label": "Spread makes a shallow copy, so `copy.tags` and `user.tags` point to the same array object"
+          "label": "Spread makes a shallow copy, so `copy.tags` and `user.tags` reference one array"
         },
         {
           "id": "c",
-          "label": "Objects declared with `const` share their nested arrays with any object spread from them"
+          "label": "Because `user` is declared with `const`, its nested arrays are shared with any object spread from it"
         },
         {
           "id": "d",
-          "label": "Spread copies by reference only when the array is non-empty, so tags stayed linked"
+          "label": "Spread copies nested arrays by reference when they are non-empty, so the `tags` arrays stay linked"
         }
       ],
       "answerKey": {
@@ -1388,7 +1383,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Async functions wrap every returned value in a new promise, which swallows the rejection before catch runs"
+          "label": "Async functions wrap every returned value in a new promise, which swallows the rejection before the catch block gets a chance to run"
         },
         {
           "id": "b",
@@ -1396,11 +1391,11 @@
         },
         {
           "id": "c",
-          "label": "`catch` only handles errors thrown by `await` expressions on promises that were already resolved earlier"
+          "label": "`catch` only handles errors thrown synchronously or by `await` expressions, and a returned promise counts as neither kind of error source"
         },
         {
           "id": "d",
-          "label": "`try` blocks inside async functions run on a later microtask, so the catch is registered too late"
+          "label": "`try` blocks inside async functions run on a later microtask, so the catch handler is registered too late to see the rejection"
         }
       ],
       "answerKey": {
@@ -1599,19 +1594,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The import cycle is rejected with a SyntaxError before any code runs"
+          "label": "The import cycle is rejected with a SyntaxError before any module code runs, because ES modules forbid circular imports"
         },
         {
           "id": "b",
-          "label": "`b.js` throws a ReferenceError, because `value` is still uninitialised when `b.js` evaluates"
+          "label": "`b.js` throws a ReferenceError, because `value` is uninitialised when `b.js` runs"
         },
         {
           "id": "c",
-          "label": "`helper` is 84, because imports are hoisted and `value` is already assigned"
+          "label": "`helper` is 84, because imports are hoisted so `value` is already assigned when `b.js` runs"
         },
         {
           "id": "d",
-          "label": "`helper` is NaN, because `value` is undefined during the cycle"
+          "label": "`helper` is NaN, because `value` is still undefined while the cycle is being resolved"
         }
       ],
       "answerKey": {
@@ -1634,19 +1629,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`await` inside a callback converts a rejection into a resolved `undefined` value"
+          "label": "`await` inside an async callback converts a rejection into a resolved `undefined`, so no error ever reaches `catch`"
         },
         {
           "id": "b",
-          "label": "`catch` only handles errors thrown by built-in methods, never by user-defined functions"
+          "label": "`catch` only handles errors thrown by built-in methods, never by user-defined functions such as `save`"
         },
         {
           "id": "c",
-          "label": "`forEach` discards the promises the callbacks return, so rejections escape the `try` block unhandled"
+          "label": "`forEach` discards the promises its callbacks return, so rejections escape the `try` block unhandled"
         },
         {
           "id": "d",
-          "label": "`forEach` runs its callbacks on separate threads, so `catch` executes on another thread"
+          "label": "`forEach` runs its callbacks on separate threads, so `catch` executes on a different thread than the error"
         }
       ],
       "answerKey": {
@@ -1705,19 +1700,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The Map holds strong references to its element keys, so removed nodes can never be garbage collected"
+          "label": "The Map holds strong references to its element keys, so removed nodes stay reachable"
         },
         {
           "id": "b",
-          "label": "Event listeners on removed nodes are always kept alive by the browser's event loop"
+          "label": "Listeners attached to removed nodes stay registered with the event loop, so the browser keeps those nodes alive"
         },
         {
           "id": "c",
-          "label": "Map entries are copied on every lookup, so each navigation duplicates the stored data"
+          "label": "Each Map lookup copies the stored layout data, so every navigation duplicates the entries and exhausts the heap"
         },
         {
           "id": "d",
-          "label": "`removeChild` only hides nodes, and the garbage collector frees them at page unload"
+          "label": "`removeChild` only hides nodes from the document, and the garbage collector frees them at page unload"
         }
       ],
       "answerKey": {
@@ -1740,11 +1735,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`Promise.race`, rendering whichever widget settles first"
+          "label": "`Promise.race`, rendering whichever widget settles first and ignoring the rest"
         },
         {
           "id": "b",
-          "label": "Sequential `await` calls in a single `try` block"
+          "label": "Sequential `await` calls in a single `try` block, with one shared `catch` handler"
         },
         {
           "id": "c",
@@ -1752,7 +1747,7 @@
         },
         {
           "id": "d",
-          "label": "`Promise.all`, with one `catch` that shows a page-wide error"
+          "label": "`Promise.all`, with one `catch` that shows a page-wide error message"
         }
       ],
       "answerKey": {
@@ -2025,15 +2020,15 @@
         },
         {
           "id": "b",
-          "label": "Freeze is deep but only in strict mode, so non-strict code can mutate nested values"
+          "label": "Freeze is deep in strict mode, but non-strict code can still change nested values like `config.db.host`"
         },
         {
           "id": "c",
-          "label": "Freeze works only inside classes, so a plain object literal remains fully mutable"
+          "label": "Freeze makes the top-level properties read-only, but `config.retries = 5` still succeeds in non-strict code"
         },
         {
           "id": "d",
-          "label": "Freeze only blocks deleting properties, so `config.retries = 5` still succeeds in all modes"
+          "label": "Freeze blocks changes to existing values, but new properties can be added to `config.db` and to `config` itself"
         }
       ],
       "answerKey": {
@@ -2091,11 +2086,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Bind a listener on every row, because each handler is isolated and the added memory is negligible"
+          "label": "Bind a listener on every row, accepting the memory cost because each handler stays isolated per row"
         },
         {
           "id": "b",
-          "label": "Bind a listener on every row and rebind after each render, because bubbling is unreliable for clicks"
+          "label": "Bind a listener on every row and rebind after each render, since row replacement drops old handlers"
         },
         {
           "id": "c",
@@ -2103,7 +2098,7 @@
         },
         {
           "id": "d",
-          "label": "Use one delegated listener on `document`, because events never need to bubble to reach it"
+          "label": "Use one delegated listener on `document`, noting it fails when rows are added after page load"
         }
       ],
       "answerKey": {
@@ -2272,19 +2267,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Disable the input while a request is pending, so overlapping requests cannot happen at all"
+          "label": "Disable the input while a request is pending, so overlapping requests cannot happen while the user is typing"
         },
         {
           "id": "b",
-          "label": "Abort the previous `AbortController` before each new fetch, passing `signal`, and ignore `AbortError` rejections"
+          "label": "Abort the previous `AbortController` before each fetch, pass its `signal`, and ignore `AbortError`"
         },
         {
           "id": "c",
-          "label": "Debounce input at 50 ms and render whichever response arrives first, as it must be the freshest"
+          "label": "Debounce input by 50 ms and render whichever response arrives first, since it is likely the freshest one"
         },
         {
           "id": "d",
-          "label": "Keep a request counter and ignore stale responses, letting every older request run to completion"
+          "label": "Keep a request counter and ignore stale responses, letting each older request finish in the background"
         }
       ],
       "answerKey": {
@@ -2453,19 +2448,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Split tasks into groups of three and `await Promise.all` each group before starting the next group"
+          "label": "Split tasks into groups of three and `await Promise.all` on each group, so only three run at a time and results keep their order"
         },
         {
           "id": "b",
-          "label": "Run tasks one after another in a `for...of` with `await`, which keeps ordering and never exceeds three"
+          "label": "Run tasks one after another in a `for...of` loop with `await`, which keeps input order and never exceeds three in flight"
         },
         {
           "id": "c",
-          "label": "Call `Promise.all(tasks.map(t => t()))` so the runtime limits concurrency to three internally"
+          "label": "Call `Promise.all(tasks.map(t => t()))` so the runtime queues the tasks and limits concurrency to three internally"
         },
         {
           "id": "d",
-          "label": "Start three workers that each loop, taking the next shared index and storing `results[i]`, then await all workers"
+          "label": "Start three workers that each loop on a shared next index and set `results[i]`, then await all workers"
         }
       ],
       "answerKey": {

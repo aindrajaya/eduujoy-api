@@ -7,7 +7,7 @@
       "stage": "novice",
       "bloom": "C1",
       "kind": "single_choice",
-      "prompt": "What does SDL stand for in GraphQL, the notation used to write a schema?",
+      "prompt": "What does SDL stand for in GraphQL, the notation used to write out types and operations?",
       "options": [
         {
           "id": "a",
@@ -23,7 +23,7 @@
         },
         {
           "id": "d",
-          "label": "Server Delivery Language"
+          "label": "Server Data Query Language"
         }
       ],
       "answerKey": {
@@ -120,7 +120,7 @@
         },
         {
           "id": "b",
-          "label": "The field can never be null"
+          "label": "The field is never null"
         },
         {
           "id": "c",
@@ -270,7 +270,7 @@
         },
         {
           "id": "c",
-          "label": "The client lists the fields it wants, so only those fields are returned"
+          "label": "The client names the fields it wants, so only those come back"
         },
         {
           "id": "d",
@@ -297,11 +297,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It exposes one URL, with the requested operation sent in the request body"
+          "label": "It exposes one URL, with the operation sent in the request body"
         },
         {
           "id": "b",
-          "label": "It exposes one URL per resource, each using a different HTTP verb"
+          "label": "It exposes one URL per resource, each one using a different HTTP verb"
         },
         {
           "id": "c",
@@ -406,15 +406,15 @@
         },
         {
           "id": "b",
-          "label": "The server skips the field and returns the rest without any error"
+          "label": "The server skips the unknown field and returns the other requested fields without an error"
         },
         {
           "id": "c",
-          "label": "The server returns null for that field and runs all the resolvers"
+          "label": "The server returns null for that field and still runs every other resolver as usual"
         },
         {
           "id": "d",
-          "label": "The server creates the field and returns an empty value for it"
+          "label": "The server adds the field to the schema and returns an empty value until a resolver exists"
         }
       ],
       "answerKey": {
@@ -473,11 +473,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The app would call 30 separate endpoints and merge the results"
+          "label": "The app would call a separate endpoint for each of the 30 fields and merge the results on the device"
         },
         {
           "id": "b",
-          "label": "The app would receive all 30 fields but GraphQL would compress them"
+          "label": "The app would still receive all 30 fields, but GraphQL would compress the response to shrink it"
         },
         {
           "id": "c",
@@ -485,7 +485,7 @@
         },
         {
           "id": "d",
-          "label": "The server would guess which fields the app needs from past requests"
+          "label": "The server would guess which fields the app needs from its past requests and send only those"
         }
       ],
       "answerKey": {
@@ -691,7 +691,7 @@
         },
         {
           "id": "c",
-          "label": "Query"
+          "label": "Input"
         },
         {
           "id": "d",
@@ -701,14 +701,9 @@
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "Query, Mutation and Subscription are the three root operation types.",
-        "Fragment is a reusable selection of fields, not an operation type."
-      ],
       "reviewed": false
     },
     {
@@ -1251,19 +1246,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The `posts` resolver paginates badly, so the database receives one query per page instead of a single query"
+          "label": "The `posts` resolver paginates badly, so the database gets one query per page; fix it by raising the page size and fetching all posts in one query"
         },
         {
           "id": "b",
-          "label": "`Post.author` looks up each author separately, so 50 posts cost 50 extra queries; batch keys per request with DataLoader"
+          "label": "`Post.author` queries per post, so 50 posts cost 50 extra queries; batch per request with DataLoader"
         },
         {
           "id": "c",
-          "label": "GraphQL sends every nested field as a separate HTTP request, so each field costs one more round trip"
+          "label": "GraphQL sends every nested field as a separate HTTP request, so each field costs a round trip; fix it by merging fields into one request"
         },
         {
           "id": "d",
-          "label": "The database lacks an index on `Post.id`, so the same lookup repeats 50 times while resolving authors"
+          "label": "The database lacks an index on `Post.id`, so the same lookup repeats 50 times; fix it by adding an index on that column"
         }
       ],
       "answerKey": {
@@ -1286,19 +1281,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A null in a non-null field propagates up to the nearest nullable parent, which here is `user`"
+          "label": "A null in a non-null field propagates up to the nearest nullable parent, here `user`"
         },
         {
           "id": "b",
-          "label": "The client library strips the object because the error path points inside it and cannot be merged"
+          "label": "The client library drops the `user` object because the error path points inside it and the partial result cannot be merged into its cache"
         },
         {
           "id": "c",
-          "label": "The server discards any object whose resolver logs an error, to avoid returning partial results"
+          "label": "The server discards the parent object when a resolver logs an error, because the spec forbids returning partial results alongside errors"
         },
         {
           "id": "d",
-          "label": "Errors in a leaf field always null the root field because execution stops at the first error"
+          "label": "The error in a leaf field halts execution of the whole query, so the server returns null for the parent field that was being resolved"
         }
       ],
       "answerKey": {
@@ -1333,7 +1328,7 @@
         },
         {
           "id": "d",
-          "label": "GraphQL returns HTTP 200 with an `errors` array for resolver failures, so status-code monitoring misses them"
+          "label": "Resolver failures return HTTP 200 with an `errors` array, so status-code monitoring misses them"
         }
       ],
       "answerKey": {
@@ -1356,19 +1351,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Only the first root field of any operation is executed, and the second one is run by a retry mechanism"
+          "label": "Only the first root field of an operation is executed by the server, and the second one is run later by a client retry mechanism"
         },
         {
           "id": "b",
-          "label": "The resolvers are asynchronous, which always makes GraphQL ignore the order of fields in a document"
+          "label": "Asynchronous resolvers make GraphQL ignore field order in a document, so even a Mutation would run its root fields in random order"
         },
         {
           "id": "c",
-          "label": "HTTP/2 reorders the two fields on the wire, so the server receives credit first"
+          "label": "HTTP/2 multiplexing reorders the two fields on the wire, so the server receives the credit field before the debit field"
         },
         {
           "id": "d",
-          "label": "Query root fields may execute in parallel, so ordering is not guaranteed; side effects belong in Mutation, whose root fields run serially"
+          "label": "Query root fields may run in parallel, so order is not guaranteed; Mutation root fields run serially, so side effects belong there"
         }
       ],
       "answerKey": {
@@ -1391,19 +1386,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Mutations never write to the cache, so a manual refetch is always required for any change"
+          "label": "Mutations never write to the cache automatically, so a manual refetch or cache update is always required after any change"
         },
         {
           "id": "b",
-          "label": "The response lacks `id` and `__typename`, so the normalized cache cannot match it to the cached User entity"
+          "label": "The response lacks `id`, so the normalized cache cannot match it to the cached User entity"
         },
         {
           "id": "c",
-          "label": "The list query used a fragment, which makes cached fields immutable after the first response"
+          "label": "The list query used a fragment, which makes the cached fields immutable once the first response has been stored"
         },
         {
           "id": "d",
-          "label": "Apollo caches every mutation result for 24 hours, so the list stays stale until the entry expires"
+          "label": "Apollo caches each mutation result for 24 hours, so the list stays stale until that cache entry expires"
         }
       ],
       "answerKey": {
@@ -1467,19 +1462,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The subscription resolver returns an async iterator, which supports only one subscriber per server"
+          "label": "The subscription resolver returns an async iterator, and an async iterator can serve only one subscriber per server process at a time"
         },
         {
           "id": "b",
-          "label": "The mutation must return the subscription payload, otherwise the event is dropped by every instance"
+          "label": "The mutation must return the subscription payload to the client, otherwise the event is dropped by every instance that did not run it"
         },
         {
           "id": "c",
-          "label": "Websockets cannot carry subscriptions, so the load balancer must convert them into HTTP polling"
+          "label": "Websockets cannot carry subscriptions through a load balancer, so the balancer must convert them into HTTP polling requests"
         },
         {
           "id": "d",
-          "label": "In-memory PubSub is local to each process, so events published on one instance never reach subscribers on another"
+          "label": "The in-memory PubSub is local to each process, so events published on one instance never reach subscribers on another"
         }
       ],
       "answerKey": {
@@ -1572,7 +1567,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The whole `posts` field is null, because one failed item invalidates the list it belongs to"
+          "label": "The whole `posts` field is null, because an error in one list item invalidates the entire list that contains it"
         },
         {
           "id": "b",
@@ -1580,11 +1575,11 @@
         },
         {
           "id": "c",
-          "label": "The second post stays with `author: null`, since errors never change the shape of the data"
+          "label": "The second post stays with `author: null`, since a resolver error never changes the shape of the returned data"
         },
         {
           "id": "d",
-          "label": "The entire `data` is null, because any non-null violation nulls the root of the response"
+          "label": "The entire `data` is null, because any non-null violation nulls the root of the response before it is sent"
         }
       ],
       "answerKey": {
@@ -1642,11 +1637,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Subscriptions deliver only the first event of each connection, so later messages are skipped"
+          "label": "Subscriptions stop delivering after the first event on a connection unless the client re-subscribes"
         },
         {
           "id": "b",
-          "label": "The resolver for `messageAdded` filters out events created by any other user on purpose"
+          "label": "The `messageAdded` resolver filters events by sender, so some users are excluded from receiving them"
         },
         {
           "id": "c",
@@ -1654,7 +1649,7 @@
         },
         {
           "id": "d",
-          "label": "WebSocket connections cannot pass through a load balancer, so some clients never subscribe"
+          "label": "The load balancer cannot keep WebSocket connections open, so many clients fall back to polling and miss events"
         }
       ],
       "answerKey": {
@@ -1718,15 +1713,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Identical queries fail to match because GraphQL reorders the fields in every response"
+          "label": "The CDN treats each query string as a distinct cache key, so small whitespace differences between clients prevent matches"
         },
         {
           "id": "b",
-          "label": "GraphQL responses always include per-request timestamps, so no two responses can be identical"
+          "label": "GraphQL responses usually carry per-request tracing data in the extensions field, which makes each cached body differ"
         },
         {
           "id": "c",
-          "label": "The CDN cannot parse JSON, so it rejects the responses and drops them before storing"
+          "label": "The CDN cannot cache JSON payloads by default, so it treats every GraphQL response as a non-cacheable content type"
         },
         {
           "id": "d",
@@ -1897,15 +1892,15 @@
         },
         {
           "id": "b",
-          "label": "Caching every response for an hour so repeated costly queries are never re-executed"
+          "label": "Caching responses for an hour, so that repeated costly queries are mostly served without re-execution"
         },
         {
           "id": "c",
-          "label": "A persisted-query allow-list that rejects any query not registered at build time"
+          "label": "A persisted-query allow-list that rejects queries not registered at build time by the client"
         },
         {
           "id": "d",
-          "label": "Disabling introspection, so developers cannot see which expensive fields exist"
+          "label": "Disabling introspection in production, so developers have a harder time finding expensive fields"
         }
       ],
       "answerKey": {
@@ -2034,19 +2029,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Declare it non-null so failures are reported clearly, accepting that null bubbles up to the nearest nullable parent"
+          "label": "Declare it non-null so failures are reported clearly, accepting that null bubbles up to the nearest nullable parent field"
         },
         {
           "id": "b",
-          "label": "Catch the failure in the resolver and return an empty summary with zeros, so clients never see any sign of an error"
+          "label": "Catch the failure in the resolver and return an empty summary with zero counts, so clients never see any sign of an error or outage"
         },
         {
           "id": "c",
-          "label": "Return HTTP 503 whenever any resolver throws, so that clients retry the complete query until every field works"
+          "label": "Return HTTP 503 whenever any resolver throws, so that clients retry the complete query until every field resolves without errors"
         },
         {
           "id": "d",
-          "label": "Declare `reviewSummary` nullable, so a failure gives null plus an entry in `errors` while product fields still return"
+          "label": "Make it nullable, so a failure gives null plus an entry in `errors` while the other product fields still return"
         }
       ],
       "answerKey": {
@@ -2215,11 +2210,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Turn on CDN caching for POST responses keyed by URL alone, since the endpoint is public and every request shares one path"
+          "label": "Turn on CDN caching for POST responses keyed by URL alone, so the single public /graphql path is cached for 5 minutes"
         },
         {
           "id": "b",
-          "label": "Cache each resolver's results for 5 minutes in memory, which removes the need for a CDN and all network traffic to the API"
+          "label": "Cache each resolver's results for 5 minutes in server memory, so repeated queries skip the database and the CDN is not needed"
         },
         {
           "id": "c",
@@ -2227,7 +2222,7 @@
         },
         {
           "id": "d",
-          "label": "Replace the catalog queries with one REST endpoint per screen, because GraphQL responses can never be cached by anything"
+          "label": "Replace the catalog queries with one REST endpoint per screen, so each URL gets its own CDN cache entry and headers"
         }
       ],
       "answerKey": {

@@ -151,19 +151,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Repeating the same request has the same effect as sending it once"
+          "label": "Repeating the same request leaves the server in the same state as sending it once"
         },
         {
           "id": "b",
-          "label": "The request body is always encrypted before it is sent"
+          "label": "The request can be repeated safely because it only reads data and never changes any server state"
         },
         {
           "id": "c",
-          "label": "The server must reply to the request within one second"
+          "label": "The server returns the same status code and identical response body for every repeat of the request"
         },
         {
           "id": "d",
-          "label": "The response to the request is always stored in a cache"
+          "label": "The response can be stored by caches and reused for later requests without contacting the server"
         }
       ],
       "answerKey": {
@@ -402,11 +402,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Pagination lets the server skip authentication for each later page request"
+          "label": "Pagination lets the server skip authentication checks on every page after the first request"
         },
         {
           "id": "b",
-          "label": "Pagination encrypts the data so that only the current page can be read"
+          "label": "Pagination encrypts the data in transit so that only the page being viewed can be read"
         },
         {
           "id": "c",
@@ -414,7 +414,7 @@
         },
         {
           "id": "d",
-          "label": "Pagination is required by HTTP, which caps every response at 100 items"
+          "label": "HTTP itself requires pagination and caps every single response at 100 items per request"
         }
       ],
       "answerKey": {
@@ -613,11 +613,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It sorts the products so the newest always appear first"
+          "label": "It sorts the products so the newest ones always appear first"
         },
         {
           "id": "b",
-          "label": "It encrypts large result sets so they are safe to send"
+          "label": "It compresses large result sets so they download much faster"
         },
         {
           "id": "c",
@@ -625,7 +625,7 @@
         },
         {
           "id": "d",
-          "label": "It returns the collection in small chunks so responses stay manageable"
+          "label": "It returns the collection in small, manageable chunks"
         }
       ],
       "answerKey": {
@@ -965,19 +965,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`404 Not Found`, because the email resource was not found"
+          "label": "`404 Not Found`, because the required email resource was not found"
         },
         {
           "id": "b",
-          "label": "`500 Internal Server Error`, because the user could not be saved"
+          "label": "`500 Internal Server Error`, because the user could not be saved without it"
         },
         {
           "id": "c",
-          "label": "`400 Bad Request` with a JSON error body naming the missing `email` field"
+          "label": "`400 Bad Request` with a JSON error body naming the missing `email`"
         },
         {
           "id": "d",
-          "label": "`200 OK` with `{\"status\": \"failed\"}` in the body"
+          "label": "`200 OK` with `{\"status\": \"failed\", \"reason\": \"email is missing\"}` in the body"
         }
       ],
       "answerKey": {
@@ -1179,7 +1179,7 @@
         },
         {
           "id": "b",
-          "label": "`GET /users/5`"
+          "label": "`PATCH /users/5` with body `{\"loginCount\": {\"increment\": 1}}`"
         },
         {
           "id": "c",
@@ -1193,14 +1193,9 @@
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
           "d"
         ]
       },
-      "rubric": [
-        "PUT, DELETE and GET give the same end state when repeated.",
-        "A plain POST that creates a new resource each call is not idempotent."
-      ],
       "reviewed": false
     },
     {
@@ -1247,19 +1242,19 @@
       "options": [
         {
           "id": "a",
-          "label": "New inserts at the top shift older items down, so later offsets re-cover items already seen"
+          "label": "New inserts at the top shift older items down, so later offsets re-cover seen items"
         },
         {
           "id": "b",
-          "label": "Sorting newest first is unstable, so the database returns rows in a random order"
+          "label": "Sorting newest first is unstable, so the database returns rows in a different random order on every page request"
         },
         {
           "id": "c",
-          "label": "The limit of 20 is too small, so consecutive pages overlap at their boundaries"
+          "label": "The limit of 20 is too small, so consecutive pages overlap by a few items at their shared boundaries"
         },
         {
           "id": "d",
-          "label": "Offsets are zero-based, so each page repeats the last item of the previous page"
+          "label": "Offsets are zero-based, so each page repeats the last item of the previous page at its start"
         }
       ],
       "answerKey": {
@@ -1317,11 +1312,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Add rate limiting so the client cannot send two requests in a row"
+          "label": "Add rate limiting so the client cannot send two payment requests within a few seconds of each other"
         },
         {
           "id": "b",
-          "label": "Switch the endpoint to GET so that retries are always safe to repeat"
+          "label": "Switch the endpoint to GET so that a retried request is safe to repeat without side effects"
         },
         {
           "id": "c",
@@ -1329,7 +1324,7 @@
         },
         {
           "id": "d",
-          "label": "Raise the client timeout so the response arrives before any retry is sent"
+          "label": "Raise the client timeout so the response usually arrives before any retry would be sent"
         }
       ],
       "answerKey": {
@@ -1352,19 +1347,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A state change is exposed through GET, which crawlers and prefetchers may call freely"
+          "label": "A state change is exposed through GET, which crawlers may call freely"
         },
         {
           "id": "b",
-          "label": "The endpoint should return 200 rather than 204 so crawlers know it succeeded"
+          "label": "The endpoint should return 200 rather than 204 so crawlers know the deletion succeeded"
         },
         {
           "id": "c",
-          "label": "The verb `delete` is placed in the path, which breaks the API's naming style"
+          "label": "The verb `delete` is placed in the path, which breaks the API's resource naming style"
         },
         {
           "id": "d",
-          "label": "User ids should be passed in the query string instead of the URL path"
+          "label": "User ids should be passed in the query string instead of the URL path to avoid indexing"
         }
       ],
       "answerKey": {
@@ -1387,19 +1382,19 @@
       "options": [
         {
           "id": "a",
-          "label": "URL versions are invisible to caches, so they always need a `Vary` header"
+          "label": "URL versions are invisible to shared caches, so they need a `Vary` header to avoid serving wrong versions"
         },
         {
           "id": "b",
-          "label": "Header versioning keeps URIs stable, but is harder to try in a browser and needs `Vary` for caches"
+          "label": "Header versioning keeps URIs stable, but is harder to test in a browser and needs `Vary` for caches"
         },
         {
           "id": "c",
-          "label": "Header versioning forces every client onto the newest version at the same time"
+          "label": "Header versioning moves clients to the newest version at once, since the server picks the media type"
         },
         {
           "id": "d",
-          "label": "URL versioning changes a resource's identity only for clients that send a custom header"
+          "label": "URL versioning gives one resource several URIs, so clients that send a custom header see a different identity"
         }
       ],
       "answerKey": {
@@ -1529,19 +1524,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Offset-based pagination shifts when rows are inserted ahead of the current offset, so items move between pages"
+          "label": "Offset pagination shifts when rows are inserted ahead of the offset, so items move between pages"
         },
         {
           "id": "b",
-          "label": "The server sorts by a stable unique column, which forces rows to be returned more than once"
+          "label": "The sort column is not unique, so rows with equal values come back in a random order on each request"
         },
         {
           "id": "c",
-          "label": "The per_page value of 50 exceeds the maximum that HTTP allows for a response body, so rows repeat"
+          "label": "The per_page value of 50 is above the maximum page size HTTP permits, so the server repeats rows"
         },
         {
           "id": "d",
-          "label": "GET requests with query strings are cached by proxies, which merges adjacent pages together"
+          "label": "A shared proxy caches each query string separately, so adjacent pages are served from overlapping snapshots"
         }
       ],
       "answerKey": {
@@ -1564,19 +1559,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The email field must be moved into the URL path, since body fields in PUT are always optional"
+          "label": "The email field must be moved into the URL path, because PUT treats every field left in the body as optional and unchanged"
         },
         {
           "id": "b",
-          "label": "PUT is only valid for creating new resources, so the server wiped the record before recreating it"
+          "label": "PUT is only valid for creating new resources, so the server wiped the existing record before recreating it from the body"
         },
         {
           "id": "c",
-          "label": "The client is using PUT, whose full-replacement semantics drop omitted fields; a partial update belongs under PATCH"
+          "label": "PUT has full-replacement semantics, so omitted fields are dropped; partial updates belong under PATCH"
         },
         {
           "id": "d",
-          "label": "The server should return 204 instead of 200, because 200 causes clients to clear unspecified fields"
+          "label": "The server should return 204 instead of 200, because a 200 response makes clients clear any fields they did not send"
         }
       ],
       "answerKey": {
@@ -1634,19 +1629,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Numbers and strings are interchangeable in JSON, so the breakage came from the response being too large"
+          "label": "Numbers and strings are interchangeable in JSON, so the breakage came from the payload growing larger and hitting partners' response size limits"
         },
         {
           "id": "b",
-          "label": "Changing a field's type is a breaking change for consumers that parse it, even though the URL and field name stay the same"
+          "label": "Changing a field's type breaks consumers that parse it, even though the URL and field name stay the same"
         },
         {
           "id": "c",
-          "label": "Only removed endpoints can break clients, so the partners must have been using undocumented URLs"
+          "label": "Only removed endpoints or renamed fields can break clients, so the partners must have been relying on undocumented URLs or behaviour"
         },
         {
           "id": "d",
-          "label": "The change was safe, but partners had cached the 200 status and replayed it against the new schema"
+          "label": "The change was safe, but partners had cached the old 200 responses and replayed them against the new schema, causing parse errors"
         }
       ],
       "answerKey": {
@@ -1776,19 +1771,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Change fields in place and announce changes by email, since consumers should keep up"
+          "label": "Change fields in place and announce changes by email a few weeks ahead, since consumers should keep up with the API"
         },
         {
           "id": "b",
-          "label": "Evolve additively within a version, avoid breaking changes, and introduce a new major version only with a long deprecation window"
+          "label": "Add fields without breaking existing ones, and release a new major version only rarely, with a long deprecation window"
         },
         {
           "id": "c",
-          "label": "Release a new major version for every field addition, so each client pins an exact schema"
+          "label": "Release a new major version for every field addition and keep all old versions running, so each client pins an exact schema"
         },
         {
           "id": "d",
-          "label": "Remove the version entirely and let each client negotiate fields through undocumented query flags"
+          "label": "Drop explicit versions and let each client negotiate fields through query flags that are documented only in release notes"
         }
       ],
       "answerKey": {
@@ -1811,19 +1806,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Return 400 with an empty body, as the status code alone tells clients what went wrong"
+          "label": "Return 400 with an empty body, since the status code alone tells clients the request was invalid and which input to fix"
         },
         {
           "id": "b",
-          "label": "Return 422 or 400 with an `application/problem+json` body (RFC 9457) listing a type, title, detail and per-field errors"
+          "label": "Return 422 or 400 with an `application/problem+json` body (RFC 9457) with type, title, detail and per-field errors"
         },
         {
           "id": "c",
-          "label": "Return 200 with `{\"ok\": false}` so every client parses a single success shape"
+          "label": "Return 200 with `{\"ok\": false, \"error\": \"invalid\"}` so every client can parse a single response shape for all outcomes"
         },
         {
           "id": "d",
-          "label": "Return 500 with a plain text message, since the server rejected the input"
+          "label": "Return 400 with a plain text message such as \"name is required\", written clearly so that any developer can read the cause"
         }
       ],
       "answerKey": {
@@ -1846,19 +1841,19 @@
       "options": [
         {
           "id": "a",
-          "label": "B, because query filters give stronger authorisation guarantees than path hierarchy"
+          "label": "B, because a flat URL lets you check access on the item alone without loading the order first"
         },
         {
           "id": "b",
-          "label": "B, because flat URLs are always better regardless of ownership relationships"
+          "label": "B, because flat URLs keep paths short and make caching easier for every kind of child resource"
         },
         {
           "id": "c",
-          "label": "A, because nested paths are required by the HTTP specification for child resources"
+          "label": "A, because the HTTP specification requires child resources to be nested under their parent path"
         },
         {
           "id": "d",
-          "label": "A, because the path expresses ownership and lets authorisation and lifecycle follow the parent order"
+          "label": "A, because the path shows ownership so access checks and lifecycle follow the order"
         }
       ],
       "answerKey": {
@@ -2058,19 +2053,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Sound: without a new version the field cannot be described in the published API description"
+          "label": "Sound: the published API description is a contract, so a new field must be released as a new version before clients can rely on it"
         },
         {
           "id": "b",
-          "label": "Unnecessary only if the field is also added to every other endpoint, which keeps shapes uniform across the API"
+          "label": "Unnecessary only if the field is added to all other endpoints too, since mixed response shapes in one version would confuse clients"
         },
         {
           "id": "c",
-          "label": "Unnecessary: adding an optional field is backward compatible for tolerant clients, so ship it in v1 and document it"
+          "label": "Unnecessary: an optional field is backward compatible for tolerant clients, so add it to v1 and document it"
         },
         {
           "id": "d",
-          "label": "Sound: any change to a response shape is breaking for someone, so each such change needs its own new major version"
+          "label": "Sound: clients that validate responses strictly could fail on any new field, so every such change needs its own major version"
         }
       ],
       "answerKey": {
@@ -2304,15 +2299,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Return numeric internal exception codes and stack traces in the body so that clients can search for them"
+          "label": "A JSON body with a numeric internal error code and a localised message string, with field errors packed into the message text"
         },
         {
           "id": "b",
-          "label": "application/problem+json with a type URI, title, status, detail and an extension `errors` array of field and message pairs"
+          "label": "application/problem+json with a type URI, title, status, detail and an `errors` array of field and message pairs"
         },
         {
           "id": "c",
-          "label": "Return only the HTTP status code and a free-text English sentence in the body describing each failure"
+          "label": "A JSON body with an `error` string holding the English exception class name, plus a `fields` map of field names to messages"
         },
         {
           "id": "d",
@@ -2374,19 +2369,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Silently redirect v1 calls to v2 with 301 so every client migrates without noticing the change"
+          "label": "Redirect v1 calls to v2 with a 301, log which clients follow it, and tell clients to update their saved URLs when convenient"
         },
         {
           "id": "b",
-          "label": "Send Deprecation and Sunset headers with a Link to migration docs, log calls per API key, and contact remaining callers before the date"
+          "label": "Send Deprecation and Sunset headers linking to migration docs, log calls per API key, and contact remaining callers"
         },
         {
           "id": "c",
-          "label": "Keep v1 running indefinitely but drop it from the documentation so new clients cannot find it"
+          "label": "Keep v1 running with no end date, remove it from the docs, and watch per-key traffic until usage falls to a low level"
         },
         {
           "id": "d",
-          "label": "Announce on the blog, then return 410 Gone to all callers on the sunset date to force migration"
+          "label": "Announce the retirement on the blog and list the date there, then return 410 Gone to v1 callers when the sunset date arrives"
         }
       ],
       "answerKey": {
@@ -2450,7 +2445,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Return `full_name` only when clients send a new header and never remove `name`, keeping both forever"
+          "label": "Return `full_name` only when clients send an opt-in header, leave `name` in place for everyone else, and never remove it, so no client is ever broken"
         },
         {
           "id": "b",
@@ -2458,11 +2453,11 @@
         },
         {
           "id": "c",
-          "label": "Return both `name` and `full_name`, mark `name` deprecated, track its use per client, and remove it in a later version once usage reaches zero"
+          "label": "Return both `name` and `full_name`, mark `name` deprecated, track its use per client, and remove it once usage reaches zero"
         },
         {
           "id": "d",
-          "label": "Rename it in place and release /v2 only, telling app owners to update before the old field disappears"
+          "label": "Rename it in place and release /v2 only, telling app owners to update before the old field disappears from v1 on a fixed date"
         }
       ],
       "answerKey": {

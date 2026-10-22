@@ -81,11 +81,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A test that fails on purpose to check alerts"
+          "label": "A test that fails on purpose to check that alerts reach the team"
         },
         {
           "id": "b",
-          "label": "A server setting that limits how many jobs run"
+          "label": "A server setting that limits how many jobs can run at the same time"
         },
         {
           "id": "c",
@@ -93,7 +93,7 @@
         },
         {
           "id": "d",
-          "label": "A script that deletes old build artifacts"
+          "label": "A script that deletes old build artifacts once storage fills up"
         }
       ],
       "answerKey": {
@@ -227,19 +227,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is skipped because the pipeline stops at the failed stage"
+          "label": "It is skipped, as the pipeline stops at the failed stage"
         },
         {
           "id": "b",
-          "label": "It runs but only on a staging server"
+          "label": "It runs but only on a staging server, to limit the risk"
         },
         {
           "id": "c",
-          "label": "It runs anyway and flags the failure later"
+          "label": "It runs anyway and the failure is flagged on the report later"
         },
         {
           "id": "d",
-          "label": "It waits until the developer fixes the test"
+          "label": "It waits in a paused state until the developer fixes the test"
         }
       ],
       "answerKey": {
@@ -262,19 +262,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It removes the need for code review"
+          "label": "It removes the need for code review before merging"
         },
         {
           "id": "b",
-          "label": "It lets developers skip testing locally"
+          "label": "It lets developers skip running tests on their machines"
         },
         {
           "id": "c",
-          "label": "It catches integration problems while the change is small"
+          "label": "It catches integration problems while changes are small"
         },
         {
           "id": "d",
-          "label": "It makes the build artifact smaller"
+          "label": "It makes the build artifact smaller and faster to ship"
         }
       ],
       "answerKey": {
@@ -297,19 +297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Delivery needs a manual approval before production; deployment releases automatically"
+          "label": "Delivery needs manual approval before production; deployment doesn't"
         },
         {
           "id": "b",
-          "label": "Delivery skips the tests that deployment runs"
+          "label": "Delivery stops after the build and tests; deployment adds a release step"
         },
         {
           "id": "c",
-          "label": "Deployment only builds artifacts; delivery releases them"
+          "label": "Deployment only builds artifacts; delivery releases them to users"
         },
         {
           "id": "d",
-          "label": "Delivery targets mobile apps; deployment targets web apps"
+          "label": "Delivery runs on every commit; deployment runs only on a nightly schedule"
         }
       ],
       "answerKey": {
@@ -332,11 +332,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Only the deploy stage runs"
+          "label": "Only the deploy stage runs, to a preview environment"
         },
         {
           "id": "b",
-          "label": "Build, test and deploy all run"
+          "label": "Build, test and deploy all run, since the push triggers it"
         },
         {
           "id": "c",
@@ -344,7 +344,7 @@
         },
         {
           "id": "d",
-          "label": "Nothing runs until the branch is merged"
+          "label": "Nothing runs until the branch is merged into main"
         }
       ],
       "answerKey": {
@@ -367,15 +367,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Rebuilding is not allowed by CI tools"
+          "label": "Rebuilding in each environment would cost more compute than CI plans allow"
         },
         {
           "id": "b",
-          "label": "Environments cannot run source code"
+          "label": "Each environment needs its own build so config is compiled in"
         },
         {
           "id": "c",
-          "label": "Artifacts become smaller each time they move"
+          "label": "Artifacts get smaller and faster after each promotion step"
         },
         {
           "id": "d",
@@ -402,15 +402,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It rebuilds the code with extra logging enabled"
+          "label": "It rebuilds the same code with extra logging enabled to find the fault"
         },
         {
           "id": "b",
-          "label": "It rewrites Git history to remove the bad commit"
+          "label": "It rewrites Git history so the bad commit is removed from the branch"
         },
         {
           "id": "c",
-          "label": "It deletes the failing tests from the repo"
+          "label": "It removes the failing tests so the pipeline can pass and ship again"
         },
         {
           "id": "d",
@@ -548,19 +548,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It makes the build run faster because production never needs any compiled files"
+          "label": "It speeds up the pipeline because later stages skip compilation and so need no dependency checks"
         },
         {
           "id": "b",
-          "label": "It lets each environment use its own source branch, so the code can differ safely"
+          "label": "It lets each environment pull its own source branch, so code can safely differ between stages"
         },
         {
           "id": "c",
-          "label": "It guarantees that what was tested is exactly what ships, instead of a fresh rebuild that might differ"
+          "label": "It ensures the tested artifact is what ships, not a rebuild that might differ"
         },
         {
           "id": "d",
-          "label": "It removes the need for tests in staging because the artifact was already built"
+          "label": "It removes the need for tests in staging, because the artifact was already verified once"
         }
       ],
       "answerKey": {
@@ -583,19 +583,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Secrets in the repository are fine for private repos, as long as the key is renamed regularly"
+          "label": "Private repositories are only visible to trusted people, so a committed key is safe as long as the key is renamed regularly"
         },
         {
           "id": "b",
-          "label": "The secret store makes the key work faster, because stored values are cached on agents"
+          "label": "The secret store makes the key work faster, because stored values are cached on every build agent and skip lookups"
         },
         {
           "id": "c",
-          "label": "Repository history is widely readable and permanent, so a committed key stays exposed even if later deleted"
+          "label": "Repository history is widely readable and permanent, so a committed key stays exposed even if deleted"
         },
         {
           "id": "d",
-          "label": "Committed files cannot be read by pipeline jobs, so the key would never be found"
+          "label": "Pipeline jobs cannot read committed files during a run, so the key would never be found when the deploy step needs it"
         }
       ],
       "answerKey": {
@@ -618,7 +618,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Running slow tests last guarantees that they always pass because the code was already checked"
+          "label": "Slow tests are more likely to pass once unit tests have run, because the unit tests warm up the shared test environment"
         },
         {
           "id": "b",
@@ -626,11 +626,11 @@
         },
         {
           "id": "c",
-          "label": "End-to-end tests cannot run until all unit tests have been deleted from the project"
+          "label": "End-to-end tests depend on the unit test results as inputs, so they must be run after the unit tests finish"
         },
         {
           "id": "d",
-          "label": "Unit tests are always more important, so the slow tests can be ignored if they fail"
+          "label": "Unit tests cover more of the system than end-to-end tests, so a slow test failure is usually safe to ignore"
         }
       ],
       "answerKey": {
@@ -729,19 +729,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The pipeline reruns the deployment until it works, which hides any library differences"
+          "label": "The pipeline reruns the deployment until it works, which hides any library differences between environments"
         },
         {
           "id": "b",
-          "label": "The agent encrypts the release, which stops library versions from differing in production"
+          "label": "The agent runs the unit tests on the laptop's libraries before release, so mismatched versions get caught early"
         },
         {
           "id": "c",
-          "label": "A pipeline automatically upgrades every library to the newest version, which makes them all match"
+          "label": "A pipeline automatically upgrades every library to the newest version on each run, which makes all environments match"
         },
         {
           "id": "d",
-          "label": "A fresh agent installs dependencies from declared files each time, so builds don't depend on one person's machine"
+          "label": "A fresh agent installs dependencies from declared files each run, so builds don't depend on one machine"
         }
       ],
       "answerKey": {
@@ -904,19 +904,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A fixed string like `deps`, so the cache is always reused"
+          "label": "A fixed string like `deps`, so the cache is always reused and installs stay fast"
         },
         {
           "id": "b",
-          "label": "A hash of `package-lock.json`, so the cache changes when dependencies change"
+          "label": "A hash of `package-lock.json`, so it changes when dependencies change"
         },
         {
           "id": "c",
-          "label": "The current date, so the cache refreshes daily"
+          "label": "The current date, so the cache is rebuilt once per day and never gets too stale"
         },
         {
           "id": "d",
-          "label": "The commit SHA, so each run gets its own entry"
+          "label": "The commit SHA, so each run gets its own entry and always matches the code"
         }
       ],
       "answerKey": {
@@ -1045,11 +1045,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`if: github.base_ref == 'main'`"
+          "label": "`if: github.base_ref == 'main' && github.event_name == 'pull_request'`"
         },
         {
           "id": "b",
-          "label": "`if: github.actor == 'main'`"
+          "label": "`if: github.actor == 'main' && github.event_name == 'push'`"
         },
         {
           "id": "c",
@@ -1057,7 +1057,7 @@
         },
         {
           "id": "d",
-          "label": "`if: github.event_name == 'pull_request'`"
+          "label": "`if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'`"
         }
       ],
       "answerKey": {
@@ -1084,15 +1084,15 @@
         },
         {
           "id": "b",
-          "label": "The commit SHA of the current build"
+          "label": "The commit SHA of the current build, so each commit gets its own cache"
         },
         {
           "id": "c",
-          "label": "The runner's operating system name only"
+          "label": "The runner's operating system name, so every run on that OS shares one cache"
         },
         {
           "id": "d",
-          "label": "The current date, so the cache refreshes daily"
+          "label": "The current date, so the cache refreshes once a day on every branch"
         }
       ],
       "answerKey": {
@@ -1115,7 +1115,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Hardcode it in the workflow YAML as an env value"
+          "label": "Hardcode it in the workflow YAML as an env value so every pipeline run uses the same token"
         },
         {
           "id": "b",
@@ -1123,11 +1123,11 @@
         },
         {
           "id": "c",
-          "label": "Commit it in a `.env` file in a private repository"
+          "label": "Commit it in a `.env` file in a private repository so only team members can read it"
         },
         {
           "id": "d",
-          "label": "Pass it as a command-line argument in the script"
+          "label": "Pass it as a command-line argument in the script so it is never written to any file"
         }
       ],
       "answerKey": {
@@ -1291,11 +1291,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Production needs a larger runner for the build"
+          "label": "The build runs on a different runner size than production, so the compiled output is tuned to the wrong hardware"
         },
         {
           "id": "b",
-          "label": "The test job should run after the deploy job"
+          "label": "Tests should run after deploy, because only the production environment shows whether the code really works"
         },
         {
           "id": "c",
@@ -1303,7 +1303,7 @@
         },
         {
           "id": "d",
-          "label": "The deploy job should run fewer build steps to be faster"
+          "label": "The deploy job repeats build steps, which wastes time but cannot change what is shipped"
         }
       ],
       "answerKey": {
@@ -1326,7 +1326,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Masking only works on secrets longer than 64 characters"
+          "label": "Masking only applies to secrets shorter than 64 characters, so longer values pass through unmasked"
         },
         {
           "id": "b",
@@ -1334,11 +1334,11 @@
         },
         {
           "id": "c",
-          "label": "Masked secrets are shown again when a job is retried"
+          "label": "Masked secrets are shown again in the log output whenever a failed job is retried"
         },
         {
           "id": "d",
-          "label": "Base64 output is excluded from all log filtering by design"
+          "label": "Base64 output is excluded from log filtering by design, since it is treated as binary data"
         }
       ],
       "answerKey": {
@@ -1361,7 +1361,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Forks will be unable to open pull requests"
+          "label": "Fork contributors can no longer open pull requests, because the trigger blocks them"
         },
         {
           "id": "b",
@@ -1369,11 +1369,11 @@
         },
         {
           "id": "c",
-          "label": "The workflow will skip tests for code from forks"
+          "label": "The workflow skips tests for fork code, so unreviewed changes merge without checks"
         },
         {
           "id": "d",
-          "label": "Builds will be slower because forks use separate caches"
+          "label": "Builds slow down because forks cannot share the base repository's dependency cache"
         }
       ],
       "answerKey": {
@@ -1400,15 +1400,15 @@
         },
         {
           "id": "b",
-          "label": "Tests were run before the cache was saved"
+          "label": "Tests ran before the cache was saved, so the new library was skipped"
         },
         {
           "id": "c",
-          "label": "The cache is too small to hold the new library"
+          "label": "The cache exceeded its size limit, so the new library was never stored"
         },
         {
           "id": "d",
-          "label": "The branch name is too short to be unique"
+          "label": "The branch name is too generic to identify each separate CI run"
         }
       ],
       "answerKey": {
@@ -1467,19 +1467,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The pipeline cached the release 42 image under the old tag"
+          "label": "The pipeline reused a cached layer, so the redeployed 41 tag still ran release 42 code"
         },
         {
           "id": "b",
-          "label": "Release 41's image was corrupted when it was pulled"
+          "label": "Release 41's image was corrupted when it was pulled, so its data access code was incomplete"
         },
         {
           "id": "c",
-          "label": "The rollback ran with an older version of the CI runner"
+          "label": "The rollback job ran on a newer CI runner version, which rebuilt release 41 with changed dependencies"
         },
         {
           "id": "d",
-          "label": "The migration was not backward compatible, so old code can't run on the new schema"
+          "label": "The migration wasn't backward compatible, so old code can't run on the new schema"
         }
       ],
       "answerKey": {
@@ -1607,19 +1607,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Each environment builds its own artifact, so unpinned dependencies may resolve differently between builds"
+          "label": "Each environment builds its own artifact, so unpinned dependencies may resolve differently"
         },
         {
           "id": "b",
-          "label": "Production servers use a faster CPU, so race conditions only appear there"
+          "label": "Production servers have a faster CPU than staging, so timing-dependent race conditions surface only there"
         },
         {
           "id": "c",
-          "label": "The commit hash changes between the staging and production deploys because Git rewrites history"
+          "label": "Staging tests run against a mocked backend, so some real integration defects are hidden until production"
         },
         {
           "id": "d",
-          "label": "Staging tests run against a mocked backend, so every real defect is always hidden there"
+          "label": "The deploy jobs check out the branch head at run time, so production may get newer commits than staging"
         }
       ],
       "answerKey": {
@@ -1642,7 +1642,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Masking only applies to jobs on the default branch, so debug steps are always exposed"
+          "label": "Masking is limited to jobs on the default branch, so a debug step on a feature branch prints secrets unfiltered"
         },
         {
           "id": "b",
@@ -1650,11 +1650,11 @@
         },
         {
           "id": "c",
-          "label": "Masking is applied only after the job finishes, so streaming output is never filtered"
+          "label": "Masking runs as a post-processing pass after the job finishes, so streamed output is not filtered while the step runs"
         },
         {
           "id": "d",
-          "label": "Masking works only on secrets under 16 characters, so longer keys are printed as-is"
+          "label": "Masking is designed for secrets under 16 characters, so a longer key is printed as-is once it is piped to another command"
         }
       ],
       "answerKey": {
@@ -1718,19 +1718,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The token expires after one use, and the first branch PR already consumed it"
+          "label": "The token is single-use, so the first branch PR consumed it and later runs are rejected"
         },
         {
           "id": "b",
-          "label": "Forks use a different Git history, so the checkout step fetches an outdated copy of the tests"
+          "label": "Forks have a separate Git history, so the checkout step fetches an outdated copy of the tests that lacks the auth setup"
         },
         {
           "id": "c",
-          "label": "Fork contributors have lower rate limits on the test API, so the server rejects their requests"
+          "label": "Fork contributors get lower rate limits on the test API, so the server rejects their requests as unauthorized"
         },
         {
           "id": "d",
-          "label": "Forked PR runs don't receive repository secrets by default, so the token is empty and authentication fails"
+          "label": "Fork PR runs get no repository secrets by default, so the token is empty and authentication fails"
         }
       ],
       "answerKey": {
@@ -1823,19 +1823,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Commit an encrypted key to the repo and decrypt it with a passphrase stored in CI"
+          "label": "Commit an encrypted key to the repo and decrypt it at deploy time with a passphrase stored as a CI secret"
         },
         {
           "id": "b",
-          "label": "Store a long-lived admin key as a CI secret and restrict who can edit the workflow"
+          "label": "Store a long-lived admin key as a CI secret, mask it in logs and restrict who can edit the workflow file"
         },
         {
           "id": "c",
-          "label": "Use OIDC federation so the job gets short-lived, narrowly scoped tokens bound to that repository"
+          "label": "Use OIDC federation so the job gets short-lived, scoped tokens bound to that repository"
         },
         {
           "id": "d",
-          "label": "Use the same personal access key as the lead engineer so audits are traceable"
+          "label": "Use the lead engineer's personal access key in CI so every deploy is traceable to a named person in audits"
         }
       ],
       "answerKey": {
@@ -1858,19 +1858,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is sound, because any test that passes on a retry proves the code is correct"
+          "label": "It is sound, because a test that passes on retry shows the code works and the failure was only noise"
         },
         {
           "id": "b",
-          "label": "It is sound, because flaky tests indicate test infrastructure problems that are never worth fixing"
+          "label": "It is sound, because flaky failures usually come from test infrastructure and cost more to fix than they save"
         },
         {
           "id": "c",
-          "label": "It is harmful, because retries always slow pipelines more than the flakiness itself did"
+          "label": "It is harmful, because retries add enough run time to outweigh the value of the signal the suite gives"
         },
         {
           "id": "d",
-          "label": "It hides real intermittent defects and flakiness trends, so retries should be tracked and flaky tests quarantined and fixed"
+          "label": "It hides intermittent defects and flakiness trends, so track retries and quarantine and fix flaky tests"
         }
       ],
       "answerKey": {
@@ -1969,15 +1969,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Canary release sending 5% of traffic to the new version, with automated error-rate checks and rollback"
+          "label": "Canary release: 5% of traffic to the new version, auto-rollback on error rate"
         },
         {
           "id": "b",
-          "label": "Blue-green with a full duplicate environment and an all-at-once traffic switch"
+          "label": "Blue-green with a full duplicate environment, switching all traffic at once and keeping the old one for rollback"
         },
         {
           "id": "c",
-          "label": "Feature freeze for a month, so each release is tested longer in staging before shipping"
+          "label": "Rolling update that replaces instances in batches, relying on readiness probes to catch bad releases before all are replaced"
         },
         {
           "id": "d",
@@ -2004,15 +2004,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Run affected-service tests on PRs and again on main, with no full run, since dependency graphs are always exact"
+          "label": "Run affected-service tests on PRs and again on main after merge, with no full run, because the dependency graph identifies impacted services"
         },
         {
           "id": "b",
-          "label": "Run the full suite only nightly and let PRs run lint, since a broken main can be fixed forward the next morning"
+          "label": "Run the full suite nightly and only lint on PRs, because a broken main can be fixed forward the next morning"
         },
         {
           "id": "c",
-          "label": "Run the full suite on every PR using larger runners, since only a complete run can ever protect main from breakage"
+          "label": "Run the full suite on every PR using larger runners, because parallel hardware can cut 45 minutes to under 10"
         },
         {
           "id": "d",
@@ -2074,19 +2074,19 @@
       "options": [
         {
           "id": "a",
-          "label": "What passed staging is not necessarily what ships, since base-image or dependency drift can change the prod build; build once, promote by digest"
+          "label": "Staging may validate a different image than prod ships, since base-image or dependency drift can change the prod build; build once, promote by digest"
         },
         {
           "id": "b",
-          "label": "Prod images should be built on a release engineer's laptop so that they can inspect the result before it is shipped"
+          "label": "Prod images should be built on a release engineer's laptop, where the result can be inspected by hand before shipping, instead of by the CI runners"
         },
         {
           "id": "c",
-          "label": "Building in each job is fine because the same commit guarantees identical output, so only job ordering matters here"
+          "label": "Building in each job is fine because the same commit guarantees byte-identical output, so only the ordering of the staging and prod jobs matters here"
         },
         {
           "id": "d",
-          "label": "The two builds double compute cost, which is the main flaw, and layer caching would resolve the whole problem"
+          "label": "The duplicate builds double compute cost, which is the main flaw, and enabling shared layer caching between the two jobs would resolve the problem entirely"
         }
       ],
       "answerKey": {
@@ -2113,15 +2113,15 @@
         },
         {
           "id": "b",
-          "label": "Delete the test now, because an intermittently failing test gives no information and costs every reviewer time"
+          "label": "Delete the test now, since its intermittent failures make its results unreliable and it costs reviewers time on unrelated PRs"
         },
         {
           "id": "c",
-          "label": "Retry every failing test three times and report success if any attempt passes, so intermittent failures never block merges"
+          "label": "Retry failing tests up to three times and report success if one attempt passes, so intermittent failures stop blocking merges"
         },
         {
           "id": "d",
-          "label": "Mark the whole suite non-blocking until flakiness is gone, since blocking on any test punishes unrelated authors"
+          "label": "Mark the whole suite non-blocking until the flakiness is resolved, since blocking on one test penalizes authors of unrelated changes"
         }
       ],
       "answerKey": {
@@ -2325,19 +2325,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Cancel any in-progress deploy when a newer run starts, so the newest commit always wins the race for the environment"
+          "label": "Cancel any in-progress deploy when a newer run starts, so the newest commit always wins the race for the environment and no stale deploy can finish"
         },
         {
           "id": "b",
-          "label": "Add a ten-minute sleep before each deploy so earlier commits have time to finish before later ones begin deploying"
+          "label": "Add a ten-minute wait before each deploy so earlier commits have time to finish before later ones begin, which keeps the order of completion stable"
         },
         {
           "id": "c",
-          "label": "Skip tests on deploy runs so each finishes faster, making out-of-order completion unlikely in normal operation"
+          "label": "Run deploys in parallel per commit but only after tests pass, and let the environment keep whichever deploy reports success last as the live one"
         },
         {
           "id": "d",
-          "label": "Serialize deploys in one concurrency group without cancelling the running one, and skip a queued deploy if a newer commit is already live"
+          "label": "Serialize deploys in one concurrency group without cancelling the running one, and skip a queued deploy if a newer commit is live"
         }
       ],
       "answerKey": {
@@ -2360,11 +2360,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Compare errors with yesterday in a nightly job that pages on-call, who restore the last database backup and the old image"
+          "label": "Compare error counts with yesterday in a nightly job that pages on-call, who then restore the last database backup and redeploy the old image"
         },
         {
           "id": "b",
-          "label": "Run a post-deploy smoke test that checks the home page returns 200 and reverts migrations with a down script on failure"
+          "label": "Run a post-deploy smoke test that checks the home page returns 200 and, on failure, reverts the migration with a down script and the old image"
         },
         {
           "id": "c",
@@ -2372,7 +2372,7 @@
         },
         {
           "id": "d",
-          "label": "Keep the old version on standby and have developers flip traffic by hand after they notice alerts in the team chat"
+          "label": "Keep the old version on standby and have developers flip traffic by hand once they notice alerts in the team chat, then run the down migration"
         }
       ],
       "answerKey": {
@@ -2471,11 +2471,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Deploy all three regions in parallel from one job and roll all of them back if any health check fails"
+          "label": "Deploy all three regions in parallel from one job, with health checks after the rollout and an automatic rollback of every region if any check fails"
         },
         {
           "id": "b",
-          "label": "Deploy the first region automatically, then let each regional team trigger its own deployment when it is ready"
+          "label": "Deploy the first region automatically, then let each regional team trigger its own deployment once it has reviewed the first region's metrics"
         },
         {
           "id": "c",
@@ -2483,7 +2483,7 @@
         },
         {
           "id": "d",
-          "label": "Deploy only to the lowest-traffic region and leave the others on the old version until the next scheduled release"
+          "label": "Deploy only to the lowest-traffic region and leave the others on the old version until the next scheduled release cycle begins"
         }
       ],
       "answerKey": {

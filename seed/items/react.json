@@ -231,15 +231,15 @@
         },
         {
           "id": "b",
-          "label": "Turn the component into a class so it can return more"
+          "label": "Turn the component into a class so it can return more than one element"
         },
         {
           "id": "c",
-          "label": "Wrap both elements in one parent element or a fragment `<>...</>`"
+          "label": "Wrap both in one parent element or a fragment `<>...</>`"
         },
         {
           "id": "d",
-          "label": "Put each element in its own separate `return` statement"
+          "label": "Put each element in its own `return` statement, one after another"
         }
       ],
       "answerKey": {
@@ -262,7 +262,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Plain variables are always reset by the browser each second"
+          "label": "React only lets you display variables that were declared with useState, so plain ones never show"
         },
         {
           "id": "b",
@@ -270,11 +270,11 @@
         },
         {
           "id": "c",
-          "label": "State values are saved permanently in the browser's storage"
+          "label": "State values are saved permanently in the browser's storage, so they survive a page reload"
         },
         {
           "id": "d",
-          "label": "Plain variables cannot hold numbers inside components"
+          "label": "Plain variables inside components are constants, so their values can never be changed"
         }
       ],
       "answerKey": {
@@ -367,19 +367,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It lets React identify which items were added, changed or removed"
+          "label": "It helps React track which items were added or removed"
         },
         {
           "id": "b",
-          "label": "It sets the order in which items appear on screen"
+          "label": "It sets the order in which items appear on screen, sorted by key value"
         },
         {
           "id": "c",
-          "label": "It makes each item read-only so it cannot be edited"
+          "label": "It makes each item read-only so it cannot be edited by other components"
         },
         {
           "id": "d",
-          "label": "It passes the item's data to the child as a prop"
+          "label": "It passes the item's data to the child as a prop named key"
         }
       ],
       "answerKey": {
@@ -406,15 +406,15 @@
         },
         {
           "id": "b",
-          "label": "Props are stored in the browser, while state lives on the server"
+          "label": "Props are saved in the browser between visits, while state is kept on the server for each user"
         },
         {
           "id": "c",
-          "label": "Props are for strings only, while state is for objects only"
+          "label": "Props can only hold strings and numbers, while state can hold objects and arrays only"
         },
         {
           "id": "d",
-          "label": "Props are changed by the component itself, while state comes from its parent"
+          "label": "Props are changed by the component itself, while state is handed down from its parent"
         }
       ],
       "answerKey": {
@@ -473,7 +473,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Buttons in React fire click events automatically on every render"
+          "label": "React attaches click listeners at render time, so each render triggers the button's click handler once"
         },
         {
           "id": "b",
@@ -481,11 +481,11 @@
         },
         {
           "id": "c",
-          "label": "The `onClick` name must be lowercase `onclick` to wait for a click"
+          "label": "JSX needs the lowercase attribute `onclick` for the handler to be deferred until a real click occurs"
         },
         {
           "id": "d",
-          "label": "The function must first be stored in state before it can be a handler"
+          "label": "A handler must be saved in state first, otherwise React runs it during each render to read it"
         }
       ],
       "answerKey": {
@@ -1351,19 +1351,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`options` is a new object every render, so the dependency always changes and the effect re-runs"
+          "label": "`options` is a new object every render, so the effect re-runs each time"
         },
         {
           "id": "b",
-          "label": "`setRows` is not listed in the dependency array, so React re-runs the effect"
+          "label": "`setRows` is missing from the dependency array, so React re-runs the effect after every state update"
         },
         {
           "id": "c",
-          "label": "Objects cannot be listed as dependencies, so React re-runs the effect each time"
+          "label": "Objects cannot be listed as dependencies, so React re-runs the effect on every single render"
         },
         {
           "id": "d",
-          "label": "`fetchData` returns a promise, and effects may not start asynchronous work"
+          "label": "`fetchData` returns a promise, and effects may not start asynchronous work without cleanup"
         }
       ],
       "answerKey": {
@@ -1457,19 +1457,19 @@
       "options": [
         {
           "id": "a",
-          "label": "React re-renders only when state values are primitives such as numbers or strings"
+          "label": "React re-renders only when state values are primitives such as numbers or strings, so array state never triggers a render"
         },
         {
           "id": "b",
-          "label": "`push` is asynchronous, so `setItems` runs before the new element exists"
+          "label": "`push` is asynchronous, so `setItems` runs before the new element exists and React stores the old array"
         },
         {
           "id": "c",
-          "label": "`setItems` only accepts functions, so passing an array is silently ignored"
+          "label": "`setItems` only accepts updater functions, so passing an array directly is silently ignored by React"
         },
         {
           "id": "d",
-          "label": "The array was mutated and the same reference passed, so React sees no change and skips the render"
+          "label": "The same array reference was passed after mutation, so React sees no change and skips the render"
         }
       ],
       "answerKey": {
@@ -1843,7 +1843,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep them all, since memoization is free and never causes stale values as long as the dependencies are listed"
+          "label": "Keep them all, since memoization is cheap and stale values are avoided once the dependencies are listed correctly"
         },
         {
           "id": "b",
@@ -1851,11 +1851,11 @@
         },
         {
           "id": "c",
-          "label": "Keep them only on handlers, since creating functions on each render is always the main source of slowness"
+          "label": "Keep them on handlers only, since recreating functions on each render is the main cause of slow renders in React"
         },
         {
           "id": "d",
-          "label": "Replace them with `React.memo` on every component, which has no comparison cost and always prevents re-renders"
+          "label": "Replace them with `React.memo` on every component, since its shallow prop comparison costs little and avoids most re-renders"
         }
       ],
       "answerKey": {
@@ -1984,15 +1984,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Wrap the parent's returned JSX in `useMemo` so the table is not rebuilt on keystrokes"
+          "label": "Wrap the parent's returned JSX in `useMemo` keyed on the query so the table is not rebuilt on keystrokes"
         },
         {
           "id": "b",
-          "label": "Debounce the `setQuery` call by 300ms so the input value updates less often"
+          "label": "Debounce the `setQuery` call by 300ms so the controlled input value and the table update less often"
         },
         {
           "id": "c",
-          "label": "Give the table a new `key` on each keystroke so React discards the old rows quickly"
+          "label": "Give the table a new `key` on each keystroke so React discards the old rows quickly instead of diffing"
         },
         {
           "id": "d",
@@ -2019,19 +2019,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Move the effect into a custom hook so the derived value can be reused in other components"
+          "label": "Move the effect into a custom hook so the derived value can be reused in other components without duplicating the sync logic"
         },
         {
           "id": "b",
-          "label": "Compute `first + ' ' + last` during render, since the effect adds a redundant extra render and a stale frame"
+          "label": "Compute `first + ' ' + last` during render, since the effect adds an extra render and a stale frame"
         },
         {
           "id": "c",
-          "label": "The effect should use `useLayoutEffect` so the update lands before the browser paints"
+          "label": "Switch the effect to `useLayoutEffect` so the update lands before the browser paints and the stale frame never shows"
         },
         {
           "id": "d",
-          "label": "The dependency array should include `setFull` so the effect stays in sync with state"
+          "label": "Add `setFull` to the dependency array so the effect always stays in sync with the latest state value it writes"
         }
       ],
       "answerKey": {
@@ -2054,19 +2054,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Switch the consumers to `React.memo`, because memo blocks re-renders triggered by context changes"
+          "label": "Switch the consumers to `React.memo`, because memo compares props and so also blocks re-renders triggered by context changes"
         },
         {
           "id": "b",
-          "label": "Replace the context with props passed from the root, since props never trigger re-renders of children"
+          "label": "Replace the context with props passed down from the root, since unchanged props never trigger re-renders of child components"
         },
         {
           "id": "c",
-          "label": "Every consumer re-renders on any value change, so move the data to an external store read with `useSyncExternalStore` selectors"
+          "label": "Every consumer re-renders on any value change, so move the data to a store read with `useSyncExternalStore` selectors"
         },
         {
           "id": "d",
-          "label": "Wrap the context value in `useMemo` keyed on `x` and `y`, which stops consumers re-rendering on change"
+          "label": "Wrap the context value in `useMemo` keyed on `x` and `y`, so consumers skip re-rendering when the coordinates change"
         }
       ],
       "answerKey": {
@@ -2195,19 +2195,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Pass `data` through context, since memo only works for components without props"
+          "label": "Pass `data` through context, because memo skips renders only for components that receive no props from the parent"
         },
         {
           "id": "b",
-          "label": "Memo is broken for components that take objects, so remove it and rely on `useEffect`"
+          "label": "Memo is unreliable for components that take object props, so remove it and gate the work inside a `useEffect` instead"
         },
         {
           "id": "c",
-          "label": "The inline object is new each render, so hoist it to a constant or `useMemo` it for memo's comparison to pass"
+          "label": "The inline object is new each render, so hoist it to a constant or wrap it in `useMemo`"
         },
         {
           "id": "d",
-          "label": "Replace memo with `useCallback`, which is the hook that caches prop objects"
+          "label": "Replace memo with `useCallback`, because that hook caches prop objects and keeps their references stable across renders"
         }
       ],
       "answerKey": {
@@ -2265,11 +2265,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep the width in a `useRef` updated by a resize listener and return `ref.current`"
+          "label": "Keep the width in a `useRef` that a resize listener updates, and return `ref.current` from the hook during render"
         },
         {
           "id": "b",
-          "label": "Use `useState(window.innerWidth)` and update it in a resize listener added in `useEffect`"
+          "label": "Use `useState(window.innerWidth)` and update it from a resize listener added in `useEffect`, removed in its cleanup"
         },
         {
           "id": "c",
@@ -2277,7 +2277,7 @@
         },
         {
           "id": "d",
-          "label": "Read `window.innerWidth` directly in render and re-render the app with a timer"
+          "label": "Read `window.innerWidth` directly in render and force a re-render of the whole app from a timer every second"
         }
       ],
       "answerKey": {

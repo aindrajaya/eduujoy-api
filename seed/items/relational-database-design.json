@@ -11,7 +11,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It links the table to another database"
+          "label": "It links each row to matching rows in a table in another database"
         },
         {
           "id": "b",
@@ -23,7 +23,7 @@
         },
         {
           "id": "d",
-          "label": "It uniquely identifies each row in the table"
+          "label": "It uniquely identifies each row"
         }
       ],
       "answerKey": {
@@ -46,7 +46,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A column that must hold only unique numbers"
+          "label": "A column that must hold only unique numbers in each row"
         },
         {
           "id": "b",
@@ -54,11 +54,11 @@
         },
         {
           "id": "c",
-          "label": "A column that encrypts sensitive data values"
+          "label": "A column that encrypts sensitive data values stored in it"
         },
         {
           "id": "d",
-          "label": "A column that is stored in a separate server"
+          "label": "A column that is physically stored on a separate server"
         }
       ],
       "answerKey": {
@@ -194,7 +194,7 @@
         },
         {
           "id": "c",
-          "label": "FOREIGN KEY"
+          "label": "CREATE INDEX"
         },
         {
           "id": "d",
@@ -204,14 +204,9 @@
       "answerKey": {
         "optionIds": [
           "b",
-          "c",
           "d"
         ]
       },
-      "rubric": [
-        "PRIMARY KEY, FOREIGN KEY and UNIQUE are constraints.",
-        "SELECT is a query statement, not a constraint."
-      ],
       "reviewed": false
     },
     {
@@ -231,11 +226,11 @@
         },
         {
           "id": "c",
-          "label": "A single column listing all course names"
+          "label": "A single column in students listing all course names"
         },
         {
           "id": "d",
-          "label": "A duplicate students table for every course"
+          "label": "A duplicate students table kept for every course"
         }
       ],
       "answerKey": {
@@ -258,11 +253,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Queries on orders then never need a join"
+          "label": "Orders can then be read without joining any table"
         },
         {
           "id": "b",
-          "label": "Databases refuse to store repeated text values"
+          "label": "Databases limit how often one text value can repeat"
         },
         {
           "id": "c",
@@ -270,7 +265,7 @@
         },
         {
           "id": "d",
-          "label": "Orders cannot hold text columns of any kind"
+          "label": "Text columns in order tables slow down every query"
         }
       ],
       "answerKey": {
@@ -297,15 +292,15 @@
         },
         {
           "id": "b",
-          "label": "None, since every column holds a single value"
+          "label": "None, since every column holds a single atomic value"
         },
         {
           "id": "c",
-          "label": "First normal form, as the key has two columns"
+          "label": "First normal form, as the key is made of two columns"
         },
         {
           "id": "d",
-          "label": "Third normal form only, as there are two tables"
+          "label": "Third normal form only, as one non-key column determines another"
         }
       ],
       "answerKey": {
@@ -470,15 +465,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The table needs phone3 renamed to a more general name"
+          "label": "Phone numbers are a multi-valued type; add a phone4 column and then rename the columns to a general scheme"
         },
         {
           "id": "b",
-          "label": "The table needs an index on each phone column to fix it"
+          "label": "Searches are slow because the columns are unindexed; add an index on each phone column to fix both problems"
         },
         {
           "id": "c",
-          "label": "The table needs a larger text type for phone columns"
+          "label": "The phone columns are too narrow for some numbers; widen them to a larger text type so a fourth fits"
         },
         {
           "id": "d",
@@ -575,7 +570,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The column repeats data that belongs in another table"
+          "label": "The column repeats the same phone number across many different rows"
         },
         {
           "id": "b",
@@ -610,11 +605,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It guarantees each customer can have only one order"
+          "label": "It guarantees that each customer can place only one order"
         },
         {
           "id": "b",
-          "label": "It stops orders from pointing at customers that don't exist"
+          "label": "It stops orders from pointing at missing customers"
         },
         {
           "id": "c",
@@ -721,19 +716,19 @@
       "options": [
         {
           "id": "a",
-          "label": "An insert anomaly, since new orders can't be created"
+          "label": "An insert anomaly, since a new customer can't be saved until they place an order"
         },
         {
           "id": "b",
-          "label": "A missing index, which made the update skip rows"
+          "label": "A missing index, which made the update skip some of the matching rows"
         },
         {
           "id": "c",
-          "label": "A missing primary key, so rows can't be told apart"
+          "label": "A missing primary key, so the update could not tell the order rows apart"
         },
         {
           "id": "d",
-          "label": "An update anomaly, caused by the same fact being stored many times"
+          "label": "An update anomaly, since the same email is stored in many rows"
         }
       ],
       "answerKey": {
@@ -1003,11 +998,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A comma-separated list of course IDs in a column on students"
+          "label": "A comma-separated list of course IDs and enrollment dates in a column on the students table"
         },
         {
           "id": "b",
-          "label": "A single wide table repeating the student row for each course taken"
+          "label": "A single wide table repeating the student row for every course that student has taken"
         },
         {
           "id": "c",
@@ -1015,7 +1010,7 @@
         },
         {
           "id": "d",
-          "label": "A student_id column in courses and a course_id column in students"
+          "label": "A student_id column in courses and a course_id column in students, plus an enrolled_on column"
         }
       ],
       "answerKey": {
@@ -1284,19 +1279,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Wrapping the column in a function means the plain index cannot be used for the match"
+          "label": "The function on the column means the plain index can't be used for the match"
         },
         {
           "id": "b",
-          "label": "Indexes on text columns only work with LIKE and never with equality"
+          "label": "B-tree indexes on text columns support only LIKE prefix searches, not equality"
         },
         {
           "id": "c",
-          "label": "The table is too small for any index to be useful"
+          "label": "The optimizer skips indexes whenever the compared value is a string literal"
         },
         {
           "id": "d",
-          "label": "The index must be rebuilt every time a query uses LOWER"
+          "label": "The index must be rebuilt each time a query applies LOWER to the column"
         }
       ],
       "answerKey": {
@@ -1319,11 +1314,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Email is a string, and strings can never be valid primary keys"
+          "label": "Email is a string, and string keys compare too slowly to join reliably across tables"
         },
         {
           "id": "b",
-          "label": "The foreign keys should be removed so updates do not touch other tables"
+          "label": "The foreign keys should be removed so that email updates do not touch other tables"
         },
         {
           "id": "c",
@@ -1331,7 +1326,7 @@
         },
         {
           "id": "d",
-          "label": "Twelve tables is too many to reference a single table in a schema"
+          "label": "Referencing one parent table from twelve tables creates a circular dependency that blocks updates"
         }
       ],
       "answerKey": {
@@ -1354,19 +1349,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is in 3NF but not BCNF, because tutor determines subject yet is not a candidate key"
+          "label": "It is in 3NF but not BCNF, because tutor is not a candidate key"
         },
         {
           "id": "b",
-          "label": "It violates 2NF, because subject depends on only part of the key"
+          "label": "It violates 2NF, because subject depends on tutor, which is only part of the key"
         },
         {
           "id": "c",
-          "label": "It violates 1NF, because the tutor column repeats across rows"
+          "label": "It violates 1NF, because the tutor column repeats across rows and so is a repeating group"
         },
         {
           "id": "d",
-          "label": "It is in BCNF, because every attribute depends on the whole key"
+          "label": "It is in BCNF, because every non-key attribute depends on the whole key and nothing else"
         }
       ],
       "answerKey": {
@@ -1389,19 +1384,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Comments must be stored in the same table as posts for 3NF"
+          "label": "Third normal form requires comments to be stored in the same table as the posts they belong to"
         },
         {
           "id": "b",
-          "label": "The table needs a third value in target_type to be normalized"
+          "label": "The table is not normalized until target_type has a third value, so each target table has a row"
         },
         {
           "id": "c",
-          "label": "A single foreign key cannot reference two tables, so the database cannot enforce valid targets"
+          "label": "One foreign key cannot reference two tables, so the database cannot enforce valid targets"
         },
         {
           "id": "d",
-          "label": "The target_id column should be text so it can hold both ID formats"
+          "label": "The target_id column should be text so it can hold the different ID formats of both target tables"
         }
       ],
       "answerKey": {
@@ -1428,11 +1423,11 @@
         },
         {
           "id": "b",
-          "label": "A customer cannot be recorded until they place an order"
+          "label": "Two orders for the same customer can end up with different phone numbers"
         },
         {
           "id": "c",
-          "label": "Changing a phone number requires updating many rows, and some may be missed"
+          "label": "Order rows cannot be uniquely identified, because customer columns repeat across rows"
         },
         {
           "id": "d",
@@ -1442,14 +1437,9 @@
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "Repeated customer data causes update, deletion and insertion anomalies.",
-        "The join requirement is a cost of normalizing, not a symptom of this denormalized layout."
-      ],
       "reviewed": false
     },
     {
@@ -1461,19 +1451,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The city column has too many distinct values for any index to help"
+          "label": "City has too many distinct values, and an index only helps on low-cardinality columns"
         },
         {
           "id": "b",
-          "label": "The leading column, country, is absent from the filter, so the index cannot be searched efficiently"
+          "label": "The leading column, country, is missing from the filter, so the index can't be seeked"
         },
         {
           "id": "c",
-          "label": "The query needs ORDER BY before the index can be used"
+          "label": "The index can only serve a query once it also has an ORDER BY on the city column"
         },
         {
           "id": "d",
-          "label": "Composite indexes only work when every column is compared with equality"
+          "label": "Composite indexes only work when every column in them is compared using equality"
         }
       ],
       "answerKey": {
@@ -1535,7 +1525,7 @@
         },
         {
           "id": "b",
-          "label": "The index holds raw `email` values, so wrapping the column in `LOWER()` stops the planner using it; an index on `LOWER(email)` would match"
+          "label": "The index holds raw `email` values, so wrapping the column in `LOWER()` keeps the planner from using it"
         },
         {
           "id": "c",
@@ -1601,11 +1591,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`city` has lower cardinality than `country`, so the planner prefers a scan whenever `city` is filtered"
+          "label": "`city` has lower cardinality than `country`, so the planner prefers a full scan whenever `city` is filtered"
         },
         {
           "id": "b",
-          "label": "The index is sorted by `country` first, so without a country condition the rows for one city are scattered through it"
+          "label": "The index is sorted by `country` first, so without a country condition one city's rows are scattered"
         },
         {
           "id": "c",
@@ -1636,19 +1626,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`subject` depends on only part of the key, which is a 2NF failure that 3NF would also reject outright"
+          "label": "`subject` depends on only part of the key, which is a 2NF failure that 3NF would also reject outright, so the table cannot be in 3NF"
         },
         {
           "id": "b",
-          "label": "`teacher` determines `subject` but is not a key; 3NF tolerates this because `subject` is part of a candidate key, BCNF does not"
+          "label": "`teacher` determines `subject` without being a key; 3NF allows it because `subject` is a prime attribute"
         },
         {
           "id": "c",
-          "label": "The table repeats several teachers per subject, which 3NF allows as a repeating group but BCNF forbids"
+          "label": "The table repeats several teachers per subject, which 3NF allows as a repeating group but BCNF forbids as a violation of atomicity"
         },
         {
           "id": "d",
-          "label": "BCNF differs from 3NF only for tables with a single-column key, and this table has a composite key"
+          "label": "BCNF differs from 3NF only for tables with a single-column key, and this table has a composite key, so the two forms coincide here"
         }
       ],
       "answerKey": {
@@ -1963,7 +1953,7 @@
       "options": [
         {
           "id": "a",
-          "label": "An entity-attribute-value table holding every attribute as a row, since new types then need no schema change"
+          "label": "An entity-attribute-value table holding every attribute as a row, so new types need no schema change"
         },
         {
           "id": "b",
@@ -1971,11 +1961,11 @@
         },
         {
           "id": "c",
-          "label": "A `products` table with a JSON `attributes` column for type-specific data, validated only by the application"
+          "label": "A `products` table with a JSON `attributes` column for type-specific data, validated by application code"
         },
         {
           "id": "d",
-          "label": "One wide `products` table with all attributes nullable, since a single table keeps queries simple and avoids joins"
+          "label": "One wide `products` table with all attributes nullable, so a single table keeps queries simple and avoids joins"
         }
       ],
       "answerKey": {
@@ -2033,7 +2023,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Store it, update it in the same transaction as line changes or by trigger, and run a periodic reconciliation query"
+          "label": "Store it, update it in the same transaction as line changes or by trigger, and reconcile periodically"
         },
         {
           "id": "b",
@@ -2103,7 +2093,7 @@
       "options": [
         {
           "id": "a",
-          "label": "One wide table with a column for every attribute in every category, since NULLs never affect query plans"
+          "label": "One wide table with a column for every attribute in every category, accepting sparse NULL columns and frequent ALTER TABLE changes"
         },
         {
           "id": "b",
@@ -2111,11 +2101,11 @@
         },
         {
           "id": "c",
-          "label": "Pure EAV with a text value column, since it avoids migrations and the optimizer handles pivoted filters well"
+          "label": "Pure EAV with a text value column, so new attributes need no migration but every filter needs pivots and casts"
         },
         {
           "id": "d",
-          "label": "Typed columns for the shared, filtered attributes plus an indexed JSON column for the category-specific long tail"
+          "label": "Typed columns for the hot filtered attributes plus an indexed JSON column for the long tail"
         }
       ],
       "answerKey": {
@@ -2288,15 +2278,15 @@
         },
         {
           "id": "b",
-          "label": "A price_history table with UNIQUE(product_id, valid_from), which stops equal start dates only"
+          "label": "A price_history table with valid_from and valid_to columns and UNIQUE(product_id, valid_from), which stops equal start dates but not overlapping periods"
         },
         {
           "id": "c",
-          "label": "A single price column on products, overwritten on change, with a trigger that logs old values"
+          "label": "A single price column on products, overwritten on change, with a trigger that logs each old value to an audit table"
         },
         {
           "id": "d",
-          "label": "A price_history table with UNIQUE(product_id, valid_to), which stops equal end dates only"
+          "label": "A price_history table with valid_from and valid_to columns and UNIQUE(product_id, valid_to), which stops equal end dates but not overlapping periods"
         }
       ],
       "answerKey": {
@@ -2389,7 +2379,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Subtype tables whose primary key is vehicle_id referencing vehicles(id), with no type column"
+          "label": "Subtype tables whose primary key is vehicle_id referencing vehicles(id), plus a vehicles.type column that the application keeps in sync with the table used"
         },
         {
           "id": "b",
@@ -2469,7 +2459,7 @@
         },
         {
           "id": "b",
-          "label": "Split into (instructor, course) and (student, instructor), the BCNF decomposition, and enforce the student-course rule elsewhere"
+          "label": "Split into (instructor, course) and (student, instructor), the BCNF decomposition, and enforce the student-course rule with a foreign key between the tables"
         },
         {
           "id": "c",

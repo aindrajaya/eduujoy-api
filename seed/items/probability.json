@@ -151,11 +151,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The gap between its max and min"
+          "label": "The gap between its largest and smallest possible values"
         },
         {
           "id": "b",
-          "label": "Its middle value when sorted"
+          "label": "Its middle value when the outcomes are sorted in order"
         },
         {
           "id": "c",
@@ -163,7 +163,7 @@
         },
         {
           "id": "d",
-          "label": "Its most likely single value"
+          "label": "The single outcome with the highest probability of occurring"
         }
       ],
       "answerKey": {
@@ -257,19 +257,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Because every outcome is equally likely to occur"
+          "label": "Because all outcomes are equally likely, so each gets an equal share"
         },
         {
           "id": "b",
-          "label": "Because probabilities are always rounded to sum to 1"
+          "label": "Because probabilities get rescaled after the fact to total 1"
         },
         {
           "id": "c",
-          "label": "Because exactly one of the outcomes is certain to happen"
+          "label": "Because one outcome must occur, and outcomes can't overlap"
         },
         {
           "id": "d",
-          "label": "Because each outcome must have probability at least 0.5"
+          "label": "Because each outcome needs a probability of at least one half"
         }
       ],
       "answerKey": {
@@ -397,15 +397,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Choosing 2 people from a group for a committee"
+          "label": "Choosing 2 people from a group to form a committee"
         },
         {
           "id": "b",
-          "label": "Choosing 4 pizza toppings from a menu of 10"
+          "label": "Choosing 4 pizza toppings from a menu of 10 options"
         },
         {
           "id": "c",
-          "label": "Choosing a president and a vice president from a group"
+          "label": "Choosing a president and a vice president"
         },
         {
           "id": "d",
@@ -643,11 +643,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Normal, because the number of heads must be a continuous measurement"
+          "label": "Normal, because the number of heads is a continuous measurement that can take any value"
         },
         {
           "id": "b",
-          "label": "Uniform, because every coin flip is equally likely to land either way"
+          "label": "Uniform, because every coin flip is equally likely to land heads or tails each time"
         },
         {
           "id": "c",
@@ -655,7 +655,7 @@
         },
         {
           "id": "d",
-          "label": "Geometric, because we count flips until the first head appears"
+          "label": "Geometric, because we count the flips needed until the first head finally appears"
         }
       ],
       "answerKey": {
@@ -1386,19 +1386,19 @@
       "options": [
         {
           "id": "a",
-          "label": "36, since Y is fully dependent on X, so Var(X+Y) = Var(3X) = 9 × 4"
+          "label": "36, since X+Y = 3X, so Var(X+Y) = 9 × 4"
         },
         {
           "id": "b",
-          "label": "20, since Var(X) + Var(Y) = 4 + 16"
+          "label": "20, since Var(X) + Var(Y) = 4 + 16, and variances always add for sums"
         },
         {
           "id": "c",
-          "label": "12, since Var(3X) = 3 × 4 as variance scales linearly"
+          "label": "12, since X+Y = 3X and variance scales linearly: Var(3X) = 3 × 4"
         },
         {
           "id": "d",
-          "label": "16, since Var(Y) = 16 dominates when Y is larger"
+          "label": "16, since Y = 2X is the larger term, so Var(Y) = 16 sets the total"
         }
       ],
       "answerKey": {
@@ -1462,19 +1462,19 @@
       "options": [
         {
           "id": "a",
-          "label": "M1 is more likely, about 75%, because 2% defects times 60% output is the larger product"
+          "label": "M1 is more likely, about 75%, because its 60% output share outweighs the small gap in defect rates"
         },
         {
           "id": "b",
-          "label": "The sources are equally likely, 50%, because defects occur independently of the machine"
+          "label": "The sources are equally likely, 50%, because a defect can occur on either machine at random"
         },
         {
           "id": "c",
-          "label": "M2 is more likely, about 62.5%, since its higher defect rate outweighs its smaller share of output"
+          "label": "M2 is more likely, about 62.5%, since its higher defect rate outweighs its smaller output"
         },
         {
           "id": "d",
-          "label": "M1 is more likely, about 60%, because it makes most parts and so most defects"
+          "label": "M1 is more likely, about 60%, because the chance a defect came from M1 equals its output share"
         }
       ],
       "answerKey": {
@@ -1853,11 +1853,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Invalid: the probability should be 5 in 1,000,000, because the city is five times larger than one million people"
+          "label": "Invalid: the probability should be 5 in 1,000,000, because the city is five times larger than one million people, so the risk scales with population"
         },
         {
           "id": "b",
-          "label": "Valid: with no other evidence, a rare match makes innocence as unlikely as the match is to occur by chance"
+          "label": "Valid: with no other evidence, a rare match makes innocence as unlikely as the match is to occur by chance, since the base rate adds nothing"
         },
         {
           "id": "c",
@@ -1865,7 +1865,7 @@
         },
         {
           "id": "d",
-          "label": "Valid: the match probability for an innocent person equals the probability that this particular suspect is innocent"
+          "label": "Valid: the match probability for an innocent person equals the probability that this particular suspect is innocent, as both describe the same event"
         }
       ],
       "answerKey": {
@@ -2065,19 +2065,19 @@
       "stage": "expert",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "A call centre's daily call counts have mean 20 and variance 85. Staffing must cover the 99th percentile of daily calls. A analyst proposes a Poisson model. Which judgement is best?",
+      "prompt": "A call centre's daily call counts have mean 20 and variance 85. Staffing must cover the 99th percentile of daily calls. An analyst proposes a Poisson model. Which judgement is best?",
       "options": [
         {
           "id": "a",
-          "label": "Use a Normal with the same mean, since for large counts the variance has little effect on tail quantiles"
+          "label": "Use a Normal with the same mean and a matching variance of 20, since for large counts the Normal approximates Poisson tail quantiles well and the sample variance can be ignored"
         },
         {
           "id": "b",
-          "label": "Switch to a Binomial model, since capping the count at n pushes the variance below the mean and tightens tails"
+          "label": "Switch to a Binomial model, since capping the count at n pushes the variance below the mean and tightens the tails, which gives a more reliable 99th percentile"
         },
         {
           "id": "c",
-          "label": "Keep Poisson, since count data of this kind is always Poisson and the extra variance is just sampling noise"
+          "label": "Keep Poisson, since count data of this kind is always Poisson and the extra variance is just sampling noise that will average out over more days"
         },
         {
           "id": "d",
@@ -2116,7 +2116,7 @@
         },
         {
           "id": "d",
-          "label": "About $21, because the cap limits expected value to about one dollar per toss count up to 20, plus about one dollar from the tail"
+          "label": "About $21, because each toss count up to 20 adds about $1 and the capped tail adds about $1 more"
         }
       ],
       "answerKey": {
@@ -2215,19 +2215,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Right: switching wins 2/3 because the remaining door inherits door 3's 1/3 chance of hiding the car"
+          "label": "Right: switching wins 2/3 because the remaining door inherits door 3's 1/3 chance of hiding the car, so it now holds 2/3"
         },
         {
           "id": "b",
-          "label": "Wrong: staying wins 2/3 because the reveal adds information in favour of your original pick"
+          "label": "Wrong: staying wins 2/3 because the goat reveal adds information in favour of your original pick over the other door"
         },
         {
           "id": "c",
-          "label": "Wrong here: staying and switching each win with probability 1/2, because the host's goat reveal was not guaranteed"
+          "label": "Wrong here: staying and switching each win 1/2, because the reveal was not guaranteed to be a goat"
         },
         {
           "id": "d",
-          "label": "Right: switching wins 2/3 because your first pick had a 1/3 chance and nothing else has changed"
+          "label": "Right: switching wins 2/3 because your first pick had only a 1/3 chance and nothing about that has changed since"
         }
       ],
       "answerKey": {
@@ -2262,7 +2262,7 @@
         },
         {
           "id": "d",
-          "label": "Flip twice; HH means heads, TT means tails, and on HT or TH repeat the pair of flips"
+          "label": "Flip twice and report the first flip if the two differ; if they match, report a fresh third flip"
         }
       ],
       "answerKey": {

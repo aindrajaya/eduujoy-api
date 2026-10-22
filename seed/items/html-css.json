@@ -194,7 +194,7 @@
         },
         {
           "id": "c",
-          "label": "<article>"
+          "label": "<span>"
         },
         {
           "id": "d",
@@ -204,14 +204,9 @@
       "answerKey": {
         "optionIds": [
           "a",
-          "c",
           "d"
         ]
       },
-      "rubric": [
-        "article, footer and main describe their content's role.",
-        "div has no meaning and is a generic container."
-      ],
       "reviewed": false
     },
     {
@@ -262,15 +257,15 @@
         },
         {
           "id": "b",
-          "label": "It can be used without any CSS or JavaScript at all"
+          "label": "It needs no CSS or JavaScript to work, whereas a div always needs both to be clickable"
         },
         {
           "id": "c",
-          "label": "It loads faster because browsers skip styling for it"
+          "label": "It loads faster because browsers skip style calculation and layout work for button elements"
         },
         {
           "id": "d",
-          "label": "It prevents the page from reloading when the control is clicked"
+          "label": "It always stops the page from reloading, since buttons never submit or navigate anywhere"
         }
       ],
       "answerKey": {
@@ -375,7 +370,7 @@
         },
         {
           "id": "d",
-          "label": "Centers the items along the vertical cross axis"
+          "label": "Centers the items along the vertical cross axis of the container"
         }
       ],
       "answerKey": {
@@ -469,19 +464,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Remove the viewport meta tag so the page zooms out"
+          "label": "Remove the viewport meta tag so the phone zooms the page out"
         },
         {
           "id": "b",
-          "label": "Add `float: left` to every box so they wrap"
+          "label": "Add `float: left` to every box so they wrap onto new lines"
         },
         {
           "id": "c",
-          "label": "Use a media query with a max-width to set `flex-direction: column`"
+          "label": "Use a max-width media query to set `flex-direction: column`"
         },
         {
           "id": "d",
-          "label": "Set a fixed width of 1000px on the container"
+          "label": "Set a fixed 1000px width on the container so boxes keep size"
         }
       ],
       "answerKey": {
@@ -644,19 +639,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It scales the image to fit its container on narrow screens"
+          "label": "It scales the image to fit its container when the screen is narrow"
         },
         {
           "id": "b",
-          "label": "It shows a tooltip when the mouse hovers over the image on desktop"
+          "label": "It shows a tooltip with the image description when the mouse hovers over it"
         },
         {
           "id": "c",
-          "label": "It stops search engines from indexing the image file"
+          "label": "It tells search engines not to index the image file or show it in results"
         },
         {
           "id": "d",
-          "label": "It gives screen readers text for the image and shows when it fails to load"
+          "label": "It gives screen readers text for the image and shows if it fails to load"
         }
       ],
       "answerKey": {
@@ -975,7 +970,7 @@
         },
         {
           "id": "b",
-          "label": "Set `align-items: wrap` on the container so items break lines"
+          "label": "Set `align-content: wrap` on the container and `min-width: 200px` on the cards"
         },
         {
           "id": "c",
@@ -983,7 +978,7 @@
         },
         {
           "id": "d",
-          "label": "Set `flex-direction: reverse` on the container so cards reorder"
+          "label": "Set `flex-direction: column` on the container and `width: 200px` on the cards"
         }
       ],
       "answerKey": {
@@ -1257,19 +1252,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The h2 is a block element, and block elements only apply margins to their bottom edge when inside a container"
+          "label": "Block elements inside a container usually apply vertical margins only at the bottom edge, so the top margin moves to the parent"
         },
         {
           "id": "b",
-          "label": "The panel has `overflow: visible`, which makes any child margin render as extra parent padding above the content"
+          "label": "The panel has `overflow: visible`, so the child's margin is drawn as extra parent padding above the content and shifts the heading"
         },
         {
           "id": "c",
-          "label": "The h2's top margin collapses through the parent's top edge because nothing separates them, so it sits outside the panel"
+          "label": "The h2's top margin collapses through the parent's top edge, as nothing separates them, so it sits outside the panel"
         },
         {
           "id": "d",
-          "label": "The h2's margin is ignored when its parent is a block element without a set height, so the panel keeps only its own margin"
+          "label": "The h2's margin is dropped when its parent is a block element without a set height, so the panel keeps just its own margin"
         }
       ],
       "answerKey": {
@@ -1573,19 +1568,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Sticky only works when `z-index` is above 0, otherwise the header is treated as static and scrolls away normally"
+          "label": "Sticky only works when `z-index` is above 0, otherwise the browser treats the header as static and it scrolls away with the page"
         },
         {
           "id": "b",
-          "label": "The `overflow: hidden` ancestor becomes the sticky element's scroll container, which never scrolls, so sticking never triggers"
+          "label": "The `overflow: hidden` ancestor becomes the sticky element's scroll container and never scrolls, so sticking never triggers"
         },
         {
           "id": "c",
-          "label": "The `top: 0` offset is measured from the document start, so the header sticks only after the whole page has scrolled past"
+          "label": "The `top: 0` offset is measured from the start of the document, so the header sticks only after the whole page has scrolled past it"
         },
         {
           "id": "d",
-          "label": "Sticky elements need `position: relative` on their parent, so a tall parent is ignored in the offset calculation"
+          "label": "Sticky needs `position: relative` on its parent, so a tall parent without it is ignored when the browser works out the offset"
         }
       ],
       "answerKey": {
@@ -1889,15 +1884,15 @@
       "options": [
         {
           "id": "a",
-          "label": "An `<img>` with `srcset` using `x` descriptors only, since pixel density alone tells the browser how wide the image displays"
+          "label": "An `<img>` with `srcset` using `x` descriptors, so the browser infers the displayed width from the screen's pixel density"
         },
         {
           "id": "b",
-          "label": "A `<picture>` with one `<source media>` per breakpoint, since only `<picture>` lets the browser choose among several file sizes"
+          "label": "A `<picture>` with one `<source media>` per breakpoint, so the browser picks a file size from the viewport width ranges"
         },
         {
           "id": "c",
-          "label": "An `<img src>` of the 2400px file with `max-width: 100%`, since CSS scaling makes browsers download only the needed pixels"
+          "label": "An `<img src>` of the 2400px file with `max-width: 100%`, so CSS scaling reduces the pixels the browser downloads"
         },
         {
           "id": "d",
@@ -2070,11 +2065,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Mark each override `!important`, since author `!important` declarations beat normal declarations from any other stylesheet"
+          "label": "Mark each override `!important`, since author `!important` declarations beat normal declarations from other stylesheets"
         },
         {
           "id": "b",
-          "label": "Prefix every override with `#app` and repeat class selectors until each rule outranks the widget's, so specificity always decides the winner"
+          "label": "Prefix each override with `#app` and repeat class selectors until it outranks the widget's rule, so specificity decides the winner"
         },
         {
           "id": "c",
@@ -2082,7 +2077,7 @@
         },
         {
           "id": "d",
-          "label": "Load your stylesheet before the widget's, since the cascade always favours whichever sheet appears first in the document"
+          "label": "Load your stylesheet before the widget's, since the cascade favours the sheet that appears first in the document order"
         }
       ],
       "answerKey": {
@@ -2105,15 +2100,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`em` throughout, because each component then scales from its parent, which keeps every proportion consistent"
+          "label": "`em` for type and spacing, because each component then scales from its parent and keeps proportions consistent"
         },
         {
           "id": "b",
-          "label": "`vw` alone, because it scales smoothly with the viewport at every width and needs no other units"
+          "label": "`vw` for type, because it scales smoothly with the viewport width and removes the need for breakpoints"
         },
         {
           "id": "c",
-          "label": "`px` for type with media queries, because fixed values give designers exact and predictable results at every width"
+          "label": "`px` for type with media queries, because fixed values give designers precise and predictable results"
         },
         {
           "id": "d",
@@ -2285,7 +2280,7 @@
         },
         {
           "id": "b",
-          "label": "A `.dark` class toggled on `<body>` by a deferred script, which reads the saved choice after the page has loaded"
+          "label": "A `.dark` class toggled on `<body>` by a `defer` script that reads `localStorage` and falls back to `matchMedia('(prefers-color-scheme: dark)')` when nothing is saved"
         },
         {
           "id": "c",

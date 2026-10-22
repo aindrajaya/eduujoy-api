@@ -81,7 +81,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The total CPU used by a host per minute"
+          "label": "The total CPU used by a host, sampled every minute"
         },
         {
           "id": "b",
@@ -93,7 +93,7 @@
         },
         {
           "id": "d",
-          "label": "The text of every error in an application"
+          "label": "The text of every error message an application writes"
         }
       ],
       "answerKey": {
@@ -194,24 +194,20 @@
         },
         {
           "id": "c",
-          "label": "Commit count"
+          "label": "Saturation"
         },
         {
           "id": "d",
-          "label": "Latency"
+          "label": "Uptime of the build server"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
           "b",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "Google's golden signals are latency, traffic, errors and saturation.",
-        "Commit count is a development statistic, not a service health signal."
-      ],
       "reviewed": false
     },
     {
@@ -258,15 +254,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Dashboards only work when no problems are happening"
+          "label": "Dashboards only show data from after an incident ends, so alerts are needed to see live values"
         },
         {
           "id": "b",
-          "label": "Dashboards cannot show metrics, so alerts must show them instead"
+          "label": "Dashboards cannot display metrics from many services, so alerts are used to combine them"
         },
         {
           "id": "c",
-          "label": "Alerts store history longer than dashboards ever can"
+          "label": "Alerts keep metric history for longer than dashboards can, so they are better for later review"
         },
         {
           "id": "d",
@@ -332,15 +328,15 @@
         },
         {
           "id": "b",
-          "label": "They are exact synonyms with no difference in meaning"
+          "label": "Monitoring covers production systems only; observability covers test environments, where more detailed data is collected"
         },
         {
           "id": "c",
-          "label": "Monitoring is for hardware; observability is for people"
+          "label": "Monitoring is done by operations staff on hardware; observability is done by developers on application code only"
         },
         {
           "id": "d",
-          "label": "Monitoring uses logs only; observability uses traces only"
+          "label": "Monitoring relies on logs for diagnosis; observability replaces logs with traces and drops metrics altogether"
         }
       ],
       "answerKey": {
@@ -363,15 +359,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Request count"
+          "label": "Total request count per minute"
         },
         {
           "id": "b",
-          "label": "Minimum latency"
+          "label": "Minimum latency observed"
         },
         {
           "id": "c",
-          "label": "Average CPU usage"
+          "label": "Average CPU usage per host"
         },
         {
           "id": "d",
@@ -473,15 +469,15 @@
         },
         {
           "id": "b",
-          "label": "Logs automatically fix the errors when read"
+          "label": "The graph shows exactly which code change caused the jump, and logs only confirm the time"
         },
         {
           "id": "c",
-          "label": "Logs are the only place metrics are stored"
+          "label": "Logs are where the error-rate metric is stored, so the graph can't be trusted without them"
         },
         {
           "id": "d",
-          "label": "The graph is unreliable, so logs replace it"
+          "label": "The graph is usually inaccurate for short spikes, so logs should replace it for detection"
         }
       ],
       "answerKey": {
@@ -609,11 +605,11 @@
       "options": [
         {
           "id": "a",
-          "label": "One group of alerts fired for the same service"
+          "label": "One group of alerts fired for the same service within a window"
         },
         {
           "id": "b",
-          "label": "One log line that carries a severity level"
+          "label": "One structured log line that carries a severity level and a request ID"
         },
         {
           "id": "c",
@@ -621,7 +617,7 @@
         },
         {
           "id": "d",
-          "label": "One sampled reading of CPU usage at an instant"
+          "label": "One sampled reading of CPU usage on a host at a single instant"
         }
       ],
       "answerKey": {
@@ -894,15 +890,15 @@
         },
         {
           "id": "b",
-          "label": "Filter logs from 14:02 and look for new error messages"
+          "label": "Filter logs from 14:02 for new error messages"
         },
         {
           "id": "c",
-          "label": "Raise the alert threshold so it stops firing"
+          "label": "Raise the alert threshold so it stops firing now"
         },
         {
           "id": "d",
-          "label": "Restart every host to clear any stale state"
+          "label": "Restart every host to clear any stale state at once"
         }
       ],
       "answerKey": {
@@ -1114,11 +1110,11 @@
         },
         {
           "id": "c",
-          "label": "`{\"level\":\"error\",\"msg\":\"charge failed\",\"order\":\"A17\",\"span_count\":4}`"
+          "label": "`{\"level\":\"error\",\"msg\":\"charge failed\",\"order\":\"A17\",\"span_count\":4,\"host\":\"web-3\"}`"
         },
         {
           "id": "d",
-          "label": "`ERROR charge failed for order A17 at 12:01:07`"
+          "label": "`ERROR charge failed for order A17 at 12:01:07 on web-3 (span count 4)`"
         }
       ],
       "answerKey": {
@@ -1392,19 +1388,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Sampling at 1% breaks span ordering within a trace"
+          "label": "Head-based sampling at 1% drops spans, so span ordering breaks within a trace"
         },
         {
           "id": "b",
-          "label": "Clock skew between the hosts, since timestamps come from each host's own clock"
+          "label": "Clock skew between the hosts, as each stamps its own clock"
         },
         {
           "id": "c",
-          "label": "A log level mismatch reorders entries across hosts"
+          "label": "Mismatched log levels make the hosts flush entries in a different order"
         },
         {
           "id": "d",
-          "label": "The parent span was exported twice by the tracing library"
+          "label": "The tracing library exported the parent span twice, so a stale copy is shown"
         }
       ],
       "answerKey": {
@@ -1757,11 +1753,11 @@
         },
         {
           "id": "c",
-          "label": "A multi-window burn-rate alert on the error-ratio SLI that pages when the budget is consumed fast"
+          "label": "A multi-window burn-rate alert on the error-ratio SLI, paging when the budget is used up fast"
         },
         {
           "id": "d",
-          "label": "A page when more than 10 errors occur in an hour, regardless of how much traffic was served"
+          "label": "A page when the error ratio exceeds 0.1% over any single five-minute window, since that matches the SLO target"
         }
       ],
       "answerKey": {
@@ -1784,19 +1780,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Head-based sampling at 100% with a seven-day retention, since only storage cost matters here"
+          "label": "Head-based sampling at 100% with seven-day retention, because full capture guarantees no error or slow trace is lost"
         },
         {
           "id": "b",
-          "label": "Head-based sampling at 1% in each service, since the random choice treats all requests fairly"
+          "label": "Head-based sampling at 1% in each service, because the random choice keeps a fair share of error and slow traces"
         },
         {
           "id": "c",
-          "label": "Tail-based sampling in a collector that buffers traces and keeps errors, slow ones and a small share of the rest"
+          "label": "Tail-based sampling in a collector that keeps errors, slow traces and a few others"
         },
         {
           "id": "d",
-          "label": "Sampling only requests from internal users, since their traces are easiest to correlate with logs"
+          "label": "Head-based sampling that raises the rate to 20% for services with recent alerts, because it targets problem services"
         }
       ],
       "answerKey": {
@@ -1819,7 +1815,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Disable all debug and info logging in production, since metrics and traces replace every log line"
+          "label": "Drop debug and info logging in production, because metrics and traces can cover most of what those log lines recorded"
         },
         {
           "id": "b",
@@ -1827,11 +1823,11 @@
         },
         {
           "id": "c",
-          "label": "Keep all levels but compress them harder, since cost scales only with the stored byte format"
+          "label": "Keep all levels but switch to a denser compression format, because storage cost mainly follows the stored byte format"
         },
         {
           "id": "d",
-          "label": "Log only at 3am low-traffic hours, because that period holds a representative share of issues"
+          "label": "Log debug only during 3am low-traffic hours, because that window gives a fair sample of the issues users hit"
         }
       ],
       "answerKey": {
@@ -2251,19 +2247,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Alert when the processor's error rate exceeds 1% for 5 minutes, because errors show the pipeline is failing"
+          "label": "Alert when the processor's error rate exceeds 1% for 5 minutes, because errors show the pipeline is failing and data is going stale"
         },
         {
           "id": "b",
-          "label": "Alert when queue depth exceeds 10,000 messages, because a backlog means data arrives faster than it is processed"
+          "label": "Alert when queue depth exceeds 10,000 messages for 5 minutes, because a backlog means data arrives faster than it is processed"
         },
         {
           "id": "c",
-          "label": "Alert on the age of the oldest unprocessed message and time since the last successful database write, measured outside the processor"
+          "label": "Alert on the age of the oldest unprocessed message and time since the last database write, measured outside the processor"
         },
         {
           "id": "d",
-          "label": "Alert when processor CPU stays under 5% for 5 minutes, since an idle processor means nothing is being handled"
+          "label": "Alert when processor CPU stays under 5% for 5 minutes, since an idle processor means nothing is being handled and data is going stale"
         }
       ],
       "answerKey": {

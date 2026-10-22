@@ -230,15 +230,15 @@
         },
         {
           "id": "b",
-          "label": "df.sort(\"city\").mean(\"sales\")"
+          "label": "df.sort_values(\"city\")[\"sales\"].mean()"
         },
         {
           "id": "c",
-          "label": "df.mean(\"city\")[\"sales\"]"
+          "label": "df[\"city\"].groupby(\"sales\").mean()"
         },
         {
           "id": "d",
-          "label": "df.agg(\"city\", \"sales\", \"mean\")"
+          "label": "df.groupby(\"sales\")[\"city\"].mean()"
         }
       ],
       "answerKey": {
@@ -335,15 +335,15 @@
         },
         {
           "id": "b",
-          "label": "A single number: the total of all pts"
+          "label": "A single number: the total of pts across every team and game"
         },
         {
           "id": "c",
-          "label": "A Series of pts values sorted by team"
+          "label": "A Series of every game's pts values, reordered and sorted by team"
         },
         {
           "id": "d",
-          "label": "A DataFrame with one row per game"
+          "label": "A DataFrame with one row per game and a running pts total"
         }
       ],
       "answerKey": {
@@ -366,19 +366,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It returns a new DataFrame and leaves `df` unchanged"
+          "label": "It returns a new DataFrame; `df` itself is unchanged"
         },
         {
           "id": "b",
-          "label": "It only drops columns, never rows"
+          "label": "It only drops columns with NaN, never whole rows"
         },
         {
           "id": "c",
-          "label": "It needs `df.save()` to take effect"
+          "label": "It only marks the NaN cells until `df.commit()` is called"
         },
         {
           "id": "d",
-          "label": "It only works on a Series, not a DataFrame"
+          "label": "It only works on a Series, never on a whole DataFrame"
         }
       ],
       "answerKey": {
@@ -468,23 +468,23 @@
       "stage": "novice",
       "bloom": "C2",
       "kind": "scenario",
-      "prompt": "A analyst merges `orders` with `customers` using `how=\"left\"` on `customer_id`. Some rows in the result show NaN in the `name` column. What most likely explains this?",
+      "prompt": "An analyst merges `orders` with `customers` using `how=\"left\"` on `customer_id`. Some rows in the result show NaN in the `name` column. What most likely explains this?",
       "options": [
         {
           "id": "a",
-          "label": "The merge deleted names for duplicate customer IDs"
+          "label": "The merge dropped names whenever a customer ID appeared twice"
         },
         {
           "id": "b",
-          "label": "Pandas always puts NaN in columns from the right table"
+          "label": "Pandas fills right-table columns with NaN whenever the key names match"
         },
         {
           "id": "c",
-          "label": "The `name` column had the wrong data type before merging"
+          "label": "The `name` column was stored as a different data type before merging"
         },
         {
           "id": "d",
-          "label": "Those orders have a `customer_id` missing from `customers`"
+          "label": "Some orders have an ID that has no match in the customer table"
         }
       ],
       "answerKey": {
@@ -1729,15 +1729,15 @@
         },
         {
           "id": "b",
-          "label": "`shipping_fee` was cast to a string during the merge, so sum concatenates values"
+          "label": "`shipping_fee` was cast to a string during the merge, so sum concatenates the values instead of adding"
         },
         {
           "id": "c",
-          "label": "The merge defaulted to an outer join, adding orders that do not exist in `order_items`"
+          "label": "The merge defaulted to an outer join, which added orders that have no rows in `order_items` and inflated the totals"
         },
         {
           "id": "d",
-          "label": "The groupby sums `shipping_fee` across the full table instead of within each customer"
+          "label": "The groupby summed `shipping_fee` across the full table rather than within each customer, so every customer got the grand total"
         }
       ],
       "answerKey": {
@@ -1795,19 +1795,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Filling in place always modifies the original file on disk, which risks losing raw data"
+          "label": "Calling fillna always overwrites the source CSV on disk, so the raw readings are permanently lost"
         },
         {
           "id": "b",
-          "label": "Offline gaps are unknown, not zero, so the fill drags means down; skipping NaN or interpolating is more faithful"
+          "label": "Offline gaps are unknown, not zero, so zeros drag means down; mean() already skips NaN"
         },
         {
           "id": "c",
-          "label": "`fillna` only works on string columns, so numeric NaN would remain and the mean be NaN"
+          "label": "fillna only works on string columns, so numeric NaN stays and every device mean comes out NaN"
         },
         {
           "id": "d",
-          "label": "Zero is a different dtype from the readings, so the mean would raise an error"
+          "label": "Zero is an int while readings are floats, so the mixed dtypes make the groupby mean raise a TypeError"
         }
       ],
       "answerKey": {
@@ -1830,19 +1830,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Load the file with `read_csv(low_memory=False)` and drop unused columns afterwards"
+          "label": "Load the file with `read_csv(low_memory=False)` and drop the unused columns after loading, then run a single groupby sum"
         },
         {
           "id": "b",
-          "label": "Read a random 10% sample with `skiprows` and scale the sums up by ten"
+          "label": "Read a random 10% sample with `skiprows`, sum each category, and scale the sums up by ten to estimate totals"
         },
         {
           "id": "c",
-          "label": "Load the whole file once with `dtype=object` so no values are converted wrongly"
+          "label": "Load the whole file once with `dtype=object` so no values are converted wrongly, then run a single groupby sum"
         },
         {
           "id": "d",
-          "label": "Use `pd.read_csv(..., chunksize=...)` with `usecols`, and accumulate each chunk's groupby sums"
+          "label": "Use `read_csv(chunksize=...)` with `usecols`, and add up each chunk's groupby sums"
         }
       ],
       "answerKey": {
@@ -1865,19 +1865,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Pass `validate='many_to_one'` to `merge`, which raises if the right keys are not unique"
+          "label": "Pass `validate='many_to_one'` to `merge` so it raises on duplicate right keys"
         },
         {
           "id": "b",
-          "label": "Call `customers.drop_duplicates('cust_id')` before merging so duplicates vanish"
+          "label": "Call `customers.drop_duplicates('cust_id')` before merging so duplicate dimension rows vanish silently"
         },
         {
           "id": "c",
-          "label": "Add `indicator=True` and inspect the `_merge` column afterwards"
+          "label": "Add `indicator=True` to `merge` and then inspect the `_merge` column for unexpected values afterwards"
         },
         {
           "id": "d",
-          "label": "Switch to `how='inner'` so unmatched rows cannot appear in the output"
+          "label": "Switch to `how='inner'` so unmatched rows cannot appear and the row count stays stable"
         }
       ],
       "answerKey": {
@@ -2011,19 +2011,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is correct as written, because boolean masks always return views, so the assignment always reaches df"
+          "label": "It is correct as written, because boolean masks always return views of df, so the assignment always reaches df itself"
         },
         {
           "id": "b",
-          "label": "It drops column a from df as a side effect, so the mask must be built from a copy made beforehand"
+          "label": "It drops column a from df as a side effect, so the mask must be built from a copy made beforehand with df.copy()"
         },
         {
           "id": "c",
-          "label": "It works but is slow, so `df.query('a > 0')['b'] = 0` is the faster equivalent that writes to df"
+          "label": "It works but is slow, so `df.query('a > 0')['b'] = 0` is the faster equivalent that still writes back to df"
         },
         {
           "id": "d",
-          "label": "It may assign into a temporary copy, so df can stay unchanged; one `df.loc[mask, 'b'] = 0` call writes to df directly"
+          "label": "It may assign into a temporary copy, leaving df unchanged; a single `df.loc[mask, 'b'] = 0` writes to df"
         }
       ],
       "answerKey": {
@@ -2081,19 +2081,19 @@
       "options": [
         {
           "id": "a",
-          "label": "groupby drops NaN keys by default; use `groupby('region', dropna=False)` so the unassigned revenue appears as its own row"
+          "label": "groupby drops NaN keys by default; use `groupby('region', dropna=False)` so that revenue appears as its own row"
         },
         {
           "id": "b",
-          "label": "groupby sorts keys and truncates ties; pass `sort=False` so every region's revenue stays in the result"
+          "label": "groupby sorts keys and silently truncates tied groups; pass `sort=False` so every region's revenue stays in the result"
         },
         {
           "id": "c",
-          "label": "groupby sums skip NaN revenue by default; use `sum(skipna=False)` so the missing revenue shows up in totals"
+          "label": "groupby sums skip NaN revenue values by default; use `sum(skipna=False)` so the missing revenue shows up in the totals"
         },
         {
           "id": "d",
-          "label": "groupby treats NaN keys as an empty string group; use `fillna('')` on the result to expose the missing revenue"
+          "label": "groupby treats NaN keys as an empty-string group that is hidden; call `fillna('')` on the result to expose the missing revenue"
         }
       ],
       "answerKey": {
@@ -2262,15 +2262,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Sort by `ts`, then `df['prior'] = df['amt'].shift().cumsum()`, which lags amounts and restarts for each customer"
+          "label": "Sort by `ts`, then `df['prior'] = df['amt'].shift().cumsum()`, which lags amounts by one row and so skips the current purchase"
         },
         {
           "id": "b",
-          "label": "Sort by `ts`, then `df['prior'] = df.groupby('cust')['amt'].cumsum()`, which already leaves out the current purchase"
+          "label": "Sort by `ts`, then `df.groupby('cust')['amt'].cumsum()`, which already leaves out the current purchase"
         },
         {
           "id": "c",
-          "label": "Sort by `ts`, then `df['prior'] = df.groupby('cust')['amt'].cumsum() - df['amt']`, which subtracts the current row from each running total"
+          "label": "Sort by `ts`, then `df['prior'] = df.groupby('cust')['amt'].cumsum() - df['amt']`, subtracting the current row"
         },
         {
           "id": "d",
@@ -2297,19 +2297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`df.pivot_table(..., aggfunc='sum').fillna(0)`, which creates a column for every month in `all_months`"
+          "label": "`df.pivot_table(..., aggfunc='sum').fillna(0)`, because pivot_table builds one column for every month in `all_months` and fillna zero-fills them"
         },
         {
           "id": "b",
-          "label": "`df.pivot_table(..., aggfunc='sum', fill_value=0)` alone, which adds columns for months with no rows in the data"
+          "label": "`df.pivot_table(..., aggfunc='sum', fill_value=0)` alone, because fill_value also adds columns for months with no rows in the data"
         },
         {
           "id": "c",
-          "label": "`df.pivot(...).fillna(0)`, which sums repeated region and month pairs and zero-fills absent months"
+          "label": "`df.pivot(...).fillna(0)`, because pivot sums repeated region and month pairs and fillna(0) zero-fills the absent months"
         },
         {
           "id": "d",
-          "label": "`df.pivot_table(..., aggfunc='sum', fill_value=0).reindex(columns=all_months, fill_value=0)`, which zero-fills absent cells and absent months"
+          "label": "`df.pivot_table(..., aggfunc='sum', fill_value=0).reindex(columns=all_months, fill_value=0)`, adding the absent months"
         }
       ],
       "answerKey": {

@@ -151,7 +151,7 @@
       "options": [
         {
           "id": "a",
-          "label": "One evaluation on the test set"
+          "label": "One evaluation on the held-out test set"
         },
         {
           "id": "b",
@@ -163,7 +163,7 @@
         },
         {
           "id": "d",
-          "label": "One pass through a single mini-batch"
+          "label": "One forward and backward pass on a single mini-batch"
         }
       ],
       "answerKey": {
@@ -257,11 +257,11 @@
       "options": [
         {
           "id": "a",
-          "label": "They make each epoch run faster on a GPU"
+          "label": "They make each epoch run faster by letting a GPU parallelize the layers"
         },
         {
           "id": "b",
-          "label": "They convert input features into integer values"
+          "label": "They convert input features into integer values before each layer"
         },
         {
           "id": "c",
@@ -269,7 +269,7 @@
         },
         {
           "id": "d",
-          "label": "They keep the weights from growing too large during training"
+          "label": "They keep the weights from growing too large during training updates"
         }
       ],
       "answerKey": {
@@ -362,7 +362,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It removes the need to train the filter at all"
+          "label": "It removes the need to train the filter, since one fixed filter suits every image"
         },
         {
           "id": "b",
@@ -370,11 +370,11 @@
         },
         {
           "id": "c",
-          "label": "It makes the network ignore the colour of the pixels"
+          "label": "It makes the network ignore pixel colour, so only the shapes in the image matter"
         },
         {
           "id": "d",
-          "label": "It guarantees the output has the same size as the input"
+          "label": "It guarantees the output has the same size as the input, whatever the filter size"
         }
       ],
       "answerKey": {
@@ -468,7 +468,7 @@
       "options": [
         {
           "id": "a",
-          "label": "They are errors, and class 3 is the most accurate"
+          "label": "They are errors, so class 3 has the smallest error and is the best fit"
         },
         {
           "id": "b",
@@ -476,11 +476,11 @@
         },
         {
           "id": "c",
-          "label": "They are raw scores, and only their order matters"
+          "label": "They are raw scores before normalising, so only their order matters"
         },
         {
           "id": "d",
-          "label": "They are weights, and class 1 will be updated the most"
+          "label": "They are weights, so class 1 will be updated the most in training"
         }
       ],
       "answerKey": {
@@ -643,7 +643,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The learning rate is zero, so only validation loss changes"
+          "label": "The learning rate is too low, so validation loss lags behind training loss"
         },
         {
           "id": "b",
@@ -651,11 +651,11 @@
         },
         {
           "id": "c",
-          "label": "The model is underfitting, so it needs far more epochs to learn"
+          "label": "The model is underfitting, so it needs far more epochs and capacity to learn"
         },
         {
           "id": "d",
-          "label": "The validation set is mislabelled, so training should be stopped"
+          "label": "The validation set is mislabelled, so training should be stopped immediately"
         }
       ],
       "answerKey": {
@@ -719,19 +719,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Embeddings are only defined for words that are in alphabetical order"
+          "label": "Word embeddings are looked up from a fixed table, so they lose the order in which the words were typed"
         },
         {
           "id": "b",
-          "label": "The softmax in attention forces every word to get exactly equal weight"
+          "label": "The softmax in attention spreads weight so evenly across the words that each word's own meaning is blurred"
         },
         {
           "id": "c",
-          "label": "Self-attention alone has no sense of word order, so order information is lost"
+          "label": "Self-attention has no sense of word order, so order information is lost"
         },
         {
           "id": "d",
-          "label": "Attention heads can only compare words that appear next to each other"
+          "label": "Attention heads mostly compare words that sit near each other, so distant word order gets ignored"
         }
       ],
       "answerKey": {
@@ -1291,15 +1291,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The validation set leaked into training, so its accuracy is inflated above the training figure"
+          "label": "The validation set leaked into training, so the network has effectively memorised those examples and scores above its training figure"
         },
         {
           "id": "b",
-          "label": "The optimizer fits validation examples first because they are cleaner than training ones"
+          "label": "The optimizer fits validation examples first because they are cleaner than training ones, so early epochs favour them"
         },
         {
           "id": "c",
-          "label": "Dropout raises the loss on validation data, so a gap in the other direction is expected"
+          "label": "Dropout acts as a regulariser that lowers validation loss more than training loss, so validation accuracy ends up higher"
         },
         {
           "id": "d",
@@ -1326,19 +1326,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Early layers hold more parameters, so rounding errors in float32 accumulate only there"
+          "label": "Early layers hold more parameters, so float32 rounding errors accumulate mostly there and swamp the update"
         },
         {
           "id": "b",
-          "label": "Cross-entropy loss saturates at the output and blocks all gradient flow towards the input layers"
+          "label": "Cross-entropy loss saturates at the output, so the error signal reaching the early layers is mostly lost"
         },
         {
           "id": "c",
-          "label": "Backprop multiplies many sigmoid derivatives, each at most 0.25, so the gradient shrinks geometrically"
+          "label": "Backprop multiplies many sigmoid derivatives, each at most 0.25, so the gradient shrinks with depth"
         },
         {
           "id": "d",
-          "label": "Zero-initialised weights make all units identical, so early layers receive averaged gradients"
+          "label": "Zero-initialised weights make most units identical, so early layers receive averaged gradients that cancel"
         }
       ],
       "answerKey": {
@@ -1542,7 +1542,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Running statistics were accumulated on augmented images, so they mismatch the clean validation activations that batch statistics fit"
+          "label": "Running statistics came from augmented images, so they mismatch clean validation activations that batch statistics fit"
         },
         {
           "id": "b",
@@ -1722,15 +1722,15 @@
         },
         {
           "id": "b",
-          "label": "Adam cannot update pretrained weights, so only the head learned while the backbone drifted randomly during training"
+          "label": "Adam's adaptive steps mostly leave pretrained weights unchanged, so the backbone stayed near its start while only the head fitted the data"
         },
         {
           "id": "c",
-          "label": "Rising training accuracy proves the optimiser is fine, so the gap must come from a labelling error in the validation split"
+          "label": "Batch normalisation statistics from ImageNet were kept fixed, so the backbone's features were shifted and the head overfitted the training split"
         },
         {
           "id": "d",
-          "label": "Pretrained weights are incompatible with grayscale X-rays, so features cannot transfer whatever the learning rate used"
+          "label": "The X-rays are grayscale, which most ImageNet-trained filters handle poorly, so the transferred features were largely unusable at any learning rate"
         }
       ],
       "answerKey": {
@@ -2039,19 +2039,19 @@
       "options": [
         {
           "id": "a",
-          "label": "LayerNorm over the whole batch, because pooling all samples gives the most stable mean estimate"
+          "label": "LayerNorm over the whole batch, because pooling all samples in the batch gives the most stable mean and variance estimate"
         },
         {
           "id": "b",
-          "label": "BatchNorm with running statistics, since averaging over spatial positions makes 2 images enough"
+          "label": "BatchNorm with running statistics, since averaging over all spatial positions makes even 2 images enough for stable estimates"
         },
         {
           "id": "c",
-          "label": "GroupNorm, because its statistics are computed per sample over channel groups and do not depend on batch size"
+          "label": "GroupNorm, because its statistics are per sample over channel groups, so batch size is irrelevant"
         },
         {
           "id": "d",
-          "label": "No normalisation, because normalisation always hurts when fine-tuning from pretrained weights"
+          "label": "No normalisation, because normalisation always hurts when fine-tuning from pretrained weights on a new task"
         }
       ],
       "answerKey": {
@@ -2074,19 +2074,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The claim fails only for biases, because the penalty is never applied to them in Adam"
+          "label": "The claim fails only for biases, because Adam exempts them from the L2 penalty but still decays every weight matrix by the same factor"
         },
         {
           "id": "b",
-          "label": "The claim holds, because both shrink weights toward zero by the same factor each step"
+          "label": "The claim holds, because both shrink weights toward zero by the same factor each step, and AdamW only changes the learning-rate schedule"
         },
         {
           "id": "c",
-          "label": "The claim fails, because L2 penalties change the loss minimum while weight decay never does for any optimiser"
+          "label": "The claim fails, because an L2 penalty changes the location of the loss minimum, whereas weight decay applied to the weights leaves it unchanged"
         },
         {
           "id": "d",
-          "label": "The claim fails, because Adam rescales the L2 gradient by its per-parameter adaptive denominator, so decay strength varies by weight"
+          "label": "The claim fails, because Adam divides the L2 gradient by its adaptive denominator, so decay strength varies by weight"
         }
       ],
       "answerKey": {
@@ -2329,7 +2329,7 @@
         },
         {
           "id": "b",
-          "label": "A per-document attention mask blocking cross-document attention, with position indices restarting for each document"
+          "label": "A per-document attention mask, with position indices restarting at each document"
         },
         {
           "id": "c",
@@ -2337,7 +2337,7 @@
         },
         {
           "id": "d",
-          "label": "A bidirectional mask so each token can see its own document in both directions"
+          "label": "A bidirectional mask so each token can see the rest of its own document, both before and after it"
         }
       ],
       "answerKey": {
@@ -2399,15 +2399,15 @@
         },
         {
           "id": "b",
-          "label": "Increase kernel size to 9x9 so filters can learn rotated patterns without being told"
+          "label": "Increase kernel size to 9x9 and add dilated convolutions so filters can learn every rotated pattern without being told"
         },
         {
           "id": "c",
-          "label": "Add a rotation-prediction head and use its output to switch among four separate classifiers"
+          "label": "Add a rotation-prediction head and use its predicted angle to switch among four separately trained classifiers"
         },
         {
           "id": "d",
-          "label": "Heavy random rotation augmentation, since it guarantees invariance after enough epochs"
+          "label": "Apply heavy random rotation augmentation, since with enough epochs the network is guaranteed to become invariant"
         }
       ],
       "answerKey": {

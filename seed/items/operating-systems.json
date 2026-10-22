@@ -46,11 +46,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A section of RAM chips"
+          "label": "A block of RAM reserved for a program"
         },
         {
           "id": "b",
-          "label": "A file stored on disk"
+          "label": "An executable file saved on the disk"
         },
         {
           "id": "c",
@@ -58,7 +58,7 @@
         },
         {
           "id": "d",
-          "label": "A command typed in a shell"
+          "label": "A command that a user types in a shell"
         }
       ],
       "answerKey": {
@@ -116,7 +116,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A call between two user functions"
+          "label": "A call from one user function to another in a program"
         },
         {
           "id": "b",
@@ -124,11 +124,11 @@
         },
         {
           "id": "c",
-          "label": "A message sent over a network"
+          "label": "A message that a program sends to another computer"
         },
         {
           "id": "d",
-          "label": "A hardware reset signal"
+          "label": "A signal that the hardware sends to restart the system"
         }
       ],
       "answerKey": {
@@ -198,20 +198,15 @@
         },
         {
           "id": "d",
-          "label": "Blocked (waiting)"
+          "label": "Installed"
         }
       ],
       "answerKey": {
         "optionIds": [
           "b",
-          "c",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "Running, ready and blocked are standard process states.",
-        "Compiled describes a program build step, not a process state."
-      ],
       "reviewed": false
     },
     {
@@ -293,11 +288,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Moves a process from user to the network"
+          "label": "Moves a running process from user mode into kernel mode so it can make a system call"
         },
         {
           "id": "b",
-          "label": "Copies a process's files to a new directory"
+          "label": "Copies a process's open files and working directory to a new process it has created"
         },
         {
           "id": "c",
@@ -305,7 +300,7 @@
         },
         {
           "id": "d",
-          "label": "Erases a process's memory to free space"
+          "label": "Erases a paused process's memory pages so that other processes can use the freed space"
         }
       ],
       "answerKey": {
@@ -328,7 +323,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Programs are compressed to half their size"
+          "label": "The OS compresses every program to about half its size when loading it"
         },
         {
           "id": "b",
@@ -336,11 +331,11 @@
         },
         {
           "id": "c",
-          "label": "The CPU stores extra data in its registers"
+          "label": "The CPU keeps the overflow data in its registers and caches"
         },
         {
           "id": "d",
-          "label": "Each program secretly shares the same memory"
+          "label": "Programs are made to share one copy of memory without isolation"
         }
       ],
       "answerKey": {
@@ -367,15 +362,15 @@
         },
         {
           "id": "b",
-          "label": "It keeps the CPU until it finishes"
+          "label": "It stays at the front of the ready queue and runs again after a short pause"
         },
         {
           "id": "c",
-          "label": "It is terminated and removed from the system"
+          "label": "It is blocked until every other process in the queue has finished running"
         },
         {
           "id": "d",
-          "label": "It is moved permanently to disk"
+          "label": "It is swapped out to disk and must be reloaded by the user to continue"
         }
       ],
       "answerKey": {
@@ -398,15 +393,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Programs cannot store any data in variables"
+          "label": "Programs run too slowly to talk to hardware directly"
         },
         {
           "id": "b",
-          "label": "The kernel makes the file smaller before reading"
+          "label": "Only the kernel can hold file data, since programs keep none"
         },
         {
           "id": "c",
-          "label": "The disk can only be read during boot"
+          "label": "The disk accepts requests from just one program at a time"
         },
         {
           "id": "d",
@@ -477,11 +472,11 @@
         },
         {
           "id": "c",
-          "label": "The editor runs inside the browser's memory"
+          "label": "The editor runs inside the browser's memory and shares its CPU time"
         },
         {
           "id": "d",
-          "label": "Each process gets its own dedicated CPU core"
+          "label": "Each process gets its own dedicated CPU core to run on"
         }
       ],
       "answerKey": {
@@ -586,7 +581,7 @@
         },
         {
           "id": "d",
-          "label": "It maps each virtual page of the process to a physical frame in RAM"
+          "label": "It maps virtual pages to physical frames in RAM"
         }
       ],
       "answerKey": {
@@ -1641,11 +1636,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Each access triggers a minor trap into the kernel that zeroes a fresh page before the read"
+          "label": "Each access triggers a minor fault into the kernel, which must zero a freshly allocated page before the read can complete"
         },
         {
           "id": "b",
-          "label": "The scheduler preempts the process more often when it touches memory sparsely"
+          "label": "The scheduler preempts the process more often when it touches memory sparsely, so context switches dominate the runtime"
         },
         {
           "id": "c",
@@ -1712,19 +1707,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Run queue saturation from CPU-bound tasks, so the server needs more cores"
+          "label": "Run queue saturation from CPU-bound tasks waiting for a free core, so the server needs more cores to clear the backlog"
         },
         {
           "id": "b",
-          "label": "Tasks are blocked in uninterruptible I/O waits on the stalled mount, which add to load but use no CPU"
+          "label": "Tasks are stuck in uninterruptible I/O waits on the stalled mount, adding to load but using no CPU"
         },
         {
           "id": "c",
-          "label": "Zombie processes are piling up because parents never call wait(), consuming scheduler slots"
+          "label": "Zombie processes are piling up because parents never call wait(), and each one holds a scheduler slot and inflates the load"
         },
         {
           "id": "d",
-          "label": "Memory leaks are forcing heavy swapping, which hides CPU time from the accounting tools"
+          "label": "Memory leaks are forcing heavy swapping, and the time spent waiting on swap I/O is hidden from CPU accounting tools"
         }
       ],
       "answerKey": {
@@ -1747,7 +1742,7 @@
       "options": [
         {
           "id": "a",
-          "label": "First-come-first-served, because it avoids preemption overhead and finishes the compile earliest"
+          "label": "First-come-first-served, because it avoids preemption overhead and the compile finishes earliest without being interrupted"
         },
         {
           "id": "b",
@@ -1755,11 +1750,11 @@
         },
         {
           "id": "c",
-          "label": "Shortest-job-first using burst lengths the user declares, because it minimises average waiting time"
+          "label": "Shortest-job-first using burst lengths the user declares, because it minimises average waiting time for every task in the queue"
         },
         {
           "id": "d",
-          "label": "Strict static priorities set by the user, because interactive tasks then always outrank batch work"
+          "label": "Strict static priorities set by the user, because interactive tasks then always outrank batch work and respond immediately"
         }
       ],
       "answerKey": {
@@ -1782,11 +1777,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Lock the scanned table in memory with mlock, because pinned pages are never evicted"
+          "label": "Lock the scanned table in memory with mlock, because pinned pages are never evicted and the scan then cannot displace anything"
         },
         {
           "id": "b",
-          "label": "Switch to FIFO replacement, because it never promotes scanned pages above older entries"
+          "label": "Switch to FIFO replacement, because it never promotes scanned pages above older entries and so protects older hot pages"
         },
         {
           "id": "c",
@@ -1794,7 +1789,7 @@
         },
         {
           "id": "d",
-          "label": "Add more swap space, because evicted pages can be paged back in cheaply"
+          "label": "Add more swap space, because evicted pages can be paged back in cheaply when the morning queries need them"
         }
       ],
       "answerKey": {
@@ -1993,11 +1988,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Pure blocking mutex that sleeps immediately, because sleeping always gives the lowest tail latency"
+          "label": "Pure blocking mutex that sleeps at once on contention, since a futex wait and wake costs more than a 2 microsecond hold but keeps CPUs free"
         },
         {
           "id": "b",
-          "label": "Pure spinlock, because with a 2 microsecond hold time a context switch always costs more than waiting"
+          "label": "Pure spinlock, since a 2 microsecond hold is shorter than a context switch so waiters should spin until the lock frees"
         },
         {
           "id": "c",
@@ -2005,7 +2000,7 @@
         },
         {
           "id": "d",
-          "label": "Disable interrupts around the critical section in user space, so the holder is never preempted"
+          "label": "Spinlock with exponential backoff and pause instructions, which cuts cache-line traffic so spinning waiters waste little CPU"
         }
       ],
       "answerKey": {
@@ -2028,19 +2023,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Drop fsync once O_DIRECT is on, because direct I/O always guarantees data reaches stable media in order"
+          "label": "Drop fsync once O_DIRECT is on, because direct I/O bypasses the page cache and so always guarantees data reaches stable media in write order"
         },
         {
           "id": "b",
-          "label": "Switch to mmap for all I/O, because the kernel then guarantees write ordering and page eviction decisions match the engine's needs"
+          "label": "Switch to mmap for all I/O, because the kernel then guarantees write ordering and its page eviction decisions will match what the engine needs"
         },
         {
           "id": "c",
-          "label": "Keep buffered I/O and double the buffer pool, because the page cache evicts clean pages instantly at no cost"
+          "label": "Keep buffered I/O and double the buffer pool, because the page cache evicts clean pages instantly at no cost and so duplicates are harmless"
         },
         {
           "id": "d",
-          "label": "Use O_DIRECT for data reads and writes, keep explicit fsync for ordering; this removes the duplicate cache but the engine must handle alignment and its own readahead"
+          "label": "Use O_DIRECT for data I/O and keep fsync for ordering; this removes the duplicate cache but the engine must handle alignment and readahead"
         }
       ],
       "answerKey": {
@@ -2063,19 +2058,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Set per-container cgroup memory limits with a lower soft threshold, so only the offender is reclaimed or OOM-killed within its cgroup"
+          "label": "Set per-container cgroup memory limits, so only the offender is reclaimed or OOM-killed within its cgroup"
         },
         {
           "id": "b",
-          "label": "Disable swap and overcommit globally, so allocations fail early and the global OOM killer never runs"
+          "label": "Disable swap and overcommit globally, so allocations fail early and the global OOM killer never needs to run on the host"
         },
         {
           "id": "c",
-          "label": "Raise the offending container's CPU priority with nice, so it finishes sooner and frees memory"
+          "label": "Raise the offending container's CPU priority with nice, so it finishes sooner and returns its memory to the other containers"
         },
         {
           "id": "d",
-          "label": "Run every container as root with no limits, since the kernel fairly shares memory by page-fault rate"
+          "label": "Run every container as root with no limits, relying on the kernel to share memory fairly between containers by page-fault rate"
         }
       ],
       "answerKey": {
@@ -2098,19 +2093,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Neither, because fsync cannot guarantee durability on any filesystem"
+          "label": "A only, because fsync cannot be batched safely and each record needs its own flush"
         },
         {
           "id": "b",
-          "label": "A only, because batching always means acknowledged records can be lost on power failure"
+          "label": "A only, because batching lets acknowledged records sit unflushed in the page cache during the 5 ms window"
         },
         {
           "id": "c",
-          "label": "B with acknowledgement sent before fsync, since the page cache survives power loss"
+          "label": "B with acks sent when records enter the batch, since the OS page cache is flushed on power loss"
         },
         {
           "id": "d",
-          "label": "B, provided clients are acknowledged only after the batch fsync returns; durability holds and fsync cost is amortised"
+          "label": "B, with acks sent only after the batch fsync returns, so durability holds and fsync cost is shared"
         }
       ],
       "answerKey": {
@@ -2133,19 +2128,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is ideal, because the medium thread is the only cause and the logger is irrelevant"
+          "label": "It is ideal, because the medium thread is the only real cause and the logger's lock use is irrelevant to the misses"
         },
         {
           "id": "b",
-          "label": "It fixes the problem, since a lower-priority logger holds the lock for less time"
+          "label": "It fixes the problem, since a lower-priority logger is scheduled less often and so holds the lock for less total time"
         },
         {
           "id": "c",
-          "label": "It does not help: priority inversion needs priority inheritance on the mutex, or removing the lock from the audio path"
+          "label": "It does not help: this is priority inversion, so use priority inheritance or keep the lock off the audio path"
         },
         {
           "id": "d",
-          "label": "It helps only on multicore, since inversion cannot occur with real-time scheduling classes"
+          "label": "It helps only on multicore, since inversion cannot occur when the threads run in real-time scheduling classes"
         }
       ],
       "answerKey": {
@@ -2205,19 +2200,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Sound: strict priority guarantees both goals because batch jobs run whenever interactive ones are idle"
+          "label": "Sound: strict priority guarantees both goals, because batch jobs still run whenever interactive jobs are idle, so they cannot starve on this server"
         },
         {
           "id": "b",
-          "label": "Wrong: interactive jobs need the lowest priority so they cannot hog the CPU"
+          "label": "Wrong: interactive jobs need the lowest priority so they cannot hog the CPU, since short bursts finish quickly even when they wait behind batch work"
         },
         {
           "id": "c",
-          "label": "Sound, and aging should be avoided because it always raises context-switch cost above the benefit"
+          "label": "Sound, and aging should be avoided because it always raises context-switch cost above the benefit, which would hurt interactive response"
         },
         {
           "id": "d",
-          "label": "Risky: a busy high-priority class can starve batch jobs; use a fair scheduler with weights or aging so batch progresses while interactive jobs wake quickly"
+          "label": "Risky: busy interactive jobs can starve batch work; use weighted fair sharing or aging so both goals are met"
         }
       ],
       "answerKey": {
@@ -2240,11 +2235,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Write a temp file in /tmp, fsync it, and rename it over the target"
+          "label": "Write a temp file in /tmp, fsync the temp file, then rename it over the target file"
         },
         {
           "id": "b",
-          "label": "Write the new file, rename it over the target, and skip fsync because rename is atomic"
+          "label": "Write a temp file beside the target, rename it over the target, and skip fsync because rename is atomic"
         },
         {
           "id": "c",
@@ -2252,7 +2247,7 @@
         },
         {
           "id": "d",
-          "label": "Truncate the target and write the new contents, then fsync the file"
+          "label": "Truncate the target and write the new contents, then fsync the file and its parent directory"
         }
       ],
       "answerKey": {
@@ -2275,11 +2270,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A chroot into the input directory with the process running as root, and a ulimit on file size"
+          "label": "A chroot into the input directory, process running as root, with ulimit caps on file size, CPU time and address space"
         },
         {
           "id": "b",
-          "label": "A thread in the main service with a watchdog that kills it after a timeout"
+          "label": "A thread in the main service with a watchdog that kills it after a timeout and a memory quota enforced by the language runtime"
         },
         {
           "id": "c",
@@ -2287,7 +2282,7 @@
         },
         {
           "id": "d",
-          "label": "A normal child process that drops its own network by never calling socket, trusting the library"
+          "label": "A normal child process under an unprivileged user that never calls socket, with the conversion library audited for network code"
         }
       ],
       "answerKey": {
@@ -2310,11 +2305,11 @@
       "options": [
         {
           "id": "a",
-          "label": "One mutex and one condition variable, waiting with an if check, and signal once per operation"
+          "label": "One mutex and one shared condition variable, waiting with an if check, and calling signal once after each put or get"
         },
         {
           "id": "b",
-          "label": "Two counting semaphores only, with no mutex protecting the buffer indices"
+          "label": "Two counting semaphores for empty and full slots, with buffer indices updated by all threads without any mutex"
         },
         {
           "id": "c",
@@ -2322,7 +2317,7 @@
         },
         {
           "id": "d",
-          "label": "A spinlock around the buffer, with callers polling until a slot is free"
+          "label": "A spinlock around the buffer, with callers releasing it and polling in a loop until a slot is free"
         }
       ],
       "answerKey": {
@@ -2380,19 +2375,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Use an event loop on epoll with non-blocking sockets and a small worker pool for CPU tasks"
+          "label": "Use an epoll event loop with non-blocking sockets and a small worker pool"
         },
         {
           "id": "b",
-          "label": "Fork a process per connection to avoid sharing"
+          "label": "Fork a separate process per connection so that no memory is shared between clients"
         },
         {
           "id": "c",
-          "label": "Replace sockets with files polled in a loop using sleep"
+          "label": "Poll each socket in a loop with sleep calls between passes to cut CPU use"
         },
         {
           "id": "d",
-          "label": "Raise the thread stack size so each thread can hold more state"
+          "label": "Raise the thread stack size so each connection thread can keep more state"
         }
       ],
       "answerKey": {
@@ -2415,7 +2410,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Ignore SIGTERM and rely on SIGKILL only, since it is the cleanest signal"
+          "label": "Parent catches SIGTERM and immediately sends SIGKILL to all children so that no child can outlive it and become orphaned"
         },
         {
           "id": "b",
@@ -2448,23 +2443,23 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "scenario",
-      "prompt": "A team proposes a user-space allocator for a long-running service: per-thread free lists, size classes, and memory returned to the OS never. Constraints: low contention, bounded fragmentation, and RSS must fall after traffic spikes. The design is missing something. What is it?",
+      "prompt": "A team proposes a user-space allocator for a long-running service: per-thread free lists, size classes, and memory is never returned to the OS. Constraints: low contention, bounded fragmentation, and RSS must fall after traffic spikes. The design is missing something. What is it?",
       "options": [
         {
           "id": "a",
-          "label": "Periodic returning of fully free spans to the OS (madvise DONTNEED or munmap) with per-thread caches that are trimmed"
+          "label": "Return fully free spans to the OS with madvise or munmap, and trim per-thread caches"
         },
         {
           "id": "b",
-          "label": "Zeroing every freed block immediately so RSS drops"
+          "label": "Zero freed blocks at free time so the kernel can reclaim those pages and RSS drops"
         },
         {
           "id": "c",
-          "label": "Larger size classes only, so fewer blocks exist"
+          "label": "Use larger size classes so fewer, bigger blocks exist and fragmentation stays bounded"
         },
         {
           "id": "d",
-          "label": "A global lock around every malloc to prevent fragmentation"
+          "label": "Put one global lock around malloc and free so spans are coalesced in a single place"
         }
       ],
       "answerKey": {

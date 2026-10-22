@@ -50,11 +50,11 @@
         },
         {
           "id": "b",
-          "label": "The server crashed"
+          "label": "The server failed internally"
         },
         {
           "id": "c",
-          "label": "Access is forbidden"
+          "label": "Access is forbidden to you"
         },
         {
           "id": "d",
@@ -297,19 +297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "To store small data that the browser sends back so the server can recognise it"
+          "label": "To let the server recognise a returning browser across requests"
         },
         {
           "id": "b",
-          "label": "To speed up DNS lookups for the domain"
+          "label": "To cache the domain's DNS lookup results so later page requests load faster"
         },
         {
           "id": "c",
-          "label": "To encrypt the body of each request sent"
+          "label": "To encrypt the body of each request so that network observers cannot read it"
         },
         {
           "id": "d",
-          "label": "To tell the browser which method to use"
+          "label": "To tell the browser which method to use when it submits a form"
         }
       ],
       "answerKey": {
@@ -332,15 +332,15 @@
       "options": [
         {
           "id": "a",
-          "label": "401 means the client sent bad syntax, 403 means the page is gone"
+          "label": "401 means the request syntax was malformed, 403 means the requested page no longer exists on the server"
         },
         {
           "id": "b",
-          "label": "401 means the server is down, 403 means the page moved"
+          "label": "401 means the server is overloaded or down, 403 means the page has moved to a new URL permanently"
         },
         {
           "id": "c",
-          "label": "401 is for redirects while 403 is for successful requests"
+          "label": "401 is for redirecting to a login page, 403 is for requests that completed successfully with a body"
         },
         {
           "id": "d",
@@ -367,19 +367,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Faster responses because bodies are compressed"
+          "label": "Faster responses because the server compresses every body"
         },
         {
           "id": "b",
-          "label": "Automatic caching of every page visited"
+          "label": "Automatic caching of every page the user visits"
         },
         {
           "id": "c",
-          "label": "Guaranteed correct content from the server"
+          "label": "A guarantee that the site's content is true and safe"
         },
         {
           "id": "d",
-          "label": "Encryption with TLS so eavesdroppers cannot read the traffic"
+          "label": "TLS encryption so eavesdroppers cannot read traffic"
         }
       ],
       "answerKey": {
@@ -402,11 +402,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The page needs a login after one hour"
+          "label": "The user must log in again once an hour has passed since the page loaded"
         },
         {
           "id": "b",
-          "label": "Delete the page after one hour"
+          "label": "The browser must delete the stored copy exactly one hour after it was received"
         },
         {
           "id": "c",
@@ -414,7 +414,7 @@
         },
         {
           "id": "d",
-          "label": "Retry the request every 3600 milliseconds"
+          "label": "The browser should poll the server for this page every 3600 milliseconds"
         }
       ],
       "answerKey": {
@@ -473,7 +473,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Discard the cookie because the page changed"
+          "label": "Discard the cookie because the page changed, so the user must log in again"
         },
         {
           "id": "b",
@@ -481,7 +481,7 @@
         },
         {
           "id": "c",
-          "label": "Ask the server for a new cookie before any request"
+          "label": "Ask the server for a new cookie before sending any request to the next page"
         },
         {
           "id": "d",
@@ -508,11 +508,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It can only be sent over an HTTPS connection"
+          "label": "It is normally sent over an HTTPS connection"
         },
         {
           "id": "b",
-          "label": "It always returns the same response body"
+          "label": "It returns the same response body on repeated calls"
         },
         {
           "id": "c",
@@ -621,7 +621,7 @@
         },
         {
           "id": "c",
-          "label": "HTTP closes connections, so cookies keep the socket alive"
+          "label": "HTTP closes connections after each response, so cookies keep the socket alive"
         },
         {
           "id": "d",
@@ -691,24 +691,19 @@
         },
         {
           "id": "c",
-          "label": "Guarantee that the website's content is harmless"
+          "label": "Assurance that the site's operator is trustworthy and its content is harmless"
         },
         {
           "id": "d",
-          "label": "Detection of tampering with data in transit"
+          "label": "Hiding which server's domain name and IP address the client connects to from network observers"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "d"
+          "b"
         ]
       },
-      "rubric": [
-        "HTTPS (TLS) gives confidentiality, integrity and server authentication.",
-        "It does not vouch for whether the site itself is trustworthy or safe."
-      ],
       "reviewed": false
     },
     {
@@ -1248,15 +1243,15 @@
       "options": [
         {
           "id": "a",
-          "label": "A CORS preflight failed because the method was `OPTIONS`"
+          "label": "A CORS preflight was rejected because the API sent no Access-Control-Allow-Origin header"
         },
         {
           "id": "b",
-          "label": "The server certificate lacks a matching subject name"
+          "label": "The API server's certificate does not list api.example.com as a valid subject name"
         },
         {
           "id": "c",
-          "label": "A cookie with `SameSite=Strict` was dropped from the request"
+          "label": "A cookie with SameSite=Strict was dropped from the cross-site request by the browser"
         },
         {
           "id": "d",
@@ -1463,15 +1458,15 @@
         },
         {
           "id": "b",
-          "label": "The app returns 502 when the request body exceeds its limit"
+          "label": "The app returns 502 whenever a request body exceeds its size limit"
         },
         {
           "id": "c",
-          "label": "The proxy's TLS certificate expired during idle periods"
+          "label": "The proxy's cached DNS record for the app expires after idle gaps"
         },
         {
           "id": "d",
-          "label": "The app uses `HEAD` where the proxy expects `GET`"
+          "label": "The app rejects requests that reuse a connection with an HTTP/1.0 header"
         }
       ],
       "answerKey": {
@@ -1529,7 +1524,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The max-age of 600 is too long, since compressed responses must not be cached beyond 60 seconds"
+          "label": "The max-age of 600 is too long, since a cache must not keep compressed responses for more than about 60 seconds"
         },
         {
           "id": "b",
@@ -1537,11 +1532,11 @@
         },
         {
           "id": "c",
-          "label": "The client should have sent `Cache-Control: no-cache`, which forces the CDN to renegotiate encoding"
+          "label": "The client should have sent `Cache-Control: no-cache` on its request, which would force the CDN to renegotiate the encoding each time"
         },
         {
           "id": "d",
-          "label": "The CDN strips Content-Length, and clients cannot decode a body without it"
+          "label": "The CDN strips the Content-Length header when it stores the response, and clients cannot decode a compressed body without it"
         }
       ],
       "answerKey": {
@@ -1564,19 +1559,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The wildcard only works for HTTP, so HTTPS origins must be listed in a separate header"
+          "label": "The wildcard is valid for HTTP only, so HTTPS origins must be listed in a separate header"
         },
         {
           "id": "b",
-          "label": "Credentialed requests require an explicit origin in Allow-Origin, plus `Access-Control-Allow-Credentials: true`"
+          "label": "Credentialed requests need a specific origin in Allow-Origin and Allow-Credentials: true"
         },
         {
           "id": "c",
-          "label": "Browsers block any cross-subdomain request unless the API sets `Access-Control-Max-Age`"
+          "label": "Cross-subdomain requests are blocked by browsers unless the API also sets an Access-Control-Max-Age value"
         },
         {
           "id": "d",
-          "label": "The request must be a POST, because CORS wildcards are ignored for GET requests"
+          "label": "The wildcard is ignored for GET requests, so the call must be changed to a POST to be accepted"
         }
       ],
       "answerKey": {
@@ -1599,19 +1594,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The session expired between the click and the refresh because no Max-Age was set"
+          "label": "The session expired between the click and the refresh because no Max-Age was set, so the browser dropped the cookie after the first request"
         },
         {
           "id": "b",
-          "label": "HttpOnly prevents the cookie being sent on navigations that start from outside the browser"
+          "label": "HttpOnly prevents the cookie being sent on navigations that start from outside the browser, such as links opened from an email client"
         },
         {
           "id": "c",
-          "label": "SameSite=Strict withholds the cookie on the cross-site navigation, while the refresh is same-site and sends it"
+          "label": "SameSite=Strict withholds the cookie on the cross-site navigation; the refresh is same-site"
         },
         {
           "id": "d",
-          "label": "Secure cookies are only sent on the second request, after the TLS session is resumed"
+          "label": "Secure cookies are only sent once the TLS session is resumed, so the first request after a click goes out without the cookie"
         }
       ],
       "answerKey": {
@@ -1634,19 +1629,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The browser caches 301 responses, so it always rewrites links to http"
+          "label": "The browser caches earlier 301 responses to http URLs, so it keeps rewriting links to http"
         },
         {
           "id": "b",
-          "label": "The certificate lacks a SAN entry, so the app rewrites URLs to http"
+          "label": "The certificate lacks a SAN entry for the site's hostname, so the app falls back to http URLs"
         },
         {
           "id": "c",
-          "label": "The load balancer fails to negotiate HTTP/2, so the browser downgrades links to http"
+          "label": "The load balancer fails to negotiate HTTP/2 with browsers, so links are downgraded to http"
         },
         {
           "id": "d",
-          "label": "The app sees an HTTP connection and ignores forwarded-protocol information such as `X-Forwarded-Proto`"
+          "label": "The app sees a plain HTTP connection and ignores the `X-Forwarded-Proto` header"
         }
       ],
       "answerKey": {
@@ -1706,19 +1701,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The CDN ignored the immutable directive, so it served a different file to those users"
+          "label": "The CDN ignored the immutable directive and served a different file to those users, so the origin should purge its edge caches after every deploy"
         },
         {
           "id": "b",
-          "label": "Browsers considered the cached copy fresh for a year and never revalidated, so the fixed URL needs versioning or a shorter lifetime"
+          "label": "Browsers treated the cached copy as fresh for a year and never revalidated, so the URL needs versioning"
         },
         {
           "id": "c",
-          "label": "The server failed to send an ETag, so browsers fall back to caching forever by default"
+          "label": "The server sent no ETag validator, so browsers fell back to caching the script indefinitely and the server must add an ETag header to fix it"
         },
         {
           "id": "d",
-          "label": "Hard refresh changes the HTTP method to POST, which bypasses the stale copy"
+          "label": "A hard refresh sends the request as POST rather than GET, which bypasses the stale copy that normal reloads keep serving from cache"
         }
       ],
       "answerKey": {
@@ -1741,7 +1736,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Return 500 so retrying clients are alerted that the server state was unexpected"
+          "label": "Return 500 on repeat deletes, so that retrying clients are alerted that the server state was unexpected and can report it to operators"
         },
         {
           "id": "b",
@@ -1749,11 +1744,11 @@
         },
         {
           "id": "c",
-          "label": "Return 409 always, so that clients know the delete conflicts with an earlier one"
+          "label": "Return 409 on every repeat delete, so that clients know the request conflicts with the earlier delete and must resolve it before retrying"
         },
         {
           "id": "d",
-          "label": "Return 302 to the collection so clients follow it to confirm deletion"
+          "label": "Return 302 to the collection URL on repeat deletes, so that clients follow the redirect and confirm for themselves that the file is gone"
         }
       ],
       "answerKey": {
@@ -1846,19 +1841,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A `Content-Type` of `text/html; charset=utf-8` on all pages"
+          "label": "A `Content-Type` of `text/html; charset=utf-8` on the pages"
         },
         {
           "id": "b",
-          "label": "A `Secure` flag on a cookie used only for tracking"
+          "label": "A `Secure` flag on the session cookie, sent with each login"
         },
         {
           "id": "c",
-          "label": "A 302 redirect from HTTP to HTTPS on every request, with no other header"
+          "label": "A 302 redirect from HTTP to HTTPS, served by the web server"
         },
         {
           "id": "d",
-          "label": "A `Strict-Transport-Security` header on HTTPS responses with a long max-age"
+          "label": "A `Strict-Transport-Security` header with a long max-age"
         }
       ],
       "answerKey": {
@@ -1953,19 +1948,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Accept it: status codes are cosmetic since the body carries the real result"
+          "label": "Accept it: the body carries the real result, so clients can parse it and caches and monitors only need the payload"
         },
         {
           "id": "b",
-          "label": "Accept it, but use 418 for the error to avoid library exceptions"
+          "label": "Accept it, but send Cache-Control: no-store so the error is never cached, which fully removes the downsides"
         },
         {
           "id": "c",
-          "label": "Reject it: use 500 for missing resources so monitoring picks them up quickly"
+          "label": "Reject it: use 500 for missing resources, since any failure should page the on-call team quickly"
         },
         {
           "id": "d",
-          "label": "Reject it: use 404, since monitors, caches and intermediaries rely on status codes, and handle the old libraries separately"
+          "label": "Reject it: use 404, since monitors and caches rely on status codes; work around old libraries"
         }
       ],
       "answerKey": {
@@ -2023,19 +2018,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Retry only on 5xx responses, since a timeout always means the server never processed the request"
+          "label": "Retry only on 5xx responses, because a client-side timeout shows the server did not process the request"
         },
         {
           "id": "b",
-          "label": "Use `POST` with a client-generated `Idempotency-Key` header that the server stores and replays the result for"
+          "label": "Use POST with a client-generated Idempotency-Key header that the server stores and replays"
         },
         {
           "id": "c",
-          "label": "Switch to `PUT` at a new URL, since PUT is idempotent by definition so duplicates cannot occur"
+          "label": "Switch to PUT at a fresh server-generated URL per attempt, because PUT is idempotent by definition"
         },
         {
           "id": "d",
-          "label": "Add `Cache-Control: no-store` to the request, so intermediaries never forward a repeated request"
+          "label": "Add Cache-Control: no-store to the request, so intermediaries do not forward a repeated request"
         }
       ],
       "answerKey": {
@@ -2204,11 +2199,11 @@
         },
         {
           "id": "b",
-          "label": "Keep `max-age=600`, since browsers refresh pages on their own after a correction is posted"
+          "label": "Keep `max-age=600` but add an `ETag`, since browsers then revalidate each page and pick up corrections at once"
         },
         {
           "id": "c",
-          "label": "Use `max-age=0, s-maxage=600` with `stale-while-revalidate`, and purge by URL when a correction is published"
+          "label": "Use `s-maxage=600` with `max-age=0` and purge by URL when a correction is published"
         },
         {
           "id": "d",
@@ -2340,19 +2335,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Return the new field and drop the old one, then send `Warning` headers to old clients"
+          "label": "Return the new field and drop the old one, then send `Warning` headers to old clients so they know to migrate to the new shape"
         },
         {
           "id": "b",
-          "label": "Change the shape for everyone on `POST` only, since GET responses are never cached"
+          "label": "Change the shape for everyone on `POST` only, since GET responses are never cached and so cannot be mixed up by a shared cache"
         },
         {
           "id": "c",
-          "label": "Serve the new shape from a media type like `application/vnd.shop.v2+json` negotiated through `Accept`, with `Vary: Accept`"
+          "label": "Serve the new shape as `application/vnd.shop.v2+json` via `Accept`, with `Vary: Accept`"
         },
         {
           "id": "d",
-          "label": "Return status `301` to the same URL, so clients upgrade after following the redirect"
+          "label": "Return `301` from `/v1/orders` to `/v2/orders` for every client, so each client upgrades after following the redirect"
         }
       ],
       "answerKey": {
@@ -2375,11 +2370,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Accept every PUT and return `200`, relying on the last write to be the newest"
+          "label": "Accept every PUT and return `200`, relying on the last write to be the newest version"
         },
         {
           "id": "b",
-          "label": "Require `If-Modified-Since` on PUT and answer `304` when the document differs"
+          "label": "Return a Last-Modified date on GET, require `If-Modified-Since` on PUT, and answer `304` when the document differs"
         },
         {
           "id": "c",
@@ -2387,7 +2382,7 @@
         },
         {
           "id": "d",
-          "label": "Lock the document on GET and release it with a `DELETE` of the lock after the PUT"
+          "label": "Lock the document when an editor does GET and release it with a `DELETE` of the lock after that editor's PUT"
         }
       ],
       "answerKey": {
@@ -2447,19 +2442,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Make the app trust any `X-Forwarded-For` value sent by clients so the real address is recorded"
+          "label": "Make the app trust any `X-Forwarded-For` value sent by clients, and derive the scheme from the first `X-Forwarded-Proto` value present"
         },
         {
           "id": "b",
-          "label": "Make the app read `Host` and `Referer` from the client to infer scheme and address"
+          "label": "Make the app read `Host` and `Referer` from the client to infer scheme and address, and reject requests where they disagree"
         },
         {
           "id": "c",
-          "label": "Have the proxy set `X-Forwarded-Proto` and `X-Forwarded-For` (overwriting client values), and configure the app to trust them only from the proxy"
+          "label": "Have the proxy overwrite `X-Forwarded-Proto` and `X-Forwarded-For`, and make the app trust them only from the proxy"
         },
         {
           "id": "d",
-          "label": "Turn off TLS termination so the app sees the original connection directly"
+          "label": "Turn off TLS termination at the proxy so the app sees the original client connection and its real address directly"
         }
       ],
       "answerKey": {

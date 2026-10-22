@@ -227,19 +227,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`npm create react-app`"
+          "label": "`npx create-react-app@latest`"
         },
         {
           "id": "b",
-          "label": "`npm init next-react`"
+          "label": "`npm init next-app@latest`"
         },
         {
           "id": "c",
-          "label": "`npx next-new`"
+          "label": "`npx create-next-project`"
         },
         {
           "id": "d",
-          "label": "`npx create-next-app@latest`"
+          "label": "`npx create-next-app`"
         }
       ],
       "answerKey": {
@@ -266,15 +266,15 @@
         },
         {
           "id": "b",
-          "label": "They run on both sides and always ship their code to the client"
+          "label": "They render on the server and in the browser, so their code is always bundled and sent to the client"
         },
         {
           "id": "c",
-          "label": "They render in the browser first and then are copied to the server"
+          "label": "They render in the browser first and then are copied to the server for caching"
         },
         {
           "id": "d",
-          "label": "They only render at build time and can never use fresh data"
+          "label": "They render only once at build time and can never fetch fresh data on a request"
         }
       ],
       "answerKey": {
@@ -297,19 +297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Server Components need the hook wrapped inside an async function"
+          "label": "Server Components must wrap every hook call inside an async function before React will accept it"
         },
         {
           "id": "b",
-          "label": "Server Components only allow state when a database is attached"
+          "label": "Server Components can only hold state when a database connection is attached to the route"
         },
         {
           "id": "c",
-          "label": "Server Components cannot import anything from React at all"
+          "label": "Server Components cannot import anything from React, so no hook is available to call"
         },
         {
           "id": "d",
-          "label": "Server Components render once on the server and have no client-side state or interactivity"
+          "label": "Server Components render only on the server, so they have no client state or interactivity"
         }
       ],
       "answerKey": {
@@ -332,19 +332,19 @@
       "options": [
         {
           "id": "a",
-          "label": "HTML is generated on every request using the visitor's cookies"
+          "label": "HTML is generated on each request, using that visitor's cookies"
         },
         {
           "id": "b",
-          "label": "The page has no JavaScript and cannot be interactive"
+          "label": "The page ships little JavaScript, so it is hard to make interactive"
         },
         {
           "id": "c",
-          "label": "The page is never updated after it is deployed to the server"
+          "label": "The page is built once at deploy time and is rarely refreshed afterward"
         },
         {
           "id": "d",
-          "label": "HTML is generated ahead of time at build and reused for many requests"
+          "label": "HTML is generated ahead of time at build and reused across requests"
         }
       ],
       "answerKey": {
@@ -367,11 +367,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It forces every page change to be fetched from the server again"
+          "label": "It re-fetches the whole document from the server on each click so content is always fresh"
         },
         {
           "id": "b",
-          "label": "It converts the page into a Client Component for the whole app"
+          "label": "It turns every page it appears on into a Client Component, so the whole app loses server rendering"
         },
         {
           "id": "c",
@@ -379,7 +379,7 @@
         },
         {
           "id": "d",
-          "label": "It lets you link to external sites without any security attributes"
+          "label": "It lets you link to external sites without needing any rel security attributes at all"
         }
       ],
       "answerKey": {
@@ -582,19 +582,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It lets the file be used as an API route handler"
+          "label": "It exposes the file's exported functions as API route handlers"
         },
         {
           "id": "b",
-          "label": "It makes the component fetch its data only in the browser"
+          "label": "It forces the component to fetch its data only in the browser, never on the server"
         },
         {
           "id": "c",
-          "label": "It disables server rendering for the whole application"
+          "label": "It turns off server-side rendering for every page in the whole application"
         },
         {
           "id": "d",
-          "label": "It marks the boundary where code and its imports go to the client bundle"
+          "label": "It marks a client boundary, so the file and its imports go in the client bundle"
         }
       ],
       "answerKey": {
@@ -617,19 +617,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is rendered once more on the server for every click"
+          "label": "It is fetched and rendered again on the server for every click, then swapped in"
         },
         {
           "id": "b",
-          "label": "It unmounts and remounts on every navigation"
+          "label": "It unmounts and remounts on every navigation, as a page component would"
         },
         {
           "id": "c",
-          "label": "It stays mounted and keeps its state while only the page content changes"
+          "label": "It stays mounted and keeps its state while only the page changes"
         },
         {
           "id": "d",
-          "label": "It is rebuilt, and its state is reset on each page change"
+          "label": "It is rebuilt on each navigation, and its client state resets to initial values"
         }
       ],
       "answerKey": {
@@ -652,7 +652,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`Link` is required for any URL to be indexed by search engines"
+          "label": "`Link` helps search engines index internal URLs, which plain anchors hide from crawlers"
         },
         {
           "id": "b",
@@ -660,11 +660,11 @@
         },
         {
           "id": "c",
-          "label": "`Link` forces the target page to render on the client only"
+          "label": "`Link` renders the target page on the client, skipping server rendering for that route"
         },
         {
           "id": "d",
-          "label": "`Link` makes the browser cache every page forever offline"
+          "label": "`Link` stores each visited page in the browser cache so it loads offline later"
         }
       ],
       "answerKey": {
@@ -1109,7 +1109,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`fetch(url, { revalidate: 60000 })`"
+          "label": "`fetch(url, { next: { revalidate: 60000 } })`"
         },
         {
           "id": "b",
@@ -1144,7 +1144,7 @@
       "options": [
         {
           "id": "a",
-          "label": "In each `page.tsx`, importing a shared Sidebar component"
+          "label": "In each `page.tsx`, importing a shared Sidebar component so every dashboard page renders it"
         },
         {
           "id": "b",
@@ -1152,11 +1152,11 @@
         },
         {
           "id": "c",
-          "label": "In `app/layout.tsx`, rendered conditionally by pathname"
+          "label": "In `app/layout.tsx`, shown only when `usePathname()` starts with `/dashboard`, so it also wraps unrelated routes"
         },
         {
           "id": "d",
-          "label": "In `app/dashboard/template.tsx` only on the home page"
+          "label": "In `app/dashboard/template.tsx`, which wraps children and keeps its state between navigations"
         }
       ],
       "answerKey": {
@@ -1219,15 +1219,15 @@
         },
         {
           "id": "b",
-          "label": "Export `const revalidate = 0` so every id is prebuilt"
+          "label": "Export `const revalidate = 0` so that every listed id is prebuilt at build time"
         },
         {
           "id": "c",
-          "label": "Export `generateMetadata` returning each id as a title"
+          "label": "Export `generateMetadata` returning each id so that every page is prebuilt"
         },
         {
           "id": "d",
-          "label": "Export `getServerSideProps` returning the product list"
+          "label": "Export `getServerSideProps` returning the product list so each id is prebuilt"
         }
       ],
       "answerKey": {
@@ -1254,15 +1254,15 @@
         },
         {
           "id": "b",
-          "label": "Reading cookies forces the component to become a Client Component"
+          "label": "Reading cookies forces the component to become a Client Component, which cannot be prerendered"
         },
         {
           "id": "c",
-          "label": "Cookie access is only allowed after `revalidate` is set to 0"
+          "label": "Cookie access is only allowed once `revalidate` is set to 0, which makes the route dynamic"
         },
         {
           "id": "d",
-          "label": "Server Components that are async can never be prerendered at build time"
+          "label": "Server Components that are async can never be prerendered at build time, whatever they await"
         }
       ],
       "answerKey": {
@@ -1289,15 +1289,15 @@
         },
         {
           "id": "b",
-          "label": "The Client Component is missing an `export default` statement"
+          "label": "The Client Component is missing an `export default`, so the server cannot resolve the prop it receives"
         },
         {
           "id": "c",
-          "label": "Client Components cannot declare props that are callbacks"
+          "label": "Client Components cannot declare props that are callbacks, because only data props are allowed in them"
         },
         {
           "id": "d",
-          "label": "Arrow functions must be wrapped in `useCallback` before passing"
+          "label": "Inline arrow functions must be wrapped in `useCallback` before being passed to a Client Component"
         }
       ],
       "answerKey": {
@@ -1324,15 +1324,15 @@
         },
         {
           "id": "b",
-          "label": "Hydration only fails when `useState` is used inside the component"
+          "label": "Hydration only fails when `useState` is used inside a component that also reads from the browser's clock"
         },
         {
           "id": "c",
-          "label": "The component should have been a Server Component to hydrate"
+          "label": "Client Components are skipped during server rendering, so the browser output has nothing to match against"
         },
         {
           "id": "d",
-          "label": "Next.js caches the time and refuses to update it on the client"
+          "label": "Next.js caches the first rendered time in the build output and refuses to update it on the client"
         }
       ],
       "answerKey": {
@@ -1355,15 +1355,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The list should be fetched in `useEffect` rather than on the server"
+          "label": "The list should be fetched in `useEffect` on the client, because Server Components cannot show data that changed after build time"
         },
         {
           "id": "b",
-          "label": "The row must be inserted before the page component is imported"
+          "label": "The action should return the new row to the browser, because the page re-renders only from values the action returns"
         },
         {
           "id": "c",
-          "label": "The action needs to be declared inside a Client Component"
+          "label": "The action needs to be declared inside a Client Component, because only client code can trigger a re-render of the list page"
         },
         {
           "id": "d",
@@ -1394,15 +1394,15 @@
         },
         {
           "id": "b",
-          "label": "The matcher must be an array of RegExp objects, not strings"
+          "label": "The matcher must be an array of RegExp objects, not strings, or no request matches"
         },
         {
           "id": "c",
-          "label": "Middleware only runs for routes that export `GET` handlers"
+          "label": "Middleware only runs for routes that export a `GET` handler, so page routes are skipped"
         },
         {
           "id": "d",
-          "label": "Middleware is disabled until `use client` is added at the top"
+          "label": "Middleware stays disabled until `use client` is added at the top of the file"
         }
       ],
       "answerKey": {
@@ -1461,19 +1461,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Everything imported under a `\"use client\"` file joins the client bundle, so `db.ts` must be used only on the server"
+          "label": "Everything imported under a `\"use client\"` file joins the client bundle, so `db.ts` must stay server-only"
         },
         {
           "id": "b",
-          "label": "The database client must be created inside `useEffect` to be safe"
+          "label": "Only files that contain `\"use client\"` themselves join the client bundle, so `helpers.ts` is fine and `db.ts` just needs a `\"use server\"` directive"
         },
         {
           "id": "c",
-          "label": "`process.env` is unreadable in any file named `helpers.ts`"
+          "label": "Environment variables without a `NEXT_PUBLIC_` prefix are readable in any module that Chart imports, so the failure is a bundler bug"
         },
         {
           "id": "d",
-          "label": "Chart should be turned into an async component to fix imports"
+          "label": "Making `Chart` an async component lets it await the database client on the server, which removes `db.ts` from the browser bundle"
         }
       ],
       "answerKey": {
@@ -1496,19 +1496,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The component is missing a key prop, so React cannot pair the server nodes with the nodes it builds on the client"
+          "label": "The element lacks a stable key prop, so React cannot pair the server-rendered nodes with the nodes it builds on the client"
         },
         {
           "id": "b",
-          "label": "Client components are never rendered on the server, so React has no server HTML to match the browser output against at all"
+          "label": "Client components are skipped during server pre-rendering, so React has no server HTML to compare with the browser output"
         },
         {
           "id": "c",
-          "label": "The server and the browser evaluate the expression at different moments and locales, so the first client render differs from the server HTML"
+          "label": "The server and browser evaluate the expression at different times, so the first client render differs from the server HTML"
         },
         {
           "id": "d",
-          "label": "Date objects cannot be serialized, so the server fails to send any markup for this component during pre-rendering"
+          "label": "Date objects are not serializable across the server-client boundary, so the server sends empty markup for this component"
         }
       ],
       "answerKey": {
@@ -1531,7 +1531,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The server component must be declared `async`, because only async server components may import stateful child components"
+          "label": "The server component needs to be declared `async`, because async server components can import stateful child components and await their setup"
         },
         {
           "id": "b",
@@ -1539,11 +1539,11 @@
         },
         {
           "id": "c",
-          "label": "Hooks are not allowed anywhere in Next.js, so the package must be patched to keep its counter in a global variable instead"
+          "label": "Hooks are unsupported in components imported from node_modules, so the package must be patched to keep its counter in a module-level variable"
         },
         {
           "id": "d",
-          "label": "The package must move to devDependencies, because the bundler then skips it during server rendering and loads it later"
+          "label": "The package should move to devDependencies, because the bundler then skips it during server rendering and loads it later on the client"
         }
       ],
       "answerKey": {
@@ -2002,15 +2002,15 @@
         },
         {
           "id": "b",
-          "label": "Render a static shell and fetch the price in `useEffect` so the CDN copy never goes stale"
+          "label": "Render a static shell and fetch the price in `useEffect`, so the CDN copy stays cached but each visitor loads the price after hydration"
         },
         {
           "id": "c",
-          "label": "Set `revalidate = 60` on the page so every edit appears after the next timed window passes"
+          "label": "Set `revalidate = 60` on the page so the CDN copy is regenerated in the background and an edit shows once the window passes"
         },
         {
           "id": "d",
-          "label": "Use `dynamic = 'force-dynamic'` so every request reads the CMS and the price is always current"
+          "label": "Use `dynamic = 'force-dynamic'` so each request reads the CMS directly and the price is current, but the CDN cannot cache the page"
         }
       ],
       "answerKey": {
@@ -2033,15 +2033,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Middleware is fine as an optimistic redirect, but authorization must also be verified in the data access layer next to each query or mutation"
+          "label": "Keep middleware as an optimistic redirect, but verify authorization in the data access layer beside each query or mutation"
         },
         {
           "id": "b",
-          "label": "Middleware should run the full permission query for every request, which makes the per-action checks redundant"
+          "label": "Make middleware run the full permission query on every request, which makes per-action checks redundant since all traffic passes through it"
         },
         {
           "id": "c",
-          "label": "Middleware should be deleted and replaced with checks inside each page component only"
+          "label": "Delete middleware and check permissions inside each page component only, since pages are the entry point for every admin data request"
         },
         {
           "id": "d",
@@ -2103,19 +2103,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Cache the widget's query result for a day so the slow query rarely blocks the page"
+          "label": "Cache the widget's query result for a day so the slow query rarely blocks the page and users usually see data instantly"
         },
         {
           "id": "b",
-          "label": "Await the widget data in the page, since a single complete response avoids layout shifts"
+          "label": "Await the widget data in the page, since a single complete response avoids layout shifts and partial loading states"
         },
         {
           "id": "c",
-          "label": "Wrap the widget in `<Suspense>` with a fallback so the shell streams immediately and the widget follows"
+          "label": "Wrap the widget in `<Suspense>` with a fallback so the shell streams first and the widget follows"
         },
         {
           "id": "d",
-          "label": "Move the widget's query to a client `useEffect` so the server response stays small and quick"
+          "label": "Move the widget's query to a client `useEffect` so the server response stays small and the shell renders quickly"
         }
       ],
       "answerKey": {
@@ -2209,19 +2209,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep the cookie read in the root layout and add `revalidate = 3600` to each marketing page"
+          "label": "Keep the cookie read in the root layout and add `revalidate = 3600` to each marketing page so the CDN caches them for an hour"
         },
         {
           "id": "b",
-          "label": "Replace `cookies()` with `localStorage` read in the root layout Server Component"
+          "label": "Replace `cookies()` with `localStorage` read in the root layout Server Component, so no request-time API is used on the server"
         },
         {
           "id": "c",
-          "label": "Move the greeting into a small component inside `<Suspense>`, or into a separate route group layout, so only that part is dynamic"
+          "label": "Move the greeting into a small component inside `<Suspense>` so only that part is dynamic"
         },
         {
           "id": "d",
-          "label": "Set `dynamic = 'force-static'` on the root layout and keep reading `cookies()` there as before"
+          "label": "Set `dynamic = 'force-static'` on the root layout and keep reading `cookies()` there so every page below it is built statically"
         }
       ],
       "answerKey": {
@@ -2240,23 +2240,23 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "A blog has an index page and `/blog/[slug]` pages, all statically rendered from a CMS. Constraint: a publish or edit must refresh the affected post page and the index within seconds, without a full rebuild. Which design meets it?",
+      "prompt": "A blog has an index page and `/blog/[slug]` pages, all statically rendered from a CMS. Constraint: a publish or edit must refresh the affected post page and the index within seconds, without a full rebuild, and pages must not be regenerated when nothing changed. Which design meets it?",
       "options": [
         {
           "id": "a",
-          "label": "Tag fetches with `posts` and `post-<id>`, and have a CMS webhook Route Handler call `revalidateTag` for both"
+          "label": "Tag fetches `posts` and `post-<id>`; a CMS webhook Route Handler calls `revalidateTag` for both"
         },
         {
           "id": "b",
-          "label": "Set `revalidate = 5` on every page and let timed regeneration cover edits"
+          "label": "Set `revalidate = 5` on every page so timed regeneration picks up any edit within seconds, with no webhook needed"
         },
         {
           "id": "c",
-          "label": "Use `force-dynamic` on the index and static rendering on posts, with a redeploy after each edit"
+          "label": "Use `force-dynamic` on the index and static rendering on posts, with a redeploy after each edit to refresh the post pages"
         },
         {
           "id": "d",
-          "label": "Call `revalidatePath('/blog')` in the webhook only, since the index links to every post"
+          "label": "Call `revalidatePath('/blog')` in the webhook only, since the index page links to every post and refreshes them all"
         }
       ],
       "answerKey": {
@@ -2279,19 +2279,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Use `Math.random()` inside the Server Component so each static build picks a variant"
+          "label": "Call `Math.random()` inside the Server Component so each static build picks one variant, then redeploy regularly to reshuffle the split"
         },
         {
           "id": "b",
-          "label": "Middleware assigns a bucket cookie and rewrites to a pre-rendered variant path, such as `/landing/a` or `/landing/b`"
+          "label": "Middleware sets a bucket cookie and rewrites to a pre-rendered path such as `/landing/a` or `/landing/b`"
         },
         {
           "id": "c",
-          "label": "Read `cookies()` in the page and render the variant dynamically for every request"
+          "label": "Read `cookies()` in the page and render the chosen variant dynamically on every request, with a CDN cache keyed on the cookie"
         },
         {
           "id": "d",
-          "label": "Choose the variant in a Client Component with `useEffect` and swap the content after hydration"
+          "label": "Pick the variant in a Client Component with `useEffect` and swap the content after hydration, hiding the page until it finishes"
         }
       ],
       "answerKey": {
@@ -2314,19 +2314,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Middleware reads the host and rewrites to `/[tenant]/...`, with tenant data loaded from the dynamic segment param"
+          "label": "Middleware reads the host and rewrites to `/[tenant]/...`, loading tenant data from the param"
         },
         {
           "id": "b",
-          "label": "Use a Client Component that reads `window.location.host` and then fetches tenant data"
+          "label": "Use a Client Component that reads `window.location.host` in the browser, then fetches that tenant's data and renders the page"
         },
         {
           "id": "c",
-          "label": "Create one folder per tenant under `app/` and redeploy whenever a customer signs up"
+          "label": "Create one folder per tenant under `app/` and redeploy whenever a customer signs up so each gets its own route"
         },
         {
           "id": "d",
-          "label": "Add a `[tenant]` catch-all in `next.config.js` redirects, sending users to a shared dashboard"
+          "label": "Add `redirects()` in `next.config.js` that matches each tenant host and sends users to a shared `/dashboard?tenant=` page"
         }
       ],
       "answerKey": {
@@ -2349,7 +2349,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A Client Component form calling `fetch` in an `onSubmit` handler that always uses `preventDefault`"
+          "label": "A Client Component form calling `fetch` in an `onSubmit` handler that always uses `preventDefault`, with errors held in `useState` and the new comment added to local state at once"
         },
         {
           "id": "b",
@@ -2357,11 +2357,11 @@
         },
         {
           "id": "c",
-          "label": "A Route Handler called from `useEffect` after the user finishes typing the comment"
+          "label": "A Route Handler called from `useEffect` after the user finishes typing, with the response stored in state so the new comment and any errors render immediately"
         },
         {
           "id": "d",
-          "label": "A Server Action called only from an `onClick` handler on a plain button outside any form"
+          "label": "A Server Action called only from an `onClick` handler on a plain button outside any form, wrapped in `useTransition` so the pending comment renders instantly"
         }
       ],
       "answerKey": {
@@ -2384,11 +2384,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Create a `Providers` Client Component that accepts `children`, and render it from the server layout around the page"
+          "label": "Create a `Providers` Client Component that accepts `children` and render it in the server layout"
         },
         {
           "id": "b",
-          "label": "Add `'use client'` to the root layout and import all server components inside it directly"
+          "label": "Add `'use client'` to the root layout and import every server component inside it so the provider wraps them"
         },
         {
           "id": "c",
@@ -2396,7 +2396,7 @@
         },
         {
           "id": "d",
-          "label": "Wrap each page in its own copy of the context and read `useContext` in Server Components"
+          "label": "Wrap each page in its own copy of the context and read `useContext` in Server Components, since pages render on the server"
         }
       ],
       "answerKey": {
@@ -2455,19 +2455,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Remove `generateStaticParams` so posts are never prerendered and always reflect the CMS"
+          "label": "Remove `generateStaticParams` so posts are never prerendered at build time and every request fetches the latest CMS content"
         },
         {
           "id": "b",
-          "label": "Tag the post fetches and call `revalidateTag` for the post, or call `revalidatePath` for the specific slug path"
+          "label": "Tag the post fetches and call `revalidateTag` for the post, or revalidate the exact slug path"
         },
         {
           "id": "c",
-          "label": "Convert `/blog` to a Client Component so it refetches linked posts when the index updates"
+          "label": "Convert `/blog` to a Client Component so it refetches each linked post whenever the index revalidates and updates"
         },
         {
           "id": "d",
-          "label": "Raise the webhook's response timeout so the revalidation has time to cascade to child routes"
+          "label": "Raise the webhook's response timeout so the revalidation has enough time to cascade down to every child route"
         }
       ],
       "answerKey": {

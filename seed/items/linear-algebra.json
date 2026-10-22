@@ -46,15 +46,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The matrix A itself"
+          "label": "A itself, unchanged"
         },
         {
           "id": "b",
-          "label": "The inverse of A"
+          "label": "The inverse of A, A^-1"
         },
         {
           "id": "c",
-          "label": "The transpose of A"
+          "label": "The transpose of A, A^T"
         },
         {
           "id": "d",
@@ -266,15 +266,15 @@
         },
         {
           "id": "b",
-          "label": "It rotates every vector by 90 degrees"
+          "label": "It rotates every vector by 90 degrees counterclockwise"
         },
         {
           "id": "c",
-          "label": "It shears every vector horizontally"
+          "label": "It shears every vector horizontally, keeping y fixed"
         },
         {
           "id": "d",
-          "label": "It stretches every vector to twice its length"
+          "label": "It doubles the length of every vector"
         }
       ],
       "answerKey": {
@@ -297,19 +297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It flattens the plane onto a line or point, so it has no inverse"
+          "label": "It squashes the plane onto a line or point, so it has no inverse"
         },
         {
           "id": "b",
-          "label": "It leaves every vector unchanged, so it acts like the identity"
+          "label": "It sends every vector to the zero vector, so it is the identity"
         },
         {
           "id": "c",
-          "label": "It doubles all areas, so it is invertible"
+          "label": "It stretches the plane without flipping it, so it is invertible"
         },
         {
           "id": "d",
-          "label": "It rotates the plane without changing area, so it is invertible"
+          "label": "It rotates the plane and keeps areas the same, so it is invertible"
         }
       ],
       "answerKey": {
@@ -336,15 +336,15 @@
         },
         {
           "id": "b",
-          "label": "Their dot product is not zero"
+          "label": "Their dot product is not equal to zero"
         },
         {
           "id": "c",
-          "label": "They both have positive entries"
+          "label": "Both vectors have only positive entries"
         },
         {
           "id": "d",
-          "label": "They have different lengths"
+          "label": "They have different lengths from each other"
         }
       ],
       "answerKey": {
@@ -402,15 +402,15 @@
       "options": [
         {
           "id": "a",
-          "label": "One of the products always has a different size"
+          "label": "One of the two products always has a different size from the other"
         },
         {
           "id": "b",
-          "label": "Matrix entries are not allowed to commute"
+          "label": "The entries of a matrix are not allowed to commute with each other"
         },
         {
           "id": "c",
-          "label": "Only the identity matrix can be multiplied on either side"
+          "label": "Only the identity matrix can be multiplied on either side of another"
         },
         {
           "id": "d",
@@ -482,15 +482,15 @@
         },
         {
           "id": "b",
-          "label": "Two of the three samples must be identical rows"
+          "label": "Two of the samples must be identical copies of each other"
         },
         {
           "id": "c",
-          "label": "The data has exactly two eigenvalues equal to zero"
+          "label": "The matrix must have exactly two eigenvalues equal to zero"
         },
         {
           "id": "d",
-          "label": "All three features are orthogonal to each other"
+          "label": "All three features are orthogonal to each other in the data"
         }
       ],
       "answerKey": {
@@ -665,7 +665,7 @@
         },
         {
           "id": "d",
-          "label": "A nonzero vector that A maps to the zero vector"
+          "label": "A nonzero vector that A sends to the zero vector, so A collapses its line"
         }
       ],
       "answerKey": {
@@ -728,15 +728,15 @@
         },
         {
           "id": "b",
-          "label": "Yes; any square matrix gives exactly one solution for every right-hand side b"
+          "label": "Yes; a square matrix gives a single solution for every b, whatever its rank is"
         },
         {
           "id": "c",
-          "label": "No; but every b still gives infinitely many solutions because a column is redundant"
+          "label": "No; every b still has infinitely many solutions, since the redundant column leaves a free variable"
         },
         {
           "id": "d",
-          "label": "No; some b give no solution because a column is redundant, and others give infinitely many"
+          "label": "No; b outside the column space has no solution, and b inside it has infinitely many"
         }
       ],
       "answerKey": {
@@ -1538,7 +1538,7 @@
       "options": [
         {
           "id": "a",
-          "label": "There are infinitely many solutions with one free variable"
+          "label": "There are infinitely many solutions, with two free variables because 4 unknowns minus rank 2 leaves 2"
         },
         {
           "id": "b",
@@ -1546,11 +1546,11 @@
         },
         {
           "id": "c",
-          "label": "There is a unique solution because the rank is not full"
+          "label": "There is a unique solution because the extra rank in the augmented matrix pins down every unknown"
         },
         {
           "id": "d",
-          "label": "There are infinitely many solutions with two free variables"
+          "label": "There are infinitely many solutions, with one free variable because 3 equations minus rank 2 leaves 1"
         }
       ],
       "answerKey": {
@@ -1608,7 +1608,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The claim fails whenever A or B has a repeated eigenvalue"
+          "label": "The claim fails whenever A or B has a repeated eigenvalue, because the pairing becomes ambiguous"
         },
         {
           "id": "b",
@@ -1616,11 +1616,11 @@
         },
         {
           "id": "c",
-          "label": "Products of eigenvalues only work for A and B symmetric"
+          "label": "Products of eigenvalues only work when A and B are both symmetric, which diagonal matrices are not tested against"
         },
         {
           "id": "d",
-          "label": "Eigenvalues of AB are always sums of those of A and B"
+          "label": "Eigenvalues of AB are always sums of those of A and B, which diagonal tests cannot reveal"
         }
       ],
       "answerKey": {
@@ -1643,11 +1643,11 @@
       "options": [
         {
           "id": "a",
-          "label": "b lies inside the column space of A"
+          "label": "The vector b lies inside the column space of A"
         },
         {
           "id": "b",
-          "label": "A has more rows than columns"
+          "label": "A has more rows than columns, so it is overdetermined"
         },
         {
           "id": "c",
@@ -1655,7 +1655,7 @@
         },
         {
           "id": "d",
-          "label": "A is not a square matrix"
+          "label": "A is not square, so A^T A has no inverse"
         }
       ],
       "answerKey": {
@@ -1719,19 +1719,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The mean squared error equals the discarded eigenvalue, 0.1, about 1% of total variance 10"
+          "label": "Mean squared error equals the discarded eigenvalue, 0.1, about 1% of total variance 10"
         },
         {
           "id": "b",
-          "label": "The discarded eigenvector is orthogonal to the kept ones, so error is zero"
+          "label": "The discarded eigenvector is orthogonal to the kept ones, so the error is exactly zero"
         },
         {
           "id": "c",
-          "label": "The error equals the sum of the kept eigenvalues divided by their number, 4.95"
+          "label": "Error equals the mean of the kept eigenvalues, 4.95, which is under half of total variance 10"
         },
         {
           "id": "d",
-          "label": "The error is the ratio 0.1/1.9, because the two smallest compete"
+          "label": "Error is the ratio 0.1/1.9, about 5%, because the two smallest eigenvalues compete for it"
         }
       ],
       "answerKey": {
@@ -1754,11 +1754,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Apply Cramer's rule to each b using determinants"
+          "label": "Apply Cramer's rule to each b, computing the needed determinants by cofactor expansion"
         },
         {
           "id": "b",
-          "label": "Rerun full Gaussian elimination from scratch for each b"
+          "label": "Rerun full Gaussian elimination from scratch for each b, since pivoting must adapt to b"
         },
         {
           "id": "c",
@@ -1766,7 +1766,7 @@
         },
         {
           "id": "d",
-          "label": "Compute A^(-1) explicitly and multiply it by each b"
+          "label": "Compute A^(-1) explicitly once, then multiply it by each b, since a stored inverse makes every solve cheap"
         }
       ],
       "answerKey": {
@@ -1789,19 +1789,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Forming A^(-1) once, then multiplying it by b"
+          "label": "Forming A^(-1) explicitly once, then multiplying it by b to get x"
         },
         {
           "id": "b",
-          "label": "Preconditioned conjugate gradient, using only sparse matrix-vector products"
+          "label": "Preconditioned conjugate gradient using only sparse matrix-vector products"
         },
         {
           "id": "c",
-          "label": "Dense LU factorization of A, which is exact for any matrix"
+          "label": "Dense Cholesky factorization of A, which is stable because A is symmetric positive definite"
         },
         {
           "id": "d",
-          "label": "Cramer's rule with sparse determinants for each unknown"
+          "label": "Cramer's rule, computing each unknown from a ratio of sparse determinants"
         }
       ],
       "answerKey": {
@@ -1824,7 +1824,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Gaussian elimination applied directly to the tall matrix A"
+          "label": "Gaussian elimination with partial pivoting on A^T A, because pivoting controls error growth"
         },
         {
           "id": "b",
@@ -1836,7 +1836,7 @@
         },
         {
           "id": "d",
-          "label": "Normal equations with Cramer's rule, to avoid inverting"
+          "label": "Normal equations by Cholesky, because A^T A is symmetric positive definite"
         }
       ],
       "answerKey": {
@@ -1859,11 +1859,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The claim is wrong because the determinant is only zero for singular matrices of rank one"
+          "label": "The claim is correct: a determinant that small means the rows are almost linearly dependent, so small errors get amplified"
         },
         {
           "id": "b",
-          "label": "The claim is correct only for matrices that are not diagonal"
+          "label": "The claim is correct for this matrix, because a diagonal matrix with tiny entries has a tiny smallest pivot and loses digits"
         },
         {
           "id": "c",
@@ -1871,7 +1871,7 @@
         },
         {
           "id": "d",
-          "label": "The claim is correct, since any tiny determinant means near singularity"
+          "label": "The claim is flawed, but because 0.1*I has a determinant of 0.1 and not 1e-20, so the arithmetic is wrong"
         }
       ],
       "answerKey": {
@@ -1970,19 +1970,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Invert the matrix once, then multiply the starting vector by the inverse"
+          "label": "Invert the matrix once, then multiply the start vector by the inverse to jump to the dominant eigenvector directly"
         },
         {
           "id": "b",
-          "label": "Run the same power iteration with a random start vector each time"
+          "label": "Restart power iteration from several random vectors and average the results to shrink the error ratio below 0.99"
         },
         {
           "id": "c",
-          "label": "Use a sparse Krylov eigensolver such as Arnoldi, using only matrix-vector products"
+          "label": "Use a sparse Krylov solver such as Arnoldi, needing only matrix-vector products"
         },
         {
           "id": "d",
-          "label": "Compute the full dense eigendecomposition with QR iterations"
+          "label": "Compute the full eigendecomposition with QR iterations, since it is exact and the eigenvalue gap no longer matters"
         }
       ],
       "answerKey": {
@@ -2110,19 +2110,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Unsound: A has condition number 1, and det scales with units, so judge singularity by condition number or smallest singular value"
+          "label": "Unsound: A has condition number 1, and det scales with units, so use condition number instead"
         },
         {
           "id": "b",
-          "label": "Sound: a determinant that tiny means a direction is almost collapsed, so solves with A will lose accuracy"
+          "label": "Sound: a determinant that tiny means some direction is almost collapsed, so solves with A will lose accuracy and the inverse will be unreliable"
         },
         {
           "id": "c",
-          "label": "Sound: a determinant below machine epsilon guarantees the computed inverse has no correct digits left"
+          "label": "Sound: a determinant far below machine epsilon guarantees the computed inverse has no correct digits left, since rounding error swamps the result"
         },
         {
           "id": "d",
-          "label": "Unsound: determinants are only meaningful for integer matrices, so floating-point values cannot show singularity"
+          "label": "Unsound: determinants are only meaningful for integer matrices, so floating-point values cannot show singularity at all"
         }
       ],
       "answerKey": {
@@ -2176,36 +2176,31 @@
       "stage": "expert",
       "bloom": "C5",
       "kind": "multi_choice",
-      "prompt": "Evaluate these claims about a real symmetric matrix A. Which are correct? Select all that apply.",
+      "prompt": "A colleague makes claims about a real symmetric matrix A that has a repeated eigenvalue. Which claims are correct? Select all that apply.",
       "options": [
         {
           "id": "a",
-          "label": "All eigenvalues of A are real."
+          "label": "All eigenvalues of A are real, even though one is repeated."
         },
         {
           "id": "b",
-          "label": "Eigenvectors belonging to distinct eigenvalues are orthogonal."
+          "label": "Eigenvectors belonging to distinct eigenvalues of A are orthogonal."
         },
         {
           "id": "c",
-          "label": "A is diagonalizable only if its eigenvalues are all distinct."
+          "label": "A may fail to be diagonalizable, because a repeated eigenvalue can have fewer independent eigenvectors than its multiplicity."
         },
         {
           "id": "d",
-          "label": "A = Q L Q^T with Q orthogonal and L diagonal, even with repeated eigenvalues."
+          "label": "A = Q L Q^T with Q orthogonal and L diagonal, with the repeated eigenvalue's eigenspace given an orthonormal basis."
         }
       ],
       "answerKey": {
         "optionIds": [
-          "a",
           "b",
           "d"
         ]
       },
-      "rubric": [
-        "The spectral theorem gives real eigenvalues, orthogonal eigenvectors for distinct eigenvalues, and orthogonal diagonalization in all cases.",
-        "The claim requiring distinct eigenvalues confuses sufficiency with necessity; symmetric matrices are never defective."
-      ],
       "reviewed": false
     },
     {

@@ -15,7 +15,7 @@
         },
         {
           "id": "b",
-          "label": "Ranked Agent Gateway"
+          "label": "Ranked Agent Gateway Routing"
         },
         {
           "id": "c",
@@ -23,7 +23,7 @@
         },
         {
           "id": "d",
-          "label": "Recursive Attention Graph"
+          "label": "Recursive Attention Graph Search"
         }
       ],
       "answerKey": {
@@ -116,19 +116,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A single character, counted one by one in every prompt"
+          "label": "A single character of text, which the API counts one by one in every prompt"
         },
         {
           "id": "b",
-          "label": "A row of data stored in a vector database index"
+          "label": "A row of data stored in a vector database index and returned at query time"
         },
         {
           "id": "c",
-          "label": "A secret credential used to authenticate API calls"
+          "label": "A secret credential string that authenticates each request sent to the API"
         },
         {
           "id": "d",
-          "label": "A chunk of text, often a word or word piece, that the model processes"
+          "label": "A chunk of text, often a word or word piece, the model reads"
         }
       ],
       "answerKey": {
@@ -151,11 +151,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A short summary of the text written by a model"
+          "label": "A short summary of the text that a model writes out in words"
         },
         {
           "id": "b",
-          "label": "A keyword index mapping each word to its page"
+          "label": "A keyword index that maps each word to the pages it appears on"
         },
         {
           "id": "c",
@@ -163,7 +163,7 @@
         },
         {
           "id": "d",
-          "label": "A compressed copy of the original text file"
+          "label": "A compressed copy of the original text file to save storage"
         }
       ],
       "answerKey": {
@@ -227,11 +227,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Raising the temperature parameter"
+          "label": "Lowering temperature to zero so replies stay deterministic"
         },
         {
           "id": "b",
-          "label": "Increasing the max_tokens limit"
+          "label": "Increasing the max_tokens limit so replies are not cut off"
         },
         {
           "id": "c",
@@ -239,7 +239,7 @@
         },
         {
           "id": "d",
-          "label": "Adding more few-shot chat history"
+          "label": "Adding more few-shot chat history showing bare JSON replies"
         }
       ],
       "answerKey": {
@@ -297,19 +297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It removes the need for any prompt instructions at all"
+          "label": "It means the prompt no longer needs any instructions to the model"
         },
         {
           "id": "b",
-          "label": "It makes the model's weights permanently store the new documents"
+          "label": "It updates the model's weights so the documents are stored permanently"
         },
         {
           "id": "c",
-          "label": "It lets the model use current or private data without retraining it"
+          "label": "It lets the model use current or private data without retraining"
         },
         {
           "id": "d",
-          "label": "It guarantees the answer can never contain a mistake"
+          "label": "It guarantees the answer is grounded and can never contain a mistake"
         }
       ],
       "answerKey": {
@@ -336,15 +336,15 @@
         },
         {
           "id": "b",
-          "label": "It runs the function on the provider's servers and returns the result"
+          "label": "It runs your function on the provider's servers and sends the result into the reply"
         },
         {
           "id": "c",
-          "label": "It returns a request naming the function and its arguments for your code to run"
+          "label": "It returns a request naming the function and arguments for your code to run"
         },
         {
           "id": "d",
-          "label": "It connects to your database directly using stored credentials"
+          "label": "It connects to your database directly using credentials stored in its settings"
         }
       ],
       "answerKey": {
@@ -367,19 +367,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Each chunk then gets a different random temperature value"
+          "label": "Embedding models only accept short inputs, so chunking is needed to keep them under the token limit"
         },
         {
           "id": "b",
-          "label": "Splitting stops the vector store from saving duplicate words"
+          "label": "Splitting stops the vector store from saving duplicate words and so keeps the index small"
         },
         {
           "id": "c",
-          "label": "Smaller chunks give focused matches and fit within the context window"
+          "label": "Small chunks give focused matches and fit within the context window"
         },
         {
           "id": "d",
-          "label": "Chunks make the embedding model run without needing an API key"
+          "label": "Chunks let the embedding model skip the API key check that whole documents trigger"
         }
       ],
       "answerKey": {
@@ -402,7 +402,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Replies will always be identical, byte for byte, on every call"
+          "label": "Replies will be identical every time, because temperature 0 removes all randomness from the API"
         },
         {
           "id": "b",
@@ -473,11 +473,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Shorten the system message so the bot has fewer rules"
+          "label": "Shorten the system message so the bot has fewer rules to juggle and is less likely to improvise"
         },
         {
           "id": "b",
-          "label": "Raise the temperature so the bot explores more answers"
+          "label": "Raise the temperature so the bot explores more answers and is more likely to find one that fits"
         },
         {
           "id": "c",
@@ -485,7 +485,7 @@
         },
         {
           "id": "d",
-          "label": "Increase max_tokens so the bot can explain more fully"
+          "label": "Increase max_tokens so the bot has room to explain its reasoning fully before it answers"
         }
       ],
       "answerKey": {
@@ -1105,15 +1105,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Append the result as a plain user message with no id, then end the turn"
+          "label": "Append the result as a plain user message with no call id, then end the turn without calling the model"
         },
         {
           "id": "b",
-          "label": "Ask the model to run the function itself and wait for its confirmation"
+          "label": "Ask the model to run the function itself and wait for its confirmation message"
         },
         {
           "id": "c",
-          "label": "Show the tool call JSON to the user as the final answer"
+          "label": "Show the tool call JSON to the user as the final answer and skip any second model call"
         },
         {
           "id": "d",
@@ -1286,11 +1286,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Scores near 91% are capped, so more tuning cannot show real gains"
+          "label": "The 91% score hit a ceiling, so further tuning cannot show real gains on new traffic"
         },
         {
           "id": "b",
-          "label": "The model was silently downgraded, so fresh traffic scores lower"
+          "label": "The model was silently downgraded between runs, so fresh traffic is scored lower"
         },
         {
           "id": "c",
@@ -1298,7 +1298,7 @@
         },
         {
           "id": "d",
-          "label": "Fresh traffic is too long for the model's context window to handle"
+          "label": "Fresh user traffic is longer than the test questions and overflows the context window"
         }
       ],
       "answerKey": {
@@ -1321,7 +1321,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The new model ignores the schema, so parsing passes only by luck"
+          "label": "The new model partly ignores the schema, so outputs parse only by luck"
         },
         {
           "id": "b",
@@ -1329,11 +1329,11 @@
         },
         {
           "id": "c",
-          "label": "Pydantic coerces every wrong date into the correct deadline silently"
+          "label": "Strict-mode schemas check dates against the email text, which missed this case"
         },
         {
           "id": "d",
-          "label": "JSON mode disables date fields, so values default to the send date"
+          "label": "Date fields with a format constraint are skipped by validators, so wrong dates pass"
         }
       ],
       "answerKey": {
@@ -1391,19 +1391,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Chunks are so small that conditions are split from the rule they qualify"
+          "label": "Small chunks split conditions from the rule they qualify"
         },
         {
           "id": "b",
-          "label": "Top_k is too high, so conditions are pushed out of the prompt"
+          "label": "Top_k is set too high, so the extra retrieved chunks crowd the conditions out of the prompt"
         },
         {
           "id": "c",
-          "label": "The embedding model is too large to represent short passages well"
+          "label": "The embedding model is too large to represent short passages well, so nearby chunks rank poorly"
         },
         {
           "id": "d",
-          "label": "The vector index uses cosine rather than dot-product similarity"
+          "label": "The vector index uses cosine rather than dot-product similarity, which reorders close neighbours"
         }
       ],
       "answerKey": {
@@ -1572,19 +1572,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The model lacks parallel tool calling, so it must repeat each call sequentially until one of them succeeds."
+          "label": "The model cannot issue parallel tool calls, so it has to repeat the same call sequentially until the backend eventually accepts it."
         },
         {
           "id": "b",
-          "label": "The error message gives the model nothing to correct, so it retries identical arguments instead of fixing the date."
+          "label": "The error gives the model no signal about what to change, so it retries the same arguments rather than fixing the date."
         },
         {
           "id": "c",
-          "label": "The step limit is too high, which is the root cause because models always stop after fewer calls when limited."
+          "label": "The step limit is set too high, so the agent keeps going; a lower limit would have let the model recover by changing its arguments."
         },
         {
           "id": "d",
-          "label": "The tool schema is missing a description, which makes the model unable to produce any date value at all."
+          "label": "The tool schema lacks a description for the date field, so the model cannot produce any valid date and keeps resending its best guess."
         }
       ],
       "answerKey": {
@@ -1717,15 +1717,15 @@
         },
         {
           "id": "b",
-          "label": "The vector index uses cosine similarity, which cannot compare any query containing digits or hyphens."
+          "label": "Cosine similarity cannot score queries containing digits or hyphens, so the index must switch to Euclidean distance for such queries."
         },
         {
           "id": "c",
-          "label": "The generation model ignores retrieved text for numeric strings, so retrieval is not the real failure point."
+          "label": "The generation model ignores retrieved passages that contain numeric strings, so the real failure is in generation, not in retrieval."
         },
         {
           "id": "d",
-          "label": "The chunks are too large, so every chunk embeds to the same vector regardless of the identifiers it contains."
+          "label": "The chunks are too large, so every chunk embeds to nearly the same vector regardless of the identifiers each chunk contains."
         }
       ],
       "answerKey": {
@@ -1853,7 +1853,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Use the small model for every request, since 91% is near enough and cost is the bigger concern here."
+          "label": "Use the small model for all requests, because a 4-point accuracy gap is small next to a 10x cost difference."
         },
         {
           "id": "b",
@@ -1861,11 +1861,11 @@
         },
         {
           "id": "c",
-          "label": "Use the large model for every request, since any attempt to save money puts the accuracy target at risk."
+          "label": "Use the large model for all requests, because it is the only option shown to clear the 95% accuracy target."
         },
         {
           "id": "d",
-          "label": "Run both models on every request and average them, since ensembles always beat either single model alone."
+          "label": "Run both models on each request and average their outputs, because combining models usually beats either alone."
         }
       ],
       "answerKey": {
@@ -1888,15 +1888,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Log every refund call for weekly review, since after-the-fact auditing makes any loss recoverable."
+          "label": "Log every refund call for weekly review, so that mistaken refunds are caught and recovered afterward."
         },
         {
           "id": "b",
-          "label": "Tell the system prompt never to refund over 50 dollars, since instructions reliably prevent every violation."
+          "label": "Instruct in the system prompt to refuse refunds over 50 dollars, since models follow explicit limits closely."
         },
         {
           "id": "c",
-          "label": "Hide the refund tool until the user says a keyword, since keyword gating blocks all misuse of it."
+          "label": "Expose the refund tool only after the user states a refund keyword, which reduces accidental calls."
         },
         {
           "id": "d",
@@ -2065,19 +2065,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The claim is flawed: temperature 0 does not pin behaviour across model updates, and serving variation can still change outputs."
+          "label": "The claim is flawed: temperature 0 does not pin behaviour across model updates, and serving variation can change outputs."
         },
         {
           "id": "b",
-          "label": "The claim holds while the prompt fits the context window, because truncation is the only real source of variance."
+          "label": "The claim holds while the prompt fits the context window, because truncation is a main source of variance once sampling is removed."
         },
         {
           "id": "c",
-          "label": "The claim is flawed only because temperature 0 lowers quality, so tests should be run at temperature 1 instead."
+          "label": "The claim is flawed mainly because temperature 0 lowers output quality, so regression tests should be run at temperature 1 instead."
         },
         {
           "id": "d",
-          "label": "The claim holds, because greedy decoding returns identical output for identical input across every model version."
+          "label": "The claim holds, because greedy decoding gives identical output for identical input, even when the provider swaps in new model weights."
         }
       ],
       "answerKey": {
@@ -2135,11 +2135,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Recall@5 is the wrong metric, so drop retrieval metrics and track only end-to-end accuracy from now on."
+          "label": "Recall@5 probably overstates retrieval quality, so replace it with end-to-end accuracy as the main metric for later retrieval changes."
         },
         {
           "id": "b",
-          "label": "The change failed and should be reverted, because recall gains that do not move accuracy are only noise."
+          "label": "The new embedding model probably adds no real value, so revert it, since a recall gain with flat accuracy suggests the gain is noise."
         },
         {
           "id": "c",
@@ -2147,7 +2147,7 @@
         },
         {
           "id": "d",
-          "label": "The generator is broken and must be fine-tuned now, because recall above 0.85 always implies higher accuracy."
+          "label": "The generator is probably the weak link, so fine-tune it now, since higher recall should have produced higher accuracy by itself."
         }
       ],
       "answerKey": {
@@ -2458,19 +2458,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Retry every rejected call immediately in a tight loop until it succeeds, so that no request is ever lost."
+          "label": "Retry rejected calls right away with a fixed short delay and a high retry cap, so that bursts clear quickly and requests are rarely lost."
         },
         {
           "id": "b",
-          "label": "Send every request to two providers at once and use the first reply, so that rate limits are never a risk."
+          "label": "Send each interactive request to two providers at once and use the first reply, which cuts latency and spreads the load across both rate limits."
         },
         {
           "id": "c",
-          "label": "Drop requests above the limit and show an error, since the 5-second latency target must always be kept."
+          "label": "Reject requests above the limit with a clear error and a retry hint, which keeps replies under 5 seconds for the requests that are accepted."
         },
         {
           "id": "d",
-          "label": "Queue non-interactive jobs for later, rate-limit interactive calls client-side with backoff, and fall back to a smaller model when saturated."
+          "label": "Queue non-interactive jobs, rate-limit interactive calls client-side with backoff, and fall back to a smaller model when saturated."
         }
       ],
       "answerKey": {

@@ -11,15 +11,15 @@
       "options": [
         {
           "id": "a",
-          "label": "f' is nonzero everywhere on the interval"
+          "label": "f is differentiable and f'(x) is nonzero everywhere on [a, b]"
         },
         {
           "id": "b",
-          "label": "f is differentiable and f(a) is positive"
+          "label": "f is differentiable on [a, b] and f(a) is positive"
         },
         {
           "id": "c",
-          "label": "f(a) equals f(b) at both endpoints"
+          "label": "f is continuous and f(a) equals f(b) at both endpoints"
         },
         {
           "id": "d",
@@ -235,7 +235,7 @@
         },
         {
           "id": "c",
-          "label": "Backward difference, with error of order h^2"
+          "label": "Backward difference, with error of order h"
         },
         {
           "id": "d",
@@ -262,11 +262,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It fits a parabola to the function, so it can skip roots"
+          "label": "It fits a parabola to the function, so it can skip over some roots"
         },
         {
           "id": "b",
-          "label": "It uses the slope, so it needs a good starting guess"
+          "label": "It uses the slope at each point, so it needs a good starting guess"
         },
         {
           "id": "c",
@@ -274,7 +274,7 @@
         },
         {
           "id": "d",
-          "label": "It doubles the digits of accuracy per step, but may diverge"
+          "label": "It doubles the correct digits every step, but can diverge from poor guesses"
         }
       ],
       "answerKey": {
@@ -301,15 +301,15 @@
         },
         {
           "id": "b",
-          "label": "Round-off makes the derivative negative, so steps reverse"
+          "label": "Round-off makes the computed derivative negative, so each step reverses direction"
         },
         {
           "id": "c",
-          "label": "The tangent line becomes vertical and meets the axis nearby"
+          "label": "The tangent becomes almost vertical, so it meets the axis very near x_n"
         },
         {
           "id": "d",
-          "label": "The function value f(x_n) must also be near zero"
+          "label": "The function value f(x_n) must also be near zero, so the step overshoots"
         }
       ],
       "answerKey": {
@@ -332,19 +332,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It fits parabolas instead of lines, so its error shrinks like h^4"
+          "label": "It fits parabolas, not lines, so its error shrinks like h^4"
         },
         {
           "id": "b",
-          "label": "It uses the exact derivative of f at each node"
+          "label": "It uses the exact derivative of f at every node, so slope errors cancel"
         },
         {
           "id": "c",
-          "label": "It evaluates the function at more random points"
+          "label": "It samples the function at randomly placed points, so errors average out"
         },
         {
           "id": "d",
-          "label": "It ignores the endpoints, which are the least accurate"
+          "label": "It leaves out the endpoints, which are the least accurate samples"
         }
       ],
       "answerKey": {
@@ -402,19 +402,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It guarantees the solution is exact in floating point"
+          "label": "It guarantees the computed solution is exact in floating point"
         },
         {
           "id": "b",
-          "label": "It avoids dividing by tiny pivots, which magnify round-off errors"
+          "label": "It avoids dividing by tiny pivots that magnify round-off"
         },
         {
           "id": "c",
-          "label": "It makes the matrix symmetric, so fewer steps are needed"
+          "label": "It makes the matrix symmetric, so fewer elimination steps are needed"
         },
         {
           "id": "d",
-          "label": "It reduces the number of operations from n^3 to n^2"
+          "label": "It cuts the operation count from order n^3 to order n^2 per solve"
         }
       ],
       "answerKey": {
@@ -477,15 +477,15 @@
         },
         {
           "id": "b",
-          "label": "The truncation error grows as h gets smaller"
+          "label": "Truncation error grows as h shrinks, so the approximation worsens"
         },
         {
           "id": "c",
-          "label": "The formula is only valid for h larger than 1e-6"
+          "label": "The formula is only valid for steps larger than about 1e-6, so it breaks"
         },
         {
           "id": "d",
-          "label": "The sine function is not differentiable for tiny steps"
+          "label": "Sine is not differentiable at such tiny steps, so the limit fails"
         }
       ],
       "answerKey": {
@@ -539,7 +539,7 @@
       "stage": "advanced_beginner",
       "bloom": "C2",
       "kind": "single_choice",
-      "prompt": "The forward difference (f(x+h) - f(x))/h approximates f'(x). The error caused by dropping the higher-order terms of the Taylor series is called what?",
+      "prompt": "The forward difference (f(x+h) - f(x))/h approximates f'(x). The error caused by dropping the higher-order terms in the expansion of f(x+h) is called what?",
       "options": [
         {
           "id": "a",
@@ -551,7 +551,7 @@
         },
         {
           "id": "c",
-          "label": "Truncation error, from cutting off the Taylor series"
+          "label": "Truncation error, from cutting off an infinite expansion"
         },
         {
           "id": "d",
@@ -578,7 +578,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The error shrinks by about half at each iteration"
+          "label": "The error shrinks by about half at each iteration, as in bisection"
         },
         {
           "id": "b",
@@ -586,7 +586,7 @@
         },
         {
           "id": "c",
-          "label": "One extra correct digit is gained at each iteration"
+          "label": "One extra correct digit is gained at each iteration, steadily"
         },
         {
           "id": "d",
@@ -719,19 +719,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Gaussian elimination is only valid for symmetric matrices, so the method fails on this input"
+          "label": "Gaussian elimination is only valid for symmetric matrices, so the method breaks down on a nonsymmetric input like this one"
         },
         {
           "id": "b",
-          "label": "The right-hand side is too large, so dividing the whole system by its largest entry fixes the pivot"
+          "label": "The right-hand side is too large, so dividing the whole system by its largest entry would fix the pivot and the error"
         },
         {
           "id": "c",
-          "label": "The tiny pivot gives huge multipliers that amplify round-off error, so swapping rows to get a larger pivot helps"
+          "label": "The tiny pivot gives huge multipliers that amplify round-off error, so swapping rows for a larger pivot helps"
         },
         {
           "id": "d",
-          "label": "The matrix must be singular, because any tiny pivot means the determinant is exactly zero"
+          "label": "The matrix must be singular, because any tiny pivot means the determinant is exactly zero and no solution exists"
         }
       ],
       "answerKey": {
@@ -1461,19 +1461,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Simpson's rule needs n to be a multiple of 4, so the odd doublings are invalid"
+          "label": "Simpson's rule needs n to be a multiple of 4, so every second doubling gives an invalid, less accurate rule"
         },
         {
           "id": "b",
-          "label": "The fourth derivative of `sqrt(x)` is unbounded at 0, so the usual error bound does not apply"
+          "label": "The fourth derivative of `sqrt(x)` is unbounded at 0, so the usual error bound fails"
         },
         {
           "id": "c",
-          "label": "The sum of the interior weights is miscounted, which silently lowers the order"
+          "label": "The interior weights are miscounted in the code, which silently lowers the order of the rule"
         },
         {
           "id": "d",
-          "label": "Round-off error dominates at these step sizes, so halving h no longer helps"
+          "label": "Round-off error dominates at these step sizes, so halving h no longer reduces the total error"
         }
       ],
       "answerKey": {
@@ -1636,19 +1636,19 @@
       "options": [
         {
           "id": "a",
-          "label": "H is badly ill-conditioned, so a tiny residual is compatible with a large error; the error can reach cond(H) times the relative residual"
+          "label": "H is badly ill-conditioned, so a tiny residual is compatible with a large error; error can reach cond(H) times the relative residual"
         },
         {
           "id": "b",
-          "label": "Hilbert matrices are singular in exact arithmetic, so any computed solution is essentially arbitrary"
+          "label": "Hilbert matrices are singular in exact arithmetic, so the system has no unique solution and any computed answer is essentially arbitrary"
         },
         {
           "id": "c",
-          "label": "The residual is computed in the same precision as the solve, so it is always reported small whatever the true error is"
+          "label": "The residual is computed in the same precision as the solve, so rounding hides the true error and it always looks small whatever the error is"
         },
         {
           "id": "d",
-          "label": "Partial pivoting is unstable on symmetric matrices, so the solver reports a misleadingly small residual for a wrong answer"
+          "label": "Partial pivoting is unstable on symmetric positive definite matrices, so the solver reports a misleadingly small residual for a wrong answer"
         }
       ],
       "answerKey": {
@@ -1781,11 +1781,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Gauss–Legendre quadrature with a modest number of nodes, because error decays geometrically in the node count for analytic integrands"
+          "label": "Gauss–Legendre quadrature with a modest number of nodes, because its error decays geometrically in the node count"
         },
         {
           "id": "b",
-          "label": "Monte Carlo with 1e6 random samples, because its error does not depend on how smooth the integrand is"
+          "label": "Monte Carlo with 1e6 random samples, because its error does not depend on how smooth the integrand is at all"
         },
         {
           "id": "c",
@@ -1824,7 +1824,7 @@
         },
         {
           "id": "c",
-          "label": "Preconditioned conjugate gradients, since it needs only sparse products and a few vectors and exploits symmetric positive definiteness"
+          "label": "Preconditioned conjugate gradients, since it needs only sparse products and a few vectors"
         },
         {
           "id": "d",
@@ -2248,19 +2248,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Newton's method using a finite-difference derivative, started at the midpoint"
+          "label": "Newton's method using a finite-difference derivative, started at the midpoint of the bracket"
         },
         {
           "id": "b",
-          "label": "Brent's method, combining bisection with secant and inverse quadratic steps in a bracket"
+          "label": "Brent's method, mixing bisection with secant and inverse quadratic steps in a bracket"
         },
         {
           "id": "c",
-          "label": "Plain bisection, run until the bracket falls below the tolerance"
+          "label": "Plain bisection, halving the bracket each step until its width falls below the tolerance"
         },
         {
           "id": "d",
-          "label": "Unbracketed secant iteration, started from the two endpoints"
+          "label": "Unbracketed secant iteration, started from the two endpoints and run until the step is small"
         }
       ],
       "answerKey": {
@@ -2318,7 +2318,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Form inv(A) once and multiply it by each right-hand side"
+          "label": "Form inv(A) once, then multiply it by each right-hand side to get every solution vector"
         },
         {
           "id": "b",
@@ -2326,11 +2326,11 @@
         },
         {
           "id": "c",
-          "label": "Run Gaussian elimination without pivoting on every new system"
+          "label": "Run Gaussian elimination without pivoting on every new system, since skipping row swaps saves work"
         },
         {
           "id": "d",
-          "label": "Run Cholesky once, then reuse its factor for each right-hand side"
+          "label": "Run Cholesky once, then reuse its factor for each right-hand side with two triangular solves"
         }
       ],
       "answerKey": {
@@ -2464,19 +2464,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Use a one-sided forward difference, since it avoids cancellation"
+          "label": "Use a one-sided forward difference, since it avoids the subtractive cancellation of a central difference"
         },
         {
           "id": "b",
-          "label": "Use a high-order finite-difference stencil over the nearest 3 samples only"
+          "label": "Use a high-order finite-difference stencil over the nearest 3 samples only, to cut truncation error"
         },
         {
           "id": "c",
-          "label": "Use a smaller step by interpolating the stream to 100 kHz before differencing"
+          "label": "Use a smaller step by interpolating the stream to 100 kHz before differencing adjacent points"
         },
         {
           "id": "d",
-          "label": "Fit a local low-degree polynomial over a sliding window and differentiate it (Savitzky-Golay)"
+          "label": "Fit a local low-degree polynomial over a sliding window and differentiate it"
         }
       ],
       "answerKey": {

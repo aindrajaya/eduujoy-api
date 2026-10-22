@@ -85,15 +85,15 @@
         },
         {
           "id": "b",
-          "label": "Copies a.txt to a new file b.txt"
+          "label": "Copies a.txt to b.txt"
         },
         {
           "id": "c",
-          "label": "Compares a.txt with b.txt"
+          "label": "Compares a.txt with b.txt line by line"
         },
         {
           "id": "d",
-          "label": "Renames a.txt to b.txt"
+          "label": "Renames a.txt to b.txt, removing the old name"
         }
       ],
       "answerKey": {
@@ -402,19 +402,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It only hides the file until you reboot"
+          "label": "It only hides the file until the next reboot, then deletes it"
         },
         {
           "id": "b",
-          "label": "It asks the owner to confirm before deleting"
+          "label": "It asks the file's owner to confirm before it deletes anything"
         },
         {
           "id": "c",
-          "label": "It moves the file into a hidden trash folder"
+          "label": "It moves the file into a hidden trash folder that empties daily"
         },
         {
           "id": "d",
-          "label": "It removes the file directly, with no trash to restore from"
+          "label": "It deletes the file at once, with no trash to restore it from"
         }
       ],
       "answerKey": {
@@ -724,7 +724,7 @@
       "options": [
         {
           "id": "a",
-          "label": "She needs `sudo` to change into any directory inside her home"
+          "label": "Directories inside her home folder need `sudo` before `cd` can enter them"
         },
         {
           "id": "b",
@@ -732,11 +732,11 @@
         },
         {
           "id": "c",
-          "label": "The directory lacks a trailing slash, which `cd` always requires"
+          "label": "The directory name must end with a trailing slash for `cd` to find it"
         },
         {
           "id": "d",
-          "label": "`cd` only accepts absolute paths, so she must type `/home/ana/projects`"
+          "label": "A relative name fails in `cd`, so she must type `/home/ana/projects`"
         }
       ],
       "answerKey": {
@@ -837,7 +837,7 @@
         },
         {
           "id": "c",
-          "label": "`./job | out.txt`"
+          "label": "`./job 2>&1 > out.txt`"
         },
         {
           "id": "d",
@@ -1260,19 +1260,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The `.` path must come after the `-name` expression"
+          "label": "GNU `find` requires the starting path to come after the `-name` test, not before it"
         },
         {
           "id": "b",
-          "label": "`find` cannot match file extensions without `-regex`"
+          "label": "`find` cannot match a file extension with `-name` unless the `-regex` option is also given"
         },
         {
           "id": "c",
-          "label": "The unquoted `*.log` is expanded by the shell into `a.log b.log` before `find` runs"
+          "label": "The shell expands unquoted `*.log` to `a.log b.log` before `find` runs"
         },
         {
           "id": "d",
-          "label": "`find` requires `-type f` whenever `-name` is used"
+          "label": "`find` requires `-type f` whenever `-name` is used to match files by a pattern"
         }
       ],
       "answerKey": {
@@ -1295,19 +1295,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`echo` is a shell builtin and cannot be run through sudo"
+          "label": "`echo` is a shell builtin, so sudo cannot run it and the write falls back to your user"
         },
         {
           "id": "b",
-          "label": "`>>` is not allowed on files in `/etc`"
+          "label": "`>>` appends are blocked on files in `/etc` unless the file was created by root"
         },
         {
           "id": "c",
-          "label": "The redirection is opened by your unprivileged shell before sudo runs `echo`"
+          "label": "Your unprivileged shell opens the redirect target before sudo runs `echo`"
         },
         {
           "id": "d",
-          "label": "`sudo` drops privileges once the command prints to stdout"
+          "label": "`sudo` drops root privileges once the command starts writing to standard output"
         }
       ],
       "answerKey": {
@@ -1334,15 +1334,15 @@
         },
         {
           "id": "b",
-          "label": "`rm -rf` ignores the current directory when given `*`"
+          "label": "`rm -rf` resolves `*` against the script's own directory rather than the shell's, so it hit home"
         },
         {
           "id": "c",
-          "label": "Cron jobs always run as root, so `rm` reached the home directory"
+          "label": "Cron jobs run with root privileges, so `rm` could reach the home directory despite the `cd`"
         },
         {
           "id": "d",
-          "label": "`*` matches directories outside the current directory"
+          "label": "`*` also matches directories outside the current one when `-r` is set, so `rm` followed it up"
         }
       ],
       "answerKey": {
@@ -1365,19 +1365,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The loop runs in a subshell because of the pipe, so `count` is lost afterwards"
+          "label": "The pipe runs the loop in a subshell, so `count` is lost afterwards"
         },
         {
           "id": "b",
-          "label": "`read` consumes the input so the loop body never runs"
+          "label": "`read` consumes all of the piped input at once, so the loop body never runs"
         },
         {
           "id": "c",
-          "label": "`echo` runs before the loop has finished"
+          "label": "`echo` runs in parallel with the loop and prints before the loop has finished"
         },
         {
           "id": "d",
-          "label": "`$((count+1))` cannot be used on an unset variable"
+          "label": "`$((count+1))` fails on an unset variable, so `count` is never assigned"
         }
       ],
       "answerKey": {
@@ -1400,19 +1400,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`/bin/bash` is a symbolic link and shebangs cannot use links"
+          "label": "`/bin/bash` is a symlink to another binary, and the kernel does not follow links in shebang paths"
         },
         {
           "id": "b",
-          "label": "The file has Windows CRLF line endings, so the interpreter name includes a carriage return"
+          "label": "The file has Windows CRLF line endings, so the interpreter name ends in a carriage return"
         },
         {
           "id": "c",
-          "label": "The execute bit is set only for the owner, not for others"
+          "label": "The file is on a filesystem mounted noexec, so the kernel cannot load the interpreter named in the shebang"
         },
         {
           "id": "d",
-          "label": "The script must be run with `sh run.sh` because shebangs are advisory"
+          "label": "The shebang line is not the first line because of a hidden blank line, so the kernel ignores it"
         }
       ],
       "answerKey": {
@@ -1471,19 +1471,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`uniq -c` only counts lines that contain digits"
+          "label": "`uniq -c` only counts lines that contain digits, so ERROR lines stay at 1"
         },
         {
           "id": "b",
-          "label": "`sort` before `uniq` removes duplicate lines, so counts reset"
+          "label": "`sort` runs before `uniq` and collapses duplicate lines, so counts reset"
         },
         {
           "id": "c",
-          "label": "`grep` outputs each match once, ignoring repeats in the file"
+          "label": "`grep` prints each distinct matching message once and ignores repeats"
         },
         {
           "id": "d",
-          "label": "The timestamps make every line unique, so `uniq` finds no identical lines to group"
+          "label": "Timestamps make every line unique, so `uniq` finds no identical lines"
         }
       ],
       "answerKey": {
@@ -1506,11 +1506,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Redirections are processed left to right, so stderr was pointed at the terminal's stdout before stdout was sent to the file"
+          "label": "Redirections are processed left to right, so stderr was pointed at the terminal's stdout before stdout went to the file"
         },
         {
           "id": "b",
-          "label": "make opens /dev/tty directly for its errors, which no shell redirection can capture in any ordering"
+          "label": "make opens /dev/tty directly for its error output, and shell redirection can only capture streams that go through file descriptors 1 and 2"
         },
         {
           "id": "c",
@@ -1518,7 +1518,7 @@
         },
         {
           "id": "d",
-          "label": "Redirections are processed right to left, so stdout went to the file first and stderr was then discarded"
+          "label": "Redirections are processed right to left, so stdout was sent to the file first and stderr was then duplicated onto the old terminal stdout"
         }
       ],
       "answerKey": {
@@ -1611,19 +1611,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Without `pipefail`, a pipeline's exit status is that of its last command, here sort, which succeeded"
+          "label": "Without `pipefail`, the pipeline's status is that of its last command, sort, which succeeded"
         },
         {
           "id": "b",
-          "label": "`$?` is only updated by commands that print to the terminal, so it keeps its earlier value"
+          "label": "`$?` is only updated by commands that print to the terminal, so it keeps its earlier value of 0"
         },
         {
           "id": "c",
-          "label": "grep returns 0 whenever it writes its message to stderr instead of stdout"
+          "label": "grep returns 0 whenever it writes its error message to stderr instead of stdout, even on failure"
         },
         {
           "id": "d",
-          "label": "The redirection `> errors.txt` resets `$?` to 0 once the output file has been created"
+          "label": "The redirection `> errors.txt` resets `$?` to 0 once the output file has been created successfully"
         }
       ],
       "answerKey": {
@@ -1646,19 +1646,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`read -r` consumes the whole file in one call, so the loop body never executes"
+          "label": "`read -r` consumes the whole file in a single call, so the loop body never executes even once"
         },
         {
           "id": "b",
-          "label": "`$((count+1))` is evaluated once at parse time, so count is never updated inside the loop"
+          "label": "`$((count+1))` is evaluated once at parse time, so count is never updated on later loop iterations"
         },
         {
           "id": "c",
-          "label": "Each pipeline stage runs in a subshell, so the increments change a copy of the variable that is discarded"
+          "label": "The loop runs in a subshell, so the increments change a copy of the variable that is discarded"
         },
         {
           "id": "d",
-          "label": "`cat` keeps the file open, so the while loop sees end-of-file immediately"
+          "label": "`cat` keeps the file open and holds its lock, so the while loop sees end-of-file immediately"
         }
       ],
       "answerKey": {
@@ -2012,15 +2012,15 @@
         },
         {
           "id": "b",
-          "label": "`for f in $(ls *.tmp); do rm \"$f\"; done`"
+          "label": "`for f in $(ls -R *.tmp); do rm \"$f\"; done`"
         },
         {
           "id": "c",
-          "label": "`find . -name '*.tmp' | xargs rm`"
+          "label": "`find . -name '*.tmp' -print | xargs -d ' ' rm -f`"
         },
         {
           "id": "d",
-          "label": "`rm $(find . -name '*.tmp')`"
+          "label": "`rm -f $(find . -name '*.tmp' -type f)`"
         }
       ],
       "answerKey": {
@@ -2043,15 +2043,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It works everywhere except for builtins like `cd` and `echo`, which never return failure codes and so can never trigger an exit."
+          "label": "It works for external programs, but builtins like `cd` and `echo` return success even on failure, so their errors cannot trigger an exit."
         },
         {
           "id": "b",
-          "label": "It is sound, though it also aborts on any output written to stderr, so it is too strict for scripts that call noisy but harmless tools."
+          "label": "It is sound, though it also aborts on output written to stderr, so it is too strict for scripts that call noisy but harmless tools."
         },
         {
           "id": "c",
-          "label": "It is sound for simple commands, but only when run as `bash -e script`, because the setting inside the file is ignored after the shebang line."
+          "label": "It is sound for simple commands, but it takes effect only when run as `bash -e script`, because the setting inside the file is ignored after the shebang."
         },
         {
           "id": "d",
@@ -2113,19 +2113,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Append `2>&1` to the pipeline, because merging streams merges the stage statuses"
+          "label": "Append `2>&1` to the pipeline, because merging stderr into stdout also merges the stage statuses into one"
         },
         {
           "id": "b",
-          "label": "Enable `set -o pipefail`, because the pipeline then returns the status of the last stage that failed"
+          "label": "Enable `set -o pipefail`, because the pipeline then returns the last failing stage's status"
         },
         {
           "id": "c",
-          "label": "Add `set -e` alone, because it checks the status of every stage of a pipeline"
+          "label": "Add `set -e` alone, because it makes the shell check the status of every stage in a pipeline, not just the last"
         },
         {
           "id": "d",
-          "label": "Test `$?` right after the pipeline, because it holds the status of the first stage"
+          "label": "Test `$?` right after the pipeline, because it holds the status of the first stage that ran in it"
         }
       ],
       "answerKey": {
@@ -2187,7 +2187,7 @@
         },
         {
           "id": "b",
-          "label": "Run `sync` to flush buffers, because pending writes keep the blocks reserved until they are flushed"
+          "label": "Run `sync` to flush dirty buffers to disk, because pending writes keep the deleted file's blocks reserved until flushed"
         },
         {
           "id": "c",

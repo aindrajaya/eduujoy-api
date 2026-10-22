@@ -19,7 +19,7 @@
         },
         {
           "id": "c",
-          "label": "It is defined using the keyword pure at the top"
+          "label": "It is declared with the keyword pure and cannot call other functions"
         },
         {
           "id": "d",
@@ -93,7 +93,7 @@
         },
         {
           "id": "d",
-          "label": "A function that runs before all other functions"
+          "label": "A function that always runs before all of the other functions"
         }
       ],
       "answerKey": {
@@ -151,7 +151,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A block that closes a file after use"
+          "label": "A block that closes a file or connection after use"
         },
         {
           "id": "b",
@@ -159,11 +159,11 @@
         },
         {
           "id": "c",
-          "label": "A function that cannot be called twice"
+          "label": "A function that runs once and then cannot be called again"
         },
         {
           "id": "d",
-          "label": "A statement that ends a loop early"
+          "label": "A pure function that is sealed so it cannot read outside values"
         }
       ],
       "answerKey": {
@@ -190,7 +190,7 @@
         },
         {
           "id": "b",
-          "label": "Printing text to the console"
+          "label": "Returning the sum of two arguments"
         },
         {
           "id": "c",
@@ -198,20 +198,15 @@
         },
         {
           "id": "d",
-          "label": "Returning the sum of two arguments"
+          "label": "Creating a new local variable inside the function body"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
           "c"
         ]
       },
-      "rubric": [
-        "I/O and changing outside state are side effects.",
-        "Returning a computed value is not a side effect."
-      ],
       "reviewed": false
     },
     {
@@ -227,7 +222,7 @@
         },
         {
           "id": "b",
-          "label": "Inheritance"
+          "label": "Method inheritance"
         },
         {
           "id": "c",
@@ -235,7 +230,7 @@
         },
         {
           "id": "d",
-          "label": "Function composition"
+          "label": "Composition"
         }
       ],
       "answerKey": {
@@ -293,19 +288,19 @@
       "options": [
         {
           "id": "a",
-          "label": "They run faster, so tests finish sooner"
+          "label": "They run faster, so a test suite finishes in less time overall"
         },
         {
           "id": "b",
-          "label": "They are shorter, so they need fewer tests"
+          "label": "They are usually shorter, so fewer test cases are needed to cover them"
         },
         {
           "id": "c",
-          "label": "Output depends only on inputs, so no setup of outside state is needed"
+          "label": "Output depends only on inputs, so no outside state needs setup"
         },
         {
           "id": "d",
-          "label": "They are checked by the compiler automatically"
+          "label": "They are type-checked by the compiler, so unit tests are not needed"
         }
       ],
       "answerKey": {
@@ -367,7 +362,7 @@
         },
         {
           "id": "b",
-          "label": "Changes `xs` in place and returns nothing"
+          "label": "Changes `xs` in place and returns nothing at all"
         },
         {
           "id": "c",
@@ -375,7 +370,7 @@
         },
         {
           "id": "d",
-          "label": "Creates a new list and leaves `xs` unchanged"
+          "label": "Creates a new list, leaving `xs` as is"
         }
       ],
       "answerKey": {
@@ -1070,7 +1065,7 @@
         },
         {
           "id": "b",
-          "label": "Copy first, then sort the copy: `sorted(xs)` or `[...xs].sort()`"
+          "label": "Sort a copy, such as `sorted(xs)`"
         },
         {
           "id": "c",
@@ -1219,7 +1214,7 @@
         },
         {
           "id": "d",
-          "label": "`cart.map(i => i.qty).reduce((a, b) => a + b, 0)` giving 5"
+          "label": "`cart.map(i => i.price + i.qty).reduce((a, b) => a + b, 0)` giving 20"
         }
       ],
       "answerKey": {
@@ -1382,19 +1377,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Memoization fails because `id` is a number rather than an object"
+          "label": "Memoization breaks because `id` is a primitive number, and caches can only key on object references"
         },
         {
           "id": "b",
-          "label": "Memoization only works for recursive functions such as Fibonacci"
+          "label": "Memoization only pays off for recursive functions like Fibonacci, so it gives wrong results elsewhere"
         },
         {
           "id": "c",
-          "label": "The cache should store functions instead of values to be correct"
+          "label": "The cache should hold the functions themselves rather than values, since values are always stale"
         },
         {
           "id": "d",
-          "label": "Memoization assumes referential transparency; `getPrice` is impure so cached values go stale"
+          "label": "It assumes referential transparency, but `getPrice` is impure, so cached values go stale"
         }
       ],
       "answerKey": {
@@ -1429,20 +1424,15 @@
         },
         {
           "id": "d",
-          "label": "Returning `{...cart, items: [...cart.items, item]}` would keep the old cart unchanged"
+          "label": "Wrapping the call in `Object.freeze(cart)` would make `push` on `cart.items` throw, so the old cart stays unchanged"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "c",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "Aliasing and shallow copies explain the bug and the fix.",
-        "Having a return value does not make a function pure."
-      ],
       "reviewed": false
     },
     {
@@ -1454,19 +1444,19 @@
       "options": [
         {
           "id": "a",
-          "label": "map and filter mutate data in place, so copies pile up; use a for loop"
+          "label": "map and filter mutate the source array in place, so copies pile up as it grows; switch to a for loop that avoids copies"
         },
         {
           "id": "b",
-          "label": "Chaining creates closures per record that never get freed; avoid composition"
+          "label": "Chaining creates a new closure per record that is never freed, so memory climbs; avoid composition and call each function directly"
         },
         {
           "id": "c",
-          "label": "The functions are impure, so the runtime keeps every result; add memoization"
+          "label": "The functions are impure, so the runtime caches every result it computes; wrap each step in memoization to cut the cost"
         },
         {
           "id": "d",
-          "label": "Eager stages allocate intermediate arrays; fuse the steps or use lazy iterators/transducers"
+          "label": "Eager stages allocate intermediate arrays; fuse steps or use lazy iterators"
         }
       ],
       "answerKey": {
@@ -1489,7 +1479,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Subtraction is not commutative, so chunk results must be combined in reverse order"
+          "label": "Subtraction is not commutative, so the chunk results end up combined in the wrong order"
         },
         {
           "id": "b",
@@ -1497,11 +1487,11 @@
         },
         {
           "id": "c",
-          "label": "Chunked reduces lose the initial value, so every partial result is off by one element"
+          "label": "Each chunk's reduce starts without the previous chunk's running total, so partial results are off by one element"
         },
         {
           "id": "d",
-          "label": "Reduce cannot run on chunks because the accumulator must be a number"
+          "label": "Reduce needs a numeric accumulator type, and chunked partial results are no longer plain numbers"
         }
       ],
       "answerKey": {
@@ -1528,11 +1518,11 @@
         },
         {
           "id": "b",
-          "label": "Different argument lists can produce the same key string, so the cache conflates distinct calls"
+          "label": "Different argument lists can yield the same key string, so distinct calls collide"
         },
         {
           "id": "c",
-          "label": "Pure functions cannot be memoized when they take string arguments"
+          "label": "Pure functions cannot be safely memoized when any of their arguments are strings, because strings are compared by value"
         },
         {
           "id": "d",
@@ -1594,19 +1584,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Spread syntax freezes the new object, so the push is applied to the old one"
+          "label": "Spread freezes the properties it copies, so the push is applied to the original array in the old object"
         },
         {
           "id": "b",
-          "label": "Spread copies only top-level properties, so `items` is the same array reference in both objects"
+          "label": "Spread copies only top-level properties, so `items` is the same array in both objects"
         },
         {
           "id": "c",
-          "label": "`state.count + 1` mutates `state` in place, which then leaks into `items`"
+          "label": "`state.count + 1` mutates `state` in place, and that change then leaks into the `items` array"
         },
         {
           "id": "d",
-          "label": "Objects created with spread are linked to the original through the prototype chain"
+          "label": "Objects created with spread stay linked to the original through the prototype chain, so changes show in both"
         }
       ],
       "answerKey": {
@@ -1735,19 +1725,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Use a local mutable array and Set inside, then return a new array without touching the input"
+          "label": "Use a local Set and array inside, then return a new array; the input is never touched"
         },
         {
           "id": "b",
-          "label": "Copy the input with a deep clone at every step so no mutation can ever occur"
+          "label": "Deep-clone the input first and then mutate the clone freely at each step, so no caller can ever see a change"
         },
         {
           "id": "c",
-          "label": "Mutate the caller's array in place and document it, since that is the fastest"
+          "label": "Sort and de-duplicate the caller's array in place and document it, since avoiding any copy is the fastest"
         },
         {
           "id": "d",
-          "label": "Chain a new immutable array for each operation, even when it triples memory use"
+          "label": "Build a new immutable array for each operation, which guarantees purity even though memory use triples"
         }
       ],
       "answerKey": {
@@ -1805,15 +1795,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It is flawed, because Promises cannot wrap database calls, only timers and network requests"
+          "label": "It is flawed, because a Promise can only wrap asynchronous work, and a database insert is blocking so it cannot be deferred"
         },
         {
           "id": "b",
-          "label": "It works, because Promises are immutable values, which is all purity needs"
+          "label": "It works, because a Promise is an immutable value once created, and returning an immutable value is all that purity requires"
         },
         {
           "id": "c",
-          "label": "It works, because a Promise defers the insert until someone awaits it"
+          "label": "It works, because a Promise defers the insert until someone awaits it, so no side effect happens during the call itself"
         },
         {
           "id": "d",
@@ -1840,11 +1830,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Run the same array chain, but call it in batches of the same 10M rows"
+          "label": "Keep the eager array chain but move the filter first so every later step sees fewer rows"
         },
         {
           "id": "b",
-          "label": "Cache each intermediate array on disk so the chain stays unchanged"
+          "label": "Cache each intermediate array on disk between steps so the chain code stays unchanged"
         },
         {
           "id": "c",
@@ -1852,7 +1842,7 @@
         },
         {
           "id": "d",
-          "label": "Compose the steps into a single lazy pass (iterator or transducer) that produces rows one at a time"
+          "label": "Compose the steps into one lazy iterator or transducer pass over the rows"
         }
       ],
       "answerKey": {
@@ -1981,19 +1971,19 @@
       "options": [
         {
           "id": "a",
-          "label": "String concatenation with identity empty string"
+          "label": "String concatenation, identity empty string"
         },
         {
           "id": "b",
-          "label": "Subtraction with identity 0"
+          "label": "Subtraction on integers, with identity 0 for each chunk"
         },
         {
           "id": "c",
-          "label": "Mean of two values with identity 0"
+          "label": "Pairwise mean of two values, with identity 0 for each chunk"
         },
         {
           "id": "d",
-          "label": "Integer division with identity 1"
+          "label": "Integer division on integers, with identity 1 for each chunk"
         }
       ],
       "answerKey": {
@@ -2121,7 +2111,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Map `f` over all records into a list, then filter, then take the first, for clearly separated stages"
+          "label": "Map `f` over all records into a list, then filter, then take the first, so each stage is a separate, easily tested step"
         },
         {
           "id": "b",
@@ -2129,11 +2119,11 @@
         },
         {
           "id": "c",
-          "label": "Memoize `f` and map it eagerly over all records, since cached results make the extra work free"
+          "label": "Memoize `f` and map it eagerly over all records, so repeated inputs are served from the cache"
         },
         {
           "id": "d",
-          "label": "Run the eager map in parallel across cores, which removes any need to stop early"
+          "label": "Run the eager map in parallel across cores, so the wall-clock time falls with the core count"
         }
       ],
       "answerKey": {
@@ -2414,20 +2404,15 @@
         },
         {
           "id": "d",
-          "label": "Return the audit line in the result for the caller to write"
+          "label": "Cache the result of Date.now() in a module-level variable so repeated calls agree"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "d"
+          "b"
         ]
       },
-      "rubric": [
-        "Injecting time, returning new data and returning the effect description remove hidden inputs and effects.",
-        "Try/catch handles errors but leaves the effect inside the function."
-      ],
       "reviewed": false
     },
     {

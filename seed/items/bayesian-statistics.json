@@ -116,7 +116,7 @@
       "options": [
         {
           "id": "a",
-          "label": "In 95% of repeated samples, the data will fall inside the interval"
+          "label": "If the study were repeated many times, 95% of the intervals built this way would contain the true parameter"
         },
         {
           "id": "b",
@@ -128,7 +128,7 @@
         },
         {
           "id": "d",
-          "label": "The null hypothesis is rejected at the 5% level if it is inside"
+          "label": "The null hypothesis is rejected at the 5% level if the null value lies outside the interval"
         }
       ],
       "answerKey": {
@@ -258,19 +258,19 @@
       "stage": "novice",
       "bloom": "C2",
       "kind": "single_choice",
-      "prompt": "A analyst uses a Beta(1, 1) prior for a coin's probability of heads. How should this prior be interpreted?",
+      "prompt": "An analyst uses a Beta(1, 1) prior for a coin's probability of heads. How should this prior be interpreted?",
       "options": [
         {
           "id": "a",
-          "label": "Heads is believed to be more likely than tails"
+          "label": "Heads is believed to be more likely than tails before any flips"
         },
         {
           "id": "b",
-          "label": "The coin is believed to be exactly fair"
+          "label": "The coin is believed to be exactly fair, with all weight at 0.5"
         },
         {
           "id": "c",
-          "label": "The analyst has already seen one head and one tail"
+          "label": "The analyst has already seen one head and one tail, so the belief is centred on 0.5"
         },
         {
           "id": "d",
@@ -305,7 +305,7 @@
         },
         {
           "id": "c",
-          "label": "It vanishes only if the prior was uniform to begin with"
+          "label": "It vanishes only if the prior was perfectly uniform to begin with"
         },
         {
           "id": "d",
@@ -367,19 +367,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The credible interval is always narrower than the confidence interval"
+          "label": "The credible interval is usually narrower, because it uses the same data more efficiently"
         },
         {
           "id": "b",
-          "label": "The credible interval requires no assumptions about the data at all"
+          "label": "The credible interval does not depend on a prior, so it is more objective than a confidence interval"
         },
         {
           "id": "c",
-          "label": "The credible interval applies only when samples are very large"
+          "label": "The credible interval describes the long-run share of repeated samples whose intervals contain the parameter"
         },
         {
           "id": "d",
-          "label": "The credible interval makes a direct probability statement about the parameter"
+          "label": "The credible interval gives the probability the parameter lies in it"
         }
       ],
       "answerKey": {
@@ -410,11 +410,11 @@
         },
         {
           "id": "c",
-          "label": "The probability that the model is true given the observed data"
+          "label": "The probability that the model is true given all of the observed data"
         },
         {
           "id": "d",
-          "label": "The probability of the observed data viewed as a function of the parameter"
+          "label": "The probability of the observed data as a function of the parameter"
         }
       ],
       "answerKey": {
@@ -441,28 +441,23 @@
         },
         {
           "id": "b",
-          "label": "It typically becomes narrower as more data are collected"
-        },
-        {
-          "id": "c",
           "label": "It can serve as the prior when further data arrive"
         },
         {
+          "id": "c",
+          "label": "It is the probability of the data given the parameter, so it is the same as the likelihood"
+        },
+        {
           "id": "d",
-          "label": "It always equals the likelihood regardless of the prior"
+          "label": "It stays the same width however much data are collected, since the prior sets its spread"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "The posterior blends prior and data, tightens with more data, and can be reused as a prior.",
-        "It equals the likelihood only under special cases such as a flat prior, not always."
-      ],
       "reviewed": false
     },
     {
@@ -692,24 +687,19 @@
         },
         {
           "id": "c",
-          "label": "A posterior from one study can serve as the prior for the next"
+          "label": "A posterior from one study cannot be reused as a prior, because the prior must be set before seeing any data"
         },
         {
           "id": "d",
-          "label": "Results are only valid when the sample size is large"
+          "label": "A 95% credible interval gives the long-run share of repeated samples whose intervals contain the true value"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "Bayesian methods model parameters as distributions, allow sequential updating, and permit sensitivity checks.",
-        "Validity does not depend on large samples; that is a common misconception."
-      ],
       "reviewed": false
     },
     {
@@ -721,11 +711,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The posterior mean always equals the prior mean for proportions"
+          "label": "The posterior mean equals the prior mean for proportions whenever the prior is a Beta"
         },
         {
           "id": "b",
-          "label": "The sample is too small for Bayes' theorem to give any update"
+          "label": "The sample is too small for Bayes' theorem to produce any update at all here"
         },
         {
           "id": "c",
@@ -733,7 +723,7 @@
         },
         {
           "id": "d",
-          "label": "The likelihood is ignored whenever a prior is informative"
+          "label": "The likelihood is ignored whenever the prior is informative, so only the prior matters"
         }
       ],
       "answerKey": {
@@ -1318,15 +1308,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The posterior is always lower than the sensitivity because probabilities shrink when multiplied"
+          "label": "The posterior can never exceed the sensitivity, because multiplying probabilities by the prior always shrinks the result"
         },
         {
           "id": "b",
-          "label": "The likelihood ratio is below 1, so a positive result lowers the probability of disease"
+          "label": "The likelihood ratio of a positive result is below 1, so a positive test lowers the odds of disease relative to the prior"
         },
         {
           "id": "c",
-          "label": "The sensitivity is too low, so many true cases are missed and the positive predictive value falls"
+          "label": "The sensitivity is too low, so many true cases are missed and the positive predictive value falls well below what it should be"
         },
         {
           "id": "d",
@@ -1606,11 +1596,11 @@
         },
         {
           "id": "c",
-          "label": "The posterior is truly multimodal with four modes, so the chain means differ and the R-hat of 1.6 is expected"
+          "label": "The posterior is truly multimodal with four separate modes, so the chain means differ and an R-hat of 1.6 is expected and harmless"
         },
         {
           "id": "d",
-          "label": "The chains have not converged to a common distribution, so between-chain variance exceeds within-chain variance and draws are unreliable"
+          "label": "The chains have not converged to a common distribution, so between-chain variance exceeds within-chain variance"
         }
       ],
       "answerKey": {
@@ -1809,15 +1799,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Compare PSIS-LOO expected log predictive density, since it targets prediction and is far less sensitive to diffuse priors than Bayes factors"
+          "label": "Compare PSIS-LOO expected log predictive density, since it targets prediction and is much less prior-sensitive than Bayes factors"
         },
         {
           "id": "b",
-          "label": "Choose the model with more parameters, since diffuse priors prevent overfitting and so extra terms carry no cost"
+          "label": "Choose the model with more parameters, since diffuse priors prevent overfitting and so the extra terms carry no cost to predictive accuracy"
         },
         {
           "id": "c",
-          "label": "Choose the model with the higher maximum likelihood, since diffuse priors make the posterior equal to the likelihood"
+          "label": "Choose the model with the higher maximum likelihood, since diffuse priors make the posterior equal to the likelihood and so remove any complexity penalty"
         },
         {
           "id": "d",
@@ -1879,19 +1869,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The posterior is valid and so the stopping rule has no bearing on any long-run error rate of the decision procedure"
+          "label": "The posterior is valid, so the stopping rule has no bearing on any long-run error rate of the decision procedure"
         },
         {
           "id": "b",
-          "label": "The posterior is still a valid summary given the observed data, though frequentist error rates of the stopping rule differ and may need separate study"
+          "label": "The posterior is valid given the data, but the stopping rule can still change frequentist error rates"
         },
         {
           "id": "c",
-          "label": "The reviewer is right, since stopping on a high posterior forces the prior to be updated with a correction factor"
+          "label": "The reviewer is right, because stopping on a high posterior means the prior must be updated again with a correction factor for the peeking"
         },
         {
           "id": "d",
-          "label": "The reviewer is right, since the posterior is only valid if the sample size was fixed in advance"
+          "label": "The reviewer is right, because a posterior is only valid if the sample size was fixed in advance of collecting any data"
         }
       ],
       "answerKey": {
@@ -1950,19 +1940,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A vague prior only, since any use of historical data introduces bias that cannot be controlled"
+          "label": "A vague prior only, since any use of historical data introduces bias that cannot be controlled or checked against the current trial data"
         },
         {
           "id": "b",
-          "label": "An informative prior fully based on the 200 historical patients, since more data always reduce posterior variance"
+          "label": "An informative prior fully based on the 200 historical patients, since more data always reduce posterior variance and so improve precision"
         },
         {
           "id": "c",
-          "label": "An informative historical prior with its sd halved, since a tighter prior adds protection against conflict"
+          "label": "An informative historical prior with its sd halved, since a tighter prior adds protection against conflict between history and the trial"
         },
         {
           "id": "d",
-          "label": "A mixture of an informative prior from the historical data and a vague prior, so the weight shifts to the vague part under conflict"
+          "label": "A mixture of an informative historical prior and a vague prior, so weight shifts to the vague part under conflict"
         }
       ],
       "answerKey": {
@@ -2301,19 +2291,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Use Normal(-3, 1), centred near the expected rate on the log-odds scale, then rerun prior predictive simulations to confirm"
+          "label": "Use Normal(-3, 1), centred near the expected rate on the log-odds scale, then check it with prior predictive simulations"
         },
         {
           "id": "b",
-          "label": "Use a uniform prior on the intercept over (-20, 20), which gives equal weight to every log-odds value"
+          "label": "Use a uniform prior on the intercept over (-20, 20), which gives equal weight to every log-odds value and so avoids imposing any belief about the rate"
         },
         {
           "id": "c",
-          "label": "Use Normal(0, 100) so the prior is flatter and lets the data alone determine the implied probabilities"
+          "label": "Use Normal(0, 100) so the prior is flatter and lets the data alone determine the implied probabilities without any prior influence"
         },
         {
           "id": "d",
-          "label": "Keep Normal(0, 10) and add more data, since the prior stops mattering once the sample is large enough"
+          "label": "Keep Normal(0, 10) and add more data, since the prior stops mattering once the sample is large enough to dominate it"
         }
       ],
       "answerKey": {

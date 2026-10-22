@@ -151,15 +151,15 @@
       "options": [
         {
           "id": "a",
-          "label": "A single data center building"
+          "label": "A single data center building that hosts all of an account's resources"
         },
         {
           "id": "b",
-          "label": "A type of EC2 instance"
+          "label": "A family of EC2 instance types tuned for one workload"
         },
         {
           "id": "c",
-          "label": "A billing account group"
+          "label": "A group of linked billing accounts that share one invoice"
         },
         {
           "id": "d",
@@ -257,19 +257,19 @@
       "options": [
         {
           "id": "a",
-          "label": "S3 files are automatically free of charge"
+          "label": "S3 storage is free of charge for any amount of data"
         },
         {
           "id": "b",
-          "label": "S3 keeps data durably and independently of any single server"
+          "label": "S3 keeps data durably and independent of any one server"
         },
         {
           "id": "c",
-          "label": "S3 objects are faster to edit in place like a disk"
+          "label": "S3 objects can be edited in place faster, like blocks on a local disk"
         },
         {
           "id": "d",
-          "label": "S3 is required for any EC2 instance to boot"
+          "label": "S3 is required because an EC2 instance cannot store files locally at all"
         }
       ],
       "answerKey": {
@@ -292,15 +292,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Permissions are removed after one day"
+          "label": "Permissions expire automatically after a set time, such as one day"
         },
         {
           "id": "b",
-          "label": "Users get all permissions and lose some later"
+          "label": "Users start with full access and lose permissions they don't use"
         },
         {
           "id": "c",
-          "label": "Only the root user may have any permissions"
+          "label": "Only the root user may hold any permissions in the account"
         },
         {
           "id": "d",
@@ -362,19 +362,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A public subnet has a route to an internet gateway; a private one does not"
+          "label": "A public subnet routes to an internet gateway; a private one does not"
         },
         {
           "id": "b",
-          "label": "A public subnet is free; a private subnet is billed"
+          "label": "A public subnet is billed per hour; a private subnet has no hourly charge"
         },
         {
           "id": "c",
-          "label": "A public subnet holds databases; a private one holds servers"
+          "label": "A public subnet holds only databases; a private one holds only servers"
         },
         {
           "id": "d",
-          "label": "A public subnet is in another Region from a private one"
+          "label": "A public subnet sits in a different Region from the private subnet"
         }
       ],
       "answerKey": {
@@ -397,19 +397,19 @@
       "options": [
         {
           "id": "a",
-          "label": "You pay a fixed yearly fee regardless of usage"
+          "label": "You pay a fixed yearly fee for each instance, whether or not it runs"
         },
         {
           "id": "b",
-          "label": "You pay for the compute time you use without long-term commitment"
+          "label": "You pay for the compute time you use, with no long-term commitment"
         },
         {
           "id": "c",
-          "label": "You pay once and own the physical server"
+          "label": "You pay an upfront fee once and then own the physical server outright"
         },
         {
           "id": "d",
-          "label": "You pay only when the instance is idle and stopped"
+          "label": "You pay a reduced rate only while the instance is stopped and idle"
         }
       ],
       "answerKey": {
@@ -468,7 +468,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It makes the S3 bucket public so no credentials are needed"
+          "label": "It makes the S3 bucket public to the instance, so the app no longer needs any credentials"
         },
         {
           "id": "b",
@@ -476,11 +476,11 @@
         },
         {
           "id": "c",
-          "label": "It encrypts the instance's disk without any extra setup"
+          "label": "It encrypts the instance's disk and the key file on it, so a stolen key cannot be used"
         },
         {
           "id": "d",
-          "label": "It gives the app the same rights as the root user"
+          "label": "It gives the app the same rights as the root user, so S3 requests are never denied"
         }
       ],
       "answerKey": {
@@ -573,11 +573,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Roles bypass permission policies, so the app can reach every service"
+          "label": "A role is exempt from permission policy checks, so the app can call any service it needs"
         },
         {
           "id": "b",
-          "label": "Roles give the instance permanent keys that never need changing"
+          "label": "A role gives the instance one set of keys that stay valid until an admin rotates them"
         },
         {
           "id": "c",
@@ -585,7 +585,7 @@
         },
         {
           "id": "d",
-          "label": "Access keys cannot be used with S3, but roles can be used with it"
+          "label": "Saved access keys are rejected by S3 for instance traffic, while a role is accepted there"
         }
       ],
       "answerKey": {
@@ -608,7 +608,7 @@
       "options": [
         {
           "id": "a",
-          "label": "One or more separate data centers inside a Region, with independent power"
+          "label": "One or more data centers in a Region, with independent power"
         },
         {
           "id": "b",
@@ -714,19 +714,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Both are public, because every subnet in a VPC can reach the internet"
+          "label": "Both are public, because every subnet in a VPC can reach the internet by default once an internet gateway is attached to the VPC"
         },
         {
           "id": "b",
-          "label": "Neither is public until an Elastic IP is attached to the subnet itself"
+          "label": "Neither is public until an Elastic IP is attached to the subnet itself, since public addressing is configured per subnet, not per route"
         },
         {
           "id": "c",
-          "label": "Subnet A is public, and B is private because it has no route to the internet gateway"
+          "label": "A is public and B is private, because B has no internet route"
         },
         {
           "id": "d",
-          "label": "Subnet A is private and B is public, because B has fewer routes"
+          "label": "A is private and B is public, because B has fewer routes and so fewer paths that could block inbound internet traffic"
         }
       ],
       "answerKey": {
@@ -960,7 +960,7 @@
       "options": [
         {
           "id": "a",
-          "label": "An inbound rule allowing all traffic from 0.0.0.0/0 on the instance"
+          "label": "An inbound security group rule allowing all traffic from 0.0.0.0/0 on the instance"
         },
         {
           "id": "b",
@@ -968,11 +968,11 @@
         },
         {
           "id": "c",
-          "label": "A VPC peering connection to the public subnet of the same VPC"
+          "label": "An egress-only internet gateway attached to the VPC, with a route to it for 0.0.0.0/0"
         },
         {
           "id": "d",
-          "label": "A route from the private subnet straight to the internet gateway"
+          "label": "A route from the private subnet straight to the internet gateway for 0.0.0.0/0"
         }
       ],
       "answerKey": {
@@ -1065,7 +1065,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Put an IAM user's access keys in `~/.aws/credentials`"
+          "label": "Store an IAM user's access keys in an encrypted file on the instance's EBS volume"
         },
         {
           "id": "b",
@@ -1073,11 +1073,11 @@
         },
         {
           "id": "c",
-          "label": "Make the bucket public so no credentials are needed"
+          "label": "Make the bucket public and restrict access with a bucket policy on the VPC's IP range"
         },
         {
           "id": "d",
-          "label": "Embed the root account keys in the application's config"
+          "label": "Pass an IAM user's access keys to the instance as user data at launch time"
         }
       ],
       "answerKey": {
@@ -1170,11 +1170,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Place all instances in one larger instance type"
+          "label": "Move all instances to one larger instance type in a single AZ"
         },
         {
           "id": "b",
-          "label": "Enable ALB in subnets from at least two AZs"
+          "label": "Enable the ALB in subnets from at least two AZs"
         },
         {
           "id": "c",
@@ -1182,20 +1182,15 @@
         },
         {
           "id": "d",
-          "label": "Use an Auto Scaling group spanning both AZ subnets"
+          "label": "Attach an Elastic IP to each instance in the same AZ for failover"
         }
       ],
       "answerKey": {
         "optionIds": [
           "b",
-          "c",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "Redundancy requires ALB nodes and instances in multiple AZs, ideally managed by an ASG.",
-        "A larger single instance remains a single point of failure."
-      ],
       "reviewed": false
     },
     {
@@ -1207,7 +1202,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Scale out immediately to the maximum of 10"
+          "label": "Scale out straight to the maximum of 10, since any breach launches the full capacity"
         },
         {
           "id": "b",
@@ -1215,11 +1210,11 @@
         },
         {
           "id": "c",
-          "label": "Do nothing until CPU exceeds 90%"
+          "label": "Do nothing until CPU exceeds 90%, since policies wait for a large breach"
         },
         {
           "id": "d",
-          "label": "Scale in to 2 instances to cut cost"
+          "label": "Add one instance per cycle until the alarm clears, like simple scaling"
         }
       ],
       "answerKey": {
@@ -1242,11 +1237,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The internet gateway must be attached to the instance"
+          "label": "The internet gateway must be attached to the instance's network interface, not only to the VPC"
         },
         {
           "id": "b",
-          "label": "The security group needs an outbound rule for port 22"
+          "label": "The security group needs an outbound rule allowing port 22, because replies are not tracked"
         },
         {
           "id": "c",
@@ -1254,7 +1249,7 @@
         },
         {
           "id": "d",
-          "label": "The instance needs an IAM role for SSH"
+          "label": "The instance needs an IAM role that grants permission to accept SSH sessions"
         }
       ],
       "answerKey": {
@@ -1277,7 +1272,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The execution role lacks permission, which causes timeouts"
+          "label": "The execution role lacks dynamodb:GetItem permission, so DynamoDB silently drops the requests until they time out"
         },
         {
           "id": "b",
@@ -1285,11 +1280,11 @@
         },
         {
           "id": "c",
-          "label": "Lambda cannot call DynamoDB from any VPC"
+          "label": "The function's security group blocks inbound traffic from DynamoDB, so the responses to its calls never arrive"
         },
         {
           "id": "d",
-          "label": "DynamoDB tables must be in the same subnet"
+          "label": "DynamoDB tables must be in the same subnet as the function, and the table sits outside the private subnets"
         }
       ],
       "answerKey": {
@@ -1347,7 +1342,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Standard-IA disables request caching, raising compute charges"
+          "label": "Standard-IA bills each GET request at a higher rate, and request fees outweigh any storage savings"
         },
         {
           "id": "b",
@@ -1355,11 +1350,11 @@
         },
         {
           "id": "c",
-          "label": "Standard-IA objects are replicated to extra regions"
+          "label": "Standard-IA replicates objects across multiple Regions, so storage is billed once per Region copy"
         },
         {
           "id": "d",
-          "label": "Standard-IA has higher storage rates than Standard"
+          "label": "Standard-IA has a higher per-GB storage rate than Standard, so every stored object costs more"
         }
       ],
       "answerKey": {
@@ -1454,7 +1449,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The bucket must be made public for cross-account reads"
+          "label": "The bucket policy only works for public access, so the bucket's Block Public Access must be disabled first"
         },
         {
           "id": "b",
@@ -1462,11 +1457,11 @@
         },
         {
           "id": "c",
-          "label": "Bucket policies cannot grant cross-account access"
+          "label": "Bucket policies can grant access to users in other accounts but not to roles, which need trust policies"
         },
         {
           "id": "d",
-          "label": "The role must be recreated in account A"
+          "label": "The role must be recreated in account A, since a bucket can only trust roles from its own account"
         }
       ],
       "answerKey": {
@@ -1489,19 +1484,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The route table needs a more specific route for each repository address, since a default route is ignored by gateways"
+          "label": "The route table needs a more specific route for each repository address, because an internet gateway ignores a default route and only forwards traffic matching explicit destination prefixes"
         },
         {
           "id": "b",
-          "label": "The internet gateway cannot route outbound traffic, so the subnet needs a virtual private gateway to reach public sites"
+          "label": "The internet gateway cannot route outbound traffic, so the subnet needs a virtual private gateway attached to the VPC before instances can reach public sites"
         },
         {
           "id": "c",
-          "label": "The security group is stateful and blocks the return traffic, so an inbound rule for repositories must be added"
+          "label": "The security group is stateful and blocks the return traffic, so an inbound rule allowing the repository addresses must be added before replies can reach the instance"
         },
         {
           "id": "d",
-          "label": "The internet gateway only translates addresses for instances that have a public or Elastic IP, so private-only instances need a NAT gateway"
+          "label": "The internet gateway only translates addresses for instances with a public or Elastic IP, so private-only instances need a NAT gateway"
         }
       ],
       "answerKey": {
@@ -2061,7 +2056,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Wrong: replication is asynchronous and replicas are not automatic failover targets, so Multi-AZ better meets zero-loss failover"
+          "label": "Wrong: replication is asynchronous and promotion is manual, so Multi-AZ is needed for zero-loss failover"
         },
         {
           "id": "b",
@@ -2073,7 +2068,7 @@
         },
         {
           "id": "d",
-          "label": "Wrong: replicas must sit in the primary's AZ, so they cannot provide any resilience against an AZ outage"
+          "label": "Wrong: replicas must sit in the primary's AZ and so give no protection against an AZ outage or failure"
         }
       ],
       "answerKey": {
@@ -2096,7 +2091,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Standard Reserved Instances for the current instance family, since they give the deepest EC2-only discount"
+          "label": "Standard Reserved Instances for the current instance family, since they give the deepest EC2 discount but tie the commitment to that family"
         },
         {
           "id": "b",
@@ -2104,11 +2099,11 @@
         },
         {
           "id": "c",
-          "label": "On-Demand pricing with no commitment, since any commitment would block changing services during the year"
+          "label": "On-Demand pricing with no commitment, since it keeps full flexibility to change services but gives no discount on the steady baseline"
         },
         {
           "id": "d",
-          "label": "Spot Instances for every service, since Spot is cheapest and the workload happens to run continuously"
+          "label": "Spot Instances for the baseline, since they give the largest discount but can be interrupted when AWS reclaims capacity"
         }
       ],
       "answerKey": {
@@ -2202,19 +2197,19 @@
       "options": [
         {
           "id": "a",
-          "label": "An always-on On-Demand EC2 fleet sized for peak, since uninterrupted capacity is required for long jobs"
+          "label": "An always-on On-Demand EC2 fleet sized for peak load, since long jobs need uninterrupted capacity to finish reliably"
         },
         {
           "id": "b",
-          "label": "AWS Batch on EC2 Spot capacity, resuming from checkpoints after interruptions, since the window allows retries"
+          "label": "AWS Batch on EC2 Spot capacity, resuming after interruptions, since the window allows retries"
         },
         {
           "id": "c",
-          "label": "Lambda functions chained by Step Functions, since Lambda removes idle cost for any single long-running task"
+          "label": "Lambda functions chained by Step Functions, since Lambda removes idle cost and each step can run in parallel"
         },
         {
           "id": "d",
-          "label": "Fargate On-Demand tasks, since they avoid instance management and are cheaper than Spot for long jobs"
+          "label": "Fargate On-Demand tasks, since they avoid instance management and cost less than Spot for long jobs"
         }
       ],
       "answerKey": {

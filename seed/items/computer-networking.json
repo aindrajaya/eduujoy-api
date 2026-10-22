@@ -292,11 +292,11 @@
       "options": [
         {
           "id": "a",
-          "label": "UDP encrypts the media stream automatically"
+          "label": "UDP encrypts the media stream, so calls stay private without extra setup"
         },
         {
           "id": "b",
-          "label": "UDP guarantees every packet arrives in order"
+          "label": "UDP guarantees every packet arrives in order, so video frames never glitch"
         },
         {
           "id": "c",
@@ -304,7 +304,7 @@
         },
         {
           "id": "d",
-          "label": "UDP needs no port numbers to deliver data"
+          "label": "UDP needs no port numbers, so data reaches the right app without extra setup"
         }
       ],
       "answerKey": {
@@ -327,19 +327,19 @@
       "options": [
         {
           "id": "a",
-          "label": "To hide the IP address from other devices on the network"
+          "label": "To hide a device's IP address from other devices outside its own network"
         },
         {
           "id": "b",
-          "label": "To limit the speed of traffic leaving the network"
+          "label": "To limit the speed of traffic that leaves the network through the router"
         },
         {
           "id": "c",
-          "label": "To assign a unique name to each host on the network"
+          "label": "To assign a unique name to each host so people can reach it by name"
         },
         {
           "id": "d",
-          "label": "To tell which part of an IP address is the network and which is the host"
+          "label": "To show which part of an IP address is network and which is host"
         }
       ],
       "answerKey": {
@@ -362,11 +362,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A switch connects different networks; a hub connects only two devices"
+          "label": "A switch connects different networks and routes by IP address; a hub only links devices within one network"
         },
         {
           "id": "b",
-          "label": "A switch works with IP addresses only; a hub works with MAC addresses"
+          "label": "A switch works with IP addresses only, ignoring MAC addresses; a hub works with MAC addresses"
         },
         {
           "id": "c",
@@ -374,7 +374,7 @@
         },
         {
           "id": "d",
-          "label": "A switch broadcasts every frame; a hub learns where hosts are"
+          "label": "A switch broadcasts every frame to all ports it has; a hub learns where each host is connected"
         }
       ],
       "answerKey": {
@@ -573,11 +573,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It forwards packets bound for other networks on the host's behalf"
+          "label": "It forwards packets bound for other networks for the host"
         },
         {
           "id": "b",
-          "label": "It translates hostnames into IP addresses for the host"
+          "label": "It translates hostnames such as example.com into IP addresses"
         },
         {
           "id": "c",
@@ -643,19 +643,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A switch sends the frame to the port of the destination MAC, while a hub repeats it to all ports"
+          "label": "A switch sends the frame to the port of the destination MAC; a hub repeats it to all ports"
         },
         {
           "id": "b",
-          "label": "A hub learns MAC addresses, while a switch copies the frame to every port"
+          "label": "A hub builds a table of MAC addresses and sends the frame out one port, while a switch copies it to every port"
         },
         {
           "id": "c",
-          "label": "A hub routes frames by IP address, while a switch uses port numbers"
+          "label": "A hub forwards frames by destination IP address between networks, while a switch uses TCP port numbers"
         },
         {
           "id": "d",
-          "label": "A switch and a hub both send frames only to the destination port"
+          "label": "A switch and a hub both send the frame only to the destination port, but a switch does it faster"
         }
       ],
       "answerKey": {
@@ -1250,15 +1250,15 @@
         },
         {
           "id": "b",
-          "label": "DNS is unable to resolve names, which blocks every packet sent off-subnet"
+          "label": "DNS cannot resolve names, so the host never learns where to send any packet bound off-subnet"
         },
         {
           "id": "c",
-          "label": "The /24 mask is too small to hold any traffic that leaves the local network"
+          "label": "The /24 mask is too small to hold any traffic that leaves the local network, so it drops it"
         },
         {
           "id": "d",
-          "label": "The switch blocks the host from sending frames to any address ending in .1"
+          "label": "The switch blocks the host from sending frames to any address ending in .1, including gateways"
         }
       ],
       "answerKey": {
@@ -1316,19 +1316,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Each host treats the other as remote and sends via a gateway that does not exist"
+          "label": "Each host sees the other as off-subnet and needs a gateway that is absent"
         },
         {
           "id": "b",
-          "label": "The switch ports are different speeds and cannot negotiate a shared link"
+          "label": "The switch ports negotiated different speeds, so the link between the hosts cannot carry frames"
         },
         {
           "id": "c",
-          "label": "A /24 mask cannot be used when hosts are connected to a single switch"
+          "label": "A /24 mask is only valid on routed links, so the switch refuses to forward frames between those hosts"
         },
         {
           "id": "d",
-          "label": "The two hosts share the same MAC address range, so frames are dropped"
+          "label": "The hosts' MAC addresses fall in the same vendor range, so the switch treats them as duplicates and drops frames"
         }
       ],
       "answerKey": {
@@ -1386,7 +1386,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The DNS cache has expired, so each large transfer needs a new lookup"
+          "label": "The DNS cache entry has expired, so each large transfer must wait on a fresh lookup that never completes"
         },
         {
           "id": "b",
@@ -1394,11 +1394,11 @@
         },
         {
           "id": "c",
-          "label": "The subnet mask is too long, so large packets exceed the address range"
+          "label": "The subnet mask is too long, so large packets exceed the host range of the destination network"
         },
         {
           "id": "d",
-          "label": "UDP is being prioritised over TCP, so file transfers lose every contest"
+          "label": "UDP traffic is being prioritised over TCP by the firewall, so file transfers lose every queue contest"
         }
       ],
       "answerKey": {
@@ -1497,19 +1497,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The gateway is in 192.168.10.0/25, outside the host's subnet, so the host never ARPs for it"
+          "label": "The gateway lies outside the host's /25, so the host cannot ARP for it"
         },
         {
           "id": "b",
-          "label": "The destination subnet lacks a return route, so only same-subnet traffic gets replies"
+          "label": "The destination networks have no return route to this host's subnet, so replies never arrive back"
         },
         {
           "id": "c",
-          "label": "The /25 mask is too small to hold the host, so replies from the destination get dropped"
+          "label": "The /25 mask is too small to hold this host address, so replies from remote hosts get dropped"
         },
         {
           "id": "d",
-          "label": "The host's ARP cache is full, so it can only talk to neighbours it already resolved"
+          "label": "The host's ARP cache is full, so it can only talk to neighbours it has already resolved"
         }
       ],
       "answerKey": {
@@ -1567,11 +1567,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The receiver's advertised window drops to zero whenever a transfer exceeds a few kilobytes"
+          "label": "The receiver's advertised window drops to zero whenever a transfer exceeds a few kilobytes, so the sender stalls waiting for a window update"
         },
         {
           "id": "b",
-          "label": "The VPN gateway rate-limits ICMP echo, so pings pass while sustained TCP flows are throttled"
+          "label": "The VPN gateway rate-limits ICMP echo, so small pings pass while sustained TCP flows are throttled and stall after the handshake"
         },
         {
           "id": "c",
@@ -1579,7 +1579,7 @@
         },
         {
           "id": "d",
-          "label": "DNS returns different addresses for large downloads, so those go to a host that drops data"
+          "label": "DNS returns different addresses for large downloads, so those connections go to a second host that completes the handshake but drops data"
         }
       ],
       "answerKey": {
@@ -2129,19 +2129,19 @@
       "options": [
         {
           "id": "a",
-          "label": "NAT encrypts traffic between inside and outside, but it cannot authenticate the remote peer, so a firewall must do that"
+          "label": "NAT encrypts traffic between inside and outside hosts, but it cannot authenticate the remote peer, so a firewall must handle that authentication step"
         },
         {
           "id": "b",
-          "label": "NAT hides internal addresses so inbound scans cannot reach hosts, meaning a firewall would only add redundancy here"
+          "label": "NAT hides internal addresses so inbound scans cannot reach hosts, meaning a firewall would add only redundancy and no new control over traffic"
         },
         {
           "id": "c",
-          "label": "NAT blocks unsolicited inbound traffic only as a side effect of missing mappings, and enforces no policy on outbound or forwarded ports"
+          "label": "NAT blocks unsolicited inbound traffic only as a side effect of missing mappings and enforces no policy on outbound traffic"
         },
         {
           "id": "d",
-          "label": "NAT inspects application payloads for threats, but it cannot track UDP flows, so a firewall is needed for that protocol"
+          "label": "NAT inspects application payloads for threats, but it cannot track UDP flows, so a firewall is needed to cover that one protocol"
         }
       ],
       "answerKey": {
@@ -2456,19 +2456,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Bridge all branch LANs to HQ over layer 2 tunnels so the shared subnet becomes one network reachable everywhere"
+          "label": "Bridge every branch LAN to HQ over layer 2 tunnels so the shared subnet becomes one flat network reachable from all sites"
         },
         {
           "id": "b",
-          "label": "Advertise 192.168.1.0/24 from every branch into HQ and let HQ routers choose the nearest branch by lowest metric"
+          "label": "Advertise 192.168.1.0/24 from every branch into HQ and let HQ routers choose the nearest branch by lowest metric each time"
         },
         {
           "id": "c",
-          "label": "Enable proxy ARP on HQ routers so they answer for every branch host and forward frames to the correct office"
+          "label": "Enable proxy ARP on HQ routers so they answer for every branch host and forward frames to the correct branch office"
         },
         {
           "id": "d",
-          "label": "Assign each branch a unique routable /24 and 1:1 NAT it at the branch edge, with HQ using mapped addresses until renumbering"
+          "label": "Give each branch a unique /24 and 1:1 NAT it at the branch edge; HQ uses the mapped addresses until renumbering"
         }
       ],
       "answerKey": {

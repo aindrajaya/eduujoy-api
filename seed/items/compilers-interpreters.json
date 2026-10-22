@@ -116,11 +116,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A stream of tokens"
+          "label": "A stream of tokens produced from the raw characters"
         },
         {
           "id": "b",
-          "label": "A grammar definition"
+          "label": "A grammar definition describing the language's syntax"
         },
         {
           "id": "c",
@@ -128,7 +128,7 @@
         },
         {
           "id": "d",
-          "label": "A list of syntax errors"
+          "label": "A list of syntax errors found in the source code"
         }
       ],
       "answerKey": {
@@ -151,7 +151,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Splits it into several smaller source files"
+          "label": "Translates all of it into a separate machine-code file before any of it runs"
         },
         {
           "id": "b",
@@ -159,11 +159,11 @@
         },
         {
           "id": "c",
-          "label": "Converts it to a PDF listing"
+          "label": "Checks it for syntax errors only, and never actually runs the code"
         },
         {
           "id": "d",
-          "label": "Only checks the spelling of identifiers"
+          "label": "Rewrites it into a different source language so a person can read it"
         }
       ],
       "answerKey": {
@@ -327,11 +327,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A lexical error, because count is a bad token"
+          "label": "A lexical error, because the scanner cannot turn count into a valid token"
         },
         {
           "id": "b",
-          "label": "A runtime error, because it appears while the program runs"
+          "label": "A runtime error, because the name can only be checked once the program runs"
         },
         {
           "id": "c",
@@ -339,7 +339,7 @@
         },
         {
           "id": "d",
-          "label": "A syntax error, because the parser rejected the line"
+          "label": "A syntax error, because the parser could not fit the line into the grammar"
         }
       ],
       "answerKey": {
@@ -362,19 +362,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Comments are executed later by the interpreter"
+          "label": "Comments are run later by the interpreter's runtime"
         },
         {
           "id": "b",
-          "label": "The parser has no need for them in most languages"
+          "label": "The parser does not need them in most languages"
         },
         {
           "id": "c",
-          "label": "The lexer cannot recognise spaces at all"
+          "label": "The lexer cannot tell spaces apart from identifiers"
         },
         {
           "id": "d",
-          "label": "The code generator would crash on spaces"
+          "label": "The code generator would fail on any space character"
         }
       ],
       "answerKey": {
@@ -397,19 +397,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Native code is run by a VM, bytecode by the CPU"
+          "label": "Native code is run by a VM, while bytecode is run by the CPU directly"
         },
         {
           "id": "b",
-          "label": "Bytecode is source text that the lexer reads again"
+          "label": "Bytecode is kept as source text that the VM lexes and parses again at run time"
         },
         {
           "id": "c",
-          "label": "Bytecode is executed by a program (the VM), native code by the CPU directly"
+          "label": "A program (the VM) executes bytecode; the CPU runs native code directly"
         },
         {
           "id": "d",
-          "label": "Bytecode needs no compiling step at all"
+          "label": "Bytecode needs no compiling step, since the VM reads the programmer's code as written"
         }
       ],
       "answerKey": {
@@ -468,11 +468,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The bytecode skips lexing and parsing on each machine"
+          "label": "The bytecode skips lexing and parsing on each machine, so no OS-specific work is left"
         },
         {
           "id": "b",
-          "label": "Windows and Linux share one CPU instruction set"
+          "label": "Windows and Linux share one CPU instruction set, so the bytecode runs natively on both"
         },
         {
           "id": "c",
@@ -480,7 +480,7 @@
         },
         {
           "id": "d",
-          "label": "The bytecode is rewritten as source on each machine"
+          "label": "The bytecode is rewritten as source on each machine and then compiled again to native code"
         }
       ],
       "answerKey": {
@@ -608,11 +608,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A compiler runs the program line by line, while an interpreter translates it all ahead of time"
+          "label": "A compiler runs the program line by line as it reads it, while an interpreter translates the whole program ahead of time"
         },
         {
           "id": "b",
-          "label": "An interpreter always produces a standalone executable file, while a compiler never produces any file"
+          "label": "An interpreter usually produces a standalone executable file that runs without it, while a compiler keeps the program in source form"
         },
         {
           "id": "c",
@@ -620,7 +620,7 @@
         },
         {
           "id": "d",
-          "label": "A compiler only checks syntax, whereas an interpreter also checks types and meaning before running"
+          "label": "A compiler mostly checks syntax, whereas an interpreter also checks types and meaning before the program starts running"
         }
       ],
       "answerKey": {
@@ -719,19 +719,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The lexer, because a lone parenthesis is not a valid token on its own"
+          "label": "The lexer, because a lone parenthesis is not a valid token without a matching partner"
         },
         {
           "id": "b",
-          "label": "The parser, because the tokens do not fit the grammar's rule of matching parentheses"
+          "label": "The parser, because the tokens break the grammar's rule for matching parentheses"
         },
         {
           "id": "c",
-          "label": "Semantic analysis, because `print` cannot accept a numeric argument here"
+          "label": "Semantic analysis, because `print` cannot accept a numeric argument in this position"
         },
         {
           "id": "d",
-          "label": "The code generator, because it cannot emit a call with that many operands"
+          "label": "The code generator, because it cannot emit a call instruction with that many operands"
         }
       ],
       "answerKey": {
@@ -1251,15 +1251,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The grammar is ambiguous, so the parser keeps trying both alternatives forever"
+          "label": "The grammar is ambiguous, so the parser keeps trying both alternatives forever without committing"
         },
         {
           "id": "b",
-          "label": "The rule is left-recursive, so parseExpr calls itself without consuming a token"
+          "label": "The rule is left-recursive, so the parser recurses without consuming a token"
         },
         {
           "id": "c",
-          "label": "The lexer never returns an end-of-file token, so parsing never stops"
+          "label": "The lexer never returns an end-of-file token, so the parser keeps requesting tokens forever"
         },
         {
           "id": "d",
@@ -1321,19 +1321,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The returned function does not keep the environment, so the frame is gone when it runs"
+          "label": "The returned function does not keep the environment, so the frame is gone"
         },
         {
           "id": "b",
-          "label": "The lexer produced the local's name as the wrong token type"
+          "label": "The lexer produced the local's name as the wrong token type, so lookups miss"
         },
         {
           "id": "c",
-          "label": "The inner function is type-checked before the outer one is"
+          "label": "The inner function is type-checked before the outer one, so its local has no type"
         },
         {
           "id": "d",
-          "label": "The inner function was parsed with the wrong precedence"
+          "label": "The inner function was parsed with the wrong precedence, so it binds to the wrong scope"
         }
       ],
       "answerKey": {
@@ -1356,19 +1356,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The recursive call on the right builds Sub(10, Sub(4, 3)), making `-` right-associative"
+          "label": "The right operand is parsed by a recursive call, giving Sub(10, Sub(4, 3))"
         },
         {
           "id": "b",
-          "label": "The evaluator pops operands in the wrong order"
+          "label": "The evaluator pops the two operands off its stack in the wrong order, so each subtraction is reversed"
         },
         {
           "id": "c",
-          "label": "The lexer reads `-4` as a negative literal"
+          "label": "The lexer reads `-4` as a negative literal, so the input becomes 10 followed by -4 and -3"
         },
         {
           "id": "d",
-          "label": "The parser applies constant folding before building the tree"
+          "label": "The parser applies constant folding before building the tree, so 4-3 is merged early"
         }
       ],
       "answerKey": {
@@ -1391,19 +1391,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Each AST node costs a recursive call and pointer chase, while bytecode is a flat instruction array"
+          "label": "Each AST node costs a recursive call and pointer chase; bytecode is a flat array"
         },
         {
           "id": "b",
-          "label": "The tree walker repeats semantic analysis each time through the loop"
+          "label": "The tree walker repeats semantic analysis on every node each time through the loop body"
         },
         {
           "id": "c",
-          "label": "The bytecode VM skips type information that the tree walker must check"
+          "label": "The bytecode VM skips type information that the tree walker must always check at run time"
         },
         {
           "id": "d",
-          "label": "The tree walker re-lexes the source text on every iteration"
+          "label": "The tree walker re-lexes and re-parses the source text of the loop body on every iteration"
         }
       ],
       "answerKey": {
@@ -1462,19 +1462,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Code generation ignored short-circuit semantics and should emit a conditional jump after the first test"
+          "label": "Code generation ignored short-circuit semantics for `&&`"
         },
         {
           "id": "b",
-          "label": "The register allocator reused the register holding `p` for the result"
+          "label": "The register allocator reused the register holding `p` for the comparison result"
         },
         {
           "id": "c",
-          "label": "The type checker should have rejected `p.x` for a nullable `p`"
+          "label": "The type checker accepted `p.x` even though `p` is a nullable reference"
         },
         {
           "id": "d",
-          "label": "The lexer merged `&&` and `>` into a single token"
+          "label": "The lexer merged `&&` and `>` into one token before parsing"
         }
       ],
       "answerKey": {
@@ -1567,19 +1567,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Closures copy variable values at definition time, but the copy is taken lazily on the first call"
+          "label": "Closures copy variable values at definition time, but the copy is taken lazily on the first call, after `a = 2` exists"
         },
         {
           "id": "b",
-          "label": "Dynamic lookup in the closure's live environment finds the later block binding, so it must be resolved statically to a scope depth"
+          "label": "The closure keeps the live block environment, so a call-time lookup finds the later binding of `a`"
         },
         {
           "id": "c",
-          "label": "Function declarations are hoisted above variable declarations, so `a = 2` runs before `show` is defined"
+          "label": "Function declarations are hoisted above variable declarations, so `a = 2` runs before `show` is defined in that block"
         },
         {
           "id": "d",
-          "label": "The parser attaches `print a` to the call site, so `a` is resolved in the caller's scope rather than the declaration's"
+          "label": "The parser attaches `print a` to the call site, so `a` is resolved in the caller's scope rather than the declaration's scope"
         }
       ],
       "answerKey": {
@@ -1818,11 +1818,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Compile to custom bytecode and ship a VM, because it avoids any dependence on a native toolchain"
+          "label": "Compile to custom bytecode and ship a VM, because it removes the need for a native toolchain on user machines"
         },
         {
           "id": "b",
-          "label": "Generate LLVM IR through its C++ API, because it is the only route to optimised code on all three systems"
+          "label": "Generate LLVM IR through its C++ API, because LLVM's optimiser and backends cover all three systems well"
         },
         {
           "id": "c",
@@ -1830,7 +1830,7 @@
         },
         {
           "id": "d",
-          "label": "Emit machine code directly for each target, because it gives full control and avoids any external tools"
+          "label": "Emit machine code directly for each target, because it gives full control over instruction selection and layout"
         }
       ],
       "answerKey": {
@@ -1963,15 +1963,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Grow the property hash tables and lower their load factor so collisions are rarer on every lookup"
+          "label": "Grow each object's property hash table and lower its load factor so collisions are rarer, which shortens the probe sequence on every lookup"
         },
         {
           "id": "b",
-          "label": "Intern all strings so key comparison is pointer equality, removing the need for any lookup structure"
+          "label": "Intern all property-name strings so key comparison becomes a pointer check, which speeds up each probe but still hashes and searches the table"
         },
         {
           "id": "c",
-          "label": "Rewrite the interpreter loop in assembly per platform so hash lookups take fewer cycles"
+          "label": "Rewrite the interpreter dispatch loop in hand-tuned assembly for each platform so hash lookups and dispatch take fewer cycles per instruction"
         },
         {
           "id": "d",
@@ -2068,19 +2068,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The claim holds because bytecode is machine code that the CPU executes directly, so no interpretive overhead remains"
+          "label": "The claim holds because bytecode is machine code that the CPU executes directly, so no interpretive overhead remains at all"
         },
         {
           "id": "b",
-          "label": "Bytecode is slower in principle because each instruction needs a decode step that a tree walker avoids entirely"
+          "label": "Bytecode is slower in principle because each instruction needs a decode step that a tree walker avoids entirely, so trees always win"
         },
         {
           "id": "c",
-          "label": "The gain comes mainly from cheaper dispatch and locality, so it shrinks when runtime calls dominate or the walker is closure-compiled"
+          "label": "The gain comes from cheaper dispatch and locality, so it shrinks when runtime calls dominate or the walker is closure-compiled"
         },
         {
           "id": "d",
-          "label": "The claim is wrong because bytecode cannot express loops or branches, which only a tree structure can represent"
+          "label": "The claim is wrong because bytecode cannot express loops or branches, which only a tree structure can represent in an interpreter"
         }
       ],
       "answerKey": {
@@ -2138,11 +2138,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Rerunning the full test suite on the self-built compiler, since a backdoor would cause some test to fail"
+          "label": "Rerunning the full test suite on the self-built compiler, including the compiler's own bootstrap tests, since a backdoor would cause some test to fail"
         },
         {
           "id": "b",
-          "label": "Review of the compiler source by several maintainers, since a backdoor would have to appear there to be real"
+          "label": "Independent review of the compiler source by several maintainers, since a backdoor would have to appear in the source to be real"
         },
         {
           "id": "c",
@@ -2150,7 +2150,7 @@
         },
         {
           "id": "d",
-          "label": "Signing release binaries with a maintainer key, since a signature proves the binary has not been altered"
+          "label": "Signing release binaries with a maintainer key and publishing the hashes, since a valid signature proves the binary has not been altered"
         }
       ],
       "answerKey": {
@@ -2214,19 +2214,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Adopt the JIT, since machine code always beats bytecode and will cut startup time along with execution time"
+          "label": "Adopt the JIT, since compiled machine code beats bytecode and removes most of the startup and parsing time too"
         },
         {
           "id": "b",
-          "label": "Adopt the JIT but compile every function eagerly at startup, so hot loops never run in the interpreter"
+          "label": "Adopt the JIT with eager compilation at startup, since hot loops then never spend time in the interpreter"
         },
         {
           "id": "c",
-          "label": "Rewrite the lexer in assembly, since lexing alone accounts for all of the startup cost in the profile"
+          "label": "Rewrite the lexer in assembly, since lexing is the main startup cost and a faster lexer cuts the median most"
         },
         {
           "id": "d",
-          "label": "Defer the JIT; cache parsed bytecode and load it lazily, since warm-up would cost more than it saves on short runs"
+          "label": "Defer the JIT and cache parsed bytecode, since warm-up would cost more than it saves on short runs"
         }
       ],
       "answerKey": {

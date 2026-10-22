@@ -327,11 +327,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The name is shown as plain text unchanged"
+          "label": "The name is shown on the page as plain text, tags included"
         },
         {
           "id": "b",
-          "label": "The database deletes the user's record"
+          "label": "The database rejects the stored name as invalid input"
         },
         {
           "id": "c",
@@ -339,7 +339,7 @@
         },
         {
           "id": "d",
-          "label": "The server rejects the request with an error"
+          "label": "The server rejects the request with a validation error"
         }
       ],
       "answerKey": {
@@ -473,19 +473,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It lets the database skip parameterized queries"
+          "label": "It lets attackers bypass parameterized queries in the database layer"
         },
         {
           "id": "b",
-          "label": "It reveals internal details that help an attacker plan further attacks"
+          "label": "It reveals internal details that help an attacker plan attacks"
         },
         {
           "id": "c",
-          "label": "It makes the page load slower for all customers"
+          "label": "It slows page loads, so attackers can overload the server more easily"
         },
         {
           "id": "d",
-          "label": "It breaks the browser's same-origin policy checks"
+          "label": "It breaks the browser's same-origin policy checks for the shop's pages"
         }
       ],
       "answerKey": {
@@ -547,15 +547,15 @@
         },
         {
           "id": "b",
-          "label": "Reflected XSS, since the payload is echoed back in the response"
+          "label": "Reflected XSS, since the payload is sent in the request and echoed back unescaped in the response page"
         },
         {
           "id": "c",
-          "label": "DOM-based XSS, since the browser builds the page from the DOM"
+          "label": "DOM-based XSS, since the script is run by client-side code that writes page data into the DOM"
         },
         {
           "id": "d",
-          "label": "Self-XSS, since the attacker only attacks their own browser session"
+          "label": "Self-XSS, since the attacker only attacks their own browser session by pasting code into it"
         }
       ],
       "answerKey": {
@@ -613,15 +613,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It forces the browser to send the cookie only over encrypted HTTPS connections"
+          "label": "It forces the browser to send the cookie only over encrypted HTTPS connections, never over plain HTTP"
         },
         {
           "id": "b",
-          "label": "It stops page JavaScript from reading the cookie, so an XSS flaw cannot steal it directly"
+          "label": "It stops page JavaScript from reading the cookie, so XSS cannot steal it directly"
         },
         {
           "id": "c",
-          "label": "It prevents the cookie from being sent on requests that start from other sites"
+          "label": "It prevents the browser from sending the cookie on requests that start from other sites"
         },
         {
           "id": "d",
@@ -825,19 +825,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Require the form to be submitted over HTTPS with a longer cookie lifetime"
+          "label": "Serve the form only over HTTPS and extend the session cookie lifetime so users stay signed in"
         },
         {
           "id": "b",
-          "label": "Put a random per-session token in the form and reject requests where it is missing or wrong"
+          "label": "Put a random per-session token in the form and reject requests missing it"
         },
         {
           "id": "c",
-          "label": "Check the Content-Length header on the incoming request is within limits"
+          "label": "Check that the Content-Length header on each incoming request is within the expected limits"
         },
         {
           "id": "d",
-          "label": "Hide the form's submit button until the user's session is verified by script"
+          "label": "Hide the form's submit button until a script has verified that the user's session is valid"
         }
       ],
       "answerKey": {
@@ -966,19 +966,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Escape single quotes in the sort value and keep concatenating it"
+          "label": "Escape single quotes and backslashes in the sort value, then keep concatenating it into the query"
         },
         {
           "id": "b",
-          "label": "Run the query as a lower-privilege user and keep the current concatenation"
+          "label": "Run the query as a lower-privilege read-only database user and keep the current concatenation"
         },
         {
           "id": "c",
-          "label": "Check that the sort value is one of price, name or rating, then use it in the query"
+          "label": "Accept the sort value only if it is price, name or rating, then use it in the query"
         },
         {
           "id": "d",
-          "label": "Wrap the sort value in a parameter placeholder and cast it to a string"
+          "label": "Wrap the sort value in a parameter placeholder and cast it to a string before running the query"
         }
       ],
       "answerKey": {
@@ -1118,7 +1118,7 @@
         },
         {
           "id": "d",
-          "label": "Compare an unpredictable per-session token from a hidden form field with the token stored server-side"
+          "label": "Compare an unpredictable per-session token from a hidden form field with the server-side copy, since a cross-site page cannot read it"
         }
       ],
       "answerKey": {
@@ -1330,7 +1330,7 @@
         },
         {
           "id": "c",
-          "label": "The server never checks that the invoice belongs to the requesting user (missing object-level authorization)"
+          "label": "The server never checks that the invoice belongs to the requesting user"
         },
         {
           "id": "d",
@@ -1581,7 +1581,7 @@
         },
         {
           "id": "c",
-          "label": "Placeholders bind values only, not identifiers or keywords, so the concatenated part still reaches the parser as code"
+          "label": "Placeholders bind values only, not identifiers or keywords, so concatenated text is parsed as code"
         },
         {
           "id": "d",
@@ -1714,19 +1714,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The reset token is too short, so it can be guessed once the attacker sees the email format"
+          "label": "The reset token is too short and predictable, so the attacker can guess it once they see the email format and then build the link themselves"
         },
         {
           "id": "b",
-          "label": "The app trusts a client-controlled header to build absolute URLs rather than using a configured canonical host"
+          "label": "The app trusts a client-controlled header to build absolute URLs instead of a configured canonical host"
         },
         {
           "id": "c",
-          "label": "The email is sent over unencrypted SMTP, so the attacker can rewrite the link while it is in transit"
+          "label": "The email is sent over unencrypted SMTP, so the attacker can rewrite the link while the message is in transit between servers"
         },
         {
           "id": "d",
-          "label": "The reset endpoint lacks rate limiting, so the attacker can request unlimited emails for any account"
+          "label": "The reset endpoint lacks rate limiting, so the attacker can request unlimited reset emails for any account and eventually intercept one"
         }
       ],
       "answerKey": {
@@ -1749,15 +1749,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Escape all HTML on output, which keeps the formatting by turning users' tags into visible text"
+          "label": "Escape all HTML on output, so users' tags show as visible text and no markup ever runs in a page"
         },
         {
           "id": "b",
-          "label": "Strip `<script>` tags and `on*` attributes with regexes on input, since those are the only script vectors"
+          "label": "Strip `<script>` tags and `on*` attributes with regexes on input, which blocks the usual script vectors"
         },
         {
           "id": "c",
-          "label": "Validate the comment in client-side JavaScript before submission so that malformed markup never arrives"
+          "label": "Validate the comment in client-side JavaScript before submission, so malformed markup rarely arrives"
         },
         {
           "id": "d",
@@ -1819,7 +1819,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A missing `X-Content-Type-Options` header on static image responses"
+          "label": "Stored XSS in product reviews that runs in other shoppers' browsers but cannot read the HttpOnly session cookie"
         },
         {
           "id": "b",
@@ -1827,7 +1827,7 @@
         },
         {
           "id": "c",
-          "label": "A server banner that reveals the exact web server version number"
+          "label": "A missing CSRF token on the logged-in newsletter preferences form, which needs a victim to visit a hostile page"
         },
         {
           "id": "d",
@@ -1893,7 +1893,7 @@
         },
         {
           "id": "b",
-          "label": "Trust the `Content-Type` header the browser sends, since it states the type of file the user chose"
+          "label": "Check the first bytes of each upload for a valid PNG or JPEG signature, then store it under its original name in the web root so a CDN can serve it"
         },
         {
           "id": "c",
@@ -1995,19 +1995,19 @@
       "options": [
         {
           "id": "a",
-          "label": "HTML-encode all input before saving, so the stored text is safe in every output context later"
+          "label": "HTML-encode all input before saving, which neutralizes markup in the output contexts where the post is later shown"
         },
         {
           "id": "b",
-          "label": "Sanitize with a maintained allowlist-based library at render time, and add a CSP as a second layer"
+          "label": "Sanitize with a maintained allowlist library at render time, and add a CSP as a second layer"
         },
         {
           "id": "c",
-          "label": "Strip <script> tags with a regex on input, since script tags are the only way HTML can run code"
+          "label": "Strip <script> tags with a regex on input, since script tags are the main route for HTML to run code"
         },
         {
           "id": "d",
-          "label": "Set the session cookie to HttpOnly, which prevents injected markup from executing at all"
+          "label": "Set the session cookie to HttpOnly, which blocks injected markup from running in the user's browser"
         }
       ],
       "answerKey": {
@@ -2042,7 +2042,7 @@
         },
         {
           "id": "d",
-          "label": "Lax still sends cookies on top-level GET navigations, so any state-changing GET endpoint stays exploitable"
+          "label": "Lax still sends cookies on top-level GET navigations, so state-changing GETs remain exploitable"
         }
       ],
       "answerKey": {
@@ -2218,11 +2218,11 @@
         },
         {
           "id": "c",
-          "label": "Require HTTPS URLs only, since internal metadata services do not accept TLS connections from the server"
+          "label": "Require HTTPS URLs only, since internal metadata services do not accept TLS connections from the server, and reject any plain HTTP URL"
         },
         {
           "id": "d",
-          "label": "Extend the string blocklist with 0.0.0.0, [::1] and 169.254.169.254 so every known internal address is covered"
+          "label": "Extend the string blocklist with 0.0.0.0, [::1] and 169.254.169.254 and the decimal and hex forms of each, so every known internal address is covered"
         }
       ],
       "answerKey": {
@@ -2315,7 +2315,7 @@
       "options": [
         {
           "id": "a",
-          "label": "script-src 'sha256-<one hash>' 'self'; object-src 'self'; base-uri 'self'"
+          "label": "script-src 'sha256-<one hash>' 'self'; object-src 'self'; base-uri 'self'; require-trusted-types-for 'script'"
         },
         {
           "id": "b",
@@ -2327,7 +2327,7 @@
         },
         {
           "id": "d",
-          "label": "script-src 'self' https: 'unsafe-inline'; object-src 'self'"
+          "label": "script-src 'self' https: 'unsafe-inline'; object-src 'self'; base-uri 'self'; frame-ancestors 'none'"
         }
       ],
       "answerKey": {

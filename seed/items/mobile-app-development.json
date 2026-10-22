@@ -186,7 +186,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Displaying its own screens"
+          "label": "Reading the device's screen size to lay out its own screens"
         },
         {
           "id": "b",
@@ -198,20 +198,15 @@
         },
         {
           "id": "d",
-          "label": "Precise location"
+          "label": "Storing its own settings in app-private storage"
         }
       ],
       "answerKey": {
         "optionIds": [
           "b",
-          "c",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "Camera, location and contacts are protected by runtime permissions.",
-        "Showing its own UI needs no permission."
-      ],
       "reviewed": false
     },
     {
@@ -262,15 +257,15 @@
         },
         {
           "id": "b",
-          "label": "It lets the app bypass the operating system's security"
+          "label": "It lets the app skip the operating system's security checks once granted"
         },
         {
           "id": "c",
-          "label": "It removes the need to declare permissions in the manifest"
+          "label": "It removes the need to declare permissions in the app's manifest file"
         },
         {
           "id": "d",
-          "label": "It makes the app download faster from the store"
+          "label": "It makes the app download faster because fewer files are bundled in it"
         }
       ],
       "answerKey": {
@@ -293,19 +288,19 @@
       "options": [
         {
           "id": "a",
-          "label": "To compress images before display"
+          "label": "To shrink images so each screen loads faster"
         },
         {
           "id": "b",
-          "label": "To track screens so Back returns to the previous one"
+          "label": "To track screens so Back returns to the last one"
         },
         {
           "id": "c",
-          "label": "To send requests to a server in order"
+          "label": "To queue server requests so they send in order"
         },
         {
           "id": "d",
-          "label": "To store all user data on the device"
+          "label": "To save user data on the device between launches"
         }
       ],
       "answerKey": {
@@ -328,7 +323,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Remote servers only reply to background threads"
+          "label": "Remote servers only accept requests from background threads"
         },
         {
           "id": "b",
@@ -336,11 +331,11 @@
         },
         {
           "id": "c",
-          "label": "The main thread cannot read JSON data"
+          "label": "The main thread cannot parse JSON data from a response"
         },
         {
           "id": "d",
-          "label": "Background threads make requests use less data"
+          "label": "Background threads make requests use less mobile data"
         }
       ],
       "answerKey": {
@@ -398,15 +393,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Native apps cannot use device features; cross-platform apps can"
+          "label": "Native apps cannot use device features like the camera; cross-platform apps can use them"
         },
         {
           "id": "b",
-          "label": "Native apps run only in a browser; cross-platform apps are installed"
+          "label": "Native apps run only inside a browser; cross-platform apps are installed from a store"
         },
         {
           "id": "c",
-          "label": "Native apps use no code; cross-platform apps need code"
+          "label": "Native apps are written once for all platforms; cross-platform apps need separate code"
         },
         {
           "id": "d",
@@ -474,15 +469,15 @@
         },
         {
           "id": "b",
-          "label": "Layouts only matter for apps that use the camera"
+          "label": "Rotation reloads the screen, so layouts must be rebuilt by hand"
         },
         {
           "id": "c",
-          "label": "Rotation deletes the app's stored data on the phone"
+          "label": "Rotation clears the app's stored data, so layouts must reload it"
         },
         {
           "id": "d",
-          "label": "Responsive layouts are needed only for store approval"
+          "label": "Stores reject portrait-only apps, so layouts must support both"
         }
       ],
       "answerKey": {
@@ -505,19 +500,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is moved to a background service and kept"
+          "label": "It is moved to a background service and kept alive"
         },
         {
           "id": "b",
-          "label": "It is paused and then resumed with state intact"
+          "label": "It is paused, then resumed with all its state intact"
         },
         {
           "id": "c",
-          "label": "It stays alive and only its layout is stretched"
+          "label": "It stays alive and only its layout is stretched to fit"
         },
         {
           "id": "d",
-          "label": "It is destroyed and recreated, so unsaved state is lost"
+          "label": "It is destroyed and recreated, losing unsaved state"
         }
       ],
       "answerKey": {
@@ -575,15 +570,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Because camera code cannot compile without the dialog"
+          "label": "Because camera code cannot compile unless a permission dialog is declared in the source"
         },
         {
           "id": "b",
-          "label": "Because the device only grants access to paid apps"
+          "label": "Because the device only grants camera access to apps bought through the paid store tier"
         },
         {
           "id": "c",
-          "label": "Because the store charges a fee per permission used"
+          "label": "Because the store charges the developer a fee for each permission an app requests"
         },
         {
           "id": "d",
@@ -716,11 +711,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The list component cannot render more than a few items"
+          "label": "The list component can only render items that were fetched in the last few minutes"
         },
         {
           "id": "b",
-          "label": "The API changed its JSON format during the journey"
+          "label": "The API changed its JSON format during the journey, so parsing fails"
         },
         {
           "id": "c",
@@ -728,7 +723,7 @@
         },
         {
           "id": "d",
-          "label": "The operating system blocks apps from using any storage"
+          "label": "The operating system blocks apps from saving data while the device is offline"
         }
       ],
       "answerKey": {
@@ -786,7 +781,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Store the permission flag as true in local settings"
+          "label": "Store a granted flag in local settings after install, then open the camera directly"
         },
         {
           "id": "b",
@@ -794,11 +789,11 @@
         },
         {
           "id": "c",
-          "label": "Open the camera and wait for the system to crash"
+          "label": "Open the camera and rely on the declaration to have granted access"
         },
         {
           "id": "d",
-          "label": "Reinstall the app so the permission is granted"
+          "label": "Ask for the permission once at first launch and assume it stays granted"
         }
       ],
       "answerKey": {
@@ -891,15 +886,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Delete the previous release from your device"
+          "label": "Uninstall the earlier release from your test device and upload again"
         },
         {
           "id": "b",
-          "label": "Rename the app to a new title"
+          "label": "Change the app's display name so the store sees a new listing"
         },
         {
           "id": "c",
-          "label": "Switch the build from release to debug mode"
+          "label": "Switch the build from release to debug mode and upload that"
         },
         {
           "id": "d",
@@ -1032,19 +1027,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Only in the manifest, since dangerous permissions need no prompt"
+          "label": "In the manifest declaration alone, because the system grants dangerous permissions at install time"
         },
         {
           "id": "b",
-          "label": "Every time the app returns to the foreground, to keep consent fresh"
+          "label": "Each time the app returns to the foreground, so the user's consent stays current"
         },
         {
           "id": "c",
-          "label": "When the user taps the button, just before location is first read"
+          "label": "Right before the first read of location, triggered by the user choosing that feature"
         },
         {
           "id": "d",
-          "label": "On first launch, before any screen appears, so it is settled early"
+          "label": "At first launch, before the first screen appears, so the decision is settled early"
         }
       ],
       "answerKey": {
@@ -1459,19 +1454,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The refresh endpoint response is cached by a CDN and returns stale tokens"
+          "label": "A CDN caches the refresh endpoint response, so some callers receive stale tokens"
         },
         {
           "id": "b",
-          "label": "The HTTP client does not retry, so one failed call logs everyone out"
+          "label": "The HTTP client does not retry a failed call, so one 401 logs the user out"
         },
         {
           "id": "c",
-          "label": "The access token lifetime is too short, so refresh calls arrive too often"
+          "label": "The access token lifetime is too short, so refresh calls arrive too often for the server"
         },
         {
           "id": "d",
-          "label": "Concurrent refreshes reuse one refresh token, so later calls fail and force logout"
+          "label": "Parallel refreshes send the same refresh token, so later ones fail and force logout"
         }
       ],
       "answerKey": {
@@ -1673,7 +1668,7 @@
         },
         {
           "id": "b",
-          "label": "A long-lived object holding a stored closure that captures self strongly and is never released"
+          "label": "A singleton that holds only the application-level context for its work"
         },
         {
           "id": "c",
@@ -1681,20 +1676,15 @@
         },
         {
           "id": "d",
-          "label": "A singleton that holds only the application-level context for its work"
+          "label": "A screen that registers a lifecycle-aware observer, which the framework removes when the screen is destroyed"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
           "c"
         ]
       },
-      "rubric": [
-        "Long-lived objects holding references to a screen keep it from being freed.",
-        "The application context lives as long as the process, so holding it does not leak a screen."
-      ],
       "reviewed": false
     },
     {
@@ -1811,7 +1801,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Release to a week-long beta list and then ship to all, since beta users always mirror the whole install base"
+          "label": "Release to a week-long beta list and then ship to all users, since beta testers usually cover the device and data states of the install base"
         },
         {
           "id": "b",
@@ -1819,11 +1809,11 @@
         },
         {
           "id": "c",
-          "label": "Release to everyone on a weekend, since lower traffic reduces the number of people exposed to any migration bug"
+          "label": "Release to everyone on a weekend, when lower traffic means fewer people are exposed to any migration bug that appears"
         },
         {
           "id": "d",
-          "label": "Release to all users at once, because the migration already passed on the QA team's own test devices"
+          "label": "Release to all users at once, because the migration passed on the QA team's own test devices and a hotfix can follow if needed"
         }
       ],
       "answerKey": {
@@ -1846,19 +1836,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Poll every fifteen minutes in a background task, since it saves the most battery and chat users tolerate delays"
+          "label": "Poll every fifteen minutes in a background task, which saves the most battery and is acceptable for chat users"
         },
         {
           "id": "b",
-          "label": "Poll the server every second in every app state, since polling is simple and gives the lowest latency everywhere"
+          "label": "Poll the server every few seconds in all app states, which is simple to build and keeps latency low everywhere"
         },
         {
           "id": "c",
-          "label": "Keep a socket open while foregrounded and rely on push notifications when backgrounded, balancing latency and battery"
+          "label": "Hold a socket open while foregrounded and use push when backgrounded, balancing latency and battery"
         },
         {
           "id": "d",
-          "label": "Use only push notifications and fetch nothing while open, since push always arrives instantly with the full message"
+          "label": "Rely on push notifications alone and skip fetching while the app is open, since push carries the full message to the device"
         }
       ],
       "answerKey": {
@@ -1953,15 +1943,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Cache raw HTTP responses forever and never refresh, since offline use matters more than the ten-minute limit"
+          "label": "Cache raw HTTP responses on disk with a long expiry and refresh them on a daily schedule, since offline use matters more than the ten-minute limit"
         },
         {
           "id": "b",
-          "label": "Keep only the last response in memory, since it is fastest and survives process death on both platforms"
+          "label": "Keep the last response in an in-memory cache and reuse it on open, since memory reads are the fastest option available on both platforms"
         },
         {
           "id": "c",
-          "label": "Fetch from the network on every open and show a spinner, since always-fresh data avoids any staleness complaints"
+          "label": "Fetch from the network on each open and show a loading spinner until it returns, since fresh data avoids staleness complaints"
         },
         {
           "id": "d",
@@ -2027,11 +2017,11 @@
         },
         {
           "id": "b",
-          "label": "Send a silent ping by push and require the user to open the app before any message content is loaded"
+          "label": "Send a silent push as a ping, then load the message content when the user next opens the app to save battery"
         },
         {
           "id": "c",
-          "label": "Hold a persistent background WebSocket on both platforms, since it removes any dependence on push services"
+          "label": "Hold a persistent background WebSocket on both platforms so messages arrive directly without relying on push services"
         },
         {
           "id": "d",
@@ -2309,19 +2299,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Set a keep-awake flag during checkout so the OS cannot reclaim the process while the user is away"
+          "label": "Set a keep-awake flag for the whole checkout session so the OS will not reclaim the process while the user is in the banking app"
         },
         {
           "id": "b",
-          "label": "Hold the whole checkout in an in-memory singleton, since it survives screen changes and background transitions"
+          "label": "Hold the whole checkout in an in-memory singleton shared by all screens, since it survives screen changes and background transitions"
         },
         {
           "id": "c",
-          "label": "Persist every field including the card number, encrypted with a key bundled inside the app, and restore them all"
+          "label": "Persist every field including the card number, encrypted with a key bundled inside the app, and restore them all on return"
         },
         {
           "id": "d",
-          "label": "Save the step and non-sensitive fields in saved state or local storage by route, and re-prompt card entry via a tokenised input"
+          "label": "Save the step and non-sensitive fields in saved state by route, and re-prompt card entry via a tokenised input"
         }
       ],
       "answerKey": {
@@ -2348,15 +2338,15 @@
         },
         {
           "id": "b",
-          "label": "Make new fields optional and let the server infer client capabilities from the reported device model string"
+          "label": "Make new fields optional and let the server infer each client's capabilities from the device model string sent in request headers"
         },
         {
           "id": "c",
-          "label": "Deploy the breaking change at once and rely on automatic store updates to move everyone within a day"
+          "label": "Deploy the breaking change at once and rely on automatic store updates to move nearly every user to the new version within a day"
         },
         {
           "id": "d",
-          "label": "Hardcode the cut-off date into the next release to trigger the prompt, then ship the API change on that date"
+          "label": "Hardcode the cut-off date into the next release to trigger the update prompt, then ship the API change on that date for all users"
         }
       ],
       "answerKey": {
@@ -2379,19 +2369,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Chunked upload driven by a JavaScript or Dart timer in the background, resuming whenever the timer fires"
+          "label": "Chunked upload driven by a JavaScript or Dart timer in the background, resuming from the last saved chunk whenever the timer fires"
         },
         {
           "id": "b",
-          "label": "A single multipart POST from a foreground service or background task that keeps the app awake until the upload ends"
+          "label": "A single multipart POST from a foreground service or background task that keeps the app awake until the upload ends, with automatic retry on failure"
         },
         {
           "id": "c",
-          "label": "Compress the video to 50 MB in the foreground first, then send it in one request and retry from the start on failure"
+          "label": "Compress the video to 50 MB in the foreground first, then send it in one request and retry from the start on any network failure"
         },
         {
           "id": "d",
-          "label": "Chunked resumable upload scheduled through OS-managed background transfers (URLSession background / WorkManager), recording acknowledged chunks"
+          "label": "Chunked resumable upload via OS-managed background transfers (URLSession background / WorkManager), recording acknowledged chunks"
         }
       ],
       "answerKey": {
@@ -2455,7 +2445,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Obfuscate the client secret with string encryption and verify the redirect host inside the WebView"
+          "label": "Obfuscate the client secret with string encryption and have the WebView check that the redirect host matches the registered callback before accepting the code"
         },
         {
           "id": "b",
@@ -2463,11 +2453,11 @@
         },
         {
           "id": "c",
-          "label": "Hide the WebView so credentials can be auto-filled by the app and the user never leaves the screen"
+          "label": "Keep the WebView but move the client secret into the keychain or keystore, so the app can still read it to exchange the code and the user stays in-app"
         },
         {
           "id": "d",
-          "label": "Switch to the implicit flow so no secret is needed and tokens arrive directly in the redirect URL"
+          "label": "Switch to the implicit flow so no secret is needed and tokens arrive directly in the redirect URL, avoiding a code exchange step on the device"
         }
       ],
       "answerKey": {

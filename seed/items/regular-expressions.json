@@ -371,7 +371,7 @@
         },
         {
           "id": "b",
-          "label": "`<b>bold`"
+          "label": "`<b>bold</b` and then `>`"
         },
         {
           "id": "c",
@@ -379,7 +379,7 @@
         },
         {
           "id": "d",
-          "label": "`bold`"
+          "label": "`<b>` and then `</b>`"
         }
       ],
       "answerKey": {
@@ -578,7 +578,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Regex always returns the longest text in the input"
+          "label": "The regex engine always prefers the longest possible match anywhere in the input, regardless of the pattern's quantifiers"
         },
         {
           "id": "b",
@@ -586,11 +586,11 @@
         },
         {
           "id": "c",
-          "label": "The `<b>` tag acts as an anchor to the whole string"
+          "label": "The `<b>` at the start acts as an anchor, so the match must run from the start to the end of the whole string"
         },
         {
           "id": "d",
-          "label": "`.*` matches a single character, so the group repeats"
+          "label": "`.` matches only one character, so `*` repeats the whole `<b>` group until no more tags are left"
         }
       ],
       "answerKey": {
@@ -648,19 +648,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Both repeat ab, but the first does not store the match as a capture group"
+          "label": "Both repeat ab, but the first does not capture the match"
         },
         {
           "id": "b",
-          "label": "The first makes ab optional, while the second requires it"
+          "label": "The first makes the ab group optional, while the second requires at least one ab"
         },
         {
           "id": "c",
-          "label": "The first matches a and b in any order, the second in order"
+          "label": "The first matches a and b in either order, while the second needs ab in order"
         },
         {
           "id": "d",
-          "label": "The first matches ab once, while the second repeats it"
+          "label": "The first matches ab exactly once, while the second repeats it one or more times"
         }
       ],
       "answerKey": {
@@ -731,7 +731,7 @@
         },
         {
           "id": "d",
-          "label": "The dot is a wildcard matching any one character; escape it as `\\.` to match a literal dot"
+          "label": "The dot is a wildcard that matches any single character"
         }
       ],
       "answerKey": {
@@ -937,7 +937,7 @@
         },
         {
           "id": "c",
-          "label": "`^[A-Z]\\d+$`"
+          "label": "`^[A-Z]\\d{3}$`"
         },
         {
           "id": "d",
@@ -947,14 +947,9 @@
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "Each of the first three accepts a letter followed by two digits across exactly the whole string.",
-        "The last pattern requires digits before the letter, so it fails."
-      ],
       "reviewed": false
     },
     {
@@ -1717,15 +1712,15 @@
         },
         {
           "id": "b",
-          "label": "Greedy `.*` returns the longest match, so each line is counted once per `timeout` it contains"
+          "label": "Greedy `.*` returns the longest possible match, so a line is counted once for every `timeout` it contains"
         },
         {
           "id": "c",
-          "label": "`.*` can bridge unrelated fields, so any later `timeout` on an ERROR line counts, even in config text"
+          "label": "`.*` can span unrelated fields, so any later `timeout` on an ERROR line matches"
         },
         {
           "id": "d",
-          "label": "`ERROR` matches inside longer words such as `ERRORS`, so unrelated lines are counted as errors"
+          "label": "`ERROR` also matches inside longer words such as `ERRORS`, so unrelated lines get counted as errors"
         }
       ],
       "answerKey": {
@@ -2034,19 +2029,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A whitelist of the most common mail domains, because it removes every typo in the domain part"
+          "label": "A whitelist of the most common mail domains, because it catches typos in the domain part of nearly every address"
         },
         {
           "id": "b",
-          "label": "A letters-digits-dots-only local part, because unusual characters are rare in real addresses"
+          "label": "A local part limited to letters, digits and dots, because unusual characters are rare in real addresses"
         },
         {
           "id": "c",
-          "label": "A loose check like `^[^@\\s]+@[^@\\s]+$`, leaving real validation to the confirmation email"
+          "label": "A loose check like `^[^@\\s]+@[^@\\s]+$`, leaving real validation to the later step"
         },
         {
           "id": "d",
-          "label": "A strict RFC-style pattern, because any address that fails it is certainly not deliverable anywhere"
+          "label": "A strict RFC-style pattern, because an address that fails it is very unlikely to be deliverable"
         }
       ],
       "answerKey": {

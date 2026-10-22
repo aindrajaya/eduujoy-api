@@ -262,19 +262,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Headings load faster than styled divs in all browsers"
+          "label": "Browsers render real heading elements faster than styled divs, which helps users on slow connections"
         },
         {
           "id": "b",
-          "label": "Search engines ignore any text that is not inside a heading tag"
+          "label": "Search engines mostly skip text outside heading tags, so styled divs can hurt a page's ranking"
         },
         {
           "id": "c",
-          "label": "Screen reader users can jump between headings to understand and navigate the page"
+          "label": "Screen reader users can jump between headings to navigate the page"
         },
         {
           "id": "d",
-          "label": "Headings are the only way to change font size accessibly"
+          "label": "Headings are the main way to change font size in a way that respects user zoom settings"
         }
       ],
       "answerKey": {
@@ -297,19 +297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Users with colour blindness or screen readers may not perceive colour alone"
+          "label": "Colour-blind users and screen reader users may not perceive colour alone"
         },
         {
           "id": "b",
-          "label": "Red text always has too little contrast on white"
+          "label": "Red borders on a white page always fall below the minimum contrast ratio for text"
         },
         {
           "id": "c",
-          "label": "Borders cannot be read by browsers with zoom enabled"
+          "label": "Browsers drop border styling when users zoom the page, so the error marker disappears"
         },
         {
           "id": "d",
-          "label": "Red borders are not allowed by CSS accessibility rules"
+          "label": "Accessibility rules forbid red for error states because it is reserved for browser warnings"
         }
       ],
       "answerKey": {
@@ -332,19 +332,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It removes the element from what assistive technology exposes, while it stays visible"
+          "label": "It removes the element from the accessibility tree but leaves it visible"
         },
         {
           "id": "b",
-          "label": "It deletes the element from the DOM after page load"
+          "label": "It deletes the element from the DOM once the page has finished loading"
         },
         {
           "id": "c",
-          "label": "It hides the element visually but screen readers still read it"
+          "label": "It hides the element visually, but screen readers still read its content"
         },
         {
           "id": "d",
-          "label": "It disables the element so it cannot receive clicks"
+          "label": "It disables the element so it cannot be focused or receive clicks"
         }
       ],
       "answerKey": {
@@ -367,19 +367,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Browsers refuse to apply other CSS to the elements"
+          "label": "Browsers stop applying any other CSS to those elements"
         },
         {
           "id": "b",
-          "label": "Keyboard users can no longer see which element has focus"
+          "label": "Keyboard users can't see which element has focus"
         },
         {
           "id": "c",
-          "label": "Mouse users can no longer click the elements"
+          "label": "Mouse users can no longer click the elements reliably"
         },
         {
           "id": "d",
-          "label": "Screen readers stop announcing the elements"
+          "label": "Screen readers stop announcing the elements as links"
         }
       ],
       "answerKey": {
@@ -478,19 +478,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The placeholder is too short, so make it longer and more detailed"
+          "label": "The placeholder text is too short to be announced, so lengthen it to describe the expected format"
         },
         {
           "id": "b",
-          "label": "Screen readers cannot read input fields, so replace the input with a paragraph"
+          "label": "Screen readers skip input fields without a visible border, so add a CSS outline to the field"
         },
         {
           "id": "c",
-          "label": "The input needs `aria-hidden=\"true\"` so the placeholder is read first"
+          "label": "The placeholder is read only when the field is hidden, so add aria-hidden=\"true\" to the input"
         },
         {
           "id": "d",
-          "label": "Placeholders disappear and are not a reliable label, so add a `<label>` linked with `for` and `id`"
+          "label": "Placeholders vanish and are no real label, so add a <label> linked by for and id"
         }
       ],
       "answerKey": {
@@ -513,11 +513,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A div cannot have a click handler in modern browsers"
+          "label": "A div cannot receive click events in browsers unless it has a role attribute"
         },
         {
           "id": "b",
-          "label": "A div cannot be styled with CSS to look like a button"
+          "label": "A div cannot be styled with CSS to look like a button without extra markup"
         },
         {
           "id": "c",
@@ -525,7 +525,7 @@
         },
         {
           "id": "d",
-          "label": "A button is announced louder by screen readers than a div"
+          "label": "A button is announced more loudly by screen readers than a plain div is"
         }
       ],
       "answerKey": {
@@ -618,19 +618,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Placeholders vanish once typing starts and are not a reliable persistent name"
+          "label": "Placeholder text disappears once typing starts, so it is not a persistent name"
         },
         {
           "id": "b",
-          "label": "Placeholders are always read twice by screen readers, confusing users"
+          "label": "Screen readers usually read placeholder text twice, which confuses users who rely on them"
         },
         {
           "id": "c",
-          "label": "Placeholders are only allowed on inputs of type password in HTML"
+          "label": "Placeholders are valid only on password inputs, so other input types need a label"
         },
         {
           "id": "d",
-          "label": "Placeholders cannot be styled, so their text is always too low in contrast"
+          "label": "Placeholder text cannot be styled with CSS, so its contrast tends to fall below the WCAG minimum"
         }
       ],
       "answerKey": {
@@ -653,7 +653,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Use ARIA attributes because they add keyboard behaviour to any element"
+          "label": "Use ARIA attributes because they add keyboard behaviour to any element, so native controls are unnecessary"
         },
         {
           "id": "b",
@@ -665,7 +665,7 @@
         },
         {
           "id": "d",
-          "label": "Replace headings and landmarks with ARIA roles for consistent output"
+          "label": "Replace headings and landmarks with ARIA roles so every screen reader announces them consistently"
         }
       ],
       "answerKey": {
@@ -829,19 +829,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Add `<a href=\"main\">Skip</a>` first and set `tabindex=\"-1\"` on it"
+          "label": "Put `<a href=\"#main\" tabindex=\"-1\">Skip to main content</a>` first in `<body>`, with `<main id=\"main\">` further down the page"
         },
         {
           "id": "b",
-          "label": "Make the link the first focusable element, `<a href=\"#main\">Skip to main content</a>`, with `<main id=\"main\">`"
+          "label": "Put `<a href=\"#main\">Skip to main content</a>` first in `<body>`, with `<main id=\"main\">`"
         },
         {
           "id": "c",
-          "label": "Place `<a href=\"#main\">Skip</a>` first with `aria-hidden=\"true\"` on it"
+          "label": "Put `<a href=\"#main\" aria-hidden=\"true\">Skip to main content</a>` first in `<body>`, with `<main id=\"main\">` below it"
         },
         {
           "id": "d",
-          "label": "Make the link the last element in `<body>` with `href=\"#main\"`"
+          "label": "Put `<a href=\"#main\">Skip to main content</a>` as the last element in `<body>`, with `<main id=\"main\">` above it"
         }
       ],
       "answerKey": {
@@ -970,19 +970,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Make the red border a darker shade so the contrast is stronger"
+          "label": "Darken the red border to a shade with a much higher contrast ratio against the white page background"
         },
         {
           "id": "b",
-          "label": "Make the red border thicker and also add a small red icon"
+          "label": "Thicken the red border and add a small red warning icon with no text next to the email input"
         },
         {
           "id": "c",
-          "label": "Add a `title=\"error\"` attribute to the input so it is described"
+          "label": "Add a `title=\"Invalid email\"` attribute to the input so the error is described when it is focused"
         },
         {
           "id": "d",
-          "label": "Add visible text such as 'Enter a valid email', link it with `aria-describedby` and set `aria-invalid=\"true\"`"
+          "label": "Show text 'Enter a valid email', link it with `aria-describedby`, and set `aria-invalid=\"true\"`"
         }
       ],
       "answerKey": {
@@ -1009,15 +1009,15 @@
         },
         {
           "id": "b",
-          "label": "`<a href=\"#\"><svg role=\"presentation\">...</svg></a>`"
+          "label": "`<a href=\"#\" role=\"button\"><svg role=\"presentation\">...</svg></a>`"
         },
         {
           "id": "c",
-          "label": "`<button aria-label=\"Close dialog\"><svg aria-hidden=\"true\">...</svg></button>`"
+          "label": "`<button aria-label=\"Close\"><svg aria-hidden=\"true\">...</svg></button>`"
         },
         {
           "id": "d",
-          "label": "`<div onclick=\"close()\"><svg>...</svg></div>`"
+          "label": "`<div role=\"button\" onclick=\"close()\"><svg focusable=\"false\">...</svg></div>`"
         }
       ],
       "answerKey": {
@@ -1075,19 +1075,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Add `title` to the span with the text \"email\""
+          "label": "Add `title=\"Email address\"` to the input and wrap the span in a `<div>` placed directly before it"
         },
         {
           "id": "b",
-          "label": "Add `tabindex=\"0\"` to the span so it is focusable"
+          "label": "Add `tabindex=\"0\"` to the span and `role=\"label\"` so keyboard users can reach the text and it names the input"
         },
         {
           "id": "c",
-          "label": "Use `<label for=\"email\">Email address</label>` and give the input `id=\"email\"`"
+          "label": "Replace the span with `<label for=\"email\">` and set `id=\"email\"` on the input"
         },
         {
           "id": "d",
-          "label": "Add `placeholder=\"Email address\"` and keep the span"
+          "label": "Add `placeholder=\"Email address\"` to the input and keep the span as visible text beside it"
         }
       ],
       "answerKey": {
@@ -1110,19 +1110,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`<a href=\"#main\">` placed in the footer after the content"
+          "label": "`<a href=\"#main\">` placed in the footer, after all of the page content, so it is the last tab stop"
         },
         {
           "id": "b",
-          "label": "`<a href=\"#main\" tabindex=\"-1\">` placed at the top of the page"
+          "label": "`<a href=\"#main\" tabindex=\"-1\">` placed at the top of the page, so it is first in the DOM"
         },
         {
           "id": "c",
-          "label": "First focusable element `<a href=\"#main\">`, with `<main id=\"main\">` as target, visible on focus"
+          "label": "First focusable `<a href=\"#main\">` targeting `<main id=\"main\">`, visible on focus"
         },
         {
           "id": "d",
-          "label": "`<a href=\"#main\" style=\"display:none\">` placed at the top of the page"
+          "label": "`<a href=\"#main\" style=\"display:none\">` placed at the top of the page, so it is first in the DOM"
         }
       ],
       "answerKey": {
@@ -1220,15 +1220,15 @@
         },
         {
           "id": "b",
-          "label": "Leave focus on \"Settings\" so the user's place is preserved while the dialog shows"
+          "label": "Leave focus on \"Settings\" so the user's place is kept, and let Tab move through the page behind the dialog"
         },
         {
           "id": "c",
-          "label": "Move focus to the top of the document so the dialog is read in order"
+          "label": "Move focus to the top of the document on open so the dialog is reached in reading order from the start"
         },
         {
           "id": "d",
-          "label": "Remove all tabindex values on the page so Tab skips to the dialog by default"
+          "label": "Remove all tabindex values on the page so Tab skips the background content and lands in the dialog by default"
         }
       ],
       "answerKey": {
@@ -1251,19 +1251,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The list needs `role=\"presentation\"`"
+          "label": "The list needs `role=\"presentation\"` so its items are hidden from the accessibility tree"
         },
         {
           "id": "b",
-          "label": "`aria-haspopup` should be `true` rather than listbox"
+          "label": "`aria-haspopup` should be `true` rather than `listbox`, so the popup type is announced"
         },
         {
           "id": "c",
-          "label": "`tabindex=\"-1\"` is missing on the button"
+          "label": "`tabindex=\"-1\"` is missing on the button, so it never receives focus from the keyboard"
         },
         {
           "id": "d",
-          "label": "`aria-expanded` is not toggled as the list opens and closes"
+          "label": "`aria-expanded` is not toggled as the list opens"
         }
       ],
       "answerKey": {
@@ -1286,19 +1286,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The global outline removal strips focus indication and hover styles are not applied on focus"
+          "label": "The global outline reset removes the focus indicator and no focus style replaces it"
         },
         {
           "id": "b",
-          "label": "The hover rule is overriding the tab order"
+          "label": "The hover rule overrides the browser's tab order, so focus skips the menu items visually"
         },
         {
           "id": "c",
-          "label": "Links cannot receive focus unless they have tabindex"
+          "label": "Links only receive keyboard focus when they have an explicit tabindex attribute set"
         },
         {
           "id": "d",
-          "label": "Background colours are ignored by keyboard users"
+          "label": "Background colours set in hover rules are ignored by browsers when a keyboard is used"
         }
       ],
       "answerKey": {
@@ -1321,19 +1321,19 @@
       "options": [
         {
           "id": "a",
-          "label": "CSS classes named h2 are blocked by screen readers"
+          "label": "Screen readers treat a class named h2 as decoration and skip it when listing headings"
         },
         {
           "id": "b",
-          "label": "The text is too short to be a heading"
+          "label": "The heading text is too short for assistive tech to list it unless it has an aria-label"
         },
         {
           "id": "c",
-          "label": "A div with a class has no heading role, so assistive tech does not expose it as a heading"
+          "label": "A div has no heading role, so assistive tech does not expose it as a heading"
         },
         {
           "id": "d",
-          "label": "The class must also have `lang` set"
+          "label": "The styled div needs a lang attribute before screen readers can list it as a heading"
         }
       ],
       "answerKey": {
@@ -1356,19 +1356,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Screen readers read the last attribute in source order"
+          "label": "Screen readers use whichever naming attribute appears last in the source order"
         },
         {
           "id": "b",
-          "label": "aria-label takes precedence over the native label in the accessible name computation"
+          "label": "aria-label outranks the native label in accessible name computation"
         },
         {
           "id": "c",
-          "label": "aria-label is only read when the label is empty"
+          "label": "aria-label is used only when the associated native label has no text content"
         },
         {
           "id": "d",
-          "label": "The label's for attribute is ignored when an id is present"
+          "label": "The for attribute is ignored whenever the input already has its own id attribute"
         }
       ],
       "answerKey": {
@@ -1391,19 +1391,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The information relies on colour alone, which violates the use-of-colour criterion despite sufficient contrast"
+          "label": "Meaning is conveyed by colour alone, which fails the use-of-colour criterion even though contrast passes"
         },
         {
           "id": "b",
-          "label": "Contrast checks cover all use-of-colour issues, so the report must be wrong"
+          "label": "Passing contrast checks shows the colour requirements are met, so the cause must be the users' display settings"
         },
         {
           "id": "c",
-          "label": "Red text fails because its ratio must be 7:1"
+          "label": "The red text fails contrast because enhanced contrast of 7:1 is required for any text that marks a required field"
         },
         {
           "id": "d",
-          "label": "Required state should be shown only by `aria-hidden` text"
+          "label": "The labels need a darker shade of red, since a larger contrast ratio would make them distinguishable to these users"
         }
       ],
       "answerKey": {
@@ -1466,15 +1466,15 @@
         },
         {
           "id": "b",
-          "label": "The `.active` class should be renamed to `.selected`"
+          "label": "The `.active` class name is not exposed to screen readers, so renaming it to `.selected` will make the state announced"
         },
         {
           "id": "c",
-          "label": "The links must be converted to images"
+          "label": "The links are focusable only by Tab, so adding `tabindex=\"0\"` to every list item will supply the missing arrow key support"
         },
         {
           "id": "d",
-          "label": "The page needs a higher contrast ratio"
+          "label": "The list markup is invalid for navigation, so replacing the `ul` with a `div` and `span` set will expose the selected tab"
         }
       ],
       "answerKey": {
@@ -1783,19 +1783,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Set `display:none` on the text so it is removed from layout"
+          "label": "Set `display:none` on the text so it is removed from the page layout and no longer takes up visual space"
         },
         {
           "id": "b",
-          "label": "Set `visibility:hidden` on the text so it keeps its layout space"
+          "label": "Set `visibility:hidden` on the text so it keeps its layout space but is not shown to sighted users"
         },
         {
           "id": "c",
-          "label": "A visually-hidden class using clipping and absolute positioning, keeping it in the accessibility tree"
+          "label": "A visually-hidden class using clipping and absolute positioning"
         },
         {
           "id": "d",
-          "label": "Set `font-size:0` and `color:transparent` on the text so nothing visible remains"
+          "label": "Set `font-size:0` and `color:transparent` on the text so that nothing visible remains on screen"
         }
       ],
       "answerKey": {
@@ -1853,19 +1853,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Reject it as a substitute for fixing source markup, since it cannot reliably repair structure and labels"
+          "label": "Reject it as a substitute for fixing source markup, since it cannot reliably repair structure"
         },
         {
           "id": "b",
-          "label": "Reject it because overlay scripts disable keyboard navigation and so fail every criterion"
+          "label": "Reject it because overlays often interfere with screen reader and keyboard use, so they should never be loaded"
         },
         {
           "id": "c",
-          "label": "Accept it, since automated fixes cover all WCAG success criteria once the script is loaded"
+          "label": "Accept it, since automated fixes cover every WCAG success criterion once the script is loaded on the site"
         },
         {
           "id": "d",
-          "label": "Accept it for images only, since overlays can reliably write correct alt text for any image"
+          "label": "Accept it for images only, since overlays can reliably write correct alt text for most images on a page"
         }
       ],
       "answerKey": {
@@ -1896,7 +1896,7 @@
         },
         {
           "id": "c",
-          "label": "Drop the redundant role and label, since nav is already a navigation landmark and one nav needs no name"
+          "label": "Remove both attributes; native nav is already a landmark and a lone one needs no name"
         },
         {
           "id": "d",
@@ -2250,7 +2250,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A `ul` of anchor links with `aria-current=\"true\"` on the active one, with panels revealed through `:target` so the URL updates"
+          "label": "A `ul` of anchor links with `aria-current=\"true\"` on the active one, with panels revealed through `:target` so the URL updates and each link points to its panel"
         },
         {
           "id": "b",
@@ -2258,11 +2258,11 @@
         },
         {
           "id": "c",
-          "label": "Buttons all with `tabindex=\"0\"` and `aria-selected`, plus arrow-key handlers that duplicate what Tab already does"
+          "label": "Buttons all with `tabindex=\"0\"` and `aria-selected`, `aria-controls` pointing to each panel, plus arrow-key handlers that move focus to the next tab button"
         },
         {
           "id": "d",
-          "label": "`role=\"tab\"` buttons using `aria-pressed` toggled on selection, with each panel as `role=\"region\"` and an `aria-labelledby` link"
+          "label": "`role=\"tab\"` buttons using `aria-pressed` toggled on selection, with each panel as `role=\"region\"` and an `aria-labelledby` link back to its tab"
         }
       ],
       "answerKey": {
@@ -2332,7 +2332,7 @@
         },
         {
           "id": "d",
-          "label": "A `role=\"alert\"` message per field inserted on blur only, in red text, with no programmatic link between message and input"
+          "label": "A `role=\"alert\"` message per field, inserted on blur only, in red text with an error icon, and with no `aria-describedby` link between message and input"
         }
       ],
       "answerKey": {
@@ -2390,19 +2390,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`:focus { background: #eee }`, a tint change that avoids outline overlap on both dark and light surfaces"
+          "label": "`:focus { background: #eee }`, a tint change that avoids outline overlap with neighbouring elements on both dark and light surfaces"
         },
         {
           "id": "b",
-          "label": "`:focus { outline: none; box-shadow: 0 0 0 3px #000 }`, a thick ring that adapts automatically in forced-colors mode"
+          "label": "`:focus-visible { outline: none; box-shadow: 0 0 0 3px #000 }`, a thick ring that the browser recolours automatically in forced-colors mode"
         },
         {
           "id": "c",
-          "label": "`:focus-visible { outline: 1px dotted #999 }`, a subtle thin outline that stays faithful to the visual design"
+          "label": "`:focus-visible { outline: 1px dotted #999 }`, a subtle thin outline that stays faithful to the visual design and is drawn by the browser"
         },
         {
           "id": "d",
-          "label": "`:focus-visible { outline: 3px solid #000; outline-offset: 2px; box-shadow: 0 0 0 2px #fff }`, keeping an outline that forced colors preserve"
+          "label": "`:focus-visible { outline: 3px solid #000; outline-offset: 2px; box-shadow: 0 0 0 2px #fff }`, a real outline that forced colors keep"
         }
       ],
       "answerKey": {

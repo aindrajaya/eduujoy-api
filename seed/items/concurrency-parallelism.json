@@ -19,7 +19,7 @@
         },
         {
           "id": "c",
-          "label": "A bug where the result depends on the unpredictable timing of tasks using shared data"
+          "label": "A bug where the result depends on the timing of tasks sharing data"
         },
         {
           "id": "d",
@@ -151,7 +151,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Tasks literally executing at the same instant on multiple cores or processors"
+          "label": "Tasks executing at the same instant on multiple cores"
         },
         {
           "id": "b",
@@ -231,15 +231,15 @@
         },
         {
           "id": "b",
-          "label": "Stack frame"
+          "label": "Thread-local segment"
         },
         {
           "id": "c",
-          "label": "Boot sector"
+          "label": "Atomic scheduler slice"
         },
         {
           "id": "d",
-          "label": "Garbage region"
+          "label": "Deadlock region"
         }
       ],
       "answerKey": {
@@ -270,7 +270,7 @@
         },
         {
           "id": "c",
-          "label": "Threads always run one after another, so the second thread restarts the count at zero"
+          "label": "Threads always run one after another, so the second thread restarts the count at zero and discards the first thread's total"
         },
         {
           "id": "d",
@@ -297,19 +297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Processes avoid every possible race condition because they cannot ever communicate"
+          "label": "Processes cannot communicate with each other at all, so races between plug-ins are impossible"
         },
         {
           "id": "b",
-          "label": "Processes have isolated memory, so a crash or corruption in one does not directly damage others"
+          "label": "Processes have isolated memory, so a crash in one does not directly corrupt others"
         },
         {
           "id": "c",
-          "label": "Processes always run faster than threads because they share the same memory space"
+          "label": "Processes start faster than threads, so a plug-in is ready to run with less delay"
         },
         {
           "id": "d",
-          "label": "Processes use no operating system resources, so they are cheaper to create than threads"
+          "label": "Processes need fewer operating system resources, so many plug-ins can run cheaply"
         }
       ],
       "answerKey": {
@@ -332,7 +332,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The waiting periods overlap, so other downloads progress while one is stalled on the network"
+          "label": "Waiting overlaps, so other downloads progress while one is stalled"
         },
         {
           "id": "b",
@@ -367,19 +367,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It stops the scheduler from ever switching between threads while a lock is held"
+          "label": "It stops the scheduler from switching threads while any lock is held, so no thread is paused mid-wait"
         },
         {
           "id": "b",
-          "label": "It removes the possibility of a circular wait, so no cycle of waiting threads can form"
+          "label": "It removes circular wait, so no cycle of waiting threads can form"
         },
         {
           "id": "c",
-          "label": "It lets both locks be held by two threads together without any conflict"
+          "label": "It lets two threads hold the same lock at once, so neither has to wait for the other"
         },
         {
           "id": "d",
-          "label": "It makes each lock release itself automatically after a short time limit"
+          "label": "It makes each lock release itself after a short time limit, so waiting threads never block forever"
         }
       ],
       "answerKey": {
@@ -402,19 +402,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is concurrent, because the threads interleave, but not parallel, since only one runs at a time"
+          "label": "It is concurrent, since the threads interleave, but not parallel, since only one runs at a time"
         },
         {
           "id": "b",
-          "label": "It is parallel, because four threads always run at the same instant on any machine"
+          "label": "It is parallel, because the operating system gives each thread its own time slice on the core and they all make progress"
         },
         {
           "id": "c",
-          "label": "It is parallel, because the threads share memory and so execute together in lockstep"
+          "label": "It is parallel, because the threads share memory and so execute together in lockstep on the core"
         },
         {
           "id": "d",
-          "label": "It is neither concurrent nor parallel, because one core can run only one thread ever"
+          "label": "It is neither concurrent nor parallel, because a single core can only ever run one thread"
         }
       ],
       "answerKey": {
@@ -478,7 +478,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The operating system ran out of memory and paused the whole program"
+          "label": "The operating system ran out of memory and paused the whole program until some memory is freed"
         },
         {
           "id": "b",
@@ -486,11 +486,11 @@
         },
         {
           "id": "c",
-          "label": "A race condition is corrupting data and making the program crash silently"
+          "label": "A race condition: both threads write shared data at once, corrupt it, and the program stalls"
         },
         {
           "id": "d",
-          "label": "An infinite loop is using up all of the available processor time"
+          "label": "An infinite loop: one thread spins forever and uses up all of the available processor time"
         }
       ],
       "answerKey": {
@@ -587,15 +587,15 @@
         },
         {
           "id": "b",
-          "label": "They cannot execute at the same time on different CPU cores"
+          "label": "They are limited to one CPU core at a time, so they take turns running"
         },
         {
           "id": "c",
-          "label": "They each own a private heap and must exchange data by copying it"
+          "label": "They each get a private heap, so data moves between them by copying"
         },
         {
           "id": "d",
-          "label": "They run in separate address spaces so one cannot corrupt another"
+          "label": "They run in separate address spaces, so one thread can't corrupt another"
         }
       ],
       "answerKey": {
@@ -618,11 +618,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A thread runs slowly because many other threads share the CPU"
+          "label": "A thread runs very slowly because dozens of other threads share the same CPU core"
         },
         {
           "id": "b",
-          "label": "Two threads update a counter and the final total is wrong"
+          "label": "Two threads update a shared counter without a lock and the final total is wrong"
         },
         {
           "id": "c",
@@ -630,7 +630,7 @@
         },
         {
           "id": "d",
-          "label": "A thread sleeps for one second before it continues its work"
+          "label": "A thread calls sleep for one second and then continues its work as normal"
         }
       ],
       "answerKey": {
@@ -657,7 +657,7 @@
         },
         {
           "id": "b",
-          "label": "Only one thread holds it at a time, so guarded code runs one thread at a time"
+          "label": "Only one thread holds it at a time"
         },
         {
           "id": "c",
@@ -834,11 +834,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Only around the comparison, because it decides whether to proceed"
+          "label": "Around the comparison alone, because the check decides whether to proceed"
         },
         {
           "id": "b",
-          "label": "Only around a print of the balance, since printing is slow"
+          "label": "Around each read of balance, since stale reads are what cause overdrafts"
         },
         {
           "id": "c",
@@ -846,7 +846,7 @@
         },
         {
           "id": "d",
-          "label": "Only around the subtraction, because that is the only write"
+          "label": "Around the subtraction alone, because that is the line that writes balance"
         }
       ],
       "answerKey": {
@@ -1256,11 +1256,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The decrement is not atomic, so two decrements can merge into one"
+          "label": "The decrement is not atomic, so two simultaneous withdrawals can merge into one lost update on the balance"
         },
         {
           "id": "b",
-          "label": "The comparison `>=` should be `>` so boundary values are rejected"
+          "label": "The comparison `>=` should be `>` so that withdrawals equal to the balance are rejected before it reaches zero"
         },
         {
           "id": "c",
@@ -1268,7 +1268,7 @@
         },
         {
           "id": "d",
-          "label": "The synchronized getter returns a stale copy because Java caches values per thread"
+          "label": "The synchronized getter returns a stale copy because each thread caches its own value of the balance field"
         }
       ],
       "answerKey": {
@@ -1326,19 +1326,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The operating system caps each process at four threads, so the other sixty wait idle"
+          "label": "The OS limits each process to about one runnable thread per core, so the extra threads sit blocked and add scheduler bookkeeping overhead"
         },
         {
           "id": "b",
-          "label": "More runnable threads than cores add context switching and contention on the shared lock without adding compute"
+          "label": "Extra runnable threads add context switching and lock contention but no compute"
         },
         {
           "id": "c",
-          "label": "Extra threads make each critical section run longer because the lock slows down as waiters grow"
+          "label": "Extra threads make each critical section run longer because the lock itself slows down as more waiters queue up on it"
         },
         {
           "id": "d",
-          "label": "Threads beyond the core count cannot be scheduled until the first four terminate"
+          "label": "Threads beyond the core count cannot be scheduled until the first four finish, so the extra threads only consume memory and stall"
         }
       ],
       "answerKey": {
@@ -1467,19 +1467,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A data race on the task queue that corrupts the list of pending subtasks"
+          "label": "A data race on the shared task queue, where two workers dequeue at once and corrupt the list of pending subtasks"
         },
         {
           "id": "b",
-          "label": "A lock-ordering cycle between two mutexes held by different request handlers"
+          "label": "A lock-ordering cycle, where two request handlers each hold one mutex and wait for the one the other holds"
         },
         {
           "id": "c",
-          "label": "Livelock, where workers keep retrying and cancelling each other's subtasks"
+          "label": "Livelock, where workers keep retrying and cancelling each other's subtasks so none ever makes progress"
         },
         {
           "id": "d",
-          "label": "Thread-pool starvation deadlock: every worker waits on subtasks that are queued behind them with no free thread"
+          "label": "Pool starvation deadlock: every worker waits on a subtask queued behind them, and no thread is free to run it"
         }
       ],
       "answerKey": {
@@ -1615,7 +1615,7 @@
         },
         {
           "id": "c",
-          "label": "False sharing: slots in the same cache line are written by different cores, so the line keeps bouncing between caches"
+          "label": "False sharing: the slots share a cache line, so each write invalidates the other cores' cached copy"
         },
         {
           "id": "d",
@@ -1749,11 +1749,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A reader-writer lock, so many readers hold the shared lock together while a writer waits for exclusive access"
+          "label": "A reader-writer lock, so many readers hold the shared lock together while a writer waits for exclusive access to apply its update"
         },
         {
           "id": "b",
-          "label": "A single mutex around every read and write, since the critical section is short and uncontended in practice"
+          "label": "A single mutex around every read and write, since the critical section is short and contention would be rare in practice"
         },
         {
           "id": "c",
@@ -1761,7 +1761,7 @@
         },
         {
           "id": "d",
-          "label": "An immutable config object swapped through an atomic reference, so readers load one consistent snapshot without locking"
+          "label": "An immutable config swapped through an atomic reference, so readers load one snapshot with no lock"
         }
       ],
       "answerKey": {
@@ -1960,19 +1960,19 @@
       "options": [
         {
           "id": "a",
-          "label": "One event loop with no worker pool, because 1 ms of CPU per message can never affect tail latency during bursts"
+          "label": "One event loop with no worker pool, because 1 ms of CPU per message is small enough that bursts will not delay other connections"
         },
         {
           "id": "b",
-          "label": "Thread-per-connection with a global lock around message handling, so bursts are processed in strict arrival order"
+          "label": "Thread-per-connection with a global lock around message handling, so bursts are processed in strict arrival order and stay predictable"
         },
         {
           "id": "c",
-          "label": "An event loop for connection I/O, with CPU work on a small pool, so idle connections cost little memory and bursts stay bounded"
+          "label": "An event loop for I/O with CPU work on a small pool, so idle connections cost little memory and bursts stay bounded"
         },
         {
           "id": "d",
-          "label": "Thread-per-connection, because blocking code is simplest and 20,000 stacks fit easily in the memory limit"
+          "label": "Thread-per-connection, because blocking code is simplest and 20,000 thread stacks fit within the memory limit on a typical node"
         }
       ],
       "answerKey": {
@@ -1995,19 +1995,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep the spinlock: disk reads release the lock automatically, so waiters never spin for long in practice"
+          "label": "Keep the spinlock: a thread that blocks on disk I/O releases the lock automatically, so waiters never spin for long"
         },
         {
           "id": "b",
-          "label": "Keep the spinlock: spinning avoids context switches, so it is faster whenever the typical critical section is short"
+          "label": "Keep the spinlock: spinning avoids context-switch cost, so it wins whenever the typical critical section is this short"
         },
         {
           "id": "c",
-          "label": "Keep the mutex: spinlocks cannot guarantee mutual exclusion on multi-core machines, so the code would be unsafe"
+          "label": "Keep the mutex: a spinlock cannot give mutual exclusion across cores unless each waiter is pinned to its own core"
         },
         {
           "id": "d",
-          "label": "Keep the mutex: a spinning waiter burns a core while the holder is blocked or descheduled, which wastes CPU under oversubscription"
+          "label": "Keep the mutex: spinners burn CPU while the holder is blocked or descheduled"
         }
       ],
       "answerKey": {
@@ -2034,15 +2034,15 @@
         },
         {
           "id": "b",
-          "label": "Broken: the lock is not reentrant, so a second thread entering the block would deadlock against the first"
+          "label": "Broken: the first unsynchronized check can throw a NullPointerException when another thread is inside the lock assigning the field"
         },
         {
           "id": "c",
-          "label": "Safe: assignment of a reference is atomic, so no thread can observe the object in an inconsistent state"
+          "label": "Safe: assignment of a reference is atomic, so no thread can ever observe the object in a partly constructed or inconsistent state"
         },
         {
           "id": "d",
-          "label": "Safe: the second null check inside the lock guarantees only one thread ever runs the constructor, which is enough"
+          "label": "Safe: the second null check inside the lock guarantees only one thread ever runs the constructor, so every thread sees a fully built object"
         }
       ],
       "answerKey": {
@@ -2241,19 +2241,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Unbounded queue with a semaphore counting items, and a stop flag that makes consumers exit immediately"
+          "label": "Unbounded queue with a semaphore counting items, and a stop flag that makes consumers exit immediately when set"
         },
         {
           "id": "b",
-          "label": "Bounded queue where producers and consumers poll with short sleeps, and a stop flag ends consumers at once"
+          "label": "Bounded queue where producers and consumers poll with short sleeps, and a stop flag ends consumers at once when set"
         },
         {
           "id": "c",
-          "label": "Bounded queue that drops the oldest item when full, and consumers exit once the closed flag is set"
+          "label": "Bounded queue that drops the oldest item when full, and consumers exit once the closed flag is set by a producer"
         },
         {
           "id": "d",
-          "label": "Bounded blocking queue using condition variables, plus a closed flag that consumers check only after the queue is empty"
+          "label": "Bounded blocking queue with condition variables; consumers exit only when closed and the queue is empty"
         }
       ],
       "answerKey": {
@@ -2276,19 +2276,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Add a version column and update only `WHERE version = :read_version`, retrying the read-modify-write on zero rows updated"
+          "label": "Add a version column; update only WHERE version matches the one read, and retry if no row changed"
         },
         {
           "id": "b",
-          "label": "Wrap the read and write in an in-process mutex held by each instance"
+          "label": "Wrap the read and write in a mutex inside each instance, so only one thread per host can run the update at a time"
         },
         {
           "id": "c",
-          "label": "Read the row again just before writing and skip the write if the value changed"
+          "label": "Re-read the row just before writing and skip the write if the value has changed since the first read, then retry later"
         },
         {
           "id": "d",
-          "label": "Mark the update method `synchronized` so concurrent calls are serialised"
+          "label": "Mark the update method synchronized so that concurrent calls to it are serialised, with the lock held until the commit"
         }
       ],
       "answerKey": {
@@ -2315,15 +2315,15 @@
         },
         {
           "id": "b",
-          "label": "Give each core one equal slice and add partial sums as the threads finish"
+          "label": "Give each core one equal slice of the array, sum each slice, and add the partial sums in thread-id order"
         },
         {
           "id": "c",
-          "label": "Have all threads add into one shared atomic double as they go"
+          "label": "Have all threads add into one shared atomic double as they go, so no partial result is ever lost"
         },
         {
           "id": "d",
-          "label": "Let threads claim chunks dynamically and combine results in completion order"
+          "label": "Let threads claim fixed-size chunks dynamically and add each chunk's sum in the order they finish"
         }
       ],
       "answerKey": {
@@ -2346,19 +2346,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A way to wake workers blocked in `take()`, such as interrupting them or enqueueing sentinel jobs"
+          "label": "A way to wake workers blocked in `take()`, such as interrupts or sentinel jobs"
         },
         {
           "id": "b",
-          "label": "A second flag set by each worker to show that the first flag was seen"
+          "label": "A second flag set by each worker to confirm it has seen the first flag's new value"
         },
         {
           "id": "c",
-          "label": "A larger queue capacity so that `take()` cannot block when shutdown begins"
+          "label": "A larger queue capacity so that `take()` cannot block on a full queue when shutdown begins"
         },
         {
           "id": "d",
-          "label": "A lock around `stop`, since a volatile flag cannot be read safely from several threads"
+          "label": "A lock around every read and write of `stop`, since a volatile flag cannot be read safely from several threads"
         }
       ],
       "answerKey": {
@@ -2381,19 +2381,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Declare `head` volatile so every thread sees the latest pointer value"
+          "label": "Declare `head` volatile so every thread always sees the latest pointer value after a pop"
         },
         {
           "id": "b",
-          "label": "Check that `node.next` is non-null before attempting the CAS"
+          "label": "Check that `node.next` is non-null and still points to a live node before the CAS"
         },
         {
           "id": "c",
-          "label": "Retry the CAS in a loop until it succeeds on the current head"
+          "label": "Retry the CAS in a loop with exponential backoff until it succeeds on the current head"
         },
         {
           "id": "d",
-          "label": "Pair the head pointer with a version counter that increments on every successful CAS"
+          "label": "Pair `head` with a version counter that increments on every successful CAS"
         }
       ],
       "answerKey": {
@@ -2453,11 +2453,11 @@
       "options": [
         {
           "id": "a",
-          "label": "16 threads updating one shared result dict, each guarded by a lock to avoid lost updates"
+          "label": "16 threads each parsing a slice of records and updating one shared result dict, guarded by a lock to avoid lost updates"
         },
         {
           "id": "b",
-          "label": "A pool of 16 threads parsing records, since threads share memory and avoid copying data"
+          "label": "A pool of 16 threads parsing records in parallel, since threads share memory and avoid the cost of copying data between workers"
         },
         {
           "id": "c",
@@ -2465,7 +2465,7 @@
         },
         {
           "id": "d",
-          "label": "A single asyncio loop with one task per record, which overlaps the parsing work"
+          "label": "A single asyncio loop with one task per record, so parsing of many records overlaps on the event loop and uses every core"
         }
       ],
       "answerKey": {

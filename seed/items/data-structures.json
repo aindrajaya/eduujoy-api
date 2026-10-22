@@ -262,11 +262,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The array is scanned from the start"
+          "label": "The array is scanned from the start until position 5 is reached"
         },
         {
           "id": "b",
-          "label": "The index is looked up in a hash table"
+          "label": "The index is looked up in a hash table that maps it to a slot"
         },
         {
           "id": "c",
@@ -274,7 +274,7 @@
         },
         {
           "id": "d",
-          "label": "The elements are kept sorted"
+          "label": "The elements are kept sorted, so position 5 is found by halving"
         }
       ],
       "answerKey": {
@@ -297,19 +297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "No other elements need shifting, only a pointer changes"
+          "label": "No elements need shifting; only the head pointer changes"
         },
         {
           "id": "b",
-          "label": "The list stores elements contiguously in memory"
+          "label": "The list keeps its elements contiguously, so no lookup is needed"
         },
         {
           "id": "c",
-          "label": "The array must be copied to disk first"
+          "label": "The array must be copied to a new block of memory every time"
         },
         {
           "id": "d",
-          "label": "The list sorts its elements automatically"
+          "label": "The list keeps elements sorted, so the front slot is always free"
         }
       ],
       "answerKey": {
@@ -406,15 +406,15 @@
         },
         {
           "id": "b",
-          "label": "The table runs out of memory"
+          "label": "The table fills up and must be resized to fit more"
         },
         {
           "id": "c",
-          "label": "A key has no value assigned"
+          "label": "A lookup key is searched for but has no stored value"
         },
         {
           "id": "d",
-          "label": "A key is stored twice in one bucket"
+          "label": "The same key is inserted twice and overwrites its value"
         }
       ],
       "answerKey": {
@@ -478,15 +478,15 @@
         },
         {
           "id": "b",
-          "label": "Array, since lookup uses direct index access by name"
+          "label": "Array, since lookup goes straight to the name by direct index access"
         },
         {
           "id": "c",
-          "label": "Array, since it checks every name only once in constant time"
+          "label": "Array, since each name is stored once so a check is one quick step"
         },
         {
           "id": "d",
-          "label": "Hash table, since it keeps names in alphabetical order"
+          "label": "Hash table, since it keeps all the names in sorted alphabetical order"
         }
       ],
       "answerKey": {
@@ -1608,19 +1608,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Integer division truncates, so parent indexes are always too small and sift-up never executes at all"
+          "label": "Integer division truncates the result, so every parent index comes out too small and sift-up stops after one comparison at most"
         },
         {
           "id": "b",
-          "label": "Sift-up must start from the root and proceed downward, so the direction of the loop breaks the property"
+          "label": "Sift-up must start at the root and proceed downward, so the direction of the loop is what breaks the heap property over time"
         },
         {
           "id": "c",
-          "label": "For 0-based indexing the parent is `(i - 1) / 2`, so sift-up compares nodes with wrong parents and misplaces elements"
+          "label": "With 0-based indexing the parent is `(i - 1) / 2`, so sift-up compares nodes with wrong parents"
         },
         {
           "id": "d",
-          "label": "A min-heap needs children at `2i` and `2i + 1`, so the child formula is what is wrong and not the parent"
+          "label": "A min-heap needs its children stored at `2i` and `2i + 1`, so the child formula is what is wrong and not the parent formula"
         }
       ],
       "answerKey": {
@@ -1682,28 +1682,23 @@
         },
         {
           "id": "b",
-          "label": "Many users sign up in the same second, so identical keys or near-identical hash inputs fall into the same bucket"
+          "label": "Many users sign up in the same second, so their near-identical keys hash to the same bucket under a weak hash function"
         },
         {
           "id": "c",
-          "label": "The hash function uses only the last few characters, so keys differing in earlier characters collide"
+          "label": "The table uses open addressing with a load factor kept below 0.5, so probe sequences grow long and lookups slow in bursts"
         },
         {
           "id": "d",
-          "label": "Hash tables lose speed when keys are strings, so every lookup compares full string lengths in O(n)"
+          "label": "Each lookup compares the full key string, which costs O(n) in the number of records, so lookups slow as the table fills"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "Clustered keys, weak hash functions and rehash pauses all cause bursty slowdowns.",
-        "String comparison cost depends on key length, not on table size, so it does not explain bursts."
-      ],
       "reviewed": false
     },
     {
@@ -2005,11 +2000,11 @@
         },
         {
           "id": "c",
-          "label": "Flawed: an emptied slot ends probe chains early, so keys stored past it become unreachable; use tombstones or backward-shift deletion"
+          "label": "Flawed: an emptied slot ends probe chains early, hiding keys stored past it; use tombstones or backward shift"
         },
         {
           "id": "d",
-          "label": "Flawed: emptied slots corrupt the load factor count, so the whole table must be rehashed after every single delete"
+          "label": "Flawed: emptied slots leave the stored load factor count stale, so the table must be fully rehashed after each delete"
         }
       ],
       "answerKey": {
@@ -2102,19 +2097,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The claim is wrong: doubling wastes up to half the memory, which makes its appends amortized O(log n) overall"
+          "label": "The claim is wrong: doubling can leave up to half the array unused, and the cost of zeroing that spare space makes its appends amortized O(log n)"
         },
         {
           "id": "b",
-          "label": "The claim is wrong: fixed growth gives about n^2/1000 copying in total, so appends are amortized O(n); geometric growth restores O(1)"
+          "label": "The claim is wrong: fixed growth copies about n^2/1000 elements in total, so appends are amortized O(n); doubling keeps them O(1)"
         },
         {
           "id": "c",
-          "label": "The claim holds: in both schemes resizes happen less often than ordinary appends, so the cost per append is constant"
+          "label": "The claim holds: in both schemes a resize happens far less often than an ordinary append, so the cost per append averages out to a constant"
         },
         {
           "id": "d",
-          "label": "The claim holds: each resize copies only a bounded chunk, so appends stay amortized O(1) in either scheme"
+          "label": "The claim holds: each resize copies only a bounded chunk of 1000 elements at a time, so appends stay amortized O(1) in either scheme"
         }
       ],
       "answerKey": {
@@ -2279,19 +2274,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Max-heap of window values; remove the outgoing element by scanning the heap at each step"
+          "label": "Max-heap of (value, index) pairs; on each step, scan the heap to delete the outgoing element, then read the root as the window maximum"
         },
         {
           "id": "b",
-          "label": "Array of window values, with a cached max that is recomputed only when the outgoing element equals it"
+          "label": "Array of the current window's values with a cached max; recompute the max by rescanning the window whenever the outgoing element equals the cached max"
         },
         {
           "id": "c",
-          "label": "Deque of indices kept in decreasing value order; pop smaller values from the back on arrival, pop the front when it leaves the window"
+          "label": "Deque of indices in decreasing value order; pop smaller values from the back on arrival, pop the front when it leaves the window"
         },
         {
           "id": "d",
-          "label": "Balanced BST of window values; read the maximum in O(log n) after each insertion and deletion"
+          "label": "Balanced BST of window values; insert each arrival and delete each departure, then read the maximum from the rightmost node of the tree"
         }
       ],
       "answerKey": {
@@ -2392,11 +2387,11 @@
         },
         {
           "id": "c",
-          "label": "Balanced BST where each node stores its subtree size, maintained on rotations; rank and select walk down comparing sizes"
+          "label": "Balanced BST with subtree sizes kept up to date on rotations; rank and select descend comparing sizes"
         },
         {
           "id": "d",
-          "label": "Balanced BST keyed by value alone; select does an in-order traversal counting nodes until reaching position k"
+          "label": "Balanced BST keyed by value alone, with parent pointers; select walks in-order from the minimum, stepping k times via successor links"
         }
       ],
       "answerKey": {

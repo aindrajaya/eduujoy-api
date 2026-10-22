@@ -194,24 +194,19 @@
         },
         {
           "id": "c",
-          "label": "Hybrid cloud"
+          "label": "Infrastructure as a Service (IaaS)"
         },
         {
           "id": "d",
-          "label": "Offline cloud"
+          "label": "Software as a Service (SaaS)"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "Public, private and hybrid are standard deployment models.",
-        "Offline cloud is not a recognized model."
-      ],
       "reviewed": false
     },
     {
@@ -258,15 +253,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Many customers' VMs share one physical server, raising hardware use"
+          "label": "Many customers' VMs share one server, raising hardware use"
         },
         {
           "id": "b",
-          "label": "Each customer gets a dedicated server, which avoids waste"
+          "label": "Each customer's workload gets its own dedicated physical server, which avoids resource contention between tenants"
         },
         {
           "id": "c",
-          "label": "It makes networks faster by skipping the operating system"
+          "label": "It makes networks faster by letting VMs skip the host operating system and talk to hardware directly"
         },
         {
           "id": "d",
@@ -332,7 +327,7 @@
         },
         {
           "id": "b",
-          "label": "PaaS manages the OS and runtime so developers deploy only code"
+          "label": "PaaS manages the OS and runtime; developers deploy code"
         },
         {
           "id": "c",
@@ -398,15 +393,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Running all workloads on a single provider's VMs"
+          "label": "Running all workloads on virtual machines rented from a single public cloud provider"
         },
         {
           "id": "b",
-          "label": "Using two different public SaaS email products"
+          "label": "Using two different public SaaS products, such as separate email and chat services"
         },
         {
           "id": "c",
-          "label": "Hosting servers in a company's own closet only"
+          "label": "Hosting all servers in a company's own data center with no outside cloud services"
         },
         {
           "id": "d",
@@ -1011,7 +1006,7 @@
         },
         {
           "id": "b",
-          "label": "A larger single VM resized by hand each morning and each evening"
+          "label": "A larger single VM that an engineer resizes by hand each morning and each evening before and after the traffic peak"
         },
         {
           "id": "c",
@@ -1019,7 +1014,7 @@
         },
         {
           "id": "d",
-          "label": "A second region holding an idle copy of the whole fleet for failover"
+          "label": "A second region holding an idle copy of the whole fleet, ready to take over if the first region fails"
         }
       ],
       "answerKey": {
@@ -1081,15 +1076,15 @@
         },
         {
           "id": "b",
-          "label": "Replacing failed disks in the host servers"
+          "label": "Replacing failed disks and storage arrays in the host servers"
         },
         {
           "id": "c",
-          "label": "Maintaining the hypervisor software on the hosts"
+          "label": "Patching and maintaining the hypervisor software on the hosts"
         },
         {
           "id": "d",
-          "label": "Controlling physical access to the data center"
+          "label": "Controlling physical access to the data center buildings"
         }
       ],
       "answerKey": {
@@ -1253,19 +1248,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The VMs are too small to use their CPU"
+          "label": "The VMs are too small, so they cannot use their available CPU"
         },
         {
           "id": "b",
-          "label": "The bottleneck is the database, so adding web instances does not help"
+          "label": "A shared downstream limit is the bottleneck, so more web instances won't help"
         },
         {
           "id": "c",
-          "label": "The load balancer is using the wrong protocol"
+          "label": "The load balancer is using the wrong protocol, so requests queue before reaching the web tier"
         },
         {
           "id": "d",
-          "label": "The autoscaling policy is scaling in too fast"
+          "label": "The autoscaling policy is scaling in too fast, so too few instances remain to serve the sale traffic"
         }
       ],
       "answerKey": {
@@ -1288,11 +1283,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Elasticity failed, so instances ran longer than needed"
+          "label": "Elasticity failed to scale in, so review autoscaling policies and idle instance time"
         },
         {
           "id": "b",
-          "label": "Compute pricing changed, so rightsizing instances will fix it"
+          "label": "Compute rates rose, so rightsizing instances or buying reserved capacity will fix it"
         },
         {
           "id": "c",
@@ -1300,7 +1295,7 @@
         },
         {
           "id": "d",
-          "label": "Storage capacity fell, so costs shifted to the network"
+          "label": "Storage tiers changed, so move older objects to a cheaper class to cut the bill"
         }
       ],
       "answerKey": {
@@ -1358,19 +1353,19 @@
       "options": [
         {
           "id": "a",
-          "label": "PaaS cannot run on shared hardware"
+          "label": "PaaS runs on shared hardware, so tenants cannot isolate workloads"
         },
         {
           "id": "b",
-          "label": "PaaS usually restricts OS-level access, so the module cannot be loaded"
+          "label": "PaaS restricts OS-level access, so the module can't be loaded"
         },
         {
           "id": "c",
-          "label": "PaaS charges for every request"
+          "label": "PaaS bills per request, so a kernel module would cost too much"
         },
         {
           "id": "d",
-          "label": "PaaS has no ability to scale instances"
+          "label": "PaaS cannot scale instances, so the module would not keep up"
         }
       ],
       "answerKey": {
@@ -1393,19 +1388,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Each VM has its own dedicated physical disk, so it cannot happen"
+          "label": "Each virtual disk is backed by a dedicated physical disk, so contention cannot occur"
         },
         {
           "id": "b",
-          "label": "Virtual networks block disk access between tenants"
+          "label": "The hypervisor lets the busy VM borrow other VMs' virtual disks when idle"
         },
         {
           "id": "c",
-          "label": "The hypervisor copies each VM's memory to every other VM"
+          "label": "Virtual network isolation also throttles disk access between tenants on one host"
         },
         {
           "id": "d",
-          "label": "Virtual disks map onto shared physical storage whose throughput is divided among tenants"
+          "label": "Virtual disks map onto shared physical storage whose I/O is split among tenants"
         }
       ],
       "answerKey": {
@@ -1464,19 +1459,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Disable the VPN, since encryption alone is the only possible delay"
+          "label": "Disable the VPN for a day, since encryption overhead is the most likely source of the delay"
         },
         {
           "id": "b",
-          "label": "Move the website to a larger VM, since the cloud tier must be underpowered"
+          "label": "Move the website to a larger VM, since the cloud web tier is probably underpowered under load"
         },
         {
           "id": "c",
-          "label": "Measure latency and bandwidth across the VPN link, since each page waits on cross-boundary calls"
+          "label": "Measure latency and bandwidth on the VPN link, since each page waits on cross-boundary calls"
         },
         {
           "id": "d",
-          "label": "Replace the public cloud with SaaS, since hybrid designs are always slow"
+          "label": "Replace the public cloud with SaaS, since hybrid designs add delay that cannot be tuned out"
         }
       ],
       "answerKey": {
@@ -1785,19 +1780,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Commit to reserved capacity for the 20 baseline instances and autoscale on-demand instances for the spikes"
+          "label": "Reserve capacity for the 20 baseline instances and autoscale on-demand instances for the spikes"
         },
         {
           "id": "b",
-          "label": "Use on-demand for everything, because unpredictable demand rules out any kind of long-term commitment"
+          "label": "Use on-demand for all instances, since unpredictable spikes make a commitment on the steady baseline too risky to be worthwhile"
         },
         {
           "id": "c",
-          "label": "Reserve 60 instances for a year so spike capacity is always available at a discounted hourly rate"
+          "label": "Reserve 60 instances for a year so spike capacity is guaranteed and every instance gets a discounted hourly rate"
         },
         {
           "id": "d",
-          "label": "Run all 60 instances on spot capacity, because it is cheapest and spikes are usually short in duration"
+          "label": "Run all 60 instances on spot capacity, since it has the lowest hourly price and most spikes are short enough to ride out"
         }
       ],
       "answerKey": {
@@ -2001,19 +1996,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Serverless functions, because per-invocation billing is cheapest for constant high utilization over years"
+          "label": "Serverless functions, because per-invocation billing avoids paying for idle time and stays cheapest when utilization is constant and high for years"
         },
         {
           "id": "b",
-          "label": "Spot instances for all nodes, because the deepest discount outweighs interruption risk for any 24/7 service"
+          "label": "Spot instances for the nodes, because the deepest discount outweighs interruption risk when the service is built to tolerate restarts"
         },
         {
           "id": "c",
-          "label": "Committed-use or reserved capacity, because predictable steady load earns a discount that on-demand rates cannot match"
+          "label": "Committed-use or reserved capacity, because a steady known load earns a discount that on-demand rates cannot match"
         },
         {
           "id": "d",
-          "label": "On-demand instances, because paying per second always yields the lowest cost whatever the usage pattern is"
+          "label": "On-demand instances, because per-second billing with no commitment keeps cost lowest and preserves flexibility if needs change later"
         }
       ],
       "answerKey": {
@@ -2106,19 +2101,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Fully correct: managed services transfer all security duties, including identity policies and data exposure, to the provider"
+          "label": "Fully correct: the provider takes over identity policies, network exposure rules and data protection once the database is managed"
         },
         {
           "id": "b",
-          "label": "Fully correct for encryption only, while the customer alone handles physical datacenter security and hypervisor patching"
+          "label": "Mostly correct: the provider secures the engine and hosts, and the customer only needs to supply encryption keys when asked"
         },
         {
           "id": "c",
-          "label": "Wrong: managed services shift nothing, so the customer must patch the database engine and underlying hosts themselves"
+          "label": "Wrong: managed services shift little, so the customer must still patch the database engine and the underlying hosts"
         },
         {
           "id": "d",
-          "label": "Partly wrong: the provider secures the infrastructure and engine, but the customer still owns access control, configuration and data classification"
+          "label": "Partly wrong: the provider secures the infrastructure and engine, but the customer owns access control, configuration and data"
         }
       ],
       "answerKey": {
@@ -2212,19 +2207,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Reserve 500 cores for three years, because committed discounts beat on-demand even at under 2% utilization"
+          "label": "Reserve 500 cores for three years, because committed-use discounts beat on-demand pricing even at under 2% utilization"
         },
         {
           "id": "b",
-          "label": "Use on-demand or spot cloud capacity, because utilization is very low and elasticity avoids paying for idle owned hardware"
+          "label": "Use on-demand or spot cloud capacity, because utilization is very low and elasticity avoids paying for idle hardware"
         },
         {
           "id": "c",
-          "label": "Buy servers, because owning hardware is always cheaper than any rental once purchase price is amortized"
+          "label": "Buy servers, because owning hardware is always cheaper than any rental once the purchase price is amortized over years"
         },
         {
           "id": "d",
-          "label": "Buy servers, because cloud cores run slower than physical ones so jobs would exceed the six-hour window"
+          "label": "Buy servers, because cloud cores run slower than physical ones so the jobs would exceed the six-hour window each time"
         }
       ],
       "answerKey": {
@@ -2391,15 +2386,15 @@
         },
         {
           "id": "b",
-          "label": "Run every component on self-managed VMs to avoid any provider-specific service, accepting a large operations burden"
+          "label": "Run every component on self-managed VMs to avoid any provider-specific service, accepting the large burden of patching, scaling and operating databases and queues yourself"
         },
         {
           "id": "c",
-          "label": "Deploy simultaneously on three clouds with different proprietary features to guarantee identical behavior everywhere"
+          "label": "Deploy simultaneously on three clouds, using each cloud's proprietary features, so any one provider can be dropped without changing application behavior"
         },
         {
           "id": "d",
-          "label": "Adopt each provider's proprietary services deeply, since lock-in disappears once contracts have exit clauses"
+          "label": "Adopt each provider's proprietary services deeply for speed, since lock-in disappears once contracts include exit clauses and data export rights"
         }
       ],
       "answerKey": {

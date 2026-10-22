@@ -222,19 +222,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Call hooks only inside event handlers such as onClick"
+          "label": "Call hooks only inside event handlers such as onClick, so state updates run when the user acts"
         },
         {
           "id": "b",
-          "label": "Call hooks inside any nested function that runs on render"
+          "label": "Call hooks inside any nested function that runs on render, since each render calls it anyway"
         },
         {
           "id": "c",
-          "label": "Call hooks at the top level of the component, not inside loops or conditions"
+          "label": "Call hooks at the top level, never inside loops or conditions"
         },
         {
           "id": "d",
-          "label": "Call hooks after the return statement of the component"
+          "label": "Call hooks after the return statement, once the JSX has been built for the render"
         }
       ],
       "answerKey": {
@@ -327,15 +327,15 @@
       "options": [
         {
           "id": "a",
-          "label": "State cannot hold objects such as DOM elements"
+          "label": "State cannot store objects, so DOM nodes must go in refs"
         },
         {
           "id": "b",
-          "label": "Refs are faster at storing large amounts of data"
+          "label": "Refs are faster than state at storing large amounts of data"
         },
         {
           "id": "c",
-          "label": "Refs are reset to null on every single render"
+          "label": "Refs are reset to null on every render, so they stay current"
         },
         {
           "id": "d",
@@ -366,7 +366,7 @@
         },
         {
           "id": "b",
-          "label": "It runs first on mount to set up the effect's initial state"
+          "label": "It runs first on mount to set up the effect's initial state, before the effect body runs"
         },
         {
           "id": "c",
@@ -397,7 +397,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The hook stores state in a global variable per hook name"
+          "label": "The hook keeps its state in one global store keyed by the hook's name"
         },
         {
           "id": "b",
@@ -405,11 +405,11 @@
         },
         {
           "id": "c",
-          "label": "React blocks the second component from changing the count"
+          "label": "React locks the count to whichever component called the hook first"
         },
         {
           "id": "d",
-          "label": "Custom hooks never hold state, only plain functions do"
+          "label": "Custom hooks cannot hold state, since only built-in hooks can do that"
         }
       ],
       "answerKey": {
@@ -538,19 +538,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It stops `a` and `b` from being updated inside the effect"
+          "label": "It freezes `a` and `b` so the effect cannot update them"
         },
         {
           "id": "b",
-          "label": "It lists the props the component is allowed to read"
+          "label": "It lists the only props and state values the component may read during render"
         },
         {
           "id": "c",
-          "label": "It sets the order in which several effects will run"
+          "label": "It sets the order in which several effects in one component will run"
         },
         {
           "id": "d",
-          "label": "It tells React to re-run the effect only when `a` or `b` changed"
+          "label": "It makes React re-run the effect only when `a` or `b` changed"
         }
       ],
       "answerKey": {
@@ -714,7 +714,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`setUser` cannot be called from inside a promise callback"
+          "label": "`setUser` is ignored when it is called from inside a promise callback after render"
         },
         {
           "id": "b",
@@ -722,11 +722,11 @@
         },
         {
           "id": "c",
-          "label": "React caches the prop and ignores later changes to `userId`"
+          "label": "React keeps the first value of each prop and ignores later changes to `userId`"
         },
         {
           "id": "d",
-          "label": "`fetchUser` must be called during render rather than in an effect"
+          "label": "`fetchUser` must be called during render, because effects never run again after mount"
         }
       ],
       "answerKey": {
@@ -827,11 +827,11 @@
         },
         {
           "id": "c",
-          "label": "`const on = useRef(false); return [on, () => !on]`"
+          "label": "`const [on, setOn] = useState(false); return [on, () => { on = !on; }]`"
         },
         {
           "id": "d",
-          "label": "`const [on] = useState(false); return [on, () => !on]`"
+          "label": "`const on = useRef(false); return [on, () => { on.current = !on.current; }]`"
         }
       ],
       "answerKey": {
@@ -1152,7 +1152,7 @@
         },
         {
           "id": "d",
-          "label": "`useMemo(() => filter(items, query), [])`"
+          "label": "`useMemo(() => filter(items, query), [items, query, filter])`"
         }
       ],
       "answerKey": {
@@ -1386,15 +1386,15 @@
       "options": [
         {
           "id": "a",
-          "label": "React.memo ignores function props, so any parent render forces the child to render"
+          "label": "React.memo compares function props by value, and the new closure over the latest draft never matches"
         },
         {
           "id": "b",
-          "label": "The child must also call useCallback itself before memoization takes effect"
+          "label": "The child must also call useCallback itself before the parent's memoized callback is respected"
         },
         {
           "id": "c",
-          "label": "useCallback only memoizes during the first render, so memo comparisons always fail"
+          "label": "useCallback only memoizes during the first render, so later memo comparisons see a new function"
         },
         {
           "id": "d",
@@ -1597,19 +1597,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The inline arrow is a new function each render, so memo's shallow prop comparison sees a change"
+          "label": "The inline arrow is a new function each render, so the shallow prop check sees a change"
         },
         {
           "id": "b",
-          "label": "`React.memo` compares props deeply, and two functions never count as equal in deep checks"
+          "label": "React.memo compares props deeply, and functions with identical source text fail deep equality checks"
         },
         {
           "id": "c",
-          "label": "Parent re-renders always force children to re-render, which memo can only delay by one frame"
+          "label": "React.memo is bypassed when a parent re-renders, unless the child also wraps its state in useMemo"
         },
         {
           "id": "d",
-          "label": "`React.memo` only skips renders for components that do not use any hooks internally"
+          "label": "React.memo skips renders for components that don't call hooks, and Row's hooks cause it to re-render"
         }
       ],
       "answerKey": {
@@ -2023,19 +2023,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Create the value with `useMemo` over `[user]`, because `setUser` is stable and identity then changes only with `user`"
+          "label": "Memoize the value with `useMemo` over `[user]`; `setUser` is stable, so identity changes only with `user`"
         },
         {
           "id": "b",
-          "label": "Keep the value in a `useRef` so the provider never triggers any consumer update, even when `user` changes"
+          "label": "Keep the value in a `useRef` so the provider never triggers any consumer update, even when `user` changes later on"
         },
         {
           "id": "c",
-          "label": "Copy `user` into each consumer's own state with a `useEffect` so consumers no longer depend on the context"
+          "label": "Copy `user` into each consumer's own state with a `useEffect` so consumers no longer depend on the context at all"
         },
         {
           "id": "d",
-          "label": "Wrap every consumer in `React.memo`, which blocks re-renders that are triggered by a context value change"
+          "label": "Wrap every consumer in `React.memo`, which blocks re-renders that are triggered by a changed context value from the provider"
         }
       ],
       "answerKey": {
@@ -2379,15 +2379,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Connect in the component body behind `if (!connection)` so rendering twice opens only one connection"
+          "label": "Connect in the component body behind `if (!connection)` so that rendering twice opens only one connection and the room is reused"
         },
         {
           "id": "b",
-          "label": "Connect in an effect with `[]` dependencies and disconnect only in a `beforeunload` listener to avoid churn"
+          "label": "Connect in an effect with `[]` dependencies and disconnect only in a `beforeunload` listener, so room changes cause no reconnect churn"
         },
         {
           "id": "c",
-          "label": "Connect in an effect and guard it with a `useRef` flag so the second development invocation is skipped"
+          "label": "Connect in an effect and guard it with a `useRef` flag so the second development invocation is skipped and only one connection opens"
         },
         {
           "id": "d",
@@ -2459,11 +2459,11 @@
         },
         {
           "id": "b",
-          "label": "Wrap the editor in `React.memo` with a comparator on `userId` so it only re-renders for new users"
+          "label": "Wrap the editor in `React.memo` with a comparator on `userId` so it re-renders just for new users"
         },
         {
           "id": "c",
-          "label": "Store each field in a `useRef` so that a changed `userId` cannot leave stale drafts inside state"
+          "label": "Store each field in a `useRef` so a changed `userId` does not leave stale drafts inside state"
         },
         {
           "id": "d",

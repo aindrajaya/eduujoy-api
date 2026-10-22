@@ -182,7 +182,7 @@
       "stage": "novice",
       "bloom": "C1",
       "kind": "multi_choice",
-      "prompt": "Which of the following are valid variants of Rust's `Result<T, E>` and `Option<T>` types combined? Select all that apply.",
+      "prompt": "Which of the following are variants of Rust's built-in `Option<T>` or `Result<T, E>` enums? Select all that apply.",
       "options": [
         {
           "id": "a",
@@ -190,7 +190,7 @@
         },
         {
           "id": "b",
-          "label": "Maybe"
+          "label": "Just"
         },
         {
           "id": "c",
@@ -198,20 +198,15 @@
         },
         {
           "id": "d",
-          "label": "Err"
+          "label": "Nothing"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "c",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "Ok and Err belong to Result, Some to Option.",
-        "Maybe is from other languages such as Haskell."
-      ],
       "reviewed": false
     },
     {
@@ -363,7 +358,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Panics and aborts the program"
+          "label": "Panics with the error message and aborts the program"
         },
         {
           "id": "b",
@@ -371,11 +366,11 @@
         },
         {
           "id": "c",
-          "label": "Converts the error into None"
+          "label": "Converts the error into None and keeps running"
         },
         {
           "id": "d",
-          "label": "Ignores the error and continues"
+          "label": "Ignores the error and continues with a default value"
         }
       ],
       "answerKey": {
@@ -402,15 +397,15 @@
         },
         {
           "id": "b",
-          "label": "Allocates memory for a value on the heap"
+          "label": "Allocates a value on the heap and owns it until dropped"
         },
         {
           "id": "c",
-          "label": "Marks a variable as mutable across threads"
+          "label": "Marks a variable as safely mutable across threads"
         },
         {
           "id": "d",
-          "label": "Stores data fields shared by several structs"
+          "label": "Stores data fields that several structs inherit from it"
         }
       ],
       "answerKey": {
@@ -437,28 +432,23 @@
         },
         {
           "id": "b",
-          "label": "References are checked at compile time"
+          "label": "Borrowed references are checked at compile time"
         },
         {
           "id": "c",
-          "label": "Each value has a single owner"
+          "label": "Each value has a single owner at a time"
         },
         {
           "id": "d",
-          "label": "Memory is freed when the owner goes out of scope"
+          "label": "Every value is reference-counted at runtime by default"
         }
       ],
       "answerKey": {
         "optionIds": [
           "b",
-          "c",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "Ownership, scope-based drop and compile-time borrow checks give safety.",
-        "No background collector exists in Rust."
-      ],
       "reviewed": false
     },
     {
@@ -470,19 +460,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Add a semicolon after the call to end the move"
+          "label": "Add a semicolon after the call so the move ends at that statement"
         },
         {
           "id": "b",
-          "label": "Mark `name` as `mut` so it can be reused"
+          "label": "Declare `name` with `mut` so the value can be used again after the call"
         },
         {
           "id": "c",
-          "label": "Call `show` twice so ownership returns"
+          "label": "Call `show` twice so the second call gives ownership back to `name`"
         },
         {
           "id": "d",
-          "label": "Take `&String` or `&str` so the function borrows instead of owning"
+          "label": "Take `&str` so the function borrows the value and the caller keeps it"
         }
       ],
       "answerKey": {
@@ -540,19 +530,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The integer type implements `Copy`, so the value is duplicated on assignment"
+          "label": "Integers implement `Copy`, so assignment duplicates the value"
         },
         {
           "id": "b",
-          "label": "Integers live on the heap, so the compiler tracks them differently"
+          "label": "Integers are stored on the stack, so the compiler skips ownership tracking for them"
         },
         {
           "id": "c",
-          "label": "Integers have no owner, so moves do not apply to them"
+          "label": "Integers are immutable by default, so a second binding can safely share the same value"
         },
         {
           "id": "d",
-          "label": "Variables named `x` are borrowed automatically by the compiler"
+          "label": "Integers are borrowed automatically on assignment, so the original binding stays valid"
         }
       ],
       "answerKey": {
@@ -751,19 +741,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It fails to compile, because `push` needs a mutable borrow while `first` is live"
+          "label": "It fails to compile: `push` needs a mutable borrow while `first` is still used"
         },
         {
           "id": "b",
-          "label": "It prints 4, because `first` follows the vector's updated contents"
+          "label": "It prints 4, because `first` is a reference and follows the vector's updated contents"
         },
         {
           "id": "c",
-          "label": "It prints 1, because the vector is large enough to hold the push"
+          "label": "It prints 1, because the vector's spare capacity is enough to hold the pushed element"
         },
         {
           "id": "d",
-          "label": "It prints 1 only if the capacity is greater than 3"
+          "label": "It prints 1 only if capacity exceeds 3, otherwise it panics at runtime after reallocating"
         }
       ],
       "answerKey": {
@@ -891,7 +881,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`cargo run`, which places it in `src/bin`"
+          "label": "`cargo run --release`, which places it in `target/optimized`"
         },
         {
           "id": "b",
@@ -1032,7 +1022,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`Result<i32, std::io::Error>`"
+          "label": "`Result<i32, std::io::ParseError>`"
         },
         {
           "id": "b",
@@ -1040,7 +1030,7 @@
         },
         {
           "id": "c",
-          "label": "`Result<i32, std::fmt::Error>`"
+          "label": "`Result<i32, std::str::ParseBoolError>`"
         },
         {
           "id": "d",
@@ -1106,7 +1096,7 @@
         },
         {
           "id": "b",
-          "label": "`serde = { version = \"1\", derive = true }`"
+          "label": "`serde = { version = \"1\", derive = true, features = [] }`"
         },
         {
           "id": "c",
@@ -1313,19 +1303,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The thread may outlive `v` while the closure only borrows it; `move` hands ownership to the closure"
+          "label": "The closure only borrows `v`, but the spawned thread may outlive `v`"
         },
         {
           "id": "b",
-          "label": "`join` must be called before the closure is created so the borrow can end first"
+          "label": "`join` is called after the closure is created, so the borrow of `v` never ends before the thread starts"
         },
         {
           "id": "c",
-          "label": "`Vec` is not `Send`, so it can never be used from another thread"
+          "label": "`Vec` is not `Send`, so a vector can never be used from a spawned thread"
         },
         {
           "id": "d",
-          "label": "`println!` takes ownership of its arguments, so `v` must be moved"
+          "label": "`println!` takes ownership of its arguments, so the closure must move `v` in to print it"
         }
       ],
       "answerKey": {
@@ -1348,19 +1338,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It runs and prints `[1, 2]` because `RefCell` allows several mutable accesses"
+          "label": "It runs and prints `[1, 2]` because `RefCell` permits several simultaneous mutable accesses at runtime"
         },
         {
           "id": "b",
-          "label": "It compiles but panics at runtime, since `RefCell` checks borrow rules dynamically and `r` is still alive"
+          "label": "It compiles but panics at runtime, since `RefCell` checks borrow rules dynamically and `r` is alive"
         },
         {
           "id": "c",
-          "label": "It fails to compile with E0502 because a shared and a mutable borrow overlap"
+          "label": "It fails to compile with E0502 because the shared borrow `r` overlaps the mutable borrow, as with plain references"
         },
         {
           "id": "d",
-          "label": "It compiles but deadlocks, since `borrow_mut` waits until `r` is released"
+          "label": "It compiles but deadlocks, since `borrow_mut` blocks the thread until the shared borrow `r` is released"
         }
       ],
       "answerKey": {
@@ -1383,19 +1373,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`Vec<T>` cannot hold structs, while `Box` copies each struct to the heap and removes the type check"
+          "label": "A `Vec<T>` is limited to one element size, so the compiler rejects structs of different sizes unless `Box` copies each struct onto the heap"
         },
         {
           "id": "b",
-          "label": "Trait bounds are checked only at runtime for `dyn`, so each element is verified when it is pushed"
+          "label": "Trait bounds on `dyn Shape` are resolved at runtime, so each element is checked for `Shape` when it is pushed onto the `Vec`"
         },
         {
           "id": "c",
-          "label": "Generics only accept built-in types, while trait objects accept user-defined structs"
+          "label": "Generic bounds like `T: Shape` accept only built-in types, while trait objects accept any user-defined struct that implements the trait"
         },
         {
           "id": "d",
-          "label": "`T` is fixed to one concrete type at compile time, while `dyn Shape` allows different types behind one pointer type"
+          "label": "`T` is fixed to one concrete type, while `dyn Shape` allows different types behind one pointer type"
         }
       ],
       "answerKey": {
@@ -1454,11 +1444,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The loader should return `Option` instead, because a missing file and a bad parse are both just the absence of a value"
+          "label": "The loader should return `Option` instead, because a missing file and a bad parse are both just the absence of a value, and `None` is cheaper than an error"
         },
         {
           "id": "b",
-          "label": "`unwrap()` is unsafe because it skips bounds checks, so replacing it with `expect()` removes the risk of panics"
+          "label": "`unwrap()` is unsafe because it skips bounds checks on the parsed value, so replacing it with `expect()` and a clear message removes the risk of panics"
         },
         {
           "id": "c",
@@ -1466,7 +1456,7 @@
         },
         {
           "id": "d",
-          "label": "The panics come from the borrow checker missing a lifetime on the `path` argument, so annotating the function would stop them"
+          "label": "The panics come from the borrow checker missing a lifetime on the `path` argument, so annotating the function with an explicit lifetime would stop them"
         }
       ],
       "answerKey": {
@@ -1598,15 +1588,15 @@
         },
         {
           "id": "b",
-          "label": "`insert` needs the map to be unlocked first, and the compiler keeps the first lock held until `main` exits"
+          "label": "`insert` needs the map to be unlocked first, and the compiler keeps the first lock held until the enclosing function returns"
         },
         {
           "id": "c",
-          "label": "The guard from the first `lock()` is a temporary that lives through the whole `if let` body, so the second `lock()` waits on it"
+          "label": "The first `lock()` guard is a temporary that lives through the whole `if let` body, so the second `lock()` waits on it"
         },
         {
           "id": "d",
-          "label": "`get` returns a reference that holds a lock of its own, so `insert` waits for that second lock"
+          "label": "`get` returns a reference that holds a separate lock of its own, so `insert` must wait for that second lock to be released"
         }
       ],
       "answerKey": {
@@ -1739,11 +1729,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Return `Box<dyn Error>` everywhere, because the signature stays stable as new failures are added"
+          "label": "Return `Box<dyn Error>` everywhere, because the signature stays stable as new failures are added and callers can still downcast_ref to inspect them"
         },
         {
           "id": "b",
-          "label": "Return `Result<T, String>`, because formatted messages are easy for callers to compare and display"
+          "label": "Return `Result<T, String>`, because formatted messages are easy for callers to compare and display, and any error converts into a String"
         },
         {
           "id": "c",
@@ -1751,7 +1741,7 @@
         },
         {
           "id": "d",
-          "label": "Return `anyhow::Error`, because every failure carries context and callers can downcast when needed"
+          "label": "Return `anyhow::Error`, because every failure carries context and callers can downcast when needed without defining their own types"
         }
       ],
       "answerKey": {
@@ -2271,7 +2261,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Call `abort()` on every worker handle, then await them so the process exits immediately and cleanly"
+          "label": "Call `abort()` on every worker handle, then await each handle so cancellation drops queued and in-flight jobs cleanly"
         },
         {
           "id": "b",
@@ -2279,11 +2269,11 @@
         },
         {
           "id": "c",
-          "label": "Set a flag that workers read only at startup, then wait for the runtime to drop them when done"
+          "label": "Set a shutdown flag that workers check between jobs and exit on, leaving unread queued jobs unprocessed after 30 s"
         },
         {
           "id": "d",
-          "label": "Send each worker a sentinel value and exit the process, relying on the OS to finish pending jobs"
+          "label": "Send each worker a sentinel value, then call `std::process::exit` so the OS finishes any pending in-flight jobs"
         }
       ],
       "answerKey": {

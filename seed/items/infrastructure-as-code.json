@@ -11,7 +11,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Configuring each server by hand and documenting the steps"
+          "label": "Configuring each server by hand and keeping written notes of every step"
         },
         {
           "id": "b",
@@ -19,11 +19,11 @@
         },
         {
           "id": "c",
-          "label": "Writing application code that runs only on cloud servers"
+          "label": "Writing application code that is built to run only on cloud servers"
         },
         {
           "id": "d",
-          "label": "Storing server backups inside a source code repository"
+          "label": "Storing copies of server backups inside a source code repository"
         }
       ],
       "answerKey": {
@@ -227,11 +227,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Creates all the cloud resources in the configuration"
+          "label": "Creates all the cloud resources that are described in the configuration files"
         },
         {
           "id": "b",
-          "label": "Uploads the local files to the cloud provider account"
+          "label": "Uploads the local configuration files to the cloud provider account for storage"
         },
         {
           "id": "c",
@@ -239,7 +239,7 @@
         },
         {
           "id": "d",
-          "label": "Deletes any resources not listed in the configuration"
+          "label": "Deletes any existing resources that are not listed in the configuration files"
         }
       ],
       "answerKey": {
@@ -262,11 +262,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The command fails because the state is already used"
+          "label": "The command fails because the state file is already locked by the first run"
         },
         {
           "id": "b",
-          "label": "Duplicate copies of every resource are created"
+          "label": "Duplicate copies of every resource are created, since apply always provisions"
         },
         {
           "id": "c",
@@ -274,7 +274,7 @@
         },
         {
           "id": "d",
-          "label": "Every resource is destroyed and rebuilt from scratch"
+          "label": "Every resource is destroyed and rebuilt so it matches the code exactly"
         }
       ],
       "answerKey": {
@@ -297,7 +297,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It keeps the real servers from being changed by hand"
+          "label": "It stops anyone from changing the real servers by hand in the console"
         },
         {
           "id": "b",
@@ -305,11 +305,11 @@
         },
         {
           "id": "c",
-          "label": "It removes the need to run a plan before applying"
+          "label": "It removes the need to run a plan before applying changes to the cloud"
         },
         {
           "id": "d",
-          "label": "It lets the cloud provider build resources faster"
+          "label": "It lets the cloud provider build the resources faster than manual setup"
         }
       ],
       "answerKey": {
@@ -332,11 +332,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Terraform cannot read values written as plain text"
+          "label": "Terraform cannot read values that are written as plain text, so apply fails"
         },
         {
           "id": "b",
-          "label": "Long passwords slow the plan because of file size"
+          "label": "Long password strings slow down every plan because of the file size"
         },
         {
           "id": "c",
@@ -344,7 +344,7 @@
         },
         {
           "id": "d",
-          "label": "The cloud provider rejects passwords that appear in code"
+          "label": "Cloud providers reject any password that appears in code, so it must be typed by hand"
         }
       ],
       "answerKey": {
@@ -406,7 +406,7 @@
         },
         {
           "id": "b",
-          "label": "A scheduled job that retries failed commands every hour"
+          "label": "A pipeline step that reruns the failed create commands hourly"
         },
         {
           "id": "c",
@@ -478,7 +478,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The database will only be removed from the state file"
+          "label": "The database will only be removed from the state file, not destroyed"
         },
         {
           "id": "b",
@@ -486,11 +486,11 @@
         },
         {
           "id": "c",
-          "label": "The database will be updated in place with no downtime"
+          "label": "The database will be updated in place, so it stays online throughout"
         },
         {
           "id": "d",
-          "label": "The plan has failed and nothing can be applied"
+          "label": "The plan has failed on this resource, so nothing can be applied"
         }
       ],
       "answerKey": {
@@ -552,7 +552,7 @@
         },
         {
           "id": "b",
-          "label": "To map resources in the config to real resources so differences can be computed"
+          "label": "To map config resources to real ones so differences can be computed"
         },
         {
           "id": "c",
@@ -583,15 +583,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Duplicate each resource, since apply always adds new copies of them"
+          "label": "Create a second copy of each resource, because apply adds the declared resources again"
         },
         {
           "id": "b",
-          "label": "Recreate every resource so that the environment is guaranteed fresh"
+          "label": "Recreate the resources so the environment matches a fresh build of the config"
         },
         {
           "id": "c",
-          "label": "Fail with an error, because a config can only be applied once safely"
+          "label": "Fail with an error, because the config was already applied and the tool blocks repeats"
         },
         {
           "id": "d",
@@ -618,7 +618,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Slow growth in the size of the config files as more resources are added"
+          "label": "Gradual growth in config file size and complexity as more resources get added over time"
         },
         {
           "id": "b",
@@ -729,19 +729,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The state file was deleted overnight, so Terraform wants to rebuild the group"
+          "label": "The state file lost its record of the group overnight, so Terraform plans to create a second one"
         },
         {
           "id": "b",
-          "label": "The real group differs from the config, so plan proposes restoring the declared rules"
+          "label": "The real group differs from the config, so plan proposes removing the extra rule"
         },
         {
           "id": "c",
-          "label": "The plan always proposes changes to security groups on every single run"
+          "label": "Terraform treats every manually opened console session as a lock and plans to release it"
         },
         {
           "id": "d",
-          "label": "Terraform found a bug in the provider and wants to upgrade the group"
+          "label": "The provider caches rules from the last apply, so plan reports the cached rules as outdated"
         }
       ],
       "answerKey": {
@@ -842,11 +842,11 @@
         },
         {
           "id": "c",
-          "label": "`input \"region\" { value = \"us-east-1\" }`"
+          "label": "`input \"region\" { default_value = \"us-east-1\" }`"
         },
         {
           "id": "d",
-          "label": "`var region = \"us-east-1\"`"
+          "label": "`var \"region\" { default = \"us-east-1\" }`"
         }
       ],
       "answerKey": {
@@ -904,7 +904,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The bucket is renamed with a suffix and kept as a backup copy"
+          "label": "The bucket is renamed with a suffix and kept, since Terraform avoids data loss"
         },
         {
           "id": "b",
@@ -912,11 +912,11 @@
         },
         {
           "id": "c",
-          "label": "The plan proposes destroying the bucket, since it is no longer declared"
+          "label": "The plan proposes destroying the bucket, as it is no longer declared"
         },
         {
           "id": "d",
-          "label": "The bucket is left alone and removed only from the code"
+          "label": "The bucket is left alone and only dropped from state, so it becomes unmanaged"
         }
       ],
       "answerKey": {
@@ -1155,19 +1155,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Set a default in `variables.tf` and add that file to `.gitignore` afterwards"
+          "label": "Set a default in `variables.tf` and add that file to `.gitignore` once the first commit is pushed"
         },
         {
           "id": "b",
-          "label": "Base64-encode the password in `terraform.tfvars` and commit that file to the repo"
+          "label": "Base64-encode the password in `terraform.tfvars` and commit that file so the encoded value is versioned"
         },
         {
           "id": "c",
-          "label": "Hardcode it in the resource block, since state files are stored encrypted anyway"
+          "label": "Hardcode it in the resource block, since Terraform state files are always stored encrypted at rest"
         },
         {
           "id": "d",
-          "label": "Declare it with `sensitive = true` and supply it through a `TF_VAR_db_password` secret in CI"
+          "label": "Mark it `sensitive = true` and inject it as a `TF_VAR_db_password` secret in CI"
         }
       ],
       "answerKey": {
@@ -1231,7 +1231,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Add `lifecycle { ignore_changes = all }` so Terraform never touches the existing one"
+          "label": "Add `lifecycle { ignore_changes = all }` to the block so Terraform adopts the existing one and never modifies it"
         },
         {
           "id": "b",
@@ -1239,11 +1239,11 @@
         },
         {
           "id": "c",
-          "label": "Delete the load balancer so Terraform can create it fresh from the block"
+          "label": "Delete the load balancer in the console so Terraform can create it fresh from the block on the next apply"
         },
         {
           "id": "d",
-          "label": "Run `terraform apply`; Terraform finds the existing load balancer by name and adopts it"
+          "label": "Run `terraform apply`; Terraform finds the existing load balancer by its name and adopts it into state"
         }
       ],
       "answerKey": {
@@ -1266,19 +1266,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The instance has drifted, so Terraform replaces it to match the config"
+          "label": "The instance has drifted from its config, so Terraform replaces it to bring it back in line"
         },
         {
           "id": "b",
-          "label": "Terraform replaces any resource whose config file was edited"
+          "label": "Terraform replaces any resource whose arguments were edited, since it never updates in place"
         },
         {
           "id": "c",
-          "label": "The state file is corrupt, so Terraform rebuilds whatever it cannot read"
+          "label": "The state file is corrupt, so Terraform rebuilds whatever resource it cannot read back"
         },
         {
           "id": "d",
-          "label": "The provider cannot change `ami` in place, so the instance is destroyed and recreated"
+          "label": "The provider cannot change `ami` in place, so it destroys and recreates the instance"
         }
       ],
       "answerKey": {
@@ -1305,15 +1305,15 @@
         },
         {
           "id": "b",
-          "label": "Terraform cannot see console edits, so this change comes from a code diff"
+          "label": "Terraform cannot see console edits, so this change must come from a recent code diff in the repo"
         },
         {
           "id": "c",
-          "label": "The config is wrong and should be edited to match the console"
+          "label": "The config is out of date and should be edited to match the console, otherwise apply will fail"
         },
         {
           "id": "d",
-          "label": "The state file was edited, so Terraform is repairing the state first"
+          "label": "The state file was edited by hand, so Terraform is repairing the state before touching resources"
         }
       ],
       "answerKey": {
@@ -1336,11 +1336,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Credentials expired, so rerun with `-lock=false` to bypass the check"
+          "label": "Expired credentials blocked the state write, so rerun with `-lock=false` to skip the lock check and finish the apply"
         },
         {
           "id": "b",
-          "label": "A teammate's plan is running, so wait for the lock to expire on its own"
+          "label": "A teammate's plan is still running, so wait for the lock to expire on its own and then rerun the job"
         },
         {
           "id": "c",
@@ -1348,7 +1348,7 @@
         },
         {
           "id": "d",
-          "label": "The state is corrupted, so delete it and re-import every resource"
+          "label": "The state file is corrupted by the cancelled run, so delete it and re-import every resource by hand"
         }
       ],
       "answerKey": {
@@ -1371,11 +1371,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Add `depends_on` to each group pointing at the other group"
+          "label": "Add `depends_on` to each group pointing at the other, so Terraform orders their creation explicitly"
         },
         {
           "id": "b",
-          "label": "Apply each group separately with `-target` and keep the inline rules"
+          "label": "Apply each group separately with `-target` and keep the inline rules, so each exists before the other"
         },
         {
           "id": "c",
@@ -1383,7 +1383,7 @@
         },
         {
           "id": "d",
-          "label": "Set `count = 0` on one group until the other has been created"
+          "label": "Set `count = 0` on one group until the other has been created, then restore the count and re-apply"
         }
       ],
       "answerKey": {
@@ -1482,19 +1482,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is a provider bug; set `ignore_changes = all` on the new database and apply"
+          "label": "The provider has a bug with moved resources, so set `ignore_changes = all` on the new database and apply"
         },
         {
           "id": "b",
-          "label": "The plan is stale; run `terraform refresh` so the addresses are matched up"
+          "label": "The plan is stale because state is out of date, so run `terraform refresh` to match up the addresses"
         },
         {
           "id": "c",
-          "label": "Modules always recreate their resources; keep databases outside modules"
+          "label": "Modules always recreate the resources inside them, so keep stateful databases outside of modules"
         },
         {
           "id": "d",
-          "label": "The resource address changed, so state sees the old gone and the new missing; add a `moved` block"
+          "label": "The address changed, so state sees the old gone and the new missing; add a `moved` block"
         }
       ],
       "answerKey": {
@@ -1622,7 +1622,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Two controllers own the same attribute: the code and the autoscaler, so each run sees drift from the autoscaler"
+          "label": "Code and autoscaler both own the same attribute, so each run sees drift"
         },
         {
           "id": "b",
@@ -1657,19 +1657,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`count` addresses resources by position, so the remaining items shift indexes and map to different state entries"
+          "label": "`count` tracks resources by index, so the remaining CIDRs shift down and no longer match their state entries"
         },
         {
           "id": "b",
-          "label": "Subnet CIDR blocks are tracked globally, so removing one invalidates all CIDRs in the same VPC"
+          "label": "Subnet CIDR blocks are tracked as one group in the VPC, so removing one entry invalidates the CIDRs of its sibling subnets"
         },
         {
           "id": "c",
-          "label": "Terraform always replaces all resources in a set when its length changes, regardless of the meta-argument"
+          "label": "Terraform replaces the resources in a counted set when its length changes, because the meta-argument is recomputed for each of them"
         },
         {
           "id": "d",
-          "label": "The `length` function forces a data source refresh, which marks every dependent resource as tainted"
+          "label": "The `length` function forces a refresh of the list variable, which marks every subnet created from that list as tainted in state"
         }
       ],
       "answerKey": {
@@ -1803,19 +1803,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Generate it with `random_password` and output it, so teammates can read it from the plan"
+          "label": "Generate it with `random_password` and expose it as a sensitive output, so teammates can read it from the state file when needed"
         },
         {
           "id": "b",
-          "label": "Let the database service generate and rotate the admin secret in a secrets manager, never passing it through Terraform"
+          "label": "Let the database service generate and rotate the admin secret in a secrets manager, outside Terraform"
         },
         {
           "id": "c",
-          "label": "Commit the password in an encrypted variables file and decrypt it during each pipeline run"
+          "label": "Commit the password in a KMS-encrypted variables file and decrypt it during each pipeline run, so Git only holds ciphertext"
         },
         {
           "id": "d",
-          "label": "Mark the password variable `sensitive = true` and pass it with `TF_VAR_db_password` from CI secrets"
+          "label": "Mark the password variable `sensitive = true` and pass it with `TF_VAR_db_password` from CI secrets, so it never appears in the repo"
         }
       ],
       "answerKey": {
@@ -1838,19 +1838,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It adds indirection without encoding any standard, so it should either enforce conventions or be dropped"
+          "label": "It adds indirection but encodes no standard, so it should enforce conventions or be dropped"
         },
         {
           "id": "b",
-          "label": "It is acceptable, but only if the module is stored in a separate repository from its callers"
+          "label": "It is acceptable as written, but only if the module is kept in a separate repository from every caller that uses it"
         },
         {
           "id": "c",
-          "label": "It should be split into one module per argument, so each setting is independently versioned"
+          "label": "It should be split into one module per argument, so that each individual setting can be versioned and released independently"
         },
         {
           "id": "d",
-          "label": "It is ideal, because exposing every argument guarantees callers never need to edit the module"
+          "label": "It is ideal, because exposing every argument means callers will rarely need to edit the module or request changes to it"
         }
       ],
       "answerKey": {
@@ -2486,19 +2486,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Rename the input and flip the default in a patch release, announcing it in the changelog for teams to read"
+          "label": "Rename the input and flip the default in a patch release, and announce both changes in the changelog so teams can read them before upgrading"
         },
         {
           "id": "b",
-          "label": "Publish a new module with the new names and delete the old one so teams are forced to migrate at once"
+          "label": "Publish a new module with the new names and delete the old one from the registry, so every team is forced to migrate to it at once"
         },
         {
           "id": "c",
-          "label": "Accept both inputs and keep the old default in a minor release with a deprecation notice, then switch the default in the next major"
+          "label": "Accept both inputs and keep the old default in a minor release with a deprecation notice; switch the default in the next major"
         },
         {
           "id": "d",
-          "label": "Rename the input and flip the default in a major release, trusting teams to pin versions before they upgrade"
+          "label": "Rename the input and flip the default in a minor release, because the new default is safer and teams can override it if they object"
         }
       ],
       "answerKey": {

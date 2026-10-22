@@ -222,15 +222,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It is a battery, rated in volts"
+          "label": "It is a battery, rated in volts of supply"
         },
         {
           "id": "b",
-          "label": "It is a capacitor, rated in farads"
+          "label": "It is a capacitor, rated in farads of charge"
         },
         {
           "id": "c",
-          "label": "It is a resistor, rated in ohms"
+          "label": "It is a resistor, rated in ohms of resistance"
         },
         {
           "id": "d",
@@ -608,19 +608,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The power delivered into the node equals the resistance of its wires"
+          "label": "The power delivered into the node equals the total resistance of the wires meeting there"
         },
         {
           "id": "b",
-          "label": "The current is always divided equally among all wires leaving the node"
+          "label": "The current divides equally among all wires leaving the node, whatever their resistances"
         },
         {
           "id": "c",
-          "label": "The total current entering equals the total current leaving, since charge does not build up"
+          "label": "The total current entering equals the total current leaving, as charge cannot build up"
         },
         {
           "id": "d",
-          "label": "The voltages of all wires at the node add up to the source voltage"
+          "label": "The voltages across all the wires at the node add up to the source voltage of the circuit"
         }
       ],
       "answerKey": {
@@ -1182,7 +1182,7 @@
         },
         {
           "id": "d",
-          "label": "The voltage across the 3 kohm resistor is 3 V."
+          "label": "Each resistor drops 3 V because the source divides equally."
         },
         {
           "id": "e",
@@ -1320,15 +1320,15 @@
         },
         {
           "id": "b",
-          "label": "Sources can only be superposed when they have equal internal resistance"
+          "label": "The current source should be replaced with its internal resistance in series"
         },
         {
           "id": "c",
-          "label": "The current source should be kept, since it cannot be turned off"
+          "label": "The current source should stay in place, because it supplies a fixed current"
         },
         {
           "id": "d",
-          "label": "A voltage source must be removed first, before any current source"
+          "label": "The voltage source should be shorted too, leaving the circuit unpowered"
         }
       ],
       "answerKey": {
@@ -1355,15 +1355,15 @@
         },
         {
           "id": "b",
-          "label": "The 100 W lamp is brighter, because its rating is higher"
+          "label": "The 100 W lamp is brighter, because its higher power rating means it draws more current"
         },
         {
           "id": "c",
-          "label": "Both are equally bright, because they carry the same current"
+          "label": "Both are equally bright, because they carry the same current through them"
         },
         {
           "id": "d",
-          "label": "The 100 W lamp is brighter, because it has a larger voltage drop"
+          "label": "The 100 W lamp is brighter, because it has a larger voltage drop across it"
         }
       ],
       "answerKey": {
@@ -1532,19 +1532,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The capacitor's reactance is much larger than R at 1 kHz, so most voltage drops across C"
+          "label": "The capacitor's reactance is much larger than R at 1 kHz, so most of the source voltage drops across C"
         },
         {
           "id": "b",
-          "label": "The capacitor's reactance is much smaller than R at 1 kHz, so most voltage drops across R"
+          "label": "The capacitor's reactance is much smaller than R at 1 kHz, so R dominates the impedance"
         },
         {
           "id": "c",
-          "label": "The resistor's value changes with frequency, so it takes the larger share of the voltage"
+          "label": "The capacitor's current is much smaller than the resistor's current, so it develops less voltage across it"
         },
         {
           "id": "d",
-          "label": "The capacitor has charged fully, so its current is zero and it carries no voltage"
+          "label": "The capacitor has charged fully, so its current is zero and it carries no voltage at 1 kHz"
         }
       ],
       "answerKey": {
@@ -1637,15 +1637,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The inductor opposes a sudden current change, so the voltage across it initially equals the supply"
+          "label": "The inductor opposes a sudden current change, so its voltage initially equals the supply"
         },
         {
           "id": "b",
-          "label": "The resistor limits current to zero until the inductor's magnetic field has fully decayed"
+          "label": "The resistor drops the full supply voltage at first, so the inductor's magnetic field must build before any current flows"
         },
         {
           "id": "c",
-          "label": "The inductor stores charge on its plates, which must fill before current can flow"
+          "label": "The inductor stores charge on its plates, which must fill before current can flow through the circuit"
         },
         {
           "id": "d",
@@ -1672,32 +1672,27 @@
       "options": [
         {
           "id": "a",
-          "label": "The inductive and capacitive reactances have equal magnitude"
+          "label": "The inductive and capacitive reactances have equal magnitude, so their voltages cancel in the series loop"
         },
         {
           "id": "b",
-          "label": "The total impedance is at its minimum and equals R"
+          "label": "The total impedance is at its minimum and equals R, so the current is at its maximum for a given source voltage"
         },
         {
           "id": "c",
-          "label": "The current is in phase with the source voltage"
+          "label": "The current is 90 degrees out of phase with the source voltage because the reactances are at their peak"
         },
         {
           "id": "d",
-          "label": "The voltage across R is zero because the reactances cancel"
+          "label": "The voltage across R is zero because the inductor and capacitor voltages cancel each other"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "At resonance XL = XC, impedance = R, and current is in phase with the source.",
-        "The resistor still carries the full current, so its voltage is not zero."
-      ],
       "reviewed": false
     },
     {
@@ -1705,23 +1700,23 @@
       "stage": "proficient",
       "bloom": "C4",
       "kind": "scenario",
-      "prompt": "A technician builds a voltage divider from two 10 kohm resistors on a 10 V supply and expects 5 V at the midpoint. A multimeter with 1 Mohm input resistance reads 4.98 V, but a cheap meter with 100 kohm input reads 3.33 V. What best explains the difference?",
+      "prompt": "A technician builds a voltage divider from two 10 kohm resistors on a 10 V supply and expects 5 V at the midpoint. A multimeter with 1 Mohm input resistance reads 4.98 V, but a cheap meter with 100 kohm input reads 4.76 V. What best explains the difference?",
       "options": [
         {
           "id": "a",
-          "label": "The upper resistor's value changes with the meter's current range selected"
+          "label": "The upper resistor heats up when the meter's current range is selected, changing its resistance value"
         },
         {
           "id": "b",
-          "label": "The cheap meter's higher resistance adds series resistance, which drops extra voltage"
+          "label": "The cheap meter's resistance adds in series with the lower resistor, so extra voltage drops across the meter"
         },
         {
           "id": "c",
-          "label": "The meter's input resistance loads the lower resistor, lowering the parallel equivalent and the reading"
+          "label": "The meter loads the lower resistor, and its parallel resistance lowers the divider's output"
         },
         {
           "id": "d",
-          "label": "The supply voltage sags whenever any meter with lower resistance is connected"
+          "label": "The supply voltage sags more when a lower-resistance meter draws current, so the whole divider drops"
         }
       ],
       "answerKey": {
@@ -1931,7 +1926,7 @@
         },
         {
           "id": "d",
-          "label": "Add a large series resistor to limit current for safety"
+          "label": "Choose a meter input resistance near 10 kohm so the source and meter are matched for maximum signal"
         }
       ],
       "answerKey": {
@@ -1960,15 +1955,15 @@
         },
         {
           "id": "b",
-          "label": "A 15 A fast-acting fuse, to be safely above the surge"
+          "label": "A 15 A fast-acting fuse, since it clears the 10 A surge with margin and still limits fault current"
         },
         {
           "id": "c",
-          "label": "A 20 A slow-blow fuse, giving large margin for all conditions"
+          "label": "A 20 A slow-blow fuse, since it rides through surges and gives margin for all load conditions"
         },
         {
           "id": "d",
-          "label": "A 3 A fast-acting fuse, matching the running current exactly"
+          "label": "A 3 A fast-acting fuse, since it matches the running current and gives the tightest protection"
         }
       ],
       "answerKey": {

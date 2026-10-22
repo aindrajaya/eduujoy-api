@@ -262,19 +262,19 @@
       "options": [
         {
           "id": "a",
-          "label": "An image and a container are two names for the same thing"
+          "label": "An image and a container are the same thing, but a container is shown while it runs"
         },
         {
           "id": "b",
-          "label": "An image is a read-only template and a container is a running instance of it"
+          "label": "An image is a read-only template; a container is a running instance"
         },
         {
           "id": "c",
-          "label": "A container is a read-only template and an image is its running copy"
+          "label": "A container is a read-only template, and an image is a running copy of it"
         },
         {
           "id": "d",
-          "label": "An image is a running process and a container is the file that stores it"
+          "label": "An image is a running process, and a container is the file that stores it"
         }
       ],
       "answerKey": {
@@ -297,19 +297,19 @@
       "options": [
         {
           "id": "a",
-          "label": "They are kept and reused by the next container"
+          "label": "They stay in a hidden Docker folder and are reused by the next container"
         },
         {
           "id": "b",
-          "label": "They are saved into the original image"
+          "label": "They are committed into the original image so later containers include them"
         },
         {
           "id": "c",
-          "label": "They are moved to the host home folder"
+          "label": "They are copied to the host home folder when the container stops"
         },
         {
           "id": "d",
-          "label": "They are deleted with the container's writable layer"
+          "label": "They are deleted along with the container's writable layer"
         }
       ],
       "answerKey": {
@@ -375,7 +375,7 @@
         },
         {
           "id": "c",
-          "label": "It runs its own full guest operating system kernel"
+          "label": "It runs its own guest operating system with a separate kernel"
         },
         {
           "id": "d",
@@ -402,15 +402,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Forces the app inside to listen on port 3000"
+          "label": "Forces the app inside the container to listen on port 3000 at startup"
         },
         {
           "id": "b",
-          "label": "Opens port 3000 in the host firewall"
+          "label": "Opens port 3000 in the host firewall so outside traffic can reach it"
         },
         {
           "id": "c",
-          "label": "Publishes port 3000 on the host automatically"
+          "label": "Publishes port 3000 on a random host port when the container runs"
         },
         {
           "id": "d",
@@ -473,11 +473,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Compose blocks port 5432, so use port 3306 instead"
+          "label": "Compose blocks port 5432 between services, so publish it and use port 3306 instead"
         },
         {
           "id": "b",
-          "label": "Containers cannot talk to each other, so use the host's IP"
+          "label": "Containers on the default network cannot reach each other, so use the host machine's IP"
         },
         {
           "id": "c",
@@ -485,7 +485,7 @@
         },
         {
           "id": "d",
-          "label": "`localhost` only works on Windows, so use `127.0.0.1`"
+          "label": "`localhost` is not resolved inside containers, so use the IP `127.0.0.1` for the database"
         }
       ],
       "answerKey": {
@@ -543,7 +543,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Only the changed source file is copied and every later layer stays cached"
+          "label": "Only the changed file is re-copied, and the pip install layer below it stays cached"
         },
         {
           "id": "b",
@@ -652,7 +652,7 @@
         },
         {
           "id": "b",
-          "label": "RUN sets the command used when a container starts, and CMD runs during the build"
+          "label": "RUN sets the command used when a container starts, while CMD runs once during the image build"
         },
         {
           "id": "c",
@@ -660,7 +660,7 @@
         },
         {
           "id": "d",
-          "label": "RUN and CMD both execute at build time but CMD is limited to one per file"
+          "label": "RUN and CMD both execute at build time, but only CMD is limited to one instruction per file"
         }
       ],
       "answerKey": {
@@ -715,23 +715,23 @@
       "stage": "advanced_beginner",
       "bloom": "C2",
       "kind": "scenario",
-      "prompt": "A teammate runs a MySQL container with `docker run -d --name db mysql`, adds data, then runs `docker rm -f db` and starts a new container with the same command. The data is gone. No volume options were used. Why did this happen?",
+      "prompt": "A teammate runs a container from a custom image with `docker run -d --name notes notes-app`. The app saves notes to /app/data inside the container, and the image declares no volumes. After adding notes, they run `docker rm -f notes` and start a new container with the same command. The notes are gone. No volume options were used. Why did this happen?",
       "options": [
         {
           "id": "a",
-          "label": "The data lived in the removed container's writable layer, since no volume was mounted"
+          "label": "The notes were in the removed container's writable layer; no volume kept them"
         },
         {
           "id": "b",
-          "label": "MySQL clears its tables automatically whenever a new container starts up"
+          "label": "The app wipes its notes file automatically whenever a new container starts up"
         },
         {
           "id": "c",
-          "label": "Docker deletes all images when a container is removed with the force flag"
+          "label": "Docker deletes all images on the host when a container is removed with the force flag"
         },
         {
           "id": "d",
-          "label": "The new container used a different network, which hides the earlier tables"
+          "label": "The new container joined a different network, which hides the notes the app saved earlier"
         }
       ],
       "answerKey": {
@@ -965,19 +965,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`docker run -d -p 8080:80 --name site nginx` again with the same options"
+          "label": "`docker run -d -p 8080:80 --name site nginx` again, after running `docker rm site` to clear the failed container"
         },
         {
           "id": "b",
-          "label": "`docker run -d -p 80:80:8080 --name site nginx`"
+          "label": "`docker run -d -p 80:80:8080 --name site nginx` after running `docker rm site` to clear the failed container"
         },
         {
           "id": "c",
-          "label": "`docker run -d -p 8081:80 --name site nginx` after removing the failed `site` container"
+          "label": "`docker rm site`, then `docker run -d -p 8081:80 --name site nginx`"
         },
         {
           "id": "d",
-          "label": "`docker run -d -p 8080:8080 --name site nginx`"
+          "label": "`docker rm site`, then `docker run -d -p 8080:8080 --name site nginx`"
         }
       ],
       "answerKey": {
@@ -1105,7 +1105,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`127.0.0.1:5432`, since Compose maps services onto loopback"
+          "label": "`127.0.0.1:5432`, since Compose maps every service onto the loopback interface of all containers"
         },
         {
           "id": "b",
@@ -1113,11 +1113,11 @@
         },
         {
           "id": "c",
-          "label": "`host.docker.internal:5432`, since services reach each other via the host"
+          "label": "`host.docker.internal:5432`, since services reach each other only by going through the host machine"
         },
         {
           "id": "d",
-          "label": "`localhost:5432`, since both containers share the same machine"
+          "label": "`localhost:5432`, since both containers run on the same machine and share its network"
         }
       ],
       "answerKey": {
@@ -1251,7 +1251,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The `-d` flag detaches the container, which makes Docker stop it once the shell closes"
+          "label": "The `-d` flag detaches the container from the terminal, so Docker stops it as soon as the starting shell session closes"
         },
         {
           "id": "b",
@@ -1259,11 +1259,11 @@
         },
         {
           "id": "c",
-          "label": "The image lacks a `HEALTHCHECK`, so Docker stops containers it cannot verify as healthy"
+          "label": "The image has no `HEALTHCHECK` defined, so Docker stops containers that it cannot verify as healthy after startup"
         },
         {
           "id": "d",
-          "label": "Exit code 0 shows nginx crashed because port 80 is already taken on the host"
+          "label": "Exit code 0 shows nginx crashed because port 80 is already taken on the host, so the port binding failed at startup"
         }
       ],
       "answerKey": {
@@ -1286,19 +1286,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The first machine's cached `update` layer holds an old index, while the fresh one fetched a newer index that dropped that version"
+          "label": "The older machine's cached `update` layer holds a stale index, while the fresh build fetched a newer index without that version"
         },
         {
           "id": "b",
-          "label": "The new machine's Docker is too old to understand pinned versions in `apt-get`"
+          "label": "The new machine's Docker engine is older and cannot resolve version-pinned packages passed to `apt-get install` during builds"
         },
         {
           "id": "c",
-          "label": "Docker rejects `RUN` lines that are not joined with `&&` on fresh builds"
+          "label": "Docker only keeps separate `RUN` lines valid for builds on the machine where they were first written, so new hosts reject them"
         },
         {
           "id": "d",
-          "label": "The pinned version was never real, and the old machine ignores bad package versions"
+          "label": "The pinned version never existed in any repository, and the older machine's build silently skips package versions that are invalid"
         }
       ],
       "answerKey": {
@@ -1391,19 +1391,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`app` and `db` run on different networks until the first restart creates a shared one"
+          "label": "`app` and `db` sit on different networks until a restart creates a shared one, so the hostname `db` fails at first"
         },
         {
           "id": "b",
-          "label": "`depends_on` is ignored by Compose unless the services are declared in alphabetical order"
+          "label": "`depends_on` only applies to services built from a Dockerfile, so the prebuilt `db` image is started with no ordering at all"
         },
         {
           "id": "c",
-          "label": "The `db` container is started but not yet accepting connections, since `depends_on` alone does not wait for readiness"
+          "label": "`db` is started but not yet accepting connections, since `depends_on` alone does not wait for readiness"
         },
         {
           "id": "d",
-          "label": "Compose starts services in reverse order, so `app` always begins before `db` is created"
+          "label": "Compose starts `db` first but stops waiting once its container is created, so `app` begins before the image has been pulled"
         }
       ],
       "answerKey": {
@@ -1536,15 +1536,15 @@
         },
         {
           "id": "b",
-          "label": "The container needs the `-t` flag, otherwise any service started from CMD is terminated after init"
+          "label": "Without the `-t` flag no TTY is attached, so nginx receives a hangup signal after init and shuts down cleanly"
         },
         {
           "id": "c",
-          "label": "CMD only runs during the build, so nothing keeps the container alive after the image is started"
+          "label": "CMD is run while the image is built, so when the container starts there is no process left to keep it alive"
         },
         {
           "id": "d",
-          "label": "Nginx cannot bind to port 80 inside a container, so the start command fails and the container ends"
+          "label": "Nginx fails to bind to port 80 unless the port is published, so the start command ends and the container exits"
         }
       ],
       "answerKey": {
@@ -1567,11 +1567,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The bind mount overlays /app, so the host directory without node_modules hides what the image installed"
+          "label": "The bind mount overlays /app, so the host directory lacking node_modules hides what the image installed"
         },
         {
           "id": "b",
-          "label": "The image layers were lost because bind mounts delete the image cache when the container starts"
+          "label": "The image layers were lost because bind mounts delete the image cache whenever a container starts with them"
         },
         {
           "id": "c",
@@ -1579,7 +1579,7 @@
         },
         {
           "id": "d",
-          "label": "Bind mounts are read-only by default, so Node cannot load modules from any mounted directory"
+          "label": "Bind mounts are read-only by default, so Node cannot load modules from any mounted host directory"
         }
       ],
       "answerKey": {
@@ -1602,7 +1602,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Container names resolve only after the app container is restarted with a matching hostname alias"
+          "label": "Container names resolve on the default bridge only after the app container is restarted with a matching hostname alias"
         },
         {
           "id": "b",
@@ -1610,11 +1610,11 @@
         },
         {
           "id": "c",
-          "label": "Port 5432 is not published to the host, so other containers cannot reach it by any hostname"
+          "label": "Port 5432 is not published to the host, so name lookups from other containers fail even though the IP works"
         },
         {
           "id": "d",
-          "label": "The database container must be started with `--link` removed, because links block hostname lookups"
+          "label": "The database container needs a `--link` to the app container, since the bridge resolves names in one direction"
         }
       ],
       "answerKey": {
@@ -1717,7 +1717,7 @@
         },
         {
           "id": "b",
-          "label": "The JVM uses memory outside the heap, such as metaspace, thread stacks and native buffers, so the total passed 512m"
+          "label": "The JVM also uses non-heap memory, like metaspace and thread stacks, so the total passed 512m"
         },
         {
           "id": "c",
@@ -2029,7 +2029,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It is accurate, because UID 1000 in the container maps to an unprivileged host UID by default through user namespaces"
+          "label": "It is accurate, because UID 1000 in the container maps to an unprivileged host UID by default through user namespaces, so a breakout lands with no host privileges"
         },
         {
           "id": "b",
@@ -2041,7 +2041,7 @@
         },
         {
           "id": "d",
-          "label": "It is accurate, because kernel exploits need root inside the container and a non-root user cannot trigger them"
+          "label": "It is accurate, because kernel exploits need root inside the container and a non-root user cannot trigger them, so hardening is unnecessary"
         }
       ],
       "answerKey": {

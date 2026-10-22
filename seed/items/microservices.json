@@ -81,15 +81,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Each service owns its own data store and exposes it through its API"
+          "label": "Each service owns its data store and exposes it via its API"
         },
         {
           "id": "b",
-          "label": "Only one service may store data, and the rest stay stateless"
+          "label": "One dedicated data service holds the records and the others stay stateless"
         },
         {
           "id": "c",
-          "label": "Data lives only in the API gateway's cache for all services"
+          "label": "Data is kept in the API gateway's cache and shared by all services"
         },
         {
           "id": "d",
@@ -155,7 +155,7 @@
         },
         {
           "id": "b",
-          "label": "Querying another service's database table directly"
+          "label": "Sending an HTTP request to another service's API and holding the connection open for its reply"
         },
         {
           "id": "c",
@@ -163,7 +163,7 @@
         },
         {
           "id": "d",
-          "label": "Publishing an event to a message broker and moving on"
+          "label": "Publishing an event to a broker and moving on"
         }
       ],
       "answerKey": {
@@ -257,11 +257,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Services in different containers cannot reach the same database"
+          "label": "Services running in separate containers usually struggle to reach the same database"
         },
         {
           "id": "b",
-          "label": "Shared databases always cost more than separate ones"
+          "label": "Shared databases tend to cost more in licensing than several separate ones"
         },
         {
           "id": "c",
@@ -269,7 +269,7 @@
         },
         {
           "id": "d",
-          "label": "Databases cannot handle connections from several applications"
+          "label": "Databases generally slow down sharply when several applications connect at once"
         }
       ],
       "answerKey": {
@@ -292,11 +292,11 @@
       "options": [
         {
           "id": "a",
-          "label": "They make every request faster by default"
+          "label": "Each request runs faster because services are smaller than a monolith"
         },
         {
           "id": "b",
-          "label": "They guarantee that search can never fail"
+          "label": "Search stays available even if its own service crashes under the load"
         },
         {
           "id": "c",
@@ -304,7 +304,7 @@
         },
         {
           "id": "d",
-          "label": "They remove the need to monitor any service"
+          "label": "Checkout no longer needs monitoring because search is separate from it"
         }
       ],
       "answerKey": {
@@ -397,19 +397,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It lets both services lock one shared table at once"
+          "label": "It locks one shared table so both services commit together"
         },
         {
           "id": "b",
-          "label": "It chains local transactions and undoes earlier ones if a step fails"
+          "label": "It chains local transactions and undoes earlier ones on failure"
         },
         {
           "id": "c",
-          "label": "It replaces the need for either service to store data"
+          "label": "It copies each service's data into the other so both stay in sync"
         },
         {
           "id": "d",
-          "label": "It encrypts messages sent between the two services"
+          "label": "It encrypts messages sent between the two services in transit"
         }
       ],
       "answerKey": {
@@ -469,19 +469,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Unclear boundaries may be wrong, and the operational overhead is heavy for four people"
+          "label": "Early boundaries are likely wrong, and running many services is heavy for four people"
         },
         {
           "id": "b",
-          "label": "Monoliths cannot ever be split into services later"
+          "label": "A monolith can be split later only by a full rewrite, so the split must happen on day one"
         },
         {
           "id": "c",
-          "label": "Microservices cannot be used with Docker containers"
+          "label": "Microservices need a separate database engine per team member, which four people cannot staff"
         },
         {
           "id": "d",
-          "label": "Twelve services is above the legal limit for a small team"
+          "label": "Services communicate only over the network, so twelve of them will always be too slow to use"
         }
       ],
       "answerKey": {
@@ -504,7 +504,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Separate databases remove the need for any network calls between services"
+          "label": "Separate databases remove most network calls between services, since each one reads its own data"
         },
         {
           "id": "b",
@@ -512,11 +512,11 @@
         },
         {
           "id": "c",
-          "label": "Separate databases guarantee every service always sees identical, current data"
+          "label": "Separate databases keep data consistent across services, because each one holds its own copy"
         },
         {
           "id": "d",
-          "label": "Each service then avoids needing any backups, since data is spread out"
+          "label": "Each service can skip backups for its own data, since the data is spread across many stores"
         }
       ],
       "answerKey": {
@@ -890,19 +890,19 @@
       "options": [
         {
           "id": "a",
-          "label": "In a new Loyalty service that owns the points data and exposes an API"
+          "label": "In a new Loyalty service that owns its own data store"
         },
         {
           "id": "b",
-          "label": "In the Payment database, since points are tied to money spent"
+          "label": "In the Payment service's database, since points are calculated from the money spent"
         },
         {
           "id": "c",
-          "label": "In the Orders database, since points come from orders"
+          "label": "In the Orders service's database, since every point originates from a placed order"
         },
         {
           "id": "d",
-          "label": "In the API gateway, since every request passes through it"
+          "label": "In the API gateway, since every purchase request already passes through it"
         }
       ],
       "answerKey": {
@@ -1207,7 +1207,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Rename `address` to `street` and `city` and tell clients to update"
+          "label": "Rename `address` to `street` and `city` now, then notify mobile clients to update"
         },
         {
           "id": "b",
@@ -1215,7 +1215,7 @@
         },
         {
           "id": "c",
-          "label": "Deploy v2 and shut v1 down once the new version passes its tests"
+          "label": "Deploy v2 and shut v1 down as soon as the new version passes its tests"
         },
         {
           "id": "d",
@@ -1277,11 +1277,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Their REST contracts should be moved to gRPC to decouple them"
+          "label": "Their REST contracts are too chatty, so moving them to gRPC would decouple the two services"
         },
         {
           "id": "b",
-          "label": "They should share one database so releases stop conflicting"
+          "label": "They should share one database so that schema changes no longer need coordinated releases"
         },
         {
           "id": "c",
@@ -1289,7 +1289,7 @@
         },
         {
           "id": "d",
-          "label": "Their teams need faster CI so the two can deploy in parallel"
+          "label": "Their pipelines are too slow, so faster CI would let the two services deploy in parallel"
         }
       ],
       "answerKey": {
@@ -1347,7 +1347,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Short timeouts make D process each request twice before replying"
+          "label": "Short timeouts make D process each request twice before it replies"
         },
         {
           "id": "b",
@@ -1355,11 +1355,11 @@
         },
         {
           "id": "c",
-          "label": "The load balancer sends all traffic to a single D instance"
+          "label": "The load balancer pins all traffic to a single D instance, which then overloads"
         },
         {
           "id": "d",
-          "label": "Circuit breakers in each layer are open and block healthy calls to D"
+          "label": "Circuit breakers in every layer stay open and block healthy calls to D, forcing a backlog"
         }
       ],
       "answerKey": {
@@ -1382,7 +1382,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Multiple instances publish at once, so a distributed lock is missing"
+          "label": "Several instances publish the same event at once, because no distributed lock guards the publish call"
         },
         {
           "id": "b",
@@ -1390,11 +1390,11 @@
         },
         {
           "id": "c",
-          "label": "The broker is not durable, so events vanish after a successful publish"
+          "label": "The broker is not durable, so events that were already acknowledged vanish after the broker restarts"
         },
         {
           "id": "d",
-          "label": "The event is published before the commit, so consumers read stale data"
+          "label": "The event is published before the commit finishes, so consumers read stale data and drop the event"
         }
       ],
       "answerKey": {
@@ -1458,7 +1458,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The gateway timeout is too low and must be raised above 10 seconds"
+          "label": "The gateway timeout is shorter than the order service's own processing time, so it must be raised"
         },
         {
           "id": "b",
@@ -1466,11 +1466,11 @@
         },
         {
           "id": "c",
-          "label": "Inventory returns errors that the gateway converts into 504 responses"
+          "label": "Inventory returns errors on slow calls, and the gateway converts those errors into 504 responses"
         },
         {
           "id": "d",
-          "label": "The order service lacks a circuit breaker, which alone causes the 504s"
+          "label": "The order service has no circuit breaker, so failing inventory calls are never cut off early"
         }
       ],
       "answerKey": {
@@ -1528,19 +1528,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The event payload is too large, so the broker silently rejects it after the transaction commits"
+          "label": "The event payload is occasionally too large, so the broker silently rejects the message after the order transaction has already committed"
         },
         {
           "id": "b",
-          "label": "The broker uses topics instead of queues, so some consumers are never subscribed to the event"
+          "label": "The broker uses topics instead of queues, so some consumers are never subscribed to receive the event when it is published"
         },
         {
           "id": "c",
-          "label": "The order service uses an ORM, which delays commits until after the publish call has returned"
+          "label": "The order service uses an ORM, which delays commits until after the publish call has returned and so reorders the two steps"
         },
         {
           "id": "d",
-          "label": "The database commit and the broker publish are two separate writes, so a crash between them loses the event"
+          "label": "The commit and the publish are two separate writes, so a crash between them loses the event"
         }
       ],
       "answerKey": {
@@ -1563,15 +1563,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The payment gateway retries internally, so every charge is applied twice regardless of the consumer"
+          "label": "The payment gateway retried the call internally after a timeout, and the consumer cannot prevent duplicate charges"
         },
         {
           "id": "b",
-          "label": "The broker has a defect that creates new messages during every rebalance of the group"
+          "label": "The broker produced duplicate copies of messages while the group rebalanced, which is a defect in its delivery logic"
         },
         {
           "id": "c",
-          "label": "The consumer reads offsets too slowly, so the broker assumes messages were never delivered at all"
+          "label": "The consumer committed offsets too slowly, so the broker concluded the messages were lost and fabricated new ones"
         },
         {
           "id": "d",
@@ -1633,15 +1633,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The gateway's p99 is measured in a different unit, so the figures cannot be compared with the services'"
+          "label": "The gateway's p99 is measured in a different unit or window, so the figures cannot be compared directly with the services' p99 values"
         },
         {
           "id": "b",
-          "label": "Each service's p99 is inflated by garbage collection, which the gateway then removes by caching"
+          "label": "Each service's p99 is inflated by garbage collection pauses, and the gateway's response cache then removes those pauses for repeated requests"
         },
         {
           "id": "c",
-          "label": "Parallel calls are executed one after another by the HTTP client, so latencies add up for every request"
+          "label": "The HTTP client executes the parallel calls one after another on a single thread, so the latencies add up on every request"
         },
         {
           "id": "d",
@@ -1709,19 +1709,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The retries multiplied the offered load on an already struggling B, which pushed it from degraded to fully down"
+          "label": "The retries multiplied the load on an already struggling B, pushing it from degraded to fully down"
         },
         {
           "id": "b",
-          "label": "B should return HTTP 200 for failures, since error codes make clients retry more aggressively"
+          "label": "B should return HTTP 200 on failures, because error codes make clients retry more aggressively and add load to B"
         },
         {
           "id": "c",
-          "label": "B's autoscaler is misconfigured, and the retries have no effect on how much load B receives"
+          "label": "B's autoscaler is misconfigured, and A's retries have no real effect on how much load B receives overall"
         },
         {
           "id": "d",
-          "label": "A's retries succeed too often, which fills B's caches with stale entries and causes the failure"
+          "label": "A's retries succeed too often, which fills B's caches with stale entries until B can no longer serve requests"
         }
       ],
       "answerKey": {
@@ -2030,11 +2030,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It is unsound only because replicas lag, so it would be fine if replication were synchronous and always up to date"
+          "label": "Replication lag makes the data stale, so the proposal is acceptable once the replica is configured for synchronous replication"
         },
         {
           "id": "b",
-          "label": "It is unsound because services may only communicate through message brokers, never through any request-response style"
+          "label": "Services should exchange data through message brokers, so a direct query is a problem because it is a synchronous call"
         },
         {
           "id": "c",
@@ -2042,7 +2042,7 @@
         },
         {
           "id": "d",
-          "label": "The proposal is sound, since a read-only replica cannot change data and so cannot create any coupling between the services"
+          "label": "A read-only replica cannot be modified by reporting, so the data stays safe and the two services remain loosely coupled"
         }
       ],
       "answerKey": {
@@ -2061,23 +2061,23 @@
       "stage": "expert",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "Service A calls B, B calls C, and C calls D, and each caller retries failed calls 3 times. D degrades and begins to time out. Which assessment of this retry design is best?",
+      "prompt": "Service A calls B, B calls C, and C calls D, and each caller makes up to 3 attempts in total (the first call plus 2 retries) when a call fails. D degrades and begins to time out. Which assessment of this retry design is best?",
       "options": [
         {
           "id": "a",
-          "label": "Fine, since retries at every layer maximise the chance that each request succeeds while D recovers from its problem"
+          "label": "Sound, since retrying at every layer gives each request the best chance of succeeding while D recovers from its problem"
         },
         {
           "id": "b",
-          "label": "Fine, provided the retry interval is fixed at one second, since a fixed interval prevents any load amplification at D"
+          "label": "Sound, provided each layer waits a fixed one second between attempts, since spacing the retries out stops load from compounding at D"
         },
         {
           "id": "c",
-          "label": "Flawed, since retries are unsafe on any service call and should be replaced everywhere by much longer timeouts"
+          "label": "Flawed, since retries add load to a failing service, so every layer should drop retries and rely on much longer timeouts instead"
         },
         {
           "id": "d",
-          "label": "Flawed, since nested retries can multiply load on D up to 27 times; retry at one layer with a budget and backoff"
+          "label": "Flawed, since nested retries multiply to as many as 27 calls at D; retry at one layer with a budget and backoff"
         }
       ],
       "answerKey": {
@@ -2135,15 +2135,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Call all six consumers over REST in sequence, since immediate responses confirm that each one has processed the order"
+          "label": "Call all six consumers over REST in sequence, so each response confirms that consumer has processed the order before acceptance completes"
         },
         {
           "id": "b",
-          "label": "Let each consumer poll the orders database every minute, since polling avoids needing any broker or any contract"
+          "label": "Let each consumer poll the orders database every minute, so the orders service does not need to run a broker or publish a contract"
         },
         {
           "id": "c",
-          "label": "Call all six over REST in parallel with a 30-second timeout, since parallel calls remove any dependency on their availability"
+          "label": "Call all six over REST in parallel with a 30-second timeout, so a slow or offline consumer delays acceptance for at most that timeout"
         },
         {
           "id": "d",
@@ -2462,7 +2462,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Create the new service reading the monolith's billing tables directly, and treat the migration as complete after that"
+          "label": "Create the new service reading the monolith's billing tables directly, then move callers over one at a time and drop the old billing code once all are moved"
         },
         {
           "id": "b",
@@ -2470,11 +2470,11 @@
         },
         {
           "id": "c",
-          "label": "Rewrite billing in the new service with an empty database and send all new traffic there immediately"
+          "label": "Rewrite billing in the new service with an empty database, send all new traffic there at once, and backfill historical records from the monolith later"
         },
         {
           "id": "d",
-          "label": "Freeze writes for a weekend, copy the billing tables into a new database, and then switch every caller to the new service"
+          "label": "Freeze writes for a weekend, copy the billing tables into a new database, verify the copy, and then switch every caller to the new service"
         }
       ],
       "answerKey": {

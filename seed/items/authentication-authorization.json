@@ -260,15 +260,15 @@
         },
         {
           "id": "b",
-          "label": "It encrypts the hash so only the server can read it"
+          "label": "It encrypts the stored hash with a key, so only the server can ever read it back"
         },
         {
           "id": "c",
-          "label": "It makes the hash reversible so users can recover passwords"
+          "label": "It makes the hash reversible, so the server can recover a user's forgotten password"
         },
         {
           "id": "d",
-          "label": "It lets the server skip comparing hashes at login time"
+          "label": "It speeds up login checks, since the server can skip comparing the stored hashes"
         }
       ],
       "answerKey": {
@@ -291,7 +291,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It is a random ID the server must always look up in a store"
+          "label": "It is a random ID with no meaning of its own, so the server must look it up in a store on every request"
         },
         {
           "id": "b",
@@ -299,11 +299,11 @@
         },
         {
           "id": "c",
-          "label": "It is a hashed password sent along with every request"
+          "label": "It is a hash of the user's password that the client resends on every request so the server can check it"
         },
         {
           "id": "d",
-          "label": "It is a cookie that browsers refuse to send back to servers"
+          "label": "It is a cookie that is encrypted so only the browser can read it, so the server must ask the browser to decode it"
         }
       ],
       "answerKey": {
@@ -326,7 +326,7 @@
       "options": [
         {
           "id": "a",
-          "label": "To encrypt all traffic between the browser and the server"
+          "label": "To encrypt traffic between the browser and the server so tokens cannot be read"
         },
         {
           "id": "b",
@@ -334,11 +334,11 @@
         },
         {
           "id": "c",
-          "label": "To replace the need for any server-side permission checks"
+          "label": "To replace server-side permission checks once a user has logged in with a token"
         },
         {
           "id": "d",
-          "label": "To store user passwords in one database shared by many apps"
+          "label": "To store user passwords in one database that is shared by many different apps"
         }
       ],
       "answerKey": {
@@ -361,19 +361,19 @@
       "options": [
         {
           "id": "a",
-          "label": "HTTP forbids sending role names to the client at all"
+          "label": "Role names sent to the client would break the HTTP protocol rules"
         },
         {
           "id": "b",
-          "label": "Servers can render buttons faster than browsers can"
+          "label": "Servers render restricted pages faster than browsers can render them"
         },
         {
           "id": "c",
-          "label": "Browsers cannot display different pages for different roles"
+          "label": "Browsers cannot show different page content to users with different roles"
         },
         {
           "id": "d",
-          "label": "Clients can send requests directly, bypassing any hidden buttons"
+          "label": "Users can send requests directly, bypassing hidden buttons"
         }
       ],
       "answerKey": {
@@ -472,19 +472,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Authentication succeeded, but her account lacks the role that authorization requires"
+          "label": "Login worked, but her account lacks the role that /admin requires"
         },
         {
           "id": "b",
-          "label": "Her session expired, so the server no longer knows who she is"
+          "label": "Her session expired after login, so the server no longer knows who she is"
         },
         {
           "id": "c",
-          "label": "Her password was wrong, so authentication failed"
+          "label": "Her password was rejected, so the server treated her as not logged in"
         },
         {
           "id": "d",
-          "label": "The server could not find any page at the /admin address"
+          "label": "The server could not find any page at the /admin address, so it refused"
         }
       ],
       "answerKey": {
@@ -511,15 +511,15 @@
         },
         {
           "id": "b",
-          "label": "So the server can reverse the hash when a user forgets their password"
+          "label": "So the server can reverse the hash to recover the original password when a user forgets it"
         },
         {
           "id": "c",
-          "label": "So the hash is long enough that brute-force guessing becomes impossible"
+          "label": "So the hash becomes long enough that brute-force guessing of any password is impossible"
         },
         {
           "id": "d",
-          "label": "So the password is encrypted while it travels from the browser to the server"
+          "label": "So the password is encrypted while it travels from the browser to the login server"
         }
       ],
       "answerKey": {
@@ -612,15 +612,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It encrypts the cookie value so the user cannot read it"
+          "label": "It encrypts the cookie value so the user cannot read or edit it"
         },
         {
           "id": "b",
-          "label": "It stops the browser sending the cookie on cross-site requests"
+          "label": "It stops the browser sending the cookie on cross-site requests, limiting CSRF"
         },
         {
           "id": "c",
-          "label": "It makes the browser send the cookie only over HTTPS connections"
+          "label": "It makes the browser send the cookie only over HTTPS, preventing network sniffing"
         },
         {
           "id": "d",
@@ -647,15 +647,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It proves the user's identity to the client with no further checks"
+          "label": "It proves the user's identity to the client, so the client needs no further checks or sign-in"
         },
         {
           "id": "b",
-          "label": "It encrypts all traffic between the client and the API server"
+          "label": "It encrypts all traffic between the client and the API server, so requests cannot be read"
         },
         {
           "id": "c",
-          "label": "It stores the user's password so the client can sign in again later"
+          "label": "It stores the user's password so the client can sign in again later without asking the user"
         },
         {
           "id": "d",
@@ -718,19 +718,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The server checks only the signature and expiry, so nothing marks the token revoked before it expires"
+          "label": "The server checks only signature and expiry, so nothing marks the token revoked"
         },
         {
           "id": "b",
-          "label": "Signature checks pass automatically once a user has logged out"
+          "label": "The signature stays valid after logout because the server only re-signs tokens when the user logs in again"
         },
         {
           "id": "c",
-          "label": "Logout deletes the token from the database, but a cache keeps serving it"
+          "label": "Logout deletes the token from the database, but a cache keeps serving the stale copy until it is refreshed"
         },
         {
           "id": "d",
-          "label": "JWTs are tied to the user's IP address, which has not changed since login"
+          "label": "JWTs are bound to the user's IP address at login, and that address has not changed since the user signed in"
         }
       ],
       "answerKey": {
@@ -788,11 +788,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`DELETE /docs/7`"
+          "label": "`DELETE /docs/7` (delete a document)"
         },
         {
           "id": "b",
-          "label": "`DELETE /users/3`"
+          "label": "`DELETE /users/3` (remove a user)"
         },
         {
           "id": "c",
@@ -969,7 +969,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Save the code in a cookie and send it to the API as the access token"
+          "label": "Save the code in a cookie and send it to the API as the access token, since the provider issued it for this user"
         },
         {
           "id": "b",
@@ -977,11 +977,11 @@
         },
         {
           "id": "c",
-          "label": "Exchange the code in browser JavaScript, with the client secret embedded"
+          "label": "Exchange the code in browser JavaScript with the client secret embedded, so the token never passes through the server"
         },
         {
           "id": "d",
-          "label": "Skip the state check, since the provider already signed the user in"
+          "label": "Skip the state check because the provider already signed the user in, then exchange the code at the token endpoint"
         }
       ],
       "answerKey": {
@@ -1290,7 +1290,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The signing key is too short, so the signature can be brute-forced offline by anyone"
+          "label": "The signing key is too short, so an attacker can brute-force the secret offline and sign admin tokens"
         },
         {
           "id": "b",
@@ -1325,19 +1325,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Redirect URI is prefix-matched, so https://app.example.com.evil.net would receive the code"
+          "label": "Redirect URI is prefix-matched, so https://app.example.com.evil.net gets the code"
         },
         {
           "id": "b",
-          "label": "The consent screen is shown only once per user, so attackers can skip the approval step"
+          "label": "The consent screen is skipped for returning users, so attackers can bypass the approval step and obtain codes"
         },
         {
           "id": "c",
-          "label": "The token endpoint needs the client ID, which lets attackers impersonate any application"
+          "label": "The token endpoint accepts the client ID without a secret, so attackers can exchange codes they have intercepted"
         },
         {
           "id": "d",
-          "label": "Authorization codes travel in the query string, which always exposes them to an attacker"
+          "label": "Authorization codes travel in the query string, which exposes them to anyone who can read the browser's address bar"
         }
       ],
       "answerKey": {
@@ -1360,7 +1360,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Logout only affects cookies, so bearer tokens can never be changed by any server call"
+          "label": "Logout clears the browser cookie, but bearer tokens are issued by the client, so the server cannot change them"
         },
         {
           "id": "b",
@@ -1368,11 +1368,11 @@
         },
         {
           "id": "c",
-          "label": "Browsers cache tokens in local storage, so the server cannot detect later token reuse"
+          "label": "Browsers cache tokens in local storage, so the server cannot detect when a copied token is reused"
         },
         {
           "id": "d",
-          "label": "The signature stays valid only until a password change, not until the user logs out"
+          "label": "The signature is checked against the user's password hash, so it stays valid until the password changes"
         }
       ],
       "answerKey": {
@@ -1442,7 +1442,7 @@
         },
         {
           "id": "d",
-          "label": "Passwords are hashed with bcrypt using a per-user salt"
+          "label": "Session cookies are marked HttpOnly and Secure, but have no SameSite attribute and last 30 days"
         }
       ],
       "answerKey": {
@@ -2254,15 +2254,15 @@
         },
         {
           "id": "b",
-          "label": "Give each tenant its own URL prefix, rely on the router to block cross-prefix paths, and make shared documents reachable through unguessable links"
+          "label": "Give each tenant its own URL prefix, rely on the router to block cross-prefix paths, make shared documents reachable through unguessable links, and audit through web server access logs"
         },
         {
           "id": "c",
-          "label": "Keep tenant_id and roles in a long-lived unsigned cookie that services read directly, and record sharing as notes on each document"
+          "label": "Keep tenant_id and roles in a long-lived unsigned cookie that services read directly, record sharing as notes on each document, and audit by logging each cookie value at login"
         },
         {
           "id": "d",
-          "label": "Accept tenant_id as a request parameter, check it in each controller, and record denied requests in the application log for later review"
+          "label": "Accept tenant_id as a request parameter, check it in each controller against the user's profile, and record denied requests in the application log for later review"
         }
       ],
       "answerKey": {
@@ -2285,11 +2285,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Access JWTs live 60 seconds with no refresh token, and users re-enter their password each minute to remain logged in"
+          "label": "Access JWTs live 60 seconds with no refresh token, so users re-enter their password every minute to stay logged in"
         },
         {
           "id": "b",
-          "label": "Access JWTs live 30 days and every request checks a revocation list, so revocation is immediate and only a fast lookup is needed"
+          "label": "Access JWTs live 30 days and each request checks a cached revocation list, so revocation takes effect at once on every API call"
         },
         {
           "id": "c",
@@ -2297,7 +2297,7 @@
         },
         {
           "id": "d",
-          "label": "Access JWTs live 60 seconds; a server-side revocable refresh token lasting weeks mints new ones, so revoking it stops renewal within a minute"
+          "label": "Access JWTs live 60 seconds; a revocable server-side refresh token lasting weeks mints new ones, so revoking it stops renewal"
         }
       ],
       "answerKey": {
@@ -2320,19 +2320,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Email a link that disables MFA immediately, since control of the mailbox proves the caller is the true account holder"
+          "label": "Email a one-time link that disables MFA immediately, since control of the registered mailbox proves the caller is the true account holder and avoids support involvement"
         },
         {
           "id": "b",
-          "label": "Give hashed single-use recovery codes at enrolment; with no codes, start a delayed reset that alerts existing devices and email, with no agent override"
+          "label": "Give hashed single-use recovery codes at enrolment; with none left, start a delayed reset that alerts existing devices and email, with no agent override"
         },
         {
           "id": "c",
-          "label": "Let support agents disable MFA once the caller correctly answers questions about recent account activity and billing details"
+          "label": "Let support agents disable MFA once the caller correctly answers questions about recent account activity, billing details and the last few logins they made"
         },
         {
           "id": "d",
-          "label": "Fall back to SMS codes sent to any phone number typed at the login prompt, since entering the code proves control of it"
+          "label": "Fall back to SMS codes sent to any phone number typed at the login prompt after the password is accepted, since entering the code proves control of it"
         }
       ],
       "answerKey": {
@@ -2478,7 +2478,7 @@
         },
         {
           "id": "d",
-          "label": "On password change, revoke all the user's sessions and refresh tokens except a fresh one issued to the current device; access tokens lapse within 10 minutes"
+          "label": "On password change, revoke all other sessions and refresh tokens and reissue one for the current device"
         }
       ],
       "answerKey": {

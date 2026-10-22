@@ -297,7 +297,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It starts a new JavaScript thread for every incoming request"
+          "label": "It starts a new JavaScript thread for each request and closes it after replying"
         },
         {
           "id": "b",
@@ -367,7 +367,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It saves the value to a file on disk"
+          "label": "It writes the value to a file on disk so later runs can reload it"
         },
         {
           "id": "b",
@@ -375,11 +375,11 @@
         },
         {
           "id": "c",
-          "label": "It runs the file again each time it changes"
+          "label": "It runs the file again each time it changes, like a file watcher"
         },
         {
           "id": "d",
-          "label": "It marks the value as private to that file"
+          "label": "It marks the value as private so that no other file can access it"
         }
       ],
       "answerKey": {
@@ -478,19 +478,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Express limits the server to one connected user at a time"
+          "label": "Express limits each server process to handling one connected user at a time"
         },
         {
           "id": "b",
-          "label": "The synchronous read blocks the single thread, so other requests must wait"
+          "label": "The synchronous read blocks the single thread, so other requests wait"
         },
         {
           "id": "c",
-          "label": "Node.js queues requests by route name and serves large ones first"
+          "label": "Node.js queues requests by route name and always serves the largest file routes first"
         },
         {
           "id": "d",
-          "label": "The file read uses up all available network bandwidth"
+          "label": "The file read uses up all the available network bandwidth for other users"
         }
       ],
       "answerKey": {
@@ -618,7 +618,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It lists the scripts that `npm run` is allowed to execute"
+          "label": "It lists the scripts that `npm run` is allowed to execute in the project"
         },
         {
           "id": "b",
@@ -626,11 +626,11 @@
         },
         {
           "id": "c",
-          "label": "It stops other developers from editing `package.json`"
+          "label": "It locks `package.json` so other developers cannot edit the dependency list"
         },
         {
           "id": "d",
-          "label": "It encrypts the packages stored in `node_modules` on disk"
+          "label": "It encrypts the packages stored in `node_modules` so they cannot be tampered with"
         }
       ],
       "answerKey": {
@@ -724,19 +724,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Express rejects requests while any file is open, so they time out"
+          "label": "Express pauses its router while any file is open, so queued requests wait until the file handle is closed"
         },
         {
           "id": "b",
-          "label": "The synchronous read blocks the single JavaScript thread, so the event loop cannot handle other requests"
+          "label": "The synchronous read blocks the single JavaScript thread, so the event loop cannot serve other requests"
         },
         {
           "id": "c",
-          "label": "Node allows only one open file per server, so other requests wait for it"
+          "label": "Node allows only one open file descriptor per process, so other requests wait until that file is released"
         },
         {
           "id": "d",
-          "label": "The log file is cached in memory, which fills up the network buffer for other users"
+          "label": "The 500 MB file is cached in memory, which fills the network buffer and leaves no room for other users' responses"
         }
       ],
       "answerKey": {
@@ -1044,7 +1044,7 @@
         },
         {
           "id": "b",
-          "label": "`const cfg = JSON.parse(fs.readFileSync('config.json', cb))`"
+          "label": "`const cfg = JSON.parse(await fs.readFileSync('config.json', 'utf8'))`"
         },
         {
           "id": "c",
@@ -1251,19 +1251,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Express 4 does not catch rejections from async handlers, so the error never reaches error middleware"
+          "label": "Express 4 ignores the promise the handler returns, so the rejection never reaches error middleware"
         },
         {
           "id": "b",
-          "label": "`res.json` cannot be called after an `await` in a handler"
+          "label": "Calling `res.json` after an `await` detaches the response from the request, so the reply is never flushed"
         },
         {
           "id": "c",
-          "label": "Express 4 runs async handlers in a separate thread that times out"
+          "label": "Express 4 runs async handlers on a separate worker thread, and that thread times out on rejection"
         },
         {
           "id": "d",
-          "label": "The rejection is caught by Express but the default handler skips async routes"
+          "label": "Express 4 catches the rejection, but its default error handler skips routes declared as async functions"
         }
       ],
       "answerKey": {
@@ -1325,15 +1325,15 @@
         },
         {
           "id": "b",
-          "label": "The server's thread pool is exhausted by the report handler"
+          "label": "The report handler uses up all of libuv's worker threads, so /health has none left"
         },
         {
           "id": "c",
-          "label": "Node limits each server to one open connection at a time"
+          "label": "Node accepts only one open connection at a time, so /health waits for /report to end"
         },
         {
           "id": "d",
-          "label": "`/health` is queued behind `/report` by the HTTP keep-alive setting"
+          "label": "`/health` is queued behind `/report` by the HTTP keep-alive setting on the socket"
         }
       ],
       "answerKey": {
@@ -1356,11 +1356,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`readFile` rethrows every error to the process, ignoring any try/catch"
+          "label": "`readFile` rethrows most I/O errors straight to the process, bypassing the surrounding try/catch block"
         },
         {
           "id": "b",
-          "label": "The `catch` block must declare the error type to match `ENOENT`"
+          "label": "The `catch` block only receives errors whose type matches, so `ENOENT` errors are skipped here"
         },
         {
           "id": "c",
@@ -1368,7 +1368,7 @@
         },
         {
           "id": "d",
-          "label": "`err` is always null in callbacks, so the `if` is wrong"
+          "label": "`err` is usually null inside `readFile` callbacks, so the `if` check never takes effect"
         }
       ],
       "answerKey": {
@@ -1462,19 +1462,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Callbacks inside I/O run as microtasks, which beat all timers"
+          "label": "I/O callbacks run as microtasks, so they drain before any timer callback can run"
         },
         {
           "id": "b",
-          "label": "The I/O callback runs in the poll phase, which the check phase follows before timers run again"
+          "label": "The I/O callback runs in the poll phase, and the check phase comes before timers"
         },
         {
           "id": "c",
-          "label": "`setImmediate` has higher priority than timers in every phase of the loop"
+          "label": "`setImmediate` has higher priority than timers in every phase of the event loop"
         },
         {
           "id": "d",
-          "label": "`fs.readFile` callbacks delay timers by at least one millisecond"
+          "label": "`fs.readFile` callbacks delay timers by at least one millisecond after they finish"
         }
       ],
       "answerKey": {
@@ -1999,19 +1999,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Send hash jobs to a fixed-size `worker_threads` pool, so the main loop stays free and CPU use is capped"
+          "label": "Send hash jobs to a fixed-size `worker_threads` pool, keeping the main loop free and CPU use capped"
         },
         {
           "id": "b",
-          "label": "Run the hash inline in the handler and rely on `await` to yield between requests"
+          "label": "Run the hash inline in the handler and rely on `await` to yield to other requests while it runs"
         },
         {
           "id": "c",
-          "label": "Wrap the hash in `new Promise` so it is deferred and no longer blocks the event loop"
+          "label": "Wrap the hash in `new Promise` so its execution is deferred and it no longer blocks the event loop"
         },
         {
           "id": "d",
-          "label": "Spawn a new `worker_threads` Worker per request, so each hash gets full isolation"
+          "label": "Spawn a new `worker_threads` Worker for every request, so each hash gets full isolation from the main loop"
         }
       ],
       "answerKey": {
@@ -2139,19 +2139,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`npm update && npm install`, since it ensures the newest patch versions are always tested"
+          "label": "`npm update && npm install`, since it ensures the newest patch versions are always tested and then saved"
         },
         {
           "id": "b",
-          "label": "`npm install --no-save`, since it avoids modifying the lockfile and therefore stays reproducible"
+          "label": "`npm install --no-save`, since it avoids modifying the lockfile and still fails when the manifest and lockfile disagree"
         },
         {
           "id": "c",
-          "label": "`npm ci`, since it installs strictly from the lockfile, errors on mismatch and removes existing `node_modules`"
+          "label": "`npm ci`, since it installs strictly from the lockfile, errors on mismatch and removes `node_modules`"
         },
         {
           "id": "d",
-          "label": "`npm install`, since it reconciles the manifest with the lockfile automatically"
+          "label": "`npm install`, since it reconciles the manifest with the lockfile automatically and keeps existing modules in place"
         }
       ],
       "answerKey": {
@@ -2214,19 +2214,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep `process.exit(0)` but call it inside `setTimeout` for 1 second so most requests finish"
+          "label": "Keep `process.exit(0)` but call it inside a 5-second `setTimeout` after SIGTERM, since most requests finish within that window"
         },
         {
           "id": "b",
-          "label": "Call `server.close()` and wait for its callback only, because it forcibly ends keep-alive connections too"
+          "label": "Call `server.close()` and exit only in its callback, since it waits for every open connection, so no timer is needed"
         },
         {
           "id": "c",
-          "label": "Call `server.close()` to stop new connections, exit in its callback when requests drain, with a forced-exit timer under 30 s"
+          "label": "Call `server.close()`, exit in its callback once requests drain, and add a forced-exit timer under 30 s"
         },
         {
           "id": "d",
-          "label": "Ignore SIGTERM and wait for the orchestrator's SIGKILL, so the process is never stopped mid-request"
+          "label": "Ignore SIGTERM and let the orchestrator's SIGKILL end the process after 30 s, so the app never exits mid-request"
         }
       ],
       "answerKey": {
@@ -2249,15 +2249,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`fs.readFileSync(f,'utf8').split('\\n')`, filtering lines that include ERROR"
+          "label": "`fs.readFileSync(f,'utf8').split('\\n')`, then filter lines that include ERROR and trim the trailing `\\r`"
         },
         {
           "id": "b",
-          "label": "`createReadStream(f).on('data', c => c.toString().split('\\n'))`, counting ERROR in each piece"
+          "label": "`createReadStream(f).on('data', c => c.toString().split(/\\r?\\n/))`, counting ERROR in each piece"
         },
         {
           "id": "c",
-          "label": "`readline.createInterface({input: fs.createReadStream(f), crlfDelay: Infinity})` iterated with `for await`"
+          "label": "`readline.createInterface({input: fs.createReadStream(f), crlfDelay: Infinity})` with `for await`"
         },
         {
           "id": "d",
@@ -2284,19 +2284,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`\"main\"` to an ESM file and a `\"files\"` list, since `files` restricts which paths are importable"
+          "label": "`\"main\"` to an ESM file and a `\"files\"` list, since `files` restricts which paths consumers can import"
         },
         {
           "id": "b",
-          "label": "`\"type\":\"module\"` with `\"main\":\"index.js\"`, since Node transpiles ESM for `require` consumers"
+          "label": "`\"type\":\"module\"` with `\"main\":\"index.js\"`, since Node transpiles ESM for CommonJS consumers on load"
         },
         {
           "id": "c",
-          "label": "A `\"module\"` field to the ESM file and `\"main\"` to CJS, since Node picks by the importer"
+          "label": "A `\"module\"` field to the ESM file and `\"main\"` to CJS, since Node picks the build by the importer"
         },
         {
           "id": "d",
-          "label": "An `\"exports\"` map with `\"import\"` pointing to the ESM build and `\"require\"` to the CJS build"
+          "label": "An `\"exports\"` map with conditions `\"import\"` for the ESM build and `\"require\"` for the CJS build"
         }
       ],
       "answerKey": {
@@ -2389,11 +2389,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Parse `chunk.toString()` as JSON in `transform`, with a `try/catch` that skips failures"
+          "label": "Parse `chunk.toString()` as JSON in `transform`, with a `try/catch` that skips any chunk that fails to parse"
         },
         {
           "id": "b",
-          "label": "Collect every chunk in an array and parse all lines in `flush`, then push the results"
+          "label": "Collect every chunk in an array, then split and parse all lines in `flush` and push the results at the end"
         },
         {
           "id": "c",
@@ -2401,7 +2401,7 @@
         },
         {
           "id": "d",
-          "label": "Split each chunk on newline and parse each part, discarding the last part as incomplete"
+          "label": "Split each chunk on newline and parse every part, discarding the last part of each chunk as incomplete"
         }
       ],
       "answerKey": {

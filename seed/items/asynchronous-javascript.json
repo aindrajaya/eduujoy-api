@@ -15,15 +15,15 @@
         },
         {
           "id": "b",
-          "label": "idle, active, complete"
+          "label": "idle, active, completed, failed"
         },
         {
           "id": "c",
-          "label": "started, running, finished"
+          "label": "started, running, finished, errored"
         },
         {
           "id": "d",
-          "label": "open, resolved, closed"
+          "label": "open, resolved, closed, cancelled"
         }
       ],
       "answerKey": {
@@ -297,7 +297,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Blocks the whole program until the promise settles, including other code"
+          "label": "Blocks the whole program until the promise settles, so no other code can run in the meantime"
         },
         {
           "id": "b",
@@ -309,7 +309,7 @@
         },
         {
           "id": "d",
-          "label": "Pauses that function until the promise settles, while other code keeps running"
+          "label": "Pauses that function until the promise settles; other code keeps running"
         }
       ],
       "answerKey": {
@@ -375,7 +375,7 @@
         },
         {
           "id": "c",
-          "label": "A callback that throws an error and stops the program"
+          "label": "A callback that throws an uncaught error and crashes the program"
         },
         {
           "id": "d",
@@ -485,7 +485,7 @@
         },
         {
           "id": "d",
-          "label": "The rejection is thrown at the await and the catch block logs 'failed'"
+          "label": "The await throws the rejection and catch logs 'failed'"
         }
       ],
       "answerKey": {
@@ -578,7 +578,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It blocks the whole program, including other tasks, until the promise settles"
+          "label": "It blocks the whole program, including timers and other tasks, until the promise settles"
         },
         {
           "id": "b",
@@ -586,7 +586,7 @@
         },
         {
           "id": "c",
-          "label": "It pauses only this async function until the promise settles, letting other code run"
+          "label": "It pauses only this function until the promise settles, letting other code run"
         },
         {
           "id": "d",
@@ -719,19 +719,19 @@
       "options": [
         {
           "id": "a",
-          "label": "fetch returns a promise, and the promise object itself has no status property"
+          "label": "fetch returns a promise, which has no status property itself"
         },
         {
           "id": "b",
-          "label": "fetch only works inside async functions, so it returns undefined elsewhere"
+          "label": "fetch returns undefined outside an async function, so status is missing"
         },
         {
           "id": "c",
-          "label": "status is a method, so it must be called as `res.status()` to give a number"
+          "label": "status is a method on Response, so it needs calling as `res.status()`"
         },
         {
           "id": "d",
-          "label": "fetch sends the request synchronously, so status is only set after a page reload"
+          "label": "fetch runs synchronously and sets status after the page has finished loading"
         }
       ],
       "answerKey": {
@@ -859,7 +859,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`new Promise((res, rej) => readFile(path, (e, d) => res(e || d)))`"
+          "label": "`new Promise((res, rej) => readFile(path, (e, d) => e ? res(e) : res(d)))`"
         },
         {
           "id": "b",
@@ -1386,19 +1386,19 @@
       "options": [
         {
           "id": "a",
-          "label": "catch only handles errors thrown inside the first then callback"
+          "label": "catch only handles errors thrown inside the first then callback, not later ones"
         },
         {
           "id": "b",
-          "label": "fetch resolves on HTTP error statuses, so the chain continued with the error body"
+          "label": "fetch resolves on HTTP error statuses, so the chain continues with the body"
         },
         {
           "id": "c",
-          "label": "fetch retries a 404 internally, so the rejection is delayed until later"
+          "label": "fetch retries a 404 internally, so the rejection is delayed until much later"
         },
         {
           "id": "d",
-          "label": "r.json() rejects for any non-200 response, but catch ignores it"
+          "label": "r.json() rejects for any non-200 response, but catch ignores that rejection"
         }
       ],
       "answerKey": {
@@ -1458,7 +1458,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Promise.all cancels remaining promises after the first rejection, so emails were skipped"
+          "label": "Promise.all cancels the remaining pending promises after the first rejection, so the unsent emails were skipped"
         },
         {
           "id": "b",
@@ -1466,11 +1466,11 @@
         },
         {
           "id": "c",
-          "label": "map runs the sends one at a time, so the slow loop triggers the provider's timeouts"
+          "label": "map runs the sends one at a time, so the slow sequential loop triggers the provider's timeouts and rejections"
         },
         {
           "id": "d",
-          "label": "The await in the handler blocks the event loop, so the provider rejects later requests"
+          "label": "The await in the handler blocks the event loop while waiting, so the provider rejects the later requests it receives"
         }
       ],
       "answerKey": {
@@ -1709,19 +1709,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Responses can arrive in a different order than requests were sent, so a slower earlier response overwrites newer results"
+          "label": "Responses can arrive in a different order than requests were sent, so a slower earlier one overwrites newer results"
         },
         {
           "id": "b",
-          "label": "fetch caches responses by prefix, so shorter queries return stale data from a cache after longer ones"
+          "label": "fetch caches responses by prefix, so shorter queries return stale data from a cache even after longer queries have been sent"
         },
         {
           "id": "c",
-          "label": "The event loop runs the callbacks for the oldest request last, which reorders the UI updates"
+          "label": "The event loop always runs the callbacks for the oldest pending request last, which reorders the UI updates after typing"
         },
         {
           "id": "d",
-          "label": "Promises resolve in the order their `then` handlers were registered, so the first query always renders last"
+          "label": "Promises resolve in the order their `then` handlers were registered, so the first query's result always renders last"
         }
       ],
       "answerKey": {
@@ -1818,7 +1818,7 @@
         },
         {
           "id": "b",
-          "label": "Run batches of 10 with `Promise.all`, which always has higher throughput than any other approach"
+          "label": "Run batches of 10 with `Promise.all`, which keeps throughput high because each batch finishes together"
         },
         {
           "id": "c",
@@ -1826,7 +1826,7 @@
         },
         {
           "id": "d",
-          "label": "Await each request in a `for` loop, since that is the only way to avoid exceeding the limit"
+          "label": "Await each request in a `for` loop, since that guarantees the server limit is never exceeded"
         }
       ],
       "answerKey": {
@@ -2319,7 +2319,7 @@
         },
         {
           "id": "c",
-          "label": "Return `Promise.race([fetch(url), timeout])` where `timeout` is a promise that rejects after `ms` milliseconds"
+          "label": "Return `Promise.race([fetch(url), timeout])` where `timeout` rejects after `ms`, relying on the race to cancel the slower fetch and clear the timer"
         },
         {
           "id": "d",

@@ -401,7 +401,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It holds its previous value"
+          "label": "It holds its previous value until T changes"
         },
         {
           "id": "b",
@@ -409,11 +409,11 @@
         },
         {
           "id": "c",
-          "label": "It is reset to 0"
+          "label": "It is reset to 0 and stays there until T changes"
         },
         {
           "id": "d",
-          "label": "It is set to 1"
+          "label": "It is set to 1 and stays there until T changes"
         }
       ],
       "answerKey": {
@@ -695,7 +695,7 @@
         },
         {
           "id": "c",
-          "label": "Half adder"
+          "label": "4-bit binary counter"
         },
         {
           "id": "d",
@@ -705,14 +705,9 @@
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "Multiplexers, decoders and adders produce outputs purely from current inputs.",
-        "A flip-flop stores state, so it is sequential."
-      ],
       "reviewed": false
     },
     {
@@ -724,15 +719,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Sequential, because it has more than one input signal to monitor"
+          "label": "Sequential, because it has more than one input signal and so must monitor both over time"
         },
         {
           "id": "b",
-          "label": "Combinational, because the button and sensor are its only inputs"
+          "label": "Combinational, because the button and the sensor are its only inputs and the door is its only output"
         },
         {
           "id": "c",
-          "label": "Combinational, because it can be drawn using only AND and OR gates"
+          "label": "Combinational, because its behaviour can be drawn using only AND and OR gates with feedback"
         },
         {
           "id": "d",
@@ -1361,7 +1356,7 @@
         },
         {
           "id": "b",
-          "label": "Setup violation on the 6 ns path, which needs 8 ns"
+          "label": "Setup violation on the 9 ns path, because only the logic delay counts and 9 ns exceeds the 8 ns left after setup and clock-to-Q"
         },
         {
           "id": "c",
@@ -1498,11 +1493,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The OR gate is slower than the AND gates, so it holds F low until both products settle; adding a buffer after the OR removes the dip."
+          "label": "The OR gate is slower than the AND gates, so it holds F low until both products settle; a buffer after the OR would remove the dip."
         },
         {
           "id": "b",
-          "label": "A changes while B and C are 1, which is a static-0 hazard; adding the term A·A' to the expression would hold the output low."
+          "label": "The output is a static-0 hazard caused by A changing while B and C are 1; ANDing F with the term (A + A') would hold the output steady."
         },
         {
           "id": "c",
@@ -1510,7 +1505,7 @@
         },
         {
           "id": "d",
-          "label": "The inverter delays A', so AB falls before A'C rises and both terms are briefly 0; adding the consensus term BC covers the gap."
+          "label": "The inverter delays A', so AB falls before A'C rises and both are briefly 0; adding the consensus term BC covers the gap."
         }
       ],
       "answerKey": {
@@ -1709,19 +1704,19 @@
       "options": [
         {
           "id": "a",
-          "label": "From S3, input 0 goes to S0 instead of S2, losing the trailing 1 shared with the next 101."
+          "label": "From S3, input 0 goes to S0 instead of S2, losing the shared 1."
         },
         {
           "id": "b",
-          "label": "From S2, input 1 goes to S1 instead of S3."
+          "label": "From S2, input 1 goes to S1 instead of S3, so the first 101 would never be flagged at all."
         },
         {
           "id": "c",
-          "label": "From S1, input 1 stays in S1 instead of returning to S0."
+          "label": "From S1, input 1 stays in S1 instead of returning to S0, so a run of 1s is treated as a fresh start."
         },
         {
           "id": "d",
-          "label": "From S3, input 1 goes to S0 instead of S1."
+          "label": "From S3, input 1 goes to S0 instead of S1, so the new 1 after a match is ignored."
         }
       ],
       "answerKey": {
@@ -1744,19 +1739,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A minimised dense assignment from a tool, because it reduces next-state logic for all states at equal depth."
+          "label": "A minimised dense assignment from a tool, because it reduces next-state logic for all states and keeps the logic depth equal across all of them."
         },
         {
           "id": "b",
-          "label": "Binary, because 6 flip-flops give the fewest registers and therefore the shortest clock distribution path."
+          "label": "Binary, because 6 flip-flops give the fewest registers and therefore the shortest clock distribution path and the lowest clock skew."
         },
         {
           "id": "c",
-          "label": "One-hot, because each state is a single bit, so decoding and next-state logic stay shallow even though it needs 40 flip-flops."
+          "label": "One-hot, because each state is one bit, so decoding and next-state logic stay shallow despite needing 40 flip-flops."
         },
         {
           "id": "d",
-          "label": "Gray code, because one bit changes per transition, which makes the decoding logic shallow for every state."
+          "label": "Gray code, because only one bit changes per transition, which removes glitches and makes the decoding logic shallow for every state."
         }
       ],
       "answerKey": {
@@ -2025,19 +2020,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Moore with outputs taken directly from state flip-flops, so noisy inputs cannot reach them between edges"
+          "label": "Moore, with outputs taken directly from state flip-flops so noisy inputs cannot reach them"
         },
         {
           "id": "b",
-          "label": "Mealy, because it needs fewer states and fewer gates, and therefore generates fewer glitches"
+          "label": "Mealy, because it needs fewer states and fewer gates, and therefore generates fewer glitches on its outputs"
         },
         {
           "id": "c",
-          "label": "Mealy, because its output tracks the inputs in the same cycle and so reacts most precisely"
+          "label": "Mealy, because its output tracks the inputs within the same cycle and so reacts most precisely to changes"
         },
         {
           "id": "d",
-          "label": "Either style, because both are synchronous machines and so their outputs can never glitch"
+          "label": "Either style, because both are synchronous machines and so their outputs can never glitch at all"
         }
       ],
       "answerKey": {
@@ -2060,19 +2055,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Only one bit changes per increment, so a sampled pointer is either the old or the new value, never a mixed one"
+          "label": "Only one bit changes per increment, so a sampled pointer is either the old or new value, never a mixed one"
         },
         {
           "id": "b",
-          "label": "Gray counters increment faster than binary because they have no carry chain, keeping samples current"
+          "label": "Gray counters increment faster than binary because they have no carry chain, so the sampled pointer is always current"
         },
         {
           "id": "c",
-          "label": "Gray counters need fewer flip-flops than binary, so there are fewer paths to synchronise"
+          "label": "Gray counters need fewer flip-flops than binary, so there are fewer paths to synchronise across the two clock domains"
         },
         {
           "id": "d",
-          "label": "Gray coding removes metastability, so the synchroniser flops can be dropped from the crossing"
+          "label": "Gray coding removes metastability from the sampled bits, so the synchroniser flops can be dropped from the crossing"
         }
       ],
       "answerKey": {

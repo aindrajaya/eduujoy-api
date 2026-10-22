@@ -371,15 +371,15 @@
         },
         {
           "id": "b",
-          "label": "A separate table linked to each row by a foreign key"
+          "label": "A separate table that stores each tag as its own row, linked by a foreign key"
         },
         {
           "id": "c",
-          "label": "A column that holds exactly one text value of any length"
+          "label": "A column that holds exactly one text value of any length per row"
         },
         {
           "id": "d",
-          "label": "A column that stores key-value pairs with unique keys"
+          "label": "A column that stores key-value pairs, with each key unique in a row"
         }
       ],
       "answerKey": {
@@ -583,19 +583,19 @@
       "options": [
         {
           "id": "a",
-          "label": "B-tree indexes can only be used on numeric columns, not on text"
+          "label": "B-tree indexes are built for numeric ordering, so text columns like email need a hash index to be searched"
         },
         {
           "id": "b",
-          "label": "The index holds raw email values, so lower(email) doesn't match it"
+          "label": "The stored entries are the original values, so a comparison on a transformed value can't be looked up in them"
         },
         {
           "id": "c",
-          "label": "The index is used only when the query also includes an ORDER BY"
+          "label": "The planner skips the index for equality tests on text unless the query also sorts the rows with ORDER BY"
         },
         {
           "id": "d",
-          "label": "Any function call in WHERE disables all indexes until ANALYZE runs"
+          "label": "Calling a function in WHERE makes the planner discard index statistics until the next ANALYZE refreshes them"
         }
       ],
       "answerKey": {
@@ -700,7 +700,7 @@
         },
         {
           "id": "d",
-          "label": "Each statement needs an explicit BEGIN before it can be atomic"
+          "label": "A single UPDATE outside a transaction block may be left half-applied if an error occurs partway through"
         }
       ],
       "answerKey": {
@@ -971,11 +971,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Run VACUUM FULL on orders to shrink the table file on disk"
+          "label": "Run VACUUM FULL on orders to rewrite the table and remove dead space that slows the scan"
         },
         {
           "id": "b",
-          "label": "Create an index on status alone, since it appears in the filter"
+          "label": "Create an index on status alone, because every query on orders filters on that column"
         },
         {
           "id": "c",
@@ -983,7 +983,7 @@
         },
         {
           "id": "d",
-          "label": "Raise work_mem so that the sequential scan fits in memory"
+          "label": "Raise work_mem so that the sequential scan can run entirely in memory"
         }
       ],
       "answerKey": {
@@ -1572,15 +1572,15 @@
         },
         {
           "id": "b",
-          "label": "The session's uncommitted changes are written to the table file twice, which doubles its on-disk size"
+          "label": "The session's uncommitted changes are written to the table file twice, once as new row versions and again as a copy, which doubles its on-disk size"
         },
         {
           "id": "c",
-          "label": "Autovacuum skips tables with open transactions, so dead tuples are never counted in the statistics views"
+          "label": "Autovacuum skips any table that has an open transaction against it, so dead tuples are never counted in the statistics views and cleanup is never triggered"
         },
         {
           "id": "d",
-          "label": "Idle sessions hold an exclusive table lock, so autovacuum is blocked from ever starting on that table"
+          "label": "Idle sessions hold an exclusive table lock, so autovacuum is blocked from ever starting on that table until the session ends"
         }
       ],
       "answerKey": {
@@ -1603,11 +1603,11 @@
       "options": [
         {
           "id": "a",
-          "label": "GIN indexes are only consulted after `VACUUM FULL` has rebuilt the entries for every key in the jsonb values"
+          "label": "The GIN index entries are stale until `VACUUM FULL` rebuilds them, so the planner skips the index for key lookups"
         },
         {
           "id": "b",
-          "label": "GIN indexes can only be built on array columns, so the jsonb index was silently never created and is empty"
+          "label": "GIN indexes are meant for array columns, so the planner ignores one built on jsonb for key lookups"
         },
         {
           "id": "c",
@@ -1615,7 +1615,7 @@
         },
         {
           "id": "d",
-          "label": "The `->>` operator returns jsonb, which cannot be compared to a string literal when an index is involved"
+          "label": "The `->>` operator returns jsonb, which the planner cannot match to a text literal when choosing an index"
         }
       ],
       "answerKey": {
@@ -1638,7 +1638,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Composite indexes are used only when every indexed column appears in an equality predicate in the query"
+          "label": "Composite indexes are used for range filters only when the leading column also has an equality predicate, so a bare range on created_at is rejected by the planner"
         },
         {
           "id": "b",
@@ -1646,11 +1646,11 @@
         },
         {
           "id": "c",
-          "label": "Btree indexes are ordered by the last column first, so the filter should match and the statistics must be stale"
+          "label": "The index sorts created_at before customer_id, so the range filter matches the index order and the slowness points to stale statistics"
         },
         {
           "id": "d",
-          "label": "The `now()` function is volatile, so any predicate containing it can never use an index under any plan"
+          "label": "The now() function is volatile, so the planner evaluates it per row and treats the predicate as not indexable in this query"
         }
       ],
       "answerKey": {
@@ -1796,7 +1796,7 @@
         },
         {
           "id": "d",
-          "label": "A join table `product_tags(product_id, tag_id)` with foreign keys to both tables"
+          "label": "A `product_tags` link table of product and tag ids, which stores each tag once and lets a rename touch one row"
         }
       ],
       "answerKey": {

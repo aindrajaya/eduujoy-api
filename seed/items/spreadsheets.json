@@ -477,19 +477,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Multiplication stops working after the first row of data"
+          "label": "Excel only calculates the first row, so later rows need the formula retyped"
         },
         {
           "id": "b",
-          "label": "The reference to C1 shifted to C2, C3 and so on, which are empty"
+          "label": "C1 shifted to C2, C3 and so on, which are empty"
         },
         {
           "id": "c",
-          "label": "The tax rate cell was formatted as text, which zeroes the rows"
+          "label": "The B column values below row 2 were stored as text, so they became zero"
         },
         {
           "id": "d",
-          "label": "Copying formulas always returns zero for rows beyond the first"
+          "label": "Copied formulas keep their results from row 2, so they stay at zero after that"
         }
       ],
       "answerKey": {
@@ -520,7 +520,7 @@
         },
         {
           "id": "c",
-          "label": "It keeps the reference pointing at E1 when the formula is copied"
+          "label": "It keeps the reference pointing at E1 when copied"
         },
         {
           "id": "d",
@@ -719,23 +719,23 @@
       "stage": "advanced_beginner",
       "bloom": "C2",
       "kind": "scenario",
-      "prompt": "Priya types the date 14/03/2025 into a cell in a very narrow column. The cell shows `########`, yet the formula bar displays the date correctly. She asks what is wrong. What is the most likely explanation?",
+      "prompt": "Priya types the date 14/03/2025 into a cell. The cell shows `########`, yet the formula bar displays the date correctly. She asks what is wrong. What is the most likely explanation?",
       "options": [
         {
           "id": "a",
-          "label": "The date is invalid, so the sheet replaced it with a placeholder"
+          "label": "The date is invalid for the sheet's locale, so it replaced the entry with a placeholder"
         },
         {
           "id": "b",
-          "label": "The cell has a circular reference, so it cannot show the result"
+          "label": "The cell holds a circular reference, so it cannot calculate and show any result"
         },
         {
           "id": "c",
-          "label": "The column is too narrow to display the value, so widening it fixes it"
+          "label": "The value is too wide for the column, so widening the column displays it"
         },
         {
           "id": "d",
-          "label": "The date was stored as text, so it must be converted to a number"
+          "label": "The date was stored as text, so it must be converted to a true date number"
         }
       ],
       "answerKey": {
@@ -1461,15 +1461,15 @@
       "options": [
         {
           "id": "a",
-          "label": "SUM only skips rows hidden by hand; wrap it in COUNTIF so that filtered rows are left out"
+          "label": "SUM only skips rows hidden by hand, not by a filter; wrap the range in COUNTIF so filtered rows are left out of the total"
         },
         {
           "id": "b",
-          "label": "SUM refreshes only on F9; press it after filtering and the total will drop to visible rows"
+          "label": "SUM recalculates only when you press F9 after filtering; press it and the total will drop to the visible rows only"
         },
         {
           "id": "c",
-          "label": "The filter was applied to the wrong column; clear it and filter column D instead of Region"
+          "label": "The filter was applied to the wrong column; clear it and filter column D instead of Region so the total updates"
         },
         {
           "id": "d",
@@ -1531,7 +1531,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Refresh only updates formatting, while values update on file close"
+          "label": "Refresh only updates formatting and layout; new values are loaded when the file is next closed and reopened"
         },
         {
           "id": "b",
@@ -1539,11 +1539,11 @@
         },
         {
           "id": "c",
-          "label": "Pivot tables only recalculate when the source sheet is re-sorted first"
+          "label": "Pivot tables only recalculate after the source sheet has been re-sorted, which forces a full cache rebuild"
         },
         {
           "id": "d",
-          "label": "The new rows have dates that pivots exclude until they are grouped"
+          "label": "The new rows have dates that pivots exclude until the Date field is grouped by month or year"
         }
       ],
       "answerKey": {
@@ -1566,19 +1566,19 @@
       "options": [
         {
           "id": "a",
-          "label": "SUM skips cells containing formulas, so the numerator is too small"
+          "label": "SUM skips every cell that contains a formula, so the numerator is too small"
         },
         {
           "id": "b",
-          "label": "COUNTA counts the formula cells returning \"\", so the denominator is too large"
+          "label": "COUNTA counts the \"\" cells, so the denominator is too large"
         },
         {
           "id": "c",
-          "label": "COUNTA counts only text cells, so the denominator is too small"
+          "label": "COUNTA counts only text cells in the range, so the denominator is too small"
         },
         {
           "id": "d",
-          "label": "AVERAGE rounds up to the nearest whole number while SUM does not"
+          "label": "AVERAGE rounds its result up to the nearest whole number, but SUM does not"
         }
       ],
       "answerKey": {
@@ -1601,19 +1601,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The column is anchored, so every row multiplies by the wrong column"
+          "label": "The dollar sign locks the column but not the row, so only the column letter is protected"
         },
         {
           "id": "b",
-          "label": "The relative row part shifts to C2, C3 and so on, instead of staying on C1"
+          "label": "The row number is not locked, so it shifts to C2, C3 and so on instead of staying on C1"
         },
         {
           "id": "c",
-          "label": "Fill-down converts cell references to values after the first row"
+          "label": "Fill-down converts cell references to fixed values after the first row has been calculated"
         },
         {
           "id": "d",
-          "label": "The multiplication needs a SUMPRODUCT to work on more than one row"
+          "label": "The multiplication needs a SUMPRODUCT to work correctly when it is filled over many rows"
         }
       ],
       "answerKey": {
@@ -1636,19 +1636,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Grouping converts dates to text, which duplicates the first month"
+          "label": "Grouping by Months turns the dates into text labels, so the first month is counted twice"
         },
         {
           "id": "b",
-          "label": "Years were not included in the grouping, so Januaries of both years are combined"
+          "label": "Years were left out of the grouping, so both Januaries merged"
         },
         {
           "id": "c",
-          "label": "January always has more orders, and grouping merely sorts them"
+          "label": "Grouping by Months sorts the orders by date, so January shows the running total up to that point"
         },
         {
           "id": "d",
-          "label": "The pivot counted January twice because of a leap-year adjustment"
+          "label": "The pivot applied a leap-year adjustment to the first month, so January counted twice"
         }
       ],
       "answerKey": {
@@ -1747,19 +1747,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`=VLOOKUP(A2, Src!A:F, 4, FALSE)`, since the column number is easy to read"
+          "label": "`=VLOOKUP(A2, Src!A:F, 4, FALSE)`, since the exact-match flag is set and the column number 4 is easy for colleagues to read"
         },
         {
           "id": "b",
-          "label": "`=XLOOKUP(A2, Src!A:A, Src!D:D)`, since it references return columns directly and defaults to exact match"
+          "label": "`=XLOOKUP(A2, Src!A:A, Src!D:D)`, since it names the return column directly and defaults to exact match"
         },
         {
           "id": "c",
-          "label": "`=VLOOKUP(A2, Src!A:F, 4, TRUE)`, since approximate match runs faster on big tables"
+          "label": "`=VLOOKUP(A2, Src!A:F, 4, TRUE)`, since approximate match runs faster on big sorted tables and the index adjusts"
         },
         {
           "id": "d",
-          "label": "`=INDEX(Src!A:F, MATCH(A2, Src!A:A, 1), 4)`, since MATCH type 1 is the standard mode"
+          "label": "`=INDEX(Src!A:F, MATCH(A2, Src!A:A, 1), 4)`, since MATCH type 1 is the standard mode and INDEX tracks columns"
         }
       ],
       "answerKey": {
@@ -1782,19 +1782,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A COUNTIF check column that flags invalid codes after entry is finished"
+          "label": "A COUNTIF check column beside the codes that flags any invalid entry once typing is finished"
         },
         {
           "id": "b",
-          "label": "Data validation using a dropdown tied to a list range, with invalid entries rejected"
+          "label": "Data validation: a dropdown tied to a list range, rejecting invalid entries"
         },
         {
           "id": "c",
-          "label": "Conditional formatting that turns invalid codes red, so users notice errors"
+          "label": "Conditional formatting that turns any code missing from the list red, so users notice and fix errors"
         },
         {
           "id": "d",
-          "label": "A note at the top of the sheet that lists the codes allowed"
+          "label": "A note pinned at the top of the sheet listing the allowed codes, updated whenever the list changes"
         }
       ],
       "answerKey": {
@@ -1887,19 +1887,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Round each result to a whole number so rate changes matter less"
+          "label": "Round each result to a whole number so that yearly rate changes have less effect on totals"
         },
         {
           "id": "b",
-          "label": "Find and replace 0.2 with the new rate every year, since it is quick"
+          "label": "Use find and replace on 0.2 each year, then note the change date in the file's version history"
         },
         {
           "id": "c",
-          "label": "Add a comment on the first formula that explains the 0.2 rate"
+          "label": "Add a cell comment on the first formula explaining the 0.2 rate and where it came from"
         },
         {
           "id": "d",
-          "label": "Put the rate in one labeled input cell and reference it as `$B$1` or a named range"
+          "label": "Put the rate in one labeled cell and reference it as `$B$1` or a named range"
         }
       ],
       "answerKey": {
@@ -1958,19 +1958,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep one sheet and use protected ranges so each manager can edit only their rows"
+          "label": "Keep one sheet and protect each region's rows so only that manager edits them"
         },
         {
           "id": "b",
-          "label": "Email each manager a copy and paste their returned rows into the master"
+          "label": "Email each manager a copy, then paste their returned rows into the master sheet"
         },
         {
           "id": "c",
-          "label": "Create one tab per manager and have finance copy each tab into totals"
+          "label": "Create one tab per manager, then have finance copy every tab into a totals sheet"
         },
         {
           "id": "d",
-          "label": "Give everyone edit access and rely on version history to undo mistakes"
+          "label": "Give everyone edit access and rely on version history to undo any mistakes later"
         }
       ],
       "answerKey": {
@@ -1993,19 +1993,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Compute MATCH once per report row in a helper column, then use INDEX with that row number for each of the 8 columns"
+          "label": "Run MATCH once per report row in a helper column, then INDEX that row number for each of the 8 columns"
         },
         {
           "id": "b",
-          "label": "Write one exact-match VLOOKUP per output column, since every cell stays independent and is simple to audit later"
+          "label": "Write one exact-match VLOOKUP per output column, which keeps each cell independent and simple to audit later on"
         },
         {
           "id": "c",
-          "label": "Wrap each lookup in IFERROR with a COUNTIF check first, so every cell confirms the ID exists before it looks up"
+          "label": "Wrap each lookup in IFERROR after a COUNTIF check, so each cell confirms the ID exists before it looks it up"
         },
         {
           "id": "d",
-          "label": "Sort the data and use approximate-match VLOOKUP, since binary search is always faster and returns the same result"
+          "label": "Sort the data and use approximate-match VLOOKUP, since binary search is faster and usually returns the same result"
         }
       ],
       "answerKey": {
@@ -2205,19 +2205,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Hide all formula columns so editors cannot see them, and keep a pasted-values backup of the sheet each month"
+          "label": "Hide the formula columns so editors cannot see them, and save a pasted-values backup of the whole sheet at each month end"
         },
         {
           "id": "b",
-          "label": "Lock and protect the formula cells while leaving input cells unlocked, and rely on version history for traceability"
+          "label": "Lock and protect the formula cells, leave input cells unlocked, and use version history to trace changes"
         },
         {
           "id": "c",
-          "label": "Email a reminder to all editors not to type in formula cells and ask them to review totals before each meeting"
+          "label": "Email all editors a reminder not to type in formula cells, and ask each of them to check the totals before every board meeting"
         },
         {
           "id": "d",
-          "label": "Give edit rights to one person who enters everyone's data, so there is only one possible source of mistakes"
+          "label": "Give edit rights to one person who enters everyone's data, so that a single owner is accountable for every cell in the workbook"
         }
       ],
       "answerKey": {
@@ -2452,7 +2452,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`=IF(B2>50000,B2*5%,IF(B2>10000,B2*3%,B2*2%))`"
+          "label": "`=IF(B2>50000,B2*SUM($H$2:$H$4),IF(B2>10000,B2*($H$2+$H$3),B2*$H$2))`"
         },
         {
           "id": "b",

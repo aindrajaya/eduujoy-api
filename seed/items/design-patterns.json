@@ -81,15 +81,15 @@
       "options": [
         {
           "id": "a",
-          "label": "A single object shared across the whole program"
+          "label": "A single object shared across the whole program, created once"
         },
         {
           "id": "b",
-          "label": "A tree of objects treated uniformly as one"
+          "label": "A tree of objects that clients treat uniformly as one object"
         },
         {
           "id": "c",
-          "label": "A wrapper that converts one interface into another"
+          "label": "A wrapper that converts one interface into another interface"
         },
         {
           "id": "d",
@@ -262,19 +262,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It guarantees only one discount object is ever created"
+          "label": "It guarantees only one discount object exists, so every checkout shares the same single instance"
         },
         {
           "id": "b",
-          "label": "Each algorithm sits in its own class, so you can add or swap one without editing the checkout"
+          "label": "Each algorithm sits in its own class, so you can add or swap one without editing checkout"
         },
         {
           "id": "c",
-          "label": "It lets every discount be notified automatically when prices change"
+          "label": "It lets every discount be notified automatically whenever prices change in the catalogue"
         },
         {
           "id": "d",
-          "label": "It hides the checkout class behind a simpler interface for clients"
+          "label": "It hides the checkout class behind a simpler interface, so clients call one method instead"
         }
       ],
       "answerKey": {
@@ -367,19 +367,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The factory lets the client skip implementing the interface"
+          "label": "The factory lets the client skip implementing the interface that the product type declares"
         },
         {
           "id": "b",
-          "label": "The factory ensures that the object can never be subclassed"
+          "label": "The factory ensures that the created object can never be subclassed by other code"
         },
         {
           "id": "c",
-          "label": "The client depends on an abstraction and not on a specific concrete class"
+          "label": "The client depends on an abstraction, not a specific concrete class"
         },
         {
           "id": "d",
-          "label": "The factory makes object creation run faster than `new` does"
+          "label": "The factory makes object creation run faster than calling `new` directly does"
         }
       ],
       "answerKey": {
@@ -402,19 +402,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It acts as hidden global state, which makes code harder to test and reason about"
+          "label": "It acts as hidden global state, so code is harder to test"
         },
         {
           "id": "b",
-          "label": "It stops a class from having any methods besides its constructor"
+          "label": "It stops a class from having any public methods besides its constructor and instance getter"
         },
         {
           "id": "c",
-          "label": "It requires an inheritance hierarchy with many subclasses"
+          "label": "It requires an inheritance hierarchy with many subclasses, so even simple classes become deeply nested"
         },
         {
           "id": "d",
-          "label": "It forces every class to implement an interface"
+          "label": "It forces every class in the program to implement a shared interface before it can be created"
         }
       ],
       "answerKey": {
@@ -587,15 +587,15 @@
         },
         {
           "id": "b",
-          "label": "Only one instance of each payment algorithm can exist, so state is never duplicated"
+          "label": "Only one instance of each payment algorithm can exist and it is shared globally, so state is never duplicated across checkouts"
         },
         {
           "id": "c",
-          "label": "Payment classes inherit shared fields from a common concrete base, so there is less repeated data"
+          "label": "Payment classes inherit shared fields and methods from a common concrete base class, so there is far less repeated code and data"
         },
         {
           "id": "d",
-          "label": "Method calls are cheaper than conditionals, so the checkout code runs noticeably faster"
+          "label": "Method calls are cheaper than conditionals at runtime, so the checkout code runs noticeably faster once the chain is removed"
         }
       ],
       "answerKey": {
@@ -618,19 +618,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It hides a complex subsystem behind one simple entry-point class for clients"
+          "label": "It hides a complex subsystem behind one simple entry-point class so clients call just one interface"
         },
         {
           "id": "b",
-          "label": "It lets behaviors be combined at runtime by wrapping, so no subclass per combination is needed"
+          "label": "It lets features be stacked at runtime by wrapping an object, avoiding many classes"
         },
         {
           "id": "c",
-          "label": "It lets a class change its own superclass while the program is running"
+          "label": "It lets a class swap out its own superclass while the program is running, so features change on the fly"
         },
         {
           "id": "d",
-          "label": "It ensures a wrapped object can never be reached directly by other code"
+          "label": "It ensures a wrapped object can never be reached directly by any other code in the program"
         }
       ],
       "answerKey": {
@@ -653,19 +653,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It forces every class to inherit from one abstract base class in the application"
+          "label": "It forces each class to inherit from one shared abstract base class"
         },
         {
           "id": "b",
-          "label": "It forbids the instance from holding any data between separate method calls"
+          "label": "It stops the instance from keeping state between separate method calls"
         },
         {
           "id": "c",
-          "label": "It acts like global state, which hides dependencies and makes tests harder to isolate"
+          "label": "It acts like global state, hiding dependencies and hurting test isolation"
         },
         {
           "id": "d",
-          "label": "It makes object creation slower for every other class in the application"
+          "label": "It slows object creation for the other classes that run in the same application"
         }
       ],
       "answerKey": {
@@ -728,7 +728,7 @@
         },
         {
           "id": "b",
-          "label": "Widgets register through a common listener interface, so the sensor notifies them without knowing their classes"
+          "label": "Widgets subscribe via a listener interface, so the sensor notifies them without knowing their types"
         },
         {
           "id": "c",
@@ -736,7 +736,7 @@
         },
         {
           "id": "d",
-          "label": "A factory creates the right widget per reading, so the sensor never needs to call any widget"
+          "label": "A factory creates the right widget for each reading, so the sensor never needs to call any widget directly"
         }
       ],
       "answerKey": {
@@ -1325,15 +1325,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Subclasses override too many methods, so decorators remove the need for any shared stream interface"
+          "label": "Subclasses override too many base methods, so decorators remove the need for any shared stream interface between wrappers"
         },
         {
           "id": "b",
-          "label": "Streams should exist once per process, so decorators guarantee one stream instance per feature"
+          "label": "Streams should exist once per process, so decorators guarantee a single shared stream instance for each added feature"
         },
         {
           "id": "c",
-          "label": "Inheritance is slower at runtime, so decorators avoid virtual dispatch when features are combined"
+          "label": "Inheritance is slower at runtime, so decorators avoid virtual dispatch when several stream features are combined together"
         },
         {
           "id": "d",
@@ -1360,19 +1360,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Singletons forbid reading values, so each test sees stale copies of the settings"
+          "label": "Singletons forbid reading values after they are set, so each test sees stale copies of the settings"
         },
         {
           "id": "b",
-          "label": "Singletons are created lazily, so whichever test runs first is slow and times out"
+          "label": "Singletons are created lazily, so whichever test runs first is slow and times out before finishing"
         },
         {
           "id": "c",
-          "label": "The `Settings` class is final, so tests cannot subclass it to reset its values"
+          "label": "The `Settings` class is final, so tests cannot subclass it to reset its values between test runs"
         },
         {
           "id": "d",
-          "label": "State held by the single global instance leaks between tests, so results depend on run order"
+          "label": "The single global instance keeps its state between tests, so results depend on run order"
         }
       ],
       "answerKey": {
@@ -1395,19 +1395,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Both are Decorator because each one wraps another object to extend its behaviour"
+          "label": "Both are Decorator because each one wraps another object behind the same interface to extend its behaviour"
         },
         {
           "id": "b",
-          "label": "Both are Strategy because both delegate work to an object behind an interface"
+          "label": "Both are Strategy because each delegates its work to an interchangeable object behind a shared interface"
         },
         {
           "id": "c",
-          "label": "`Sorter` is Strategy since the client picks the algorithm; `Connection` is State since transitions happen internally"
+          "label": "`Sorter` is Strategy as the client picks the algorithm; `Connection` is State as it changes itself"
         },
         {
           "id": "d",
-          "label": "`Sorter` is State because behaviour changes; `Connection` is Strategy because it holds a reference"
+          "label": "`Sorter` is State because its behaviour varies by object held; `Connection` is Strategy because it holds a reference to an interface"
         }
       ],
       "answerKey": {
@@ -1576,7 +1576,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It is Strategy, because the behavior sits in an interchangeable object that is held behind a common interface."
+          "label": "It is Strategy, because the behavior lives in an interchangeable object behind a common interface, and swapping it is what defines the pattern."
         },
         {
           "id": "b",
@@ -2068,7 +2068,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Notifications are synchronous, so each subscriber runs in order"
+          "label": "Notifications run synchronously, so one slow subscriber delays every later subscriber and the publisher"
         },
         {
           "id": "b",
@@ -2076,11 +2076,11 @@
         },
         {
           "id": "c",
-          "label": "Subscribers cannot know which other subscribers exist"
+          "label": "Subscribers cannot know which other subscribers exist, so they cannot coordinate the order of their updates"
         },
         {
           "id": "d",
-          "label": "The bus depends on an abstract observer interface, not concrete panel classes"
+          "label": "The bus depends on an abstract observer interface, so each new panel type needs changes to the bus code"
         }
       ],
       "answerKey": {
@@ -2314,15 +2314,15 @@
       "options": [
         {
           "id": "a",
-          "label": "A domain-owned `PaymentGateway` interface, one adapter per vendor, and a fake for tests"
+          "label": "A domain-owned `PaymentGateway` interface, one adapter per vendor, and a test fake"
         },
         {
           "id": "b",
-          "label": "Call each SDK directly and wrap each call in a try/catch for errors"
+          "label": "A shared `PaymentUtils` module that calls each SDK directly and catches vendor errors"
         },
         {
           "id": "c",
-          "label": "One Singleton class that exposes both SDKs and picks one by a flag"
+          "label": "One Singleton class that exposes both SDKs and picks one by a config flag"
         },
         {
           "id": "d",
@@ -2349,7 +2349,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A Prototype that clones a default `Report` and lets callers edit the clone"
+          "label": "A Prototype that clones a default `Report`, lets callers edit the clone, then checks the combination when the report is saved"
         },
         {
           "id": "b",
@@ -2357,11 +2357,11 @@
         },
         {
           "id": "c",
-          "label": "A mutable `Report` with setters and a `validate()` method callers should invoke"
+          "label": "A mutable `Report` with fluent setters and a `validate()` method that every caller must invoke before using the report"
         },
         {
           "id": "d",
-          "label": "A constructor with 12 parameters where callers pass null for the unused ones"
+          "label": "A telescoping set of constructor overloads, each checking its own arguments, that callers pick by setting count"
         }
       ],
       "answerKey": {
@@ -2463,7 +2463,7 @@
         },
         {
           "id": "c",
-          "label": "A subclass of `Report` per format, with the tool compiled against all of them"
+          "label": "A subclass of `Report` per format, picked by a factory method, with the tool compiled against all of them"
         },
         {
           "id": "d",

@@ -194,7 +194,7 @@
         },
         {
           "id": "c",
-          "label": "string"
+          "label": "array"
         },
         {
           "id": "d",
@@ -204,14 +204,9 @@
       "answerKey": {
         "optionIds": [
           "b",
-          "c",
           "d"
         ]
       },
-      "rubric": [
-        "string, boolean and number are primitives.",
-        "integer is not a TypeScript type; whole numbers use number."
-      ],
       "reviewed": false
     },
     {
@@ -235,7 +230,7 @@
         },
         {
           "id": "d",
-          "label": "A type assertion on the return value"
+          "label": "A type assertion on the function's return value"
         }
       ],
       "answerKey": {
@@ -477,11 +472,11 @@
         },
         {
           "id": "c",
-          "label": "It only affects formatting such as semicolons"
+          "label": "It only changes how the compiler formats output, such as semicolons and quotes"
         },
         {
           "id": "d",
-          "label": "It removes all type annotations from the output"
+          "label": "It removes all type annotations and comments from the emitted JavaScript"
         }
       ],
       "answerKey": {
@@ -609,11 +604,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A class that every argument passed to the function must extend"
+          "label": "A base class that every argument passed to the function must extend, checked when the call is compiled"
         },
         {
           "id": "b",
-          "label": "A built-in alias that is another way of writing the type `any`"
+          "label": "A built-in alias that is simply another way of writing the type `any` inside generics"
         },
         {
           "id": "c",
@@ -621,7 +616,7 @@
         },
         {
           "id": "d",
-          "label": "A runtime variable that stores the name of the argument's type"
+          "label": "A runtime variable that stores the name of the argument's type as a string"
         }
       ],
       "answerKey": {
@@ -720,19 +715,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The `User` interface was never exported, so its fields are unknown"
+          "label": "Interface fields are unknown outside the file unless the `User` interface is exported"
         },
         {
           "id": "b",
-          "label": "Optional properties are typed `string | undefined`, so `.length` may hit undefined"
+          "label": "The `?` makes the type `string | undefined`, so `.length` may hit undefined"
         },
         {
           "id": "c",
-          "label": "The `length` property exists only on arrays and not on strings"
+          "label": "Under strict mode, `.length` is available only on arrays, not on plain strings"
         },
         {
           "id": "d",
-          "label": "Interfaces cannot describe string properties without a default value"
+          "label": "An optional field has no value until a default is assigned in the interface body"
         }
       ],
       "answerKey": {
@@ -971,7 +966,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`return s!.length;`"
+          "label": "`return s !== null ? s!.length : undefined;`"
         },
         {
           "id": "b",
@@ -979,11 +974,11 @@
         },
         {
           "id": "c",
-          "label": "`return s === null ? 0 : s.length;`"
+          "label": "`return s ? s.length : 0;`"
         },
         {
           "id": "d",
-          "label": "`return (s as string).length;`"
+          "label": "`return (s as string).length ?? 0;`"
         }
       ],
       "answerKey": {
@@ -1006,7 +1001,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`string`"
+          "label": "`string`, since the array has elements"
         },
         {
           "id": "b",
@@ -1014,11 +1009,11 @@
         },
         {
           "id": "c",
-          "label": "`T | undefined`"
+          "label": "`T | undefined`, as T stays unresolved"
         },
         {
           "id": "d",
-          "label": "`any`"
+          "label": "`any`, since no annotation is given"
         }
       ],
       "answerKey": {
@@ -1119,11 +1114,11 @@
         },
         {
           "id": "c",
-          "label": "`update(u, { name: 5 })`"
+          "label": "`update(u, { name: 5, id: 1 })`"
         },
         {
           "id": "d",
-          "label": "`update(u, { age: 3 })`"
+          "label": "`update(u, { id: 2, age: 3 })`"
         }
       ],
       "answerKey": {
@@ -1322,15 +1317,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`forEach` callbacks cannot read object properties by key"
+          "label": "The `forEach` callback parameter `k` is implicitly `any`, so indexing fails"
         },
         {
           "id": "b",
-          "label": "`obj` is inferred as `readonly`, so indexing is disallowed"
+          "label": "`obj` is inferred as `readonly`, so computed indexing on it is disallowed"
         },
         {
           "id": "c",
-          "label": "The keys `a` and `b` are numbers, so `k` must be numeric"
+          "label": "The keys `a` and `b` are numbers, so `k` must be numeric to index `obj`"
         },
         {
           "id": "d",
@@ -1392,19 +1387,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The `User` interface is erased, so JSON parsing fails to run"
+          "label": "The `User` interface is erased at compile time, so `JSON.parse` cannot build the objects at runtime"
         },
         {
           "id": "b",
-          "label": "Strict mode removes type assertions from the compiled output"
+          "label": "Strict mode strips type assertions from the compiled output, so the parsed data is never checked"
         },
         {
           "id": "c",
-          "label": "`as User[]` converts each element to a `User` at runtime"
+          "label": "`as User[]` converts each parsed element into a `User` at runtime, and the crash comes from a failed conversion"
         },
         {
           "id": "d",
-          "label": "`JSON.parse` returns `any`, and `as` asserts without any runtime check"
+          "label": "`JSON.parse` returns `any`, so `as` asserts a type with no runtime check"
         }
       ],
       "answerKey": {
@@ -1439,20 +1434,15 @@
         },
         {
           "id": "d",
-          "label": "The result is typed `string`"
+          "label": "`K` is inferred as `string`, so any string key is accepted at compile time"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "d"
+          "b"
         ]
       },
-      "rubric": [
-        "K extends keyof T is inferred as \"b\", so T[K] is string, and \"c\" is not a key.",
-        "The union result ignores that K is a specific literal."
-      ],
       "reviewed": false
     },
     {
@@ -1464,15 +1454,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`target` is set too low, so optional fields are never checked"
+          "label": "`target` is set too low, so optional fields are never checked by the compiler"
         },
         {
           "id": "b",
-          "label": "`skipLibCheck` is on, so declared interfaces are ignored"
+          "label": "`skipLibCheck` is on, so declared interfaces are ignored when checking property access"
         },
         {
           "id": "c",
-          "label": "`noImplicitAny` is off, so every property is typed as `any`"
+          "label": "`noImplicitAny` is off, so every property is silently typed as `any` and unchecked"
         },
         {
           "id": "d",
@@ -1534,7 +1524,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`Record` types are inferred as `any` for missing keys, so the compiler skips the check on `push` for them"
+          "label": "`Record` types are inferred as `any` for keys that were never assigned, so the compiler skips the check on `push` for those lookups"
         },
         {
           "id": "b",
@@ -1546,7 +1536,7 @@
         },
         {
           "id": "d",
-          "label": "The index signature promises every string key holds `number[]`, so `undefined` is absent from the type unless `noUncheckedIndexedAccess` is on"
+          "label": "The index signature types every string key as `number[]`, so `undefined` is left out unless `noUncheckedIndexedAccess` is on"
         }
       ],
       "answerKey": {
@@ -1608,15 +1598,15 @@
         },
         {
           "id": "b",
-          "label": "`forEach` callbacks are always checked against declared types, even for variables that are never reassigned anywhere in the function"
+          "label": "Callbacks passed to `forEach` are checked against declared types, because the compiler cannot tell whether such a callback runs synchronously"
         },
         {
           "id": "c",
-          "label": "Truthiness checks narrow only `null`, never `undefined`, so `id` still includes `undefined` everywhere inside the block"
+          "label": "Truthiness checks narrow out `null` but not `undefined`, so `id` still includes `undefined` inside the block as well as in the callback"
         },
         {
           "id": "d",
-          "label": "The callback parameter `i` shadows the outer scope, which resets the inferred types of every captured variable inside it"
+          "label": "The callback parameter `i` shadows the outer scope, which resets the inferred types of captured variables when the callback is checked"
         }
       ],
       "answerKey": {
@@ -1639,19 +1629,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`strictFunctionTypes` applies only to arrow functions, and method syntax is treated as a different non-arrow kind of function"
+          "label": "The flag checks only members declared with arrow-function types, and method declarations are treated as a separate kind of callable that is exempt from the check"
         },
         {
           "id": "b",
-          "label": "Interfaces with methods are compared by member name only, whereas those with properties get a full structural comparison"
+          "label": "Interfaces whose members are methods are compared by member name and arity, while interfaces with property members receive a full structural comparison"
         },
         {
           "id": "c",
-          "label": "Method-style members are compared bivariantly as a deliberate exception, while property-style function types are checked contravariantly"
+          "label": "Method-style members are compared bivariantly as a deliberate exception, while property function types are checked contravariantly"
         },
         {
           "id": "d",
-          "label": "`MouseEvent` is a supertype of `Event` only when the member is written as a method, because methods are hoisted"
+          "label": "`MouseEvent` counts as a supertype of `Event` when the member is declared as a method, because method declarations get looser subtype rules for parameters"
         }
       ],
       "answerKey": {
@@ -1961,7 +1951,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Enable `strict` globally and silence each error with `any`, so every file counts as typed from the very first day"
+          "label": "Enable `strict` globally and silence each resulting error with `any`, so the whole codebase counts as typed from day one"
         },
         {
           "id": "b",
@@ -1969,11 +1959,11 @@
         },
         {
           "id": "c",
-          "label": "Keep JavaScript and add JSDoc comments everywhere, since type annotations are never enforced by the compiler during a build"
+          "label": "Stay in JavaScript and add JSDoc comments with `checkJs` turned on at a lenient setting, then review the type coverage later"
         },
         {
           "id": "d",
-          "label": "Rename every file to `.ts` in one long-lived branch with `strict: false`, then raise strictness after that branch finally merges"
+          "label": "Rename all files to `.ts` in one long-lived branch with `strict: false`, then raise strictness after that branch finally merges"
         }
       ],
       "answerKey": {
@@ -2109,7 +2099,7 @@
         },
         {
           "id": "c",
-          "label": "An `interface`, because consumers can reopen it through declaration merging and add fields without editing the library"
+          "label": "An `interface`, because it can be reopened through declaration merging in other packages"
         },
         {
           "id": "d",
@@ -2255,7 +2245,7 @@
         },
         {
           "id": "c",
-          "label": "`type DeepReadonly<T> = { -readonly [K in keyof T]: DeepReadonly<T[K]> }` which recurses into every nested property"
+          "label": "`type DeepReadonly<T> = { -readonly [K in keyof T]: DeepReadonly<T[K]> }` which recurses but strips readonly at each level"
         },
         {
           "id": "d",

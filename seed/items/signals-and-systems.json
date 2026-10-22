@@ -58,7 +58,7 @@
         },
         {
           "id": "d",
-          "label": "Step function"
+          "label": "Step response function"
         }
       ],
       "answerKey": {
@@ -116,15 +116,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The output stays constant as time passes"
+          "label": "The output stays constant as time passes, whatever the input does"
         },
         {
           "id": "b",
-          "label": "The system output is always proportional to the input"
+          "label": "The output is always proportional to the input, scaled by a fixed gain"
         },
         {
           "id": "c",
-          "label": "The output depends only on the present input value"
+          "label": "The output at any instant depends only on the input at that same instant"
         },
         {
           "id": "d",
@@ -269,7 +269,7 @@
         },
         {
           "id": "d",
-          "label": "Convolution of the transforms"
+          "label": "Convolution of the two transforms together"
         }
       ],
       "answerKey": {
@@ -327,11 +327,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Convolution always doubles the frequency of its input"
+          "label": "Convolution with the impulse response doubles the frequency, then the system filters the extra component back out"
         },
         {
           "id": "b",
-          "label": "The system adds new frequencies that cancel the old ones"
+          "label": "The system generates new harmonic frequencies, but they cancel the original ones, leaving only f in the output"
         },
         {
           "id": "c",
@@ -339,7 +339,7 @@
         },
         {
           "id": "d",
-          "label": "The system samples the sinusoid at its own frequency"
+          "label": "The system samples the sinusoid at its own frequency, so the output can only repeat at the same rate as the input"
         }
       ],
       "answerKey": {
@@ -401,15 +401,15 @@
         },
         {
           "id": "b",
-          "label": "It is oscillating forever at 2 rad/s"
+          "label": "It oscillates forever, with a sinusoid at 2 rad/s"
         },
         {
           "id": "c",
-          "label": "It is unstable, with an exponential growth e^(2t)"
+          "label": "It is unstable, with exponential growth e^(2t) in its response"
         },
         {
           "id": "d",
-          "label": "It is stable, with an exponential decay e^(-2t) in its response"
+          "label": "It is stable, with decay e^(-2t) in its response"
         }
       ],
       "answerKey": {
@@ -573,19 +573,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The output frequency always equals the system's cutoff frequency instead"
+          "label": "The system's output frequency is always forced to equal its cutoff frequency, whatever the input"
         },
         {
           "id": "b",
-          "label": "Sinusoids are the only signals an LTI system can process without distortion"
+          "label": "Sinusoids are the only signals an LTI system can process without changing their shape or frequency"
         },
         {
           "id": "c",
-          "label": "The system adds harmonics, but they are always filtered by its stability"
+          "label": "The system adds harmonics of f0, but stability guarantees that all of them decay to zero"
         },
         {
           "id": "d",
-          "label": "Complex exponentials pass through LTI systems, only scaled in amplitude and shifted in phase"
+          "label": "Sinusoids are eigenfunctions of LTI systems, so only amplitude and phase change"
         }
       ],
       "answerKey": {
@@ -836,7 +836,7 @@
         },
         {
           "id": "d",
-          "label": "1/(3*sqrt(2)), about 0.236"
+          "label": "1/(3√2), about 0.236"
         }
       ],
       "answerKey": {
@@ -1250,7 +1250,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It is not linear, because discarding every second sample breaks superposition for scaled inputs"
+          "label": "It is not linear, because discarding every second sample breaks superposition for scaled inputs and sums of inputs"
         },
         {
           "id": "b",
@@ -1258,11 +1258,11 @@
         },
         {
           "id": "c",
-          "label": "It is time-invariant but non-causal, so it cannot be described by any frequency response"
+          "label": "It is time-invariant but non-causal, so it cannot be described by any frequency response at all"
         },
         {
           "id": "d",
-          "label": "Linearity alone is not enough: delaying the input by one sample does not just delay the output, so it is time-varying"
+          "label": "Linearity is not enough: delaying the input by one sample does not just delay the output, so it is time-varying"
         }
       ],
       "answerKey": {
@@ -1355,19 +1355,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Sampling at 1000 Hz is below the Nyquist rate for a 52.5 Hz tone, so aliasing smears the energy"
+          "label": "Sampling at 1000 Hz is too close to the Nyquist limit for a 52.5 Hz tone, so aliasing folds energy into neighbouring bins"
         },
         {
           "id": "b",
-          "label": "The 1 Hz bin spacing is too coarse to represent any tone, so every tone spreads across many bins"
+          "label": "The 1 Hz bin spacing is too coarse to resolve a tone at 52.5 Hz, so its energy is split across many bins"
         },
         {
           "id": "c",
-          "label": "A real tone has components at both +52.5 and -52.5 Hz, which doubles the number of occupied bins"
+          "label": "A real tone has components at both +52.5 and -52.5 Hz, so its energy is shared between two groups of bins"
         },
         {
           "id": "d",
-          "label": "The record holds a non-integer number of cycles, so the implicit periodic extension has a jump that spreads energy"
+          "label": "The record holds a non-integer number of cycles, so the periodic extension has a jump that spreads energy"
         }
       ],
       "answerKey": {
@@ -1883,19 +1883,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Direct time-domain convolution: 16 multiplies per output beats FFT overhead for so short a filter"
+          "label": "Direct convolution: 16 multiplies per output sample, with only 16 past samples held in memory"
         },
         {
           "id": "b",
-          "label": "One FFT of the whole stream, since the FFT is always faster than convolution"
+          "label": "Overlap-add with FFT blocks, since FFT filtering has a lower operation count per output sample than direct convolution at any filter length"
         },
         {
           "id": "c",
-          "label": "Frequency-domain only, since time-domain filtering cannot handle 16 taps at this length"
+          "label": "One FFT of the whole stream, since the FFT turns convolution into a pointwise product and avoids per-sample multiplies"
         },
         {
           "id": "d",
-          "label": "Zero-pad h to 10^6 samples and use the FFT, cutting cost from O(N) to O(log N)"
+          "label": "Zero-pad h to 10^6 samples and use the FFT, cutting cost from O(N·M) to O(N log N) and so winning for any M"
         }
       ],
       "answerKey": {
@@ -2129,19 +2129,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Flawed: the system is time-varying, since a shifted input does not give an equally shifted output, so the LTI eigenfunction result stands"
+          "label": "Flawed: the system is time-varying, so a shifted input does not give a shifted output and the LTI eigenfunction result stands"
         },
         {
           "id": "b",
-          "label": "Flawed: the system is nonlinear, since multiplying by a cosine creates new frequencies and only nonlinear systems can do that"
+          "label": "Flawed: the system is nonlinear, since multiplying by a cosine creates new frequencies, which a linear system cannot do to its input"
         },
         {
           "id": "c",
-          "label": "Valid: the eigenfunction property holds only for finite-energy inputs, and modulated inputs have infinite energy, so it fails"
+          "label": "Valid: the eigenfunction property depends on inputs having finite energy, and modulated inputs have infinite energy, so it breaks down here"
         },
         {
           "id": "d",
-          "label": "Valid: the eigenfunction property holds only for causal systems, and this multiplier system is noncausal, so the property fails"
+          "label": "Valid: the eigenfunction property depends on the system being causal, and this multiplier is noncausal because it uses the cosine's future values"
         }
       ],
       "answerKey": {

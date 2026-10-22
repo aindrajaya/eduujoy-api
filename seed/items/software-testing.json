@@ -11,7 +11,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A test that checks how the system behaves under heavy user load"
+          "label": "A test that checks how the system behaves when a very large number of users are active at once"
         },
         {
           "id": "b",
@@ -19,7 +19,7 @@
         },
         {
           "id": "c",
-          "label": "A test that drives the whole application through its user interface"
+          "label": "A test that drives the whole application through its user interface like a real user would"
         },
         {
           "id": "d",
@@ -46,7 +46,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A setting that skips the test on slow machines"
+          "label": "A setting that skips the test when the machine is too slow to run it"
         },
         {
           "id": "b",
@@ -54,11 +54,11 @@
         },
         {
           "id": "c",
-          "label": "A comment that documents the test name"
+          "label": "A comment above the test that documents what behaviour it covers"
         },
         {
           "id": "d",
-          "label": "A line that starts the program under test"
+          "label": "A line of setup code that starts the program under test and prepares data"
         }
       ],
       "answerKey": {
@@ -85,7 +85,7 @@
         },
         {
           "id": "b",
-          "label": "That one function returns the right value"
+          "label": "That one function returns the right value for given inputs"
         },
         {
           "id": "c",
@@ -151,19 +151,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The number of bugs found in production"
+          "label": "The number of defects that escaped into production"
         },
         {
           "id": "b",
-          "label": "The speed at which the tests finish"
+          "label": "The speed at which the whole test suite finishes"
         },
         {
           "id": "c",
-          "label": "The share of requirements the customer approved"
+          "label": "The share of requirements that the customer approved"
         },
         {
           "id": "d",
-          "label": "The share of code lines executed while the tests run"
+          "label": "The share of code lines run while tests execute"
         }
       ],
       "answerKey": {
@@ -258,7 +258,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Unit tests cover the full user journey more realistically"
+          "label": "Unit tests exercise the whole system, so each one covers more behaviour"
         },
         {
           "id": "b",
@@ -266,11 +266,11 @@
         },
         {
           "id": "c",
-          "label": "End-to-end tests cannot be automated at all"
+          "label": "End-to-end tests are slower to run and often fail for reasons unrelated to a bug"
         },
         {
           "id": "d",
-          "label": "End-to-end tests always give wrong results"
+          "label": "End-to-end tests cannot be automated, so teams rely on unit tests instead"
         }
       ],
       "answerKey": {
@@ -293,11 +293,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It increases the coverage number each time"
+          "label": "It shows the code is correct whenever the test passes"
         },
         {
           "id": "b",
-          "label": "It makes the code run faster on later runs"
+          "label": "It only matters if the test also lowers the coverage number"
         },
         {
           "id": "c",
@@ -305,7 +305,7 @@
         },
         {
           "id": "d",
-          "label": "It proves the code is correct half the time"
+          "label": "It means the test runner is broken and needs reinstalling"
         }
       ],
       "answerKey": {
@@ -363,11 +363,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The function has no bugs at all"
+          "label": "Every line ran, so the function's logic must be correct"
         },
         {
           "id": "b",
-          "label": "Every possible input has been tested"
+          "label": "Every line ran, so all input combinations have been tried"
         },
         {
           "id": "c",
@@ -375,7 +375,7 @@
         },
         {
           "id": "d",
-          "label": "The function is fast enough for production"
+          "label": "Every line ran, so no further tests are needed for edge cases"
         }
       ],
       "answerKey": {
@@ -470,19 +470,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It raises the speed of the checkout page"
+          "label": "It proves that no other discount value can cause a crash"
         },
         {
           "id": "b",
-          "label": "It replaces the need for other discount tests"
+          "label": "It replaces the need for any other discount tests"
         },
         {
           "id": "c",
-          "label": "It lets the developer skip future code reviews"
+          "label": "It makes the checkout code run faster for every order"
         },
         {
           "id": "d",
-          "label": "It stops the same bug from returning unnoticed later"
+          "label": "It catches the bug if it returns later"
         }
       ],
       "answerKey": {
@@ -830,15 +830,15 @@
         },
         {
           "id": "b",
-          "label": "Wrap the call in try/except so no email error fails the test"
+          "label": "Wrap the call in try/except so that any email error does not fail the test"
         },
         {
           "id": "c",
-          "label": "Pass a fake mailer and assert it received the email and \"Welcome\""
+          "label": "Pass a fake mailer and assert it received the address and subject"
         },
         {
           "id": "d",
-          "label": "Assert that `send_welcome` returns `None` when it is called"
+          "label": "Assert that `send_welcome` returns `None`, since a successful send returns nothing"
         }
       ],
       "answerKey": {
@@ -900,11 +900,11 @@
         },
         {
           "id": "b",
-          "label": "`try: parse(\"\")` then `except: pass`"
+          "label": "`try: parse(\"\")` then `except ValueError: pass`"
         },
         {
           "id": "c",
-          "label": "`assert parse(\"\") raises ValueError`"
+          "label": "`assert parse(\"\") is ValueError`"
         },
         {
           "id": "d",
@@ -1007,15 +1007,15 @@
       "options": [
         {
           "id": "a",
-          "label": "0, 40, 100"
+          "label": "0, 40, 100, 150"
         },
         {
           "id": "b",
-          "label": "19, 30, 64"
+          "label": "19, 30, 54, 64"
         },
         {
           "id": "c",
-          "label": "18, 40, 65"
+          "label": "18, 30, 40, 65"
         },
         {
           "id": "d",
@@ -1046,7 +1046,7 @@
         },
         {
           "id": "b",
-          "label": "Pass `None` as the mailer and assert that no exception is raised"
+          "label": "Pass `None` as the mailer and assert that no exception is raised by the call"
         },
         {
           "id": "c",
@@ -1054,7 +1054,7 @@
         },
         {
           "id": "d",
-          "label": "Pass a fake mailer that records calls, then assert it got user.email once"
+          "label": "Pass a fake mailer that records calls and assert it got the address once"
         }
       ],
       "answerKey": {
@@ -1112,15 +1112,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`@pytest.mark.parametrize(['n', 'expected'], 2, 4, 3, 9)`"
+          "label": "`@pytest.mark.parametrize(['n', 'expected'], 2, 4, 3, 9, -3, 9)`"
         },
         {
           "id": "b",
-          "label": "`@pytest.mark.parametrize('n', 'expected', [(2, 4), (3, 9)])`"
+          "label": "`@pytest.mark.parametrize('n, expected', [(2, 4), (3, 9)], [(-3, 9)])`"
         },
         {
           "id": "c",
-          "label": "`@pytest.mark.parametrize('n, expected', [2, 3], [4, 9])`"
+          "label": "`@pytest.mark.parametrize('n, expected', [2, 3, -3], [4, 9, 9])`"
         },
         {
           "id": "d",
@@ -1790,19 +1790,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Ninety percent is too low, since only full coverage guarantees no defects in covered code"
+          "label": "Ninety percent is too low, because full line coverage is what ensures the covered code has few defects"
         },
         {
           "id": "b",
-          "label": "It invites tests that execute code without assertions, so it measures execution, not verification"
+          "label": "It invites tests that run code without assertions, so it measures execution, not verification"
         },
         {
           "id": "c",
-          "label": "Line coverage is meaningless, so the team should stop measuring coverage of any kind"
+          "label": "Line coverage is a poor proxy for quality, so the team should track branch coverage in its place and gate on that"
         },
         {
           "id": "d",
-          "label": "Coverage gates only work for integration tests and can never be applied to unit tests"
+          "label": "Coverage gates suit integration tests better, because unit tests exercise too few lines to reach any threshold"
         }
       ],
       "answerKey": {
@@ -1895,19 +1895,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Many unit tests for logic, some integration tests for services, and a few E2E tests on critical purchase paths"
+          "label": "Many unit tests for logic, some integration tests for services, a few E2E tests on key purchase paths"
         },
         {
           "id": "b",
-          "label": "End-to-end tests for every rule and branch, so each scenario runs exactly as users would see it"
+          "label": "Mostly end-to-end tests covering each rule and branch, so scenarios run as users would see them and catch UI, payment and inventory defects together"
         },
         {
           "id": "c",
-          "label": "Only unit tests with all collaborators mocked, since they are the fastest to run and maintain"
+          "label": "Mostly unit tests with collaborators mocked, plus a manual check before release, since unit tests are the fastest to run and cheapest to maintain"
         },
         {
           "id": "d",
-          "label": "The same number of tests at every level, to balance speed against realism in equal parts"
+          "label": "A roughly equal number of tests at each level, to balance speed against realism in equal parts and avoid over-relying on one kind"
         }
       ],
       "answerKey": {
@@ -1966,19 +1966,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Make the change and rely on the QA team's manual regression pass shortly before release"
+          "label": "Make the change, then rely on the QA team's manual regression pass scheduled for the days just before the release"
         },
         {
           "id": "b",
-          "label": "Write characterization tests pinning current outputs for representative inputs, then change under that safety net"
+          "label": "Write characterization tests pinning current outputs for sample inputs, then change the code"
         },
         {
           "id": "c",
-          "label": "Rewrite the function cleanly first, then write tests against the new design afterwards"
+          "label": "Rewrite the function cleanly first with a simpler design, then write tests against the new code once it is done"
         },
         {
           "id": "d",
-          "label": "Write unit tests from the product spec only, ignoring whatever the current code outputs"
+          "label": "Write unit tests from the product spec alone, ignoring what the current code outputs, and fix any code that fails them"
         }
       ],
       "answerKey": {
@@ -2106,19 +2106,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Use consumer-driven contract tests in each service's pipeline, keeping a small E2E smoke suite for critical journeys."
+          "label": "Run consumer-driven contract tests in each service's pipeline, plus a small E2E smoke suite for critical journeys."
         },
         {
           "id": "b",
-          "label": "Require each team to mock every neighbouring service in unit tests, which guarantees the interfaces stay compatible."
+          "label": "Have each team mock its neighbouring services in unit tests written from the current API docs, so interface mismatches show up early in each pipeline."
         },
         {
           "id": "c",
-          "label": "Add more E2E scenarios covering each service pair, since only full-system runs can prove the interfaces still work."
+          "label": "Add E2E scenarios for each pair of services and run them on every commit, since full-system runs exercise the real interfaces most faithfully."
         },
         {
           "id": "d",
-          "label": "Freeze deployments until the E2E suite passes for every service together, so versions are always tested as one unit."
+          "label": "Hold deployments until the E2E suite passes for all services together, so the exact combination of versions is tested before release."
         }
       ],
       "answerKey": {
@@ -2141,19 +2141,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Mandate 100% line coverage on every merge so no code path is ever shipped without being executed by a test."
+          "label": "Require 100% line coverage on the payment and ledger modules at merge, so that risky code is exercised by tests before release."
         },
         {
           "id": "b",
-          "label": "Review coverage gaps on high-risk modules, pair it with mutation checks there, and use the number as a signal, not a target."
+          "label": "Review coverage gaps on high-risk modules, add mutation checks there, and treat the number as a signal, not a target."
         },
         {
           "id": "c",
-          "label": "Set a project-wide 80% threshold and treat any commit that lowers the total as an automatic failure."
+          "label": "Set an 80% project-wide threshold, fail any commit that lowers the total, and review the exceptions in each quarterly audit."
         },
         {
           "id": "d",
-          "label": "Drop coverage tracking entirely because any numeric target will inevitably be gamed by developers under pressure."
+          "label": "Stop tracking coverage and rely on code review and manual exploratory testing, since numeric targets tend to get gamed."
         }
       ],
       "answerKey": {
@@ -2282,15 +2282,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Send the same request twice and assert both responses return HTTP 200 with a well-formed JSON body."
+          "label": "Send the same request twice in sequence and assert both responses return HTTP 200 with identical, well-formed JSON bodies."
         },
         {
           "id": "b",
-          "label": "Mock the gateway and assert it was called once after a single request, confirming the happy path works correctly."
+          "label": "Mock the gateway and assert it was called exactly once after a single request, then confirm the response matches the happy path."
         },
         {
           "id": "c",
-          "label": "Unit-test the idempotency key generator to confirm it returns unique values across a million generated calls."
+          "label": "Unit-test the idempotency key generator to confirm it returns unique values across a million generated calls without any collision."
         },
         {
           "id": "d",
@@ -2352,19 +2352,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Insert short sleeps between tests so each worker's writes finish before another worker begins reading."
+          "label": "Insert short sleeps between tests so each worker's writes finish before another worker begins reading from the shared tables."
         },
         {
           "id": "b",
-          "label": "Give each worker its own schema or transaction-rolled-back connection, and create unique data through factories per test."
+          "label": "Give each worker its own schema or rolled-back transaction, and create unique data via factories per test."
         },
         {
           "id": "c",
-          "label": "Run the integration tests serially again, which removes the interference at the cost of extra runtime."
+          "label": "Run the integration tests serially again, which removes all the interference at the cost of much longer total runtime."
         },
         {
           "id": "d",
-          "label": "Add a fixed ordering to the tests so rows created by one test are cleaned by the test that runs next."
+          "label": "Add a fixed ordering to the tests so rows created by one test are cleaned up by the test that runs right after it."
         }
       ],
       "answerKey": {
@@ -2387,19 +2387,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Write tests from the outdated design document and fix every failure first, so behaviour matches the documented intent."
+          "label": "Write tests from the outdated design document and fix every failure first, so the code's behaviour matches the documented intent before refactoring begins."
         },
         {
           "id": "b",
-          "label": "Rewrite the module from scratch against a fresh specification and compare the two versions' behaviour informally."
+          "label": "Rewrite the module from scratch against a fresh specification, then compare the old and new versions' behaviour informally on a few sample runs."
         },
         {
           "id": "c",
-          "label": "Capture current outputs on representative and edge inputs as characterization tests, then refactor in small steps keeping them green."
+          "label": "Record current outputs on representative and edge inputs as characterization tests, then refactor in small steps keeping them green."
         },
         {
           "id": "d",
-          "label": "Add unit tests only for new code written during the refactor and review the old code carefully by eye."
+          "label": "Add unit tests only for new code written during the refactor, and have two reviewers read the old code carefully line by line for defects."
         }
       ],
       "answerKey": {
@@ -2458,15 +2458,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Delete the integration tests that take longest and rely on unit tests plus manual QA before every release."
+          "label": "Delete the integration tests that take longest and rely on unit tests plus a manual QA pass before every release."
         },
         {
           "id": "b",
-          "label": "On PRs run unit tests and impacted integration tests in shards; run full integration and E2E on merge, blocking release."
+          "label": "On PRs run unit and impacted integration tests in shards; run full integration and E2E on merge, gating release."
         },
         {
           "id": "c",
-          "label": "Tag slow tests to be skipped permanently on all branches, then re-enable them if production incidents occur."
+          "label": "Tag slow tests to be skipped permanently on all branches, then re-enable them only if production incidents reveal gaps."
         },
         {
           "id": "d",

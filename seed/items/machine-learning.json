@@ -15,15 +15,15 @@
         },
         {
           "id": "b",
-          "label": "Only input features with no known outcomes"
+          "label": "Input features only, with groups found by the model itself"
         },
         {
           "id": "c",
-          "label": "Rewards given after each action taken"
+          "label": "States and actions, with rewards given after each action"
         },
         {
           "id": "d",
-          "label": "Only target labels with no input features"
+          "label": "Target labels only, with features inferred by the model"
         }
       ],
       "answerKey": {
@@ -116,11 +116,11 @@
       "options": [
         {
           "id": "a",
-          "label": "To estimate performance on data not seen in training"
+          "label": "To estimate performance on unseen data"
         },
         {
           "id": "b",
-          "label": "To fit the model parameters during training"
+          "label": "To fit the model's weights by minimising the loss"
         },
         {
           "id": "c",
@@ -128,7 +128,7 @@
         },
         {
           "id": "d",
-          "label": "To increase the amount of training data"
+          "label": "To increase the amount of training data available"
         }
       ],
       "answerKey": {
@@ -227,19 +227,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The income column"
+          "label": "Income, because it is the main driver of repayment"
         },
         {
           "id": "b",
-          "label": "The column saying whether the borrower defaulted"
+          "label": "The default column"
         },
         {
           "id": "c",
-          "label": "The loan amount column"
+          "label": "Loan amount, because it sets the size of the risk"
         },
         {
           "id": "d",
-          "label": "The row number of each applicant"
+          "label": "Row number, because it identifies each applicant"
         }
       ],
       "answerKey": {
@@ -262,15 +262,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Overfitting: it memorised training noise and generalises poorly"
+          "label": "Overfitting: it memorised training noise"
         },
         {
           "id": "b",
-          "label": "Data leakage from the test set into the model"
+          "label": "Data leakage: test set information reached the model during training"
         },
         {
           "id": "c",
-          "label": "Regularisation that has been set too strongly"
+          "label": "Over-regularisation: the penalty is so strong that it blocks learning"
         },
         {
           "id": "d",
@@ -297,15 +297,15 @@
       "options": [
         {
           "id": "a",
-          "label": "So the model trains faster on a smaller dataset"
+          "label": "So the model trains faster, because it only has to fit a smaller portion of the data"
         },
         {
           "id": "b",
-          "label": "So the labels can be removed from the training data"
+          "label": "So the labels can be removed from the training data and the model learns without them"
         },
         {
           "id": "c",
-          "label": "So that every feature has the same scale in both parts"
+          "label": "So that every feature has the same scale in both parts before the model is fitted"
         },
         {
           "id": "d",
@@ -332,7 +332,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Overfitting: the model memorised the training data"
+          "label": "Overfitting: the model memorised the noise in the training data"
         },
         {
           "id": "b",
@@ -367,19 +367,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Numbers 1, 2, 3 would imply an order and distances that do not exist"
+          "label": "Codes 1, 2, 3 imply an order and distances that do not exist"
         },
         {
           "id": "b",
-          "label": "Models cannot read numbers, only binary columns"
+          "label": "Most models can only read binary columns, not numeric values"
         },
         {
           "id": "c",
-          "label": "Integer codes remove the information about the category"
+          "label": "Integer codes discard which country each row came from"
         },
         {
           "id": "d",
-          "label": "One-hot encoding always makes the model train faster"
+          "label": "One-hot columns always let the model train faster than one column"
         }
       ],
       "answerKey": {
@@ -473,7 +473,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The model was underfitted because features were scaled"
+          "label": "The model was underfitted because scaling removed useful differences between feature values"
         },
         {
           "id": "b",
@@ -481,11 +481,11 @@
         },
         {
           "id": "c",
-          "label": "Normalisation always lowers performance on new data"
+          "label": "Normalisation lowers performance on new data whose values differ from the training data"
         },
         {
           "id": "d",
-          "label": "The test set was too large to give a valid score"
+          "label": "The test set was large enough to hide errors, so its score was not a valid estimate"
         }
       ],
       "answerKey": {
@@ -1361,19 +1361,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Distance methods cannot use integer-valued features, so age was treated as constant"
+          "label": "Distance methods cannot use integer-valued features such as age, so age was effectively treated as a constant"
         },
         {
           "id": "b",
-          "label": "Age is correlated with income, and k-NN removes redundant inputs before computing distances"
+          "label": "Age is correlated with income, and k-NN removes redundant inputs before it computes any distances"
         },
         {
           "id": "c",
-          "label": "k-NN automatically prunes low-variance features, so age was already dropped by the algorithm"
+          "label": "k-NN automatically prunes low-variance features, so age was already dropped by the algorithm itself"
         },
         {
           "id": "d",
-          "label": "Euclidean distance is dominated by income's large scale, so age hardly affects which neighbours are chosen"
+          "label": "Income's far larger numeric range dominates the Euclidean distance, so age hardly affects the neighbours"
         }
       ],
       "answerKey": {
@@ -1396,15 +1396,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Too few training rows; collect more data and refit the same model"
+          "label": "Too few training rows for the model; collect more data and refit the same model"
         },
         {
           "id": "b",
-          "label": "Multicollinearity among inputs; drop one of each correlated pair"
+          "label": "Multicollinearity among inputs; drop one feature from each highly correlated pair"
         },
         {
           "id": "c",
-          "label": "Autocorrelated errors; add lagged price values as extra features"
+          "label": "Autocorrelated errors across observations; add lagged price values as extra features"
         },
         {
           "id": "d",
@@ -1502,19 +1502,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Target leakage: the feature was computed using data after the prediction point, so it encoded the outcome"
+          "label": "Target leakage: the feature used data after the prediction point, so it encoded the outcome"
         },
         {
           "id": "b",
-          "label": "Underfitting: the model was too simple to capture the churn signal in the training folds"
+          "label": "Underfitting: the model was too simple to capture the churn signal, so training folds scored poorly"
         },
         {
           "id": "c",
-          "label": "High variance from using too few cross-validation folds, which inflated the mean AUC"
+          "label": "High variance from using too few cross-validation folds, which inflated the mean AUC across the splits"
         },
         {
           "id": "d",
-          "label": "Class imbalance, which makes AUC unreliable whenever the positive class is rare in data"
+          "label": "Class imbalance, which makes AUC unreliable whenever the positive class is rare in the data"
         }
       ],
       "answerKey": {
@@ -1537,11 +1537,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Cross-validation requires raw features, so scaled inputs change the fold assignment of samples"
+          "label": "Cross-validation requires raw features, so scaled inputs change which samples land in each fold"
         },
         {
           "id": "b",
-          "label": "Scaling is unnecessary for regularised models, so the step only adds noise to the folds"
+          "label": "Scaling is unnecessary for regularised models, so the step only adds noise to every fold's estimate"
         },
         {
           "id": "c",
@@ -1549,7 +1549,7 @@
         },
         {
           "id": "d",
-          "label": "Validation folds influenced the scaling statistics, so estimates are slightly optimistic; fitting the scaler inside each training fold fixes this"
+          "label": "Validation folds influenced the scaling statistics, so estimates are slightly optimistic"
         }
       ],
       "answerKey": {
@@ -1572,19 +1572,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The forest is better because its training accuracy shows it has learned the data structure more fully"
+          "label": "The forest is clearly better, because its near-perfect training accuracy shows it has captured the real structure of the data more fully than the linear model"
         },
         {
           "id": "b",
-          "label": "The linear model is overfitting because its two scores are so close to each other"
+          "label": "The linear model is overfitting, because its training and validation scores are so close that it must be memorising the validation set as well"
         },
         {
           "id": "c",
-          "label": "The two models are equivalent because validation accuracies differ by under two points always"
+          "label": "The two models are equivalent, because their validation accuracies differ by under two points and so the forest's gap carries no information"
         },
         {
           "id": "d",
-          "label": "The forest has a large generalisation gap, but its validation score is still slightly higher, so the gap alone does not make it worse"
+          "label": "The forest has a large generalisation gap, yet its validation score is slightly higher, so the gap alone does not make it worse"
         }
       ],
       "answerKey": {
@@ -1714,19 +1714,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The model is overfitting; adding more trees will raise recall without any other change"
+          "label": "The model is overfitting to the training set, so adding more trees and regularising will raise recall without changing the metric or threshold"
         },
         {
           "id": "b",
-          "label": "Accuracy is dominated by the majority class, and the 0.5 threshold on skewed data misses most fraud; inspect precision-recall and tune the threshold"
+          "label": "Accuracy is dominated by the majority class and a 0.5 threshold misses most fraud; check precision-recall and tune the threshold"
         },
         {
           "id": "c",
-          "label": "The data is too small to evaluate, so any metric computed on it is invalid"
+          "label": "The 1% positive class is too small for any metric to be valid, so the evaluation must be discarded until far more fraud is collected"
         },
         {
           "id": "d",
-          "label": "Accuracy of 99% proves the model separates classes well, so recall is a labelling artefact"
+          "label": "Accuracy of 99% shows the model separates the classes well, so the low recall is a labelling artefact that can be ignored in evaluation"
         }
       ],
       "answerKey": {
@@ -1749,19 +1749,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Gradient boosting, since post-hoc explanations are always identical to the model's true logic"
+          "label": "Gradient boosting, since post-hoc explanations closely track the model's true logic for each decision"
         },
         {
           "id": "b",
-          "label": "Gradient boosting, since the higher AUC always outweighs any interpretability requirement"
+          "label": "Gradient boosting, since a two-point AUC gain generally outweighs the regulators' interpretability requirement"
         },
         {
           "id": "c",
-          "label": "Logistic regression, since a small AUC gap is a fair price for direct, auditable per-feature explanations"
+          "label": "Logistic regression, since a small AUC gap is a fair price for direct, auditable explanations"
         },
         {
           "id": "d",
-          "label": "A deep neural network, since it would surpass both models on any tabular dataset"
+          "label": "A deep neural network, since it would likely beat both models on a tabular dataset of this size"
         }
       ],
       "answerKey": {
@@ -1784,19 +1784,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Report the training score, because small data makes any held-out split too noisy"
+          "label": "Report the training score, because with only 300 rows any held-out split is too noisy to be informative"
         },
         {
           "id": "b",
-          "label": "Tune on the whole dataset with cross-validation and report the best CV score"
+          "label": "Tune with cross-validation on the whole dataset and report the best CV score, since every row is used for validation"
         },
         {
           "id": "c",
-          "label": "Tune on the test set, then retrain on the training set to confirm the result"
+          "label": "Tune on the test set, then retrain on the training set and report the score to confirm the result"
         },
         {
           "id": "d",
-          "label": "Hold out a test set once at the end and use nested or inner cross-validation on the rest for tuning"
+          "label": "Hold out a test set for one final check and tune with inner cross-validation on the rest"
         }
       ],
       "answerKey": {
@@ -1831,7 +1831,7 @@
         },
         {
           "id": "d",
-          "label": "Prioritise recall and lower the threshold, accepting more false positives, then check precision remains workable"
+          "label": "Prioritise recall and lower the threshold, accepting more false positives"
         }
       ],
       "answerKey": {
@@ -1858,15 +1858,15 @@
         },
         {
           "id": "b",
-          "label": "Drop the feature, since high cardinality always hurts any model"
+          "label": "Drop the feature, since 8,000 levels is too many for any linear model to use without overfitting"
         },
         {
           "id": "c",
-          "label": "Replace each zip with its integer label, since the model will learn the ordering"
+          "label": "Replace each zip with its integer label, since nearby codes tend to be geographically close and the model can use that order"
         },
         {
           "id": "d",
-          "label": "One-hot encode all levels with no regularisation, since it preserves every detail"
+          "label": "One-hot encode all 8,000 levels with no regularisation, since this keeps every level's information intact"
         }
       ],
       "answerKey": {
@@ -1889,19 +1889,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Ship it, because any increase in AUC is a genuine improvement"
+          "label": "Ship it: the validation set is held out, so the 0.005 AUC gain is a reliable estimate of real improvement"
         },
         {
           "id": "b",
-          "label": "The comparison is invalid because AUC can never be compared between two models"
+          "label": "Reject it: a gain this small on 2,000 rows cannot be detected, so no testing could justify the pipeline cost"
         },
         {
           "id": "c",
-          "label": "Reject all new features, since added features always cause overfitting"
+          "label": "Ship it only after checking the training AUC rose too, since that confirms the feature carries real signal"
         },
         {
           "id": "d",
-          "label": "The gain is within likely split-to-split noise; compare with repeated CV and weigh against pipeline cost before deciding"
+          "label": "The gain is likely split noise; rerun with repeated CV and weigh it against pipeline cost"
         }
       ],
       "answerKey": {
@@ -1924,7 +1924,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Random splits are preferable because they maximise training data in every fold"
+          "label": "Random row-level splits are preferable because each fold then has a larger, more varied training set, which gives a more reliable estimate for new patients"
         },
         {
           "id": "b",
@@ -1936,20 +1936,15 @@
         },
         {
           "id": "d",
-          "label": "Random row-level splits may inflate scores because the same patient appears in both train and validation"
+          "label": "Random row-level splits can be kept if the validation score is high enough, since a high score shows the model has not memorised individual patients"
         }
       ],
       "answerKey": {
         "optionIds": [
           "b",
-          "c",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "Grouping prevents patient-level leakage and matches the deployment condition.",
-        "Maximising training data does not outweigh bias in the estimate."
-      ],
       "reviewed": false
     },
     {
@@ -2031,19 +2026,19 @@
       "options": [
         {
           "id": "a",
-          "label": "MAPE is unreliable for forecasting, so the model should be re-scored with accuracy"
+          "label": "MAPE is unreliable for forecasting because it is a percentage error, so the model should be re-scored with accuracy"
         },
         {
           "id": "b",
-          "label": "Shuffled folds train on future weeks, so lag features leak information; use rolling-origin evaluation"
+          "label": "Shuffled folds train on future weeks, so lag features leak; use rolling-origin evaluation"
         },
         {
           "id": "c",
-          "label": "Shuffling hides seasonality from the model, so the folds should be stratified by month"
+          "label": "Shuffling hides seasonality from the model, so the folds should be stratified by calendar month to keep each season represented"
         },
         {
           "id": "d",
-          "label": "Five folds is too few, so the variance is too high; use 20 shuffled folds to fix it"
+          "label": "Five folds is too few and leaves the variance too high, so use 20 shuffled folds to get a stable estimate"
         }
       ],
       "answerKey": {
@@ -2066,7 +2061,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The estimate is sound because selection is unsupervised once the correlations are computed"
+          "label": "The estimate is sound because selection only looks at feature-label correlations, not the model, so nothing about the test folds is learned"
         },
         {
           "id": "b",
@@ -2074,11 +2069,11 @@
         },
         {
           "id": "c",
-          "label": "The estimate is pessimistic because 50 features is too few; keep 500 to raise the true AUC"
+          "label": "The estimate is pessimistic because 50 features is too few for 100 samples; keep 500 features so the CV AUC rises toward its true value"
         },
         {
           "id": "d",
-          "label": "The estimate is sound as long as the final model is regularised with a strong L2 penalty"
+          "label": "The estimate is sound as long as the final logistic regression is regularised with a strong L2 penalty, which shrinks any selection bias"
         }
       ],
       "answerKey": {
@@ -2101,19 +2096,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Use A after recalibrating on a separate held-out set, since ranking is kept and probabilities become usable"
+          "label": "Recalibrate A on a separate held-out set, keeping its ranking"
         },
         {
           "id": "b",
-          "label": "Use B and discard calibration checks, since it is already calibrated forever"
+          "label": "Use B unchanged, because a calibrated model needs no further checks and its probabilities will stay reliable after deployment"
         },
         {
           "id": "c",
-          "label": "Use A as is, because the higher AUC guarantees better cost decisions"
+          "label": "Use A as is, because its higher AUC means its probabilities will give lower expected cost at any threshold"
         },
         {
           "id": "d",
-          "label": "Use B, since AUC differences this small never matter in practice"
+          "label": "Use B, because a 0.02 AUC gap is within noise, so ranking quality should not influence the choice"
         }
       ],
       "answerKey": {
@@ -2136,19 +2131,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The gain is too small to measure because accuracy cannot change by under 1%"
+          "label": "A 0.5% gain is within rounding error, so no validation set of this size can show any real improvement over the baseline"
         },
         {
           "id": "b",
-          "label": "Validation sets should never exceed 1,000 rows, so the score is noisy"
+          "label": "A 2,000-row validation set is too small to rank configurations, so the search should be rerun with a much larger validation split"
         },
         {
           "id": "c",
-          "label": "Hyperparameter search should be random rather than grid, which invalidates the score"
+          "label": "Grid-style search over many configurations is invalid for tuning, so the score is void unless the search is rerun as a random search"
         },
         {
           "id": "d",
-          "label": "The winning score is optimistically biased by selection; confirm on untouched test data or use nested CV"
+          "label": "The best score is optimistically biased by selection; confirm on untouched test data or use nested CV"
         }
       ],
       "answerKey": {
@@ -2212,19 +2207,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Logged feedback is biased toward items the old model showed, so use counterfactual estimators or online tests"
+          "label": "Logged clicks are biased toward items the old model showed, so use counterfactual estimators or online tests"
         },
         {
           "id": "b",
-          "label": "The A/B test is underpowered by definition, so trust the offline metric and ship"
+          "label": "The A/B test likely lacked power to detect a 4% lift, so trust the offline metric and ship the new model"
         },
         {
           "id": "c",
-          "label": "NDCG is invalid for recommendation, so switch to RMSE on ratings"
+          "label": "NDCG ignores rating magnitude on recommendations, so re-evaluate the new model offline using RMSE on ratings"
         },
         {
           "id": "d",
-          "label": "The new model overfit, so add more layers to improve fit to logged clicks"
+          "label": "The new model overfit the logged clicks, so add more layers and retrain to fit those clicks even better"
         }
       ],
       "answerKey": {
@@ -2247,7 +2242,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Wait for 60-day labels and compute accuracy on each cohort, then alert"
+          "label": "Wait for 60-day labels, then compute accuracy on each cohort and alert when it drops below the validation baseline"
         },
         {
           "id": "b",
@@ -2255,11 +2250,11 @@
         },
         {
           "id": "c",
-          "label": "Retrain every night and treat a lower training loss as proof of health"
+          "label": "Retrain every night on the newest data and treat a falling training loss as proof the model is healthy"
         },
         {
           "id": "d",
-          "label": "Track only mean predicted churn rate, since the labels are too late to matter"
+          "label": "Track only the weekly mean predicted churn rate, since labels arrive too late to matter for drift detection"
         }
       ],
       "answerKey": {
@@ -2317,19 +2312,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Random 80/20 image split repeated 10 times and averaged"
+          "label": "Random 80/20 image split repeated 10 times, averaging the scores to cut variance"
         },
         {
           "id": "b",
-          "label": "Shuffled k-fold on images, stratified by image label only"
+          "label": "Shuffled k-fold on images, stratified by image label so each fold keeps 3% positives"
         },
         {
           "id": "c",
-          "label": "Stratified group k-fold with patient as the group and patient label as the stratum"
+          "label": "Stratified group k-fold, patient as group, patient label as stratum"
         },
         {
           "id": "d",
-          "label": "Group k-fold by patient with no stratification, accepting uneven folds"
+          "label": "Group k-fold by patient with no stratification, relying on large folds to balance positives"
         }
       ],
       "answerKey": {
@@ -2352,19 +2347,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Replace the feature with its row index to prevent memorising categories"
+          "label": "Replace the feature with a per-row unique index so the model cannot memorise any single category"
         },
         {
           "id": "b",
-          "label": "Encode with the mean of the target per level and add Gaussian noise to the output"
+          "label": "Encode with the per-level target mean on the full training set, then add Gaussian noise to the output"
         },
         {
           "id": "c",
-          "label": "Out-of-fold target encoding with smoothing toward the global mean, fitted inside each training fold"
+          "label": "Out-of-fold target encoding, smoothed toward the global mean, fitted inside each training fold"
         },
         {
           "id": "d",
-          "label": "Compute the encoding on the test set so levels match deployment data"
+          "label": "Compute the per-level target means on the held-out test set so levels match the deployment data"
         }
       ],
       "answerKey": {
@@ -2391,15 +2386,15 @@
         },
         {
           "id": "b",
-          "label": "Flag cases above 20/21 probability, since misses cost more than alarms"
+          "label": "Use the training-time probabilities as they are and flag cases above 20/21, since a miss costs 20 times an alarm"
         },
         {
           "id": "c",
-          "label": "Oversample positives further to 50% and use the 0.5 threshold"
+          "label": "Oversample positives to 50% prevalence, retrain, and then use the 0.5 threshold"
         },
         {
           "id": "d",
-          "label": "Calibrate, adjust probabilities for the 2% prior, then flag cases with probability above 1/21"
+          "label": "Recalibrate to the 2% prior, then flag cases above 1/21 probability"
         }
       ],
       "answerKey": {
@@ -2463,19 +2458,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A logistic regression on raw features with no interaction terms"
+          "label": "A logistic regression on raw features with no interaction terms, using L1 regularisation to keep it sparse"
         },
         {
           "id": "b",
-          "label": "A 1,000-tree boosted model explained afterwards with SHAP values"
+          "label": "A 1,000-tree boosted model explained afterwards with SHAP values for each decision"
         },
         {
           "id": "c",
-          "label": "A generalised additive model with a few validated pairwise terms, benchmarked against a boosted tree"
+          "label": "A generalised additive model with a few validated pairwise terms"
         },
         {
           "id": "d",
-          "label": "A deep neural network with attention maps shown to regulators"
+          "label": "A deep neural network with attention maps shown to regulators for each score"
         }
       ],
       "answerKey": {

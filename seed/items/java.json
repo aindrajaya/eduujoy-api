@@ -335,11 +335,11 @@
         },
         {
           "id": "c",
-          "label": "The list becomes immutable, so elements cannot be changed later"
+          "label": "The list becomes immutable, so elements cannot be added or changed later"
         },
         {
           "id": "d",
-          "label": "The list runs faster because strings are stored as primitives"
+          "label": "The list runs faster because strings are stored as primitives, not objects"
         }
       ],
       "answerKey": {
@@ -397,19 +397,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A class may extend many classes but implement one interface"
+          "label": "A class may extend several superclasses, but can implement only one interface"
         },
         {
           "id": "b",
-          "label": "A class may extend many classes and implement many interfaces"
+          "label": "A class may extend several superclasses and also implement several interfaces"
         },
         {
           "id": "c",
-          "label": "A class may extend one class and implement no interfaces"
+          "label": "A class may extend one superclass, but can implement only one interface"
         },
         {
           "id": "d",
-          "label": "A class may extend one class and implement many interfaces"
+          "label": "A class may extend one superclass, but can implement several interfaces"
         }
       ],
       "answerKey": {
@@ -538,19 +538,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Interfaces are compiled faster, so the JVM permits more of them per class"
+          "label": "Interfaces are resolved at compile time only, so the JVM never has to load more than one superclass at runtime"
         },
         {
           "id": "b",
-          "label": "Interfaces are only documentation, so the compiler ignores them when linking"
+          "label": "Interfaces are only markers with no members, so the compiler ignores them when it links method calls"
         },
         {
           "id": "c",
-          "label": "Superclasses are limited because every class already extends `Object` once per file"
+          "label": "Every class already extends `Object` implicitly, so the language reserves the single superclass slot for it"
         },
         {
           "id": "d",
-          "label": "Interfaces carry no instance state, which avoids the ambiguity of inheriting fields from many parents"
+          "label": "Interfaces carry no instance state, which avoids ambiguity from inheriting fields from many parents"
         }
       ],
       "answerKey": {
@@ -608,19 +608,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The list sorts itself alphabetically because the element type is known"
+          "label": "The list keeps its elements in alphabetical order because the compiler knows they are Strings"
         },
         {
           "id": "b",
-          "label": "The compiler rejects adding non-String elements and removes the need for casts when reading"
+          "label": "The compiler rejects non-String additions and removes casts when reading"
         },
         {
           "id": "c",
-          "label": "The list becomes immutable once the type is given in angle brackets"
+          "label": "The list becomes immutable once the element type is given in angle brackets, so add fails"
         },
         {
           "id": "d",
-          "label": "The list then stores its strings in less memory at runtime"
+          "label": "The list stores its strings in less memory at runtime because no Object boxing is needed"
         }
       ],
       "answerKey": {
@@ -1216,7 +1216,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`Comparator.comparing(Employee::dept).thenComparing(Employee::salary)`"
+          "label": "`Comparator.comparing(Employee::dept).thenComparing(Employee::salary, Comparator.naturalOrder())`"
         },
         {
           "id": "b",
@@ -1251,19 +1251,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`isEmpty()` takes a lock on the string that the list then cannot release"
+          "label": "`isEmpty()` locks the string being examined, and the list cannot release that lock during removal"
         },
         {
           "id": "b",
-          "label": "The list's modification count changes outside the iterator, so the iterator's next call fails fast"
+          "label": "The list's modification count changes outside the iterator, so its next call fails fast"
         },
         {
           "id": "c",
-          "label": "`remove(Object)` is not permitted on an ArrayList while it is non-empty"
+          "label": "`remove(Object)` is unsupported on an ArrayList and throws whenever an element is actually found"
         },
         {
           "id": "d",
-          "label": "The for-each loop iterates over a copy, which goes stale after a removal"
+          "label": "The for-each loop iterates over a snapshot copy of the list, which goes stale after a removal"
         }
       ],
       "answerKey": {
@@ -1286,19 +1286,19 @@
       "options": [
         {
           "id": "a",
-          "label": "HashSet rejects classes that override equals without implementing Comparable"
+          "label": "HashSet rejects classes that override equals without also implementing the Comparable interface"
         },
         {
           "id": "b",
-          "label": "contains calls hashCode on the set itself, which has changed after the add"
+          "label": "contains calls hashCode on the set itself, which has changed after the add call"
         },
         {
           "id": "c",
-          "label": "HashSet compares elements with == and only uses equals when sizes differ"
+          "label": "HashSet compares elements with == first and only uses equals when the set sizes differ"
         },
         {
           "id": "d",
-          "label": "The default hashCode usually sends the two equal points to different buckets, so equals is never called"
+          "label": "The default hashCode usually puts equal points in different buckets, so equals never runs"
         }
       ],
       "answerKey": {
@@ -1321,19 +1321,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Overloading is only allowed when return types differ, and both return void here"
+          "label": "Overloading must differ in return type, and both methods here return void, so the compiler rejects the pair"
         },
         {
           "id": "b",
-          "label": "The compiler cannot tell Integer from String because both implement Comparable"
+          "label": "String and Integer both implement Comparable, so the compiler treats the two parameter types as the same type"
         },
         {
           "id": "c",
-          "label": "Generic methods may not be overloaded in a class that also has a main method"
+          "label": "Generic type arguments are checked only at run time, so the compiler cannot pick between the two overloads"
         },
         {
           "id": "d",
-          "label": "Both parameter types erase to `List`, so the two methods have the same signature after erasure"
+          "label": "Both parameter types erase to `List`, so the two methods share one signature after erasure"
         }
       ],
       "answerKey": {
@@ -1391,11 +1391,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`forEach` on a parallel stream runs on one thread, which overflows the array"
+          "label": "`forEach` on a parallel stream gives no ordering guarantee, so the list is built in a shuffled order and entries get discarded"
         },
         {
           "id": "b",
-          "label": "`range` produces duplicate values when run in parallel, so some adds are dropped"
+          "label": "`range` produces overlapping sub-ranges when split across threads, so some values are added twice and others are skipped"
         },
         {
           "id": "c",
@@ -1403,7 +1403,7 @@
         },
         {
           "id": "d",
-          "label": "Autoboxing of ints is not allowed on worker threads, so some values are lost"
+          "label": "Autoboxing from int to Integer uses a shared cache that is not synchronised, so some boxed values are lost"
         }
       ],
       "answerKey": {
@@ -1852,11 +1852,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Extend `HashSet` and override only `add`, since every other insertion path is guaranteed to call it"
+          "label": "Extend `HashSet` and override only `add`, since the other insertion methods in the current release delegate to it"
         },
         {
           "id": "b",
-          "label": "Extend `HashSet` and make the counter static, since shared state stays correct across all subclasses"
+          "label": "Extend `HashSet` and make the counter static, since shared state stays correct across subclasses"
         },
         {
           "id": "c",
@@ -1864,7 +1864,7 @@
         },
         {
           "id": "d",
-          "label": "Extend `HashSet` and override `add` and `addAll`, since covering every adding method keeps counts correct"
+          "label": "Extend `HashSet` and override `add` and `addAll`, since covering each adding method keeps counts correct"
         }
       ],
       "answerKey": {
@@ -2037,15 +2037,15 @@
         },
         {
           "id": "b",
-          "label": "The catch block swallows the interrupt without restoring the flag or leaving the loop, so the shutdown request is lost"
+          "label": "The catch block swallows the interrupt without restoring the flag or exiting, so the request is lost"
         },
         {
           "id": "c",
-          "label": "Warn-level logging will flood the logs during normal operation and hide more important errors from operators"
+          "label": "Warn-level logging will flood the logs during normal operation and hide more important errors from operators, so it should be dropped"
         },
         {
           "id": "d",
-          "label": "InterruptedException is checked, so run() should declare it with throws instead of catching it inside the loop"
+          "label": "InterruptedException is checked, so run() should declare it with throws instead of catching it inside the loop, letting the thread end"
         }
       ],
       "answerKey": {
@@ -2296,7 +2296,7 @@
         },
         {
           "id": "d",
-          "label": "`<T extends Comparable<? extends T>> T max(Collection<T> c)`"
+          "label": "`<T extends Comparable<? extends T>> T max(Collection<? extends T> c)`"
         }
       ],
       "answerKey": {
@@ -2319,7 +2319,7 @@
       "options": [
         {
           "id": "a",
-          "label": "An ArrayBlockingQueue with put and take; the producer enqueues one poison-pill per consumer at the end, and each consumer exits on receiving one"
+          "label": "An ArrayBlockingQueue with put and take; the producer enqueues one poison-pill per consumer, and each consumer exits on one"
         },
         {
           "id": "b",
@@ -2327,7 +2327,7 @@
         },
         {
           "id": "c",
-          "label": "An ArrayBlockingQueue with put and take; the producer enqueues a single poison-pill, and the consumer that receives it exits"
+          "label": "An ArrayBlockingQueue with put and take; the producer enqueues a single poison-pill at the end, and the first consumer to take it exits"
         },
         {
           "id": "d",

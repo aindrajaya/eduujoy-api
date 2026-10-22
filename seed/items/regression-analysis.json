@@ -151,7 +151,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The slope, the change in y per unit x"
+          "label": "The slope, the change in y for each one-unit increase in x"
         },
         {
           "id": "b",
@@ -222,19 +222,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The probability that the slope is truly zero"
+          "label": "The probability that the slope is truly zero, given the data"
         },
         {
           "id": "b",
-          "label": "The proportion of response variance explained by the model"
+          "label": "The share of score variance explained by the model"
         },
         {
           "id": "c",
-          "label": "The increase in score for each extra hour"
+          "label": "The increase in predicted score for each extra hour studied"
         },
         {
           "id": "d",
-          "label": "The average size of the residuals in score points"
+          "label": "The average size of the residuals, in exam score points"
         }
       ],
       "answerKey": {
@@ -261,15 +261,15 @@
         },
         {
           "id": "b",
-          "label": "Weight rises by exactly 0.5 for every person per height unit"
+          "label": "Weight rises by exactly 0.5 units for every person per height unit"
         },
         {
           "id": "c",
-          "label": "Half of the variation in weight is explained by height"
+          "label": "Half of the variation in weight is explained by height alone"
         },
         {
           "id": "d",
-          "label": "Each extra unit of height goes with 0.5 more units of weight on average"
+          "label": "Each extra unit of height goes with 0.5 more weight on average"
         }
       ],
       "answerKey": {
@@ -292,11 +292,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The response must be binary"
+          "label": "The response variable must be binary, so logistic regression is needed"
         },
         {
           "id": "b",
-          "label": "The residuals are perfectly random"
+          "label": "The residuals are perfectly random, so the fit is good"
         },
         {
           "id": "c",
@@ -304,7 +304,7 @@
         },
         {
           "id": "d",
-          "label": "The sample is too large to analyse"
+          "label": "The sample is too large, so the model cannot be trusted"
         }
       ],
       "answerKey": {
@@ -323,11 +323,11 @@
       "stage": "novice",
       "bloom": "C2",
       "kind": "single_choice",
-      "prompt": "In a logistic regression, a predictor has a coefficient of 0 . What does this say about that predictor?",
+      "prompt": "In a logistic regression, a predictor has a coefficient of 0. What does this say about that predictor?",
       "options": [
         {
           "id": "a",
-          "label": "It makes the outcome impossible"
+          "label": "It makes the outcome impossible at every value"
         },
         {
           "id": "b",
@@ -335,11 +335,11 @@
         },
         {
           "id": "c",
-          "label": "It doubles the odds of the outcome"
+          "label": "It doubles the odds of the outcome per unit increase"
         },
         {
           "id": "d",
-          "label": "It makes the outcome certain to occur"
+          "label": "It lowers the probability of the outcome by zero percent only"
         }
       ],
       "answerKey": {
@@ -362,19 +362,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Slopes are only defined for experimental data"
+          "label": "Slopes are usually reliable only when the data come from a randomized experiment"
         },
         {
           "id": "b",
-          "label": "Association can arise from other factors that also affect y"
+          "label": "Other factors that also affect y can produce the association"
         },
         {
           "id": "c",
-          "label": "Least squares cannot handle observational data"
+          "label": "Least squares assumes random assignment, so it fits observational data poorly"
         },
         {
           "id": "d",
-          "label": "Causal claims need a larger R-squared only"
+          "label": "Causal claims need a larger R-squared than observational data tend to give"
         }
       ],
       "answerKey": {
@@ -401,15 +401,15 @@
         },
         {
           "id": "b",
-          "label": "The slope changes sign for any age above 40"
+          "label": "The slope estimate becomes unreliable once ages pass the sample's mean age"
         },
         {
           "id": "c",
-          "label": "Least squares gives negative values for older ages"
+          "label": "Least squares only guarantees a good fit for ages inside the middle of the data"
         },
         {
           "id": "d",
-          "label": "Predictions are only valid at the sample mean"
+          "label": "Predictions are only valid at the sample mean, not at other values"
         }
       ],
       "answerKey": {
@@ -464,7 +464,7 @@
       "stage": "novice",
       "bloom": "C2",
       "kind": "scenario",
-      "prompt": "A analyst fits a logistic regression predicting whether a customer buys (1) or not (0). The model outputs a predicted value of 0.8 for one customer. A colleague asks what this number means. Which explanation is correct?",
+      "prompt": "An analyst fits a logistic regression predicting whether a customer buys (1) or not (0). The model outputs a predicted value of 0.8 for one customer. A colleague asks what this number means. Which explanation is correct?",
       "options": [
         {
           "id": "a",
@@ -472,15 +472,15 @@
         },
         {
           "id": "b",
-          "label": "The customer is 80% of the way to buying"
+          "label": "The customer has completed 80% of the steps toward buying"
         },
         {
           "id": "c",
-          "label": "The model is 80% accurate overall"
+          "label": "The model classifies 80% of all customers correctly overall"
         },
         {
           "id": "d",
-          "label": "The customer will buy 0.8 items"
+          "label": "The customer is expected to buy 0.8 items on average"
         }
       ],
       "answerKey": {
@@ -503,7 +503,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Studying causes a 4.5% rise in the score for every student"
+          "label": "Studying causes a 4.5% rise in the score for every student who studies one more hour"
         },
         {
           "id": "b",
@@ -511,11 +511,11 @@
         },
         {
           "id": "c",
-          "label": "A student who studies 0 hours is predicted to score 4.5"
+          "label": "A student who studies 0 hours is predicted to score 4.5, the value where the line crosses the axis"
         },
         {
           "id": "d",
-          "label": "Hours studied explains 4.5 percent of the score variation"
+          "label": "Hours studied explains 4.5 percent of the variation in exam scores across all the students"
         }
       ],
       "answerKey": {
@@ -573,19 +573,19 @@
       "options": [
         {
           "id": "a",
-          "label": "About 64% of the variation in the response is accounted for by the model"
+          "label": "About 64% of the response variation is explained by the model"
         },
         {
           "id": "b",
-          "label": "The model's predictions are correct 64% of the time"
+          "label": "The model's predictions land on the observed value 64% of the time"
         },
         {
           "id": "c",
-          "label": "The correlation between predictor and response is 0.64"
+          "label": "The correlation between predictor and response is exactly 0.64"
         },
         {
           "id": "d",
-          "label": "The slope is statistically significant at the 64% level"
+          "label": "The slope is statistically significant at the 64% confidence level"
         }
       ],
       "answerKey": {
@@ -718,15 +718,15 @@
         },
         {
           "id": "b",
-          "label": "The intercept is correct only if the slope is also significant"
+          "label": "The intercept is meaningful when the slope is also statistically significant, since then the line fits well at zero"
         },
         {
           "id": "c",
-          "label": "The intercept is the average price of all houses in the dataset"
+          "label": "The intercept is the average price of all houses in the dataset, found by setting area to its mean"
         },
         {
           "id": "d",
-          "label": "The intercept is just the fitted value at area 0, which lies outside the data and may have no real meaning"
+          "label": "The intercept is the fitted value at area 0, which is outside the data and may have no real meaning"
         }
       ],
       "answerKey": {
@@ -964,7 +964,7 @@
         },
         {
           "id": "b",
-          "label": "t = 3 means advertising causes 3 times more sales"
+          "label": "t = 3, so advertising causes sales to rise by a factor of three"
         },
         {
           "id": "c",
@@ -972,7 +972,7 @@
         },
         {
           "id": "d",
-          "label": "t = 3, so the slope is statistically distinguishable from zero"
+          "label": "t = 3, so the slope differs from zero"
         }
       ],
       "answerKey": {
@@ -1214,11 +1214,11 @@
         },
         {
           "id": "b",
-          "label": "Report a 95% prediction interval, which also includes residual variation"
+          "label": "Report a 95% prediction interval, adding residual variance"
         },
         {
           "id": "c",
-          "label": "Report a 95% confidence interval for the mean price at that size"
+          "label": "Report a 95% confidence interval for the mean price, since it covers the average house"
         },
         {
           "id": "d",
@@ -1245,19 +1245,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The relationship is nonlinear, so adding a variable flips its sign"
+          "label": "The relationship is nonlinear, so adding any second predictor makes the linear slope on ad_spend flip sign"
         },
         {
           "id": "b",
-          "label": "The model is overfitting because it has only two predictors"
+          "label": "The model is overfitting, because adding a second predictor always inflates coefficient variance"
         },
         {
           "id": "c",
-          "label": "The residuals are heteroscedastic, which biases the coefficient sign"
+          "label": "The residuals are heteroscedastic, which biases the OLS coefficient estimates and changes their sign"
         },
         {
           "id": "d",
-          "label": "The two predictors are nearly collinear, so their separate effects are poorly identified"
+          "label": "The predictors are nearly collinear, so their separate effects are poorly identified"
         }
       ],
       "answerKey": {
@@ -1601,19 +1601,19 @@
       "options": [
         {
           "id": "a",
-          "label": "High influence, since any point with extreme x always drags the slope toward itself"
+          "label": "High influence, since a point with extreme x usually drags the slope toward itself and so distorts the fitted line"
         },
         {
           "id": "b",
-          "label": "Low leverage, since a point that sits on the line cannot affect the fit in any way"
+          "label": "Low leverage, since a point that sits on the line has little pull on the slope and leaves the fit nearly unchanged"
         },
         {
           "id": "c",
-          "label": "High leverage but small residual, so it barely moves the slope yet inflates R^2 and tightens the standard errors"
+          "label": "High leverage but small residual, so it barely moves the slope yet inflates R^2 and shrinks the standard errors"
         },
         {
           "id": "d",
-          "label": "No effect on inference, since only points with large residuals change standard errors"
+          "label": "No effect on inference, since mainly the points with large residuals change the standard errors and the R^2"
         }
       ],
       "answerKey": {
@@ -1707,19 +1707,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The residuals are normal, so the long runs are harmless and no adjustment is needed"
+          "label": "Normally distributed residuals make the long runs harmless, so the reported tests need no adjustment"
         },
         {
           "id": "b",
-          "label": "The standard errors are too small, so the significance is overstated while the slope is still unbiased"
+          "label": "The standard errors are too small, so significance is overstated though the slope stays unbiased"
         },
         {
           "id": "c",
-          "label": "The R^2 is understated, so the model is better than the output suggests"
+          "label": "R^2 is understated because the runs add noise, so the model is better than the output suggests"
         },
         {
           "id": "d",
-          "label": "The slope estimate is biased upward, so the true ad effect is smaller than reported"
+          "label": "The slope is biased upward because errors carry over between days, so the true ad effect is smaller"
         }
       ],
       "answerKey": {
@@ -1777,19 +1777,19 @@
       "options": [
         {
           "id": "a",
-          "label": "OLS with all 30 predictors, because it is unbiased and unbiasedness gives the best predictions"
+          "label": "OLS with all 30 predictors, because it is unbiased and so gives the lowest expected prediction error"
         },
         {
           "id": "b",
-          "label": "OLS on the three predictors with the smallest p-values, because small models always predict better"
+          "label": "OLS on the few predictors with the smallest p-values, because screening on p-values removes noise variables and cuts variance"
         },
         {
           "id": "c",
-          "label": "A model fitted by minimising training error across many transformations, because it fits the data most closely"
+          "label": "A model with many added transformations and interactions chosen to minimise training error, because it fits the data closely"
         },
         {
           "id": "d",
-          "label": "Ridge regression with the penalty tuned by cross-validation, because shrinkage trades a little bias for much lower variance"
+          "label": "Ridge regression with the penalty tuned by cross-validation, because shrinkage trades a little bias for lower variance"
         }
       ],
       "answerKey": {
@@ -1882,19 +1882,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Drop x2, since removing collinear variables always gives a more precise x1 estimate"
+          "label": "Drop x2, since removing collinear variables always gives a more precise and trustworthy x1 estimate"
         },
         {
           "id": "b",
-          "label": "Drop x1 instead, since the one with the higher p-value should leave the model"
+          "label": "Drop x1 instead, since the predictor with the higher p-value should always be the one removed"
         },
         {
           "id": "c",
-          "label": "Keep both and accept the wide confidence interval on x1, or gather data where they vary independently"
+          "label": "Keep both and accept the wide interval on x1, or gather data where they vary independently"
         },
         {
           "id": "d",
-          "label": "Keep both but standardise y, since rescaling the response removes the collinearity"
+          "label": "Keep both but standardise y, since rescaling the response removes the collinearity between predictors"
         }
       ],
       "answerKey": {
@@ -1988,11 +1988,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep both, because collinearity inflates coefficient variance but barely harms predictions within the same joint distribution"
+          "label": "Keep both, because collinearity inflates coefficient variance but barely harms predictions in the same population"
         },
         {
           "id": "b",
-          "label": "Drop one, because collinearity violates the OLS assumptions needed for predictions to be unbiased"
+          "label": "Drop one, because collinearity violates the OLS assumptions needed for predictions to be unbiased and efficient in new data"
         },
         {
           "id": "c",
@@ -2000,7 +2000,7 @@
         },
         {
           "id": "d",
-          "label": "Drop one, because collinearity biases the fitted values and makes predictions systematically wrong"
+          "label": "Drop one, because collinearity biases the fitted values and makes predictions systematically wrong for new cases"
         }
       ],
       "answerKey": {
@@ -2058,15 +2058,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The lagged term is invalid because predictors must be independent of the response in any regression"
+          "label": "The lagged term is invalid because predictors must be independent of the response in any regression, so the model is misspecified"
         },
         {
           "id": "b",
-          "label": "The gain mostly reflects persistence in sales, so higher R^2 says little about whether the promotion effect is better identified"
+          "label": "The gain mostly reflects persistence in sales, so higher R^2 says little about the promotion effect"
         },
         {
           "id": "c",
-          "label": "R^2 can never be compared across models, so the conclusion is invalid whatever predictors are added"
+          "label": "R^2 can never be compared across models, so the conclusion is invalid whatever predictors are added or removed"
         },
         {
           "id": "d",
@@ -2093,19 +2093,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Run WLS with weights guessed from a single predictor, since any weighting beats unweighted fits"
+          "label": "Run WLS with weights estimated from a single predictor, since a correct weight model gives the most efficient estimates"
         },
         {
           "id": "b",
-          "label": "Keep the OLS estimates and use heteroskedasticity-robust standard errors, which stay valid without a model for the variance"
+          "label": "Keep the OLS estimates and use heteroskedasticity-robust standard errors, valid without a variance model"
         },
         {
           "id": "c",
-          "label": "Drop the observations with the largest residuals until the residual plot looks even across fitted values"
+          "label": "Drop the observations with the largest residuals until the residual plot looks even, since outliers drive the unequal variance"
         },
         {
           "id": "d",
-          "label": "Log-transform the response without checking, since this always removes heteroskedasticity from the errors"
+          "label": "Log-transform the response and keep the usual standard errors, since the log scale usually stabilises the variance"
         }
       ],
       "answerKey": {
@@ -2234,19 +2234,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Negative binomial regression with a log link and an offset of log(population), so coefficients are rate ratios"
+          "label": "Negative binomial regression with a log link and a log(population) offset, so coefficients are rate ratios"
         },
         {
           "id": "b",
-          "label": "Logistic regression on whether any infection occurred, since it removes the effect of district size"
+          "label": "Logistic regression on whether any infection occurred, since a binary outcome removes the effect of district size and overdispersion"
         },
         {
           "id": "c",
-          "label": "OLS on the raw counts with population as a predictor, since it keeps the model linear and simple"
+          "label": "OLS on the raw counts with population as a predictor, since it keeps the model linear and the coefficients easy to read"
         },
         {
           "id": "d",
-          "label": "Poisson regression with no offset, since overdispersion is handled by the log link alone"
+          "label": "Poisson regression with a log link and no offset, since the log link alone adjusts for district size and overdispersion"
         }
       ],
       "answerKey": {
@@ -2304,19 +2304,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Standardised predictors, since scaling is needed before cross-validation yields an honest error estimate"
+          "label": "Standardised predictors inside every fold, since unscaled inputs make cross-validated error estimates optimistic and unreliable"
         },
         {
           "id": "b",
-          "label": "A random seed fixed per fold, since reproducibility is the main threat to forecast validation"
+          "label": "A fixed random seed for each fold split, since irreproducible fold assignments are the main threat to forecast validation"
         },
         {
           "id": "c",
-          "label": "A larger number of folds, since 5 folds leave too little data for training in each fold"
+          "label": "A larger number of folds such as 20, since 5 folds leave too little training data and bias the error estimate upward"
         },
         {
           "id": "d",
-          "label": "Forward-chaining validation that trains on past weeks and tests on later ones, so no future data leaks into training"
+          "label": "Forward-chaining validation that trains on past weeks and tests on later ones, so no future data leaks"
         }
       ],
       "answerKey": {
@@ -2450,7 +2450,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Fit all 30 predictors by maximum likelihood, then keep those with p < 0.05 for the final score"
+          "label": "Fit all 30 predictors by maximum likelihood, then refit with only those at p < 0.05 and report the cross-validated AUC"
         },
         {
           "id": "b",
@@ -2458,11 +2458,11 @@
         },
         {
           "id": "c",
-          "label": "Fit a very flexible model with interactions, since more terms capture the risk structure and calibrate better"
+          "label": "Fit a very flexible model with interactions and splines, since the added terms capture the risk structure and improve calibration"
         },
         {
           "id": "d",
-          "label": "Run best-subset selection on the full data and report the apparent AUC as the performance estimate"
+          "label": "Run best-subset selection on the full data, then report the apparent AUC and calibration slope from that same sample"
         }
       ],
       "answerKey": {

@@ -116,7 +116,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Encrypting traffic between client and server"
+          "label": "Encrypting traffic between a client and a server"
         },
         {
           "id": "b",
@@ -124,11 +124,11 @@
         },
         {
           "id": "c",
-          "label": "Translating domain names to IP addresses"
+          "label": "Translating domain names into IP addresses for clients"
         },
         {
           "id": "d",
-          "label": "Enforcing foreign keys in a relational table"
+          "label": "Enforcing foreign keys between relational tables"
         }
       ],
       "answerKey": {
@@ -155,15 +155,15 @@
         },
         {
           "id": "b",
-          "label": "A user who sends all requests from one IP address"
+          "label": "A user whose repeated failed requests get blocked by a rate limiter"
         },
         {
           "id": "c",
-          "label": "A database table with only one column"
+          "label": "A database write that fails and must be retried by the client"
         },
         {
           "id": "d",
-          "label": "A server that handles only one request at a time"
+          "label": "A server that is slower than the other servers behind a load balancer"
         }
       ],
       "answerKey": {
@@ -257,19 +257,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Repeated reads are served from fast memory, so the database does less work"
+          "label": "Repeated reads are served from fast memory, easing database load"
         },
         {
           "id": "b",
-          "label": "It guarantees data is never out of date"
+          "label": "It keeps a copy of every record, so cached data is never out of date"
         },
         {
           "id": "c",
-          "label": "It removes the need to back up the database"
+          "label": "It holds a second copy of the data, so regular database backups are unnecessary"
         },
         {
           "id": "d",
-          "label": "It lets the database accept writes without storing them"
+          "label": "It buffers incoming writes in memory so the database does not need to store them"
         }
       ],
       "answerKey": {
@@ -292,19 +292,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It makes each email send faster on the worker"
+          "label": "It makes each email send faster once a worker picks it up"
         },
         {
           "id": "b",
-          "label": "It encrypts the emails before sending"
+          "label": "It encrypts the emails so they stay private while waiting"
         },
         {
           "id": "c",
-          "label": "It guarantees emails arrive in the inbox"
+          "label": "It guarantees every email reaches the recipient's inbox"
         },
         {
           "id": "d",
-          "label": "The web server can reply quickly while emails are sent later"
+          "label": "The server can reply now and the emails are sent later"
         }
       ],
       "answerKey": {
@@ -327,7 +327,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Each request is processed twice for accuracy"
+          "label": "Each request is processed by both copies so results can be checked"
         },
         {
           "id": "b",
@@ -335,11 +335,11 @@
         },
         {
           "id": "c",
-          "label": "The service uses less memory overall"
+          "label": "The service uses less memory because the work is split in two"
         },
         {
           "id": "d",
-          "label": "Database queries become unnecessary"
+          "label": "Database queries become unnecessary because copies share state"
         }
       ],
       "answerKey": {
@@ -362,15 +362,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Vertical is for databases only; horizontal is for caches only"
+          "label": "Vertical scaling suits only databases, while horizontal scaling suits only caches and stateless web servers"
         },
         {
           "id": "b",
-          "label": "Vertical adds machines; horizontal makes one machine bigger"
+          "label": "Vertical scaling adds more machines, while horizontal scaling makes one machine bigger"
         },
         {
           "id": "c",
-          "label": "Vertical and horizontal both mean copying data to backups"
+          "label": "Vertical and horizontal scaling both mean copying data to backups"
         },
         {
           "id": "d",
@@ -397,11 +397,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Reads become slower than hitting the database"
+          "label": "Reads become slower than reading from the database each time"
         },
         {
           "id": "b",
-          "label": "Caches cannot hold more than one item"
+          "label": "Caches cannot hold more than one item at once"
         },
         {
           "id": "c",
@@ -468,19 +468,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It lets the site handle more traffic and survive a server failure"
+          "label": "It spreads load and survives a server failure"
         },
         {
           "id": "b",
-          "label": "It stops customers from seeing old prices"
+          "label": "It keeps customers from seeing outdated prices or stock"
         },
         {
           "id": "c",
-          "label": "It removes the need to store orders"
+          "label": "It removes the need to back up order data regularly"
         },
         {
           "id": "d",
-          "label": "It makes the database schema normalized"
+          "label": "It makes each page load faster for a single user"
         }
       ],
       "answerKey": {
@@ -889,7 +889,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Order creation date, so recent orders sit together on one shard"
+          "label": "Order creation date, so recent orders sit together on one shard and range scans stay cheap"
         },
         {
           "id": "b",
@@ -897,11 +897,11 @@
         },
         {
           "id": "c",
-          "label": "Customer country, so orders from each region stay on their own shard"
+          "label": "Customer country, so orders from each region stay on their own shard close to local users"
         },
         {
           "id": "d",
-          "label": "Random value per order, so each shard gets the same number of rows"
+          "label": "Random value per order, so each shard gets the same number of rows and no shard runs hot"
         }
       ],
       "answerKey": {
@@ -1100,19 +1100,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Country code, so regional users share a shard and queries stay local"
+          "label": "Country code, so regional customers share a shard and most queries stay close to them"
         },
         {
           "id": "b",
-          "label": "Order creation date, so recent orders are grouped together on one shard"
+          "label": "Order creation date, so recent orders are grouped together on one shard and reads are fast"
         },
         {
           "id": "c",
-          "label": "Hash of user_id, so each user's orders sit on one shard and users spread evenly"
+          "label": "Hash of user_id, so one customer's orders share a shard and load is spread"
         },
         {
           "id": "d",
-          "label": "Order status, so open orders are separated from completed ones"
+          "label": "Order status, so open orders are kept apart from completed ones and scans stay small"
         }
       ],
       "answerKey": {
@@ -1211,19 +1211,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Shorten the session timeout so stale sessions clear sooner"
+          "label": "Shorten the session timeout so stale sessions on each server clear sooner"
         },
         {
           "id": "b",
-          "label": "Increase each server's memory so sessions survive longer in local storage"
+          "label": "Increase each server's memory so sessions survive longer in its local storage"
         },
         {
           "id": "c",
-          "label": "Store sessions in a shared store such as Redis that every server reads and writes"
+          "label": "Move sessions into a shared store such as Redis that every server uses"
         },
         {
           "id": "d",
-          "label": "Add a fourth server so fewer requests land on any one server"
+          "label": "Add a fourth server so fewer requests land on any single server's memory"
         }
       ],
       "answerKey": {
@@ -1246,19 +1246,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The database became slower, which makes cached entries expire sooner"
+          "label": "The database became slower under load, so cached entries are invalidated sooner than before"
         },
         {
           "id": "b",
-          "label": "The cache's TTL was set too low relative to the read traffic"
+          "label": "The cache's TTL was set too low relative to the read traffic, so entries expire before reuse"
         },
         {
           "id": "c",
-          "label": "The key now includes a value unique to each request, so no key is ever reused"
+          "label": "The key includes a per-request value, so no key is ever reused"
         },
         {
           "id": "d",
-          "label": "The cache ran out of memory and began evicting entries too quickly"
+          "label": "The cache ran out of memory and began evicting entries far faster than they are being read"
         }
       ],
       "answerKey": {
@@ -1281,19 +1281,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The replica serving the read has not yet applied the write because of replication lag"
+          "label": "The read hit a replica that had not yet applied the write"
         },
         {
           "id": "b",
-          "label": "The browser cache is set to ignore server responses for profile pages"
+          "label": "The browser cache is ignoring server responses for profile pages and serving a stored copy"
         },
         {
           "id": "c",
-          "label": "The primary database rejected the write and silently retried it later"
+          "label": "The primary database rejected the write at first and silently retried it a few seconds later"
         },
         {
           "id": "d",
-          "label": "The load balancer is dropping the write request on some connections"
+          "label": "The load balancer dropped the write request on some connections and the client resent it"
         }
       ],
       "answerKey": {
@@ -1316,19 +1316,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The database has too many connections open during payments"
+          "label": "Connections are held open too long during payments, so the database pool is exhausted and requests queue"
         },
         {
           "id": "b",
-          "label": "Checkout needs a CDN in front of it to absorb the slow responses"
+          "label": "Checkout responses are not cached at the edge, so slow replies reach users instead of being absorbed"
         },
         {
           "id": "c",
-          "label": "The email call sits in the request path, so provider slowness is passed on to checkout"
+          "label": "The email call is in the request path, so provider slowness reaches checkout"
         },
         {
           "id": "d",
-          "label": "Payment processing is the bottleneck and needs more capacity"
+          "label": "Payment processing is the real bottleneck under load and needs more capacity to cut latency"
         }
       ],
       "answerKey": {
@@ -1351,15 +1351,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Hash-based sharding always concentrates writes on the first shard"
+          "label": "Hash-based sharding favors the lowest-numbered shard, so write load piles up there over time as data grows"
         },
         {
           "id": "b",
-          "label": "The hash function is biased and must be replaced with a stronger one"
+          "label": "The hash function is biased and spreads tenants unevenly, so swapping in a stronger hash would even out the load"
         },
         {
           "id": "c",
-          "label": "There are too few shards, so adding more would split that tenant"
+          "label": "There are too few shards for this many tenants, so adding more shards would split that tenant's traffic"
         },
         {
           "id": "d",
@@ -1462,19 +1462,19 @@
       "options": [
         {
           "id": "a",
-          "label": "When the key expires, many concurrent requests miss at once and all query the database"
+          "label": "When the key expires, many concurrent requests miss together and query the database"
         },
         {
           "id": "b",
-          "label": "Network latency between app and cache rises periodically on the minute"
+          "label": "Network latency between the app servers and the cache rises periodically on the minute, delaying cache reads until timeouts fire and fall back to the database"
         },
         {
           "id": "c",
-          "label": "The database runs a scheduled backup each minute that competes with queries"
+          "label": "A scheduled job on the database runs every minute, such as a backup or statistics refresh, and competes with the page queries for CPU"
         },
         {
           "id": "d",
-          "label": "The cache evicts the key early because memory is nearly full"
+          "label": "The cache evicts the hot key early under memory pressure, so the next requests must reload it from the database"
         }
       ],
       "answerKey": {
@@ -1680,7 +1680,7 @@
         },
         {
           "id": "c",
-          "label": "The cache uses LRU eviction, which always evicts popular keys first"
+          "label": "The cache is write-through, so each miss forces a synchronous write to the database"
         },
         {
           "id": "d",
@@ -1709,19 +1709,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Sticky cookies keep returning users on their original instances, so new instances get only new users"
+          "label": "Cookies pin returning users to their original instances, so new ones get only new users"
         },
         {
           "id": "b",
-          "label": "The new instances fail health checks intermittently and are taken out of rotation"
+          "label": "The new instances fail health checks intermittently and are pulled out of rotation by the load balancer"
         },
         {
           "id": "c",
-          "label": "The load balancer uses least-connections, which always favours the oldest instances"
+          "label": "The load balancer's least-connections algorithm favours instances that already hold many open connections"
         },
         {
           "id": "d",
-          "label": "Autoscaling adds instances with smaller CPU capacity, so they report lower utilisation"
+          "label": "New instances are slower to warm their caches, so the load balancer sends them fewer requests than the others"
         }
       ],
       "answerKey": {
@@ -1814,19 +1814,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Send the email before taking payment so a provider outage is detected early"
+          "label": "Send the email before taking payment so a provider outage is detected early and checkout is blocked"
         },
         {
           "id": "b",
-          "label": "Call the email provider inline and retry in the request until it succeeds"
+          "label": "Call the email provider inline and retry within the request until it finally succeeds or times out"
         },
         {
           "id": "c",
-          "label": "Fire the email call asynchronously in memory and ignore failures to keep checkout fast"
+          "label": "Fire the email call asynchronously from memory after commit and log failures so checkout stays fast"
         },
         {
           "id": "d",
-          "label": "Persist the order and an outbox record in one transaction, then send emails from a queue worker"
+          "label": "Save the order and an outbox row in one transaction; a queue worker sends and retries emails"
         }
       ],
       "answerKey": {
@@ -1931,7 +1931,7 @@
         },
         {
           "id": "d",
-          "label": "Redis can't store session data, because it only supports caching"
+          "label": "Sessions must live in a relational database, because an in-memory store cannot give the fast lookups that logins need"
         }
       ],
       "answerKey": {
@@ -2026,15 +2026,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Backoff delays make retries useless, because a failed server has always lost the state of the request"
+          "label": "Backoff delays make retries ineffective, because a server that failed a request has usually lost the state needed to process it"
         },
         {
           "id": "b",
-          "label": "Retries are safe for every operation, so the only real cost is slightly higher latency seen by clients"
+          "label": "Retries are safe for most operations, so the main cost is slightly higher latency that clients see while calls are retried"
         },
         {
           "id": "c",
-          "label": "Exponential backoff synchronises clients, so a fixed short retry interval is always more stable under load"
+          "label": "Exponential backoff tends to synchronise clients, so a fixed short retry interval is generally more stable when load is high"
         },
         {
           "id": "d",
@@ -2096,19 +2096,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Unsafe unless storage rejects writes whose fencing token is older than the latest token it has seen"
+          "label": "Unsafe unless storage rejects writes carrying a token older than the latest it has seen"
         },
         {
           "id": "b",
-          "label": "Safe if the TTL is set far above any expected pause, since the lease then can never expire early"
+          "label": "Safe if the TTL is set well above any expected pause, since the lease will then expire only after the worker finishes"
         },
         {
           "id": "c",
-          "label": "Safe, because the worker checked the lock before the write and the pause cannot affect that check"
+          "label": "Safe, because the worker verified it held the lock just before the write, so the lease was valid at write time"
         },
         {
           "id": "d",
-          "label": "Unsafe only when clocks drift, so NTP synchronisation fully removes the stale-writer problem"
+          "label": "Unsafe mainly when clocks drift, so NTP synchronisation across workers removes the stale-writer problem"
         }
       ],
       "answerKey": {
@@ -2207,19 +2207,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Extract only image processing behind a queue, since it has the distinct load and failure profile, and keep the rest modular"
+          "label": "Extract only image processing behind a queue, since its load and failure profile differ, and keep the rest modular"
         },
         {
           "id": "b",
-          "label": "Split by database table, since data ownership boundaries matter more than load profiles when choosing services"
+          "label": "Split the monolith along database-table ownership lines into several services, since data boundaries matter more than load profiles here"
         },
         {
           "id": "c",
-          "label": "Approve the full split, since independent services always give better fault isolation whatever the team size"
+          "label": "Approve the full split into 15 services, since independent services give stronger fault isolation and the team can grow into the operational load"
         },
         {
           "id": "d",
-          "label": "Reject any change, since weekly deploys show the architecture already meets every current need"
+          "label": "Keep the monolith and only add more servers at peak, since weekly deploys show the architecture meets current needs and scaling covers the CPU spike"
         }
       ],
       "answerKey": {
@@ -2242,19 +2242,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Each node holds a local token bucket with a share of the quota, and nodes rebalance shares by exchanging usage asynchronously"
+          "label": "Each node keeps a local token bucket with a share of the quota and rebalances shares by exchanging usage asynchronously"
         },
         {
           "id": "b",
-          "label": "Route every request for a key to one node by consistent hashing, then count locally at that node"
+          "label": "Route every request for a key to one node chosen by consistent hashing, then count locally there so the limit stays exact"
         },
         {
           "id": "c",
-          "label": "Each node calls a central counter on every request and rejects once the global count passes the limit"
+          "label": "Each node calls a central counter on every request and rejects once the global count passes the limit, keeping the limit exact"
         },
         {
           "id": "d",
-          "label": "Each node enforces the full 10,000 locally, since evenly spread traffic will make the totals match the limit"
+          "label": "Each node enforces the full 10,000 locally, since evenly spread traffic will make the totals match the limit across nodes"
         }
       ],
       "answerKey": {
@@ -2458,19 +2458,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Stateless gateways hold connections; a replicated log partitioned by conversation assigns sequence numbers; clients resume from their last acked sequence"
+          "label": "Stateless gateways hold connections; a replicated log partitioned by conversation assigns sequence numbers; clients resume from last acked sequence"
         },
         {
           "id": "b",
-          "label": "Gateways keep messages in memory per connection and flush to a database each minute, ordering by client timestamps"
+          "label": "Gateways keep messages in memory per connection and flush them to a database every minute, ordering by client timestamps and replaying unsent ones on reconnect"
         },
         {
           "id": "c",
-          "label": "Pin each conversation to one gateway that holds messages in local memory and replicates them lazily at shutdown"
+          "label": "Pin each conversation to one gateway that holds messages in local memory, replicates them lazily at shutdown, and redelivers from that memory when users reconnect"
         },
         {
           "id": "d",
-          "label": "Gateways broadcast every message to all gateways by pub/sub and drop it if the recipient is offline, ordering by arrival time"
+          "label": "Gateways broadcast every message to all gateways by pub/sub and drop it if the recipient is offline, ordering by arrival time at each gateway"
         }
       ],
       "answerKey": {

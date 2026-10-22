@@ -46,15 +46,15 @@
       "options": [
         {
           "id": "a",
-          "label": "A single key with a string"
+          "label": "A key paired with a single string value"
         },
         {
           "id": "b",
-          "label": "A node linked by edges"
+          "label": "A node joined to others by edges"
         },
         {
           "id": "c",
-          "label": "A row in a fixed table"
+          "label": "A row in a fixed-schema table"
         },
         {
           "id": "d",
@@ -116,19 +116,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Data is never stored on disk"
+          "label": "Data is held only in memory and not saved to disk"
         },
         {
           "id": "b",
-          "label": "Documents in one collection may have different fields"
+          "label": "Documents in one collection can have different fields"
         },
         {
           "id": "c",
-          "label": "Documents cannot contain nested data"
+          "label": "Documents are kept flat, so nested data is not supported"
         },
         {
           "id": "d",
-          "label": "Every query needs a fixed table definition"
+          "label": "Each query must name a table definition before it runs"
         }
       ],
       "answerKey": {
@@ -198,7 +198,7 @@
         },
         {
           "id": "d",
-          "label": "Wide-column"
+          "label": "Key-value"
         }
       ],
       "answerKey": {
@@ -258,19 +258,19 @@
       "options": [
         {
           "id": "a",
-          "label": "They require every server to hold the same joins"
+          "label": "Every server keeps a full copy of all the data and joins"
         },
         {
           "id": "b",
-          "label": "They forbid more than one user at a time"
+          "label": "They limit each server to one connected user at a time"
         },
         {
           "id": "c",
-          "label": "Data can be partitioned across machines, spreading load"
+          "label": "Data is partitioned across machines, spreading the load"
         },
         {
           "id": "d",
-          "label": "They store all data on one very large machine"
+          "label": "They keep all data on one very large central machine"
         }
       ],
       "answerKey": {
@@ -293,11 +293,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Reads always return the newest write instantly"
+          "label": "Every read returns the newest write, because writes wait for all replicas first"
         },
         {
           "id": "b",
-          "label": "Writes are rejected until all replicas agree"
+          "label": "Writes are rejected until all replicas have agreed on a single value"
         },
         {
           "id": "c",
@@ -305,7 +305,7 @@
         },
         {
           "id": "d",
-          "label": "Data is deleted after some time"
+          "label": "Data is kept only temporarily and is deleted once a set time passes"
         }
       ],
       "answerKey": {
@@ -363,19 +363,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Friend connections between users in a social network"
+          "label": "Friend links between users in a social network"
         },
         {
           "id": "b",
-          "label": "A cache of session tokens by ID"
+          "label": "A cache of user session tokens looked up by session ID"
         },
         {
           "id": "c",
-          "label": "Daily server logs appended in order"
+          "label": "Daily server logs appended in time order, one row per event"
         },
         {
           "id": "d",
-          "label": "A list of invoices with fixed columns"
+          "label": "A list of invoices with the same fixed columns in every row"
         }
       ],
       "answerKey": {
@@ -540,7 +540,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A fixed-width row that must match every other row's columns"
+          "label": "A fixed-width row that must match the column layout of every other row in its table"
         },
         {
           "id": "b",
@@ -552,7 +552,7 @@
         },
         {
           "id": "d",
-          "label": "A single key mapped to an opaque binary value with no fields"
+          "label": "A single key mapped to an opaque binary value that the database cannot look inside"
         }
       ],
       "answerKey": {
@@ -614,15 +614,15 @@
         },
         {
           "id": "b",
-          "label": "Replicas never need to agree because each keeps its own copy"
+          "label": "Replicas stay independent copies, so differing values are expected to persist"
         },
         {
           "id": "c",
-          "label": "Every read always returns the latest write from any replica"
+          "label": "Reads return the latest write because a quorum must confirm each update first"
         },
         {
           "id": "d",
-          "label": "Writes are queued and applied only once a day in batches"
+          "label": "Writes are held in a queue and applied to replicas in nightly batch jobs"
         }
       ],
       "answerKey": {
@@ -653,11 +653,11 @@
         },
         {
           "id": "c",
-          "label": "It keeps every user in one large JSON document for fast reads"
+          "label": "It keeps each user and their friends together in one JSON document"
         },
         {
           "id": "d",
-          "label": "It removes the need to define any relationships between users"
+          "label": "It precomputes the friend lists for users when data is first loaded"
         }
       ],
       "answerKey": {
@@ -716,15 +716,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Documents are stored as one key and value, so fields cannot be queried"
+          "label": "Documents are stored as opaque key-value blobs, so field-level queries need a scan"
         },
         {
           "id": "b",
-          "label": "Document databases always give strongly consistent joins across all collections"
+          "label": "Document databases guarantee strongly consistent joins across collections by default"
         },
         {
           "id": "c",
-          "label": "Document databases enforce one identical set of columns for every product"
+          "label": "Document databases require one fixed set of columns declared up front for each collection"
         },
         {
           "id": "d",
@@ -1253,19 +1253,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The userId index is unused, so the query falls back to a full collection scan"
+          "label": "The userId index is not being used, so the query falls back to a full collection scan of every event"
         },
         {
           "id": "b",
-          "label": "Sorting requires the collection to be sharded before any index can help"
+          "label": "Sorting only benefits from an index once the collection is sharded, so the single-node index cannot help"
         },
         {
           "id": "c",
-          "label": "The limit is applied before the filter, so too many documents are loaded"
+          "label": "The limit is applied before the filter and sort, so the server loads far too many documents first"
         },
         {
           "id": "d",
-          "label": "The index cannot supply createdAt order, so all of the user's matches are fetched then sorted"
+          "label": "The index cannot supply createdAt order, so all of the user's matches are fetched, then sorted"
         }
       ],
       "answerKey": {
@@ -1362,15 +1362,15 @@
         },
         {
           "id": "b",
-          "label": "The TTL makes Redis rewrite the whole dataset to disk at each expiry"
+          "label": "Each expiry makes Redis rewrite its whole dataset to disk, stalling reads that then fall through to the database"
         },
         {
           "id": "c",
-          "label": "The database leaks connections whenever Redis returns a cached value"
+          "label": "The database leaks connections whenever Redis returns a cached value, until the pool is exhausted every 5 minutes"
         },
         {
           "id": "d",
-          "label": "Redis evicts the key early because the TTL is longer than memory allows"
+          "label": "Redis evicts the key early because the TTL is longer than memory allows, so reads fall back to the database"
         }
       ],
       "answerKey": {
@@ -1393,11 +1393,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The graph store skips duplicate friends by ignoring cycles, which relational engines cannot do"
+          "label": "The graph store avoids revisiting friends already reached through a cycle, and the relational engine has to re-expand them at every hop"
         },
         {
           "id": "b",
-          "label": "The graph store keeps all data in memory, while relational tables must always be read from disk"
+          "label": "The graph store keeps the working set in memory, while the relational engine pays disk reads for each index lookup on every hop"
         },
         {
           "id": "c",
@@ -1405,7 +1405,7 @@
         },
         {
           "id": "d",
-          "label": "Relational databases cannot index a two-column table, so each join scans the whole table"
+          "label": "The relational index on a two-column table helps little here, since each hop joins on a non-selective key and scans most of the table"
         }
       ],
       "answerKey": {
@@ -1711,19 +1711,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The orders collection has too few fields, so the query planner cannot choose an access path"
+          "label": "The orders collection has too few indexed fields, so the planner scans it fully and no index can speed up the lookups"
         },
         {
           "id": "b",
-          "label": "MongoDB lacks any join capability, so `$lookup` falls back to copying collections into memory"
+          "label": "MongoDB has weaker join support than SQL, so `$lookup` copies each joined collection into memory before matching rows"
         },
         {
           "id": "c",
-          "label": "The document model was not reshaped around the read pattern, so joins happen at query time at scale"
+          "label": "The model was not reshaped around the read pattern, so joins run at query time"
         },
         {
           "id": "d",
-          "label": "Sharding was enabled by default, which forces every aggregation to run on a single node"
+          "label": "Sharding is usually enabled by default, so aggregations are forced to run on a single node and cannot use other servers"
         }
       ],
       "answerKey": {
@@ -1851,19 +1851,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Cassandra cannot store enough data to support analytics at the volume analysts normally query"
+          "label": "Cassandra's storage engine caps tables at a size too small for the data volumes analysts normally query"
         },
         {
           "id": "b",
-          "label": "Cassandra requires analysts to write queries in a procedural language, which BI tools cannot generate"
+          "label": "Cassandra only offers a procedural query language, which BI tools cannot generate or send to the database"
         },
         {
           "id": "c",
-          "label": "Cassandra tables must be modelled per query, so ad hoc filters and joins fit poorly without a separate analytic store"
+          "label": "Tables are modelled per query, so ad hoc filters and joins fit poorly without a separate analytic store"
         },
         {
           "id": "d",
-          "label": "Cassandra's replication delays make every analytic query return results from the previous day"
+          "label": "Cassandra's eventual consistency means analysts can only read data that is a full day behind the writes"
         }
       ],
       "answerKey": {
@@ -1933,7 +1933,7 @@
         },
         {
           "id": "d",
-          "label": "Relational stores always scale writes horizontally better than any NoSQL system"
+          "label": "Normalised tables let each account's writes be sharded across nodes more simply, which helps ledger throughput"
         }
       ],
       "answerKey": {
@@ -2028,15 +2028,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Hashed customerId, which spreads customers evenly across shards and still targets queries"
+          "label": "Hashed customerId, which spreads customers evenly across shards and keeps each customer's queries targeted"
         },
         {
           "id": "b",
-          "label": "Ascending orderId, which keeps new inserts together so index writes stay fast on one shard"
+          "label": "Ascending orderId, which keeps new inserts together so index writes stay fast on a single shard"
         },
         {
           "id": "c",
-          "label": "Compound key {customerId: 1, _id: 1}, which targets queries and can split a large customer across chunks"
+          "label": "Compound {customerId: 1, _id: 1}, which targets queries and can split a big customer"
         },
         {
           "id": "d",
@@ -2075,7 +2075,7 @@
         },
         {
           "id": "d",
-          "label": "AOF with appendfsync always, since it removes any loss risk at negligible latency cost"
+          "label": "AOF with appendfsync always, since fsync on each write gives the strongest durability guarantee"
         }
       ],
       "answerKey": {

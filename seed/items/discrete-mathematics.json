@@ -397,19 +397,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Order of the books does not matter in an arrangement"
+          "label": "Order of the books does not matter in an arrangement, so repeats are divided out"
         },
         {
           "id": "b",
-          "label": "Only the first book's position affects the count"
+          "label": "Only the first book's position is free, and the others then follow automatically"
         },
         {
           "id": "c",
-          "label": "Each shelf slot can hold any of the 4 books again"
+          "label": "Each shelf slot can hold any of the 4 books again, so choices stay at 4"
         },
         {
           "id": "d",
-          "label": "Each placed book cannot be reused, so choices shrink: 4, 3, 2, 1"
+          "label": "Each book is used once, so choices shrink: 4, 3, 2, 1"
         }
       ],
       "answerKey": {
@@ -469,7 +469,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It is quadratic: differences grow by 2 each step"
+          "label": "It is quadratic: the differences grow by 2 at each step, so 3, 4, 6, 9, ..."
         },
         {
           "id": "b",
@@ -477,11 +477,11 @@
         },
         {
           "id": "c",
-          "label": "It is geometric: 3, 6, 12, 24, ... doubling each time"
+          "label": "It is geometric: 3, 6, 12, 24, ... with each term doubling the last"
         },
         {
           "id": "d",
-          "label": "It is constant: every term equals 3"
+          "label": "It is constant: every term equals 3, since the starting value never changes"
         }
       ],
       "answerKey": {
@@ -504,15 +504,15 @@
       "options": [
         {
           "id": "a",
-          "label": "No student in the class passed"
+          "label": "No student in the class passed the exam"
         },
         {
           "id": "b",
-          "label": "Every student in the class failed"
+          "label": "Every student in the class failed the exam"
         },
         {
           "id": "c",
-          "label": "Some student in the class passed"
+          "label": "Some student in the class passed the exam"
         },
         {
           "id": "d",
@@ -1243,7 +1243,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The base case should be P(0) instead"
+          "label": "The base case must be P(0), since induction on integers always starts at zero"
         },
         {
           "id": "b",
@@ -1251,11 +1251,11 @@
         },
         {
           "id": "c",
-          "label": "The hypothesis should assume all P(j) for j < k"
+          "label": "The hypothesis must assume all P(j) for j < k, because plain P(k) is too weak"
         },
         {
           "id": "d",
-          "label": "Induction only works for the sum formulas"
+          "label": "One base case is not enough, since the step needs two starting values proven"
         }
       ],
       "answerKey": {
@@ -1278,19 +1278,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The first digit has only 9 choices, so the count is 9*9*8*7"
+          "label": "The first digit has 9 choices, so the count is 9*9*8*7"
         },
         {
           "id": "b",
-          "label": "The last digit has 6 choices, giving 10*9*8*6"
+          "label": "The last digit has only 6 choices left, so the count is 10*9*8*6"
         },
         {
           "id": "c",
-          "label": "The count should be C(10,4)"
+          "label": "Order should not matter here, so the count should be C(10,4)"
         },
         {
           "id": "d",
-          "label": "Repeated digits should be allowed, giving 10^4"
+          "label": "Repeated digits should be allowed here, so the count is 10^4"
         }
       ],
       "answerKey": {
@@ -1454,19 +1454,19 @@
       "options": [
         {
           "id": "a",
-          "label": "With 12 people, each could have a different month, so it is not guaranteed"
+          "label": "With 12 people, all 12 months could each appear once, so no guarantee"
         },
         {
           "id": "b",
-          "label": "With 12 people it is guaranteed since there are 12 months"
+          "label": "With 12 people it is guaranteed, since the number of people equals the number of months"
         },
         {
           "id": "c",
-          "label": "The guarantee holds only for 25 people"
+          "label": "The guarantee needs 25 people, since each month must be able to hold two people first"
         },
         {
           "id": "d",
-          "label": "Pigeonhole cannot apply to months"
+          "label": "Pigeonhole cannot apply here, since birth months are not evenly spread across people"
         }
       ],
       "answerKey": {
@@ -2016,7 +2016,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Valid: symmetry and transitivity together always force reflexivity on every element of the set"
+          "label": "Valid: symmetry and transitivity together force reflexivity on each element of the set"
         },
         {
           "id": "b",
@@ -2024,11 +2024,11 @@
         },
         {
           "id": "c",
-          "label": "Invalid: symmetry holds only for distinct elements, so bRa does not follow from aRb"
+          "label": "Invalid: symmetry holds for distinct elements, so bRa does not follow from aRb when a equals b"
         },
         {
           "id": "d",
-          "label": "Invalid: transitivity cannot be applied when the two pairs used are (a,b) and (b,a)"
+          "label": "Invalid: transitivity requires three distinct elements, so (a,b) and (b,a) cannot give aRa"
         }
       ],
       "answerKey": {
@@ -2197,19 +2197,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Collisions become likely only once about half of all 2^32 values are used, so 100,000 IDs leave a wide margin"
+          "label": "Collisions become likely only once about half of all 2^32 values are used, so 100,000 IDs leave a wide margin and no change is needed"
         },
         {
           "id": "b",
-          "label": "Collisions are impossible until 2^32 IDs have been issued, so the design is safe and needs no change"
+          "label": "Collisions are impossible until 2^32 IDs have been issued, since each new random ID still has unused values to pick from, so the design is safe"
         },
         {
           "id": "c",
-          "label": "Collisions are likely: expected duplicate pairs are about n^2/2N, roughly 1.2, giving about a 70% chance, so wider IDs are warranted"
+          "label": "Collisions are likely: expected duplicate pairs are about n^2/2N, roughly 1.2, so wider IDs are warranted"
         },
         {
           "id": "d",
-          "label": "Collisions are unlikely: 100,000 is a tiny fraction of 2^32, so the duplicate chance is about that same fraction"
+          "label": "Collisions are unlikely: 100,000 is a tiny fraction of 2^32, so the duplicate chance is about that same fraction, roughly 2%"
         }
       ],
       "answerKey": {
@@ -2228,15 +2228,15 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "You will prove by strong induction that every integer n >= 12 equals 4a + 5b with a, b >= 0. The step writes n as (n-4) + 4 and uses the claim for n-4. Which set of base cases makes the proof complete?",
+      "prompt": "You will prove by strong induction that every integer n >= 12 equals 4a + 5b with a, b >= 0. The step writes n as (n-4) + 4 and uses the claim for n-4. Which is the smallest set of base cases that makes the proof complete?",
       "options": [
         {
           "id": "a",
-          "label": "12 through 16"
+          "label": "12 through 16, since the step needs n-4 >= 12"
         },
         {
           "id": "b",
-          "label": "12 only"
+          "label": "12 only, since the step then reaches every larger n"
         },
         {
           "id": "c",
@@ -2244,7 +2244,7 @@
         },
         {
           "id": "d",
-          "label": "12 and 13"
+          "label": "12 and 13, since 4 and 5 differ by one"
         }
       ],
       "answerKey": {
@@ -2271,7 +2271,7 @@
         },
         {
           "id": "b",
-          "label": "a_n = a_{n-1} + a_{n-2}, with a_1 = 1 and a_2 = 2"
+          "label": "a_n = a_{n-1} + a_{n-2} + 1, with a_1 = 2 and a_2 = 3"
         },
         {
           "id": "c",
@@ -2345,11 +2345,11 @@
         },
         {
           "id": "c",
-          "label": "∀x ∀y ((P(x) ∧ P(y)) → x = y)"
+          "label": "∀x ∀y ((P(x) ∧ P(y)) → x = y) ∧ ¬∃x ∃y (P(x) ∧ P(y) ∧ x ≠ y)"
         },
         {
           "id": "d",
-          "label": "∃x ∃y (P(x) ∧ P(y) ∧ x ≠ y)"
+          "label": "∃x ∃y (P(x) ∧ P(y) ∧ x ≠ y) ∧ ∀z (P(z) → (z = x ∨ z = y))"
         }
       ],
       "answerKey": {
@@ -2413,7 +2413,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Seat A, then place B in only 2 of the non-adjacent seats and arrange the other four in 4! ways, giving 48"
+          "label": "Seat A, then place B in any of the 4 other seats except one neighbour, and arrange the other four in 4! ways, giving 96"
         },
         {
           "id": "b",
@@ -2452,11 +2452,11 @@
         },
         {
           "id": "b",
-          "label": "A proof of P(n+1) from P(n) alone, because strong induction cannot replace ordinary induction"
+          "label": "A proof of P(n+1) from P(n) alone, because a step using two earlier cases is not a valid induction step"
         },
         {
           "id": "c",
-          "label": "A check of a large case such as P(100), because induction hypotheses cannot cover unbounded n"
+          "label": "A check of P(3), because the step for n = 2 relies on P(1) and P(0), and 3 is the first case the step reaches"
         },
         {
           "id": "d",

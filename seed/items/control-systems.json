@@ -266,15 +266,15 @@
         },
         {
           "id": "b",
-          "label": "It removes the need to measure the output at all"
+          "label": "It removes the need for a model by measuring only the input signal"
         },
         {
           "id": "c",
-          "label": "It guarantees the system is always stable at any gain"
+          "label": "It guarantees the closed loop stays stable no matter how high the gain"
         },
         {
           "id": "d",
-          "label": "It makes the plant's own dynamics disappear entirely"
+          "label": "It cancels the plant's own dynamics so the output follows instantly"
         }
       ],
       "answerKey": {
@@ -332,19 +332,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The s = -10 system settles faster than the other"
+          "label": "The s = -10 system settles faster, with a time constant of 0.1 s"
         },
         {
           "id": "b",
-          "label": "The s = -2 system settles faster than the other"
+          "label": "The s = -2 system settles faster, with a time constant of 2 s"
         },
         {
           "id": "c",
-          "label": "Both settle equally fast as both are stable"
+          "label": "Both settle equally fast, because both poles are in the left half-plane"
         },
         {
           "id": "d",
-          "label": "The s = -10 system oscillates more than the other"
+          "label": "The s = -10 system oscillates more, because its pole is larger"
         }
       ],
       "answerKey": {
@@ -371,15 +371,15 @@
         },
         {
           "id": "b",
-          "label": "It increases the plant's bandwidth so error vanishes"
+          "label": "It raises the loop gain at high frequencies so the error shrinks"
         },
         {
           "id": "c",
-          "label": "It filters out measurement noise in the feedback path"
+          "label": "It filters out measurement noise in the feedback path to cut error"
         },
         {
           "id": "d",
-          "label": "It predicts future error and acts before it appears"
+          "label": "It predicts future error and acts before it appears in the output"
         }
       ],
       "answerKey": {
@@ -473,19 +473,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Higher gain moved closed-loop poles into the right half-plane"
+          "label": "Higher gain pushed the loop past its stability limit"
         },
         {
           "id": "b",
-          "label": "The reference is too far from the initial speed"
+          "label": "The set speed is too far from the starting speed, so the error is too large"
         },
         {
           "id": "c",
-          "label": "Sensor noise has increased in proportion to the gain"
+          "label": "Sensor noise has increased in proportion to the gain and is being amplified"
         },
         {
           "id": "d",
-          "label": "The integral term has saturated from the long runtime"
+          "label": "The actuator saturated and stopped responding to the controller's commands"
         }
       ],
       "answerKey": {
@@ -508,15 +508,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It makes every plant stable regardless of the gain"
+          "label": "It makes every plant stable regardless of how large the loop gain is"
         },
         {
           "id": "b",
-          "label": "It guarantees the plant has no delay in responding"
+          "label": "It guarantees the plant has no delay in responding to the setpoint"
         },
         {
           "id": "c",
-          "label": "It makes the output less sensitive to disturbances and plant changes"
+          "label": "It reduces sensitivity to disturbances and plant changes"
         },
         {
           "id": "d",
@@ -578,15 +578,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It drives steady-state error to zero by accumulating past error"
+          "label": "It removes steady-state error by accumulating past error"
         },
         {
           "id": "b",
-          "label": "It speeds up response by scaling the instantaneous error"
+          "label": "It speeds up the response by scaling the instantaneous error at each moment"
         },
         {
           "id": "c",
-          "label": "It predicts future error from the current rate of change"
+          "label": "It predicts future error from the current rate of change of the error"
         },
         {
           "id": "d",
@@ -728,15 +728,15 @@
         },
         {
           "id": "b",
-          "label": "The controller is unstable and has reached a limit cycle"
+          "label": "The controller has become unstable and the speed is stuck in a steady limit cycle"
         },
         {
           "id": "c",
-          "label": "The proportional gain is too high and causes the offset"
+          "label": "The proportional gain is too high, so the controller overshoots and leaves an offset"
         },
         {
           "id": "d",
-          "label": "The hill adds a pole that moves into the right half-plane"
+          "label": "The hill adds a pole that moves into the right half-plane and blocks the speed"
         }
       ],
       "answerKey": {
@@ -1791,19 +1791,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Rate-limiting the setpoint so steps never saturate the drive, since windup only arises from setpoint changes and not from loads."
+          "label": "Rate-limiting the setpoint so steps never drive the actuator into saturation, since windup only arises from setpoint changes and not from load disturbances."
         },
         {
           "id": "b",
-          "label": "Back-calculation anti-windup, which drives the integrator state toward the saturation limit while saturated and leaves the linear tuning unchanged."
+          "label": "Back-calculation anti-windup, which bleeds the integrator toward the saturation limit while saturated and keeps the linear tuning."
         },
         {
           "id": "c",
-          "label": "Removing the integral term and relying on a high proportional gain, since proportional action cannot wind up during saturation."
+          "label": "Removing the integral term and relying on a high proportional gain, since proportional action cannot wind up while the drive is saturated."
         },
         {
           "id": "d",
-          "label": "Permanently lowering Ki until windup is negligible, since a slower integrator stores less error while the drive is saturated."
+          "label": "Permanently lowering Ki until windup is negligible, since a slower integrator stores less error while the drive is saturated in a load event."
         }
       ],
       "answerKey": {
@@ -2258,7 +2258,7 @@
         },
         {
           "id": "b",
-          "label": "C(s) = 5/s"
+          "label": "C(s) = 5(s-1)/s"
         },
         {
           "id": "c",
@@ -2474,15 +2474,15 @@
         },
         {
           "id": "b",
-          "label": "Raise crossover to 40 rad/s so feedback actively damps the mode for every load, accepting the larger noise sensitivity"
+          "label": "Raise crossover to 40 rad/s so feedback actively damps the mode at the nominal load, accepting the larger noise sensitivity"
         },
         {
           "id": "c",
-          "label": "A very narrow notch at exactly 40 rad/s, since it cancels the resonance for any load"
+          "label": "Place a very narrow notch at 40 rad/s to cancel the resonance at the nominal load, which keeps the loop gain near 0 dB elsewhere"
         },
         {
           "id": "d",
-          "label": "Add lead at 40 rad/s to place the resonance phase in the stable region for every load"
+          "label": "Add phase lead near 40 rad/s so the resonance phase stays in the stable region at the nominal load and the peak can stay above 0 dB"
         }
       ],
       "answerKey": {

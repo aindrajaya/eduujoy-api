@@ -7,15 +7,15 @@
       "stage": "novice",
       "bloom": "C1",
       "kind": "single_choice",
-      "prompt": "Which keyword declares a new variable with shorthand syntax inside a function, as in `x := 5`? Choose the term that names this operator.",
+      "prompt": "In Go, what is the name of the `:=` construct used inside a function, as in `x := 5`?",
       "options": [
         {
           "id": "a",
-          "label": "Pointer dereference"
+          "label": "Pointer dereference operation"
         },
         {
           "id": "b",
-          "label": "Type assertion"
+          "label": "Type assertion expression"
         },
         {
           "id": "c",
@@ -23,7 +23,7 @@
         },
         {
           "id": "d",
-          "label": "Constant assignment"
+          "label": "Constant assignment statement"
         }
       ],
       "answerKey": {
@@ -198,20 +198,15 @@
         },
         {
           "id": "d",
-          "label": "string"
+          "label": "double"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "d"
+          "b"
         ]
       },
-      "rubric": [
-        "string, bool and float64 are built-in types.",
-        "Go has no `char` type; it uses `rune` or `byte`."
-      ],
       "reviewed": false
     },
     {
@@ -262,15 +257,15 @@
         },
         {
           "id": "b",
-          "label": "It returns one value that may be an error"
+          "label": "It returns a single value that may itself hold an error"
         },
         {
           "id": "c",
-          "label": "It returns a result and an error value the caller should check"
+          "label": "It returns a result and an error to check"
         },
         {
           "id": "d",
-          "label": "It throws an exception when b is zero"
+          "label": "It panics with an exception when b is zero"
         }
       ],
       "answerKey": {
@@ -363,19 +358,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Closes the file after one second"
+          "label": "Waits for a background goroutine to close the file later"
         },
         {
           "id": "b",
-          "label": "Runs Close when the surrounding function returns"
+          "label": "Runs Close when the function returns"
         },
         {
           "id": "c",
-          "label": "Runs Close only if an error occurs"
+          "label": "Runs Close only if the function returns an error value"
         },
         {
           "id": "d",
-          "label": "Closes the file immediately"
+          "label": "Closes the file immediately, then reopens it on return"
         }
       ],
       "answerKey": {
@@ -441,24 +436,19 @@
         },
         {
           "id": "c",
-          "label": "Errors are returned as values and checked explicitly"
+          "label": "Errors are returned as values, not thrown, so callers must check them explicitly"
         },
         {
           "id": "d",
-          "label": "Errors automatically stop the program unless caught"
+          "label": "If you ignore a returned error, Go panics and stops the program at that call"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
           "c"
         ]
       },
-      "rubric": [
-        "Go uses explicit error values; nil means success.",
-        "There is no automatic exception propagation."
-      ],
       "reviewed": false
     },
     {
@@ -470,19 +460,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Integers cannot be declared outside `main`"
+          "label": "Integer variables can only be declared inside `main`, so other scopes need a function call"
         },
         {
           "id": "b",
-          "label": "The name x is reserved at package level"
+          "label": "Package-level names must be declared with `const`, because variables need a function"
         },
         {
           "id": "c",
-          "label": "Short declarations with `:=` are allowed only inside functions; use `var` at package level"
+          "label": "`:=` works only inside functions; use `var` at package level"
         },
         {
           "id": "d",
-          "label": "Top-level variables must be constants"
+          "label": "The name x is reserved at package level, so any other name would compile with `:=`"
         }
       ],
       "answerKey": {
@@ -579,7 +569,7 @@
         },
         {
           "id": "b",
-          "label": "It has all the methods the interface declares, with no extra declaration"
+          "label": "It has every method the interface declares"
         },
         {
           "id": "c",
@@ -587,7 +577,7 @@
         },
         {
           "id": "d",
-          "label": "It embeds the interface inside its struct definition only"
+          "label": "It is declared in the same package as the interface"
         }
       ],
       "answerKey": {
@@ -891,19 +881,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Add `time.Sleep(0)` after starting the goroutine"
+          "label": "Call `time.Sleep(0)` right after starting the goroutine so the scheduler runs worker before main continues"
         },
         {
           "id": "b",
-          "label": "Call `runtime.Gosched()` once before main returns"
+          "label": "Call `runtime.Gosched()` once before main returns so worker is guaranteed to finish first"
         },
         {
           "id": "c",
-          "label": "Declare `worker` with the `async` keyword so it completes"
+          "label": "Make `worker` return a value, since main waits for any goroutine whose result is used"
         },
         {
           "id": "d",
-          "label": "Use a `sync.WaitGroup`: `Add(1)`, `defer wg.Done()` in worker, `wg.Wait()` in main"
+          "label": "Use `sync.WaitGroup`: `Add(1)`, `defer wg.Done()`, `wg.Wait()` in main"
         }
       ],
       "answerKey": {
@@ -1283,7 +1273,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`var e *MyErr` allocates a zeroed struct, so the pointer is not actually nil here"
+          "label": "`var e *MyErr` allocates a zeroed struct, so the pointer is not actually nil when it is returned"
         },
         {
           "id": "b",
@@ -1291,11 +1281,11 @@
         },
         {
           "id": "c",
-          "label": "The compiler converts any returned pointer into a non-nil error value at the return"
+          "label": "The compiler converts any non-interface pointer returned as an error into a freshly allocated non-nil error value"
         },
         {
           "id": "d",
-          "label": "`MyErr` must implement `Error` on a value receiver for a nil pointer to count as nil"
+          "label": "`MyErr` must implement `Error` on a value receiver for a nil pointer to count as nil after conversion"
         }
       ],
       "answerKey": {
@@ -1388,19 +1378,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The send blocks until a receiver is ready, but the only receiver is later in the same goroutine"
+          "label": "The send blocks until a receiver is ready, but the only receiver is later in main"
         },
         {
           "id": "b",
-          "label": "`Println` cannot receive from a channel without first calling `close(ch)`"
+          "label": "The receive blocks because `Println` cannot take a channel value until `close(ch)` has been called first"
         },
         {
           "id": "c",
-          "label": "The runtime requires a `sync.Mutex` around any channel operation in main"
+          "label": "The runtime requires a `sync.Mutex` around channel operations whenever they are used in the main goroutine"
         },
         {
           "id": "d",
-          "label": "The channel type `int` is too small to carry a value without a buffer"
+          "label": "The channel of type `int` is too small to carry a value, so it needs a buffer of at least two"
         }
       ],
       "answerKey": {
@@ -2320,7 +2310,7 @@
         },
         {
           "id": "c",
-          "label": "Replace `time.Now` through a package-level variable that each test overwrites before it runs"
+          "label": "Replace `time.Now` with a package-level `var now = time.Now` that each test overwrites and restores with `defer` around its run"
         },
         {
           "id": "d",

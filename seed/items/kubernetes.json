@@ -198,20 +198,15 @@
         },
         {
           "id": "d",
-          "label": "NodePort"
+          "label": "StatefulSet"
         }
       ],
       "answerKey": {
         "optionIds": [
           "b",
-          "c",
-          "d"
+          "c"
         ]
       },
-      "rubric": [
-        "ClusterIP, NodePort and LoadBalancer are the standard Service types.",
-        "Replicated is not a Service type."
-      ],
       "reviewed": false
     },
     {
@@ -293,7 +288,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Clients can use the Service's stable address instead of pod IPs"
+          "label": "Clients can use the Service's stable address, not pod IPs"
         },
         {
           "id": "b",
@@ -328,19 +323,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Removes the node from the cluster"
+          "label": "Marks the pod unready and removes it from Service endpoints only"
         },
         {
           "id": "b",
-          "label": "Sends the pod's logs to the Service for repair"
+          "label": "Reschedules the pod onto a different node in the cluster"
         },
         {
           "id": "c",
-          "label": "Restarts the container according to the pod's restart policy"
+          "label": "Restarts the container per the pod's restart policy"
         },
         {
           "id": "d",
-          "label": "Deletes the whole Deployment and stops"
+          "label": "Scales the Deployment up by one extra replica pod"
         }
       ],
       "answerKey": {
@@ -398,19 +393,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A Secret is meant for sensitive values, though only base64-encoded by default"
+          "label": "A Secret is meant for sensitive values and is only base64-encoded by default"
         },
         {
           "id": "b",
-          "label": "A Secret is always encrypted and a ConfigMap is always encrypted too"
+          "label": "A Secret is always encrypted at rest by default, while a ConfigMap is stored as plain text"
         },
         {
           "id": "c",
-          "label": "A Secret works only for pods and a ConfigMap only for services"
+          "label": "A Secret can be consumed only by pods, while a ConfigMap is read only by services"
         },
         {
           "id": "d",
-          "label": "A Secret can only hold numbers and a ConfigMap only text"
+          "label": "A Secret can only hold numeric values, while a ConfigMap can hold text and files"
         }
       ],
       "answerKey": {
@@ -1281,7 +1276,7 @@
         },
         {
           "id": "b",
-          "label": "The metrics server reports stale data, so the scheduler wrongly believes the nodes are full"
+          "label": "The metrics server reports stale data, so the scheduler wrongly believes the nodes are already full of pods"
         },
         {
           "id": "c",
@@ -1289,7 +1284,7 @@
         },
         {
           "id": "d",
-          "label": "The scheduler compares the pod's memory limit with current usage, and the limit is above what is free"
+          "label": "The scheduler compares the pod's memory limit with the memory currently in use on each node, and that limit is above what is free"
         }
       ],
       "answerKey": {
@@ -1523,7 +1518,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The kubelet killed the container after a failed liveness check"
+          "label": "The kubelet restarted the container after repeated failed liveness checks, so it is crash-looping"
         },
         {
           "id": "b",
@@ -1531,11 +1526,11 @@
         },
         {
           "id": "c",
-          "label": "The scheduler cannot find a node with enough free CPU"
+          "label": "The scheduler cannot find a node with enough free CPU or memory to place the new pods"
         },
         {
           "id": "d",
-          "label": "The image pull failed because of missing registry credentials"
+          "label": "The image pull failed because the registry credentials in the pull secret are missing"
         }
       ],
       "answerKey": {
@@ -1735,15 +1730,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Delete the metrics server and let the HPA fall back to node averages"
+          "label": "Remove the metrics server so the HPA falls back to averaging CPU across node capacity"
         },
         {
           "id": "b",
-          "label": "Raise maxReplicas, since the HPA is capped below needed capacity"
+          "label": "Raise maxReplicas, since the HPA is probably capped below the capacity the load needs"
         },
         {
           "id": "c",
-          "label": "Switch the HPA to memory, because CPU metrics never work with HPA"
+          "label": "Switch the HPA to a memory target, because CPU metrics are not supported for HPA scaling"
         },
         {
           "id": "d",
@@ -1770,11 +1765,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It is fine as long as failureThreshold is set to exactly one"
+          "label": "It is fine if failureThreshold is raised high enough that brief database blips never trigger a restart"
         },
         {
           "id": "b",
-          "label": "It is sound, because a pod that cannot reach its database is dead"
+          "label": "It is sound, because a pod that cannot reach its database cannot serve traffic and should be restarted"
         },
         {
           "id": "c",
@@ -1782,7 +1777,7 @@
         },
         {
           "id": "d",
-          "label": "It is wrong, because liveness probes must never use HTTP requests"
+          "label": "It is wrong, because liveness probes should use a TCP socket check instead of HTTP requests"
         }
       ],
       "answerKey": {
@@ -1947,19 +1942,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A Deployment with a livenessProbe that restarts the loop on errors"
+          "label": "A Deployment with a livenessProbe that restarts the loop whenever it errors out"
         },
         {
           "id": "b",
-          "label": "A StatefulSet so the batch pod keeps a stable name every night"
+          "label": "A StatefulSet so the batch pod keeps a stable name and storage every night"
         },
         {
           "id": "c",
-          "label": "A CronJob whose job template sets backoffLimit and restartPolicy OnFailure"
+          "label": "A CronJob with backoffLimit set and restartPolicy OnFailure"
         },
         {
           "id": "d",
-          "label": "A DaemonSet that runs the loop on every node continuously"
+          "label": "A DaemonSet that runs the loop on every node and restarts it on failure"
         }
       ],
       "answerKey": {
@@ -2122,19 +2117,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Set requests and limits to identical tiny values so the pod is Guaranteed QoS class"
+          "label": "Set CPU and memory requests equal to limits at a small value so the pod gets Guaranteed QoS and is never throttled or evicted"
         },
         {
           "id": "b",
-          "label": "Set an accurate CPU request, remove or greatly raise the limit, and keep memory limit equal to request"
+          "label": "Set an accurate CPU request, remove or greatly raise the CPU limit, and keep memory limit equal to request"
         },
         {
           "id": "c",
-          "label": "Raise the limit to 4 cores and drop the request so the scheduler places pods freely"
+          "label": "Raise the CPU limit to 4 cores and drop the CPU request so the scheduler can place the pod on any node without reserving capacity"
         },
         {
           "id": "d",
-          "label": "Keep the 500m limit and add replicas so each handles less traffic and throttles less"
+          "label": "Keep the 500m limit and add replicas so each pod handles less traffic and stays under the quota, which stops the throttling"
         }
       ],
       "answerKey": {
@@ -2268,7 +2263,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Set terminationGracePeriodSeconds to 0 so the pod is removed from endpoints immediately"
+          "label": "Set terminationGracePeriodSeconds to 0 so the pod is removed from endpoints immediately, with no delay"
         },
         {
           "id": "b",
@@ -2276,11 +2271,11 @@
         },
         {
           "id": "c",
-          "label": "Increase replicas so remaining pods absorb the errors from the terminating pod"
+          "label": "Increase replicas and add a PodDisruptionBudget so the remaining pods absorb the errors from the terminating pod"
         },
         {
           "id": "d",
-          "label": "Replace the readiness probe with a liveness probe so Kubernetes detects shutdown faster"
+          "label": "Replace the readiness probe with a liveness probe so Kubernetes detects the shutdown sooner and restarts the pod"
         }
       ],
       "answerKey": {

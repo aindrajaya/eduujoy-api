@@ -194,7 +194,7 @@
         },
         {
           "id": "c",
-          "label": "MAX"
+          "label": "ROUND"
         },
         {
           "id": "d",
@@ -204,14 +204,9 @@
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "MAX, SUM and COUNT combine many rows into one value.",
-        "UPPER is a scalar function that works on each row individually."
-      ],
       "reviewed": false
     },
     {
@@ -270,7 +265,7 @@
         },
         {
           "id": "d",
-          "label": "Filter groups using an aggregate such as COUNT(*) > 5"
+          "label": "Filter groups by an aggregate like COUNT(*)"
         }
       ],
       "answerKey": {
@@ -297,11 +292,11 @@
         },
         {
           "id": "b",
-          "label": "The customer is dropped from the result"
+          "label": "The customer is dropped because no order row matches it"
         },
         {
           "id": "c",
-          "label": "The query fails with a join error"
+          "label": "The customer appears once with the order columns left blank as 0"
         },
         {
           "id": "d",
@@ -441,7 +436,7 @@
         },
         {
           "id": "c",
-          "label": "Aggregates are calculated separately for each group"
+          "label": "It removes the need for aggregate functions such as COUNT or SUM"
         },
         {
           "id": "d",
@@ -451,14 +446,9 @@
       "answerKey": {
         "optionIds": [
           "a",
-          "b",
-          "c"
+          "b"
         ]
       },
-      "rubric": [
-        "GROUP BY makes one row per group, with aggregates computed per group, and plain columns must be grouped.",
-        "It does not guarantee any sort order; ORDER BY does that."
-      ],
       "reviewed": false
     },
     {
@@ -505,19 +495,19 @@
       "options": [
         {
           "id": "a",
-          "label": "WHERE runs after GROUP BY, so the counts have already been used up and cannot be compared"
+          "label": "WHERE is evaluated after GROUP BY has finished, so the group counts were already consumed and cannot be compared again"
         },
         {
           "id": "b",
-          "label": "WHERE filters individual rows before grouping, so aggregates are not available there; HAVING filters groups"
+          "label": "WHERE filters rows before grouping, so aggregates are unavailable there; HAVING filters groups"
         },
         {
           "id": "c",
-          "label": "COUNT can appear only in the SELECT list, so it is rejected in every other clause of a query"
+          "label": "COUNT is allowed in the SELECT list but is rejected in most other clauses of a query, including WHERE and HAVING"
         },
         {
           "id": "d",
-          "label": "WHERE only works on text columns, so conditions on numbers must be moved into a HAVING clause"
+          "label": "WHERE is meant for comparing text columns, so numeric conditions such as counts must be moved into a HAVING clause"
         }
       ],
       "answerKey": {
@@ -721,15 +711,15 @@
       "options": [
         {
           "id": "a",
-          "label": "GROUP BY must list every column of the table, including salary, before AVG can be used"
+          "label": "GROUP BY lists only department, but salary also has to be listed there before AVG can be used"
         },
         {
           "id": "b",
-          "label": "AVG cannot be combined with GROUP BY when the grouped column is text, such as department"
+          "label": "AVG does not work with GROUP BY when the grouped column is text, such as department"
         },
         {
           "id": "c",
-          "label": "AVG(salary) must be placed in a WHERE clause so that it is calculated for each department"
+          "label": "AVG(salary) belongs in a WHERE clause so that it is calculated for each department"
         },
         {
           "id": "d",
@@ -1318,19 +1308,19 @@
       "options": [
         {
           "id": "a",
-          "label": "LEFT JOIN only keeps unmatched customers when the query also uses GROUP BY on the customer name"
+          "label": "LEFT JOIN keeps unmatched customers only when the query also uses GROUP BY on the customer name, which this query lacks"
         },
         {
           "id": "b",
-          "label": "The ON clause is missing a status condition, so the join matches no customers to any shipped orders"
+          "label": "The ON clause is missing a status condition, so the join matches no customers to any shipped orders and drops them early"
         },
         {
           "id": "c",
-          "label": "Comparing a text column with '=' inside a LEFT JOIN query converts the join into a CROSS JOIN"
+          "label": "Comparing a text column with '=' inside a LEFT JOIN query silently converts the join into a CROSS JOIN before filtering"
         },
         {
           "id": "d",
-          "label": "The WHERE test on o.status is not true for NULL-extended rows, so unmatched customers are removed after the join"
+          "label": "WHERE o.status is not true for NULL-extended rows, so unmatched customers are removed after the join"
         }
       ],
       "answerKey": {
@@ -1714,15 +1704,15 @@
         },
         {
           "id": "b",
-          "label": "BETWEEN works on dates only, so the result depends on how the optimizer reads each timestamp"
+          "label": "BETWEEN is inclusive only for date columns, so on a TIMESTAMP column the upper bound is treated as exclusive and the 31st is lost"
         },
         {
           "id": "c",
-          "label": "The column type TIMESTAMP cannot be compared to a date string, so the filter matches only some rows"
+          "label": "A TIMESTAMP cannot be compared to a date string, so the string is converted to text and rows on the 31st fail the comparison"
         },
         {
           "id": "d",
-          "label": "BETWEEN excludes its upper bound, so every row dated on the 31st is dropped from the result"
+          "label": "BETWEEN excludes its upper bound, so rows stamped exactly 2024-03-31 00:00:00 are dropped and the rest of that day is kept"
         }
       ],
       "answerKey": {
@@ -1780,11 +1770,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`RANK() OVER (PARTITION BY customer_id ORDER BY created_at DESC)` and keep rows ranked 1"
+          "label": "`RANK() OVER (PARTITION BY customer_id ORDER BY created_at DESC, customer_id)` and keep rows ranked 1"
         },
         {
           "id": "b",
-          "label": "Join orders to `SELECT customer_id, MAX(created_at) ... GROUP BY customer_id` on both columns"
+          "label": "Join orders to `SELECT customer_id, MAX(created_at) ... GROUP BY customer_id` on both customer_id and created_at"
         },
         {
           "id": "c",
@@ -1792,7 +1782,7 @@
         },
         {
           "id": "d",
-          "label": "Order by `created_at DESC` and apply `LIMIT 1` to the whole orders table once"
+          "label": "Order by `created_at DESC` and apply `LIMIT 1` to the whole orders table once per customer in the application"
         }
       ],
       "answerKey": {
@@ -1850,19 +1840,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Preview with a SELECT using the same predicate, then run the DELETE in a transaction and check the count before COMMIT"
+          "label": "Preview with a SELECT using the same predicate, then DELETE in a transaction and check the row count before COMMIT"
         },
         {
           "id": "b",
-          "label": "Run the DELETE straight away, since a WHERE clause on the duplicate key is safe enough"
+          "label": "Run the DELETE straight away with a WHERE clause on the duplicate key, then check the table afterwards and restore from last night's backup if wrong"
         },
         {
           "id": "c",
-          "label": "Run the DELETE without a transaction so a failure part-way leaves earlier deletions committed"
+          "label": "Run the DELETE in autocommit mode in small batches, so a failure part-way leaves only the earlier batches deleted and the rest untouched"
         },
         {
           "id": "d",
-          "label": "Add a UNIQUE constraint first, so the database removes the existing duplicates on its own"
+          "label": "Add a UNIQUE constraint on the duplicate key first, so the database removes the existing duplicate rows on its own"
         }
       ],
       "answerKey": {
@@ -1885,7 +1875,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`LIMIT 20 OFFSET n` with `SELECT DISTINCT` to remove rows repeated between pages"
+          "label": "`LIMIT 20 OFFSET n` with `SELECT DISTINCT` to remove rows repeated between pages, plus an index on `created_at`"
         },
         {
           "id": "b",
@@ -1893,11 +1883,11 @@
         },
         {
           "id": "c",
-          "label": "`LIMIT 20 OFFSET n`, since the page number maps directly onto the offset"
+          "label": "`LIMIT 20 OFFSET n` on an index over `created_at`, since the page number maps directly onto the offset"
         },
         {
           "id": "d",
-          "label": "Loading all ids once with a subquery, then paging with OFFSET against that list in memory"
+          "label": "Loading all ids once with a subquery, then paging with OFFSET against that list in memory for each user"
         }
       ],
       "answerKey": {
@@ -1961,19 +1951,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Use a LEFT JOIN in place of each INNER JOIN so every customer keeps its original row count"
+          "label": "Switch each INNER JOIN to a LEFT JOIN so that every customer keeps its original row count, with no duplicated order rows"
         },
         {
           "id": "b",
-          "label": "Pre-aggregate items per order in a CTE, join that to orders, then group by customer for count and sum"
+          "label": "Sum shipped items per order in a CTE, join it to orders, then group by customer"
         },
         {
           "id": "c",
-          "label": "Change to `COUNT(DISTINCT o.id)` and keep the single join, accepting the extra rows it builds"
+          "label": "Change to `COUNT(DISTINCT o.id)` and keep the single join, since the repeated rows then no longer affect either metric"
         },
         {
           "id": "d",
-          "label": "Add `SELECT DISTINCT` on top of the whole query so repeated customer rows are collapsed"
+          "label": "Add `SELECT DISTINCT` on top of the whole query so that repeated customer rows are collapsed into one row per customer"
         }
       ],
       "answerKey": {
@@ -2066,19 +2056,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`LIMIT 50 OFFSET n` with an index on `created_at`, since the index makes skipping earlier rows free"
+          "label": "`LIMIT 50 OFFSET n` with an index on `created_at`, since the index lets the engine jump straight to row n without reading earlier rows"
         },
         {
           "id": "b",
-          "label": "Cache a total `COUNT(*)` and compute page numbers from it, since a known total keeps every page stable"
+          "label": "Cache a total `COUNT(*)` and compute page numbers from it, since a known total keeps every page stable even when new rows are inserted"
         },
         {
           "id": "c",
-          "label": "Keyset on `created_at` alone with `WHERE created_at < :last`, since a strict comparison prevents repeats"
+          "label": "Keyset on `created_at` alone with `WHERE created_at < :last`, since a strict comparison on an indexed column prevents repeats and skips"
         },
         {
           "id": "d",
-          "label": "Keyset on the pair, `WHERE (created_at, id) < (:last_ts, :last_id)` with a matching ordered index, so ties break uniquely"
+          "label": "Keyset on `(created_at, id) < (:last_ts, :last_id)` with a matching index, so ties break uniquely"
         }
       ],
       "answerKey": {
@@ -2101,19 +2091,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is sound as written, because a LEFT JOIN guarantees every customer survives any later WHERE filter"
+          "label": "It is sound as written, because a LEFT JOIN guarantees every customer survives any later WHERE filter on the joined table"
         },
         {
           "id": "b",
-          "label": "Switch to a RIGHT JOIN, because the filtered table must be on the preserved side to keep unmatched rows"
+          "label": "Switch to a RIGHT JOIN, because the table being filtered by the date test must be on the preserved side to keep unmatched rows"
         },
         {
           "id": "c",
-          "label": "The WHERE test removes NULL-extended rows, so customers without 2024 orders vanish; move the date test into the ON clause"
+          "label": "The WHERE test drops NULL-extended rows, so customers without 2024 orders vanish; move the date test into the ON clause"
         },
         {
           "id": "d",
-          "label": "Replace the range with `BETWEEN`, which keeps unmatched customers because it treats NULL dates as in range"
+          "label": "Replace the range with `BETWEEN`, which keeps unmatched customers because it treats NULL order dates as being in range"
         }
       ],
       "answerKey": {
@@ -2136,19 +2126,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`SELECT user_id, MAX(ts), device FROM logins GROUP BY user_id`, since MAX picks the whole row for the user"
+          "label": "`SELECT user_id, MAX(ts), device FROM logins GROUP BY user_id`, since MAX picks the whole row for the user and keeps its device"
         },
         {
           "id": "b",
-          "label": "`RANK() OVER (PARTITION BY user_id ORDER BY ts DESC)` and keep rank 1, since RANK is unique per row"
+          "label": "`RANK() OVER (PARTITION BY user_id ORDER BY ts DESC, id DESC)` and keep rank 1, since the tiebreaker makes RANK unique"
         },
         {
           "id": "c",
-          "label": "Join logins to a `MAX(ts)`-per-user subquery on user_id and ts, since it is simple and exact"
+          "label": "Join logins to a `MAX(ts)`-per-user subquery on user_id and ts, since matching the maximum timestamp returns exactly one row"
         },
         {
           "id": "d",
-          "label": "`ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY ts DESC, id DESC)` and keep `rn = 1`, so ties break deterministically"
+          "label": "`ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY ts DESC, id DESC)`, keep `rn = 1`, so ties break deterministically"
         }
       ],
       "answerKey": {
@@ -2207,19 +2197,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Aggregate items and shipments separately per order in subqueries, then join those one-row-per-order results to orders"
+          "label": "Aggregate items and shipments separately per order in subqueries, then join the one-row-per-order results"
         },
         {
           "id": "b",
-          "label": "Use `SUM(DISTINCT i.price * i.qty)` so repeated rows are counted only once in each month"
+          "label": "Use `SUM(DISTINCT i.price * i.qty)` so that rows repeated by the shipments join are counted only once in each month"
         },
         {
           "id": "c",
-          "label": "Add `s.shipment_id` to the GROUP BY so that each shipment's rows are summed separately from the others"
+          "label": "Add `s.shipment_id` to the GROUP BY so that each shipment's item rows are summed separately and then reported by month"
         },
         {
           "id": "d",
-          "label": "Change both joins to LEFT JOIN so that unmatched rows no longer multiply the sums in the report"
+          "label": "Change both joins to LEFT JOIN so that unmatched rows no longer multiply the item sums when shipments repeat"
         }
       ],
       "answerKey": {
@@ -2277,19 +2267,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Group by user and month and count distinct dates, then take the maximum monthly count per user"
+          "label": "Group by user and calendar month, count distinct login dates in each month, then keep the maximum monthly count per user as the streak"
         },
         {
           "id": "b",
-          "label": "Take distinct dates, subtract `ROW_NUMBER()` days per user ordered by date to get a constant island key, then group and count"
+          "label": "Take distinct dates, subtract `ROW_NUMBER()` days per user ordered by date as an island key, then group and count"
         },
         {
           "id": "c",
-          "label": "Use `LAG(login_date)` to compute gaps and `SUM` them per user, since gaps of 1 add up to a streak"
+          "label": "Use `LAG(login_date)` to compute day gaps per user and `SUM` the rows where the gap equals 1, since those gaps add up to the longest streak"
         },
         {
           "id": "d",
-          "label": "Self-join logins on `b.login_date = a.login_date + 1` and count the matching pairs per user"
+          "label": "Self-join logins on `b.login_date = a.login_date + 1` for the same user and count the matching pairs, since each pair extends the streak"
         }
       ],
       "answerKey": {
@@ -2382,19 +2372,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Both updates in one transaction, with the debit guarded by `AND bal >= :amt` and its affected row count checked before the credit"
+          "label": "Both updates in one transaction, with the debit guarded by `AND bal >= :amt` and its row count checked before the credit"
         },
         {
           "id": "b",
-          "label": "A `SELECT bal` in the application before the debit, which then guarantees no overdraft even with concurrent transfers"
+          "label": "A `SELECT bal` in the application before the debit, run in the same session, which then guarantees no overdraft even with concurrent transfers"
         },
         {
           "id": "c",
-          "label": "A stricter isolation level for the SELECT only, since the updates already lock rows and need no grouping"
+          "label": "A stricter isolation level applied only to a preliminary SELECT of both balances, since the later updates already lock rows and are safe alone"
         },
         {
           "id": "d",
-          "label": "A third statement logging the transfer after the credit, which restores balances if either update fails midway"
+          "label": "A third statement logging the transfer after the credit, which restores balances automatically if either update fails midway through"
         }
       ],
       "answerKey": {

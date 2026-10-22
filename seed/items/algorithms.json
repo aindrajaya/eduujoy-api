@@ -15,11 +15,11 @@
         },
         {
           "id": "b",
-          "label": "The number of lines in its source code"
+          "label": "The number of lines of source code needed to implement it"
         },
         {
           "id": "c",
-          "label": "The programming language it must be written in"
+          "label": "The fastest possible time it could take on its best input"
         },
         {
           "id": "d",
@@ -120,15 +120,15 @@
         },
         {
           "id": "b",
-          "label": "The first call made to the function"
+          "label": "The first call made to the function from outside code"
         },
         {
           "id": "c",
-          "label": "The line where the function returns a list"
+          "label": "The step where the function splits the problem smaller"
         },
         {
           "id": "d",
-          "label": "The case that calls itself the most times"
+          "label": "The case that calls itself the most times in a run"
         }
       ],
       "answerKey": {
@@ -231,11 +231,11 @@
         },
         {
           "id": "c",
-          "label": "Brute force"
+          "label": "Exhaustive search"
         },
         {
           "id": "d",
-          "label": "Linear scanning"
+          "label": "Sequential scanning"
         }
       ],
       "answerKey": {
@@ -293,11 +293,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It switches to a loop automatically"
+          "label": "The compiler converts it into a loop that runs until the input is empty"
         },
         {
           "id": "b",
-          "label": "It returns zero after one call"
+          "label": "It returns zero or null after the first call, since nothing is left to do"
         },
         {
           "id": "c",
@@ -305,7 +305,7 @@
         },
         {
           "id": "d",
-          "label": "It runs once and then stops"
+          "label": "It runs once and then stops, since the second call finds no work"
         }
       ],
       "answerKey": {
@@ -398,19 +398,19 @@
       "options": [
         {
           "id": "a",
-          "label": "To avoid recomputing the same subproblem repeatedly"
+          "label": "To avoid recomputing the same subproblem"
         },
         {
           "id": "b",
-          "label": "To sort the inputs before processing"
+          "label": "To sort the subproblems by size before solving them"
         },
         {
           "id": "c",
-          "label": "To use less memory than plain recursion"
+          "label": "To use less memory than plain recursion would need"
         },
         {
           "id": "d",
-          "label": "To make the code shorter in every case"
+          "label": "To split the problem into independent halves"
         }
       ],
       "answerKey": {
@@ -469,19 +469,19 @@
       "options": [
         {
           "id": "a",
-          "label": "O(n^2), since the body runs n times for each of n passes"
+          "label": "O(n^2), since the body runs n times per pass"
         },
         {
           "id": "b",
-          "label": "O(2n), since there are two loops"
+          "label": "O(2n), since the two loops run one after the other"
         },
         {
           "id": "c",
-          "label": "O(log n), since the loops repeat"
+          "label": "O(log n), since each pass repeats the same step"
         },
         {
           "id": "d",
-          "label": "O(n), since constants are dropped"
+          "label": "O(n), since constant work per step is dropped"
         }
       ],
       "answerKey": {
@@ -504,19 +504,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Each comparison with the middle element lets it discard half the range, which is only valid if order is known"
+          "label": "Comparing with the middle element lets it discard half the range, which is only valid if order is known"
         },
         {
           "id": "b",
-          "label": "Sorting makes every element unique, so the middle element can be compared reliably"
+          "label": "Sorting makes every element unique, so a comparison with the middle element gives a reliable result every time"
         },
         {
           "id": "c",
-          "label": "It needs sorted data so that it can count the elements before it starts searching"
+          "label": "It needs sorted data so that it can count the elements before it starts, and the count fixes the middle index"
         },
         {
           "id": "d",
-          "label": "It copies the array into a tree first, and building that tree requires sorted input"
+          "label": "It copies the array into a balanced tree first, and building that tree only works when the input is sorted"
         }
       ],
       "answerKey": {
@@ -539,7 +539,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It always performs exactly n squared operations for any input"
+          "label": "It always performs exactly n squared basic operations, no more and no fewer, on every input of size n"
         },
         {
           "id": "b",
@@ -551,7 +551,7 @@
         },
         {
           "id": "d",
-          "label": "Its running time doubles whenever the input size increases by one"
+          "label": "Its running time roughly doubles each time the input size increases by one more item"
         }
       ],
       "answerKey": {
@@ -574,11 +574,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It switches to a loop after many calls"
+          "label": "It switches to a loop once the recursion gets deep enough"
         },
         {
           "id": "b",
-          "label": "It runs once and then stops on its own"
+          "label": "It runs once and then stops because nothing tells it to continue"
         },
         {
           "id": "c",
@@ -586,7 +586,7 @@
         },
         {
           "id": "d",
-          "label": "It returns zero after the first call finishes"
+          "label": "It returns zero after the first call finishes, as a default value"
         }
       ],
       "answerKey": {
@@ -1242,19 +1242,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`lo = mid` doesn't advance when `lo` and `mid` are equal"
+          "label": "`lo = mid` can leave `lo` unchanged, so the range stops shrinking"
         },
         {
           "id": "b",
-          "label": "`mid` is rounded down instead of rounded up"
+          "label": "`mid` is rounded down, so the midpoint can never reach the top index"
         },
         {
           "id": "c",
-          "label": "The loop uses `<=` where `<` is required"
+          "label": "The loop uses `<=` where `<` is required, so it runs once too often"
         },
         {
           "id": "d",
-          "label": "`hi = mid - 1` skips the element at index `mid`"
+          "label": "`hi = mid - 1` skips the element at index `mid`, so the range collapses"
         }
       ],
       "answerKey": {
@@ -1347,19 +1347,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Top-down DP solves more subproblems than the bottom-up version"
+          "label": "Top-down DP solves more distinct subproblems than the bottom-up loop does"
         },
         {
           "id": "b",
-          "label": "The memo table stores too many entries to fit in the heap"
+          "label": "The memo table holds too many entries to fit in the heap at that size"
         },
         {
           "id": "c",
-          "label": "Recursion depth grows linearly with n, exceeding the call-stack limit"
+          "label": "Recursion depth grows with n, exceeding the call-stack limit"
         },
         {
           "id": "d",
-          "label": "Memoisation makes each call do more work than the loop version"
+          "label": "Memoisation makes every call do more work than an iteration of the loop"
         }
       ],
       "answerKey": {
@@ -1523,19 +1523,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The relaxation step only runs once per edge, so negative edges are skipped when their source is first visited"
+          "label": "Each edge is relaxed only once, when its source is popped, so a negative edge reached through a later path is never relaxed again"
         },
         {
           "id": "b",
-          "label": "The graph must be acyclic for distances to be defined, and a negative edge always creates a cycle"
+          "label": "Distances are only well defined on acyclic graphs, and a negative edge usually creates a cycle that the algorithm cannot handle"
         },
         {
           "id": "c",
-          "label": "A node, once popped as the minimum, is assumed final, but a later path through a negative edge can still shorten it"
+          "label": "A popped minimum node is treated as final, but a later path through a negative edge can still shorten it"
         },
         {
           "id": "d",
-          "label": "The priority queue cannot hold negative keys, so the node is inserted with the wrong priority"
+          "label": "The priority queue orders nodes by key, and negative edge weights give some nodes a wrong priority when they are inserted"
         }
       ],
       "answerKey": {
@@ -1554,34 +1554,30 @@
       "stage": "proficient",
       "bloom": "C4",
       "kind": "single_choice",
-      "prompt": "A binary search on the answer finds the smallest capacity `c` such that `feasible(c)` is true, assuming feasibility is monotonic. It sometimes returns a value for which `feasible(c)` is false at neighbouring larger capacities. What is the most likely flaw?",
+      "prompt": "A binary search on the answer finds the smallest capacity `c` such that `feasible(c)` is true, and feasibility is known to be monotonic. It sometimes returns a value `c` for which `feasible(c)` is false. What is the most likely flaw?",
       "options": [
         {
           "id": "a",
-          "label": "The midpoint is computed with integer division, which always biases the search toward the lower half"
+          "label": "The midpoint uses integer division, which rounds down and so can stop the search one step short of the true minimum"
         },
         {
           "id": "b",
-          "label": "The loop uses `lo < hi` instead of `lo <= hi`, so the final candidate is never tested"
+          "label": "The loop sets `lo = mid + 1` when `feasible(mid)` is false, but when it is true sets `hi = mid - 1`, which can skip the smallest feasible value and return an infeasible one"
         },
         {
           "id": "c",
-          "label": "The search range starts at 1 instead of 0, which shifts every midpoint by one and breaks the invariant"
+          "label": "The search range starts at 1 instead of 0, which shifts each midpoint by one and so breaks the monotonic ordering of the predicate"
         },
         {
           "id": "d",
-          "label": "`feasible` is not monotonic in `c`, so discarding half the range on one test can discard valid answers"
+          "label": "The loop uses `lo < hi` rather than `lo <= hi`, so a range of one candidate is left unexamined, which would only matter if the answer were not already kept in `hi`"
         }
       ],
       "answerKey": {
         "optionIds": [
-          "d"
+          "b"
         ]
       },
-      "rubric": [
-        "Binary search on the answer needs a monotonic predicate; otherwise discarding a half is unsound.",
-        "Other options are boundary slips that would not yield true results at larger neighbours' mismatch pattern."
-      ],
       "reviewed": false
     },
     {
@@ -2032,11 +2028,11 @@
         },
         {
           "id": "c",
-          "label": "Binary-heap Dijkstra at O((V+E) log V), because heaps always beat a linear scan for finding the minimum"
+          "label": "Binary-heap Dijkstra at O((V+E) log V), because a heap finds the minimum faster than a linear scan on any graph"
         },
         {
           "id": "d",
-          "label": "Array-scan Dijkstra at O(V^2), because the heap's log V cost per edge exceeds the plain scans when E is near V^2"
+          "label": "Array-scan Dijkstra at O(V^2), because a heap's log V factor per edge outweighs plain scans when E is near V^2"
         }
       ],
       "answerKey": {
@@ -2204,7 +2200,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Run quickselect over an in-memory array of all scores, then sort the top 100 elements"
+          "label": "Run quickselect over an in-memory array holding all scores, then sort the 100 largest elements it finds"
         },
         {
           "id": "b",
@@ -2212,11 +2208,11 @@
         },
         {
           "id": "c",
-          "label": "Write all scores to disk, external merge sort them, then read back the last 100 values"
+          "label": "Write all scores to disk, external merge sort them, then read back the last 100 values from the sorted file"
         },
         {
           "id": "d",
-          "label": "Keep every score in a max-heap, then pop 100 times, for O(n + k log n) total time"
+          "label": "Keep every score in a max-heap, then pop 100 times, for O(n + k log n) total time and simple code"
         }
       ],
       "answerKey": {
@@ -2243,15 +2239,15 @@
         },
         {
           "id": "b",
-          "label": "Keep a sorted array and insert by binary search, then read the middle element directly"
+          "label": "Keep a sorted array, find the insert position by binary search, shift later elements, then read the middle element directly"
         },
         {
           "id": "c",
-          "label": "Keep one min-heap of all values and pop half of them whenever a median query arrives"
+          "label": "Keep one min-heap of all values and, whenever a median query arrives, pop half of the values and push them back afterwards"
         },
         {
           "id": "d",
-          "label": "Keep a hash map from value to count and scan the keys in order when the median is requested"
+          "label": "Keep a hash map from value to count and scan the keys in sorted order whenever the median is requested"
         }
       ],
       "answerKey": {
