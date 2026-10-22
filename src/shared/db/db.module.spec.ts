@@ -37,6 +37,15 @@ describe('poolConfig', () => {
     expect(options).not.toHaveProperty('options');
   });
 
+  it('keeps idle clients short-lived, uses TCP keep-alive and bounds connects (Neon resets)', () => {
+    expect(poolConfig(config({}))).toMatchObject({
+      idleTimeoutMillis: 10_000,
+      connectionTimeoutMillis: 5_000,
+      keepAlive: true,
+      keepAliveInitialDelayMillis: 10_000,
+    });
+  });
+
   it('pins search_path to the test schema with public kept for pgvector', () => {
     expect(poolConfig(config({ DATABASE_SCHEMA: 'test_20261021100000_ab12cd34' }))).toMatchObject({
       options: '-c search_path="test_20261021100000_ab12cd34",public',

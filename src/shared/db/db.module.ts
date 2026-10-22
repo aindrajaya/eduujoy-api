@@ -8,14 +8,25 @@ import { describeError } from './redact';
 export const DATABASE = Symbol('DATABASE');
 export const PG_POOL = Symbol('PG_POOL');
 
-/** Pool settings for Neon free: few connections, short idle so compute can suspend (PRD-API §3). */
+/**
+ * Pool settings for Neon free (PRD-API §3; resilience spec request approved by the user, 22 Oct 2026):
+ * few connections; idle clients closed after 10 s, well below Neon's idle cutoffs, so the pool rarely
+ * hands out a socket Neon already dropped; TCP keep-alive so dead peers are noticed; a bounded connect
+ * timeout. Queries are never retried here: a reset mid-query fails, which is correct for writes.
+ */
+export const POOL_SETTINGS = {
+  max: 5,
+  idleTimeoutMillis: 10_000,
+  connectionTimeoutMillis: 5_000,
+  keepAlive: true,
+  keepAliveInitialDelayMillis: 10_000,
+} as const;
+
 export function poolConfig(config: AppConfig): ConstructorParameters<typeof Pool>[0] {
   const { DATABASE_URL, DATABASE_SCHEMA } = config.env;
   return {
     connectionString: DATABASE_URL,
-    max: 5,
-    idleTimeoutMillis: 10_000,
-    connectionTimeoutMillis: 5_000,
+    ...POOL_SETTINGS,
     // The pooled Neon endpoint rejects startup options, so only per-run test schemas set one.
     ...(DATABASE_SCHEMA === 'public' ? {} : { options: `-c search_path="${DATABASE_SCHEMA}",public` }),
   };
