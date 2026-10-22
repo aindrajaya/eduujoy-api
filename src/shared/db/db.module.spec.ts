@@ -25,6 +25,8 @@ function config(overrides: Partial<Env>): AppConfig {
     LEMONSQUEEZY_VARIANT_SUBSCRIPTION: '2',
     LEMONSQUEEZY_VARIANT_CREDIT_PACK: '3',
     LEMONSQUEEZY_MODE: 'test',
+    YOUTUBE_API_KEY: 'test-youtube-key',
+    OPENALEX_API_KEY: 'test-openalex-key',
     ...overrides,
   });
 }

@@ -46,6 +46,8 @@ describe('CLI boot (integration)', () => {
       LEMONSQUEEZY_VARIANT_SUBSCRIPTION: '200001',
       LEMONSQUEEZY_VARIANT_CREDIT_PACK: '200002',
       LEMONSQUEEZY_MODE: 'test',
+      YOUTUBE_API_KEY: 'test-youtube-key',
+      OPENALEX_API_KEY: 'test-openalex-key',
     })) {
       process.env[name] ??= value;
     }

@@ -26,6 +26,8 @@ const PLACEHOLDER_ENV: Record<string, string> = {
   LEMONSQUEEZY_VARIANT_SUBSCRIPTION: '2',
   LEMONSQUEEZY_VARIANT_CREDIT_PACK: '3',
   LEMONSQUEEZY_MODE: 'test',
+  YOUTUBE_API_KEY: 'openapi-export-placeholder',
+  OPENALEX_API_KEY: 'openapi-export-placeholder',
 };
 
 /** Boots the real AppModule (routes, DTOs, decorators) and returns its OpenAPI document. */

@@ -23,4 +23,7 @@ Object.assign(process.env, {
   LEMONSQUEEZY_VARIANT_SUBSCRIPTION: '200001',
   LEMONSQUEEZY_VARIANT_CREDIT_PACK: '200002',
   LEMONSQUEEZY_MODE: 'test',
+  // Fake discovery keys: the YouTube and OpenAlex adapters are faked in e2e (test/app.ts).
+  YOUTUBE_API_KEY: 'e2e-youtube-key',
+  OPENALEX_API_KEY: 'e2e-openalex-key',
 });

@@ -20,6 +20,8 @@ const valid = {
   LEMONSQUEEZY_VARIANT_SUBSCRIPTION: '1111111',
   LEMONSQUEEZY_VARIANT_CREDIT_PACK: '2222222',
   LEMONSQUEEZY_MODE: 'live',
+  YOUTUBE_API_KEY: 'unit-youtube-key',
+  OPENALEX_API_KEY: 'unit-openalex-key',
 };
 
 describe('parseEnv', () => {
@@ -76,7 +78,9 @@ describe('parseEnv', () => {
         'LEMONSQUEEZY_VARIANT_CREDIT_PACK',
         'LEMONSQUEEZY_VARIANT_SUBSCRIPTION',
         'LEMONSQUEEZY_WEBHOOK_SECRET',
+        'OPENALEX_API_KEY',
         'REFRESH_TOKEN_PEPPER',
+        'YOUTUBE_API_KEY',
       ]);
       expect((error as Error).message).toContain('APP_ORIGIN');
     }
