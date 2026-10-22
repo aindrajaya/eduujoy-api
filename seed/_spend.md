@@ -16,3 +16,6 @@ Actual cost of every paid run, from API usage at catalog list prices. Hard stop 
 | 2026-10-22 03:24 | items-review | batch | 164 | 84436 | 1419 | 231297 | 64826 | $0.4219 | msgbatch_011uwF7Mm6KASxNCfvUc3qi2 |
 | 2026-10-22 07:30 | topics-refine --sample | standard | 4 | 4075 | 774 | 2322 | 663 | $0.0169 | v1 |
 | 2026-10-22 07:37 | topics-refine | batch | 67 | 68554 | 774 | 51084 | 10443 | $0.1243 | msgbatch_01YTwzN42XTshjoSqUBZ8zmH |
+| 2026-10-22 11:53 | taxonomy | batch | 10 | 192 | 16188 | 37772 | 1200 | $0.0283 | msgbatch_01NuHZSpMvxxXPYVRoVQddef |
+| 2026-10-22 11:54 | topics-refine --sample | standard | 10 | 14200 | 774 | 6966 | 1583 | $0.0469 | v1 |
+| 2026-10-22 12:27 | items | batch | 50 | 8755 | 22734 | 103566 | 372288 | $1.9038 | msgbatch_01Y1vC9yvNdqcGLGD5JJwXmQ |
