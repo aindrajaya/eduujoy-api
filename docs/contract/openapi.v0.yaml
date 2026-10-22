@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Eduujoy API
-  version: 0.8.0-v0
+  version: 0.9.0-v0
   summary: Frozen v0 contract for the Eduujoy MVP.
   description: |
     Frozen v0 contract, written from PRD-API Section 7 (endpoints), Section 8 and master PRD
@@ -1004,6 +1004,9 @@ components:
         aliases: { type: array, items: { type: string } }
         parentId: { type: [string, 'null'] }
         description: { type: string }
+        hasDiagnostic:
+          type: boolean
+          description: True when the topic has a diagnostic item bank; false for new or learner-created topics until one is generated.
     TopicResolveResponse:
       type: object
       required: [status]
@@ -1020,6 +1023,11 @@ components:
               - type: object
                 properties:
                   similarity: { type: number, minimum: 0, maximum: 1 }
+        related:
+          type: array
+          maxItems: 3
+          description: Only with status `created`. The catalog topics nearest to the text (below the choice threshold), so the UI can offer them before a diagnostic without questions.
+          items: { $ref: '#/components/schemas/Topic' }
 
     # ---------- assessment: diagnostic ----------
     DiagnosticStartRequest:
