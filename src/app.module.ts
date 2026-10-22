@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { AccountModule } from './modules/account/account.module';
 import { AssessmentModule } from './modules/assessment/assessment.module';
 import { CatalogModule } from './modules/catalog/catalog.module';
 import { IdentityModule } from './modules/identity/identity.module';
@@ -30,6 +31,7 @@ import { JobsModule } from './shared/jobs';
     CatalogModule,
     AssessmentModule,
     ProgressModule,
+    AccountModule,
   ],
 })
 export class AppModule {}
