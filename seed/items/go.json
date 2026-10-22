@@ -1,0 +1,2488 @@
+{
+  "version": 1,
+  "topic": "go",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which keyword declares a new variable with shorthand syntax inside a function, as in `x := 5`? Choose the term that names this operator.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pointer dereference"
+        },
+        {
+          "id": "b",
+          "label": "Type assertion"
+        },
+        {
+          "id": "c",
+          "label": "Short variable declaration"
+        },
+        {
+          "id": "d",
+          "label": "Constant assignment"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`:=` is the short variable declaration, usable only inside functions.",
+        "Distractors confuse it with other Go operators or constructs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which keyword starts a new goroutine?",
+      "options": [
+        {
+          "id": "a",
+          "label": "async"
+        },
+        {
+          "id": "b",
+          "label": "spawn"
+        },
+        {
+          "id": "c",
+          "label": "go"
+        },
+        {
+          "id": "d",
+          "label": "thread"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The `go` keyword before a function call launches a goroutine.",
+        "Other options come from other languages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the zero value of an `int` variable declared as `var n int` with no initial value?",
+      "options": [
+        {
+          "id": "a",
+          "label": "undefined"
+        },
+        {
+          "id": "b",
+          "label": "-1"
+        },
+        {
+          "id": "c",
+          "label": "nil"
+        },
+        {
+          "id": "d",
+          "label": "0"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Go variables are zero-valued: ints are 0.",
+        "nil and undefined are misconceptions from other languages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which command runs all tests in the current Go package?",
+      "options": [
+        {
+          "id": "a",
+          "label": "go test"
+        },
+        {
+          "id": "b",
+          "label": "go run test"
+        },
+        {
+          "id": "c",
+          "label": "go check"
+        },
+        {
+          "id": "d",
+          "label": "go build -t"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`go test` compiles and runs tests in the package.",
+        "Other commands do not exist or do something else."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "By convention, which built-in interface type represents an error value in Go?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Exception"
+        },
+        {
+          "id": "b",
+          "label": "Throwable"
+        },
+        {
+          "id": "c",
+          "label": "fault"
+        },
+        {
+          "id": "d",
+          "label": "error"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`error` is the built-in interface with an `Error() string` method.",
+        "Other names come from other languages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are valid Go basic types? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "bool"
+        },
+        {
+          "id": "b",
+          "label": "float64"
+        },
+        {
+          "id": "c",
+          "label": "char"
+        },
+        {
+          "id": "d",
+          "label": "string"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "string, bool and float64 are built-in types.",
+        "Go has no `char` type; it uses `rune` or `byte`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "You are writing your first Go program in a file `main.go`. You want it to be an executable that prints text when run. Which package declaration and function must the file contain for it to build as a runnable program?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`package main` and `func init()` only"
+        },
+        {
+          "id": "b",
+          "label": "`package run` and `func main()`"
+        },
+        {
+          "id": "c",
+          "label": "`package main` and `func main()`"
+        },
+        {
+          "id": "d",
+          "label": "`package app` and `func start()`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Executables need `package main` with a `main` function.",
+        "init alone or other package names do not produce an executable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does a function with the signature `func divide(a, b float64) (float64, error)` tell a caller to expect?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It runs asynchronously and reports errors later"
+        },
+        {
+          "id": "b",
+          "label": "It returns one value that may be an error"
+        },
+        {
+          "id": "c",
+          "label": "It returns a result and an error value the caller should check"
+        },
+        {
+          "id": "d",
+          "label": "It throws an exception when b is zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Go returns errors as ordinary values alongside results.",
+        "Distractors assume exceptions or async behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does a struct type satisfy an interface in Go without any `implements` keyword?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It embeds the interface name in a comment"
+        },
+        {
+          "id": "b",
+          "label": "It is registered with the compiler at build time"
+        },
+        {
+          "id": "c",
+          "label": "It has all the methods the interface declares"
+        },
+        {
+          "id": "d",
+          "label": "It is declared in the same package"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Interfaces are satisfied implicitly by having the methods.",
+        "Other options invent nonexistent mechanisms."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What happens when a goroutine sends on an unbuffered channel and no other goroutine is receiving yet?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The program panics immediately"
+        },
+        {
+          "id": "b",
+          "label": "The sender blocks until a receiver is ready"
+        },
+        {
+          "id": "c",
+          "label": "The value is dropped silently"
+        },
+        {
+          "id": "d",
+          "label": "The value is queued and the sender continues"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Unbuffered channels synchronise sender and receiver.",
+        "Queueing describes buffered channels."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `defer file.Close()` do when placed after opening a file in a function?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Closes the file after one second"
+        },
+        {
+          "id": "b",
+          "label": "Runs Close when the surrounding function returns"
+        },
+        {
+          "id": "c",
+          "label": "Runs Close only if an error occurs"
+        },
+        {
+          "id": "d",
+          "label": "Closes the file immediately"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Deferred calls run when the surrounding function returns.",
+        "Distractors misread the timing or condition."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A function receives a slice `s` and runs `s[0] = 99`. What does the caller see afterwards?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only a new copy of the slice has the change"
+        },
+        {
+          "id": "b",
+          "label": "The caller's slice is unchanged because arguments are copied deeply"
+        },
+        {
+          "id": "c",
+          "label": "A compile error occurs because slices are read-only"
+        },
+        {
+          "id": "d",
+          "label": "The caller's slice element is changed too"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A slice header copy still points to the same underlying array.",
+        "Deep copy assumption is the common misconception."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe Go's `if err != nil` pattern? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A nil error means the call succeeded"
+        },
+        {
+          "id": "b",
+          "label": "Checking the error right after the call lets you handle failure early"
+        },
+        {
+          "id": "c",
+          "label": "Errors are returned as values and checked explicitly"
+        },
+        {
+          "id": "d",
+          "label": "Errors automatically stop the program unless caught"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Go uses explicit error values; nil means success.",
+        "There is no automatic exception propagation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A teammate writes `x := 10` at the top level of a file, outside any function, and the compiler reports an error. They ask why the same line works inside `main`. What is the correct explanation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Integers cannot be declared outside `main`"
+        },
+        {
+          "id": "b",
+          "label": "The name x is reserved at package level"
+        },
+        {
+          "id": "c",
+          "label": "Short declarations with `:=` are allowed only inside functions; use `var` at package level"
+        },
+        {
+          "id": "d",
+          "label": "Top-level variables must be constants"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`:=` is function-scope only; package level needs `var`.",
+        "Other options invent restrictions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Inside a function, what does the statement `count := 10` do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Assigns 10 to an existing package-level variable named count"
+        },
+        {
+          "id": "b",
+          "label": "Declares count with no fixed type so it can hold any value"
+        },
+        {
+          "id": "c",
+          "label": "Declares count as a constant that cannot be changed later"
+        },
+        {
+          "id": "d",
+          "label": "Declares a new variable count and infers its type as int"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`:=` is short declaration: it declares and initialises, inferring the type from the value.",
+        "Distractors confuse it with plain assignment, `const`, or dynamic typing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the value of `s` after `var s string` with no initialiser?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A compile error occurs"
+        },
+        {
+          "id": "b",
+          "label": "undefined"
+        },
+        {
+          "id": "c",
+          "label": "\"\" (the empty string)"
+        },
+        {
+          "id": "d",
+          "label": "nil"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Go gives every type a zero value; for string it is the empty string.",
+        "nil, undefined and compile errors reflect habits from other languages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does a Go type come to satisfy an interface?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is registered with the interface by a call in `init()`"
+        },
+        {
+          "id": "b",
+          "label": "It has all the methods the interface declares, with no extra declaration"
+        },
+        {
+          "id": "c",
+          "label": "It lists the interface name in an `implements` clause"
+        },
+        {
+          "id": "d",
+          "label": "It embeds the interface inside its struct definition only"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Go interfaces are satisfied implicitly by having the method set.",
+        "Distractors import explicit-declaration ideas from Java or registration patterns."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do many Go functions return an `error` as their last result instead of throwing exceptions?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The compiler forces callers to handle every error by refusing to build"
+        },
+        {
+          "id": "b",
+          "label": "Go has no way to stop a function early once it has started running"
+        },
+        {
+          "id": "c",
+          "label": "Returned errors are automatically logged and the program then exits"
+        },
+        {
+          "id": "d",
+          "label": "Errors are ordinary values the caller checks, usually with `if err != nil`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Go treats errors as values returned and checked explicitly by the caller.",
+        "The compiler does not force handling; errors are not auto-logged; panic exists for exceptional cases."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A goroutine sends on an unbuffered channel and no other goroutine is receiving yet. What happens to the sender?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It panics because no receiver exists at that moment"
+        },
+        {
+          "id": "b",
+          "label": "It blocks until another goroutine is ready to receive"
+        },
+        {
+          "id": "c",
+          "label": "It continues immediately and the value is dropped"
+        },
+        {
+          "id": "d",
+          "label": "It continues immediately and the value is queued for later"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Unbuffered sends synchronise with a receive, so the sender blocks.",
+        "Distractors assume queuing, dropping or panicking, which describe other designs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe Go slices? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Passing a slice to a function deep-copies all its elements"
+        },
+        {
+          "id": "b",
+          "label": "A slice is a view onto an underlying array"
+        },
+        {
+          "id": "c",
+          "label": "A slice's length must always equal its capacity"
+        },
+        {
+          "id": "d",
+          "label": "Appending beyond capacity may allocate a new underlying array"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Slices reference an array and `append` reallocates when capacity is exceeded.",
+        "Passing a slice copies only the header, and length may be less than capacity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A developer defines `type Counter struct{ n int }` and a method `func (c Counter) Inc() { c.n++ }`. After calling `c.Inc()` in main on a `Counter` variable, printing `c.n` still shows 0. The developer is puzzled. Why does this happen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Field n is unexported, so it can never be modified by methods"
+        },
+        {
+          "id": "b",
+          "label": "The method receives a copy of the struct, so the change is lost"
+        },
+        {
+          "id": "c",
+          "label": "The `++` operator does not work on struct fields in Go"
+        },
+        {
+          "id": "d",
+          "label": "Struct fields are immutable once the struct has been created"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A value receiver operates on a copy; a pointer receiver `(c *Counter)` would persist the change.",
+        "Distractors invent immutability or operator limits."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What does this print?\n`s := []int{1, 2, 3}`\n`t := s[:2]`\n`t = append(t, 9)`\n`fmt.Println(s)`",
+      "options": [
+        {
+          "id": "a",
+          "label": "[1 2 9]"
+        },
+        {
+          "id": "b",
+          "label": "[1 2 3 9]"
+        },
+        {
+          "id": "c",
+          "label": "[9 2 3]"
+        },
+        {
+          "id": "d",
+          "label": "[1 2 3]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "t has capacity 3 and shares the array with s, so append overwrites s[2].",
+        "[1 2 3] assumes append copies; [1 2 3 9] assumes s grows."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `m := map[string]int{\"a\": 0}`, which line correctly tells whether key \"b\" is present?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`if len(m[\"b\"]) == 0 { ... }`"
+        },
+        {
+          "id": "b",
+          "label": "`if m[\"b\"] == nil { ... }`"
+        },
+        {
+          "id": "c",
+          "label": "`if _, ok := m[\"b\"]; !ok { ... }`"
+        },
+        {
+          "id": "d",
+          "label": "`if m[\"b\"] == 0 { ... }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The comma-ok form distinguishes a missing key from a stored zero value.",
+        "Comparing to 0 cannot tell missing from zero; nil and len do not suit int."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What does this code print?\n`for i := 0; i < 3; i++ {`\n`    defer fmt.Print(i)`\n`}`",
+      "options": [
+        {
+          "id": "a",
+          "label": "333"
+        },
+        {
+          "id": "b",
+          "label": "012"
+        },
+        {
+          "id": "c",
+          "label": "210"
+        },
+        {
+          "id": "d",
+          "label": "Nothing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Deferred calls run last-in-first-out and arguments are evaluated at defer time, giving 210.",
+        "012 ignores LIFO; 333 confuses argument evaluation time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You want to run all tests in the current module, including every subpackage. Which command do you run from the module root?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`go test ./...`"
+        },
+        {
+          "id": "b",
+          "label": "`go test .`"
+        },
+        {
+          "id": "c",
+          "label": "`go run ./...`"
+        },
+        {
+          "id": "d",
+          "label": "`go build test`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`./...` matches all packages beneath the current directory.",
+        "`go test .` covers only the current package; run and build do not execute tests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`main` starts `go worker()` and returns right away, so worker's output never appears. Which change makes main wait for it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add `time.Sleep(0)` after starting the goroutine"
+        },
+        {
+          "id": "b",
+          "label": "Call `runtime.Gosched()` once before main returns"
+        },
+        {
+          "id": "c",
+          "label": "Declare `worker` with the `async` keyword so it completes"
+        },
+        {
+          "id": "d",
+          "label": "Use a `sync.WaitGroup`: `Add(1)`, `defer wg.Done()` in worker, `wg.Wait()` in main"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A WaitGroup reliably blocks main until the goroutine signals completion.",
+        "Sleep(0) and Gosched do not guarantee completion; Go has no async keyword."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Given `type P struct{ N int }` and `p := &P{N: 5}`, which expressions evaluate to 5? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`p->N`"
+        },
+        {
+          "id": "b",
+          "label": "`(*p).N`"
+        },
+        {
+          "id": "c",
+          "label": "`*p.N`"
+        },
+        {
+          "id": "d",
+          "label": "`p.N`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Go auto-dereferences pointers for field access, and explicit dereference also works.",
+        "`->` does not exist in Go and `*p.N` tries to dereference an int."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You are writing a CLI that reads a config file. The path is in variable `path`. You need to open the file, handle a possible failure, and make sure the file is closed when the function ends. Which sequence is correct and idiomatic?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`f, err := os.Open(path)`, `defer f.Close()`, then check `err` later"
+        },
+        {
+          "id": "b",
+          "label": "`f, _ := os.Open(path)`, `defer f.Close()`, then read from `f`"
+        },
+        {
+          "id": "c",
+          "label": "`defer f.Close()`, then `f, err := os.Open(path)`, then check `err`"
+        },
+        {
+          "id": "d",
+          "label": "`f, err := os.Open(path)`, check `err` and return, then `defer f.Close()`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Check err first so f is valid, then defer Close right after a successful open.",
+        "Other orders use f before it exists, defer on a possibly nil file, or ignore the error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What does this print? `a := []int{1,2,3,4}; b := a[:2]; b = append(b, 99); fmt.Println(a)`",
+      "options": [
+        {
+          "id": "a",
+          "label": "[1 2 99 4]"
+        },
+        {
+          "id": "b",
+          "label": "[1 2 3 4 99]"
+        },
+        {
+          "id": "c",
+          "label": "[1 2 99]"
+        },
+        {
+          "id": "d",
+          "label": "[1 2 3 4]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`b` has capacity 4 and shares a's array, so append writes 99 into index 2 of the shared array.",
+        "Choosing [1 2 3 4] assumes append always copies; [1 2 99] confuses a with b."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What does this print? `for i := 0; i < 3; i++ { defer fmt.Print(i) }`",
+      "options": [
+        {
+          "id": "a",
+          "label": "222"
+        },
+        {
+          "id": "b",
+          "label": "210"
+        },
+        {
+          "id": "c",
+          "label": "333"
+        },
+        {
+          "id": "d",
+          "label": "012"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Deferred calls run last-in first-out and the argument i is evaluated when defer executes, giving 2, 1, 0.",
+        "333 and 222 wrongly assume the argument is evaluated when the function returns."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `err := fmt.Errorf(\"load: %w\", io.EOF)`, which expression evaluates to true?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`errors.Is(io.EOF, err)`"
+        },
+        {
+          "id": "b",
+          "label": "`err == io.EOF`"
+        },
+        {
+          "id": "c",
+          "label": "`errors.Unwrap(err) == nil`"
+        },
+        {
+          "id": "d",
+          "label": "`errors.Is(err, io.EOF)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`errors.Is` walks the chain of errors wrapped with %w, so it finds io.EOF.",
+        "Direct == fails because err is a wrapper; the reversed arguments search the wrong chain."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `type Counter struct{ n int }`, `func (c *Counter) Inc() { c.n++ }` and `type Incer interface{ Inc() }`, which assignment compiles?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`var i Incer = Counter{n: 1}`"
+        },
+        {
+          "id": "b",
+          "label": "`var i Incer = &Counter{}`"
+        },
+        {
+          "id": "c",
+          "label": "`var i Incer = Counter{}`"
+        },
+        {
+          "id": "d",
+          "label": "`var i Incer = *new(Counter)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Inc has a pointer receiver, so only *Counter has it in its method set.",
+        "The other options assign a Counter value, which lacks the method."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A producer goroutine sends 1, 2, 3 on an unbuffered `chan int`, and main runs `for v := range ch { fmt.Println(v) }`. What must the producer do so the loop ends instead of blocking forever?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Do nothing; range exits once no sender is currently ready"
+        },
+        {
+          "id": "b",
+          "label": "Call `close(ch)` from the consumer inside the loop after each receive"
+        },
+        {
+          "id": "c",
+          "label": "Call `close(ch)` after the last send so the range loop terminates"
+        },
+        {
+          "id": "d",
+          "label": "Send `-1` after the last value so the loop sees it and stops"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Range over a channel ends only when the channel is closed, and the sender should close it.",
+        "A sentinel does not stop range, and closing from the receiver side risks a panic on send."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "With `var m map[string]int` (a nil map), which statements run without panicking? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`n := len(m)`"
+        },
+        {
+          "id": "b",
+          "label": "`m[\"a\"]++`"
+        },
+        {
+          "id": "c",
+          "label": "`delete(m, \"a\")`"
+        },
+        {
+          "id": "d",
+          "label": "`_ = m[\"a\"]`"
+        },
+        {
+          "id": "e",
+          "label": "`m[\"a\"] = 1`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Reads, delete and len are safe on a nil map; reads return the zero value.",
+        "Any write, including ++, panics on a nil map."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You wrote `func Health(w http.ResponseWriter, r *http.Request)` that replies 200 with body \"ok\". You want a fast unit test that runs in `go test` without opening a port. Which approach fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Build the binary, run it in the background and check it with `curl` from the test"
+        },
+        {
+          "id": "b",
+          "label": "Create a request with `httptest.NewRequest`, call `Health` with `httptest.NewRecorder`, then check `rec.Code`"
+        },
+        {
+          "id": "c",
+          "label": "Start `http.ListenAndServe` in a goroutine, sleep a second, then call it with `http.Get`"
+        },
+        {
+          "id": "d",
+          "label": "Replace the `net` package with a hand-written fake so the handler reads from memory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "httptest lets you call the handler directly and inspect the recorded response with no network.",
+        "Starting a real server or external process is slow and flaky; faking `net` is needless."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A program starts 5 goroutines with `go func() { wg.Add(1); defer wg.Done(); work() }()` in a loop, then calls `wg.Wait()`. It sometimes exits before work finishes. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Goroutines started in a loop cannot be tracked by a WaitGroup in the same function"
+        },
+        {
+          "id": "b",
+          "label": "`defer wg.Done()` runs before `work()` finishes, releasing the group too early"
+        },
+        {
+          "id": "c",
+          "label": "`Add(1)` runs inside the goroutine, so `Wait` may run before any `Add` has happened"
+        },
+        {
+          "id": "d",
+          "label": "`wg` is copied into each goroutine, so `Wait` watches a counter that is always zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Add must happen before the goroutine starts; otherwise Wait can see a zero counter and return.",
+        "Defer runs at function exit, and the closure captures wg by reference rather than copying it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`func run() error { var e *MyErr; return e }` where `*MyErr` implements error. The caller's `if err := run(); err != nil` branch runs. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`var e *MyErr` allocates a zeroed struct, so the pointer is not actually nil here"
+        },
+        {
+          "id": "b",
+          "label": "The returned interface holds type `*MyErr` with a nil value, and such an interface is not equal to nil"
+        },
+        {
+          "id": "c",
+          "label": "The compiler converts any returned pointer into a non-nil error value at the return"
+        },
+        {
+          "id": "d",
+          "label": "`MyErr` must implement `Error` on a value receiver for a nil pointer to count as nil"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An interface is nil only when both its dynamic type and value are nil; here the type is set.",
+        "The pointer is nil, and the compiler does not allocate for it; the fix is to return a literal nil."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "1000 goroutines each run `n++` on a shared `int`, and a WaitGroup correctly waits for all of them. The final n is often below 1000. What explains it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`wg.Wait()` returns before the last few goroutines have finished running"
+        },
+        {
+          "id": "b",
+          "label": "`n++` is a read-modify-write, so concurrent goroutines overwrite each other's updates"
+        },
+        {
+          "id": "c",
+          "label": "Some goroutines are dropped by the scheduler when too many are started at once"
+        },
+        {
+          "id": "d",
+          "label": "The `int` type is too small to hold the sum when updated from many goroutines"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Unsynchronised `n++` is a data race where two goroutines read the same value and write back the same result; use a mutex or atomic.",
+        "The scheduler does not drop goroutines, and the WaitGroup stated as correct rules out early return."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "With `type P struct{ n int }` and `m := map[string]P{\"a\": {1}}`, the statement `m[\"a\"].n++` fails to compile. What is the reason?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Struct fields named with lowercase letters cannot be changed from outside their type"
+        },
+        {
+          "id": "b",
+          "label": "Maps hold copies only when the key is a string, which makes the value read-only"
+        },
+        {
+          "id": "c",
+          "label": "Map values are not addressable, so a field of a stored struct cannot be assigned in place"
+        },
+        {
+          "id": "d",
+          "label": "The `++` operator is not allowed on struct fields, only on plain variables"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Map elements are not addressable; copy the value out, modify it and store it back, or use pointer values.",
+        "The field is in the same package, and `++` works on addressable struct fields elsewhere."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`ch := make(chan int); ch <- 1; fmt.Println(<-ch)` in main ends with \"all goroutines are asleep - deadlock!\". Which diagnosis is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The send blocks until a receiver is ready, but the only receiver is later in the same goroutine"
+        },
+        {
+          "id": "b",
+          "label": "`Println` cannot receive from a channel without first calling `close(ch)`"
+        },
+        {
+          "id": "c",
+          "label": "The runtime requires a `sync.Mutex` around any channel operation in main"
+        },
+        {
+          "id": "d",
+          "label": "The channel type `int` is too small to carry a value without a buffer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "An unbuffered send blocks until another goroutine receives, so main never reaches the receive.",
+        "Closing is not needed for receiving, and channels need no mutex."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A function does `ch := make(chan int); go func() { ch <- compute() }()` then `select { case v := <-ch: use(v); case <-time.After(time.Second): return }`. On timeout the goroutine leaks. Which changes fix the leak? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call `close(ch)` in the timeout branch before returning"
+        },
+        {
+          "id": "b",
+          "label": "Call `runtime.Gosched()` in the timeout branch"
+        },
+        {
+          "id": "c",
+          "label": "Make the channel buffered with `make(chan int, 1)`"
+        },
+        {
+          "id": "d",
+          "label": "Have the goroutine `select` on its send and a `ctx.Done()` case"
+        },
+        {
+          "id": "e",
+          "label": "Raise the timeout so it is longer than any compute call"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A buffer of one lets the send finish with no receiver; a select on ctx.Done lets the goroutine give up.",
+        "Closing makes the pending send panic, and a longer timeout or Gosched does not guarantee a receiver."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A teammate's code is `for _, u := range users { if u.Age > 30 { u.Active = true } }` where `users` is a `[]User` of structs. After the loop, nobody is marked active even though ages qualify. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The loop variable `u` is a copy of each element, so the change never reaches the slice"
+        },
+        {
+          "id": "b",
+          "label": "`u.Age > 30` compares the pointer rather than the value, so it is never true"
+        },
+        {
+          "id": "c",
+          "label": "Slices of structs are read-only inside range loops unless declared as arrays"
+        },
+        {
+          "id": "d",
+          "label": "The assignment runs, but `Active` resets when the loop variable goes out of scope"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Range yields a copy of each struct; index with `users[i].Active = true` or store pointers.",
+        "The comparison is on a value, and range does not make slices read-only."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A function declared as `func find() error` does `var e *NotFoundError; return e` when nothing fails. The caller's `if err := find(); err != nil` branch still runs. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The compiler converts any typed nil pointer into a zero-value struct, which compares as non-nil"
+        },
+        {
+          "id": "b",
+          "label": "The `!=` operator on error values compares the memory addresses of their messages, which differ"
+        },
+        {
+          "id": "c",
+          "label": "The returned interface holds a type descriptor, so it is not nil even though the pointer inside is nil"
+        },
+        {
+          "id": "d",
+          "label": "The variable `e` was never initialised, so it holds a random address that is non-nil at runtime"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An interface value is nil only when both its type and value are nil; a typed nil pointer yields a non-nil interface.",
+        "Distractors invent conversion or address-comparison behaviour that Go does not have."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A service starts a goroutine per request that does `ch <- result` on an unbuffered channel. The handler returns early on a timeout without reading `ch`. Memory and goroutine counts climb steadily. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The runtime creates a new OS thread per blocked goroutine, and these threads are never released"
+        },
+        {
+          "id": "b",
+          "label": "The garbage collector cannot reclaim channels until the program exits, so every request leaks a channel"
+        },
+        {
+          "id": "c",
+          "label": "Each abandoned goroutine blocks forever on its send because no receiver remains, so it is never freed"
+        },
+        {
+          "id": "d",
+          "label": "The unbuffered channel copies each result into a growing internal queue that is never drained"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A send on an unbuffered channel with no receiver blocks forever, leaking the goroutine and what it references.",
+        "Distractors misdescribe channel internals and GC behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Given `a := make([]int, 3, 10)`, then `b := append(a, 1)` and `c := append(a, 2)`, what is the value of `b[3]`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The code panics with an index out of range"
+        },
+        {
+          "id": "b",
+          "label": "0"
+        },
+        {
+          "id": "c",
+          "label": "2"
+        },
+        {
+          "id": "d",
+          "label": "1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Capacity 10 means both appends reuse the same backing array and write index 3, so c's write overwrites b's.",
+        "Learners answering 1 assume append always copies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A tool loops over 50,000 paths, calling `f, _ := os.Open(p)` and then `defer f.Close()` inside the loop body. It fails partway with 'too many open files'. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Deferred calls run at the end of each loop iteration, but `Close` is asynchronous and lags behind"
+        },
+        {
+          "id": "b",
+          "label": "The `defer` statement copies the file handle, so the original handle is never closed at all"
+        },
+        {
+          "id": "c",
+          "label": "Deferred calls run when the function returns, so all files stay open until the whole loop finishes"
+        },
+        {
+          "id": "d",
+          "label": "The `os.Open` call caches handles by path, so deferring `Close` only decrements a reference count"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "defer is function-scoped, not block-scoped, so closes pile up until return.",
+        "Distractors assume block-scoped or asynchronous defer semantics."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Code does `for _, j := range jobs { go func(j Job) { wg.Add(1); defer wg.Done(); run(j) }(j) }` then `wg.Wait()`. Results are sometimes incomplete. What is the faulty step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`defer wg.Done()` runs before `run(j)` finishes, so the counter drops too early"
+        },
+        {
+          "id": "b",
+          "label": "Passing `j` as a parameter copies it, so each goroutine sees a stale job value"
+        },
+        {
+          "id": "c",
+          "label": "`wg.Add(1)` runs inside the goroutine, so `Wait` may see a zero counter before goroutines have started"
+        },
+        {
+          "id": "d",
+          "label": "`wg.Wait()` must be called inside the loop, since a WaitGroup tracks only one goroutine at a time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Add must happen before the goroutine is launched, otherwise Wait can return early.",
+        "Distractors blame parameter copying or defer order, which are correct here."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Which of these snippets contain a data race that `go test -race` would report? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A goroutine sends a value on a channel and the main goroutine receives it and then reads the value"
+        },
+        {
+          "id": "b",
+          "label": "Ten goroutines each run `counter++` on a shared int with no synchronisation"
+        },
+        {
+          "id": "c",
+          "label": "Each of ten goroutines writes only to its own distinct index of a preallocated slice"
+        },
+        {
+          "id": "d",
+          "label": "One goroutine writes to a shared map while another reads from it, with no lock"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Unsynchronised concurrent access with a write is a race, for both the counter and the map.",
+        "Distinct slice indices and channel handoffs do not race."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An HTTP handler runs `rows, err := db.QueryContext(context.Background(), q, id)`. When clients disconnect, the database still shows long queries running for each abandoned request, and load spikes. Which diagnosis best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The handler should use `db.Query` instead, because QueryContext holds connections open after the response ends"
+        },
+        {
+          "id": "b",
+          "label": "The connection pool is too small, so queries queue up and stay running after the client disconnects"
+        },
+        {
+          "id": "c",
+          "label": "The handler ignores `err`, so cancelled queries are retried by the driver until they succeed"
+        },
+        {
+          "id": "d",
+          "label": "The query context is detached from the request, so client cancellation never reaches the database call"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "context.Background() is never cancelled; using r.Context() would propagate disconnects.",
+        "Distractors blame the pool, error handling or the wrong API."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A struct `Cache` embeds a `sync.Mutex` and has methods `Get` and `Set`. Criteria: correct locking, and `go vet` must stay clean. Which receiver choice is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Value receivers for `Get` and pointer receivers for `Set`, so reads never block writers"
+        },
+        {
+          "id": "b",
+          "label": "Value receivers, so each call works on its own copy and needs no shared lock"
+        },
+        {
+          "id": "c",
+          "label": "Pointer receivers on all methods, so every call shares one mutex rather than a copy"
+        },
+        {
+          "id": "d",
+          "label": "Pointer receivers only on `Set`, since only writes need to reach the original struct"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Copying a struct copies its mutex, which defeats locking and is flagged by vet; use pointer receivers consistently.",
+        "Distractors treat copies as safe or mix receivers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A library wraps a database error and returns it. Callers must test for `sql.ErrNoRows` with `errors.Is` while the message keeps context like 'load user 42'. Which return best meets both criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`return fmt.Errorf(\"load user %d: %w\", id, err)`, since %w keeps the cause in the chain"
+        },
+        {
+          "id": "b",
+          "label": "`return errors.New(\"load user \" + err.Error())`, since the message includes the cause"
+        },
+        {
+          "id": "c",
+          "label": "`return fmt.Errorf(\"load user %d\", id)`, since callers should not see driver errors"
+        },
+        {
+          "id": "d",
+          "label": "`return fmt.Errorf(\"load user %d: %v\", id, err)`, since %v preserves the original text"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Only %w keeps the wrapped error discoverable by errors.Is while adding context.",
+        "%v and errors.New flatten the error into text, breaking the chain."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A pipeline's producer is much faster than its consumer. Criteria: bounded memory, and the producer should slow down automatically. Which channel design best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An unbuffered channel, so each send waits until the consumer is ready to receive"
+        },
+        {
+          "id": "b",
+          "label": "A channel with `select` and `default` that silently drops values whenever it is full"
+        },
+        {
+          "id": "c",
+          "label": "An unbounded slice guarded by a mutex, so the producer never blocks on a slow consumer"
+        },
+        {
+          "id": "d",
+          "label": "A channel buffered with 1,000,000 slots, so the producer rarely ever has to wait"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Blocking sends on a bounded or unbuffered channel give backpressure with bounded memory.",
+        "A huge buffer or slice defers the problem; dropping violates no-loss intent."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A reviewer sees package `storage` define a 12-method `Store` interface next to its one implementation, and package `api` depends on it to use only `Get`. Criteria: idiomatic Go, easy test fakes. What is the best critique?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Split `Store` into twelve one-method interfaces in `storage`, so each method is separately mockable"
+        },
+        {
+          "id": "b",
+          "label": "Replace the interface with a global variable holding a concrete `*Store`, so tests can swap it"
+        },
+        {
+          "id": "c",
+          "label": "Move the interface into `api` and shrink it to the one method it needs, so fakes are trivial"
+        },
+        {
+          "id": "d",
+          "label": "Keep it as is, because interfaces belong with the implementation so all methods stay documented together"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Go interfaces are best defined by the consumer and kept small; this makes fakes simple.",
+        "Other options keep producer-side interfaces or add global state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A parsing library calls `panic` when it meets malformed input, expecting callers to use `recover`. Criteria: predictable API, idiomatic Go, safe for callers' servers. Which judgement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Acceptable, because `recover` in every caller is the standard way to handle input failures in Go"
+        },
+        {
+          "id": "b",
+          "label": "Poor, because panics cannot be recovered across package boundaries, so callers could never catch them"
+        },
+        {
+          "id": "c",
+          "label": "Poor, because malformed input is expected, so the function should return an `error` callers can check"
+        },
+        {
+          "id": "d",
+          "label": "Acceptable, because panics are faster than error returns and malformed input is rare in practice"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Expected failures should be returned as errors; panics are for programmer errors or unrecoverable states.",
+        "Distractors misstate performance, convention or recover's reach."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A worker pool starts one goroutine per task and uses `time.Sleep(5*time.Second)` to wait for completion. Criteria: bounded resources, reliable shutdown. Which changes are sound improvements? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pass a `context.Context` so workers can stop early on cancellation"
+        },
+        {
+          "id": "b",
+          "label": "Start a fixed number of workers reading tasks from a shared channel"
+        },
+        {
+          "id": "c",
+          "label": "Replace the sleep with a `sync.WaitGroup` that waits for workers to finish"
+        },
+        {
+          "id": "d",
+          "label": "Let each worker close the shared task channel when it finishes its own task"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Fixed workers bound resources; WaitGroup gives deterministic completion; context allows cancellation.",
+        "Closing a shared channel from several receivers can cause panics; the sender should close it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A service keeps an in-memory `map[string]Config` read on every request (thousands per second) and updated about once a minute. Criteria: correctness under concurrency, low read contention, simplicity. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Guard the map with a `sync.Mutex` held for each read and write, since that is the simplest safe option"
+        },
+        {
+          "id": "b",
+          "label": "Route every read and write through one goroutine that owns the map, using request and reply channels"
+        },
+        {
+          "id": "c",
+          "label": "Guard the map with a `sync.RWMutex`, taking read locks for lookups and a write lock for updates"
+        },
+        {
+          "id": "d",
+          "label": "Share the map freely and rely on map reads being atomic, since writes are rare enough"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "RWMutex allows many concurrent readers with rare exclusive writers, and stays simple.",
+        "An unguarded map races; a single mutex or owner goroutine serialises reads needlessly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A handler package depends on a 12-method `Store` interface defined in the storage package, but the handler only calls `Get`. Judged on testability and decoupling, which critique and fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Define a one-method interface in the handler package, because the consumer owns what it needs and fakes stay tiny"
+        },
+        {
+          "id": "b",
+          "label": "Embed the full interface in the handler struct, because embedding makes mocks generate automatically without extra code"
+        },
+        {
+          "id": "c",
+          "label": "Keep the large interface in the storage package, because one canonical interface avoids duplicated declarations across packages"
+        },
+        {
+          "id": "d",
+          "label": "Replace the interface with `any` and type-assert inside the handler, because that removes the compile-time dependency entirely"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Go interfaces are satisfied implicitly, so small consumer-side interfaces minimise coupling and make fakes trivial.",
+        "Distractors reflect Java-style producer-owned interfaces or trading type safety for decoupling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A library wraps errors from a third-party database driver. The maintainers want callers to rely only on the library's own documented errors so the driver can be swapped later. Which wrapping choice best meets that criterion?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call `panic(err)` on driver failures, because the library then never commits to any error contract with callers"
+        },
+        {
+          "id": "b",
+          "label": "Use `fmt.Errorf(\"query: %v\", err)` and map known cases to own sentinels, because %v keeps driver types out of the API"
+        },
+        {
+          "id": "c",
+          "label": "Use `fmt.Errorf(\"query: %w\", err)` everywhere, because callers can then match every driver error with `errors.As`"
+        },
+        {
+          "id": "d",
+          "label": "Return the driver error unchanged, because adding context hides the original type and breaks callers' matching"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "%w makes the wrapped error part of the API contract; %v preserves the message without exposing the type.",
+        "The %w distractor is the common habit of always wrapping, which leaks the dependency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Many goroutines increment per-key counters in a shared `map[string]int` with very short critical sections. Criteria: correctness, simplicity, adequate throughput. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use `sync.WaitGroup` around each increment, because it serialises access to the map between the goroutines"
+        },
+        {
+          "id": "b",
+          "label": "Guard the map with a `sync.Mutex`, because the state is shared, not handed off, and the lock is held very briefly"
+        },
+        {
+          "id": "c",
+          "label": "Send every increment to a single owner goroutine through a channel, because channels are always preferred over locks"
+        },
+        {
+          "id": "d",
+          "label": "Leave the map unguarded, because integer increments are atomic on 64-bit machines and cannot corrupt the map"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Shared state with short critical sections is simplest and fast with a mutex; channels suit ownership transfer.",
+        "Distractors reflect slogan-following about channels and misunderstanding that concurrent map writes are unsafe."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A long-lived `Server` struct stores a `context.Context` in a field set at construction and uses it for all outgoing calls in every request. Which critique best fits the standard guidance?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is wrong only because struct fields cannot hold interface values that carry cancellation behaviour"
+        },
+        {
+          "id": "b",
+          "label": "It is fine if the context is `context.Background()`, because that guarantees cancellation reaches every request"
+        },
+        {
+          "id": "c",
+          "label": "It is a flaw, because request deadlines and cancellation are per call; pass `ctx` as the first parameter of each method"
+        },
+        {
+          "id": "d",
+          "label": "It is fine, because one context for the process is cheaper than creating one per request on the hot path"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Contexts model a request-scoped lifetime and should flow through calls, not live in long-lived structs.",
+        "Distractors misjudge cost or claim Background provides cancellation, which it never does."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A function starts a goroutine that sends its result on an unbuffered channel, then the caller selects on that channel or a timeout and returns on timeout. Ranking fixes by how reliably they remove the resulting leak, which is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Close the channel in the caller after the timeout, because closing wakes the blocked sender safely and lets it exit"
+        },
+        {
+          "id": "b",
+          "label": "Call `runtime.Gosched()` before the send, because yielding makes the receiver run and drain the channel"
+        },
+        {
+          "id": "c",
+          "label": "Add `time.Sleep` in the goroutine before sending, because a delay lets the caller finish reading first"
+        },
+        {
+          "id": "d",
+          "label": "Create the channel with capacity 1, because the sender can then complete its send and exit even if nobody receives"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A buffer of one lets the single send finish without a receiver, so the goroutine ends.",
+        "Closing makes the blocked sender panic; sleeping and yielding are timing hacks that do not guarantee a receiver."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team proposes using `sync.Pool` to reuse `*bytes.Buffer` values across requests to cut allocations. Which considerations are valid when evaluating this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The benefit should be confirmed with a benchmark or allocation profile before accepting the added complexity"
+        },
+        {
+          "id": "b",
+          "label": "The pool guarantees every `Put` value is returned by a later `Get`, so it works as a fixed-size free list"
+        },
+        {
+          "id": "c",
+          "label": "Buffers must be reset before reuse, or stale data from a previous request can leak into the next one"
+        },
+        {
+          "id": "d",
+          "label": "The pool may drop items at any garbage collection, so code cannot assume a buffer will be returned"
+        },
+        {
+          "id": "e",
+          "label": "A buffer is safe for two goroutines to use at once after `Put`, because the pool serialises their access"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Pools are a best-effort cache: items can vanish, need resetting, and must be justified by measurement.",
+        "Distractors assume the pool synchronises users or acts as a guaranteed free list."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "An HTTP client library returns failures that carry a status code and a retryable flag. Callers often receive these errors after middleware wraps them with `fmt.Errorf(\"...: %w\", err)`. Callers must read the status code reliably through wrapping. Which error design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Export sentinel `var ErrNotFound` values and compare with `==`, because equality stays reliable after any wrapping"
+        },
+        {
+          "id": "b",
+          "label": "Export `StatusError` and have callers use `err.(*StatusError)`, because a type assertion inspects the whole chain"
+        },
+        {
+          "id": "c",
+          "label": "Return plain `errors.New` strings containing the code and have callers parse them with `strings.Contains`"
+        },
+        {
+          "id": "d",
+          "label": "Export `*StatusError` with `Code` and `Retryable` fields, and have callers use `errors.As`, which unwraps the chain"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A custom error type plus errors.As carries structured data and works through %w wrapping.",
+        "Direct assertion and == only see the outermost error, and string parsing is brittle."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a shutdown for an HTTP service: stop accepting new connections on SIGINT or SIGTERM, let in-flight requests finish for up to 10 seconds, then exit. Which design meets every requirement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call `srv.Close()` when the signal arrives, because it waits gracefully for in-flight requests to finish within ten seconds"
+        },
+        {
+          "id": "b",
+          "label": "Cancel the context passed to `ListenAndServe`, because that automatically drains active connections before it returns"
+        },
+        {
+          "id": "c",
+          "label": "Call `os.Exit(0)` from a signal handler after `time.Sleep(10 * time.Second)`, so every request has had time to finish"
+        },
+        {
+          "id": "d",
+          "label": "Use `signal.NotifyContext`, then on cancel call `srv.Shutdown` with a 10-second timeout context and wait for it to return"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Shutdown stops listeners and waits for active requests until its context expires.",
+        "Close drops connections immediately, and os.Exit or sleeping gives no draining guarantee."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a fan-out that fetches 50 URLs concurrently. The first error must cancel the remaining fetches and be returned to the caller, and no goroutine may outlive the function. Which design satisfies all of this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run the fetches sequentially in a loop and break on the first error, which trivially satisfies the cancellation requirement"
+        },
+        {
+          "id": "b",
+          "label": "Use `errgroup.WithContext`, pass its context to each fetch, and return the result of `g.Wait()`"
+        },
+        {
+          "id": "c",
+          "label": "Start a goroutine per URL with a `sync.WaitGroup` and write errors into a shared `err` variable that all goroutines assign"
+        },
+        {
+          "id": "d",
+          "label": "Start a goroutine per URL and return the first value read from an unbuffered error channel, leaving the others to finish"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "errgroup cancels the shared context on first error, waits for all goroutines, and returns that error.",
+        "Distractors race on a shared variable, leak goroutines, or drop the concurrency requirement."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Code computes expiry from `time.Now()` directly and its tests are slow and flaky. Constraints: no change to production behaviour, no global patching, tests must run in parallel. Which change meets all of them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run tests with `-p 1` and `-count=1` so that real time always passes consistently for all of them"
+        },
+        {
+          "id": "b",
+          "label": "Inject a `Clock` interface or `func() time.Time` into the type, defaulting to `time.Now`, and pass a fake in tests"
+        },
+        {
+          "id": "c",
+          "label": "Replace `time.Now` through a package-level variable that each test overwrites before it runs"
+        },
+        {
+          "id": "d",
+          "label": "Add `time.Sleep` calls in tests until the real clock reaches the expiry, then assert on the outcome"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Dependency injection of the clock keeps state per instance, so parallel tests do not interfere.",
+        "A global variable overwritten by tests races under parallelism, and sleeping or flags do not make time controllable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A config loader may fail (for example, the file is not yet present). Design lazy loading so concurrent callers never race, only one load attempt runs at a time, and a failed attempt is retried by the next caller. Which design meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap the load in `sync.Once`, because it retries automatically whenever the function inside it returns an error"
+        },
+        {
+          "id": "b",
+          "label": "Set an `atomic.Bool` to true before loading, so concurrent callers skip the load and read the config at once"
+        },
+        {
+          "id": "c",
+          "label": "Use a mutex around check-and-load, storing the config only on success so later callers retry after a failure"
+        },
+        {
+          "id": "d",
+          "label": "Check a plain `loaded bool` without a lock, then lock only to load, because reads of a bool are always safe"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A mutex serialises attempts and caching only on success permits retries.",
+        "sync.Once never reruns after failure, and the unlocked bool or early atomic flag allow races or half-loaded reads."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "An upload handler must store a 20 GB request body to disk and compute its SHA-256 in a single pass, using constant memory. Which design satisfies the constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Copy the body to the file, then reopen the file and read it again from the start to feed the hasher"
+        },
+        {
+          "id": "b",
+          "label": "Wrap the body in `bufio.NewScanner` and hash each line, because scanners bound memory by line size"
+        },
+        {
+          "id": "c",
+          "label": "Call `io.ReadAll(r.Body)`, then write the bytes to the file and hash the same slice afterwards"
+        },
+        {
+          "id": "d",
+          "label": "Use `io.Copy(io.MultiWriter(f, h), r.Body)` with `h := sha256.New()`, which streams both writes in one pass"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "MultiWriter fans each chunk to the file and the hash while io.Copy streams with a fixed buffer.",
+        "ReadAll uses memory proportional to size, two passes violate the single-pass constraint, and scanners fail on long lines."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "You are designing the public API of a client library. Constraints: blocking calls must be cancellable, optional settings must be addable later without breaking callers, and callers must be able to hold the concrete type. Which choices satisfy these? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Accept settings as `...interface{}` so any future setting can be passed without changing the signature"
+        },
+        {
+          "id": "b",
+          "label": "Return the concrete `*Client` from the constructor rather than an interface the library defines"
+        },
+        {
+          "id": "c",
+          "label": "Provide `New(addr string, opts ...Option) *Client` with options like `WithTimeout(d)`"
+        },
+        {
+          "id": "d",
+          "label": "Configure behaviour through package-level variables that callers mutate in their `init` functions"
+        },
+        {
+          "id": "e",
+          "label": "Take `ctx context.Context` as the first parameter of every blocking method"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Context parameters, functional options and concrete return types give cancellation, extensibility and flexibility.",
+        "Untyped variadics lose compile-time checks and mutable globals make configuration shared and racy."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A service must call a downstream API for each of 500 IDs. Constraints: at most 8 calls in flight, results returned in the same order as the input IDs, and all work must stop promptly when the request context is cancelled. Which design meets every constraint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Feed IDs to 8 workers and send results on one channel, then read them in arrival order for the final response"
+        },
+        {
+          "id": "b",
+          "label": "Launch 500 goroutines that append to a shared slice under a mutex, so results are collected as they finish"
+        },
+        {
+          "id": "c",
+          "label": "Use `errgroup` with `SetLimit(8)` and a context, and write each result into `results[i]` for its input index"
+        },
+        {
+          "id": "d",
+          "label": "Process the IDs in batches of 8 with a `WaitGroup`, appending each batch's results in whatever order they complete"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A concurrency limit plus index-addressed writes bounds parallelism and preserves order without locking, and the context stops work.",
+        "Distractors lose order, exceed the limit, or ignore cancellation."
+      ],
+      "reviewed": false
+    }
+  ]
+}

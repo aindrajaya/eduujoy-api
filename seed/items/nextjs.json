@@ -1,0 +1,2485 @@
+{
+  "version": 1,
+  "topic": "nextjs",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In the App Router, which file defines the UI for the route `/about`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`app/about/page.js`"
+        },
+        {
+          "id": "b",
+          "label": "`app/about.js`"
+        },
+        {
+          "id": "c",
+          "label": "`app/about/index.js`"
+        },
+        {
+          "id": "d",
+          "label": "`app/about/route.html`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`page.js` inside a route folder makes that route publicly accessible.",
+        "`index.js` is a Pages Router habit and does not define App Router pages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which directive at the top of a file marks its components as Client Components?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`\"use state\"`"
+        },
+        {
+          "id": "b",
+          "label": "`\"use browser\"`"
+        },
+        {
+          "id": "c",
+          "label": "`\"use client\"`"
+        },
+        {
+          "id": "d",
+          "label": "`\"use effect\"`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`\"use client\"` sets the server/client boundary.",
+        "The other strings sound plausible because they resemble hook names but are not Next.js directives."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which App Router file defines shared UI that wraps the pages and child layouts beneath it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`layout.js`"
+        },
+        {
+          "id": "b",
+          "label": "`wrapper.js`"
+        },
+        {
+          "id": "c",
+          "label": "`_app.js`"
+        },
+        {
+          "id": "d",
+          "label": "`shell.js`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`layout.js` is the App Router convention for shared UI.",
+        "`_app.js` belongs to the older Pages Router."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which folder name creates a dynamic route segment named `id`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`{id}`"
+        },
+        {
+          "id": "b",
+          "label": "`$id`"
+        },
+        {
+          "id": "c",
+          "label": "`[id]`"
+        },
+        {
+          "id": "d",
+          "label": "`:id`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Square brackets denote dynamic segments in Next.js.",
+        "Colon syntax comes from other routers such as Express."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which file name defines an HTTP endpoint (such as GET or POST) inside the App Router?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`api.js`"
+        },
+        {
+          "id": "b",
+          "label": "`endpoint.js`"
+        },
+        {
+          "id": "c",
+          "label": "`route.js`"
+        },
+        {
+          "id": "d",
+          "label": "`handler.js`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Route Handlers are defined in `route.js` files exporting functions named after HTTP methods.",
+        "The other names are invented conventions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are special file conventions in the App Router? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`not-found.js`"
+        },
+        {
+          "id": "b",
+          "label": "`loading.js`"
+        },
+        {
+          "id": "c",
+          "label": "`error.js`"
+        },
+        {
+          "id": "d",
+          "label": "`config.html`"
+        },
+        {
+          "id": "e",
+          "label": "`helper.js`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "`loading.js`, `error.js` and `not-found.js` are reserved file names with defined roles.",
+        "`helper.js` and `config.html` have no special meaning to the router."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A team is starting a brand new Next.js project and wants the official scaffolding tool to generate the folder structure and dependencies. Which terminal command do they run?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`npm create react-app`"
+        },
+        {
+          "id": "b",
+          "label": "`npm init next-react`"
+        },
+        {
+          "id": "c",
+          "label": "`npx next-new`"
+        },
+        {
+          "id": "d",
+          "label": "`npx create-next-app@latest`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`create-next-app` is the official Next.js project generator.",
+        "`create-react-app` makes a plain React app, not a Next.js one."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does it mean that components in the App Router are Server Components by default?",
+      "options": [
+        {
+          "id": "a",
+          "label": "They render on the server and their own JavaScript is not sent to the browser"
+        },
+        {
+          "id": "b",
+          "label": "They run on both sides and always ship their code to the client"
+        },
+        {
+          "id": "c",
+          "label": "They render in the browser first and then are copied to the server"
+        },
+        {
+          "id": "d",
+          "label": "They only render at build time and can never use fresh data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Server Components render on the server and add no component JS to the client bundle.",
+        "Believing they are build-time only confuses them with static rendering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does calling `useState` in a Server Component cause an error?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Server Components need the hook wrapped inside an async function"
+        },
+        {
+          "id": "b",
+          "label": "Server Components only allow state when a database is attached"
+        },
+        {
+          "id": "c",
+          "label": "Server Components cannot import anything from React at all"
+        },
+        {
+          "id": "d",
+          "label": "Server Components render once on the server and have no client-side state or interactivity"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "State needs a live client-side component; add `\"use client\"` to use it.",
+        "Other options invent restrictions unrelated to rendering location."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does static rendering of a route mean in Next.js?",
+      "options": [
+        {
+          "id": "a",
+          "label": "HTML is generated on every request using the visitor's cookies"
+        },
+        {
+          "id": "b",
+          "label": "The page has no JavaScript and cannot be interactive"
+        },
+        {
+          "id": "c",
+          "label": "The page is never updated after it is deployed to the server"
+        },
+        {
+          "id": "d",
+          "label": "HTML is generated ahead of time at build and reused for many requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Static rendering produces HTML once, ahead of requests, and serves it repeatedly.",
+        "Per-request rendering describes dynamic rendering instead."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main benefit of using the `Link` component from `next/link` instead of a plain `<a>` tag for internal pages?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It forces every page change to be fetched from the server again"
+        },
+        {
+          "id": "b",
+          "label": "It converts the page into a Client Component for the whole app"
+        },
+        {
+          "id": "c",
+          "label": "It navigates on the client without a full page reload and can prefetch routes"
+        },
+        {
+          "id": "d",
+          "label": "It lets you link to external sites without any security attributes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`Link` enables client-side transitions and prefetching.",
+        "A full reload is what plain anchors cause, not what `Link` does."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A file exists at `app/shop/[slug]/page.js`. A visitor opens `/shop/shoes`. What value does the `slug` param have?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`undefined`"
+        },
+        {
+          "id": "b",
+          "label": "`\"shop\"`"
+        },
+        {
+          "id": "c",
+          "label": "`\"[slug]\"`"
+        },
+        {
+          "id": "d",
+          "label": "`\"shoes\"`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The dynamic segment captures the matching URL part, here `shoes`.",
+        "`\"[slug]\"` mistakes the folder name for the value."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about Server Components are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "They are re-created in the browser on each click"
+        },
+        {
+          "id": "b",
+          "label": "They can use `useEffect` to run code after render"
+        },
+        {
+          "id": "c",
+          "label": "They can safely read server-only secrets such as API keys"
+        },
+        {
+          "id": "d",
+          "label": "They can be `async` and `await` data directly"
+        },
+        {
+          "id": "e",
+          "label": "They can attach `onClick` handlers to elements"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Server Components can await data and keep secrets on the server.",
+        "Event handlers and effects need Client Components."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A developer adds a like button with `onClick` and `useState` directly inside `app/post/page.js`, which has no directive. Next.js reports an error. The rest of the page only displays text fetched on the server. What is the best way to fix it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add `\"use client\"` to the whole page so that all its data fetching moves into the browser"
+        },
+        {
+          "id": "b",
+          "label": "Rename the page file to `page.client.js` so Next.js treats it as interactive"
+        },
+        {
+          "id": "c",
+          "label": "Move the button into its own file marked `\"use client\"` and import it into the page"
+        },
+        {
+          "id": "d",
+          "label": "Replace `useState` with a normal variable so the page stays server-rendered"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Only the interactive piece needs to be a Client Component; the page can stay on the server.",
+        "Marking the whole page as client works poorly and loses server benefits; a plain variable does not re-render."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In the Next.js App Router, which file makes the URL `/about` reachable?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`app/about.js` exporting a React component"
+        },
+        {
+          "id": "b",
+          "label": "`app/about/page.js` exporting a React component"
+        },
+        {
+          "id": "c",
+          "label": "`app/about/layout.js` exporting a React component"
+        },
+        {
+          "id": "d",
+          "label": "`app/about/index.js` exporting a React component"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A folder becomes a public route only when it contains a `page.js` file.",
+        "`index.js` and bare files come from the old Pages Router; `layout.js` only wraps pages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In the App Router, what kind of component is a component in the `app` directory by default, unless you opt out?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A Web Worker that runs off the main thread"
+        },
+        {
+          "id": "b",
+          "label": "A Server Component that renders on the server"
+        },
+        {
+          "id": "c",
+          "label": "A static HTML snippet with no React behaviour"
+        },
+        {
+          "id": "d",
+          "label": "A Client Component that hydrates in the browser"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "App Router components are Server Components by default.",
+        "Learners from plain React often assume everything is a Client Component."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does placing `'use client'` at the top of a file do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It lets the file be used as an API route handler"
+        },
+        {
+          "id": "b",
+          "label": "It makes the component fetch its data only in the browser"
+        },
+        {
+          "id": "c",
+          "label": "It disables server rendering for the whole application"
+        },
+        {
+          "id": "d",
+          "label": "It marks the boundary where code and its imports go to the client bundle"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`'use client'` sets a server/client boundary; the file and its imports are included in the client bundle.",
+        "It does not turn off SSR app-wide, and it does not control data fetching."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A user moves between two pages that share the same `layout.js`. What happens to that layout?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is rendered once more on the server for every click"
+        },
+        {
+          "id": "b",
+          "label": "It unmounts and remounts on every navigation"
+        },
+        {
+          "id": "c",
+          "label": "It stays mounted and keeps its state while only the page content changes"
+        },
+        {
+          "id": "d",
+          "label": "It is rebuilt, and its state is reset on each page change"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Layouts persist across navigations between their child routes and do not re-render or lose state.",
+        "Distractors treat layouts like ordinary components in a page that is replaced."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why use `next/link`'s `Link` instead of a plain `<a>` for internal navigation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Link` is required for any URL to be indexed by search engines"
+        },
+        {
+          "id": "b",
+          "label": "`Link` navigates on the client without a full reload and can prefetch routes"
+        },
+        {
+          "id": "c",
+          "label": "`Link` forces the target page to render on the client only"
+        },
+        {
+          "id": "d",
+          "label": "`Link` makes the browser cache every page forever offline"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`Link` enables client-side transitions and route prefetching.",
+        "Other options confuse it with SEO, caching or rendering mode."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which are benefits of rendering a component as a Server Component? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Its heavy dependencies stay out of the client JavaScript bundle"
+        },
+        {
+          "id": "b",
+          "label": "It can attach `onClick` handlers to its elements"
+        },
+        {
+          "id": "c",
+          "label": "It can query a database or read secrets directly on the server"
+        },
+        {
+          "id": "d",
+          "label": "It can hold state with `useState` and update on user input"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Server Components keep dependencies off the client and can reach backend resources directly.",
+        "State and event handlers need a Client Component."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A developer writes a server component page that calls `cookies()` from `next/headers` to show the logged-in user's name. They ask how Next.js will render this route. What is the best explanation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It fails to build because server components cannot read request information"
+        },
+        {
+          "id": "b",
+          "label": "It is rendered only in the browser because cookies live on the client"
+        },
+        {
+          "id": "c",
+          "label": "It is rendered once at build time and the same HTML is sent to everyone"
+        },
+        {
+          "id": "d",
+          "label": "It is rendered dynamically at request time because it depends on request data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Using request-time APIs such as `cookies()` makes the route dynamic, rendered per request.",
+        "Build-time rendering would give every user the same output, which a distractor wrongly assumes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You need pages like `/blog/hello-world` and `/blog/second-post` served by one component, with the last part available as `slug`. Which file path does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`app/blog/[slug]/page.js`"
+        },
+        {
+          "id": "b",
+          "label": "`app/blog/:slug/page.js`"
+        },
+        {
+          "id": "c",
+          "label": "`app/blog/slug/page.js`"
+        },
+        {
+          "id": "d",
+          "label": "`app/blog/{slug}/page.js`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Square brackets define a dynamic segment in the App Router.",
+        "Colon and brace syntax come from other frameworks; a plain folder matches only the literal URL."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A component in `app/` uses `useState` and an `onClick` handler, and the build errors out. What is the fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rename the file to `component.client.js` so it runs in the browser"
+        },
+        {
+          "id": "b",
+          "label": "Add `export const dynamic = 'force-client'` to the page"
+        },
+        {
+          "id": "c",
+          "label": "Add `'use client'` as the first line of the file"
+        },
+        {
+          "id": "d",
+          "label": "Wrap the component in `Suspense` so hooks are allowed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Hooks and event handlers require a Client Component, declared with `'use client'` at the top.",
+        "The other options are invented or unrelated settings."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You want `GET /api/hello` to return JSON in the App Router. What do you create?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`app/api/hello/route.js` that default-exports a React component"
+        },
+        {
+          "id": "b",
+          "label": "`app/api/hello/route.js` that exports an async `GET` function"
+        },
+        {
+          "id": "c",
+          "label": "`app/api/hello.js` that exports an async `GET` function"
+        },
+        {
+          "id": "d",
+          "label": "`app/api/hello/page.js` that exports an async `GET` function"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Route Handlers live in `route.js` and export functions named after HTTP methods.",
+        "`page.js` renders UI, and a component default export does not handle requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A slow server-rendered page in `app/reports/` should show a spinner while its data loads. What do you add?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A `loading.js` file next to `page.js`"
+        },
+        {
+          "id": "b",
+          "label": "A `spinner.js` file next to `page.js`"
+        },
+        {
+          "id": "c",
+          "label": "A `suspense.js` file next to `page.js`"
+        },
+        {
+          "id": "d",
+          "label": "A `pending.js` file next to `page.js`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`loading.js` is the special file that gives an instant loading state via Suspense.",
+        "The other names have no special meaning in Next.js."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In an App Router page, how do you load data from an API before rendering?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Seed `useState` with a `fetch` call inside the component"
+        },
+        {
+          "id": "b",
+          "label": "Call `fetch` in `useEffect` inside the server component"
+        },
+        {
+          "id": "c",
+          "label": "Export `getServerSideProps` from `page.js` and read props"
+        },
+        {
+          "id": "d",
+          "label": "Make the component `async` and `await fetch(url)` in its body"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Server Components can be async and await data directly.",
+        "`getServerSideProps` belongs to the Pages Router; hooks do not run in Server Components."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "With this structure, which files create a URL route? `app/shop/page.js`, `app/shop/button.js`, `app/shop/cart/page.js`, `app/shop/layout.js`. Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`app/shop/page.js`"
+        },
+        {
+          "id": "b",
+          "label": "`app/shop/cart/page.js`"
+        },
+        {
+          "id": "c",
+          "label": "`app/shop/layout.js`"
+        },
+        {
+          "id": "d",
+          "label": "`app/shop/button.js`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Only folders containing `page.js` become routes: `/shop` and `/shop/cart`.",
+        "Layouts and ordinary component files are not routes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A product page is a server component that fetches product data from a database. You must add a Like button with a click counter held in `useState`. You want to keep database access on the server. Where do you put `'use client'`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "At the top of a separate `LikeButton` file that the page imports"
+        },
+        {
+          "id": "b",
+          "label": "At the top of the page file, so the button can use state"
+        },
+        {
+          "id": "c",
+          "label": "At the top of the database helper module the page calls"
+        },
+        {
+          "id": "d",
+          "label": "Nowhere, because server components may call `useState` directly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Put the client boundary on the small interactive component and import it into the server page.",
+        "Marking the whole page makes it a Client Component and ends direct database access."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In the App Router, which file serves the URL `/blog/hello-world`, where the last segment is a dynamic slug?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`app/blog/slug/page.tsx`"
+        },
+        {
+          "id": "b",
+          "label": "`app/blog/[slug]/page.tsx`"
+        },
+        {
+          "id": "c",
+          "label": "`app/blog/(slug)/page.tsx`"
+        },
+        {
+          "id": "d",
+          "label": "`app/blog/[slug].tsx`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Square brackets around a folder name create a dynamic segment, and page.tsx makes it routable.",
+        "Parentheses make a route group that is omitted from the URL; a bare folder name matches only the literal text."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A component in the `app` directory uses `useState` and an `onClick` handler, and the build fails because hooks are unavailable. What fixes it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap the component in a `Suspense` boundary"
+        },
+        {
+          "id": "b",
+          "label": "Add `\"use server\"` as the first line of the file"
+        },
+        {
+          "id": "c",
+          "label": "Export `const dynamic = 'force-dynamic'` from the file"
+        },
+        {
+          "id": "d",
+          "label": "Add `\"use client\"` as the first line of the file"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Hooks and event handlers need a Client Component, which `\"use client\"` declares.",
+        "\"use server\" marks Server Actions, not client code; dynamic and Suspense do not change the component type."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You need a JSON endpoint answering `GET /api/health` in the App Router. Which setup works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`app/api/health/route.ts` with a default export function"
+        },
+        {
+          "id": "b",
+          "label": "`app/api/health.ts` with a default export handler"
+        },
+        {
+          "id": "c",
+          "label": "`app/api/health/page.ts` with a default export function"
+        },
+        {
+          "id": "d",
+          "label": "`app/api/health/route.ts` exporting a function named `GET`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Route handlers live in route.ts and export functions named after HTTP methods.",
+        "Default-export handlers belong to the Pages Router API style and page.ts renders UI."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Server Component fetches `https://api.example.com/news`. You want the cached result reused but refreshed at most once per minute. Which call does that?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`fetch(url, { revalidate: 60000 })`"
+        },
+        {
+          "id": "b",
+          "label": "`fetch(url, { next: { revalidate: 60 } })`"
+        },
+        {
+          "id": "c",
+          "label": "`fetch(url, { next: { tags: 60 } })`"
+        },
+        {
+          "id": "d",
+          "label": "`fetch(url, { cache: 'no-store' })`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`next.revalidate` takes seconds and enables time-based revalidation.",
+        "no-store disables caching, and the other options use wrong keys or units."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "All pages under `/dashboard` must share a sidebar that stays mounted while navigating between them. Where do you put it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "In each `page.tsx`, importing a shared Sidebar component"
+        },
+        {
+          "id": "b",
+          "label": "In `app/dashboard/layout.tsx`, rendering `{children}` beside it"
+        },
+        {
+          "id": "c",
+          "label": "In `app/layout.tsx`, rendered conditionally by pathname"
+        },
+        {
+          "id": "d",
+          "label": "In `app/dashboard/template.tsx` only on the home page"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Nested layouts persist across navigation between child routes and wrap their children.",
+        "Importing into each page remounts it, and the root layout is the wrong scope."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which of these can you do directly in a Server Component in the App Router, with no extra directive? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Make the component `async` and `await` a database query"
+        },
+        {
+          "id": "b",
+          "label": "Call `useEffect` to load data after render"
+        },
+        {
+          "id": "c",
+          "label": "Attach an `onClick` handler to a button"
+        },
+        {
+          "id": "d",
+          "label": "Read a secret such as `process.env.DB_PASSWORD`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Server Components can be async and run only on the server, so secrets stay private.",
+        "Effects and event handlers need client-side JavaScript, which requires a Client Component."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You build `app/products/[id]/page.tsx`. You have a list of 200 product ids at build time and want those pages generated statically during `next build`. Which addition does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Export `generateStaticParams` returning `[{ id: '1' }, ...]`"
+        },
+        {
+          "id": "b",
+          "label": "Export `const revalidate = 0` so every id is prebuilt"
+        },
+        {
+          "id": "c",
+          "label": "Export `generateMetadata` returning each id as a title"
+        },
+        {
+          "id": "d",
+          "label": "Export `getServerSideProps` returning the product list"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "generateStaticParams supplies the dynamic param values to prerender at build time.",
+        "getServerSideProps is Pages Router and renders per request; the others do not enumerate params."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A page was expected to be statically rendered, but `next build` marks it dynamic. The only unusual code is `const token = (await cookies()).get('t')` in a Server Component. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cookies are read per request, so using them opts the route into dynamic rendering"
+        },
+        {
+          "id": "b",
+          "label": "Reading cookies forces the component to become a Client Component"
+        },
+        {
+          "id": "c",
+          "label": "Cookie access is only allowed after `revalidate` is set to 0"
+        },
+        {
+          "id": "d",
+          "label": "Server Components that are async can never be prerendered at build time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Request-time APIs like cookies() need the actual request, so the route cannot be fully static.",
+        "Async components can be static, and cookies() does not turn a component into a client one."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A Server Component passes `onSave={() => save()}` to a Client Component and Next.js throws an error about functions not being passable. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Props crossing the server-client boundary must be serializable, and plain functions are not"
+        },
+        {
+          "id": "b",
+          "label": "The Client Component is missing an `export default` statement"
+        },
+        {
+          "id": "c",
+          "label": "Client Components cannot declare props that are callbacks"
+        },
+        {
+          "id": "d",
+          "label": "Arrow functions must be wrapped in `useCallback` before passing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Props are serialized into the RSC payload, and plain functions cannot be serialized (Server Actions are the exception).",
+        "useCallback and exports are unrelated, and Client Components can take callbacks from other Client Components."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A Client Component renders `new Date().toLocaleTimeString()` and the console shows a hydration mismatch warning. Which diagnosis fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The server and browser render different times, so the HTML differs from the first client render"
+        },
+        {
+          "id": "b",
+          "label": "Hydration only fails when `useState` is used inside the component"
+        },
+        {
+          "id": "c",
+          "label": "The component should have been a Server Component to hydrate"
+        },
+        {
+          "id": "d",
+          "label": "Next.js caches the time and refuses to update it on the client"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Client Components are pre-rendered on the server too, so a time-dependent value differs between server HTML and first client render.",
+        "Hydration mismatches do not depend on useState, and caching is not the cause."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A Server Action inserts a row, and the DB confirms it, but the list page still shows old data until a hard rebuild. The page fetches the list in a Server Component. What is the likely missing piece?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The list should be fetched in `useEffect` rather than on the server"
+        },
+        {
+          "id": "b",
+          "label": "The row must be inserted before the page component is imported"
+        },
+        {
+          "id": "c",
+          "label": "The action needs to be declared inside a Client Component"
+        },
+        {
+          "id": "d",
+          "label": "The action never invalidates cached data, such as with `revalidatePath('/list')`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Cached server-rendered output stays stale until invalidated with revalidatePath or revalidateTag.",
+        "Moving the fetch or the action location does not invalidate the cache."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A `middleware.ts` file with a valid matcher never runs on any request. It is located at `app/middleware.ts`. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Middleware must be at the project root or `src`, beside `app`, not inside it"
+        },
+        {
+          "id": "b",
+          "label": "The matcher must be an array of RegExp objects, not strings"
+        },
+        {
+          "id": "c",
+          "label": "Middleware only runs for routes that export `GET` handlers"
+        },
+        {
+          "id": "d",
+          "label": "Middleware is disabled until `use client` is added at the top"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Next.js only detects middleware at the project root (or src) level, not within app.",
+        "Matchers accept path strings, and middleware is not tied to route handlers or client directives."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A Server Component page awaits `getUser()`, then `getPosts()`, then `getStats()`. They are independent, and `getStats()` is slow, so the page feels slow. Which changes would reduce time to useful content? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Start the independent calls together with `Promise.all`"
+        },
+        {
+          "id": "b",
+          "label": "Move the stats section into its own component under `Suspense` so it streams in"
+        },
+        {
+          "id": "c",
+          "label": "Move all three calls into `useEffect` on the client"
+        },
+        {
+          "id": "d",
+          "label": "Add `\"use client\"` to the page so the fetches run sooner"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Parallelising independent fetches removes the waterfall, and Suspense streams the slow part later.",
+        "Client-side effects add a round trip after hydration and \"use client\" does not speed fetches."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A Client Component named `Chart` imports `helpers.ts`, which imports `db.ts`, a module that creates a database client using `process.env.DB_URL`. The build now fails, or the secret risks reaching the browser. What is the best diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Everything imported under a `\"use client\"` file joins the client bundle, so `db.ts` must be used only on the server"
+        },
+        {
+          "id": "b",
+          "label": "The database client must be created inside `useEffect` to be safe"
+        },
+        {
+          "id": "c",
+          "label": "`process.env` is unreadable in any file named `helpers.ts`"
+        },
+        {
+          "id": "d",
+          "label": "Chart should be turned into an async component to fix imports"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The client boundary pulls all transitive imports into the browser bundle, so server-only code must stay in Server Components and pass data down.",
+        "Async Client Components and useEffect do not remove the import, and filenames do not matter."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A client component renders `{new Date().toLocaleTimeString()}` inside a page that Next.js pre-renders on the server. The console reports a hydration mismatch. What is the most precise cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The component is missing a key prop, so React cannot pair the server nodes with the nodes it builds on the client"
+        },
+        {
+          "id": "b",
+          "label": "Client components are never rendered on the server, so React has no server HTML to match the browser output against at all"
+        },
+        {
+          "id": "c",
+          "label": "The server and the browser evaluate the expression at different moments and locales, so the first client render differs from the server HTML"
+        },
+        {
+          "id": "d",
+          "label": "Date objects cannot be serialized, so the server fails to send any markup for this component during pre-rendering"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Hydration compares server HTML with the first client render; a time value computed twice differs.",
+        "Distractors wrongly claim client components skip server rendering or blame serialization or keys."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A server component imports `<Counter />` from a third-party package whose source calls `useState` and has no directive. The build fails. Which diagnosis and fix is most appropriate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The server component must be declared `async`, because only async server components may import stateful child components"
+        },
+        {
+          "id": "b",
+          "label": "The package file runs as a server module where hooks are unavailable, so wrap it in your own file marked `\"use client\"`"
+        },
+        {
+          "id": "c",
+          "label": "Hooks are not allowed anywhere in Next.js, so the package must be patched to keep its counter in a global variable instead"
+        },
+        {
+          "id": "d",
+          "label": "The package must move to devDependencies, because the bundler then skips it during server rendering and loads it later"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Without a directive, imported modules join the server graph, where state hooks fail; a client wrapper file sets the boundary.",
+        "Distractors misread async components, dependency types, or claim hooks are banned."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A team calls `cookies()` in the root layout to read a theme preference. Pages under it were static before, and now none are prebuilt. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Layouts are always rendered dynamically in Next.js, regardless of which functions they call or whether they read the request"
+        },
+        {
+          "id": "b",
+          "label": "Using `cookies()` makes only the layout dynamic, while the pages beneath it stay prebuilt and are served from the cache"
+        },
+        {
+          "id": "c",
+          "label": "The build skips prerendering whenever any file in the app folder imports `next/headers`, even if the import is unused"
+        },
+        {
+          "id": "d",
+          "label": "Reading `cookies()` in the layout makes the output depend on the request, so every route beneath it renders dynamically"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Request-time APIs in a shared layout make every route that uses that layout dynamic.",
+        "Distractors assume layouts are always dynamic or that the effect stops at the layout."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A server component renders `<Form onSubmit={handleSubmit} />`, where `Form` is a client component and `handleSubmit` is a plain function defined in the server file. Next.js throws an error. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Props crossing the server-to-client boundary must be serializable, and a plain function cannot be sent in the payload"
+        },
+        {
+          "id": "b",
+          "label": "`handleSubmit` must be written as an arrow function, because function declarations are not hoisted in the client bundle"
+        },
+        {
+          "id": "c",
+          "label": "Event handler props are reserved names that only work on built-in DOM elements, never on custom client components"
+        },
+        {
+          "id": "d",
+          "label": "Client components cannot receive any props from server components, only from other client components higher in the tree"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Props from server to client are serialized into the RSC payload; ordinary functions are not serializable.",
+        "Distractors invent restrictions on props, handler names, or hoisting."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A client `ThemeProvider` wraps `{children}` in the root layout, and those children include server components that query a database. Why can they still run only on the server?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Context providers automatically convert every descendant into a server component when the provider mounts in the browser"
+        },
+        {
+          "id": "b",
+          "label": "They are rendered on the server and passed in as the children prop, so the client module never imports them"
+        },
+        {
+          "id": "c",
+          "label": "Any component that touches a database is silently skipped by the client bundler, wherever it sits in the component tree"
+        },
+        {
+          "id": "d",
+          "label": "The `\"use client\"` directive only affects the default export of its own file, never the elements nested inside it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Server components passed as children are already rendered; the client module does not import them, so they stay out of the client graph.",
+        "Distractors invent automatic conversion or bundler skipping rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Assuming no other route configuration, which of these cause a route to be rendered at request time instead of being prebuilt? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reading the `searchParams` prop in the page component"
+        },
+        {
+          "id": "b",
+          "label": "Calling `fetch` with the option `cache: 'no-store'`"
+        },
+        {
+          "id": "c",
+          "label": "Exporting `generateStaticParams` from a dynamic segment"
+        },
+        {
+          "id": "d",
+          "label": "Importing a static JSON file at the top of the page"
+        },
+        {
+          "id": "e",
+          "label": "Calling `cookies()` in the page component"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Request-bound inputs (cookies, search params) and uncached fetches make rendering dynamic.",
+        "generateStaticParams and static imports support prebuilding, so they do not force dynamic rendering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A server action inserts a row into the database and then calls `redirect('/posts')`. The `/posts` page is a server component that queries the database during render and uses no request-time functions. After the redirect, the list still lacks the new row until the next deploy. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`redirect` always serves the previous response from the browser's back-forward cache, regardless of server settings"
+        },
+        {
+          "id": "b",
+          "label": "The posts page must be a client component to show rows inserted after the build has completed on the server"
+        },
+        {
+          "id": "c",
+          "label": "The `/posts` output was prerendered and cached, and the action never revalidated that path or its cache tag"
+        },
+        {
+          "id": "d",
+          "label": "Server actions run only in the browser, so the database write is not committed before the redirect is triggered"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A statically cached page keeps old output until revalidated, for example with `revalidatePath` or `revalidateTag` in the action.",
+        "Distractors misplace where actions run or blame browser caching and component type."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A shop has 200,000 product pages. Prices change a few times a day, pages must be served from a CDN with fast TTFB, builds must stay short, and prices may be at most 1 hour stale. Which strategy best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Prebuild all 200,000 pages at build time and trigger a full redeploy every hour to refresh the prices shown"
+        },
+        {
+          "id": "b",
+          "label": "Ship an empty shell and make each page fetch its price in the browser after load, skipping server rendering"
+        },
+        {
+          "id": "c",
+          "label": "Render every page on each request with no caching, so that every visitor always sees the exact current price"
+        },
+        {
+          "id": "d",
+          "label": "Prebuild only popular pages, render the rest on first request, and set time-based revalidation of 3600 seconds"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Partial prebuilding plus on-demand generation with hourly revalidation meets build time, CDN, and staleness limits.",
+        "Distractors break the build-time limit, CDN/TTFB goals, or the server-rendered content need."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A public article page needs content in the initial HTML for SEO, must call a CMS using a secret API key, and should ship as little JavaScript as possible. Which data-fetching approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Fetch in a client component with a `NEXT_PUBLIC_` key, so the same code can run on both the server and browser"
+        },
+        {
+          "id": "b",
+          "label": "Fetch inside a client component's `useEffect` through a public env variable, so the browser loads content after hydration"
+        },
+        {
+          "id": "c",
+          "label": "Fetch in the browser through a loading spinner, and let crawlers wait until the client finishes rendering the data"
+        },
+        {
+          "id": "d",
+          "label": "Fetch in a server component, so the key stays on the server and the content is already in the initial HTML"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Server components keep secrets off the client, put content in HTML, and add no fetch code to the bundle.",
+        "Distractors expose the key, delay content, or rely on crawlers executing client code."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An article page renders a large markdown body and a single like button with local state. The goal is the smallest client JavaScript with no loss of functionality. Which structure is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Move the like button into its own `\"use client\"` file and keep the page and markdown rendering as server components"
+        },
+        {
+          "id": "b",
+          "label": "Mark every component in the tree `\"use client\"`, so that the boundary is consistent and nothing runs on the server"
+        },
+        {
+          "id": "c",
+          "label": "Wrap the markdown renderer in a client component, so it can share state with the like button through context"
+        },
+        {
+          "id": "d",
+          "label": "Mark the whole page `\"use client\"`, because a page containing any interactive element must be one client component"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Pushing the boundary to the interactive leaf keeps the heavy markdown code out of the client bundle.",
+        "Distractors widen the boundary, adding client JavaScript without benefit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A dashboard shows private user records. Criteria: records must stay protected even if a developer later adds a new route or the middleware matcher misses a path. Which approach is most robust?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Hide dashboard links from logged-out users and verify the session in a client `useEffect` after the page has loaded"
+        },
+        {
+          "id": "b",
+          "label": "Rely on a middleware matcher for `/dashboard/:path*`, since middleware runs before every page and covers all dashboard paths"
+        },
+        {
+          "id": "c",
+          "label": "Verify the session inside the data-access function that reads the records, in addition to any middleware redirect"
+        },
+        {
+          "id": "d",
+          "label": "Check the session once in the root layout, because layouts re-render on every navigation and so repeat the check"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Authorization next to the data survives new routes and matcher gaps; middleware is an optimistic first layer.",
+        "Distractors rely on a single path-based check, assume layouts re-render on navigation, or check only on the client."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A page does `const user = await getUser(); const posts = await getPosts(); const stats = await getStats();`. The calls are independent and take about 300 ms each. Criteria: lower latency, same output, and any failure still surfaces as an error. Which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Move each call into a `useEffect` of a client component, so the browser runs the three calls at the same time"
+        },
+        {
+          "id": "b",
+          "label": "Add `cache: 'force-cache'` to each call, so that the three awaits resolve with no network time on any request"
+        },
+        {
+          "id": "c",
+          "label": "Wrap the calls in `Promise.race`, so the page renders as soon as the first of the three calls completes"
+        },
+        {
+          "id": "d",
+          "label": "Start all three requests and await them together with `Promise.all`, so latency approaches the slowest single call"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Independent requests started together and awaited with Promise.all remove the waterfall and still reject on failure.",
+        "Distractors move work to the client, drop data with race, or misuse caching on a first request."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Which are sound reasons to implement an endpoint as a route handler rather than a server action? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A form on your own page mutates data and then refreshes the UI"
+        },
+        {
+          "id": "b",
+          "label": "The endpoint must return a generated CSV file in response to a GET request"
+        },
+        {
+          "id": "c",
+          "label": "A mobile app must call the endpoint and receive JSON responses"
+        },
+        {
+          "id": "d",
+          "label": "A payment provider must POST webhooks to a stable public URL"
+        },
+        {
+          "id": "e",
+          "label": "You want progressive enhancement for a form on your own page"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Route handlers expose stable HTTP endpoints for external clients and non-HTML responses.",
+        "Mutations from your own forms and progressive enhancement are what server actions are designed for."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A dashboard page has a fast header and a personalized recommendations widget that takes about 2 seconds. Product wants the header visible immediately, header text indexable, and no extra client fetching code. Which approach best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Make the page fully static so the 2 second query runs once at build time and serves every visitor the same widget"
+        },
+        {
+          "id": "b",
+          "label": "Wrap the recommendations server component in `Suspense` with a skeleton fallback, so the shell streams first"
+        },
+        {
+          "id": "c",
+          "label": "Convert the whole page to a client component and fetch recommendations in an effect after hydration finishes"
+        },
+        {
+          "id": "d",
+          "label": "Await the recommendations in the page component before returning, so the whole page appears complete in a single render"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Suspense streaming sends the shell immediately and fills in the slow server component later without client fetch code.",
+        "Distractors block the header, add client fetching, or make personalized content static."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A product page gets heavy traffic. Prices change a few times a day through a CMS, and an edit must show within seconds. Which caching strategy best meets freshness and CDN-serving cost criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Statically render with tagged fetches and call `revalidateTag` from a CMS webhook on each edit"
+        },
+        {
+          "id": "b",
+          "label": "Render a static shell and fetch the price in `useEffect` so the CDN copy never goes stale"
+        },
+        {
+          "id": "c",
+          "label": "Set `revalidate = 60` on the page so every edit appears after the next timed window passes"
+        },
+        {
+          "id": "d",
+          "label": "Use `dynamic = 'force-dynamic'` so every request reads the CMS and the price is always current"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "On-demand revalidation keeps CDN-served static output and updates within seconds of an edit.",
+        "Time-based revalidation can leave edits stale up to the window; force-dynamic gives up caching and raises cost."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team protects an admin area only with middleware that redirects unauthenticated users. Judged against the criterion of resisting bypass through Server Actions and Route Handlers, which critique and fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Middleware is fine as an optimistic redirect, but authorization must also be verified in the data access layer next to each query or mutation"
+        },
+        {
+          "id": "b",
+          "label": "Middleware should run the full permission query for every request, which makes the per-action checks redundant"
+        },
+        {
+          "id": "c",
+          "label": "Middleware should be deleted and replaced with checks inside each page component only"
+        },
+        {
+          "id": "d",
+          "label": "Middleware is enough, because it runs before every request and a redirect blocks all access paths"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Authorization belongs where data is accessed, since matchers can miss routes and actions are callable as POST endpoints.",
+        "Page-only checks leave actions and handlers open; heavy checks in middleware are fragile and still miss paths."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A marketing page has one like button needing `useState`. A developer proposes adding `'use client'` at the top of the page file. Judged by client JavaScript shipped and keeping server data access, which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Extract the button into its own small Client Component and leave the page as a Server Component"
+        },
+        {
+          "id": "b",
+          "label": "Mark the whole page client-side, because one boundary is simpler to reason about than several"
+        },
+        {
+          "id": "c",
+          "label": "Mark only the root layout as client-side so every child inherits the same interactivity settings"
+        },
+        {
+          "id": "d",
+          "label": "Keep the page on the server and call `useState` there, since hooks work in any component"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Pushing the client boundary to a small leaf limits bundle size and keeps the rest server-rendered.",
+        "Marking pages or layouts as client pulls their whole import subtree into the bundle; hooks are unavailable in Server Components."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A dashboard shell loads in 50 ms, but one analytics widget needs a 3 s query. Judged by perceived performance with the least added complexity, which is the best option?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cache the widget's query result for a day so the slow query rarely blocks the page"
+        },
+        {
+          "id": "b",
+          "label": "Await the widget data in the page, since a single complete response avoids layout shifts"
+        },
+        {
+          "id": "c",
+          "label": "Wrap the widget in `<Suspense>` with a fallback so the shell streams immediately and the widget follows"
+        },
+        {
+          "id": "d",
+          "label": "Move the widget's query to a client `useEffect` so the server response stays small and quick"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Suspense streaming sends the fast shell first and fills in the slow part when ready.",
+        "Awaiting everything blocks on the slowest query; client fetching adds a waterfall; a day-long cache sacrifices freshness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A mutation that creates orders will be called by the web app and by a native mobile app. Judged by reuse across clients and a stable contract, which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use a Route Handler only for mobile, and keep a separate duplicate Server Action for web logic"
+        },
+        {
+          "id": "b",
+          "label": "Expose a Route Handler with a documented request and response contract, and call it from both clients"
+        },
+        {
+          "id": "c",
+          "label": "Use a Server Action, because its generated endpoint URL is a stable public API"
+        },
+        {
+          "id": "d",
+          "label": "Use a Server Action, because the mobile app can import and invoke it directly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Route Handlers are ordinary HTTP endpoints that any client can call with a stable contract.",
+        "Server Actions use framework-internal identifiers and are not a public API; duplicating logic invites drift."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A Server Component loads a full user row (email, address, role, billing token reference) and passes it as one prop to a Client Component that only displays the name. Which critiques are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The whole object is serialized into the payload sent to the browser, exposing fields the UI never uses"
+        },
+        {
+          "id": "b",
+          "label": "Pass only the needed field or a small DTO, which reduces both leakage risk and payload size"
+        },
+        {
+          "id": "c",
+          "label": "The Client Component will re-run the database query on every re-render"
+        },
+        {
+          "id": "d",
+          "label": "Props to Client Components can only be strings, so the object will throw at build time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Props crossing the boundary are serialized to the client, so extra fields leak and add weight.",
+        "Client Components do not query the database, and plain objects are serializable props."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A site reads `cookies()` in the root layout to show a greeting. The team notices that all marketing pages are now rendered per request and CDN hit rates dropped. Judged by keeping marketing pages static while retaining the greeting, which fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep the cookie read in the root layout and add `revalidate = 3600` to each marketing page"
+        },
+        {
+          "id": "b",
+          "label": "Replace `cookies()` with `localStorage` read in the root layout Server Component"
+        },
+        {
+          "id": "c",
+          "label": "Move the greeting into a small component inside `<Suspense>`, or into a separate route group layout, so only that part is dynamic"
+        },
+        {
+          "id": "d",
+          "label": "Set `dynamic = 'force-static'` on the root layout and keep reading `cookies()` there as before"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Request-time APIs make everything above them dynamic; isolating them keeps other routes static.",
+        "A revalidate time does not override dynamic APIs, localStorage is unavailable on the server, and forcing static would break the cookie read."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A blog has an index page and `/blog/[slug]` pages, all statically rendered from a CMS. Constraint: a publish or edit must refresh the affected post page and the index within seconds, without a full rebuild. Which design meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Tag fetches with `posts` and `post-<id>`, and have a CMS webhook Route Handler call `revalidateTag` for both"
+        },
+        {
+          "id": "b",
+          "label": "Set `revalidate = 5` on every page and let timed regeneration cover edits"
+        },
+        {
+          "id": "c",
+          "label": "Use `force-dynamic` on the index and static rendering on posts, with a redeploy after each edit"
+        },
+        {
+          "id": "d",
+          "label": "Call `revalidatePath('/blog')` in the webhook only, since the index links to every post"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Tags let one webhook invalidate both the specific post and the list on demand.",
+        "Timed revalidation is wasteful and imprecise; revalidating only the index leaves post pages stale."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design an A/B test for a landing page. Constraints: no layout shift, no client-side flicker, and both variants must be served as cached static output. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use `Math.random()` inside the Server Component so each static build picks a variant"
+        },
+        {
+          "id": "b",
+          "label": "Middleware assigns a bucket cookie and rewrites to a pre-rendered variant path, such as `/landing/a` or `/landing/b`"
+        },
+        {
+          "id": "c",
+          "label": "Read `cookies()` in the page and render the variant dynamically for every request"
+        },
+        {
+          "id": "d",
+          "label": "Choose the variant in a Client Component with `useEffect` and swap the content after hydration"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A middleware rewrite routes to separately pre-rendered static variants with no flicker.",
+        "Client swapping flickers, per-request rendering loses static caching, and random at build time gives everyone one variant."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a multi-tenant app where each customer uses `acme.example.com`-style subdomains. Constraints: one codebase, tenant pages organised under one route tree, and no per-tenant deployment. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Middleware reads the host and rewrites to `/[tenant]/...`, with tenant data loaded from the dynamic segment param"
+        },
+        {
+          "id": "b",
+          "label": "Use a Client Component that reads `window.location.host` and then fetches tenant data"
+        },
+        {
+          "id": "c",
+          "label": "Create one folder per tenant under `app/` and redeploy whenever a customer signs up"
+        },
+        {
+          "id": "d",
+          "label": "Add a `[tenant]` catch-all in `next.config.js` redirects, sending users to a shared dashboard"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A host-based rewrite to a dynamic segment gives one route tree and no per-tenant deploys.",
+        "Per-tenant folders need redeploys, client-side host reads lose server rendering, and redirects expose the wrong URL shape."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a comment form. Constraints: it must submit and show validation errors even if JavaScript has not loaded, and it should show the new comment instantly when JavaScript is available. Which design meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A Client Component form calling `fetch` in an `onSubmit` handler that always uses `preventDefault`"
+        },
+        {
+          "id": "b",
+          "label": "A Server Action bound to the form's `action`, with `useActionState` for errors and `useOptimistic` for the instant item"
+        },
+        {
+          "id": "c",
+          "label": "A Route Handler called from `useEffect` after the user finishes typing the comment"
+        },
+        {
+          "id": "d",
+          "label": "A Server Action called only from an `onClick` handler on a plain button outside any form"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Form actions work as native form posts without JS, and the hooks add enhancement when JS runs.",
+        "Handlers that depend on JS events fail before hydration."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A theme and auth context provider needs `useContext` state, but the root layout must stay a Server Component and keep rendering server-fetched children. Which design meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Create a `Providers` Client Component that accepts `children`, and render it from the server layout around the page"
+        },
+        {
+          "id": "b",
+          "label": "Add `'use client'` to the root layout and import all server components inside it directly"
+        },
+        {
+          "id": "c",
+          "label": "Move the context into a module-level variable that Server Components mutate per request"
+        },
+        {
+          "id": "d",
+          "label": "Wrap each page in its own copy of the context and read `useContext` in Server Components"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Passing server-rendered children into a client provider keeps them as Server Components.",
+        "Making the layout client-side or importing servers into clients changes their boundary; Server Components cannot use context, and module state leaks across requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A proposal wraps a per-user dashboard query in `unstable_cache` with the fixed key `['dashboard']` and a 1 hour lifetime. Constraint: users must never see each other's data. Which changes fix the design? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Read `cookies()` inside the cached function so the cache detects each user automatically"
+        },
+        {
+          "id": "b",
+          "label": "Skip caching for this personalized query, or cache only shared non-personal parts"
+        },
+        {
+          "id": "c",
+          "label": "Increase the lifetime to 24 hours so entries are rebuilt less often"
+        },
+        {
+          "id": "d",
+          "label": "Include the user id in the cache key parts, so each user gets a separate entry"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A shared key serves one user's data to all; keying per user or not caching fixes it.",
+        "A longer lifetime worsens leakage, and request APIs inside cached functions are not allowed and do not vary the key."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A team's CMS webhook Route Handler calls only `revalidatePath('/blog')` after a post is edited. The index updates, but `/blog/my-post` still shows old content for hours. The page uses `generateStaticParams` and fetches without tags. Which change completes the design?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Remove `generateStaticParams` so posts are never prerendered and always reflect the CMS"
+        },
+        {
+          "id": "b",
+          "label": "Tag the post fetches and call `revalidateTag` for the post, or call `revalidatePath` for the specific slug path"
+        },
+        {
+          "id": "c",
+          "label": "Convert `/blog` to a Client Component so it refetches linked posts when the index updates"
+        },
+        {
+          "id": "d",
+          "label": "Raise the webhook's response timeout so the revalidation has time to cascade to child routes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Revalidating a path does not cover other dynamic pages; a tag or the exact slug path is needed.",
+        "Timeouts do not cascade invalidation, and the other options change rendering rather than invalidate the cache."
+      ],
+      "reviewed": false
+    }
+  ]
+}

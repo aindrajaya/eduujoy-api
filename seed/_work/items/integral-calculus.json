@@ -776,6 +776,262 @@
           "Distractors target preferring simplicity (left sum, trapezoid) or overfitting a high-degree polynomial, which can oscillate."
         ]
       }
+    ],
+    "expert": [
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A student evaluates the integral of 1/x^2 from -1 to 1 with the FTC: [-1/x] from -1 to 1 = (-1) - (1) = -2, and reports -2. Which critique is best?",
+        "options": [
+          "The antiderivative should be ln|x|, and symmetry about 0 then gives an answer of 0",
+          "The answer is right: -1/x is a valid antiderivative, and the negative sign reflects area below the axis",
+          "The integrand blows up at 0 inside the interval, so the FTC does not apply and the integral diverges",
+          "The integrand is even, so the value is twice the integral over [0,1], which equals exactly 2"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "1/x^2 is positive and unbounded at 0, so the FTC cannot be applied across 0 and the integral diverges to +infinity.",
+          "Distractors target trusting a formal antiderivative blindly or misusing symmetry; a positive integrand can never give -2."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "You must integrate a smooth, analytic, 2π-periodic function over one full period from equally spaced samples, using as few evaluations as possible for high accuracy. Which rule is the best choice?",
+        "options": [
+          "Simpson's rule, because its fourth-order error term in h beats that of any lower-order rule on smooth data",
+          "Gauss-Legendre with 3 nodes, because Gauss rules are exact for every smooth integrand on an interval",
+          "The trapezoid rule, because the endpoint error terms cancel for periodic analytic integrands and the error falls exponentially in n",
+          "Monte Carlo sampling, because its error is independent of smoothness and so beats grid rules in this case"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "By Euler-Maclaurin, the endpoint correction terms vanish for periodic functions, so the trapezoid rule converges faster than any power of 1/n.",
+          "Distractors rely on generic order-of-accuracy arguments, false exactness claims, or Monte Carlo's slow 1/sqrt(n) convergence."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A reviewer argues: 'The integral of |sin x|/x from 1 to infinity diverges, so the integral of sin x / x from 1 to infinity diverges too.' Which judgement is correct?",
+        "options": [
+          "Valid: if the absolute-value integral diverges, the signed integral must diverge, as with series tests",
+          "Invalid: |sin x|/x converges, since |sin x| ≤ 1 and 1/x is integrable on [1, infinity)",
+          "Valid: sin x / x is non-negative on most of the range, so both integrals behave alike and diverge together",
+          "Invalid: integration by parts shows sin x / x converges, so it is conditionally convergent while the absolute integral diverges"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Integrating by parts gives cos x / x terms that converge, so sin x / x converges, while |sin x|/x is bounded below by a multiple of 1/x on average and diverges.",
+          "Distractors assume absolute divergence implies divergence, or that 1/x is integrable at infinity."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A student computes the integral of sqrt(sin^2 x) from 0 to 2π by simplifying to the integral of sin x and reports 0. Which critique is best?",
+        "options": [
+          "Correct: sqrt(sin^2 x) = sin x, and sin x integrates to 0 over a full period",
+          "Flawed: sqrt(sin^2 x) = |sin x|, which is non-negative, so the integral is 4 rather than 0",
+          "Flawed: the root should be taken after integrating, so the answer is sqrt of the integral of sin^2 x, which is sqrt(π)",
+          "Flawed: sqrt(sin^2 x) = |sin x|, but only the positive half-period counts, so the integral is 2"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "sqrt(u^2) = |u|, so the integrand is |sin x|; each of the two lobes has area 2, giving 4.",
+          "Distractors keep the sign slip, swap the order of root and integral, or drop one lobe."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A student states: 'The antiderivative of 1/x is ln|x| + C, with one constant C, so all antiderivatives of 1/x on its domain differ by one constant.' Which judgement is best?",
+        "options": [
+          "Correct: any two antiderivatives have the same derivative everywhere, so they differ by one constant",
+          "Incorrect: for x < 0 the antiderivative is ln x, since ln|x| is not differentiable on negative values",
+          "Incorrect: it should be ln|x| only, with the constant fixed by continuity at x = 0",
+          "Incomplete: the domain is two separate intervals, so the constant can differ on each: ln|x| + C1 for x < 0 and ln|x| + C2 for x > 0"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Two antiderivatives differ by a constant only on a connected interval; the domain of 1/x is split at 0, so each piece gets its own constant.",
+          "Distractors misuse the same-derivative argument, mistake the log domain, or invoke continuity at a point outside the domain."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "multi_choice",
+        "prompt": "Which of these judgments about integrals over the symmetric interval [-a, a] are sound? Select all that apply.",
+        "options": [
+          "For continuous odd f, the integral of f over [-a, a] is 0 by symmetry.",
+          "For f(x) = 1/x on [-1, 1], oddness gives the integral 0, so it converges to 0.",
+          "For continuous even f, the integral over [-a, a] equals twice the integral over [0, a].",
+          "For continuous odd f, the integral of |f| over [-a, a] is also 0."
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "rubric": [
+          "Odd and even symmetry results hold for continuous (integrable) functions.",
+          "1/x is not integrable at 0, so only the principal value is 0; |f| of an odd function is even and non-negative, so its integral is positive unless f = 0."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "scenario",
+        "prompt": "A battery logger records power (W) at irregular times 0, 1, 3, 4, 8 and 9 seconds. An analyst must estimate the total energy from 0 to 9 s using only these samples. A colleague proposes Simpson's rule because it is higher order. Which judgement is best?",
+        "options": [
+          "Use Simpson's rule with h = 1.5 s, the average spacing, because a higher-order rule always gives the better estimate",
+          "Use the left Riemann sum with the mean power, because irregular spacing cancels out in the average",
+          "Fit one degree-5 polynomial through all samples and integrate it, because it is exact for any measured data",
+          "Use the trapezoid rule on each actual gap, because standard Simpson weights assume equal spacing within each pair of panels"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "The trapezoid rule works panel by panel with the true gap widths, while standard Simpson weights require equal spacing.",
+          "Distractors apply a rule with a false uniform-spacing assumption, ignore weighting by time, or trust high-degree interpolation that oscillates."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "You need I(a) = the integral from 0 to 1 of (x^a - 1)/ln x dx for a > -1, an integrand with no elementary antiderivative in x. Which construction evaluates it?",
+        "options": [
+          "Substitute t = x^a, so the logarithm cancels and the integral collapses to a/(a+1)",
+          "Expand ln x in a Taylor series about 0 and integrate term by term, giving a convergent series in a",
+          "Differentiate with respect to a to get I'(a) = integral of x^a dx = 1/(a+1), and use I(0) = 0 to obtain I(a) = ln(1+a)",
+          "Integrate by parts with u = 1/ln x, which removes the logarithm and leaves only an elementary integral of x^a"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Differentiating under the integral sign turns the log-denominator into an elementary power integral; I(0) = 0 fixes the constant, giving ln(1+a).",
+          "Distractors use a substitution that does not cancel the log, a Taylor series that does not exist at 0, or a by-parts step that does not remove the log."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "You must prove that the integral of e^(-x^2) from 1 to infinity converges, with a self-contained bounding argument. Which argument is valid?",
+        "options": [
+          "Since e^(-x^2) ≤ 1/x for x ≥ 1 and 1/x grows slowly, the integral of e^(-x^2) must be finite",
+          "Since x^2 ≥ x for x ≥ 1, e^(-x^2) ≥ e^(-x), so the finite integral of e^(-x) bounds it",
+          "Since x^2 ≥ x for x ≥ 1, e^(-x^2) ≤ e^(-x), and the integral of e^(-x) from 1 to infinity is 1/e",
+          "Find an elementary antiderivative of e^(-x^2) by parts, then take its limit as x goes to infinity"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Comparison with the integrable e^(-x) from above proves convergence of the non-negative integrand.",
+          "Distractors compare to a divergent integral, reverse the inequality, or assume an elementary antiderivative exists."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "Build a continuous f ≥ 0 on [0, infinity) that is unbounded but has a convergent improper integral, using non-overlapping triangular spikes centred at x = n (n = 2, 3, ...). Which design works?",
+        "options": [
+          "Height n and base width 1/n^2, since spike areas shrink to 0 and so the total must be finite",
+          "Height n and base width 1/n, since the narrowing bases make the total area finite",
+          "Height n^2 and base width 1/n^2, since a bounded area per spike keeps the total finite",
+          "Height n and base width 1/n^3, since the spike areas 1/(2n^2) form a convergent series"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Areas 1/(2n^2) sum to a finite value while heights grow without bound.",
+          "Distractors give areas 1/(2n), 1/2 or 1/2 each, whose sums diverge; areas tending to 0 is not enough for a finite sum."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "To compute I_n = the integral of sin^n x dx for all n ≥ 2 by reduction, you integrate by parts with u = sin^(n-1) x, dv = sin x dx, and replace cos^2 x by 1 - sin^2 x. Which recurrence results?",
+        "options": [
+          "I_n = (1/n) sin^(n-1) x cos x + ((n-1)/n) I_(n-2)",
+          "I_n = -(1/n) sin^(n-1) x cos x + ((n-1)/n) I_(n-2)",
+          "I_n = -(1/n) sin^(n-1) x cos x + (1/n) I_(n-2)",
+          "I_n = -sin^(n-1) x cos x + (n-1) I_(n-2)"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "By parts gives I_n = -sin^(n-1)x cos x + (n-1)(I_(n-2) - I_n), so n I_n = -sin^(n-1)x cos x + (n-1) I_(n-2).",
+          "Distractors flip the sign, drop the factor n-1, or forget to divide by n."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "To evaluate the limit as n goes to infinity of the sum for k = 1 to n of k/(n^2 + k^2), you rewrite it as a Riemann sum. Which integral does it converge to?",
+        "options": [
+          "The integral from 0 to 1 of 1/(1+x^2) dx",
+          "The integral from 0 to 1 of x/(1+x) dx",
+          "The integral from 0 to 1 of x^2/(1+x^2) dx",
+          "The integral from 0 to 1 of x/(1+x^2) dx"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "k/(n^2+k^2) = (1/n)·(k/n)/(1+(k/n)^2), which is a Riemann sum for x/(1+x^2) on [0,1].",
+          "Distractors lose the factor k/n or change the denominator."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "multi_choice",
+        "prompt": "You must integrate cos(x)/sqrt(x) over [0, 1] with a quadrature rule that needs a bounded integrand on [0, 1]. Which transformations give an equivalent integral meeting that requirement? Select all that apply.",
+        "options": [
+          "Substitute x = t^2, giving the integral from 0 to 1 of 2 cos(t^2) dt.",
+          "Integrate by parts with u = cos x, dv = x^(-1/2) dx, leaving 2 cos 1 plus 2 times the integral of sqrt(x) sin x.",
+          "Define the integrand as 1 at x = 0 and apply Simpson's rule to the unchanged integrand.",
+          "Multiply and divide by x to write it as the integral of x cos x / x^(3/2), which is bounded."
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Both the substitution and the by-parts step yield exact, bounded integrands on [0,1].",
+          "Patching a single point or rewriting algebraically leaves the 1/sqrt(x) blow-up in place."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "scenario",
+        "prompt": "A horizontal cylindrical tank has radius r and length L. Measuring y upward from the central axis, the liquid surface is at y = h - r (0 ≤ h ≤ 2r). You must write the liquid volume as one integral over slices with correct limits. Which expression is correct?",
+        "options": [
+          "V = L · (integral from y = 0 to y = h of 2 sqrt(r^2 - y^2) dy)",
+          "V = L · (integral from y = -r to y = h - r of sqrt(r^2 - y^2) dy)",
+          "V = π · (integral from y = -r to y = h - r of (r^2 - y^2) dy)",
+          "V = L · (integral from y = -r to y = h - r of 2 sqrt(r^2 - y^2) dy)"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Each horizontal strip at height y has width 2 sqrt(r^2 - y^2) and runs along length L, from the tank bottom y = -r up to the surface y = h - r.",
+          "Distractors use limits measured from the bottom while y is from the axis, drop the factor 2 for width, or use a disk-of-revolution formula."
+        ]
+      }
     ]
   }
 }

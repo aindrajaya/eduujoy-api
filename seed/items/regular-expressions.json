@@ -1,0 +1,2491 @@
+{
+  "version": 1,
+  "topic": "regular-expressions",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which metacharacter matches any single character (other than a newline by default)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`*`"
+        },
+        {
+          "id": "b",
+          "label": "`?`"
+        },
+        {
+          "id": "c",
+          "label": "`^`"
+        },
+        {
+          "id": "d",
+          "label": "`.`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`.` is the wildcard for one character.",
+        "`*` is a quantifier, not a wildcard, and `^` is an anchor."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which anchor matches the start of a string (or line in multiline mode)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`^`"
+        },
+        {
+          "id": "b",
+          "label": "`\\d`"
+        },
+        {
+          "id": "c",
+          "label": "`\\b`"
+        },
+        {
+          "id": "d",
+          "label": "`$`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`^` anchors to the start.",
+        "`$` anchors to the end, a common mix-up."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the quantifier `+` mean after an item in a pattern?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Zero or one of the item"
+        },
+        {
+          "id": "b",
+          "label": "Zero or more of the item"
+        },
+        {
+          "id": "c",
+          "label": "One or more of the item"
+        },
+        {
+          "id": "d",
+          "label": "Exactly one of the item"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`+` requires at least one occurrence.",
+        "`*` allows zero and `?` means optional."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In most regex flavours, what does the shorthand `\\d` match?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A single digit"
+        },
+        {
+          "id": "b",
+          "label": "A word boundary"
+        },
+        {
+          "id": "c",
+          "label": "A whitespace character"
+        },
+        {
+          "id": "d",
+          "label": "A single letter"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`\\d` is the digit class, equal to `[0-9]`.",
+        "`\\s` is whitespace and `\\b` is a boundary."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which syntax creates a capturing group?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`(abc)`"
+        },
+        {
+          "id": "b",
+          "label": "`[abc]`"
+        },
+        {
+          "id": "c",
+          "label": "`{abc}`"
+        },
+        {
+          "id": "d",
+          "label": "`<abc>`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Parentheses create capturing groups.",
+        "Square brackets make a character class and braces are quantifiers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are quantifiers in regular expressions? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`?`"
+        },
+        {
+          "id": "b",
+          "label": "`*`"
+        },
+        {
+          "id": "c",
+          "label": "`^`"
+        },
+        {
+          "id": "d",
+          "label": "`\\w`"
+        },
+        {
+          "id": "e",
+          "label": "`{2,4}`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "`*`, `?` and `{n,m}` control repetition.",
+        "`^` is an anchor and `\\w` is a character class."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A developer searches a log file for the exact text `3.14` and wants the dot to match only a literal period, not any character. Which pattern does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`3.14`"
+        },
+        {
+          "id": "b",
+          "label": "`3%.14`"
+        },
+        {
+          "id": "c",
+          "label": "`3/.14`"
+        },
+        {
+          "id": "d",
+          "label": "`3\\.14`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A backslash escapes the dot so it is literal.",
+        "An unescaped `.` matches any character, e.g. `3x14`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which string does the pattern `^cat$` match in full?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`cat food`"
+        },
+        {
+          "id": "b",
+          "label": "`cat`"
+        },
+        {
+          "id": "c",
+          "label": "`the cat`"
+        },
+        {
+          "id": "d",
+          "label": "`concat`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Both anchors force the whole string to be exactly `cat`.",
+        "Other options contain `cat` but not as the entire string."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which pair of strings are both matched by `colou?r`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`color` and `colour`"
+        },
+        {
+          "id": "b",
+          "label": "`colouur` and `color`"
+        },
+        {
+          "id": "c",
+          "label": "`colouur` and `colr`"
+        },
+        {
+          "id": "d",
+          "label": "`colr` and `colour`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`u?` makes the `u` optional, so zero or one `u` is allowed.",
+        "`colr` lacks the `o` and `colouur` has two `u`s."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does the pattern `[abc]` differ from the pattern `abc`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`[abc]` matches a, b, c in sequence, while `abc` matches any one of those letters"
+        },
+        {
+          "id": "b",
+          "label": "`[abc]` and `abc` match exactly the same text because order does not matter"
+        },
+        {
+          "id": "c",
+          "label": "`[abc]` matches only the first letter, while `abc` matches all three in any order"
+        },
+        {
+          "id": "d",
+          "label": "`[abc]` matches one character that is a, b or c, while `abc` needs a, b, c in sequence"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A character class matches one character from a set.",
+        "Plain `abc` is a literal sequence; the distractors confuse order and sets."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "The pattern `<.+>` is applied to the text `<b>bold</b>`. What does it match by default (greedy)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`<b>`"
+        },
+        {
+          "id": "b",
+          "label": "`<b>bold`"
+        },
+        {
+          "id": "c",
+          "label": "`<b>bold</b>`"
+        },
+        {
+          "id": "d",
+          "label": "`bold`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Greedy `.+` expands as far as possible, ending at the last `>`.",
+        "`<b>` would be the result of a lazy `.+?`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How many matches does `\\bcat\\b` find in the text `cat concat cats`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1"
+        },
+        {
+          "id": "b",
+          "label": "0"
+        },
+        {
+          "id": "c",
+          "label": "2"
+        },
+        {
+          "id": "d",
+          "label": "3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Only the standalone `cat` has word boundaries on both sides.",
+        "`concat` and `cats` have no boundary on one side."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which strings are matched in full by `^\\d{3}-\\d{4}$`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`555-12345`"
+        },
+        {
+          "id": "b",
+          "label": "`555-1234`"
+        },
+        {
+          "id": "c",
+          "label": "`123-4567`"
+        },
+        {
+          "id": "d",
+          "label": "`5551234`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "The pattern needs exactly three digits, a hyphen, then exactly four digits.",
+        "`5551234` lacks the hyphen and `555-12345` has too many digits."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A user applies find-and-replace with regex in an editor. The pattern is `(\\w+) (\\w+)` and the replacement is `$2 $1`, where `$1` and `$2` refer to the first and second groups. The input text is `Ada Lovelace`. What is the result?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Lovelace Lovelace`"
+        },
+        {
+          "id": "b",
+          "label": "`Ada Lovelace`"
+        },
+        {
+          "id": "c",
+          "label": "`Lovelace Ada`"
+        },
+        {
+          "id": "d",
+          "label": "`$2 $1`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Group 1 captures `Ada`, group 2 captures `Lovelace`, and the replacement swaps them.",
+        "Distractors ignore the group references or repeat one group."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the pattern `\\d{3}` match?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The letter d followed by the number 3"
+        },
+        {
+          "id": "b",
+          "label": "Exactly three digit characters in a row"
+        },
+        {
+          "id": "c",
+          "label": "Three or more non-digit characters"
+        },
+        {
+          "id": "d",
+          "label": "The digit 3 repeated any number of times"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`\\d` is a digit and `{3}` means exactly three repetitions.",
+        "Distractors treat `\\d` as a literal d or confuse `{3}` with the digit 3."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the anchor `$` do in the pattern `cat$`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It matches cat only when it is at the end"
+        },
+        {
+          "id": "b",
+          "label": "It matches cat followed by a dollar sign"
+        },
+        {
+          "id": "c",
+          "label": "It matches cat followed by any ending text"
+        },
+        {
+          "id": "d",
+          "label": "It matches cat only at the start of the text"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`$` anchors the match to the end of the text.",
+        "Distractors treat `$` as a literal dollar sign or confuse it with `^`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Given the text `<b>one</b><b>two</b>`, the pattern `<b>.*</b>` returns the whole text as one match. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Regex always returns the longest text in the input"
+        },
+        {
+          "id": "b",
+          "label": "`.*` is greedy: it takes as much as possible, then backs off to the last `</b>`"
+        },
+        {
+          "id": "c",
+          "label": "The `<b>` tag acts as an anchor to the whole string"
+        },
+        {
+          "id": "d",
+          "label": "`.*` matches a single character, so the group repeats"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Greedy quantifiers expand as far as possible and backtrack only as needed.",
+        "Distractors misread `.*` or invent anchoring behavior; `.*?` would give the shorter match."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the character class `[^abc]` match?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Any string that does not contain abc"
+        },
+        {
+          "id": "b",
+          "label": "Any single character except a, b or c"
+        },
+        {
+          "id": "c",
+          "label": "The literal text ^abc"
+        },
+        {
+          "id": "d",
+          "label": "The start of a string followed by a, b or c"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`^` right after `[` negates the class and it matches one character.",
+        "Distractors treat `^` as literal or an anchor, or assume it matches whole strings."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does `(?:ab)+` differ from `(ab)+`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Both repeat ab, but the first does not store the match as a capture group"
+        },
+        {
+          "id": "b",
+          "label": "The first makes ab optional, while the second requires it"
+        },
+        {
+          "id": "c",
+          "label": "The first matches a and b in any order, the second in order"
+        },
+        {
+          "id": "d",
+          "label": "The first matches ab once, while the second repeats it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`(?:...)` is a non-capturing group; repetition behaves the same.",
+        "Distractors invent differences in repetition, optionality or ordering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which strings contain a match for the pattern `colou?r`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "colour"
+        },
+        {
+          "id": "b",
+          "label": "color"
+        },
+        {
+          "id": "c",
+          "label": "colouur"
+        },
+        {
+          "id": "d",
+          "label": "colr"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "`u?` allows zero or one u, so color and colour match.",
+        "colouur has two u's and colr lacks the o, so neither matches."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A developer wants to find the file name `a.c` in a list. Their pattern `a.c` also matches `abc` and `a-c`, which surprises them. Which explanation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The dot needs a quantifier such as `+` to act as a wildcard"
+        },
+        {
+          "id": "b",
+          "label": "The pattern is case-insensitive by default, so extra names match"
+        },
+        {
+          "id": "c",
+          "label": "The dot matches only letters, so `abc` is expected to match"
+        },
+        {
+          "id": "d",
+          "label": "The dot is a wildcard matching any one character; escape it as `\\.` to match a literal dot"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An unescaped `.` matches any single character; `\\.` matches a literal dot.",
+        "Distractors invent case rules or misunderstand what the dot matches."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which pattern matches a string that is exactly a five-digit ZIP code and nothing else?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`^\\d+5$`"
+        },
+        {
+          "id": "b",
+          "label": "`\\d{5}`"
+        },
+        {
+          "id": "c",
+          "label": "`^\\d{5}$`"
+        },
+        {
+          "id": "d",
+          "label": "`^\\d{5}`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Both anchors force the entire string to be five digits.",
+        "Unanchored or one-anchor patterns still match longer strings such as 123456."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "The pattern `(\\w+)@(\\w+)\\.com` is applied to `bob@site.com`. What text does group 2 capture?",
+      "options": [
+        {
+          "id": "a",
+          "label": "site"
+        },
+        {
+          "id": "b",
+          "label": "site.com"
+        },
+        {
+          "id": "c",
+          "label": "bob@site"
+        },
+        {
+          "id": "d",
+          "label": "bob"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Group 2 is the second parenthesised part, the word after @ and before .com.",
+        "Other options mix up group numbering or include text outside the group."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "The pattern `(\\d{4})-(\\d{2})-(\\d{2})` is replaced with `$3/$2/$1` in the text `2024-05-17`. What is the result?",
+      "options": [
+        {
+          "id": "a",
+          "label": "17/05/2024"
+        },
+        {
+          "id": "b",
+          "label": "2024/05/17"
+        },
+        {
+          "id": "c",
+          "label": "05/17/2024"
+        },
+        {
+          "id": "d",
+          "label": "17-05-2024"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Groups 3, 2, 1 are day, month, year, joined by slashes.",
+        "Other options keep the original order or mis-order the groups."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which pattern matches exactly the words `gray` and `grey`, and nothing else?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`gr[a-e]y`"
+        },
+        {
+          "id": "b",
+          "label": "`gra|ey`"
+        },
+        {
+          "id": "c",
+          "label": "`gr[ae]y`"
+        },
+        {
+          "id": "d",
+          "label": "`gr(ae)y`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The class `[ae]` allows one of a or e in that position.",
+        "`[a-e]` also allows b, c, d; `(ae)` requires both letters; `gra|ey` is an alternation of fragments."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "How many matches does `\\b\\w{4}\\b` find in `this is a test of word sizes`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3"
+        },
+        {
+          "id": "b",
+          "label": "2"
+        },
+        {
+          "id": "c",
+          "label": "4"
+        },
+        {
+          "id": "d",
+          "label": "5"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The four-letter words are this, test and word; sizes has five letters.",
+        "Wrong counts come from ignoring word boundaries or miscounting letters."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which patterns match the entire string `A12` when tested against the full string? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`^\\w{3}$`"
+        },
+        {
+          "id": "b",
+          "label": "`^[A-Z]\\d{2}$`"
+        },
+        {
+          "id": "c",
+          "label": "`^[A-Z]\\d+$`"
+        },
+        {
+          "id": "d",
+          "label": "`^\\d+[A-Z]$`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Each of the first three accepts a letter followed by two digits across exactly the whole string.",
+        "The last pattern requires digits before the letter, so it fails."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You are searching a log for lines that begin with `ERROR`, then one space, then a full date such as `2024-05-17`, as in `ERROR 2024-05-17 disk full`. You want to avoid lines like `NO ERROR 2024-05-17`. Which pattern should you use?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`ERROR \\d{4}-\\d{2}-\\d{2}`"
+        },
+        {
+          "id": "b",
+          "label": "`^ERROR \\d{4}\\d{2}\\d{2}`"
+        },
+        {
+          "id": "c",
+          "label": "`^ERROR \\d{4}-\\d{2}-\\d{2}`"
+        },
+        {
+          "id": "d",
+          "label": "`^ERROR\\d{4}-\\d{2}-\\d{2}`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The `^` anchor, the space and the hyphenated date together fit the required lines.",
+        "Dropping the anchor lets mid-line matches through; other options omit the space or the hyphens."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A find-and-replace uses pattern `(\\d+)-(\\d+)` with replacement `$2:$1` on the text `a 3-14 b 7-8`. What is the result?",
+      "options": [
+        {
+          "id": "a",
+          "label": "a 14:3 b 8:7"
+        },
+        {
+          "id": "b",
+          "label": "a 3:14 b 7:8"
+        },
+        {
+          "id": "c",
+          "label": "a 8:7 b 14:3"
+        },
+        {
+          "id": "d",
+          "label": "a 14:3 b 7-8"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Each match swaps its two captured numbers, and the global replace applies to both pairs.",
+        "Distractors keep the original order, replace only the first pair, or mix up the pairs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Pattern `^(\\d{4})-(\\d{2})-\\d{2}\\s+(\\w+)` is run on the line `2024-05-17 ERROR disk full`. What does group 3 capture?",
+      "options": [
+        {
+          "id": "a",
+          "label": "05"
+        },
+        {
+          "id": "b",
+          "label": "disk"
+        },
+        {
+          "id": "c",
+          "label": "ERROR"
+        },
+        {
+          "id": "d",
+          "label": "2024"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Only the three parenthesised parts are groups, and the third is the word after the whitespace.",
+        "Distractors pick other groups or a later word, from miscounting the groups."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "The pattern `<.+?>` is applied globally to the text `<p><b>hi</b></p>`. How many matches does it find?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1"
+        },
+        {
+          "id": "b",
+          "label": "4"
+        },
+        {
+          "id": "c",
+          "label": "2"
+        },
+        {
+          "id": "d",
+          "label": "3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The lazy quantifier stops at the first `>`, giving `<p>`, `<b>`, `</b>`, `</p>`.",
+        "Answering 1 assumes greedy matching from the first `<` to the last `>`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In a language where `find` searches anywhere in the text, which pattern accepts `555-1234` but rejects both `555-12345` and `x555-1234`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`\\d{3}-\\d{4}$`"
+        },
+        {
+          "id": "b",
+          "label": "`\\d{3}-\\d{4}`"
+        },
+        {
+          "id": "c",
+          "label": "`^\\d{3}-\\d{4}`"
+        },
+        {
+          "id": "d",
+          "label": "`^\\d{3}-\\d{4}$`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Both anchors are needed to force the whole string to be the number.",
+        "Each distractor has only one anchor, so one of the bad inputs still matches."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Text: `15 USD, 20 EUR, 30 USD`. Which pattern matches exactly `15` and `30`, with the currency code not included in the matched text?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`\\d+(?= USD)`"
+        },
+        {
+          "id": "b",
+          "label": "`\\d+(?! USD)`"
+        },
+        {
+          "id": "c",
+          "label": "`\\d+ USD`"
+        },
+        {
+          "id": "d",
+          "label": "`(?<=USD )\\d+`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A positive lookahead checks for ` USD` after the digits without consuming it.",
+        "Distractors include the code, look behind the wrong side, or negate the condition."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which strings does the pattern `^[A-Z]{2}\\d{2,3}$` match in full? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A123"
+        },
+        {
+          "id": "b",
+          "label": "AB1234"
+        },
+        {
+          "id": "c",
+          "label": "XY999"
+        },
+        {
+          "id": "d",
+          "label": "ab123"
+        },
+        {
+          "id": "e",
+          "label": "AB12"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "The pattern needs exactly two uppercase letters followed by two or three digits.",
+        "Distractors have too many digits, lowercase letters, or only one letter."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You export a contact list where each line looks like `Lovelace, Ada`. In your editor's regex find-and-replace, groups are referenced as `$1` and `$2`. You want every line to become `Ada Lovelace`. Which find and replace pair does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Find `(\\w+) (\\w+)` and replace with `$2 $1`"
+        },
+        {
+          "id": "b",
+          "label": "Find `(\\w+), (\\w+)` and replace with `$1 $2`"
+        },
+        {
+          "id": "c",
+          "label": "Find `(\\w+), (\\w+)` and replace with `$2 $1`"
+        },
+        {
+          "id": "d",
+          "label": "Find `(\\w+),(\\w+)` and replace with `$2 $1`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The pattern must match the comma and space, and the replacement must swap the groups.",
+        "Distractors keep the order, omit the space after the comma, or never match because of the comma."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A developer validates emails by searching with `[a-z]+@[a-z]+\\.com`. On `jo.smith@mail.com` it reports a match, but the matched text is only `smith@mail.com`. What causes this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `@` is a special character, so it splits the pattern into two separate searches"
+        },
+        {
+          "id": "b",
+          "label": "The escaped `\\.` matches any character, so it swallows the dot in the local part"
+        },
+        {
+          "id": "c",
+          "label": "The `+` quantifiers are lazy, so the engine stops at the first position that satisfies the pattern"
+        },
+        {
+          "id": "d",
+          "label": "The class `[a-z]` has no dot, so a match can only begin after the dot in the local part"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The dot is not in the class, so the match starts after it because the search is unanchored.",
+        "Distractors blame laziness, `@` or the escaped dot, none of which affects the start."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "The pattern `(a+)+$` takes seconds on the input `aaaaaaaaaaaaaaaaaaaaaaaa!` but is instant on `aaaaaaaaaaaaaaaaaaaaaaaa`. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `!` is missing from the pattern, so the engine raises an error and retries slowly"
+        },
+        {
+          "id": "b",
+          "label": "The `$` anchor makes the engine rescan the whole string from every earlier starting position"
+        },
+        {
+          "id": "c",
+          "label": "Nested quantifiers let the engine split the a's in exponentially many ways before it fails"
+        },
+        {
+          "id": "d",
+          "label": "The `+` quantifiers are greedy, and greedy matching always scans the string once per character"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Nested `+` quantifiers give exponentially many ways to partition the a's, and all are tried when the match fails.",
+        "Distractors blame anchors, greediness or a missing character, none of which explains exponential growth."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A search for the standalone word with `\\bcat\\b` does not match the `cat` inside `my_cat`, though it matches in `my cat`. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `\\b` consumes one character, so the underscore is used up before `cat` can match"
+        },
+        {
+          "id": "b",
+          "label": "The `\\b` matches only at the start or end of the whole string, so mid-text fails"
+        },
+        {
+          "id": "c",
+          "label": "Boundaries require whitespace on both sides, and an underscore is not whitespace"
+        },
+        {
+          "id": "d",
+          "label": "The underscore is a word character, so there is no boundary between it and `c`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`\\b` marks a change between word and non-word characters, and `_` counts as a word character.",
+        "Distractors misdescribe `\\b` as whitespace-based, consuming, or limited to string edges."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "The pattern `START.*END` finds nothing in the text `START` then a line break, `middle`, a line break, `END`. It works if all three parts are on one line. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "By default `.` does not match a line break, so `.*` cannot cross lines"
+        },
+        {
+          "id": "b",
+          "label": "The `*` quantifier is limited to a single word, so it stops at the first break"
+        },
+        {
+          "id": "c",
+          "label": "The `.*` is greedy and gives `END` back to the remaining text, so it fails"
+        },
+        {
+          "id": "d",
+          "label": "Anchors are implied, so START must be at a line start and END at its end"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Without a dotall or single-line flag, `.` excludes newline characters.",
+        "Distractors invent word limits, implied anchors, or a greediness failure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Pattern A is `(ab)+c(d)` and pattern B is `(?:ab)+c(d)`. Both are run on `ababcd`. How do they differ?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A fails because a capturing group keeps only the last repetition and the text is rejected"
+        },
+        {
+          "id": "b",
+          "label": "B matches the same text, but its `d` group is empty because non-capturing groups hide later ones"
+        },
+        {
+          "id": "c",
+          "label": "They match the same text, but `d` is group 1 in B and group 2 in A"
+        },
+        {
+          "id": "d",
+          "label": "A matches the whole text, but B matches only `cd` because non-capturing groups cannot repeat"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Both match `ababcd`, but B's non-capturing group takes no number, so `(d)` becomes group 1.",
+        "Distractors claim differences in what is matched, which grouping does not change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A pattern `[A-Z|a-z]+` was meant to match words made of letters. Which statements about it are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is equivalent to `[A-Za-z]+` in every case"
+        },
+        {
+          "id": "b",
+          "label": "It matches a mixed-case run such as `aBc`"
+        },
+        {
+          "id": "c",
+          "label": "It matches only words that are all uppercase or all lowercase"
+        },
+        {
+          "id": "d",
+          "label": "It also matches the pipe character `|` as part of a word"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Inside a class, `|` is a literal and the `+` applies to the whole class, so mixed case is fine.",
+        "Distractors treat `|` as alternation, which it is not inside brackets."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "In Python, a script runs `re.match(r\"ERROR (\\d+)\", line)` on log lines like `2024-05-17 ERROR 500 timeout`. It returns `None` for every line, though each line clearly contains `ERROR 500`. What is the cause and the fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`re.match` only tries at the start of the string, so use `re.search` instead"
+        },
+        {
+          "id": "b",
+          "label": "`\\d+` is greedy and swallows the space, so change it to `\\d+?` to stop sooner"
+        },
+        {
+          "id": "c",
+          "label": "`ERROR` is case-folded by default, so add the `re.I` flag to match uppercase"
+        },
+        {
+          "id": "d",
+          "label": "The parentheses make the group mandatory, so remove them to make digits optional"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`re.match` anchors at position 0, and the lines start with a date, so `re.search` is needed.",
+        "Distractors blame greediness, group syntax or case, none of which causes a failure here."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "On a backtracking engine, which pattern can take exponential time to fail on the input `aaaaaaaaaaaaaaaaaaaaaaaaaaaa!`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`^(a+)+$`"
+        },
+        {
+          "id": "b",
+          "label": "`^[a-z]+!$`"
+        },
+        {
+          "id": "c",
+          "label": "`^(?:ab)+$`"
+        },
+        {
+          "id": "d",
+          "label": "`^a+$`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Nested quantifiers `(a+)+` can split a run of `a` in exponentially many ways before the engine gives up.",
+        "The other patterns have only one way to consume the input, so they fail in linear time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In Python, `re.match(r'^\\d+$', '42\\n')` returns a match even though the string ends in a newline. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`re.match` ignores `^` and `$` anchors, so only a prefix of the string is ever checked"
+        },
+        {
+          "id": "b",
+          "label": "`\\d` also matches newline characters, so `+` consumes the whole input including the last one"
+        },
+        {
+          "id": "c",
+          "label": "`$` also matches just before a final newline, so the trailing `\\n` falls outside the matched text"
+        },
+        {
+          "id": "d",
+          "label": "`+` is greedy and backtracks past `$`, so the end anchor is skipped for the last character"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Without MULTILINE, `$` matches at the end and before a trailing newline, which is why `fullmatch` or `\\Z` is safer for validation.",
+        "Distractors blame `\\d`, `match`, or greedy backtracking, none of which change how `$` is defined."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Both `\"[^\"]*\"` and `\".*?\"` applied to the text `\"a\\\"b\"` (a backslash-escaped quote inside) return `\"a\\\"` instead of the whole literal. What do the two patterns share?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Both are lazy, so they stop at the shortest quoted piece they can find"
+        },
+        {
+          "id": "b",
+          "label": "Both ignore the backslash, so the first quote after `a` closes the match"
+        },
+        {
+          "id": "c",
+          "label": "Both fail on the backslash because `.` and `[^\"]` cannot match that character"
+        },
+        {
+          "id": "d",
+          "label": "Both are greedy, so they run past the escaped quote and then give back too much"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Neither pattern treats `\\\"` as an escape, so the quote after the backslash ends the match.",
+        "Greedy versus lazy is irrelevant here; `[^\"]*` is not lazy and still fails the same way."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In a backtracking engine such as Python's `re`, the pattern `cat|category` finds `cat` in the text `category`, while `category|cat` finds `category`. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Alternatives are tried left to right and the first one that succeeds wins, not the longest one"
+        },
+        {
+          "id": "b",
+          "label": "Alternation picks the shortest alternative unless a longer one is listed first in the pattern"
+        },
+        {
+          "id": "c",
+          "label": "The second pattern compiles differently because it begins with a longer literal prefix"
+        },
+        {
+          "id": "d",
+          "label": "Alternation is greedy by default, so it prefers the longest alternative that fits the text"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Perl-style engines take the first alternative that lets the overall match succeed; order controls the result.",
+        "Distractors assume a longest-match rule, which belongs to POSIX-style engines."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After matching `(\\w)+` against `abc`, group 1 holds `c`. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A repeated group is overwritten on each iteration, so it keeps only the last capture"
+        },
+        {
+          "id": "b",
+          "label": "The engine reports captures in reverse order, so group 1 shows the last character first"
+        },
+        {
+          "id": "c",
+          "label": "Greedy `+` makes the group capture the final character after backtracking from `abc`"
+        },
+        {
+          "id": "d",
+          "label": "Capturing groups reset whenever the outer match is retried, leaving only the last attempt"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Each iteration of a quantified group replaces the stored capture; to keep all characters, put the quantifier inside: `(\\w+)`.",
+        "Distractors invent backtracking or ordering effects; no backtracking happens in this match."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "The pattern `^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+$` is used to validate email addresses. Which inputs does it accept even though they are not valid addresses? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`.a@x.org`"
+        },
+        {
+          "id": "b",
+          "label": "`a@x-.org`"
+        },
+        {
+          "id": "c",
+          "label": "`a@x..org`"
+        },
+        {
+          "id": "d",
+          "label": "`a..b@x.org`"
+        },
+        {
+          "id": "e",
+          "label": "`a@x`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "The local-part class allows consecutive and leading dots, and a domain label may end in a hyphen, so those three pass.",
+        "`a@x` lacks a dot-separated label and `a@x..org` has an empty label, so the pattern already rejects both."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An engineer counts timeout failures in logs with `ERROR.*timeout`. The count is higher than the alerting system's. One counted line is `ERROR job=7 retry ok; config timeout=30`, which is not a timeout failure. What is the cause of the over-count?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Without a global flag the pattern matches only the first `timeout`, which skews the total upward"
+        },
+        {
+          "id": "b",
+          "label": "Greedy `.*` returns the longest match, so each line is counted once per `timeout` it contains"
+        },
+        {
+          "id": "c",
+          "label": "`.*` can bridge unrelated fields, so any later `timeout` on an ERROR line counts, even in config text"
+        },
+        {
+          "id": "d",
+          "label": "`ERROR` matches inside longer words such as `ERRORS`, so unrelated lines are counted as errors"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The pattern only requires both words on one line, so `.*` lets a config value satisfy the match; anchor on the message field instead.",
+        "Greedy matching does not multiply per-line counts, and the sample line contains neither a plural nor a missing flag problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A service lets customers submit their own regexes. The requirement is that worst-case matching time is guaranteed linear in input length, whatever pattern is submitted. Which approach best meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rewrite greedy quantifiers as lazy ones, since lazy matching avoids the exponential paths"
+        },
+        {
+          "id": "b",
+          "label": "Run each match in a thread with a 5-second timeout, since that removes the risk of stalls"
+        },
+        {
+          "id": "c",
+          "label": "Cap input length at 1,000 characters, since short strings cannot backtrack badly enough to stall"
+        },
+        {
+          "id": "d",
+          "label": "Use a linear-time engine such as RE2, accepting the loss of backreferences and lookarounds"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Automaton-based engines give a worst-case guarantee; the cost is dropping features that need backtracking.",
+        "Length caps, lazy quantifiers and timeouts reduce or contain the damage but do not guarantee linear time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "In Python 3, a `str` pattern must accept only the ASCII digits 0 to 9 in an ID field, with no flags set and no reliance on caller settings. Which class best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`\\d`"
+        },
+        {
+          "id": "b",
+          "label": "`[\\d]`"
+        },
+        {
+          "id": "c",
+          "label": "`[^\\D]`"
+        },
+        {
+          "id": "d",
+          "label": "`[0-9]`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`\\d` on Unicode strings also matches other scripts' decimal digits, whereas `[0-9]` is explicit.",
+        "The other options are equivalent to `\\d` and share its Unicode behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must extract every link target from 2,000 HTML files generated by one template, where each link is written exactly as `<a href=\"...\">`. It is a one-off job whose output will be spot-checked. Which approach best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use a targeted regex like `href=\"([^\"]*)\"` and compare counts to a grep, since the format is fixed"
+        },
+        {
+          "id": "b",
+          "label": "Load all files into a browser DOM tool, since parsing fidelity matters more than effort in any one-off job"
+        },
+        {
+          "id": "c",
+          "label": "Use a lookbehind-based regex that tracks nested tags, since that makes extraction fully general for HTML"
+        },
+        {
+          "id": "d",
+          "label": "Build a full HTML parser pipeline first, since regex cannot be trusted on markup even from one template"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "With a controlled template and a one-off job, a narrow regex plus a count check is the cheapest sound choice.",
+        "Regex cannot track nesting, and heavier tooling adds effort the stated criteria do not require."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A signup form enforces a password policy of five rules that product managers change often. Users must be told exactly which rules failed. Which implementation best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use one pattern with an alternation per rule, so the engine reports which alternative matched on failure"
+        },
+        {
+          "id": "b",
+          "label": "Check each rule with its own small pattern, so failures can be named and rules edited one at a time"
+        },
+        {
+          "id": "c",
+          "label": "Write a single negated character class, so every disallowed password is rejected without rule-specific logic"
+        },
+        {
+          "id": "d",
+          "label": "Combine all rules in one lookahead-chained pattern, so a single match call keeps the whole policy together"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Separate checks give per-rule feedback and isolate edits; a regex match returns only pass or fail.",
+        "A lookahead chain is compact but cannot say which lookahead failed; alternation and negated classes do not express these rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A refactor rewrites `foo(a, b)` to `bar(b, a)` across 300 files. Arguments are identifiers or member chains like `x.y`, there are no nested calls, several `foo` calls may share a line, and 3-argument `foo` calls must stay untouched. Which search pattern best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`foo\\((.*), (.*)\\)`"
+        },
+        {
+          "id": "b",
+          "label": "`foo\\((.+?), (.+?)\\)`"
+        },
+        {
+          "id": "c",
+          "label": "`foo\\(([\\w.]+), ([\\w.]+)\\)`"
+        },
+        {
+          "id": "d",
+          "label": "`foo\\((\\w+), (\\w+)\\)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`[\\w.]+` covers member chains and cannot cross commas or parentheses, so 3-argument calls and neighbouring calls are not matched.",
+        "`.*` spans several calls, lazy `.+?` still swallows `b, c` in a 3-argument call, and `\\w+` misses `x.y`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team will maintain a date-parsing pattern for years, and several people will add groups over time. Which are sound reasons to prefer named groups such as `(?P<year>\\d{4})` over numbered ones? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Named groups make lookbehind assertions fixed-width, so the pattern works in more engines"
+        },
+        {
+          "id": "b",
+          "label": "A named group matches faster, because the engine skips bookkeeping that numbered captures require"
+        },
+        {
+          "id": "c",
+          "label": "Replacement strings can use `\\g<year>` rather than a position, so pattern edits don't break them"
+        },
+        {
+          "id": "d",
+          "label": "Code that reads `m.group('year')` documents what each captured piece means without consulting the pattern"
+        },
+        {
+          "id": "e",
+          "label": "Inserting a new group earlier in the pattern does not renumber the references that code already uses"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Names decouple code from group order and make both extraction and replacement self-documenting, which suits long-lived patterns.",
+        "Named groups give no speed benefit and have no effect on lookbehind width rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A payments team must stop card numbers leaking into logs. Missing a real number is far costlier than redacting a harmless long number. Logs show cards as 16 digits, sometimes grouped by spaces or hyphens, and other brands use 13 to 19 digits. Which redaction rule best fits these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Redact only the pattern `\\d{4}-\\d{4}-\\d{4}-\\d{4}`, since it matches the format the logs usually show"
+        },
+        {
+          "id": "b",
+          "label": "Redact any run of 13 to 19 digits allowing single spaces or hyphens between digits, with no further checks"
+        },
+        {
+          "id": "c",
+          "label": "Redact any 16-digit run with optional separators, since 16 digits covers nearly every card brand in use"
+        },
+        {
+          "id": "d",
+          "label": "Redact only runs of digits that pass a Luhn check, so ordinary long numbers are never altered"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A broad pattern favours recall, which the stated costs demand; extra redactions of harmless numbers are acceptable.",
+        "Luhn filtering lets mistyped real numbers leak, and the narrow patterns miss unseparated numbers or non-16-digit brands."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A service runs user-supplied text through a backtracking regex engine with no timeout. Judging worst-case risk on long near-miss input such as 40 `a` characters followed by `!`, which pattern is most dangerous?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`^(a+)+$`"
+        },
+        {
+          "id": "b",
+          "label": "`^[ab]*$`"
+        },
+        {
+          "id": "c",
+          "label": "`^a+b+$`"
+        },
+        {
+          "id": "d",
+          "label": "`^(?:ab)+$`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Nested quantifiers over the same characters let the engine split the run of a's exponentially many ways before failing.",
+        "The other patterns have only one way to consume each character, so they fail in linear or quadratic time at worst."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A signup form should catch obvious typos without rejecting real addresses, and ownership is verified by a confirmation email anyway. Which validation is the best trade-off?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A whitelist of the most common mail domains, because it removes every typo in the domain part"
+        },
+        {
+          "id": "b",
+          "label": "A letters-digits-dots-only local part, because unusual characters are rare in real addresses"
+        },
+        {
+          "id": "c",
+          "label": "A loose check like `^[^@\\s]+@[^@\\s]+$`, leaving real validation to the confirmation email"
+        },
+        {
+          "id": "d",
+          "label": "A strict RFC-style pattern, because any address that fails it is certainly not deliverable anywhere"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A loose shape check avoids false rejects, and the confirmation email is the only true proof of validity.",
+        "Strict or whitelist patterns reject legitimate addresses such as plus-tagged or less common domains."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must extract the text of every `<div>` from untrusted HTML pages where divs can nest to any depth, and the output must be correct for all valid pages. Which approach best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Parse the HTML into a DOM and walk its div nodes, since nesting needs a real tree"
+        },
+        {
+          "id": "b",
+          "label": "Use a negated-class pattern `<div>([^<]*)</div>`, since it avoids backtracking on nested content"
+        },
+        {
+          "id": "c",
+          "label": "Use the lazy pattern `<div>(.*?)</div>` with the dot-matches-newline flag, since lazy stops at the nearest closing tag"
+        },
+        {
+          "id": "d",
+          "label": "Use the greedy pattern `<div>(.*)</div>` repeated per match, since greedy always spans the full nested block"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Arbitrary nesting needs tree structure that an ordinary regex cannot track, so a parser is the robust choice.",
+        "Lazy and greedy patterns pair the wrong closing tags on nested divs, and the negated class skips any div containing a tag."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You need to extract double-quoted string literals from source code. A string may contain a backslash-escaped quote, and unterminated quotes should fail quickly. Which pattern best meets the criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`\"(?:[^\"\\\\]|\\\\.)*\"`"
+        },
+        {
+          "id": "b",
+          "label": "`\"([^\"]*)\"`"
+        },
+        {
+          "id": "c",
+          "label": "`\"(.*?)\"`"
+        },
+        {
+          "id": "d",
+          "label": "`\"(.*)\"`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The alternation consumes either a normal character or a backslash pair, so escaped quotes are handled and each character has exactly one way to match.",
+        "The lazy and negated-class patterns stop at an escaped quote, and the greedy one overruns into later strings."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A form requires a password with a digit, an upper-case letter and at least 12 characters, and must tell the user which rule failed. Which design best meets both criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One pattern of three lookaheads, since a single anchored match is the clearest way to report any failure"
+        },
+        {
+          "id": "b",
+          "label": "One alternation of the three rule patterns, so the branch that matched shows which rule was broken"
+        },
+        {
+          "id": "c",
+          "label": "Three separate checks, one pattern per rule, so each failing check maps directly to its own message"
+        },
+        {
+          "id": "d",
+          "label": "One pattern of three lookaheads, then inspect the capture groups afterwards to see which rule failed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Separate checks give a one-to-one mapping between rule and message.",
+        "A combined pattern returns only pass or fail, lookaheads capture nothing, and an alternation matches when any rule holds rather than reporting which one failed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "The pattern `^(\\w+\\s?)*$` hangs a backtracking engine on long text that ends in a symbol. Which mitigations would meaningfully reduce the risk? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rewrite it unambiguously as `^\\w+(?:\\s\\w+)*$`"
+        },
+        {
+          "id": "b",
+          "label": "Add the ignore-case flag"
+        },
+        {
+          "id": "c",
+          "label": "Make the quantifier lazy: `^(\\w+\\s?)*?$`"
+        },
+        {
+          "id": "d",
+          "label": "Run it on a linear-time engine such as RE2"
+        },
+        {
+          "id": "e",
+          "label": "Enforce a match timeout and an input length cap"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Removing the ambiguity, using a non-backtracking engine, or bounding time and input size each limits the blow-up.",
+        "Lazy quantifiers and case flags do not change how many ways a failing match can be split, so the exponential search remains."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A Python service validates ZIP codes with `re.match(r'^[0-9]{5}$', s)`. A security review finds that `12345\\n` (with a trailing newline) is accepted, and the requirement is that any trailing whitespace must be rejected. Which fix best meets the requirement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add `re.MULTILINE`, because it makes `$` match only at the true end of the whole string"
+        },
+        {
+          "id": "b",
+          "label": "Call `s.strip()` first, because it removes the stray newline before the check runs and keeps input tidy"
+        },
+        {
+          "id": "c",
+          "label": "Replace `[0-9]` with `\\d`, because it makes the pattern stricter about which characters are allowed"
+        },
+        {
+          "id": "d",
+          "label": "`re.fullmatch(r'[0-9]{5}', s)`, which requires the whole string to match"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "In Python `$` also matches before a final newline, whereas `fullmatch` demands the entire string match.",
+        "MULTILINE loosens `$`, strip would accept the bad input, and `\\d` is broader, not stricter."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Write a pattern that finds ISO dates `YYYY-MM-DD` in free text, accepting months 01-12 and days 01-31, but not when glued to extra digits (for example inside `120240-01-011`). Which pattern meets every constraint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`(?<!\\d)\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])(?!\\d)`"
+        },
+        {
+          "id": "b",
+          "label": "`(?<!\\d)\\d{4}-[01]\\d-[0-3]\\d(?!\\d)`"
+        },
+        {
+          "id": "c",
+          "label": "`\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])`"
+        },
+        {
+          "id": "d",
+          "label": "`(?<!\\d)\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])(?![0-9]{2})`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Lookarounds on both ends block neighbouring digits, and the alternations restrict month and day ranges.",
+        "The other options miss a boundary, allow values like 19 or 00, or let one glued digit follow."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "In a replace-all call, you must insert thousands separators into a standalone string of digits (`1234567` becomes `1,234,567`) using only a zero-width match and `,` as the replacement. Which pattern works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`\\B(?=\\d{3})`"
+        },
+        {
+          "id": "b",
+          "label": "`(?=(?:\\d{3})+)`"
+        },
+        {
+          "id": "c",
+          "label": "`\\B(?=(?:\\d{3})+(?!\\d))`"
+        },
+        {
+          "id": "d",
+          "label": "`(?<=\\d)(?=\\d{3}\\b)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A comma belongs only where the remaining digits form complete groups of three up to the end, and `\\B` avoids the string start.",
+        "The other patterns insert at every position with three digits ahead, only before the last group, or also at the start."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Config lines look like `name = value  # note`. A value is either a double-quoted string (which may contain `#`) or a bare token with no spaces or `#`; an optional comment may follow. Which pattern captures the value correctly?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`^(\\w+)\\s*=\\s*(\".*\"|[^\\s]+)\\s*(?:#.*)?$`"
+        },
+        {
+          "id": "b",
+          "label": "`^(\\w+)\\s*=\\s*([^#]*[^#\\s])\\s*(?:#.*)?$`"
+        },
+        {
+          "id": "c",
+          "label": "`^(\\w+)\\s*=\\s*(.*?)\\s*(?:#.*)?\\s*$`"
+        },
+        {
+          "id": "d",
+          "label": "`^(\\w+)\\s*=\\s*(\"[^\"]*\"|[^\\s#]+)\\s*(?:#.*)?$`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A closed quoted string or a bare token without space or `#` handles both value forms and leaves the comment out.",
+        "The other patterns cut quoted values at `#`, swallow comments containing quotes, or let bare values absorb `#`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Validate a single DNS label: 1 to 63 characters from letters, digits and hyphen, with no leading or trailing hyphen. Which pattern meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`^(?!-)[A-Za-z0-9-]{1,63}(?!-)$`"
+        },
+        {
+          "id": "b",
+          "label": "`^(?<!-)[A-Za-z0-9-]{1,63}(?<!-)$`"
+        },
+        {
+          "id": "c",
+          "label": "`^(?!-)[A-Za-z0-9-]{1,63}(?<!-)$`"
+        },
+        {
+          "id": "d",
+          "label": "`^[A-Za-z0-9][A-Za-z0-9-]{1,61}[A-Za-z0-9]$`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A lookahead at the start and a lookbehind at the end check both hyphen rules while allowing 1 to 63 characters.",
+        "The first option rejects one- and two-character labels, the second checks the end with a lookahead that is always true there, and the third checks the start with a lookbehind that is always true there."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "With the ignore-case flag on, find accidentally repeated words, where the repeat may be separated by spaces or line breaks, and `the theme` must not be flagged. Which pattern meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`(\\w+)\\s+\\1`"
+        },
+        {
+          "id": "b",
+          "label": "`\\b(\\w+)\\s+\\1\\b`"
+        },
+        {
+          "id": "c",
+          "label": "`\\b(\\w+) \\1\\b`"
+        },
+        {
+          "id": "d",
+          "label": "`\\b(\\w+)\\s+\\1`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Boundaries on both sides plus `\\s+` and a backreference match whole repeated words across any whitespace.",
+        "Without the trailing `\\b`, `the them` is flagged; a literal space misses line breaks; dropping both boundaries also matches inside words."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A log line looks like `a=1&id=42&uid=7`. You need to capture the value of the key exactly `id` (not `uid`, `pid` or `user-id`), where a value ends at `&` or whitespace. Which fragments could belong to a correct pattern? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`(?:^|[&\\s])id=`"
+        },
+        {
+          "id": "b",
+          "label": "`([^&\\s]+)`"
+        },
+        {
+          "id": "c",
+          "label": "`(.*)`"
+        },
+        {
+          "id": "d",
+          "label": "`\\bid=`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "The key must be preceded by the line start or a separator, and the value must be a run excluding `&` and whitespace.",
+        "`\\bid=` also matches inside `user-id=`, and `(.*)` runs past the value."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A team's validator uses `^[\\w.+-]+@example\\.com$`. Management now wants subdomains of any depth accepted, such as `ops@eu.west.example.com`. It must still reject `ops@evilexample.com` and `ops@example.com.evil.io`. Which revised pattern does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`^[\\w.+-]+@(?:.+\\.)?example\\.com\\b.*$`"
+        },
+        {
+          "id": "b",
+          "label": "`^[\\w.+-]+@(?:[a-z0-9]+\\.){0,1}example\\.com$`"
+        },
+        {
+          "id": "c",
+          "label": "`^[\\w.+-]+@(?:[\\w-]+\\.)*example\\.com$`"
+        },
+        {
+          "id": "d",
+          "label": "`^[\\w.+-]+@[\\w.-]*example\\.com$`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Requiring each extra label to end in a dot lets any depth through while the domain must still end exactly at `example.com`.",
+        "The first option allows `evilexample.com`, the second permits only one level, and the third accepts trailing text after `example.com`."
+      ],
+      "reviewed": false
+    }
+  ]
+}
