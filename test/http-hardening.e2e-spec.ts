@@ -27,7 +27,7 @@ describe('HTTP hardening (e2e)', () => {
     expect(res.headers['x-request-id']).toMatch(/^[0-9a-f-]{36}$/);
   });
 
-  it('allows an APP_ORIGIN origin with credentials and exposes X-Request-Id and Retry-After', async () => {
+  it('allows an APP_ORIGIN origin with credentials and exposes X-Request-Id, Retry-After and Content-Disposition', async () => {
     const res = await request(app.getHttpServer())
       .get('/health')
       .set('Origin', 'https://eduujoy.aindrajaya.my.id')
@@ -35,7 +35,7 @@ describe('HTTP hardening (e2e)', () => {
 
     expect(res.headers['access-control-allow-origin']).toBe('https://eduujoy.aindrajaya.my.id');
     expect(res.headers['access-control-allow-credentials']).toBe('true');
-    expect(res.headers['access-control-expose-headers']).toBe('X-Request-Id,Retry-After');
+    expect(res.headers['access-control-expose-headers']).toBe('X-Request-Id,Retry-After,Content-Disposition');
   });
 
   it('answers a preflight from an allowed origin with the allowed methods and headers', async () => {
