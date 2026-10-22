@@ -15,7 +15,7 @@ import { QUOTA_COUNTER } from './application/ports/quota-counter';
 import { RESOURCE_ANALYZER } from './application/ports/resource-analyzer';
 import { VIDEO_SEARCH } from './application/ports/video-search';
 import { WEB_DISCOVERY } from './application/ports/web-discovery';
-import { RequestDiscovery } from './application/request-discovery.usecase';
+import { DISCOVERY_CAPS, RequestDiscovery } from './application/request-discovery.usecase';
 import { ClaudeWebDiscovery } from './infrastructure/claude-web-discovery';
 import { DrizzleDiscoveryRepository } from './infrastructure/drizzle-discovery.repository';
 import { DrizzleQuotaCounter } from './infrastructure/drizzle-quota.counter';
@@ -40,6 +40,11 @@ import { YouTubeDataApiAdapter } from './infrastructure/youtube-data-api.adapter
     { provide: DISCOVERY_REPOSITORY, useClass: DrizzleDiscoveryRepository },
     { provide: QUOTA_COUNTER, useClass: DrizzleQuotaCounter },
     { provide: DISCOVERY_CLOCK, useValue: () => new Date() },
+    {
+      provide: DISCOVERY_CAPS,
+      inject: [AppConfig],
+      useFactory: ({ env }: AppConfig) => ({ free: env.DISCOVERY_DAILY_PER_LEARNER_FREE, paid: env.DISCOVERY_DAILY_PER_LEARNER_PAID }),
+    },
     { provide: VIDEO_SEARCH, inject: [AppConfig], useFactory: ({ env }: AppConfig) => new YouTubeDataApiAdapter(env.YOUTUBE_API_KEY) },
     { provide: PAPER_SEARCH, inject: [AppConfig], useFactory: ({ env }: AppConfig) => new OpenAlexAdapter(env.OPENALEX_API_KEY) },
     { provide: LINK_CHECKER, useFactory: () => new HttpLinkChecker() },

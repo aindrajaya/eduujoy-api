@@ -8,7 +8,11 @@ import { type Stage } from '../domain';
 import { DISCOVER_RESOURCES_JOB, type DiscoverPayload } from './jobs';
 import { type Clock, DISCOVERY_CLOCK, DISCOVERY_REPOSITORY, type DiscoveryRepository } from './ports/discovery.repository';
 
-export type DiscoveryRequestOutcome = 'fresh' | 'queued' | 'over_budget';
+export type DiscoveryRequestOutcome = 'fresh' | 'queued' | 'over_budget' | 'deferred';
+
+/** Per-learner daily caps on cold discoveries their placements trigger (defaults: free 1, paid 5). */
+export const DISCOVERY_CAPS = Symbol('DiscoveryCaps');
+export type DiscoveryCaps = Record<'free' | 'paid', number>;
 
 /**
  * PlacementComputed → `discover-resources` when the topic and stage pool is missing or expired
@@ -24,6 +28,7 @@ export class RequestDiscovery {
     private readonly budget: AiBudgetGuard,
     private readonly scopes: GetBudgetScopeQuery,
     @Inject(DISCOVERY_CLOCK) private readonly clock: Clock,
+    @Inject(DISCOVERY_CAPS) private readonly caps: DiscoveryCaps,
   ) {}
 
   /** PlacementComputed → discover-resources when the topic + stage pool is missing or expired (PRD-API §5). */
@@ -37,6 +42,16 @@ export class RequestDiscovery {
 
     // A shared pool is charged to the scope of the learner whose placement triggered it (D1).
     const budgetScope = input.userId ? await this.scopes.execute(input.userId) : 'free';
+    // Diagnostics are free and unlimited: without a cap one learner could drain a whole daily scope.
+    // Over the cap the discovery waits for that learner's path request (A9), which charges first.
+    if (input.userId) {
+      const dayStart = new Date(Date.UTC(this.clock().getUTCFullYear(), this.clock().getUTCMonth(), this.clock().getUTCDate()));
+      const triggered = await this.queue.countForUser(DISCOVER_RESOURCES_JOB, input.userId, dayStart);
+      if (triggered >= this.caps[budgetScope]) {
+        this.logger.log({ topicId: input.topicId, stage: input.stage, budgetScope, triggered, cap: this.caps[budgetScope] }, 'Discovery deferred: per-learner cap');
+        return 'deferred';
+      }
+    }
     const budget = await this.budget.status(budgetScope);
     if (budget.exceeded) {
       this.logger.warn({ topicId: input.topicId, stage: input.stage, budgetScope }, 'Cold discovery skipped: daily AI budget reached');
