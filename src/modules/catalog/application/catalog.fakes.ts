@@ -80,7 +80,7 @@ export class FakeTopicRepository implements TopicRepository {
   similarNames(_normalised: string, minimum: number, limit: number, viewerId: string): Promise<NearTopic[]> {
     const hits = [...this.topics.values()]
       .filter((t) => visible(t, viewerId) && (this.nameScores.get(t.slug) ?? 0) >= minimum)
-      .map((t) => ({ topic: view(t), similarity: this.nameScores.get(t.slug) ?? 0 }))
+      .map((t) => ({ topic: view(t), similarity: this.nameScores.get(t.slug) ?? 0, domain: t.domain ?? null }))
       .sort((a, b) => b.similarity - a.similarity)
       .slice(0, limit);
     return Promise.resolve(hits);
@@ -89,7 +89,7 @@ export class FakeTopicRepository implements TopicRepository {
   nearest(query: TopicEmbedding, limit: number, viewerId: string): Promise<NearTopic[]> {
     const near = [...this.topics.values()]
       .filter((t) => visible(t, viewerId) && t.embedding && t.embedding.model === query.model && t.embedding.version === query.version)
-      .map((t) => ({ topic: view(t), similarity: cosine(t.embedding?.vector ?? [], query.vector) }))
+      .map((t) => ({ topic: view(t), similarity: cosine(t.embedding?.vector ?? [], query.vector), domain: t.domain ?? null }))
       .sort((a, b) => b.similarity - a.similarity)
       .slice(0, limit);
     return Promise.resolve(near);
@@ -132,4 +132,15 @@ function visible(t: FakeTopic, viewerId: string): boolean {
 
 function view(t: FakeTopic): TopicView {
   return { id: t.id, canonicalName: t.canonicalName, aliases: t.aliases, parentId: t.parentId, description: t.description };
+}
+
+/** TopicBanks backed by a set of topic ids that have a bank; records each lookup. */
+export class FakeTopicBanks {
+  readonly lookups: string[][] = [];
+  constructor(readonly banked = new Set<string>()) {}
+
+  withBank(topicIds: readonly string[]): Promise<Set<string>> {
+    this.lookups.push([...topicIds]);
+    return Promise.resolve(new Set(topicIds.filter((id) => this.banked.has(id))));
+  }
 }

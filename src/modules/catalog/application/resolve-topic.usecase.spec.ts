@@ -3,7 +3,7 @@ import { type AiBudgetGuard, AiBudgetExceededError, type Embedder, type Embeddin
 import { EventBus } from '../../../shared/events/event-bus';
 import { type TopicResolved } from '../domain/events/topic-resolved.event';
 import { CHOICE_THRESHOLD, MATCH_THRESHOLD } from '../domain/resolution';
-import { FakeTopicRepository } from './catalog.fakes';
+import { FakeTopicBanks, FakeTopicRepository } from './catalog.fakes';
 import { TopicCreateLimitError, TopicSearchUnavailableError, TopicTextInvalidError } from './errors';
 import { type NormalisedTopic, type TopicNormalizer } from './ports/topic-normalizer';
 import { DAILY_TOPIC_CREATE_LIMIT, ResolveTopic } from './resolve-topic.usecase';
@@ -53,16 +53,18 @@ function setup() {
   const hooks = repo.add({ slug: 'react-hooks', canonicalName: 'React hooks', aliases: ['hooks', 'useState'], embedding: { vector: at(0), ...MODEL } });
   const react = repo.add({ slug: 'react', canonicalName: 'React', embedding: { vector: at(1.645), ...MODEL } });
   const vue = repo.add({ slug: 'vue', canonicalName: 'Vue', embedding: { vector: at(-1.2), ...MODEL } });
+  const banks = new FakeTopicBanks();
   return {
     repo,
     embedder,
     normalizer,
+    banks,
     events,
     topics: { hooks, react, vue },
     exceedBudget: () => {
       budgetExceeded = true;
     },
-    resolve: new ResolveTopic(repo, embedder, normalizer, budget, bus),
+    resolve: new ResolveTopic(repo, embedder, normalizer, banks, budget, bus),
   };
 }
 
@@ -245,7 +247,8 @@ describe('ResolveTopic', () => {
       const view = await t.resolve.execute('u1', 'frontend state', { createNew: true });
 
       expect(view).toMatchObject({ status: 'created', topic: { canonicalName: 'Frontend state management' } });
-      expect(t.embedder.requests.map((r) => r.kind)).toEqual(['document']);
+      // No matching, but one query embedding for `related` (contract 0.9.0), then the new topic's document.
+      expect(t.embedder.requests.map((r) => r.kind)).toEqual(['query', 'document']);
       expect(t.events[0]).toMatchObject({ status: 'created', method: 'create_new', topSimilarity: null });
     });
 
@@ -262,4 +265,83 @@ describe('ResolveTopic', () => {
   it('rejects text with nothing left after normalising', async () => {
     await expect(setup().resolve.execute('u1', '?!')).rejects.toBeInstanceOf(TopicTextInvalidError);
   });
+
+  describe('contract 0.9.0: hasDiagnostic and domain-filtered related', () => {
+    /** Prod 22 Oct 2026: "Indonesian language" had Spanish 0.679, Java 0.667, English grammar 0.651 nearest. */
+    function indonesian() {
+      const t = setup();
+      // The query sits at angle 3, far from the React fixtures; each topic at its prod similarity to it.
+      const Q = 3;
+      const place = (slug: string, canonicalName: string, domain: 'software' | 'non_technical', similarity: number) =>
+        t.repo.add({ slug, canonicalName, domain, embedding: { vector: at(Q - similarityAngle(similarity)), ...MODEL } });
+      const spanish = place('spanish', 'Spanish', 'non_technical', 0.679);
+      const java = place('java', 'Java', 'software', 0.667);
+      const grammar = place('english-grammar', 'English grammar', 'non_technical', 0.651);
+      const weak = place('public-speaking', 'Public speaking', 'non_technical', 0.55);
+      t.embedder.queries.set('Indonesian language', at(Q));
+      t.normalizer.result = { canonicalName: 'Indonesian language', domain: 'non_technical', description: 'The Indonesian language.', aliases: ['bahasa indonesia'] };
+      t.banks.banked.add(spanish.id).add(java.id);
+      return { t, spanish, java, grammar, weak };
+    }
+
+    it('suggests same-domain topics above the floor, banked first, never Java (createNew)', async () => {
+      const { t, spanish, grammar } = indonesian();
+
+      const view = await t.resolve.execute('u1', 'Indonesian language', { createNew: true });
+
+      expect(view.status).toBe('created');
+      if (view.status !== 'created') return;
+      expect(view.related.map((r) => r.canonicalName)).toEqual(['Spanish', 'English grammar']);
+      expect(view.related).toEqual([expect.objectContaining({ id: spanish.id, hasDiagnostic: true }), expect.objectContaining({ id: grammar.id, hasDiagnostic: false })]);
+      expect(view.topic.hasDiagnostic).toBe(false);
+      // One bank lookup for the whole response.
+      expect(t.banks.lookups).toHaveLength(1);
+    });
+
+    it("falls back to the nearest neighbour's domain at 0.65 when the normaliser is unavailable", async () => {
+      const { t } = indonesian();
+      t.normalizer.fail = true;
+
+      const view = await t.resolve.execute('u1', 'Indonesian language', { createNew: true });
+
+      // Spanish (0.679) passes the stricter floor; English grammar (0.651) does too, just.
+      expect(view.status === 'created' ? view.related.map((r) => r.canonicalName) : null).toEqual(['Spanish', 'English grammar']);
+    });
+
+    it('suggests nothing for "beekeeping" without a normaliser domain, never react-hooks', async () => {
+      const t = setup();
+      const Q = 3;
+      t.repo.add({ slug: 'react-hooks-2', canonicalName: 'React hooks (software)', domain: 'software', embedding: { vector: at(Q - similarityAngle(0.618)), ...MODEL } });
+      t.repo.add({ slug: 'observability', canonicalName: 'Observability', domain: 'software', embedding: { vector: at(Q - similarityAngle(0.614)), ...MODEL } });
+      t.repo.add({ slug: 'cooking', canonicalName: 'Cooking', domain: 'non_technical', embedding: { vector: at(Q + similarityAngle(0.6)), ...MODEL } });
+      t.embedder.queries.set('beekeeping', at(Q));
+      t.normalizer.fail = true;
+
+      const view = await t.resolve.execute('u1', 'beekeeping', { createNew: true });
+
+      expect(view).toMatchObject({ status: 'created', related: [] });
+    });
+
+    it('returns no related topics when none reaches the floor', async () => {
+      const t = setup();
+      t.embedder.queries.set('beekeeping', at(Math.PI));
+
+      const view = await t.resolve.execute('u1', 'beekeeping');
+
+      expect(view).toMatchObject({ status: 'created', related: [] });
+    });
+
+    it('marks matched topics and every choice with hasDiagnostic', async () => {
+      const t = setup();
+      t.banks.banked.add(t.topics.hooks.id);
+      t.embedder.queries.set('state in function components', at(0.05));
+
+      await expect(t.resolve.execute('u1', 'React Hooks')).resolves.toMatchObject({ status: 'matched', topic: { id: t.topics.hooks.id, hasDiagnostic: true } });
+      t.embedder.queries.set('react or hooks', at(0.8225));
+      const view = await t.resolve.execute('u1', 'react or hooks');
+      expect(view.status).toBe('choices');
+      if (view.status === 'choices') for (const c of view.choices) expect(c.hasDiagnostic).toBe(c.id === t.topics.hooks.id);
+    });
+  });
 });
+

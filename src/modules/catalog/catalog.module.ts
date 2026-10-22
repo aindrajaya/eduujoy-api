@@ -9,6 +9,7 @@ import { DrizzleTopicRepository } from './infrastructure/drizzle-topic.repositor
 import { HaikuTopicNormalizer } from './infrastructure/haiku-topic-normalizer';
 import { TopicsController } from './interface/topics.controller';
 import { ACCOUNT_DATA } from '../../shared/common/account';
+import { DrizzleTopicBanks, TOPIC_BANKS } from '../../shared/common/topic-banks';
 import { CatalogAccountData } from './infrastructure/catalog-account-data';
 
 /** Catalog (PRD-API §4): topic lookups, resolution with embeddings (FR-01, FR-02) and the embedding backfill. */
@@ -21,6 +22,7 @@ import { CatalogAccountData } from './infrastructure/catalog-account-data';
     EmbedTopics,
     { provide: TOPIC_REPOSITORY, useClass: DrizzleTopicRepository },
     { provide: TOPIC_NORMALIZER, useClass: HaikuTopicNormalizer },
+    { provide: TOPIC_BANKS, useClass: DrizzleTopicBanks },
     { provide: ACCOUNT_DATA.catalog, useClass: CatalogAccountData },
   ],
   exports: [GetTopicQuery, GetTopicProfileQuery, EmbedTopics, ACCOUNT_DATA.catalog],

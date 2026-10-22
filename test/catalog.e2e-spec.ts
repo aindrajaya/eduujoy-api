@@ -17,7 +17,7 @@ import { decodeVector, loadGoldenEmbeddings, loadHoldoutEmbeddings, RecordedEmbe
 import golden from './fixtures/catalog/golden.json';
 
 const csrf = { Origin: 'http://localhost:5173', 'X-Requested-With': 'eduujoy' };
-const TOPIC_FIELDS = ['aliases', 'canonicalName', 'description', 'id', 'parentId'];
+const TOPIC_FIELDS = ['aliases', 'canonicalName', 'description', 'hasDiagnostic', 'id', 'parentId'];
 
 interface GoldenCase {
   text: string;
@@ -40,9 +40,11 @@ const holdout = JSON.parse(readFileSync(join(__dirname, '..', 'seed', '_eval', '
   cases: (GoldenCase & { kind: string; nearSlugs?: string[] })[];
 };
 
-/** Normaliser stand-in: the learner's words as the name, so created topics stay distinct. */
+/** Normaliser stand-in: the learner's words as the name, so created topics stay distinct; a domain like Haiku's. */
+const SOFTWARE_WORDS = /mongodb|python|javascript|react|kubernetes|database|code|api/i;
 const normalizer: TopicNormalizer = {
-  normalise: (text) => Promise.resolve({ canonicalName: fallbackTopicName(text), domain: 'non_technical', description: 'A learner topic.', aliases: [] }),
+  normalise: (text) =>
+    Promise.resolve({ canonicalName: fallbackTopicName(text), domain: SOFTWARE_WORDS.test(text) ? 'software' : 'non_technical', description: 'A learner topic.', aliases: [] }),
 };
 
 describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
@@ -122,7 +124,7 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
       await db.update(topics).set({ embedding: vector, embeddingModel: recording.model, embeddingVersion: recording.version }).where(eq(topics.slug, t.slug));
     }
 
-    const results: { case: GoldenCase; got: string; strict: boolean; lenient: boolean }[] = [];
+    const results: { case: GoldenCase; got: string; strict: boolean; lenient: boolean; wrongMatch: boolean }[] = [];
     for (const c of golden.cases as GoldenCase[]) {
       const { cookie } = await signedInUser();
       const misses = embedder.misses.length;
@@ -146,7 +148,9 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
         expect({ text: c.text, status: body.status, matched, embedded: embedder.misses.length !== misses }).toEqual({ text: c.text, status: 'matched', matched: c.slugs?.[0], embedded: false });
       }
       const got = body.status === 'choices' ? `choices ${offered.join(', ')}` : `${body.status} ${matched ?? body.topic?.canonicalName ?? ''}`;
-      results.push({ case: c, got, strict, lenient });
+      // An auto-match to a topic the case doesn't list (or any match for an out-of-catalog phrase).
+      const wrongMatch = body.status === 'matched' && !inSet(matched);
+      results.push({ case: c, got, strict, lenient, wrongMatch });
     }
 
     const scored = results.filter((r) => !r.case.exact);
@@ -156,9 +160,12 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
     const topicCases = scored.filter((r) => r.case.expect === 'topic');
     const misses = scored.filter((r) => !r.lenient);
     const picks = scored.filter((r) => r.lenient && !r.strict);
+    const wrong = scored.filter((r) => r.wrongMatch);
     process.stdout.write(
       `Golden set (${scored.length} scored, ${results.length - scored.length} exact checked separately):\n` +
-        `  lenient ${rate(lenientN)}  strict ${rate(strictN)}  auto-matched topic phrases ${topicCases.filter((r) => r.strict).length}/${topicCases.length}\n` +
+        `  lenient ${rate(lenientN)}  strict ${rate(strictN)}  auto-matched topic phrases ${topicCases.filter((r) => r.strict).length}/${topicCases.length}  wrong auto-matches ${wrong.length}\n` +
+        wrong.map((r) => `  WRONG "${r.case.text}": expected ${r.case.expect} ${r.case.slugs?.join('|') ?? ''}, got ${r.got}`).join('\n') +
+        (wrong.length ? '\n' : '') +
         misses.map((r) => `  MISS "${r.case.text}": expected ${r.case.expect} ${r.case.slugs?.join('|') ?? ''}, got ${r.got}`).join('\n') +
         (misses.length ? '\n' : '') +
         picks.map((r) => `  PICK "${r.case.text}": learner chooses from ${r.got}`).join('\n') +
@@ -167,6 +174,8 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
     // Every golden query was recorded; only created topics' document embeddings miss (left for the backfill).
     expect(embedder.misses.filter((m) => m.startsWith('query:'))).toEqual([]);
     expect(lenientN / scored.length).toBeGreaterThanOrEqual(0.95);
+    // The launch gate's second half (EXECUTION-PLAN §4) holds on the tuning set too.
+    expect(wrong.map((r) => r.case.text)).toEqual([]);
     // 150 vector writes and ~100 resolves, each a round trip to the Neon test branch.
   }, 180_000);
 
@@ -247,7 +256,11 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
 
     const created = await resolve(cookie, { text: 'storing documents in mongodb', createNew: true }).expect(200);
 
-    expect(created.body).toMatchObject({ status: 'created', topic: { canonicalName: 'Storing documents in mongodb' } });
+    expect(created.body).toMatchObject({ status: 'created', topic: { canonicalName: 'Storing documents in mongodb', hasDiagnostic: false } });
+    // Contract 0.9.0: the rejected choice comes back as a related topic in the same (software) domain.
+    const related = (created.body as { related?: { id: string; hasDiagnostic?: unknown }[] }).related ?? [];
+    expect(related.map((r) => slugById.get(r.id))).toContain('nosql-databases');
+    for (const r of related) expect(typeof r.hasDiagnostic).toBe('boolean');
     expect(await db.select().from(topics).where(eq(topics.createdBy, userId))).toHaveLength(1);
     await resolve(cookie, { text: 'storing documents in mongodb', createNew: 'yes' }).expect(400);
   });

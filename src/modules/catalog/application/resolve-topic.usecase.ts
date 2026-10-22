@@ -1,25 +1,29 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { AiBudgetGuard, EMBEDDER, type Embedder } from '../../../shared/ai';
+import { TOPIC_BANKS, type TopicBanks } from '../../../shared/common/topic-banks';
 import { EventBus } from '../../../shared/events';
 import {
   clampSimilarity,
   decide,
   fallbackTopicName,
   MAX_CHOICES,
+  type Neighbour,
   normaliseTopicText,
+  pickRelated,
   queryText,
+  relatedCandidates,
   slugify,
   topicDocument,
 } from '../domain/resolution';
 import { type ResolveMethod, TopicResolved } from '../domain/events/topic-resolved.event';
 import { TopicCreateLimitError, TopicSearchUnavailableError, TopicTextInvalidError } from './errors';
 import { TOPIC_NORMALIZER, type NormalisedTopic, type TopicNormalizer } from './ports/topic-normalizer';
-import { type NewTopic, TOPIC_REPOSITORY, type TopicRepository, type TopicView } from './ports/topic.repository';
+import { type NearTopic, type NewTopic, TOPIC_REPOSITORY, type TopicRepository, type TopicView } from './ports/topic.repository';
 
 /** New topics a learner may create per UTC day; resolving to existing topics is not capped. */
 export const DAILY_TOPIC_CREATE_LIMIT = 10;
-/** Nearest neighbours fetched from the HNSW index before applying the thresholds. */
-const NEIGHBOURS = 5;
+/** Nearest neighbours fetched from the HNSW index: the thresholds use the top ones, `related` the rest. */
+const NEIGHBOURS = 8;
 /** Outage fallback (contract 0.4.0-v0): pg_trgm name/alias similarity that still offers choices. */
 export const NAME_FALLBACK_MINIMUM = 0.3;
 export const OUTAGE_RETRY_AFTER_SECONDS = 30;
@@ -27,7 +31,7 @@ export const OUTAGE_RETRY_AFTER_SECONDS = 30;
 export type ResolveTopicView =
   | { status: 'matched'; topic: TopicView }
   | { status: 'choices'; choices: (TopicView & { similarity: number })[] }
-  | { status: 'created'; topic: TopicView };
+  | { status: 'created'; topic: TopicView; related: TopicView[] };
 
 /** What decided a resolution, for the TopicResolved event and the per-resolve log line. */
 interface Signal {
@@ -40,6 +44,8 @@ interface Resolution {
   view: ResolveTopicView;
   needsReview: boolean;
   signal: Signal;
+  /** `related` candidates for a created topic (contract 0.9.0), before the bank preference. */
+  related?: { candidates: Neighbour[]; topics: Map<string, TopicView> };
 }
 
 const EXACT: Signal = { method: 'exact', top: 1, second: null };
@@ -61,6 +67,7 @@ export class ResolveTopic {
     @Inject(TOPIC_REPOSITORY) private readonly topics: TopicRepository,
     @Inject(EMBEDDER) private readonly embedder: Embedder,
     @Inject(TOPIC_NORMALIZER) private readonly normalizer: TopicNormalizer,
+    @Inject(TOPIC_BANKS) private readonly banks: TopicBanks,
     private readonly budget: AiBudgetGuard,
     private readonly events: EventBus,
   ) {}
@@ -68,7 +75,9 @@ export class ResolveTopic {
   async execute(userId: string, text: string, options: ResolveOptions = {}): Promise<ResolveTopicView> {
     const key = normaliseTopicText(text);
     if (key.length === 0) throw new TopicTextInvalidError('Topic text has no letters or digits');
-    const { view, needsReview, signal } = options.createNew ? await this.create(userId, text, CREATE_NEW) : await this.resolve(userId, text, key);
+    const resolution = options.createNew ? await this.create(userId, text, CREATE_NEW, await this.neighbours(userId, text)) : await this.resolve(userId, text, key);
+    const { needsReview, signal } = resolution;
+    const view = await this.withBanks(resolution);
     const topicId = view.status === 'choices' ? null : view.topic.id;
     // Scores only, never the learner's text: enough to re-tune thresholds from the score distribution.
     this.logger.log({ status: view.status, method: signal.method, topSimilarity: signal.top, secondSimilarity: signal.second, topicId }, 'Topic resolved');
@@ -108,7 +117,37 @@ export class ResolveTopic {
         }),
       }, signal);
     }
-    return this.create(userId, text, signal);
+    return this.create(userId, text, signal, near);
+  }
+
+  /** createNew skips matching, but `related` still needs the text's neighbours: one cheap query embedding. */
+  private async neighbours(userId: string, text: string): Promise<NearTopic[]> {
+    try {
+      const embedded = await this.embedder.embed({ stage: 'topic-resolve', texts: [queryText(text)], kind: 'query' });
+      const vector = embedded.vectors[0];
+      return vector ? await this.topics.nearest({ vector, model: embedded.model, version: embedded.version }, NEIGHBOURS, userId) : [];
+    } catch (error) {
+      this.logger.warn({ err: error }, 'Query embedding failed; the created topic gets no related topics');
+      return [];
+    }
+  }
+
+  /**
+   * Contract 0.9.0: every topic in the response carries hasDiagnostic, from one bank lookup; `related`
+   * prefers topics that have a bank.
+   */
+  private async withBanks(resolution: Resolution): Promise<ResolveTopicView> {
+    const { view, related } = resolution;
+    const shown = view.status === 'choices' ? view.choices.map((c) => c.id) : [view.topic.id];
+    const banks = await this.banks.withBank([...shown, ...(related?.candidates.map((c) => c.topicId) ?? [])]);
+    const mark = <T extends TopicView>(topic: T): T => ({ ...topic, hasDiagnostic: banks.has(topic.id) });
+    if (view.status === 'choices') return { status: 'choices', choices: view.choices.map(mark) };
+    if (view.status === 'matched') return { status: 'matched', topic: mark(view.topic) };
+    const picked = related ? pickRelated(related.candidates, banks).flatMap((c) => {
+      const topic = related.topics.get(c.topicId);
+      return topic ? [mark(topic)] : [];
+    }) : [];
+    return { status: 'created', topic: mark(view.topic), related: picked };
   }
 
   /** Embedding outage: close names become choices; nothing is ever created, since that would duplicate topics. */
@@ -120,7 +159,7 @@ export class ResolveTopic {
     return found({ status: 'choices', choices }, { method: 'name_fallback', top: choices[0]?.similarity ?? null, second: choices[1]?.similarity ?? null });
   }
 
-  private async create(userId: string, text: string, signal: Signal): Promise<Resolution> {
+  private async create(userId: string, text: string, signal: Signal, near: NearTopic[]): Promise<Resolution> {
     const now = new Date();
     const dayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
     const limited = (): TopicCreateLimitError => new TopicCreateLimitError(Math.max(1, Math.ceil((dayStart.getTime() + 86_400_000 - now.getTime()) / 1000)));
@@ -151,7 +190,13 @@ export class ResolveTopic {
     const result = await this.topics.create(topic, { since: dayStart, max: DAILY_TOPIC_CREATE_LIMIT });
     if (result.outcome === 'limited') throw limited();
     if (result.outcome === 'exists') return found({ status: 'matched', topic: result.topic }, signal);
-    return { view: { status: 'created', topic: result.topic }, needsReview: topic.needsReview, signal };
+    const neighbours = near.map((n) => ({ topicId: n.topic.id, similarity: clampSimilarity(n.similarity), domain: n.domain }));
+    return {
+      view: { status: 'created', topic: result.topic, related: [] },
+      needsReview: topic.needsReview,
+      signal,
+      related: { candidates: relatedCandidates(neighbours, fields.domain, result.topic.id), topics: new Map(near.map((n) => [n.topic.id, n.topic])) },
+    };
   }
 
   /** Haiku when the budget allows; otherwise the learner's own words, flagged for review. Never fails. */
