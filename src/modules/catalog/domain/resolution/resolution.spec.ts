@@ -3,6 +3,7 @@ import {
   clampSimilarity,
   decide,
   fallbackTopicName,
+  MATCH_MARGIN,
   MATCH_THRESHOLD,
   normaliseTopicText,
   queryText,
@@ -12,11 +13,22 @@ import {
 
 describe('decide', () => {
   it('uses the thresholds tuned on the golden set', () => {
-    expect([MATCH_THRESHOLD, CHOICE_THRESHOLD]).toEqual([0.7, 0.66]);
+    expect([MATCH_THRESHOLD, CHOICE_THRESHOLD, MATCH_MARGIN]).toEqual([0.7, 0.66, 0.04]);
   });
 
-  it('auto-matches the nearest topic at the match threshold or above', () => {
-    expect(decide([{ topicId: 'b', similarity: 0.68 }, { topicId: 'a', similarity: MATCH_THRESHOLD }])).toEqual({ kind: 'matched', topicId: 'a', similarity: MATCH_THRESHOLD });
+  it('auto-matches the nearest topic at the match threshold or above, clear of the runner-up', () => {
+    expect(decide([{ topicId: 'b', similarity: 0.66 }, { topicId: 'a', similarity: MATCH_THRESHOLD }])).toEqual({ kind: 'matched', topicId: 'a', similarity: MATCH_THRESHOLD });
+    expect(decide([{ topicId: 'a', similarity: 0.71 }])).toMatchObject({ kind: 'matched', topicId: 'a' });
+  });
+
+  it('offers choices instead when the runner-up is within the margin (near-neighbour topics)', () => {
+    expect(decide([{ topicId: 'trig', similarity: 0.74 }, { topicId: 'geo', similarity: 0.705 }, { topicId: 'far', similarity: 0.5 }])).toEqual({
+      kind: 'choices',
+      choices: [
+        { topicId: 'trig', similarity: 0.74 },
+        { topicId: 'geo', similarity: 0.705 },
+      ],
+    });
   });
 
   it('offers at most 3 choices between the thresholds, nearest first', () => {
@@ -43,8 +55,14 @@ describe('decide', () => {
     expect(decide([])).toEqual({ kind: 'create' });
   });
 
-  it('breaks similarity ties by id so results are stable', () => {
-    expect(decide([{ topicId: 'z', similarity: 0.8 }, { topicId: 'a', similarity: 0.8 }])).toMatchObject({ topicId: 'a' });
+  it('breaks similarity ties by id so results are stable (a tie is never a clear match)', () => {
+    expect(decide([{ topicId: 'z', similarity: 0.8 }, { topicId: 'a', similarity: 0.8 }])).toEqual({
+      kind: 'choices',
+      choices: [
+        { topicId: 'a', similarity: 0.8 },
+        { topicId: 'z', similarity: 0.8 },
+      ],
+    });
   });
 });
 
