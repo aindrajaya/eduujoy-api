@@ -379,9 +379,11 @@ describe('discovery (integration, A8 Verify)', () => {
     await expect(guard.assertCanStart('cold', 'free')).rejects.toThrow();
     const discover = new DiscoverResources(p.repo, p.videos, new ClaudeWebDiscovery(new MeteredWebSearcher(searcher, recorder), new PromptRegistry()), p.papers, p.links, p.quota, p.clock, new GetTopicProfileQuery(new DrizzleTopicRepository(db)), guard, { enqueue: (r: EnqueueRequest) => (p.queued.push(r), Promise.resolve({ job: { id: 'x' }, created: true })) } as unknown as JobQueue, new UnitOfWork(db, p.bus));
 
-    await discover.run(discover.parse({ topicId: id, stage: 'novice', poolVersion: 1, budgetScope: 'paid' }), ctx());
+    // A real job row: llm_calls.job_id references jobs, so a made-up id would lose the row.
+    const job = (await new JobRepository(db).enqueue({ type: 'int-discover', idempotencyKey: `paid:${randomUUID()}`, payload: {} })).job.id;
+    await discover.run(discover.parse({ topicId: id, stage: 'novice', poolVersion: 1, budgetScope: 'paid' }), ctx(job));
 
-    const [row] = await db.select({ scope: llmCalls.budgetScope }).from(llmCalls).where(and(eq(llmCalls.stage, 'discover'), eq(llmCalls.latencyMs, 777)));
+    const [row] = await db.select({ scope: llmCalls.budgetScope }).from(llmCalls).where(eq(llmCalls.jobId, job));
     expect(row?.scope).toBe('paid');
     const queued = p.queued.filter((q) => q.type === ANALYSE_RESOURCE_JOB);
     expect(queued.map((q) => (q.payload as { budgetScope: string }).budgetScope)).toEqual(['paid']);
