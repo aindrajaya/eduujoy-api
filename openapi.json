@@ -618,6 +618,10 @@
           "description": {
             "type": "string"
           },
+          "hasDiagnostic": {
+            "description": "True when the topic has a diagnostic item bank; false for new or learner-created topics until one is generated.",
+            "type": "boolean"
+          },
           "id": {
             "type": "string"
           },
@@ -645,6 +649,10 @@
           },
           "description": {
             "type": "string"
+          },
+          "hasDiagnostic": {
+            "description": "True when the topic has a diagnostic item bank; false for new or learner-created topics until one is generated.",
+            "type": "boolean"
           },
           "id": {
             "type": "string"
@@ -690,6 +698,14 @@
           "choices": {
             "items": {
               "$ref": "#/components/schemas/TopicChoiceDto"
+            },
+            "maxItems": 3,
+            "type": "array"
+          },
+          "related": {
+            "description": "Only with status `created`. Up to 3 catalog topics nearest to the text in the same domain (similarity at least 0.60), banked topics first, so the UI can offer them before a diagnostic without questions. May include topics the learner just declined as choices; may be empty.",
+            "items": {
+              "$ref": "#/components/schemas/Topic"
             },
             "maxItems": 3,
             "type": "array"
@@ -756,7 +772,7 @@
     "contact": {},
     "description": "Generated from the NestJS app; checked against docs/contract/openapi.v0.yaml by `pnpm openapi:check`.",
     "title": "Eduujoy API",
-    "version": "0.8.0-v0"
+    "version": "0.9.1-v0"
   },
   "openapi": "3.1.0",
   "paths": {

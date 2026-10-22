@@ -66,6 +66,12 @@ export class TopicDto {
   @Expose()
   @Transform(({ value }: { value: unknown }) => (value === null ? undefined : value))
   description?: string;
+  @ApiPropertyOptional({
+    type: Boolean,
+    description: 'True when the topic has a diagnostic item bank; false for new or learner-created topics until one is generated.',
+  })
+  @Expose()
+  hasDiagnostic?: boolean;
 }
 
 /** Contract DiagnosticResponse (0.2.0): the batch shape plus topic and timestamps. */

@@ -1,3 +1,4 @@
+import { DrizzleTopicBanks } from '../../src/shared/common/topic-banks';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { eq } from 'drizzle-orm';
 import { type Client } from 'pg';
@@ -33,7 +34,7 @@ describe('catalog topic lookup and the progress placement listener (integration)
   });
 
   it('GetTopicQuery returns the contract Topic, and null for unknown or malformed ids', async () => {
-    const query = new GetTopicQuery(new DrizzleTopicRepository(db));
+    const query = new GetTopicQuery(new DrizzleTopicRepository(db), new DrizzleTopicBanks(db));
 
     await expect(query.execute(topicId)).resolves.toEqual({
       id: topicId,
@@ -41,6 +42,7 @@ describe('catalog topic lookup and the progress placement listener (integration)
       aliases: ['lt'],
       parentId: null,
       description: null,
+      hasDiagnostic: false,
     });
     await expect(query.execute('00000000-0000-4000-8000-000000000000')).resolves.toBeNull();
     await expect(query.execute('not-a-uuid')).resolves.toBeNull();
