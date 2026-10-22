@@ -110,6 +110,13 @@ describe('parseEnv', () => {
     ).not.toThrow();
   });
 
+  it('treats an empty APP_VERSION as unset and validates KOYEB_GIT_SHA as hex', () => {
+    expect(parseEnv({ ...valid, APP_VERSION: '' }).APP_VERSION).toBeUndefined();
+    expect(parseEnv({ ...valid, KOYEB_GIT_SHA: 'a261098c0ffee1234567890abcdef1234567890' }).KOYEB_GIT_SHA).toBe('a261098c0ffee1234567890abcdef1234567890');
+    expect(parseEnv({ ...valid, KOYEB_GIT_SHA: '' }).KOYEB_GIT_SHA).toBeUndefined();
+    expect(() => parseEnv({ ...valid, KOYEB_GIT_SHA: 'main; rm -rf' })).toThrow(EnvValidationError);
+  });
+
   it('accepts a short APP_VERSION and rejects unsafe ones', () => {
     expect(parseEnv({ ...valid, APP_VERSION: '1.2.3+abc123' }).APP_VERSION).toBe('1.2.3+abc123');
     expect(() => parseEnv({ ...valid, APP_VERSION: 'v1 <script>' })).toThrow(EnvValidationError);

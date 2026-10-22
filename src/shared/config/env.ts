@@ -24,7 +24,10 @@ export const envSchema = z
     PORT: z.coerce.number().int().min(1).max(65535).default(3000),
     LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace', 'silent']).default('info'),
     APP_ORIGIN: originList,
-    APP_VERSION: z.string().regex(/^[\w.+-]{1,64}$/).optional(),
+    // An empty build arg (no KOYEB_GIT_SHA at build time) means unset, not invalid.
+    APP_VERSION: z.preprocess((v) => (v === '' ? undefined : v), z.string().regex(/^[\w.+-]{1,64}$/).optional()),
+    // Set by Koyeb for GitHub deployments at build and run time (koyeb.com/docs/build-and-deploy/environment-variables).
+    KOYEB_GIT_SHA: z.preprocess((v) => (v === '' ? undefined : v), z.string().regex(/^[0-9a-f]{7,64}$/i).optional()),
     DATABASE_URL: z.string().regex(/^postgres(ql)?:\/\/\S+$/, { error: 'must be a postgres:// connection string' }),
     DATABASE_SCHEMA: z
       .string()

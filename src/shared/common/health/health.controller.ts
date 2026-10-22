@@ -39,7 +39,8 @@ export class HealthController {
     });
   }
 
+  /** The deployed commit: the image's APP_VERSION, else Koyeb's runtime KOYEB_GIT_SHA, else `dev`. */
   private get version(): string {
-    return this.config.env.APP_VERSION ?? 'dev';
+    return this.config.env.APP_VERSION ?? this.config.env.KOYEB_GIT_SHA ?? 'dev';
   }
 }
