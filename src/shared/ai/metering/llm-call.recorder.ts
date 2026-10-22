@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { DATABASE, type Database } from '../../db';
 import { llmCalls } from '../../db/schema/ai';
+import { type BudgetScope } from '../budget/budget.guard';
 import { type Provider, type TokenUsage } from '../catalog';
 
 export const LLM_CALL_RECORDER = Symbol('LlmCallRecorder');
@@ -20,6 +21,7 @@ export interface LlmCallEntry {
   status: LlmCallStatus;
   failure: string | null;
   jobId: string | null;
+  budgetScope: BudgetScope;
 }
 
 export interface LlmCallRecorder {
@@ -48,6 +50,7 @@ export class DrizzleLlmCallRecorder implements LlmCallRecorder {
       status: entry.status,
       failure: entry.failure,
       jobId: entry.jobId,
+      budgetScope: entry.budgetScope,
     });
   }
 }

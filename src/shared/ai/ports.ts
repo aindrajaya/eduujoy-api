@@ -1,4 +1,5 @@
 import { type ZodType } from 'zod';
+import { type BudgetScope } from './budget/budget.guard';
 import { type ModelId, type Provider, type TokenUsage } from './catalog';
 
 export const STRUCTURED_GENERATOR = Symbol('StructuredGenerator');
@@ -29,6 +30,8 @@ export interface StructuredRequest<T> {
    */
   media?: { youtubeUrl: string; fps?: number; endOffsetSec?: number };
   jobId?: string;
+  /** The daily budget this call counts against; `free` when omitted. */
+  budgetScope?: BudgetScope;
   /** Aborts the provider call (a job's timeout signal). */
   signal?: AbortSignal;
 }
@@ -72,6 +75,7 @@ export interface EmbeddingRequest {
   /** Document titles aligned with `texts` (e.g. a topic's canonical name); missing ones become `none`. */
   titles?: (string | null)[];
   jobId?: string;
+  budgetScope?: BudgetScope;
 }
 
 export interface EmbeddingResult {
@@ -98,6 +102,7 @@ export interface WebSearchRequest {
   blockedDomains?: string[];
   maxTokens?: number;
   jobId?: string;
+  budgetScope?: BudgetScope;
   signal?: AbortSignal;
 }
 

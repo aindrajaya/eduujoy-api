@@ -75,7 +75,7 @@ export class DiscoverResources implements JobHandler<DiscoverPayload> {
     if (existing) return { resultRef, result: { poolId: existing.id, candidates: existing.candidateIds.length } };
 
     try {
-      await this.budget.assertCanStart('cold');
+      await this.budget.assertCanStart('cold', payload.budgetScope);
     } catch (error) {
       if (error instanceof AiBudgetExceededError) throw new NonRetryableJobError(error.message);
       throw error;
@@ -124,7 +124,7 @@ export class DiscoverResources implements JobHandler<DiscoverPayload> {
       for (const candidate of candidates) {
         const resourceId = ids.get(candidate.resource.url);
         if (!resourceId) continue;
-        const analyse: AnalysePayload = { poolId: pool.id, resourceId, topicId: payload.topicId, stage: payload.stage, abstract: candidate.abstract };
+        const analyse: AnalysePayload = { poolId: pool.id, resourceId, topicId: payload.topicId, stage: payload.stage, abstract: candidate.abstract, budgetScope: payload.budgetScope };
         await this.queue.enqueue(
           { type: ANALYSE_RESOURCE_JOB, idempotencyKey: `${pool.id}:${resourceId}`, payload: analyse, userId: null, maxAttempts: 3 },
           { tx, scope },
@@ -168,7 +168,7 @@ export class DiscoverResources implements JobHandler<DiscoverPayload> {
   /** A transient web search failure retries the job; a permanent one (refusal, bad request) leaves web results out. */
   private async findWeb(topic: DiscoveryTopic, payload: DiscoverPayload, plan: PoolPlan, includeVideos: boolean, ctx: JobContext): Promise<WebFind[]> {
     try {
-      return await this.web.find({ topic, stage: payload.stage, max: plan.maxWeb + WEB_HEADROOM, includeVideos, jobId: ctx.jobId, signal: ctx.signal });
+      return await this.web.find({ topic, stage: payload.stage, max: plan.maxWeb + WEB_HEADROOM, includeVideos, jobId: ctx.jobId, budgetScope: payload.budgetScope, signal: ctx.signal });
     } catch (error) {
       if (error instanceof AiCallError && !error.retryable) {
         this.warn('Web discovery failed', error);

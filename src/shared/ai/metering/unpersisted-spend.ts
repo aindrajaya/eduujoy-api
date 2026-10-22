@@ -1,5 +1,5 @@
 import { Logger } from '@nestjs/common';
-import { type SpendReader } from '../budget/budget.guard';
+import { type BudgetScope, type SpendReader } from '../budget/budget.guard';
 import { type LlmCallEntry, type LlmCallRecorder } from './llm-call.recorder';
 
 /**
@@ -8,19 +8,19 @@ import { type LlmCallEntry, type LlmCallRecorder } from './llm-call.recorder';
  * it must never under-count what this process spent (lead review, 22 Oct 2026).
  */
 export class UnpersistedSpend {
-  private readonly entries: { at: number; costUsd: number }[] = [];
+  private readonly entries: { at: number; costUsd: number; scope: BudgetScope }[] = [];
 
-  add(costUsd: number, at: Date): void {
-    this.entries.push({ at: at.getTime(), costUsd });
+  add(costUsd: number, at: Date, scope: BudgetScope = 'free'): void {
+    this.entries.push({ at: at.getTime(), costUsd, scope });
   }
 
   get count(): number {
     return this.entries.length;
   }
 
-  totalSince(since: Date): number {
+  totalSince(since: Date, scope?: BudgetScope): number {
     const from = since.getTime();
-    return this.entries.reduce((total, e) => (e.at >= from ? total + e.costUsd : total), 0);
+    return this.entries.reduce((total, e) => (e.at >= from && (scope === undefined || e.scope === scope) ? total + e.costUsd : total), 0);
   }
 }
 
@@ -38,9 +38,9 @@ export class PersistGuardRecorder implements LlmCallRecorder {
     try {
       await this.inner.record(entry);
     } catch (error) {
-      this.unpersisted.add(entry.costUsd, this.clock());
+      this.unpersisted.add(entry.costUsd, this.clock(), entry.budgetScope);
       this.logger.error(
-        { stage: entry.stage, costUsd: entry.costUsd, unpersistedRows: this.unpersisted.count },
+        { stage: entry.stage, costUsd: entry.costUsd, scope: entry.budgetScope, unpersistedRows: this.unpersisted.count },
         'llm_calls row not persisted; its cost still counts toward the daily AI budget in this process',
       );
       throw error;
@@ -55,7 +55,7 @@ export class GuardedSpendReader implements SpendReader {
     private readonly unpersisted: UnpersistedSpend,
   ) {}
 
-  async spentSince(since: Date): Promise<number> {
-    return (await this.persisted.spentSince(since)) + this.unpersisted.totalSince(since);
+  async spentSince(since: Date, scope: BudgetScope): Promise<number> {
+    return (await this.persisted.spentSince(since, scope)) + this.unpersisted.totalSince(since, scope);
   }
 }

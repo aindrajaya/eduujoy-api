@@ -19,6 +19,7 @@ function config(overrides: Partial<Env>): AppConfig {
     ANTHROPIC_API_KEY: 'a',
     GEMINI_API_KEY: 'g',
     AI_DAILY_BUDGET_USD: 5,
+    AI_DAILY_PAID_BUDGET_USD: 20,
     LEMONSQUEEZY_API_KEY: 'ls',
     LEMONSQUEEZY_STORE_ID: '1',
     LEMONSQUEEZY_WEBHOOK_SECRET: 'w'.repeat(40),

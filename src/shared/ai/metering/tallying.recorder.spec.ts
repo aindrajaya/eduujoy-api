@@ -14,6 +14,7 @@ const entry = (costUsd: number): LlmCallEntry => ({
   status: 'ok',
   failure: null,
   jobId: 'smoke',
+  budgetScope: 'operator',
 });
 
 describe('TallyingRecorder', () => {

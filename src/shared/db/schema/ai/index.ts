@@ -4,6 +4,12 @@ import { jobs } from '../jobs';
 
 export const llmProvider = pgEnum('llm_provider', ['anthropic', 'google']);
 export const llmCallStatus = pgEnum('llm_call_status', ['ok', 'error', 'timeout', 'invalid_output', 'refused']);
+/**
+ * Whose daily budget a call counts against (D1, user decision 23 Oct 2026): `free` (AI_DAILY_BUDGET_USD),
+ * `paid` (AI_DAILY_PAID_BUDGET_USD: subscription or credit charges) or `operator` (pre-generation and
+ * smoke scripts, capped by the script itself and counted in neither daily budget).
+ */
+export const budgetScope = pgEnum('budget_scope', ['free', 'paid', 'operator']);
 
 /** One row per model call; feeds the cost and latency dashboards (FR-25). Pruned after 90 days. */
 export const llmCalls = pgTable(
@@ -25,6 +31,7 @@ export const llmCalls = pgTable(
     costUsd: numeric('cost_usd', { precision: 12, scale: 6 }).notNull().default('0'),
     latencyMs: integer('latency_ms').notNull(),
     status: llmCallStatus('status').notNull(),
+    budgetScope: budgetScope('budget_scope').notNull().default('free'),
     /** AiFailure detail when status is not ok (rate_limited, billing, bad_request, ...). */
     failure: text('failure'),
     jobId: uuid('job_id').references(() => jobs.id, { onDelete: 'set null' }),
@@ -33,5 +40,6 @@ export const llmCalls = pgTable(
   (t) => [
     index('llm_calls_created_idx').on(t.createdAt),
     index('llm_calls_stage_model_idx').on(t.stage, t.model, t.createdAt),
+    index('llm_calls_scope_created_idx').on(t.budgetScope, t.createdAt),
   ],
 );

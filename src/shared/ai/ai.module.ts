@@ -72,7 +72,7 @@ const ANTHROPIC_CLIENT = Symbol('AnthropicClient');
     {
       provide: AiBudgetGuard,
       inject: [SPEND_READER, AppConfig],
-      useFactory: (spend: SpendReader, { env }: AppConfig) => new AiBudgetGuard(spend, env.AI_DAILY_BUDGET_USD),
+      useFactory: (spend: SpendReader, { env }: AppConfig) => new AiBudgetGuard(spend, { free: env.AI_DAILY_BUDGET_USD, paid: env.AI_DAILY_PAID_BUDGET_USD }),
     },
     { provide: PromptRegistry, useFactory: () => new PromptRegistry() },
   ],

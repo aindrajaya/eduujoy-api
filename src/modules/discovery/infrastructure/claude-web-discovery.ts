@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { z } from 'zod';
-import { PromptRegistry, WEB_SEARCHER, type WebSearcher, wrapUntrusted } from '../../../shared/ai';
+import { type BudgetScope, PromptRegistry, WEB_SEARCHER, type WebSearcher, wrapUntrusted } from '../../../shared/ai';
 import { type DiscoveryTopic, type WebDiscovery, type WebFind } from '../application/ports/web-discovery';
 import { BLOCKED_DOMAINS, normaliseUrl, officialDocRule, type Stage, type WebResourceType, youtubeIdFromUrl } from '../domain';
 
@@ -31,7 +31,7 @@ export class ClaudeWebDiscovery implements WebDiscovery {
     private readonly prompts: PromptRegistry,
   ) {}
 
-  async find(input: { topic: DiscoveryTopic; stage: Stage; max: number; includeVideos: boolean; jobId?: string; signal?: AbortSignal }): Promise<WebFind[]> {
+  async find(input: { topic: DiscoveryTopic; stage: Stage; max: number; includeVideos: boolean; jobId?: string; budgetScope?: BudgetScope; signal?: AbortSignal }): Promise<WebFind[]> {
     const request = [
       `Topic: ${input.topic.name}`,
       `Domain: ${input.topic.domain ?? 'unknown'} (official docs: ${officialDocRule(input.topic.domain)})`,
@@ -50,6 +50,7 @@ export class ClaudeWebDiscovery implements WebDiscovery {
       maxTokens: 2_000,
       schema: answer,
       ...(input.jobId ? { jobId: input.jobId } : {}),
+      ...(input.budgetScope ? { budgetScope: input.budgetScope } : {}),
       ...(input.signal ? { signal: input.signal } : {}),
     });
 

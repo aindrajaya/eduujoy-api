@@ -14,6 +14,7 @@ const valid = {
   ANTHROPIC_API_KEY: 'sk-ant-test',
   GEMINI_API_KEY: 'gemini-test',
   AI_DAILY_BUDGET_USD: '5',
+  AI_DAILY_PAID_BUDGET_USD: '5',
   LEMONSQUEEZY_API_KEY: 'ls-api-key',
   LEMONSQUEEZY_STORE_ID: '123456',
   LEMONSQUEEZY_WEBHOOK_SECRET: 'w'.repeat(40),
@@ -63,6 +64,7 @@ describe('parseEnv', () => {
       expect(error).toBeInstanceOf(EnvValidationError);
       expect((error as EnvValidationError).keys).toEqual([
         'AI_DAILY_BUDGET_USD',
+        'AI_DAILY_PAID_BUDGET_USD',
         'ANTHROPIC_API_KEY',
         'API_PUBLIC_URL',
         'APP_ORIGIN',

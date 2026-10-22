@@ -20,6 +20,7 @@ const PLACEHOLDER_ENV: Record<string, string> = {
   ANTHROPIC_API_KEY: 'openapi-export-placeholder',
   GEMINI_API_KEY: 'openapi-export-placeholder',
   AI_DAILY_BUDGET_USD: '1',
+  AI_DAILY_PAID_BUDGET_USD: '1',
   LEMONSQUEEZY_API_KEY: 'openapi-export-placeholder',
   LEMONSQUEEZY_STORE_ID: '1',
   LEMONSQUEEZY_WEBHOOK_SECRET: 'openapi-export-placeholder-secret',

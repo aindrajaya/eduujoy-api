@@ -16,7 +16,7 @@ import { GeminiResourceAnalyzer } from '../src/modules/discovery/infrastructure/
 import { DrizzleDiscoveryRepository } from '../src/modules/discovery/infrastructure/drizzle-discovery.repository';
 import { DrizzleQuotaCounter } from '../src/modules/discovery/infrastructure/drizzle-quota.counter';
 import { type ResourceDead, type ResourcesReady, pacificDay, poolPlan, type Stage, YOUTUBE_SEARCH_GUARD, YOUTUBE_SEARCH_QUOTA } from '../src/modules/discovery/domain';
-import { type AiBudgetGuard, type Embedder, type EmbeddingRequest, PromptRegistry, type StructuredGenerator, type StructuredRequest, type WebSearcher } from '../src/shared/ai';
+import { AiBudgetGuard, type BudgetScope, type Embedder, type EmbeddingRequest, PromptRegistry, type StructuredGenerator, type StructuredRequest, type WebSearcher } from '../src/shared/ai';
 import { DrizzleLlmCallRecorder } from '../src/shared/ai/metering/llm-call.recorder';
 import { MeteredEmbedder, MeteredStructuredGenerator, MeteredWebSearcher } from '../src/shared/ai/metering/metered';
 import { ReviewQueue } from '../src/shared/common/review';
@@ -359,6 +359,32 @@ describe('discovery (integration, A8 Verify)', () => {
 
     expect(p.analyzer.calls).toHaveLength(1);
     expect(p.analyzer.calls[0]?.clip).toEqual({ fps: 0.25, endSec: null });
+  });
+
+  it("meters a paid discovery and its analyses under 'paid', and free spend at its cap does not block it", async () => {
+    const recorder = new DrizzleLlmCallRecorder(db);
+    const p = pipeline(new Date('2026-10-30T12:00:00Z'));
+    const id = await topic('Paid pool');
+    const searcher: WebSearcher = {
+      search: () =>
+        Promise.resolve({
+          hits: [{ url: `https://paid-pool-${tag}.example/guide`, title: 'Guide', pageAge: null }],
+          answer: { picks: [{ url: `https://paid-pool-${tag}.example/guide`, type: 'article' }] },
+          queries: ['q'],
+          call: { provider: 'anthropic', model: 'claude-haiku-5-5', usage: { inputTokens: 1_000, cacheWriteTokens: 0, cacheReadTokens: 0, outputTokens: 100 }, webSearchRequests: 2, latencyMs: 777 },
+        }) as never,
+    };
+    // Free traffic has spent its whole budget today; paid has its own ceiling.
+    const guard = new AiBudgetGuard({ spentSince: (_since: Date, scope: BudgetScope) => Promise.resolve(scope === 'free' ? 3 : 0) }, { free: 3, paid: 20 });
+    await expect(guard.assertCanStart('cold', 'free')).rejects.toThrow();
+    const discover = new DiscoverResources(p.repo, p.videos, new ClaudeWebDiscovery(new MeteredWebSearcher(searcher, recorder), new PromptRegistry()), p.papers, p.links, p.quota, p.clock, new GetTopicProfileQuery(new DrizzleTopicRepository(db)), guard, { enqueue: (r: EnqueueRequest) => (p.queued.push(r), Promise.resolve({ job: { id: 'x' }, created: true })) } as unknown as JobQueue, new UnitOfWork(db, p.bus));
+
+    await discover.run(discover.parse({ topicId: id, stage: 'novice', poolVersion: 1, budgetScope: 'paid' }), ctx());
+
+    const [row] = await db.select({ scope: llmCalls.budgetScope }).from(llmCalls).where(and(eq(llmCalls.stage, 'discover'), eq(llmCalls.latencyMs, 777)));
+    expect(row?.scope).toBe('paid');
+    const queued = p.queued.filter((q) => q.type === ANALYSE_RESOURCE_JOB);
+    expect(queued.map((q) => (q.payload as { budgetScope: string }).budgetScope)).toEqual(['paid']);
   });
 });
 

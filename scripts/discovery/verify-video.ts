@@ -66,6 +66,7 @@ async function main(): Promise<void> {
       source: video.channel,
       durationMin: video.durationMin,
       content: null,
+      budgetScope: 'operator',
       clip: { fps: plan.fps, endSec: plan.endSec },
     });
     const seconds = plan.endSec ?? video.durationMin * 60;

@@ -3,6 +3,7 @@ import { ReviewQueue } from '../../shared/common/review';
 import { AppConfig } from '../../shared/config';
 import { EventBus } from '../../shared/events';
 import { JobExecutor, JobQueue } from '../../shared/jobs';
+import { BillingModule } from '../billing/billing.module';
 import { CatalogModule } from '../catalog/catalog.module';
 import { AnalyseResource } from './application/analyse-resource.handler';
 import { DiscoverResources } from './application/discover-resources.handler';
@@ -28,7 +29,7 @@ import { YouTubeDataApiAdapter } from './infrastructure/youtube-data-api.adapter
  * analysis into ResourceCards, dedupe, and the shared topic + stage pools that pathing builds on.
  */
 @Module({
-  imports: [CatalogModule],
+  imports: [CatalogModule, BillingModule],
   providers: [
     RequestDiscovery,
     DiscoverResources,

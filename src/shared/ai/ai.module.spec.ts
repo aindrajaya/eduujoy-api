@@ -15,7 +15,7 @@ class FakeDbModule {}
 
 describe('AiModule', () => {
   it('wires metered ports, the budget guard and the prompt registry without touching the network', async () => {
-    const env = { ANTHROPIC_API_KEY: 'a', GEMINI_API_KEY: 'g', AI_DAILY_BUDGET_USD: 5 } as Env;
+    const env = { ANTHROPIC_API_KEY: 'a', GEMINI_API_KEY: 'g', AI_DAILY_BUDGET_USD: 5, AI_DAILY_PAID_BUDGET_USD: 20 } as Env;
     const moduleRef = await Test.createTestingModule({
       imports: [ConfigModule.forRoot(env), FakeDbModule, AiModule],
     }).compile();

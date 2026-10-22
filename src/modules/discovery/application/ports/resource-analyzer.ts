@@ -1,3 +1,4 @@
+import { type BudgetScope } from '../../../../shared/ai';
 import { type Bloom, type Concept, type Quality, type Stage } from '../../domain';
 import { type DiscoveryTopic } from './web-discovery';
 
@@ -16,6 +17,8 @@ export interface AnalysisInput {
   clip?: { fps: number; endSec: number | null };
   /** Page text or a paper abstract (untrusted); null for videos. */
   content: string | null;
+  /** The daily budget the analysis counts against (D1). */
+  budgetScope?: BudgetScope;
   jobId?: string;
   signal?: AbortSignal;
 }

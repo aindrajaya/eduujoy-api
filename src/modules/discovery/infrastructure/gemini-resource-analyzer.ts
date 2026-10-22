@@ -65,6 +65,7 @@ export class GeminiResourceAnalyzer implements ResourceAnalyzer {
         ? { media: { youtubeUrl: input.url, ...(input.clip ? { fps: input.clip.fps, ...(input.clip.endSec === null ? {} : { endOffsetSec: input.clip.endSec }) } : {}) } }
         : {}),
       ...(input.jobId ? { jobId: input.jobId } : {}),
+      ...(input.budgetScope ? { budgetScope: input.budgetScope } : {}),
       ...(input.signal ? { signal: input.signal } : {}),
     });
     return { ...(output as Omit<Analysis, 'model' | 'inputTokens'>), model: call.model, inputTokens: call.usage.inputTokens + call.usage.cacheReadTokens };

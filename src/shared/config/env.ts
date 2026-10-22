@@ -46,6 +46,9 @@ export const envSchema = z
     OPENALEX_API_KEY: z.string().min(1),
     // Daily AI spend cap in US$ (PRD-API §5); no default, so the operator must choose it.
     AI_DAILY_BUDGET_USD: z.coerce.number().positive().max(1000),
+    // D1 (user, 23 Oct 2026): a separate daily ceiling for paid traffic (subscription or credit charges),
+    // so paying users are never blocked by free-tier spend. No default, like the free budget.
+    AI_DAILY_PAID_BUDGET_USD: z.coerce.number().positive().max(1000),
     API_PUBLIC_URL: z.url({ protocol: /^https?$/ }).transform((value) => value.replace(/\/+$/, '')),
     // Billing (A12, FR-23). LEMONSQUEEZY_MODE has no default: a test-mode event must never credit in a
     // live deployment, or the other way round, so the operator states which one this is.

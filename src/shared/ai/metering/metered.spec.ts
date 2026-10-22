@@ -62,6 +62,7 @@ describe('MeteredStructuredGenerator', () => {
         status: 'ok',
         failure: null,
         jobId: '11111111-1111-4111-8111-111111111111',
+        budgetScope: 'free',
       },
     ]);
   });
@@ -156,3 +157,15 @@ describe('MeteredWebSearcher', () => {
     expect(recorder.entries[0]).toMatchObject({ status: 'invalid_output', webSearchRequests: 2, costUsd: 0.02 });
   });
 });
+
+describe('budget scope on metered rows', () => {
+  it("records the request's scope, and free when it has none", async () => {
+    const t = setup((model) => Promise.resolve({ output: { ok: true }, call: call(model) }));
+
+    await t.generator.generate({ ...request('gemini-3.5-flash-lite'), budgetScope: 'paid' });
+    await t.generator.generate(request('gemini-3.5-flash-lite'));
+
+    expect(t.recorder.entries.map((e) => e.budgetScope)).toEqual(['paid', 'free']);
+  });
+});
+
