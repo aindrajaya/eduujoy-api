@@ -398,9 +398,9 @@ The Max 5x plan includes US$100 of Claude API credits each billing cycle. They c
 | Window | Task | Model and mode | Volume | Est. cost (US$) |
 | --- | --- | --- | --- | --- |
 | 22–24 Oct | Prompt development for `PathDesigner` and `Grader` | Sonnet 5.5, standard | Interactive iterations | 20 |
-| 25 Oct | Seed topic taxonomy: names, aliases, descriptions, prerequisite edges | Sonnet 5.5, Batch | 150 topics (50 software, 50 STEM, 50 non-technical) | 3 |
-| 26 Oct | Concept maps: learning objectives per Dreyfus stage × Bloom band | Sonnet 5.5, Batch | 150 topics | 5 |
-| 27–28 Oct | Diagnostic item banks with rubrics | Sonnet 5.5, Batch | 150 topics × 72 items | 20 |
+| 25 Oct | Seed topic taxonomy: names, aliases, descriptions, prerequisite edges | Sonnet 5.5, Batch | 160 topics (50 software, 50 STEM, 60 non-technical) | 3 |
+| 26 Oct | Concept maps: learning objectives per Dreyfus stage × Bloom band | Sonnet 5.5, Batch | 160 topics | 5 |
+| 27–28 Oct | Diagnostic item banks with rubrics | Sonnet 5.5, Batch | 160 topics × 70 items | 20 |
 | 29 Oct | Item quality review (LLM judge, cached rubric) | Sonnet 5.5, Batch + prompt cache | \~10,800 items | 18 |
 | 30 Oct | Golden-set draft paths and rubrics for in-house review | Sonnet 5.5, Batch | 90 cases | 5 |
 | 31 Oct–2 Nov | Eval runs: LLM judge across prompt versions | Sonnet 5.5, Batch | 90 cases × 5 versions | 10 |
@@ -471,7 +471,7 @@ Fourteen slices, each sized for one Claude Code session and one pull request, in
 | ID | Slice | Covers | Done when | Verify |
 | --- | --- | --- | --- | --- |
 | A0 | Repo bootstrap: Nest app, strict TS, ESLint boundaries rule, Zod env config, pino, helmet, health endpoints, Dockerfile, CI | — | App deploys to Koyeb and serves at api.eduujoy.aindrajaya.my.id with a valid certificate; `/health` returns 200 | `pnpm lint && pnpm test && pnpm build`; `curl /health` |
-| A1 | Database: Drizzle schema for all master + API tables, `pgvector` extension, HNSW indexes, seed loader for `seed/*.json` | Data model | Migrations apply on a Neon branch; seed loads 150 topics | `pnpm db:migrate && pnpm db:seed`; integration tests |
+| A1 | Database: Drizzle schema for all master + API tables, `pgvector` extension, HNSW indexes, seed loader for `seed/*.json` | Data model | Migrations apply on a Neon branch; seed loads 160 topics | `pnpm db:migrate && pnpm db:seed`; integration tests |
 | A2 | Identity: register, login, refresh rotation, logout, Google OAuth, `auth/me`, guard chain, roles, problem+json filter and `ValidationPipe` | FR-23, Section 6 | Cookies set with correct flags; reuse detection revokes family | e2e: `auth.e2e-spec.ts` |
 | A3 | Contract layer: serializer, Swagger export, `openapi:check`, request IDs; reuses A2's problem+json filter and `ValidationPipe` | Section 7 | `openapi.json` committed; invalid DTO returns 400 with field errors | `pnpm openapi:check` |
 | A4 | AI shared kernel: ports, Claude and Gemini adapters, `llm_calls` metering, budget guard, fixtures | Section 11 | Adapters pass contract tests offline | `pnpm test ai` |
