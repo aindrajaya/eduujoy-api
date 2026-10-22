@@ -15,6 +15,7 @@ import { CreateCheckout, isProviderCheckoutUrl } from '../../src/modules/billing
 import { CheckoutUnavailableError, QuotaExceededError, SubscriptionActiveError } from '../../src/modules/billing/application/errors';
 import { orderRef, ProcessBillingEvent } from '../../src/modules/billing/application/process-billing-event.handler';
 import { ReceiveWebhook, verifySignature, WebhookSignatureError } from '../../src/modules/billing/application/receive-webhook.usecase';
+import { ReprocessBillingEvent } from '../../src/modules/billing/application/reprocess-billing-event.usecase';
 import { ReservePath } from '../../src/modules/billing/application/reserve-path.usecase';
 
 const SECRET = 'unit-webhook-secret-'.padEnd(40, 'z');
@@ -130,6 +131,38 @@ describe('credit packs', () => {
     t.provider.orderItems.set('5001', [{ variantId: VARIANTS.creditPack, quantity: 2 }]);
     await expect(t.processor.run(t.processor.parse(job.payload))).resolves.toMatchObject({ result: { outcome: 'credited:2' } });
     expect(t.repo.balance(USER)).toBe(2);
+  });
+
+  it('billing:reprocess re-queues only an unprocessed event, and two runs credit once', async () => {
+    const t = setup();
+    t.provider.orderItemsStatus = 404;
+    const raw = Buffer.from(JSON.stringify(orderEvent({ userId: USER, orderId: 5001 })));
+    await t.receive.execute(raw, sign(raw));
+    const first = t.enqueued.at(-1);
+    if (!first) throw new Error('nothing enqueued');
+    await expect(t.processor.run(t.processor.parse(first.payload))).rejects.toBeInstanceOf(NonRetryableJobError);
+    const eventId = (first.payload as { eventId: string }).eventId;
+
+    let tick = 0;
+    const reprocess = new ReprocessBillingEvent(t.repo, { enqueue: (r: { type: string; payload: unknown; idempotencyKey: string }) => (t.enqueued.push(r), Promise.resolve({ job: { id: `job-${++tick}` }, created: true })) } as never, () => new Date(Date.UTC(2026, 9, 22, 12, 0, tick)));
+    await expect(reprocess.execute('not-a-uuid', { dryRun: false })).resolves.toEqual({ outcome: 'not_found' });
+    await expect(reprocess.execute(randomUUID(), { dryRun: false })).resolves.toEqual({ outcome: 'not_found' });
+    await expect(reprocess.execute(eventId, { dryRun: true })).resolves.toEqual({ outcome: 'would_queue', type: 'order_created' });
+    const queuedBefore = t.enqueued.length;
+
+    // The operator runs it twice before the API wakes up; both jobs run.
+    t.provider.orderItemsStatus = null;
+    t.provider.orderItems.set('5001', [{ variantId: VARIANTS.creditPack, quantity: 2 }]);
+    await expect(reprocess.execute(eventId, { dryRun: false })).resolves.toMatchObject({ outcome: 'queued' });
+    await expect(reprocess.execute(eventId, { dryRun: false })).resolves.toMatchObject({ outcome: 'queued' });
+    const jobs = t.enqueued.slice(queuedBefore);
+    expect(new Set(jobs.map((j) => j.idempotencyKey)).size).toBe(2);
+    const outcomes = [];
+    for (const job of jobs) outcomes.push(((await t.processor.run(t.processor.parse(job.payload))).result as { outcome: string }).outcome);
+
+    expect(outcomes).toEqual(['credited:2', 'already_processed']);
+    expect(t.repo.balance(USER)).toBe(2);
+    await expect(reprocess.execute(eventId, { dryRun: false })).resolves.toMatchObject({ outcome: 'already_processed', type: 'order_created' });
   });
 
   it('ignores unknown variants and events from the other mode', async () => {
