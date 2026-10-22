@@ -296,10 +296,12 @@ The master PRD's tables stand; the API adds session, job, submission and billing
 
 | Use case | Query | Threshold (start values, tune on golden set) |
 | --- | --- | --- |
-| Topic resolution (FR-02) | Nearest topics to the learner's text | ≥ 0.88 auto-match; 0.75–0.88 offer ≤ 3 choices; below, create a new topic |
+| Topic resolution (FR-02) | Nearest topics to the learner's text | ≥ 0.70 auto-match; 0.66–0.70 offer ≤ 3 choices; below, create a new topic. Tuned on the A6 golden set with `gemini-embedding-2` (start values were 0.88 / 0.75). `createNew: true` skips matching and creates from the text (the learner rejected the choices) |
 | Resource dedupe | Nearest card in the same topic | ≥ 0.95 treated as duplicate; keep the higher quality score |
 | Resource swap (US-07) | Same topic, same stage, overlapping Bloom tags, not disliked by this user | Top 3 by cosine × quality |
 | Remedial step resource | Same concept, one Bloom level lower | Top 1 not already in the path |
+
+**Topic resolution during an embedding outage:** if the query embedding fails, the API falls back to `pg_trgm` similarity on topic names and aliases and returns `choices` when any score ≥ 0.3. It never creates a topic during an outage; with no close name it returns 503 `SERVICE_UNAVAILABLE` with `Retry-After: 30`.
 
 ```sql
 SELECT rc.resource_id, 1 - (rc.embedding <=> $1) AS similarity
