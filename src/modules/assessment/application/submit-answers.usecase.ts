@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { UnitOfWork } from '../../../shared/events';
-import { type Answer, BatchMismatchError, isCorrect, submit } from '../domain/diagnostic';
+import { type Answer, BatchMismatchError, endedClimbing, isCorrect, submit } from '../domain/diagnostic';
 import { PlacementComputed } from '../domain/events/placement-computed.event';
 import { type DiagnosticBatchView, itemsView, placementView } from './diagnostic.view';
 import { DiagnosticConflictError, DiagnosticNotFoundError } from './errors';
@@ -32,6 +32,8 @@ export function answersRequestHash(command: SubmitAnswersCommand): string {
 /** POST /v1/diagnostics/:id/answers: grades the batch and returns the next batch or the placement. */
 @Injectable()
 export class SubmitDiagnosticAnswers {
+  private readonly logger = new Logger(SubmitDiagnosticAnswers.name);
+
   constructor(
     @Inject(DIAGNOSTIC_REPOSITORY) private readonly repo: DiagnosticRepository,
     private readonly uow: UnitOfWork,
@@ -99,6 +101,15 @@ export class SubmitDiagnosticAnswers {
         basis: step.basis,
       });
       const { stage, bloom } = step.placement.position;
+      if (step.basis === 'items' && endedClimbing(step.state)) {
+        // Counted to size the A7 cap (user decision, 22 Oct 2026): grep "Placement may be capped".
+        scope.afterCommit(() => {
+          this.logger.log(
+            { placementId, topicId: session.topicId, stage, bloom, items: step.state.results.length, estimates: step.state.estimates },
+            'Placement may be capped: the estimate was still rising when the diagnostic ended',
+          );
+        });
+      }
       scope.publish(new PlacementComputed(placementId, session.userId, session.topicId, stage, bloom, step.placement.confidence, step.basis));
       return remember({ diagnosticId: session.id, status: 'completed', progress: step.progress, placement: placementView(placementId, step.placement) });
     });

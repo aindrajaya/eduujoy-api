@@ -87,6 +87,17 @@ export function shouldStop(state: Pick<DiagnosticState, 'results' | 'estimates'>
   return false;
 }
 
+/**
+ * The diagnostic ended while the estimate was still rising (the last batch moved it up). One-cell moves
+ * and 12 items cap how far a placement can climb from its start (about 3 cells; the A7 "silent expert"
+ * edge), so such a placement may sit below the learner's real level. Counted, not corrected (user
+ * decision, 22 Oct 2026).
+ */
+export function endedClimbing(state: Pick<DiagnosticState, 'estimates'>): boolean {
+  const [prev, last] = state.estimates.slice(-2);
+  return prev !== undefined && last !== undefined && last > prev;
+}
+
 /** The learner-facing estimate of how many items this diagnostic will take. */
 export function estimatedTotal(state: Pick<DiagnosticState, 'results' | 'estimates'>, done: boolean, unseen: number): number {
   const answered = state.results.length;

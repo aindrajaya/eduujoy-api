@@ -1,4 +1,4 @@
-import { batchTargets, estimatedTotal, nextEstimate, selectBatch, shouldStop } from './adaptive';
+import { batchTargets, endedClimbing, estimatedTotal, nextEstimate, selectBatch, shouldStop } from './adaptive';
 import { type BankItem, isCorrect } from './grading';
 import { cellIndex, LADDER } from './ladder';
 import { placeFromItems, placeFromSelfReport } from './placement';
@@ -40,6 +40,28 @@ describe('startCell', () => {
     [{ years: 12, projectsShipped: 5 }, 6],
   ])('maps %j to cell %i', (report, cell) => {
     expect(startCell(report)).toBe(cell);
+  });
+});
+
+describe('UI self-report choices (single choice, contract selfReport)', () => {
+  // ui-lane maps its five choices to these values; pinned so a change here is a contract change.
+  it.each([
+    ["I'm new to this", { years: 0, projectsShipped: 0 }, 1],
+    ['Some experience', { years: 1, projectsShipped: 1 }, 2],
+    ['Comfortable', { years: 3, projectsShipped: 3 }, 4],
+    ['Experienced', { years: 6, projectsShipped: 10 }, 6],
+    ['Expert', { years: 10, projectsShipped: 20 }, 8],
+  ])('%s %j starts at cell %d', (_label, report, cell) => {
+    expect(startCell(report)).toBe(cell);
+  });
+});
+
+describe('endedClimbing (the A7 cap signal)', () => {
+  it('is true only when the last batch moved the estimate up', () => {
+    expect(endedClimbing({ estimates: [1, 2, 3] })).toBe(true);
+    expect(endedClimbing({ estimates: [3, 3] })).toBe(false);
+    expect(endedClimbing({ estimates: [4, 3] })).toBe(false);
+    expect(endedClimbing({ estimates: [1] })).toBe(false);
   });
 });
 
