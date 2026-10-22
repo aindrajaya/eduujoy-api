@@ -904,11 +904,11 @@
         },
         {
           "id": "b",
-          "label": "`INSERT ... ON CONFLICT (email) DO NOTHING;`"
+          "label": "`INSERT ... ON CONFLICT (email) DO NOTHING RETURNING name = EXCLUDED.name;`"
         },
         {
           "id": "c",
-          "label": "`INSERT ... WHERE NOT EXISTS UPDATE name = EXCLUDED.name;`"
+          "label": "`INSERT ... WHERE NOT EXISTS (email) UPDATE SET name = EXCLUDED.name;`"
         },
         {
           "id": "d",
