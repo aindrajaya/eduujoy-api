@@ -35,7 +35,7 @@ describe('GoogleOAuthHttpClient (contract, offline)', () => {
   }
 
   it('builds an authorization URL with PKCE S256, nonce and the registered redirect URI', () => {
-    const url = new URL(new GoogleOAuthHttpClient(config, fetch, jwks).authorizationUrl({ state: 's', codeChallenge: 'cc', nonce: 'n' }));
+    const url = new URL(new GoogleOAuthHttpClient(config, fetch, jwks).authorizationUrl({ state: 's', codeChallenge: 'cc', nonce: 'n', reauth: false }));
 
     expect(url.origin + url.pathname).toBe('https://accounts.google.com/o/oauth2/v2/auth');
     expect(Object.fromEntries(url.searchParams)).toMatchObject({
@@ -58,6 +58,7 @@ describe('GoogleOAuthHttpClient (contract, offline)', () => {
       email: 'ada@example.com',
       emailVerified: true,
       name: 'Ada',
+      authTime: null,
     });
     expect(calls[0]?.url).toBe('https://oauth2.googleapis.com/token');
     expect(Object.fromEntries(calls[0]?.body ?? [])).toMatchObject({ grant_type: 'authorization_code', code: 'code-1', code_verifier: 'v-1', redirect_uri: config.redirectUri });
@@ -72,6 +73,24 @@ describe('GoogleOAuthHttpClient (contract, offline)', () => {
     const { client } = clientReturning({ id_token: await idToken(claims, opts) });
 
     await expect(client.exchange({ code: 'c', codeVerifier: 'v', nonce: 'n-1' })).rejects.toThrow();
+  });
+
+  it('asks for a fresh Google sign-in on reauth (prompt=login, max_age=0)', () => {
+    const client = new GoogleOAuthHttpClient(config, fetch, jwks);
+    const reauth = new URL(client.authorizationUrl({ state: 's', codeChallenge: 'cc', nonce: 'n', reauth: true })).searchParams;
+    const normal = new URL(client.authorizationUrl({ state: 's', codeChallenge: 'cc', nonce: 'n', reauth: false })).searchParams;
+
+    expect([reauth.get('prompt'), reauth.get('max_age')]).toEqual(['login', '0']);
+    expect([normal.get('prompt'), normal.get('max_age')]).toEqual(['select_account', null]);
+  });
+
+  it('returns auth_time from the id_token when present, and rejects a non-integer one', async () => {
+    const withTime = clientReturning({ id_token: await idToken({ auth_time: 1_792_670_000 }) });
+    await expect(withTime.client.exchange({ code: 'c', codeVerifier: 'v', nonce: 'n-1' })).resolves.toMatchObject({ authTime: 1_792_670_000 });
+    const without = clientReturning({ id_token: await idToken({}) });
+    await expect(without.client.exchange({ code: 'c', codeVerifier: 'v', nonce: 'n-1' })).resolves.toMatchObject({ authTime: null });
+    const bad = clientReturning({ id_token: await idToken({ auth_time: 'yesterday' }) });
+    await expect(bad.client.exchange({ code: 'c', codeVerifier: 'v', nonce: 'n-1' })).rejects.toBeInstanceOf(GoogleExchangeError);
   });
 
   it('rejects an id_token signed by an unknown key', async () => {
@@ -105,6 +124,7 @@ describe('JoseOAuthStateStore', () => {
     nonce: 'n'.repeat(43),
     origin: 'https://eduujoy.aindrajaya.my.id',
     returnTo: '/paths',
+    reauth: false,
   };
 
   it('round-trips the state', async () => {
@@ -117,6 +137,17 @@ describe('JoseOAuthStateStore', () => {
 
     await expect(store.open(await other.seal(state))).resolves.toBeNull();
     await expect(store.open(`${sealed.slice(0, -2)}xx`)).resolves.toBeNull();
+  });
+
+  it('rejects a reauth flag forged into a signed state, and reads old states as normal sign-ins', async () => {
+    const sealed = await store.seal(state);
+    const [header, payload, signature] = sealed.split('.');
+    const forged = Buffer.from(JSON.stringify({ ...(JSON.parse(Buffer.from(payload ?? '', 'base64url').toString()) as object), reauth: true })).toString('base64url');
+
+    await expect(store.open(`${header}.${forged}.${signature}`)).resolves.toBeNull();
+    // A state sealed before 0.8.0 has no reauth field (the store signs whatever it is given).
+    const before080 = Object.fromEntries(Object.entries(state).filter(([k]) => k !== 'reauth')) as unknown as typeof state;
+    await expect(store.open(await store.seal(before080))).resolves.toEqual({ ...state, reauth: false });
   });
 
   it.each(['//evil.example', '/a\\b', 'https://evil.example', '/today\n'])(

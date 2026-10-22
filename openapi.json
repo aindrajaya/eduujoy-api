@@ -756,7 +756,7 @@
     "contact": {},
     "description": "Generated from the NestJS app; checked against docs/contract/openapi.v0.yaml by `pnpm openapi:check`.",
     "title": "Eduujoy API",
-    "version": "0.7.1-v0"
+    "version": "0.8.0-v0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -827,6 +827,16 @@
               "maxLength": 512,
               "pattern": "^/",
               "type": "string"
+            }
+          },
+          {
+            "description": "Re-authentication for a sensitive action (DELETE /v1/me). Google is asked for a fresh\nsign-in (prompt=login, max_age=0), and the API counts the session as freshly signed in\nonly if the ID token's auth_time is within the last 10 minutes; otherwise the sign-in\nsucceeds but DELETE /v1/me still returns REAUTH_REQUIRED.\n",
+            "in": "query",
+            "name": "reauth",
+            "required": false,
+            "schema": {
+              "default": false,
+              "type": "boolean"
             }
           }
         ],

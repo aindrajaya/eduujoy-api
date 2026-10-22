@@ -1,5 +1,5 @@
 import { ApiHideProperty, ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Allow, IsOptional, IsString, MaxLength } from 'class-validator';
+import { Allow, IsIn, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class GoogleStartQueryDto {
   /** Never rejected: anything that isn't a safe same-site path falls back (see safeReturnTo). */
@@ -11,6 +11,19 @@ export class GoogleStartQueryDto {
   })
   @Allow()
   returnTo?: unknown;
+
+  @ApiPropertyOptional({
+    type: Boolean,
+    default: false,
+    description:
+      'Re-authentication for a sensitive action (DELETE /v1/me). Google is asked for a fresh\n' +
+      'sign-in (prompt=login, max_age=0), and the API counts the session as freshly signed in\n' +
+      "only if the ID token's auth_time is within the last 10 minutes; otherwise the sign-in\n" +
+      'succeeds but DELETE /v1/me still returns REAUTH_REQUIRED.\n',
+  })
+  @IsOptional()
+  @IsIn(['true', 'false'])
+  reauth?: 'true' | 'false';
 }
 
 /** Google appends scope, authuser, prompt, hd and iss; they are accepted and ignored. */

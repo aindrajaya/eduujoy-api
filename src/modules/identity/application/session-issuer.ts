@@ -27,9 +27,12 @@ export class SessionIssuer {
     private readonly accessTokens: AccessTokenService,
   ) {}
 
-  /** Starts a new session family: a real sign-in, so its time is the family's auth time. */
-  async start(user: UserRecord, meta: RequestMeta): Promise<IssuedSession> {
-    const { token, next } = this.nextSession(user.id, randomUUID(), meta, this.clock());
+  /**
+   * Starts a new session family. A real sign-in, so by default its time is the family's auth time;
+   * a Google re-authentication passes the verified (or fallback) time instead.
+   */
+  async start(user: UserRecord, meta: RequestMeta, authTime: Date = this.clock()): Promise<IssuedSession> {
+    const { token, next } = this.nextSession(user.id, randomUUID(), meta, authTime);
     const session = await this.sessions.create(next);
     return { user, accessToken: await this.sign(user, session.id), refreshToken: token };
   }

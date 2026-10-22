@@ -13,10 +13,12 @@ function cookie(res: Response, name: string): string | undefined {
 const value = (res: Response, name: string): string => cookie(res, name)?.split(';')[0]?.slice(name.length + 1) ?? '';
 
 class FakeGoogle implements GoogleOAuthClient {
-  identity: GoogleIdentity = { sub: `g-${randomUUID()}`, email: `g-${randomUUID()}@example.com`, emailVerified: true, name: 'Grace' };
+  identity: GoogleIdentity = { sub: `g-${randomUUID()}`, email: `g-${randomUUID()}@example.com`, emailVerified: true, name: 'Grace', authTime: null };
+  lastReauth: boolean | null = null;
   exchanged: { codeVerifier: string; nonce: string }[] = [];
 
-  authorizationUrl({ state, codeChallenge, nonce }: { state: string; codeChallenge: string; nonce: string }): string {
+  authorizationUrl({ state, codeChallenge, nonce, reauth }: { state: string; codeChallenge: string; nonce: string; reauth: boolean }): string {
+    this.lastReauth = reauth;
     return `https://accounts.google.com/o/oauth2/v2/auth?state=${state}&code_challenge=${codeChallenge}&nonce=${nonce}`;
   }
   exchange(input: { code: string; codeVerifier: string; nonce: string }): Promise<GoogleIdentity> {
@@ -81,6 +83,43 @@ describe('Google OAuth (e2e)', () => {
     const evil = await start('', 'https://evil.example/phish');
     const fromEvil = await callback(`code=abc&state=${evil.state}`, evil.oauthCookie);
     expect(fromEvil.headers.location).toBe('http://localhost:5173/today');
+  });
+
+  describe('reauth (contract 0.8.0)', () => {
+    const csrf = { Origin: 'http://localhost:5173', 'X-Requested-With': 'eduujoy' };
+    const signIn = async (authTime: number | null) => {
+      google.identity = { ...google.identity, authTime };
+      const { state, oauthCookie } = await start('?returnTo=/account&reauth=true');
+      const res = await callback(`code=abc&state=${state}`, oauthCookie);
+      return value(res, 'ej_at');
+    };
+    const del = (access: string) => http().delete('/v1/me').set(csrf).set('Cookie', `ej_at=${access}`);
+
+    it('asks Google for a fresh sign-in only when reauth=true, and rejects a malformed flag', async () => {
+      await start('?reauth=true');
+      expect(google.lastReauth).toBe(true);
+      await start('?reauth=false');
+      expect(google.lastReauth).toBe(false);
+      await start('');
+      expect(google.lastReauth).toBe(false);
+      await http().get('/v1/auth/google?reauth=yes').expect(400);
+    });
+
+    it('lets DELETE /v1/me through after a fresh Google re-authentication', async () => {
+      const access = await signIn(Math.floor(Date.now() / 1000) - 30);
+      await del(access).expect(204);
+    });
+
+    it.each([
+      ['stale', () => Math.floor(Date.now() / 1000) - 11 * 60],
+      ['missing', () => null],
+      ['far-future', () => Math.floor(Date.now() / 1000) + 3600],
+    ])('signs in with a %s auth_time, but deletion still asks again', async (_label, authTime) => {
+      const access = await signIn(authTime());
+      await http().get('/v1/auth/me').set('Cookie', `ej_at=${access}`).expect(200);
+      const res = await del(access).expect(401);
+      expect((res.body as { code: string }).code).toBe('REAUTH_REQUIRED');
+    });
   });
 
   it('rejects a mismatched state with ?error=oauth_state and sets no session', async () => {

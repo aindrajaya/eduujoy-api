@@ -45,6 +45,7 @@ export class GoogleAuthController {
     const { redirectUrl, sealedState } = await this.startSignIn.execute({
       origin: this.originFromReferer(req.get('referer')),
       returnTo: safeReturnTo(query.returnTo),
+      reauth: query.reauth === 'true',
     });
     res.cookie(OAUTH_COOKIE, sealedState, oauthCookieOptions);
     res.redirect(302, redirectUrl);

@@ -15,6 +15,7 @@ const idTokenClaims = z.object({
   email_verified: z.boolean(),
   nonce: z.string(),
   name: z.string().max(200).optional(),
+  auth_time: z.number().int().positive().optional(),
 });
 
 export class GoogleExchangeError extends Error {
@@ -35,7 +36,7 @@ export class GoogleOAuthHttpClient implements GoogleOAuthClient {
     private readonly keys: JWTVerifyGetKey = createRemoteJWKSet(new URL(JWKS_URL)),
   ) {}
 
-  authorizationUrl({ state, codeChallenge, nonce }: { state: string; codeChallenge: string; nonce: string }): string {
+  authorizationUrl({ state, codeChallenge, nonce, reauth }: { state: string; codeChallenge: string; nonce: string; reauth: boolean }): string {
     const url = new URL(AUTH_ENDPOINT);
     url.search = new URLSearchParams({
       response_type: 'code',
@@ -46,7 +47,8 @@ export class GoogleOAuthHttpClient implements GoogleOAuthClient {
       nonce,
       code_challenge: codeChallenge,
       code_challenge_method: 'S256',
-      prompt: 'select_account',
+      // A re-authentication must not be satisfied by the browser's existing Google session.
+      ...(reauth ? { prompt: 'login', max_age: '0' } : { prompt: 'select_account' }),
     }).toString();
     return url.toString();
   }
@@ -83,6 +85,7 @@ export class GoogleOAuthHttpClient implements GoogleOAuthClient {
       email: claims.data.email,
       emailVerified: claims.data.email_verified,
       name: claims.data.name ?? null,
+      authTime: claims.data.auth_time ?? null,
     };
   }
 }

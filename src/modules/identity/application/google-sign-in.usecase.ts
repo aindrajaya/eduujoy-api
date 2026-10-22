@@ -10,6 +10,24 @@ import { type IssuedSession, type RequestMeta, SessionIssuer } from './session-i
 
 export type OAuthFailure = 'oauth_state' | 'oauth_denied' | 'oauth_failed' | 'email_unverified';
 
+/** A re-authentication counts only if Google signed the learner in this recently (DELETE /v1/me's window). */
+export const REAUTH_FRESH_MS = 10 * 60 * 1000;
+/** Tolerated clock difference with Google when auth_time is slightly ahead of our clock. */
+export const AUTH_TIME_SKEW_MS = 60 * 1000;
+/** A re-authentication that can't be verified as fresh: the sign-in works, deletion still asks again. */
+export const UNVERIFIED_AUTH_TIME = new Date(0);
+
+/**
+ * The session's auth time after a Google re-authentication: the id_token's auth_time when it is an
+ * integer within the last 10 minutes (and not more than the skew in the future), else the epoch.
+ */
+export function reauthTime(authTime: number | null, now: Date): Date {
+  if (authTime === null || !Number.isSafeInteger(authTime)) return UNVERIFIED_AUTH_TIME;
+  const at = authTime * 1000;
+  if (at > now.getTime() + AUTH_TIME_SKEW_MS || now.getTime() - at > REAUTH_FRESH_MS) return UNVERIFIED_AUTH_TIME;
+  return new Date(Math.min(at, now.getTime()));
+}
+
 /** Carries where to send the browser back to, so the failure redirect stays on an allowed origin. */
 export class OAuthFailedError extends Error {
   override name = 'OAuthFailedError';
@@ -37,13 +55,14 @@ export class StartGoogleSignIn {
   ) {}
 
   /** `origin` must already be validated against APP_ORIGIN and `returnTo` passed through safeReturnTo. */
-  async execute(input: { origin: string; returnTo: string }): Promise<{ redirectUrl: string; sealedState: string }> {
+  async execute(input: { origin: string; returnTo: string; reauth?: boolean }): Promise<{ redirectUrl: string; sealedState: string }> {
+    const reauth = input.reauth === true;
     const state = random(32);
     const codeVerifier = random(48);
     const nonce = random(32);
     const codeChallenge = createHash('sha256').update(codeVerifier).digest('base64url');
-    const sealedState = await this.states.seal({ state, codeVerifier, nonce, ...input });
-    return { redirectUrl: this.google.authorizationUrl({ state, codeChallenge, nonce }), sealedState };
+    const sealedState = await this.states.seal({ state, codeVerifier, nonce, origin: input.origin, returnTo: input.returnTo, reauth });
+    return { redirectUrl: this.google.authorizationUrl({ state, codeChallenge, nonce, reauth }), sealedState };
   }
 }
 
@@ -77,7 +96,9 @@ export class CompleteGoogleSignIn {
     if (!identity.emailVerified) throw new OAuthFailedError('email_unverified', saved.origin);
 
     const user = await this.resolveUser(identity);
-    return { session: await this.issuer.start(user, meta), redirectTo: `${saved.origin}${saved.returnTo}` };
+    // Without reauth nothing changes: a Google sign-in counts as signed in now.
+    const authTime = saved.reauth ? reauthTime(identity.authTime, this.clock()) : undefined;
+    return { session: await this.issuer.start(user, meta, authTime), redirectTo: `${saved.origin}${saved.returnTo}` };
   }
 
   private async resolveUser(identity: { sub: string; email: string; name: string | null }): Promise<UserRecord> {
