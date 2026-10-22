@@ -60,7 +60,7 @@ export function callUsage(usage: Anthropic.Beta.BetaUsage, requestedModel: strin
   return { usage: sumUsage(parts), parts };
 }
 
-function toAiError(error: unknown): AiCallError {
+export function toAiError(error: unknown): AiCallError {
   if (error instanceof AiCallError) return error;
   if (error instanceof Anthropic.APIConnectionTimeoutError) return new AiCallError('timeout', 'Claude request timed out');
   if (error instanceof Anthropic.APIConnectionError) return new AiCallError('server', 'Could not reach the Claude API');
