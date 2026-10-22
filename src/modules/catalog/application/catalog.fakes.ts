@@ -119,6 +119,15 @@ export class FakeTopicRepository implements TopicRepository {
     return Promise.resolve(rows);
   }
 
+  listAll(afterId: string | null, limit: number): Promise<TopicToEmbed[]> {
+    const rows = [...this.topics.values()]
+      .filter((t) => afterId === null || t.id > afterId)
+      .sort((a, b) => a.id.localeCompare(b.id))
+      .slice(0, limit)
+      .map(({ id, canonicalName, aliases, description }) => ({ id, canonicalName, aliases, description }));
+    return Promise.resolve(rows);
+  }
+
   setEmbedding(id: string, embedding: TopicEmbedding): Promise<void> {
     const t = this.topics.get(id);
     if (t) t.embedding = embedding;

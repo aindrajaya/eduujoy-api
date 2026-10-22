@@ -67,6 +67,21 @@ describe('DrizzleTopicRepository (integration)', () => {
     expect(mine[1]?.similarity).toBeCloseTo(Math.cos(1.2 - Math.acos(0.9)), 4);
   });
 
+  it('pages through every topic by id for a full re-embed, embedded or not', async () => {
+    const seen: string[] = [];
+    let after: string | null = null;
+    for (;;) {
+      const page = await repo.listAll(after, 2);
+      if (page.length === 0) break;
+      seen.push(...page.map((t) => t.id));
+      after = page.at(-1)?.id ?? null;
+    }
+    expect(new Set(seen).size).toBe(seen.length);
+    expect([...seen].sort()).toEqual(seen);
+    const names = (await db.select({ id: topics.id, name: topics.canonicalName }).from(topics)).filter((t) => t.name.endsWith(tag));
+    expect(names.every((t) => seen.includes(t.id))).toBe(true);
+  });
+
   it('creates a learner topic once per slug and counts creates per user and day', async () => {
     const [user] = await db.insert(users).values({ email: `topics-${randomUUID()}@example.com` }).returning();
     const userId = user?.id ?? '';

@@ -284,7 +284,7 @@ async function runSample(client: Anthropic, topics: SeedTopic[], targets: Unit[]
   let accepted = 0;
   try {
     for (const unit of targets) {
-      const message = await client.messages.create(requestParams(topics, unit), { timeout: 180_000, maxRetries: 2 });
+      const message = await client.messages.create(requestParams(topics, unit), { timeout: 600_000, maxRetries: 2 }); // up to 32,000 output tokens
       usage = addUsage(usage, fromApiUsage(message.usage));
       if (acceptReply(unit, message)) accepted++;
     }

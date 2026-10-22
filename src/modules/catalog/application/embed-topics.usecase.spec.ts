@@ -31,4 +31,20 @@ describe('EmbedTopics', () => {
     expect(repo.topics.get(stale.id)?.embedding?.version).toBe(EMBEDDING_VERSION);
     await expect(new EmbedTopics(repo, embedder).execute()).resolves.toEqual({ embedded: 0, batches: 0 });
   });
+
+  it('with all, re-embeds every topic under the current version, even ones already current', async () => {
+    const repo = new FakeTopicRepository();
+    for (let i = 0; i < EMBED_BATCH_SIZE + 3; i++) {
+      repo.add({ slug: `c-${i}`, canonicalName: `Current ${i}`, embedding: { vector: [9.5, 9.5], model: EMBEDDING_MODEL, version: EMBEDDING_VERSION } });
+    }
+    const embedder = new CountingEmbedder();
+
+    const result = await new EmbedTopics(repo, embedder).execute(undefined, { all: true });
+
+    expect(result).toEqual({ embedded: EMBED_BATCH_SIZE + 3, batches: 2 });
+    expect([...repo.topics.values()].every((t) => t.embedding?.vector[0] !== 9.5 && t.embedding?.version === EMBEDDING_VERSION)).toBe(true);
+    // Without `all`, nothing is stale.
+    await expect(new EmbedTopics(repo, embedder).execute()).resolves.toEqual({ embedded: 0, batches: 0 });
+  });
 });
+
