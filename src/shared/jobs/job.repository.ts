@@ -131,16 +131,17 @@ export class JobRepository {
   }
 
   /**
-   * Milliseconds until the earliest *future* run_after among waiting jobs of `types` (database clock),
-   * for the executor's next timer. Jobs already due are not counted: either a slot frees up (and the
-   * finishing job pumps) or they were just claimed.
+   * Milliseconds until the earliest run_after among waiting jobs of `types` (database clock), for the
+   * executor's next timer; zero or negative when one is already due. A job can fall due between the
+   * claim that missed it and this query (a short RescheduleJob delay against Neon latency), so due
+   * jobs count too, or nothing would ever wake for them.
    */
   async msUntilNextDue(types: string[]): Promise<number | null> {
     if (types.length === 0) return null;
     const [row] = await this.db
       .select({ ms: sql<string | null>`extract(epoch from (min(${jobs.runAfter}) - now())) * 1000` })
       .from(jobs)
-      .where(and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types), gt(jobs.runAfter, sql`now()`)));
+      .where(and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types)));
     return row?.ms == null ? null : Number(row.ms);
   }
 

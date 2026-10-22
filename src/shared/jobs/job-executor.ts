@@ -28,6 +28,9 @@ export interface ExecutorOptions {
   random?: () => number;
 }
 
+/** Timer floor for a job that is already due but was not claimed (scheduleNext). */
+const DUE_RECHECK_MS = 250;
+
 class TimeoutError extends Error {
   override name = 'JobTimeoutError';
 }
@@ -194,14 +197,15 @@ export class JobExecutor {
   }
 
   /**
-   * Arms one timer for the earliest *future* run_after among types with a free slot. Saturated types
-   * need no timer (a finishing job pumps), and due-now jobs were just claimed, so this can't spin.
+   * Arms one timer for the earliest run_after among types with a free slot. Saturated types need no
+   * timer (a finishing job pumps). A job already due (it fell due after the claim missed it, or
+   * another instance holds its row) is retried after DUE_RECHECK_MS, so this can't spin.
    */
   private async scheduleNext(): Promise<void> {
     clearTimeout(this.timer);
     const untilDue = await this.repo.msUntilNextDue(this.typesWithFreeSlots());
     if (untilDue === null || this.stopped) return;
-    const delay = Math.max(0, Math.min(Math.ceil(untilDue), 2 ** 31 - 1));
+    const delay = untilDue <= 0 ? DUE_RECHECK_MS : Math.min(Math.ceil(untilDue), 2 ** 31 - 1);
     this.timer = setTimeout(() => void this.pump(), delay);
     this.timer.unref();
   }
