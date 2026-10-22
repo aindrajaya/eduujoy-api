@@ -22,7 +22,7 @@ const WORK_DIR = join(SEED_DIR, '_work', 'items');
 const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('diagnostic-items', 'v2');
 
 const MAX_TOKENS = 16_000;
-const EXPECTED_OUTPUT_TOKENS = 5_000;
+const EXPECTED_OUTPUT_TOKENS = 7_000; // prompt v2 sample: 6,872 per request
 
 export const STAGES = [
   { stage: 'novice', abbr: 'nov', band: ['C1', 'C2'] },
