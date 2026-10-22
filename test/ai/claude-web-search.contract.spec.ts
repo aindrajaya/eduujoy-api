@@ -4,8 +4,8 @@ import { ClaudeWebSearcher } from '../../src/shared/ai/claude/claude.web-search'
 import { AiCallError } from '../../src/shared/ai/errors';
 import { FixtureServer, type FixtureResponse } from './fixture-server';
 
-// Synthetic responses in the documented shape (platform.claude.com web-search-tool, "Response"), until
-// `pnpm discovery:smoke --record` saves a real Haiku 5.5 exchange.
+// Synthetic responses in the documented shape (platform.claude.com web-search-tool, "Response"); the
+// live run (`pnpm discovery:smoke`) exercises the real API.
 const picks = z.object({ picks: z.array(z.object({ url: z.string(), type: z.enum(['article', 'official_doc', 'related']) })) });
 const prompt = { name: 'web-discovery', version: 'v1', text: 'Find learning resources.' };
 const request = { stage: 'discover', model: 'claude-haiku-5-5' as const, prompt, input: 'React hooks, novice', maxUses: 6, schema: picks, blockedDomains: ['contentfarm.example'] };

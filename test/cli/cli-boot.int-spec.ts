@@ -19,6 +19,7 @@ const CLIS = [
   { script: 'db:seed', file: 'src/shared/db/cli/seed.ts', args: ['--dir', 'seed'], out: 'db:seed: ok (150 topics)' },
   { script: 'catalog:embed-topics', file: 'scripts/catalog/embed-topics.ts', args: [], out: 'catalog:embed-topics: ok (EmbedTopics)' },
   { script: 'billing:reprocess', file: 'scripts/billing/reprocess.ts', args: [], out: 'billing:reprocess: ok (ReprocessBillingEvent)' },
+  { script: 'discovery:smoke', file: 'scripts/discovery/smoke.ts', args: [], out: 'discovery:smoke: ok (DiscoverResources, AnalyseResource)' },
 ];
 
 describe('CLI boot (integration)', () => {
