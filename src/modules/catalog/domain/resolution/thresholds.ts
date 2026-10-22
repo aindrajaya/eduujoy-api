@@ -6,3 +6,9 @@
 export const MATCH_THRESHOLD = 0.7;
 export const CHOICE_THRESHOLD = 0.66;
 export const MAX_CHOICES = 3;
+/**
+ * An auto-match also needs the nearest topic to beat the runner-up by this much; closer pairs are offered
+ * as choices (user decision, 22 Oct 2026, after the held-out check). Tuned on the golden set only: the
+ * golden phrases meant to be ambiguous had gaps up to 0.038, and the closest clear match above that 0.042.
+ */
+export const MATCH_MARGIN = 0.04;
