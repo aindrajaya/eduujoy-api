@@ -60,7 +60,8 @@ const generatedItem = z
     if (!single && (item.correct.length < 2 || item.correct.length > 3)) fail('multi_choice needs 2 or 3 correct options');
     if (new Set(item.correct).size !== item.correct.length) fail('correct has duplicates');
     if (item.correct.some((i) => i >= item.options.length)) fail('correct points past the options');
-    if (new Set(item.options.map((o) => o.toLowerCase())).size !== item.options.length) fail('duplicate options');
+    // Case matters: `F(b) - F(a)` and `f(b) - f(a)` are different answers.
+    if (new Set(item.options.map((o) => o.replace(/\s+/g, ' '))).size !== item.options.length) fail('duplicate options');
   });
 type GeneratedItem = z.infer<typeof generatedItem>;
 
