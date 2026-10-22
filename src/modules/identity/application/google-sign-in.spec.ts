@@ -88,7 +88,7 @@ describe('CompleteGoogleSignIn', () => {
   it('links an existing password account by verified email, clearing the password and its sessions', async () => {
     const t = setup();
     const existing = await t.users.create({ email: 'ada@example.com', name: null, passwordHash: await fakeHasher.hash('attacker-set password'), googleSub: null, emailVerified: false, roles: ['learner'] });
-    await t.sessions.create({ userId: existing.id, familyId: 'f', refreshHash: 'h:attacker', userAgent: null, ipHash: null, expiresAt: new Date('2027-01-01') });
+    await t.sessions.create({ userId: existing.id, familyId: 'f', refreshHash: 'h:attacker', userAgent: null, ipHash: null, authTime: new Date(), expiresAt: new Date('2027-01-01') });
     const { started, saved } = await begin(t);
 
     const result = await t.complete.execute({ code: 'c', state: saved.state, sealedState: started.sealedState }, meta);

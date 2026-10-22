@@ -46,6 +46,9 @@ export class FakeSessions implements SessionRepository {
   findByRefreshHash(hash: string): Promise<SessionRecord | null> {
     return Promise.resolve([...this.rows.values()].find((s) => s.refreshHash === hash) ?? null);
   }
+  findById(id: string): Promise<SessionRecord | null> {
+    return Promise.resolve(this.rows.get(id) ?? null);
+  }
   async rotate(previousId: string, next: NewSession, now: Date): Promise<SessionRecord | null> {
     const previous = this.rows.get(previousId);
     if (!previous || previous.replacedBy !== null || previous.revokedAt !== null) return null;

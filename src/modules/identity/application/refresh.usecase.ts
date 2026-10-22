@@ -32,7 +32,8 @@ export class RefreshSession {
     const user = await this.users.findById(session.userId);
     if (!user) throw new SessionInvalidError('revoked');
 
-    const { token, next } = this.issuer.nextSession(user.id, session.familyId, meta);
+    // A refresh is not a sign-in: the new session keeps the family's original auth time.
+    const { token, next } = this.issuer.nextSession(user.id, session.familyId, meta, session.authTime);
     const rotated = await this.sessions.rotate(session.id, next, now);
     if (!rotated) throw new SessionInvalidError('concurrent');
     return { user, accessToken: await this.issuer.sign(user, rotated.id), refreshToken: token };

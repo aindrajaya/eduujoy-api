@@ -9,6 +9,7 @@ const RECORD = {
   id: sessions.id,
   userId: sessions.userId,
   familyId: sessions.familyId,
+  authTime: sessions.authTime,
   expiresAt: sessions.expiresAt,
   revokedAt: sessions.revokedAt,
   replacedBy: sessions.replacedBy,
@@ -26,6 +27,11 @@ export class DrizzleSessionRepository implements SessionRepository {
 
   async findByRefreshHash(hash: string): Promise<SessionRecord | null> {
     const [row] = await this.db.select(RECORD).from(sessions).where(eq(sessions.refreshHash, hash)).limit(1);
+    return row ?? null;
+  }
+
+  async findById(id: string): Promise<SessionRecord | null> {
+    const [row] = await this.db.select(RECORD).from(sessions).where(eq(sessions.id, id)).limit(1);
     return row ?? null;
   }
 

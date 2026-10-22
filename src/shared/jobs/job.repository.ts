@@ -145,6 +145,18 @@ export class JobRepository {
   }
 
   /**
+   * Account deletion (A13): removes the learner's jobs that aren't running (their events cascade).
+   * A running job finishes on its own; deleting the user then sets its user_id to null.
+   */
+  async deleteForUser(userId: string, exec: DbExecutor = this.db): Promise<number> {
+    const rows = await exec
+      .delete(jobs)
+      .where(and(eq(jobs.userId, userId), sql`${jobs.status} <> 'running'`))
+      .returning({ id: jobs.id });
+    return rows.length;
+  }
+
+  /**
    * Deletes finished jobs (succeeded or dead) last updated more than `olderThanMs` ago; their
    * job_events go with them (ON DELETE CASCADE). Keeps the Neon free tier's 1 GB in check.
    */

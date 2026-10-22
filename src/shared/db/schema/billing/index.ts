@@ -21,14 +21,17 @@ export const entitlements = pgTable('entitlements', {
   ...withUpdatedAt,
 }, (t) => [index('entitlements_provider_subscription_idx').on(t.providerSubscriptionId)]);
 
-/** Signed credit movements; the balance is SUM(delta). `external_ref` makes purchases idempotent. */
+/**
+ * Signed credit movements; the balance is SUM(delta). `external_ref` makes purchases idempotent. On
+ * account deletion the rows stay for refund and fraud handling: `user_id` goes null and `subject_ref`
+ * holds a random tombstone id shared with the learner's billing events (user decision, 22 Oct 2026).
+ */
 export const creditLedger = pgTable(
   'credit_ledger',
   {
     id: uuid('id').primaryKey().defaultRandom(),
-    userId: uuid('user_id')
-      .notNull()
-      .references(() => users.id, { onDelete: 'cascade' }),
+    userId: uuid('user_id').references(() => users.id, { onDelete: 'set null' }),
+    subjectRef: text('subject_ref'),
     delta: integer('delta').notNull(),
     reason: creditReason('reason').notNull(),
     externalRef: text('external_ref'),

@@ -13,8 +13,11 @@ export const CORS_ALLOWED_HEADERS = [
   'If-None-Match',
   'Last-Event-ID',
 ];
-/** Readable cross-origin by allow-listed origins (contract 0.3.0-v0): Retry-After on 429 and 503 AI_BUDGET_EXCEEDED. */
-export const CORS_EXPOSED_HEADERS = ['X-Request-Id', 'Retry-After'];
+/**
+ * Readable cross-origin by allow-listed origins: Retry-After on 429 and 503 (contract 0.3.0-v0), and
+ * Content-Disposition so the UI can name the account export file (contract 0.7.1-v0).
+ */
+export const CORS_EXPOSED_HEADERS = ['X-Request-Id', 'Retry-After', 'Content-Disposition'];
 
 /** HTTP hardening shared by main.ts and the e2e harness, so tests exercise the real stack. */
 export function configureApp(app: NestExpressApplication, config: AppConfig): void {

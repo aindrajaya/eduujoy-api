@@ -20,6 +20,9 @@ import { DrizzleUserRepository } from './infrastructure/drizzle-user.repository'
 import { GoogleOAuthHttpClient } from './infrastructure/google-oauth.client';
 import { HmacSecretHasher } from './infrastructure/hmac-secret.hasher';
 import { JoseOAuthStateStore } from './infrastructure/jose-oauth-state.store';
+import { ACCOUNT_DATA } from '../../shared/common/account';
+import { GetSessionAuthTime } from './application/get-session-auth-time.query';
+import { IdentityAccountData } from './infrastructure/identity-account-data';
 import { AuthController } from './interface/auth.controller';
 import { GoogleAuthController } from './interface/google-auth.controller';
 
@@ -35,6 +38,8 @@ import { GoogleAuthController } from './interface/google-auth.controller';
     StartGoogleSignIn,
     CompleteGoogleSignIn,
     SessionIssuer,
+    GetSessionAuthTime,
+    { provide: ACCOUNT_DATA.identity, useClass: IdentityAccountData },
     { provide: USER_REPOSITORY, useClass: DrizzleUserRepository },
     { provide: SESSION_REPOSITORY, useClass: DrizzleSessionRepository },
     { provide: LOGIN_ATTEMPT_REPOSITORY, useClass: DrizzleLoginAttemptRepository },
@@ -61,6 +66,6 @@ import { GoogleAuthController } from './interface/google-auth.controller';
       useFactory: ({ env }: AppConfig) => new JoseOAuthStateStore(env.JWT_ACCESS_SECRET, env.API_PUBLIC_URL),
     },
   ],
-  exports: [SessionIssuer, USER_REPOSITORY, GOOGLE_OAUTH_CLIENT],
+  exports: [SessionIssuer, USER_REPOSITORY, GOOGLE_OAUTH_CLIENT, GetSessionAuthTime, ACCOUNT_DATA.identity],
 })
 export class IdentityModule {}

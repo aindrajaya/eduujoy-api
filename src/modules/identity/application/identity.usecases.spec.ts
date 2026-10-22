@@ -134,6 +134,19 @@ describe('RefreshSession', () => {
     expect(rows[0]).toMatchObject({ replacedBy: rows[1]?.id, revokedAt: t.clock.now });
   });
 
+  it('keeps the sign-in time through every rotation: a refresh is not a re-authentication', async () => {
+    const t = await signedIn();
+    const signedInAt = new Date(t.clock.now.getTime());
+    t.clock.advance(20 * 60 * 1000);
+    const second = await t.refresh.execute(t.issued.refreshToken, meta);
+    t.clock.advance(20 * 60 * 1000);
+    await t.refresh.execute(second.refreshToken, meta);
+
+    const rows = [...t.sessions.rows.values()];
+    expect(rows).toHaveLength(3);
+    expect(rows.map((r) => r.authTime.getTime())).toEqual([signedInAt.getTime(), signedInAt.getTime(), signedInAt.getTime()]);
+  });
+
   it('revokes the whole family when a rotated token is reused after the grace window', async () => {
     const t = await signedIn();
     const second = await t.refresh.execute(t.issued.refreshToken, meta);

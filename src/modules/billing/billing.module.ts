@@ -16,6 +16,8 @@ import { DrizzleQuotaRepository } from './infrastructure/drizzle-quota.repositor
 import { LemonSqueezyNotificationParser } from './infrastructure/lemonsqueezy-notification.parser';
 import { LemonSqueezyProvider } from './infrastructure/lemonsqueezy.provider';
 import { BillingController } from './interface/billing.controller';
+import { ACCOUNT_DATA } from '../../shared/common/account';
+import { BillingAccountData } from './infrastructure/billing-account-data';
 
 /** Billing (PRD-API §4, A12): Lemon Squeezy checkout and webhooks, entitlements and the credit ledger. */
 @Module({
@@ -31,8 +33,9 @@ import { BillingController } from './interface/billing.controller';
     { provide: NOTIFICATION_PARSER, useClass: LemonSqueezyNotificationParser },
     { provide: BILLING_PROVIDER, inject: [AppConfig], useFactory: (config: AppConfig) => new LemonSqueezyProvider(config) },
     { provide: BILLING_CLOCK, useValue: () => new Date() },
+    { provide: ACCOUNT_DATA.billing, useClass: BillingAccountData },
   ],
-  exports: [GetQuotaQuery, ReservePath],
+  exports: [GetQuotaQuery, ReservePath, ACCOUNT_DATA.billing],
 })
 export class BillingModule implements OnModuleInit {
   constructor(

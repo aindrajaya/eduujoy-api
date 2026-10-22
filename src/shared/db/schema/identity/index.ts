@@ -62,6 +62,11 @@ export const sessions = pgTable(
     userAgent: text('user_agent'),
     ipHash: text('ip_hash'),
     ...withCreatedAt,
+    /**
+     * When the learner signed in (password or Google) to start this family; refresh rotation copies it,
+     * so a refresh never renews it. DELETE /v1/me requires it within the last 10 minutes.
+     */
+    authTime: timestamp('auth_time', { withTimezone: true }).notNull(),
     expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
     revokedAt: timestamp('revoked_at', { withTimezone: true }),
   },

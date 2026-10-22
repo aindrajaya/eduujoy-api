@@ -756,7 +756,7 @@
     "contact": {},
     "description": "Generated from the NestJS app; checked against docs/contract/openapi.v0.yaml by `pnpm openapi:check`.",
     "title": "Eduujoy API",
-    "version": "0.7.0-v0"
+    "version": "0.7.1-v0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -1619,6 +1619,124 @@
         "summary": "Submit a batch of answers; returns the next batch or the placement (FR-04).",
         "tags": [
           "assessment"
+        ]
+      }
+    },
+    "/v1/me": {
+      "delete": {
+        "description": "Requires a sign-in (password or Google, not a token refresh) within the last 10 minutes.\nOtherwise 401 with code `REAUTH_REQUIRED`: the client must not try a refresh for it (a\nrefresh keeps the original sign-in time); it asks the learner to sign in again, then retries.\n",
+        "operationId": "meDelete",
+        "parameters": [
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted and signed out; both cookies cleared."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in (`UNAUTHENTICATED`), or the sign-in is older than 10 minutes (`REAUTH_REQUIRED`)."
+          },
+          "403": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not the owner, missing role or CSRF rejected."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Delete my account and personal data; signs out (clears both cookies).",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/me/export": {
+      "get": {
+        "description": "No re-authentication needed; rate-limited.",
+        "operationId": "meExport",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The export, sent as an attachment (`Content-Disposition`).",
+            "headers": {
+              "Content-Disposition": {
+                "description": "Attachment file name. Exposed to allow-listed origins via CORS.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "429": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Rate limited (code RATE_LIMITED).",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Download all my personal data as JSON (GDPR-level export, master PRD §12; PRD-API §12).",
+        "tags": [
+          "auth"
         ]
       }
     },

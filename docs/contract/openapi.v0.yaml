@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Eduujoy API
-  version: 0.7.0-v0
+  version: 0.7.1-v0
   summary: Frozen v0 contract for the Eduujoy MVP.
   description: |
     Frozen v0 contract, written from PRD-API Section 7 (endpoints), Section 8 and master PRD
@@ -17,8 +17,9 @@ info:
     - Auth is cookie-based (`ej_at`, `ej_rt`, HttpOnly). Unsafe methods require
       `X-Requested-With: eduujoy` and an allow-listed `Origin` (CsrfGuard).
     - Every error is `application/problem+json` (RFC 9457).
-    - CORS exposes `X-Request-Id` and `Retry-After` to allow-listed origins, so the UI can read
-      both on cross-origin responses (Retry-After on 429 and on 503 AI_BUDGET_EXCEEDED).
+    - CORS exposes `X-Request-Id`, `Retry-After` and `Content-Disposition` to allow-listed origins,
+      so the UI can read them on cross-origin responses (Retry-After on 429 and 503;
+      Content-Disposition on the data export).
     - Realtime payloads (SSE and Socket.IO) are listed under `x-sse-events` and
       `x-socket-events`, and their payloads are defined in `components.schemas`.
 servers:
@@ -183,7 +184,9 @@ paths:
         '200':
           description: The export, sent as an attachment (`Content-Disposition`).
           headers:
-            Content-Disposition: { schema: { type: string } }
+            Content-Disposition:
+              description: Attachment file name. Exposed to allow-listed origins via CORS.
+              schema: { type: string }
           content:
             application/json:
               schema: { type: object, additionalProperties: true }
