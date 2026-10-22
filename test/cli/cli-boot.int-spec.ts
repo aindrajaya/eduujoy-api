@@ -20,6 +20,7 @@ const CLIS = [
   { script: 'catalog:embed-topics', file: 'scripts/catalog/embed-topics.ts', args: [], out: 'catalog:embed-topics: ok (EmbedTopics)' },
   { script: 'billing:reprocess', file: 'scripts/billing/reprocess.ts', args: [], out: 'billing:reprocess: ok (ReprocessBillingEvent)' },
   { script: 'discovery:smoke', file: 'scripts/discovery/smoke.ts', args: [], out: 'discovery:smoke: ok (DiscoverResources, AnalyseResource)' },
+  { script: 'discovery:verify-video', file: 'scripts/discovery/verify-video.ts', args: [], out: 'discovery:verify-video: ok (GeminiResourceAnalyzer)' },
 ];
 
 describe('CLI boot (integration)', () => {
