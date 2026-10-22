@@ -19,7 +19,7 @@ import { spread } from './sample';
 const COMMAND = 'items';
 const ITEMS_DIR = join(SEED_DIR, 'items');
 const WORK_DIR = join(SEED_DIR, '_work', 'items');
-const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('diagnostic-items', 'v1');
+const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('diagnostic-items', 'v2');
 
 const MAX_TOKENS = 16_000;
 const EXPECTED_OUTPUT_TOKENS = 5_000;
@@ -64,18 +64,67 @@ const generatedItem = z
   });
 type GeneratedItem = z.infer<typeof generatedItem>;
 
-/** The reply for one stage: exactly the stage's Bloom levels and the per-cell kind mix. */
-export function replySchema(spec: StageSpec): z.ZodType<{ items: GeneratedItem[] }> {
-  return z.object({ items: z.array(generatedItem).length(ITEMS_PER_STAGE) }).superRefine(({ items }, ctx) => {
-    for (const bloom of spec.band) {
-      for (const kind of KINDS) {
-        const n = items.filter((i) => i.bloom === bloom && i.kind === kind).length;
-        if (n !== PER_CELL[kind]) ctx.addIssue({ code: 'custom', message: `${bloom} ${kind}: ${n}, expected ${PER_CELL[kind]}` });
-      }
+const replyShape = z.object({ items: z.array(z.unknown()) });
+
+export type Selection = { items: GeneratedItem[]; dropped: string[] } | { short: string[]; dropped: string[] };
+
+/**
+ * Picks one stage's items from a reply. Each item is checked on its own; invalid items, items outside
+ * the stage's band and surplus items are dropped, and the first valid items per Bloom cell and kind are
+ * kept (PER_CELL). Only a cell that can't be filled fails the reply.
+ */
+export function selectItems(spec: StageSpec, reply: unknown): Selection {
+  const parsed = replyShape.safeParse(reply);
+  if (!parsed.success) return { short: ['reply has no items array'], dropped: [] };
+  const band: readonly string[] = spec.band;
+  const kept: GeneratedItem[] = [];
+  const dropped: string[] = [];
+  parsed.data.items.forEach((raw, index) => {
+    const item = generatedItem.safeParse(raw);
+    if (!item.success) {
+      dropped.push(`#${index} invalid: ${item.error.issues.map((i) => i.message).join(', ')}`);
+    } else if (!band.includes(item.data.bloom)) {
+      dropped.push(`#${index} ${item.data.bloom} is outside ${band.join('/')}`);
+    } else if (kept.filter((k) => k.bloom === item.data.bloom && k.kind === item.data.kind).length >= PER_CELL[item.data.kind]) {
+      dropped.push(`#${index} surplus ${item.data.bloom} ${item.data.kind}`);
+    } else {
+      kept.push(item.data);
     }
-    const stray = items.filter((i) => !(spec.band as readonly string[]).includes(i.bloom));
-    if (stray.length > 0) ctx.addIssue({ code: 'custom', message: `${stray.length} items outside ${spec.band.join('/')}` });
   });
+  const short = spec.band.flatMap((bloom) =>
+    KINDS.flatMap((kind) => {
+      const n = kept.filter((k) => k.bloom === bloom && k.kind === kind).length;
+      return n < PER_CELL[kind] ? [`${bloom} ${kind}: ${n} of ${PER_CELL[kind]}`] : [];
+    }),
+  );
+  return short.length > 0 ? { short, dropped } : { items: kept, dropped };
+}
+
+/** Single-answer items (single choice and scenario) whose key is the one longest option. */
+export function longestKeyCount(items: GeneratedItem[]): { longest: number; total: number } {
+  const single = items.filter((i) => i.kind !== 'multi_choice');
+  const longest = single.filter((i) => {
+    const lengths = i.options.map((o) => o.length);
+    const max = Math.max(...lengths);
+    const key = i.correct[0] ?? -1;
+    return lengths[key] === max && lengths.filter((l) => l === max).length === 1;
+  }).length;
+  return { longest, total: single.length };
+}
+
+/** Longest-key tally for the items accepted in this run, by stage. */
+const runStats = new Map<string, { longest: number; total: number }>();
+
+function printRunStats(): void {
+  const rows = STAGES.flatMap((spec) => {
+    const s = runStats.get(spec.stage);
+    return s ? [[spec.stage, s] as const] : [];
+  });
+  if (rows.length === 0) return;
+  const pct = (s: { longest: number; total: number }): string => `${s.longest}/${s.total} (${Math.round((100 * s.longest) / s.total)}%)`;
+  const all = rows.reduce((a, [, s]) => ({ longest: a.longest + s.longest, total: a.total + s.total }), { longest: 0, total: 0 });
+  process.stdout.write(`Key is the longest option in single-answer items: ${pct(all)}; chance is 25%, target at most 30%.\n`);
+  for (const [stage, s] of rows) process.stdout.write(`  ${stage.padEnd(18)} ${pct(s)}\n`);
 }
 
 const workSchema = z.object({ promptVersion: z.string(), stages: z.record(z.string(), z.array(generatedItem)) });
@@ -133,7 +182,7 @@ function topicBlock(topics: SeedTopic[], topic: SeedTopic, spec: StageSpec): str
 }
 
 function requestParams(topics: SeedTopic[], unit: Unit): Anthropic.MessageCreateParamsNonStreaming {
-  // Bounds stay out of the API schema (structured outputs reject most of them); replySchema enforces them.
+  // Bounds stay out of the API schema (structured outputs reject most of them); selectItems enforces them.
   const apiSchema = z.object({
     items: z.array(
       z.object({
@@ -155,17 +204,21 @@ function requestParams(topics: SeedTopic[], unit: Unit): Anthropic.MessageCreate
   };
 }
 
-/** Validates one stage reply and stores it in the topic's work file; false (with a reject row) otherwise. */
+/** Selects one stage's items and stores them in the topic's work file; false (with a reject row) otherwise. */
 function acceptReply(unit: Unit, message: Anthropic.Message): boolean {
   const json = replyJson(COMMAND, unit.id, message);
   if (json === undefined) return false;
-  const parsed = replySchema(unit.spec).safeParse(json);
-  if (!parsed.success) {
-    reject(COMMAND, unit.id, parsed.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; '), json);
+  const selection = selectItems(unit.spec, json);
+  if ('short' in selection) {
+    reject(COMMAND, unit.id, `cells short: ${selection.short.join('; ')}; dropped: ${selection.dropped.join('; ') || 'none'}`, json);
     return false;
   }
+  if (selection.dropped.length > 0) reject(COMMAND, unit.id, `accepted after dropping: ${selection.dropped.join('; ')}`);
+  const stats = runStats.get(unit.spec.stage) ?? { longest: 0, total: 0 };
+  const count = longestKeyCount(selection.items);
+  runStats.set(unit.spec.stage, { longest: stats.longest + count.longest, total: stats.total + count.total });
   const work = loadWork(unit.topic.slug);
-  work.stages[unit.spec.stage] = parsed.data.items;
+  work.stages[unit.spec.stage] = selection.items;
   writeJson(workPath(unit.topic.slug), work);
   return true;
 }
@@ -188,6 +241,7 @@ export async function runItems(options: ItemsOptions): Promise<void> {
       return;
     }
     await collect(new Anthropic(), units, open.batchId);
+    printRunStats();
     assemble(topics);
     return;
   }
@@ -214,11 +268,13 @@ export async function runItems(options: ItemsOptions): Promise<void> {
   const client = new Anthropic();
   if (!batch) {
     await runSample(client, topics, targets);
+    printRunStats();
     assemble(topics);
     return;
   }
   const requests = targets.map((unit) => ({ custom_id: unit.id, params: requestParams(topics, unit) }));
   await collect(client, units, await submitBatch(client, COMMAND, PROMPT.version, requests));
+  printRunStats();
   assemble(topics);
 }
 
