@@ -21,6 +21,8 @@ const SENSITIVE_KEYS = [
   'apiKey',
   'secret',
   'clientSecret',
+  // Lemon Squeezy webhook HMAC (A12): not a secret itself, but kept out of logs with the other credentials.
+  'x-signature',
 ] as const;
 
 function keyPath(prefix: string, key: string): string {

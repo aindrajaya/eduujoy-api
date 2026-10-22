@@ -16,4 +16,11 @@ Object.assign(process.env, {
   ANTHROPIC_API_KEY: 'e2e-anthropic-key',
   GEMINI_API_KEY: 'e2e-gemini-key',
   AI_DAILY_BUDGET_USD: '5',
+  // Test-only billing values; e2e signs its own webhooks and never reaches Lemon Squeezy (fake provider).
+  LEMONSQUEEZY_API_KEY: 'e2e-lemonsqueezy-key',
+  LEMONSQUEEZY_STORE_ID: '100001',
+  LEMONSQUEEZY_WEBHOOK_SECRET: 'e2e-webhook-secret-'.padEnd(40, 'z'),
+  LEMONSQUEEZY_VARIANT_SUBSCRIPTION: '200001',
+  LEMONSQUEEZY_VARIANT_CREDIT_PACK: '200002',
+  LEMONSQUEEZY_MODE: 'test',
 });

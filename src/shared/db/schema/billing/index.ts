@@ -14,8 +14,12 @@ export const entitlements = pgTable('entitlements', {
   periodStart: timestamp('period_start', { withTimezone: true }).notNull(),
   periodEnd: timestamp('period_end', { withTimezone: true }).notNull(),
   providerSubscriptionId: text('provider_subscription_id'),
+  /** The order that started the stored subscription, so a refunded order ends that subscription only. */
+  providerOrderId: text('provider_order_id'),
+  /** The provider's `updated_at` of the last applied subscription event; older, out-of-order events are skipped. */
+  providerUpdatedAt: timestamp('provider_updated_at', { withTimezone: true }),
   ...withUpdatedAt,
-});
+}, (t) => [index('entitlements_provider_subscription_idx').on(t.providerSubscriptionId)]);
 
 /** Signed credit movements; the balance is SUM(delta). `external_ref` makes purchases idempotent. */
 export const creditLedger = pgTable(
@@ -47,6 +51,8 @@ export const billingEvents = pgTable(
     payload: jsonb('payload').notNull(),
     ...withCreatedAt,
     processedAt: timestamp('processed_at', { withTimezone: true }),
+    /** What processing did (`credited`, `ignored:mode_mismatch`, ...), for audit and support. */
+    outcome: text('outcome'),
   },
   (t) => [uniqueIndex('billing_events_provider_event_id_key').on(t.providerEventId)],
 );

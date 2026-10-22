@@ -34,7 +34,7 @@ describe('buildPinoOptions', () => {
     const logger = pino(buildPinoOptions({ LOG_LEVEL: 'info', NODE_ENV: 'production' }), stream);
 
     logger.info({
-      req: { headers: { cookie: 'ej_at=abc', authorization: 'Bearer abc', 'user-agent': 'jest' } },
+      req: { headers: { cookie: 'ej_at=abc', authorization: 'Bearer abc', 'user-agent': 'jest', 'x-signature': 'hmac-hex' } },
       res: { headers: { 'set-cookie': ['ej_rt=def'] } },
       body: { email: 'a@b.c', password: 'hunter2', refreshToken: 'r', apiKey: 'k' },
       err: { config: { headers: { 'x-api-key': 'vendor-key' } } },
@@ -42,7 +42,7 @@ describe('buildPinoOptions', () => {
 
     const [line] = lines();
     expect(line).toMatchObject({
-      req: { headers: { cookie: REDACTED, authorization: REDACTED, 'user-agent': 'jest' } },
+      req: { headers: { cookie: REDACTED, authorization: REDACTED, 'user-agent': 'jest', 'x-signature': REDACTED } },
       res: { headers: { 'set-cookie': REDACTED } },
       body: { email: 'a@b.c', password: REDACTED, refreshToken: REDACTED, apiKey: REDACTED },
       err: { config: { headers: { 'x-api-key': REDACTED } } },
