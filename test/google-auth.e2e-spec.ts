@@ -105,6 +105,15 @@ describe('Google OAuth (e2e)', () => {
       await http().get('/v1/auth/google?reauth=yes').expect(400);
     });
 
+    it('never lets a normal (possibly silent) Google sign-in delete the account', async () => {
+      google.identity = { ...google.identity, authTime: Math.floor(Date.now() / 1000) - 5 };
+      const { state, oauthCookie } = await start('?returnTo=/account');
+      const access = value(await callback(`code=abc&state=${state}`, oauthCookie), 'ej_at');
+
+      const res = await del(access).expect(401);
+      expect((res.body as { code: string }).code).toBe('REAUTH_REQUIRED');
+    });
+
     it('lets DELETE /v1/me through after a fresh Google re-authentication', async () => {
       const access = await signIn(Math.floor(Date.now() / 1000) - 30);
       await del(access).expect(204);

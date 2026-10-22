@@ -96,8 +96,10 @@ export class CompleteGoogleSignIn {
     if (!identity.emailVerified) throw new OAuthFailedError('email_unverified', saved.origin);
 
     const user = await this.resolveUser(identity);
-    // Without reauth nothing changes: a Google sign-in counts as signed in now.
-    const authTime = saved.reauth ? reauthTime(identity.authTime, this.clock()) : undefined;
+    // Only a verified Google re-authentication counts as a fresh sign-in. A normal Google sign-in can
+    // complete silently from the browser's Google session (an unattended device), so it gets the
+    // epoch: it signs in, but DELETE /v1/me asks for a reauth (lead security gate, A13 follow-ups).
+    const authTime = saved.reauth ? reauthTime(identity.authTime, this.clock()) : UNVERIFIED_AUTH_TIME;
     return { session: await this.issuer.start(user, meta, authTime), redirectTo: `${saved.origin}${saved.returnTo}` };
   }
 

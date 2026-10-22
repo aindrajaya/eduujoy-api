@@ -170,13 +170,14 @@ describe('Google re-authentication (contract 0.8.0)', () => {
     expect(session?.authTime).toEqual(want);
   });
 
-  it('leaves a normal Google sign-in unchanged: it counts as signed in now', async () => {
-    const t = setup({ authTime: 1 });
-    const { started, saved } = await begin(t);
+  it('never counts a normal Google sign-in as fresh, even with a recent auth_time', async () => {
+    const t = setup();
+    const google = setup({ authTime: Math.floor(t.clock.now.getTime() / 1000) - 30 });
+    const { started, saved } = await begin(google);
 
-    await t.complete.execute({ code: 'c', state: saved.state, sealedState: started.sealedState }, meta);
+    await google.complete.execute({ code: 'c', state: saved.state, sealedState: started.sealedState }, meta);
 
-    expect([...t.sessions.rows.values()][0]?.authTime).toEqual(t.clock.now);
+    expect([...google.sessions.rows.values()][0]?.authTime).toEqual(UNVERIFIED_AUTH_TIME);
   });
 });
 

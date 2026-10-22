@@ -28,8 +28,9 @@ export class SessionIssuer {
   ) {}
 
   /**
-   * Starts a new session family. A real sign-in, so by default its time is the family's auth time;
-   * a Google re-authentication passes the verified (or fallback) time instead.
+   * Starts a new session family. Password sign-in and registration prove the credential now, so they
+   * use the default (now). Google passes its own: the verified auth_time of a re-authentication, or the
+   * epoch for any other Google sign-in, which may have completed without the learner present.
    */
   async start(user: UserRecord, meta: RequestMeta, authTime: Date = this.clock()): Promise<IssuedSession> {
     const { token, next } = this.nextSession(user.id, randomUUID(), meta, authTime);
