@@ -2,11 +2,11 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { z } from 'zod';
 import { AppConfig } from '../../../shared/config';
 import { EventBus } from '../../../shared/events';
-import { type JobHandler, type JobOutcome } from '../../../shared/jobs';
+import { type JobHandler, type JobOutcome, NonRetryableJobError } from '../../../shared/jobs';
 import { ended, entitlementFor, MAX_PACK_QUANTITY, packCredits, refundClawback } from '../domain/billing-rules';
 import { EntitlementChanged } from '../domain/events/entitlement-changed.event';
 import { type BillingNotification, NOTIFICATION_PARSER, type NotificationParser } from './ports/billing-notification';
-import { BILLING_PROVIDER, type BillingProvider } from './ports/billing-provider';
+import { BILLING_PROVIDER, type BillingProvider, BillingProviderHttpError } from './ports/billing-provider';
 import { BILLING_REPOSITORY, type BillingRepository } from './ports/billing.repository';
 import { BILLING_EVENT_JOB } from './receive-webhook.usecase';
 
@@ -89,7 +89,7 @@ export class ProcessBillingEvent implements JobHandler<{ eventId: string }> {
     if (n.status !== 'paid') return { outcome: `ignored:order_${n.status}` };
     if (!n.userId) return { outcome: 'held:no_user' };
     // The webhook carries no quantity; the order items are the source of truth, never the client.
-    const items = await this.provider.listOrderItems(n.orderId);
+    const items = await this.orderItems(n.orderId, n.testMode);
     const quantity = items.filter((i) => i.variantId === n.variantId).reduce((sum, i) => sum + i.quantity, 0);
     const credits = packCredits(quantity);
     if (credits === null) return { outcome: `held:quantity_${quantity}` };
@@ -101,6 +101,24 @@ export class ProcessBillingEvent implements JobHandler<{ eventId: string }> {
       return { outcome: `credited:${credits}${flag}`, changed: { userId: n.userId, reason: 'purchase' } };
     }
     return { outcome: granted === 'duplicate' ? 'ignored:already_credited' : 'held:unknown_user' };
+  }
+
+  /**
+   * A 401, 403 or 404 won't change on a retry: most likely LEMONSQUEEZY_API_KEY is a key for the other
+   * mode (test-mode keys only see test data). The job ends at once with the status in jobs.error, and the
+   * event stays unprocessed (processed_at null) so it can be re-run once the key is fixed.
+   */
+  private async orderItems(orderId: string, testMode: boolean): Promise<{ variantId: string; quantity: number }[]> {
+    try {
+      return await this.provider.listOrderItems(orderId);
+    } catch (error) {
+      if (!(error instanceof BillingProviderHttpError) || !error.permanent) throw error;
+      this.logger.error(
+        { orderId, status: error.status, orderTestMode: testMode, mode: this.config.env.LEMONSQUEEZY_MODE },
+        'Order items lookup refused; check that LEMONSQUEEZY_API_KEY matches the order mode',
+      );
+      throw new NonRetryableJobError(`order items: ${error.message} (order test_mode=${String(testMode)}; is LEMONSQUEEZY_API_KEY a ${testMode ? 'test' : 'live'}-mode key?)`);
+    }
   }
 
   private async orderRefunded(n: Extract<BillingNotification, { kind: 'order' }>, now: Date): Promise<Effect> {

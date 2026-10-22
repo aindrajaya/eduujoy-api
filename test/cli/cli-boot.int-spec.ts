@@ -18,6 +18,7 @@ const CLIS = [
   { script: 'db:migrate', file: 'src/shared/db/cli/migrate.ts', args: [], out: 'db:migrate: ok' },
   { script: 'db:seed', file: 'src/shared/db/cli/seed.ts', args: ['--dir', 'seed'], out: 'db:seed: ok (150 topics)' },
   { script: 'catalog:embed-topics', file: 'scripts/catalog/embed-topics.ts', args: [], out: 'catalog:embed-topics: ok (EmbedTopics)' },
+  { script: 'billing:reprocess', file: 'scripts/billing/reprocess.ts', args: [], out: 'billing:reprocess: ok (ReprocessBillingEvent)' },
 ];
 
 describe('CLI boot (integration)', () => {
