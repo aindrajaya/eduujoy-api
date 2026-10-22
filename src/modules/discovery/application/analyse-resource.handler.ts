@@ -17,19 +17,30 @@ import {
   ResourcesReady,
 } from '../domain';
 import { ANALYSE_RESOURCE_JOB, type AnalysePayload, analysePayload, DAY_MS } from './jobs';
-import { type Clock, DISCOVERY_CLOCK, DISCOVERY_REPOSITORY, type DiscoveryRepository, type NewCard, type PoolRecord, type ResourceRecord } from './ports/discovery.repository';
+import {
+  type Clock,
+  DISCOVERY_CLOCK,
+  DISCOVERY_REPOSITORY,
+  type DiscoveryRepository,
+  type NewCard,
+  type PoolRecord,
+  type ResourceRecord,
+  type ReusableAnalysis,
+} from './ports/discovery.repository';
 import { LINK_CHECKER, type LinkChecker } from './ports/link-checker';
 import { RESOURCE_ANALYZER, type ResourceAnalyzer } from './ports/resource-analyzer';
 
 /** About 8k tokens of page text per article (master PRD §8 cost table). */
 export const MAX_PAGE_CHARS = 32_000;
 
-type Outcome = 'cached' | 'analysed' | 'skipped';
+type Outcome = 'cached' | 'reused' | 'analysed' | 'skipped';
 
 interface Analysed {
   card: NewCard;
-  readingMin: number | null;
-  language: string;
+  /** Absent when the analysis was reused: the resource row already has them. */
+  readingMin?: number | null;
+  language?: string;
+  reused: boolean;
 }
 
 /**
@@ -74,7 +85,7 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
       } else {
         try {
           analysed = await this.analyse(resource, payload, promptVersion, ctx);
-          outcome = analysed ? 'analysed' : 'skipped';
+          outcome = analysed ? (analysed.reused ? 'reused' : 'analysed') : 'skipped';
         } catch (error) {
           // Retry transient failures while attempts remain; after that, the pool moves on without it.
           const retryable = !(error instanceof AiCallError) || error.retryable;
@@ -96,6 +107,13 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
     const profile = await this.topics.execute(payload.topicId);
     if (!profile) return null;
     const isVideo = resource.type === 'youtube';
+    const now = this.clock();
+
+    // Decision 3 (user, 22 Oct 2026): the same URL and prompt version analysed for another topic in the
+    // last 30 days is reused, so a second topic spends nothing on analysis or embedding.
+    const reused = await this.repo.findRecentAnalysis(resource.id, promptVersion, new Date(now.getTime() - CARD_TTL_DAYS * DAY_MS));
+    if (reused) return { card: await this.judge(resource, payload, promptVersion, reused, reused.embedding, ctx), reused: true };
+
     const content = isVideo ? null : (payload.abstract ?? (await this.links.fetchText(resource.url, MAX_PAGE_CHARS, ctx.signal)));
     if (!isVideo && !content) return null;
 
@@ -111,22 +129,42 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
       jobId: ctx.jobId,
       signal: ctx.signal,
     });
+    const embedding = judgeCard({ quality: analysis.quality, confidence: analysis.confidence, concepts: analysis.concepts, durationMin: resource.durationMin, isVideo }).status === 'dropped'
+      ? null
+      : await this.embed(resource, analysis, ctx);
+    const card = await this.judge(resource, payload, promptVersion, analysis, embedding, ctx);
+    return { card, readingMin: isVideo ? null : analysis.readingMin, language: analysis.language, reused: false };
+  }
+
+  private async embed(resource: ResourceRecord, analysis: Pick<NewCard, 'keyTakeaways' | 'concepts'>, ctx: JobContext): Promise<NewCard['embedding']> {
+    const embedded = await this.embedder.embed({
+      stage: 'analyse',
+      kind: 'document',
+      texts: [embeddingText({ title: resource.title, keyTakeaways: analysis.keyTakeaways, concepts: analysis.concepts })],
+      titles: [resource.title],
+      jobId: ctx.jobId,
+    });
+    const vector = embedded.vectors[0];
+    return vector ? { vector, model: embedded.model, version: embedded.version } : null;
+  }
+
+  /** Applies the card rules and the in-topic dedupe to an analysis, new or reused. */
+  private async judge(
+    resource: ResourceRecord,
+    payload: AnalysePayload,
+    promptVersion: string,
+    analysis: Omit<ReusableAnalysis, 'embedding'>,
+    embedding: NewCard['embedding'],
+    ctx: JobContext,
+  ): Promise<NewCard> {
+    const isVideo = resource.type === 'youtube';
     const verdict = judgeCard({ quality: analysis.quality, confidence: analysis.confidence, concepts: analysis.concepts, durationMin: resource.durationMin, isVideo });
     const score = qualityScore(analysis.quality);
-
     let status: CardStatus = verdict.status;
-    let embedding: NewCard['embedding'] = null;
     let reason = verdict.reason;
-    if (status !== 'dropped') {
-      const embedded = await this.embedder.embed({
-        stage: 'analyse',
-        kind: 'document',
-        texts: [embeddingText({ title: resource.title, keyTakeaways: analysis.keyTakeaways, concepts: analysis.concepts })],
-        titles: [resource.title],
-        jobId: ctx.jobId,
-      });
-      const vector = embedded.vectors[0];
-      if (vector) embedding = { vector, model: embedded.model, version: embedded.version };
+    if (status === 'dropped') {
+      // Logged with its scores so the 60 cut-off can be tuned (user decision 2, 22 Oct 2026).
+      this.logger.log({ url: resource.url, topicId: payload.topicId, jobId: ctx.jobId, qualityScore: score, quality: analysis.quality }, 'Resource card dropped under the quality floor');
     }
     if (status === 'served' && embedding) {
       const nearest = await this.repo.nearestServedCard(payload.topicId, embedding.vector, resource.id);
@@ -135,8 +173,7 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
         reason = `duplicate of card ${nearest.card.id}`;
       }
     }
-
-    const card: NewCard = {
+    return {
       resourceId: resource.id,
       topicId: payload.topicId,
       model: analysis.model,
@@ -156,7 +193,6 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
       embedding,
       expiresAt: new Date(this.clock().getTime() + CARD_TTL_DAYS * DAY_MS),
     };
-    return { card, readingMin: isVideo ? null : analysis.readingMin, language: analysis.language };
   }
 
   private async saveCard(tx: Tx, { card, readingMin, language }: Analysed, resource: ResourceRecord): Promise<void> {
@@ -176,7 +212,7 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
         detail: { url: resource.url, topicId: card.topicId, confidence: card.confidence, evidence: card.evidence },
       });
     }
-    await this.repo.recordAnalysis(tx, resource.id, { readingMin, language });
+    if (language !== undefined) await this.repo.recordAnalysis(tx, resource.id, { readingMin: readingMin ?? null, language });
   }
 
   /** Counts the resource as analysed; the last one settles the pool. Returns whether this job settled it. */

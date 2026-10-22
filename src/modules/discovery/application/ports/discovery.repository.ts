@@ -67,6 +67,12 @@ export interface NewCard {
   expiresAt: Date;
 }
 
+/** A card's analysis, reusable for the same URL in another topic (user decision 3, 22 Oct 2026). */
+export type ReusableAnalysis = Pick<
+  NewCard,
+  'model' | 'dreyfusStage' | 'bloomLevels' | 'prerequisites' | 'concepts' | 'keyTakeaways' | 'whyThis' | 'quality' | 'confidence' | 'evidence' | 'embedding'
+>;
+
 export interface CardRecord {
   id: string;
   resourceId: string;
@@ -91,6 +97,8 @@ export interface DiscoveryRepository {
   getResource(id: string): Promise<ResourceRecord | null>;
   /** The unexpired card for a resource in a topic and prompt version (the L2 cache, PRD-API §10). */
   findCard(resourceId: string, topicId: string, promptVersion: string, now: Date): Promise<CardRecord | null>;
+  /** The newest analysis of this resource in this prompt version, in any topic, made since `since`. */
+  findRecentAnalysis(resourceId: string, promptVersion: string, since: Date): Promise<ReusableAnalysis | null>;
   /** The closest served card in the topic by cosine similarity, other than `excludeResourceId`'s. */
   nearestServedCard(topicId: string, vector: number[], excludeResourceId: string): Promise<{ card: CardRecord; similarity: number } | null>;
   /** Inserts, or replaces an expired card for the same resource, topic and prompt version. */

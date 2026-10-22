@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { and, asc, cosineDistance, desc, eq, gt, inArray, isNotNull, isNull, lt, ne, or, sql } from 'drizzle-orm';
+import { and, asc, cosineDistance, desc, eq, gt, gte, inArray, isNotNull, isNull, lt, ne, or, sql } from 'drizzle-orm';
 import { DATABASE, type Database, type Tx } from '../../../shared/db';
 import { discoveryResults, resourceCards, resources } from '../../../shared/db/schema/discovery';
 import {
@@ -10,6 +10,7 @@ import {
   type PoolCard,
   type PoolRecord,
   type ResourceRecord,
+  type ReusableAnalysis,
 } from '../application/ports/discovery.repository';
 import { type CardStatus, type PoolStatus, type Stage } from '../domain';
 
@@ -135,6 +136,32 @@ export class DrizzleDiscoveryRepository implements DiscoveryRepository {
         ),
       );
     return row ?? null;
+  }
+
+  async findRecentAnalysis(resourceId: string, promptVersion: string, since: Date): Promise<ReusableAnalysis | null> {
+    const [row] = await this.db
+      .select()
+      .from(resourceCards)
+      .where(and(eq(resourceCards.resourceId, resourceId), eq(resourceCards.promptVersion, promptVersion), gte(resourceCards.createdAt, since)))
+      .orderBy(desc(resourceCards.createdAt))
+      .limit(1);
+    if (!row) return null;
+    return {
+      model: row.model,
+      dreyfusStage: row.dreyfusStage,
+      bloomLevels: row.bloomLevels,
+      prerequisites: row.prerequisites,
+      concepts: row.concepts as NewCard['concepts'],
+      keyTakeaways: row.keyTakeaways,
+      whyThis: row.whyThis,
+      quality: row.quality as NewCard['quality'],
+      confidence: row.confidence,
+      evidence: row.evidence,
+      embedding:
+        row.embedding && row.embeddingModel && row.embeddingVersion !== null
+          ? { vector: row.embedding, model: row.embeddingModel, version: row.embeddingVersion }
+          : null,
+    };
   }
 
   async nearestServedCard(topicId: string, vector: number[], excludeResourceId: string): Promise<{ card: CardRecord; similarity: number } | null> {
