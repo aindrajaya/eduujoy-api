@@ -4,7 +4,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { z } from 'zod';
 import { toStructuredSchema } from '../../src/shared/ai/json-schema';
 import { PromptRegistry } from '../../src/shared/ai/prompts/prompt-registry';
-import { type SeedTopic } from '../../src/shared/db/seed/seed-data';
+import { parseSeed, type SeedTopic } from '../../src/shared/db/seed/seed-data';
 import { collectBatch, replyJson, submitBatch } from './batch';
 import { assertWithinCap, logSpend, openRun, reject, ROOT, SEED_DIR, writeJson } from './ledger';
 import { addUsage, estimate, estimateTokens, formatEstimate, fromApiUsage, SEED_MODEL, usd, ZERO_USAGE, type Usage } from './pricing';
@@ -201,22 +201,34 @@ function assemble(topics: ProposedTopic[], answers: Map<string, Answer>): void {
     return;
   }
 
+  // Topics already in topics.json are kept exactly as they are (later steps such as seed:topics-refine
+  // edit them); only proposal topics missing from the file are built from their answers.
+  const current = existsSync(TOPICS_FILE)
+    ? parseSeed({ topics: JSON.parse(readFileSync(TOPICS_FILE, 'utf8')) as unknown, items: {} }).topics
+    : [];
+  const kept = new Map(current.map((t) => [t.slug, t]));
+  const taken = new Set(current.flatMap((t) => [t.canonicalName, ...t.aliases].map((a) => a.toLowerCase())));
+  let added = 0;
   const out: SeedTopic[] = topics.map((t) => {
+    const existing = kept.get(t.slug);
+    if (existing) return existing;
+    added++;
     const answer = answers.get(t.slug) as Answer;
     return {
       slug: t.slug,
       canonicalName: t.canonicalName,
-      aliases: cleanAliases(t, answer.aliases),
+      aliases: cleanAliases(t, answer.aliases).filter((a) => !taken.has(a.toLowerCase())),
       description: answer.description,
       domain: t.domain,
       parent: t.parent,
       prerequisites: [...new Set(answer.prerequisites)].filter((p) => p !== t.slug && !isDescendant(topics, p, t.slug)),
     };
   });
+  out.push(...current.filter((t) => !topics.some((p) => p.slug === t.slug)));
   for (const [from, to] of breakCycles(out)) reject(COMMAND, from, `dropped prerequisite ${to}: it closes a cycle`);
   writeJson(TOPICS_FILE, { version: 1, topics: out });
   const edges = out.reduce((n, t) => n + t.prerequisites.length, 0);
-  process.stdout.write(`Wrote seed/topics.json: ${out.length} topics, ${edges} prerequisite edges. Next: pnpm seed:validate --expect-topics ${out.length}\n`);
+  process.stdout.write(`Wrote seed/topics.json: ${out.length} topics (${added} added, ${out.length - added} kept as they were), ${edges} prerequisite edges. Next: pnpm seed:validate --expect-topics ${out.length}\n`);
 }
 
 function cleanAliases(topic: ProposedTopic, aliases: string[]): string[] {

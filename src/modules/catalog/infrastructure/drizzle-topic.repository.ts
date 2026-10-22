@@ -60,18 +60,18 @@ export class DrizzleTopicRepository implements TopicRepository {
     // Best of the name and every alias; the catalog is small, so no trigram index yet.
     const score = sql<number>`greatest(similarity(lower(${topics.canonicalName}), ${normalised}), coalesce((select max(similarity(lower(alias), ${normalised})) from unnest(${topics.aliases}) as alias), 0))`;
     const rows = await this.db
-      .select({ ...VIEW, score })
+      .select({ ...VIEW, domain: topics.domain, score })
       .from(topics)
       .where(and(visibleTo(viewerId), sql`${score} >= ${minimum}`))
       .orderBy(sql`${score} desc`, asc(topics.slug))
       .limit(limit);
-    return rows.map(({ score: s, ...topic }) => ({ topic, similarity: s }));
+    return rows.map(({ score: s, domain, ...topic }) => ({ topic, similarity: s, domain }));
   }
 
   async nearest(query: TopicEmbedding, limit: number, viewerId: string): Promise<NearTopic[]> {
     const distance = cosineDistance(topics.embedding, query.vector);
     const rows = await this.db
-      .select({ ...VIEW, distance: sql<number>`${distance}` })
+      .select({ ...VIEW, domain: topics.domain, distance: sql<number>`${distance}` })
       .from(topics)
       .where(
         and(
@@ -84,7 +84,7 @@ export class DrizzleTopicRepository implements TopicRepository {
       // ORDER BY the distance expression so the HNSW cosine index serves the query.
       .orderBy(distance)
       .limit(limit);
-    return rows.map(({ distance: d, ...topic }) => ({ topic, similarity: 1 - d }));
+    return rows.map(({ distance: d, domain, ...topic }) => ({ topic, similarity: 1 - d, domain }));
   }
 
   create(topic: NewTopic, limit: CreateLimit): Promise<CreateResult> {

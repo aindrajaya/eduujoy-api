@@ -14,3 +14,13 @@ Actual cost of every paid run, from API usage at catalog list prices. Hard stop 
 | 2026-10-22 02:54 | items --sample | standard | 1 | 190 | 0 | 2526 | 2473 | $0.0254 | v2 |
 | 2026-10-22 03:04 | items-review | batch | 3361 | 1727417 | 19866 | 4749393 | 1319215 | $8.5858 | msgbatch_01KQu4kDPvYPRRBoGkcgjCo5 |
 | 2026-10-22 03:24 | items-review | batch | 164 | 84436 | 1419 | 231297 | 64826 | $0.4219 | msgbatch_011uwF7Mm6KASxNCfvUc3qi2 |
+| 2026-10-22 07:30 | topics-refine --sample | standard | 4 | 4075 | 774 | 2322 | 663 | $0.0169 | v1 |
+| 2026-10-22 07:37 | topics-refine | batch | 67 | 68554 | 774 | 51084 | 10443 | $0.1243 | msgbatch_01YTwzN42XTshjoSqUBZ8zmH |
+| 2026-10-22 11:53 | taxonomy | batch | 10 | 192 | 16188 | 37772 | 1200 | $0.0283 | msgbatch_01NuHZSpMvxxXPYVRoVQddef |
+| 2026-10-22 11:54 | topics-refine --sample | standard | 10 | 14200 | 774 | 6966 | 1583 | $0.0469 | v1 |
+| 2026-10-22 12:27 | items | batch | 50 | 8755 | 22734 | 103566 | 372288 | $1.9038 | msgbatch_01Y1vC9yvNdqcGLGD5JJwXmQ |
+| 2026-10-22 13:13 | items --sample | standard | 2 | 227 | 2526 | 0 | 5681 | $0.0636 | v2 |
+| 2026-10-22 13:58 | items --sample | standard | 1 | 0 | 0 | 0 | 0 | $0.0000 | v2 |
+| 2026-10-23 00:00 | console reconciliation | manual | 0 | 0 | 0 | 0 | 0 | $0.7800 | Console $38.36 vs _spend.md $37.58: timed-out standard items retries (22 Oct) |
+| 2026-10-22 20:09 | items | batch | 1 | 209 | 2526 | 0 | 8086 | $0.0438 | msgbatch_012KnssBCMPko8tjxBpLvETb |
+| 2026-10-22 20:15 | items-review | batch | 200 | 104827 | 1419 | 282381 | 73562 | $0.4885 | msgbatch_01MqT1uh37bbMwVkDbJtvEcZ |

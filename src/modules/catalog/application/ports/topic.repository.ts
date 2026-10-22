@@ -9,12 +9,16 @@ export interface TopicView {
   aliases: string[];
   parentId: string | null;
   description: string | null;
+  /** Contract 0.9.0: the topic has a diagnostic item bank. Set by the use cases, not the repository. */
+  hasDiagnostic?: boolean;
 }
 
 export interface NearTopic {
   topic: TopicView;
   /** Cosine similarity, 1 - pgvector cosine distance. */
   similarity: number;
+  /** For `related` (contract 0.9.0): suggestions stay in the learner's domain. */
+  domain: TopicDomain | null;
 }
 
 export interface TopicEmbedding {
