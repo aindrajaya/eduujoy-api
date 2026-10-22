@@ -71,5 +71,7 @@ export interface TopicRepository {
   countCreatedBy(userId: string, since: Date): Promise<number>;
   /** Topics without an embedding for this model and version, oldest first. */
   listUnembedded(model: string, version: number, limit: number): Promise<TopicToEmbed[]>;
+  /** Every topic in id order after `afterId` (keyset paging), for a full re-embed after topic texts change. */
+  listAll(afterId: string | null, limit: number): Promise<TopicToEmbed[]>;
   setEmbedding(id: string, embedding: TopicEmbedding): Promise<void>;
 }

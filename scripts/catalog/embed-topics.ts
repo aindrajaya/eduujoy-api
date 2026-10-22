@@ -12,6 +12,8 @@ import { describeError } from '../../src/shared/db/redact';
 // Run by the user: `pnpm catalog:embed-topics` (node --env-file=.env --import tsx). Embeds every topic
 // without a current gemini-embedding-2 vector, 50 per request, metered in llm_calls (150 topics cost
 // well under US$0.01). Idempotent: re-run after a failure, or after an EMBEDDING_VERSION bump.
+// `--all` re-embeds every topic under the current version, after topic texts change (a seed refine);
+// resolve keeps working throughout. A failed --all run is simply run again.
 // Wired by hand like the db:* CLIs: tsx emits no decorator metadata, so Nest DI can't run under it.
 
 export function buildEmbedTopics(client: Client, geminiApiKey: string): EmbedTopics {
@@ -33,7 +35,8 @@ async function main(): Promise<void> {
   }
   await client.connect();
   try {
-    const result = await embedTopics.execute((done) => process.stdout.write(`embedded ${done} topics\n`));
+    const all = process.argv.includes('--all');
+    const result = await embedTopics.execute((done) => process.stdout.write(`embedded ${done} topics\n`), { all });
     process.stdout.write(`Done: ${result.embedded} topics in ${result.batches} requests\n`);
   } finally {
     await client.end();
