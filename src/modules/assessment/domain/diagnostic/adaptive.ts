@@ -15,6 +15,8 @@ export interface GradedItem {
 
 /** Persisted adaptive state (diagnostic_sessions.state). */
 export interface DiagnosticState {
+  /** The start cell from the self-report (absent on sessions started before 22 Oct 2026). */
+  start?: number;
   estimate: number;
   /** Item ids of the batch waiting for answers. */
   current: string[];
@@ -85,6 +87,17 @@ export function shouldStop(state: Pick<DiagnosticState, 'results' | 'estimates'>
     return prev !== undefined && prev === last;
   }
   return false;
+}
+
+/**
+ * The diagnostic ended while the estimate was still rising (the last batch moved it up). One-cell moves
+ * and 12 items cap how far a placement can climb from its start (about 3 cells; the A7 "silent expert"
+ * edge), so such a placement may sit below the learner's real level. Counted, not corrected (user
+ * decision, 22 Oct 2026).
+ */
+export function endedClimbing(state: Pick<DiagnosticState, 'estimates'>): boolean {
+  const [prev, last] = state.estimates.slice(-2);
+  return prev !== undefined && last !== undefined && last > prev;
 }
 
 /** The learner-facing estimate of how many items this diagnostic will take. */

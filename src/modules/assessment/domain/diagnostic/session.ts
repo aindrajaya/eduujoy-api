@@ -23,7 +23,7 @@ function unseenCount(bank: readonly BankItem[], state: DiagnosticState): number 
 
 /** Starts a diagnostic at the self-report cell; with no gradable items it completes at once. */
 export function begin(start: number, bank: BankItem[]): Step {
-  const empty: DiagnosticState = { estimate: start, current: [], served: [], results: [], estimates: [] };
+  const empty: DiagnosticState = { start, estimate: start, current: [], served: [], results: [], estimates: [] };
   const batch = selectBatch(start, bank, []);
   if (batch.length === 0) {
     return { done: true, state: empty, placement: placeFromSelfReport(start), basis: 'self_report', progress: { answered: 0, estimatedTotal: 0 } };
