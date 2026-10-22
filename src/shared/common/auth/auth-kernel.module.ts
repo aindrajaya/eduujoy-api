@@ -3,6 +3,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AppConfig } from '../../config';
 import { AccessTokenService } from './access-token.service';
+import { DeletedUsers } from './deleted-users';
 import { CsrfGuard, JwtAuthGuard, RolesGuard } from './guards';
 
 export const DEFAULT_RATE_LIMIT = { ttl: 60_000, limit: 100 };
@@ -21,11 +22,13 @@ export const DEFAULT_RATE_LIMIT = { ttl: 60_000, limit: 100 };
       useFactory: (config: AppConfig) =>
         new AccessTokenService(config.env.JWT_ACCESS_SECRET, config.env.API_PUBLIC_URL),
     },
+    // One per process (see DeletedUsers for the accepted single-instance gap).
+    { provide: DeletedUsers, useFactory: () => new DeletedUsers() },
     { provide: APP_GUARD, useClass: ThrottlerGuard },
     { provide: APP_GUARD, useClass: CsrfGuard },
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: RolesGuard },
   ],
-  exports: [AccessTokenService],
+  exports: [AccessTokenService, DeletedUsers],
 })
 export class AuthKernelModule {}

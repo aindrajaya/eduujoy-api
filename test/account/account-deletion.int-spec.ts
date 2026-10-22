@@ -3,6 +3,7 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { eq, inArray } from 'drizzle-orm';
 import { type Client } from 'pg';
 import { DeleteAccount } from '../../src/modules/account/application/delete-account.usecase';
+import { DeletedUsers } from '../../src/shared/common/auth/deleted-users';
 import { AssessmentAccountData } from '../../src/modules/assessment/infrastructure/assessment-account-data';
 import { BillingAccountData, STRIPPED_PAYLOAD_PATHS } from '../../src/modules/billing/infrastructure/billing-account-data';
 import { CatalogAccountData } from '../../src/modules/catalog/infrastructure/catalog-account-data';
@@ -77,6 +78,7 @@ describe('Account deletion (integration, A13 gate)', () => {
       new JobRepository(db),
       new BillingAccountData(db),
       new IdentityAccountData(db),
+      new DeletedUsers(),
     );
   });
 
