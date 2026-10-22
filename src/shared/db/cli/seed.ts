@@ -1,12 +1,11 @@
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
-import { sql } from 'drizzle-orm';
 import { Client } from 'pg';
 import { createDatabase } from '../database';
 import { describeError } from '../redact';
-import { topics } from '../schema';
 import { loadSeed } from '../seed/load-seed';
 import { parseSeed, readSeedFiles } from '../seed/seed-data';
+import { topicCounts } from '../seed/topic-counts';
 import { loadDirectDatabaseUrl } from './env';
 import { guardConnection } from './guard';
 
@@ -29,16 +28,17 @@ async function main(): Promise<void> {
   try {
     const db = createDatabase(client);
     const result = await loadSeed(db, data);
-    const [count] = await db.select({ n: sql<number>`count(*)::int` }).from(topics);
-    const total = count?.n ?? 0;
+    const counts = await topicCounts(db);
     process.stdout.write(
       `Seeded from ${values.dir}: ${result.topics} topics, ${result.prerequisites} prerequisite edges, ` +
-        `${result.items} diagnostic items. Topics in database: ${total}\n`,
+        `${result.items} diagnostic items. Seed topics in database: ${counts.seed} (plus ${counts.other} learner or reviewer topics)\n`,
     );
 
+    // Only seed topics are checked: learner-created topics are legitimate in prod (23 Oct 2026, the prod
+    // seed found 161 with one learner topic and failed).
     const expected = values['expect-topics'];
-    if (expected !== undefined && total !== Number(expected)) {
-      throw new Error(`Expected ${expected} topics in the database, found ${total}`);
+    if (expected !== undefined && counts.seed !== Number(expected)) {
+      throw new Error(`Expected ${expected} seed topics in the database, found ${counts.seed}`);
     }
   } finally {
     await client.end();
