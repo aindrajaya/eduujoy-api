@@ -23,3 +23,4 @@ Actual cost of every paid run, from API usage at catalog list prices. Hard stop 
 | 2026-10-22 13:58 | items --sample | standard | 1 | 0 | 0 | 0 | 0 | $0.0000 | v2 |
 | 2026-10-23 00:00 | console reconciliation | manual | 0 | 0 | 0 | 0 | 0 | $0.7800 | Console $38.36 vs _spend.md $37.58: timed-out standard items retries (22 Oct) |
 | 2026-10-22 20:09 | items | batch | 1 | 209 | 2526 | 0 | 8086 | $0.0438 | msgbatch_012KnssBCMPko8tjxBpLvETb |
+| 2026-10-22 20:15 | items-review | batch | 200 | 104827 | 1419 | 282381 | 73562 | $0.4885 | msgbatch_01MqT1uh37bbMwVkDbJtvEcZ |

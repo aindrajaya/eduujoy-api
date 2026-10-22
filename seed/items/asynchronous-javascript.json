@@ -1215,15 +1215,15 @@
         },
         {
           "id": "b",
-          "label": "`(async () => readLater(p))()`"
+          "label": "`new Promise((res, rej) => { try { readLater(p, (err, d) => res(d)) } catch (e) { rej(e) } })`"
         },
         {
           "id": "c",
-          "label": "`Promise.resolve(readLater(p, (err, d) => d))`"
+          "label": "`Promise.resolve(readLater(p, (err, d) => err ? Promise.reject(err) : d))`"
         },
         {
           "id": "d",
-          "label": "`new Promise(res => readLater(p, res))`"
+          "label": "`new Promise(res => readLater(p, (err, d) => res(err || d)))`"
         }
       ],
       "answerKey": {
