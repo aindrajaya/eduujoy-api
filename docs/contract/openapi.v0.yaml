@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Eduujoy API
-  version: 0.9.0-v0
+  version: 0.9.1-v0
   summary: Frozen v0 contract for the Eduujoy MVP.
   description: |
     Frozen v0 contract, written from PRD-API Section 7 (endpoints), Section 8 and master PRD
@@ -1026,7 +1026,7 @@ components:
         related:
           type: array
           maxItems: 3
-          description: Only with status `created`. The catalog topics nearest to the text (below the choice threshold), so the UI can offer them before a diagnostic without questions.
+          description: Only with status `created`. Up to 3 catalog topics nearest to the text in the same domain (similarity at least 0.60), banked topics first, so the UI can offer them before a diagnostic without questions. May include topics the learner just declined as choices; may be empty.
           items: { $ref: '#/components/schemas/Topic' }
 
     # ---------- assessment: diagnostic ----------
