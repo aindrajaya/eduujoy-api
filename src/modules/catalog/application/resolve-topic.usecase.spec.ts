@@ -298,13 +298,28 @@ describe('ResolveTopic', () => {
       expect(t.banks.lookups).toHaveLength(1);
     });
 
-    it('falls back to the nearest neighbour\'s domain when the normaliser is unavailable', async () => {
+    it("falls back to the nearest neighbour's domain at 0.65 when the normaliser is unavailable", async () => {
       const { t } = indonesian();
       t.normalizer.fail = true;
 
       const view = await t.resolve.execute('u1', 'Indonesian language', { createNew: true });
 
+      // Spanish (0.679) passes the stricter floor; English grammar (0.651) does too, just.
       expect(view.status === 'created' ? view.related.map((r) => r.canonicalName) : null).toEqual(['Spanish', 'English grammar']);
+    });
+
+    it('suggests nothing for "beekeeping" without a normaliser domain, never react-hooks', async () => {
+      const t = setup();
+      const Q = 3;
+      t.repo.add({ slug: 'react-hooks-2', canonicalName: 'React hooks (software)', domain: 'software', embedding: { vector: at(Q - similarityAngle(0.618)), ...MODEL } });
+      t.repo.add({ slug: 'observability', canonicalName: 'Observability', domain: 'software', embedding: { vector: at(Q - similarityAngle(0.614)), ...MODEL } });
+      t.repo.add({ slug: 'cooking', canonicalName: 'Cooking', domain: 'non_technical', embedding: { vector: at(Q + similarityAngle(0.6)), ...MODEL } });
+      t.embedder.queries.set('beekeeping', at(Q));
+      t.normalizer.fail = true;
+
+      const view = await t.resolve.execute('u1', 'beekeeping', { createNew: true });
+
+      expect(view).toMatchObject({ status: 'created', related: [] });
     });
 
     it('returns no related topics when none reaches the floor', async () => {

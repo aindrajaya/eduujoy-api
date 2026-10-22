@@ -6,6 +6,11 @@
  * is weaker than noise.
  */
 export const RELATED_FLOOR = 0.6;
+/**
+ * When the domain comes only from the nearest catalog topic (no normaliser domain), each suggestion must
+ * reach this instead: a wrong-domain suggestion is worse than none (user requirement, 22 Oct 2026).
+ */
+export const RELATED_FALLBACK_FLOOR = 0.65;
 export const MAX_RELATED = 3;
 
 export type Domain = 'software' | 'stem' | 'non_technical';
@@ -17,13 +22,17 @@ export interface Neighbour {
 }
 
 /**
- * Candidates for `related`, nearest first: in `domain` (or, when it is unknown, the nearest neighbour's
- * domain), at or above the floor, never the created topic itself. The caller prefers topics with a bank.
+ * Candidates for `related`, nearest first: in `domain` at RELATED_FLOOR or above, or, when the topic's
+ * domain is unknown, in the nearest neighbour's domain at RELATED_FALLBACK_FLOOR or above; never the
+ * created topic itself. The caller prefers topics with a bank.
  */
 export function relatedCandidates(neighbours: readonly Neighbour[], domain: Domain | null, excludeTopicId: string): Neighbour[] {
-  const sorted = [...neighbours].sort((a, b) => b.similarity - a.similarity || a.topicId.localeCompare(b.topicId));
-  const wanted = domain ?? sorted.find((n) => n.topicId !== excludeTopicId)?.domain ?? null;
-  return sorted.filter((n) => n.topicId !== excludeTopicId && n.similarity >= RELATED_FLOOR && (wanted === null || n.domain === wanted));
+  const sorted = [...neighbours]
+    .filter((n) => n.topicId !== excludeTopicId)
+    .sort((a, b) => b.similarity - a.similarity || a.topicId.localeCompare(b.topicId));
+  const wanted = domain ?? sorted[0]?.domain ?? null;
+  const floor = domain ? RELATED_FLOOR : RELATED_FALLBACK_FLOOR;
+  return sorted.filter((n) => n.similarity >= floor && (wanted === null || n.domain === wanted));
 }
 
 /** The final pick: topics with a diagnostic bank first, then by similarity; at most 3. */

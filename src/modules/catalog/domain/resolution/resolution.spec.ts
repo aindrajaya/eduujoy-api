@@ -7,6 +7,7 @@ import {
   MATCH_THRESHOLD,
   normaliseTopicText,
   pickRelated,
+  RELATED_FALLBACK_FLOOR,
   RELATED_FLOOR,
   relatedCandidates,
   queryText,
@@ -118,10 +119,14 @@ describe('related (contract 0.9.0)', () => {
     expect(relatedCandidates(near, 'software', 'self').map((c) => c.topicId)).toEqual(['java']);
   });
 
-  it("uses the nearest neighbour's domain when the topic's is unknown", () => {
+  it("uses the nearest neighbour's domain at the stricter 0.65 floor when the topic's is unknown", () => {
+    expect(RELATED_FALLBACK_FLOOR).toBe(0.65);
     expect(relatedCandidates(near, null, 'self').map((c) => c.topicId)).toEqual(['spanish', 'grammar']);
-    expect(relatedCandidates([n('x', 0.61, null)], null, 'self').map((c) => c.topicId)).toEqual(['x']);
-    expect(relatedCandidates([n('x', 0.5, 'stem')], null, 'self')).toEqual([]);
+    expect(relatedCandidates([n('x', 0.64, null)], null, 'self')).toEqual([]);
+    expect(relatedCandidates([n('x', 0.66, null)], null, 'self').map((c) => c.topicId)).toEqual(['x']);
+    // Golden "beekeeping": the nearest topics are software at 0.61-0.62, so nothing, never react-hooks.
+    const bees = [n('react-hooks', 0.618, 'software'), n('observability', 0.614, 'software'), n('cooking', 0.6, 'non_technical')];
+    expect(relatedCandidates(bees, null, 'self')).toEqual([]);
   });
 
   it('prefers topics with a bank, then similarity, at most 3', () => {

@@ -43,7 +43,7 @@ export class TopicResolveResponseDto {
     isArray: true,
     maxItems: 3,
     description:
-      'Only with status `created`. The catalog topics nearest to the text (below the choice threshold), so the UI can offer them before a diagnostic without questions.',
+      'Only with status `created`. Up to 3 catalog topics nearest to the text in the same domain (similarity at least 0.60), banked topics first, so the UI can offer them before a diagnostic without questions. May include topics the learner just declined as choices; may be empty.',
   })
   @Expose()
   @Type(() => TopicDto)
