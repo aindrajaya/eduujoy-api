@@ -66,7 +66,8 @@ export class DrizzleBillingRepository implements BillingRepository {
       .select({ userId: creditLedger.userId, credits: creditLedger.delta })
       .from(creditLedger)
       .where(and(eq(creditLedger.reason, 'purchase'), eq(creditLedger.externalRef, orderRef)));
-    return row ?? null;
+    // A deleted account's purchase is anonymised (user_id null): there is no balance left to claw back from.
+    return row?.userId ? { userId: row.userId, credits: row.credits } : null;
   }
 
   applyRefund(

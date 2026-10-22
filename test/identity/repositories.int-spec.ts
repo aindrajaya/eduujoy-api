@@ -68,6 +68,7 @@ describe('identity repositories (integration)', () => {
       refreshHash: randomUUID(),
       userAgent: 'jest',
       ipHash: 'ip',
+      authTime: new Date('2026-10-22T10:00:00Z'),
       expiresAt: new Date(Date.now() + 60_000),
     });
 
@@ -88,6 +89,14 @@ describe('identity repositories (integration)', () => {
       const [stored] = await db.select().from(sessionsTable).where(eq(sessionsTable.id, first.id));
       expect(stored).toMatchObject({ replacedBy: winner?.id });
       expect(stored?.revokedAt).toBeInstanceOf(Date);
+    });
+
+    it('stores and returns the auth time, and finds a session by id', async () => {
+      const user = await users.create(newUser('repo-authtime@example.com'));
+      const created = await sessions.create(session(user.id));
+
+      await expect(sessions.findById(created.id)).resolves.toMatchObject({ authTime: new Date('2026-10-22T10:00:00Z') });
+      await expect(sessions.findById(randomUUID())).resolves.toBeNull();
     });
 
     it('revokes a whole family without touching other families', async () => {

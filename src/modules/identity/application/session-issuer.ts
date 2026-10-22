@@ -27,15 +27,15 @@ export class SessionIssuer {
     private readonly accessTokens: AccessTokenService,
   ) {}
 
-  /** Starts a new session family. */
+  /** Starts a new session family: a real sign-in, so its time is the family's auth time. */
   async start(user: UserRecord, meta: RequestMeta): Promise<IssuedSession> {
-    const { token, next } = this.nextSession(user.id, randomUUID(), meta);
+    const { token, next } = this.nextSession(user.id, randomUUID(), meta, this.clock());
     const session = await this.sessions.create(next);
     return { user, accessToken: await this.sign(user, session.id), refreshToken: token };
   }
 
-  /** Builds the next session of an existing family (used by refresh rotation). */
-  nextSession(userId: string, familyId: string, meta: RequestMeta): { token: string; next: NewSession } {
+  /** Builds the next session of a family; refresh rotation passes the family's original `authTime` through. */
+  nextSession(userId: string, familyId: string, meta: RequestMeta, authTime: Date): { token: string; next: NewSession } {
     const { token, hash } = this.secrets.newRefreshToken();
     const expiresAt = new Date(this.clock().getTime() + REFRESH_TTL_MS);
     return {
@@ -46,6 +46,7 @@ export class SessionIssuer {
         refreshHash: hash,
         userAgent: meta.userAgent?.slice(0, 512) ?? null,
         ipHash: meta.ip === null ? null : this.secrets.hashIp(meta.ip),
+        authTime,
         expiresAt,
       },
     };
