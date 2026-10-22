@@ -93,15 +93,17 @@ describe('credit packs', () => {
     expect(t.enqueued[0]).toMatchObject({ type: 'billing-event', idempotencyKey: expect.stringMatching(/^billing:/) as unknown });
   });
 
-  it('holds orders over 10 packs, unpaid orders and orders without our user id', async () => {
+  it('credits a paid order over 10 packs with a flag, and holds zero-quantity, unpaid and user-less orders', async () => {
     const t = setup();
     t.provider.orderItems.set('5001', [{ variantId: VARIANTS.creditPack, quantity: 11 }]);
+    t.provider.orderItems.set('5005', []);
 
-    await expect(t.deliver(orderEvent({ userId: USER, orderId: 5001 }))).resolves.toBe('held:quantity_11');
+    await expect(t.deliver(orderEvent({ userId: USER, orderId: 5001 }))).resolves.toBe('credited:11:over_cap_11');
+    await expect(t.deliver(orderEvent({ userId: USER, orderId: 5005 }))).resolves.toBe('held:quantity_0');
     await expect(t.deliver(orderEvent({ userId: USER, orderId: 5002, status: 'pending' }))).resolves.toBe('ignored:order_pending');
     await expect(t.deliver(orderEvent({ userId: null, orderId: 5003 }))).resolves.toBe('held:no_user');
     await expect(t.deliver(orderEvent({ userId: randomUUID(), orderId: 5004 }))).resolves.toMatch(/^held:(quantity_0|unknown_user)$/);
-    expect(t.repo.balance(USER)).toBe(0);
+    expect(t.repo.balance(USER)).toBe(11);
   });
 
   it('ignores unknown variants and events from the other mode', async () => {
@@ -222,9 +224,16 @@ describe('CreateCheckout', () => {
     await t.checkout.execute(USER, 'subscription', ORIGIN);
 
     expect(t.provider.checkouts).toEqual([
-      { storeId: '100001', variantId: VARIANTS.creditPack, userId: USER, testMode: true, redirectUrl: 'http://localhost:5173/account?checkout=success' },
-      { storeId: '100001', variantId: VARIANTS.subscription, userId: USER, testMode: true, redirectUrl: 'http://localhost:5173/account?checkout=success' },
+      { storeId: '100001', variantId: VARIANTS.creditPack, userId: USER, testMode: true, redirectUrl: 'http://localhost:5173/account?checkout=success', quantity: 1 },
+      { storeId: '100001', variantId: VARIANTS.subscription, userId: USER, testMode: true, redirectUrl: 'http://localhost:5173/account?checkout=success', quantity: 1 },
     ]);
+  });
+
+  it('presets the chosen pack quantity on credit-pack checkouts only', async () => {
+    const t = setup();
+    await t.checkout.execute(USER, 'credit_pack', ORIGIN, 7);
+    await t.checkout.execute(USER, 'subscription', ORIGIN, 7);
+    expect(t.provider.checkouts.map((c) => c.quantity)).toEqual([7, 1]);
   });
 
   it('never returns the learner to an origin outside APP_ORIGIN', async () => {
