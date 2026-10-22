@@ -27,9 +27,13 @@ export class SessionIssuer {
     private readonly accessTokens: AccessTokenService,
   ) {}
 
-  /** Starts a new session family: a real sign-in, so its time is the family's auth time. */
-  async start(user: UserRecord, meta: RequestMeta): Promise<IssuedSession> {
-    const { token, next } = this.nextSession(user.id, randomUUID(), meta, this.clock());
+  /**
+   * Starts a new session family. Password sign-in and registration prove the credential now, so they
+   * use the default (now). Google passes its own: the verified auth_time of a re-authentication, or the
+   * epoch for any other Google sign-in, which may have completed without the learner present.
+   */
+  async start(user: UserRecord, meta: RequestMeta, authTime: Date = this.clock()): Promise<IssuedSession> {
+    const { token, next } = this.nextSession(user.id, randomUUID(), meta, authTime);
     const session = await this.sessions.create(next);
     return { user, accessToken: await this.sign(user, session.id), refreshToken: token };
   }

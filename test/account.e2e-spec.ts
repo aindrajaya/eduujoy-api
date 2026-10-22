@@ -118,5 +118,15 @@ describe('account export and deletion (e2e, contract 0.6.0/0.7.1)', () => {
     await http(me.addr).post('/v1/auth/refresh').set(csrf).set('Cookie', `ej_rt=${me.refresh}`).expect(401);
     await http(me.addr).get('/v1/auth/me').set('Cookie', cookies(me.access)).expect(401);
     await http(me.addr).post('/v1/auth/login').set(csrf).send({ email: me.email, password }).expect(401);
+    // The deleted-user denylist: the still-unexpired access token is refused on every route at once.
+    const withOldToken = cookies(me.access);
+    for (const send of [
+      () => http(me.addr).get('/v1/me/export').set('Cookie', withOldToken),
+      () => http(me.addr).post('/v1/topics/resolve').set(csrf).set('Cookie', withOldToken).send({ text: 'kubernetes' }),
+      () => http(me.addr).post('/v1/billing/checkout').set(csrf).set('Cookie', withOldToken).send({ product: 'credit_pack' }),
+    ]) {
+      const res = await send().expect(401);
+      expect((res.body as { code: string }).code).toBe('UNAUTHENTICATED');
+    }
   });
 });

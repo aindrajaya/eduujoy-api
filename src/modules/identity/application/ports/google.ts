@@ -8,10 +8,13 @@ export interface GoogleIdentity {
   email: string;
   emailVerified: boolean;
   name: string | null;
+  /** The id_token's `auth_time` (seconds since the epoch), when Google sent one; it does for `max_age`. */
+  authTime: number | null;
 }
 
 export interface GoogleOAuthClient {
-  authorizationUrl(input: { state: string; codeChallenge: string; nonce: string }): string;
+  /** `reauth` asks Google for a fresh sign-in (prompt=login, max_age=0) so the id_token carries auth_time. */
+  authorizationUrl(input: { state: string; codeChallenge: string; nonce: string; reauth: boolean }): string;
   /** Exchanges the code (with the PKCE verifier) and returns the verified id_token claims. */
   exchange(input: { code: string; codeVerifier: string; nonce: string }): Promise<GoogleIdentity>;
 }
@@ -23,6 +26,8 @@ export interface OAuthState {
   nonce: string;
   origin: string;
   returnTo: string;
+  /** Started as a re-authentication (contract 0.8.0); signed with the rest, so it can't be forged. */
+  reauth: boolean;
 }
 
 export interface OAuthStateStore {

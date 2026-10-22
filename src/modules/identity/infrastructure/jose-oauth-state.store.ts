@@ -12,6 +12,8 @@ const stateSchema = z.object({
   nonce: z.string().min(32).max(128),
   origin: z.url(),
   returnTo: z.string().refine(isSafeReturnTo, { error: 'returnTo must be a safe same-site path' }),
+  // Absent in states sealed before contract 0.8.0 deployed: treat as a normal sign-in (the safe default).
+  reauth: z.boolean().default(false),
 });
 
 /** Signs the OAuth round-trip state; the key is derived so it can never verify as an access token. */

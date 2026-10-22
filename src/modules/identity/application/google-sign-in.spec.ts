@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { CompleteGoogleSignIn, OAuthFailedError, StartGoogleSignIn } from './google-sign-in.usecase';
+import { AUTH_TIME_SKEW_MS, CompleteGoogleSignIn, OAuthFailedError, reauthTime, REAUTH_FRESH_MS, StartGoogleSignIn, UNVERIFIED_AUTH_TIME } from './google-sign-in.usecase';
 import { fakeHasher, FakeSessions, FakeUsers, TestClock, testIssuer } from './identity.fakes';
 import { type GoogleIdentity, type GoogleOAuthClient, type OAuthState, type OAuthStateStore } from './ports/google';
 
@@ -25,14 +25,15 @@ function setup(identity: Partial<GoogleIdentity> = {}) {
   const { issuer } = testIssuer(sessions, clock);
   const exchanges: { code: string; codeVerifier: string; nonce: string }[] = [];
   const google: GoogleOAuthClient = {
-    authorizationUrl: ({ state, codeChallenge, nonce }) => `https://google.test/auth?state=${state}&cc=${codeChallenge}&nonce=${nonce}`,
+    authorizationUrl: ({ state, codeChallenge, nonce, reauth }) => `https://google.test/auth?state=${state}&cc=${codeChallenge}&nonce=${nonce}&reauth=${String(reauth)}`,
     exchange: (input) => {
       exchanges.push(input);
-      return Promise.resolve({ sub: 'g-1', email: 'Ada@Example.com', emailVerified: true, name: 'Ada', ...identity });
+      return Promise.resolve({ sub: 'g-1', email: 'Ada@Example.com', emailVerified: true, name: 'Ada', authTime: null, ...identity });
     },
   };
   const states = new FakeStates();
   return {
+    clock,
     users,
     sessions,
     exchanges,
@@ -42,8 +43,8 @@ function setup(identity: Partial<GoogleIdentity> = {}) {
   };
 }
 
-async function begin(t: ReturnType<typeof setup>) {
-  const started = await t.start.execute({ origin: 'https://eduujoy.aindrajaya.my.id', returnTo: '/paths' });
+async function begin(t: ReturnType<typeof setup>, reauth = false) {
+  const started = await t.start.execute({ origin: 'https://eduujoy.aindrajaya.my.id', returnTo: '/paths', reauth });
   const saved = JSON.parse(started.sealedState) as OAuthState;
   return { started, saved };
 }
@@ -126,3 +127,57 @@ describe('CompleteGoogleSignIn', () => {
     expect(unverified.users.rows.size).toBe(0);
   });
 });
+
+describe('Google re-authentication (contract 0.8.0)', () => {
+  const now = new Date('2026-10-22T12:00:00Z');
+  const secs = (ms: number) => Math.floor(ms / 1000);
+
+  it('counts auth_time only when it is a recent integer, allowing a small skew', () => {
+    expect(reauthTime(secs(now.getTime() - 60_000), now)).toEqual(new Date(now.getTime() - 60_000));
+    expect(reauthTime(secs(now.getTime() - REAUTH_FRESH_MS + 1000), now).getTime()).toBeGreaterThan(0);
+    // Stale, missing, non-integer and far in the future: not fresh.
+    expect(reauthTime(secs(now.getTime() - REAUTH_FRESH_MS - 1000), now)).toEqual(UNVERIFIED_AUTH_TIME);
+    expect(reauthTime(null, now)).toEqual(UNVERIFIED_AUTH_TIME);
+    expect(reauthTime(1.5, now)).toEqual(UNVERIFIED_AUTH_TIME);
+    expect(reauthTime(secs(now.getTime() + AUTH_TIME_SKEW_MS + 5000), now)).toEqual(UNVERIFIED_AUTH_TIME);
+    // Slightly ahead of our clock (within the skew) is clamped to now.
+    expect(reauthTime(secs(now.getTime() + 10_000), now)).toEqual(now);
+  });
+
+  it('asks Google for a fresh sign-in and seals the flag in the state', async () => {
+    const t = setup();
+    const { started, saved } = await begin(t, true);
+
+    expect(new URL(started.redirectUrl).searchParams.get('reauth')).toBe('true');
+    expect(saved.reauth).toBe(true);
+    expect((await begin(t)).saved.reauth).toBe(false);
+  });
+
+  it.each([
+    ['fresh', -60_000, 'verified'],
+    ['stale', -(REAUTH_FRESH_MS + 60_000), 'epoch'],
+    ['missing', null, 'epoch'],
+  ] as const)('sets the session auth time from a %s auth_time', async (_label, offset, expected) => {
+    const t = setup();
+    const authTime = offset === null ? null : secs(t.clock.now.getTime() + offset);
+    const google = setup({ authTime });
+    const { started, saved } = await begin(google, true);
+
+    await google.complete.execute({ code: 'c', state: saved.state, sealedState: started.sealedState }, meta);
+
+    const [session] = [...google.sessions.rows.values()];
+    const want = expected === 'verified' ? new Date((authTime ?? 0) * 1000) : UNVERIFIED_AUTH_TIME;
+    expect(session?.authTime).toEqual(want);
+  });
+
+  it('never counts a normal Google sign-in as fresh, even with a recent auth_time', async () => {
+    const t = setup();
+    const google = setup({ authTime: Math.floor(t.clock.now.getTime() / 1000) - 30 });
+    const { started, saved } = await begin(google);
+
+    await google.complete.execute({ code: 'c', state: saved.state, sealedState: started.sealedState }, meta);
+
+    expect([...google.sessions.rows.values()][0]?.authTime).toEqual(UNVERIFIED_AUTH_TIME);
+  });
+});
+

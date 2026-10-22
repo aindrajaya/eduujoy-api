@@ -5,6 +5,7 @@ import { AppConfig } from '../../config';
 import { ProblemException } from '../problem/problem';
 import { AccessTokenService, type AuthRole } from './access-token.service';
 import { IS_PUBLIC, ROLES, SKIP_CSRF } from './decorators';
+import { DeletedUsers } from './deleted-users';
 import { ACCESS_COOKIE } from './session-cookies';
 
 const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);
@@ -41,6 +42,7 @@ export class JwtAuthGuard implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
     private readonly tokens: AccessTokenService,
+    private readonly deleted: DeletedUsers,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -51,7 +53,8 @@ export class JwtAuthGuard implements CanActivate {
     const cookies = req.cookies as Record<string, unknown> | undefined;
     const token = cookies?.[ACCESS_COOKIE];
     const claims = typeof token === 'string' ? await this.tokens.verify(token) : null;
-    if (!claims) throw new ProblemException(401, 'UNAUTHENTICATED', 'Not signed in');
+    // A deleted account's token is still cryptographically valid until it expires.
+    if (!claims || this.deleted.has(claims.userId)) throw new ProblemException(401, 'UNAUTHENTICATED', 'Not signed in');
     req.user = claims;
     return true;
   }

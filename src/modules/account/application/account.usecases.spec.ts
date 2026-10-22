@@ -1,5 +1,6 @@
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { type AccountDataContributor } from '../../../shared/common/account';
+import { DeletedUsers } from '../../../shared/common/auth/deleted-users';
 import { type Database } from '../../../shared/db/database';
 import { EventBus } from '../../../shared/events/event-bus';
 import { UnitOfWork } from '../../../shared/events/unit-of-work';
@@ -28,8 +29,9 @@ function setup(authTime: Date | null) {
   const uow = new UnitOfWork(db, new EventBus(new EventEmitter2()));
   const jobs = { deleteForUser: (userId: string) => (calls.push(`jobs:${userId}`), Promise.resolve(0)) } as unknown as JobRepository;
   const authTimes = { execute: () => Promise.resolve(authTime) } as unknown as GetSessionAuthTime;
-  const deleter = new DeleteAccount(authTimes, uow, jobs, contributor('billing', calls), contributor('account', calls));
-  return { calls, deleter };
+  const deletedUsers = new DeletedUsers();
+  const deleter = new DeleteAccount(authTimes, uow, jobs, contributor('billing', calls), contributor('account', calls), deletedUsers);
+  return { calls, deleter, deletedUsers };
 }
 
 describe('DeleteAccount', () => {
@@ -40,6 +42,8 @@ describe('DeleteAccount', () => {
 
     // The tombstone is a UUID (36 chars), shared by the billing and identity steps.
     expect(t.calls).toEqual(['billing:u1:36', 'jobs:u1', 'account:u1:36']);
+    // Its unexpired access tokens are refused from now on.
+    expect(t.deletedUsers.has('u1')).toBe(true);
   });
 
   it('asks for a fresh sign-in once the window has passed, and deletes nothing', async () => {
@@ -47,6 +51,7 @@ describe('DeleteAccount', () => {
 
     await expect(t.deleter.execute('u1', 's1', NOW)).rejects.toBeInstanceOf(ReauthRequiredError);
     expect(t.calls).toEqual([]);
+    expect(t.deletedUsers.has('u1')).toBe(false);
   });
 
   it('refuses an unknown or revoked session', async () => {

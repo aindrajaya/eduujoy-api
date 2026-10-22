@@ -1,5 +1,6 @@
 export { type AccessClaims, AccessTokenService, ACCESS_TOKEN_TTL_SECONDS, type AuthRole } from './access-token.service';
 export { AuthKernelModule } from './auth-kernel.module';
+export { DeletedUsers } from './deleted-users';
 export { type AuthUser, CurrentUser, Public, Roles, SkipCsrf } from './decorators';
 export { CSRF_HEADER_VALUE } from './guards';
 export {

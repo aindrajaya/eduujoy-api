@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ACCOUNT_DATA, type AccountDataContributor } from '../../../shared/common/account';
+import { DeletedUsers } from '../../../shared/common/auth';
 import { UnitOfWork } from '../../../shared/events';
 import { JobRepository } from '../../../shared/jobs';
 import { GetSessionAuthTime } from '../../identity/application/get-session-auth-time.query';
@@ -28,6 +29,7 @@ export class DeleteAccount {
     private readonly jobs: JobRepository,
     @Inject(ACCOUNT_DATA.billing) private readonly billing: AccountDataContributor,
     @Inject(ACCOUNT_DATA.identity) private readonly identity: AccountDataContributor,
+    private readonly deletedUsers: DeletedUsers,
   ) {}
 
   async execute(userId: string, sessionId: string, now: Date = new Date()): Promise<void> {
@@ -41,6 +43,8 @@ export class DeleteAccount {
       await this.jobs.deleteForUser(userId, tx);
       await this.identity.erase?.(tx, userId, tombstone);
     });
+    // Its unexpired access tokens stop working now, not when they expire.
+    this.deletedUsers.add(userId);
     // The tombstone links retained billing rows for support; it is not the user id and is not stored with it.
     this.logger.log({ tombstone }, 'Account deleted');
   }
