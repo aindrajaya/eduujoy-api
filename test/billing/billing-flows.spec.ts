@@ -7,7 +7,7 @@ import { type Env } from '../../src/shared/config/env';
 import { type Database } from '../../src/shared/db/database';
 import { EventBus } from '../../src/shared/events/event-bus';
 import { UnitOfWork } from '../../src/shared/events/unit-of-work';
-import { type JobQueue } from '../../src/shared/jobs';
+import { type JobQueue, NonRetryableJobError } from '../../src/shared/jobs';
 import { type EntitlementChanged } from '../../src/modules/billing/domain/events/entitlement-changed.event';
 import { LemonSqueezyNotificationParser } from '../../src/modules/billing/infrastructure/lemonsqueezy-notification.parser';
 import { FakeBillingProvider, FakeBillingRepository, fakeQuotaRepository } from '../../src/modules/billing/application/billing.fakes';
@@ -15,6 +15,7 @@ import { CreateCheckout, isProviderCheckoutUrl } from '../../src/modules/billing
 import { CheckoutUnavailableError, QuotaExceededError, SubscriptionActiveError } from '../../src/modules/billing/application/errors';
 import { orderRef, ProcessBillingEvent } from '../../src/modules/billing/application/process-billing-event.handler';
 import { ReceiveWebhook, verifySignature, WebhookSignatureError } from '../../src/modules/billing/application/receive-webhook.usecase';
+import { ReprocessBillingEvent } from '../../src/modules/billing/application/reprocess-billing-event.usecase';
 import { ReservePath } from '../../src/modules/billing/application/reserve-path.usecase';
 
 const SECRET = 'unit-webhook-secret-'.padEnd(40, 'z');
@@ -51,7 +52,7 @@ function setup(mode: 'test' | 'live' = 'test') {
     const outcome = await processor.run(processor.parse(job.payload));
     return (outcome.result as { outcome: string }).outcome;
   }
-  return { repo, provider, changes, enqueued, deliver, receive, checkout: new CreateCheckout(provider, fakeQuotaRepository(repo), config), reserve: new ReservePath(repo) };
+  return { repo, provider, changes, enqueued, deliver, receive, processor, checkout: new CreateCheckout(provider, fakeQuotaRepository(repo), config), reserve: new ReservePath(repo) };
 }
 
 const sign = (raw: Buffer, secret = SECRET) => createHmac('sha256', secret).update(raw).digest('hex');
@@ -104,6 +105,64 @@ describe('credit packs', () => {
     await expect(t.deliver(orderEvent({ userId: null, orderId: 5003 }))).resolves.toBe('held:no_user');
     await expect(t.deliver(orderEvent({ userId: randomUUID(), orderId: 5004 }))).resolves.toMatch(/^held:(quantity_0|unknown_user)$/);
     expect(t.repo.balance(USER)).toBe(11);
+  });
+
+  it('ends at once, uncredited and re-runnable, when the order items lookup is refused (API key in the other mode)', async () => {
+    // Prod 22 Oct 2026: a paid test-mode pack never credited. A key that can't read the order's mode
+    // gets 401/403/404 from GET /v1/order-items, which no retry fixes.
+    const t = setup();
+    t.provider.orderItemsStatus = 404;
+    const raw = Buffer.from(JSON.stringify(orderEvent({ userId: USER, orderId: 5001 })));
+    await t.receive.execute(raw, sign(raw));
+    const job = t.enqueued.at(-1);
+    if (!job) throw new Error('nothing enqueued');
+
+    const failure = await t.processor.run(t.processor.parse(job.payload)).catch((e: unknown) => e);
+
+    expect(failure).toBeInstanceOf(NonRetryableJobError);
+    expect((failure as Error).message).toMatch(/HTTP 404.*test_mode=true.*test-mode key/);
+    expect([...t.repo.events.values()][0]?.processedAt).toBeNull();
+    expect(t.repo.balance(USER)).toBe(0);
+
+    // A transient error stays retryable; once the key is fixed, re-running the same event credits it.
+    t.provider.orderItemsStatus = 503;
+    await expect(t.processor.run(t.processor.parse(job.payload))).rejects.not.toBeInstanceOf(NonRetryableJobError);
+    t.provider.orderItemsStatus = null;
+    t.provider.orderItems.set('5001', [{ variantId: VARIANTS.creditPack, quantity: 2 }]);
+    await expect(t.processor.run(t.processor.parse(job.payload))).resolves.toMatchObject({ result: { outcome: 'credited:2' } });
+    expect(t.repo.balance(USER)).toBe(2);
+  });
+
+  it('billing:reprocess re-queues only an unprocessed event, and two runs credit once', async () => {
+    const t = setup();
+    t.provider.orderItemsStatus = 404;
+    const raw = Buffer.from(JSON.stringify(orderEvent({ userId: USER, orderId: 5001 })));
+    await t.receive.execute(raw, sign(raw));
+    const first = t.enqueued.at(-1);
+    if (!first) throw new Error('nothing enqueued');
+    await expect(t.processor.run(t.processor.parse(first.payload))).rejects.toBeInstanceOf(NonRetryableJobError);
+    const eventId = (first.payload as { eventId: string }).eventId;
+
+    let tick = 0;
+    const reprocess = new ReprocessBillingEvent(t.repo, { enqueue: (r: { type: string; payload: unknown; idempotencyKey: string }) => (t.enqueued.push(r), Promise.resolve({ job: { id: `job-${++tick}` }, created: true })) } as never, () => new Date(Date.UTC(2026, 9, 22, 12, 0, tick)));
+    await expect(reprocess.execute('not-a-uuid', { dryRun: false })).resolves.toEqual({ outcome: 'not_found' });
+    await expect(reprocess.execute(randomUUID(), { dryRun: false })).resolves.toEqual({ outcome: 'not_found' });
+    await expect(reprocess.execute(eventId, { dryRun: true })).resolves.toEqual({ outcome: 'would_queue', type: 'order_created' });
+    const queuedBefore = t.enqueued.length;
+
+    // The operator runs it twice before the API wakes up; both jobs run.
+    t.provider.orderItemsStatus = null;
+    t.provider.orderItems.set('5001', [{ variantId: VARIANTS.creditPack, quantity: 2 }]);
+    await expect(reprocess.execute(eventId, { dryRun: false })).resolves.toMatchObject({ outcome: 'queued' });
+    await expect(reprocess.execute(eventId, { dryRun: false })).resolves.toMatchObject({ outcome: 'queued' });
+    const jobs = t.enqueued.slice(queuedBefore);
+    expect(new Set(jobs.map((j) => j.idempotencyKey)).size).toBe(2);
+    const outcomes = [];
+    for (const job of jobs) outcomes.push(((await t.processor.run(t.processor.parse(job.payload))).result as { outcome: string }).outcome);
+
+    expect(outcomes).toEqual(['credited:2', 'already_processed']);
+    expect(t.repo.balance(USER)).toBe(2);
+    await expect(reprocess.execute(eventId, { dryRun: false })).resolves.toMatchObject({ outcome: 'already_processed', type: 'order_created' });
   });
 
   it('ignores unknown variants and events from the other mode', async () => {

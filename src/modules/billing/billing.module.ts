@@ -1,6 +1,7 @@
-import { Inject, Module, type OnModuleInit } from '@nestjs/common';
+import { Inject, Module, type OnApplicationBootstrap, type OnModuleInit } from '@nestjs/common';
 import { AppConfig } from '../../shared/config';
 import { JobExecutor } from '../../shared/jobs';
+import { CheckKeyMode } from './application/check-key-mode';
 import { CreateCheckout } from './application/create-checkout.usecase';
 import { GetQuotaQuery } from './application/get-quota.query';
 import { BILLING_PROVIDER } from './application/ports/billing-provider';
@@ -28,6 +29,7 @@ import { BillingAccountData } from './infrastructure/billing-account-data';
     ReceiveWebhook,
     ProcessBillingEvent,
     ReservePath,
+    CheckKeyMode,
     { provide: QUOTA_REPOSITORY, useClass: DrizzleQuotaRepository },
     { provide: BILLING_REPOSITORY, useClass: DrizzleBillingRepository },
     { provide: NOTIFICATION_PARSER, useClass: LemonSqueezyNotificationParser },
@@ -37,13 +39,19 @@ import { BillingAccountData } from './infrastructure/billing-account-data';
   ],
   exports: [GetQuotaQuery, ReservePath, ACCOUNT_DATA.billing],
 })
-export class BillingModule implements OnModuleInit {
+export class BillingModule implements OnModuleInit, OnApplicationBootstrap {
   constructor(
     @Inject(JobExecutor) private readonly executor: JobExecutor,
     @Inject(ProcessBillingEvent) private readonly processBillingEvent: ProcessBillingEvent,
+    @Inject(CheckKeyMode) private readonly checkKeyMode: CheckKeyMode,
   ) {}
 
   onModuleInit(): void {
     this.executor.register(this.processBillingEvent);
+  }
+
+  onApplicationBootstrap(): void {
+    // In the background: a slow or unreachable provider must not delay boot.
+    void this.checkKeyMode.execute();
   }
 }

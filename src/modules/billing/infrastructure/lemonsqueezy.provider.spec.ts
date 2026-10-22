@@ -59,4 +59,17 @@ describe('LemonSqueezyProvider', () => {
     const { ls } = provider(() => json({ data: { attributes: { url: 'not a url' } } }));
     await expect(ls.createCheckout({ storeId: '1', variantId: '2', userId: 'u', testMode: false, redirectUrl: 'https://a.example/', quantity: 1 })).rejects.toThrow();
   });
+
+  it('reads the API key mode from GET /v1/users/me meta.test_mode', async () => {
+    const { calls, ls } = provider(() => json({ meta: { test_mode: true }, data: { type: 'users', id: '1', attributes: { name: 'x' } } }));
+
+    await expect(ls.apiKeyTestMode()).resolves.toBe(true);
+    expect(calls[0]?.url).toBe('https://api.lemonsqueezy.com/v1/users/me');
+    expect(calls[0]?.init).toMatchObject({ method: 'GET', headers: { Authorization: `Bearer ${KEY}` } });
+
+    await expect(provider(() => json({ meta: { test_mode: false } })).ls.apiKeyTestMode()).resolves.toBe(false);
+    await expect(provider(() => json({ data: {} })).ls.apiKeyTestMode()).resolves.toBeNull();
+    await expect(provider(() => json({}, 401)).ls.apiKeyTestMode()).rejects.toMatchObject({ status: 401, permanent: true });
+  });
 });
+

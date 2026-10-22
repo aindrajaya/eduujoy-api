@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { z } from 'zod';
 import { AppConfig } from '../../../shared/config';
-import { type BillingProvider } from '../application/ports/billing-provider';
+import { type BillingProvider, BillingProviderHttpError } from '../application/ports/billing-provider';
 
 const API = 'https://api.lemonsqueezy.com/v1';
 const TIMEOUT_MS = 10_000;
@@ -21,13 +21,12 @@ const orderItemsResponse = z.object({
     .max(MAX_ORDER_ITEMS),
 });
 
-export class LemonSqueezyApiError extends Error {
-  override name = 'LemonSqueezyApiError';
+// GET /v1/users/me answers with `"meta": { "test_mode": true }` for a test-mode key
+// (docs.lemonsqueezy.com/api/users/retrieve-user, example response).
+const userResponse = z.object({ meta: z.object({ test_mode: z.boolean() }).partial().optional() });
 
-  constructor(readonly status: number) {
-    // Status only: response bodies can echo request data, and the key must never reach a log.
-    super(`Lemon Squeezy API returned HTTP ${status}`);
-  }
+export class LemonSqueezyApiError extends BillingProviderHttpError {
+  override name = 'LemonSqueezyApiError';
 }
 
 /** Lemon Squeezy REST API (JSON:API), docs.lemonsqueezy.com/api. */
@@ -68,6 +67,11 @@ export class LemonSqueezyProvider implements BillingProvider {
   async listOrderItems(orderId: string): Promise<{ variantId: string; quantity: number }[]> {
     const json = await this.request('GET', `/order-items?filter[order_id]=${encodeURIComponent(orderId)}&page[size]=${MAX_ORDER_ITEMS}`);
     return orderItemsResponse.parse(json).data.map((d) => ({ variantId: d.attributes.variant_id, quantity: d.attributes.quantity }));
+  }
+
+  async apiKeyTestMode(): Promise<boolean | null> {
+    const parsed = userResponse.safeParse(await this.request('GET', '/users/me'));
+    return parsed.success ? (parsed.data.meta?.test_mode ?? null) : null;
   }
 
   private async request(method: 'GET' | 'POST', path: string, body?: unknown): Promise<unknown> {
