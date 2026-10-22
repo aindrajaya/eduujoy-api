@@ -32,8 +32,9 @@ describe('Gemini adapters (contract: recorded generateContent, synthetic embeddi
       sleeps.push(ms);
       return Promise.resolve();
     };
-    generator = new GeminiStructuredGenerator(client, { sleep });
-    embedder = new GeminiEmbedder(client, { sleep });
+    // Pinned jitter: the delays below are exact, so the test can't flake on Math.random.
+    generator = new GeminiStructuredGenerator(client, { sleep, random: () => 0.5 });
+    embedder = new GeminiEmbedder(client, { sleep, random: () => 0.5 });
   });
 
   afterEach(async () => {
@@ -75,8 +76,8 @@ describe('Gemini adapters (contract: recorded generateContent, synthetic embeddi
 
     await expect(generator.generate(request)).resolves.toBeDefined();
     expect(server.received).toHaveLength(3);
-    expect(sleeps).toHaveLength(2);
-    expect(sleeps[1]).toBeGreaterThan(sleeps[0] ?? 0);
+    // base 500 ms × 2^attempt × (0.5 + 0.5): 500 then 1000.
+    expect(sleeps).toEqual([500, 1000]);
   });
 
   it.each([

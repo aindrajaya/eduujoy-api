@@ -7,7 +7,7 @@ const config: Config = {
   testRegex: '\\.e2e-spec\\.ts$',
   transform: { '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }] },
   moduleFileExtensions: ['ts', 'js', 'json'],
-  setupFiles: ['<rootDir>/test/setup-env.ts'],
+  setupFiles: ['<rootDir>/test/setup-network.ts', '<rootDir>/test/setup-env.ts'],
   globalSetup: '<rootDir>/test/db/global-setup.ts',
   globalTeardown: '<rootDir>/test/db/global-teardown.ts',
   testTimeout: 30_000,

@@ -8,6 +8,7 @@ const config: Config = {
   testRegex: '\\.int-spec\\.ts$',
   transform: { '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }] },
   moduleFileExtensions: ['ts', 'js', 'json'],
+  setupFiles: ['<rootDir>/test/setup-network.ts'],
   globalSetup: '<rootDir>/test/db/global-setup.ts',
   globalTeardown: '<rootDir>/test/db/global-teardown.ts',
   testTimeout: 30_000,

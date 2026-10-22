@@ -22,6 +22,8 @@ export const EMBEDDING_VERSION = 1;
 export interface GeminiOptions {
   baseUrl?: string;
   sleep?: (ms: number) => Promise<void>;
+  /** Jitter source for retries (tests pin it; defaults to Math.random). */
+  random?: () => number;
 }
 
 export interface GeminiClientOptions {
@@ -98,7 +100,7 @@ export class GeminiStructuredGenerator implements StructuredGenerator {
           throw toAiError(error);
         }
       },
-      { retries: 2, baseDelayMs: 500, ...(this.options.sleep ? { sleep: this.options.sleep } : {}) },
+      { retries: 2, baseDelayMs: 500, ...(this.options.sleep ? { sleep: this.options.sleep } : {}), ...(this.options.random ? { random: this.options.random } : {}) },
     );
 
     const call = {
@@ -165,7 +167,7 @@ export class GeminiEmbedder implements Embedder {
           throw toAiError(error);
         }
       },
-      { retries: 2, baseDelayMs: 500, ...(this.options.sleep ? { sleep: this.options.sleep } : {}) },
+      { retries: 2, baseDelayMs: 500, ...(this.options.sleep ? { sleep: this.options.sleep } : {}), ...(this.options.random ? { random: this.options.random } : {}) },
     );
 
     const vectors = (response.embeddings ?? []).map((e) => e.values ?? []);
