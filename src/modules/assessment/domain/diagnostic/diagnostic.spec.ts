@@ -63,6 +63,10 @@ describe('endedClimbing (the A7 cap signal)', () => {
     expect(endedClimbing({ estimates: [4, 3] })).toBe(false);
     expect(endedClimbing({ estimates: [1] })).toBe(false);
   });
+
+  it('keeps the start cell in the state, so the cap log can be split by self-report choice', () => {
+    expect(begin(4, []).state.start).toBe(4);
+  });
 });
 
 describe('isCorrect', () => {

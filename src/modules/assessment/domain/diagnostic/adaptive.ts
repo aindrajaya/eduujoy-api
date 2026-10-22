@@ -15,6 +15,8 @@ export interface GradedItem {
 
 /** Persisted adaptive state (diagnostic_sessions.state). */
 export interface DiagnosticState {
+  /** The start cell from the self-report (absent on sessions started before 22 Oct 2026). */
+  start?: number;
   estimate: number;
   /** Item ids of the batch waiting for answers. */
   current: string[];

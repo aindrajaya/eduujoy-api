@@ -105,7 +105,7 @@ export class SubmitDiagnosticAnswers {
         // Counted to size the A7 cap (user decision, 22 Oct 2026): grep "Placement may be capped".
         scope.afterCommit(() => {
           this.logger.log(
-            { placementId, topicId: session.topicId, stage, bloom, items: step.state.results.length, estimates: step.state.estimates },
+            { placementId, topicId: session.topicId, startCell: step.state.start ?? null, stage, bloom, items: step.state.results.length, estimates: step.state.estimates },
             'Placement may be capped: the estimate was still rising when the diagnostic ended',
           );
         });
