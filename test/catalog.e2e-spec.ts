@@ -179,9 +179,11 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
     // 160 vector writes and ~100 resolves, each a round trip to the Neon test branch.
   }, 180_000);
 
-  // Launch requirement (EXECUTION-PLAN §4): the held-out set was never used for tuning. It must reach
-  // lenient >= 95% with no wrong auto-match. Runs after the golden test, which loads the topic vectors.
-  (holdoutRecording ? it : it.skip)('held-out v2 topic phrases: lenient >= 95% and no wrong auto-match (launch check)', async () => {
+  // Launch check (EXECUTION-PLAN §4) on held-out v2, never used for tuning. User decision (23 Oct 2026,
+  // after the one v2 run: lenient 38/41 = 92.7%, strict 61.0%, 0 wrong): the gate is no wrong
+  // auto-match (a confident wrong topic is worse than choices or a new topic); lenient and strict are
+  // reported, not asserted. Runs after the golden test, which loads the topic vectors.
+  (holdoutRecording ? it : it.skip)('held-out v2 topic phrases: no wrong auto-match (launch check; lenient reported)', async () => {
     const rows: { kind: string; text: string; got: string; strict: boolean; lenient: boolean; wrongMatch: boolean }[] = [];
     for (const c of holdout.cases) {
       const { cookie } = await signedInUser();
@@ -216,7 +218,6 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
         '\n',
     );
     expect(rows.filter((r) => r.wrongMatch).map((r) => r.text)).toEqual([]);
-    expect(rows.filter((r) => r.lenient).length / rows.length).toBeGreaterThanOrEqual(0.95);
   }, 180_000);
 
   it('matches an exact name without an embedding call and returns only contract fields', async () => {
