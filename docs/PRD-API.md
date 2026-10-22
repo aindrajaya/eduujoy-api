@@ -45,7 +45,7 @@ The MVP runs as one NestJS process on Koyeb's free instance, with jobs in the sa
 | Docs and types | `@nestjs/swagger` → `openapi.json` → `openapi-typescript` in the UI repo | One contract for two repos |
 | Logging and errors | `nestjs-pino` (JSON logs, request IDs), Sentry | Searchable logs, alerting |
 | Tests | Jest unit tests, Supertest e2e, a Neon test branch (one schema per run, no Docker) | Real database in CI |
-| Deploy | Dockerfile → Koyeb (Frankfurt or Washington, D.C.), GitHub Actions CI | Push-to-deploy |
+| Deploy | Dockerfile → Koyeb (Frankfurt, `fra`), GitHub Actions CI | Push-to-deploy |
 
 **Free-tier constraints and how the design absorbs them**
 
@@ -454,7 +454,7 @@ Cold start on the free instance adds 1–5 s; the UI covers it with a wake-up st
 
 | Neon project | Region | Branch | Used by | Variable |
 | --- | --- | --- | --- | --- |
-| `eduujoy-prod` | AWS Frankfurt (next to Koyeb) | `main` | Production API | `DATABASE_URL`, `DATABASE_URL_DIRECT` in Koyeb |
+| `eduujoy-prod` | AWS Frankfurt (`eu-central-1`, next to Koyeb `fra`) | `main` | Production API | `DATABASE_URL` (pooled) in Koyeb; `DATABASE_URL_DIRECT` held by the user only (migrations and seeds) |
 | `eduujoy-dev` | AWS Singapore (close to the developer) | `main` | Local development | `DATABASE_URL`, `DATABASE_URL_DIRECT` in `.secrets.env` |
 | `eduujoy-dev` | AWS Singapore | `test` | Integration and e2e tests, locally and in CI | `DATABASE_URL_TEST` (direct string, never pooled) |
 
