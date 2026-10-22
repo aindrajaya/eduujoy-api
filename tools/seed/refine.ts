@@ -26,6 +26,7 @@ const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('topic-refin
 /** Named in the task: the held-out failures (geometry vs trigonometry, world-history, spanish). */
 const ALWAYS = ['geometry', 'trigonometry', 'world-history', 'spanish'];
 const NEIGHBOURS = 6;
+const MAX_EXPLICIT_NEIGHBOURS = 12;
 const MAX_TOKENS = 4_000;
 const EXPECTED_OUTPUT_TOKENS = 600;
 const MAX_ALIASES = 10;
@@ -44,6 +45,17 @@ export interface RefineOptions {
   go: boolean;
   sample?: number;
   minCosine: number;
+  /** Explicit targets instead of the cosine search; each is compared with the other listed topics. */
+  topics?: string[];
+}
+
+/** Explicit targets (--topics), for topics without recorded vectors yet, such as newly added ones. */
+function explicitTargets(topics: SeedTopic[], slugs: string[]): Target[] {
+  const bySlug = new Map(topics.map((t) => [t.slug, t]));
+  const unknown = slugs.filter((s) => !bySlug.has(s));
+  if (unknown.length > 0) throw new Error(`--topics: unknown slugs ${unknown.join(', ')}`);
+  const listed = slugs.flatMap((s) => bySlug.get(s) ?? []);
+  return listed.map((topic) => ({ topic, neighbours: listed.filter((n) => n !== topic).slice(0, MAX_EXPLICIT_NEIGHBOURS).map((n) => ({ topic: n, cosine: NaN })) }));
 }
 
 interface Target {
@@ -106,7 +118,9 @@ function entry(topic: SeedTopic): string {
 }
 
 function userTurn(target: Target): string {
-  const neighbours = target.neighbours.map((n) => `<neighbour similarity="${n.cosine.toFixed(3)}">\n${entry(n.topic)}\n</neighbour>`);
+  const neighbours = target.neighbours.map((n) =>
+    Number.isNaN(n.cosine) ? `<neighbour>\n${entry(n.topic)}\n</neighbour>` : `<neighbour similarity="${n.cosine.toFixed(3)}">\n${entry(n.topic)}\n</neighbour>`,
+  );
   return `<topic>\n${entry(target.topic)}\n</topic>\n\n${neighbours.join('\n')}`;
 }
 
@@ -136,7 +150,8 @@ function accept(answers: Map<string, Answer>, slug: string, message: Anthropic.M
 export async function runRefine(options: RefineOptions): Promise<void> {
   const write = (line: string): boolean => process.stdout.write(`${line}\n`);
   const topics = parseSeed({ topics: readSeedFiles(SEED_DIR).topics, items: {} }).topics;
-  const { targets, pairs, model } = findTargets(topics, options.minCosine);
+  const found = options.topics ? undefined : findTargets(topics, options.minCosine);
+  const targets = found?.targets ?? explicitTargets(topics, options.topics ?? []);
   const bySlug = new Map(targets.map((t) => [t.topic.slug, t]));
   const answers = loadAnswers();
 
@@ -152,7 +167,11 @@ export async function runRefine(options: RefineOptions): Promise<void> {
   }
 
   const domains = ['software', 'stem', 'non_technical'].map((d) => `${d} ${targets.filter((t) => t.topic.domain === d).length}`);
-  write(`Near neighbours (${model} topic vectors, cosine >= ${options.minCosine}): ${pairs} pairs; ${targets.length} topics to refine incl. ${ALWAYS.join(', ')} (${domains.join(', ')}).`);
+  write(
+    found
+      ? `Near neighbours (${found.model} topic vectors, cosine >= ${options.minCosine}): ${found.pairs} pairs; ${targets.length} topics to refine incl. ${ALWAYS.join(', ')} (${domains.join(', ')}).`
+      : `Explicit targets (--topics): ${targets.length} topics, each compared with the other listed topics (${domains.join(', ')}).`,
+  );
   const pending = targets.filter((t) => !answers.has(t.topic.slug));
   write(`Refine: ${answers.size} answered (prompt ${PROMPT.name}/${PROMPT.version}), ${pending.length} pending.`);
   if (pending.length === 0) {

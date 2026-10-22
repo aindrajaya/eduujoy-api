@@ -16,7 +16,7 @@ import { SPEND_CAP_USD, usd } from './pricing';
 //   pnpm seed:items [--dry-run] [--sample N] [--go]     (--sample N: N topics, all five stages)
 //   pnpm seed:items-review [--dry-run] [--sample N] [--min-margin F] [--go]   (flagged items only; --sample N: top N)
 //   pnpm seed:items-apply [--dry-run]   (free: applies review verdicts to seed/items, parser-checked)
-//   pnpm seed:topics-refine [--dry-run] [--sample N] [--min-cosine F] [--go]   (near-neighbour topics: description and aliases)
+//   pnpm seed:topics-refine [--dry-run] [--sample N] [--min-cosine F | --topics a,b,c] [--go]   (near-neighbour topics: description and aliases)
 //   pnpm seed:validate [--dir seed] [--expect-topics N]
 //
 // Paid runs need --go and print their estimate first; --dry-run never calls the API.
@@ -33,6 +33,7 @@ async function main(): Promise<void> {
       'min-margin': { type: 'string', default: '0' },
       // Geometry vs trigonometry, the pair behind the held-out failure (22 Oct 2026).
       'min-cosine': { type: 'string', default: '0.789' },
+      topics: { type: 'string' },
     },
   });
   const command = positionals[0];
@@ -64,7 +65,8 @@ async function main(): Promise<void> {
       const sample = values.sample === undefined ? undefined : positiveInt(values.sample, '--sample');
       const minCosine = Number(values['min-cosine']);
       if (!(minCosine > 0 && minCosine < 1)) throw new Error('--min-cosine must be a fraction between 0 and 1');
-      await runRefine({ dryRun: values['dry-run'], go: values.go, sample, minCosine });
+      const topics = values.topics?.split(',').map((s) => s.trim()).filter(Boolean);
+      await runRefine({ dryRun: values['dry-run'], go: values.go, sample, minCosine, topics });
       return;
     }
     case 'validate': {
