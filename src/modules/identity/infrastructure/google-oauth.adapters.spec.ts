@@ -136,7 +136,18 @@ describe('JoseOAuthStateStore', () => {
     const sealed = await store.seal(state);
 
     await expect(store.open(await other.seal(state))).resolves.toBeNull();
-    await expect(store.open(`${sealed.slice(0, -2)}xx`)).resolves.toBeNull();
+    // Change one character in the middle of the signed payload, always to a different one. (Overwriting the
+    // signature's last two characters was flaky: its final base64url character carries only 4 data bits,
+    // so some runs left the bytes unchanged and the "tampered" state was genuine.)
+    const parts = sealed.split('.');
+    expect(parts).toHaveLength(3);
+    const payload = parts[1] ?? '';
+    const at = Math.floor(payload.length / 2);
+    parts[1] = `${payload.slice(0, at)}${payload[at] === 'A' ? 'B' : 'A'}${payload.slice(at + 1)}`;
+    await expect(store.open(parts.join('.'))).resolves.toBeNull();
+    // A different signature is rejected too.
+    const signature = parts[2] ?? '';
+    await expect(store.open(`${parts[0] ?? ''}.${payload}.${signature[0] === 'A' ? 'B' : 'A'}${signature.slice(1)}`)).resolves.toBeNull();
   });
 
   it('rejects a reauth flag forged into a signed state, and reads old states as normal sign-ins', async () => {
