@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { type Entitlement } from '../domain/quota';
-import { type BillingProvider } from './ports/billing-provider';
+import { type BillingProvider, BillingProviderHttpError } from './ports/billing-provider';
 import { type QuotaRepository } from './ports/quota.repository';
 import { type BillingRepository, type LockedQuotaState, type PathCharge, type StoredBillingEvent } from './ports/billing.repository';
 
@@ -135,6 +135,9 @@ export class FakeBillingProvider implements BillingProvider {
   failCheckout = false;
   readonly orderItems = new Map<string, { variantId: string; quantity: number }[]>();
   failOrderItems = false;
+  /** HTTP status listOrderItems fails with, e.g. 404 for a key in the wrong mode. */
+  orderItemsStatus: number | null = null;
+  keyTestMode: boolean | null = true;
 
   createCheckout(input: { storeId: string; variantId: string; userId: string; testMode: boolean; redirectUrl: string; quantity: number }): Promise<{ url: string }> {
     if (this.failCheckout) return Promise.reject(new Error('Lemon Squeezy API returned HTTP 500'));
@@ -144,6 +147,11 @@ export class FakeBillingProvider implements BillingProvider {
 
   listOrderItems(orderId: string): Promise<{ variantId: string; quantity: number }[]> {
     if (this.failOrderItems) return Promise.reject(new Error('Lemon Squeezy API returned HTTP 503'));
+    if (this.orderItemsStatus !== null) return Promise.reject(new BillingProviderHttpError(this.orderItemsStatus));
     return Promise.resolve(this.orderItems.get(orderId) ?? []);
+  }
+
+  apiKeyTestMode(): Promise<boolean | null> {
+    return Promise.resolve(this.keyTestMode);
   }
 }
