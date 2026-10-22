@@ -12,12 +12,13 @@ import { FakeLinkChecker, FakePaperSearch, FakeResourceAnalyzer, FakeVideoSearch
 import { ANALYSE_RESOURCE_JOB, CHECK_LIVENESS_JOB } from '../src/modules/discovery/application/jobs';
 import { CheckLiveness, LivenessSweep } from '../src/modules/discovery/application/liveness.handlers';
 import { ClaudeWebDiscovery } from '../src/modules/discovery/infrastructure/claude-web-discovery';
+import { GeminiResourceAnalyzer } from '../src/modules/discovery/infrastructure/gemini-resource-analyzer';
 import { DrizzleDiscoveryRepository } from '../src/modules/discovery/infrastructure/drizzle-discovery.repository';
 import { DrizzleQuotaCounter } from '../src/modules/discovery/infrastructure/drizzle-quota.counter';
 import { type ResourceDead, type ResourcesReady, pacificDay, poolPlan, type Stage, YOUTUBE_SEARCH_GUARD, YOUTUBE_SEARCH_QUOTA } from '../src/modules/discovery/domain';
-import { type AiBudgetGuard, type Embedder, type EmbeddingRequest, PromptRegistry, type WebSearcher } from '../src/shared/ai';
+import { type AiBudgetGuard, type Embedder, type EmbeddingRequest, PromptRegistry, type StructuredGenerator, type StructuredRequest, type WebSearcher } from '../src/shared/ai';
 import { DrizzleLlmCallRecorder } from '../src/shared/ai/metering/llm-call.recorder';
-import { MeteredWebSearcher } from '../src/shared/ai/metering/metered';
+import { MeteredEmbedder, MeteredStructuredGenerator, MeteredWebSearcher } from '../src/shared/ai/metering/metered';
 import { ReviewQueue } from '../src/shared/common/review';
 import { reviewItems } from '../src/shared/db/schema/admin';
 import { llmCalls } from '../src/shared/db/schema/ai';
@@ -25,7 +26,7 @@ import { topics } from '../src/shared/db/schema/catalog';
 import { discoveryResults, resourceCards, resources } from '../src/shared/db/schema/discovery';
 import { EventBus } from '../src/shared/events/event-bus';
 import { UnitOfWork } from '../src/shared/events/unit-of-work';
-import { type EnqueueRequest, type JobContext, type JobQueue } from '../src/shared/jobs';
+import { type EnqueueRequest, type JobContext, type JobQueue, JobRepository } from '../src/shared/jobs';
 import { connectTestClient, testDb, type TestDb } from './db/connect';
 
 const DIMS = 768;
@@ -47,7 +48,7 @@ class FakeEmbedder implements Embedder {
   }
 }
 
-const ctx = (jobId = randomUUID()): JobContext => ({
+const ctx = (jobId: string = randomUUID()): JobContext => ({
   jobId,
   attempt: 1,
   maxAttempts: 3,
@@ -275,4 +276,52 @@ describe('discovery (integration, A8 Verify)', () => {
     // 40k x $0.1/M + 1.5k x $0.5/M = $0.00475, plus 6 searches x $0.01.
     expect(row).toMatchObject({ model: 'claude-haiku-5-5', webSearchRequests: 6, inputTokens: 40_000, outputTokens: 1_500, costUsd: '0.064750', status: 'ok' });
   });
+
+  it('records every AI call of a discovery in llm_calls under its job (a missing row fails here)', async () => {
+    // Prod-shaped wiring: metered adapters and real job rows (llm_calls.job_id references jobs). The
+    // first smoke run lost every row to a placeholder job id; this test fails if rows go missing.
+    const recorder = new DrizzleLlmCallRecorder(db);
+    const jobs = new JobRepository(db);
+    const realJob = async (type: string) => (await jobs.enqueue({ type: `int-${type}`, idempotencyKey: `${type}:${randomUUID()}`, payload: {} })).job.id;
+    const p = pipeline(new Date('2026-10-27T12:00:00Z'));
+    const id = await topic('Metered pool');
+    const searcher: WebSearcher = {
+      search: () =>
+        Promise.resolve({
+          hits: [
+            { url: `https://metered-pool-${tag}.example/guide`, title: 'Guide', pageAge: null },
+            { url: `https://docs.metered-pool-${tag}.example/`, title: 'Docs', pageAge: null },
+          ],
+          answer: { picks: [{ url: `https://metered-pool-${tag}.example/guide`, type: 'article' }, { url: `https://docs.metered-pool-${tag}.example/`, type: 'official_doc' }] },
+          queries: ['q'],
+          call: { provider: 'anthropic', model: 'claude-haiku-5-5', usage: { inputTokens: 8_000, cacheWriteTokens: 0, cacheReadTokens: 0, outputTokens: 400 }, webSearchRequests: 6, latencyMs: 10 },
+        }) as never,
+    };
+    const valid = { dreyfusStage: 'novice', bloomLevels: ['C2'], prerequisites: [], concepts: [{ name: 'core', start: null, end: null }], keyTakeaways: ['k'], whyThis: 'w', readingMin: 5, language: 'en', quality: { relevance: 80, accuracySignals: 80, recency: 80, teaching: 80 }, evidence: 'e', confidence: 0.9 };
+    const gemini: StructuredGenerator = {
+      generate: <T,>(req: StructuredRequest<T>) =>
+        Promise.resolve({ output: req.schema.parse({ ...valid, keyTakeaways: [req.input.slice(0, 40)] }), call: { provider: 'google' as const, model: req.model, usage: { inputTokens: 2_000, cacheWriteTokens: 0, cacheReadTokens: 0, outputTokens: 300 }, latencyMs: 10 } }),
+    };
+    const prompts = new PromptRegistry();
+    const discover = new DiscoverResources(p.repo, p.videos, new ClaudeWebDiscovery(new MeteredWebSearcher(searcher, recorder), prompts), p.papers, p.links, p.quota, p.clock, new GetTopicProfileQuery(new DrizzleTopicRepository(db)), { assertCanStart: () => Promise.resolve() } as unknown as AiBudgetGuard, { enqueue: (r: EnqueueRequest) => (p.queued.push(r), Promise.resolve({ job: { id: 'x' }, created: true })) } as unknown as JobQueue, new UnitOfWork(db, p.bus));
+    const analyse = new AnalyseResource(p.repo, new GeminiResourceAnalyzer(new MeteredStructuredGenerator({ anthropic: gemini, google: gemini }, recorder), prompts), p.links, new MeteredEmbedder(new FakeEmbedder(), 'gemini-embedding-2', recorder), p.clock, new GetTopicProfileQuery(new DrizzleTopicRepository(db)), new ReviewQueue(), new UnitOfWork(db, p.bus));
+
+    const discoverJob = await realJob('discover');
+    await discover.run(discover.parse({ topicId: id, stage: 'novice', poolVersion: 1 }), ctx(discoverJob));
+    const analyseJobs: string[] = [];
+    for (const job of p.queued.filter((q) => q.type === ANALYSE_RESOURCE_JOB).splice(0)) {
+      const jobId = await realJob('analyse');
+      analyseJobs.push(jobId);
+      await analyse.run(analyse.parse(job.payload), ctx(jobId));
+    }
+
+    const rows = await db.select({ jobId: llmCalls.jobId, stage: llmCalls.stage, searches: llmCalls.webSearchRequests, cost: llmCalls.costUsd }).from(llmCalls).where(inArray(llmCalls.jobId, [discoverJob, ...analyseJobs]));
+    expect(analyseJobs).toHaveLength(2);
+    expect(rows.filter((r) => r.jobId === discoverJob)).toEqual([expect.objectContaining({ stage: 'discover', searches: 6 })]);
+    // Each analysis: one Gemini call and one embedding.
+    for (const jobId of analyseJobs) expect(rows.filter((r) => r.jobId === jobId).map((r) => r.stage).sort()).toEqual(['analyse', 'analyse']);
+    // 8k x $0.1/M + 400 x $0.5/M + 6 searches x $0.01.
+    expect(rows.find((r) => r.jobId === discoverJob)?.cost).toBe('0.061000');
+  }, 60_000);
 });
+

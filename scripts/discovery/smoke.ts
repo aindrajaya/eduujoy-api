@@ -20,8 +20,9 @@ import { AiBudgetGuard, EMBEDDING_MODEL, PromptRegistry } from '../../src/shared
 import { ClaudeStructuredGenerator } from '../../src/shared/ai/claude/claude.generator';
 import { ClaudeWebSearcher } from '../../src/shared/ai/claude/claude.web-search';
 import { createGeminiClient, GeminiEmbedder, GeminiStructuredGenerator } from '../../src/shared/ai/gemini/gemini.adapters';
-import { DrizzleLlmCallRecorder, type LlmCallEntry, type LlmCallRecorder } from '../../src/shared/ai/metering/llm-call.recorder';
+import { DrizzleLlmCallRecorder } from '../../src/shared/ai/metering/llm-call.recorder';
 import { MeteredEmbedder, MeteredStructuredGenerator, MeteredWebSearcher } from '../../src/shared/ai/metering/metered';
+import { TallyingRecorder } from '../../src/shared/ai/metering/tallying.recorder';
 import { ReviewQueue } from '../../src/shared/common/review';
 import { createDatabase } from '../../src/shared/db';
 import { loadDirectDatabaseUrl } from '../../src/shared/db/cli/env';
@@ -59,18 +60,6 @@ const FIXTURES: { slug: string; stage: Stage }[] = [
   { slug: 'microeconomics', stage: 'proficient' },
 ];
 
-/** Writes every llm_calls row and keeps a running total, per discovery and overall. */
-class SpendMeter implements LlmCallRecorder {
-  total = 0;
-  current: LlmCallEntry[] = [];
-  constructor(private readonly inner: LlmCallRecorder) {}
-  async record(entry: LlmCallEntry): Promise<void> {
-    this.total += entry.costUsd;
-    this.current.push(entry);
-    await this.inner.record(entry);
-  }
-}
-
 class SpendStop extends Error {
   override name = 'SpendStop';
 }
@@ -88,7 +77,7 @@ function arg(name: string, fallback: string): string {
 
 interface Smoke {
   db: ReturnType<typeof createDatabase>;
-  meter: SpendMeter;
+  meter: TallyingRecorder;
   discover: DiscoverResources;
   analyse: AnalyseResource;
   queued: EnqueueRequest[];
@@ -100,7 +89,8 @@ interface Smoke {
 
 export function buildSmoke(client: Client, keys: { anthropic: string; gemini: string; youtube: string; openalex: string }, capUsd: number): Smoke {
   const db = createDatabase(client);
-  const meter = new SpendMeter(new DrizzleLlmCallRecorder(db));
+  // Handlers run inline here, outside the jobs table, so llm_calls rows carry no job id.
+  const meter = new TallyingRecorder(new DrizzleLlmCallRecorder(db), { detachJobs: true });
   const anthropic = new Anthropic({ apiKey: keys.anthropic });
   const gemini = createGeminiClient(keys.gemini);
   const prompts = new PromptRegistry();
@@ -159,7 +149,7 @@ async function main(): Promise<void> {
       const topicId = ids.get(fixture.slug);
       if (!topicId) throw new Error(`Topic ${fixture.slug} is not in the database; run pnpm db:seed first`);
       if (smoke.meter.total + DISCOVERY_RESERVE_USD > capUsd) throw new SpendStop(`stopping before ${fixture.slug}: $${smoke.meter.total.toFixed(4)} spent of the $${capUsd} cap`);
-      smoke.meter.current = [];
+      smoke.meter.take();
       const started = Date.now();
       const latest = await smoke.repo.latestPool(topicId, fixture.stage);
       const poolVersion = (latest?.poolVersion ?? 0) + 1;
@@ -181,7 +171,7 @@ async function main(): Promise<void> {
         const ok = id ? (await smoke.videos.details([id])).some((v) => v.public && v.embeddable) : (await smoke.links.check(r.url)).ok;
         if (!ok) dead += 1;
       }
-      const calls = smoke.meter.current;
+      const calls = smoke.meter.take();
       const row = {
         topic: fixture.slug,
         stage: fixture.stage,
@@ -222,12 +212,18 @@ async function main(): Promise<void> {
       totalSpentUsd: Math.round(smoke.meter.total * 1_000_000) / 1_000_000,
       capUsd,
       youtubeSearchCallsToday: used,
+      // Must be 0: an unrecorded call is spend the daily budget guard cannot see.
+      recordFailures: smoke.meter.failures,
     };
     const dir = join(__dirname, '..', '..', '.smoke');
     mkdirSync(dir, { recursive: true });
     const file = join(dir, `discovery-${summary.at.replace(/[:.]/g, '-')}.json`);
     writeFileSync(file, `${JSON.stringify({ summary, topics: report }, null, 2)}\n`);
     process.stdout.write(`\n${JSON.stringify(summary)}\nReport: ${file}\n`);
+    if (smoke.meter.failures > 0) {
+      process.stderr.write(`discovery:smoke: ${smoke.meter.failures} llm_calls row(s) failed to record; the run's cost is not fully in llm_calls\n`);
+      process.exitCode = 1;
+    }
     await client.end();
   }
 }
