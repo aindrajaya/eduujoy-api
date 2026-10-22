@@ -1,5 +1,5 @@
 export { AiModule } from './ai.module';
-export { AiBudgetGuard, type BudgetStatus, type WorkKind } from './budget/budget.guard';
+export { AiBudgetGuard, type BudgetScope, type BudgetStatus, type DailyBudgets, type WorkKind } from './budget/budget.guard';
 export { costUsd, MODELS, type ModelId, type TokenUsage, WEB_SEARCH_USD_PER_REQUEST } from './catalog';
 export { AiBudgetExceededError, AiCallError, type AiFailure } from './errors';
 export { EMBEDDING_MODEL, EMBEDDING_VERSION } from './gemini/gemini.adapters';

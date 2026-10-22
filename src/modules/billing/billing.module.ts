@@ -3,6 +3,7 @@ import { AppConfig } from '../../shared/config';
 import { JobExecutor } from '../../shared/jobs';
 import { CheckKeyMode } from './application/check-key-mode';
 import { CreateCheckout } from './application/create-checkout.usecase';
+import { GetBudgetScopeQuery } from './application/get-budget-scope.query';
 import { GetQuotaQuery } from './application/get-quota.query';
 import { BILLING_PROVIDER } from './application/ports/billing-provider';
 import { NOTIFICATION_PARSER } from './application/ports/billing-notification';
@@ -25,6 +26,7 @@ import { BillingAccountData } from './infrastructure/billing-account-data';
   controllers: [BillingController],
   providers: [
     GetQuotaQuery,
+    GetBudgetScopeQuery,
     CreateCheckout,
     ReceiveWebhook,
     ProcessBillingEvent,
@@ -37,7 +39,7 @@ import { BillingAccountData } from './infrastructure/billing-account-data';
     { provide: BILLING_CLOCK, useValue: () => new Date() },
     { provide: ACCOUNT_DATA.billing, useClass: BillingAccountData },
   ],
-  exports: [GetQuotaQuery, ReservePath, ACCOUNT_DATA.billing],
+  exports: [GetQuotaQuery, GetBudgetScopeQuery, ReservePath, ACCOUNT_DATA.billing],
 })
 export class BillingModule implements OnModuleInit, OnApplicationBootstrap {
   constructor(

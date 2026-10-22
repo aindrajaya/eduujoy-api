@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { type ZodType } from 'zod';
+import { type BudgetScope } from '../budget/budget.guard';
 import { costUsd, MODELS, type Provider, WEB_SEARCH_USD_PER_REQUEST } from '../catalog';
 import { AiCallError, type AiFailure } from '../errors';
 import {
@@ -34,7 +35,7 @@ class Meter {
   ) {}
 
   async run<R extends { call: CallRecord }>(
-    meta: { stage: string; provider: Provider; model: string; promptName: string | null; promptVersion: string | null; jobId: string | null },
+    meta: { stage: string; provider: Provider; model: string; promptName: string | null; promptVersion: string | null; jobId: string | null; budgetScope: BudgetScope },
     fn: () => Promise<R>,
   ): Promise<R> {
     const started = this.now();
@@ -101,6 +102,7 @@ export class MeteredStructuredGenerator implements StructuredGenerator {
         promptName: request.prompt.name,
         promptVersion: request.prompt.version,
         jobId: request.jobId ?? null,
+        budgetScope: request.budgetScope ?? 'free',
       },
       () => this.providers[provider].generate(request),
     );
@@ -122,7 +124,7 @@ export class MeteredEmbedder implements Embedder {
 
   embed(request: EmbeddingRequest): Promise<EmbeddingResult> {
     return this.meter.run(
-      { stage: request.stage, provider: 'google', model: this.model, promptName: null, promptVersion: null, jobId: request.jobId ?? null },
+      { stage: request.stage, provider: 'google', model: this.model, promptName: null, promptVersion: null, jobId: request.jobId ?? null, budgetScope: request.budgetScope ?? 'free' },
       () => this.inner.embed(request),
     );
   }
@@ -149,6 +151,7 @@ export class MeteredWebSearcher implements WebSearcher {
         promptName: request.prompt.name,
         promptVersion: request.prompt.version,
         jobId: request.jobId ?? null,
+        budgetScope: request.budgetScope ?? 'free',
       },
       () => this.inner.search(request),
     );

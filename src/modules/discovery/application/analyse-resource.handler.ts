@@ -146,6 +146,7 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
       durationMin: resource.durationMin,
       content,
       ...(clip ? { clip } : {}),
+      budgetScope: payload.budgetScope,
       jobId: ctx.jobId,
       signal: ctx.signal,
     });
@@ -155,18 +156,19 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
     }
     const embedding = judgeCard({ quality: analysis.quality, confidence: analysis.confidence, concepts: analysis.concepts, durationMin: resource.durationMin, isVideo }).status === 'dropped'
       ? null
-      : await this.embed(resource, analysis, ctx);
+      : await this.embed(resource, analysis, ctx, payload.budgetScope);
     const card = await this.judge(resource, payload, promptVersion, analysis, embedding, ctx);
     return { card, readingMin: isVideo ? null : analysis.readingMin, language: analysis.language, reused: false };
   }
 
-  private async embed(resource: ResourceRecord, analysis: Pick<NewCard, 'keyTakeaways' | 'concepts'>, ctx: JobContext): Promise<NewCard['embedding']> {
+  private async embed(resource: ResourceRecord, analysis: Pick<NewCard, 'keyTakeaways' | 'concepts'>, ctx: JobContext, budgetScope: AnalysePayload['budgetScope']): Promise<NewCard['embedding']> {
     const embedded = await this.embedder.embed({
       stage: 'analyse',
       kind: 'document',
       texts: [embeddingText({ title: resource.title, keyTakeaways: analysis.keyTakeaways, concepts: analysis.concepts })],
       titles: [resource.title],
       jobId: ctx.jobId,
+      budgetScope,
     });
     const vector = embedded.vectors[0];
     return vector ? { vector, model: embedded.model, version: embedded.version } : null;

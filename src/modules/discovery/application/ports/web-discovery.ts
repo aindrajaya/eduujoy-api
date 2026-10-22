@@ -1,3 +1,4 @@
+import { type BudgetScope } from '../../../../shared/ai';
 import { type Stage, type TopicDomain, type WebResourceType } from '../../domain';
 
 export const WEB_DISCOVERY = Symbol('WebDiscovery');
@@ -23,5 +24,5 @@ export interface WebDiscovery {
    * `includeVideos` asks for YouTube videos too: the fallback when the YouTube `search.list` guard is
    * reached (master PRD §14). Video results are recognised by URL and confirmed with `videos.list`.
    */
-  find(input: { topic: DiscoveryTopic; stage: Stage; max: number; includeVideos: boolean; jobId?: string; signal?: AbortSignal }): Promise<WebFind[]>;
+  find(input: { topic: DiscoveryTopic; stage: Stage; max: number; includeVideos: boolean; jobId?: string; budgetScope?: BudgetScope; signal?: AbortSignal }): Promise<WebFind[]>;
 }

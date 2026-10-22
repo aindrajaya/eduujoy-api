@@ -43,6 +43,7 @@ describe('CLI boot (integration)', () => {
       ANTHROPIC_API_KEY: 'int-anthropic-key',
       GEMINI_API_KEY: 'int-gemini-key',
       AI_DAILY_BUDGET_USD: '1',
+      AI_DAILY_PAID_BUDGET_USD: '5',
       LEMONSQUEEZY_API_KEY: 'int-lemonsqueezy-key',
       LEMONSQUEEZY_STORE_ID: '100001',
       LEMONSQUEEZY_WEBHOOK_SECRET: 'int-webhook-secret-'.padEnd(40, 'z'),

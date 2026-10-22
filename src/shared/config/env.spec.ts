@@ -14,6 +14,7 @@ const valid = {
   ANTHROPIC_API_KEY: 'sk-ant-test',
   GEMINI_API_KEY: 'gemini-test',
   AI_DAILY_BUDGET_USD: '5',
+  AI_DAILY_PAID_BUDGET_USD: '5',
   LEMONSQUEEZY_API_KEY: 'ls-api-key',
   LEMONSQUEEZY_STORE_ID: '123456',
   LEMONSQUEEZY_WEBHOOK_SECRET: 'w'.repeat(40),
@@ -63,6 +64,7 @@ describe('parseEnv', () => {
       expect(error).toBeInstanceOf(EnvValidationError);
       expect((error as EnvValidationError).keys).toEqual([
         'AI_DAILY_BUDGET_USD',
+        'AI_DAILY_PAID_BUDGET_USD',
         'ANTHROPIC_API_KEY',
         'API_PUBLIC_URL',
         'APP_ORIGIN',
@@ -176,4 +178,11 @@ describe('parseEnv', () => {
       expect(() => parseEnv({ ...valid, AI_DAILY_BUDGET_USD: bad })).toThrow(EnvValidationError);
     }
   });
+
+  it('defaults the per-learner discovery caps to 1 (free) and 5 (paid), and accepts overrides', () => {
+    expect(parseEnv(valid)).toMatchObject({ DISCOVERY_DAILY_PER_LEARNER_FREE: 1, DISCOVERY_DAILY_PER_LEARNER_PAID: 5 });
+    expect(parseEnv({ ...valid, DISCOVERY_DAILY_PER_LEARNER_FREE: '2' }).DISCOVERY_DAILY_PER_LEARNER_FREE).toBe(2);
+    expect(() => parseEnv({ ...valid, DISCOVERY_DAILY_PER_LEARNER_PAID: '-1' })).toThrow(EnvValidationError);
+  });
 });
+

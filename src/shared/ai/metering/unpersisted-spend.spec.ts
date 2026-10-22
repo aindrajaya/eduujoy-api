@@ -17,6 +17,7 @@ const entry = (costUsd: number): LlmCallEntry => ({
   status: 'ok',
   failure: null,
   jobId: null,
+  budgetScope: 'free',
 });
 
 describe('unpersisted spend', () => {
@@ -24,7 +25,7 @@ describe('unpersisted spend', () => {
     const unpersisted = new UnpersistedSpend();
     const recorder = new PersistGuardRecorder({ record: () => Promise.reject(new Error('Connection terminated')) }, unpersisted, () => NOW);
     // Persisted spend today: $2.50 of a $3 budget.
-    const guard = new AiBudgetGuard(new GuardedSpendReader({ spentSince: () => Promise.resolve(2.5) }, unpersisted), 3, () => NOW);
+    const guard = new AiBudgetGuard(new GuardedSpendReader({ spentSince: () => Promise.resolve(2.5) }, unpersisted), { free: 3, paid: 20 }, () => NOW);
 
     await expect(guard.assertCanStart('cold')).resolves.toBeUndefined();
     await expect(recorder.record(entry(0.3))).rejects.toThrow('Connection terminated');

@@ -1,4 +1,4 @@
-import { computeQuota, FREE_MONTHLY_PATHS, freePeriod } from './quota';
+import { computeQuota, FREE_MONTHLY_PATHS, freePeriod, nextPathScope } from './quota';
 
 const now = new Date('2026-10-21T10:00:00Z');
 
@@ -55,3 +55,15 @@ describe('computeQuota', () => {
     expect(computeQuota({ entitlement: null, creditBalance: -2, usedPaths: 0, now }).credits).toBe(0);
   });
 });
+
+describe('nextPathScope (D1 budget scopes)', () => {
+  it.each([
+    ['a subscriber', { plan: 'subscription' as const, monthlyPaths: 8, usedPaths: 8, credits: 0 }, 'paid'],
+    ['a free learner with the monthly path left', { plan: 'free' as const, monthlyPaths: 1, usedPaths: 0, credits: 5 }, 'free'],
+    ['a free learner paying with a credit', { plan: 'free' as const, monthlyPaths: 1, usedPaths: 1, credits: 2 }, 'paid'],
+    ['a free learner with nothing left', { plan: 'free' as const, monthlyPaths: 1, usedPaths: 1, credits: 0 }, 'free'],
+  ])('%s → %s', (_label, quota, scope) => {
+    expect(nextPathScope(quota)).toBe(scope);
+  });
+});
+

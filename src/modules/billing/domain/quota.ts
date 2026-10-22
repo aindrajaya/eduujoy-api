@@ -56,3 +56,15 @@ export function computeQuota(input: {
     periodEnd: currentPeriod(entitlement, now).end,
   };
 }
+
+/**
+ * Which daily AI budget a learner's next path counts against (D1, 23 Oct 2026), in ReservePath's charge
+ * order: a subscription's paths are paid; on the free plan the monthly allowance comes first (free),
+ * then credits (paid). With nothing left the path would be refused, so it stays free.
+ */
+export function nextPathScope(quota: Pick<Quota, 'plan' | 'monthlyPaths' | 'usedPaths' | 'credits'>): 'free' | 'paid' {
+  if (quota.plan === 'subscription') return 'paid';
+  if (quota.usedPaths < quota.monthlyPaths) return 'free';
+  return quota.credits > 0 ? 'paid' : 'free';
+}
+

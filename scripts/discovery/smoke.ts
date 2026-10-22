@@ -122,7 +122,8 @@ export function buildSmoke(client: Pool, keys: { anthropic: string; gemini: stri
   const uow = new UnitOfWork(db, new EventBus(new EventEmitter2()));
   const topicQuery = new GetTopicProfileQuery(new DrizzleTopicRepository(db));
   // The smoke's own cap is the budget: discovery refuses to start once the run has spent it.
-  const budget = new AiBudgetGuard({ spentSince: () => Promise.resolve(meter.total) }, capUsd);
+  // The smoke runs as `operator` (its own cap below), so the daily scopes never stop it.
+  const budget = new AiBudgetGuard({ spentSince: () => Promise.resolve(meter.total) }, { free: capUsd, paid: capUsd });
   const queued: EnqueueRequest[] = [];
   const queue = { enqueue: (r: EnqueueRequest) => (queued.push(r), Promise.resolve({ job: { id: 'inline' }, created: true })) } as unknown as JobQueue;
   const clock = (): Date => new Date();
@@ -184,7 +185,8 @@ async function main(): Promise<void> {
       const started = Date.now();
       const poolVersion = (latest?.poolVersion ?? 0) + 1;
       try {
-        await smoke.discover.run(smoke.discover.parse({ topicId, stage: fixture.stage, poolVersion }), ctx(abort.signal));
+        // Operator scope: counted in neither daily budget; this script's cap is the stop.
+        await smoke.discover.run(smoke.discover.parse({ topicId, stage: fixture.stage, poolVersion, budgetScope: 'operator' }), ctx(abort.signal));
         const jobs = smoke.queued.filter((q) => q.type === ANALYSE_RESOURCE_JOB).splice(0);
         smoke.queued.length = 0;
         let cachedOrReused = 0;
