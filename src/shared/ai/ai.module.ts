@@ -8,6 +8,7 @@ import { ClaudeWebSearcher } from './claude/claude.web-search';
 import { createGeminiClient, EMBEDDING_MODEL, GeminiEmbedder, GeminiStructuredGenerator } from './gemini/gemini.adapters';
 import { DrizzleLlmCallRecorder, LLM_CALL_RECORDER, type LlmCallRecorder } from './metering/llm-call.recorder';
 import { MeteredEmbedder, MeteredStructuredGenerator, MeteredWebSearcher } from './metering/metered';
+import { GuardedSpendReader, PersistGuardRecorder, UnpersistedSpend } from './metering/unpersisted-spend';
 import { EMBEDDER, STRUCTURED_GENERATOR, WEB_SEARCHER } from './ports';
 import { PromptRegistry } from './prompts/prompt-registry';
 
@@ -21,8 +22,20 @@ const ANTHROPIC_CLIENT = Symbol('AnthropicClient');
 @Global()
 @Module({
   providers: [
-    { provide: LLM_CALL_RECORDER, useClass: DrizzleLlmCallRecorder },
-    { provide: SPEND_READER, useClass: DrizzleSpendReader },
+    // One tally per process: rows that fail to persist still count toward the daily budget.
+    { provide: UnpersistedSpend, useFactory: () => new UnpersistedSpend() },
+    DrizzleLlmCallRecorder,
+    DrizzleSpendReader,
+    {
+      provide: LLM_CALL_RECORDER,
+      inject: [DrizzleLlmCallRecorder, UnpersistedSpend],
+      useFactory: (recorder: DrizzleLlmCallRecorder, unpersisted: UnpersistedSpend) => new PersistGuardRecorder(recorder, unpersisted),
+    },
+    {
+      provide: SPEND_READER,
+      inject: [DrizzleSpendReader, UnpersistedSpend],
+      useFactory: (reader: DrizzleSpendReader, unpersisted: UnpersistedSpend) => new GuardedSpendReader(reader, unpersisted),
+    },
     {
       provide: GEMINI_CLIENT,
       inject: [AppConfig],
