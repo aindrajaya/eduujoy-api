@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Eduujoy API
-  version: 0.6.0-v0
+  version: 0.7.0-v0
   summary: Frozen v0 contract for the Eduujoy MVP.
   description: |
     Frozen v0 contract, written from PRD-API Section 7 (endpoints), Section 8 and master PRD
@@ -1373,6 +1373,12 @@ components:
       required: [product]
       properties:
         product: { type: string, enum: [subscription, credit_pack] }
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 10
+          default: 1
+          description: Credit packs to buy (credit_pack only; 400 if sent with subscription or outside 1–10). Preset on the Lemon Squeezy checkout; credits come only from the paid order in the webhook.
     CheckoutResponse:
       type: object
       required: [url]
