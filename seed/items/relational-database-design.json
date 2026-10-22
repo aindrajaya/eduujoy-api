@@ -1,0 +1,2495 @@
+{
+  "version": 1,
+  "topic": "relational-database-design",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the purpose of a primary key in a relational table?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It links the table to another database"
+        },
+        {
+          "id": "b",
+          "label": "It lists every column that the table has"
+        },
+        {
+          "id": "c",
+          "label": "It sorts the rows alphabetically by name"
+        },
+        {
+          "id": "d",
+          "label": "It uniquely identifies each row in the table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A primary key uniquely identifies each row.",
+        "Distractors confuse keys with ordering, column lists or cross-database links."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is a foreign key?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A column that must hold only unique numbers"
+        },
+        {
+          "id": "b",
+          "label": "A column that references a key in another table"
+        },
+        {
+          "id": "c",
+          "label": "A column that encrypts sensitive data values"
+        },
+        {
+          "id": "d",
+          "label": "A column that is stored in a separate server"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A foreign key references a key (usually the primary key) of another table.",
+        "Distractors confuse it with encryption, uniqueness or physical location."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which normal form first requires that every column hold a single atomic value with no repeating groups?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Second normal form (2NF)"
+        },
+        {
+          "id": "b",
+          "label": "First normal form (1NF)"
+        },
+        {
+          "id": "c",
+          "label": "Boyce-Codd normal form (BCNF)"
+        },
+        {
+          "id": "d",
+          "label": "Third normal form (3NF)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "1NF demands atomic values and no repeating groups.",
+        "Higher forms build on 1NF and address dependencies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which constraint prevents a column from storing missing (NULL) values?",
+      "options": [
+        {
+          "id": "a",
+          "label": "UNIQUE"
+        },
+        {
+          "id": "b",
+          "label": "DEFAULT"
+        },
+        {
+          "id": "c",
+          "label": "CHECK"
+        },
+        {
+          "id": "d",
+          "label": "NOT NULL"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "NOT NULL forbids NULLs.",
+        "UNIQUE restricts duplicates, CHECK tests conditions, DEFAULT supplies a value but still permits explicit NULL."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In an entity-relationship diagram, what does a rectangle usually represent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A foreign key column"
+        },
+        {
+          "id": "b",
+          "label": "An entity such as Customer"
+        },
+        {
+          "id": "c",
+          "label": "A relationship between rows"
+        },
+        {
+          "id": "d",
+          "label": "An index on a table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Rectangles denote entities.",
+        "Distractors name other schema elements that are not drawn as entity boxes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are constraints that can be declared on a table? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "SELECT"
+        },
+        {
+          "id": "b",
+          "label": "PRIMARY KEY"
+        },
+        {
+          "id": "c",
+          "label": "FOREIGN KEY"
+        },
+        {
+          "id": "d",
+          "label": "UNIQUE"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "PRIMARY KEY, FOREIGN KEY and UNIQUE are constraints.",
+        "SELECT is a query statement, not a constraint."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A school database must record that each student can enrol in many courses and each course has many students. A designer wants to model this many-to-many relationship in tables. What is the standard structure for this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An index placed on the student name column"
+        },
+        {
+          "id": "b",
+          "label": "A junction table holding a key from each side"
+        },
+        {
+          "id": "c",
+          "label": "A single column listing all course names"
+        },
+        {
+          "id": "d",
+          "label": "A duplicate students table for every course"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Many-to-many relationships are resolved with a junction (associative) table.",
+        "Distractors use repeating values, duplication or indexes, which do not model the relationship."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is a customer's address stored once in a customers table instead of in every order row?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Queries on orders then never need a join"
+        },
+        {
+          "id": "b",
+          "label": "Databases refuse to store repeated text values"
+        },
+        {
+          "id": "c",
+          "label": "It lets the address be changed in one place only"
+        },
+        {
+          "id": "d",
+          "label": "Orders cannot hold text columns of any kind"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Storing it once avoids redundancy and update anomalies.",
+        "Distractors invent technical limits or wrongly claim joins are avoided."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A table order_items has the composite key (order_id, product_id) and also a column product_name, which depends only on product_id. Which normal form does this break?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Second normal form, as a partial dependency exists"
+        },
+        {
+          "id": "b",
+          "label": "None, since every column holds a single value"
+        },
+        {
+          "id": "c",
+          "label": "First normal form, as the key has two columns"
+        },
+        {
+          "id": "d",
+          "label": "Third normal form only, as there are two tables"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A non-key column depending on part of a composite key is a 2NF violation.",
+        "Distractors confuse composite keys with 1NF or ignore the partial dependency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why would you add an index to a column that is searched often in WHERE clauses?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It makes inserts faster and uses less storage"
+        },
+        {
+          "id": "b",
+          "label": "It forces every value in the column to be unique"
+        },
+        {
+          "id": "c",
+          "label": "It lets the column be used as a foreign key"
+        },
+        {
+          "id": "d",
+          "label": "It speeds up lookups but adds cost to writes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Indexes speed reads but add storage and write overhead.",
+        "Distractors claim writes get faster or confuse indexes with uniqueness or key rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A foreign key on orders.customer_id references customers.id. What happens when you insert an order with a customer_id that does not exist in customers?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The order is saved but flagged as a warning only"
+        },
+        {
+          "id": "b",
+          "label": "The insert is rejected to keep the data consistent"
+        },
+        {
+          "id": "c",
+          "label": "The order is saved and a new customer is created"
+        },
+        {
+          "id": "d",
+          "label": "The order is saved with the customer_id set to NULL"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Foreign keys enforce referential integrity and reject orphan rows.",
+        "Distractors imagine automatic creation, silent NULLs or mere warnings."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do many designers use a generated id as the primary key instead of a customer's email address?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Generated ids are required by every relational database"
+        },
+        {
+          "id": "b",
+          "label": "Email addresses are too long to be stored in a table"
+        },
+        {
+          "id": "c",
+          "label": "Emails can never be unique across different customers"
+        },
+        {
+          "id": "d",
+          "label": "The id stays stable even if the email value changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A surrogate key stays stable when business data changes.",
+        "Distractors overstate technical limits or wrongly say emails cannot be unique."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which problems can be caused by storing the same facts redundantly in many rows? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Insert anomalies, where a fact cannot be added without unrelated data"
+        },
+        {
+          "id": "b",
+          "label": "Update anomalies, where some copies are changed and others are not"
+        },
+        {
+          "id": "c",
+          "label": "Automatic enforcement of consistency across all copies"
+        },
+        {
+          "id": "d",
+          "label": "Delete anomalies, where removing a row loses unrelated facts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Redundancy causes update, insert and delete anomalies.",
+        "Redundancy does not enforce consistency; it threatens it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "An employees table has columns phone1, phone2 and phone3 to store each employee's phone numbers. A new employee has four numbers, and searching for a given number requires checking all three columns. What is the best explanation and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The table needs phone3 renamed to a more general name"
+        },
+        {
+          "id": "b",
+          "label": "The table needs an index on each phone column to fix it"
+        },
+        {
+          "id": "c",
+          "label": "The table needs a larger text type for phone columns"
+        },
+        {
+          "id": "d",
+          "label": "These repeating columns break 1NF; use a separate phones table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Repeating column groups violate 1NF; a child table with one row per number fixes it.",
+        "Distractors treat a structural problem as an indexing, typing or naming issue."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Students can enroll in many courses, and each course has many students. How is this relationship classified, and how is it represented in tables?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One-to-one, stored by merging both into a single table"
+        },
+        {
+          "id": "b",
+          "label": "Many-to-many, stored with a junction table holding both keys"
+        },
+        {
+          "id": "c",
+          "label": "One-to-many, stored with a course_id column in students"
+        },
+        {
+          "id": "d",
+          "label": "Many-to-many, stored with a list of IDs in one column"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A many-to-many relationship needs a junction table with a foreign key to each side.",
+        "Distractors suggest list columns or a single FK, which can't represent both directions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does declaring a column as the PRIMARY KEY of a table guarantee?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The column can never be changed after insertion"
+        },
+        {
+          "id": "b",
+          "label": "The column is automatically linked to other tables"
+        },
+        {
+          "id": "c",
+          "label": "Each row has a value that is unique and never NULL"
+        },
+        {
+          "id": "d",
+          "label": "Each row is stored in alphabetical order by that column"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A primary key enforces uniqueness and non-null values to identify each row.",
+        "Distractors confuse keys with ordering, immutability, or automatic relationships."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A column `phones` stores values like '555-1234, 555-9876'. Why does this break first normal form?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The column repeats data that belongs in another table"
+        },
+        {
+          "id": "b",
+          "label": "The column has no index to speed up phone lookups"
+        },
+        {
+          "id": "c",
+          "label": "The column uses text instead of a numeric data type"
+        },
+        {
+          "id": "d",
+          "label": "The column holds several values instead of one atomic value"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "1NF requires each column to hold a single atomic value per row.",
+        "Distractors name unrelated issues such as indexing, dependencies, or data types."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main purpose of a foreign key constraint from orders.customer_id to customers.id?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It guarantees each customer can have only one order"
+        },
+        {
+          "id": "b",
+          "label": "It stops orders from pointing at customers that don't exist"
+        },
+        {
+          "id": "c",
+          "label": "It makes order lookups by customer faster automatically"
+        },
+        {
+          "id": "d",
+          "label": "It copies customer details into every new order row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Foreign keys enforce referential integrity and prevent orphan rows.",
+        "Distractors confuse constraints with indexes, uniqueness, or data copying."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does adding an index to a column usually speed up reads on it but slow down inserts and updates?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The index duplicates each row, which fills the disk quickly"
+        },
+        {
+          "id": "b",
+          "label": "The index locks the table so that only readers can use it"
+        },
+        {
+          "id": "c",
+          "label": "The index must be kept in sync with each change to the table"
+        },
+        {
+          "id": "d",
+          "label": "The index forces every query to check each constraint again"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Indexes are extra structures that must be updated on every write.",
+        "Distractors invent locking, row duplication, or constraint rechecking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these are benefits of normalizing a schema? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "No need to define primary keys on tables"
+        },
+        {
+          "id": "b",
+          "label": "Facts stored in only one place stay consistent"
+        },
+        {
+          "id": "c",
+          "label": "Less duplicated data stored across rows"
+        },
+        {
+          "id": "d",
+          "label": "Fewer update anomalies when a fact changes"
+        },
+        {
+          "id": "e",
+          "label": "Every query runs faster because fewer tables are joined"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Normalization reduces redundancy and so avoids update anomalies and inconsistency.",
+        "Normalization often adds joins, and it still requires keys."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "An orders table stores customer_name and customer_email in every order row. A customer changes their email, and only some of their old orders are updated. What problem does this show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An insert anomaly, since new orders can't be created"
+        },
+        {
+          "id": "b",
+          "label": "A missing index, which made the update skip rows"
+        },
+        {
+          "id": "c",
+          "label": "A missing primary key, so rows can't be told apart"
+        },
+        {
+          "id": "d",
+          "label": "An update anomaly, caused by the same fact being stored many times"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Repeating customer data across rows causes inconsistent values when one copy is changed.",
+        "Distractors blame keys or indexes, which don't cause this inconsistency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Each department has many employees, and each employee belongs to exactly one department. Which design correctly models this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Create a table with one row per department and employee pair"
+        },
+        {
+          "id": "b",
+          "label": "Put all employee names in one departments column"
+        },
+        {
+          "id": "c",
+          "label": "Add an employee_id column to departments"
+        },
+        {
+          "id": "d",
+          "label": "Add a department_id foreign key column to employees"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "In a one-to-many relationship the foreign key goes on the 'many' side.",
+        "Distractors place the key on the wrong side or break atomicity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A table grades(student_id, course_id, student_name, grade) has primary key (student_id, course_id). student_name depends only on student_id. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a surrogate id column and keep the rest as it is"
+        },
+        {
+          "id": "b",
+          "label": "Move student_name to a students table keyed by student_id"
+        },
+        {
+          "id": "c",
+          "label": "Copy student_name into the courses table as well"
+        },
+        {
+          "id": "d",
+          "label": "Remove student_name and keep only the IDs and grade"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A partial dependency on part of the key is removed by splitting into a students table (2NF).",
+        "Distractors don't remove the dependency or lose data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You are designing a users table. People sometimes change their email address, and other tables will reference users. Which key choice fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use email as the primary key, since it is already unique"
+        },
+        {
+          "id": "b",
+          "label": "Use a surrogate id as primary key and a UNIQUE constraint on email"
+        },
+        {
+          "id": "c",
+          "label": "Use no primary key and rely on a UNIQUE constraint on email"
+        },
+        {
+          "id": "d",
+          "label": "Use the full name as primary key, with email as a plain column"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A stable surrogate key avoids cascading changes while UNIQUE keeps emails distinct.",
+        "Email as primary key would need updates in every referencing table."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An app runs `SELECT * FROM orders WHERE customer_id = 42` thousands of times a day on a large table with no indexes besides the primary key. What is the sensible fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a CHECK constraint on customer_id"
+        },
+        {
+          "id": "b",
+          "label": "Create an index on orders(total_amount)"
+        },
+        {
+          "id": "c",
+          "label": "Split orders into one table per customer"
+        },
+        {
+          "id": "d",
+          "label": "Create an index on orders(customer_id)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An index on the filtered column lets the database avoid scanning the whole table.",
+        "Other options index an unused column, fragment the schema, or use the wrong tool."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which definition ensures the quantity column in order_items can never hold zero or negative numbers?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`quantity INT UNIQUE`"
+        },
+        {
+          "id": "b",
+          "label": "`quantity INT REFERENCES items(id)`"
+        },
+        {
+          "id": "c",
+          "label": "`quantity INT CHECK (quantity > 0)`"
+        },
+        {
+          "id": "d",
+          "label": "`quantity INT PRIMARY KEY`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A CHECK constraint enforces a rule about the values allowed in a column.",
+        "UNIQUE, PRIMARY KEY and REFERENCES enforce other kinds of rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You create a junction table enrollments to link students and courses. Which definitions belong in it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A foreign key from course_id to courses"
+        },
+        {
+          "id": "b",
+          "label": "A composite primary key on (student_id, course_id)"
+        },
+        {
+          "id": "c",
+          "label": "A UNIQUE constraint on the grade column"
+        },
+        {
+          "id": "d",
+          "label": "A foreign key from student_id to students"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A junction table needs foreign keys to both parents and a composite key that prevents duplicate enrollments.",
+        "Grade values are not unique, so UNIQUE on grade would be wrong."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A library owns several physical copies of each book title. Members borrow individual copies, and the library wants to know who has which copy. Which set of tables fits this requirement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "books, copies(book_id), members, and loans(copy_id, member_id)"
+        },
+        {
+          "id": "b",
+          "label": "members and one table with a row per loan and book details"
+        },
+        {
+          "id": "c",
+          "label": "books(copy_ids list), members, and loans"
+        },
+        {
+          "id": "d",
+          "label": "books, members, and loans(book_id, member_id)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Title and physical copy are separate entities, so copies references books and loans references copies.",
+        "Other designs can't track individual copies or repeat book details."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Students enroll in many courses, and each course has many students. You must also record the enrollment date for each pairing. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A comma-separated list of course IDs in a column on students"
+        },
+        {
+          "id": "b",
+          "label": "A single wide table repeating the student row for each course taken"
+        },
+        {
+          "id": "c",
+          "label": "An enrollments table with student_id, course_id and enrolled_on, keyed on both IDs"
+        },
+        {
+          "id": "d",
+          "label": "A student_id column in courses and a course_id column in students"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A many-to-many relationship needs a junction table, and the pairing attribute (date) lives there.",
+        "Foreign keys on either side or lists in a column cannot represent many-to-many cleanly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A table `order_items(order_id, product_id, product_name, qty)` has the primary key (order_id, product_id). `product_name` depends only on `product_id`. Which decomposition removes the redundancy?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`orders(order_id, product_name)` plus `order_items(product_id, qty)`"
+        },
+        {
+          "id": "b",
+          "label": "`order_items(order_id, qty)` plus `products(product_id, product_name, qty)`"
+        },
+        {
+          "id": "c",
+          "label": "`order_items(order_id, product_id, qty)` plus `products(product_id, product_name)`"
+        },
+        {
+          "id": "d",
+          "label": "`order_items(order_id, product_id, qty)` plus `names(order_id, product_name)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Moving the partially dependent attribute to a table keyed by product_id removes the partial dependency.",
+        "Other splits lose the link between order and product or key the name on the wrong column."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A frequent query is `WHERE status = 'open' AND created_at >= '2024-01-01' ORDER BY created_at`. Which single index best supports it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An index on (status, created_at)"
+        },
+        {
+          "id": "b",
+          "label": "Two separate indexes, one on status and one on created_at"
+        },
+        {
+          "id": "c",
+          "label": "An index on (created_at, status)"
+        },
+        {
+          "id": "d",
+          "label": "An index on status alone, because it filters first"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Equality column first and range/sort column second lets one index filter and return rows in order.",
+        "Putting the range column first stops later columns narrowing the scan; separate indexes cannot give the ordering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Each user has at most one profile, and each profile belongs to exactly one user. Which schema enforces that rule in the database?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`profiles` whose primary key `user_id` is also a foreign key to `users`"
+        },
+        {
+          "id": "b",
+          "label": "`profiles` with a `user_id` column and an index for fast lookups"
+        },
+        {
+          "id": "c",
+          "label": "`profiles` with its own id and a `user_id` column with no constraint"
+        },
+        {
+          "id": "d",
+          "label": "`users` with a `profile_id` column that may repeat across users"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Using the foreign key as the primary key guarantees one profile per user.",
+        "A plain indexed or unconstrained column still allows several profiles per user."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In an `employees` table, every employee may have a manager who is also an employee, and top executives have none. Which column definition models this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`manager_id` NOT NULL, referencing `managers(id)`"
+        },
+        {
+          "id": "b",
+          "label": "`manager_id` nullable, with no foreign key so that executives are allowed"
+        },
+        {
+          "id": "c",
+          "label": "`manager_id` nullable, a foreign key to `employees(id)`"
+        },
+        {
+          "id": "d",
+          "label": "`manager_name` text, copied from the manager's row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A nullable self-referencing foreign key models optional hierarchy with integrity.",
+        "NOT NULL blocks executives, copied names go stale, and dropping the FK loses integrity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Requirements: deleting an order must delete its lines, and a product that appears on any order line must not be deletable. Which foreign key definitions on `order_lines` meet these requirements? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`product_id` references `products` with ON DELETE RESTRICT"
+        },
+        {
+          "id": "b",
+          "label": "`order_id` references `orders` with ON DELETE RESTRICT"
+        },
+        {
+          "id": "c",
+          "label": "`order_id` references `orders` with ON DELETE CASCADE"
+        },
+        {
+          "id": "d",
+          "label": "`product_id` references `products` with ON DELETE CASCADE"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Cascade on the order link removes lines with the order; restrict on the product link blocks deleting used products.",
+        "Cascading from products would silently delete order history."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You are modeling a clinic. Tables `doctors` and `patients` exist, and a new `appointments` table holds doctor_id, patient_id and start_time. Business rule: a doctor cannot have two appointments starting at the same time, but a patient may see different doctors. Which constraint enforces the rule?",
+      "options": [
+        {
+          "id": "a",
+          "label": "UNIQUE (doctor_id, patient_id)"
+        },
+        {
+          "id": "b",
+          "label": "UNIQUE (doctor_id, start_time)"
+        },
+        {
+          "id": "c",
+          "label": "An index on start_time to speed up conflict checks"
+        },
+        {
+          "id": "d",
+          "label": "UNIQUE (patient_id, start_time)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A uniqueness constraint on doctor and start time prevents double-booking a doctor.",
+        "Other combinations constrain the wrong entity, and an ordinary index enforces nothing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A table `results(student_id, course_id, instructor, grade)` has the key (student_id, course_id), and each course has exactly one instructor. Renaming a course's instructor requires updating many rows, and some are missed. What is the underlying cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`instructor` is a text column, so it should be replaced by a numeric code"
+        },
+        {
+          "id": "b",
+          "label": "`instructor` depends on course_id only, a partial dependency on the key"
+        },
+        {
+          "id": "c",
+          "label": "The key is composite, and any composite key causes update anomalies"
+        },
+        {
+          "id": "d",
+          "label": "`grade` depends on both key columns, which breaks first normal form"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Instructor depends on part of the key, so it is repeated and updates are inconsistent (2NF violation).",
+        "A composite key itself is fine; grade depends on the whole key, and data type is not the cause."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`customers` has an index on `last_name`, yet `WHERE LOWER(last_name) = 'smith'` scans the whole table. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrapping the column in a function means the plain index cannot be used for the match"
+        },
+        {
+          "id": "b",
+          "label": "Indexes on text columns only work with LIKE and never with equality"
+        },
+        {
+          "id": "c",
+          "label": "The table is too small for any index to be useful"
+        },
+        {
+          "id": "d",
+          "label": "The index must be rebuilt every time a query uses LOWER"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A function on the indexed column hides the stored values, so an expression index or normalized column is needed.",
+        "The other options invent rules about table size, text equality or rebuilds."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A team uses each user's email address as the primary key, with foreign keys in 12 tables. Users now change email often, and these updates are slow and sometimes fail. What is the best diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Email is a string, and strings can never be valid primary keys"
+        },
+        {
+          "id": "b",
+          "label": "The foreign keys should be removed so updates do not touch other tables"
+        },
+        {
+          "id": "c",
+          "label": "A mutable natural key forces updates to propagate through every referencing table"
+        },
+        {
+          "id": "d",
+          "label": "Twelve tables is too many to reference a single table in a schema"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A key whose value changes must be rewritten in every referencing row; a stable surrogate key with a unique email avoids that.",
+        "String keys are valid, and removing foreign keys would give up integrity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`tutoring(student, subject, tutor)` has the key (student, subject). Each tutor teaches only one subject, so tutor determines subject. Which analysis is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is in 3NF but not BCNF, because tutor determines subject yet is not a candidate key"
+        },
+        {
+          "id": "b",
+          "label": "It violates 2NF, because subject depends on only part of the key"
+        },
+        {
+          "id": "c",
+          "label": "It violates 1NF, because the tutor column repeats across rows"
+        },
+        {
+          "id": "d",
+          "label": "It is in BCNF, because every attribute depends on the whole key"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Subject is a prime attribute, so 3NF holds, but the determinant tutor is not a candidate key, so BCNF fails.",
+        "No partial dependency on a non-prime attribute exists, and repeated values do not break 1NF."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A `comments` table stores `target_type` ('post' or 'photo') and `target_id`, which holds the ID from whichever table the type names. What is the main structural weakness of this design?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Comments must be stored in the same table as posts for 3NF"
+        },
+        {
+          "id": "b",
+          "label": "The table needs a third value in target_type to be normalized"
+        },
+        {
+          "id": "c",
+          "label": "A single foreign key cannot reference two tables, so the database cannot enforce valid targets"
+        },
+        {
+          "id": "d",
+          "label": "The target_id column should be text so it can hold both ID formats"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A polymorphic reference cannot carry a real foreign key, so orphans and bad IDs go unchecked.",
+        "Adding types, merging tables or changing the type does not restore referential integrity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "An `orders` table repeats customer_name and customer_phone on every order row. Which problems follow directly from this design? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Deleting a customer's only order also erases the customer's details"
+        },
+        {
+          "id": "b",
+          "label": "A customer cannot be recorded until they place an order"
+        },
+        {
+          "id": "c",
+          "label": "Changing a phone number requires updating many rows, and some may be missed"
+        },
+        {
+          "id": "d",
+          "label": "Queries must always join to find an order's total"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Repeated customer data causes update, deletion and insertion anomalies.",
+        "The join requirement is a cost of normalizing, not a symptom of this denormalized layout."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A `places` table has a composite index on (country, city). A report filters only `WHERE city = 'Lyon'` and is slow, while queries filtering on country are fast. The table has millions of rows. What most likely explains the slow report?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The city column has too many distinct values for any index to help"
+        },
+        {
+          "id": "b",
+          "label": "The leading column, country, is absent from the filter, so the index cannot be searched efficiently"
+        },
+        {
+          "id": "c",
+          "label": "The query needs ORDER BY before the index can be used"
+        },
+        {
+          "id": "d",
+          "label": "Composite indexes only work when every column is compared with equality"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Composite indexes are ordered by their leading column, so filtering only on a later column cannot seek into the index.",
+        "High cardinality helps indexes, and range predicates and ORDER BY are not the cause here."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A table `tickets(ticket_id PK, customer_id, customer_email, agent_id, agent_team)` shows that changing a customer's email on one ticket leaves their other tickets with the old address. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`customer_email` has no index on it, so updates scan the ticket rows and silently skip some of them"
+        },
+        {
+          "id": "b",
+          "label": "`customer_email` depends on `customer_id`, a non-key column, so a transitive dependency breaks 3NF"
+        },
+        {
+          "id": "c",
+          "label": "`customer_email` depends on only part of the primary key, so the table breaks 2NF on its composite key"
+        },
+        {
+          "id": "d",
+          "label": "`customer_email` holds several values per ticket, so the table fails 1NF because the column is not atomic"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The email is determined by customer_id, which is not the key, so it is a transitive dependency (3NF).",
+        "The 2NF distractor fails because the primary key is a single column, so no partial dependency can exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`users` has an ordinary index on `email`, yet `SELECT * FROM users WHERE LOWER(email) = 'a@x.com'` performs a full table scan. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Indexes on `email` only support prefix `LIKE` searches, so an equality test on any value needs a full table scan"
+        },
+        {
+          "id": "b",
+          "label": "The index holds raw `email` values, so wrapping the column in `LOWER()` stops the planner using it; an index on `LOWER(email)` would match"
+        },
+        {
+          "id": "c",
+          "label": "The index is ordered by `email`, so equality tests on lowercase text always fall back to a scan until statistics are rebuilt"
+        },
+        {
+          "id": "d",
+          "label": "`LOWER()` returns `text` rather than `varchar`, so the planner rejects the index until the column type is changed to match"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A function applied to the indexed column hides it from the plain index; an expression index fixes it.",
+        "Distractors blame statistics, types or index capability, none of which is the real cause."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`enrollment(id PK, student_id FK, course_id FK, grade)` uses a surrogate key and has no other constraints. Which flaw does this create?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Grades can no longer be stored per student, because the surrogate key ties each grade to a single row only"
+        },
+        {
+          "id": "b",
+          "label": "Foreign keys stop working on tables with a surrogate primary key, so orphan enrollments become possible"
+        },
+        {
+          "id": "c",
+          "label": "The table now fails 2NF, since `grade` depends on `id` instead of depending on both foreign keys together"
+        },
+        {
+          "id": "d",
+          "label": "The same student can be enrolled in one course twice, because nothing makes the `(student_id, course_id)` pair unique"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A surrogate key does not enforce the natural uniqueness of the pair; a UNIQUE constraint is needed.",
+        "Other options misstate how foreign keys and 2NF behave with surrogate keys."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An index exists on `(country, city, created_at)`. The query `WHERE city = 'Oslo' AND created_at > '2024-01-01'` is slow. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`city` has lower cardinality than `country`, so the planner prefers a scan whenever `city` is filtered"
+        },
+        {
+          "id": "b",
+          "label": "The index is sorted by `country` first, so without a country condition the rows for one city are scattered through it"
+        },
+        {
+          "id": "c",
+          "label": "`created_at` is a range condition, which makes the engine ignore every other column of a composite index"
+        },
+        {
+          "id": "d",
+          "label": "Composite indexes are used only when all three columns appear in the query, so a partial match is skipped"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Composite indexes follow the leftmost-prefix rule; skipping the leading column scatters matching entries.",
+        "Distractors misdescribe range conditions, all-column requirements or cardinality rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`teaching(student, subject, teacher)`: each teacher teaches one subject, and a student has one teacher per subject. Candidate keys are `(student, subject)` and `(student, teacher)`. Why is it in 3NF but not BCNF?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`subject` depends on only part of the key, which is a 2NF failure that 3NF would also reject outright"
+        },
+        {
+          "id": "b",
+          "label": "`teacher` determines `subject` but is not a key; 3NF tolerates this because `subject` is part of a candidate key, BCNF does not"
+        },
+        {
+          "id": "c",
+          "label": "The table repeats several teachers per subject, which 3NF allows as a repeating group but BCNF forbids"
+        },
+        {
+          "id": "d",
+          "label": "BCNF differs from 3NF only for tables with a single-column key, and this table has a composite key"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "BCNF requires every determinant to be a superkey; 3NF excuses determinants whose target is a prime attribute.",
+        "Distractors confuse this with 2NF, 1NF or claim BCNF only matters for single-column keys."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A `posts` table stores tag ids in a text column such as `'4,17,32'`. Which problems follow from this design? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Removing a tag requires rewriting the list in every post that mentions it"
+        },
+        {
+          "id": "b",
+          "label": "The `tags` table can no longer be joined to `posts` by any SQL expression"
+        },
+        {
+          "id": "c",
+          "label": "The database cannot enforce a foreign key from each listed tag id to the `tags` table"
+        },
+        {
+          "id": "d",
+          "label": "Finding all posts with a given tag cannot use an ordinary B-tree index on the column"
+        },
+        {
+          "id": "e",
+          "label": "The `posts` table fails 2NF because the tag ids depend on part of the key"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Packed lists defeat foreign keys, indexing and clean deletes.",
+        "Joining is still possible with string functions, and 2NF is not the issue because the key is not composite."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A reviewer flags `order_lines.unit_price` as redundant with `products.price` and says the table violates 3NF. The shop copies the product price into each line when the order is placed, and prices change monthly. What does a dependency analysis show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`unit_price` is a partial dependency on `product_id`, which 2NF forbids, so the key should be extended to include the price"
+        },
+        {
+          "id": "b",
+          "label": "`unit_price` records the price at time of sale, so it depends on the order line rather than `product_id` alone and is a legitimate fact"
+        },
+        {
+          "id": "c",
+          "label": "`unit_price` is determined by `product_id`, so it is a transitive dependency and should be removed, with totals joining to the current price"
+        },
+        {
+          "id": "d",
+          "label": "`unit_price` is redundant but harmless, since 3NF only restricts text columns, so numeric copies can stay with no consequence"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The historical sale price is not functionally determined by product_id, since the current price differs.",
+        "The other options treat it as a plain copy and would corrupt past order totals."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "`users` uses `email` as its primary key and six child tables reference it. Emails change a few times a year; email must stay unique and required. Which design best fits these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use a surrogate `bigint` primary key and add a `UNIQUE NOT NULL` constraint on `email`, so changes touch one row"
+        },
+        {
+          "id": "b",
+          "label": "Use a composite primary key of `(email, created_at)` so older addresses remain distinct when emails change"
+        },
+        {
+          "id": "c",
+          "label": "Keep `email` as the primary key and use `ON UPDATE CASCADE`, which rewrites all six child tables on each change"
+        },
+        {
+          "id": "d",
+          "label": "Use a surrogate `bigint` primary key and check email uniqueness in application code, since the key is already unique"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A surrogate key isolates changes, and the UNIQUE NOT NULL constraint preserves the email rules.",
+        "Distractors either spread updates across tables, drop DB enforcement, or misuse a composite key."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Categories nest to arbitrary depth. Criteria: subtree reads are frequent and must be a single indexed join without recursion; moves are occasional; the database must enforce referential integrity. Which model best meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A closure table of `(ancestor_id, descendant_id, depth)` with foreign keys to `categories`"
+        },
+        {
+          "id": "b",
+          "label": "An adjacency list with only `parent_id`, reading subtrees through recursive queries each time"
+        },
+        {
+          "id": "c",
+          "label": "Nested sets with `lft` and `rgt` numbers, which give fast subtree reads but no foreign key on the hierarchy"
+        },
+        {
+          "id": "d",
+          "label": "A materialized path string such as `'/1/4/9/'`, queried with prefix `LIKE` and no foreign keys on ancestors"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A closure table gives non-recursive subtree joins and real foreign keys, at the cost of heavier moves.",
+        "Adjacency needs recursion; nested sets and path strings cannot enforce integrity through foreign keys."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A dashboard reads order totals about 1000 times per write. Criteria: a total must never disagree with its line items, and reads must not be stale. Which approach best satisfies these?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep only line items and sum them on every dashboard read, because normalized data can never be inconsistent"
+        },
+        {
+          "id": "b",
+          "label": "Store `orders.total` and refresh it in a nightly batch job, which keeps writes cheap and reads fast"
+        },
+        {
+          "id": "c",
+          "label": "Store `orders.total` and let each application service update it, since services already know the line items"
+        },
+        {
+          "id": "d",
+          "label": "Store `orders.total` and update it by trigger in the same transaction as each line change, so the two cannot drift"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A transactional trigger keeps the derived value consistent while making reads cheap.",
+        "Batch jobs go stale, scattered service code can drift, and summing on every read ignores the read-heavy cost."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "In a database supporting partial indexes, `users` has `deleted_at` for soft deletes. Criteria: email must be unique among active users, and a deleted user's email may be reused. Which constraint is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A `UNIQUE (email, deleted_at)` constraint, which treats NULL timestamps as equal and so blocks active duplicates"
+        },
+        {
+          "id": "b",
+          "label": "A unique index on `email` restricted to rows `WHERE deleted_at IS NULL`"
+        },
+        {
+          "id": "c",
+          "label": "A plain `UNIQUE (email)` constraint, which also blocks reuse of a deleted user's address"
+        },
+        {
+          "id": "d",
+          "label": "An application check before each insert, which avoids index overhead and enforces the rule in one place"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A partial unique index enforces uniqueness only for active rows, in the database itself.",
+        "A composite with a nullable column usually treats NULLs as distinct, and application checks race under concurrency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "`invoices.customer_id` references `customers`. Criteria: invoices must be kept for 7 years, customers may ask for their account to be removed, and no invoice may lose its customer link. Which choice is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "No foreign key at all, so customers can be deleted freely while invoices remain in their own table"
+        },
+        {
+          "id": "b",
+          "label": "`ON DELETE CASCADE`, so removing a customer also removes the invoices that belong to that customer"
+        },
+        {
+          "id": "c",
+          "label": "`ON DELETE RESTRICT`, with removal requests handled by anonymising the customer row instead of deleting it"
+        },
+        {
+          "id": "d",
+          "label": "`ON DELETE SET NULL`, so invoices survive and simply lose the link to the customer who was removed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "RESTRICT keeps the link intact; anonymising satisfies removal requests without orphaning invoices.",
+        "CASCADE destroys retained records, SET NULL breaks the link, and no FK permits orphans."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A design stores every address in one `addresses` table with `(owner_type, owner_id)`, where `owner_type` is 'user' or 'company'. Which criticisms are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The table violates 1NF because one column holds ids from two different tables"
+        },
+        {
+          "id": "b",
+          "label": "An index on `owner_id` is impossible because its values refer to different tables"
+        },
+        {
+          "id": "c",
+          "label": "Orphaned addresses can remain after an owner is deleted unless application code cleans them up"
+        },
+        {
+          "id": "d",
+          "label": "The database cannot enforce a foreign key on `owner_id`, since it may point to either table"
+        },
+        {
+          "id": "e",
+          "label": "Joining to the owner requires a type condition or a separate join per owner table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Polymorphic references lose FK enforcement, allow orphans and complicate joins.",
+        "Mixed-origin ids don't violate 1NF, and the column can still be indexed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A catalogue has three product types sharing six columns, each with 5-8 required type-specific attributes that need `NOT NULL` and foreign keys. Queries are mostly per type. The team compares designs against those criteria. Which is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An entity-attribute-value table holding every attribute as a row, since new types then need no schema change"
+        },
+        {
+          "id": "b",
+          "label": "A shared `products` table plus one subtype table per type, whose primary key is also a foreign key to `products`"
+        },
+        {
+          "id": "c",
+          "label": "A `products` table with a JSON `attributes` column for type-specific data, validated only by the application"
+        },
+        {
+          "id": "d",
+          "label": "One wide `products` table with all attributes nullable, since a single table keeps queries simple and avoids joins"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Class-table inheritance allows NOT NULL and FK constraints on subtype attributes while sharing common columns.",
+        "Wide nullable tables, EAV and JSON all lose the required database-level constraints."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Six services reference invoices by key. The natural identifier is a 13-character tax code that the issuing authority occasionally corrects. Criteria: foreign keys must stay stable and a correction must touch as few rows as possible. Which key choice best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use the tax code as the primary key, since a surrogate would add a join to every lookup by code"
+        },
+        {
+          "id": "b",
+          "label": "Use the tax code as the primary key with ON UPDATE CASCADE, since natural keys are always more meaningful"
+        },
+        {
+          "id": "c",
+          "label": "Use a composite of tax code and issue date, so each correction produces a distinct key value"
+        },
+        {
+          "id": "d",
+          "label": "Use a surrogate primary key and keep the tax code as a unique column, so a correction updates one row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A surrogate key isolates references from changes to a mutable business identifier.",
+        "Cascading updates rewrite rows across all six services, and composite natural keys still change when the code changes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An orders table could store a denormalized order_total next to the order_lines. Criteria: reads outnumber writes 500 to 1, and totals must never disagree with the lines. Which judgment is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Store it, update it in the same transaction as line changes or by trigger, and run a periodic reconciliation query"
+        },
+        {
+          "id": "b",
+          "label": "Store it and update it from the application after commit, since a transaction would slow the write path"
+        },
+        {
+          "id": "c",
+          "label": "Replace it with a view over the lines in every case, since views store results and cost nothing to read"
+        },
+        {
+          "id": "d",
+          "label": "Reject any stored total, because any redundancy breaks 3NF and will inevitably cause inconsistency"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Controlled redundancy that is maintained atomically meets both the read-heavy and the consistency criteria.",
+        "Post-commit updates can leave drift, and ordinary views recompute on every read rather than storing results."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A users table uses a deleted_at timestamp for soft deletes, and email must be unique among active users only. A full UNIQUE(email) blocks re-registration after deletion. Which fix is best on a typical engine?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Create a unique index on email restricted to rows WHERE deleted_at IS NULL, so only active rows compete"
+        },
+        {
+          "id": "b",
+          "label": "Create a unique index on (email, deleted_at), which fully prevents duplicates among active rows"
+        },
+        {
+          "id": "c",
+          "label": "Rename the email on deletion with a random suffix and keep the full unique index, which loses the original value"
+        },
+        {
+          "id": "d",
+          "label": "Drop the unique constraint and check uniqueness in application code, which is cheaper than an index"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A partial unique index enforces the rule in the database for exactly the rows that matter.",
+        "A unique index on (email, deleted_at) lets multiple active rows coexist because NULLs are treated as distinct."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A catalog has 40 product categories. About 8 attributes are shared and filtered constantly with typed comparisons, while hundreds of rarely queried attributes vary by category. Which schema approach best balances type safety, filter speed and migration churn?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One wide table with a column for every attribute in every category, since NULLs never affect query plans"
+        },
+        {
+          "id": "b",
+          "label": "One table per category with its own typed columns, accepting UNION queries for any cross-category search"
+        },
+        {
+          "id": "c",
+          "label": "Pure EAV with a text value column, since it avoids migrations and the optimizer handles pivoted filters well"
+        },
+        {
+          "id": "d",
+          "label": "Typed columns for the shared, filtered attributes plus an indexed JSON column for the category-specific long tail"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A hybrid keeps hot attributes typed and indexable while absorbing the long tail without constant migrations.",
+        "Pure EAV loses typing and makes filters expensive, and per-category tables make cross-category search awkward."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "The hottest queries are WHERE tenant_id = ? AND created_at >= ? ORDER BY created_at, and also WHERE tenant_id = ? alone. Judge which index on a B-tree engine serves both best.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Two single-column indexes, because the optimizer can always combine them as cheaply as one composite"
+        },
+        {
+          "id": "b",
+          "label": "(created_at, tenant_id), because range columns should lead so the scan narrows first"
+        },
+        {
+          "id": "c",
+          "label": "(tenant_id, created_at), because the equality column leads and the range column then supplies the ordering"
+        },
+        {
+          "id": "d",
+          "label": "A hash index on tenant_id, because hash lookups beat B-trees for equality and keep rows sorted"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Equality column first, then the range/sort column, lets one index serve both query shapes.",
+        "Leading with the range column breaks the tenant-only query, and hash indexes provide no ordering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Judge these claims about normal forms and decomposition. Which are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A relation in 3NF cannot suffer any update anomaly."
+        },
+        {
+          "id": "b",
+          "label": "Every relation in BCNF is also in 3NF."
+        },
+        {
+          "id": "c",
+          "label": "A 3NF relation whose candidate keys are all single attributes is already in BCNF."
+        },
+        {
+          "id": "d",
+          "label": "Any relation can be decomposed into BCNF with a lossless join while preserving every functional dependency."
+        },
+        {
+          "id": "e",
+          "label": "Any relation can be decomposed into 3NF with a lossless join while preserving every functional dependency."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "BCNF is stricter than 3NF, 3NF synthesis is always lossless and dependency-preserving, and single-attribute keys remove the prime-attribute exception.",
+        "BCNF may lose dependencies, and 3NF can still permit anomalies from the prime-attribute exception."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team stores comments for posts, photos and videos in one table using commentable_type and commentable_id. Requirements: one comments table, one query for all comments by an author, and database-enforced referential integrity as new types are rarely added. Which design best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add nullable post_id, photo_id and video_id foreign keys with a CHECK that exactly one is non-null"
+        },
+        {
+          "id": "b",
+          "label": "Store a JSON list of parent references on each comment and validate it at write time in the application"
+        },
+        {
+          "id": "c",
+          "label": "Keep the type/id pair and validate parents in application code, since no design can enforce foreign keys across types"
+        },
+        {
+          "id": "d",
+          "label": "Create separate comment tables per type, each with a real foreign key, and UNION them for author queries"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Nullable typed foreign keys with an exactly-one CHECK keep a single table and real integrity.",
+        "The type/id pair and JSON references cannot be enforced by foreign keys, and per-type tables violate the single-table requirement."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design requirement: each customer may have many addresses but at most one flagged primary, enforced by the database even under concurrent writes. Which design meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A partial unique index on customer_id WHERE is_primary is true, which allows many other addresses"
+        },
+        {
+          "id": "b",
+          "label": "A CHECK constraint whose subquery counts primary rows for the customer, which is evaluated per row"
+        },
+        {
+          "id": "c",
+          "label": "An is_primary boolean with UNIQUE(customer_id, is_primary), which allows one true and one false row"
+        },
+        {
+          "id": "d",
+          "label": "An application-side check before each insert, run inside a transaction at READ COMMITTED isolation"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A partial unique index allows only one primary row per customer, atomically.",
+        "The composite unique on a boolean also limits non-primary rows, and check-then-insert or subquery checks race under concurrency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design requirement: each product has at most one price at any instant, past prices must be queryable by date, and the database must reject overlapping periods. Which schema meets every requirement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A price_history table with a period range column and an exclusion constraint on product_id with overlap on period"
+        },
+        {
+          "id": "b",
+          "label": "A price_history table with UNIQUE(product_id, valid_from), which stops equal start dates only"
+        },
+        {
+          "id": "c",
+          "label": "A single price column on products, overwritten on change, with a trigger that logs old values"
+        },
+        {
+          "id": "d",
+          "label": "A price_history table with UNIQUE(product_id, valid_to), which stops equal end dates only"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "An exclusion constraint on product plus overlapping period rejects any overlap declaratively.",
+        "Unique constraints on one endpoint still allow overlapping periods, and an overwritten column does not model periods."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "In a multi-tenant schema, every table has tenant_id. Requirement: the database must make it impossible for a child row in one tenant to reference a parent row in another. Which design does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Row-level security filtering every table by tenant_id, which hides rows from queries"
+        },
+        {
+          "id": "b",
+          "label": "A CHECK that tenant_id is positive on each child, plus a single-column foreign key on parent_id"
+        },
+        {
+          "id": "c",
+          "label": "UNIQUE(tenant_id, id) on each parent and a composite foreign key (tenant_id, parent_id) on each child"
+        },
+        {
+          "id": "d",
+          "label": "An application filter adding tenant_id to every query, reviewed in each pull request"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Including tenant_id in the foreign key makes cross-tenant references violate referential integrity.",
+        "Row-level security and query filters do not stop a foreign key from pointing at another tenant's row."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A proposed schema has orders(id, customer_id, placed_at), order_lines(order_id, product_id, qty) and products(id, name, price). Requirement: reprinting a year-old order must show the amounts originally charged. What is the design missing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A UNIQUE(order_id, product_id) constraint so lines cannot repeat a product"
+        },
+        {
+          "id": "b",
+          "label": "A unit_price (and tax) value copied onto each order line when the order is placed"
+        },
+        {
+          "id": "c",
+          "label": "A name column on order_lines so product names are shown as they were"
+        },
+        {
+          "id": "d",
+          "label": "An index on products.price so old prices can be found quickly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Transactional amounts must be snapshotted on the line because products.price changes over time.",
+        "Indexes and uniqueness do not preserve history, and the name is not an amount."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Vehicles are either cars or trucks, each with its own attributes in separate subtype tables. Requirement: the database must guarantee each vehicle has a row in exactly the subtype table matching its type. Which design does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Subtype tables whose primary key is vehicle_id referencing vehicles(id), with no type column"
+        },
+        {
+          "id": "b",
+          "label": "A vehicles.type column, UNIQUE(id, type), and subtype tables with a fixed-type CHECK and a foreign key on (vehicle_id, type)"
+        },
+        {
+          "id": "c",
+          "label": "One table with nullable columns for both subtypes and a free-text type column"
+        },
+        {
+          "id": "d",
+          "label": "Subtype tables that each repeat the common columns, with no vehicles table at all"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The composite foreign key with a fixed type in each subtype table ties a vehicle to exactly one subtype.",
+        "Plain id references allow a vehicle in both tables, and the other options enforce nothing about exclusivity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design a room-booking table where no two bookings for a room may overlap, back-to-back bookings are allowed, and the database must enforce this under concurrency (engine supports exclusion constraints). Which elements belong in the design? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A CHECK that start_time is strictly less than end_time"
+        },
+        {
+          "id": "b",
+          "label": "Half-open intervals [start, end) so a booking ending at 10:00 does not clash with one starting at 10:00"
+        },
+        {
+          "id": "c",
+          "label": "An application check for conflicts before each insert, with no locking"
+        },
+        {
+          "id": "d",
+          "label": "UNIQUE(room_id, start_time) as the only overlap protection"
+        },
+        {
+          "id": "e",
+          "label": "An exclusion constraint on room_id with overlapping time ranges"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "The exclusion constraint, a valid-range check and half-open intervals together meet all requirements.",
+        "A unique start time misses partial overlaps, and unlocked check-then-insert races."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "Teaching(student, course, instructor) has rules: (student, course) determines instructor, and each instructor teaches only one course. Requirement: stay lossless and enforce both rules with declarative constraints, without app code. Which design meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep one table keyed on (student, course, instructor), which records every combination without extra constraints"
+        },
+        {
+          "id": "b",
+          "label": "Split into (instructor, course) and (student, instructor), the BCNF decomposition, and enforce the student-course rule elsewhere"
+        },
+        {
+          "id": "c",
+          "label": "Keep one table with PRIMARY KEY (student, course) and enforce the instructor-course rule in application code"
+        },
+        {
+          "id": "d",
+          "label": "Add instructor_course(instructor PK, course, UNIQUE(instructor, course)); Teaching has PK (student, course) and FK (instructor, course) to it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The composite foreign key lets both functional dependencies be enforced by keys while remaining lossless.",
+        "The BCNF split loses declarative enforcement of the student-course rule, and the other options leave a rule unenforced."
+      ],
+      "reviewed": false
+    }
+  ]
+}

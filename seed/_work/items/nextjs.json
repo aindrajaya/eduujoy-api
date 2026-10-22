@@ -1,0 +1,1036 @@
+{
+  "promptVersion": "v2",
+  "stages": {
+    "expert": [
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A product page gets heavy traffic. Prices change a few times a day through a CMS, and an edit must show within seconds. Which caching strategy best meets freshness and CDN-serving cost criteria?",
+        "options": [
+          "Statically render with tagged fetches and call `revalidateTag` from a CMS webhook on each edit",
+          "Set `revalidate = 60` on the page so every edit appears after the next timed window passes",
+          "Use `dynamic = 'force-dynamic'` so every request reads the CMS and the price is always current",
+          "Render a static shell and fetch the price in `useEffect` so the CDN copy never goes stale"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "On-demand revalidation keeps CDN-served static output and updates within seconds of an edit.",
+          "Time-based revalidation can leave edits stale up to the window; force-dynamic gives up caching and raises cost."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A team protects an admin area only with middleware that redirects unauthenticated users. Judged against the criterion of resisting bypass through Server Actions and Route Handlers, which critique and fix is best?",
+        "options": [
+          "Middleware is enough, because it runs before every request and a redirect blocks all access paths",
+          "Middleware should be deleted and replaced with checks inside each page component only",
+          "Middleware is fine as an optimistic redirect, but authorization must also be verified in the data access layer next to each query or mutation",
+          "Middleware should run the full permission query for every request, which makes the per-action checks redundant"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Authorization belongs where data is accessed, since matchers can miss routes and actions are callable as POST endpoints.",
+          "Page-only checks leave actions and handlers open; heavy checks in middleware are fragile and still miss paths."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A marketing page has one like button needing `useState`. A developer proposes adding `'use client'` at the top of the page file. Judged by client JavaScript shipped and keeping server data access, which approach is best?",
+        "options": [
+          "Mark the whole page client-side, because one boundary is simpler to reason about than several",
+          "Extract the button into its own small Client Component and leave the page as a Server Component",
+          "Mark only the root layout as client-side so every child inherits the same interactivity settings",
+          "Keep the page on the server and call `useState` there, since hooks work in any component"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Pushing the client boundary to a small leaf limits bundle size and keeps the rest server-rendered.",
+          "Marking pages or layouts as client pulls their whole import subtree into the bundle; hooks are unavailable in Server Components."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A dashboard shell loads in 50 ms, but one analytics widget needs a 3 s query. Judged by perceived performance with the least added complexity, which is the best option?",
+        "options": [
+          "Await the widget data in the page, since a single complete response avoids layout shifts",
+          "Move the widget's query to a client `useEffect` so the server response stays small and quick",
+          "Cache the widget's query result for a day so the slow query rarely blocks the page",
+          "Wrap the widget in `<Suspense>` with a fallback so the shell streams immediately and the widget follows"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Suspense streaming sends the fast shell first and fills in the slow part when ready.",
+          "Awaiting everything blocks on the slowest query; client fetching adds a waterfall; a day-long cache sacrifices freshness."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A mutation that creates orders will be called by the web app and by a native mobile app. Judged by reuse across clients and a stable contract, which design is best?",
+        "options": [
+          "Expose a Route Handler with a documented request and response contract, and call it from both clients",
+          "Use a Server Action, because the mobile app can import and invoke it directly",
+          "Use a Server Action, because its generated endpoint URL is a stable public API",
+          "Use a Route Handler only for mobile, and keep a separate duplicate Server Action for web logic"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Route Handlers are ordinary HTTP endpoints that any client can call with a stable contract.",
+          "Server Actions use framework-internal identifiers and are not a public API; duplicating logic invites drift."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "multi_choice",
+        "prompt": "A Server Component loads a full user row (email, address, role, billing token reference) and passes it as one prop to a Client Component that only displays the name. Which critiques are valid? Select all that apply.",
+        "options": [
+          "The whole object is serialized into the payload sent to the browser, exposing fields the UI never uses",
+          "The Client Component will re-run the database query on every re-render",
+          "Pass only the needed field or a small DTO, which reduces both leakage risk and payload size",
+          "Props to Client Components can only be strings, so the object will throw at build time"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "rubric": [
+          "Props crossing the boundary are serialized to the client, so extra fields leak and add weight.",
+          "Client Components do not query the database, and plain objects are serializable props."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "scenario",
+        "prompt": "A site reads `cookies()` in the root layout to show a greeting. The team notices that all marketing pages are now rendered per request and CDN hit rates dropped. Judged by keeping marketing pages static while retaining the greeting, which fix is best?",
+        "options": [
+          "Keep the cookie read in the root layout and add `revalidate = 3600` to each marketing page",
+          "Move the greeting into a small component inside `<Suspense>`, or into a separate route group layout, so only that part is dynamic",
+          "Replace `cookies()` with `localStorage` read in the root layout Server Component",
+          "Set `dynamic = 'force-static'` on the root layout and keep reading `cookies()` there as before"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Request-time APIs make everything above them dynamic; isolating them keeps other routes static.",
+          "A revalidate time does not override dynamic APIs, localStorage is unavailable on the server, and forcing static would break the cookie read."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "A blog has an index page and `/blog/[slug]` pages, all statically rendered from a CMS. Constraint: a publish or edit must refresh the affected post page and the index within seconds, without a full rebuild. Which design meets it?",
+        "options": [
+          "Set `revalidate = 5` on every page and let timed regeneration cover edits",
+          "Tag fetches with `posts` and `post-<id>`, and have a CMS webhook Route Handler call `revalidateTag` for both",
+          "Use `force-dynamic` on the index and static rendering on posts, with a redeploy after each edit",
+          "Call `revalidatePath('/blog')` in the webhook only, since the index links to every post"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Tags let one webhook invalidate both the specific post and the list on demand.",
+          "Timed revalidation is wasteful and imprecise; revalidating only the index leaves post pages stale."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "Design an A/B test for a landing page. Constraints: no layout shift, no client-side flicker, and both variants must be served as cached static output. Which design meets all three?",
+        "options": [
+          "Choose the variant in a Client Component with `useEffect` and swap the content after hydration",
+          "Read `cookies()` in the page and render the variant dynamically for every request",
+          "Middleware assigns a bucket cookie and rewrites to a pre-rendered variant path, such as `/landing/a` or `/landing/b`",
+          "Use `Math.random()` inside the Server Component so each static build picks a variant"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "A middleware rewrite routes to separately pre-rendered static variants with no flicker.",
+          "Client swapping flickers, per-request rendering loses static caching, and random at build time gives everyone one variant."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "Design a multi-tenant app where each customer uses `acme.example.com`-style subdomains. Constraints: one codebase, tenant pages organised under one route tree, and no per-tenant deployment. Which design fits?",
+        "options": [
+          "Create one folder per tenant under `app/` and redeploy whenever a customer signs up",
+          "Use a Client Component that reads `window.location.host` and then fetches tenant data",
+          "Add a `[tenant]` catch-all in `next.config.js` redirects, sending users to a shared dashboard",
+          "Middleware reads the host and rewrites to `/[tenant]/...`, with tenant data loaded from the dynamic segment param"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "A host-based rewrite to a dynamic segment gives one route tree and no per-tenant deploys.",
+          "Per-tenant folders need redeploys, client-side host reads lose server rendering, and redirects expose the wrong URL shape."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "Design a comment form. Constraints: it must submit and show validation errors even if JavaScript has not loaded, and it should show the new comment instantly when JavaScript is available. Which design meets both?",
+        "options": [
+          "A Server Action bound to the form's `action`, with `useActionState` for errors and `useOptimistic` for the instant item",
+          "A Client Component form calling `fetch` in an `onSubmit` handler that always uses `preventDefault`",
+          "A Route Handler called from `useEffect` after the user finishes typing the comment",
+          "A Server Action called only from an `onClick` handler on a plain button outside any form"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Form actions work as native form posts without JS, and the hooks add enhancement when JS runs.",
+          "Handlers that depend on JS events fail before hydration."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "A theme and auth context provider needs `useContext` state, but the root layout must stay a Server Component and keep rendering server-fetched children. Which design meets this?",
+        "options": [
+          "Add `'use client'` to the root layout and import all server components inside it directly",
+          "Create a `Providers` Client Component that accepts `children`, and render it from the server layout around the page",
+          "Wrap each page in its own copy of the context and read `useContext` in Server Components",
+          "Move the context into a module-level variable that Server Components mutate per request"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Passing server-rendered children into a client provider keeps them as Server Components.",
+          "Making the layout client-side or importing servers into clients changes their boundary; Server Components cannot use context, and module state leaks across requests."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "multi_choice",
+        "prompt": "A proposal wraps a per-user dashboard query in `unstable_cache` with the fixed key `['dashboard']` and a 1 hour lifetime. Constraint: users must never see each other's data. Which changes fix the design? Select all that apply.",
+        "options": [
+          "Include the user id in the cache key parts, so each user gets a separate entry",
+          "Increase the lifetime to 24 hours so entries are rebuilt less often",
+          "Skip caching for this personalized query, or cache only shared non-personal parts",
+          "Read `cookies()` inside the cached function so the cache detects each user automatically"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "rubric": [
+          "A shared key serves one user's data to all; keying per user or not caching fixes it.",
+          "A longer lifetime worsens leakage, and request APIs inside cached functions are not allowed and do not vary the key."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "scenario",
+        "prompt": "A team's CMS webhook Route Handler calls only `revalidatePath('/blog')` after a post is edited. The index updates, but `/blog/my-post` still shows old content for hours. The page uses `generateStaticParams` and fetches without tags. Which change completes the design?",
+        "options": [
+          "Raise the webhook's response timeout so the revalidation has time to cascade to child routes",
+          "Convert `/blog` to a Client Component so it refetches linked posts when the index updates",
+          "Tag the post fetches and call `revalidateTag` for the post, or call `revalidatePath` for the specific slug path",
+          "Remove `generateStaticParams` so posts are never prerendered and always reflect the CMS"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Revalidating a path does not cover other dynamic pages; a tag or the exact slug path is needed.",
+          "Timeouts do not cascade invalidation, and the other options change rendering rather than invalidate the cache."
+        ]
+      }
+    ],
+    "advanced_beginner": [
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "In the Next.js App Router, which file makes the URL `/about` reachable?",
+        "options": [
+          "`app/about/page.js` exporting a React component",
+          "`app/about/index.js` exporting a React component",
+          "`app/about.js` exporting a React component",
+          "`app/about/layout.js` exporting a React component"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "A folder becomes a public route only when it contains a `page.js` file.",
+          "`index.js` and bare files come from the old Pages Router; `layout.js` only wraps pages."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "In the App Router, what kind of component is a component in the `app` directory by default, unless you opt out?",
+        "options": [
+          "A Client Component that hydrates in the browser",
+          "A Server Component that renders on the server",
+          "A static HTML snippet with no React behaviour",
+          "A Web Worker that runs off the main thread"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "App Router components are Server Components by default.",
+          "Learners from plain React often assume everything is a Client Component."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What does placing `'use client'` at the top of a file do?",
+        "options": [
+          "It makes the component fetch its data only in the browser",
+          "It disables server rendering for the whole application",
+          "It marks the boundary where code and its imports go to the client bundle",
+          "It lets the file be used as an API route handler"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "`'use client'` sets a server/client boundary; the file and its imports are included in the client bundle.",
+          "It does not turn off SSR app-wide, and it does not control data fetching."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "A user moves between two pages that share the same `layout.js`. What happens to that layout?",
+        "options": [
+          "It unmounts and remounts on every navigation",
+          "It is rebuilt, and its state is reset on each page change",
+          "It is rendered once more on the server for every click",
+          "It stays mounted and keeps its state while only the page content changes"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Layouts persist across navigations between their child routes and do not re-render or lose state.",
+          "Distractors treat layouts like ordinary components in a page that is replaced."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Why use `next/link`'s `Link` instead of a plain `<a>` for internal navigation?",
+        "options": [
+          "`Link` is required for any URL to be indexed by search engines",
+          "`Link` makes the browser cache every page forever offline",
+          "`Link` forces the target page to render on the client only",
+          "`Link` navigates on the client without a full reload and can prefetch routes"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "`Link` enables client-side transitions and route prefetching.",
+          "Other options confuse it with SEO, caching or rendering mode."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "multi_choice",
+        "prompt": "Which are benefits of rendering a component as a Server Component? Select all that apply.",
+        "options": [
+          "Its heavy dependencies stay out of the client JavaScript bundle",
+          "It can query a database or read secrets directly on the server",
+          "It can hold state with `useState` and update on user input",
+          "It can attach `onClick` handlers to its elements"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Server Components keep dependencies off the client and can reach backend resources directly.",
+          "State and event handlers need a Client Component."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "scenario",
+        "prompt": "A developer writes a server component page that calls `cookies()` from `next/headers` to show the logged-in user's name. They ask how Next.js will render this route. What is the best explanation?",
+        "options": [
+          "It is rendered once at build time and the same HTML is sent to everyone",
+          "It is rendered dynamically at request time because it depends on request data",
+          "It is rendered only in the browser because cookies live on the client",
+          "It fails to build because server components cannot read request information"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Using request-time APIs such as `cookies()` makes the route dynamic, rendered per request.",
+          "Build-time rendering would give every user the same output, which a distractor wrongly assumes."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "You need pages like `/blog/hello-world` and `/blog/second-post` served by one component, with the last part available as `slug`. Which file path does this?",
+        "options": [
+          "`app/blog/:slug/page.js`",
+          "`app/blog/{slug}/page.js`",
+          "`app/blog/[slug]/page.js`",
+          "`app/blog/slug/page.js`"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Square brackets define a dynamic segment in the App Router.",
+          "Colon and brace syntax come from other frameworks; a plain folder matches only the literal URL."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A component in `app/` uses `useState` and an `onClick` handler, and the build errors out. What is the fix?",
+        "options": [
+          "Rename the file to `component.client.js` so it runs in the browser",
+          "Add `export const dynamic = 'force-client'` to the page",
+          "Wrap the component in `Suspense` so hooks are allowed",
+          "Add `'use client'` as the first line of the file"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Hooks and event handlers require a Client Component, declared with `'use client'` at the top.",
+          "The other options are invented or unrelated settings."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "You want `GET /api/hello` to return JSON in the App Router. What do you create?",
+        "options": [
+          "`app/api/hello/route.js` that exports an async `GET` function",
+          "`app/api/hello/page.js` that exports an async `GET` function",
+          "`app/api/hello.js` that exports an async `GET` function",
+          "`app/api/hello/route.js` that default-exports a React component"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Route Handlers live in `route.js` and export functions named after HTTP methods.",
+          "`page.js` renders UI, and a component default export does not handle requests."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A slow server-rendered page in `app/reports/` should show a spinner while its data loads. What do you add?",
+        "options": [
+          "A `spinner.js` file next to `page.js`",
+          "A `pending.js` file next to `page.js`",
+          "A `loading.js` file next to `page.js`",
+          "A `suspense.js` file next to `page.js`"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "`loading.js` is the special file that gives an instant loading state via Suspense.",
+          "The other names have no special meaning in Next.js."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "In an App Router page, how do you load data from an API before rendering?",
+        "options": [
+          "Export `getServerSideProps` from `page.js` and read props",
+          "Call `fetch` in `useEffect` inside the server component",
+          "Seed `useState` with a `fetch` call inside the component",
+          "Make the component `async` and `await fetch(url)` in its body"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Server Components can be async and await data directly.",
+          "`getServerSideProps` belongs to the Pages Router; hooks do not run in Server Components."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "multi_choice",
+        "prompt": "With this structure, which files create a URL route? `app/shop/page.js`, `app/shop/button.js`, `app/shop/cart/page.js`, `app/shop/layout.js`. Select all that apply.",
+        "options": [
+          "`app/shop/page.js`",
+          "`app/shop/button.js`",
+          "`app/shop/cart/page.js`",
+          "`app/shop/layout.js`"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "rubric": [
+          "Only folders containing `page.js` become routes: `/shop` and `/shop/cart`.",
+          "Layouts and ordinary component files are not routes."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "scenario",
+        "prompt": "A product page is a server component that fetches product data from a database. You must add a Like button with a click counter held in `useState`. You want to keep database access on the server. Where do you put `'use client'`?",
+        "options": [
+          "At the top of the page file, so the button can use state",
+          "At the top of a separate `LikeButton` file that the page imports",
+          "At the top of the database helper module the page calls",
+          "Nowhere, because server components may call `useState` directly"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Put the client boundary on the small interactive component and import it into the server page.",
+          "Marking the whole page makes it a Client Component and ends direct database access."
+        ]
+      }
+    ],
+    "proficient": [
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A client component renders `{new Date().toLocaleTimeString()}` inside a page that Next.js pre-renders on the server. The console reports a hydration mismatch. What is the most precise cause?",
+        "options": [
+          "The server and the browser evaluate the expression at different moments and locales, so the first client render differs from the server HTML",
+          "Client components are never rendered on the server, so React has no server HTML to match the browser output against at all",
+          "Date objects cannot be serialized, so the server fails to send any markup for this component during pre-rendering",
+          "The component is missing a key prop, so React cannot pair the server nodes with the nodes it builds on the client"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Hydration compares server HTML with the first client render; a time value computed twice differs.",
+          "Distractors wrongly claim client components skip server rendering or blame serialization or keys."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A server component imports `<Counter />` from a third-party package whose source calls `useState` and has no directive. The build fails. Which diagnosis and fix is most appropriate?",
+        "options": [
+          "Hooks are not allowed anywhere in Next.js, so the package must be patched to keep its counter in a global variable instead",
+          "The server component must be declared `async`, because only async server components may import stateful child components",
+          "The package file runs as a server module where hooks are unavailable, so wrap it in your own file marked `\"use client\"`",
+          "The package must move to devDependencies, because the bundler then skips it during server rendering and loads it later"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Without a directive, imported modules join the server graph, where state hooks fail; a client wrapper file sets the boundary.",
+          "Distractors misread async components, dependency types, or claim hooks are banned."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A team calls `cookies()` in the root layout to read a theme preference. Pages under it were static before, and now none are prebuilt. What explains this?",
+        "options": [
+          "Layouts are always rendered dynamically in Next.js, regardless of which functions they call or whether they read the request",
+          "Reading `cookies()` in the layout makes the output depend on the request, so every route beneath it renders dynamically",
+          "Using `cookies()` makes only the layout dynamic, while the pages beneath it stay prebuilt and are served from the cache",
+          "The build skips prerendering whenever any file in the app folder imports `next/headers`, even if the import is unused"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Request-time APIs in a shared layout make every route that uses that layout dynamic.",
+          "Distractors assume layouts are always dynamic or that the effect stops at the layout."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A server component renders `<Form onSubmit={handleSubmit} />`, where `Form` is a client component and `handleSubmit` is a plain function defined in the server file. Next.js throws an error. Why?",
+        "options": [
+          "Client components cannot receive any props from server components, only from other client components higher in the tree",
+          "Props crossing the server-to-client boundary must be serializable, and a plain function cannot be sent in the payload",
+          "Event handler props are reserved names that only work on built-in DOM elements, never on custom client components",
+          "`handleSubmit` must be written as an arrow function, because function declarations are not hoisted in the client bundle"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Props from server to client are serialized into the RSC payload; ordinary functions are not serializable.",
+          "Distractors invent restrictions on props, handler names, or hoisting."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A client `ThemeProvider` wraps `{children}` in the root layout, and those children include server components that query a database. Why can they still run only on the server?",
+        "options": [
+          "Context providers automatically convert every descendant into a server component when the provider mounts in the browser",
+          "Any component that touches a database is silently skipped by the client bundler, wherever it sits in the component tree",
+          "They are rendered on the server and passed in as the children prop, so the client module never imports them",
+          "The `\"use client\"` directive only affects the default export of its own file, never the elements nested inside it"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Server components passed as children are already rendered; the client module does not import them, so they stay out of the client graph.",
+          "Distractors invent automatic conversion or bundler skipping rules."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "multi_choice",
+        "prompt": "Assuming no other route configuration, which of these cause a route to be rendered at request time instead of being prebuilt? Select all that apply.",
+        "options": [
+          "Calling `cookies()` in the page component",
+          "Reading the `searchParams` prop in the page component",
+          "Calling `fetch` with the option `cache: 'no-store'`",
+          "Exporting `generateStaticParams` from a dynamic segment",
+          "Importing a static JSON file at the top of the page"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "rubric": [
+          "Request-bound inputs (cookies, search params) and uncached fetches make rendering dynamic.",
+          "generateStaticParams and static imports support prebuilding, so they do not force dynamic rendering."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "scenario",
+        "prompt": "A server action inserts a row into the database and then calls `redirect('/posts')`. The `/posts` page is a server component that queries the database during render and uses no request-time functions. After the redirect, the list still lacks the new row until the next deploy. What is the most likely cause?",
+        "options": [
+          "Server actions run only in the browser, so the database write is not committed before the redirect is triggered",
+          "The `/posts` output was prerendered and cached, and the action never revalidated that path or its cache tag",
+          "`redirect` always serves the previous response from the browser's back-forward cache, regardless of server settings",
+          "The posts page must be a client component to show rows inserted after the build has completed on the server"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "A statically cached page keeps old output until revalidated, for example with `revalidatePath` or `revalidateTag` in the action.",
+          "Distractors misplace where actions run or blame browser caching and component type."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A shop has 200,000 product pages. Prices change a few times a day, pages must be served from a CDN with fast TTFB, builds must stay short, and prices may be at most 1 hour stale. Which strategy best meets these criteria?",
+        "options": [
+          "Render every page on each request with no caching, so that every visitor always sees the exact current price",
+          "Prebuild all 200,000 pages at build time and trigger a full redeploy every hour to refresh the prices shown",
+          "Prebuild only popular pages, render the rest on first request, and set time-based revalidation of 3600 seconds",
+          "Ship an empty shell and make each page fetch its price in the browser after load, skipping server rendering"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Partial prebuilding plus on-demand generation with hourly revalidation meets build time, CDN, and staleness limits.",
+          "Distractors break the build-time limit, CDN/TTFB goals, or the server-rendered content need."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A public article page needs content in the initial HTML for SEO, must call a CMS using a secret API key, and should ship as little JavaScript as possible. Which data-fetching approach is best?",
+        "options": [
+          "Fetch inside a client component's `useEffect` through a public env variable, so the browser loads content after hydration",
+          "Fetch in a server component, so the key stays on the server and the content is already in the initial HTML",
+          "Fetch in a client component with a `NEXT_PUBLIC_` key, so the same code can run on both the server and browser",
+          "Fetch in the browser through a loading spinner, and let crawlers wait until the client finishes rendering the data"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Server components keep secrets off the client, put content in HTML, and add no fetch code to the bundle.",
+          "Distractors expose the key, delay content, or rely on crawlers executing client code."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "An article page renders a large markdown body and a single like button with local state. The goal is the smallest client JavaScript with no loss of functionality. Which structure is best?",
+        "options": [
+          "Mark the whole page `\"use client\"`, because a page containing any interactive element must be one client component",
+          "Wrap the markdown renderer in a client component, so it can share state with the like button through context",
+          "Mark every component in the tree `\"use client\"`, so that the boundary is consistent and nothing runs on the server",
+          "Move the like button into its own `\"use client\"` file and keep the page and markdown rendering as server components"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Pushing the boundary to the interactive leaf keeps the heavy markdown code out of the client bundle.",
+          "Distractors widen the boundary, adding client JavaScript without benefit."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A dashboard shows private user records. Criteria: records must stay protected even if a developer later adds a new route or the middleware matcher misses a path. Which approach is most robust?",
+        "options": [
+          "Rely on a middleware matcher for `/dashboard/:path*`, since middleware runs before every page and covers all dashboard paths",
+          "Check the session once in the root layout, because layouts re-render on every navigation and so repeat the check",
+          "Hide dashboard links from logged-out users and verify the session in a client `useEffect` after the page has loaded",
+          "Verify the session inside the data-access function that reads the records, in addition to any middleware redirect"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Authorization next to the data survives new routes and matcher gaps; middleware is an optimistic first layer.",
+          "Distractors rely on a single path-based check, assume layouts re-render on navigation, or check only on the client."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A page does `const user = await getUser(); const posts = await getPosts(); const stats = await getStats();`. The calls are independent and take about 300 ms each. Criteria: lower latency, same output, and any failure still surfaces as an error. Which change is best?",
+        "options": [
+          "Start all three requests and await them together with `Promise.all`, so latency approaches the slowest single call",
+          "Move each call into a `useEffect` of a client component, so the browser runs the three calls at the same time",
+          "Wrap the calls in `Promise.race`, so the page renders as soon as the first of the three calls completes",
+          "Add `cache: 'force-cache'` to each call, so that the three awaits resolve with no network time on any request"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Independent requests started together and awaited with Promise.all remove the waterfall and still reject on failure.",
+          "Distractors move work to the client, drop data with race, or misuse caching on a first request."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "multi_choice",
+        "prompt": "Which are sound reasons to implement an endpoint as a route handler rather than a server action? Select all that apply.",
+        "options": [
+          "A payment provider must POST webhooks to a stable public URL",
+          "A mobile app must call the endpoint and receive JSON responses",
+          "A form on your own page mutates data and then refreshes the UI",
+          "The endpoint must return a generated CSV file in response to a GET request",
+          "You want progressive enhancement for a form on your own page"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "rubric": [
+          "Route handlers expose stable HTTP endpoints for external clients and non-HTML responses.",
+          "Mutations from your own forms and progressive enhancement are what server actions are designed for."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "scenario",
+        "prompt": "A dashboard page has a fast header and a personalized recommendations widget that takes about 2 seconds. Product wants the header visible immediately, header text indexable, and no extra client fetching code. Which approach best meets this?",
+        "options": [
+          "Await the recommendations in the page component before returning, so the whole page appears complete in a single render",
+          "Convert the whole page to a client component and fetch recommendations in an effect after hydration finishes",
+          "Make the page fully static so the 2 second query runs once at build time and serves every visitor the same widget",
+          "Wrap the recommendations server component in `Suspense` with a skeleton fallback, so the shell streams first"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Suspense streaming sends the shell immediately and fills in the slow server component later without client fetch code.",
+          "Distractors block the header, add client fetching, or make personalized content static."
+        ]
+      }
+    ],
+    "novice": [
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "In the App Router, which file defines the UI for the route `/about`?",
+        "options": [
+          "`app/about/page.js`",
+          "`app/about/index.js`",
+          "`app/about.js`",
+          "`app/about/route.html`"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "`page.js` inside a route folder makes that route publicly accessible.",
+          "`index.js` is a Pages Router habit and does not define App Router pages."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which directive at the top of a file marks its components as Client Components?",
+        "options": [
+          "`\"use browser\"`",
+          "`\"use state\"`",
+          "`\"use client\"`",
+          "`\"use effect\"`"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "`\"use client\"` sets the server/client boundary.",
+          "The other strings sound plausible because they resemble hook names but are not Next.js directives."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which App Router file defines shared UI that wraps the pages and child layouts beneath it?",
+        "options": [
+          "`wrapper.js`",
+          "`layout.js`",
+          "`_app.js`",
+          "`shell.js`"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "`layout.js` is the App Router convention for shared UI.",
+          "`_app.js` belongs to the older Pages Router."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which folder name creates a dynamic route segment named `id`?",
+        "options": [
+          "`{id}`",
+          "`:id`",
+          "`$id`",
+          "`[id]`"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Square brackets denote dynamic segments in Next.js.",
+          "Colon syntax comes from other routers such as Express."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which file name defines an HTTP endpoint (such as GET or POST) inside the App Router?",
+        "options": [
+          "`route.js`",
+          "`api.js`",
+          "`handler.js`",
+          "`endpoint.js`"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Route Handlers are defined in `route.js` files exporting functions named after HTTP methods.",
+          "The other names are invented conventions."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "multi_choice",
+        "prompt": "Which of these are special file conventions in the App Router? Select all that apply.",
+        "options": [
+          "`loading.js`",
+          "`helper.js`",
+          "`error.js`",
+          "`config.html`",
+          "`not-found.js`"
+        ],
+        "correct": [
+          0,
+          2,
+          4
+        ],
+        "rubric": [
+          "`loading.js`, `error.js` and `not-found.js` are reserved file names with defined roles.",
+          "`helper.js` and `config.html` have no special meaning to the router."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "scenario",
+        "prompt": "A team is starting a brand new Next.js project and wants the official scaffolding tool to generate the folder structure and dependencies. Which terminal command do they run?",
+        "options": [
+          "`npm init next-react`",
+          "`npx next-new`",
+          "`npm create react-app`",
+          "`npx create-next-app@latest`"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "`create-next-app` is the official Next.js project generator.",
+          "`create-react-app` makes a plain React app, not a Next.js one."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What does it mean that components in the App Router are Server Components by default?",
+        "options": [
+          "They render on the server and their own JavaScript is not sent to the browser",
+          "They render in the browser first and then are copied to the server",
+          "They run on both sides and always ship their code to the client",
+          "They only render at build time and can never use fresh data"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Server Components render on the server and add no component JS to the client bundle.",
+          "Believing they are build-time only confuses them with static rendering."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Why does calling `useState` in a Server Component cause an error?",
+        "options": [
+          "Server Components cannot import anything from React at all",
+          "Server Components render once on the server and have no client-side state or interactivity",
+          "Server Components only allow state when a database is attached",
+          "Server Components need the hook wrapped inside an async function"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "State needs a live client-side component; add `\"use client\"` to use it.",
+          "Other options invent restrictions unrelated to rendering location."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What does static rendering of a route mean in Next.js?",
+        "options": [
+          "HTML is generated on every request using the visitor's cookies",
+          "The page has no JavaScript and cannot be interactive",
+          "The page is never updated after it is deployed to the server",
+          "HTML is generated ahead of time at build and reused for many requests"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Static rendering produces HTML once, ahead of requests, and serves it repeatedly.",
+          "Per-request rendering describes dynamic rendering instead."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What is the main benefit of using the `Link` component from `next/link` instead of a plain `<a>` tag for internal pages?",
+        "options": [
+          "It navigates on the client without a full page reload and can prefetch routes",
+          "It forces every page change to be fetched from the server again",
+          "It converts the page into a Client Component for the whole app",
+          "It lets you link to external sites without any security attributes"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "`Link` enables client-side transitions and prefetching.",
+          "A full reload is what plain anchors cause, not what `Link` does."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "A file exists at `app/shop/[slug]/page.js`. A visitor opens `/shop/shoes`. What value does the `slug` param have?",
+        "options": [
+          "`\"[slug]\"`",
+          "`\"shop\"`",
+          "`\"shoes\"`",
+          "`undefined`"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "The dynamic segment captures the matching URL part, here `shoes`.",
+          "`\"[slug]\"` mistakes the folder name for the value."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "multi_choice",
+        "prompt": "Which statements about Server Components are true? Select all that apply.",
+        "options": [
+          "They can be `async` and `await` data directly",
+          "They can attach `onClick` handlers to elements",
+          "They can use `useEffect` to run code after render",
+          "They can safely read server-only secrets such as API keys",
+          "They are re-created in the browser on each click"
+        ],
+        "correct": [
+          0,
+          3
+        ],
+        "rubric": [
+          "Server Components can await data and keep secrets on the server.",
+          "Event handlers and effects need Client Components."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "scenario",
+        "prompt": "A developer adds a like button with `onClick` and `useState` directly inside `app/post/page.js`, which has no directive. Next.js reports an error. The rest of the page only displays text fetched on the server. What is the best way to fix it?",
+        "options": [
+          "Add `\"use client\"` to the whole page so that all its data fetching moves into the browser",
+          "Move the button into its own file marked `\"use client\"` and import it into the page",
+          "Replace `useState` with a normal variable so the page stays server-rendered",
+          "Rename the page file to `page.client.js` so Next.js treats it as interactive"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Only the interactive piece needs to be a Client Component; the page can stay on the server.",
+          "Marking the whole page as client works poorly and loses server benefits; a plain variable does not re-render."
+        ]
+      }
+    ]
+  }
+}

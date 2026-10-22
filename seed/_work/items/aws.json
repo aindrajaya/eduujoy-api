@@ -1,0 +1,1037 @@
+{
+  "promptVersion": "v2",
+  "stages": {
+    "competent": [
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A web server in a public subnet must serve HTTPS to the whole internet, but SSH must work only from the office range `203.0.113.0/24`. Which inbound security group rules do this?",
+        "options": [
+          "TCP 443 from `0.0.0.0/0` and TCP 22 from `203.0.113.0/24`",
+          "TCP 443 from `0.0.0.0/0` and TCP 22 from `0.0.0.0/0`",
+          "TCP 443 from `203.0.113.0/24` and TCP 22 from `0.0.0.0/0`",
+          "TCP 443 and TCP 22 both from `203.0.113.0/24`"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Open 443 to the world and restrict 22 to the office CIDR.",
+          "Other options swap the sources or open SSH to everyone, missing which port needs which scope."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Versioning is enabled on an S3 bucket. You run `aws s3 rm s3://logs-bkt/app.log` without a version ID. What happens?",
+        "options": [
+          "A delete marker is added and earlier versions remain",
+          "The latest version is deleted and the older one is promoted",
+          "All versions of the object are permanently deleted",
+          "The request fails until versioning is suspended"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "A plain delete on a versioned bucket adds a delete marker; old versions stay recoverable.",
+          "Distractors assume deletion is permanent or blocked."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "An application on an EC2 instance must read objects from one S3 bucket without storing any long-term credentials on the instance. What should you do?",
+        "options": [
+          "Put an IAM user's access keys in `~/.aws/credentials`",
+          "Attach an IAM role with S3 read permission via an instance profile",
+          "Make the bucket public so no credentials are needed",
+          "Embed the root account keys in the application's config"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Instance profiles supply temporary credentials automatically.",
+          "Stored keys or public buckets violate the no-long-term-credentials requirement."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Instances in a private subnet need outbound internet access to download patches, but must not accept inbound connections from the internet. Which route table entry achieves this?",
+        "options": [
+          "`0.0.0.0/0` to an internet gateway",
+          "`0.0.0.0/0` to a NAT gateway in a public subnet",
+          "`10.0.0.0/16` to a NAT gateway in the private subnet",
+          "`0.0.0.0/0` to a virtual private gateway"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "A NAT gateway in a public subnet gives outbound-only access.",
+          "Routing directly to an internet gateway makes the subnet public."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "You want to upload the local folder `./site` to `s3://my-bucket/site`, copying only new or changed files on repeat runs. Which command fits?",
+        "options": [
+          "`aws s3 cp ./site s3://my-bucket/site`",
+          "`aws s3 mv ./site s3://my-bucket/site`",
+          "`aws s3 sync ./site s3://my-bucket/site`",
+          "`aws s3 ls ./site s3://my-bucket/site`"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "`sync` compares and copies only differences recursively.",
+          "`cp` without `--recursive` fails on folders and `mv` deletes the source."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "multi_choice",
+        "prompt": "You must make a web tier behind an Application Load Balancer tolerate the loss of one Availability Zone. Which actions do this? Select all that apply.",
+        "options": [
+          "Launch instances in subnets in at least two AZs",
+          "Enable ALB in subnets from at least two AZs",
+          "Place all instances in one larger instance type",
+          "Use an Auto Scaling group spanning both AZ subnets"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "rubric": [
+          "Redundancy requires ALB nodes and instances in multiple AZs, ideally managed by an ASG.",
+          "A larger single instance remains a single point of failure."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "scenario",
+        "prompt": "An Auto Scaling group has 4 instances and a target tracking policy of 50% average CPU. Traffic rises and average CPU reaches 75%. Max size is 10. Roughly what will the group do?",
+        "options": [
+          "Scale out to about 6 instances to bring CPU near 50%",
+          "Scale in to 2 instances to cut cost",
+          "Do nothing until CPU exceeds 90%",
+          "Scale out immediately to the maximum of 10"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Target tracking scales proportionally: 4 x 75/50 = 6.",
+          "Others misunderstand direction or ignore proportional scaling."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "An EC2 instance in a new subnet has a public IP and a security group allowing SSH, yet connections time out. The VPC has an internet gateway. Which cause is most likely?",
+        "options": [
+          "The subnet's route table lacks a `0.0.0.0/0` route to the internet gateway",
+          "The security group needs an outbound rule for port 22",
+          "The internet gateway must be attached to the instance",
+          "The instance needs an IAM role for SSH"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "A subnet is public only if its route table sends internet traffic to the IGW.",
+          "Security groups are stateful so replies need no outbound rule; IAM doesn't govern network SSH."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A Lambda function in private subnets of a VPC times out when calling DynamoDB, but works when not attached to a VPC. The subnets have no NAT gateway. What is the best diagnosis?",
+        "options": [
+          "Lambda cannot call DynamoDB from any VPC",
+          "The function has no network path to DynamoDB's public endpoint",
+          "DynamoDB tables must be in the same subnet",
+          "The execution role lacks permission, which causes timeouts"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "VPC-attached Lambda needs a NAT or a gateway VPC endpoint to reach DynamoDB.",
+          "Missing IAM permission yields an AccessDenied error, not a timeout."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A user's IAM policy allows `s3:*` on a bucket. The bucket policy has an explicit Deny for requests not coming from a specific VPC endpoint. The user calls from a laptop. What is the result?",
+        "options": [
+          "Allowed, because the identity policy grants `s3:*`",
+          "Allowed, because the user is in the same account",
+          "Denied, because an explicit deny overrides any allow",
+          "Denied, because bucket policies always override identity policies"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "An explicit deny always wins in policy evaluation.",
+          "The last option overstates it: bucket policies only win here because of the explicit deny."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A team moves 2 TB of objects read daily into S3 Standard-IA to save money, and the bill rises. What best explains this?",
+        "options": [
+          "Standard-IA has higher storage rates than Standard",
+          "Standard-IA charges per-GB retrieval fees that outweigh storage savings for frequent reads",
+          "Standard-IA objects are replicated to extra regions",
+          "Standard-IA disables request caching, raising compute charges"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "IA lowers storage price but adds retrieval fees, which suit infrequently accessed data.",
+          "Other options invent pricing behaviors."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A reporting-heavy application slows down because many read queries hit the primary RDS instance. The database already uses Multi-AZ. Why won't Multi-AZ help, and what would?",
+        "options": [
+          "Multi-AZ standby is not readable; add a read replica",
+          "Multi-AZ standby is readable but needs a larger instance type",
+          "Multi-AZ only helps writes; enable Provisioned IOPS only",
+          "Multi-AZ replicates asynchronously; switch to a single AZ"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Standard Multi-AZ standby exists for failover and does not serve reads; read replicas scale reads.",
+          "Others confuse availability with read scaling."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "multi_choice",
+        "prompt": "An ALB shows all targets as unhealthy though the application runs on the instances. Which could be causes? Select all that apply.",
+        "options": [
+          "The instance security group doesn't allow traffic from the ALB",
+          "The health check path returns HTTP 404",
+          "The instances lack a public IP address",
+          "The app listens on a port different from the health check port"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "rubric": [
+          "Blocked traffic, bad path, or wrong port each fail health checks.",
+          "A public IP isn't needed as the ALB reaches targets via private IPs."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "scenario",
+        "prompt": "Account A owns bucket `data-a` whose bucket policy allows account B's root principal `s3:GetObject`. A role in account B with no S3 permissions in its policies gets AccessDenied reading objects. What is the cause?",
+        "options": [
+          "Bucket policies cannot grant cross-account access",
+          "The role also needs an identity policy in account B allowing S3 access",
+          "The bucket must be made public for cross-account reads",
+          "The role must be recreated in account A"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Cross-account access requires an allow on both the resource side and the caller's identity side.",
+          "Others misstate how cross-account trust works."
+        ]
+      }
+    ],
+    "proficient": [
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "An EC2 instance in a subnet with no public IP cannot reach package repositories. The subnet's route table has `0.0.0.0/0` pointing directly at an internet gateway. What is the most likely cause?",
+        "options": [
+          "The internet gateway only translates addresses for instances that have a public or Elastic IP, so private-only instances need a NAT gateway",
+          "The internet gateway cannot route outbound traffic, so the subnet needs a virtual private gateway to reach public sites",
+          "The security group is stateful and blocks the return traffic, so an inbound rule for repositories must be added",
+          "The route table needs a more specific route for each repository address, since a default route is ignored by gateways"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "An internet gateway performs one-to-one NAT only for instances with public IPs, so private-only instances need a NAT gateway.",
+          "Distractors misread stateful security groups and the role of virtual private gateways."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A role has `s3:GetObject` on a bucket and the bucket policy allows it, yet reads of SSE-KMS encrypted objects fail with AccessDenied. Other unencrypted objects in the bucket read fine. What is the most likely cause?",
+        "options": [
+          "The bucket policy must also name the role's account number in a separate statement for encrypted objects to be readable",
+          "The role lacks `kms:Decrypt` permission via the key policy or a grant, so the object cannot be decrypted",
+          "S3 blocks all SSE-KMS reads unless the request comes from the same region through a gateway VPC endpoint",
+          "The objects' storage class prevents decryption until they are restored by an explicit lifecycle transition"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Reading SSE-KMS objects needs permission to use the KMS key in addition to S3 permissions.",
+          "Distractors invent S3-side restrictions rather than checking the KMS layer."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A web server's security group allows inbound 443. The subnet's network ACL has inbound allow 443 and outbound allow 443 only, with default deny otherwise. Clients time out. Why?",
+        "options": [
+          "The security group is stateless, so it needs an explicit outbound rule to answer the client requests",
+          "The network ACL is stateful, so it blocks the connection until the inbound rule is replicated outbound",
+          "The network ACL is stateless, so the outbound rule must allow the ephemeral ports used by client responses",
+          "The server needs an Elastic IP, since responses on ephemeral ports are dropped by the internet gateway"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Network ACLs are stateless, so return traffic to the client's ephemeral port needs an outbound allow.",
+          "Distractors swap the stateful/stateless behaviour of security groups and network ACLs."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A Lambda function attached to private subnets in a VPC times out when calling DynamoDB, but worked before it was attached to the VPC. The subnets have no NAT gateway. What is the best diagnosis?",
+        "options": [
+          "Lambda functions in a VPC lose IAM permissions, so the execution role must be recreated with DynamoDB access",
+          "DynamoDB tables only accept connections from the internet, so the function must be moved back to public subnets",
+          "The function's memory is too low once attached to a VPC, so the network interface fails to initialise",
+          "The subnets have no path to DynamoDB, so a gateway VPC endpoint or NAT route is needed"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Attaching to a VPC removes default internet access; DynamoDB needs a gateway endpoint or NAT path.",
+          "Distractors blame IAM, DynamoDB exposure or memory instead of routing."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A team enabled RDS Multi-AZ (standard instance deployment) expecting read-heavy dashboards to speed up, but read latency on the primary is unchanged. What explains this?",
+        "options": [
+          "Replication to the standby is synchronous, which adds latency on every read and cancels any gain",
+          "The standby exists for failover only and does not serve reads, so read scaling needs read replicas",
+          "Multi-AZ only protects storage, so the compute size of the primary must be raised to improve reads",
+          "The standby serves reads only after a failover test has been run, which has not yet happened"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "The standby in a Multi-AZ instance deployment is for availability and does not serve reads.",
+          "Distractors confuse availability with read scaling."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "multi_choice",
+        "prompt": "A user's identity policy allows `s3:*` on a bucket, yet `PutObject` returns AccessDenied in the same account. Which could explain this? Select all that apply.",
+        "options": [
+          "A permissions boundary on the user that does not include `s3:PutObject`",
+          "The identity policy is attached to a group rather than the user, which makes it ignored",
+          "An explicit Deny in the bucket policy that matches the user's request",
+          "A service control policy in the organization that denies S3 writes",
+          "The bucket is in a different region than the user's console session"
+        ],
+        "correct": [
+          0,
+          2,
+          3
+        ],
+        "rubric": [
+          "Permissions boundaries, explicit denies and SCPs all cap or override identity allows.",
+          "Group-attached policies still apply, and console region does not affect S3 authorisation."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "scenario",
+        "prompt": "An Auto Scaling group behind an ALB keeps terminating new instances a minute after launch and replacing them in a loop. The app needs about five minutes to start. The ELB health check is used with a health check grace period of 60 seconds. What is the root cause?",
+        "options": [
+          "The ALB deregistration delay is too long, which causes instances to be removed before they have started",
+          "The launch template's AMI is corrupted, so each instance fails its EC2 status checks after boot",
+          "The grace period ends before the app is ready, so failed ELB health checks mark instances unhealthy",
+          "The scaling policy's cooldown is too short, which forces the group to add instances faster than it needs"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Health checks start counting after the grace period; with a 60s grace and 5 minute startup, instances are replaced prematurely.",
+          "Distractors blame deregistration, AMI or cooldown, which don't produce this pattern."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "Application logs in S3 have unpredictable access: some months nothing is read, others many objects are. The team wants no retrieval fees, no manual lifecycle tuning and low storage cost. Which storage choice best fits?",
+        "options": [
+          "S3 Standard-IA for all objects, because it has lower storage cost and no retrieval charge",
+          "S3 Glacier Flexible Retrieval, because it has the lowest storage price and retrieval is typically fast",
+          "S3 One Zone-IA for all objects, because it is cheapest and is designed for unpredictable access",
+          "S3 Intelligent-Tiering, because it moves objects between tiers automatically with no retrieval fees"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Intelligent-Tiering adapts to unpredictable access without retrieval charges.",
+          "Distractors ignore IA retrieval fees or the retrieval delay in Glacier."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A production database server runs 24/7 at steady load and must never be interrupted. The commitment is acceptable for three years. Judged on cost and reliability, which purchasing option is best?",
+        "options": [
+          "Spot Instances, because they are the cheapest and the workload can be restarted from backup",
+          "On-Demand Instances, because they cost less than commitments when usage is steady and predictable",
+          "A Compute or EC2 Instance Savings Plan, because it discounts steady usage without interruption risk",
+          "Dedicated Hosts on-demand, because they guarantee no interruptions and are cheaper than any commitment"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Savings Plans or reservations give a large discount for steady usage with no interruption risk.",
+          "Spot can be interrupted; On-Demand costs more for steady loads."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A CI job in account A must deploy to account B. Criteria: no long-lived secrets, auditable per-session activity, and revocable centrally. Which approach best meets them?",
+        "options": [
+          "Create an IAM user in account B and store its access keys in the CI system's secret store",
+          "Create a shared admin IAM user in both accounts and rotate its password every ninety days",
+          "Make the deployment bucket public in account B and let the job push artifacts without credentials",
+          "Create a role in account B trusting account A's job role, and have the job call `sts:AssumeRole`"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Cross-account roles issue temporary credentials, logged per session, and are revoked by editing the trust or policy.",
+          "Distractors rely on long-lived keys, shared users or public access."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A web app needs path-based routing to several services, TLS termination and integration with AWS WAF. Traffic is HTTP/HTTPS only. Which load balancer best meets these criteria?",
+        "options": [
+          "Network Load Balancer, because it operates at layer 4 and supports WAF rules on listener ports",
+          "Classic Load Balancer, because it supports path routing with a single listener for every service",
+          "Application Load Balancer, because it routes on HTTP paths and integrates with AWS WAF",
+          "Gateway Load Balancer, because it inspects HTTP paths and terminates TLS for backend services"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "ALB works at layer 7 with path rules, TLS termination and WAF integration.",
+          "NLB and GWLB don't offer path-based routing or WAF."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A service needs RTO of 15 minutes and RPO of seconds after a regional outage, with a budget that rules out full active-active. Which disaster recovery strategy best fits?",
+        "options": [
+          "Backup and restore, because snapshots copied cross-region are cheapest and recover within the RTO",
+          "Pilot light with only the database replicated, because compute can always be rebuilt within fifteen minutes",
+          "Cold standby with infrastructure code stored, because it has zero running cost and fast deployment",
+          "Warm standby with a scaled-down running stack and continuous replication, scaled up on failover"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Warm standby with continuous replication meets a seconds-level RPO and 15-minute RTO below active-active cost.",
+          "Backup/restore and cold options typically exceed the RTO; pilot light is slower to scale."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "multi_choice",
+        "prompt": "A proposal stores a database password in plain text in EC2 launch template user data. Which are valid criticisms? Select all that apply.",
+        "options": [
+          "Anyone with permission to describe the launch template can read the password",
+          "The password cannot be rotated without creating a new launch template version",
+          "User data is always encrypted at rest with the instance's KMS key, so exposure is impossible",
+          "The password is retrievable from the instance metadata service by any process on the instance",
+          "User data is limited in size, so a password cannot fit"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "rubric": [
+          "User data is readable via API and instance metadata and is hard to rotate, so Secrets Manager or Parameter Store is better.",
+          "User data is not automatically encrypted for readers, and size limits don't block a password."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "scenario",
+        "prompt": "A production VPC spans three AZs. A team proposes one NAT gateway in a single AZ to save about two-thirds of NAT cost. Criteria: the app must keep outbound access to external APIs during a single-AZ failure, and cost matters but is secondary. What is the best judgement?",
+        "options": [
+          "Keep one NAT gateway, because it automatically fails over to another AZ when its own AZ fails",
+          "Use one NAT gateway per AZ with matching route tables, because it avoids a cross-AZ dependency",
+          "Replace NAT with an internet gateway on private subnets, because it removes the single point of failure",
+          "Use one NAT instance on a small EC2 size, because it is cheaper and survives AZ failure by default"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "A NAT gateway is AZ-scoped; one per AZ keeps outbound access when an AZ fails, satisfying the primary criterion.",
+          "Distractors assume automatic cross-AZ failover or misuse IGWs and NAT instances."
+        ]
+      }
+    ],
+    "novice": [
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which AWS service provides resizable virtual servers that you can launch in the cloud?",
+        "options": [
+          "Amazon EC2",
+          "Amazon S3",
+          "Amazon RDS",
+          "Amazon VPC"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "EC2 provides virtual servers called instances.",
+          "S3 is object storage, RDS is managed databases, VPC is networking; learners confuse these with compute."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "What type of storage is Amazon S3?",
+        "options": [
+          "Object storage",
+          "Block storage",
+          "Relational database",
+          "In-memory cache"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "S3 stores data as objects in buckets.",
+          "Block storage describes EBS, a common confusion."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "What does IAM stand for in AWS?",
+        "options": [
+          "Identity and Access Management",
+          "Instance and Application Manager",
+          "Internal Access Monitor",
+          "Integrated Account Metrics"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "IAM is Identity and Access Management, used to control who can do what.",
+          "Other options are plausible-sounding invented expansions."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which AWS service is a managed relational database service supporting engines such as MySQL and PostgreSQL?",
+        "options": [
+          "Amazon RDS",
+          "Amazon DynamoDB",
+          "Amazon S3",
+          "Amazon Route 53"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "RDS is the managed relational database service.",
+          "DynamoDB is a NoSQL key-value service, often confused with RDS."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "What is an AWS Region?",
+        "options": [
+          "A separate geographic area containing multiple Availability Zones",
+          "A single data center building",
+          "A type of EC2 instance",
+          "A billing account group"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "A Region is a geographic area with multiple AZs.",
+          "Learners often equate a Region or AZ with a single data center."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "multi_choice",
+        "prompt": "Which of the following are AWS database services? Select all that apply.",
+        "options": [
+          "Amazon DynamoDB",
+          "Amazon Aurora",
+          "Amazon CloudFront",
+          "Amazon EBS"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "DynamoDB and Aurora are database services.",
+          "CloudFront is a CDN and EBS is block storage."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "scenario",
+        "prompt": "A new team member must create a private network section in AWS where their servers will run, with their own IP address range and subnets. Which AWS service is used to define this virtual network?",
+        "options": [
+          "Amazon VPC",
+          "Amazon CloudWatch",
+          "AWS Lambda",
+          "Amazon SNS"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "VPC lets you define an isolated virtual network with subnets.",
+          "CloudWatch is monitoring; Lambda is serverless compute; SNS is messaging."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Why would you store a website's images in S3 instead of on an EC2 instance's local disk?",
+        "options": [
+          "S3 keeps data durably and independently of any single server",
+          "S3 objects are faster to edit in place like a disk",
+          "S3 is required for any EC2 instance to boot",
+          "S3 files are automatically free of charge"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "S3 offers durable storage separate from instance lifecycle.",
+          "Distractors assume S3 behaves like a disk, is mandatory, or is free."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What does it mean that an IAM policy follows the principle of least privilege?",
+        "options": [
+          "Users get only the permissions needed for their tasks",
+          "Users get all permissions and lose some later",
+          "Only the root user may have any permissions",
+          "Permissions are removed after one day"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Least privilege grants the minimum permissions required.",
+          "Other options misread it as default-open, root-only or time-limited."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Why do architects deploy an application across two Availability Zones?",
+        "options": [
+          "So it keeps running if one zone has a failure",
+          "So it runs twice as fast on every request",
+          "So data is stored in two countries automatically",
+          "So the bill is cut in half by sharing"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Multiple AZs provide fault tolerance.",
+          "Learners mistake AZs for performance, country distribution or cost savings."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What is the main difference between a public subnet and a private subnet in a VPC?",
+        "options": [
+          "A public subnet has a route to an internet gateway; a private one does not",
+          "A public subnet is free; a private subnet is billed",
+          "A public subnet is in another Region from a private one",
+          "A public subnet holds databases; a private one holds servers"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Public subnets route to an internet gateway.",
+          "Distractors invent cost, region or role differences."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Which statement best explains how EC2 pricing with On-Demand instances works?",
+        "options": [
+          "You pay for the compute time you use without long-term commitment",
+          "You pay a fixed yearly fee regardless of usage",
+          "You pay only when the instance is idle and stopped",
+          "You pay once and own the physical server"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "On-Demand is pay-as-you-go.",
+          "Distractors describe reservations, inverted billing or ownership."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "multi_choice",
+        "prompt": "Which statements correctly describe IAM roles? Select all that apply.",
+        "options": [
+          "They provide temporary credentials to a service or user that assumes them",
+          "They let an EC2 instance access S3 without stored access keys",
+          "They must be tied to one person's password",
+          "They are the same thing as the root account"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Roles give temporary credentials, avoiding hard-coded keys.",
+          "Roles are not passwords or the root account."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "scenario",
+        "prompt": "A developer stores an access key in a file on an EC2 instance so the app can read an S3 bucket. A colleague suggests attaching an IAM role to the instance instead. Why is the role the better choice?",
+        "options": [
+          "It supplies temporary credentials automatically, so no long-lived key sits on the disk",
+          "It makes the S3 bucket public so no credentials are needed",
+          "It encrypts the instance's disk without any extra setup",
+          "It gives the app the same rights as the root user"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Roles avoid storing long-lived secrets.",
+          "Distractors misstate roles as making buckets public, encrypting disks, or granting root."
+        ]
+      }
+    ],
+    "expert": [
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A teammate says a role in account A can read objects in an S3 bucket in account B once the role's identity policy allows s3:GetObject on that bucket's ARN. Which critique is correct?",
+        "options": [
+          "Wrong: the identity policy alone is enough, because the role is already authenticated inside AWS and the bucket owner has no say",
+          "Wrong: the bucket policy in account B must also allow the role, because cross-account access needs an allow on both sides",
+          "Wrong: only the bucket policy matters, so the role needs no S3 permissions in account A because the bucket owner decides",
+          "Wrong: cross-account reads need an S3 ACL on every object, because bucket and identity policies cannot grant across accounts"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Cross-account access requires an allow in the caller's identity policy and in the resource policy of the other account.",
+          "Distractors assume one side suffices or that only ACLs work across accounts."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "Private-subnet workers pull about 40 TB a month from S3 in the same Region through a NAT gateway. Criteria: cut cost, keep traffic off the public internet, make no code changes. Which option is best?",
+        "options": [
+          "Add an S3 gateway endpoint and route-table entry, removing NAT data-processing charges for that S3 traffic",
+          "Add a second NAT gateway in each AZ, since spreading the traffic lowers the per-GB processing charge",
+          "Move workers to public subnets with Elastic IPs, since that avoids NAT charges and still stays private",
+          "Replace NAT with an S3 interface endpoint, since gateway endpoints are billed per GB in the same way as NAT"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "S3 gateway endpoints have no hourly or per-GB charge and keep traffic on the AWS network.",
+          "Distractors misread NAT pricing, or use public subnets, which sends traffic through the internet gateway."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "In a design review someone says: 'An RDS read replica in another AZ gives us automatic failover with zero data loss, so we can skip Multi-AZ.' Which evaluation is right?",
+        "options": [
+          "Right: replicas replicate synchronously, and RDS promotes them automatically whenever the primary instance fails",
+          "Wrong: replicas must sit in the primary's AZ, so they cannot provide any resilience against an AZ outage",
+          "Wrong: replication is asynchronous and replicas are not automatic failover targets, so Multi-AZ better meets zero-loss failover",
+          "Right: replicas share the primary's storage volume, so no committed writes can be lost when failing over"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Read replicas are asynchronous and need manual promotion; a Multi-AZ standby is synchronous with automatic failover.",
+          "Distractors confuse replicas with Multi-AZ standbys or invent shared storage."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "Steady compute of about $20 per hour runs 24/7 for the next year. During the year the team will move some services from EC2 to Fargate and change instance families. Criterion: maximise discount while keeping that flexibility. Which is best?",
+        "options": [
+          "Standard Reserved Instances for the current instance family, since they give the deepest EC2-only discount",
+          "A one-year Compute Savings Plan, since the hourly commitment applies across EC2, Fargate and Lambda usage",
+          "Spot Instances for every service, since Spot is cheapest and the workload happens to run continuously",
+          "On-Demand pricing with no commitment, since any commitment would block changing services during the year"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Compute Savings Plans discount usage across instance families and services such as Fargate.",
+          "Standard RIs lock the instance family; Spot suits interruptible work, not a steady baseline."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "Objects of several MB have unpredictable access patterns. Requirements: millisecond retrieval, no retrieval fees, and lowest storage cost without manual analysis. Which S3 storage class is best?",
+        "options": [
+          "S3 Standard-IA, since its infrequent-access pricing is lower and retrieval stays immediate",
+          "S3 Glacier Flexible Retrieval, since archive classes always give the lowest cost per GB stored",
+          "S3 Intelligent-Tiering, since it moves objects between access tiers automatically without retrieval fees",
+          "S3 One Zone-IA, since using one zone is cheaper and retrieval fees do not apply to that class"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Intelligent-Tiering adapts to unpredictable access with no retrieval charges and millisecond access.",
+          "Standard-IA and One Zone-IA charge retrieval fees; Glacier Flexible Retrieval is not millisecond."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "multi_choice",
+        "prompt": "A design runs an Auto Scaling group across two AZs in private subnets, with one NAT gateway in AZ-a, IAM user AdministratorAccess keys stored in a file on each instance, and RDS Multi-AZ. Which criticisms are valid? Select all that apply.",
+        "options": [
+          "The keys are long-lived and over-privileged; an instance role with least-privilege permissions would be safer",
+          "The single NAT gateway makes AZ-a a dependency for outbound traffic from instances in both AZs",
+          "RDS Multi-AZ is redundant because the Auto Scaling group already protects the database tier from failure",
+          "Instances in private subnets cannot receive patches, so they should be moved into public subnets"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Static admin keys violate least privilege and role-based credentials; one NAT is an AZ-level single point of failure.",
+          "Auto Scaling does not protect stateful databases, and private instances can be patched via NAT or endpoints."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "scenario",
+        "prompt": "A nightly job runs about 5 hours, is CPU-heavy, and writes checkpoints to S3 every 5 minutes so it can resume after interruption. Finance wants the lowest cost, and the job has a 10-hour window. Which compute choice best fits?",
+        "options": [
+          "Lambda functions chained by Step Functions, since Lambda removes idle cost for any single long-running task",
+          "An always-on On-Demand EC2 fleet sized for peak, since uninterrupted capacity is required for long jobs",
+          "AWS Batch on EC2 Spot capacity, resuming from checkpoints after interruptions, since the window allows retries",
+          "Fargate On-Demand tasks, since they avoid instance management and are cheaper than Spot for long jobs"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Checkpointed, deadline-tolerant work suits Spot, which is the cheapest capacity.",
+          "Distractors ignore the 15-minute Lambda limit, pay for idle fleets, or assume On-Demand beats Spot."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "CloudTrail logs from all accounts must be tamper-resistant even against administrators of the source accounts, and retained for 7 years. Which design meets this?",
+        "options": [
+          "An account trail to a bucket in the same account, with versioning and MFA delete enabled for 7 years",
+          "An organization trail to a bucket in a separate log-archive account with Object Lock in compliance mode for 7 years",
+          "An organization trail to a log-archive bucket with a lifecycle rule moving objects to Glacier after one day",
+          "Trails in each account writing to CloudWatch Logs with 7-year retention and access limited to administrators"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "A separate account plus Object Lock compliance mode prevents deletion or alteration even by privileged users.",
+          "Same-account, lifecycle-only or log-group designs can still be changed by administrators."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "A Lambda function in a VPC must reach an RDS MySQL database. Requirements: no database password in code or environment variables, and surviving bursts of 1,000 concurrent invocations without exhausting connections. Which design meets both?",
+        "options": [
+          "Connect directly, reading the password from Secrets Manager on each invocation and opening a new connection",
+          "Connect through RDS Proxy using IAM database authentication, with the Lambda role allowed rds-db:connect",
+          "Connect directly with a KMS-encrypted password in an environment variable and a raised max_connections setting",
+          "Run Lambda outside the VPC and use a public RDS endpoint with a password stored in Parameter Store"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "RDS Proxy pools connections and IAM authentication removes the stored password from the function.",
+          "Other options keep passwords in the function path or leave connection exhaustion unsolved."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "A game needs players in us-east-1 and eu-west-1 to write locally with low latency, tolerate a full Region loss, and see replication lag of about a second. Which data layer meets all of these?",
+        "options": [
+          "Aurora Global Database with the writer in us-east-1 and a read-only secondary cluster in eu-west-1",
+          "DynamoDB global tables with replicas in both Regions, and clients using their local Region's endpoint",
+          "DynamoDB with AWS Backup copying snapshots to eu-west-1 hourly and restoring after a Region loss",
+          "RDS Multi-AZ in us-east-1 with a cross-Region read replica in eu-west-1 promoted manually on failure"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Global tables give multi-Region active-active writes with replication typically within about a second.",
+          "Aurora Global has a single writer; backup copies and replicas give far worse RPO and no local writes."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "A vendor's AWS account must read only the `exports/` prefix of your bucket. Requirements: no long-lived keys, and protection against the vendor's other customers tricking the vendor into using your role. Which design meets this?",
+        "options": [
+          "An IAM user for the vendor with access keys scoped to the prefix, rotated every 90 days",
+          "A role trusting any principal, protected only by a unique ExternalId and a policy limited to the prefix",
+          "A role trusting the vendor's account with a unique ExternalId condition and permissions limited to the prefix",
+          "A public-read bucket policy on the prefix, with an unguessable object-key naming scheme to deter outsiders"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "A role trusted by the vendor account with ExternalId avoids long-lived keys and mitigates the confused deputy problem.",
+          "Other options use static keys, trust anyone, or rely on obscurity."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "Instances in private subnets with no internet route must use SQS and S3, and only principals from your AWS Organization may use these paths. Which design meets this?",
+        "options": [
+          "A NAT gateway with security groups that allow only the published AWS public IP ranges for SQS and S3",
+          "An interface endpoint for SQS and a gateway endpoint for S3, with endpoint policies on aws:PrincipalOrgID",
+          "Gateway endpoints for both SQS and S3, with a network ACL limiting traffic to the organization's accounts",
+          "An internet gateway and public IPs on the instances, with IAM policies restricting the queue and the bucket"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "SQS uses an interface endpoint and S3 a gateway endpoint; endpoint policies can restrict by organization ID.",
+          "SQS has no gateway endpoint, NACLs cannot filter by account, and NAT or public IPs break the no-internet requirement."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "multi_choice",
+        "prompt": "You must serve a static site worldwide at https://www.example.com from a private S3 bucket. Which components belong in a design that meets this? Select all that apply.",
+        "options": [
+          "A CloudFront distribution using origin access control, with a bucket policy allowing only that distribution",
+          "An ACM certificate requested in us-east-1 and attached to the distribution",
+          "A Route 53 alias record for www pointing to the distribution",
+          "The bucket made public with a website endpoint, so CloudFront can fetch objects without extra policies",
+          "An ACM certificate requested in the bucket's Region, since CloudFront reads certificates from the origin's Region"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "rubric": [
+          "OAC keeps the bucket private, CloudFront certificates must be in us-east-1, and an alias record maps the domain.",
+          "Public buckets break the private requirement, and the origin Region is irrelevant for CloudFront certificates."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "scenario",
+        "prompt": "An order pipeline sends messages to an SQS standard queue consumed by Lambda. Malformed messages are retried until the 4-day retention expires, then vanish unseen, while using up consumer capacity. Requirements: no message silently lost, and poison messages set aside for inspection. What is the design missing?",
+        "options": [
+          "A dead-letter queue with a redrive policy and maxReceiveCount, plus an alarm on its depth",
+          "A longer retention period of 14 days, so that failing messages have more time to eventually succeed",
+          "A switch to a FIFO queue, since FIFO queues automatically discard messages that cannot be processed",
+          "A visibility timeout of zero, so that failed messages return at once and are retried much faster"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "A DLQ isolates messages after repeated failures so they can be inspected rather than expiring silently.",
+          "Longer retention, FIFO, or zero visibility timeout do not isolate poison messages and may worsen the problem."
+        ]
+      }
+    ]
+  }
+}

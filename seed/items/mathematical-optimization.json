@@ -1,0 +1,2486 @@
+{
+  "version": 1,
+  "topic": "mathematical-optimization",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In an optimization problem, what is the function that is to be minimized or maximized called?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Feasible region"
+        },
+        {
+          "id": "b",
+          "label": "Constraint function"
+        },
+        {
+          "id": "c",
+          "label": "Objective function"
+        },
+        {
+          "id": "d",
+          "label": "Slack variable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The objective function is the quantity being minimized or maximized.",
+        "Constraints and the feasible region restrict choices but are not the target quantity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In linear programming, what is the set of all points that satisfy every constraint called?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Objective contour"
+        },
+        {
+          "id": "b",
+          "label": "Dual variable"
+        },
+        {
+          "id": "c",
+          "label": "Feasible region"
+        },
+        {
+          "id": "d",
+          "label": "Gradient field"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The feasible region is the set of points satisfying all constraints.",
+        "An objective contour is a level set of the objective, a different idea."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which is the basic gradient descent update for minimizing f with step size a > 0?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`x_new = x - a * grad f(x)`"
+        },
+        {
+          "id": "b",
+          "label": "`x_new = x + a * grad f(x)`"
+        },
+        {
+          "id": "c",
+          "label": "`x_new = x - a * f(x) * x`"
+        },
+        {
+          "id": "d",
+          "label": "`x_new = x - a * f(x)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Gradient descent subtracts the scaled gradient from the current point.",
+        "Adding the gradient is ascent; using f(x) instead of the gradient is a common mix-up."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "For maximizing f(x, y) subject to g(x, y) = c, which condition do Lagrange multipliers use at a candidate optimum?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`grad g = 0`"
+        },
+        {
+          "id": "b",
+          "label": "`grad f = c * grad g`"
+        },
+        {
+          "id": "c",
+          "label": "`grad f = lambda * grad g`"
+        },
+        {
+          "id": "d",
+          "label": "`f(x, y) = lambda * g(x, y)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "At a constrained optimum the gradient of f is parallel to the gradient of g, with multiplier lambda.",
+        "Setting grad f = c * grad g confuses the constant c with the multiplier."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which definition describes a convex function f?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The segment between any two points on its graph lies on or above the graph"
+        },
+        {
+          "id": "b",
+          "label": "Its graph has exactly one stationary point"
+        },
+        {
+          "id": "c",
+          "label": "The segment between any two points on its graph lies on or below the graph"
+        },
+        {
+          "id": "d",
+          "label": "Its first derivative is positive everywhere"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Convexity means chords lie on or above the graph.",
+        "The 'below' option describes a concave function; the others describe unrelated properties."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which are standard components of a formulated optimization problem? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Constraints (possibly none)"
+        },
+        {
+          "id": "b",
+          "label": "An objective function"
+        },
+        {
+          "id": "c",
+          "label": "Decision variables"
+        },
+        {
+          "id": "d",
+          "label": "A learning rate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Every formulation has decision variables, an objective, and constraints (possibly none).",
+        "A learning rate belongs to gradient methods, not to the problem formulation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A workshop chooses how many chairs x and tables y to build. It wants to maximize profit `5x + 4y`, and labour is limited to 100 hours in total. What is the term for the expression `5x + 4y`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Objective function"
+        },
+        {
+          "id": "b",
+          "label": "Constraint"
+        },
+        {
+          "id": "c",
+          "label": "Feasible set"
+        },
+        {
+          "id": "d",
+          "label": "Decision variable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The profit expression being maximized is the objective function.",
+        "The labour limit is the constraint; x and y are the decision variables."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does gradient descent move in the direction of the negative gradient?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The gradient points to the steepest increase, so its negative is the steepest decrease"
+        },
+        {
+          "id": "b",
+          "label": "The negative gradient always has smaller length"
+        },
+        {
+          "id": "c",
+          "label": "The gradient is zero away from the minimum"
+        },
+        {
+          "id": "d",
+          "label": "The gradient points toward the nearest minimum"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The gradient points in the direction of steepest local increase, so moving against it lowers f fastest.",
+        "It does not point to a minimum; it is local information only."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does convexity guarantee about a local minimum of a convex function on a convex domain?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is found in one gradient step"
+        },
+        {
+          "id": "b",
+          "label": "It is the only stationary point"
+        },
+        {
+          "id": "c",
+          "label": "It is also a global minimum"
+        },
+        {
+          "id": "d",
+          "label": "It lies on the domain boundary"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "For convex problems every local minimum is global.",
+        "Uniqueness needs strict convexity, and nothing places the minimum on the boundary."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A linear program has a bounded, nonempty feasible region. Where is an optimal solution guaranteed to be found?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Strictly inside the region"
+        },
+        {
+          "id": "b",
+          "label": "At a vertex (corner) of the region"
+        },
+        {
+          "id": "c",
+          "label": "At a point where the gradient is zero"
+        },
+        {
+          "id": "d",
+          "label": "Only at the center of the region"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A linear objective attains its optimum at a vertex of a bounded feasible polyhedron.",
+        "A zero gradient never occurs for a nonconstant linear objective, so interior points are not needed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In maximizing f subject to g(x) = c, what does the Lagrange multiplier lambda at the optimum tell you?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The value of f at the optimum"
+        },
+        {
+          "id": "b",
+          "label": "The rate the optimal value changes per unit change in c"
+        },
+        {
+          "id": "c",
+          "label": "The step size needed to reach the optimum"
+        },
+        {
+          "id": "d",
+          "label": "The distance from the optimum to the constraint"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Lambda measures sensitivity of the optimal value to the constraint constant c.",
+        "It is not the objective value or a distance."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "For f(x) = x^2 - 4x + 7 with no constraints, how is the point x = 2 best described?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A maximum, since f'(2) = 0"
+        },
+        {
+          "id": "b",
+          "label": "A global minimum, since f'(2) = 0 and f''(x) = 2 > 0"
+        },
+        {
+          "id": "c",
+          "label": "A saddle point, since f(2) = 3"
+        },
+        {
+          "id": "d",
+          "label": "A minimum only locally, since f is not convex"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "f' = 2x - 4 vanishes at 2 and f'' = 2 > 0 so f is convex, making x = 2 a global minimum.",
+        "The 'maximum' and 'saddle' options misread the second derivative; f is in fact convex."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about convex optimization problems are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Gradient descent always reaches the minimum in one step"
+        },
+        {
+          "id": "b",
+          "label": "A strictly convex function has at most one minimizer"
+        },
+        {
+          "id": "c",
+          "label": "A zero gradient always indicates a maximum"
+        },
+        {
+          "id": "d",
+          "label": "Any local minimum is a global minimum"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Local minima are global in convex problems, and strict convexity gives at most one minimizer.",
+        "A zero gradient of a convex function marks a minimum, and one-step convergence is not guaranteed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A student runs gradient descent on f(x) = x^2 with step size 1.5, starting at x = 1. The iterates go 1, -2, 4, -8 and the function value grows each step. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The starting point is a maximum"
+        },
+        {
+          "id": "b",
+          "label": "The gradient was computed with the wrong sign"
+        },
+        {
+          "id": "c",
+          "label": "The function is not convex"
+        },
+        {
+          "id": "d",
+          "label": "The step size is too large, so each step overshoots the minimum"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "With a = 1.5 the update gives x_new = -2x, so the iterates overshoot and diverge.",
+        "A sign error would move away monotonically, not alternate; f = x^2 is convex."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A linear program maximizes 3x + 2y over a nonempty, bounded feasible region defined by linear inequalities. Where is an optimal solution guaranteed to occur?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Along the longest edge of the region, because it holds the most feasible points"
+        },
+        {
+          "id": "b",
+          "label": "At a point where the gradient equals zero, because every maximum must occur there"
+        },
+        {
+          "id": "c",
+          "label": "At a corner point of the region, because a linear objective keeps improving until a boundary stops it"
+        },
+        {
+          "id": "d",
+          "label": "At the centroid of the region, because the objective averages its values over all feasible points"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A linear objective has no interior optimum, so improvement continues until a vertex is reached.",
+        "Distractors apply the calculus idea of zero gradient or an averaging idea that does not fit linear objectives."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A function f is convex and differentiable on the whole plane. Gradient descent reaches a point where the gradient is zero. What can you conclude about that point?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is a global minimum only if the domain is also bounded, because otherwise values may fall further"
+        },
+        {
+          "id": "b",
+          "label": "It is only a local minimum, because the other regions of the plane would still need checking"
+        },
+        {
+          "id": "c",
+          "label": "It is a global minimum, because a convex function never drops below its tangent plane"
+        },
+        {
+          "id": "d",
+          "label": "It may be a saddle point, because a zero gradient is possible in some directions only"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "For convex f the tangent plane is a global underestimator, so a zero gradient means a global minimum.",
+        "Distractors treat convex functions like general nonconvex ones with saddles or spurious local minima."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Gradient descent minimizes a smooth bowl-shaped function, but the step size is set far too large. What is the most likely behaviour?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It stalls at the nearest saddle point, since large steps ignore the curvature of the function"
+        },
+        {
+          "id": "b",
+          "label": "It overshoots the minimum and may oscillate or diverge, since each step jumps past the bottom"
+        },
+        {
+          "id": "c",
+          "label": "It converges faster, since bigger steps cover the distance to the minimum sooner"
+        },
+        {
+          "id": "d",
+          "label": "It converges to a maximum instead, since large steps reverse the direction of descent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Too large a step overshoots the minimum, causing oscillation or divergence.",
+        "Distractors assume bigger steps always help or that the direction itself flips."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "To maximize f(x,y) subject to g(x,y) = c, the Lagrange condition says grad f = lambda * grad g at the optimum. What does this say geometrically?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The gradients of f and g are perpendicular, so the curves cross at right angles"
+        },
+        {
+          "id": "b",
+          "label": "The level curve of f and the constraint curve have the same value of lambda"
+        },
+        {
+          "id": "c",
+          "label": "The level curve of f touches the constraint curve tangentially at the optimum"
+        },
+        {
+          "id": "d",
+          "label": "The gradient of f is zero everywhere along the constraint curve"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Parallel gradients mean the level curve of f is tangent to the constraint curve.",
+        "Distractors confuse parallel with perpendicular gradients or misuse lambda."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which of the following is a convex optimization problem?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Minimize x^2 + y^2 subject to x^2 + y^2 >= 1"
+        },
+        {
+          "id": "b",
+          "label": "Maximize x^2 + y^2 subject to x + y <= 1"
+        },
+        {
+          "id": "c",
+          "label": "Minimize x^2 + y^2 subject to x + y >= 1"
+        },
+        {
+          "id": "d",
+          "label": "Minimize -x^2 subject to -1 <= x <= 1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A convex objective over a convex (linear) feasible set is convex.",
+        "Distractors have a nonconvex feasible set, or maximize or minimize the wrong curvature."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about the feasible region of a linear program are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It can be unbounded, in which case the objective may have no finite optimum"
+        },
+        {
+          "id": "b",
+          "label": "It is described by linear inequalities and equalities"
+        },
+        {
+          "id": "c",
+          "label": "The gradient of the objective must vanish at the optimum"
+        },
+        {
+          "id": "d",
+          "label": "The optimal solution is always unique"
+        },
+        {
+          "id": "e",
+          "label": "It is convex, because it is an intersection of half-spaces"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "The feasible region is a convex polyhedron that may be unbounded.",
+        "Optima can be non-unique along an edge, and a linear objective has a constant nonzero gradient."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A factory maximizes profit 40x + 30y subject to machine hours 2x + y <= 100 and labor hours x + y <= 80, with x, y >= 0. The solver's optimal solution reports slack 0 for the machine constraint and slack 15 for the labor constraint. How should the manager interpret this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Labor is the binding resource, with 15 machine hours left over"
+        },
+        {
+          "id": "b",
+          "label": "Machine hours are fully used, while 15 labor hours stay unused"
+        },
+        {
+          "id": "c",
+          "label": "Both resources are fully used, with 15 units of profit lost"
+        },
+        {
+          "id": "d",
+          "label": "The solution is infeasible, since a slack of 15 violates the labor limit"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Zero slack means the constraint is binding; positive slack means unused capacity.",
+        "Distractors swap the resources or read slack as a violation or lost profit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Gradient descent minimizes f(x) = x^2 - 6x + 5 starting at x0 = 0 with step size 0.1. What is x1?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1.2"
+        },
+        {
+          "id": "b",
+          "label": "0.6"
+        },
+        {
+          "id": "c",
+          "label": "-0.6"
+        },
+        {
+          "id": "d",
+          "label": "0.06"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "f'(0) = -6, so x1 = 0 - 0.1*(-6) = 0.6.",
+        "Distractors come from a sign error or a mistake in the step arithmetic."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Find the stationary point of f(x,y) = x^2 + xy + y^2 - 3x.",
+      "options": [
+        {
+          "id": "a",
+          "label": "(1, 1)"
+        },
+        {
+          "id": "b",
+          "label": "(-2, 1)"
+        },
+        {
+          "id": "c",
+          "label": "(3, 0)"
+        },
+        {
+          "id": "d",
+          "label": "(2, -1)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Solve 2x + y - 3 = 0 and x + 2y = 0, giving x = 2, y = -1.",
+        "Distractors satisfy only one of the two gradient equations."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Use a Lagrange multiplier to find the maximum of xy subject to x + y = 10.",
+      "options": [
+        {
+          "id": "a",
+          "label": "50"
+        },
+        {
+          "id": "b",
+          "label": "16"
+        },
+        {
+          "id": "c",
+          "label": "25"
+        },
+        {
+          "id": "d",
+          "label": "10"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "grad f = lambda grad g gives y = x, so x = y = 5 and xy = 25.",
+        "Distractors ignore the constraint or give an unrelated value."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Maximize 3x + 2y subject to x + y <= 4, x <= 3, x >= 0, y >= 0. What is the maximum value?",
+      "options": [
+        {
+          "id": "a",
+          "label": "9"
+        },
+        {
+          "id": "b",
+          "label": "11"
+        },
+        {
+          "id": "c",
+          "label": "8"
+        },
+        {
+          "id": "d",
+          "label": "12"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The corners (0,0), (3,0), (3,1), (0,4) give 0, 9, 11, 8, so the maximum is 11.",
+        "Distractors come from skipping the corner (3,1) or from an infeasible point."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "The function f(x,y) = x^2 + 4xy + y^2 has a stationary point at the origin. Using the Hessian, how is it classified?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Local maximum"
+        },
+        {
+          "id": "b",
+          "label": "Saddle point"
+        },
+        {
+          "id": "c",
+          "label": "Global minimum"
+        },
+        {
+          "id": "d",
+          "label": "Local minimum"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The Hessian [[2,4],[4,2]] has determinant 4 - 16 < 0, so the origin is a saddle.",
+        "Distractors assume positive diagonal entries alone imply a minimum."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Consider the constraints x + y <= 5, x - y >= 1, x >= 0, y >= 0. Which points are feasible? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "(3, 1)"
+        },
+        {
+          "id": "b",
+          "label": "(4, 1)"
+        },
+        {
+          "id": "c",
+          "label": "(3, 3)"
+        },
+        {
+          "id": "d",
+          "label": "(2, 0)"
+        },
+        {
+          "id": "e",
+          "label": "(2, 2)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Check each point against all four inequalities: (3,1), (4,1) and (2,0) satisfy them.",
+        "(2,2) fails x - y >= 1 and (3,3) fails x + y <= 5."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A farmer has 100 m of fencing and will enclose a rectangular pen along a straight river, so only three sides need fencing. With x as the length of each side perpendicular to the river, the area is x(100 - 2x). What is the maximum area in square metres?",
+      "options": [
+        {
+          "id": "a",
+          "label": "2500"
+        },
+        {
+          "id": "b",
+          "label": "1875"
+        },
+        {
+          "id": "c",
+          "label": "1250"
+        },
+        {
+          "id": "d",
+          "label": "625"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Setting the derivative 100 - 4x to zero gives x = 25, so the area is 25*50 = 1250.",
+        "Distractors come from fencing all four sides (625) or from ignoring the constraint."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Maximise f(x,y) = x*y subject to x + 2y = 12 using a Lagrange multiplier. What is the maximum value of f?",
+      "options": [
+        {
+          "id": "a",
+          "label": "12"
+        },
+        {
+          "id": "b",
+          "label": "24"
+        },
+        {
+          "id": "c",
+          "label": "18"
+        },
+        {
+          "id": "d",
+          "label": "36"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Setting y = λ and x = 2λ gives x = 2y, so y = 3, x = 6 and f = 18.",
+        "36 comes from ignoring the factor 2 on y in the constraint."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Gradient descent on f(x,y) = x^2 + 3y^2 starts at (2, 1) with step size 0.1. What is the point after one update?",
+      "options": [
+        {
+          "id": "a",
+          "label": "(2.4, 1.6)"
+        },
+        {
+          "id": "b",
+          "label": "(1.8, 0.7)"
+        },
+        {
+          "id": "c",
+          "label": "(1.6, 0.4)"
+        },
+        {
+          "id": "d",
+          "label": "(1.6, 0.7)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The gradient is (2x, 6y) = (4, 6), so the update is (2 - 0.4, 1 - 0.6) = (1.6, 0.4).",
+        "(1.8, 0.7) results from forgetting the factor 2 in the derivative of each term."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Maximise 3x + 2y subject to x + y <= 4, x + 3y <= 6, x >= 0, y >= 0. What is the optimal objective value?",
+      "options": [
+        {
+          "id": "a",
+          "label": "12"
+        },
+        {
+          "id": "b",
+          "label": "14"
+        },
+        {
+          "id": "c",
+          "label": "4"
+        },
+        {
+          "id": "d",
+          "label": "11"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The vertices are (0,0), (4,0), (3,1) and (0,2), giving 0, 12, 11 and 4; the maximum is 12.",
+        "11 comes from assuming the optimum is at the intersection of the two main constraints."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Apply one Newton step to minimise f(x) = x^4 - 4x starting at x = 2. What is the new x?",
+      "options": [
+        {
+          "id": "a",
+          "label": "31/12"
+        },
+        {
+          "id": "b",
+          "label": "-1/3"
+        },
+        {
+          "id": "c",
+          "label": "-26"
+        },
+        {
+          "id": "d",
+          "label": "17/12"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "f'(2) = 28 and f''(2) = 48, so x1 = 2 - 28/48 = 17/12.",
+        "-26 comes from forgetting to divide by f''; 31/12 comes from adding the step instead of subtracting it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A workshop makes t tables (4 labour hours each) and c chairs (2 hours each) and has at most 100 labour hours available. Which constraint models the labour limit?",
+      "options": [
+        {
+          "id": "a",
+          "label": "4t + 2c <= 100"
+        },
+        {
+          "id": "b",
+          "label": "4t + 2c >= 100"
+        },
+        {
+          "id": "c",
+          "label": "2t + 4c <= 100"
+        },
+        {
+          "id": "d",
+          "label": "t + c <= 100"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Total hours are 4t + 2c and must not exceed 100.",
+        "Swapping the coefficients or the inequality direction are the common modelling slips."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Using second-derivative tests, which of these functions are convex on the stated domain? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "f(x) = -x^2 + 4x on all reals"
+        },
+        {
+          "id": "b",
+          "label": "f(x) = x^4 on all reals"
+        },
+        {
+          "id": "c",
+          "label": "f(x) = e^x + x^2 on all reals"
+        },
+        {
+          "id": "d",
+          "label": "f(x) = x^3 on all reals"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "x^4 has f'' = 12x^2 >= 0 and e^x + x^2 has f'' = e^x + 2 > 0.",
+        "x^3 has f'' = 6x, negative for x < 0, and -x^2 + 4x is concave."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A farmer has 40 m of fencing for a rectangular pen. One side lies along an existing wall and needs no fence, so the fence covers two sides of length x and one side of length y. She wants the largest area x*y. What is the maximum area?",
+      "options": [
+        {
+          "id": "a",
+          "label": "400 square metres"
+        },
+        {
+          "id": "b",
+          "label": "200 square metres"
+        },
+        {
+          "id": "c",
+          "label": "100 square metres"
+        },
+        {
+          "id": "d",
+          "label": "300 square metres"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "With y = 40 - 2x, area = 40x - 2x^2 is maximised at x = 10, y = 20, giving 200.",
+        "100 and 400 come from treating the pen as fenced on all four sides or from ignoring the wall."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Gradient descent on f(x) = x^2 with step size 1.1 gives iterates whose sign flips each step and whose magnitude grows. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The gradient sign is wrong, so each update moves uphill and away from the minimum"
+        },
+        {
+          "id": "b",
+          "label": "The function is nonconvex, so the iterates are drawn toward a different local minimum"
+        },
+        {
+          "id": "c",
+          "label": "The step exceeds 2/L, where L = 2, so each update overshoots by more than it corrects"
+        },
+        {
+          "id": "d",
+          "label": "The minimum is at the origin, so the iterates cannot converge from any start point"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The update is x <- x - 1.1*2x = -1.2x, so |x| grows because the step exceeds 2/L = 1.",
+        "A wrong gradient sign would not produce alternating signs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Gradient descent on f(x,y) = x^2 + 100y^2 with a fixed step zigzags and creeps along the x direction. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The gradient is zero along x, so no progress can be made in that direction"
+        },
+        {
+          "id": "b",
+          "label": "The Hessian's condition number is 100, so the step must suit the steep y direction and is too small for x"
+        },
+        {
+          "id": "c",
+          "label": "The function is nonconvex, so the gradient points toward a saddle instead of the minimum"
+        },
+        {
+          "id": "d",
+          "label": "The step is too large in x, so the iterates overshoot there and bounce back and forth"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Curvatures 2 and 200 force a small step for stability, which makes progress in the flat x direction slow.",
+        "The function is convex and the gradient in x is nonzero, so the saddle and zero-gradient explanations are wrong."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A student finds that f(x,y) = x^2 - y^2 has gradient zero at (0,0) and concludes it is a minimum. Which step is faulty?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The gradient was miscomputed; it should be nonzero at the origin, so the point is not stationary"
+        },
+        {
+          "id": "b",
+          "label": "A zero gradient does not decide the type; the Hessian diag(2,-2) is indefinite, so it is a saddle"
+        },
+        {
+          "id": "c",
+          "label": "The function is unbounded below, so no stationary point can exist anywhere in the plane"
+        },
+        {
+          "id": "d",
+          "label": "A zero gradient shows a maximum for such functions, because the y term has a negative sign"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The gradient is (2x, -2y), which is zero at the origin, but the indefinite Hessian shows a saddle.",
+        "Stationary points can exist even when a function is unbounded below."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A solver reports 'unbounded' for: maximise x + y subject to x - y <= 1, x >= 0, y >= 0. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The optimum is at the vertex (1,0), but the solver fails to detect it numerically"
+        },
+        {
+          "id": "b",
+          "label": "The region is empty, so the solver cannot find any feasible point to start from"
+        },
+        {
+          "id": "c",
+          "label": "The constraints are redundant, so the solver cannot identify a unique optimal vertex"
+        },
+        {
+          "id": "d",
+          "label": "The direction (1,1) is feasible from any feasible point and raises the objective forever"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Moving along (1,1) keeps x - y fixed and increases x + y without limit.",
+        "Infeasibility and redundancy are different outcomes; here the region is nonempty and the objective grows."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Newton's method minimises f(x) = (1/2)x^T A x - b^T x, with A symmetric positive definite, from any start. Why does it reach the minimiser in one step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The Hessian is the constant matrix A, so the quadratic model is exact and the step solves A x = b"
+        },
+        {
+          "id": "b",
+          "label": "Positive definiteness guarantees the step length is chosen perfectly by a line search"
+        },
+        {
+          "id": "c",
+          "label": "Newton's method always converges in one step on any convex function with a unique minimiser"
+        },
+        {
+          "id": "d",
+          "label": "The gradient is constant, so the first step always lands on the point where it vanishes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "For a quadratic, the second-order model equals f, so the Newton step lands exactly on A x = b.",
+        "The gradient is Ax - b, not constant, and general convex functions need several steps."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "For which situations can you conclude that a local minimiser is also a global minimiser? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Minimising a linear objective over a polyhedron"
+        },
+        {
+          "id": "b",
+          "label": "Minimising a differentiable function whose gradient is zero at the point"
+        },
+        {
+          "id": "c",
+          "label": "Minimising a function whose Hessian is positive definite at the point only"
+        },
+        {
+          "id": "d",
+          "label": "Minimising a convex function over a convex feasible set"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Convex problems, including linear programs, have no local minima that are not global.",
+        "A positive definite Hessian at one point or a zero gradient gives only local information."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A profit LP maximises 40x + 30y. The labour constraint 2x + y <= 100 is binding with shadow price 15 per hour. The material constraint has 20 units of slack. A manager adds 4 labour hours and 10 material units, both small enough to keep the same optimal basis. What is the predicted change in profit?",
+      "options": [
+        {
+          "id": "a",
+          "label": "No change, because shadow prices apply only to resources that are fully used up in the plan"
+        },
+        {
+          "id": "b",
+          "label": "Up by 60, because labour is binding and the extra material has no value while slack remains"
+        },
+        {
+          "id": "c",
+          "label": "Up by 150, because each added labour hour is worth the 15 shadow price times the 10 material units"
+        },
+        {
+          "id": "d",
+          "label": "Up by 60 plus a material bonus, because every added resource unit raises profit somewhat"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Profit changes by 15*4 = 60 from labour, and slack material has shadow price zero.",
+        "Adding to a non-binding resource gains nothing, and shadow prices are not multiplied across resources."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Gradient descent with fixed step 0.009 on f(x,y) = x^2 + 100y^2, started at (1,1), drives y near 0 within tens of iterations but needs hundreds of iterations for x. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A fixed step cannot converge on a quadratic, so x shrinks only through slowly accumulating numerical noise in the updates"
+        },
+        {
+          "id": "b",
+          "label": "The gradient in x is exactly zero at the start, so only y changes until rounding errors finally move x away from 1"
+        },
+        {
+          "id": "c",
+          "label": "The function is non-convex in x, so iterates stall near a saddle along the x axis for many steps before escaping it"
+        },
+        {
+          "id": "d",
+          "label": "The step size is capped by the steep y curvature, so the flat x direction shrinks only by a factor of about 0.98 per step"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Curvatures 2 and 200 differ by 100; a stable step must suit the steep direction, so x contracts by 1 - 0.009*2 = 0.982 per step.",
+        "Distractors invoke saddles, a zero gradient or impossible convergence; the function is convex and the x gradient is 2."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "During the simplex method on an LP, a pivot changes the basis, but the current point and the objective value stay exactly the same. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The objective is constant along every edge from this vertex, so every neighbouring vertex is also optimal and pivots cannot improve it"
+        },
+        {
+          "id": "b",
+          "label": "The vertex is degenerate: extra constraints are active, a basic variable equals zero, and the ratio test gives a zero step length"
+        },
+        {
+          "id": "c",
+          "label": "The pivot direction is unbounded, so the ratio test returned an infinite step that the solver truncated back to the same point"
+        },
+        {
+          "id": "d",
+          "label": "The entering variable had a positive reduced cost in a minimisation, so the pivot moved to a point of equal objective value"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "At a degenerate vertex more than n constraints are active, so the minimum ratio is zero and the basis changes without movement.",
+        "Alternative-optima and unboundedness distractors confuse a zero step length with zero reduced cost or an infinite step."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "For minimising x^2 + y^2 subject to x + y = c, the Lagrange conditions at c = 2 give x = y = 1 with multiplier 2 (using L = f - lambda(x + y - c)). Using the multiplier, estimate the change in the optimal value when c rises to 2.1.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Increase by about 0.1"
+        },
+        {
+          "id": "b",
+          "label": "Increase by about 0.4"
+        },
+        {
+          "id": "c",
+          "label": "Increase by about 0.2"
+        },
+        {
+          "id": "d",
+          "label": "Increase by about 0.02"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The multiplier is the sensitivity of the optimal value to c, so the change is about 2 * 0.1 = 0.2 (exact: 2.205 - 2).",
+        "Other values come from halving or doubling the multiplier or from squaring the perturbation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A student minimises x^2 subject to x <= 2. They write L = x^2 + mu(x - 2), assume the constraint is active (x = 2), solve 2x + mu = 0 to get mu = -4, and report x = 2 as optimal. Which step is faulty?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Testing the boundary case x = 2 at all, since an inequality constraint can never be active at an optimum"
+        },
+        {
+          "id": "b",
+          "label": "Keeping mu = -4 although KKT needs mu >= 0; the sign shows the constraint is inactive and the optimum is x = 0"
+        },
+        {
+          "id": "c",
+          "label": "Differentiating x^2 as 2x, since the constraint changes the derivative of the objective once the boundary is reached"
+        },
+        {
+          "id": "d",
+          "label": "Setting the gradient of the Lagrangian to zero, since inequality constraints need stationarity only on the boundary"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Dual feasibility requires mu >= 0; a negative multiplier rejects the active-set guess, and the unconstrained minimiser x = 0 is feasible.",
+        "The other options attack steps that are valid: the stationarity condition, the derivative, and testing active cases."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "For f(x,y) = x^2 + 3xy + y^2, the gradient vanishes at the origin. How should this stationary point be classified, and why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Inconclusive: the gradient vanishes, and the second-derivative test cannot settle a quadratic's stationary point"
+        },
+        {
+          "id": "b",
+          "label": "A saddle: the Hessian eigenvalues are 5 and -1, so f rises along (1,1) and falls along (1,-1)"
+        },
+        {
+          "id": "c",
+          "label": "A minimum: both diagonal Hessian entries are positive, so f curves upward in every direction from the origin"
+        },
+        {
+          "id": "d",
+          "label": "A maximum: the cross term 3xy outweighs both square terms, so f falls in every direction from the origin"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The Hessian [[2,3],[3,2]] has eigenvalues 5 and -1, so it is indefinite: f(t,t) = 5t^2 and f(t,-t) = -t^2.",
+        "Positive diagonal entries do not imply positive definiteness; the off-diagonal term matters."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Which of these are convex optimisation problems (convex objective minimised over a convex feasible set)? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Minimise e^x subject to x^2 <= 4"
+        },
+        {
+          "id": "b",
+          "label": "Minimise x^2 + y^2 subject to x + y >= 1"
+        },
+        {
+          "id": "c",
+          "label": "Minimise x^2 subject to x^2 >= 1"
+        },
+        {
+          "id": "d",
+          "label": "Maximise x^2 + y^2 subject to x + y <= 1, x >= 0, y >= 0"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "The first two minimise convex functions over convex sets (a half-plane and the interval [-2,2]).",
+        "The third has the nonconvex feasible set |x| >= 1; the fourth maximises a convex function, which is not a convex problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A team fits unregularised logistic regression by gradient descent on data that is perfectly linearly separable. After thousands of iterations the loss keeps falling toward 0, the weight norms keep growing, and the gradient norm keeps shrinking. What is happening?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The gradient code has a bug, because a correct gradient would reach exactly zero at some finite weight vector on this data"
+        },
+        {
+          "id": "b",
+          "label": "No finite minimiser exists: scaling up a separating weight vector always lowers the loss, so it approaches its infimum only as weights diverge"
+        },
+        {
+          "id": "c",
+          "label": "The step size is too large, so the iterates are diverging, and the shrinking gradient norm is only a numerical artefact of that divergence"
+        },
+        {
+          "id": "d",
+          "label": "The loss is non-convex, so the iterates are crossing a long plateau before they eventually settle at a finite minimiser"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "On separable data the loss is convex but has no attained minimum; larger weights keep reducing it, and the gradient tends to zero only at infinity.",
+        "Distractors blame step size, non-convexity or a bug, while the loss and gradient behave exactly as theory predicts."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A smooth, strongly convex objective has 10^7 variables. Gradients are cheap, the Hessian cannot be stored, memory is limited to a few vectors' worth per variable, and plain gradient descent is too slow. Which method best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Nelder-Mead, because it needs no gradients and scales well to millions of variables in practice"
+        },
+        {
+          "id": "b",
+          "label": "L-BFGS, because about 10 stored gradient-difference pairs approximate curvature with memory linear in the variables"
+        },
+        {
+          "id": "c",
+          "label": "Newton's method, because exact curvature gives the fastest convergence per iteration regardless of storage cost"
+        },
+        {
+          "id": "d",
+          "label": "Plain gradient descent with a small fixed step, because it needs no curvature and is guaranteed to converge fast"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "L-BFGS keeps O(n*m) memory and improves on gradient descent by using approximate curvature.",
+        "Newton needs an n-by-n Hessian; plain gradient descent is the slow baseline; Nelder-Mead scales poorly with dimension."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Minimise a smooth convex loss over box bounds l <= x <= u in 10^5 variables. Criteria: every iterate must be feasible, and the constraint handling must be cheap per step. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The simplex method on a linearisation of the loss, since box constraints form a polytope with vertices"
+        },
+        {
+          "id": "b",
+          "label": "Projected gradient: clip each coordinate to [l,u] after every step, keeping iterates feasible at negligible cost"
+        },
+        {
+          "id": "c",
+          "label": "A quadratic penalty on bound violations, since a large penalty weight keeps every iterate inside the box"
+        },
+        {
+          "id": "d",
+          "label": "Unconstrained gradient descent with a single clip to the bounds at the end, since clipping preserves optimality"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Projection onto a box is coordinate-wise clipping, which is cheap and keeps every iterate feasible.",
+        "Penalties permit infeasible iterates, and clipping only at the end generally loses optimality; linearising discards the convex loss."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Gradient descent runs on a quadratic whose Hessian eigenvalues range from 1 to 10. Criteria: the fixed step must guarantee convergence and give the best worst-case contraction rate. Which step should be chosen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.30"
+        },
+        {
+          "id": "b",
+          "label": "0.18"
+        },
+        {
+          "id": "c",
+          "label": "0.01"
+        },
+        {
+          "id": "d",
+          "label": "0.21"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The optimal fixed step is 2/(L+mu) = 2/11, about 0.18, giving a worst-case factor of about 0.82.",
+        "Steps of 0.21 and 0.30 exceed 2/L = 0.2 and diverge on the steepest direction; 0.01 converges very slowly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A colleague runs gradient descent from 50 random starts on a nonconvex objective and reports the best result as 'the global minimum'. Which are sound critiques of this claim? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Random starts make gradient descent diverge on nonconvex functions, so none of the 50 runs can converge to any point at all"
+        },
+        {
+          "id": "b",
+          "label": "Taking the best of several runs is invalid, because objective values found from different starting points cannot be compared meaningfully"
+        },
+        {
+          "id": "c",
+          "label": "If the basin of attraction of the global minimum is tiny, random starts may all miss it, however many runs are made"
+        },
+        {
+          "id": "d",
+          "label": "Each run certifies at most a local stationary point, and 50 starts give no proof that no lower value exists elsewhere in the space"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Multistart gives a heuristic with no optimality certificate, and basin sizes determine whether it finds the global minimum.",
+        "Comparing objective values across runs is valid, and nonconvexity does not by itself cause divergence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Fit y = a*x + b to 200 data points so that the largest absolute residual is as small as possible, because a specification limits worst-case error. Which approach best fits this criterion?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A linear program: minimise t subject to -t <= y_i - a*x_i - b <= t for all i, which solves the minimax fit exactly"
+        },
+        {
+          "id": "b",
+          "label": "Least absolute deviations, since the L1 norm bounds the maximum residual tightly enough for any worst-case specification"
+        },
+        {
+          "id": "c",
+          "label": "Gradient descent on the max residual directly, since a maximum of absolute values is smooth and has gradients everywhere"
+        },
+        {
+          "id": "d",
+          "label": "Ordinary least squares, since minimising the sum of squared residuals also minimises the largest single residual in general"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The epigraph variable t turns the minimax fit into an LP with an exact solution.",
+        "Least squares and L1 optimise different norms, and the max of absolute values is non-smooth at ties."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A production LP reports a shadow price of 4 per machine-hour, valid for up to 50 extra hours. Overtime hours can be bought at 5 per hour, and the plant considers buying 20. Judged by net profit, what is the best decision?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Buy them, because a positive shadow price shows hours are scarce, so any extra hour raises net profit"
+        },
+        {
+          "id": "b",
+          "label": "Decline, because shadow prices describe lost profit only when hours are removed and never when they are added"
+        },
+        {
+          "id": "c",
+          "label": "Buy them, because 20 hours is inside the 50-hour valid range, so each hour nets a gain of 4"
+        },
+        {
+          "id": "d",
+          "label": "Decline, because within the valid range each extra hour adds 4 to profit but costs 5, losing 1 per hour"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Within the range, marginal value (4) is below marginal cost (5), so net change is -1 per hour.",
+        "Distractors ignore the cost, confuse value with net gain, or wrongly treat shadow prices as one-directional."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A planner assigns 200 jobs to machines using binary variables, and the linear cost model is accurate. Management needs a plan within 10 minutes and a proven guarantee that it is within 2% of the optimum. Which approach best meets both criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Solve the LP relaxation and round every fractional variable to the nearest integer, since rounding stays within 2% of the optimum"
+        },
+        {
+          "id": "b",
+          "label": "Use a mixed-integer solver with branch and bound, stopped at a 2% relative gap, since its LP bounds certify the gap"
+        },
+        {
+          "id": "c",
+          "label": "Run gradient descent on a smooth relaxation and quote its final objective as the bound, since relaxations always bound the optimum"
+        },
+        {
+          "id": "d",
+          "label": "Run simulated annealing for a long time, since it converges to the global optimum and so proves the 2% guarantee"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Branch and bound maintains a proven lower bound, so stopping at a 2% gap certifies the guarantee within the time limit.",
+        "Rounding can be infeasible or far off, annealing has no finite-time certificate, and a gradient-based objective is not a valid bound."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Gradient descent with a fixed step size runs on the convex quadratic `f(x) = 0.5 x^T A x`, where A has eigenvalues 1 and 100. Judged by the best worst-case convergence rate, which step size is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1/100"
+        },
+        {
+          "id": "b",
+          "label": "1/101"
+        },
+        {
+          "id": "c",
+          "label": "2/101"
+        },
+        {
+          "id": "d",
+          "label": "1/50"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Step 2/(L+mu) = 2/101 balances the contraction factors on both eigendirections, giving rate 99/101.",
+        "1/100 is the common 1/L choice but is slower on the small eigenvalue; 1/50 = 2/L does not converge."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Minimising f(x) subject to a nonlinear equality h(x)=0 with a quadratic penalty needs mu to grow without bound, which makes each subproblem ill-conditioned. The criteria are: h(x)=0 reached at a finite parameter, and well-conditioned subproblems. Which fix best meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Raise mu tenfold each outer loop, since a stronger penalty enforces h(x)=0 more tightly"
+        },
+        {
+          "id": "b",
+          "label": "Use an augmented Lagrangian, updating multiplier estimates so a moderate mu still drives h(x) to zero"
+        },
+        {
+          "id": "c",
+          "label": "Drop the constraint and add a very large fixed weight on h(x)^2 so only one solve is needed"
+        },
+        {
+          "id": "d",
+          "label": "Replace the penalty with a log barrier, because barriers hold iterates strictly inside the feasible set"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Augmented Lagrangian multiplier updates remove the need for mu to go to infinity, so conditioning stays bounded.",
+        "Growing mu or using a huge weight worsens conditioning; log barriers suit inequality constraints, not equalities."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Which statement about linear programming duality is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "If the primal is feasible, the dual has a finite optimum with the same value"
+        },
+        {
+          "id": "b",
+          "label": "If the primal is unbounded, the dual must be infeasible"
+        },
+        {
+          "id": "c",
+          "label": "The primal and dual can both be unbounded at the same time"
+        },
+        {
+          "id": "d",
+          "label": "If the dual is infeasible, the primal must also be infeasible"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "By weak duality, a feasible dual would bound the primal, so an unbounded primal forces dual infeasibility.",
+        "The distractors confuse strong duality, which needs a finite optimum, with feasibility alone; an infeasible dual may go with an unbounded primal."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must fit a smooth convex logistic regression with 5 million features. A dense Hessian cannot be stored, and you need far fewer iterations than plain gradient descent while keeping memory linear in the number of features. Which method best fits these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "L-BFGS with about ten stored update pairs, for curvature information at linear memory"
+        },
+        {
+          "id": "b",
+          "label": "Random search over directions, for its freedom from gradient computation"
+        },
+        {
+          "id": "c",
+          "label": "Gradient descent with fixed step 1/L, for its guaranteed monotone descent"
+        },
+        {
+          "id": "d",
+          "label": "Newton's method with the exact Hessian, for its quadratic local convergence"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "L-BFGS approximates curvature from a few stored vector pairs, so memory grows linearly while iteration counts drop.",
+        "Newton needs an n-by-n Hessian; plain gradient descent meets memory but not the iteration criterion."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You need the exact minimiser of `max_i |a_i^T x - b_i|` using an off-the-shelf LP solver, and a plain subgradient method is too slow. Which approach best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Minimise the sum of squared residuals, since it is smooth and close to the max"
+        },
+        {
+          "id": "b",
+          "label": "Run a subgradient method with diminishing steps and accept its slow rate"
+        },
+        {
+          "id": "c",
+          "label": "Add a variable t, minimise t subject to `-t <= a_i^T x - b_i <= t`"
+        },
+        {
+          "id": "d",
+          "label": "Smooth the max with log-sum-exp at a fixed temperature and run gradient descent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The epigraph form is an exact LP that the solver handles directly.",
+        "Least squares and fixed-temperature smoothing change the problem and give only approximate answers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A modeller wants to keep a minimisation problem convex. Which reformulations preserve convexity? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Minimise the product of two convex functions"
+        },
+        {
+          "id": "b",
+          "label": "Minimise the minimum of two convex functions"
+        },
+        {
+          "id": "c",
+          "label": "Add an equality constraint h(x)=0 with h convex but nonlinear"
+        },
+        {
+          "id": "d",
+          "label": "Minimise convex f(x) plus 0.1 times the L1 norm of x"
+        },
+        {
+          "id": "e",
+          "label": "Minimise the maximum of two convex functions"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "The pointwise maximum and the sum of convex functions are convex.",
+        "Minima, products, and nonlinear equality constraints in general destroy convexity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team minimises `w^T S w` over portfolio weights with sum(w)=1 and w>=0. S is the sample covariance of 200 assets from 60 observations, so it is rank-deficient. Each run gives very concentrated portfolios that change sharply with small data changes. Which judgement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Estimation error in S is amplified by the optimiser, so shrink S toward a scaled identity"
+        },
+        {
+          "id": "b",
+          "label": "The problem is nonconvex, so a global solver is needed to escape bad local minima"
+        },
+        {
+          "id": "c",
+          "label": "The budget constraint causes instability, so remove it and rescale afterward"
+        },
+        {
+          "id": "d",
+          "label": "The solver tolerance is too loose, so tightening it will stabilise the weights"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The problem is convex but S is poorly estimated; the optimiser exploits near-null directions, so shrinkage or ridge regularisation stabilises it.",
+        "Global solvers and tolerance changes do not address the ill-posed input; removing the budget constraint does not fix the rank deficiency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A production quantity x must be either 0 or between 10 and 50, and the model must stay a mixed-integer linear program. Which constraint set is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`10 <= x <= 50` and `0 <= x <= 0`, joined by OR"
+        },
+        {
+          "id": "b",
+          "label": "`10y <= x <= 50y` with y binary"
+        },
+        {
+          "id": "c",
+          "label": "`x(x-10) >= 0` and `x <= 50` with x >= 0"
+        },
+        {
+          "id": "d",
+          "label": "`x <= 50y` and `x >= 10(1-y)` with y binary"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "With y=0, x is forced to 0; with y=1, x lies in [10,50], and all constraints are linear.",
+        "The second option forces x>=10 when y=0; the third is nonlinear; the fourth is not a linear constraint set."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "To minimise the convex `f(x) = ||Ax - b||^2` subject to x >= 0, you want every iterate feasible and guaranteed descent. Let L be the gradient's Lipschitz constant. Which update is the best design?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Take x <- max(0, x - (1/L) grad f(x)), projecting onto the nonnegative orthant each step"
+        },
+        {
+          "id": "b",
+          "label": "Minimise f plus a penalty on negative entries and ignore feasibility until convergence"
+        },
+        {
+          "id": "c",
+          "label": "Take x <- max(0, x - (3/L) grad f(x)) so progress is faster than with 1/L"
+        },
+        {
+          "id": "d",
+          "label": "Take unconstrained gradient steps with step 1/L, then clip negatives at the end"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Projected gradient with step 1/L stays feasible and decreases f for convex smooth f.",
+        "Clipping only at the end and penalties allow infeasible iterates; step 3/L exceeds 2/L and can diverge."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Using Lagrange multipliers, derive the minimiser of `||x||^2` subject to `Ax = b`, where A is m-by-n with full row rank and m < n. Which expression is it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`(A^T A)^{-1} A^T b`"
+        },
+        {
+          "id": "b",
+          "label": "`A^T (A A^T)^{-1} b`"
+        },
+        {
+          "id": "c",
+          "label": "`A^T b`"
+        },
+        {
+          "id": "d",
+          "label": "`A^{-1} b`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Stationarity gives x = A^T lambda/2; substituting into Ax=b gives x = A^T (A A^T)^{-1} b.",
+        "(A^T A) is singular when m<n, A is not square, and A^T b does not satisfy Ax=b in general."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "You want to minimise `sum_i |x_i|` subject to `Ax = b` as a linear program. Which formulation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Minimise sum t_i subject to `-t_i <= x_i <= t_i` and Ax=b"
+        },
+        {
+          "id": "b",
+          "label": "Minimise sum x_i subject to Ax=b and x >= 0"
+        },
+        {
+          "id": "c",
+          "label": "Minimise sum t_i subject to `x_i^2 <= t_i` and Ax=b"
+        },
+        {
+          "id": "d",
+          "label": "Minimise sum t_i subject to `x_i <= t_i` and Ax=b"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Bounding x_i on both sides by t_i makes t_i = |x_i| at the optimum, and every constraint is linear.",
+        "A one-sided bound is unbounded below, squares are not linear and change the objective, and x>=0 restricts the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A proposed solver certifies a local minimum of a nonconvex constrained problem by checking feasibility, a zero Lagrangian gradient, and correct multiplier signs. What essential check is missing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "That the objective decreases along the negative gradient from the point"
+        },
+        {
+          "id": "b",
+          "label": "That the Hessian of the Lagrangian is positive definite on the critical cone"
+        },
+        {
+          "id": "c",
+          "label": "That the Hessian of f alone is positive definite everywhere in R^n"
+        },
+        {
+          "id": "d",
+          "label": "That all multipliers are zero, so constraints do not affect the solution"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "First-order KKT points can be saddles or maxima; second-order sufficiency needs positive curvature of the Lagrangian on the critical cone.",
+        "Hessian of f alone and global conditions are neither required nor right; zero multipliers are not needed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "You design a stopping test that certifies an epsilon-optimal solution of a convex program with inequality constraints, using a primal-dual method. Which checks belong in it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Gap between primal and dual objective values at most epsilon"
+        },
+        {
+          "id": "b",
+          "label": "Change between consecutive iterates is small"
+        },
+        {
+          "id": "c",
+          "label": "Primal feasibility residual below a tolerance"
+        },
+        {
+          "id": "d",
+          "label": "Gradient norm of the objective alone is small"
+        },
+        {
+          "id": "e",
+          "label": "A dual-feasible point is available"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Primal feasibility, dual feasibility, and a small duality gap together bound suboptimality.",
+        "A small objective gradient or small step does not account for constraints and certifies nothing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A planner solves max c^T x subject to `a^T x <= b` and x >= 0. Each coefficient a_i is only known to lie in `[abar_i - d_i, abar_i + d_i]`, with d_i >= 0. The plan must be feasible for every possible a, while staying a linear program. Which constraint should replace the original?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`abar^T x + d^T x <= b`, using the worst case"
+        },
+        {
+          "id": "b",
+          "label": "`abar^T x + |d|^T x^2 <= b`, using a quadratic margin"
+        },
+        {
+          "id": "c",
+          "label": "`abar^T x <= b`, using the nominal values"
+        },
+        {
+          "id": "d",
+          "label": "`abar^T x - d^T x <= b`, using the best-case coefficients"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "With x>=0 the worst case is a_i = abar_i + d_i, giving the linear robust counterpart.",
+        "Nominal or best-case coefficients can be violated; the quadratic margin is not linear."
+      ],
+      "reviewed": false
+    }
+  ]
+}

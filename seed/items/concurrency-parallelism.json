@@ -1,0 +1,2483 @@
+{
+  "version": 1,
+  "topic": "concurrency-parallelism",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is a race condition?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A setting where two processes are given identical names by the scheduler"
+        },
+        {
+          "id": "b",
+          "label": "A situation where one thread finishes much faster than all of the other threads"
+        },
+        {
+          "id": "c",
+          "label": "A bug where the result depends on the unpredictable timing of tasks using shared data"
+        },
+        {
+          "id": "d",
+          "label": "A state where a program ends before it has received all of its input data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A race condition is timing-dependent behaviour on shared data.",
+        "Distractors confuse it with simple speed differences or unrelated terms."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is a deadlock?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Tasks that each wait for a resource held by another, so none can ever continue"
+        },
+        {
+          "id": "b",
+          "label": "A thread that is stopped permanently by the user closing the program window"
+        },
+        {
+          "id": "c",
+          "label": "A program that runs very slowly because it has created too many threads at once"
+        },
+        {
+          "id": "d",
+          "label": "A lock that is released too early so that two threads enter a section together"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Deadlock is a circular wait where no task can proceed.",
+        "Distractors describe termination, early release (race) and slowness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the main purpose of a mutex (mutual exclusion lock)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "To let only one thread at a time execute a protected section of code"
+        },
+        {
+          "id": "b",
+          "label": "To copy shared data into every thread so that each one has its own version"
+        },
+        {
+          "id": "c",
+          "label": "To split a large task automatically into equal parts for each CPU core"
+        },
+        {
+          "id": "d",
+          "label": "To make a single thread run faster by giving it priority on the processor"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A mutex enforces exclusive access to a critical section.",
+        "Distractors confuse locks with priority, copying or auto-parallelisation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which statement about threads and processes is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Threads within one process share that process's memory, while processes do not"
+        },
+        {
+          "id": "b",
+          "label": "Processes can only be created by the kernel, while threads are made by users only"
+        },
+        {
+          "id": "c",
+          "label": "Threads each have fully separate memory, while processes always share memory"
+        },
+        {
+          "id": "d",
+          "label": "Threads and processes are two names for exactly the same operating system object"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Threads share their process's address space; processes are isolated.",
+        "The first distractor reverses the facts."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which definition describes parallelism, as opposed to mere concurrency?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Tasks literally executing at the same instant on multiple cores or processors"
+        },
+        {
+          "id": "b",
+          "label": "Tasks that are written in separate source files and then compiled together"
+        },
+        {
+          "id": "c",
+          "label": "Tasks that never need to share any data or wait for any other task to finish"
+        },
+        {
+          "id": "d",
+          "label": "Tasks that take turns on one core so that each makes progress over time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Parallelism means simultaneous execution on multiple processing units.",
+        "The third distractor describes concurrency by time-slicing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are among the four classic conditions required for a deadlock to occur? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Message passing: tasks communicate only through queues"
+        },
+        {
+          "id": "b",
+          "label": "Hold and wait: a task keeps one resource while waiting for another"
+        },
+        {
+          "id": "c",
+          "label": "Round-robin scheduling: every task gets equal time slices"
+        },
+        {
+          "id": "d",
+          "label": "Mutual exclusion: a resource can be held by only one task"
+        },
+        {
+          "id": "e",
+          "label": "Circular wait: tasks form a cycle, each waiting on the next"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Mutual exclusion, hold and wait, (no preemption) and circular wait are the classic conditions.",
+        "Scheduling policy and message passing are not deadlock conditions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "Two threads in a banking program both update the same shared `balance` variable. A developer wants to wrap the lines that read and change `balance` in a lock. What is the standard term for that section of code that must not be run by two threads at once?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Critical section"
+        },
+        {
+          "id": "b",
+          "label": "Stack frame"
+        },
+        {
+          "id": "c",
+          "label": "Boot sector"
+        },
+        {
+          "id": "d",
+          "label": "Garbage region"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The code touching shared data that needs mutual exclusion is the critical section.",
+        "Other terms are real or invented but unrelated to locking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Two threads each run `counter += 1` 1000 times on a shared variable with no lock. Why can the final value be less than 2000?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The operating system skips some increments to stop the counter from overflowing"
+        },
+        {
+          "id": "b",
+          "label": "The increment reads, adds and writes in steps, so threads can overwrite each other's update"
+        },
+        {
+          "id": "c",
+          "label": "Threads always run one after another, so the second thread restarts the count at zero"
+        },
+        {
+          "id": "d",
+          "label": "Each thread gets its own copy of `counter`, and only one copy is saved at the end"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Read-modify-write steps interleave, causing lost updates.",
+        "Distractors invent copies, OS skipping or sequential execution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why might a developer choose separate processes instead of threads for running untrusted plug-in code?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Processes avoid every possible race condition because they cannot ever communicate"
+        },
+        {
+          "id": "b",
+          "label": "Processes have isolated memory, so a crash or corruption in one does not directly damage others"
+        },
+        {
+          "id": "c",
+          "label": "Processes always run faster than threads because they share the same memory space"
+        },
+        {
+          "id": "d",
+          "label": "Processes use no operating system resources, so they are cheaper to create than threads"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Isolated address spaces give fault containment.",
+        "Distractors wrongly claim speed, no communication, or no resource cost."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A program downloads 50 files, spending most of its time waiting for the network. Why do threads or async tasks help here?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The waiting periods overlap, so other downloads progress while one is stalled on the network"
+        },
+        {
+          "id": "b",
+          "label": "Threads convert the downloads into CPU work, which is always quicker than waiting"
+        },
+        {
+          "id": "c",
+          "label": "Each thread makes the network cable carry data faster than a single thread can"
+        },
+        {
+          "id": "d",
+          "label": "Threads guarantee the files arrive in the order that they were requested by the program"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "I/O-bound work benefits because waits overlap.",
+        "Distractors assume bandwidth gains, CPU conversion or ordering guarantees."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does making every thread acquire locks A and B in the same fixed order prevent deadlock?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It stops the scheduler from ever switching between threads while a lock is held"
+        },
+        {
+          "id": "b",
+          "label": "It removes the possibility of a circular wait, so no cycle of waiting threads can form"
+        },
+        {
+          "id": "c",
+          "label": "It lets both locks be held by two threads together without any conflict"
+        },
+        {
+          "id": "d",
+          "label": "It makes each lock release itself automatically after a short time limit"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Consistent ordering breaks the circular-wait condition.",
+        "Distractors describe timeouts, shared holding or disabling the scheduler."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A program runs four threads on a computer with a single CPU core. Which description is accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is concurrent, because the threads interleave, but not parallel, since only one runs at a time"
+        },
+        {
+          "id": "b",
+          "label": "It is parallel, because four threads always run at the same instant on any machine"
+        },
+        {
+          "id": "c",
+          "label": "It is parallel, because the threads share memory and so execute together in lockstep"
+        },
+        {
+          "id": "d",
+          "label": "It is neither concurrent nor parallel, because one core can run only one thread ever"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "One core time-slices threads: concurrency without parallelism.",
+        "Distractors equate thread count or shared memory with parallel execution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which approaches help prevent race conditions on shared data? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pass data between tasks through a thread-safe queue"
+        },
+        {
+          "id": "b",
+          "label": "Share only immutable data that no thread can change"
+        },
+        {
+          "id": "c",
+          "label": "Create more threads so each update is spread over more workers"
+        },
+        {
+          "id": "d",
+          "label": "Protect the shared data with a lock around every access"
+        },
+        {
+          "id": "e",
+          "label": "Add `sleep` calls so that the threads rarely collide in practice"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Locks, immutability and message queues remove unsynchronised shared mutation.",
+        "Sleeping and adding threads only change timing, not correctness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "Thread 1 locks A, then tries to lock B. Thread 2 locks B, then tries to lock A. The program freezes and the CPU usage drops to nearly zero. What is the most likely explanation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The operating system ran out of memory and paused the whole program"
+        },
+        {
+          "id": "b",
+          "label": "A deadlock: each thread holds one lock and waits forever for the other's lock"
+        },
+        {
+          "id": "c",
+          "label": "A race condition is corrupting data and making the program crash silently"
+        },
+        {
+          "id": "d",
+          "label": "An infinite loop is using up all of the available processor time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Opposite lock orders with idle CPU indicate deadlock.",
+        "A busy loop would show high CPU; races usually give wrong results, not freezing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A single-core machine switches rapidly between two tasks so that both make steady progress. Which term describes this best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Neither, since only one core is running"
+        },
+        {
+          "id": "b",
+          "label": "Both concurrency and true parallelism"
+        },
+        {
+          "id": "c",
+          "label": "Parallelism without any concurrency"
+        },
+        {
+          "id": "d",
+          "label": "Concurrency without true parallelism"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Interleaving tasks on one core is concurrency; parallelism needs several cores executing at the same instant.",
+        "Distractors confuse 'progress on both' with 'running simultaneously'."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Two threads each run `count = count + 1` on a shared variable, and sometimes one increment is lost. Why does this happen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The increment is read, add, write, so both threads may read the same old value"
+        },
+        {
+          "id": "b",
+          "label": "Each thread gets a private copy of count, so the copies never merge back"
+        },
+        {
+          "id": "c",
+          "label": "The CPU adds too slowly, so the second thread's result arrives too late"
+        },
+        {
+          "id": "d",
+          "label": "The operating system forbids two simultaneous writes, so one write is dropped"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The increment is not atomic, so two threads can read the same value and overwrite each other.",
+        "Distractors invent copies or OS write-dropping, which do not happen with shared memory."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which statement correctly describes threads that belong to the same process?",
+      "options": [
+        {
+          "id": "a",
+          "label": "They share heap memory and can see the same variables and objects"
+        },
+        {
+          "id": "b",
+          "label": "They cannot execute at the same time on different CPU cores"
+        },
+        {
+          "id": "c",
+          "label": "They each own a private heap and must exchange data by copying it"
+        },
+        {
+          "id": "d",
+          "label": "They run in separate address spaces so one cannot corrupt another"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Threads in one process share the address space, which is why races are possible.",
+        "Distractors describe processes (isolation, copying) or wrongly deny multicore execution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which situation is a deadlock?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A thread runs slowly because many other threads share the CPU"
+        },
+        {
+          "id": "b",
+          "label": "Two threads update a counter and the final total is wrong"
+        },
+        {
+          "id": "c",
+          "label": "Thread 1 holds lock A and waits for B while thread 2 holds B and waits for A"
+        },
+        {
+          "id": "d",
+          "label": "A thread sleeps for one second before it continues its work"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Deadlock is a cycle of threads each waiting for a resource another holds.",
+        "Wrong totals describe a race condition; slowness and sleeping are not blocking cycles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does a mutex (mutual exclusion lock) guarantee?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Waiting threads are released in the order they were created"
+        },
+        {
+          "id": "b",
+          "label": "Only one thread holds it at a time, so guarded code runs one thread at a time"
+        },
+        {
+          "id": "c",
+          "label": "Guarded variables become private copies for every thread"
+        },
+        {
+          "id": "d",
+          "label": "Guarded code runs faster because it is pinned to one core"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A mutex enforces exclusive access to a critical section.",
+        "Distractors attribute speed, ordering or copying to locks, which they do not provide."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these are conditions that must all hold for a deadlock to occur? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Mutual exclusion: a resource can be held by only one thread at a time"
+        },
+        {
+          "id": "b",
+          "label": "All threads must have exactly the same priority"
+        },
+        {
+          "id": "c",
+          "label": "Hold and wait: a thread holding one resource waits for another"
+        },
+        {
+          "id": "d",
+          "label": "Every thread runs on its own dedicated CPU core"
+        },
+        {
+          "id": "e",
+          "label": "Circular wait: a cycle of threads each waits for the next one's resource"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Mutual exclusion, hold and wait, and circular wait (plus no preemption) are deadlock conditions.",
+        "Core count and equal priority are unrelated to deadlock."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A script downloads 50 files one after another on a one-core laptop, and most of the time is spent waiting for the network. A teammate rewrites it with 10 threads and it finishes much faster. Why does this help even with only one core?",
+      "options": [
+        {
+          "id": "a",
+          "label": "While one thread waits on the network, others can start requests or use the CPU"
+        },
+        {
+          "id": "b",
+          "label": "Threads skip the waiting by guessing the file contents before they arrive"
+        },
+        {
+          "id": "c",
+          "label": "Each thread is given its own core automatically, so the work is truly parallel"
+        },
+        {
+          "id": "d",
+          "label": "Threads make each network connection faster by compressing the data sent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Concurrency overlaps waiting time, so I/O-bound work speeds up without extra cores.",
+        "Distractors claim extra cores, compression or guessing, none of which threads provide."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Two threads each run `for i in range(1000): count += 1` on a shared `count` that starts at 0, with no lock. Which final value is possible?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1850, because some increments overwrote each other"
+        },
+        {
+          "id": "b",
+          "label": "Exactly 2000 every time, because both loops have equal length"
+        },
+        {
+          "id": "c",
+          "label": "3000, because each thread may count some steps twice"
+        },
+        {
+          "id": "d",
+          "label": "Exactly 1000, because the second thread's work is discarded"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Lost updates make results below 2000 possible; it can never exceed 2000.",
+        "Distractors assume the loop is safe, or that updates are discarded wholesale or doubled."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Thread 1 locks A then B, and thread 2 locks B then A, so the program sometimes hangs. Which change removes the deadlock?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Give thread 2 a higher priority, so it always wins the race for locks"
+        },
+        {
+          "id": "b",
+          "label": "Add a one-second sleep before each second lock, so the other thread finishes"
+        },
+        {
+          "id": "c",
+          "label": "Start extra threads so that at least one can always make progress"
+        },
+        {
+          "id": "d",
+          "label": "Make both threads lock A first and then B, so no wait cycle can form"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A consistent global lock order prevents circular wait.",
+        "Sleeping, priorities and extra threads only change timing; they do not remove the cycle."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Several threads run `if balance >= amount: balance -= amount` on a shared `balance`. Where should the lock go to prevent overdrafts?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only around the comparison, because it decides whether to proceed"
+        },
+        {
+          "id": "b",
+          "label": "Only around a print of the balance, since printing is slow"
+        },
+        {
+          "id": "c",
+          "label": "Around the check and the subtraction together, as one critical section"
+        },
+        {
+          "id": "d",
+          "label": "Only around the subtraction, because that is the only write"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Check-then-act must be atomic; otherwise two threads can pass the check before either subtracts.",
+        "Locking only one half leaves a gap where the balance changes between check and update."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A semaphore is created with a count of 3. Five threads call `acquire()` at the same moment and none releases. How many threads proceed immediately?",
+      "options": [
+        {
+          "id": "a",
+          "label": "2"
+        },
+        {
+          "id": "b",
+          "label": "3"
+        },
+        {
+          "id": "c",
+          "label": "5"
+        },
+        {
+          "id": "d",
+          "label": "1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A semaphore with count 3 admits three holders; the others block.",
+        "5 ignores the limit; 1 treats it as a mutex."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "There are 8 independent CPU-bound tasks of 10 seconds each, run by 4 workers on a 4-core machine that truly runs them in parallel. Ignoring overhead, how long until all finish?",
+      "options": [
+        {
+          "id": "a",
+          "label": "10 s"
+        },
+        {
+          "id": "b",
+          "label": "80 s"
+        },
+        {
+          "id": "c",
+          "label": "20 s"
+        },
+        {
+          "id": "d",
+          "label": "40 s"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Four workers each handle two tasks: 2 x 10 s = 20 s.",
+        "10 s assumes 8 cores; 80 s assumes no parallelism; 40 s is a miscalculation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Several threads run at once. Which of these need a lock or other synchronisation? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A loop variable declared inside each thread's own function"
+        },
+        {
+          "id": "b",
+          "label": "A config dictionary built before threads start and only read afterwards"
+        },
+        {
+          "id": "c",
+          "label": "A shared counter that every thread increments"
+        },
+        {
+          "id": "d",
+          "label": "A shared list that every thread appends results to"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Shared mutable data that is written concurrently needs protection.",
+        "Read-only data and thread-local variables cannot race."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A main thread starts a worker with `t.start()` that computes a sum into a shared variable `result`. Main immediately prints `result` and often sees 0. Which change reliably fixes this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call `t.start()` a second time so that result is refreshed"
+        },
+        {
+          "id": "b",
+          "label": "Call `t.join()` before printing, so the worker has finished"
+        },
+        {
+          "id": "c",
+          "label": "Wrap the print in a lock that the worker never uses"
+        },
+        {
+          "id": "d",
+          "label": "Print result twice so the second print shows the final value"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "join() makes main wait until the worker completes, so the sum is ready.",
+        "The other options do not wait for the worker: repeating or locking unrelated code is only luck."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Two threads each run `count += 1` 50000 times on a shared integer, and the final total is sometimes below 100000. Which change reliably fixes this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Have both threads take the same mutex around each `count += 1`"
+        },
+        {
+          "id": "b",
+          "label": "Add a short sleep before each increment to spread out the threads"
+        },
+        {
+          "id": "c",
+          "label": "Declare `count` volatile so every thread sees the newest value"
+        },
+        {
+          "id": "d",
+          "label": "Give each thread its own mutex and lock it around `count += 1`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A single shared lock makes the read-modify-write atomic with respect to the other thread.",
+        "Separate locks exclude nothing, and volatile gives visibility but not atomicity; sleeping only hides the race."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A semaphore starts with value 3. Five threads call `acquire()` at the same moment and none releases. How many threads proceed past `acquire()`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3"
+        },
+        {
+          "id": "b",
+          "label": "5"
+        },
+        {
+          "id": "c",
+          "label": "2"
+        },
+        {
+          "id": "d",
+          "label": "1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Each acquire decrements the count and the fourth caller finds 0 and blocks, so 3 proceed.",
+        "Distractors confuse a semaphore with a mutex (1) or ignore the initial value."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Thread 1 locks A then B. Thread 2 currently locks B then A, and the two sometimes deadlock. You adopt the global lock order A before B. How should Thread 2 acquire its locks?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lock A and B in whichever order the scheduler favours at that moment"
+        },
+        {
+          "id": "b",
+          "label": "Lock B first, then A, and release B if A is not available"
+        },
+        {
+          "id": "c",
+          "label": "Lock A first, then B, then release both when done"
+        },
+        {
+          "id": "d",
+          "label": "Lock B first, then A, but only after checking A is free"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Following one global order for every thread removes circular wait.",
+        "Check-then-lock is itself racy, and release-on-failure or arbitrary order does not guarantee a consistent ordering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A producer puts 5 items quickly into a blocking queue with capacity 2. The consumer takes one item per second. What does the producer do when it tries to add the third item while the queue is full?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It grows the queue past capacity so the item fits"
+        },
+        {
+          "id": "b",
+          "label": "It throws an error that ends the producer thread"
+        },
+        {
+          "id": "c",
+          "label": "It silently drops the item and moves on to the next"
+        },
+        {
+          "id": "d",
+          "label": "It blocks until the consumer frees a slot"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A bounded blocking queue makes `put` wait for space, which gives backpressure.",
+        "Dropping, growing or crashing are behaviours of other queue types or non-blocking variants."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In CPython, you must speed up a CPU-bound image filter by using 4 cores. Which approach fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Eight threads, so the extra ones cover for idle cores"
+        },
+        {
+          "id": "b",
+          "label": "A multiprocessing pool of 4 worker processes"
+        },
+        {
+          "id": "c",
+          "label": "Four threads from a `threading` thread pool"
+        },
+        {
+          "id": "d",
+          "label": "A single asyncio event loop with four coroutines"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Separate processes each have their own interpreter and GIL, so CPU-bound work runs in parallel.",
+        "Threads and coroutines share one GIL for pure Python CPU work and give no speedup."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You are writing code that waits on a condition variable until a queue is non-empty. Which practices are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Re-check the predicate in a `while` loop after waking"
+        },
+        {
+          "id": "b",
+          "label": "Hold the associated mutex when calling `wait`"
+        },
+        {
+          "id": "c",
+          "label": "Call `wait` without the mutex to avoid blocking others"
+        },
+        {
+          "id": "d",
+          "label": "Use a single `if` check because wakeups are never spurious"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "The mutex must be held around `wait`, and the predicate is re-tested in a loop because of spurious wakeups and stolen wakeups.",
+        "Waiting without the mutex races with the notifier, and relying on a single `if` is unsafe."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A batch job has 8 independent tasks, each taking 2 seconds of pure CPU time. It runs on a machine with 4 free cores using a pool of 4 worker threads in a language with true parallel threads. Ignoring overhead, roughly how long does the whole batch take?",
+      "options": [
+        {
+          "id": "a",
+          "label": "16 seconds"
+        },
+        {
+          "id": "b",
+          "label": "2 seconds"
+        },
+        {
+          "id": "c",
+          "label": "4 seconds"
+        },
+        {
+          "id": "d",
+          "label": "8 seconds"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Four workers run 4 tasks at once, so 8 tasks take two rounds of 2 seconds.",
+        "16 s assumes serial execution, 8 s assumes only two-way parallelism, and 2 s assumes all tasks run at once."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A bank method does `if (balance >= amt) { balance -= amt; }`. The `balance` getter and the decrement are each synchronized, yet accounts occasionally go negative. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The decrement is not atomic, so two decrements can merge into one"
+        },
+        {
+          "id": "b",
+          "label": "The comparison `>=` should be `>` so boundary values are rejected"
+        },
+        {
+          "id": "c",
+          "label": "The check and the update are separate critical sections, so another thread can change the balance between them"
+        },
+        {
+          "id": "d",
+          "label": "The synchronized getter returns a stale copy because Java caches values per thread"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "It is a check-then-act race: the compound operation needs one lock covering both steps.",
+        "Each call is already atomic and visible, so the other options misdiagnose the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A thread dump shows T1 holding lock A and waiting for B, while T2 holds B and waits for A. Which of the four deadlock conditions does adopting a global lock order eliminate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Mutual exclusion"
+        },
+        {
+          "id": "b",
+          "label": "Circular wait"
+        },
+        {
+          "id": "c",
+          "label": "No preemption"
+        },
+        {
+          "id": "d",
+          "label": "Hold and wait"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A total order on acquisition makes a cycle in the wait graph impossible.",
+        "Threads still hold locks while waiting and locks are still exclusive and non-preemptible."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A CPU-bound service on 4 cores ran well with 4 worker threads. Raising to 64 threads that share one lock made throughput drop. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The operating system caps each process at four threads, so the other sixty wait idle"
+        },
+        {
+          "id": "b",
+          "label": "More runnable threads than cores add context switching and contention on the shared lock without adding compute"
+        },
+        {
+          "id": "c",
+          "label": "Extra threads make each critical section run longer because the lock slows down as waiters grow"
+        },
+        {
+          "id": "d",
+          "label": "Threads beyond the core count cannot be scheduled until the first four terminate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Oversubscription adds switching and lock-queue overhead while the cores were already saturated.",
+        "The other options invent OS limits or scheduling rules that do not exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Thread A loops `while (!done) { }` on a plain shared boolean. Thread B sets `done = true`, yet A never exits in an optimised build. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The loop is too tight, so the scheduler never lets B run at all"
+        },
+        {
+          "id": "b",
+          "label": "Without synchronization or volatile, A may never see B's write because the read can be hoisted out of the loop"
+        },
+        {
+          "id": "c",
+          "label": "The boolean needs a mutex held by A for the entire duration of the loop"
+        },
+        {
+          "id": "d",
+          "label": "Thread B's write is lost because booleans are written in two halves"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "It is a visibility problem: no happens-before edge exists, so the compiler or CPU may keep a stale value.",
+        "Booleans are not torn, and holding a mutex through the loop would block B."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A program has 20% strictly serial work and 80% perfectly parallelisable work. Using Amdahl's law, which is the best estimate of speedup on 8 cores?",
+      "options": [
+        {
+          "id": "a",
+          "label": "About 3.3x"
+        },
+        {
+          "id": "b",
+          "label": "About 6.4x"
+        },
+        {
+          "id": "c",
+          "label": "About 5x"
+        },
+        {
+          "id": "d",
+          "label": "About 8x"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Speedup = 1 / (0.2 + 0.8/8) = 1/0.3, about 3.3.",
+        "8x ignores the serial part; 6.4x only scales the parallel fraction; 5x is a guess."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Your service deadlocks occasionally when code needs two locks and also calls user-supplied callbacks. Which changes would reduce the deadlock risk? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Double the thread pool so waiters can still run"
+        },
+        {
+          "id": "b",
+          "label": "Use `tryLock` with a timeout, then release and retry"
+        },
+        {
+          "id": "c",
+          "label": "Enforce one global acquisition order for the locks"
+        },
+        {
+          "id": "d",
+          "label": "Invoke callbacks while still holding both locks"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Ordering prevents cycles and timed tryLock breaks hold-and-wait by backing off.",
+        "Calling foreign code under locks adds hidden lock edges, and more threads just means more blocked threads."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A web service uses a fixed pool of 10 threads. Each request task submits a subtask to the same pool and blocks waiting for its result. Under heavy load all 10 threads are blocked, the CPU is idle and no request completes. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A data race on the task queue that corrupts the list of pending subtasks"
+        },
+        {
+          "id": "b",
+          "label": "A lock-ordering cycle between two mutexes held by different request handlers"
+        },
+        {
+          "id": "c",
+          "label": "Livelock, where workers keep retrying and cancelling each other's subtasks"
+        },
+        {
+          "id": "d",
+          "label": "Thread-pool starvation deadlock: every worker waits on subtasks that are queued behind them with no free thread"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Workers occupy all threads while waiting for queued work that can never start.",
+        "No locks are described, so a lock cycle, a race or livelock does not fit idle threads and a blocked pool."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A Java lazy singleton uses `if (inst == null) { synchronized(lock) { if (inst == null) inst = new Foo(); } }` with a plain, non-volatile `inst` field. Rarely, a thread reads a non-null `inst` whose fields are still default values. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Two threads enter the synchronized block at once, because the monitor is released while the constructor runs and lets another in"
+        },
+        {
+          "id": "b",
+          "label": "The reference can be published before the constructor's writes are visible, since the unsynchronized first read has no happens-before edge"
+        },
+        {
+          "id": "c",
+          "label": "The first null check takes too long, so the JVM times out and hands back a default-initialized object to the waiting thread"
+        },
+        {
+          "id": "d",
+          "label": "The lock object is shared across classes, so unrelated code holding it makes the singleton constructor run twice in parallel"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Without volatile, the unsynchronized read can see the reference before the constructor's writes, since reordering or caching is allowed.",
+        "Distractors assume the monitor fails to give mutual exclusion, but it works; the flaw is in the unsynchronized read."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A service deadlocks occasionally. Thread dumps show T1 holds `Account.lock` and is inside a listener callback waiting for `Audit.lock`. T2 holds `Audit.lock` and is calling `Account.update()`, waiting for `Account.lock`. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Both locks are non-reentrant, so each thread blocks on a lock it already owns when it calls into the other component"
+        },
+        {
+          "id": "b",
+          "label": "The thread pool is too small, so the two threads starve each other of CPU time until neither can make progress"
+        },
+        {
+          "id": "c",
+          "label": "Lock acquisition is unfair, so T2 keeps losing every race for `Account.lock` and waits forever behind newer threads"
+        },
+        {
+          "id": "d",
+          "label": "Calling foreign code while holding a lock lets two threads acquire the same two locks in opposite orders, forming a cycle"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The dump shows a circular wait caused by inverted lock ordering, introduced by invoking a callback under a lock.",
+        "Reentrancy, pool size and fairness do not create a cycle between two different locks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A pure-Python function does heavy arithmetic in a loop. Running it in 4 `threading.Thread`s on a 4-core machine (CPython) takes about as long as running it 4 times sequentially. Which explanation fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The OS pins all threads of one process to a single core, so the scheduler can never place them on other cores"
+        },
+        {
+          "id": "b",
+          "label": "The global interpreter lock lets only one thread execute Python bytecode at a time, so CPU-bound threads cannot run in parallel"
+        },
+        {
+          "id": "c",
+          "label": "Python threads are green threads scheduled by the interpreter, so the OS never sees more than one runnable thread"
+        },
+        {
+          "id": "d",
+          "label": "Thread creation and context-switch costs are larger than the arithmetic work, so overhead cancels the gain from extra cores"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "In CPython the GIL serializes bytecode execution, so CPU-bound threads give no speedup.",
+        "Core pinning, overhead and green threads are common misattributions; CPython uses real OS threads that the OS can run on other cores."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Each of 8 threads increments its own counter, stored in adjacent slots of a `long[8]` array, with no sharing of any slot. Adding threads makes total throughput drop sharply. Which diagnosis is most plausible?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lost updates from a data race on the array, which forces the runtime to retry failed increments"
+        },
+        {
+          "id": "b",
+          "label": "A deadlock between threads that each wait for a neighbouring slot to be released before writing"
+        },
+        {
+          "id": "c",
+          "label": "False sharing: slots in the same cache line are written by different cores, so the line keeps bouncing between caches"
+        },
+        {
+          "id": "d",
+          "label": "Lock convoying, because the runtime silently wraps array writes in a monitor that all threads queue on"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Adjacent slots share a cache line, so independent writes invalidate each other's caches; padding fixes it.",
+        "No slot is shared, so there is no data race, lock or deadlock."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A cache wraps a thread-safe concurrent map: `if (!map.containsKey(k)) { map.put(k, expensive(k)); }`. Under load, `expensive(k)` runs several times for the same key, though the map never corrupts. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each call is atomic, but the check and the put are separate steps, so threads can both see the key missing"
+        },
+        {
+          "id": "b",
+          "label": "The `containsKey` call returns stale data permanently, because concurrent maps never reflect writes by other threads"
+        },
+        {
+          "id": "c",
+          "label": "The map's internal locking is per-bucket, so two puts to the same key corrupt the stored value"
+        },
+        {
+          "id": "d",
+          "label": "`expensive(k)` is being run by the map itself on every put, since concurrent maps recompute values on insert"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Thread-safe operations do not make a compound check-then-act atomic; an atomic compute-if-absent is needed.",
+        "The distractors claim the map is corrupted or stale, but its individual operations are correct."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A consumer uses `if (queue.isEmpty()) cond.wait(lock); item = queue.pop();` and with several consumers it sometimes pops from an empty queue. Which factors contribute to the bug? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The wait can return without any notify (a spurious wakeup), and the condition is not rechecked"
+        },
+        {
+          "id": "b",
+          "label": "`if` checks the condition once, whereas a `while` loop would recheck it after every wakeup"
+        },
+        {
+          "id": "c",
+          "label": "The lock is held throughout `wait`, which prevents producers from ever adding items"
+        },
+        {
+          "id": "d",
+          "label": "Another consumer can take the item between the notify and this thread reacquiring the lock"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Waking up does not guarantee the condition still holds, so the predicate must be rechecked in a loop.",
+        "`wait` releases the lock while waiting, so the last option is false."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An async Python web service runs on a single event loop. After a release, p99 latency of every endpoint jumps from 40 ms to 900 ms during traffic bursts, though CPU use stays low. The diff adds a `requests.get(...)` call, inside an `async def` handler, to a slow partner API. What best explains the latency on unrelated endpoints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Coroutines race on shared state, so the handler overwrites other requests' responses and forces retries"
+        },
+        {
+          "id": "b",
+          "label": "Too many coroutines were created, and the loop's scheduler cost grows quadratically with the number of pending tasks"
+        },
+        {
+          "id": "c",
+          "label": "The blocking call stalls the single event-loop thread, so no other coroutine runs until the partner API responds"
+        },
+        {
+          "id": "d",
+          "label": "The GIL blocks other coroutines while `requests` holds it, as the loop releases it only between requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A synchronous network call inside a coroutine blocks the only thread running the loop, so all tasks wait; use an async client or an executor.",
+        "Low CPU use rules out scheduler cost and GIL contention; no shared-state race is described."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A config object is read by 64 threads on every request (99.9% of operations) and replaced a few times a day. Criteria: readers must never block or take a lock, and a reader must see a consistent object. Which design fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A reader-writer lock, so many readers hold the shared lock together while a writer waits for exclusive access"
+        },
+        {
+          "id": "b",
+          "label": "A single mutex around every read and write, since the critical section is short and uncontended in practice"
+        },
+        {
+          "id": "c",
+          "label": "Mutable fields updated in place by the writer, with each field marked volatile so readers see every update promptly"
+        },
+        {
+          "id": "d",
+          "label": "An immutable config object swapped through an atomic reference, so readers load one consistent snapshot without locking"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A copy-on-write snapshot swapped atomically gives lock-free, consistent reads.",
+        "Reader-writer locks still block readers during writes, and in-place volatile fields can expose a half-updated mix."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A Python service must run CPU-heavy image transforms on 8 cores. Criteria: real parallel speedup, and a crash (segfault) in a native image library must not take down the service. Which approach best meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An `asyncio` event loop with 8 concurrent tasks, since coroutines avoid the thread overhead and context switching"
+        },
+        {
+          "id": "b",
+          "label": "A pool of worker processes, since each has its own interpreter and memory, so a crash is contained to one worker"
+        },
+        {
+          "id": "c",
+          "label": "A single thread per request, since it keeps native code under one scheduler and avoids any inter-process copying"
+        },
+        {
+          "id": "d",
+          "label": "A `ThreadPoolExecutor` with 8 threads, since threads share memory and make results cheap to return"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Processes bypass the GIL and isolate native crashes from the parent.",
+        "Threads and coroutines share one process, so they neither parallelize pure-Python CPU work nor contain a segfault."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Money transfers lock both accounts. Deadlocks occur when transfers A→B and B→A overlap. Criteria: deadlock must be impossible by construction, with no retry logic and negligible overhead. Which fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap each lock acquisition in a 50 ms timeout and retry the transfer after a random delay on failure"
+        },
+        {
+          "id": "b",
+          "label": "Detect cycles with a background monitor thread that kills the youngest transfer whenever a deadlock is found"
+        },
+        {
+          "id": "c",
+          "label": "Always lock the account with the lower id first, so every thread acquires locks in one global order"
+        },
+        {
+          "id": "d",
+          "label": "Use one global lock for all transfers, so only one transfer runs at a time and no lock cycle is possible"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A global lock ordering removes circular wait by construction, at almost no cost.",
+        "Timeouts and detectors need retry logic and permit deadlocks; a global lock removes the deadlock but serializes everything."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A producer reads events faster than a consumer can process them. Criteria: memory is capped at 512 MB, no events may be dropped, and the system must stay stable for hours. Which queue design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A bounded queue whose put blocks when full, so backpressure slows the producer to the consumer's pace"
+        },
+        {
+          "id": "b",
+          "label": "An unbounded queue, because it never blocks the producer and so keeps ingestion at full speed"
+        },
+        {
+          "id": "c",
+          "label": "A bounded queue that raises an error when full, so the producer crashes and the supervisor restarts it"
+        },
+        {
+          "id": "d",
+          "label": "A bounded queue that discards the oldest item when full, so memory stays flat and the producer never waits"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Blocking puts apply backpressure, which bounds memory and loses nothing.",
+        "Unbounded queues exhaust memory; dropping loses events; crashing and restarting is unstable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A reviewer proposes fixing a lost-update bug on a shared `int count` (`count++` from many threads) by declaring `count` as `volatile`. Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It fails only on machines with many cores, since volatile fully guards `count++` on systems with few cores"
+        },
+        {
+          "id": "b",
+          "label": "It works, because volatile makes each write immediately visible, so no increment can overwrite another thread's value"
+        },
+        {
+          "id": "c",
+          "label": "It fails, because volatile gives visibility and ordering but not atomicity, so read-modify-write steps can still interleave"
+        },
+        {
+          "id": "d",
+          "label": "It works only if every thread also calls `Thread.yield()` after each increment to let the others publish their writes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`count++` is read, add, write; volatile does not make that sequence atomic, so an atomic type or a lock is needed.",
+        "The other options treat visibility as if it implied atomicity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A hot metrics counter is incremented by 32 threads and read about once a second. Criteria: minimal write contention, and a read may be slightly stale but must include all completed increments eventually. Which designs meet the criteria? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "One global mutex around every increment and every read of a single integer"
+        },
+        {
+          "id": "b",
+          "label": "Per-thread counters registered in a list, with a read that sums all of them"
+        },
+        {
+          "id": "c",
+          "label": "One shared atomic integer updated with a compare-and-swap retry loop on each increment"
+        },
+        {
+          "id": "d",
+          "label": "Striped cells, where each thread updates one of several cells and a read sums them"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Sharding writes across cells or threads removes contention, and summing on the rare read gives an eventually complete total.",
+        "A global mutex or a single CAS target stays a contention hotspot at 32 writers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team builds a chat gateway holding 20,000 mostly idle WebSocket connections per node. Each message needs about 1 ms of CPU. Criteria: memory per node is limited, tail latency under bursts must stay low, and the code should stay simple. They weigh thread-per-connection against an event loop with a small worker pool for CPU. Which is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One event loop with no worker pool, because 1 ms of CPU per message can never affect tail latency during bursts"
+        },
+        {
+          "id": "b",
+          "label": "Thread-per-connection with a global lock around message handling, so bursts are processed in strict arrival order"
+        },
+        {
+          "id": "c",
+          "label": "An event loop for connection I/O, with CPU work on a small pool, so idle connections cost little memory and bursts stay bounded"
+        },
+        {
+          "id": "d",
+          "label": "Thread-per-connection, because blocking code is simplest and 20,000 stacks fit easily in the memory limit"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Idle connections are cheap on an event loop, and a small pool keeps CPU work off the loop to bound tail latency.",
+        "Thread-per-connection costs a stack per idle connection, and a pool-less loop lets a burst of 1 ms tasks queue up and delay everything."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team swaps a mutex for a spinlock to cut latency. The critical section is usually 50 ns but occasionally does a disk read, and the service runs more threads than cores. Which critique is most defensible?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep the spinlock: disk reads release the lock automatically, so waiters never spin for long in practice"
+        },
+        {
+          "id": "b",
+          "label": "Keep the spinlock: spinning avoids context switches, so it is faster whenever the typical critical section is short"
+        },
+        {
+          "id": "c",
+          "label": "Keep the mutex: spinlocks cannot guarantee mutual exclusion on multi-core machines, so the code would be unsafe"
+        },
+        {
+          "id": "d",
+          "label": "Keep the mutex: a spinning waiter burns a core while the holder is blocked or descheduled, which wastes CPU under oversubscription"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Spinning only pays when holders run briefly and are never descheduled; occasional blocking I/O with oversubscription makes waiters burn CPU.",
+        "Distractors focus on the typical case or wrongly claim spinlocks are unsafe."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A Java singleton uses double-checked locking: check `instance == null`, lock, check again, then assign `instance = new Foo()`. The field is not volatile. Which evaluation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Broken: the reference can be published before the constructor's writes are visible, so another thread may use a partly built object"
+        },
+        {
+          "id": "b",
+          "label": "Broken: the lock is not reentrant, so a second thread entering the block would deadlock against the first"
+        },
+        {
+          "id": "c",
+          "label": "Safe: assignment of a reference is atomic, so no thread can observe the object in an inconsistent state"
+        },
+        {
+          "id": "d",
+          "label": "Safe: the second null check inside the lock guarantees only one thread ever runs the constructor, which is enough"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Without volatile or a barrier, reordering can expose the reference before initialisation is visible; atomicity of assignment does not give ordering.",
+        "Distractors confuse mutual exclusion with memory visibility."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A job is 20% inherently serial and 80% perfectly parallel. A manager claims moving from 16 to 32 cores will nearly double throughput. Judge the claim using Amdahl's law.",
+      "options": [
+        {
+          "id": "a",
+          "label": "True: speedup rises from 4.0 to about 7.1"
+        },
+        {
+          "id": "b",
+          "label": "False: speedup rises from 5.0 to about 6.7"
+        },
+        {
+          "id": "c",
+          "label": "True: the parallel part halves, so speedup goes from 8 to 16"
+        },
+        {
+          "id": "d",
+          "label": "False: speedup rises only from 4.0 to about 4.4"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "1/(0.2+0.8/16)=4.0 and 1/(0.2+0.8/32)≈4.44; the serial fraction caps speedup at 5.",
+        "Distractors ignore the serial fraction or miscompute it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A transfer function must lock two accounts. The pair is known before any lock is taken, transfers are frequent, and contention on any one account is low. Which strategy best meets throughput and deadlock-freedom criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use one global lock for all transfers, which is simplest and removes deadlock but serialises unrelated work"
+        },
+        {
+          "id": "b",
+          "label": "Lock source then destination with a timeout, and retry on failure, which avoids deadlock but can livelock under load"
+        },
+        {
+          "id": "c",
+          "label": "Lock the source first and only then look up the destination, so each thread holds a single lock at a time"
+        },
+        {
+          "id": "d",
+          "label": "Sort the two accounts by unique ID and lock in that order, so no cycle of waiters can form"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A global acquisition order removes circular wait without sacrificing parallelism when the lock set is known upfront.",
+        "Distractors trade away throughput, risk livelock, or misdescribe lock holding."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "64 threads increment a statistics counter millions of times per second; it is read once per second. Criteria: maximum write throughput, exact total at read time. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One counter behind a mutex, since the lock guarantees the total is exact and the cost is negligible"
+        },
+        {
+          "id": "b",
+          "label": "Striped per-thread counters, each updated locally and summed when read, so writers do not share a cache line"
+        },
+        {
+          "id": "c",
+          "label": "One shared atomic counter, since lock-free increments never contend and scale linearly with thread count"
+        },
+        {
+          "id": "d",
+          "label": "One volatile long updated with `count++`, since volatile makes each increment visible to every thread"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A single atomic still bounces one cache line between cores; striping removes that contention and summing on read gives an exact total.",
+        "Distractors assume atomics scale freely or that volatile makes increments atomic."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team argues about a single-threaded async event loop (await-based tasks). Which statements are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A check-then-act sequence spanning an `await` can still race with other tasks on the loop"
+        },
+        {
+          "id": "b",
+          "label": "Async tasks on one loop give multi-core speedup for CPU-bound work"
+        },
+        {
+          "id": "c",
+          "label": "A CPU-bound handler that never yields stalls every other task on that loop"
+        },
+        {
+          "id": "d",
+          "label": "Having one thread means shared state needs no care, since tasks can never interleave"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Cooperative scheduling means long computations block the loop, and interleaving at await points can break invariants.",
+        "Distractors assume single thread implies no interleaving or parallelism."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A service runs request handlers on a fixed pool of 8 threads. Each handler submits 3 subtasks to the same pool and blocks until they finish. Under heavy load the service freezes with all 8 threads waiting and CPU near zero. Which assessment and fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Data race on the task queue: guard the queue with a stronger lock so submissions are not lost"
+        },
+        {
+          "id": "b",
+          "label": "Livelock from too many retries: add randomized backoff so handlers stop submitting simultaneously"
+        },
+        {
+          "id": "c",
+          "label": "Classic lock-ordering deadlock: acquire the handlers' locks in a consistent order to break the cycle"
+        },
+        {
+          "id": "d",
+          "label": "Thread-starvation deadlock: all workers wait on queued subtasks; run subtasks on a separate pool or compose them without blocking"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Every worker blocks on work that can only run on a worker, so nothing progresses; separate pools or non-blocking composition fixes it.",
+        "Distractors name other concurrency failures that do not match zero CPU with all threads waiting on futures."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a bounded producer-consumer pipeline. Constraints: no busy-waiting or sleep polling, producers block when full, and on shutdown every item already queued is still processed. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Unbounded queue with a semaphore counting items, and a stop flag that makes consumers exit immediately"
+        },
+        {
+          "id": "b",
+          "label": "Bounded queue where producers and consumers poll with short sleeps, and a stop flag ends consumers at once"
+        },
+        {
+          "id": "c",
+          "label": "Bounded queue that drops the oldest item when full, and consumers exit once the closed flag is set"
+        },
+        {
+          "id": "d",
+          "label": "Bounded blocking queue using condition variables, plus a closed flag that consumers check only after the queue is empty"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Blocking waits avoid polling, bounding gives backpressure, and draining before exit preserves queued items.",
+        "Distractors poll, drop items, or abandon queued work."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Several service instances (separate processes on different hosts) update the same database row with read-modify-write logic, and updates are being lost. Constraints: no cross-host lock service, retries are acceptable. Which fix meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a version column and update only `WHERE version = :read_version`, retrying the read-modify-write on zero rows updated"
+        },
+        {
+          "id": "b",
+          "label": "Wrap the read and write in an in-process mutex held by each instance"
+        },
+        {
+          "id": "c",
+          "label": "Read the row again just before writing and skip the write if the value changed"
+        },
+        {
+          "id": "d",
+          "label": "Mark the update method `synchronized` so concurrent calls are serialised"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Optimistic concurrency via a conditional update works across processes and detects conflicts atomically.",
+        "Distractors only protect within one process or leave a window between check and write."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a parallel sum of a large array of doubles. Constraint: the result must be bit-identical across runs and across machines with different core counts, while using all cores. Which design satisfies it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Split into fixed-size chunks by index, sum each chunk, and combine the partial sums in a fixed order"
+        },
+        {
+          "id": "b",
+          "label": "Give each core one equal slice and add partial sums as the threads finish"
+        },
+        {
+          "id": "c",
+          "label": "Have all threads add into one shared atomic double as they go"
+        },
+        {
+          "id": "d",
+          "label": "Let threads claim chunks dynamically and combine results in completion order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Floating-point addition is not associative, so grouping and order must not depend on core count or timing.",
+        "Distractors let thread count or scheduling change the order of additions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A proposed worker design: `while (!stop) { job = queue.take(); run(job); }`, with shutdown setting `stop = true` (a volatile flag). Shutdown sometimes hangs forever. What does the design lack?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A way to wake workers blocked in `take()`, such as interrupting them or enqueueing sentinel jobs"
+        },
+        {
+          "id": "b",
+          "label": "A second flag set by each worker to show that the first flag was seen"
+        },
+        {
+          "id": "c",
+          "label": "A larger queue capacity so that `take()` cannot block when shutdown begins"
+        },
+        {
+          "id": "d",
+          "label": "A lock around `stop`, since a volatile flag cannot be read safely from several threads"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Idle workers blocked on an empty queue never re-check the flag; they must be woken.",
+        "Distractors misjudge volatile visibility or the cause of blocking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A lock-free stack uses CAS on `head`. Popped nodes are recycled through a free list, and rare corruption appears. Constraint: keep it lock-free. Which addition fixes the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Declare `head` volatile so every thread sees the latest pointer value"
+        },
+        {
+          "id": "b",
+          "label": "Check that `node.next` is non-null before attempting the CAS"
+        },
+        {
+          "id": "c",
+          "label": "Retry the CAS in a loop until it succeeds on the current head"
+        },
+        {
+          "id": "d",
+          "label": "Pair the head pointer with a version counter that increments on every successful CAS"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Recycled nodes allow ABA, where the pointer matches but the structure changed; a version tag makes the CAS fail.",
+        "Distractors address visibility or retrying, which the code already handles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Five philosophers share five forks, and each needs two forks to eat. Which designs guarantee freedom from deadlock? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Number the forks and always pick up the lower-numbered fork first"
+        },
+        {
+          "id": "b",
+          "label": "Take both forks together under one lock, or take neither"
+        },
+        {
+          "id": "c",
+          "label": "Every philosopher takes the left fork, then the right fork"
+        },
+        {
+          "id": "d",
+          "label": "Allow at most four philosophers to try to pick up forks at once"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Resource ordering, limiting contenders, and all-or-nothing acquisition each break a necessary deadlock condition.",
+        "Everyone grabbing left then right allows a circular wait."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A Python (CPython) batch job parses 10 million independent records, and parsing is CPU-bound. The machine has 16 cores, results must be merged at the end, and code changes should be small. Which design best uses all cores?",
+      "options": [
+        {
+          "id": "a",
+          "label": "16 threads updating one shared result dict, each guarded by a lock to avoid lost updates"
+        },
+        {
+          "id": "b",
+          "label": "A pool of 16 threads parsing records, since threads share memory and avoid copying data"
+        },
+        {
+          "id": "c",
+          "label": "A process pool that maps parsing over chunks of records, with the parent merging each chunk's result"
+        },
+        {
+          "id": "d",
+          "label": "A single asyncio loop with one task per record, which overlaps the parsing work"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The GIL stops threads from running Python bytecode in parallel, so CPU-bound work needs separate processes.",
+        "Distractors rely on threads or async, which do not give CPU parallelism here."
+      ],
+      "reviewed": false
+    }
+  ]
+}

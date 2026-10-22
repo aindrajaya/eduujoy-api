@@ -1,0 +1,2477 @@
+{
+  "version": 1,
+  "topic": "http",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which HTTP method is intended to retrieve a resource without changing it on the server?",
+      "options": [
+        {
+          "id": "a",
+          "label": "POST"
+        },
+        {
+          "id": "b",
+          "label": "DELETE"
+        },
+        {
+          "id": "c",
+          "label": "GET"
+        },
+        {
+          "id": "d",
+          "label": "PUT"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "GET is the method for reading a resource without side effects.",
+        "POST, PUT and DELETE are meant to create, replace or remove data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the HTTP status code 404 mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The request succeeded"
+        },
+        {
+          "id": "b",
+          "label": "The server crashed"
+        },
+        {
+          "id": "c",
+          "label": "Access is forbidden"
+        },
+        {
+          "id": "d",
+          "label": "The resource was not found"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "404 means Not Found.",
+        "Learners confuse it with 500 (server error) or 403 (forbidden)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which request header states the media type of the body being sent, such as `application/json`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Host"
+        },
+        {
+          "id": "b",
+          "label": "User-Agent"
+        },
+        {
+          "id": "c",
+          "label": "Accept"
+        },
+        {
+          "id": "d",
+          "label": "Content-Type"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Content-Type describes the body being sent.",
+        "Accept lists the types the client wants back, which is a common mix-up."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the default port for HTTPS?",
+      "options": [
+        {
+          "id": "a",
+          "label": "21"
+        },
+        {
+          "id": "b",
+          "label": "80"
+        },
+        {
+          "id": "c",
+          "label": "8080"
+        },
+        {
+          "id": "d",
+          "label": "443"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "HTTPS defaults to port 443.",
+        "80 is the default for plain HTTP."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which class of status codes indicates that a request was successful?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1xx"
+        },
+        {
+          "id": "b",
+          "label": "5xx"
+        },
+        {
+          "id": "c",
+          "label": "2xx"
+        },
+        {
+          "id": "d",
+          "label": "3xx"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "2xx codes signal success, such as 200 OK.",
+        "3xx is redirection and 5xx is server error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are standard HTTP request methods? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "PUT"
+        },
+        {
+          "id": "b",
+          "label": "GET"
+        },
+        {
+          "id": "c",
+          "label": "SEND"
+        },
+        {
+          "id": "d",
+          "label": "FETCH"
+        },
+        {
+          "id": "e",
+          "label": "DELETE"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "GET, PUT and DELETE are standard HTTP methods.",
+        "FETCH and SEND sound plausible but are not HTTP methods."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A developer opens browser tools and sees a response with status 301 for a page. She wants to find the new address of the page in the response. Which response header holds that address?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Allow"
+        },
+        {
+          "id": "b",
+          "label": "Referer"
+        },
+        {
+          "id": "c",
+          "label": "Host"
+        },
+        {
+          "id": "d",
+          "label": "Location"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Redirect responses carry the target URL in Location.",
+        "Referer and Host are request headers, so they do not hold the redirect target."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "HTTP is described as stateless. What does that mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Responses never contain any status code or headers at all"
+        },
+        {
+          "id": "b",
+          "label": "The connection is encrypted so that no state can be observed"
+        },
+        {
+          "id": "c",
+          "label": "The server keeps a session open for every client until it logs out"
+        },
+        {
+          "id": "d",
+          "label": "Each request is handled on its own, with no built-in memory of earlier requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Stateless means each request stands alone; state needs cookies or tokens.",
+        "Distractors confuse statelessness with sessions or encryption."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do websites use cookies with HTTP?",
+      "options": [
+        {
+          "id": "a",
+          "label": "To store small data that the browser sends back so the server can recognise it"
+        },
+        {
+          "id": "b",
+          "label": "To speed up DNS lookups for the domain"
+        },
+        {
+          "id": "c",
+          "label": "To encrypt the body of each request sent"
+        },
+        {
+          "id": "d",
+          "label": "To tell the browser which method to use"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Cookies let a stateless protocol carry identity or session data between requests.",
+        "Encryption and DNS are handled by other mechanisms."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does a 401 response differ from a 403 response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "401 means the client sent bad syntax, 403 means the page is gone"
+        },
+        {
+          "id": "b",
+          "label": "401 means the server is down, 403 means the page moved"
+        },
+        {
+          "id": "c",
+          "label": "401 is for redirects while 403 is for successful requests"
+        },
+        {
+          "id": "d",
+          "label": "401 means credentials are missing or invalid, 403 means access is refused anyway"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "401 is about authentication; 403 means the server understood but refuses.",
+        "Other options mix up unrelated status code classes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does HTTPS add compared with plain HTTP?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Faster responses because bodies are compressed"
+        },
+        {
+          "id": "b",
+          "label": "Automatic caching of every page visited"
+        },
+        {
+          "id": "c",
+          "label": "Guaranteed correct content from the server"
+        },
+        {
+          "id": "d",
+          "label": "Encryption with TLS so eavesdroppers cannot read the traffic"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "HTTPS is HTTP over TLS, giving confidentiality and integrity in transit.",
+        "It does not guarantee speed, caching or that the site's content is truthful."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A response includes `Cache-Control: max-age=3600`. What does this tell the browser?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The page needs a login after one hour"
+        },
+        {
+          "id": "b",
+          "label": "Delete the page after one hour"
+        },
+        {
+          "id": "c",
+          "label": "It may reuse the stored copy for up to one hour without asking the server"
+        },
+        {
+          "id": "d",
+          "label": "Retry the request every 3600 milliseconds"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "max-age gives freshness lifetime in seconds, so 3600 is one hour.",
+        "Distractors misread the unit or the purpose of the directive."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly compare GET and POST? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "GET is the usual choice for submitting changes to data"
+        },
+        {
+          "id": "b",
+          "label": "POST responses are always cached by browsers"
+        },
+        {
+          "id": "c",
+          "label": "GET data is usually sent in the URL query string"
+        },
+        {
+          "id": "d",
+          "label": "POST data is usually sent in the request body"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "GET puts parameters in the URL while POST normally uses the body.",
+        "GET is for reading and POST responses are not always cached."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A user submits a login form. The server replies with 200 OK and a `Set-Cookie: session=abc123` header. The user then clicks a link to another page on the same site. What will the browser most likely do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Discard the cookie because the page changed"
+        },
+        {
+          "id": "b",
+          "label": "Send `Cookie: session=abc123` in the request to that site"
+        },
+        {
+          "id": "c",
+          "label": "Ask the server for a new cookie before any request"
+        },
+        {
+          "id": "d",
+          "label": "Send the cookie only to other websites"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Browsers return stored cookies to the matching site on later requests.",
+        "Distractors wrongly treat cookies as per-page or sent to other sites."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which statement best describes what it means that the `GET` method is \"safe\" in HTTP?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It can only be sent over an HTTPS connection"
+        },
+        {
+          "id": "b",
+          "label": "It always returns the same response body"
+        },
+        {
+          "id": "c",
+          "label": "It encrypts the request so others cannot read it"
+        },
+        {
+          "id": "d",
+          "label": "It is not meant to change state on the server"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Safe methods are defined as read-only in intent, so they should not change server state.",
+        "Distractors confuse safety with encryption, identical responses, or HTTPS-only use."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A server answers a request with status `404 Not Found`. What does this tell the client?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The client must log in before retrying"
+        },
+        {
+          "id": "b",
+          "label": "The server crashed while handling the request"
+        },
+        {
+          "id": "c",
+          "label": "The resource moved permanently to a new URL"
+        },
+        {
+          "id": "d",
+          "label": "The server could not find a resource at that URL"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "404 means no resource was found at the requested URL.",
+        "Distractors mix it up with 500, 401 and 301."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main purpose of the `Content-Type` header in an HTTP response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It tells the client which server sent the body"
+        },
+        {
+          "id": "b",
+          "label": "It tells the client whether to cache the body"
+        },
+        {
+          "id": "c",
+          "label": "It tells the client the media type of the body"
+        },
+        {
+          "id": "d",
+          "label": "It tells the client how long the body is"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Content-Type declares the media type, such as text/html or application/json.",
+        "Distractors describe Content-Length, Server and Cache-Control."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does HTTP use cookies for login sessions even though each request is independent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "HTTP is stateless, so the client resends an identifier each time"
+        },
+        {
+          "id": "b",
+          "label": "HTTP has no headers, so cookies carry the request data"
+        },
+        {
+          "id": "c",
+          "label": "HTTP closes connections, so cookies keep the socket alive"
+        },
+        {
+          "id": "d",
+          "label": "HTTP lacks encryption, so cookies hide the password"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Because HTTP is stateless, a cookie holding a session ID is sent with each request so the server can link them.",
+        "Distractors misattribute cookies to connection handling, encryption or missing headers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which classification of status codes is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`301` is a redirection and `503` is a server error"
+        },
+        {
+          "id": "b",
+          "label": "`301` is a client error and `503` is a redirection"
+        },
+        {
+          "id": "c",
+          "label": "`301` is a success and `503` is a client error"
+        },
+        {
+          "id": "d",
+          "label": "`301` is a server error and `503` is a success"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "3xx codes are redirections and 5xx codes are server errors.",
+        "Distractors scramble the code classes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are things HTTPS provides compared with plain HTTP? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Verification of the server's identity via a certificate"
+        },
+        {
+          "id": "b",
+          "label": "Encryption of traffic between client and server"
+        },
+        {
+          "id": "c",
+          "label": "Guarantee that the website's content is harmless"
+        },
+        {
+          "id": "d",
+          "label": "Detection of tampering with data in transit"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "HTTPS (TLS) gives confidentiality, integrity and server authentication.",
+        "It does not vouch for whether the site itself is trustworthy or safe."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A developer sees that a browser sent a request with `Cache-Control: no-cache` removed, and the response had `Cache-Control: max-age=3600`. The user reloads the page by clicking a link 10 minutes later. What is the browser most likely to do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Send the request but ignore the server's reply"
+        },
+        {
+          "id": "b",
+          "label": "Discard the copy because 10 minutes is too long"
+        },
+        {
+          "id": "c",
+          "label": "Always ask the server for a fresh copy first"
+        },
+        {
+          "id": "d",
+          "label": "Reuse its stored copy without contacting the server"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "max-age=3600 means the stored response is fresh for an hour, so it can be reused.",
+        "Distractors assume caching never applies or that the lifetime is shorter."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You need an API call that creates a new order on the server, and repeating it would create another order. Which method fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`HEAD`"
+        },
+        {
+          "id": "b",
+          "label": "`OPTIONS`"
+        },
+        {
+          "id": "c",
+          "label": "`GET`"
+        },
+        {
+          "id": "d",
+          "label": "`POST`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "POST is used to create resources and is not idempotent.",
+        "GET and HEAD are read-only; OPTIONS asks about capabilities."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A client sends a request to `/profile` without logging in, and the server wants to demand credentials. Which status code should it return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`201`"
+        },
+        {
+          "id": "b",
+          "label": "`401`"
+        },
+        {
+          "id": "c",
+          "label": "`403`"
+        },
+        {
+          "id": "d",
+          "label": "`302`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "401 Unauthorized signals missing or invalid authentication.",
+        "403 means authenticated but forbidden; the others are unrelated."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given the raw request line `GET /search?q=cats HTTP/1.1` and header `Host: example.com`, which full URL was requested?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`http://example.com/?q=search/cats`"
+        },
+        {
+          "id": "b",
+          "label": "`http://example.com/search?q=cats`"
+        },
+        {
+          "id": "c",
+          "label": "`http://search/example.com?q=cats`"
+        },
+        {
+          "id": "d",
+          "label": "`http://example.com/cats?search=q`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Host gives the domain, the request target gives path and query.",
+        "Distractors rearrange the parts."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You want a server to set a cookie that JavaScript on the page cannot read. Which header should the response include?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Cookie: id=abc123; HttpOnly`"
+        },
+        {
+          "id": "b",
+          "label": "`Set-Cookie: id=abc123; Secure`"
+        },
+        {
+          "id": "c",
+          "label": "`Set-Cookie: id=abc123; HttpOnly`"
+        },
+        {
+          "id": "d",
+          "label": "`Set-Cookie: id=abc123; Path=/`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "HttpOnly hides the cookie from document.cookie.",
+        "Secure restricts to HTTPS, Cookie is a request header, and Path only scopes the URL."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A page was moved permanently from `/old` to `/new`. Which response should the server send for `/old` so browsers and search engines update the address?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`302` with `Location: /new`"
+        },
+        {
+          "id": "b",
+          "label": "`301` with `Location: /new`"
+        },
+        {
+          "id": "c",
+          "label": "`200` with `Location: /new`"
+        },
+        {
+          "id": "d",
+          "label": "`404` with `Location: /new`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "301 signals a permanent redirect with the new URL in Location.",
+        "302 is temporary; 200 and 404 do not redirect."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You are building a JSON API client that posts a new user as JSON text. Which request headers should you set or expect to use? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Accept: application/json`"
+        },
+        {
+          "id": "b",
+          "label": "`Location: /users`"
+        },
+        {
+          "id": "c",
+          "label": "`Set-Cookie: user=json`"
+        },
+        {
+          "id": "d",
+          "label": "`Content-Type: application/json`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Content-Type describes the body being sent and Accept states the preferred response type.",
+        "Set-Cookie and Location are response headers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "Your server has a stored file with ETag `\"v7\"`. A browser holds a cached copy and revalidates with `If-None-Match: \"v7\"`. The file has not changed. What should the server respond with?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`304 Not Modified` with no body"
+        },
+        {
+          "id": "b",
+          "label": "`200 OK` with the full file again"
+        },
+        {
+          "id": "c",
+          "label": "`412 Precondition Failed` with an error page"
+        },
+        {
+          "id": "d",
+          "label": "`204 No Content` and delete the cache"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A matching ETag lets the server return 304 so the browser reuses its cache.",
+        "Distractors resend the file or misuse other codes; 412 applies to If-Match style failures."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A client has a cached copy of `/logo.png` with `ETag: \"v7\"`. It wants to check if the copy is still valid without downloading the body again. Which request header should it send?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`If-Match: \"v7\"`"
+        },
+        {
+          "id": "b",
+          "label": "`Accept: \"v7\"`"
+        },
+        {
+          "id": "c",
+          "label": "`Cache-Control: only-if-cached`"
+        },
+        {
+          "id": "d",
+          "label": "`If-None-Match: \"v7\"`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`If-None-Match` makes the server answer 304 when the ETag still matches.",
+        "`If-Match` is for conditional updates (preconditions), not cache revalidation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An API creates an order when it receives `POST /orders` with a valid JSON body. Which response best follows HTTP conventions for a successful creation of the new order at `/orders/812`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`200 OK` with `Location: /orders/812` and no body"
+        },
+        {
+          "id": "b",
+          "label": "`201 Created` with `Location: /orders/812`"
+        },
+        {
+          "id": "c",
+          "label": "`204 No Content` with `Refresh: /orders/812`"
+        },
+        {
+          "id": "d",
+          "label": "`202 Accepted` with `Content-Location: /orders`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "201 plus Location identifies the newly created resource.",
+        "202 means the work is not yet done; 200 and 204 do not signal creation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A server wants a session cookie that JavaScript cannot read and that is sent only over HTTPS. Which `Set-Cookie` header does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Set-Cookie: sid=abc; Secure; Path=/`"
+        },
+        {
+          "id": "b",
+          "label": "`Set-Cookie: sid=abc; Secure; Max-Age=0`"
+        },
+        {
+          "id": "c",
+          "label": "`Set-Cookie: sid=abc; HttpOnly; SameSite=None`"
+        },
+        {
+          "id": "d",
+          "label": "`Set-Cookie: sid=abc; HttpOnly; Secure`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "HttpOnly hides it from scripts and Secure restricts it to HTTPS.",
+        "Others omit one of the two attributes or expire the cookie."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must fetch bytes 0-1023 of a large file at `/video.mp4` from a server that supports ranges. Which request is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`HEAD /video.mp4` with `Range: bytes=0-1023`"
+        },
+        {
+          "id": "b",
+          "label": "`GET /video.mp4` with `Accept-Ranges: 0-1023`"
+        },
+        {
+          "id": "c",
+          "label": "`GET /video.mp4` with `Range: bytes=0-1023`"
+        },
+        {
+          "id": "d",
+          "label": "`GET /video.mp4` with `Content-Range: bytes 0-1023`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The Range request header on GET returns a 206 partial body.",
+        "Content-Range and Accept-Ranges are response headers; HEAD returns no body."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A response carries `Cache-Control: max-age=600`. A browser stored it 250 seconds ago and the user requests the same URL now, with no reload. What does the browser do by default?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sends a conditional request, since the copy is partly aged"
+        },
+        {
+          "id": "b",
+          "label": "Serves the stored copy without contacting the server"
+        },
+        {
+          "id": "c",
+          "label": "Fetches a new copy, as 250 seconds exceeds the default"
+        },
+        {
+          "id": "d",
+          "label": "Serves the stored copy but re-fetches it in the background"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The copy is fresh for 600 seconds, so it is reused directly.",
+        "Revalidation or refetching happens only after the freshness lifetime expires."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which of the following methods are defined as idempotent in HTTP, so a client can safely retry them after a timeout? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`PUT`"
+        },
+        {
+          "id": "b",
+          "label": "`POST`"
+        },
+        {
+          "id": "c",
+          "label": "`GET`"
+        },
+        {
+          "id": "d",
+          "label": "`DELETE`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "PUT, DELETE and GET repeat with the same intended effect on the server.",
+        "POST is not idempotent; retries may create duplicates."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You are building a login form. The server checks credentials and, if correct, should send the browser to `/dashboard` so that refreshing the page afterwards does not resubmit the form. The form was sent by `POST /login`.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Respond `303 See Other` with `Location: /dashboard`"
+        },
+        {
+          "id": "b",
+          "label": "Respond `307` with `Location: /dashboard` for the retry"
+        },
+        {
+          "id": "c",
+          "label": "Respond `200 OK` with `Location: /dashboard` header"
+        },
+        {
+          "id": "d",
+          "label": "Respond `304 Not Modified` with `Location: /dashboard`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "303 tells the client to follow with GET, avoiding resubmission.",
+        "307 repeats the POST; 200 and 304 do not trigger redirects."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A page served over HTTPS loads fine, but the browser console shows a blocked request to `http://api.example.com/data` made by its script. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A CORS preflight failed because the method was `OPTIONS`"
+        },
+        {
+          "id": "b",
+          "label": "The server certificate lacks a matching subject name"
+        },
+        {
+          "id": "c",
+          "label": "A cookie with `SameSite=Strict` was dropped from the request"
+        },
+        {
+          "id": "d",
+          "label": "Mixed content: an insecure subresource on a secure page is blocked"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Browsers block active insecure requests from HTTPS pages.",
+        "The other causes would give different errors and do not depend on the http scheme."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a deploy, users see old JavaScript. Responses for `/app.js` have `Cache-Control: public, max-age=86400` and the filename never changes. Which diagnosis explains it best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The browser ignores max-age for scripts and uses heuristics"
+        },
+        {
+          "id": "b",
+          "label": "The ETag is missing, so browsers cannot cache the file at all"
+        },
+        {
+          "id": "c",
+          "label": "Caches keep the file as fresh for a day, so no revalidation occurs"
+        },
+        {
+          "id": "d",
+          "label": "`public` forces proxies to purge the file at every deploy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "With a stable URL and 24h freshness, clients never ask for the new file.",
+        "Missing ETag does not stop caching, and public does not purge anything."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A browser app at `https://app.example` calls `https://api.example/items` with `fetch` and a custom header `X-Token`. The request fails, and the network log shows an `OPTIONS` request returning 404 before it. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The API rejected the GET method with a 404"
+        },
+        {
+          "id": "b",
+          "label": "The browser sent `OPTIONS` because the cookie was missing"
+        },
+        {
+          "id": "c",
+          "label": "The custom header must be sent in a `HEAD` request first"
+        },
+        {
+          "id": "d",
+          "label": "The API does not handle the CORS preflight request"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Custom headers trigger a preflight OPTIONS; failing it blocks the real call.",
+        "The GET was never sent, and cookies do not cause preflight."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A client sends `GET /report` and gets `301 Moved Permanently` to `/reports/2024`. Following it returns `200`. Later the team finds that the old URL is still requested through the proxy on every call. Which fix addresses the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Make the 301 cacheable and have clients update stored links"
+        },
+        {
+          "id": "b",
+          "label": "Add `Content-Length` to the 301 response body"
+        },
+        {
+          "id": "c",
+          "label": "Switch the redirect to `Transfer-Encoding: chunked`"
+        },
+        {
+          "id": "d",
+          "label": "Change the 301 to a 404 so clients stop using the old path"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "301 is permanent, so clients can cache it and update bookmarks.",
+        "The other changes do not affect redirect handling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A CDN serves one gzip-compressed copy of `/data` to a client that sent `Accept-Encoding: identity`, which then fails to parse it. The origin varies its body by encoding. Which header was most likely missing from the origin response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Accept-Ranges: bytes`"
+        },
+        {
+          "id": "b",
+          "label": "`Content-Type: text/plain`"
+        },
+        {
+          "id": "c",
+          "label": "`Vary: Accept-Encoding`"
+        },
+        {
+          "id": "d",
+          "label": "`Last-Modified`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Vary makes caches key entries by the request's encoding.",
+        "Other headers do not separate cached variants."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Users report being logged out when moving from `https://shop.example` to a checkout at `https://pay.other.com` and back. The session cookie has `SameSite=Strict`. Which factors could explain the lost session? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The cookie was set for `shop.example` and is not sent to `pay.other.com`"
+        },
+        {
+          "id": "b",
+          "label": "The `Secure` attribute prevents sending over TLS"
+        },
+        {
+          "id": "c",
+          "label": "Strict forces the browser to delete the cookie at redirects"
+        },
+        {
+          "id": "d",
+          "label": "Strict cookies are withheld on cross-site navigations arriving from another site"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Strict omits the cookie on cross-site-initiated requests, and cookies are scoped to their domain.",
+        "Strict does not delete cookies and Secure is for HTTPS."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A team behind a reverse proxy sees intermittent 502 errors. The proxy log shows upstream `connection reset` only on requests sent right after an idle period. The proxy keeps connections to the app open for 120 s, while the app server closes idle keep-alive connections after 30 s. What explains it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The proxy reuses an upstream connection the app already closed"
+        },
+        {
+          "id": "b",
+          "label": "The app returns 502 when the request body exceeds its limit"
+        },
+        {
+          "id": "c",
+          "label": "The proxy's TLS certificate expired during idle periods"
+        },
+        {
+          "id": "d",
+          "label": "The app uses `HEAD` where the proxy expects `GET`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Mismatched keep-alive timeouts cause reuse of a closed connection, so reset errors follow idle gaps.",
+        "The other causes would not correlate with idle time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A client sends `GET /report` with `If-None-Match: \"v7\"`. The server replies `200 OK` with a full body and `ETag: \"v7\"` every time. Which is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The server never compares the incoming validator to its current ETag, so it never issues a 304"
+        },
+        {
+          "id": "b",
+          "label": "A 304 response is reserved for HEAD requests, so GET always receives the full body"
+        },
+        {
+          "id": "c",
+          "label": "The client must send `If-Modified-Since` too, because ETag validation only works as a pair with it"
+        },
+        {
+          "id": "d",
+          "label": "The ETag is strong, and strong validators cannot be used with conditional GET requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A matching If-None-Match should produce 304; always returning 200 with the same ETag means the comparison is skipped.",
+        "Distractors invent a required header pairing or restrict 304 to HEAD or weak validators."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A response has `Cache-Control: max-age=600` and no `Vary` header. It serves compressed content when the request has `Accept-Encoding: gzip`. A shared CDN caches it, and some clients later receive gzip bytes they cannot decode. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The max-age of 600 is too long, since compressed responses must not be cached beyond 60 seconds"
+        },
+        {
+          "id": "b",
+          "label": "The response varies by Accept-Encoding but lacks `Vary: Accept-Encoding`, so the cache reuses one variant for all"
+        },
+        {
+          "id": "c",
+          "label": "The client should have sent `Cache-Control: no-cache`, which forces the CDN to renegotiate encoding"
+        },
+        {
+          "id": "d",
+          "label": "The CDN strips Content-Length, and clients cannot decode a body without it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Without Vary, the cache keys only on URL and serves the wrong variant.",
+        "Distractors blame TTL or client headers instead of the missing cache key dimension."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A single-page app on `https://app.example.com` calls `https://api.example.com/data` with `fetch` and `credentials: 'include'`. The API returns `Access-Control-Allow-Origin: *` and the browser blocks the response. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The wildcard only works for HTTP, so HTTPS origins must be listed in a separate header"
+        },
+        {
+          "id": "b",
+          "label": "Credentialed requests require an explicit origin in Allow-Origin, plus `Access-Control-Allow-Credentials: true`"
+        },
+        {
+          "id": "c",
+          "label": "Browsers block any cross-subdomain request unless the API sets `Access-Control-Max-Age`"
+        },
+        {
+          "id": "d",
+          "label": "The request must be a POST, because CORS wildcards are ignored for GET requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A wildcard origin is not accepted when credentials are included.",
+        "Distractors invent protocol or method restrictions for wildcards."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After login, the server sends `Set-Cookie: sid=abc; Secure; HttpOnly; SameSite=Strict`. A user clicks a link in an email to the site and appears logged out on that first page load, but is logged in after refreshing. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The session expired between the click and the refresh because no Max-Age was set"
+        },
+        {
+          "id": "b",
+          "label": "HttpOnly prevents the cookie being sent on navigations that start from outside the browser"
+        },
+        {
+          "id": "c",
+          "label": "SameSite=Strict withholds the cookie on the cross-site navigation, while the refresh is same-site and sends it"
+        },
+        {
+          "id": "d",
+          "label": "Secure cookies are only sent on the second request, after the TLS session is resumed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Strict omits cookies on cross-site top-level navigations; the refresh originates from the site itself.",
+        "HttpOnly only hides the cookie from scripts, and Secure only requires HTTPS."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A load balancer terminates TLS and forwards plain HTTP to an app. The app builds redirect URLs and keeps generating `http://` links, causing mixed content warnings. Which diagnosis fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The browser caches 301 responses, so it always rewrites links to http"
+        },
+        {
+          "id": "b",
+          "label": "The certificate lacks a SAN entry, so the app rewrites URLs to http"
+        },
+        {
+          "id": "c",
+          "label": "The load balancer fails to negotiate HTTP/2, so the browser downgrades links to http"
+        },
+        {
+          "id": "d",
+          "label": "The app sees an HTTP connection and ignores forwarded-protocol information such as `X-Forwarded-Proto`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Behind TLS termination the app must trust the proxy's protocol header to build correct URLs.",
+        "Other options mix up certificate or HTTP version issues with URL generation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "An API client retries `POST /payments` after a network timeout and customers are sometimes charged twice. Which observations explain or contribute to the problem? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "HTTPS encrypts the retry in a way that makes the server treat it as a new session"
+        },
+        {
+          "id": "b",
+          "label": "The server lacks an idempotency key to detect repeats of the same logical operation"
+        },
+        {
+          "id": "c",
+          "label": "POST is not idempotent by definition, so a repeated request may repeat the side effect"
+        },
+        {
+          "id": "d",
+          "label": "The timeout does not show whether the server processed the first request"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Non-idempotent method, uncertainty after timeout, and no deduplication key together cause duplicates.",
+        "TLS has no bearing on whether a payment is duplicated."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A team serves `/app.js` with `Cache-Control: max-age=31536000, immutable` at a fixed URL. They deploy a bug fix, but many users still run the old script a week later, while a hard refresh fixes it. Server logs show no requests from those users for `/app.js`. What is the most precise diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The CDN ignored the immutable directive, so it served a different file to those users"
+        },
+        {
+          "id": "b",
+          "label": "Browsers considered the cached copy fresh for a year and never revalidated, so the fixed URL needs versioning or a shorter lifetime"
+        },
+        {
+          "id": "c",
+          "label": "The server failed to send an ETag, so browsers fall back to caching forever by default"
+        },
+        {
+          "id": "d",
+          "label": "Hard refresh changes the HTTP method to POST, which bypasses the stale copy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A long freshness lifetime means no request reaches the server; fingerprinted URLs fix this.",
+        "ETag absence does not cause indefinite caching, and hard refresh does not alter the method."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must choose a status code for a `DELETE /files/9` where the file was already deleted earlier by the same client. Criteria: clients retrying safely, honest signaling, and minimal special-casing. Which is the best choice?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return 500 so retrying clients are alerted that the server state was unexpected"
+        },
+        {
+          "id": "b",
+          "label": "Return 204 or 404 consistently, documenting that repeat deletes leave the same end state, so retries need no special handling"
+        },
+        {
+          "id": "c",
+          "label": "Return 409 always, so that clients know the delete conflicts with an earlier one"
+        },
+        {
+          "id": "d",
+          "label": "Return 302 to the collection so clients follow it to confirm deletion"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "DELETE is idempotent in effect; either a consistent 204 or 404 meets the criteria if documented.",
+        "500 signals a server fault; 302 and 409 add misleading semantics."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A page shows per-user account data. Criteria: never serve one user's data to another via shared caches, and still allow the user's browser to reuse the response briefly. Which header is the best choice?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Cache-Control: s-maxage=60`"
+        },
+        {
+          "id": "b",
+          "label": "`Cache-Control: private, max-age=60`"
+        },
+        {
+          "id": "c",
+          "label": "`Cache-Control: public, max-age=60`"
+        },
+        {
+          "id": "d",
+          "label": "`Cache-Control: no-store, max-age=60`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "private bars shared caches while letting the browser cache for 60 seconds.",
+        "public allows shared caching; no-store prevents any reuse; s-maxage targets shared caches."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team debates how to authenticate a mobile API. Criteria: the token must not leak in logs or browser history, and must work for non-browser clients. Which approach best meets the criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Put the token in a custom cookie without Secure so any client can read it"
+        },
+        {
+          "id": "b",
+          "label": "Send a bearer token in the `Authorization` header over HTTPS"
+        },
+        {
+          "id": "c",
+          "label": "Place the token in the query string of every URL so it is easy to replay"
+        },
+        {
+          "id": "d",
+          "label": "Embed the token in the URL path so proxies can route by user"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Headers are not logged as URLs by default and suit non-browser clients.",
+        "URLs, including path and query, commonly appear in logs, history and referrers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A site wants to guarantee browsers only use HTTPS, including after a user types a bare domain. Criteria: protect repeat visits against downgrade attacks and keep initial setup simple. Which is the best addition?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A `Content-Type` of `text/html; charset=utf-8` on all pages"
+        },
+        {
+          "id": "b",
+          "label": "A `Secure` flag on a cookie used only for tracking"
+        },
+        {
+          "id": "c",
+          "label": "A 302 redirect from HTTP to HTTPS on every request, with no other header"
+        },
+        {
+          "id": "d",
+          "label": "A `Strict-Transport-Security` header on HTTPS responses with a long max-age"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "HSTS makes browsers upgrade to HTTPS on repeat visits, resisting downgrade attacks.",
+        "A redirect alone is still exposed on the first plain HTTP request each time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A large video download must resume after interruptions. Criteria: avoid re-downloading received bytes and keep the server stateless. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Split the video into cookies the client sends back piece by piece"
+        },
+        {
+          "id": "b",
+          "label": "Keep a per-client server session that remembers the last byte sent"
+        },
+        {
+          "id": "c",
+          "label": "Return `304 Not Modified` for any request after the first"
+        },
+        {
+          "id": "d",
+          "label": "Support `Range` requests and answer with `206 Partial Content`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Range with 206 lets clients request remaining bytes without server state.",
+        "Session state violates the stateless criterion; 304 gives no body."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team reviews a plan to expose an API over HTTP/1.1 behind a CDN. Criteria: fewer origin hits and correct freshness. Which proposed practices are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use `Cache-Control: public, max-age=3600` on responses containing personalised data"
+        },
+        {
+          "id": "b",
+          "label": "Use `stale-while-revalidate` for content where brief staleness is acceptable"
+        },
+        {
+          "id": "c",
+          "label": "Send `ETag` with responses so caches can revalidate with `If-None-Match`"
+        },
+        {
+          "id": "d",
+          "label": "Add `Vary: Accept-Language` when the body depends on that header"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Validators, Vary and stale-while-revalidate support reuse with correctness.",
+        "Public caching of personalised data risks leaking it to other users."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "An engineer proposes returning `200 OK` with `{\"error\":\"not found\"}` for missing resources, because some old client libraries throw exceptions on 4xx codes. Criteria: monitoring accuracy, cache correctness and intermediary behavior. What is the best judgement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Accept it: status codes are cosmetic since the body carries the real result"
+        },
+        {
+          "id": "b",
+          "label": "Accept it, but use 418 for the error to avoid library exceptions"
+        },
+        {
+          "id": "c",
+          "label": "Reject it: use 500 for missing resources so monitoring picks them up quickly"
+        },
+        {
+          "id": "d",
+          "label": "Reject it: use 404, since monitors, caches and intermediaries rely on status codes, and handle the old libraries separately"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Status codes drive caching, alerts and proxy behavior; a 200 error hides failures and may be cached as success.",
+        "Using 500 misreports a client error as a server fault."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An API serves per-user JSON at `/api/profile`, identified by an `Authorization` header, behind a shared CDN. Criteria: never serve one user's data to another, and still allow browser reuse. Which `Cache-Control` policy best meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`private, max-age=60`, so only the user's own browser may store the response"
+        },
+        {
+          "id": "b",
+          "label": "`no-cache`, since it tells every cache never to store the response at all"
+        },
+        {
+          "id": "c",
+          "label": "`public, max-age=60`, since the Authorization header is part of the cache key by default"
+        },
+        {
+          "id": "d",
+          "label": "`s-maxage=60`, since it limits only browsers and keeps CDN copies user-specific"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`private` forbids shared caches from storing the response while permitting browser reuse.",
+        "`no-cache` still allows storage with revalidation, and `s-maxage` targets shared caches, so they misstate semantics."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team must make a payment-creation endpoint safe for client retries after network timeouts. Criteria: no duplicate charges, minimal client complexity, no reliance on the network's behaviour. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Retry only on 5xx responses, since a timeout always means the server never processed the request"
+        },
+        {
+          "id": "b",
+          "label": "Use `POST` with a client-generated `Idempotency-Key` header that the server stores and replays the result for"
+        },
+        {
+          "id": "c",
+          "label": "Switch to `PUT` at a new URL, since PUT is idempotent by definition so duplicates cannot occur"
+        },
+        {
+          "id": "d",
+          "label": "Add `Cache-Control: no-store` to the request, so intermediaries never forward a repeated request"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A server-side key makes retries safe regardless of where the failure occurred.",
+        "Switching the method name doesn't dedupe unless the URL is stable; a timeout gives no proof the request was unprocessed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A site wants to drop HTTP-to-HTTPS redirects' downgrade window for returning visitors. Criteria: protect users on hostile Wi-Fi, avoid breaking subdomains unexpectedly, and be reversible if misconfigured. Which rollout is the best judgement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Send `Strict-Transport-Security` with a max-age of two years and `preload` at once, since it protects everyone sooner"
+        },
+        {
+          "id": "b",
+          "label": "Rely on the 301 redirect alone, since browsers cache it permanently and so refuse plain HTTP afterwards"
+        },
+        {
+          "id": "c",
+          "label": "Set the `Secure` flag on cookies only, since that makes browsers rewrite every request URL to HTTPS"
+        },
+        {
+          "id": "d",
+          "label": "Send `Strict-Transport-Security` with a short max-age first, then raise it gradually after verifying all subdomains work"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Staged HSTS limits the cost of mistakes while still closing the downgrade window.",
+        "Immediate long preload is hard to reverse; a redirect or Secure cookie flag doesn't force future requests onto HTTPS."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A static asset `app.js` changes on every deploy. Criteria: users see new code immediately after a deploy, the CDN offloads nearly all traffic, and no purge step is required. Which strategy is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Serve a fixed name with `no-cache` and an ETag, so every request is revalidated cheaply"
+        },
+        {
+          "id": "b",
+          "label": "Serve a fixed name with `no-store`, so no cache can ever hold an outdated copy"
+        },
+        {
+          "id": "c",
+          "label": "Fingerprint the filename by content hash and serve it with `max-age=31536000, immutable`"
+        },
+        {
+          "id": "d",
+          "label": "Serve a fixed name with `max-age=300`, accepting up to five minutes of stale code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Hashed names make each version a new URL, so long caching is safe with no purge.",
+        "ETag revalidation still costs a round trip per request; short max-age or no-store fail the stated criteria."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must rank which flaw is most dangerous on a banking site's session cookie. Criteria: the site has an XSS bug in a comment widget and uses HTTPS everywhere. Which missing attribute most directly lets the XSS bug steal the session?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`HttpOnly`, because without it injected script can read `document.cookie`"
+        },
+        {
+          "id": "b",
+          "label": "`Secure`, because without it injected script can read the cookie value"
+        },
+        {
+          "id": "c",
+          "label": "`Path=/`, because without it script from the same origin cannot send the cookie"
+        },
+        {
+          "id": "d",
+          "label": "`Max-Age`, because a session cookie without it is readable by any script"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "HttpOnly blocks script access to the cookie, which is what XSS theft needs.",
+        "Secure governs transport over plain HTTP, not script access; Path and Max-Age don't control readability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A service has a cross-origin SPA calling its API with cookies. Which judgements about the CORS configuration are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Access-Control-Allow-Origin: *` cannot be combined with credentialed requests"
+        },
+        {
+          "id": "b",
+          "label": "Reflecting any `Origin` header with credentials allowed lets any site read authenticated responses"
+        },
+        {
+          "id": "c",
+          "label": "The server should send `Vary: Origin` when it varies the allow-origin value per request"
+        },
+        {
+          "id": "d",
+          "label": "CORS stops a malicious page from sending the request to the API at all"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Wildcards are rejected with credentials, blind reflection is unsafe, and Vary prevents cache mix-ups.",
+        "CORS restricts reading responses in browsers; it doesn't prevent requests being sent."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A news site's CDN serves HTML with `Cache-Control: public, max-age=600`. Editors complain that corrections take ten minutes to appear, but origin load would spike if caching were dropped. Criteria: fast corrections, low origin load, minimal complexity. Which change is the best trade-off?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Set `no-store` on all HTML, since freshness for readers matters more than origin cost"
+        },
+        {
+          "id": "b",
+          "label": "Keep `max-age=600`, since browsers refresh pages on their own after a correction is posted"
+        },
+        {
+          "id": "c",
+          "label": "Use `max-age=0, s-maxage=600` with `stale-while-revalidate`, and purge by URL when a correction is published"
+        },
+        {
+          "id": "d",
+          "label": "Raise `max-age` to a day and ask editors to change article URLs for each correction"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Short browser freshness plus CDN caching and targeted purge gives quick fixes and low origin load.",
+        "no-store ignores load; longer TTLs or URL changes worsen freshness or break links."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a response for `GET /reports/42` that is generated per user language via `Accept-Language`, cached by a shared CDN, and must never return the wrong language. Which header set is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Cache-Control: public, max-age=300` and `Vary: *` to cover every header"
+        },
+        {
+          "id": "b",
+          "label": "`Cache-Control: private, s-maxage=300` and `Vary: Cookie`"
+        },
+        {
+          "id": "c",
+          "label": "`Cache-Control: public, max-age=300` and `Vary: Accept-Language`"
+        },
+        {
+          "id": "d",
+          "label": "`Cache-Control: public, max-age=300` and `Content-Language: fr` only"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Vary on Accept-Language makes the cache key include the negotiated header.",
+        "Content-Language only labels the response; Vary: * effectively prevents reuse and Vary: Cookie keys on the wrong header."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design an upload endpoint for 5 GB files. Constraints: the client must resume after interruptions, the server must not buffer whole bodies in memory, and the server must be able to reject an oversize upload before the body is sent. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Client base64-encodes the file into a JSON `POST` so the server can validate the size field"
+        },
+        {
+          "id": "b",
+          "label": "Client sends one `POST` with `Transfer-Encoding: chunked` and retries from the start on any failure"
+        },
+        {
+          "id": "c",
+          "label": "Client sends one `PUT` with `Connection: keep-alive`, and the server buffers the body to check its size"
+        },
+        {
+          "id": "d",
+          "label": "Client sends `Expect: 100-continue` after declaring `Content-Length`, and uploads parts with `PATCH` and `Content-Range` to an upload URL that reports the stored offset"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Expect lets the server refuse early, and offset-based part uploads provide resume without full buffering.",
+        "Whole-body retries, buffering and base64 each violate one stated constraint."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design cookie settings for a session on `app.example.com` that must survive a top-level link click from an external site, resist CSRF as far as cookies allow, resist XSS theft, and never travel over plain HTTP. Which attribute set fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Secure; HttpOnly; SameSite=Lax`"
+        },
+        {
+          "id": "b",
+          "label": "`SameSite=Lax; Domain=example.com`, since a wider Domain makes the cookie Secure"
+        },
+        {
+          "id": "c",
+          "label": "`HttpOnly; SameSite=Strict`, since Strict also allows cross-site link navigation to carry it"
+        },
+        {
+          "id": "d",
+          "label": "`Secure; SameSite=None`, with no HttpOnly so the SPA can read it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Lax sends the cookie on top-level GET navigations, with Secure and HttpOnly covering the other constraints.",
+        "Strict withholds the cookie on cross-site navigation; None weakens CSRF protection; Domain doesn't add Secure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design an API change that renames a JSON field in `/v1/orders` without breaking old clients, lets clients opt into the new shape, and allows caches to keep both shapes separate. Which design works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return the new field and drop the old one, then send `Warning` headers to old clients"
+        },
+        {
+          "id": "b",
+          "label": "Change the shape for everyone on `POST` only, since GET responses are never cached"
+        },
+        {
+          "id": "c",
+          "label": "Serve the new shape from a media type like `application/vnd.shop.v2+json` negotiated through `Accept`, with `Vary: Accept`"
+        },
+        {
+          "id": "d",
+          "label": "Return status `301` to the same URL, so clients upgrade after following the redirect"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Content negotiation with Vary lets clients opt in while caches keep shapes apart.",
+        "Dropping the field breaks old clients; a redirect to the same URL is meaningless."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design an update flow for `PUT /docs/7` where two editors may save simultaneously. Constraints: no lost updates, no server-side locks held between requests, and clients must learn when they lost the race. Which design meets these?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Accept every PUT and return `200`, relying on the last write to be the newest"
+        },
+        {
+          "id": "b",
+          "label": "Require `If-Modified-Since` on PUT and answer `304` when the document differs"
+        },
+        {
+          "id": "c",
+          "label": "Return an ETag on GET, require `If-Match` on PUT, and answer `412 Precondition Failed` on mismatch"
+        },
+        {
+          "id": "d",
+          "label": "Lock the document on GET and release it with a `DELETE` of the lock after the PUT"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "If-Match with 412 gives optimistic concurrency without locks.",
+        "Last write wins loses updates; If-Modified-Since/304 is for cache validation, and locks violate a constraint."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design a response-header set for an authenticated HTML page that must resist clickjacking and MIME sniffing, and not be stored by shared caches. Which headers help meet all of these? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Cache-Control: private, no-store`"
+        },
+        {
+          "id": "b",
+          "label": "`Content-Security-Policy: frame-ancestors 'none'`"
+        },
+        {
+          "id": "c",
+          "label": "`X-Content-Type-Options: nosniff`"
+        },
+        {
+          "id": "d",
+          "label": "`Access-Control-Allow-Origin: 'none'`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "frame-ancestors blocks framing, nosniff stops sniffing, and private/no-store keeps shared caches out.",
+        "ACAO is a CORS header and doesn't prevent framing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A team serves an API over HTTPS through a proxy that terminates TLS and talks to the app over plain HTTP. The app builds absolute redirect URLs and wrongly emits `http://` links, and logs show the proxy's IP for every client. Which fix meets both problems without trusting spoofed input?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Make the app trust any `X-Forwarded-For` value sent by clients so the real address is recorded"
+        },
+        {
+          "id": "b",
+          "label": "Make the app read `Host` and `Referer` from the client to infer scheme and address"
+        },
+        {
+          "id": "c",
+          "label": "Have the proxy set `X-Forwarded-Proto` and `X-Forwarded-For` (overwriting client values), and configure the app to trust them only from the proxy"
+        },
+        {
+          "id": "d",
+          "label": "Turn off TLS termination so the app sees the original connection directly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Proxy-set forwarding headers trusted only from the proxy fix scheme and client IP safely.",
+        "Client-supplied headers can be spoofed; Host/Referer don't carry scheme or client IP reliably."
+      ],
+      "reviewed": false
+    }
+  ]
+}

@@ -1,0 +1,2490 @@
+{
+  "version": 1,
+  "topic": "web-security",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which technique is the standard primary defense against SQL injection?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Parameterized queries"
+        },
+        {
+          "id": "b",
+          "label": "Client-side form checks"
+        },
+        {
+          "id": "c",
+          "label": "Hiding the database port"
+        },
+        {
+          "id": "d",
+          "label": "Serving pages over HTTPS"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Parameterized queries (prepared statements) keep user input separate from SQL code.",
+        "HTTPS and hidden ports do not stop malicious input reaching the query."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the acronym XSS stand for?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cross-site scripting"
+        },
+        {
+          "id": "b",
+          "label": "Extended style sheets"
+        },
+        {
+          "id": "c",
+          "label": "Cross-site sessions"
+        },
+        {
+          "id": "d",
+          "label": "Cross-server scripting"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "XSS is cross-site scripting.",
+        "Other options are look-alike terms that do not name a real attack."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which HTTP response header lets a site declare which sources of scripts the browser may load and run?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Content-Type"
+        },
+        {
+          "id": "b",
+          "label": "Accept-Language"
+        },
+        {
+          "id": "c",
+          "label": "Cache-Control"
+        },
+        {
+          "id": "d",
+          "label": "Content-Security-Policy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Content-Security-Policy restricts the sources of scripts and other content.",
+        "Content-Type only declares the media type, and Cache-Control governs caching."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which cookie attribute prevents JavaScript running in the page from reading the cookie?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Path"
+        },
+        {
+          "id": "b",
+          "label": "HttpOnly"
+        },
+        {
+          "id": "c",
+          "label": "Secure"
+        },
+        {
+          "id": "d",
+          "label": "Expires"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "HttpOnly hides the cookie from document.cookie.",
+        "Secure only limits the cookie to HTTPS, which is a common mix-up."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does CSRF stand for?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Client-side request forwarding"
+        },
+        {
+          "id": "b",
+          "label": "Cross-site request forgery"
+        },
+        {
+          "id": "c",
+          "label": "Cross-script resource filtering"
+        },
+        {
+          "id": "d",
+          "label": "Cross-server response forgery"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "CSRF is cross-site request forgery.",
+        "Other options are invented phrases built from similar words."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are recognized defenses against CSRF? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Output encoding of user input"
+        },
+        {
+          "id": "b",
+          "label": "Salted password hashing"
+        },
+        {
+          "id": "c",
+          "label": "The SameSite cookie attribute"
+        },
+        {
+          "id": "d",
+          "label": "Anti-CSRF tokens in forms"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Anti-CSRF tokens and SameSite cookies stop forged cross-site requests.",
+        "Output encoding targets XSS and password hashing protects stored credentials."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A team notices that their login form sends usernames and passwords to the server over plain `http://`, so anyone on the network can read them. Which technology should they adopt to encrypt traffic between browser and server?",
+      "options": [
+        {
+          "id": "a",
+          "label": "MD5 hashing"
+        },
+        {
+          "id": "b",
+          "label": "TLS (HTTPS)"
+        },
+        {
+          "id": "c",
+          "label": "CORS headers"
+        },
+        {
+          "id": "d",
+          "label": "Base64 encoding"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "TLS, used through HTTPS, encrypts data in transit.",
+        "Base64 is encoding, not encryption, and CORS controls cross-origin access."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do parameterized queries prevent SQL injection?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Input is checked by the browser first, so the server never sees bad values"
+        },
+        {
+          "id": "b",
+          "label": "Input has every quote character deleted before the query text is assembled"
+        },
+        {
+          "id": "c",
+          "label": "Input is sent separately from the query text, so it is treated only as data"
+        },
+        {
+          "id": "d",
+          "label": "Input is encrypted before the query runs, so special characters become harmless"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The database fixes the query structure first, so input cannot change its meaning.",
+        "Stripping characters or browser checks can be bypassed and are not the mechanism."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "An attacker posts a comment containing a script. The site saves it and runs it for every visitor who views the page. Which type of attack is this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "CSRF"
+        },
+        {
+          "id": "b",
+          "label": "SQL injection"
+        },
+        {
+          "id": "c",
+          "label": "Stored XSS"
+        },
+        {
+          "id": "d",
+          "label": "Reflected XSS"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Payload saved on the server and served to many users is stored XSS.",
+        "Reflected XSS comes from a single request, not saved data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A page inserts a user's name into HTML without encoding. A user sets their name to `<script>alert(1)</script>`. What will most likely happen when the page loads?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The name is shown as plain text unchanged"
+        },
+        {
+          "id": "b",
+          "label": "The database deletes the user's record"
+        },
+        {
+          "id": "c",
+          "label": "The browser runs the script as part of the page"
+        },
+        {
+          "id": "d",
+          "label": "The server rejects the request with an error"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Unencoded input is parsed as HTML, so the browser executes the script.",
+        "Showing plain text would only happen if the output were encoded."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why can a malicious site trigger a CSRF attack against a bank where the user is logged in?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The bank's passwords are sent in plain text"
+        },
+        {
+          "id": "b",
+          "label": "The malicious site can read the bank's cookie values directly"
+        },
+        {
+          "id": "c",
+          "label": "The bank's server cannot tell which HTTP method was used"
+        },
+        {
+          "id": "d",
+          "label": "The browser automatically attaches the bank's cookies to requests sent to the bank"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Browsers add cookies automatically, so forged requests look authenticated.",
+        "The attacker does not read cookies; same-origin policy blocks that."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is validating input only in the browser not enough to secure a web app?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Browsers cannot run validation code reliably"
+        },
+        {
+          "id": "b",
+          "label": "Validation in JavaScript slows the page too much"
+        },
+        {
+          "id": "c",
+          "label": "Attackers can skip the browser and send requests straight to the server"
+        },
+        {
+          "id": "d",
+          "label": "Server code cannot validate the same rules"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Client-side checks are under the user's control and easily bypassed.",
+        "The server must validate again; speed and capability are not the issue."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are examples of insecure configuration in a web application? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Default admin credentials left active"
+        },
+        {
+          "id": "b",
+          "label": "Applying security patches regularly"
+        },
+        {
+          "id": "c",
+          "label": "Disabling services the app does not use"
+        },
+        {
+          "id": "d",
+          "label": "Directory listing enabled on the web server"
+        },
+        {
+          "id": "e",
+          "label": "Detailed stack traces shown to users"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Default credentials, verbose errors and directory listing expose the app or its internals.",
+        "Patching and disabling unused services are hardening steps."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A shop's error page shows the full stack trace, including SQL table names and the server's file paths, whenever a request fails. A tester flags this as a security issue. Why is it a problem?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It lets the database skip parameterized queries"
+        },
+        {
+          "id": "b",
+          "label": "It reveals internal details that help an attacker plan further attacks"
+        },
+        {
+          "id": "c",
+          "label": "It makes the page load slower for all customers"
+        },
+        {
+          "id": "d",
+          "label": "It breaks the browser's same-origin policy checks"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Verbose errors leak internals such as table names and paths, which aids attackers.",
+        "The leak is an information disclosure issue, unrelated to speed or same-origin policy."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do parameterized queries prevent SQL injection?",
+      "options": [
+        {
+          "id": "a",
+          "label": "They limit each query to a single row so injected statements return no extra data"
+        },
+        {
+          "id": "b",
+          "label": "They strip quotes and semicolons from input before the database sees the query"
+        },
+        {
+          "id": "c",
+          "label": "They encrypt the query string so an attacker cannot read or alter its structure"
+        },
+        {
+          "id": "d",
+          "label": "They send user input separately from the SQL text, so it is treated only as data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Parameters are bound as values and never parsed as SQL syntax.",
+        "Stripping characters is a fragile filter, not the mechanism of parameterization."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A forum saves each comment in its database and shows it unescaped to everyone who opens the thread. A comment containing a script tag runs for every visitor. What type of XSS is this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Stored XSS, since the payload is saved on the server and served to later visitors"
+        },
+        {
+          "id": "b",
+          "label": "Reflected XSS, since the payload is echoed back in the response"
+        },
+        {
+          "id": "c",
+          "label": "DOM-based XSS, since the browser builds the page from the DOM"
+        },
+        {
+          "id": "d",
+          "label": "Self-XSS, since the attacker only attacks their own browser session"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Payloads persisted server-side and served to other users are stored XSS.",
+        "Reflected XSS needs the victim to follow a crafted link; here no link is needed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What makes cross-site request forgery (CSRF) possible against a site that uses cookie-based sessions?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Browsers send the site's cookies with requests it triggers from other sites"
+        },
+        {
+          "id": "b",
+          "label": "Session cookies are stored in plain text on the server's disk"
+        },
+        {
+          "id": "c",
+          "label": "HTTP requests carry no information about which page started them at all"
+        },
+        {
+          "id": "d",
+          "label": "Attackers can read the victim's cookies using JavaScript on their own page"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Browsers attach cookies automatically, so a forged cross-site request looks authenticated.",
+        "Reading cookies cross-site is blocked by the same-origin policy; CSRF doesn't need it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the HttpOnly flag on a session cookie do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It forces the browser to send the cookie only over encrypted HTTPS connections"
+        },
+        {
+          "id": "b",
+          "label": "It stops page JavaScript from reading the cookie, so an XSS flaw cannot steal it directly"
+        },
+        {
+          "id": "c",
+          "label": "It prevents the cookie from being sent on requests that start from other sites"
+        },
+        {
+          "id": "d",
+          "label": "It makes the cookie expire when the browser tab is closed by the user"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "HttpOnly hides the cookie from document.cookie.",
+        "Sending only over HTTPS is Secure; cross-site restriction is SameSite."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is validating a form only with client-side JavaScript not enough to protect a web application?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Client-side checks cannot compare values against any regular expression"
+        },
+        {
+          "id": "b",
+          "label": "Browsers disable validation scripts when the page is loaded over HTTPS"
+        },
+        {
+          "id": "c",
+          "label": "JavaScript validation is too slow to catch malicious values in time"
+        },
+        {
+          "id": "d",
+          "label": "An attacker can send requests directly to the server and skip the browser code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Attackers control the client and can bypass its checks, so the server must validate.",
+        "The other options invent technical limits that don't exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are examples of insecure configuration? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The default admin password of a framework console is left unchanged"
+        },
+        {
+          "id": "b",
+          "label": "Directory listing is enabled on a folder holding uploaded files"
+        },
+        {
+          "id": "c",
+          "label": "The site sends an HSTS header telling browsers to use HTTPS only"
+        },
+        {
+          "id": "d",
+          "label": "Error pages show full stack traces and database details to visitors"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Default credentials, verbose errors and open directory listings expose the app.",
+        "HSTS is a hardening setting, not a misconfiguration."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A search page shows the text 'You searched for: ' followed by the q parameter from the URL, without escaping it. A tester opens a link with q set to a script tag and sees the script run. Nothing is stored on the server. What best classifies this flaw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reflected XSS, because the input in the request is echoed straight into the response"
+        },
+        {
+          "id": "b",
+          "label": "SQL injection, because a URL parameter is used to build the page"
+        },
+        {
+          "id": "c",
+          "label": "CSRF, because the link makes the browser send a request the user never intended"
+        },
+        {
+          "id": "d",
+          "label": "Stored XSS, because the script remains on the server for later users"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Input echoed immediately into the response without escaping is reflected XSS.",
+        "Stored XSS needs persistence; CSRF forges actions rather than running script."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Node app builds a query with `\"SELECT * FROM users WHERE name = '\" + name + \"'\"`. Which replacement removes the injection risk?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`db.query(\"SELECT * FROM users WHERE name = ?\", [name])`"
+        },
+        {
+          "id": "b",
+          "label": "`db.query(\"SELECT * FROM users WHERE name = '\" + name.slice(0, 20) + \"'\")`"
+        },
+        {
+          "id": "c",
+          "label": "`db.query(\"SELECT * FROM users WHERE name = '\" + name.toLowerCase() + \"'\")`"
+        },
+        {
+          "id": "d",
+          "label": "`db.query(\"SELECT * FROM users WHERE name = '\" + name.trim() + \"'\")`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A placeholder binds name as data.",
+        "Trimming, lowercasing or truncating still concatenates input into the SQL."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A page inserts a user's bio into the HTML body. The bio is `<b>Hi</b>`. Which output shows the text literally instead of rendering bold when HTML-encoded?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`&lt;b&gt;Hi&lt;/b&gt;`"
+        },
+        {
+          "id": "b",
+          "label": "`%3Cb%3EHi%3C%2Fb%3E`"
+        },
+        {
+          "id": "c",
+          "label": "`\\u003cb\\u003eHi`"
+        },
+        {
+          "id": "d",
+          "label": "`<b>Hi</b>`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "HTML-encoding turns angle brackets into entities so the browser shows them as text.",
+        "URL and JavaScript escapes are for other contexts and won't encode correctly in an HTML body."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must protect a cookie-authenticated `POST /change-email` form against CSRF. Which change do you make?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Require the form to be submitted over HTTPS with a longer cookie lifetime"
+        },
+        {
+          "id": "b",
+          "label": "Put a random per-session token in the form and reject requests where it is missing or wrong"
+        },
+        {
+          "id": "c",
+          "label": "Check the Content-Length header on the incoming request is within limits"
+        },
+        {
+          "id": "d",
+          "label": "Hide the form's submit button until the user's session is verified by script"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A secret token an attacker's page cannot know proves the request came from your form.",
+        "HTTPS and cookie lifetime don't stop the browser attaching cookies to forged requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which Set-Cookie header correctly hardens a session cookie against script access, plaintext transport and most cross-site sends?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Set-Cookie: session=abc123; HttpOnly; SameSite=None; Domain=.com`"
+        },
+        {
+          "id": "b",
+          "label": "`Set-Cookie: session=abc123; HttpOnly; Secure; SameSite=Lax`"
+        },
+        {
+          "id": "c",
+          "label": "`Set-Cookie: session=abc123; Secure; SameSite=None; Path=/`"
+        },
+        {
+          "id": "d",
+          "label": "`Set-Cookie: session=abc123; Secure; Path=/; Max-Age=999999`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "HttpOnly, Secure and SameSite=Lax cover the three goals.",
+        "Other options omit HttpOnly or Secure, or allow cross-site sending with SameSite=None."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A script shows a user comment with `box.innerHTML = comment;`. Which line displays it safely as plain text?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`box.innerHTML = comment.toLowerCase();`"
+        },
+        {
+          "id": "b",
+          "label": "`box.textContent = comment;`"
+        },
+        {
+          "id": "c",
+          "label": "`box.innerHTML = comment.trim();`"
+        },
+        {
+          "id": "d",
+          "label": "`box.outerHTML = comment;`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "textContent treats the value as text, never as markup.",
+        "Trimming, lowercasing or outerHTML still parse markup and can run event handlers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A bank app uses cookie sessions and has a state-changing `POST /transfer` endpoint. Which changes help stop CSRF against it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Change the endpoint to `GET /transfer` so it is easier to log"
+        },
+        {
+          "id": "b",
+          "label": "Set SameSite=Lax or Strict on the session cookie"
+        },
+        {
+          "id": "c",
+          "label": "Validate a per-session anti-CSRF token on each POST"
+        },
+        {
+          "id": "d",
+          "label": "Validate the amount field with JavaScript before the form submits"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "SameSite cookies and anti-CSRF tokens both stop forged cross-site requests.",
+        "GET for state changes worsens CSRF, and client-side validation doesn't affect forged requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A product list endpoint builds `\"SELECT * FROM products ORDER BY \" + req.query.sort`. A developer tries a placeholder for the column name, but the database rejects it. The sort values the UI uses are price, name and rating. What is the best fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Escape single quotes in the sort value and keep concatenating it"
+        },
+        {
+          "id": "b",
+          "label": "Run the query as a lower-privilege user and keep the current concatenation"
+        },
+        {
+          "id": "c",
+          "label": "Check that the sort value is one of price, name or rating, then use it in the query"
+        },
+        {
+          "id": "d",
+          "label": "Wrap the sort value in a parameter placeholder and cast it to a string"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Identifiers can't be bound as parameters, so an allow-list of known columns is the standard defense.",
+        "Quote escaping doesn't help in an unquoted position, and privilege reduction doesn't remove the injection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A search feature must find items whose name contains the user's term. Which database call is safe against SQL injection?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`db.query(\"SELECT * FROM items WHERE name LIKE '%\" + esc(term) + \"%'\")` where `esc` doubles single quotes"
+        },
+        {
+          "id": "b",
+          "label": "`db.query(\"SELECT * FROM items WHERE name LIKE '%?%'\", [term])`"
+        },
+        {
+          "id": "c",
+          "label": "`db.query(\"SELECT * FROM items WHERE name LIKE ?\", [\"%\" + term + \"%\"])`"
+        },
+        {
+          "id": "d",
+          "label": "`db.query(\"SELECT * FROM items WHERE name LIKE '%\" + term.replace(/;/g, \"\") + \"%'\")`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The wildcards are added to the bound value, so the term is always sent as data, never as SQL.",
+        "A placeholder inside quotes is a literal question mark, and hand-rolled escaping or stripping characters is incomplete."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A page renders `<input value=\"USER\">`, where USER is text a visitor typed earlier. Which defense is correct for this exact output context?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Escape the value as a JavaScript string, because attribute values are evaluated as script by browsers"
+        },
+        {
+          "id": "b",
+          "label": "URL-encode the value with `encodeURIComponent` so special characters cannot be parsed by the browser"
+        },
+        {
+          "id": "c",
+          "label": "Remove only angle brackets from the value, because an attribute cannot contain tags that run"
+        },
+        {
+          "id": "d",
+          "label": "HTML-encode the value, including double quotes, so it cannot close the attribute or add new ones"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "In a quoted attribute the attacker must break out with a quote, so HTML attribute encoding of quotes is the matching defense.",
+        "Stripping brackets or using URL or JS encoding targets a different context and leaves attribute injection like `\" onfocus=...` possible."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which `Set-Cookie` attributes best protect a session cookie on an HTTPS site from script access and from being sent on most cross-site requests?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Secure; Path=/; Max-Age=86400`"
+        },
+        {
+          "id": "b",
+          "label": "`Secure; SameSite=None; Path=/`"
+        },
+        {
+          "id": "c",
+          "label": "`HttpOnly; Secure; SameSite=Lax`"
+        },
+        {
+          "id": "d",
+          "label": "`HttpOnly; Domain=.example.com; SameSite=None`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "HttpOnly blocks script reads, Secure limits to HTTPS, and Lax withholds the cookie from most cross-site subrequests.",
+        "SameSite=None sends the cookie cross-site and no HttpOnly leaves it readable by injected script."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must protect a state-changing `POST /settings` form from CSRF in a session-cookie app. Which server-side check is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Confirm the body is URL-encoded form data, since attackers cannot forge that format from another site"
+        },
+        {
+          "id": "b",
+          "label": "Confirm the session cookie is present and valid, since browsers only send it from the user's own pages"
+        },
+        {
+          "id": "c",
+          "label": "Require a secret value stored in a cookie, since the browser attaches that cookie to every request automatically"
+        },
+        {
+          "id": "d",
+          "label": "Compare an unpredictable per-session token from a hidden form field with the token stored server-side"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The attacker's page cannot read the token, so a matching token proves the request came from the app's own form.",
+        "Cookies are attached automatically to forged requests, and cross-site forms can send URL-encoded bodies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A login page redirects to the URL in `?next=` after sign-in. To prevent an open redirect to phishing sites, which fix should you apply?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reject values that do not start with `https://`, since that ensures an encrypted connection to our site"
+        },
+        {
+          "id": "b",
+          "label": "Remove the substring `http://` from the value once, then redirect to whatever remains"
+        },
+        {
+          "id": "c",
+          "label": "Accept only values matching a server-side allowlist of internal paths, else redirect to a default page"
+        },
+        {
+          "id": "d",
+          "label": "URL-encode the value before placing it in the `Location` header so it cannot be parsed as another site"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An allowlist of internal destinations guarantees the redirect stays on the site.",
+        "Prefix checks, single-pass stripping and encoding all still permit external hosts such as `https://evil.example`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which changes harden the configuration of a production web application? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep directory listing enabled so support staff can find uploaded files quickly"
+        },
+        {
+          "id": "b",
+          "label": "Return generic error pages to users and keep stack traces in server-side logs only"
+        },
+        {
+          "id": "c",
+          "label": "Send a `Content-Security-Policy` that limits `script-src` to the app's own origin and omits `unsafe-inline`"
+        },
+        {
+          "id": "d",
+          "label": "Send `Access-Control-Allow-Origin: *` together with credentials so every client works"
+        },
+        {
+          "id": "e",
+          "label": "Send `X-Content-Type-Options: nosniff` so browsers respect the declared content types"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "CSP, nosniff and generic errors reduce script injection, content sniffing and information leakage.",
+        "Wildcard CORS with credentials and directory listing expose data rather than harden the app."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A report page lets users pick a sort column from a dropdown. The server builds `\"SELECT * FROM orders ORDER BY \" + request.sort`. The team already uses placeholders for values elsewhere. Which fix is appropriate for this clause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Map the requested value to a fixed allowlist of column names and append only the matched name"
+        },
+        {
+          "id": "b",
+          "label": "Bind the sort value as a parameter by writing `ORDER BY ?` and passing the request value"
+        },
+        {
+          "id": "c",
+          "label": "Pass the sort string as an argument to a stored procedure that concatenates it inside the database"
+        },
+        {
+          "id": "d",
+          "label": "Escape single quotes in the value, since column names in ORDER BY are not wrapped in quotes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Identifiers cannot be bound as parameters, so only known column names from an allowlist should reach the SQL text.",
+        "Binding yields a constant expression, and escaping quotes or moving concatenation into a procedure still allows injection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A comment form deletes the text `<script>` from input before saving. A stored comment `<img src=x onerror=alert(1)>` still runs script for every viewer. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The comment is saved in the database, so storing user text at all is what creates the vulnerability"
+        },
+        {
+          "id": "b",
+          "label": "The filter is case-sensitive, so the real fix is to also strip `<SCRIPT>` and similar variants"
+        },
+        {
+          "id": "c",
+          "label": "The defense is an input blacklist rather than encoding output for the HTML context where data is rendered"
+        },
+        {
+          "id": "d",
+          "label": "The `img` tag loads an external resource, so blocking image tags in comments removes the underlying cause"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Blacklists miss countless payloads; encoding on output for the right context neutralises any markup.",
+        "Adding variants or blocking one tag just moves to the next payload, and storing text is not itself the flaw."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An app sets its session cookie `SameSite=Lax`. A link on an attacker's site sends the victim to `https://bank.example/transfer?to=x&amt=100`, and the transfer executes. Why did Lax not prevent it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lax cookies are still sent on top-level GET navigations, and this app changes state on a GET request"
+        },
+        {
+          "id": "b",
+          "label": "SameSite is ignored over HTTPS unless the cookie also carries the `HttpOnly` attribute in the header"
+        },
+        {
+          "id": "c",
+          "label": "Lax only restricts cookies on same-site requests, so every cross-site request carries the cookie anyway"
+        },
+        {
+          "id": "d",
+          "label": "Browsers send Lax cookies on any cross-site request started by a link, form post, image or script"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Lax allows cookies on top-level navigations using safe methods, so state changes must never happen on GET.",
+        "The distractors misstate Lax as sending cookies on all cross-site requests, or as depending on HttpOnly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`GET /invoices/1042` returns any invoice to any logged-in user who guesses the ID. Authentication itself works correctly. What is the root flaw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The endpoint uses GET, so moving the lookup to a POST request would stop unauthorized reads"
+        },
+        {
+          "id": "b",
+          "label": "Missing rate limiting lets attackers enumerate IDs, which is the root flaw behind the exposure"
+        },
+        {
+          "id": "c",
+          "label": "The server never checks that the invoice belongs to the requesting user (missing object-level authorization)"
+        },
+        {
+          "id": "d",
+          "label": "IDs are sequential, so predictable numbering is the flaw and random IDs would fully fix it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Access to an object must be authorised per object; authentication only proves identity.",
+        "Random IDs, POST and rate limits only obscure or slow the attack while the missing ownership check remains."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An API echoes the request's `Origin` header into `Access-Control-Allow-Origin` and also sends `Access-Control-Allow-Credentials: true`. What does this enable?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Any website a logged-in user visits can read that user's authenticated API responses"
+        },
+        {
+          "id": "b",
+          "label": "Attackers can send forged requests but cannot read responses, since browsers block cross-origin reads"
+        },
+        {
+          "id": "c",
+          "label": "Attackers can downgrade the connection to HTTP, since the origin check ignores the URL scheme"
+        },
+        {
+          "id": "d",
+          "label": "Attackers can inject SQL through the Origin header, since the server copies its value into queries"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Reflecting any origin with credentials lets attacker pages read private data using the victim's cookies.",
+        "The distractors describe CSRF-only, SQL injection or downgrade attacks that this header pairing does not cause."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An attacker plants a known session ID in a victim's browser through a crafted link. The victim then logs in, and the attacker uses that same ID to act as the victim. Which step is faulty?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The session ID is not regenerated at login, so the ID the attacker knows becomes an authenticated one"
+        },
+        {
+          "id": "b",
+          "label": "The login form is served over HTTP, so the attacker sniffed the password and then created a session"
+        },
+        {
+          "id": "c",
+          "label": "The session ID is too short, so the attacker got it by brute force before the victim signed in"
+        },
+        {
+          "id": "d",
+          "label": "The cookie lacks `HttpOnly`, so injected script read the ID after the victim had authenticated"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Issuing a fresh ID on privilege change prevents a pre-planted ID from gaining authenticated access.",
+        "The distractors describe guessing, script theft or sniffing, none of which the scenario involves."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "An app uses parameterized queries for user input, yet a SQL injection is confirmed. Which situations could explain it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A bound parameter contains a single quote character that the driver then passes through"
+        },
+        {
+          "id": "b",
+          "label": "The prepared statement is reused across several requests on a pooled connection"
+        },
+        {
+          "id": "c",
+          "label": "A stored procedure builds a dynamic SQL string by concatenating its argument"
+        },
+        {
+          "id": "d",
+          "label": "A value saved safely earlier is read back and concatenated into a later query"
+        },
+        {
+          "id": "e",
+          "label": "The sort direction from the request is concatenated into the `ORDER BY` clause"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Injection survives wherever untrusted text still reaches SQL text: identifiers, dynamic SQL in procedures, and second-order use.",
+        "Quotes in bound values and statement reuse are handled as data and do not cause injection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A profile page renders `<a href=\"USER_URL\">My website</a>`. The app HTML-encodes USER_URL, yet a user sets it to `javascript:alert(document.cookie)` and the script runs on click. What is the best diagnosis and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Encoding was applied too early, so encode twice and the colon will become an entity"
+        },
+        {
+          "id": "b",
+          "label": "The cookie lacks `HttpOnly`, so setting that flag removes the vulnerability entirely"
+        },
+        {
+          "id": "c",
+          "label": "The double quotes were not encoded, so the payload broke out of the attribute and added a handler"
+        },
+        {
+          "id": "d",
+          "label": "HTML encoding does not cover URL context; validate that the scheme is http or https before output"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The payload needs no quotes or brackets; the dangerous part is the URL scheme, which only a scheme allowlist stops.",
+        "Double encoding and HttpOnly do not stop script execution, and no attribute breakout occurs here."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A comment filter removes `<script>` tags with a regex before saving. A tester stores `<img src=x onerror=alert(1)>` and the script runs when other users view the page. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The regex is case sensitive, so adding a case-insensitive flag would fully close the hole in the filter"
+        },
+        {
+          "id": "b",
+          "label": "The filter targets one known tag instead of encoding output for the HTML context where the data is rendered"
+        },
+        {
+          "id": "c",
+          "label": "Image tags are always unsafe, so the filter should drop every tag that can load an external resource"
+        },
+        {
+          "id": "d",
+          "label": "The filter runs on the server, when it should run in the browser so that it sees the final rendered DOM"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Blacklist filtering on input misses other script vectors; context-aware output encoding addresses the actual cause.",
+        "Distractors treat the problem as a regex detail or a tag-specific issue, which leaves other event-handler vectors open."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A site sets its session cookie with `SameSite=Lax`. It also has an endpoint `GET /account/delete?confirm=1` that deletes the logged-in account. Why can an attacker's page still trigger the deletion?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lax cookies are sent on cross-site top-level GET navigations, so a link or redirect carries the session"
+        },
+        {
+          "id": "b",
+          "label": "Lax is ignored by browsers unless the cookie also carries the `Secure` flag in the response header"
+        },
+        {
+          "id": "c",
+          "label": "Lax applies only to POST requests, so every GET request is sent with cookies regardless of its origin"
+        },
+        {
+          "id": "d",
+          "label": "Lax cookies are blocked on all cross-site requests, so the attacker must be using an XSS flaw instead"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Lax still sends cookies on top-level cross-site GET navigations, so state-changing GET endpoints stay CSRF-able.",
+        "Distractors misstate what Lax blocks or assume an unrelated flaw such as XSS."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A search endpoint binds the filter value as a parameter, but builds the clause `ORDER BY ` + `req.query.sort` by string concatenation. A tester injects SQL through `sort`. Why did parameter binding not help here?",
+      "options": [
+        {
+          "id": "a",
+          "label": "ORDER BY is evaluated before WHERE, so the bound values are not yet substituted when it is parsed"
+        },
+        {
+          "id": "b",
+          "label": "Bound parameters are escaped by the client library, which fails on strings that contain sort keywords"
+        },
+        {
+          "id": "c",
+          "label": "Placeholders bind values only, not identifiers or keywords, so the concatenated part still reaches the parser as code"
+        },
+        {
+          "id": "d",
+          "label": "Placeholders are applied only to the first clause of a statement, so later clauses are left unescaped"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Parameter binding covers literal values; column names and keywords must be allowlisted instead.",
+        "Distractors invent clause-ordering or escaping explanations that are not how prepared statements work."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Logs show an external client calling `/preview?url=http://169.254.169.254/latest/meta-data/` on a thumbnail service, and the response contains cloud instance metadata. Which weakness does this reveal?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An open redirect, because the endpoint sends users to a URL that the attacker picks"
+        },
+        {
+          "id": "b",
+          "label": "XML external entity processing, because the endpoint resolves an external resource named in the input"
+        },
+        {
+          "id": "c",
+          "label": "Cross-site request forgery, because the endpoint performs an action without any anti-forgery token"
+        },
+        {
+          "id": "d",
+          "label": "Server-side request forgery, because the server fetches user-chosen URLs from inside the trusted network"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The server itself makes the request to an internal address chosen by the attacker, which is SSRF.",
+        "Distractors name other vulnerabilities that involve URLs or external references but do not match the server-side fetch."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An API verifies tokens with `jwt.verify(token, rsaPublicKey)` and lets the token header choose the algorithm. An attacker signs a token with HS256 using the RSA public key as the secret, and it is accepted. What went wrong?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The public key was too short, so the attacker could factor it and forge RSA signatures offline"
+        },
+        {
+          "id": "b",
+          "label": "HS256 tokens are always accepted by JWT libraries once any valid RSA token has been issued earlier"
+        },
+        {
+          "id": "c",
+          "label": "The token lacked an expiry claim, so signatures remained valid and could be replayed indefinitely"
+        },
+        {
+          "id": "d",
+          "label": "The library let the untrusted header pick HMAC, so the public key was used as a shared secret"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "This is algorithm confusion: the verifier must fix the expected algorithm rather than trust the header.",
+        "Distractors blame key size, expiry or library behaviour, none of which explain acceptance of a forged HMAC token."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A tester steals session cookies by exploiting an XSS flaw. Which findings made the impact of the XSS worse, without being its cause? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The CSP allows `'unsafe-inline'` in `script-src`, so injected inline scripts run"
+        },
+        {
+          "id": "b",
+          "label": "The session cookie has the `Secure` flag, so it travels only over HTTPS"
+        },
+        {
+          "id": "c",
+          "label": "The session cookie has no `HttpOnly` flag, so page scripts can read it"
+        },
+        {
+          "id": "d",
+          "label": "Passwords are hashed with a per-user salt before they are stored"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "A readable cookie and a CSP that permits inline scripts both let the injected code steal the session.",
+        "The Secure flag and salted hashing are not factors in cookie theft through XSS."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A password reset email builds its link from the incoming `Host` header. An attacker requests a reset for a victim's account with `Host: evil.example`. The victim receives a genuine email whose link points to evil.example with a valid token, and clicking it sends the token to the attacker. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The reset token is too short, so it can be guessed once the attacker sees the email format"
+        },
+        {
+          "id": "b",
+          "label": "The app trusts a client-controlled header to build absolute URLs rather than using a configured canonical host"
+        },
+        {
+          "id": "c",
+          "label": "The email is sent over unencrypted SMTP, so the attacker can rewrite the link while it is in transit"
+        },
+        {
+          "id": "d",
+          "label": "The reset endpoint lacks rate limiting, so the attacker can request unlimited emails for any account"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Host header injection: the link is built from attacker-controlled input instead of a fixed configured host.",
+        "Distractors point to real weaknesses that are not what let the attacker redirect the token here."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A forum lets users post comments with bold text, lists and links. Criteria: formatting must be kept, and protection must hold even if developers add new templates later. Which approach best meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Escape all HTML on output, which keeps the formatting by turning users' tags into visible text"
+        },
+        {
+          "id": "b",
+          "label": "Strip `<script>` tags and `on*` attributes with regexes on input, since those are the only script vectors"
+        },
+        {
+          "id": "c",
+          "label": "Validate the comment in client-side JavaScript before submission so that malformed markup never arrives"
+        },
+        {
+          "id": "d",
+          "label": "Sanitize at render time with a maintained allowlist sanitizer, and add a CSP as a second layer of defense"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An allowlist sanitizer keeps formatting and a CSP backs it up; neither depends on each template being written correctly.",
+        "Escaping everything loses formatting, regex stripping is bypassable, and client-side checks can be skipped by attackers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A cookie-authenticated app has state-changing POST endpoints. Criteria: protection must hold in browsers with uneven SameSite support, and one misconfiguration must not expose every user. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rely on `SameSite=Strict` alone, since modern browsers enforce it and extra tokens only add complexity"
+        },
+        {
+          "id": "b",
+          "label": "Require a JSON content type on POSTs, since cross-site forms cannot send it without a CORS preflight"
+        },
+        {
+          "id": "c",
+          "label": "Use `SameSite=Lax` cookies plus a per-session anti-CSRF token checked on every state-changing request"
+        },
+        {
+          "id": "d",
+          "label": "Accept requests only when a `Referer` header is present, since attackers cannot forge that header"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Layering SameSite with a verified token gives defense in depth that survives gaps in either control.",
+        "The other options depend on a single control, a header that may be stripped, or a content-type quirk."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A scan of a public retail site returns four findings. Criteria: fix first the issue giving the greatest exposure of customer data for the least attacker effort. Which should be fixed first?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A missing `X-Content-Type-Options` header on static image responses"
+        },
+        {
+          "id": "b",
+          "label": "Self-XSS that works only if a user pastes a payload into their own profile field"
+        },
+        {
+          "id": "c",
+          "label": "A server banner that reveals the exact web server version number"
+        },
+        {
+          "id": "d",
+          "label": "Unauthenticated SQL injection in the product search endpoint that concatenates input into its query"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Unauthenticated injection is remotely exploitable with low effort and exposes the database, so it ranks highest.",
+        "The other findings are low impact or need unusual victim action."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team proposes to prevent SQL injection with a custom function that doubles single quotes in every input before it is concatenated into queries. Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It fails because databases strip doubled quotes, so inputs would have to be wrapped in double quotes instead"
+        },
+        {
+          "id": "b",
+          "label": "It misses numeric and identifier positions and depends on encoding details, while parameterized queries keep data out of code"
+        },
+        {
+          "id": "c",
+          "label": "It is adequate when paired with a maximum input length, since short inputs cannot carry a working payload"
+        },
+        {
+          "id": "d",
+          "label": "It is sound for string inputs, and the only real drawback is slower execution compared with prepared statements at scale"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Quote doubling does not cover non-string contexts or character-set tricks; parameterization separates code from data structurally.",
+        "Distractors treat the approach as basically safe or misdescribe how databases treat escaped quotes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Users upload avatar images. Criteria: block stored XSS and server-side code execution, and keep serving cheap. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Scan filenames for `.php` and `.js` strings, then store files in the web root so a CDN can serve them"
+        },
+        {
+          "id": "b",
+          "label": "Trust the `Content-Type` header the browser sends, since it states the type of file the user chose"
+        },
+        {
+          "id": "c",
+          "label": "Re-encode images server-side, store under random names outside the web root, and serve with `nosniff` from a cookieless domain"
+        },
+        {
+          "id": "d",
+          "label": "Accept files whose extension is `.png` or `.jpg` and keep them in the web root under their original names"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Re-encoding, random names, non-executable storage and a separate cookieless origin address both XSS and code execution.",
+        "Extension, header and filename checks are all attacker-controlled and easy to bypass."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "An API authenticates users with cookies. Judge which CORS configurations are unsafe for it. Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It uses an exact allowlist of two first-party origins with credentials allowed"
+        },
+        {
+          "id": "b",
+          "label": "It sends `Access-Control-Allow-Origin: *` on a public endpoint that returns no user data"
+        },
+        {
+          "id": "c",
+          "label": "It reflects any request `Origin` in `Access-Control-Allow-Origin` and sends `Access-Control-Allow-Credentials: true`"
+        },
+        {
+          "id": "d",
+          "label": "It allows `Origin: null` with `Access-Control-Allow-Credentials: true`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Reflecting arbitrary origins or trusting null with credentials lets hostile pages read authenticated responses.",
+        "An exact allowlist and a wildcard on public, credential-free data do not expose user data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team builds a single-page app that embeds several third-party analytics scripts and displays user-generated content. They must choose how to hold the session credential. Criteria: limit damage if a script is injected, and keep CSRF manageable. Which choice is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Store the JWT in `localStorage`, since it is immune to CSRF and therefore the safest browser storage overall"
+        },
+        {
+          "id": "b",
+          "label": "Store the JWT in `sessionStorage`, since it clears on tab close and so cannot be read by injected scripts"
+        },
+        {
+          "id": "c",
+          "label": "Use an opaque session ID in an `HttpOnly`, `Secure`, `SameSite=Lax` cookie, plus CSRF tokens on state changes"
+        },
+        {
+          "id": "d",
+          "label": "Keep the JWT in a JavaScript variable and a non-HttpOnly cookie copy, so either can restore the session"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An HttpOnly cookie cannot be read by injected scripts, and SameSite plus tokens keeps CSRF under control.",
+        "Web storage and script-readable cookies expose the credential to any injected or third-party script."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A forum must let users post limited HTML (bold, links, lists). Judged on stopping stored XSS while keeping the feature, which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "HTML-encode all input before saving, so the stored text is safe in every output context later"
+        },
+        {
+          "id": "b",
+          "label": "Sanitize with a maintained allowlist-based library at render time, and add a CSP as a second layer"
+        },
+        {
+          "id": "c",
+          "label": "Strip <script> tags with a regex on input, since script tags are the only way HTML can run code"
+        },
+        {
+          "id": "d",
+          "label": "Set the session cookie to HttpOnly, which prevents injected markup from executing at all"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Allowlist sanitization at output plus CSP gives layered defense while preserving allowed HTML.",
+        "Regex blacklists are bypassed by event handlers and encodings; input encoding is context-blind; HttpOnly only limits cookie theft."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team claims SameSite=Lax on the session cookie makes CSRF tokens unnecessary. Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lax blocks every cross-site navigation including links, so it breaks sign-in and should be None"
+        },
+        {
+          "id": "b",
+          "label": "Lax only mitigates XSS, so it has no effect on whether cookies accompany cross-site requests"
+        },
+        {
+          "id": "c",
+          "label": "Lax is ignored by modern browsers, so cookies are still sent on every cross-site request"
+        },
+        {
+          "id": "d",
+          "label": "Lax still sends cookies on top-level GET navigations, so any state-changing GET endpoint stays exploitable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Lax permits cookies on top-level GET navigations, so unsafe GET handlers remain CSRF-able.",
+        "Other options misstate what Lax does or confuse it with XSS defenses."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Which CORS configuration on an authenticated API poses the greatest risk?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Access-Control-Allow-Origin: * on a public endpoint that returns open data and needs no cookies or login"
+        },
+        {
+          "id": "b",
+          "label": "Allowing only GET and POST from one vetted partner origin, with credentials enabled for that origin"
+        },
+        {
+          "id": "c",
+          "label": "Reflecting any request Origin into Access-Control-Allow-Origin while also sending Access-Control-Allow-Credentials: true"
+        },
+        {
+          "id": "d",
+          "label": "Omitting Access-Control-Max-Age, so browsers repeat preflight requests more often than strictly needed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Reflecting arbitrary origins with credentials lets any site read authenticated responses.",
+        "Wildcard on public data and a vetted origin are acceptable; missing Max-Age is only a performance matter."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A SPA is served from the same site as its API. Criteria: limit damage from XSS token theft, and accept extra CSRF work. Which session storage is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Store a JWT in localStorage, since scripts need it for headers and CSRF then cannot occur"
+        },
+        {
+          "id": "b",
+          "label": "Store the JWT in sessionStorage, which clears on tab close so injected scripts cannot read it"
+        },
+        {
+          "id": "c",
+          "label": "Store the JWT in a JavaScript-readable cookie so the page and server can both read it easily"
+        },
+        {
+          "id": "d",
+          "label": "Use an HttpOnly, Secure, SameSite session cookie and add CSRF protection on state-changing requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "HttpOnly cookies cannot be read by injected script, and CSRF defenses address the cookie trade-off.",
+        "Web storage and script-readable cookies are all exposed to XSS theft."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A report endpoint takes a sort column name from the query string and places it in ORDER BY. Which defense is most robust?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Escape single quotes in the value, since identifiers are only injected through quote characters"
+        },
+        {
+          "id": "b",
+          "label": "Bind the column name as a prepared-statement parameter, since parameters protect any SQL position"
+        },
+        {
+          "id": "c",
+          "label": "Remove semicolons and comment markers from the input before concatenating it into the query"
+        },
+        {
+          "id": "d",
+          "label": "Map the input to a fixed allowlist of known column names and use only the mapped value"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Identifiers cannot be bound as parameters, so an allowlist mapping is the reliable control.",
+        "Escaping quotes or stripping characters is a blacklist approach that misses unquoted identifier injection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A site uses the CSP `script-src 'self' 'unsafe-inline' https://cdn.example.com`. Which criticisms of this policy are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The policy is strong because the CDN is served over HTTPS, which prevents script injection"
+        },
+        {
+          "id": "b",
+          "label": "Allowlisting a shared CDN host can enable bypass through JSONP endpoints or script gadgets hosted there"
+        },
+        {
+          "id": "c",
+          "label": "'self' permits scripts from any subdomain of the site's registered domain"
+        },
+        {
+          "id": "d",
+          "label": "'unsafe-inline' lets an injected inline script or event handler run, undermining XSS protection"
+        },
+        {
+          "id": "e",
+          "label": "The policy blocks all inline event handlers, which will break many legacy pages"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Both unsafe-inline and broad host allowlists are well-known CSP weaknesses.",
+        "The other options misstate what 'self' and 'unsafe-inline' do, or confuse HTTPS with injection protection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "An image-import feature fetches a user-supplied URL. The team blocks hosts equal to 'localhost' or '127.0.0.1'. A pentester reaches the cloud metadata address 169.254.169.254 using an attacker-owned hostname whose DNS record points to it. Which improvement best addresses the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Validate the URL with a stricter regex at submit time and trust the stored value whenever it is fetched later"
+        },
+        {
+          "id": "b",
+          "label": "Resolve the hostname, check the resulting IP against allowed public ranges, then connect to that validated IP without following redirects"
+        },
+        {
+          "id": "c",
+          "label": "Require HTTPS URLs only, since internal metadata services do not accept TLS connections from the server"
+        },
+        {
+          "id": "d",
+          "label": "Extend the string blocklist with 0.0.0.0, [::1] and 169.254.169.254 so every known internal address is covered"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "SSRF defenses must check the resolved IP and pin the connection, and handle redirects, rather than match host strings.",
+        "String blocklists and submit-time regexes are bypassed by DNS and alternate encodings."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Password reset constraints: links must be single-use, expire quickly, resist guessing, and not be usable if the database leaks. Which design meets all of them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Email a link with a sequential reset ID plus a hash of the user's email, expiring in 15 minutes"
+        },
+        {
+          "id": "b",
+          "label": "Email a link with a random 128-bit token, store only its hash with an expiry, and invalidate it on first use"
+        },
+        {
+          "id": "c",
+          "label": "Email a link with a random token stored in plaintext for lookup, expiring in 15 minutes and deleted on use"
+        },
+        {
+          "id": "d",
+          "label": "Email a link with base64 of user ID and timestamp, valid 24 hours, reusable until the password changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Hashing the stored random token protects against DB leaks while expiry and single use limit replay.",
+        "Plaintext storage fails the leak constraint; predictable or reusable tokens fail guessing and single-use."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Avatar upload constraints: files must never execute as code on the app's origin, SVG-borne script must not run with the app's cookies, and filenames must not permit path traversal. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Generate random server-side names, re-encode images to raster, and serve from a separate cookieless domain with nosniff"
+        },
+        {
+          "id": "b",
+          "label": "Keep the original filename, check the extension is .png or .jpg, and store the files in the web root for fast serving"
+        },
+        {
+          "id": "c",
+          "label": "Strip '../' from filenames, allow SVG for image quality, and serve from the app domain using an inline Content-Disposition"
+        },
+        {
+          "id": "d",
+          "label": "Trust the Content-Type header sent by the browser, then store under the user-supplied name in a private folder"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Random names, re-encoding and a cookieless separate origin address traversal, script execution and cookie exposure.",
+        "Extension or header checks and naive stripping are bypassable and leave uploads on the app origin."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A site loads many third-party scripts that load further scripts dynamically. Constraints: no host allowlists (bypass risk), block injected inline scripts, block plugin content and injected base tags. Which CSP fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "script-src 'sha256-<one hash>' 'self'; object-src 'self'; base-uri 'self'"
+        },
+        {
+          "id": "b",
+          "label": "script-src https://a.example https://b.example 'unsafe-eval'; default-src *"
+        },
+        {
+          "id": "c",
+          "label": "script-src 'nonce-{random per response}' 'strict-dynamic'; object-src 'none'; base-uri 'none'"
+        },
+        {
+          "id": "d",
+          "label": "script-src 'self' https: 'unsafe-inline'; object-src 'self'"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A per-response nonce with strict-dynamic trusts dynamically loaded scripts without allowlists, and object-src/base-uri none close the other gaps.",
+        "Other policies keep unsafe-inline, host allowlists or permissive object and base settings."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A cookie-session JSON API is called by a first-party SPA on a sibling subdomain. Constraints: no server-side token storage, and defence against both cross-site and sibling-subdomain attackers who can set cookies. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Naive double-submit: set a random cookie and require its value in a header, with no signing or session binding"
+        },
+        {
+          "id": "b",
+          "label": "Set SameSite=None on the session cookie so the browser can distinguish first-party requests"
+        },
+        {
+          "id": "c",
+          "label": "Rely on requiring Content-Type: application/json, since cross-site HTML forms cannot send that type"
+        },
+        {
+          "id": "d",
+          "label": "Send an HMAC-signed token bound to the session ID, require it in a header, and also verify the Origin header"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A signed, session-bound token is stateless and resists cookie injection from sibling subdomains; Origin adds a second check.",
+        "Naive double-submit is defeated by cookie injection; content-type reliance and SameSite=None do not stop CSRF."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A SPA login uses the authorization code flow with exact redirect_uri matching over HTTPS. A reviewer says two protections are missing, against login CSRF and against interception of authorization codes. Which additions complete the design?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A nonce in the URL fragment, plus wildcard redirect_uri support for subpaths"
+        },
+        {
+          "id": "b",
+          "label": "Referrer-Policy: no-referrer, plus encryption of the authorization code in the query string"
+        },
+        {
+          "id": "c",
+          "label": "A state value bound to the user's session, plus PKCE with a code verifier"
+        },
+        {
+          "id": "d",
+          "label": "A client secret embedded in the SPA bundle, plus a longer-lived access token"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "State binds the response to the initiating session and PKCE binds the code to the client that requested it.",
+        "Embedded secrets are public in SPAs, and wildcard redirects weaken matching."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A banking page must not be embeddable by other sites, and an attacker who plants a known session ID before login must gain no access after the victim logs in. Which controls together satisfy this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Send CSP frame-ancestors 'none' on the page"
+        },
+        {
+          "id": "b",
+          "label": "Rely on a JavaScript frame-busting check as the only framing protection"
+        },
+        {
+          "id": "c",
+          "label": "Accept the session ID from a URL parameter for users with cookies disabled"
+        },
+        {
+          "id": "d",
+          "label": "Issue a new session ID when the user authenticates"
+        },
+        {
+          "id": "e",
+          "label": "Send X-XSS-Protection: 1; mode=block on all responses"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "frame-ancestors blocks framing, and regenerating the session ID at login defeats session fixation.",
+        "Frame-busting scripts are bypassable, URL session IDs enable fixation, and X-XSS-Protection is unrelated."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A multi-tenant invoicing API exposes GET /invoices/{id} with sequential IDs. A review found users reading other tenants' invoices by editing the ID. The fix must cover every current and future endpoint, must not rely on the client, and must not depend on secret IDs. Which design meets these constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add rate limiting and alerts on sequential ID enumeration, so repeated guessing is blocked or flagged quickly"
+        },
+        {
+          "id": "b",
+          "label": "Replace sequential IDs with random UUIDs and leave the handlers unchanged, since attackers cannot guess them"
+        },
+        {
+          "id": "c",
+          "label": "Scope every data-access query by the authenticated tenant in a shared layer, deny by default, and test per endpoint"
+        },
+        {
+          "id": "d",
+          "label": "Hide other tenants' invoices in the UI and check the user's role at the route level for each endpoint"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Centralised tenant-scoped object-level authorization enforced server-side covers all endpoints without relying on ID secrecy.",
+        "UUIDs, UI hiding, route role checks and rate limits all leave object-level authorization gaps."
+      ],
+      "reviewed": false
+    }
+  ]
+}

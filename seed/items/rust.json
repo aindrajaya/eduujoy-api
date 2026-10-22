@@ -1,0 +1,2482 @@
+{
+  "version": 1,
+  "topic": "rust",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which keyword declares a variable whose value can be changed after it is assigned in Rust?",
+      "options": [
+        {
+          "id": "a",
+          "label": "static"
+        },
+        {
+          "id": "b",
+          "label": "const"
+        },
+        {
+          "id": "c",
+          "label": "let"
+        },
+        {
+          "id": "d",
+          "label": "let mut"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`let mut` declares a mutable binding.",
+        "Plain `let` bindings are immutable by default, which learners from other languages often forget."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which Cargo command compiles your project and runs the resulting binary?",
+      "options": [
+        {
+          "id": "a",
+          "label": "cargo fmt"
+        },
+        {
+          "id": "b",
+          "label": "cargo clean"
+        },
+        {
+          "id": "c",
+          "label": "cargo init"
+        },
+        {
+          "id": "d",
+          "label": "cargo run"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`cargo run` builds and then executes the program.",
+        "Other commands only create, format or delete files."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the name of the file in a Cargo project that lists the package name, version and dependencies?",
+      "options": [
+        {
+          "id": "a",
+          "label": "main.rs"
+        },
+        {
+          "id": "b",
+          "label": "build.json"
+        },
+        {
+          "id": "c",
+          "label": "Cargo.lock"
+        },
+        {
+          "id": "d",
+          "label": "Cargo.toml"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Cargo.toml is the manifest edited by hand.",
+        "Cargo.lock records resolved versions and is generated, which is the common confusion."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which type does Rust use to represent a value that may be either present or absent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Option<T>"
+        },
+        {
+          "id": "b",
+          "label": "Box<T>"
+        },
+        {
+          "id": "c",
+          "label": "Vec<T>"
+        },
+        {
+          "id": "d",
+          "label": "Result<T, E>"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`Option<T>` has `Some` and `None` variants.",
+        "`Result` represents success or error, not absence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What symbol is used to create a shared (immutable) reference to a value `x`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "&x"
+        },
+        {
+          "id": "b",
+          "label": "*x"
+        },
+        {
+          "id": "c",
+          "label": "&mut x"
+        },
+        {
+          "id": "d",
+          "label": "@x"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`&x` borrows x immutably.",
+        "`&mut x` is a mutable borrow and `*x` dereferences."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are valid variants of Rust's `Result<T, E>` and `Option<T>` types combined? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Some"
+        },
+        {
+          "id": "b",
+          "label": "Maybe"
+        },
+        {
+          "id": "c",
+          "label": "Ok"
+        },
+        {
+          "id": "d",
+          "label": "Err"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Ok and Err belong to Result, Some to Option.",
+        "Maybe is from other languages such as Haskell."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "You open a new terminal and want to start a fresh Rust binary project named `greeter` in a new folder. You have Rust installed through rustup and nothing else set up. Which command creates the project with a `src/main.rs` and a `Cargo.toml`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "rustc new greeter"
+        },
+        {
+          "id": "b",
+          "label": "rustup init greeter"
+        },
+        {
+          "id": "c",
+          "label": "cargo new greeter"
+        },
+        {
+          "id": "d",
+          "label": "cargo build greeter"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`cargo new` scaffolds a binary package.",
+        "rustup manages toolchains and rustc compiles single files; neither scaffolds projects."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "After `let a = String::from(\"hi\"); let b = a;` what happens if the code then tries to print `a`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Compile error, because ownership moved to b"
+        },
+        {
+          "id": "b",
+          "label": "Prints an empty string, because a was cleared"
+        },
+        {
+          "id": "c",
+          "label": "Runtime panic, because a is null"
+        },
+        {
+          "id": "d",
+          "label": "Prints hi, because both share the string"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Assigning a String moves ownership, so a is no longer valid.",
+        "Others assume copying, sharing or nulls, as in other languages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does this compile: `let x = 5; let y = x; println!(\"{}\", x);`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Integers implement Copy, so x is duplicated"
+        },
+        {
+          "id": "b",
+          "label": "Integers are stored on the heap and shared"
+        },
+        {
+          "id": "c",
+          "label": "Rust ignores moves for variables named x"
+        },
+        {
+          "id": "d",
+          "label": "The compiler delays the move until the print"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Simple scalar types are Copy, so assignment duplicates them.",
+        "Distractors invent heap sharing or delayed moves."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the borrow checker enforce about references at any given moment?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Either one mutable reference or many shared ones"
+        },
+        {
+          "id": "b",
+          "label": "Only one reference of any kind per value"
+        },
+        {
+          "id": "c",
+          "label": "Any number of mutable and shared references together"
+        },
+        {
+          "id": "d",
+          "label": "One shared reference and one mutable reference"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Rust permits many shared borrows or exactly one mutable borrow, not both.",
+        "Distractors misstate the aliasing rule."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the `?` operator do when applied to a `Result` that holds an `Err` inside a function returning `Result`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Panics and aborts the program"
+        },
+        {
+          "id": "b",
+          "label": "Returns the error early from the function"
+        },
+        {
+          "id": "c",
+          "label": "Converts the error into None"
+        },
+        {
+          "id": "d",
+          "label": "Ignores the error and continues"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`?` propagates the Err to the caller by returning early.",
+        "It does not panic or swallow errors."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the purpose of a trait in Rust?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Defines shared behaviour that types can implement"
+        },
+        {
+          "id": "b",
+          "label": "Allocates memory for a value on the heap"
+        },
+        {
+          "id": "c",
+          "label": "Marks a variable as mutable across threads"
+        },
+        {
+          "id": "d",
+          "label": "Stores data fields shared by several structs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Traits describe behaviour as method sets types implement, similar to interfaces.",
+        "Distractors confuse traits with inheritance of data, Box, or threading."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe how Rust achieves memory safety without a garbage collector? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A background thread frees unused memory"
+        },
+        {
+          "id": "b",
+          "label": "References are checked at compile time"
+        },
+        {
+          "id": "c",
+          "label": "Each value has a single owner"
+        },
+        {
+          "id": "d",
+          "label": "Memory is freed when the owner goes out of scope"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Ownership, scope-based drop and compile-time borrow checks give safety.",
+        "No background collector exists in Rust."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A learner writes a function `fn show(s: String)` and calls `show(name);` then tries `println!(\"{}\", name);` on the next line, getting a compile error. They want `name` to remain usable after the call. What change best explains the fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a semicolon after the call to end the move"
+        },
+        {
+          "id": "b",
+          "label": "Mark `name` as `mut` so it can be reused"
+        },
+        {
+          "id": "c",
+          "label": "Call `show` twice so ownership returns"
+        },
+        {
+          "id": "d",
+          "label": "Take `&String` or `&str` so the function borrows instead of owning"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Passing by value moves ownership; borrowing keeps it with the caller.",
+        "`mut` does not affect moves."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Given `let s1 = String::from(\"hi\"); let s2 = s1;`, what is the state of `s1` afterwards?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It still works, because both names share one read-only copy"
+        },
+        {
+          "id": "b",
+          "label": "It becomes an empty string, and `s2` holds the old text"
+        },
+        {
+          "id": "c",
+          "label": "It is borrowed by `s2`, so `s1` is readable but not writable"
+        },
+        {
+          "id": "d",
+          "label": "It is moved into `s2`, so using `s1` later is a compile error"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Assigning a String transfers ownership, so the old binding is invalid.",
+        "Distractors treat the assignment as sharing, borrowing or leaving behind an empty value."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why can `let x = 5; let y = x;` still use `x` afterwards, while the same pattern with a `String` cannot?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The integer type implements `Copy`, so the value is duplicated on assignment"
+        },
+        {
+          "id": "b",
+          "label": "Integers live on the heap, so the compiler tracks them differently"
+        },
+        {
+          "id": "c",
+          "label": "Integers have no owner, so moves do not apply to them"
+        },
+        {
+          "id": "d",
+          "label": "Variables named `x` are borrowed automatically by the compiler"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Simple types like i32 implement Copy, so assignment copies the value.",
+        "Distractors invent heap, auto-borrow or ownerless rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the borrow checker guarantee about a live `&mut T` reference?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It can be freely copied to other threads without any checks"
+        },
+        {
+          "id": "b",
+          "label": "It is the only active reference to that data while it lives"
+        },
+        {
+          "id": "c",
+          "label": "It may coexist with any number of `&T` references to the data"
+        },
+        {
+          "id": "d",
+          "label": "It lets the data outlive its owner as long as it is mutable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A mutable reference is exclusive for its lifetime.",
+        "Distractors confuse mutability with shared access or extended lifetime."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does a function returning `Result<u32, String>` communicate to its caller?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It returns `Ok` with a u32 or `Err` with a String to handle"
+        },
+        {
+          "id": "b",
+          "label": "It panics on failure, and the String is the panic message"
+        },
+        {
+          "id": "c",
+          "label": "It returns a u32 or null, with the String as a fallback name"
+        },
+        {
+          "id": "d",
+          "label": "It always returns a number, and the string is a debug log"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Result is an enum with Ok and Err variants the caller must handle.",
+        "Distractors suggest logging, panics or null values, which Result does not do."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the purpose of running `cargo check` during development?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It builds an optimized binary for release and stores it in `target`"
+        },
+        {
+          "id": "b",
+          "label": "It downloads dependencies and then skips compiling your own code"
+        },
+        {
+          "id": "c",
+          "label": "It runs all tests and reports which ones failed"
+        },
+        {
+          "id": "d",
+          "label": "It type-checks and borrow-checks the code faster, without making a binary"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "cargo check verifies the code compiles without producing an executable.",
+        "Distractors confuse it with cargo test, cargo build --release or fetch."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe Rust's borrowing rules? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A reference may outlive the value it points to if it is `mut`"
+        },
+        {
+          "id": "b",
+          "label": "A `&mut T` cannot coexist with other references to the same data"
+        },
+        {
+          "id": "c",
+          "label": "Any number of shared `&T` references can exist at the same time"
+        },
+        {
+          "id": "d",
+          "label": "Shared references let you modify the value through them by default"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Many shared refs or one exclusive mutable ref are allowed.",
+        "Distractors claim mut extends lifetimes or that shared refs permit mutation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A learner writes `fn show(s: String) { println!(\"{}\", s); }`, then calls `show(name);` and on the next line `println!(\"{}\", name);`. The compiler reports 'borrow of moved value: `name`'. What explains the error?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`println!` cannot print a String more than once in a function"
+        },
+        {
+          "id": "b",
+          "label": "`name` needed to be declared `mut` before being passed to any function"
+        },
+        {
+          "id": "c",
+          "label": "Passing `name` by value gave ownership to `show`, which dropped it at its end"
+        },
+        {
+          "id": "d",
+          "label": "Functions always copy their arguments, so `name` was corrupted"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Passing a String by value moves ownership into the function.",
+        "Distractors blame println!, missing mut, or imagine arguments are copied."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What happens when this compiles? `let mut v = vec![1, 2, 3]; let first = &v[0]; v.push(4); println!(\"{}\", first);`",
+      "options": [
+        {
+          "id": "a",
+          "label": "It fails to compile, because `push` needs a mutable borrow while `first` is live"
+        },
+        {
+          "id": "b",
+          "label": "It prints 4, because `first` follows the vector's updated contents"
+        },
+        {
+          "id": "c",
+          "label": "It prints 1, because the vector is large enough to hold the push"
+        },
+        {
+          "id": "d",
+          "label": "It prints 1 only if the capacity is greater than 3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A shared borrow used later conflicts with the mutable borrow in push.",
+        "Distractors assume the check depends on capacity or runtime behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `fn double(s: &str) -> Result<i32, std::num::ParseIntError> { let n: i32 = s.parse()?; Ok(n * 2) }`, what does `double(\"abc\")` return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Ok(0)`, since failed parses default to zero"
+        },
+        {
+          "id": "b",
+          "label": "`Err(ParseIntError)`, returned early by the `?` operator"
+        },
+        {
+          "id": "c",
+          "label": "A panic, since `?` always unwraps and aborts on errors"
+        },
+        {
+          "id": "d",
+          "label": "`Ok(-1)`, since the parse failure is mapped to a sentinel"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The ? operator returns the Err early from the function.",
+        "Distractors treat ? as defaulting or panicking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You have `let name = String::from(\"Ada\");` and want a function that counts its characters without taking ownership. Which signature and call work?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`fn count(s: str)` called as `count(*name)`"
+        },
+        {
+          "id": "b",
+          "label": "`fn count(s: &str)` called as `count(&name)`"
+        },
+        {
+          "id": "c",
+          "label": "`fn count(s: &mut str)` called as `count(name)`"
+        },
+        {
+          "id": "d",
+          "label": "`fn count(s: String)` called as `count(name)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A &str parameter accepts &String via deref coercion and keeps ownership with the caller.",
+        "Distractors move the value, mismatch types, or use unsized str."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What is the value of `r` in `let x: Option<i32> = None; let r = x.unwrap_or(7) + 1;`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "7"
+        },
+        {
+          "id": "b",
+          "label": "1"
+        },
+        {
+          "id": "c",
+          "label": "8"
+        },
+        {
+          "id": "d",
+          "label": "A panic at runtime"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "unwrap_or supplies 7 for None, then 1 is added to give 8.",
+        "Distractors skip the addition, treat None as 0, or expect a panic like unwrap."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You want a fully optimized binary of your Cargo project for deployment. Which command do you run, and where is the binary placed?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`cargo run`, which places it in `src/bin`"
+        },
+        {
+          "id": "b",
+          "label": "`cargo build`, which places it in `target/release`"
+        },
+        {
+          "id": "c",
+          "label": "`cargo check --release`, which places it in `target/release`"
+        },
+        {
+          "id": "d",
+          "label": "`cargo build --release`, which places it in `target/release`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "--release enables optimizations and outputs to target/release.",
+        "Distractors mix up commands or output directories."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "The code `fn add(v: &Vec<i32>) { v.push(1); }` fails to compile. Which changes fix it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Change it to `mut v: Vec<i32>`, return `v`, and call `nums = add(nums)` with `let mut nums`"
+        },
+        {
+          "id": "b",
+          "label": "Change the parameter to `v: &mut Vec<i32>` and call `add(&mut nums)` with `let mut nums`"
+        },
+        {
+          "id": "c",
+          "label": "Change the parameter to `v: mut &Vec<i32>` and keep the call as `add(&nums)`"
+        },
+        {
+          "id": "d",
+          "label": "Keep `&Vec<i32>` and declare `let mut nums`, then call `add(&nums)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Either borrow mutably or take ownership and return the vector.",
+        "Distractors use invalid syntax or assume a mut binding makes a shared reference writable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A learner writes a helper that returns the longer of two string slices: `fn longest(a: &str, b: &str) -> &str { if a.len() > b.len() { a } else { b } }`. The compiler reports a 'missing lifetime specifier'. Which fix works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Change both parameters to `&mut str` so the compiler can pick one"
+        },
+        {
+          "id": "b",
+          "label": "Mark the function `unsafe`, since it returns a reference to either input"
+        },
+        {
+          "id": "c",
+          "label": "Return `String` and call `.clone()` on the result inside `longest`"
+        },
+        {
+          "id": "d",
+          "label": "Declare `fn longest<'a>(a: &'a str, b: &'a str) -> &'a str`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Tying both inputs and the output to one lifetime tells the compiler the result lives as long as both.",
+        "Distractors change types or use unsafe rather than annotating lifetimes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What happens when this code runs?\n\n`fn take(v: Vec<i32>) -> usize { v.len() }`\n`let v = vec![1, 2, 3];`\n`let n = take(v.clone());`\n`let m = take(v);`\n`println!(\"{} {}\", n, m);`",
+      "options": [
+        {
+          "id": "a",
+          "label": "`3 3`"
+        },
+        {
+          "id": "b",
+          "label": "Compile error: `v` is moved twice"
+        },
+        {
+          "id": "c",
+          "label": "`3 0`"
+        },
+        {
+          "id": "d",
+          "label": "Compile error: `clone()` moves `v`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The first call receives a clone, so `v` is still owned and can be moved in the second call; both lengths are 3.",
+        "Distractors assume `clone()` consumes the original or that moved data reads as empty."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Inside a function you write `let n = s.parse::<i32>()?;` where `s: &str`. Which return type lets this line compile unchanged?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Result<i32, std::io::Error>`"
+        },
+        {
+          "id": "b",
+          "label": "`Option<i32>`"
+        },
+        {
+          "id": "c",
+          "label": "`Result<i32, std::fmt::Error>`"
+        },
+        {
+          "id": "d",
+          "label": "`Result<i32, std::num::ParseIntError>`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`?` needs the function's error type to be, or be convertible from, `ParseIntError`.",
+        "Other `Result` types have no `From<ParseIntError>`, and `?` on a `Result` cannot be used in an `Option` function."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A function takes two `&str` arguments and its body returns either `x` or `y`, whichever is longer. Which signature compiles?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`fn longest(x: &str, y: &str) -> &str`"
+        },
+        {
+          "id": "b",
+          "label": "`fn longest<'a>(x: &'a str, y: &'a str) -> &'a str`"
+        },
+        {
+          "id": "c",
+          "label": "`fn longest<'a>(x: &'a str, y: &str) -> &'a str`"
+        },
+        {
+          "id": "d",
+          "label": "`fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Both inputs must share the lifetime of the returned reference because either could be returned.",
+        "The other options fail because `y` cannot be returned as `'a`, or because elision cannot pick between two inputs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which `Cargo.toml` dependency line adds `serde` version 1 with its `derive` feature enabled?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`serde = [\"1\", \"derive\"]`"
+        },
+        {
+          "id": "b",
+          "label": "`serde = { version = \"1\", derive = true }`"
+        },
+        {
+          "id": "c",
+          "label": "`serde = { version = \"1\", features = [\"derive\"] }`"
+        },
+        {
+          "id": "d",
+          "label": "`serde = { version = \"1\", features = \"derive\" }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Features are given as an array under the `features` key in a dependency table.",
+        "Distractors invent a `derive` key, pass a string instead of an array, or misuse array syntax."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `#[derive(Debug)] struct P { x: i32 }` with `let p = P { x: 1 }; let q = P { x: 2 };`, which single line compiles?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`let r = p.clone();`"
+        },
+        {
+          "id": "b",
+          "label": "`println!(\"{}\", p);`"
+        },
+        {
+          "id": "c",
+          "label": "`println!(\"{:?}\", p);`"
+        },
+        {
+          "id": "d",
+          "label": "`if p == q {}`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`derive(Debug)` provides only the `{:?}` formatting.",
+        "`{}` needs `Display`, `==` needs `PartialEq` and `.clone()` needs `Clone`; none were derived."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which snippets compile? Assume `let mut s = String::from(\"a\");` comes first in each.\n\nSelect all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`let r1 = &mut s; let r2 = &mut s; r1.push('x'); r2.push('y');`"
+        },
+        {
+          "id": "b",
+          "label": "`let r = &s; println!(\"{}\", r); s.push('b');`"
+        },
+        {
+          "id": "c",
+          "label": "`let r1 = &s; let r2 = &s; println!(\"{} {}\", r1, r2);`"
+        },
+        {
+          "id": "d",
+          "label": "`let r = &s; s.push('b'); println!(\"{}\", r);`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Many shared borrows are fine, and a borrow ends after its last use, so mutating afterwards is allowed.",
+        "Two live mutable borrows, or mutation while a later-used shared borrow exists, are rejected."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You are writing a CLI. In `fn main() {` you call `std::fs::read_to_string(path)?` and the compiler says `?` can only be used in a function that returns `Result` or `Option`. You want to keep propagating the I/O error and print it on failure. Which change does that?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep `fn main()` and wrap the call in `unwrap_or_default()` so that no error type is needed"
+        },
+        {
+          "id": "b",
+          "label": "Change the signature to `fn main() -> Option<()>` and end the body with `Some(())`, since `?` works anywhere"
+        },
+        {
+          "id": "c",
+          "label": "Change the signature to `fn main() -> Result<(), Box<dyn std::error::Error>>` and end the body with `Ok(())`"
+        },
+        {
+          "id": "d",
+          "label": "Change the signature to `fn main() -> Result<(), String>` and keep the body as is, since errors print as text"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`Box<dyn Error>` accepts `io::Error` through `From`, and `main` must return `Ok(())`.",
+        "`String` has no `From<io::Error>`, `Option` cannot hold the error, and `unwrap_or_default` discards it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Why is this rejected?\n\n`let mut v = vec![1, 2, 3];`\n`let first = &v[0];`\n`v.push(4);`\n`println!(\"{}\", first);`",
+      "options": [
+        {
+          "id": "a",
+          "label": "`&v[0]` copies the element, so `first` is an `i32` that cannot be used after any mutation of `v`"
+        },
+        {
+          "id": "b",
+          "label": "Indexing a `Vec` yields a temporary that is dropped at the end of the `let` statement, leaving `first` dangling"
+        },
+        {
+          "id": "c",
+          "label": "`push` moves `v` into the method, so `first` points at moved data"
+        },
+        {
+          "id": "d",
+          "label": "`push` needs a mutable borrow while `first`, a shared borrow used later, is still live, and it could reallocate the buffer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A mutable borrow cannot overlap a shared borrow used later; reallocation would invalidate `first`.",
+        "Distractors misread `push` as a move, `&v[0]` as a copy, or the borrow as a temporary."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`fn make() -> &str { let s = String::from(\"a\"); &s }` fails to compile. What is the underlying problem that adding a lifetime annotation cannot fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`String` cannot coerce to `&str` implicitly, so returning `s.as_str()` is the fix and avoids the error"
+        },
+        {
+          "id": "b",
+          "label": "`s` is dropped when the function ends, so the returned reference would dangle; return an owned `String` instead"
+        },
+        {
+          "id": "c",
+          "label": "Elision cannot name a lifetime here, so `fn make<'a>() -> &'a str` makes the function compile"
+        },
+        {
+          "id": "d",
+          "label": "`&s` creates a mutable borrow of `s`, so it must be written `&mut s` before it can be returned"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The data lives only inside the function, so no lifetime can make a reference to it valid for the caller.",
+        "Distractors treat it as a syntax or coercion issue; `as_str()` would still borrow the dropped local."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`let v = vec![1, 2, 3]; let h = std::thread::spawn(|| println!(\"{:?}\", v)); h.join().unwrap();` fails with 'closure may outlive the current function'. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The thread may outlive `v` while the closure only borrows it; `move` hands ownership to the closure"
+        },
+        {
+          "id": "b",
+          "label": "`join` must be called before the closure is created so the borrow can end first"
+        },
+        {
+          "id": "c",
+          "label": "`Vec` is not `Send`, so it can never be used from another thread"
+        },
+        {
+          "id": "d",
+          "label": "`println!` takes ownership of its arguments, so `v` must be moved"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`spawn` requires a `'static` closure, so a borrow of a local is rejected and `move` fixes it.",
+        "`Vec<i32>` is `Send`, `println!` only borrows, and `join` ordering does not affect the borrow."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`let c = RefCell::new(vec![1]); let r = c.borrow(); c.borrow_mut().push(2); println!(\"{:?}\", r);` What happens and why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It runs and prints `[1, 2]` because `RefCell` allows several mutable accesses"
+        },
+        {
+          "id": "b",
+          "label": "It compiles but panics at runtime, since `RefCell` checks borrow rules dynamically and `r` is still alive"
+        },
+        {
+          "id": "c",
+          "label": "It fails to compile with E0502 because a shared and a mutable borrow overlap"
+        },
+        {
+          "id": "d",
+          "label": "It compiles but deadlocks, since `borrow_mut` waits until `r` is released"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`RefCell` moves borrow checking to runtime, so the overlapping `borrow_mut` panics.",
+        "It is not a compile error, `RefCell` does not allow overlap, and it never blocks like a lock."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A function `fn total<T: Shape>(items: Vec<T>)` is called with circles and squares mixed in one `Vec`, which is rejected. Why does the same idea work with `Vec<Box<dyn Shape>>`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Vec<T>` cannot hold structs, while `Box` copies each struct to the heap and removes the type check"
+        },
+        {
+          "id": "b",
+          "label": "Trait bounds are checked only at runtime for `dyn`, so each element is verified when it is pushed"
+        },
+        {
+          "id": "c",
+          "label": "Generics only accept built-in types, while trait objects accept user-defined structs"
+        },
+        {
+          "id": "d",
+          "label": "`T` is fixed to one concrete type at compile time, while `dyn Shape` allows different types behind one pointer type"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A generic parameter resolves to a single type; trait objects use dynamic dispatch over a common pointer type.",
+        "Other options invent restrictions on generics or runtime trait checks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "`#[derive(Clone, Copy)] struct Job { name: String, id: u32 }` fails to compile. Which changes resolve the error?\n\nSelect all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Change `name` to `Box<str>`, keeping both derives"
+        },
+        {
+          "id": "b",
+          "label": "Remove `Copy` from the derive list and keep `Clone`"
+        },
+        {
+          "id": "c",
+          "label": "Change `id` from `u32` to `u64`"
+        },
+        {
+          "id": "d",
+          "label": "Change `name` to `&'static str`, keeping both derives"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "`Copy` needs every field to be `Copy`; `&'static str` is, and dropping `Copy` removes the requirement.",
+        "`u32` is already `Copy`, and `Box<str>` owns heap data so it is not `Copy`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A config-loading CLI uses `File::open(path).unwrap()` and `text.parse::<u16>().unwrap()`. Users report panics with cryptic messages, and maintainers want a missing file reported differently from a malformed port. Which analysis best identifies the design flaw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The loader should return `Option` instead, because a missing file and a bad parse are both just the absence of a value"
+        },
+        {
+          "id": "b",
+          "label": "`unwrap()` is unsafe because it skips bounds checks, so replacing it with `expect()` removes the risk of panics"
+        },
+        {
+          "id": "c",
+          "label": "`unwrap()` turns recoverable I/O and parse errors into panics at the failure site; return a `Result` with an error enum so `main` can report each case"
+        },
+        {
+          "id": "d",
+          "label": "The panics come from the borrow checker missing a lifetime on the `path` argument, so annotating the function would stop them"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Both failures are recoverable and distinct; propagating typed errors lets the caller handle them differently.",
+        "`Option` loses the cause, lifetimes are unrelated to these panics, and `expect` still panics."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "```\nstruct Parser<'a> { input: &'a str }\nimpl<'a> Parser<'a> {\n    fn next_token(&mut self) -> &str { /* slice of self.input */ }\n}\nlet t1 = p.next_token();\nlet t2 = p.next_token();\nprintln!(\"{t1} {t2}\");\n```\nThis fails with a borrow error. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A method taking `&mut self` can only be called once per value, so the second call is rejected"
+        },
+        {
+          "id": "b",
+          "label": "Elision ties the returned `&str` to the `&mut self` borrow, so `t1` keeps `p` mutably borrowed"
+        },
+        {
+          "id": "c",
+          "label": "The returned slice outlives `'a`, so the compiler cannot prove the input string is still valid"
+        },
+        {
+          "id": "d",
+          "label": "`println!` moves both tokens, so `t1` is consumed before the second call can borrow `p`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "With elision, a method taking `&mut self` gives its returned reference the lifetime of that borrow, not `'a`.",
+        "Distractors misread lifetimes or invent move and call-count rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A developer swaps `Rc<RefCell<Vec<i32>>>` for `Arc<RefCell<Vec<i32>>>` and clones it into `thread::spawn` closures, but the compiler still reports a `Send`/`Sync` error. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Arc<T>` is only `Send` when `T` is `Send + Sync`, and `RefCell` is not `Sync`"
+        },
+        {
+          "id": "b",
+          "label": "`thread::spawn` accepts only `'static` references, and `Arc::clone` yields a borrowed handle"
+        },
+        {
+          "id": "c",
+          "label": "`Arc` also uses a non-atomic counter unless a `sync` feature of the standard library is enabled"
+        },
+        {
+          "id": "d",
+          "label": "`Vec<i32>` is not `Send`, so any container holding it is rejected at a thread boundary"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Arc requires its contents to be Send + Sync, and RefCell's unsynchronised borrow flag makes it !Sync; Arc<Mutex<_>> fixes it.",
+        "Distractors invent features or misattribute the failure to Vec or 'static."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "```\nenum CliError { Io(std::io::Error), Parse(std::num::ParseIntError) }\nimpl From<std::io::Error> for CliError { /* ... */ }\nfn run(p: &str) -> Result<i32, CliError> {\n    let s = std::fs::read_to_string(p)?;\n    let n = s.trim().parse::<i32>()?;\n    Ok(n)\n}\n```\nThe compiler reports an error. Where and why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `Ok(n)` line fails, because `i32` must be wrapped in `CliError` when the function's `Result` is custom"
+        },
+        {
+          "id": "b",
+          "label": "Only the `read_to_string` line fails, because `?` cannot convert an `io::Error` unless `CliError` implements `Error`"
+        },
+        {
+          "id": "c",
+          "label": "Both `?` lines fail, because `?` works only when the function's error type is exactly the callee's error type"
+        },
+        {
+          "id": "d",
+          "label": "Only the `parse` line fails, because `?` needs `From<ParseIntError> for CliError`, which is missing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`?` calls `From::from` on the error, and only the io conversion is implemented.",
+        "Distractors claim `?` needs identical types or an Error impl on the target."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`cache` is a `Mutex<HashMap<u32, u32>>`. On a single thread this code hangs:\n```\nif let Some(v) = cache.lock().unwrap().get(&key) {\n    cache.lock().unwrap().insert(other, *v);\n}\n```\nWhy?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`unwrap` on a `LockResult` blocks until another thread calls `lock`, so one thread can never pass it"
+        },
+        {
+          "id": "b",
+          "label": "`insert` needs the map to be unlocked first, and the compiler keeps the first lock held until `main` exits"
+        },
+        {
+          "id": "c",
+          "label": "The guard from the first `lock()` is a temporary that lives through the whole `if let` body, so the second `lock()` waits on it"
+        },
+        {
+          "id": "d",
+          "label": "`get` returns a reference that holds a lock of its own, so `insert` waits for that second lock"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Temporaries in the scrutinee live to the end of the if let body, so the MutexGuard is still held at the second lock().",
+        "Distractors invent extra locks or blocking behaviour of unwrap."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "```\ntrait Shape {\n    fn area(&self) -> f64;\n    fn scale<T: Into<f64>>(&self, k: T) -> f64;\n}\nlet shapes: Vec<Box<dyn Shape>> = Vec::new();\n```\nThe compiler says `Shape` cannot be made into an object. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Vec<Box<dyn Shape>>` requires `Shape: Sized`, which any trait with a method returning `f64` loses"
+        },
+        {
+          "id": "b",
+          "label": "`scale` is generic, so it needs a separate compiled copy per `T` and cannot occupy one vtable slot"
+        },
+        {
+          "id": "c",
+          "label": "`Into<f64>` is itself not object safe, so any trait mentioning it in a bound is rejected as an object"
+        },
+        {
+          "id": "d",
+          "label": "`area` takes `&self`, and trait object methods must take `self: Box<Self>` to be dispatched dynamically"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Generic methods need monomorphisation, so they cannot be vtable entries; `where Self: Sized` on the method excludes it.",
+        "Distractors invent receiver and Sized rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "```\nlet data = vec![1, 2, 3];\nlet h = std::thread::spawn(|| println!(\"{:?}\", data));\nh.join().unwrap();\n```\nThe compiler says the closure may outlive `data`. Which changes make it compile? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call `data.clone()` inside the closure body so each access works on its own copy"
+        },
+        {
+          "id": "b",
+          "label": "Wrap the spawn in `thread::scope` and call `s.spawn` so the closure may borrow `data`"
+        },
+        {
+          "id": "c",
+          "label": "Write `&data` explicitly in the closure so the borrow is visible to `spawn`"
+        },
+        {
+          "id": "d",
+          "label": "Add `move` before the closure so it takes ownership of `data`"
+        },
+        {
+          "id": "e",
+          "label": "Add a `'static` lifetime annotation to the `data` binding so the closure's borrow is accepted"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "`move` gives the thread ownership; scoped threads guarantee the borrow ends before `data` does.",
+        "Explicit borrows and clones inside the closure still borrow `data`, and a binding cannot be annotated `'static` this way."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A CLI tool reads a file into a local `Vec<String>` of lines, then builds a `HashMap<&str, usize>` of word counts whose keys are slices of those lines. The function `fn count(path: &str) -> HashMap<&str, usize>` returns the map. The compiler rejects it with a message about returning data owned by the current function. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keys borrow from the local `Vec<String>`, which is dropped at return, so the map would dangle"
+        },
+        {
+          "id": "b",
+          "label": "Elision gives the return type `'static`, and `path` is not `'static`, so the signature is rejected"
+        },
+        {
+          "id": "c",
+          "label": "`usize` values are `Copy`, and a map with `Copy` values cannot be returned while its keys are borrowed"
+        },
+        {
+          "id": "d",
+          "label": "`HashMap` keys must be owned, so `&str` keys are never allowed in a map that leaves its function"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The slices point into a Vec owned by the function, which is freed on return; use `String` keys or return the lines too.",
+        "Distractors misstate key and elision rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You publish a parsing library crate. Criteria: callers must match on specific failure kinds, the crate adds no heavy dependencies, and errors must work with `?` into `Box<dyn Error>`. Which public error design fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return `Box<dyn Error>` everywhere, because the signature stays stable as new failures are added"
+        },
+        {
+          "id": "b",
+          "label": "Return `Result<T, String>`, because formatted messages are easy for callers to compare and display"
+        },
+        {
+          "id": "c",
+          "label": "A public enum of failure kinds implementing `Error` and `Display`, so callers match variants with no extra dependency"
+        },
+        {
+          "id": "d",
+          "label": "Return `anyhow::Error`, because every failure carries context and callers can downcast when needed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A typed enum implementing Error meets all three criteria.",
+        "anyhow, Box<dyn Error> and String hide the failure kind or add dependencies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A tree with parent links has millions of nodes traversed in a hot loop. Criteria: no runtime borrow panics, no leaks from reference cycles, and contiguous memory for cache locality. Which representation is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Rc<RefCell<Node>>` for children and parents, relying on discipline to avoid overlapping borrows"
+        },
+        {
+          "id": "b",
+          "label": "`Box<Node>` children with raw-pointer parents, since boxes avoid reference counting entirely"
+        },
+        {
+          "id": "c",
+          "label": "`Rc<RefCell<Node>>` with `Weak` parents, since weak links avoid cycles and `RefCell` permits mutation"
+        },
+        {
+          "id": "d",
+          "label": "A `Vec<Node>` whose nodes store children and parent as `usize` indices into that same vector"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An index arena has no RefCell panics, no cycles, and contiguous storage.",
+        "Rc/RefCell variants still allow borrow panics and scatter memory; raw pointers need unsafe."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A tool loads plugins chosen at runtime from a config file, keeps them in one list, and must allow third-party plugins without modifying the core crate. Binary size matters and virtual-call cost is negligible. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Vec<T>` with `T: Plugin`, because generics give static dispatch and the list can mix types"
+        },
+        {
+          "id": "b",
+          "label": "A generic `run<P: Plugin>` called once per plugin, because monomorphisation keeps each call fast"
+        },
+        {
+          "id": "c",
+          "label": "`Vec<Box<dyn Plugin>>`, because one list can hold different concrete types added outside the core"
+        },
+        {
+          "id": "d",
+          "label": "An enum of all plugin types known today, because it avoids vtables and keeps matching exhaustive"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Trait objects allow heterogeneous, open-ended sets chosen at runtime with little code bloat.",
+        "Generics are homogeneous or fixed at compile time, and a closed enum blocks third-party plugins."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A function must mutate two distinct elements `a[i]` and `a[j]` (`i != j`) of a `&mut [Item]`. Criteria: sound, no `unsafe` in your own code, no cloning. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Take `&mut a[i]` and `&mut a[j]` in the same scope, which the compiler accepts for distinct indices"
+        },
+        {
+          "id": "b",
+          "label": "Cast `&mut a[i]` to a raw pointer and use it while holding `&mut a[j]`, since indices differ"
+        },
+        {
+          "id": "c",
+          "label": "Clone both items, mutate the clones, and write them back, which sidesteps the borrow checker entirely"
+        },
+        {
+          "id": "d",
+          "label": "Use `split_at_mut` to get two disjoint mutable slices, then borrow one element from each"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`split_at_mut` proves disjointness safely without cloning.",
+        "The compiler cannot see that indices differ, and the other options break the criteria."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A service binary must build reproducibly across CI and production, and dependency upgrades must be deliberate and reviewed. Which Cargo practice best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add `Cargo.lock` to `.gitignore`, because the lock file regenerates automatically and only matters for libraries"
+        },
+        {
+          "id": "b",
+          "label": "Use `*` version requirements in `Cargo.toml`, so every build always picks up the latest security patches"
+        },
+        {
+          "id": "c",
+          "label": "Pin every dependency with `=` exact versions and delete the lock file, so resolution never changes anything"
+        },
+        {
+          "id": "d",
+          "label": "Commit `Cargo.lock` and run `cargo update` only in reviewed changes, so resolved versions change deliberately"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "For binaries, a committed lock file fixes resolved versions and updates become reviewable commits.",
+        "Ignoring the lock, wildcards or deleting the lock all lose reproducibility or review."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A parser handles a very large log where most fields are copied verbatim and a few need unescaping. Criteria: minimise allocations, no `unsafe`, no leaked memory. Which designs are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Accept `&str` input and return `&str` slices tied to it with a lifetime, so fields are not copied"
+        },
+        {
+          "id": "b",
+          "label": "Use `Box::leak` on each line to obtain `'static` slices, removing every lifetime parameter"
+        },
+        {
+          "id": "c",
+          "label": "Return `Cow<str>` fields, borrowing unless unescaping forces an owned `String`"
+        },
+        {
+          "id": "d",
+          "label": "Return a lazy iterator over records so the full parsed output is never held at once"
+        },
+        {
+          "id": "e",
+          "label": "Convert every field to `String` up front, so lifetimes disappear and callers never see a borrow"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Borrowed slices, Cow and lazy iteration all cut allocations safely.",
+        "Box::leak leaks memory and eager String conversion allocates for every field."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team runs a network service. Startup code compiles a hard-coded regex literal, and request handlers parse untrusted JSON bodies. They debate `unwrap`. Criteria: a malformed request must never crash the process, and genuine programmer bugs should fail loudly with clear messages. Which policy is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ban `unwrap` and `expect` everywhere, returning even the literal regex failure to callers as a runtime error"
+        },
+        {
+          "id": "b",
+          "label": "Propagate request-parsing errors with `?` into a 4xx response, and use `expect` with a message for the literal regex"
+        },
+        {
+          "id": "c",
+          "label": "Use `unwrap` on request parsing and rely on a supervisor to restart the process after each panic"
+        },
+        {
+          "id": "d",
+          "label": "Wrap each handler in `catch_unwind` so panics from bad input are swallowed and requests continue silently"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Input errors are expected and should be handled; a bad literal is a bug that should fail loudly with a message.",
+        "Other options either crash on bad input, hide bugs, or treat a bug as a runtime error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A public library crate's `parse` function can fail from I/O errors, bad syntax or an unsupported version. Downstream callers must retry on I/O errors but abort on syntax errors. Judged against that criterion, which return type is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Result<T, String>`, because callers can inspect the message text to decide whether to retry or abort"
+        },
+        {
+          "id": "b",
+          "label": "`Result<T, Box<dyn Error>>`, because callers can downcast when needed and no extra types must be defined"
+        },
+        {
+          "id": "c",
+          "label": "`Result<T, ()>`, because failure is simply signalled and callers can rerun the parse with another strategy"
+        },
+        {
+          "id": "d",
+          "label": "A public error enum with one variant per failure kind, so callers match on variants instead of parsing text"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A typed enum lets callers branch on failure kind reliably and stays part of a checked API.",
+        "Box<dyn Error> and String hide the kind behind downcasts or fragile text matching."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Stage A produces about 100k items/s and stage B handles about 20k items/s. Memory is capped and no item may be dropped. Which pipeline design best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A buffer that discards the oldest items when full, which keeps latency low and memory use flat"
+        },
+        {
+          "id": "b",
+          "label": "An unbounded channel, so the producer never stalls and overall throughput stays at its peak"
+        },
+        {
+          "id": "c",
+          "label": "A bounded `sync_channel` that blocks the producer when B lags, so memory is capped and nothing is lost"
+        },
+        {
+          "id": "d",
+          "label": "A shared `Arc<Mutex<Vec<Item>>>` that B drains periodically, which lowers per-item channel overhead"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Backpressure from a bounded channel caps memory without losing items.",
+        "Unbounded queues and shared Vecs grow without limit; discarding violates the no-loss criterion."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A reviewer claims: \"Any `clone()` added to satisfy the borrow checker is a design flaw.\" Which critique of that claim is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claim is wrong, because the compiler elides a clone whenever the original value is not used afterwards"
+        },
+        {
+          "id": "b",
+          "label": "The claim holds, because every `clone()` copies heap data and signals that ownership should be restructured"
+        },
+        {
+          "id": "c",
+          "label": "The claim is too broad: cloning an `Arc` or small data is cheap, but clones that deep-copy in hot paths hurt"
+        },
+        {
+          "id": "d",
+          "label": "The claim holds, because borrow errors always mean the design is wrong and cloning only postpones the failure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Cost depends on what is cloned and where; Arc/Rc clones are refcount bumps.",
+        "Distractors assume clone is always expensive or always free."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A safe function `two_mut(v: &mut [u8], i: usize, j: usize) -> (&mut u8, &mut u8)` uses raw pointers after asserting `i < v.len() && j < v.len()`. Which flaw makes it unsound?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It uses raw pointers, and any raw pointer dereference makes a function unsound whatever checks precede it"
+        },
+        {
+          "id": "b",
+          "label": "It never checks `i != j`, so safe callers can obtain two aliasing `&mut` references to one element"
+        },
+        {
+          "id": "c",
+          "label": "It ties the returned references to the lifetime of `v`, letting callers keep them after the data is freed"
+        },
+        {
+          "id": "d",
+          "label": "It bounds-checks with `<` rather than `<=`, so the last element can never be reached by safe callers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Two live &mut to the same element violates aliasing rules, reachable from safe code.",
+        "Raw pointers are fine when invariants are enforced; the lifetime tie is correct and `<` is right."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A tool picks output sinks (file, stdout, network, any mix) from a config file at startup and stores them in one collection. Criteria: mixed concrete types, and one virtual call per batch is negligible cost. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Vec<Box<dyn Sink>>`, because one vector can hold different types and dispatch cost is minor per batch"
+        },
+        {
+          "id": "b",
+          "label": "A separate generic call per config entry, because the compiler picks each sink type from the file at run time"
+        },
+        {
+          "id": "c",
+          "label": "`Vec<impl Sink>`, because it hides the concrete types yet lets every element differ from the others"
+        },
+        {
+          "id": "d",
+          "label": "`Vec<S> where S: Sink`, because monomorphisation gives static dispatch for every sink in one vector"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Trait objects allow heterogeneous runtime-chosen values at small per-call cost.",
+        "Generics and impl Trait fix one concrete type at compile time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A task holds a `std::sync::MutexGuard` across an `.await` on a multithreaded Tokio runtime. Which judgments are accurate? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "If another task on the same worker thread locks the mutex, it can block the thread and deadlock"
+        },
+        {
+          "id": "b",
+          "label": "The guard is released automatically at the `.await`, so the lock is never held while suspended"
+        },
+        {
+          "id": "c",
+          "label": "The future is not `Send`, so `tokio::spawn` will typically reject it at compile time"
+        },
+        {
+          "id": "d",
+          "label": "It always compiles and runs safely, because the borrow checker tracks lock ownership across tasks"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Std guards are !Send and a blocked lock on the same worker can deadlock.",
+        "Guards are not dropped at await points, and the borrow checker does not model cross-task locking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "Your 1.x crate exposes `pub enum Error { Io, Parse }`. You expect to add variants regularly and want to avoid semver-major releases each time. Which option is the best judgment?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep it as is, because adding a variant is always a minor change since existing matches still compile"
+        },
+        {
+          "id": "b",
+          "label": "Wrap every error in `Box<dyn Error>`, so the variants stop being part of the public API surface"
+        },
+        {
+          "id": "c",
+          "label": "Mark the enum `#[repr(u8)]`, so adding variants keeps the layout stable for downstream exhaustive matches"
+        },
+        {
+          "id": "d",
+          "label": "Add `#[non_exhaustive]` now, so downstream matches need a wildcard arm and new variants are minor changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Adding a variant to an exhaustive public enum breaks downstream matches; non_exhaustive prevents that.",
+        "repr and boxing do not address exhaustiveness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design `Cache<K, V>` with `get_or_insert(&self, key, f)` so earlier results can be held while later inserts happen, with no unsafe code, and entries can later be evicted and freed. Which design meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`HashMap<K, V>` with `&mut self` returning `&V`, so the borrow checker keeps each result valid"
+        },
+        {
+          "id": "b",
+          "label": "`HashMap<K, &'static V>` filled by `Box::leak`, so results stay valid for the whole program run"
+        },
+        {
+          "id": "c",
+          "label": "`RefCell<HashMap<K, V>>` returning `&V` from inside the borrow, which stays valid after later inserts"
+        },
+        {
+          "id": "d",
+          "label": "`Mutex<HashMap<K, Arc<V>>>` returning a cloned `Arc<V>`, so held results outlive inserts and eviction"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Shared ownership via Arc lets callers keep values after rehash or eviction.",
+        "The other designs either do not compile, block further inserts, or never free memory."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design graceful shutdown for Tokio workers pulling jobs from an mpsc channel. Constraints: queued and in-flight jobs must finish, no new jobs are accepted, and exit must happen within 30 seconds. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call `abort()` on every worker handle, then await them so the process exits immediately and cleanly"
+        },
+        {
+          "id": "b",
+          "label": "Drop the senders so workers drain the queue until `recv` returns `None`, then await joins under a 30 s timeout"
+        },
+        {
+          "id": "c",
+          "label": "Set a flag that workers read only at startup, then wait for the runtime to drop them when done"
+        },
+        {
+          "id": "d",
+          "label": "Send each worker a sentinel value and exit the process, relying on the OS to finish pending jobs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Closing the channel lets workers drain, and the timeout bounds the wait.",
+        "Abort, ignored flags and process exit all lose queued or in-flight work."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A parser struct must own a `String` and expose a token slice of it, in safe code, with no extra allocation and no `Box::leak`. A field `tok: &str` pointing into the same struct will not compile. Which redesign meets the constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Make the field `&'static str` by leaking the `String` once, so the borrow never expires"
+        },
+        {
+          "id": "b",
+          "label": "Pin the struct in a `Box` so the compiler allows a field to borrow from another field safely"
+        },
+        {
+          "id": "c",
+          "label": "Store the token as a `(start, end)` byte range and build the `&str` from the owned `String` on demand"
+        },
+        {
+          "id": "d",
+          "label": "Wrap the struct in `Rc<RefCell<..>>` so the field can borrow from its own sibling at run time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Offsets avoid self-reference and need no allocation or unsafe.",
+        "Rc/RefCell and Pin do not make safe self-borrows; leaking violates the constraint."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A trait `Shape` is used as `Box<dyn Shape>`, and `Vec<Box<dyn Shape>>` must be cloneable with `.clone()`. Adding `Clone` as a supertrait breaks object safety. Which design satisfies both constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Declare `trait Shape: Clone` and keep using `dyn Shape`, since Clone is implemented by every concrete shape"
+        },
+        {
+          "id": "b",
+          "label": "Add `fn box_clone(&self) -> Box<dyn Shape>` to the trait and implement `Clone for Box<dyn Shape>` by calling it"
+        },
+        {
+          "id": "c",
+          "label": "Replace `Box<dyn Shape>` with `Box<impl Shape>` so each element is cloned using its own concrete type"
+        },
+        {
+          "id": "d",
+          "label": "Add `fn clone(&self) -> Self` to the trait and mark the whole trait `where Self: Sized` to keep it usable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A method returning a boxed trait object is object-safe and enables Clone for the box.",
+        "Clone supertraits and Self-returning methods make the trait non-object-safe."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A workspace has a library and CLI. A heavy TLS dependency must be off by default, and the design must respect Cargo's rule that features are additive, so enabling any feature never removes functionality. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A `tls` feature enabling an optional dependency, with TLS code behind `cfg(feature = \"tls\")` and off by default"
+        },
+        {
+          "id": "b",
+          "label": "A `build.rs` that reads an environment variable and silently adds the dependency whenever it is set"
+        },
+        {
+          "id": "c",
+          "label": "A separate forked crate carrying the TLS code, kept in sync with the library by copying files manually"
+        },
+        {
+          "id": "d",
+          "label": "A `no-tls` feature that, when enabled, removes the TLS code paths from the library at compile time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "An opt-in feature gating an optional dependency is additive and off by default.",
+        "Negative features break additivity; forks and env-driven builds are fragile and not unified by Cargo."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design a builder where calling `send()` before `url()` is rejected at compile time. Which elements together achieve this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A type parameter on the builder (with `PhantomData`) marking whether a URL has been set"
+        },
+        {
+          "id": "b",
+          "label": "An `Option<String>` field checked in `send`, returning `Err` when no URL was set"
+        },
+        {
+          "id": "c",
+          "label": "A `bool` field checked by `assert!` in `send`, panicking when no URL was set"
+        },
+        {
+          "id": "d",
+          "label": "`send` implemented only for the builder state in which the URL is already set"
+        },
+        {
+          "id": "e",
+          "label": "`url(self)` consuming the builder and returning the builder in the URL-set state"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Typestate uses a marker type, state-specific impls, and state-changing methods.",
+        "Runtime checks (assert or Err) fail at run time, not compile time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A multithreaded server allocates a 1 MiB buffer per request, and profiling shows allocation dominating. You must reuse buffers across threads, use no unsafe, and ensure buffers return to the pool automatically even on early returns or panics. Which design meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Leak buffers with `Box::leak` into a global list and hand out references to them as requested"
+        },
+        {
+          "id": "b",
+          "label": "A `release(buf)` function that handlers call at the end of each request to return the buffer"
+        },
+        {
+          "id": "c",
+          "label": "A `thread_local!` pool of `Rc<Vec<u8>>` handed out to any thread that asks"
+        },
+        {
+          "id": "d",
+          "label": "A guard type owning the buffer with `Drop` pushing it back into an `Arc<Mutex<Vec<..>>>` pool"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A Drop guard returns the buffer on every exit path, and the Arc<Mutex> pool is shareable across threads.",
+        "Manual release is skipped on early return or panic; Rc is not Send; leaking never reuses or frees."
+      ],
+      "reviewed": false
+    }
+  ]
+}

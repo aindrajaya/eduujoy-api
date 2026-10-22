@@ -1,0 +1,1031 @@
+{
+  "promptVersion": "v2",
+  "stages": {
+    "expert": [
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A lab claims a drug 'enhances LTP' because field EPSP slope in CA1 rose 40% after tetanus. Judged against the criterion of showing a postsynaptic, NMDA-receptor-dependent mechanism, which critique is strongest?",
+        "options": [
+          "Slope alone cannot separate presynaptic release changes from postsynaptic changes, so without APV controls and paired-pulse or quantal analysis the mechanism is unsupported",
+          "Field recordings are invalid for CA1, because only whole-cell recordings can measure any synaptic change, so the result should be discarded outright",
+          "A 40% increase is too small to count as LTP, because potentiation must exceed 100% to be distinguished from baseline drift in any preparation",
+          "Tetanic stimulation always recruits inhibitory interneurons, which means any potentiation observed must be presynaptic in origin by default"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Mechanism claims need manipulations (APV) and measures (PPR, quantal analysis) that localize the change.",
+          "Distractors assert false thresholds or invalidate field recordings wholesale."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "To test whether neurons in region X are necessary for a learned lever press, you need reversibility within one session and temporal precision of seconds. Which method best meets these criteria?",
+        "options": [
+          "Electrolytic lesion of X, because permanent damage gives the cleanest and most complete loss of function across sessions",
+          "Optogenetic inhibition with a light-driven pump or channel, because it silences cells on a seconds timescale and reverses when the light stops",
+          "Chronic knockout of a gene enriched in X, because it removes the protein throughout development and gives stable effects",
+          "Post-hoc c-Fos mapping after training, because activity-dependent labeling shows which neurons are necessary for the behavior"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Optogenetic inhibition is reversible and temporally precise.",
+          "Lesions and knockouts are irreversible and allow compensation; c-Fos is correlational."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A paper reports that fMRI activity in the fusiform region predicts face recognition, concluding the region 'is the face module'. Which critique best weighs the evidence against the claim of necessity and specificity?",
+        "options": [
+          "BOLD reflects blood flow, so it cannot reflect neural activity at all and the correlation must be spurious",
+          "The sample was probably too large, since large samples make any region seem to correlate with behavior",
+          "Correlational imaging cannot show necessity, and responses to non-face expert categories would challenge specificity, so lesion or stimulation data are needed",
+          "Face recognition is distributed, so no region can ever be more involved than another, making the claim meaningless"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Necessity needs causal perturbation; specificity needs control categories.",
+          "Distractors overstate: BOLD does track neural activity; regional specialization can exist."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "Two models explain a neuron's direction selectivity: (A) asymmetric inhibition delayed along the preferred-null axis, (B) dendritic nonlinear summation of sequential inputs. Which result most strongly favors A over B?",
+        "options": [
+          "Selectivity persists when the cell is hyperpolarized below spike threshold at the soma",
+          "Selectivity is reduced when GABA-A receptors are blocked while excitatory inputs remain intact",
+          "Selectivity is larger for slow motion than for fast motion across all tested stimuli",
+          "Selectivity correlates with dendritic spine density measured in fixed tissue afterward"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Loss of selectivity with inhibition blocked specifically implicates inhibitory asymmetry.",
+          "Other results are compatible with both models or merely correlational."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A single-unit study finds a motor cortex neuron fires most for rightward reach. Under a population-vector view versus a 'preferred-direction coding' view of single cells, which interpretation best fits the criterion of predicting reach from data?",
+        "options": [
+          "Each neuron alone encodes the reach direction, so the best neuron should be chosen and the rest ignored",
+          "Broad tuning means neurons carry no direction information, so decoding from them cannot work",
+          "Direction is read from the weighted activity of many broadly tuned neurons, which gives robust prediction despite noisy single cells",
+          "Tuning curves are only artifacts of averaging trials, so single-trial decoding must fail"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Population vectors pool broadly tuned cells for robustness.",
+          "Distractors assume single-cell sufficiency or no information."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "multi_choice",
+        "prompt": "A group claims that a hippocampal 'engram' cell ensemble stores a fear memory. Which findings would count as strong evidence for sufficiency and necessity combined? Select all that apply.",
+        "options": [
+          "Optogenetically reactivating tagged cells triggers freezing in a neutral context",
+          "Silencing the tagged cells during testing impairs recall of the fear memory",
+          "Tagged cells show higher c-Fos than random cells during training",
+          "Total hippocampal activity rises during any novel experience"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Artificial reactivation shows sufficiency; silencing shows necessity.",
+          "Elevated c-Fos and general activity are correlational."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "scenario",
+        "prompt": "A team records from a cortical neuron whose firing ramps before a decision. They propose it integrates evidence. A colleague notes the ramp also appears when the animal's choice is fixed in advance by a cue and no evidence is shown. Which judgment of the integration claim is best?",
+        "options": [
+          "The claim is confirmed, since ramping always indicates integration of sensory evidence",
+          "The claim is refuted, since neurons never ramp in any decision task",
+          "The claim is weakened, because ramping may reflect anticipation or motor preparation, so it must vary with evidence strength to support integration",
+          "The claim is irrelevant, since choices without evidence cannot be studied"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Integration predicts ramp slope scaling with evidence strength; a ramp without evidence suggests other causes.",
+          "Distractors over- or under-claim."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "Design a test of whether dopamine neurons signal reward prediction error. Constraints: separate prediction from reward value, and include a case with a negative error. Which design fits?",
+        "options": [
+          "Record while giving larger rewards only, and check that firing rises with reward size",
+          "Record during a cue-reward task, then omit the expected reward on some trials and check for a firing dip below baseline",
+          "Record during free feeding, and check that firing is higher in hungry animals than sated ones",
+          "Record while giving unpredicted rewards only, and check that cells fire at reward delivery"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Omission of a predicted reward isolates negative prediction error.",
+          "Other designs cannot separate prediction from value or lack a negative error."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "You want to show a synapse's potentiation is expressed presynaptically with minimal perturbation of the postsynaptic cell. Which assembled protocol meets all constraints?",
+        "options": [
+          "Whole-cell record with a strong postsynaptic depolarization, and measure EPSC amplitude only",
+          "Pair-stimulate afferents, record EPSCs, and check paired-pulse ratio and miniature frequency versus amplitude changes after induction",
+          "Apply AMPA receptor antagonist throughout, and measure the field potential before and after",
+          "Delete NMDA receptors, and observe whether basal transmission is lost"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Paired-pulse ratio and mEPSC frequency changes indicate presynaptic expression.",
+          "Other options either cannot localize expression or abolish the response."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "Propose an experiment to test that a cerebellar circuit learns a timed eyeblink response via climbing-fiber error signals. Constraints: causal, and distinguishing error signal from sensory cue. Which fits best?",
+        "options": [
+          "Record Purkinje cells during passive tone presentation to see if simple spikes change",
+          "Lesion the cerebellum before training and verify the animal cannot blink at all",
+          "Pair tone with puff, then substitute optogenetic climbing-fiber stimulation for the puff and test whether the conditioned blink develops",
+          "Raise tone volume progressively and measure cerebellar BOLD signals"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Replacing the unconditioned stimulus with climbing-fiber stimulation tests the teaching signal causally.",
+          "Other options are correlational or abolish the behavior without isolating the error signal."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "Design a closed-loop epilepsy intervention meeting: detect seizure onset within 100 ms, act only during events, avoid chronic circuit alteration. Which is best?",
+        "options": [
+          "Continuous high-frequency stimulation of the focus at all times",
+          "Surgical removal of both hippocampi in every patient",
+          "Daily systemic anticonvulsant at maximum dose",
+          "Real-time EEG detection of ictal onset triggering brief stimulation or optogenetic inhibition of the focus, off otherwise"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Closed-loop triggering satisfies detection speed, event-only action, and minimal chronic change.",
+          "Other options act continuously or irreversibly."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "single_choice",
+        "prompt": "Build a computational model of a ring attractor for head direction. Which feature must the design include to hold a heading without input and update it on rotation?",
+        "options": [
+          "Local recurrent excitation with broad inhibition for a bump, plus velocity-gated asymmetric input that shifts the bump",
+          "Feedforward connections only, with thresholds tuned per cell for each direction",
+          "Uniform all-to-all excitation and no inhibition so activity spreads evenly",
+          "Random connectivity with fixed weights and no velocity input"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Recurrent excitation with inhibition sustains a bump; asymmetric velocity input shifts it.",
+          "Other designs cannot persist or update."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "multi_choice",
+        "prompt": "Design a study to test whether a cortical area is needed for tactile discrimination, not just for movement of the response. Which elements must it include? Select all that apply.",
+        "options": [
+          "Reversible inactivation of the area during the stimulus period",
+          "A control task requiring the same response but no tactile judgment",
+          "Recording only from neurons already known to be tuned",
+          "Use of a single animal to reduce variability"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Reversible inactivation plus a motor-matched control separates perception from response.",
+          "Selective recording is correlational; one animal weakens inference."
+        ]
+      },
+      {
+        "bloom": "C6",
+        "kind": "scenario",
+        "prompt": "A team plans to restore vision in retinal degeneration by expressing a light-sensitive channel in surviving cells. Constraints: work at ambient light, not need genetically blind-only cells, and preserve spatial resolution. Which design best meets them?",
+        "options": [
+          "Express a highly light-sensitive opsin in surviving retinal ganglion cells and use goggles for amplified input",
+          "Express a channel responding only to ultraviolet, since brightness is irrelevant",
+          "Express opsin in all photoreceptors including healthy ones with no sensitivity control",
+          "Express opsin in the optic nerve's glial cells to avoid neurons"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Targeting surviving cells with a sensitive opsin and light amplification works under ambient light while keeping cell-level resolution.",
+          "Other options ignore sensitivity or the cell type needed."
+        ]
+      }
+    ],
+    "novice": [
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which part of a neuron typically receives incoming signals from other neurons?",
+        "options": [
+          "Dendrites",
+          "Axon terminal",
+          "Myelin sheath",
+          "Node of Ranvier"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Dendrites are the branching extensions that receive input from other cells.",
+          "Axon terminals send signals, a common mix-up."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "What is the name of the small gap between two communicating neurons?",
+        "options": [
+          "Synaptic cleft",
+          "Axon hillock",
+          "Soma",
+          "Glial junction"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The synaptic cleft separates presynaptic and postsynaptic cells.",
+          "The axon hillock is where action potentials start, not the gap."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which ion rushes into the neuron during the rising phase of an action potential?",
+        "options": [
+          "Sodium (Na+)",
+          "Potassium (K+)",
+          "Chloride (Cl-)",
+          "Calcium (Ca2+)"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Voltage-gated Na+ channels open and Na+ enters, depolarizing the cell.",
+          "K+ leaves the cell during repolarization."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which brain region is mainly responsible for coordinating balance and fine-tuning movement?",
+        "options": [
+          "Cerebellum",
+          "Hippocampus",
+          "Amygdala",
+          "Thalamus"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The cerebellum coordinates movement and balance.",
+          "The hippocampus is linked to memory formation, a frequent confusion."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "single_choice",
+        "prompt": "Which type of molecule is released by a presynaptic neuron to signal across a synapse?",
+        "options": [
+          "Neurotransmitter",
+          "Hormone",
+          "Enzyme",
+          "Antibody"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Neurotransmitters carry the signal across the synaptic cleft.",
+          "Hormones travel through blood, not across synapses."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "multi_choice",
+        "prompt": "Which of the following are neurotransmitters? Select all that apply.",
+        "options": [
+          "Dopamine",
+          "Glutamate",
+          "Hemoglobin",
+          "Collagen"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Dopamine and glutamate are neurotransmitters.",
+          "Hemoglobin and collagen are proteins with other roles."
+        ]
+      },
+      {
+        "bloom": "C1",
+        "kind": "scenario",
+        "prompt": "A student studying a diagram of the brain is asked to label the lobe that processes visual information. It sits at the back of the head. Which lobe should the student label?",
+        "options": [
+          "Occipital lobe",
+          "Frontal lobe",
+          "Temporal lobe",
+          "Parietal lobe"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The occipital lobe at the back handles primary visual processing.",
+          "The temporal lobe is for hearing and memory, often confused."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Why does the neuron's resting membrane potential sit at about -70 mV?",
+        "options": [
+          "Unequal ion distribution and selective membrane permeability keep the inside negative",
+          "Neurotransmitters constantly bind to the membrane and charge it negatively",
+          "The nucleus produces a steady negative charge that fills the cytoplasm",
+          "Myelin insulates the cell and traps negative charge inside the axon"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Ion gradients plus leak channels, mostly K+, set the resting potential.",
+          "Myelin affects speed, not the resting potential."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What does myelin do for an axon?",
+        "options": [
+          "Speeds conduction by letting the signal jump between nodes",
+          "Stores neurotransmitters so they can be released faster",
+          "Increases the size of each action potential along the axon",
+          "Receives signals from neighboring neurons across the synapse"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Myelin enables saltatory conduction, speeding signals.",
+          "Myelin does not make action potentials larger; they are all-or-none."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What does it mean that an action potential is 'all-or-none'?",
+        "options": [
+          "Once threshold is reached, it fires at full size regardless of stimulus strength",
+          "It travels along the axon only if every neighbor neuron also fires",
+          "A stronger stimulus produces a taller action potential in the same neuron",
+          "It occurs in the whole brain at once or not at all"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Action potentials have fixed amplitude once threshold is crossed.",
+          "Stimulus strength is coded by firing rate, not amplitude."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "How does an inhibitory neurotransmitter such as GABA mainly affect the postsynaptic neuron?",
+        "options": [
+          "It makes the neuron less likely to fire an action potential",
+          "It permanently destroys the receptors on the postsynaptic cell",
+          "It forces the neuron to fire at a faster rate than normal",
+          "It converts the neuron's signal into a hormone-based message"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Inhibitory input hyperpolarizes or stabilizes the cell, lowering firing probability.",
+          "Inhibition is not receptor destruction or excitation."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Which statement best describes the difference between the sensory and motor neurons?",
+        "options": [
+          "Sensory neurons carry information toward the CNS; motor neurons carry commands away",
+          "Sensory neurons carry commands to muscles; motor neurons carry information from skin",
+          "Sensory neurons exist only in the brain; motor neurons only in the spinal cord",
+          "Sensory neurons use electrical signals; motor neurons use only chemical ones"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Afferent sensory neurons go to the CNS; efferent motor neurons go out.",
+          "Reversing the direction is the common error."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "multi_choice",
+        "prompt": "Which statements correctly describe synaptic transmission at a chemical synapse? Select all that apply.",
+        "options": [
+          "Calcium entry triggers vesicles to release neurotransmitter",
+          "Neurotransmitter binds receptors on the postsynaptic cell",
+          "Action potentials jump directly across the cleft as electricity",
+          "Neurotransmitter stays in the cleft permanently to keep signaling"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Ca2+ triggers release and transmitter binds postsynaptic receptors.",
+          "Chemical synapses do not pass spikes across the gap, and transmitter is cleared or reuptaken."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "scenario",
+        "prompt": "A person touches a hot stove and pulls their hand away before feeling pain. A teacher explains this to the class. Which explanation best accounts for the quick response?",
+        "options": [
+          "A spinal reflex arc links sensory input to motor output without waiting for the brain",
+          "The muscles sense the heat themselves and contract without any neural input",
+          "The brain predicts the touch in advance and sends a movement command early",
+          "Pain receptors directly release hormones that move the hand within seconds"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Reflex arcs route through the spinal cord for speed.",
+          "Muscles need motor neuron input; hormones are too slow."
+        ]
+      }
+    ],
+    "competent": [
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A neuron has a resting potential of -70 mV. Its K+ equilibrium potential is -90 mV and its Na+ equilibrium potential is +60 mV. Extra K+ leak channels open while all other channels stay as they were. Where does the membrane potential move?",
+        "options": [
+          "Toward -90 mV, so the cell hyperpolarizes",
+          "Toward +60 mV, so the cell depolarizes",
+          "It stays at -70 mV, since K+ is at equilibrium",
+          "Toward 0 mV, so the channels act nonselectively"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Opening more K+ channels pulls Vm toward E_K, which is more negative than rest, so the cell hyperpolarizes.",
+          "Distractors confuse the direction of the driving force or treat the resting potential as K+ equilibrium."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A neuron rests at -70 mV with a spike threshold of -55 mV. Three excitatory synapses each add a +5 mV EPSP and one inhibitory synapse adds a -2 mV IPSP, all arriving at the soma at the same instant. Assuming linear summation, what happens?",
+        "options": [
+          "Spike fires; the membrane reaches about -52 mV",
+          "Spike fires; the membrane reaches exactly -55 mV",
+          "No spike; the membrane reaches about -57 mV",
+          "No spike; the membrane reaches about -63 mV"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Net change is +15 - 2 = +13 mV, giving about -57 mV, which is below threshold.",
+          "Distractors ignore the IPSP or add the potentials incorrectly."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Tetrodotoxin (TTX), which blocks voltage-gated Na+ channels, is applied to the middle of a healthy myelinated axon. What do you predict for an action potential approaching that region?",
+        "options": [
+          "Resting potential drops to -90 mV and spikes get larger",
+          "Spikes fail to propagate; resting potential barely changes",
+          "Spikes become broader because K+ channels stay open longer",
+          "Spikes still occur but conduct slowly, as in demyelination"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Without voltage-gated Na+ channels the regenerative depolarization cannot occur, so propagation stops, while the resting potential is set mainly by K+ leak.",
+          "Distractors confuse Na+ channel block with demyelination or K+ channel effects."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A stroke damages the hand region of the left primary somatosensory cortex (postcentral gyrus) but spares motor cortex. Which deficit do you predict?",
+        "options": [
+          "Loss of touch localization in the right hand",
+          "Loss of touch localization in the left hand",
+          "Weakness of the right hand with normal touch",
+          "Loss of vision in the right visual field"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Somatosensory pathways cross the midline, so left cortex represents the right hand, and sensory cortex damage impairs touch, not strength.",
+          "Distractors ignore the crossing or swap sensory and motor cortex."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "In a brain slice, a postsynaptic neuron is voltage-clamped at -80 mV while a presynaptic input is stimulated with a high-frequency train that normally induces LTP. Glutamate is released normally and AMPA receptors work. What do you predict?",
+        "options": [
+          "No LTP, because Mg2+ still blocks NMDA channels",
+          "LTP occurs, since glutamate alone opens NMDA channels fully",
+          "LTP occurs, because hyperpolarization boosts Ca2+ entry",
+          "No LTP, because AMPA receptors cannot bind glutamate"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "NMDA receptors need glutamate plus depolarization to expel Mg2+, so clamping at -80 mV prevents the Ca2+ entry needed for LTP.",
+          "Distractors treat glutamate binding as sufficient or reverse the effect of hyperpolarization."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "multi_choice",
+        "prompt": "Which treatments would be expected to increase serotonin signaling at synapses? Select all that apply.",
+        "options": [
+          "An SSRI that blocks the serotonin transporter",
+          "An MAO inhibitor that slows serotonin breakdown",
+          "A 5-HT receptor antagonist acting on postsynaptic cells",
+          "An inhibitor of tryptophan hydroxylase"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Blocking reuptake and slowing degradation both raise synaptic serotonin.",
+          "An antagonist blocks the receptors, and blocking tryptophan hydroxylase reduces serotonin synthesis."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "scenario",
+        "prompt": "In a patch-clamp experiment on a neuron, chloride's equilibrium potential is -70 mV. The cell is held at -40 mV, and a GABA-A receptor agonist is applied so that the channels open. What happens to chloride?",
+        "options": [
+          "Cl- flows into the cell, driving Vm toward -70 mV",
+          "Cl- flows out of the cell, because the interior is more positive than outside",
+          "No net Cl- flow, because channels open only at the resting potential",
+          "Cl- flows into the cell, driving Vm toward 0 mV"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "At -40 mV the membrane is above E_Cl, so the driving force pushes Cl- inward and moves Vm toward -70 mV.",
+          "Distractors reverse the direction of the driving force or ignore the equilibrium potential."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A patient cannot recognize familiar faces, yet identifies the same people by their voices, reads fluently and sees fine detail normally. Which interpretation best fits this pattern?",
+        "options": [
+          "Selective damage to ventral occipitotemporal face-processing areas",
+          "Damage to primary visual cortex, blocking all visual input",
+          "Damage to Broca's area, impairing the naming of people",
+          "Damage to the hippocampus, preventing all new memories"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Intact acuity, reading and voice recognition with failed face recognition points to a selective deficit in face-specialized ventral visual cortex.",
+          "Distractors invoke damage that would cause broader visual, language or memory problems."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A long stretch of an axon is demyelinated, and conduction fails there although the neuron is otherwise healthy. Which explanation best accounts for the failure?",
+        "options": [
+          "Nodal Na+ channels are destroyed, so no node can ever fire again",
+          "Current leaks from the bare membrane, so the next node stays below threshold",
+          "Resting potential rises along the axon, inactivating every Na+ channel",
+          "Myelin loss blocks vesicle release at the terminal directly"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Without insulation, current leaks out and capacitance increases, so the depolarization reaching the next node falls short of threshold.",
+          "Distractors attribute failure to channel destruction, resting potential or terminal release, none of which is the primary mechanism."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "Patients with damage to region A fail task X but pass task Y. Patients with damage to region B pass task X but fail task Y. What is the best inference?",
+        "options": [
+          "Region A is necessary for all cognition tested here",
+          "Task X is simply harder than task Y for all patients",
+          "Tasks X and Y rely at least partly on different regions",
+          "Regions A and B form one serial pathway for both tasks"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "A double dissociation indicates the two tasks depend at least partly on separable neural substrates.",
+          "Distractors ignore that the reversed pattern rules out a simple difficulty difference or a single shared pathway."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "After a drug is applied, the EPSC evoked by a single stimulus rises by 50%, the paired-pulse ratio falls, and mEPSC amplitude is unchanged. Where does the drug most likely act?",
+        "options": [
+          "More postsynaptic AMPA receptors at each synapse",
+          "Increased presynaptic release probability",
+          "Slower transmitter clearance from the cleft",
+          "Increased postsynaptic membrane capacitance"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Higher release probability depletes vesicles faster, lowering the paired-pulse ratio, while the quantal size (mEPSC) is unchanged.",
+          "Postsynaptic or clearance changes would alter mEPSC amplitude rather than the paired-pulse ratio."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A study finds that BOLD signal in region R rises during a memory task, and a headline claims R is necessary for memory. What is the strongest objection?",
+        "options": [
+          "Activation is correlational and doesn't show R is required for memory",
+          "BOLD reflects only inhibitory firing so it can't show function",
+          "fMRI has too little spatial resolution to localise any task",
+          "Memory tasks are always supported by exactly one region"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Imaging shows association; necessity needs causal tests such as lesions or inactivation.",
+          "Distractors misstate what BOLD measures or what fMRI can resolve."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "multi_choice",
+        "prompt": "Which findings together would point to a postsynaptic rather than presynaptic locus for LTP expression? Select all that apply.",
+        "options": [
+          "mEPSC amplitude increases after induction",
+          "Paired-pulse ratio is unchanged after induction",
+          "Paired-pulse ratio decreases after induction",
+          "Presynaptic vesicle release probability rises"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Larger quantal size with unchanged release properties indicates more or stronger postsynaptic receptors.",
+          "A falling paired-pulse ratio or higher release probability indicates a presynaptic change."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "scenario",
+        "prompt": "A researcher raises extracellular K+ from 4 mM to 12 mM while recording from a neuron. At first it fires rapidly, then it falls silent with its membrane potential sitting near -45 mV. Which mechanism best explains the silence?",
+        "options": [
+          "Na+ channels inactivate during sustained depolarization, so spikes cannot be generated",
+          "K+ channels close fully, so repolarization never completes and the cell dies",
+          "Chloride equilibrium shifts above threshold, producing strong inhibition",
+          "Synaptic vesicles are depleted, so the neuron cannot generate spikes"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Higher external K+ depolarizes the cell, and sustained depolarization inactivates voltage-gated Na+ channels, a depolarization block.",
+          "Distractors point to K+ channel closure, chloride or vesicle depletion, which do not explain a silent depolarized cell."
+        ]
+      }
+    ],
+    "advanced_beginner": [
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Why do myelinated axons conduct action potentials faster than unmyelinated axons of the same diameter?",
+        "options": [
+          "Myelin pumps ions out of the axon, so the resting potential becomes more positive",
+          "The signal jumps between nodes of Ranvier, so depolarization is regenerated only at gaps",
+          "Myelin carries neurotransmitter along the axon, so the signal can skip the synapse",
+          "Myelin increases sodium flow along every part of the axon, so each patch fires sooner"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Myelin insulates the axon so the action potential is regenerated only at nodes (saltatory conduction).",
+          "Distractors confuse myelin with ion pumping, transmitter transport, or more sodium flow along the whole membrane."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What directly triggers release of neurotransmitter from an axon terminal?",
+        "options": [
+          "Binding of neurotransmitter to autoreceptors on the terminal",
+          "Exit of potassium ions through leak channels in the terminal",
+          "Reuptake of transmitter by transporters in the terminal membrane",
+          "Entry of calcium ions through voltage-gated channels"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Depolarization opens voltage-gated Ca2+ channels, and Ca2+ entry causes vesicles to fuse and release transmitter.",
+          "Distractors name real processes (autoreceptors, K+ leak, reuptake) that do not trigger vesicle release."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "A patient understands spoken sentences well but speaks in slow, effortful, halting phrases. Which region is most likely damaged?",
+        "options": [
+          "Wernicke's area in the left temporal lobe",
+          "Primary visual cortex in the occipital lobe",
+          "Broca's area in the left frontal lobe",
+          "The cerebellum at the back of the brain"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Broca's area damage causes non-fluent speech production with relatively preserved comprehension.",
+          "Wernicke's damage typically impairs comprehension with fluent but meaningless speech."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Why does an inhibitory postsynaptic potential (IPSP) make a neuron less likely to fire?",
+        "options": [
+          "It moves the membrane potential away from threshold, often by hyperpolarizing it",
+          "It destroys the neurotransmitter so that excitatory signals cannot arrive",
+          "It raises sodium permeability so the neuron cannot recover between spikes",
+          "It shortens the axon's length so that fewer inputs can sum at the soma"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "IPSPs (e.g., Cl- entry or K+ exit) hold the potential further from threshold.",
+          "Distractors invent mechanisms such as transmitter destruction, higher sodium permeability, or axon changes."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Which statement best describes the main role of the cerebellum?",
+        "options": [
+          "Generating the initial command to start a voluntary movement",
+          "Regulating heart rate and breathing through reflex centers",
+          "Storing long-term declarative memories of past events",
+          "Coordinating the timing and smoothness of movements"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "The cerebellum fine-tunes movement and supports motor learning.",
+          "Distractors assign motor cortex, brainstem, or hippocampal functions to it."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "multi_choice",
+        "prompt": "Which statements correctly describe action potentials in a typical neuron? Select all that apply.",
+        "options": [
+          "Once threshold is reached, the spike has the same amplitude each time",
+          "A stronger stimulus is usually signalled by a higher firing rate",
+          "A stronger stimulus produces a larger action potential",
+          "The spike shrinks gradually as it travels down the axon"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "Action potentials are all-or-none and intensity is coded mainly by frequency.",
+          "Distractors treat spikes as graded or decaying, which describes graded potentials."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "scenario",
+        "prompt": "After surgery removing both hippocampi, a patient can chat normally and recall childhood events. He cannot remember meeting his doctors from one day to the next, yet he gradually improves at a mirror-drawing task he never recalls practicing. Which interpretation best fits these observations?",
+        "options": [
+          "The hippocampus stores every memory permanently, so old memories should also have been erased",
+          "The hippocampus is needed to form new declarative memories, but not for old memories or motor skill learning",
+          "The hippocampus controls all learning, so the improvement at drawing must be a measurement error",
+          "The hippocampus produces speech, so his conversation should have been lost along with memory"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Hippocampal damage causes anterograde amnesia for declarative memory while skill learning uses other circuits.",
+          "Distractors treat the hippocampus as the sole site of storage, learning, or language."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A neuron rests at -70 mV with a threshold of -55 mV. Three EPSPs of +6 mV each and one IPSP of -2 mV arrive together and sum. What happens?",
+        "options": [
+          "It does not fire; the potential only reaches -58 mV",
+          "It fires; the potential reaches -50 mV",
+          "It fires; the potential reaches -54 mV",
+          "It does not fire; the potential only reaches -64 mV"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Net change is 18 - 2 = +16 mV, giving -54 mV, which is above threshold.",
+          "Distractors come from arithmetic or sign errors in summing inputs."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A neuron rests at -70 mV and the K+ equilibrium potential is about -90 mV. Extra K+ channels open. What is the most likely effect?",
+        "options": [
+          "The membrane moves toward -90 mV, making firing less likely",
+          "The membrane moves toward 0 mV, making firing more likely",
+          "The membrane stays at -70 mV because K+ in and out cancel",
+          "The membrane moves toward +60 mV, making firing more likely"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "K+ flows out, pulling the potential toward its equilibrium potential and hyperpolarizing the cell.",
+          "Distractors confuse the direction of K+ flow or use the Na+ equilibrium potential."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A dentist injects lidocaine, which blocks voltage-gated sodium channels, near a tooth's nerve. What is the most likely result?",
+        "options": [
+          "The pain axons fire continuously, flooding the brain with signals",
+          "Spikes still travel, but the pain cortex is silenced directly by the drug",
+          "The pain axons cannot generate action potentials, so no signal reaches the brain",
+          "The axons conduct normally, but their terminals release extra transmitter"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Without Na+ channel opening, the rising phase of the action potential fails and the pain signal is not conducted.",
+          "Distractors predict hyperactivity or a central site of action, which do not follow from blocking axonal Na+ channels."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "You touch a hot pan and your hand jerks away before you feel pain. Which sequence best describes the reflex pathway?",
+        "options": [
+          "Motor neuron, spinal cord, sensory neuron, then muscle",
+          "Muscle, motor neuron, spinal cord, then sensory neuron",
+          "Sensory neuron, somatosensory cortex, motor cortex, then muscle",
+          "Sensory neuron, spinal cord interneuron, motor neuron, then muscle"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Spinal reflexes route sensory input through the cord to motor neurons without waiting for the cortex.",
+          "Distractors reverse the order or send the signal through the cortex first."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "A drug blocks the presynaptic transporters that take serotonin back up from the synaptic cleft. What is the expected effect at that synapse?",
+        "options": [
+          "Serotonin stays in the cleft longer, increasing receptor activation",
+          "Less serotonin is released, reducing receptor activation",
+          "Serotonin is broken down faster, reducing receptor activation",
+          "Postsynaptic receptors are blocked, so serotonin has no effect"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Blocking reuptake leaves more transmitter in the cleft for longer.",
+          "Distractors describe reduced release, faster breakdown, or receptor blockade, none of which reuptake inhibition causes."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "multi_choice",
+        "prompt": "A stroke destroys the hand area of the left primary motor cortex. Which outcomes would you expect? Select all that apply.",
+        "options": [
+          "Weakness of the right hand",
+          "Weakness of the left hand",
+          "Largely normal movement of the left hand",
+          "Loss of balance as the main deficit",
+          "Speech comprehension that is typically intact"
+        ],
+        "correct": [
+          0,
+          2,
+          4
+        ],
+        "rubric": [
+          "Motor cortex controls the opposite side of the body, and the hand area does not hold language comprehension.",
+          "Distractors reverse laterality or assign a cerebellar deficit to motor cortex damage."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "scenario",
+        "prompt": "In a lab, a researcher applies curare, which blocks nicotinic acetylcholine receptors, to a nerve-muscle preparation. She then stimulates the motor neuron and records from both the axon and the muscle. Which result should she predict?",
+        "options": [
+          "The motor neuron cannot fire, so no acetylcholine is ever released",
+          "The muscle contracts continuously because acetylcholine builds up",
+          "The motor axon fires normally, but the muscle fibers do not depolarize or contract",
+          "The sensory neurons stop firing, but the muscle still contracts normally"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Curare blocks postsynaptic receptors at the neuromuscular junction, so the axon still fires but the muscle fails to respond.",
+          "Distractors place the block in the neuron, predict overstimulation, or involve sensory neurons."
+        ]
+      }
+    ]
+  }
+}

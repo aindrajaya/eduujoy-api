@@ -1,0 +1,781 @@
+{
+  "promptVersion": "v2",
+  "stages": {
+    "advanced_beginner": [
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Why does the general antiderivative of 2x include the term '+ C'?",
+        "options": [
+          "Functions that differ by a constant all have the derivative 2x",
+          "The constant records the starting value of x when integrating begins",
+          "The constant corrects the rounding error left by approximating area",
+          "Integration always drops one term of the function, and C replaces it"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Adding a constant never changes a derivative, so every x^2 + C is an antiderivative of 2x.",
+          "Distractors treat C as an initial x value, an error correction or a lost term; it is none of these."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "The function f(x) = x - 5 is below the x-axis on [0, 3]. What can you say about the definite integral of f from 0 to 3?",
+        "options": [
+          "It is positive, because an area is always a positive quantity",
+          "It is zero, because the parts above and below the axis cancel out",
+          "It is negative, because the region lies below the axis and counts as negative",
+          "It is undefined, because the graph never crosses the axis on this interval"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "Definite integrals give signed area, so regions below the axis contribute negative values.",
+          "Distractors confuse signed area with geometric area or assume cancellation that cannot occur when f never changes sign."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "What does the second part of the Fundamental Theorem of Calculus let you do?",
+        "options": [
+          "Find a definite integral by differentiating f and evaluating it at the midpoint",
+          "Evaluate a definite integral by subtracting an antiderivative's values at the endpoints",
+          "Replace the area under any curve with f(b) times (b - a) exactly",
+          "Show that every continuous function must have a derivative everywhere"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "The theorem says the integral of f from a to b equals F(b) - F(a) for any antiderivative F.",
+          "Distractors confuse integration with differentiation, a rectangle approximation, or differentiability."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Which technique is the most natural starting point for the integral of x * e^(x^2) dx, and why?",
+        "options": [
+          "Integration by parts, since the integrand is a product of two different functions",
+          "Partial fractions, since e^(x^2) can be split into simpler pieces first",
+          "Trig substitution, since an x^2 term sits inside the expression here",
+          "Substitution, since x is the derivative of x^2 up to a constant factor"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "With u = x^2, du = 2x dx, so the integrand becomes a constant multiple of e^u du.",
+          "Parts is tempting because of the product, but substitution is much simpler here."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "single_choice",
+        "prompt": "Without finding an antiderivative, predict the value of the integral of x^3 from -2 to 2.",
+        "options": [
+          "8",
+          "4",
+          "0",
+          "-8"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "x^3 is an odd function, so the signed areas on either side of 0 cancel.",
+          "Distractors come from evaluating at one endpoint or ignoring the sign of the left half."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "multi_choice",
+        "prompt": "Which of the following statements about definite integrals are true for continuous functions? Select all that apply.",
+        "options": [
+          "Swapping the limits of integration changes the sign of the result",
+          "The integral of f from a to a is always 0",
+          "The integral of f*g equals the integral of f times the integral of g",
+          "The integral from a to c equals the integral from a to b plus the integral from b to c",
+          "If f(x) > g(x) on [a, b], then the integral of f is less than that of g"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "rubric": [
+          "Reversal flips the sign, a zero-width interval has no area, and intervals add.",
+          "There is no product rule for integrals, and a larger function has the larger integral, so those two are false."
+        ]
+      },
+      {
+        "bloom": "C2",
+        "kind": "scenario",
+        "prompt": "A car moves along a straight road with velocity v(t) in m/s. It moves forward for the first 3 seconds and backward during the 4th second. A student computes the integral of v(t) from t = 0 to t = 4 and gets 10. What does this number represent?",
+        "options": [
+          "The total distance driven, 10 m, counting forward and backward travel alike",
+          "The average velocity of the car over the 4 seconds, which is 10 m/s",
+          "The net change in position, so the car ends 10 m ahead of where it began",
+          "The final acceleration of the car at t = 4, which equals 10 m/s^2"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "The integral of velocity is net displacement, so backward motion subtracts.",
+          "Distance would need the integral of |v|; average velocity would need division by 4."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Find the integral of (3x^2 + 4x) dx.",
+        "options": [
+          "x^3 + 4x^2 + C",
+          "x^3 + 2x^2 + C",
+          "6x + 4 + C",
+          "x^3 + 2x + C"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Use the power rule on each term: 3x^2 gives x^3 and 4x gives 2x^2.",
+          "Distractors forget to divide by the new exponent, differentiate instead, or mishandle the x term."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Evaluate the integral of (x^2 + 1) dx from 0 to 2.",
+        "options": [
+          "5",
+          "10/3",
+          "6",
+          "14/3"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "The antiderivative is x^3/3 + x, and at 2 it equals 8/3 + 2 = 14/3, while at 0 it is 0.",
+          "Distractors evaluate f(2) or slip on the fractions."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Find the integral of 2x * cos(x^2) dx.",
+        "options": [
+          "-sin(x^2) + C",
+          "sin(x^2) + C",
+          "2x sin(x^2) + C",
+          "sin(x^2) / (2x) + C"
+        ],
+        "correct": [
+          1
+        ],
+        "rubric": [
+          "Let u = x^2, so du = 2x dx and the integral becomes cos u du = sin u + C.",
+          "Distractors flip the sign or integrate cos(x^2) without accounting for the inner function."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Use the substitution u = x^2 + 1 to evaluate the integral of 2x(x^2 + 1)^3 dx from 0 to 1.",
+        "options": [
+          "15",
+          "4",
+          "1/4",
+          "15/4"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "The new limits are u = 1 to u = 2, so the integral is the integral of u^3 from 1 to 2, which is (16 - 1)/4 = 15/4.",
+          "Distractors drop the factor 1/4 or use the wrong limits or an incomplete evaluation."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Use integration by parts to find the integral of x * e^x dx.",
+        "options": [
+          "x e^x + e^x + C",
+          "(x^2 / 2) e^x + C",
+          "x e^x - e^x + C",
+          "e^x + C"
+        ],
+        "correct": [
+          2
+        ],
+        "rubric": [
+          "With u = x and dv = e^x dx, the result is x e^x - the integral of e^x dx = x e^x - e^x + C.",
+          "Distractors make a sign error or integrate each factor separately."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "multi_choice",
+        "prompt": "Which of the following antiderivative results are correct? Select all that apply.",
+        "options": [
+          "The integral of e^(2x) dx = e^(2x)/2 + C",
+          "The integral of cos x dx = -sin x + C",
+          "The integral of 1/x dx = ln|x| + C",
+          "The integral of x^2 dx = x^3 + C",
+          "The integral of sin x dx = -cos x + C"
+        ],
+        "correct": [
+          0,
+          2,
+          4
+        ],
+        "rubric": [
+          "Each correct result can be checked by differentiating, and e^(2x) needs the chain-rule factor 1/2.",
+          "The cos x and x^2 results have a wrong sign and a missing 1/3 respectively."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "scenario",
+        "prompt": "Water flows into a tank at a rate of r(t) = 6t + 2 liters per minute, where t is in minutes. The tank is empty at t = 0. How much water has entered the tank by t = 3?",
+        "options": [
+          "20 L",
+          "36 L",
+          "27 L",
+          "33 L"
+        ],
+        "correct": [
+          3
+        ],
+        "rubric": [
+          "Total volume is the integral of 6t + 2 from 0 to 3, which is 3t^2 + 2t evaluated at 3, giving 27 + 6 = 33 L.",
+          "Distractors use the rate at t = 3 or drop the constant term of the rate."
+        ]
+      }
+    ],
+    "competent": [
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Evaluate `integral from 0 to sqrt(pi/2) of 2x cos(x^2) dx`.",
+        "options": [
+          "1",
+          "0",
+          "1/2",
+          "2"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Let u = x^2, so du = 2x dx and the limits become 0 to pi/2; the integral of cos u is sin(pi/2) - sin 0 = 1.",
+          "Choosing 1/2 or 2 comes from mishandling the factor 2 in du; choosing 0 comes from evaluating sin at the wrong limit."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Use integration by parts to find `integral of x e^x dx`.",
+        "options": [
+          "`x e^x - e^x + C`",
+          "`x e^x + e^x + C`",
+          "`(x^2/2) e^x + C`",
+          "`e^x (x^2/2 - 1) + C`"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "With u = x and dv = e^x dx: x e^x minus the integral of e^x, which gives x e^x - e^x + C.",
+          "Distractors come from a sign slip or from integrating x and e^x separately."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Evaluate `integral from 1 to e of (ln x)/x dx`.",
+        "options": [
+          "1/2",
+          "1",
+          "e - 1",
+          "0"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Let u = ln x, so du = dx/x and the limits become 0 to 1; the integral of u is 1/2.",
+          "Answer 1 forgets the 1/2 from the power rule; e - 1 treats the integrand as 1."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Find `integral of 1/(x^2 - 1) dx`.",
+        "options": [
+          "`(1/2) ln|(x-1)/(x+1)| + C`",
+          "`(1/2) ln|(x+1)/(x-1)| + C`",
+          "`ln|x^2 - 1| + C`",
+          "`(1/2) ln|x^2 - 1| + C`"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Partial fractions give 1/(x^2-1) = (1/2)[1/(x-1) - 1/(x+1)], which integrates to (1/2) ln|(x-1)/(x+1)|.",
+          "Swapping the ratio is a sign slip; the other options treat the denominator's derivative as if it were in the numerator."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "single_choice",
+        "prompt": "Find the area of the region enclosed by `y = x` and `y = x^2`.",
+        "options": [
+          "1/6",
+          "1/3",
+          "1/2",
+          "1/12"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The curves meet at x = 0 and x = 1, and the area is the integral of (x - x^2), which is 1/2 - 1/3 = 1/6.",
+          "1/3 and 1/2 come from integrating only one curve."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "multi_choice",
+        "prompt": "Which of these definite integrals equal 0? Select all that apply.",
+        "options": [
+          "`integral from -1 to 1 of x^3 dx`",
+          "`integral from -pi to pi of sin x dx`",
+          "`integral from -1 to 1 of x^2 dx`",
+          "`integral from -2 to 2 of cos x dx`"
+        ],
+        "correct": [
+          0,
+          1
+        ],
+        "rubric": [
+          "x^3 and sin x are odd functions, so over symmetric intervals the integral is 0.",
+          "x^2 and cos x are even, so their symmetric integrals are twice the half-interval value and are not zero."
+        ]
+      },
+      {
+        "bloom": "C3",
+        "kind": "scenario",
+        "prompt": "A water tank receives inflow at rate `r(t) = 3t^2` liters per minute. An operator wants to know how many liters flow in between t = 1 and t = 3 minutes. Which value is correct?",
+        "options": [
+          "26 liters",
+          "27 liters",
+          "18 liters",
+          "12 liters"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The total is the integral of 3t^2 from 1 to 3, which is 3^3 - 1^3 = 26.",
+          "27 forgets to subtract the value at t = 1; 18 uses the derivative 6t at t = 3."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A student computes `integral from -1 to 1 of 1/x^2 dx` as `[-1/x]` from -1 to 1, getting -2. What is the main flaw?",
+        "options": [
+          "The integrand is unbounded at x = 0, so the FTC does not apply and the integral diverges",
+          "The antiderivative of 1/x^2 is ln|x|, so -1/x is the wrong choice of function",
+          "A positive integrand over an interval cannot give a negative result, so -2 is only a sign slip",
+          "The interval is symmetric and the integrand is even, so the answer must be 0 by symmetry"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "1/x^2 blows up at 0, inside the interval, so the integral is improper and diverges to infinity.",
+          "The negative sign is a symptom, not the cause; the symmetry argument fails for the same reason."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A student evaluates `integral from 0 to 2 of x sqrt(x^2+1) dx` with u = x^2 + 1 and writes `(1/2) integral from 0 to 2 of sqrt(u) du`. What is the error?",
+        "options": [
+          "The limits were not converted to u = 1 and u = 5",
+          "The du should be 2x dx with no factor of 1/2",
+          "The antiderivative of sqrt(u) should be 2 u^(1/2)",
+          "The integral needs parts because of the square root"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "After substituting, the limits must become u(0) = 1 and u(2) = 5, or the result must be converted back to x.",
+          "The 1/2 factor is correct; the other options attack correct steps."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "The region under `y = x^2` for 0 <= x <= 2 is revolved about the y-axis. Which integral correctly gives the volume?",
+        "options": [
+          "`2*pi * integral from 0 to 2 of x^3 dx`",
+          "`pi * integral from 0 to 2 of x^4 dx`",
+          "`pi * integral from 0 to 4 of y dy`",
+          "`2*pi * integral from 0 to 2 of x^2 dx`"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Shells of radius x and height x^2 give 2*pi*x*x^2 = 2*pi*x^3, which equals 8*pi.",
+          "The x^4 option is the disk setup for rotation about the x-axis; the y-integral omits the hole; the last omits a factor of x."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "Applying integration by parts twice to `I = integral of e^x sin x dx` gives `I = e^x sin x - e^x cos x - I`. What is the correct result?",
+        "options": [
+          "`(e^x/2)(sin x - cos x) + C`",
+          "`e^x (sin x - cos x) + C`",
+          "`(e^x/2)(sin x + cos x) + C`",
+          "`0`"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Solving 2I = e^x sin x - e^x cos x gives I = (e^x/2)(sin x - cos x) + C.",
+          "Dropping the 1/2 ignores the I on the right; 0 wrongly cancels the equation."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A student says the total area between `y = cos x` and the x-axis on [0, pi] is 0 because the integral of cos x there is 0. What is the correct total area?",
+        "options": [
+          "2",
+          "0",
+          "1",
+          "pi"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The integral nets signed areas; the true area is the integral of |cos x|, which is 1 + 1 = 2.",
+          "0 repeats the student's confusion of signed and total area."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "multi_choice",
+        "prompt": "Which of these improper integrals converge? Select all that apply.",
+        "options": [
+          "`integral from 1 to infinity of 1/x^2 dx`",
+          "`integral from 1 to infinity of 1/x dx`",
+          "`integral from 0 to 1 of 1/sqrt(x) dx`",
+          "`integral from 0 to 1 of 1/x dx`"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "rubric": [
+          "1/x^2 at infinity gives 1, and 1/sqrt(x) near 0 gives 2; both converge.",
+          "1/x diverges (logarithmic growth) at both infinity and 0."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "scenario",
+        "prompt": "A particle has velocity `v(t) = t^2 - 4t + 3` m/s. An analyst integrates from t = 0 to t = 4 and gets 4/3, then reports it as the distance travelled. The velocity changes sign at t = 1 and t = 3. What is the actual total distance?",
+        "options": [
+          "4 m",
+          "4/3 m",
+          "8/3 m",
+          "0 m"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Distance is the integral of |v|: the three pieces have magnitudes 4/3, 4/3 and 4/3, totalling 4.",
+          "4/3 is the net displacement; 8/3 comes from miscounting one interval."
+        ]
+      }
+    ],
+    "proficient": [
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A student applies the Fundamental Theorem to ∫_{-1}^{1} 1/x^2 dx with the antiderivative -1/x and gets -2, although the integrand is positive. What is the underlying error?",
+        "options": [
+          "The integrand is unbounded at 0, so the theorem's continuity requirement fails on [-1, 1]",
+          "The antiderivative should be ln|x|, because the power rule does not work for negative exponents",
+          "Evenness of 1/x^2 forces the integral over [-1, 1] to be zero, so -2 is wrong anyway",
+          "The limits must be swapped because the lower bound is negative, which flips the sign of the result"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The integrand blows up at 0, so the FTC cannot be applied across it; the integral actually diverges.",
+          "Distractors target misremembering the power rule and misapplying symmetry or sign rules."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A student evaluates ∫_0^{2π} sqrt(1 - cos^2 x) dx by rewriting the integrand as sin x and obtains 0. Which step is faulty?",
+        "options": [
+          "Taking sqrt(sin^2 x) as sin x; it is |sin x|, which stays nonnegative on (π, 2π)",
+          "Using 1 - cos^2 x = sin^2 x, an identity that holds only for x in the interval [0, π]",
+          "Integrating sin x as cos x rather than -cos x, which flips the sign of the whole answer",
+          "Ignoring the period, since an integral over a full period of sine must equal 2π exactly"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The square root of a square is an absolute value, so the true value is 4, not 0.",
+          "Distractors target doubts about the identity, antiderivative sign slips and periodicity misconceptions."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "While computing ∫ e^x sin x dx by parts twice, a student ends up with the trivial statement ∫ e^x sin x dx = ∫ e^x sin x dx. What most likely caused this?",
+        "options": [
+          "In the second pass the roles of u and dv were swapped, which undoes the first pass",
+          "The integral has no elementary antiderivative, so repeated parts must always loop back",
+          "Parts cannot be applied to a product of an exponential and a trigonometric function",
+          "The constant of integration cancelled from both sides, which forces an identity to appear"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Choosing u and dv inconsistently in the second step reverses the first, giving a circular identity.",
+          "Distractors target the belief that looping signals non-elementary integrals or that parts is inapplicable."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "The region between y = x and y = x^2 for 0 ≤ x ≤ 1 is rotated about the y-axis. Which integral gives its volume?",
+        "options": [
+          "2π ∫_0^1 x(x - x^2) dx",
+          "π ∫_0^1 (x^2 - x^4) dx",
+          "2π ∫_0^1 (x - x^2) dx",
+          "π ∫_0^1 (x - x^2)^2 dx"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Shells about the y-axis use radius x and height x - x^2.",
+          "Distractors are the x-axis washer setup, shells without the radius factor, and squaring the height."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "single_choice",
+        "prompt": "A student integrates x^3/(x^2 - 1) by assuming x^3/(x^2 - 1) = A/(x - 1) + B/(x + 1) and cannot find A and B that work. Why does this setup fail?",
+        "options": [
+          "The numerator's degree exceeds the denominator's, so a polynomial part must be divided out first",
+          "The denominator factors over the reals only when the numerator vanishes at x = 1 and x = -1",
+          "Repeated factors are present in the denominator, so squared terms are needed in the setup",
+          "The numerator must be a constant before a decomposition into linear factors is possible"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Partial fractions requires a proper rational function; long division first gives x + x/(x^2 - 1).",
+          "Distractors target confusion about factoring, repeated factors and numerator form."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "multi_choice",
+        "prompt": "Which of these integrals equal 0? Select all that apply.",
+        "options": [
+          "∫_{-π}^{π} x^3 cos x dx",
+          "∫_{-1}^{1} x^2 sin x dx",
+          "∫_{-1}^{1} x sin x dx",
+          "∫_{-2}^{2} x|x| dx",
+          "∫_{-1}^{1} (x^3 + 1) dx"
+        ],
+        "correct": [
+          0,
+          1,
+          3
+        ],
+        "rubric": [
+          "The first, second and fourth integrands are odd on symmetric intervals, so they integrate to 0.",
+          "x sin x is even and positive on most of the interval, and x^3 + 1 has an even part equal to 1, giving 2."
+        ]
+      },
+      {
+        "bloom": "C4",
+        "kind": "scenario",
+        "prompt": "A particle's velocity is v(t) = t^2 - 4t + 3 m/s for 0 ≤ t ≤ 4. A student computes ∫_0^4 v dt = 4/3 and reports it as the total distance traveled. Velocity is negative between t = 1 and t = 3. What is the correct total distance?",
+        "options": [
+          "4 m",
+          "4/3 m",
+          "8/3 m",
+          "20/3 m"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Distance is the integral of |v|: 4/3 + 4/3 + 4/3 = 4 m, because the segments on [0,1], [1,3] and [3,4] each contribute 4/3.",
+          "The 4/3 result is net displacement, where the negative segment cancels positive travel."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "Which judgment about applying Simpson's rule to ∫_0^1 sqrt(x) dx is best supported?",
+        "options": [
+          "Its usual fourth-order error guarantee fails because sqrt(x) has unbounded derivatives at 0, so convergence is slower",
+          "It is exact for this integral, because Simpson's rule fits a parabola to any smooth-looking function",
+          "It keeps fourth-order accuracy, because sqrt(x) is continuous on the whole closed interval [0, 1]",
+          "It is less accurate than the trapezoid rule, because Simpson's rule cannot handle concave functions"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The error bound needs a bounded fourth derivative, which fails at x = 0 for sqrt(x).",
+          "Distractors confuse continuity with smoothness and wrongly claim exactness or concavity limits."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "A student claims: if ∫_1^∞ f(x) dx converges, then f(x) → 0 as x → ∞. Which assessment is correct?",
+        "options": [
+          "False: f can have ever-narrower spikes of height 1 whose total area is finite",
+          "True: otherwise f would eventually stay above some positive constant, making the area infinite",
+          "True for every f, provided f is also continuous on the whole interval [1, ∞)",
+          "False: but only because f might tend to a nonzero constant while the integral still converges"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Narrow spikes of constant height with summable areas give a convergent integral without f tending to 0.",
+          "Distractors apply the argument valid only for limits, or claim continuity fixes it, or say a nonzero limit is possible."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "Which justification correctly settles the behaviour of ∫_2^∞ 1/(x ln x) dx?",
+        "options": [
+          "Substituting u = ln x gives ln(ln x), which grows without bound, so the integral diverges",
+          "It is smaller than 1/x and ∫ 1/x diverges, so comparison shows that it must diverge",
+          "Its integrand tends to 0 as x grows, and such an integrand always gives a convergent integral",
+          "It decays faster than 1/x^p for every p > 1, so comparison shows that it converges"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "The exact antiderivative ln(ln x) is unbounded, so the integral diverges.",
+          "Distractors use invalid comparison direction, the 'tends to 0' fallacy, or a false decay claim."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "The region under y = e^{-x^2} for 0 ≤ x ≤ 1 is rotated about the y-axis. The criterion is an exact value built from elementary antiderivatives. Which method is best?",
+        "options": [
+          "Shells, 2π ∫ x e^{-x^2} dx, since u = x^2 gives an elementary antiderivative at once",
+          "Washers in y, since inverting e^{-x^2} produces a radius whose integral is also elementary",
+          "Disks as if rotating about the x-axis, since the axis of rotation does not change the volume",
+          "Simpson's rule only, since no exact value can be obtained for any integral involving e^{-x^2}"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Shells bring in a factor x that makes the integrand elementary: the result is π(1 - 1/e).",
+          "Distractors ignore the cost of inverting the function, the axis choice, or that this integral is elementary."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "single_choice",
+        "prompt": "For f(x) = e^x on [0, 1], which statement about the midpoint and trapezoid estimates with the same n is correct?",
+        "options": [
+          "Midpoint underestimates and trapezoid overestimates, because e^x is concave up",
+          "Both underestimate, because e^x is increasing across the whole interval [0, 1]",
+          "Midpoint overestimates and trapezoid underestimates, because chords lie below a convex curve",
+          "Both overestimate, because the second derivative of e^x is positive everywhere"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "For convex functions, chords lie above the curve (trapezoid over) and tangent-line midpoints lie below (midpoint under).",
+          "Distractors confuse monotonicity with concavity or reverse the roles."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "multi_choice",
+        "prompt": "A student claims ∫_{-1}^{1} 1/x dx = 0 because 1/x is odd. Which critiques are valid? Select all that apply.",
+        "options": [
+          "The integrand is unbounded at 0, so the integral is improper and oddness alone does not settle it",
+          "Both halves, ∫_0^1 1/x dx and ∫_{-1}^0 1/x dx, diverge, so the standard improper integral does not exist",
+          "Symmetric cancellation gives a principal value of 0, which is a different definition from convergence",
+          "ln|x| equals 0 at both x = 1 and x = -1, so the FTC rigorously gives the value 0 on [-1, 1]",
+          "Odd integrands integrate to 0 over every symmetric interval, so the student's claim is valid"
+        ],
+        "correct": [
+          0,
+          1,
+          2
+        ],
+        "rubric": [
+          "The integral is improper at 0 and each half diverges; only the principal value is 0.",
+          "Using ln|x| across 0 and the universal oddness rule both ignore the singularity."
+        ]
+      },
+      {
+        "bloom": "C5",
+        "kind": "scenario",
+        "prompt": "A lab logs the power of a smooth signal every 10 s for 60 s (7 readings, no formula available). The team needs total energy with the best accuracy those readings allow. Which method is best?",
+        "options": [
+          "Simpson's rule with 6 subintervals, since the signal is smooth and the subinterval count is even",
+          "Left Riemann sum, since it only uses measured values and never relies on a fitted curve",
+          "Trapezoid rule, since straight segments are safe for any signal whatever its curvature",
+          "One degree-6 polynomial through all readings, integrated exactly, since it matches every reading"
+        ],
+        "correct": [
+          0
+        ],
+        "rubric": [
+          "Simpson's rule gives higher-order accuracy for smooth data with an even number of equal subintervals.",
+          "Distractors target preferring simplicity (left sum, trapezoid) or overfitting a high-degree polynomial, which can oscillate."
+        ]
+      }
+    ]
+  }
+}

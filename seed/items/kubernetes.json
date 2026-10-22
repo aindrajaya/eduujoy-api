@@ -1,0 +1,2479 @@
+{
+  "version": 1,
+  "topic": "kubernetes",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the smallest deployable unit that Kubernetes creates and manages?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Node"
+        },
+        {
+          "id": "b",
+          "label": "Namespace"
+        },
+        {
+          "id": "c",
+          "label": "Deployment"
+        },
+        {
+          "id": "d",
+          "label": "Pod"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The pod is the smallest deployable unit and wraps one or more containers.",
+        "Deployment and node are larger constructs; a node is a machine, not a workload unit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which command lists the pods in the current namespace?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`kubectl list pods`"
+        },
+        {
+          "id": "b",
+          "label": "`kubectl get pods`"
+        },
+        {
+          "id": "c",
+          "label": "`kubectl view pods`"
+        },
+        {
+          "id": "d",
+          "label": "`kubectl show pods`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`kubectl get pods` is the standard listing command.",
+        "The other verbs look plausible but do not exist in kubectl."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which Kubernetes object gives a group of pods a stable virtual IP and DNS name?",
+      "options": [
+        {
+          "id": "a",
+          "label": "ConfigMap"
+        },
+        {
+          "id": "b",
+          "label": "Node"
+        },
+        {
+          "id": "c",
+          "label": "Service"
+        },
+        {
+          "id": "d",
+          "label": "ReplicaSet"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A Service provides a stable address and name in front of changing pods.",
+        "A ReplicaSet keeps pod counts but does not give a stable address."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In a YAML manifest, which top-level field names the type of object being created, such as Pod or Deployment?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`metadata`"
+        },
+        {
+          "id": "b",
+          "label": "`kind`"
+        },
+        {
+          "id": "c",
+          "label": "`spec`"
+        },
+        {
+          "id": "d",
+          "label": "`type`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`kind` states the object type.",
+        "`metadata` holds name and labels; `spec` holds the desired state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which object stores non-confidential configuration as key-value pairs for pods to consume?",
+      "options": [
+        {
+          "id": "a",
+          "label": "PersistentVolume"
+        },
+        {
+          "id": "b",
+          "label": "ConfigMap"
+        },
+        {
+          "id": "c",
+          "label": "Namespace"
+        },
+        {
+          "id": "d",
+          "label": "Secret"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "ConfigMap holds non-sensitive configuration data.",
+        "Secret is for sensitive data, so it is the closest distractor."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are Kubernetes Service types? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replicated"
+        },
+        {
+          "id": "b",
+          "label": "LoadBalancer"
+        },
+        {
+          "id": "c",
+          "label": "ClusterIP"
+        },
+        {
+          "id": "d",
+          "label": "NodePort"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "ClusterIP, NodePort and LoadBalancer are the standard Service types.",
+        "Replicated is not a Service type."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A Deployment named `web` is running 2 pods. Traffic is growing and your lead asks you to run 5 replicas instead. Which command does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`kubectl expand deployment web --replicas=5`"
+        },
+        {
+          "id": "b",
+          "label": "`kubectl scale deployment web --replicas=5`"
+        },
+        {
+          "id": "c",
+          "label": "`kubectl set replicas web 5`"
+        },
+        {
+          "id": "d",
+          "label": "`kubectl resize pods web --count=5`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`kubectl scale` with `--replicas` changes the replica count.",
+        "The other commands use invented verbs or subcommands."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is a Deployment normally used instead of creating a bare pod for a web application?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It gives each pod its own public IP address on the internet"
+        },
+        {
+          "id": "b",
+          "label": "It stores the application's configuration values securely in etcd"
+        },
+        {
+          "id": "c",
+          "label": "It replaces failed pods and manages rolling updates automatically"
+        },
+        {
+          "id": "d",
+          "label": "It makes containers run faster than they do inside a bare pod"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A Deployment keeps the desired number of pods running and handles rolling updates.",
+        "A bare pod is not recreated if it is deleted or its node fails."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Pod IP addresses change whenever a pod is replaced. Why does this make a Service useful?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Clients can use the Service's stable address instead of pod IPs"
+        },
+        {
+          "id": "b",
+          "label": "Pods are prevented from ever being replaced or rescheduled"
+        },
+        {
+          "id": "c",
+          "label": "The Service makes all pods share one IP so none ever change"
+        },
+        {
+          "id": "d",
+          "label": "The Service copies each pod's IP into its own container image"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A Service gives clients a fixed endpoint that routes to whichever pods currently match.",
+        "Pods still get replaced and keep their own IPs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A container's liveness probe keeps failing. What does Kubernetes do in response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Removes the node from the cluster"
+        },
+        {
+          "id": "b",
+          "label": "Sends the pod's logs to the Service for repair"
+        },
+        {
+          "id": "c",
+          "label": "Restarts the container according to the pod's restart policy"
+        },
+        {
+          "id": "d",
+          "label": "Deletes the whole Deployment and stops"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The kubelet restarts a container that fails its liveness probe.",
+        "Failing a liveness probe does not delete the Deployment or the node."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does a rolling update of a Deployment do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Edits the running containers in place without restarting"
+        },
+        {
+          "id": "b",
+          "label": "Stops all old pods first, then starts all the new pods"
+        },
+        {
+          "id": "c",
+          "label": "Creates a separate cluster and then switches all users over"
+        },
+        {
+          "id": "d",
+          "label": "Replaces old pods with new ones gradually, a few at a time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A rolling update swaps pods gradually so the app stays available.",
+        "Stopping all pods first describes the Recreate strategy."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does a Secret differ from a ConfigMap?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A Secret is meant for sensitive values, though only base64-encoded by default"
+        },
+        {
+          "id": "b",
+          "label": "A Secret is always encrypted and a ConfigMap is always encrypted too"
+        },
+        {
+          "id": "c",
+          "label": "A Secret works only for pods and a ConfigMap only for services"
+        },
+        {
+          "id": "d",
+          "label": "A Secret can only hold numbers and a ConfigMap only text"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Secrets are intended for sensitive data but are only base64-encoded unless encryption is enabled.",
+        "Base64 is encoding, not encryption."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about labels and selectors are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Labels are key-value pairs attached to objects"
+        },
+        {
+          "id": "b",
+          "label": "A selector can match pods only by their exact name"
+        },
+        {
+          "id": "c",
+          "label": "A Service uses a selector to find pods by their labels"
+        },
+        {
+          "id": "d",
+          "label": "Every label value must be unique across the whole cluster"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Labels are key-value tags and selectors match on them, which is how Services find pods.",
+        "Labels need not be unique and selectors match labels, not names."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "You update a Deployment's image tag but mistype it. The new pods show `ImagePullBackOff`, yet users can still reach the app. The Deployment has 3 replicas and uses the default rolling update.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Kubernetes ignored the update because the tag was invalid"
+        },
+        {
+          "id": "b",
+          "label": "The old pods keep running until new pods become ready"
+        },
+        {
+          "id": "c",
+          "label": "The Service is caching old responses from the deleted pods"
+        },
+        {
+          "id": "d",
+          "label": "The old pods were never part of the Deployment's replicas"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A rolling update only removes old pods as new ones become ready, so the failing pods leave old ones serving.",
+        "The update was not ignored; the new pods were created but cannot start."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is a Deployment usually preferred over creating a bare Pod for a web application?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It keeps the desired number of replicas running and replaces failed pods"
+        },
+        {
+          "id": "b",
+          "label": "It stores application data permanently even after all its pods are deleted"
+        },
+        {
+          "id": "c",
+          "label": "It makes containers run faster by giving them dedicated CPU cores on a node"
+        },
+        {
+          "id": "d",
+          "label": "It lets a single pod span several nodes so it survives a node failure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A Deployment's controller maintains the desired replica count and replaces failed pods.",
+        "Distractors confuse Deployments with resource allocation, multi-node pods, or persistent storage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does a Service of type ClusterIP provide?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A stable virtual IP reachable only from inside the cluster"
+        },
+        {
+          "id": "b",
+          "label": "A dedicated external load balancer created by the cloud provider"
+        },
+        {
+          "id": "c",
+          "label": "A port opened on every node that forwards traffic to the pods"
+        },
+        {
+          "id": "d",
+          "label": "A public IP address that exposes the pods to the internet"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "ClusterIP is the default type and gives an internal-only stable virtual IP.",
+        "Distractors describe LoadBalancer and NodePort behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does a Service decide which pods receive its traffic?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It matches the Service name against each pod's name prefix"
+        },
+        {
+          "id": "b",
+          "label": "It matches its selector against the labels on pods"
+        },
+        {
+          "id": "c",
+          "label": "It uses the image name that the pods were built from"
+        },
+        {
+          "id": "d",
+          "label": "It sends traffic to every pod in the same namespace"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Services route to pods whose labels match the Service selector.",
+        "Distractors assume matching by name, namespace, or image, which Kubernetes does not do."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which best describes the purpose of a ConfigMap?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Encrypting passwords and tokens so that only the owning application can read them"
+        },
+        {
+          "id": "b",
+          "label": "Caching container images on each node so pods start without a registry pull"
+        },
+        {
+          "id": "c",
+          "label": "Defining how many replicas of a pod should be running at the same time"
+        },
+        {
+          "id": "d",
+          "label": "Holding non-confidential settings as key-value data, kept apart from the image"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A ConfigMap stores non-sensitive configuration separately from the container image.",
+        "Distractors confuse it with an image cache, Secrets, or a replica-count setting."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A pod shows the status CrashLoopBackOff. What does this mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The scheduler cannot find any node with enough free CPU or memory to run it"
+        },
+        {
+          "id": "b",
+          "label": "The pod finished its work successfully and Kubernetes will not restart it"
+        },
+        {
+          "id": "c",
+          "label": "Its container keeps starting, exiting, and being restarted with growing delays"
+        },
+        {
+          "id": "d",
+          "label": "The container image cannot be found in the registry that the pod names"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "CrashLoopBackOff means the container repeatedly crashes and the kubelet backs off between restarts.",
+        "Distractors describe Pending scheduling failures, ImagePullBackOff, and a Completed pod."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these things does a Deployment do for you? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replaces pods that are deleted or crash so the replica count is kept"
+        },
+        {
+          "id": "b",
+          "label": "Backs up the data stored inside each container's filesystem"
+        },
+        {
+          "id": "c",
+          "label": "Rewrites application code to fix bugs that cause crashes"
+        },
+        {
+          "id": "d",
+          "label": "Replaces old pods gradually with new ones when the pod template changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Deployments maintain replica count and perform rolling updates when the template changes.",
+        "They do not back up data or fix application code."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team runs three API pods behind a frontend. After one API pod restarts, the frontend's calls to that pod's old IP fail because the replacement pod received a different IP. Which explanation best describes how a Service solves this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It offers a fixed address and routes to whichever matching pods are ready"
+        },
+        {
+          "id": "b",
+          "label": "It copies the old pod's IP onto the replacement pod whenever a pod restarts"
+        },
+        {
+          "id": "c",
+          "label": "It restarts the frontend whenever a backend pod's IP changes so it reconnects"
+        },
+        {
+          "id": "d",
+          "label": "It reserves each pod's IP on its node so a restarted pod gets the same one"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A Service gives a stable address and tracks matching ready pods as they change.",
+        "Distractors wrongly claim pod IPs are preserved or that the frontend is restarted."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Deployment named `web` currently has 2 replicas. Which command scales it to 5 replicas?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`kubectl expose deployment web --replicas=5`"
+        },
+        {
+          "id": "b",
+          "label": "`kubectl scale pod web --replicas=5`"
+        },
+        {
+          "id": "c",
+          "label": "`kubectl scale deployment web --replicas=5`"
+        },
+        {
+          "id": "d",
+          "label": "`kubectl set replicas deployment web 5`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`kubectl scale deployment <name> --replicas=N` is the correct form.",
+        "Distractors use the wrong resource type or non-existent or unrelated commands."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Service named `shop` has `port: 80` and `targetPort: 8080`. The container listens on 8080. Which URL lets another pod in the same namespace reach it through the Service?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`http://shop:443`"
+        },
+        {
+          "id": "b",
+          "label": "`http://shop:8080`"
+        },
+        {
+          "id": "c",
+          "label": "`http://shop:80`"
+        },
+        {
+          "id": "d",
+          "label": "`http://shop:30080`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Clients call the Service's `port` (80); Kubernetes forwards to the `targetPort`.",
+        "Using 8080 confuses targetPort with the Service port."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A rolling update of Deployment `api` to a new image causes errors. Which command returns it to the previous revision?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`kubectl rollout pause deployment/api`"
+        },
+        {
+          "id": "b",
+          "label": "`kubectl rollout restart deployment/api`"
+        },
+        {
+          "id": "c",
+          "label": "`kubectl rollout undo deployment/api`"
+        },
+        {
+          "id": "d",
+          "label": "`kubectl delete deployment/api --previous`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`kubectl rollout undo` reverts to the prior ReplicaSet revision.",
+        "Restart recreates pods with the same bad image; pause only halts the rollout."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Deployment has 4 replicas with `maxSurge: 1` and `maxUnavailable: 0`. During a rolling update, what is the maximum number of pods that can exist at one time?",
+      "options": [
+        {
+          "id": "a",
+          "label": "6"
+        },
+        {
+          "id": "b",
+          "label": "4"
+        },
+        {
+          "id": "c",
+          "label": "8"
+        },
+        {
+          "id": "d",
+          "label": "5"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Maximum pods = replicas + maxSurge = 4 + 1 = 5.",
+        "Other values ignore maxSurge or double the count."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which container `env` entry sets the variable `LOG_LEVEL` from key `level` in the ConfigMap `app-config`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`{name: LOG_LEVEL, valueFrom: {secretKeyRef: {name: app-config, key: level}}}`"
+        },
+        {
+          "id": "b",
+          "label": "`{name: LOG_LEVEL, value: app-config.level}`"
+        },
+        {
+          "id": "c",
+          "label": "`{name: LOG_LEVEL, valueFrom: {configMapKeyRef: {name: app-config, key: level}}}`"
+        },
+        {
+          "id": "d",
+          "label": "`{name: level, valueFrom: {configMapKeyRef: {name: LOG_LEVEL, key: app-config}}}`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "configMapKeyRef with the ConfigMap name and key populates the variable.",
+        "Distractors use secretKeyRef, a literal string, or swap names."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A new pod stays in Pending status. Which commands would help you find out why? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`kubectl rollout undo pod <name>`"
+        },
+        {
+          "id": "b",
+          "label": "`kubectl expose pod <name> --port=80`"
+        },
+        {
+          "id": "c",
+          "label": "`kubectl describe pod <name>`"
+        },
+        {
+          "id": "d",
+          "label": "`kubectl get events --sort-by=.metadata.creationTimestamp`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Describe and events show scheduling messages such as insufficient resources.",
+        "Rollout undo and expose do not diagnose scheduling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You apply a Deployment whose pods carry the label `app: store` and a Service with `selector: {app: shop}`. The pods are Running, but `kubectl get endpoints` shows no endpoints for the Service. What change fixes it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Increase the Deployment's replicas so that more pods can register with the Service"
+        },
+        {
+          "id": "b",
+          "label": "Change the Service selector to `app: store` so it matches the pod labels"
+        },
+        {
+          "id": "c",
+          "label": "Change the Service type from ClusterIP to NodePort so it can see the pods"
+        },
+        {
+          "id": "d",
+          "label": "Add a readiness probe to the Service so Kubernetes can discover the pods"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Empty endpoints with running pods signals a selector and label mismatch.",
+        "Distractors change replicas, Service type, or probes, none of which fix label matching."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Deployment has 4 replicas and a rolling update strategy with `maxSurge: 1` and `maxUnavailable: 0`. During an image update, which statement describes the limits on its pods?",
+      "options": [
+        {
+          "id": "a",
+          "label": "At most 5 pods exist and at least 3 are ready"
+        },
+        {
+          "id": "b",
+          "label": "At most 6 pods exist and at least 4 are ready"
+        },
+        {
+          "id": "c",
+          "label": "At most 4 pods exist and at least 3 are ready"
+        },
+        {
+          "id": "d",
+          "label": "At most 5 pods exist and at least 4 are ready"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "maxSurge 1 allows 4+1=5 pods and maxUnavailable 0 keeps all 4 desired pods available.",
+        "Distractors misapply the surge or unavailable value to the totals."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A ConfigMap `app-config` has the key `LOG_LEVEL`. Which env entry in a container spec sets the environment variable `LOG_LEVEL` from that key?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`valueFrom: {configMapKeyRef: {name: app-config, key: LOG_LEVEL}}`"
+        },
+        {
+          "id": "b",
+          "label": "`valueFrom: {secretKeyRef: {name: app-config, key: LOG_LEVEL}}`"
+        },
+        {
+          "id": "c",
+          "label": "`valueFrom: {configMapKeyRef: {name: LOG_LEVEL, key: app-config}}`"
+        },
+        {
+          "id": "d",
+          "label": "`valueFrom: {fieldRef: {fieldPath: app-config.LOG_LEVEL}}`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "configMapKeyRef takes the ConfigMap name and the key within it.",
+        "Distractors use the Secret reference type, swap name and key, or use fieldRef, which reads pod fields."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Revision 3 of Deployment `web` is broken. You want to return to revision 2 specifically, not just the previous one. Which command does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`kubectl rollout restart deployment/web --to-revision=2`"
+        },
+        {
+          "id": "b",
+          "label": "`kubectl rollout resume deployment/web --to-revision=2`"
+        },
+        {
+          "id": "c",
+          "label": "`kubectl rollout undo deployment/web --to-revision=2`"
+        },
+        {
+          "id": "d",
+          "label": "`kubectl rollout history deployment/web --revision=2`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "rollout undo with --to-revision rolls back to a chosen revision.",
+        "history only displays revision details, and restart and resume do not change revisions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A node has 4 CPUs allocatable and its existing pods already request 2.5 CPUs in total. A new Deployment has pods that each request `600m` CPU. At most how many of these pods can the scheduler place on this node?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3"
+        },
+        {
+          "id": "b",
+          "label": "4"
+        },
+        {
+          "id": "c",
+          "label": "1"
+        },
+        {
+          "id": "d",
+          "label": "2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Remaining requestable CPU is 1.5, and 1.5 / 0.6 = 2.5, so 2 pods fit.",
+        "Higher answers round up or ignore the existing requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Service `web` is type ClusterIP with `port: 80` and `targetPort: 8080`, selecting pods that listen on 8080. From another pod in the same namespace, which command reaches the application through the Service?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`curl http://web`"
+        },
+        {
+          "id": "b",
+          "label": "`curl http://web:30080`"
+        },
+        {
+          "id": "c",
+          "label": "`curl http://web:8080`"
+        },
+        {
+          "id": "d",
+          "label": "`curl http://web:80:8080`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Clients use the Service port (80, the HTTP default) and the Service forwards to targetPort 8080.",
+        "Using 8080 confuses targetPort with the Service port, and 30080 assumes a NodePort."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You must make a Secret named `creds` available as files under `/etc/creds` in the containers of a Deployment. Which changes to the Deployment manifest are needed? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a pod-level `volumes` entry that references the Secret `creds`"
+        },
+        {
+          "id": "b",
+          "label": "Add a container `volumeMounts` entry with `mountPath: /etc/creds` and the same volume name"
+        },
+        {
+          "id": "c",
+          "label": "Add a Service with a selector that matches the Secret name `creds`"
+        },
+        {
+          "id": "d",
+          "label": "Change the rollout `strategy` to `Recreate` so the Secret files get created"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "A secret volume plus a matching volumeMount puts the keys under the mount path as files.",
+        "A Service selects pods rather than Secrets, and the update strategy does not create files."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A CI job runs `kubectl apply -f deploy.yaml` with a new image tag for Deployment `web`. The next pipeline step runs smoke tests, so it must wait until the rollout completes and the job must fail if it has not finished within two minutes. Which command should run between the two steps?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`kubectl rollout status deployment/web --timeout=120s`"
+        },
+        {
+          "id": "b",
+          "label": "`sleep 120 && kubectl get deployment web`"
+        },
+        {
+          "id": "c",
+          "label": "`kubectl wait --for=condition=Ready node --timeout=120s`"
+        },
+        {
+          "id": "d",
+          "label": "`kubectl get pods -l app=web --watch --timeout=120s`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "rollout status blocks until the rollout finishes and exits non-zero on timeout or failure.",
+        "Watching pods or sleeping never fails the job, and waiting on nodes ignores the Deployment."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Pods of `web` show `Running 1/1` and carry the label `app=web-v2`. Service `web` has the selector `app=web`, and `kubectl get endpoints web` shows `<none>`. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The Service selector doesn't match the pod labels, so no pods are selected"
+        },
+        {
+          "id": "b",
+          "label": "The pods have no readiness probe, so their addresses are never added to the endpoints"
+        },
+        {
+          "id": "c",
+          "label": "The Service type is ClusterIP, so it cannot register pod addresses until it becomes NodePort"
+        },
+        {
+          "id": "d",
+          "label": "The Service targetPort differs from the container port, so the endpoints list stays empty"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Endpoints are built from pods matching the selector, and the labels differ.",
+        "A wrong targetPort still lists endpoints, a missing probe makes pods ready by default, and the Service type does not affect endpoints."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A new pod stays Pending with the event `0/3 nodes are available: 3 Insufficient memory`. `kubectl top nodes` shows each node at about 40% memory use. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The nodes carry a taint the pod doesn't tolerate, which the scheduler reports as insufficient memory"
+        },
+        {
+          "id": "b",
+          "label": "The metrics server reports stale data, so the scheduler wrongly believes the nodes are full"
+        },
+        {
+          "id": "c",
+          "label": "The scheduler counts memory requests of existing pods, which can exhaust allocatable memory despite low actual use"
+        },
+        {
+          "id": "d",
+          "label": "The scheduler compares the pod's memory limit with current usage, and the limit is above what is free"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Scheduling is based on summed requests against allocatable, not on live usage.",
+        "Distractors blame limits, taints (reported differently) or stale metrics that the scheduler does not use."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A container restarts repeatedly. `kubectl describe pod` shows `Last State: Terminated`, `Reason: OOMKilled`, `Exit Code: 137`, with a memory limit of `256Mi`, while the node has plenty of free memory. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The node ran short of memory, so the kubelet evicted the pod"
+        },
+        {
+          "id": "b",
+          "label": "The process exceeded its own container memory limit and was killed"
+        },
+        {
+          "id": "c",
+          "label": "The memory request is lower than the limit, so the scheduler kills the pod"
+        },
+        {
+          "id": "d",
+          "label": "A failing liveness probe made the kubelet kill the container with SIGKILL"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "OOMKilled with a plentiful node means the container hit its cgroup limit.",
+        "Node pressure causes eviction with a different status, and probe failures show other reasons."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a rollout (`maxSurge: 1`, `maxUnavailable: 0`) the new pod is `Running 0/1`, its readiness probe gets 404 on `/healthz`, and the old pods still serve traffic. Why does the rollout stall while the app stays up?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The 404 response makes the kubelet restart the new pod, which resets the rollout timer endlessly"
+        },
+        {
+          "id": "b",
+          "label": "The Deployment pauses itself whenever a probe fails, until someone runs `kubectl rollout resume`"
+        },
+        {
+          "id": "c",
+          "label": "The new pod never becomes Ready, so the controller can't remove old pods without exceeding maxUnavailable"
+        },
+        {
+          "id": "d",
+          "label": "The Service stops routing to old pods, so the controller waits for the old pods to drain"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "With maxUnavailable 0, old pods are only removed once new ones are Ready.",
+        "Distractors invent draining, restarts caused by readiness failure, or automatic pausing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An app needs about 90 seconds to start. Its pod has a liveness probe with `initialDelaySeconds: 10`, `periodSeconds: 10` and `failureThreshold: 3`, and it restarts in a loop with no errors in the logs. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The missing readiness probe makes the kubelet restart pods that are not yet serving traffic"
+        },
+        {
+          "id": "b",
+          "label": "The liveness probe fails about 40 seconds in and the kubelet restarts the container before startup finishes"
+        },
+        {
+          "id": "c",
+          "label": "The restart policy is Always, so the kubelet restarts containers that take more than a minute"
+        },
+        {
+          "id": "d",
+          "label": "The image pull policy forces a fresh image pull, which exceeds the probe timeout on each start"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "10s delay plus 3 failures at 10s intervals gives a kill at roughly 40s, before the app is up; a startupProbe or longer delay fixes it.",
+        "Readiness never restarts containers, and restart policy and pull policy do not time startup."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Clients see occasional 503 errors during rolling updates of a Deployment behind a Service. Which of these can contribute to the errors? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "No readiness probe, so new pods receive traffic before the app can serve it"
+        },
+        {
+          "id": "b",
+          "label": "The container exits immediately on SIGTERM while endpoint removal is still propagating to proxies"
+        },
+        {
+          "id": "c",
+          "label": "The Service is ClusterIP rather than LoadBalancer, which drops connections on pod replacement"
+        },
+        {
+          "id": "d",
+          "label": "The Deployment has more than one replica, so old and new versions run side by side"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Early traffic to unready pods and abrupt shutdown before endpoints update both cause failed requests.",
+        "The Service type and multiple replicas are not causes of dropped requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A Deployment's pods read `LOG_LEVEL` as an env var via `configMapKeyRef`. An engineer runs `kubectl apply` on the ConfigMap with `LOG_LEVEL: debug`, and `kubectl get cm` shows the new value. Running pods still log at the old level. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The ConfigMap change was not stored, since `kubectl apply` on a ConfigMap only takes effect after the Deployment is deleted"
+        },
+        {
+          "id": "b",
+          "label": "The Deployment must be scaled to zero first, because env values are cached in the ReplicaSet until replicas drop"
+        },
+        {
+          "id": "c",
+          "label": "Env vars are set when a container starts, so pods need a restart such as `kubectl rollout restart` to see the change"
+        },
+        {
+          "id": "d",
+          "label": "The kubelet refreshes env vars from ConfigMaps on a long timer, so the pods only need more time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Environment variables are injected at container start and are not updated live; a new rollout picks up the value.",
+        "Distractors claim the update was not stored, is on a timer, or needs scaling to zero."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`kubectl get endpoints web` shows `<none>`, although the three pods of the `web` Deployment are Running and Ready. Which cause best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The Deployment has no resource limits defined on containers"
+        },
+        {
+          "id": "b",
+          "label": "The Service selector labels do not match the labels on the pods"
+        },
+        {
+          "id": "c",
+          "label": "The Service type is ClusterIP instead of LoadBalancer"
+        },
+        {
+          "id": "d",
+          "label": "The kube-proxy cache holds stale rules until pods restart"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Endpoints are built from pods whose labels match the Service selector; empty endpoints with Ready pods point to a selector mismatch.",
+        "Service type affects exposure, not endpoint population."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A rollout of a Deployment stalls. The new pods show `Running` but `0/1` READY, and old pods remain. Events show `Readiness probe failed: HTTP probe failed with statuscode: 503`. What does this most directly indicate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The kubelet killed the container after a failed liveness check"
+        },
+        {
+          "id": "b",
+          "label": "The container runs, but the app is not answering healthy on the probe path"
+        },
+        {
+          "id": "c",
+          "label": "The scheduler cannot find a node with enough free CPU"
+        },
+        {
+          "id": "d",
+          "label": "The image pull failed because of missing registry credentials"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Running with 0/1 Ready and readiness failures means the process started but the app reports unhealthy, so the rollout cannot progress.",
+        "Scheduling and image pull failures would show Pending or ErrImagePull, not Running."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A pod restarts repeatedly. `kubectl describe pod` shows `Last State: Terminated, Reason: OOMKilled, Exit Code: 137`, and the app logs show no errors before each restart. What is the most likely diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The liveness probe timeout is shorter than the app startup time"
+        },
+        {
+          "id": "b",
+          "label": "The image entrypoint exits with code 0 and the pod restarts"
+        },
+        {
+          "id": "c",
+          "label": "The node ran out of disk and evicted the pod from the cluster"
+        },
+        {
+          "id": "d",
+          "label": "The container exceeded its memory limit and was killed by the kernel"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "OOMKilled with exit 137 means the container went over its memory limit and was killed without a graceful log trail.",
+        "A liveness failure would show probe events, and disk eviction shows Evicted status."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A Deployment with `replicas: 4`, `maxSurge: 25%` and `maxUnavailable: 0` is updated. One new pod stays Pending with `0/5 nodes available: Insufficient cpu`, and the rollout stops. Why does it stop rather than replace old pods?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pending pods are automatically deleted once the old pods are terminated"
+        },
+        {
+          "id": "b",
+          "label": "Surge pods must be created first and none can be removed until one is Ready"
+        },
+        {
+          "id": "c",
+          "label": "The ReplicaSet controller ignores maxUnavailable when nodes are full"
+        },
+        {
+          "id": "d",
+          "label": "Rolling updates always pause after the first pod is created"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "With maxUnavailable 0, an old pod can only be removed after a new one becomes Ready, so a Pending surge pod blocks progress.",
+        "The other options misstate how the rollout controller sequences replacement."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A ConfigMap `app-config` is edited. Pod A reads `LOG_LEVEL` through `env.valueFrom.configMapKeyRef`. Pod B mounts the ConfigMap as a volume. Without restarting either pod, what is observed after a few minutes?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pod A sees the new value, and the mounted files in pod B stay frozen"
+        },
+        {
+          "id": "b",
+          "label": "Pod B's mounted files update eventually, while pod A keeps the old value"
+        },
+        {
+          "id": "c",
+          "label": "Neither pod sees the new value until the Deployment is deleted"
+        },
+        {
+          "id": "d",
+          "label": "Both pods see the new value because the kubelet syncs ConfigMaps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Environment variables are fixed at container start, while volume-mounted ConfigMap files are refreshed by the kubelet.",
+        "Distractors assume both paths behave identically."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A newly created pod stays in `Pending` and never gets assigned to a node. Which of the following could explain this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The image tag does not exist in the container registry"
+        },
+        {
+          "id": "b",
+          "label": "Its resource requests exceed free capacity on every node"
+        },
+        {
+          "id": "c",
+          "label": "Its nodeSelector names a label that no node carries"
+        },
+        {
+          "id": "d",
+          "label": "Every node has a taint the pod does not tolerate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Resource shortage, unmatched nodeSelector and untolerated taints all prevent scheduling.",
+        "A missing image tag only appears after scheduling as ErrImagePull."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A Service `api` defines `port: 80` and `targetPort: 8080`. Its endpoints list the pod IPs correctly. From another pod, `curl api:80` returns `Connection refused`. Inside an api pod, `ss -ltn` shows the app listening only on port 3000. Which is the best diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The targetPort points to 8080 while the app listens on 3000"
+        },
+        {
+          "id": "b",
+          "label": "The Service lacks an Ingress, so cluster traffic cannot reach it"
+        },
+        {
+          "id": "c",
+          "label": "The endpoints list is stale and needs kube-proxy restarted"
+        },
+        {
+          "id": "d",
+          "label": "DNS resolves `api` to the wrong ClusterIP for this namespace"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Traffic is forwarded to targetPort 8080 on the pod, where nothing listens, so the connection is refused.",
+        "Correct endpoints and successful name resolution rule out DNS and endpoint issues."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team enables an HPA targeting 70% CPU utilization, but the Deployment's containers define no CPU requests. The HPA reports `<unknown>` for current CPU. Which judgement about the fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Delete the metrics server and let the HPA fall back to node averages"
+        },
+        {
+          "id": "b",
+          "label": "Raise maxReplicas, since the HPA is capped below needed capacity"
+        },
+        {
+          "id": "c",
+          "label": "Switch the HPA to memory, because CPU metrics never work with HPA"
+        },
+        {
+          "id": "d",
+          "label": "Set CPU requests, since utilization is computed relative to requested CPU"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Percent utilization targets are measured against requests, so without requests the HPA cannot compute a value.",
+        "The other options ignore that the missing denominator is the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A liveness probe on a web service calls `/health`, which queries the shared database. Criteria: avoid cascading failures and unnecessary restarts during a database outage. What is the best critique?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is fine as long as failureThreshold is set to exactly one"
+        },
+        {
+          "id": "b",
+          "label": "It is sound, because a pod that cannot reach its database is dead"
+        },
+        {
+          "id": "c",
+          "label": "It is risky, since a database outage restarts every pod and worsens recovery"
+        },
+        {
+          "id": "d",
+          "label": "It is wrong, because liveness probes must never use HTTP requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Liveness should reflect the process's own health; tying it to a shared dependency causes mass restarts during outages.",
+        "Dependency checks belong in readiness, not liveness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must run a three-node database cluster where each member needs a stable network identity and its own persistent volume that follows it across restarts. Which workload choice best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A StatefulSet with a headless Service and volumeClaimTemplates"
+        },
+        {
+          "id": "b",
+          "label": "A DaemonSet so each node always runs exactly one database member"
+        },
+        {
+          "id": "c",
+          "label": "A Deployment with three replicas and one shared PersistentVolumeClaim"
+        },
+        {
+          "id": "d",
+          "label": "A Deployment with a PodDisruptionBudget and a ClusterIP Service"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "StatefulSets give stable ordinal names via a headless Service and per-replica volumes via volumeClaimTemplates.",
+        "Deployments give interchangeable pods with no stable identity or per-pod storage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Version 2 of a service changes a database schema in a way that version 1 cannot read. Criteria: never have both versions serving at once; a short outage is acceptable. Which update strategy is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "RollingUpdate with maxUnavailable 50% to finish faster"
+        },
+        {
+          "id": "b",
+          "label": "Two Deployments behind one Service selecting both versions"
+        },
+        {
+          "id": "c",
+          "label": "RollingUpdate with maxSurge 100% and maxUnavailable 0"
+        },
+        {
+          "id": "d",
+          "label": "Recreate, so all old pods stop before new pods start"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Recreate terminates all old pods before starting new ones, guaranteeing no version overlap at the cost of downtime.",
+        "Every rolling or dual-deployment option runs both versions concurrently."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Database credentials must be delivered to pods. Criteria: keep them out of Git-stored images, limit exposure in `kubectl describe` output, and allow rotation without rebuilding. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Put credentials as plain values in the Deployment env section"
+        },
+        {
+          "id": "b",
+          "label": "Store them in a Secret and mount it as a volume, restricting RBAC"
+        },
+        {
+          "id": "c",
+          "label": "Store them in a ConfigMap, since it is easier to edit and reload"
+        },
+        {
+          "id": "d",
+          "label": "Bake credentials into the image as ENV lines in the Dockerfile"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A mounted Secret keeps values out of images and describe output, and updates on rotation, with RBAC limiting access.",
+        "Plain env values and ConfigMaps expose credentials; baked-in values need rebuilds."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Criteria: a Deployment of 4 replicas must serve traffic without dropped requests during rollouts and node drains. Which measures are sound for this goal? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A readiness probe that passes only when the app can serve"
+        },
+        {
+          "id": "b",
+          "label": "Setting maxUnavailable to 100% so updates finish quickly"
+        },
+        {
+          "id": "c",
+          "label": "A preStop delay so endpoints are removed before shutdown"
+        },
+        {
+          "id": "d",
+          "label": "A PodDisruptionBudget with minAvailable set to 3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Readiness gating, a PDB for drains and a preStop delay for endpoint propagation each protect in-flight traffic.",
+        "maxUnavailable 100% removes all capacity at once."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team runs a nightly batch job as a Deployment with one replica and a loop inside the container. Failures are invisible and the pod restarts endlessly. They want scheduled runs, retries on failure, and no running pod between runs. Which redesign is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A Deployment with a livenessProbe that restarts the loop on errors"
+        },
+        {
+          "id": "b",
+          "label": "A StatefulSet so the batch pod keeps a stable name every night"
+        },
+        {
+          "id": "c",
+          "label": "A CronJob whose job template sets backoffLimit and restartPolicy OnFailure"
+        },
+        {
+          "id": "d",
+          "label": "A DaemonSet that runs the loop on every node continuously"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A CronJob schedules runs, retries via backoffLimit, and leaves no pod running between runs.",
+        "The other options keep long-running pods or add identity the task does not need."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A 10-replica API must never serve with fewer than 10 ready pods during a release, and the cluster has room for one extra pod. Which rolling update strategy best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "maxSurge: 25%, maxUnavailable: 25%, the default values proven to work for most workloads"
+        },
+        {
+          "id": "b",
+          "label": "maxSurge: 0, maxUnavailable: 1, so capacity is reused and no extra pod is ever needed"
+        },
+        {
+          "id": "c",
+          "label": "maxSurge: 1, maxUnavailable: 0, so a new pod is ready before any old one is removed"
+        },
+        {
+          "id": "d",
+          "label": "Recreate strategy, so old and new versions never run side by side during the release"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Surge with zero unavailable keeps ready capacity at or above 10 throughout.",
+        "maxUnavailable 1 or 25% permits dips below 10; Recreate drops to zero."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A queue-consumer Deployment is I/O-bound, so CPU stays near 15% while the backlog grows for hours. The goal is to keep backlog latency under 2 minutes. Which scaling approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lower the HPA CPU target to 5% so that any activity triggers scale-out"
+        },
+        {
+          "id": "b",
+          "label": "Scale on queue length per replica through an external or custom metric such as KEDA"
+        },
+        {
+          "id": "c",
+          "label": "Add a VerticalPodAutoscaler so each consumer gets more CPU as the backlog grows"
+        },
+        {
+          "id": "d",
+          "label": "Raise CPU requests so that utilisation percentages climb and HPA reacts earlier"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The signal must reflect the actual bottleneck, which is backlog, not CPU.",
+        "CPU-based tweaks and VPA still track a metric that doesn't correlate with load."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team's liveness probe calls /health, which queries the shared database. The database has a 3-minute outage. Judge this design against the goal of limiting outage impact.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sound, because restarting pods during a database outage forces fresh connections to be built"
+        },
+        {
+          "id": "b",
+          "label": "Sound, because liveness should report every dependency so Kubernetes has full visibility"
+        },
+        {
+          "id": "c",
+          "label": "Flawed, because liveness probes can't use HTTP and must use exec commands instead"
+        },
+        {
+          "id": "d",
+          "label": "Flawed, because a dependency failure restarts healthy pods, adding load and prolonging recovery"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Liveness should reflect only whether the process itself is stuck; restarting doesn't fix an external outage.",
+        "Dependency checks belong in readiness at most."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Node upgrades must run unattended by draining nodes. Which PodDisruptionBudget on a 3-replica Deployment is the biggest risk to that goal?",
+      "options": [
+        {
+          "id": "a",
+          "label": "maxUnavailable: 1, which allows one pod at a time to be evicted"
+        },
+        {
+          "id": "b",
+          "label": "minAvailable: 50%, which rounds up and allows one eviction at a time"
+        },
+        {
+          "id": "c",
+          "label": "minAvailable: 2, which allows one pod at a time to be evicted"
+        },
+        {
+          "id": "d",
+          "label": "minAvailable: 3, which allows no voluntary eviction and stalls drains"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "minAvailable equal to replicas blocks all voluntary evictions, so drain hangs.",
+        "The other budgets each permit one eviction at a time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A latency-sensitive service shows p99 spikes while CPU use is well below node capacity; metrics show CFS throttling due to a 500m CPU limit. Which change best balances predictable latency and fair sharing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Set requests and limits to identical tiny values so the pod is Guaranteed QoS class"
+        },
+        {
+          "id": "b",
+          "label": "Set an accurate CPU request, remove or greatly raise the limit, and keep memory limit equal to request"
+        },
+        {
+          "id": "c",
+          "label": "Raise the limit to 4 cores and drop the request so the scheduler places pods freely"
+        },
+        {
+          "id": "d",
+          "label": "Keep the 500m limit and add replicas so each handles less traffic and throttles less"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Requests guarantee fair share while an absent limit avoids throttling; memory stays bounded.",
+        "Dropping requests or shrinking values harms scheduling or increases throttling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team will roll out configuration by editing one shared ConfigMap in place, consumed as env vars by 40 Deployments. Which criticisms are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Env vars are read at start, so pods pick up changes only on restart and the fleet diverges"
+        },
+        {
+          "id": "b",
+          "label": "Editing a ConfigMap that is in use is rejected by the API server"
+        },
+        {
+          "id": "c",
+          "label": "ConfigMaps are limited to 1 KB, so large configuration will be rejected"
+        },
+        {
+          "id": "d",
+          "label": "The Deployment spec doesn't change, so there is no rollout history to roll back to"
+        },
+        {
+          "id": "e",
+          "label": "A bad value reaches every pod that restarts for any reason, with no staged release"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "In-place edits give inconsistent pickup, no rollback and an unstaged blast radius.",
+        "The size limit is about 1 MiB and in-use edits are allowed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A company runs 30 HTTP services on a managed cluster. Each is a Service of type LoadBalancer, costing a cloud load balancer each and requiring separate TLS certificates. The goals are to cut cost, centralise TLS and keep per-service routing independent. Which option best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Put all 30 services in one Deployment with multiple containers so a single Service fronts them"
+        },
+        {
+          "id": "b",
+          "label": "Switch all Services to NodePort and have clients connect to node IPs and high ports"
+        },
+        {
+          "id": "c",
+          "label": "Run one shared ingress controller behind a single load balancer with host or path rules and central TLS"
+        },
+        {
+          "id": "d",
+          "label": "Keep per-service LoadBalancers and automate certificates for each, since isolation is the safest"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A shared ingress consolidates load balancers and TLS while per-service Ingress rules keep routing independent.",
+        "NodePort and a merged Deployment break operability and independence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a placement for 6 replicas across 3 zones. Replicas must spread evenly in normal operation, yet pods must still schedule if one zone is down. Which spec meets both constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A nodeSelector pinning the Deployment to a single zone with the most capacity"
+        },
+        {
+          "id": "b",
+          "label": "topologySpreadConstraints on the zone key, maxSkew 1, whenUnsatisfiable: DoNotSchedule"
+        },
+        {
+          "id": "c",
+          "label": "Required podAntiAffinity on the hostname key, so no two replicas share a node"
+        },
+        {
+          "id": "d",
+          "label": "topologySpreadConstraints on the zone key, maxSkew 1, whenUnsatisfiable: ScheduleAnyway"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "ScheduleAnyway spreads when possible but doesn't block during a zone outage.",
+        "DoNotSchedule would leave pods pending when a zone is lost."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Requests fail for a second or two at every pod termination, because the pod still receives traffic after SIGTERM. The app drains in-flight requests within 10 seconds. Which fix meets the zero-error constraint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Set terminationGracePeriodSeconds to 0 so the pod is removed from endpoints immediately"
+        },
+        {
+          "id": "b",
+          "label": "Add a preStop sleep of about 5s and set terminationGracePeriodSeconds above sleep plus drain time"
+        },
+        {
+          "id": "c",
+          "label": "Increase replicas so remaining pods absorb the errors from the terminating pod"
+        },
+        {
+          "id": "d",
+          "label": "Replace the readiness probe with a liveness probe so Kubernetes detects shutdown faster"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The sleep covers endpoint propagation and the grace period leaves time to drain.",
+        "A zero grace period kills at once; more replicas only dilute the errors."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A nightly CronJob manifest has a schedule, a restartPolicy of OnFailure and a backoffLimit. Runs sometimes take 30 hours, and two instances must never process the same data at once. What is the design missing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "concurrencyPolicy: Forbid so a new run is skipped while the previous one is still active"
+        },
+        {
+          "id": "b",
+          "label": "A higher activeDeadlineSeconds so every run finishes before the next schedule fires"
+        },
+        {
+          "id": "c",
+          "label": "A parallelism of 2 so a late run is picked up by a second concurrent pod"
+        },
+        {
+          "id": "d",
+          "label": "A replicas field of 1 so that Kubernetes limits the job to one running pod"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The default Allow policy starts overlapping runs; Forbid prevents them.",
+        "Parallelism and a deadline don't stop overlap, and CronJob has no replicas field."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A shared cluster namespace for one team must stop CPU and memory starvation of other teams, forbid privileged pods, and block cross-namespace traffic by default. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "ResourceQuota and a default-deny NetworkPolicy, trusting teams not to request privileged pods"
+        },
+        {
+          "id": "b",
+          "label": "ResourceQuota and LimitRange, plus restricted Pod Security admission labels and a default-deny NetworkPolicy"
+        },
+        {
+          "id": "c",
+          "label": "LimitRange and restricted Pod Security labels, since per-pod defaults also cap namespace totals"
+        },
+        {
+          "id": "d",
+          "label": "Restricted Pod Security labels and a default-deny NetworkPolicy, as quotas only affect object counts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Each constraint needs its own control: quota for totals, Pod Security for privilege, NetworkPolicy for traffic.",
+        "The distractors each omit one control."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Using only core Kubernetes resources, with no service mesh or ingress extensions, you must send roughly 10% of traffic to version 2 while version 1 keeps serving. Which design does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Two Deployments with a shared label behind one Service, replicas 9 and 1"
+        },
+        {
+          "id": "b",
+          "label": "One Deployment with maxSurge 10% so 10% of pods run version 2 during the update"
+        },
+        {
+          "id": "c",
+          "label": "An Ingress annotation giving version 2 a 10% weight, which every controller supports"
+        },
+        {
+          "id": "d",
+          "label": "Two Services, one per version, with clients told to call version 2 one time in ten"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A Service balances across all pods matching its selector, so the replica ratio sets the split.",
+        "Surge is transient, ingress weights are controller-specific, and the client-side split is not cluster-managed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A 3-replica API must survive a node drain without capacity below 2 ready pods, and drains must still complete. Which design elements are needed? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "hostNetwork: true so pods keep their IPs after rescheduling"
+        },
+        {
+          "id": "b",
+          "label": "A readinessProbe so that new pods receive traffic only when they can serve"
+        },
+        {
+          "id": "c",
+          "label": "Spreading replicas across nodes with topologySpreadConstraints or anti-affinity"
+        },
+        {
+          "id": "d",
+          "label": "A PodDisruptionBudget with minAvailable: 2"
+        },
+        {
+          "id": "e",
+          "label": "A PodDisruptionBudget with minAvailable: 3 for maximum protection"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "The budget limits evictions, spreading avoids losing several pods with one node, and readiness protects capacity.",
+        "minAvailable 3 blocks drains, and hostNetwork is irrelevant."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A Deployment reads its settings from a ConfigMap. The team wants any config change to trigger a rolling update, and a rollback with `kubectl rollout undo` must also restore the previous config contents. Which design meets both requirements?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Edit the ConfigMap in place and put its checksum in a pod template annotation"
+        },
+        {
+          "id": "b",
+          "label": "Mount the ConfigMap as a volume and rely on kubelet syncing to update running pods"
+        },
+        {
+          "id": "c",
+          "label": "Edit the ConfigMap in place and run `kubectl rollout restart` after every change"
+        },
+        {
+          "id": "d",
+          "label": "Create a new immutable ConfigMap per version and reference its name in the pod template"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Versioned immutable names make config part of the revision, so a rollback restores both.",
+        "In-place edits overwrite old content, so undo restores the old template but keeps the new config."
+      ],
+      "reviewed": false
+    }
+  ]
+}

@@ -1,0 +1,2498 @@
+{
+  "version": 1,
+  "topic": "linear-algebra",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the dot product of the vectors `(1, 2, 3)` and `(4, 5, 6)`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "21"
+        },
+        {
+          "id": "b",
+          "label": "28"
+        },
+        {
+          "id": "c",
+          "label": "32"
+        },
+        {
+          "id": "d",
+          "label": "15"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Multiply matching entries and add: 4 + 10 + 18 = 32.",
+        "15 comes from adding the entries of one vector or mixing up the operation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the result of multiplying any compatible matrix `A` by the identity matrix `I`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The matrix A itself"
+        },
+        {
+          "id": "b",
+          "label": "The inverse of A"
+        },
+        {
+          "id": "c",
+          "label": "The transpose of A"
+        },
+        {
+          "id": "d",
+          "label": "The zero matrix"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The identity matrix leaves a matrix unchanged under multiplication.",
+        "Distractors confuse the identity with the zero matrix, transpose or inverse."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the determinant of the matrix with rows `[2, 1]` and `[3, 4]`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "11"
+        },
+        {
+          "id": "b",
+          "label": "5"
+        },
+        {
+          "id": "c",
+          "label": "-5"
+        },
+        {
+          "id": "d",
+          "label": "8"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "For a 2x2 matrix, det = ad - bc = 8 - 3 = 5.",
+        "11 adds the products; 8 forgets to subtract bc."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which statement gives the definition of an eigenvector of a square matrix `A`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A nonzero vector v for which Av is exactly the zero vector"
+        },
+        {
+          "id": "b",
+          "label": "A nonzero vector v for which Av is a scalar multiple of v"
+        },
+        {
+          "id": "c",
+          "label": "A nonzero vector v whose length is one after multiplying by A"
+        },
+        {
+          "id": "d",
+          "label": "A nonzero vector v for which Av is the transpose of v"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An eigenvector satisfies Av = λv for some scalar λ.",
+        "The zero-vector option describes the null space, which is a different concept."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Matrix `A` is 2x3 and matrix `B` is 3x4. What is the size of the product `AB`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3x3"
+        },
+        {
+          "id": "b",
+          "label": "2x3"
+        },
+        {
+          "id": "c",
+          "label": "2x4"
+        },
+        {
+          "id": "d",
+          "label": "4x2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An (m x n) times (n x p) product is m x p, so 2x4.",
+        "Other options swap or mix the outer dimensions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are valid elementary row operations used in Gaussian elimination? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a multiple of one row to another row"
+        },
+        {
+          "id": "b",
+          "label": "Swap two rows"
+        },
+        {
+          "id": "c",
+          "label": "Multiply a row by zero"
+        },
+        {
+          "id": "d",
+          "label": "Multiply a row by a nonzero scalar"
+        },
+        {
+          "id": "e",
+          "label": "Square every entry in a row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "The three valid operations are swapping, nonzero scaling, and adding a multiple of one row to another.",
+        "Multiplying by zero destroys information and squaring entries is not linear."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A student row-reduces the augmented matrix of a linear system and obtains a row `[0 0 0 | 5]`. Recalling the rule for such rows, what does this say about the system?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It has only the trivial solution"
+        },
+        {
+          "id": "b",
+          "label": "It has a unique solution with x = 5"
+        },
+        {
+          "id": "c",
+          "label": "It has infinitely many solutions"
+        },
+        {
+          "id": "d",
+          "label": "It has no solution"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A row 0 = 5 is a contradiction, so the system is inconsistent.",
+        "Infinitely many solutions arise from a zero row like [0 0 0 | 0], not a nonzero right side."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "The matrix with rows `[2, 0]` and `[0, 2]` acts on vectors in the plane. What does this transformation do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It reflects every vector across the x-axis"
+        },
+        {
+          "id": "b",
+          "label": "It rotates every vector by 90 degrees"
+        },
+        {
+          "id": "c",
+          "label": "It shears every vector horizontally"
+        },
+        {
+          "id": "d",
+          "label": "It stretches every vector to twice its length"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Multiplying by 2I doubles each coordinate, scaling uniformly.",
+        "Other options describe different standard transformation matrices."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A 2x2 matrix has determinant 0. How should you interpret this as a transformation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It flattens the plane onto a line or point, so it has no inverse"
+        },
+        {
+          "id": "b",
+          "label": "It leaves every vector unchanged, so it acts like the identity"
+        },
+        {
+          "id": "c",
+          "label": "It doubles all areas, so it is invertible"
+        },
+        {
+          "id": "d",
+          "label": "It rotates the plane without changing area, so it is invertible"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Determinant 0 means area collapses to zero, so the map loses information and is not invertible.",
+        "Rotations have determinant 1, and the identity also has determinant 1."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why are the vectors `(1, 2)` and `(2, 4)` classified as linearly dependent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One is a scalar multiple of the other"
+        },
+        {
+          "id": "b",
+          "label": "Their dot product is not zero"
+        },
+        {
+          "id": "c",
+          "label": "They both have positive entries"
+        },
+        {
+          "id": "d",
+          "label": "They have different lengths"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "(2,4) = 2(1,2), so one vector lies in the span of the other.",
+        "A nonzero dot product only shows they are not orthogonal, which is unrelated."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "For any matrix `A`, what can you predict about the homogeneous system `Ax = 0`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It always has infinitely many solutions"
+        },
+        {
+          "id": "b",
+          "label": "It has no solution when A is square"
+        },
+        {
+          "id": "c",
+          "label": "It always has at least the solution x = 0"
+        },
+        {
+          "id": "d",
+          "label": "It has a unique solution only when A is the zero matrix"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "x = 0 always satisfies A·0 = 0, so the system is never inconsistent.",
+        "Infinitely many solutions occur only when free variables exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does `AB` usually differ from `BA` for two square matrices?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One of the products always has a different size"
+        },
+        {
+          "id": "b",
+          "label": "Matrix entries are not allowed to commute"
+        },
+        {
+          "id": "c",
+          "label": "Only the identity matrix can be multiplied on either side"
+        },
+        {
+          "id": "d",
+          "label": "Applying transformation B then A generally differs from A then B"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Matrix product represents composition of transformations, and order matters, like rotating then shearing.",
+        "For square matrices of equal size both products exist, so size is not the cause."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements must be true for an invertible 3x3 matrix `A`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ax = 0 has only the solution x = 0"
+        },
+        {
+          "id": "b",
+          "label": "Zero is one of its eigenvalues"
+        },
+        {
+          "id": "c",
+          "label": "Its determinant is nonzero"
+        },
+        {
+          "id": "d",
+          "label": "Its rank is 2"
+        },
+        {
+          "id": "e",
+          "label": "Its columns are linearly independent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Invertibility is equivalent to nonzero determinant, independent columns, and a trivial null space.",
+        "Rank 2 or eigenvalue 0 would signal a singular matrix."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A data analyst builds a matrix with 3 feature columns for many samples. Software reports the rank is 2. The analyst wants to interpret this result for the features.",
+      "options": [
+        {
+          "id": "a",
+          "label": "One feature is a linear combination of the other two"
+        },
+        {
+          "id": "b",
+          "label": "Two of the three samples must be identical rows"
+        },
+        {
+          "id": "c",
+          "label": "The data has exactly two eigenvalues equal to zero"
+        },
+        {
+          "id": "d",
+          "label": "All three features are orthogonal to each other"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Rank 2 with 3 columns means the columns are dependent, so one is redundant.",
+        "Orthogonal nonzero columns would give full rank 3."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Matrix A is 2x3 and matrix B is 3x4. What can be said about the product AB?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is defined and is 4x2"
+        },
+        {
+          "id": "b",
+          "label": "It is not defined, since A and B differ in size"
+        },
+        {
+          "id": "c",
+          "label": "It is defined and is 3x3"
+        },
+        {
+          "id": "d",
+          "label": "It is defined and is 2x4"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The inner dimensions (3 and 3) match, and the result takes the outer dimensions 2x4.",
+        "Distractors reflect mixing up which dimensions survive or thinking sizes must match."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A system of two linear equations in two unknowns has no solution. What does this mean when each equation is graphed as a line?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The lines are parallel and distinct"
+        },
+        {
+          "id": "b",
+          "label": "The lines cross at the origin only"
+        },
+        {
+          "id": "c",
+          "label": "The lines cross at exactly one point"
+        },
+        {
+          "id": "d",
+          "label": "The lines are the same line"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Parallel distinct lines never meet, so no point satisfies both equations.",
+        "Distractors describe unique solutions, infinitely many solutions, or the homogeneous case."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A square matrix has determinant 0. Which statement must be true?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It has no inverse"
+        },
+        {
+          "id": "b",
+          "label": "It is the zero matrix"
+        },
+        {
+          "id": "c",
+          "label": "It has no eigenvalues at all"
+        },
+        {
+          "id": "d",
+          "label": "It is the identity matrix"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A zero determinant means the matrix is singular and not invertible.",
+        "Distractors confuse a zero determinant with being the zero matrix or with eigenvalue existence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "The matrix `[[0, -1], [1, 0]]` multiplies vectors in the plane. Which transformation does it perform?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rotation by 90 degrees counterclockwise"
+        },
+        {
+          "id": "b",
+          "label": "Projection onto the x-axis"
+        },
+        {
+          "id": "c",
+          "label": "Scaling every vector by a factor of 2"
+        },
+        {
+          "id": "d",
+          "label": "Reflection across the y-axis"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "It sends (1,0) to (0,1) and (0,1) to (-1,0), which is a 90 degree counterclockwise rotation.",
+        "Distractors name other common 2x2 transformations without checking the columns."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which statement best describes an eigenvector of a square matrix A?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A vector orthogonal to every row of A"
+        },
+        {
+          "id": "b",
+          "label": "A nonzero vector that A only scales, keeping its line"
+        },
+        {
+          "id": "c",
+          "label": "A unit vector lying in the column space of A"
+        },
+        {
+          "id": "d",
+          "label": "A nonzero vector that A maps to the zero vector"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An eigenvector satisfies Av = (lambda)v, so A only stretches or flips it along its own line.",
+        "Distractors confuse eigenvectors with null space vectors, orthogonality, or column space."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these sets of vectors are linearly dependent? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`{(1,2,3), (2,4,6)}`"
+        },
+        {
+          "id": "b",
+          "label": "`{(1,0,0), (0,1,0)}`"
+        },
+        {
+          "id": "c",
+          "label": "`{(1,0,0), (0,1,0), (1,1,0)}`"
+        },
+        {
+          "id": "d",
+          "label": "`{(1,0,0), (0,1,0), (0,0,1)}`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "(2,4,6) is twice (1,2,3), and (1,1,0) is the sum of the first two vectors, so both sets are dependent.",
+        "The standard basis vectors and the pair of axis vectors are independent."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A data analyst has a 3x3 matrix A with rank 2 and is solving Ax = b for different vectors b. A colleague asks whether every b gives exactly one solution. What is the correct response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Yes; two pivots among three columns are enough to fix all three unknowns"
+        },
+        {
+          "id": "b",
+          "label": "Yes; any square matrix gives exactly one solution for every right-hand side b"
+        },
+        {
+          "id": "c",
+          "label": "No; but every b still gives infinitely many solutions because a column is redundant"
+        },
+        {
+          "id": "d",
+          "label": "No; some b give no solution because a column is redundant, and others give infinitely many"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Rank 2 means the columns span only a plane, so b outside it has no solution and b inside it has infinitely many.",
+        "Distractors assume square implies invertible, or that a deficient rank always yields solutions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What is the determinant of `[[2, 1], [3, 4]]`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "5"
+        },
+        {
+          "id": "b",
+          "label": "8"
+        },
+        {
+          "id": "c",
+          "label": "11"
+        },
+        {
+          "id": "d",
+          "label": "-5"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "ad - bc = 2*4 - 1*3 = 5.",
+        "Distractors come from adding the products or swapping the sign."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Let A = `[[1, 2], [3, 4]]` and x = `(1, -1)`. What is Ax?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`(3, 7)`"
+        },
+        {
+          "id": "b",
+          "label": "`(-1, 1)`"
+        },
+        {
+          "id": "c",
+          "label": "`(-1, -1)`"
+        },
+        {
+          "id": "d",
+          "label": "`(1, 1)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Row 1: 1 - 2 = -1; row 2: 3 - 4 = -1.",
+        "Distractors come from adding entries or using the wrong signs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Solve the system `x + y = 5` and `x - y = 1`. What is `(x, y)`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`(6, -1)`"
+        },
+        {
+          "id": "b",
+          "label": "`(2, 3)`"
+        },
+        {
+          "id": "c",
+          "label": "`(3, 2)`"
+        },
+        {
+          "id": "d",
+          "label": "`(4, 1)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Adding the equations gives 2x = 6, so x = 3 and y = 2.",
+        "Distractors satisfy only one equation or swap the variables."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What are the eigenvalues of the triangular matrix `[[3, 1], [0, 2]]`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "5 and 6"
+        },
+        {
+          "id": "b",
+          "label": "3 and 1"
+        },
+        {
+          "id": "c",
+          "label": "1 and 2"
+        },
+        {
+          "id": "d",
+          "label": "3 and 2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "For a triangular matrix the eigenvalues are the diagonal entries, 3 and 2.",
+        "Distractors use the off-diagonal entry, or the trace and determinant as eigenvalues."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What is the inverse of `[[2, 1], [1, 1]]`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`[[1, -1], [-1, 2]]`"
+        },
+        {
+          "id": "b",
+          "label": "`[[1, 1], [1, 2]]`"
+        },
+        {
+          "id": "c",
+          "label": "`[[-1, 1], [1, -2]]`"
+        },
+        {
+          "id": "d",
+          "label": "`[[2, -1], [-1, 1]]`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The determinant is 1, so swap the diagonal entries and negate the off-diagonals: [[1,-1],[-1,2]].",
+        "Distractors forget to swap the diagonal or mishandle the signs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Let A = `[[2, 0], [0, 3]]`. Which of these vectors are eigenvectors of A? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`(0, 5)`"
+        },
+        {
+          "id": "b",
+          "label": "`(1, 1)`"
+        },
+        {
+          "id": "c",
+          "label": "`(1, 0)`"
+        },
+        {
+          "id": "d",
+          "label": "`(2, 0)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A(1,0) = 2(1,0), A(0,5) = 3(0,5) and A(2,0) = 2(2,0), so each is only scaled.",
+        "A(1,1) = (2,3) is not a multiple of (1,1)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "An engineer row-reduces a system in unknowns x, y, z and obtains the augmented rows `[1 0 2 | 3]` and `[0 1 -1 | 1]`. Which description of the solution set is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Exactly one solution: `(3, 1, 1)`"
+        },
+        {
+          "id": "b",
+          "label": "No solution, since there are fewer equations than unknowns"
+        },
+        {
+          "id": "c",
+          "label": "Infinitely many solutions: `(3-2t, 1+t, t)` for any real t"
+        },
+        {
+          "id": "d",
+          "label": "Exactly one solution: `(3, 1, 0)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "z has no pivot so it is free; x = 3 - 2z and y = 1 + z.",
+        "Distractors set the free variable to a fixed value or assume fewer equations means inconsistency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Compute the determinant of the matrix with rows (2, 0, 1), (1, 3, 2), (0, 1, 4).",
+      "options": [
+        {
+          "id": "a",
+          "label": "19"
+        },
+        {
+          "id": "b",
+          "label": "21"
+        },
+        {
+          "id": "c",
+          "label": "25"
+        },
+        {
+          "id": "d",
+          "label": "23"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Cofactor expansion along row 1: 2(12-2) - 0 + 1(1-0) = 21.",
+        "Distractors come from sign slips or dropping the third cofactor term."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Solve the system `x + 2y = 5` and `3x - y = 1`. Which pair (x, y) is the solution?",
+      "options": [
+        {
+          "id": "a",
+          "label": "(2, 1)"
+        },
+        {
+          "id": "b",
+          "label": "(1, 2)"
+        },
+        {
+          "id": "c",
+          "label": "(1, 3)"
+        },
+        {
+          "id": "d",
+          "label": "(3, 1)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "From the second equation y = 3x - 1; substituting gives 7x - 2 = 5, so x = 1, y = 2.",
+        "Other pairs satisfy only one equation or swap the variables."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Find the inverse of the matrix with rows (2, 1) and (5, 3).",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rows (3, 1) and (5, 2)"
+        },
+        {
+          "id": "b",
+          "label": "Rows (3, 5) and (-1, 2)"
+        },
+        {
+          "id": "c",
+          "label": "Rows (3, -1) and (-5, 2)"
+        },
+        {
+          "id": "d",
+          "label": "Rows (2, -1) and (-5, 3)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The determinant is 1, so swap the diagonal entries and negate the off-diagonal entries.",
+        "Distractors forget to negate, swap the wrong entries, or transpose."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Find the eigenvalues of the matrix with rows (4, 1) and (2, 3).",
+      "options": [
+        {
+          "id": "a",
+          "label": "5 and 2"
+        },
+        {
+          "id": "b",
+          "label": "-5 and -2"
+        },
+        {
+          "id": "c",
+          "label": "4 and 3"
+        },
+        {
+          "id": "d",
+          "label": "6 and 1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Trace is 7 and determinant is 10, so the characteristic polynomial is l^2 - 7l + 10, with roots 5 and 2.",
+        "Distractors use the diagonal entries as eigenvalues or break the trace/determinant relations."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Let A have rows (1, 2) and (0, 1), and B have rows (3, 0) and (1, 4). Compute AB.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rows (5, 8) and (1, 4)"
+        },
+        {
+          "id": "b",
+          "label": "Rows (5, 2) and (1, 4)"
+        },
+        {
+          "id": "c",
+          "label": "Rows (3, 0) and (0, 4)"
+        },
+        {
+          "id": "d",
+          "label": "Rows (3, 6) and (1, 6)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Row-by-column products: first row (1*3+2*1, 1*0+2*4) = (5, 8); second row (1, 4).",
+        "Distractors give BA, entrywise multiplication, or mixed-up row-column products."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which of these 2x2 matrices are invertible? A: rows (1, 2),(2, 4). B: rows (1, 2),(3, 4). C: rows (2, 0),(0, 5). D: rows (1, 1),(1, 1). Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A"
+        },
+        {
+          "id": "b",
+          "label": "C"
+        },
+        {
+          "id": "c",
+          "label": "D"
+        },
+        {
+          "id": "d",
+          "label": "B"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "B has determinant -2 and C has determinant 10, so both are invertible.",
+        "A and D have determinant 0 because their rows are proportional."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A graphics routine first rotates points 90 degrees counterclockwise about the origin, mapping (x, y) to (-y, x). It then scales the x-coordinate by 2. A designer applies the routine to the point (1, 2). Where does the point end up?",
+      "options": [
+        {
+          "id": "a",
+          "label": "(4, -1)"
+        },
+        {
+          "id": "b",
+          "label": "(2, 2)"
+        },
+        {
+          "id": "c",
+          "label": "(-4, 1)"
+        },
+        {
+          "id": "d",
+          "label": "(-2, 2)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Rotation gives (-2, 1); scaling x by 2 gives (-4, 1).",
+        "(-2, 2) results from applying the steps in the wrong order."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A 3x3 system Ax = b has a coefficient matrix whose third row equals row 1 plus row 2. The right-hand side has b3 not equal to b1 + b2. How many solutions does the system have?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Infinitely many, since one row is redundant"
+        },
+        {
+          "id": "b",
+          "label": "Exactly two, since one variable is determined by the others"
+        },
+        {
+          "id": "c",
+          "label": "None, since the equations contradict each other"
+        },
+        {
+          "id": "d",
+          "label": "Exactly one, since the other two rows are independent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Adding equations 1 and 2 forces row 3's left side to equal b1 + b2, which contradicts b3, so the system is inconsistent.",
+        "The 'redundant row means infinitely many' distractor ignores that the right-hand side must be consistent too."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A 3x3 matrix A has characteristic polynomial `l^3 - 4l^2 + 3l`. Which conclusion is valid?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A is invertible, since its trace 4 is nonzero"
+        },
+        {
+          "id": "b",
+          "label": "Ax = 0 has a nonzero solution, since 0 is an eigenvalue"
+        },
+        {
+          "id": "c",
+          "label": "A has determinant 3, the coefficient of the linear term"
+        },
+        {
+          "id": "d",
+          "label": "A^2 has eigenvalues 0, 2, and 6, doubling each root"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The polynomial factors as l(l-1)(l-3), so 0 is an eigenvalue and A is singular.",
+        "Distractors confuse trace with invertibility, misread coefficients as determinant, or mis-square eigenvalues."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A student has a 3x3 matrix A with det(A) = 5 and claims det(2A) = 10. What is the error, and what is the correct value?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each of the 3 rows is doubled, giving factor 2^3, so det(2A) = 40"
+        },
+        {
+          "id": "b",
+          "label": "Every one of the 9 entries doubles, giving factor 2^9, so det(2A) = 2560"
+        },
+        {
+          "id": "c",
+          "label": "Determinant is linear in the matrix, so 10 is right but the sign may flip"
+        },
+        {
+          "id": "d",
+          "label": "A shift of 2 adds to the determinant, so det(2A) = 5 + 2 = 7"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Scaling each row by 2 multiplies the determinant by 2 for each of the 3 rows, giving 8*5 = 40.",
+        "The factor 2^9 counts entries instead of rows, and 10 wrongly assumes det is linear in the whole matrix."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A student argues that (1, 2, 3), (2, 4, 6), and (0, 1, 1) form a basis of R^3 because there are exactly three vectors. Where does the argument fail?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Basis vectors must be orthogonal, and these pairs have nonzero dot products"
+        },
+        {
+          "id": "b",
+          "label": "The second vector is twice the first, so the set is dependent and cannot span"
+        },
+        {
+          "id": "c",
+          "label": "Every basis of R^3 must contain the standard unit vectors as members"
+        },
+        {
+          "id": "d",
+          "label": "A basis needs more than three vectors to cover all three dimensions"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Three vectors form a basis only if independent; here v2 = 2*v1, so the set spans only a plane.",
+        "Orthogonality is not required for a basis."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Is the matrix with rows (2, 1) and (0, 2) diagonalizable over the reals? Choose the best explanation.",
+      "options": [
+        {
+          "id": "a",
+          "label": "No: eigenvalue 2 is repeated but has only one independent eigenvector, so no eigenvector basis exists"
+        },
+        {
+          "id": "b",
+          "label": "Yes: all its eigenvalues are real, and real eigenvalues guarantee an eigenvector basis exists"
+        },
+        {
+          "id": "c",
+          "label": "Yes: it is upper triangular, so its diagonal entries already give a diagonal form directly"
+        },
+        {
+          "id": "d",
+          "label": "No: its determinant 4 is nonzero, and invertible matrices cannot be diagonalized in general"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A - 2I has rank 1, so the eigenspace is 1-dimensional, which is less than the algebraic multiplicity 2.",
+        "Triangular form and real eigenvalues do not guarantee diagonalizability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A 3x3 matrix A has determinant 0. Which statements must be true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The columns of A are linearly dependent"
+        },
+        {
+          "id": "b",
+          "label": "Ax = 0 has a nonzero solution"
+        },
+        {
+          "id": "c",
+          "label": "A has a repeated eigenvalue"
+        },
+        {
+          "id": "d",
+          "label": "A has rank 3"
+        },
+        {
+          "id": "e",
+          "label": "Ax = b is inconsistent for at least one b"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Zero determinant means singular: dependent columns, nontrivial null space, and column space smaller than R^3.",
+        "A repeated eigenvalue is not forced (e.g. eigenvalues 0, 1, 2), and rank 3 would mean invertible."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An analyst models a two-state system with x_(k+1) = A x_k, where A has eigenvalues 1.2 and 0.5 with eigenvectors v1 and v2. The starting vector x_0 has a nonzero component along both v1 and v2. What does the direction of x_k approach after many steps?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The direction of v2, because the smaller eigenvalue stabilises the system"
+        },
+        {
+          "id": "b",
+          "label": "The direction of v1, because the 1.2 component outgrows the 0.5 component"
+        },
+        {
+          "id": "c",
+          "label": "Alternating directions, because the two eigenvalues pull in opposite ways"
+        },
+        {
+          "id": "d",
+          "label": "The zero vector, because one eigenvalue is below 1 and damps everything"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "x_k = c1(1.2^k)v1 + c2(0.5^k)v2, so the v1 term dominates and the direction tends to v1.",
+        "Distractors treat the smaller eigenvalue as dominant or assume all components decay."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A 3x3 real matrix A has characteristic polynomial (x-2)^2 (x-5). Which single check decides whether A is diagonalizable?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Whether A is symmetric, since only symmetric matrices diagonalize"
+        },
+        {
+          "id": "b",
+          "label": "Whether det(A) is nonzero, since 2 and 5 are nonzero"
+        },
+        {
+          "id": "c",
+          "label": "Whether null(A - 2I) has dimension 2, matching the repeated root"
+        },
+        {
+          "id": "d",
+          "label": "Whether the eigenspace for eigenvalue 5 is nonzero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Diagonalizable iff geometric multiplicity equals algebraic multiplicity for every eigenvalue; only the repeated eigenvalue 2 can fail.",
+        "Distractors confuse invertibility or symmetry (sufficient, not necessary) with diagonalizability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A system Ax = b has 3 equations and 4 unknowns. Row reduction shows rank(A) = 2 but rank of the augmented matrix [A | b] = 3. What does this tell you?",
+      "options": [
+        {
+          "id": "a",
+          "label": "There are infinitely many solutions with one free variable"
+        },
+        {
+          "id": "b",
+          "label": "There is no solution because b lies outside the column space of A"
+        },
+        {
+          "id": "c",
+          "label": "There is a unique solution because the rank is not full"
+        },
+        {
+          "id": "d",
+          "label": "There are infinitely many solutions with two free variables"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Augmented rank exceeding rank(A) means b is not in col(A), so the system is inconsistent.",
+        "Distractors count free variables from the unknowns minus rank and ignore consistency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A is a 2-by-2 invertible matrix with singular values 100 and 0.0001. You solve Ax = b, where b has relative error about 1e-6 from measurement. In the worst case, what relative error in x is plausible?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Around 1e-6, as the error carries straight through"
+        },
+        {
+          "id": "b",
+          "label": "Around 1, since the condition number is about 1e6"
+        },
+        {
+          "id": "c",
+          "label": "Around 1e-12, since A is invertible and exact"
+        },
+        {
+          "id": "d",
+          "label": "Around 1e-2, from the ratio 100/1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Condition number is 100/0.0001 = 1e6, so relative error can grow by up to that factor: 1e-6 * 1e6 ≈ 1.",
+        "Distractors assume errors do not amplify or misuse the singular values."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A student claims the eigenvalues of AB are always the products of an eigenvalue of A with an eigenvalue of B, and checks it only with diagonal matrices. Which statement best identifies the flaw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claim fails whenever A or B has a repeated eigenvalue"
+        },
+        {
+          "id": "b",
+          "label": "Diagonal examples hide that eigenvectors of A and B need not be shared"
+        },
+        {
+          "id": "c",
+          "label": "Products of eigenvalues only work for A and B symmetric"
+        },
+        {
+          "id": "d",
+          "label": "Eigenvalues of AB are always sums of those of A and B"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The pairing of eigenvalues works only when A and B share eigenvectors (e.g. simultaneously diagonalizable); diagonal tests all share them.",
+        "Distractors name wrong conditions such as symmetry or repeated eigenvalues."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A least-squares fit solves A^T A x = A^T b, and the solver reports that A^T A is singular. Which is the most likely underlying cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "b lies inside the column space of A"
+        },
+        {
+          "id": "b",
+          "label": "A has more rows than columns"
+        },
+        {
+          "id": "c",
+          "label": "The columns of A are linearly dependent"
+        },
+        {
+          "id": "d",
+          "label": "A is not a square matrix"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A^T A is singular exactly when A has a nontrivial null space, i.e. dependent columns.",
+        "Distractors cite tall shape or non-squareness, which are normal for least squares."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A is a 5x3 real matrix with rank 3. Which statements must be true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The columns of A are linearly independent"
+        },
+        {
+          "id": "b",
+          "label": "Ax = b has a solution for every b in R^5"
+        },
+        {
+          "id": "c",
+          "label": "The rows of A are linearly independent"
+        },
+        {
+          "id": "d",
+          "label": "The null space of A contains only the zero vector"
+        },
+        {
+          "id": "e",
+          "label": "A^T A is an invertible 3x3 matrix"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Rank 3 with 3 columns means independent columns, trivial null space and invertible A^T A.",
+        "Five rows in a rank-3 matrix cannot be independent, and the column space is only 3-dimensional in R^5, so not every b is reachable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A data scientist computes the covariance matrix of 3 sensor channels and finds eigenvalues 8.0, 1.9 and 0.1. She projects data onto the top two eigenvectors and reconstructs it. She wants to explain why the reconstruction is so accurate. Which explanation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The mean squared error equals the discarded eigenvalue, 0.1, about 1% of total variance 10"
+        },
+        {
+          "id": "b",
+          "label": "The discarded eigenvector is orthogonal to the kept ones, so error is zero"
+        },
+        {
+          "id": "c",
+          "label": "The error equals the sum of the kept eigenvalues divided by their number, 4.95"
+        },
+        {
+          "id": "d",
+          "label": "The error is the ratio 0.1/1.9, because the two smallest compete"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Mean squared reconstruction error equals the sum of discarded eigenvalues; total variance is the trace, 10.",
+        "Orthogonality of eigenvectors does not mean zero error; other distractors misuse eigenvalue arithmetic."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must solve Ax = b for 500 different right-hand sides b, with the same dense 2000x2000 matrix A that is well conditioned. Criteria: minimal total cost and good numerical accuracy. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Apply Cramer's rule to each b using determinants"
+        },
+        {
+          "id": "b",
+          "label": "Rerun full Gaussian elimination from scratch for each b"
+        },
+        {
+          "id": "c",
+          "label": "Factor A = LU once with pivoting, then do two triangular solves per b"
+        },
+        {
+          "id": "d",
+          "label": "Compute A^(-1) explicitly and multiply it by each b"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "One O(n^3) factorization plus O(n^2) triangular solves per b is cheapest and stable with pivoting.",
+        "Explicit inverses cost more and are less accurate; Cramer's rule is far costlier; repeating elimination wastes work."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must solve Ax = b where A is symmetric positive definite, sparse, with n = 10^6 and about 7 nonzeros per row. Memory is limited and an approximate answer to tolerance 1e-8 is enough. Which method best fits these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Forming A^(-1) once, then multiplying it by b"
+        },
+        {
+          "id": "b",
+          "label": "Preconditioned conjugate gradient, using only sparse matrix-vector products"
+        },
+        {
+          "id": "c",
+          "label": "Dense LU factorization of A, which is exact for any matrix"
+        },
+        {
+          "id": "d",
+          "label": "Cramer's rule with sparse determinants for each unknown"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "CG suits SPD sparse systems: low memory, matrix-vector products only, and stops at a tolerance.",
+        "Dense LU and inverses destroy sparsity and exceed memory; Cramer's rule is impractical."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A regression design matrix A has two nearly collinear columns, with cond(A) about 1e7, in double precision (about 16 digits). Criterion: the most accurate least-squares solution. Which method is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Gaussian elimination applied directly to the tall matrix A"
+        },
+        {
+          "id": "b",
+          "label": "Normal equations, because A^T A is square and symmetric"
+        },
+        {
+          "id": "c",
+          "label": "QR factorization of A, because it avoids squaring the condition number"
+        },
+        {
+          "id": "d",
+          "label": "Normal equations with Cramer's rule, to avoid inverting"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Forming A^T A squares the condition number to about 1e14, leaving roughly 2 digits; QR works with cond(A).",
+        "Distractors favour convenience of square or symmetric systems over numerical accuracy."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A colleague argues: \"det(A) = 1e-20, so A is nearly singular and the solution will be unreliable.\" A is the 20x20 matrix 0.1*I. Which evaluation of the claim is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claim is wrong because the determinant is only zero for singular matrices of rank one"
+        },
+        {
+          "id": "b",
+          "label": "The claim is correct only for matrices that are not diagonal"
+        },
+        {
+          "id": "c",
+          "label": "The claim is flawed: det scales with the matrix, and cond(0.1*I) = 1, so it is perfectly conditioned"
+        },
+        {
+          "id": "d",
+          "label": "The claim is correct, since any tiny determinant means near singularity"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The determinant depends on scale (0.1^20), while conditioning depends on the ratio of singular values, which is 1 here.",
+        "Distractors treat the determinant as a conditioning measure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You need the best rank-k approximation to a dense, non-symmetric 1000x300 data matrix M, judged by Frobenius-norm error. Which choice is best justified?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep the first k columns from Gram-Schmidt on M, as they span most of M"
+        },
+        {
+          "id": "b",
+          "label": "Truncate the eigen-decomposition of M, since eigenvalues rank importance"
+        },
+        {
+          "id": "c",
+          "label": "Truncate the SVD to the k largest singular values, which is provably optimal"
+        },
+        {
+          "id": "d",
+          "label": "Keep the k columns of M with largest norm, as they carry most energy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The Eckart-Young theorem makes truncated SVD the optimal rank-k approximation in Frobenius and spectral norms.",
+        "Column selection, Gram-Schmidt order and eigen-decomposition (undefined for non-square M) carry no optimality guarantee."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A least-squares problem has a rank-deficient, noisy matrix A. Which are valid reasons to prefer an SVD-based pseudoinverse solution over the normal equations? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It returns the minimum-norm solution among all least-squares minimizers"
+        },
+        {
+          "id": "b",
+          "label": "It avoids squaring the condition number of A"
+        },
+        {
+          "id": "c",
+          "label": "Thresholding tiny singular values controls noise amplification"
+        },
+        {
+          "id": "d",
+          "label": "It makes Ax = b exactly solvable for any b"
+        },
+        {
+          "id": "e",
+          "label": "It is always cheaper than QR factorization"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "SVD gives the minimum-norm minimizer, works with cond(A) rather than cond(A)^2, and lets small singular values be cut off.",
+        "SVD is usually more expensive than QR, and no method makes an inconsistent system exactly solvable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team ranks pages using power iteration on a huge sparse transition matrix with dominant eigenvalue 1 and second eigenvalue 0.99. Convergence is very slow. Constraints: keep the same matrix, keep it sparse, and avoid dense storage. Which remedy is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Invert the matrix once, then multiply the starting vector by the inverse"
+        },
+        {
+          "id": "b",
+          "label": "Run the same power iteration with a random start vector each time"
+        },
+        {
+          "id": "c",
+          "label": "Use a sparse Krylov eigensolver such as Arnoldi, using only matrix-vector products"
+        },
+        {
+          "id": "d",
+          "label": "Compute the full dense eigendecomposition with QR iterations"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Power iteration converges at rate 0.99^k; Arnoldi/Krylov methods extract the dominant eigenvector faster with only sparse products.",
+        "Dense decomposition and inversion violate the sparsity constraint; random restarts do not change the convergence rate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A student claims: 'A square matrix with a repeated eigenvalue can never be diagonalized.' Which evaluation of this claim is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Incorrect: every real matrix is diagonalizable over the complex numbers, whatever its eigenvalue multiplicities"
+        },
+        {
+          "id": "b",
+          "label": "Incorrect: the identity has a repeated eigenvalue yet is diagonal; only geometric and algebraic multiplicities must match"
+        },
+        {
+          "id": "c",
+          "label": "Correct: a repeated eigenvalue forces linearly dependent eigenvectors, so a full eigenbasis can never exist"
+        },
+        {
+          "id": "d",
+          "label": "Correct: a double root of the characteristic polynomial always gives a repeated factor in the minimal polynomial"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Diagonalizability needs geometric multiplicity equal to algebraic multiplicity for every eigenvalue, and the identity is a counterexample.",
+        "Distractors confuse repeated eigenvalues with defectiveness, or wrongly claim complex diagonalizability is automatic (Jordan blocks)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A is 500x20 with condition number about 1e8, and you work in double precision (about 1e-16 relative error). You need accurate least-squares coefficients. Which approach is best given this accuracy criterion?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Solve only the first 20 rows exactly by elimination, since a square subsystem avoids any approximation error"
+        },
+        {
+          "id": "b",
+          "label": "Explicit inverse of A^T A times A^T b, since an exact inverse removes any sensitivity to conditioning"
+        },
+        {
+          "id": "c",
+          "label": "Normal equations solved by Cholesky, since A^T A is small and symmetric positive definite, so it is just as accurate"
+        },
+        {
+          "id": "d",
+          "label": "QR factorization of A, since it never forms A^T A, whose condition number of about 1e16 would erase all digits"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Forming A^T A squares the condition number (1e16), which exhausts double precision; QR works with A directly.",
+        "Distractors rely on small size, exactness of an inverse, or discarding data, none of which fix the conditioning problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A symmetric 3x3 matrix has eigenvalues 5, -5 and 1. A colleague plans plain power iteration from a random start to find the dominant eigenpair. Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It converges to 5, because a positive eigenvalue always dominates a negative one of equal magnitude in the iteration"
+        },
+        {
+          "id": "b",
+          "label": "It will not settle: two eigenvalues share the largest magnitude, so the iterates keep oscillating between components"
+        },
+        {
+          "id": "c",
+          "label": "It converges to 1, because the contributions of 5 and -5 cancel and leave the smallest eigenvector"
+        },
+        {
+          "id": "d",
+          "label": "It converges, because symmetry guarantees a unique dominant eigenvector whatever the eigenvalue signs are"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Power iteration needs a strictly dominant magnitude; with 5 and -5 the iterates alternate and do not converge.",
+        "Distractors assume sign breaks ties, that components cancel, or that symmetry guarantees a unique dominant eigenvalue."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A monitoring tool flags A = 1e-10 * I (3x3) as 'nearly singular' because det(A) = 1e-30. Which evaluation is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Unsound: A has condition number 1, and det scales with units, so judge singularity by condition number or smallest singular value"
+        },
+        {
+          "id": "b",
+          "label": "Sound: a determinant that tiny means a direction is almost collapsed, so solves with A will lose accuracy"
+        },
+        {
+          "id": "c",
+          "label": "Sound: a determinant below machine epsilon guarantees the computed inverse has no correct digits left"
+        },
+        {
+          "id": "d",
+          "label": "Unsound: determinants are only meaningful for integer matrices, so floating-point values cannot show singularity"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The determinant scales as c^n under A -> cA, so it says nothing about sensitivity; the condition number is scale-invariant.",
+        "Distractors treat small determinant as proof of ill-conditioning or claim determinants are meaningless in floating point."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must solve Ax=b to tolerance 1e-6, where A is symmetric positive definite, n = 1,000,000, with about 5 million nonzeros, and memory is limited. Which method is best against these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Explicit inverse of A multiplied by b, since the inverse of a sparse matrix is sparse and cheap to hold"
+        },
+        {
+          "id": "b",
+          "label": "Cramer's rule with sparse determinants, since it gives exact entries without any iteration or factorization"
+        },
+        {
+          "id": "c",
+          "label": "Dense LU factorization, since pivoting makes it reliable and any matrix size fits once it is stored in blocks"
+        },
+        {
+          "id": "d",
+          "label": "Preconditioned conjugate gradient, since each step needs only a sparse mat-vec and SPD guarantees convergence"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "CG with a preconditioner uses O(nnz) memory per iteration and suits SPD systems with a loose tolerance.",
+        "Distractors ignore that dense storage is about 1e12 entries, that inverses of sparse matrices are generally dense, and that Cramer's rule is impractical."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Evaluate these claims about a real symmetric matrix A. Which are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "All eigenvalues of A are real."
+        },
+        {
+          "id": "b",
+          "label": "Eigenvectors belonging to distinct eigenvalues are orthogonal."
+        },
+        {
+          "id": "c",
+          "label": "A is diagonalizable only if its eigenvalues are all distinct."
+        },
+        {
+          "id": "d",
+          "label": "A = Q L Q^T with Q orthogonal and L diagonal, even with repeated eigenvalues."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "The spectral theorem gives real eigenvalues, orthogonal eigenvectors for distinct eigenvalues, and orthogonal diagonalization in all cases.",
+        "The claim requiring distinct eigenvalues confuses sufficiency with necessity; symmetric matrices are never defective."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "An analyst runs PCA on the covariance matrix of customer data: income in dollars (variance about 1e9), visits per month (variance about 25) and satisfaction on a 1-5 scale (variance about 1). The first component is almost entirely income. The goal is structure across all three variables, which matter equally. Which action is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Drop income and rerun covariance PCA, since a dominant variance means that variable carries no shared structure"
+        },
+        {
+          "id": "b",
+          "label": "Standardize each column to unit variance, so PCA uses the correlation matrix and units do not set the ranking"
+        },
+        {
+          "id": "c",
+          "label": "Rescale the first component's loadings to equal size, since this corrects for income's unit without changing the data"
+        },
+        {
+          "id": "d",
+          "label": "Keep the covariance matrix and keep only component one, since it explains over 99.9 percent of total variance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Covariance PCA is unit-dependent, so a large-scale variable dominates; standardizing makes variables comparable.",
+        "Distractors treat explained variance as importance, discard a needed variable, or tamper with loadings after the fact."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a 2x2 matrix A with A^2 = A, range equal to span{(1,1)} and null space equal to span{(1,0)}. Which matrix meets every constraint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "[[0,1],[0,1]]"
+        },
+        {
+          "id": "b",
+          "label": "[[1,0],[1,0]]"
+        },
+        {
+          "id": "c",
+          "label": "[[1/2,1/2],[1/2,1/2]]"
+        },
+        {
+          "id": "d",
+          "label": "[[1,1],[0,0]]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A(x,y) = (y,y) sends (1,0) to 0 and fixes (1,1), and it is idempotent.",
+        "The first option is the orthogonal projection (null space span{(1,-1)}); the other two have wrong null space or range."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A is 100x5 with rank 3. You need the minimizer of ||Ax - b|| that also has the smallest ||x||, computed reliably. Which design meets both requirements?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Compute the SVD, invert only the nonzero singular values, and set x = V S^+ U^T b"
+        },
+        {
+          "id": "b",
+          "label": "Run Gaussian elimination on Ax = b and keep the first solution, since any least-squares solution is also shortest"
+        },
+        {
+          "id": "c",
+          "label": "Solve (A^T A + I)x = A^T b, since ridge with lambda = 1 gives exactly the minimum-norm least-squares minimizer"
+        },
+        {
+          "id": "d",
+          "label": "Evaluate (A^T A)^-1 A^T b, since it gives the least-squares solution and the inverse picks the shortest one"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The pseudoinverse via SVD gives the minimum-norm least-squares solution even when A is rank deficient.",
+        "A^T A is singular here so the first option fails, and ridge with lambda = 1 changes the minimizer rather than selecting among exact ones."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a 3-state row-stochastic transition matrix whose unique stationary distribution is (1/2, 1/4, 1/4). Which construction satisfies both constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A matrix with every row equal to (1/2, 1/4, 1/4), since the target is fixed and every state can be reached"
+        },
+        {
+          "id": "b",
+          "label": "The cyclic permutation with rows (0,1,0), (0,0,1), (1,0,0), since it visits all three states repeatedly"
+        },
+        {
+          "id": "c",
+          "label": "The identity matrix, since every state keeps its probability and the target vector is then stationary"
+        },
+        {
+          "id": "d",
+          "label": "A block matrix with rows (1/2,1/2,0), (1/2,1/2,0), (0,0,1), since it weights the first state most"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "With identical rows, pi P = pi for any distribution summing to 1 only when pi equals the row, and all entries are positive so the chain is irreducible, giving uniqueness.",
+        "The identity and block matrix are reducible with non-unique or different stationary vectors, and the cycle has uniform stationary distribution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A fixed dense, well-conditioned 2000x2000 matrix A must be used to solve Ax = b for 1000 right-hand sides that arrive one at a time. Total cost and accuracy both matter. Which plan is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run full Gaussian elimination from scratch for each b, since elimination work cannot be reused across vectors"
+        },
+        {
+          "id": "b",
+          "label": "Compute an LU factorization once, then do forward and back substitution for each b at about n^2 cost"
+        },
+        {
+          "id": "c",
+          "label": "Form A^-1 once and multiply each b, since this is more accurate than substitution and costs less per vector"
+        },
+        {
+          "id": "d",
+          "label": "Use Cramer's rule per vector, since determinants can be reused and avoid any repeated elimination"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Factoring once costs about n^3, then each solve costs about n^2, with good backward stability.",
+        "Re-eliminating repeats n^3 work 1000 times; the explicit inverse is not more accurate; Cramer's rule is far costlier."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A proof that AB and BA (n x n) share nonzero eigenvalues reads: 'Let ABv = lambda v with v nonzero. Then BA(Bv) = B(ABv) = lambda(Bv), so lambda is an eigenvalue of BA.' What step is missing for the argument to be complete?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A check that Bv is nonzero, which holds because lambda is nonzero and ABv = lambda v is nonzero"
+        },
+        {
+          "id": "b",
+          "label": "A check that v itself is also an eigenvector of BA, since an eigenvalue must share its vector"
+        },
+        {
+          "id": "c",
+          "label": "A check that A and B commute, since otherwise the order of the products changes the eigenvalues"
+        },
+        {
+          "id": "d",
+          "label": "A check that A and B are both invertible, since otherwise Bv would not be defined as a vector"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "An eigenvector must be nonzero; if lambda is nonzero then ABv is nonzero, so Bv is nonzero.",
+        "The other options demand commutativity, invertibility or a shared eigenvector, none of which is needed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design a real 3x3 matrix A with A^2 = I but A not equal to I and not equal to -I. Which constructions work? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "diag(1, -1, 1)"
+        },
+        {
+          "id": "b",
+          "label": "[[1,1,0],[0,1,0],[0,0,1]]"
+        },
+        {
+          "id": "c",
+          "label": "I - 2uu^T for a unit column vector u"
+        },
+        {
+          "id": "d",
+          "label": "I - uu^T for a unit column vector u"
+        },
+        {
+          "id": "e",
+          "label": "[[0,1,0],[1,0,0],[0,0,1]]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Diagonal sign matrices, Householder reflections and swap-plus-identity blocks are involutions, so their squares equal I.",
+        "I - uu^T is a projection (A^2 = A), and the shear matrix squares to a matrix with entry 2."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A ratings matrix R is 10000x1000. Storage allows only 20 components. A designer must build the rank-20 matrix closest to R in Frobenius norm. Which construction meets this requirement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Eigen-decompose R directly and keep the 20 largest eigenvalues with their eigenvectors"
+        },
+        {
+          "id": "b",
+          "label": "Keep the 20 columns of R with the largest norms and zero out the other 980 columns"
+        },
+        {
+          "id": "c",
+          "label": "Compute the SVD of R and keep the top 20 singular values with their singular vectors"
+        },
+        {
+          "id": "d",
+          "label": "Take the first 20 rows of the echelon form of R and rebuild R from those pivots"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Truncated SVD is optimal in Frobenius norm among all rank-20 matrices (Eckart-Young).",
+        "R is not square so eigen-decomposition does not apply, and column selection or echelon rows have no optimality guarantee."
+      ],
+      "reviewed": false
+    }
+  ]
+}

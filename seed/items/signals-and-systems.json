@@ -1,0 +1,2486 @@
+{
+  "version": 1,
+  "topic": "signals-and-systems",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which operation on the input signal x(t) and the impulse response h(t) gives the output y(t) of an LTI system?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Differentiation of x(t) with respect to h(t)"
+        },
+        {
+          "id": "b",
+          "label": "Pointwise multiplication of x(t) and h(t)"
+        },
+        {
+          "id": "c",
+          "label": "Convolution of x(t) with h(t)"
+        },
+        {
+          "id": "d",
+          "label": "Addition of x(t) and h(t) over time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The output of an LTI system is the convolution of the input with the impulse response.",
+        "Pointwise multiplication is the frequency-domain relation, not the time-domain one."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the name of the function whose output is the response of an LTI system to a unit impulse input?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Window function"
+        },
+        {
+          "id": "b",
+          "label": "Transfer ratio"
+        },
+        {
+          "id": "c",
+          "label": "Impulse response"
+        },
+        {
+          "id": "d",
+          "label": "Step function"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The impulse response h(t) is the output when the input is the unit impulse.",
+        "The step function is a different input, not the response."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which transform converts a time-domain signal into a function of complex frequency s?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Laplace transform"
+        },
+        {
+          "id": "b",
+          "label": "Hilbert transform"
+        },
+        {
+          "id": "c",
+          "label": "Z-transform"
+        },
+        {
+          "id": "d",
+          "label": "Walsh transform"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The Laplace transform maps x(t) to X(s) with s complex.",
+        "The Z-transform is for discrete-time signals in the variable z."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the term 'time-invariant' mean for a system?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The output stays constant as time passes"
+        },
+        {
+          "id": "b",
+          "label": "The system output is always proportional to the input"
+        },
+        {
+          "id": "c",
+          "label": "The output depends only on the present input value"
+        },
+        {
+          "id": "d",
+          "label": "A delay in the input produces the same delay in the output"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Time invariance means shifting the input shifts the output by the same amount.",
+        "Proportionality describes homogeneity (part of linearity), not time invariance."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In the Fourier transform of a real signal, what does the magnitude |X(f)| represent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The energy lost in the system at frequency f"
+        },
+        {
+          "id": "b",
+          "label": "The delay of the signal at frequency f"
+        },
+        {
+          "id": "c",
+          "label": "The amount of the signal at frequency f"
+        },
+        {
+          "id": "d",
+          "label": "The time at which frequency f occurs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Magnitude gives the strength of each frequency component.",
+        "Phase, not magnitude, relates to timing and delay."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are properties required of a linear system? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Homogeneity: scaling the input scales the output equally"
+        },
+        {
+          "id": "b",
+          "label": "Additivity: the response to a sum is the sum of responses"
+        },
+        {
+          "id": "c",
+          "label": "Causality: output never depends on future input"
+        },
+        {
+          "id": "d",
+          "label": "Stability: bounded input gives bounded output"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Linearity means additivity plus homogeneity (superposition).",
+        "Causality and stability are separate properties that a linear system may or may not have."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A student is reading about a filter. The text says the filter's frequency response H(f) is the Fourier transform of a certain function. The student wants to know which function this is.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The unit step response"
+        },
+        {
+          "id": "b",
+          "label": "The impulse response h(t)"
+        },
+        {
+          "id": "c",
+          "label": "The input signal x(t)"
+        },
+        {
+          "id": "d",
+          "label": "The output signal y(t)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "H(f) is the Fourier transform of the impulse response.",
+        "The step response is related by integration but is not the transform pair."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Convolution in the time domain corresponds to which operation in the frequency domain?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Addition of the transforms"
+        },
+        {
+          "id": "b",
+          "label": "Division of the transforms"
+        },
+        {
+          "id": "c",
+          "label": "Multiplication of the transforms"
+        },
+        {
+          "id": "d",
+          "label": "Convolution of the transforms"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Y(f) = X(f)H(f), so time convolution becomes multiplication.",
+        "Frequency convolution corresponds to multiplication in time, the reverse relation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "An ideal low-pass filter is applied to a signal containing 100 Hz and 5 kHz sinusoids, with cutoff at 1 kHz. What is the output?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only the 5 kHz sinusoid"
+        },
+        {
+          "id": "b",
+          "label": "Both sinusoids, with 5 kHz delayed"
+        },
+        {
+          "id": "c",
+          "label": "Both sinusoids, with 100 Hz attenuated"
+        },
+        {
+          "id": "d",
+          "label": "Only the 100 Hz sinusoid"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A low-pass filter passes frequencies below cutoff and blocks those above.",
+        "Choosing the 5 kHz one confuses low-pass with high-pass."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does an LTI system fed a sinusoid of frequency f produce an output at the same frequency f?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Convolution always doubles the frequency of its input"
+        },
+        {
+          "id": "b",
+          "label": "The system adds new frequencies that cancel the old ones"
+        },
+        {
+          "id": "c",
+          "label": "Sinusoids are eigenfunctions, so the system only scales and shifts them"
+        },
+        {
+          "id": "d",
+          "label": "The system samples the sinusoid at its own frequency"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Complex exponentials are eigenfunctions of LTI systems; only gain and phase change.",
+        "Creating new frequencies is characteristic of nonlinear systems."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A signal is delayed by t0 seconds. How does its Fourier transform magnitude change?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It becomes zero at frequencies below 1/t0"
+        },
+        {
+          "id": "b",
+          "label": "It is scaled by t0 at all frequencies"
+        },
+        {
+          "id": "c",
+          "label": "It is shifted along the frequency axis by t0"
+        },
+        {
+          "id": "d",
+          "label": "It stays the same; only the phase changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A time delay multiplies X(f) by a phase factor of magnitude one.",
+        "Shifting in frequency corresponds to modulation, not delay."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A system has H(s) = 1/(s + 2). What does the pole at s = -2 tell you about the system?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It blocks all input at the frequency 2 rad/s"
+        },
+        {
+          "id": "b",
+          "label": "It is oscillating forever at 2 rad/s"
+        },
+        {
+          "id": "c",
+          "label": "It is unstable, with an exponential growth e^(2t)"
+        },
+        {
+          "id": "d",
+          "label": "It is stable, with an exponential decay e^(-2t) in its response"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A pole in the left half-plane gives a decaying exponential and a stable causal system.",
+        "Growth or oscillation needs poles in the right half-plane or on the imaginary axis."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe the frequency response H(f) of an LTI system? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It depends on the particular input signal used"
+        },
+        {
+          "id": "b",
+          "label": "It is only defined for signals that are zero for t < 0"
+        },
+        {
+          "id": "c",
+          "label": "Its phase gives the shift applied to each frequency"
+        },
+        {
+          "id": "d",
+          "label": "Its magnitude gives the gain applied to each frequency"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "H(f) gives gain (magnitude) and phase shift per frequency.",
+        "It is a property of the system and does not depend on the input."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "An engineer sends a 50 Hz sinusoid with amplitude 2 into an LTI filter whose frequency response at 50 Hz has magnitude 0.5 and phase -90 degrees. She wants to predict the output.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A 50 Hz sinusoid with amplitude 4, leading by 90 degrees"
+        },
+        {
+          "id": "b",
+          "label": "A 50 Hz sinusoid with amplitude 2, lagging by 45 degrees"
+        },
+        {
+          "id": "c",
+          "label": "A 25 Hz sinusoid with amplitude 1, lagging by 90 degrees"
+        },
+        {
+          "id": "d",
+          "label": "A 50 Hz sinusoid with amplitude 1, lagging by 90 degrees"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Output amplitude is 2 x 0.5 = 1 and the phase shifts by -90 degrees at the same frequency.",
+        "Distractors multiply wrongly, flip the phase sign, or change the frequency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the impulse response h(t) of an LTI system tell you about the system?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The steady-state output only when the input is a unit step"
+        },
+        {
+          "id": "b",
+          "label": "The frequencies the system removes, but nothing about its output"
+        },
+        {
+          "id": "c",
+          "label": "The output for any input is the product of that input with h(t)"
+        },
+        {
+          "id": "d",
+          "label": "The output for any input is the convolution of that input with h(t)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An LTI system is fully characterised by h(t), and y = x * h for any input.",
+        "Distractors confuse convolution with pointwise multiplication or limit h(t) to one special input."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Convolving two signals in the time domain corresponds to which operation on their Fourier transforms?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Adding the two spectra at each frequency"
+        },
+        {
+          "id": "b",
+          "label": "Convolving the two spectra with each other"
+        },
+        {
+          "id": "c",
+          "label": "Dividing one spectrum by the other"
+        },
+        {
+          "id": "d",
+          "label": "Multiplying the two spectra at each frequency"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The convolution theorem: time-domain convolution becomes frequency-domain multiplication.",
+        "Distractors reverse the theorem or pick another arithmetic operation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A sinusoid of frequency f0 enters a stable LTI system. Why does the output contain only frequency f0?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The output frequency always equals the system's cutoff frequency instead"
+        },
+        {
+          "id": "b",
+          "label": "Sinusoids are the only signals an LTI system can process without distortion"
+        },
+        {
+          "id": "c",
+          "label": "The system adds harmonics, but they are always filtered by its stability"
+        },
+        {
+          "id": "d",
+          "label": "Complex exponentials pass through LTI systems, only scaled in amplitude and shifted in phase"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Complex exponentials are eigenfunctions of LTI systems, so only gain and phase change.",
+        "Distractors invent harmonic generation or tie output frequency to the cutoff."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A causal LTI system has H(s) with all poles in the left half of the s-plane. What can you conclude?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The system is a high-pass filter, since its poles are negative"
+        },
+        {
+          "id": "b",
+          "label": "The system is non-causal, since its poles have negative real parts"
+        },
+        {
+          "id": "c",
+          "label": "The system is BIBO stable, since its impulse response decays"
+        },
+        {
+          "id": "d",
+          "label": "The system is unstable, since poles must lie on the axis"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Left-half-plane poles give decaying exponentials, hence a bounded impulse response sum and BIBO stability.",
+        "Distractors misread pole location as instability, non-causality or filter type."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Consider the system y(t) = t * x(t). How is it best classified?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Linear and time-invariant, because it only scales the input"
+        },
+        {
+          "id": "b",
+          "label": "Nonlinear and time-invariant, because it multiplies by t"
+        },
+        {
+          "id": "c",
+          "label": "Linear but time-varying, because the gain depends on t"
+        },
+        {
+          "id": "d",
+          "label": "Nonlinear and time-varying, because the output grows with t"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Superposition holds, but delaying x does not simply delay y, since the gain t changes.",
+        "Distractors treat any scaling as time-invariant or growth as nonlinearity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about LTI systems are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Convolution is commutative, so x * h equals h * x"
+        },
+        {
+          "id": "b",
+          "label": "The system y(t) = x(t)^2 is LTI, since it has no memory"
+        },
+        {
+          "id": "c",
+          "label": "A sinusoidal input never produces new frequencies at the output"
+        },
+        {
+          "id": "d",
+          "label": "Output at time t can depend on future inputs for any LTI system"
+        },
+        {
+          "id": "e",
+          "label": "Doubling the input doubles the output"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Commutativity, homogeneity and no new frequencies are core LTI properties.",
+        "Squaring is nonlinear, and only non-causal LTI systems use future inputs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "An audio engineer passes a signal through a low-pass filter whose magnitude response is near 1 below 1 kHz and falls steeply above it. The input contains a 200 Hz tone and a 5 kHz tone of equal amplitude. What should the engineer predict at the output?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Both tones are reduced equally, since they began with equal amplitude"
+        },
+        {
+          "id": "b",
+          "label": "Both tones appear shifted to the 1 kHz cutoff frequency afterwards"
+        },
+        {
+          "id": "c",
+          "label": "The 200 Hz tone is nearly unchanged and the 5 kHz tone is strongly reduced"
+        },
+        {
+          "id": "d",
+          "label": "The 5 kHz tone is unchanged and the 200 Hz tone is strongly reduced"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Each tone is scaled by |H(f)| at its own frequency, so low frequencies pass and high ones fall.",
+        "Distractors ignore frequency dependence, swap pass and stop bands, or move frequencies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Compute the convolution of x[n] = {1, 2} and h[n] = {1, 1, 1}, both starting at n = 0. What is y[n] for n = 0, 1, 2, 3?",
+      "options": [
+        {
+          "id": "a",
+          "label": "{2, 3, 3, 1}"
+        },
+        {
+          "id": "b",
+          "label": "{1, 3, 3, 2}"
+        },
+        {
+          "id": "c",
+          "label": "{1, 3, 2, 2}"
+        },
+        {
+          "id": "d",
+          "label": "{1, 2, 2, 1}"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Sliding sum: y0=1, y1=1+2=3, y2=1+2=3, y3=2.",
+        "Distractors come from misaligned overlaps or dropped terms."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What is the Laplace transform of x(t) = e^(-2t) u(t)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1/(s-2)"
+        },
+        {
+          "id": "b",
+          "label": "1/(s+2)"
+        },
+        {
+          "id": "c",
+          "label": "1/(s^2+4)"
+        },
+        {
+          "id": "d",
+          "label": "2/(s+2)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The transform of e^(-at)u(t) is 1/(s+a), with a = 2.",
+        "Distractors flip the sign, add a factor or use the sinusoid form."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A system has H(s) = 1/(s+3). Its input is cos(3t). What is the steady-state output amplitude?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1/3, about 0.333"
+        },
+        {
+          "id": "b",
+          "label": "1/6, about 0.167"
+        },
+        {
+          "id": "c",
+          "label": "1/sqrt(3), about 0.577"
+        },
+        {
+          "id": "d",
+          "label": "1/(3*sqrt(2)), about 0.236"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "|H(j3)| = 1/|3+j3| = 1/(3*sqrt(2)).",
+        "Distractors drop the imaginary part or add the terms linearly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A system obeys y'(t) + 2y(t) = x(t). A unit step u(t) is applied. What is the final steady-state value of y(t)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.5"
+        },
+        {
+          "id": "b",
+          "label": "2"
+        },
+        {
+          "id": "c",
+          "label": "1"
+        },
+        {
+          "id": "d",
+          "label": "0"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "H(s) = 1/(s+2), so the DC gain H(0) = 1/2 gives the steady value 0.5.",
+        "Distractors invert the gain, assume unity gain, or assume decay to zero."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A 5 kHz cosine is sampled at 8 kHz with no anti-alias filter. At what apparent frequency does it appear in the sampled data?",
+      "options": [
+        {
+          "id": "a",
+          "label": "13 kHz"
+        },
+        {
+          "id": "b",
+          "label": "3 kHz"
+        },
+        {
+          "id": "c",
+          "label": "8 kHz"
+        },
+        {
+          "id": "d",
+          "label": "5 kHz"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Aliasing folds 5 kHz about fs/2 = 4 kHz, giving |8 - 5| = 3 kHz.",
+        "Distractors keep the true frequency or add instead of subtract."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which of these causal systems are BIBO stable? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "H(s) = 1/(s-2)"
+        },
+        {
+          "id": "b",
+          "label": "H(s) = 1/(s^2+2s+5)"
+        },
+        {
+          "id": "c",
+          "label": "H(s) = 1/s"
+        },
+        {
+          "id": "d",
+          "label": "H(s) = 1/(s^2+4)"
+        },
+        {
+          "id": "e",
+          "label": "H(s) = 1/(s+1)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Poles at -1 and at -1 ± 2j are in the left half-plane.",
+        "A pole at +2 grows, while poles at ±2j or 0 are only marginally stable and not BIBO stable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A technician builds an RC low-pass filter with R = 1 kOhm and C = 1 microfarad. The transfer function is H(s) = 1/(1 + RCs). She needs the cutoff, where the magnitude falls to 1/sqrt(2) of its DC value, in rad/s.",
+      "options": [
+        {
+          "id": "a",
+          "label": "1,000,000 rad/s"
+        },
+        {
+          "id": "b",
+          "label": "1000 rad/s"
+        },
+        {
+          "id": "c",
+          "label": "159 rad/s"
+        },
+        {
+          "id": "d",
+          "label": "6283 rad/s"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The cutoff is 1/(RC) = 1/(1e3 * 1e-6) = 1000 rad/s.",
+        "Distractors confuse rad/s with Hz, multiply by 2*pi, or ignore the microfarad scale."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Convolve x[n] = {1, 2, 1} (n = 0, 1, 2) with h[n] = {1, 1} (n = 0, 1). What is y[n] for n = 0, 1, 2, 3?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1, 4, 4, 1"
+        },
+        {
+          "id": "b",
+          "label": "2, 3, 2, 0"
+        },
+        {
+          "id": "c",
+          "label": "1, 3, 3, 1"
+        },
+        {
+          "id": "d",
+          "label": "1, 2, 2, 1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Each output is a sum of x[k]h[n-k]: 1, 1+2, 2+1, 1.",
+        "Distractors come from multiplying samples pointwise or mis-aligning the overlap."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An LTI system has H(s) = 1/(s+2). The input is x(t) = cos(2t) for all t. What is the steady-state output amplitude?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.354"
+        },
+        {
+          "id": "b",
+          "label": "0.707"
+        },
+        {
+          "id": "c",
+          "label": "0.500"
+        },
+        {
+          "id": "d",
+          "label": "0.250"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "|H(j2)| = 1/sqrt(2^2+2^2) = 1/sqrt(8) = 0.354.",
+        "Distractors use H(0)=0.5, drop the square root, or assume the -3 dB value at the corner."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A signal containing tones at 300 Hz and 700 Hz is sampled at 1000 Hz with no anti-alias filter. At what frequency does the 700 Hz tone appear in the sampled spectrum (0 to 500 Hz)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "300 Hz"
+        },
+        {
+          "id": "b",
+          "label": "500 Hz"
+        },
+        {
+          "id": "c",
+          "label": "100 Hz"
+        },
+        {
+          "id": "d",
+          "label": "700 Hz"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The tone folds about fs/2 = 500 Hz, so 700 Hz appears at 1000 - 700 = 300 Hz.",
+        "Distractors ignore folding or subtract 500 from 700 or similar."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "x(t) = e^{-3t}u(t) has Laplace transform 1/(s+3). What is the Laplace transform of the delayed signal x(t-2)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "e^{-2s}/(s+3)"
+        },
+        {
+          "id": "b",
+          "label": "1/(s+5)"
+        },
+        {
+          "id": "c",
+          "label": "e^{2s}/(s+3)"
+        },
+        {
+          "id": "d",
+          "label": "e^{-3s}/(s+2)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A delay of T multiplies the transform by e^{-sT}.",
+        "Distractors flip the sign, treat the delay as a pole shift, or swap the constants."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A discrete system is y[n] = 0.5 y[n-1] + x[n]. What is its gain for a constant (DC) input?",
+      "options": [
+        {
+          "id": "a",
+          "label": "2"
+        },
+        {
+          "id": "b",
+          "label": "0.5"
+        },
+        {
+          "id": "c",
+          "label": "1"
+        },
+        {
+          "id": "d",
+          "label": "1.5"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "H(z) = 1/(1 - 0.5 z^-1); at z = 1 the gain is 1/0.5 = 2.",
+        "Distractors confuse the gain with the feedback coefficient or assume unity DC gain."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which of these impulse responses describe causal, BIBO-stable systems? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "h(t) = u(t)"
+        },
+        {
+          "id": "b",
+          "label": "h[n] = (0.9)^n u[n]"
+        },
+        {
+          "id": "c",
+          "label": "h(t) = e^{-3t} u(t)"
+        },
+        {
+          "id": "d",
+          "label": "h[n] = (-1.1)^n u[n]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Stability needs an absolutely integrable or summable h; decaying exponentials qualify.",
+        "u(t) is a pure integrator and |-1.1| > 1 grows, so neither is stable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "In a lab, a first-order RC low-pass filter has R = 10 kOhm and C = 15.9 nF, giving a cutoff near 1 kHz. A 1 V amplitude sine at 3 kHz is applied to the input. Using |H(jw)| = 1/sqrt(1 + (f/fc)^2), what amplitude do you expect at the output?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.71 V"
+        },
+        {
+          "id": "b",
+          "label": "0.32 V"
+        },
+        {
+          "id": "c",
+          "label": "0.10 V"
+        },
+        {
+          "id": "d",
+          "label": "0.50 V"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Gain = 1/sqrt(1+9) = 0.316, so about 0.32 V.",
+        "0.71 V is the gain at the cutoff, and 0.10 V comes from dropping the square root."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A student argues that y[n] = x[2n] is an LTI system because it is linear. Which statement identifies the flaw in this argument?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is not linear, because discarding every second sample breaks superposition for scaled inputs"
+        },
+        {
+          "id": "b",
+          "label": "It is LTI, but it discards samples, so its impulse response is infinite and convolution fails"
+        },
+        {
+          "id": "c",
+          "label": "It is time-invariant but non-causal, so it cannot be described by any frequency response"
+        },
+        {
+          "id": "d",
+          "label": "Linearity alone is not enough: delaying the input by one sample does not just delay the output, so it is time-varying"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Shifting the input by 1 gives x[2n-1] after the shift, not y[n-1] = x[2n-2]; the system is time-varying.",
+        "Distractors misattribute the failure to linearity or to causality."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A system H(s) = 1/(s^2 + 2s + 10) has a step response that visibly rings before settling. Which explanation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The poles at -1 ± j3 are complex, so the response oscillates near 3 rad/s inside a decaying e^{-t} envelope"
+        },
+        {
+          "id": "b",
+          "label": "The poles at -1 and -10 are real and distinct, so the two decaying exponentials add and overshoot the final value"
+        },
+        {
+          "id": "c",
+          "label": "The poles at ± j sqrt(10) lie on the imaginary axis, so the oscillation continues forever without decaying"
+        },
+        {
+          "id": "d",
+          "label": "The zeros at -1 ± j3 cancel the damping, so the response oscillates until the input is removed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The roots of s^2+2s+10 are -1 ± j3, giving a damped oscillation.",
+        "Distractors mis-factor the denominator or confuse poles with zeros."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A system has H(s) = (s-1)/(s+1). What does it do to a sinusoidal input at steady state?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Leaves amplitude unchanged at every frequency and only shifts phase, because |jw-1| = |jw+1|"
+        },
+        {
+          "id": "b",
+          "label": "Passes DC unchanged and attenuates everything else, because the zero lies in the right half plane"
+        },
+        {
+          "id": "c",
+          "label": "Attenuates high frequencies, because the pole at s = -1 sets a cutoff near 1 rad/s"
+        },
+        {
+          "id": "d",
+          "label": "Acts as a high-pass filter, because the zero at s = 1 reduces the response near DC"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The magnitude equals 1 for all w, so this is an all-pass system that only alters phase.",
+        "Distractors treat the pole or zero as a corner frequency without computing the magnitude."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An engineer records 1.0 s of a 52.5 Hz tone sampled at 1000 Hz. The DFT shows energy spread over many bins instead of one sharp peak. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sampling at 1000 Hz is below the Nyquist rate for a 52.5 Hz tone, so aliasing smears the energy"
+        },
+        {
+          "id": "b",
+          "label": "The 1 Hz bin spacing is too coarse to represent any tone, so every tone spreads across many bins"
+        },
+        {
+          "id": "c",
+          "label": "A real tone has components at both +52.5 and -52.5 Hz, which doubles the number of occupied bins"
+        },
+        {
+          "id": "d",
+          "label": "The record holds a non-integer number of cycles, so the implicit periodic extension has a jump that spreads energy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "52.5 cycles in the record is not an integer, so the periodic extension is discontinuous and leaks energy.",
+        "Distractors blame aliasing or resolution, but 1000 Hz is well above Nyquist, and integer-frequency tones give a single peak."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A student states that a stable LTI system driven by x(t) = cos(w0 t)u(t) gives exactly |H(jw0)|cos(w0 t + angle H(jw0)) for t >= 0. What is wrong with this claim?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It gives only the steady-state part; the turn-on adds a transient that decays with the system's natural modes"
+        },
+        {
+          "id": "b",
+          "label": "The formula needs |H(jw0)|^2 because the output power, not the amplitude, is scaled by the gain"
+        },
+        {
+          "id": "c",
+          "label": "Frequency response applies only to non-causal systems, so the formula cannot hold for a causal system"
+        },
+        {
+          "id": "d",
+          "label": "Switching on at t = 0 makes the input nonlinear, so superposition fails and no formula applies"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The frequency response gives the response to an everlasting sinusoid; a switched-on input also excites natural modes.",
+        "Distractors misstate what H(jw) means or claim u(t) breaks linearity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A system has H(s) = 1/((s+1)(s-2)). Which statements about its possible regions of convergence (ROC) are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "ROC -1 < Re(s) < 2 gives a BIBO-stable system that is not causal"
+        },
+        {
+          "id": "b",
+          "label": "A causal, stable system exists because the pole at -1 is in the left half plane"
+        },
+        {
+          "id": "c",
+          "label": "ROC Re(s) > 2 gives a causal system that is not BIBO stable"
+        },
+        {
+          "id": "d",
+          "label": "ROC Re(s) < -1 gives a stable system because it lies left of all the poles"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Right-sided ROC means causal, but it must include the jw axis for stability; the strip between the poles includes it but is two-sided.",
+        "The pole at 2 prevents any causal stable choice, and ROC Re(s) < -1 excludes the jw axis."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A sensor is sampled at 1000 Hz and contaminated by 50 Hz mains hum. An engineer applies a 10-point moving average, expecting the hum to vanish, but a clear 50 Hz component remains. Which diagnosis is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The averager is a high-pass filter, so it passes low-frequency hum and removes only slow drift"
+        },
+        {
+          "id": "b",
+          "label": "The moving average has nulls at multiples of fs/N = 100 Hz, so 50 Hz falls between nulls and is only partly attenuated"
+        },
+        {
+          "id": "c",
+          "label": "Moving averages cannot remove periodic signals, because their impulse response is not absolutely summable"
+        },
+        {
+          "id": "d",
+          "label": "The 50 Hz hum aliases to a different frequency at fs = 1000 Hz, so the filter targets the wrong component"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A length-N moving average has nulls at k·fs/N; here that is 100 Hz, 200 Hz, ..., so 50 Hz keeps a gain near 0.64.",
+        "A 20-point average would place a null at 50 Hz; the distractors misclassify the filter or misapply aliasing and stability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A squarer `y(t) = x(t)^2` is driven by `x(t) = cos(w1 t) + cos(w2 t)`, where w1 and w2 are positive, different, and not in a 2:1 ratio. Which set of frequencies appears in the output?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only w1 and w2, scaled, as with any system driven by sinusoids"
+        },
+        {
+          "id": "b",
+          "label": "Only 2w1 and 2w2, since each cosine is squared separately"
+        },
+        {
+          "id": "c",
+          "label": "w1, w2 and w1+w2, since the output is a sum of input terms"
+        },
+        {
+          "id": "d",
+          "label": "DC, 2w1, 2w2, w1+w2 and |w1-w2|, from squaring and cross terms"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Squaring produces cross terms, so sum and difference frequencies plus DC and doubled frequencies appear.",
+        "Distractors assume LTI behaviour or ignore the cross term 2cos(w1 t)cos(w2 t)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A 7 kHz sine is sampled at 10 kHz with no anti-alias filter. The spectrum of the samples shows a strong peak at 3 kHz and nothing at 7 kHz. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Quantization noise creates a tone at fs minus 7 kHz that masks the original"
+        },
+        {
+          "id": "b",
+          "label": "7 kHz is above fs/2 = 5 kHz, so it folds to 10 - 7 = 3 kHz"
+        },
+        {
+          "id": "c",
+          "label": "Sampling at 10 kHz acts as a low-pass filter that moves the tone down to 3 kHz"
+        },
+        {
+          "id": "d",
+          "label": "Spectral leakage from the analysis window moves energy from 7 kHz to 3 kHz"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Components above fs/2 alias to |f - k*fs|, here 3 kHz.",
+        "Distractors blame filtering, leakage or quantization, none of which relocate a tone this way."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A 6-sample signal x is convolved with a 4-tap filter h by multiplying 8-point DFTs and inverting. The true linear convolution has 9 samples. Which output samples differ from the linear result?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only y[0], because linear sample y[8] wraps around onto index 0"
+        },
+        {
+          "id": "b",
+          "label": "y[0] through y[2], the first samples that lack a full overlap with h"
+        },
+        {
+          "id": "c",
+          "label": "y[6] and y[7], the last samples before the 8-point frame ends"
+        },
+        {
+          "id": "d",
+          "label": "None, because 8 points exceeds the length of both x and h"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The linear result has 9 samples, so index 8 aliases onto index 0 in an 8-point circular convolution.",
+        "Distractors misapply the overlap-save rule or only compare N with each input length, not with L+M-1."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A stable system has `H(s) = (s^2 + 4) / (s^2 + 3s + 4)`. Its steady-state response to `sin(2t)` is exactly zero. Which feature explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The numerator has zeros at s = ±j2, so H(j2) = 0"
+        },
+        {
+          "id": "b",
+          "label": "The denominator poles have magnitude 2, so they cancel a 2 rad/s input"
+        },
+        {
+          "id": "c",
+          "label": "The DC gain is 1, so every sinusoid passes through unchanged"
+        },
+        {
+          "id": "d",
+          "label": "All poles lie in the left half-plane, so every sinusoid is damped to zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Zeros on the imaginary axis at ±j2 give H(j2)=0, a notch at 2 rad/s.",
+        "Stability only removes transients, and pole magnitude near 2 would shape a peak, not a null."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`X(s) = 1/((s+1)(s-2))` is the transform of the impulse response of a system known to be BIBO stable. Which statement about its region of convergence (ROC) and causality is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "ROC is -1 < Re s < 2, so h(t) is two-sided and the system is not causal"
+        },
+        {
+          "id": "b",
+          "label": "ROC is Re s > -1, so h(t) is causal, and stable because -1 is the dominant pole"
+        },
+        {
+          "id": "c",
+          "label": "ROC is Re s < -1, so h(t) is anticausal, and stable since it contains the left pole"
+        },
+        {
+          "id": "d",
+          "label": "ROC is Re s > 2, so h(t) is causal, and stable because the poles are simple"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Stability requires the ROC to contain the imaginary axis, which forces the strip between the poles and hence a two-sided h(t).",
+        "Distractors choose a causal or anticausal ROC that excludes the jw axis, or treat simple poles as ensuring stability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "An LTI system has impulse response `h(t) = e^(-2t) u(t+1)`, where u is the unit step. Which statements are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Its frequency response H(jw) exists, because the system is stable"
+        },
+        {
+          "id": "b",
+          "label": "It is BIBO stable, because the integral of |h(t)| is finite"
+        },
+        {
+          "id": "c",
+          "label": "It is not causal, because h(t) is nonzero for -1 < t < 0"
+        },
+        {
+          "id": "d",
+          "label": "It is memoryless, because h(t) is a single exponential"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "The step starts at t=-1, so h is nonzero before 0; the decaying exponential is absolutely integrable, so H(jw) exists.",
+        "Memoryless would require h to be a scaled impulse, which a single exponential is not."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An engineer applies a unit step to an unknown LTI system. The output overshoots its final value by about 60% and oscillates at roughly 10 rad/s, with the envelope decaying over several seconds. Which pole configuration is most consistent with this response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A complex pair near ±j10 with a small positive real part"
+        },
+        {
+          "id": "b",
+          "label": "A complex pair near ±j10 with a small negative real part"
+        },
+        {
+          "id": "c",
+          "label": "Two distinct real poles near -10"
+        },
+        {
+          "id": "d",
+          "label": "A pole at the origin plus a real pole at -10"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Large overshoot and slowly decaying ringing at about 10 rad/s indicate a lightly damped complex pair near the imaginary axis in the left half-plane.",
+        "A positive real part would make the envelope grow, and real poles cannot ring."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A crossover filter must preserve waveform shape: it needs exactly linear phase and guaranteed stability, and added latency and higher order are acceptable. Which design best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Symmetric-coefficient FIR, which gives constant group delay and has no feedback"
+        },
+        {
+          "id": "b",
+          "label": "Chebyshev IIR, since passband ripple lowers the group delay variation"
+        },
+        {
+          "id": "c",
+          "label": "Butterworth IIR, whose flat magnitude response means no waveform distortion"
+        },
+        {
+          "id": "d",
+          "label": "Elliptic IIR, which gives the sharpest roll-off for the lowest order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Symmetric FIR filters have exactly linear phase and are always stable, matching the stated criteria.",
+        "IIR filters cannot have exactly linear phase, and flat magnitude does not imply undistorted phase."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A windowed-sinc lowpass FIR needs at least 50 dB stopband attenuation with the narrowest transition band possible. Approximate peak stopband attenuation: rectangular 21 dB, Hann 44 dB, Hamming 53 dB, Blackman 74 dB. Higher attenuation means a wider main lobe. Which window fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Hamming, the narrowest main lobe among windows that reach 50 dB"
+        },
+        {
+          "id": "b",
+          "label": "Hann, since it is the standard compromise between lobe width and leakage"
+        },
+        {
+          "id": "c",
+          "label": "Blackman, since more stopband attenuation is always the better trade"
+        },
+        {
+          "id": "d",
+          "label": "Rectangular, since its narrow main lobe gives the sharpest transition"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Hamming is the first window meeting 50 dB, so it has the narrowest transition among those that qualify.",
+        "Rectangular and Hann miss the attenuation target, while Blackman needlessly widens the transition."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A colleague claims the integrator `H(s) = 1/s` is stable because it has no poles in the right half-plane, so every bounded input gives a bounded output. Which critique is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claim is wrong because an integrator has no frequency response at any frequency, including w not equal to 0"
+        },
+        {
+          "id": "b",
+          "label": "The claim is correct, because a pole on the boundary counts as stable for every bounded input"
+        },
+        {
+          "id": "c",
+          "label": "The claim is wrong because the pole at the origin lies in the right half-plane and causes exponential growth"
+        },
+        {
+          "id": "d",
+          "label": "The pole at the origin is only marginally stable: a bounded step gives an unbounded ramp, so it is not BIBO stable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "BIBO stability needs absolutely integrable h(t); the integrator's h(t)=u(t) is not, and a step input shows unbounded output.",
+        "Distractors treat the boundary as stable, misplace the pole, or deny that H(jw) exists for w not zero."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A 20 kHz-bandwidth signal is digitized. The anti-alias filter must be fully stopped by fs minus 20 kHz, and its transition band must be at least 8 kHz wide to keep the order low. The data rate must not exceed 60 kS/s. Which sampling rate meets all criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "44.1 kS/s: gives a transition band of 4.1 kHz, which is common practice"
+        },
+        {
+          "id": "b",
+          "label": "96 kS/s: gives the widest transition band, so the filter is easiest"
+        },
+        {
+          "id": "c",
+          "label": "48 kS/s: gives an 8 kHz transition band within the data-rate limit"
+        },
+        {
+          "id": "d",
+          "label": "40 kS/s: meets Nyquist exactly, so no guard band is needed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Transition width is fs-40 kHz, so fs must be at least 48 kS/s, and the rate must be at most 60 kS/s.",
+        "40 and 44.1 kS/s give too narrow a transition band, while 96 kS/s breaks the data-rate limit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must filter a stream of 10^6 samples with a fixed 16-tap FIR filter, minimizing arithmetic operations and memory. Which approach is best justified?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Direct time-domain convolution: 16 multiplies per output beats FFT overhead for so short a filter"
+        },
+        {
+          "id": "b",
+          "label": "One FFT of the whole stream, since the FFT is always faster than convolution"
+        },
+        {
+          "id": "c",
+          "label": "Frequency-domain only, since time-domain filtering cannot handle 16 taps at this length"
+        },
+        {
+          "id": "d",
+          "label": "Zero-pad h to 10^6 samples and use the FFT, cutting cost from O(N) to O(log N)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "For very short filters, 16 multiply-adds per sample is cheaper and needs less memory than FFT methods.",
+        "Distractors assume the FFT always wins or misstate the complexity, ignoring the short filter length."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "You are choosing between Laplace and Fourier analysis for LTI systems described by differential equations. Which are valid reasons to prefer the Laplace transform? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It handles transient responses with nonzero initial conditions directly"
+        },
+        {
+          "id": "b",
+          "label": "It gives the steady-state sinusoidal response, which Fourier cannot do for stable systems"
+        },
+        {
+          "id": "c",
+          "label": "It is needed because the Fourier transform cannot turn convolution into a product"
+        },
+        {
+          "id": "d",
+          "label": "It covers growing signals and unstable systems whose Fourier integral diverges"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "The unilateral Laplace transform includes initial conditions and extends to signals that grow exponentially.",
+        "Fourier also turns convolution into multiplication and gives the steady-state sinusoidal response of stable systems."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team low-pass filters a short rectangular pulse from a sensor before the ADC. Criteria: overshoot under 1%, pulse shape preserved (flat group delay), and only modest noise rejection. They compare four 4th-order analog filters. Which best meets the criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Bessel, since near-constant group delay limits overshoot at the cost of slow roll-off"
+        },
+        {
+          "id": "b",
+          "label": "Butterworth, since flat magnitude means the pulse shape is not distorted"
+        },
+        {
+          "id": "c",
+          "label": "Elliptic, since its sharp transition keeps out the most noise and phase is secondary"
+        },
+        {
+          "id": "d",
+          "label": "Chebyshev with 1 dB ripple, since steep roll-off outweighs any pulse ringing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Bessel filters have nearly flat group delay, giving minimal overshoot and best pulse fidelity, which matches the criteria.",
+        "Chebyshev, elliptic and Butterworth filters trade phase linearity for sharper magnitude, causing ringing or overshoot."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must apply a 2048-tap FIR filter to a 10-minute audio recording (about 2.6e7 samples). The result must equal exact linear convolution, and compute cost should be minimised. Which approach is best on these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Overlap-add with FFT blocks, using FFT length at least block length plus 2047, so each block's tail is added into the next"
+        },
+        {
+          "id": "b",
+          "label": "Decimate the input by 2048 before filtering, because this cuts the multiplications per output sample while keeping the result exact"
+        },
+        {
+          "id": "c",
+          "label": "Direct-form convolution, because FFT filtering only approximates linear convolution and so cannot meet the exactness criterion"
+        },
+        {
+          "id": "d",
+          "label": "Block FFT filtering with FFT length equal to the block length, because the circular wraparound error is negligible for long inputs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Zero-padded FFT blocks with overlap-add give exact linear convolution at roughly N log(block) cost.",
+        "Distractors assume FFT filtering is inexact or that wraparound is harmless; both ignore that circular convolution aliases in time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A colleague claims: H(s) = 1/(s-1) cannot have a frequency response, because its pole lies in the right half-plane. Which evaluation of the claim is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Correct: a right-half-plane pole makes the impulse response grow, so no Fourier transform exists for any choice of ROC"
+        },
+        {
+          "id": "b",
+          "label": "Correct: a frequency response requires causality, and a causal system needs all its poles in the left half-plane"
+        },
+        {
+          "id": "c",
+          "label": "Incorrect: the causal ROC Re(s) > 1 still contains the jw axis, so the causal system also has this frequency response"
+        },
+        {
+          "id": "d",
+          "label": "Incorrect: choosing the ROC Re(s) < 1 gives a stable, noncausal system whose frequency response is H(jw) = 1/(jw - 1)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The ROC, not the pole location alone, decides the impulse response; Re(s) < 1 includes the jw axis, giving a left-sided stable system.",
+        "Distractors confuse pole location with ROC or tie the frequency response to causality."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A transfer function H(s) = (s-1)/((s-1)(s+2)) is to be built as a cascade of one block with zero at s=1 and a separate block with poles at s=1 and s=-2. The simplified H(s) is 1/(s+2). Which judgment about this implementation is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is safe, because the cancellation is exact and the unstable pole disappears from the system, leaving only the stable pole at -2"
+        },
+        {
+          "id": "b",
+          "label": "It is unsafe, because a zero in the right half-plane always makes the cascade unstable regardless of any pole cancellation"
+        },
+        {
+          "id": "c",
+          "label": "Input-output behaviour looks stable, but the cancelled unstable mode stays internally and grows from any initial state or mismatch, so it is unsafe"
+        },
+        {
+          "id": "d",
+          "label": "It is safe, because BIBO stability depends only on the simplified transfer function, so internal modes cannot affect the physical outputs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Pole-zero cancellation of an unstable pole hides an uncontrollable or unobservable mode that still grows internally.",
+        "Distractors treat transfer-function simplification as the whole physical system, or blame the zero rather than the hidden mode."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must see a weak sinusoid 60 dB below a strong one, separated by about 5 FFT bins, in a single non-coherent record. Evaluate window choices against the criterion of detecting the weak tone. Which is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Any window with 8x zero-padding, since padding lowers sidelobe leakage and removes the need for window shaping"
+        },
+        {
+          "id": "b",
+          "label": "Rectangular window, since its narrowest main lobe resolves tones 5 bins apart and sidelobes matter little at that spacing"
+        },
+        {
+          "id": "c",
+          "label": "Hann window, since its -31 dB peak sidelobe is low enough to leave a tone 60 dB below the strong one clearly visible"
+        },
+        {
+          "id": "d",
+          "label": "4-term Blackman-Harris window, since sidelobes below -90 dB outweigh its wider main lobe when tones are 5 bins apart"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Leakage from the strong tone must fall under the weak tone; very low sidelobes win, and 5 bins is enough to tolerate a wide main lobe.",
+        "Distractors rely on resolution only, a window too leaky for 60 dB, or believe zero-padding reduces leakage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A student argues: y(t) = x(t)cos(w0 t) is linear and produces frequencies absent from its input, so the claim that complex exponentials are eigenfunctions of LTI systems must be wrong. Which evaluation is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Flawed: the system is time-varying, since a shifted input does not give an equally shifted output, so the LTI eigenfunction result stands"
+        },
+        {
+          "id": "b",
+          "label": "Flawed: the system is nonlinear, since multiplying by a cosine creates new frequencies and only nonlinear systems can do that"
+        },
+        {
+          "id": "c",
+          "label": "Valid: the eigenfunction property holds only for finite-energy inputs, and modulated inputs have infinite energy, so it fails"
+        },
+        {
+          "id": "d",
+          "label": "Valid: the eigenfunction property holds only for causal systems, and this multiplier system is noncausal, so the property fails"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The multiplier is linear but not time-invariant; creating new frequencies is a symptom of time variation, not a counterexample.",
+        "Distractors mislabel it nonlinear or invent causality and energy restrictions on the eigenfunction property."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A lab estimates a structure's frequency response as Y(f)/X(f) from a single noisy record of a nonperiodic random input, using a rectangular window. Which criticisms of this method are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Where |X(f)| is small, the ratio amplifies measurement noise and gives unreliable estimates"
+        },
+        {
+          "id": "b",
+          "label": "Non-integer-period content leaks through the rectangular window and biases the estimate"
+        },
+        {
+          "id": "c",
+          "label": "A single-record spectral estimate has variance that does not shrink as the record gets longer"
+        },
+        {
+          "id": "d",
+          "label": "Frequency-domain division is invalid for nonperiodic inputs, since LTI systems are characterised only by periodic signals"
+        },
+        {
+          "id": "e",
+          "label": "The ratio Y(f)/X(f) yields only phase information, because magnitude is lost in the division"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Small-|X| noise amplification, leakage bias and inconsistent single-record estimates are real weaknesses; averaging and windowing address them.",
+        "Distractors wrongly claim LTI analysis needs periodic inputs or that the ratio discards magnitude."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "An ECG front end samples at 16 kHz, then decimates digitally. Content of interest lies below 150 Hz, and the QRS waveform shape must be preserved. Aliasing must be 40 dB down above 8 kHz. Which anti-alias filter choice is best on these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Elliptic filter, since its steepest roll-off needs the lowest order and the passband ripple is small enough to be ignored"
+        },
+        {
+          "id": "b",
+          "label": "Chebyshev type I filter, since equiripple passband gives sharper cutoff than Butterworth and the ripple preserves pulse shape"
+        },
+        {
+          "id": "c",
+          "label": "Low-order Bessel filter, since near-constant group delay preserves QRS shape and the wide transition band suits 16 kHz oversampling"
+        },
+        {
+          "id": "d",
+          "label": "Butterworth filter, since maximally flat magnitude means the waveform is passed with no distortion in the passband at all"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Heavy oversampling allows a gentle filter, so choose for phase linearity: Bessel keeps group delay nearly flat and avoids ringing.",
+        "Distractors prioritise roll-off or flat magnitude and ignore group-delay distortion of pulse shapes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a causal, stable analog filter with DC gain exactly 1 that completely rejects a 50 Hz tone. Let w0 = 100*pi. Which transfer function meets every constraint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "H(s) = (s^2 + w0^2) / (s^2 + 1.4 w0 s + w0^2)"
+        },
+        {
+          "id": "b",
+          "label": "H(s) = (s^2 + 1.4 w0 s + w0^2) / (s^2 + w0^2)"
+        },
+        {
+          "id": "c",
+          "label": "H(s) = (s^2 + w0^2) / (s^2 + 1.4 w0 s + 2 w0^2)"
+        },
+        {
+          "id": "d",
+          "label": "H(s) = (s^2 + w0^2) / (s^2 - 1.4 w0 s + w0^2)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Zeros at +/- j w0 null 50 Hz, left-half-plane poles give stability and H(0) = 1.",
+        "Distractors have right-half-plane poles, DC gain 0.5, or poles on the jw axis with zeros misplaced."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a 3-tap FIR filter h = [1, a, 1] that exactly nulls a discrete-time sinusoid at normalised frequency w = pi/4 rad/sample. Which value of a works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "a = -2"
+        },
+        {
+          "id": "b",
+          "label": "a = sqrt(2)"
+        },
+        {
+          "id": "c",
+          "label": "a = -1"
+        },
+        {
+          "id": "d",
+          "label": "a = -sqrt(2)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "H(z) = 1 + a z^-1 + z^-2 has zeros at e^(+/- j pi/4) when a = -2cos(pi/4) = -sqrt(2).",
+        "Other values put the nulls at 3pi/4, pi/3 or DC."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A real bandpass signal occupies 20-25 MHz. Choose a sampling rate below 15 MHz that avoids any aliasing overlap and sits strictly inside a valid range, not on a boundary. Which rate works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "15 MHz"
+        },
+        {
+          "id": "b",
+          "label": "11 MHz"
+        },
+        {
+          "id": "c",
+          "label": "13 MHz"
+        },
+        {
+          "id": "d",
+          "label": "10 MHz"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "For n = 4 the valid range is 12.5-13.33 MHz, and 13 MHz lies strictly inside it.",
+        "10 MHz is exactly on the boundary; 11 MHz and 15 MHz fall in forbidden ranges where images overlap."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A channel has H(z) = 1 - 2z^-1, with a zero outside the unit circle. Design a causal, stable equaliser G(z) such that |H(e^jw) G(e^jw)| = 1 for all w. Which G(z) meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "G(z) = 1 / (1 - 0.5z^-1)"
+        },
+        {
+          "id": "b",
+          "label": "G(z) = 1 / (2(1 - 0.5z^-1))"
+        },
+        {
+          "id": "c",
+          "label": "G(z) = 1 / (2(1 - 2z^-1))"
+        },
+        {
+          "id": "d",
+          "label": "G(z) = 1 / (1 - 2z^-1)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Since |1 - 2e^-jw| = 2|1 - 0.5e^-jw|, G = 1/(2(1 - 0.5z^-1)) is stable, causal and flattens the magnitude to 1.",
+        "Distractors have an unstable pole at 2, or leave a gain of 2 in the product."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Offline, you must low-pass a recorded ECG using a given causal IIR filter H with nonlinear phase. The result must have zero phase distortion and no net delay. Which procedure meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Filter forward, reverse the output in time, filter again, then reverse again, giving a net real response |H|^2"
+        },
+        {
+          "id": "b",
+          "label": "Filter once, then advance the output by the filter's DC group delay, which cancels phase at every frequency"
+        },
+        {
+          "id": "c",
+          "label": "Filter once, then apply the inverse filter 1/H to the output, which removes phase while keeping the low-pass action"
+        },
+        {
+          "id": "d",
+          "label": "Cascade the same filter twice in the forward direction, so the phase errors cancel by symmetry between the two stages"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Forward-backward filtering yields H(w)H*(w) = |H(w)|^2, which is real, so phase is zero.",
+        "Distractors assume a constant shift fixes frequency-dependent phase, that cascading cancels phase, or undo the filtering entirely."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A 8 kHz sampler must capture a 0-1.5 kHz signal, but a strong 33 kHz interferer aliases to 1 kHz, inside the band. Which elements must a valid design include? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "An analog stopband that begins no higher than 6.5 kHz with enough attenuation, so anything folding into 0-1.5 kHz is suppressed"
+        },
+        {
+          "id": "b",
+          "label": "A digital notch at 1 kHz after the ADC, since it removes the aliased interferer without affecting the wanted signal"
+        },
+        {
+          "id": "c",
+          "label": "A stopband edge of exactly 4 kHz, since any edge above the Nyquist frequency would let aliases into the band"
+        },
+        {
+          "id": "d",
+          "label": "A wide transition band from 1.5 kHz to 6.5 kHz, which lets a low-order analog filter do the job"
+        },
+        {
+          "id": "e",
+          "label": "An analog low-pass filter ahead of the sampler, since after sampling the alias cannot be told apart from true 1 kHz content"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Aliasing must be prevented before sampling; content from 6.5 kHz up folds into 0-1.5 kHz, so the stopband must start by then, and the 1.5-6.5 kHz band is free for the transition.",
+        "Distractors propose digital removal of an alias (which also removes real signal) or claim a needlessly strict 4 kHz edge is required."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "You must measure the frequency response of a lightly damped structure from 10 to 500 Hz. Sensor noise is strong relative to the weak resonances, and leakage must not mask them. The shaker can output any waveform. Which excitation and processing plan is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A single hammer impact repeated once, analysed with a rectangular window over the whole record, since impulses excite all frequencies"
+        },
+        {
+          "id": "b",
+          "label": "A periodic multisine on harmonics of 1 Hz, with whole periods per record, first transient period discarded and several periods averaged"
+        },
+        {
+          "id": "c",
+          "label": "A single long white-noise record divided into Y(f)/X(f), since random excitation gives a variance that shrinks as the record lengthens"
+        },
+        {
+          "id": "d",
+          "label": "One fast chirp swept across the band in 0.1 s, analysed over a record containing a non-integer number of chirp repetitions"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Periodic excitation synchronised with the record has no leakage, the transient is discarded, and averaging periods suppresses noise.",
+        "Distractors give low energy per bin, mismatched periods that cause leakage, or an estimator whose variance does not shrink."
+      ],
+      "reviewed": false
+    }
+  ]
+}

@@ -1,0 +1,2496 @@
+{
+  "version": 1,
+  "topic": "authentication-authorization",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does authentication verify?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Which pages the user is allowed to open"
+        },
+        {
+          "id": "b",
+          "label": "How much data the user may upload"
+        },
+        {
+          "id": "c",
+          "label": "Whether the user's browser is up to date"
+        },
+        {
+          "id": "d",
+          "label": "That the user is who they claim to be"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Authentication establishes identity.",
+        "Choosing the pages option confuses it with authorization."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does authorization decide?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Whether a submitted password matches the stored hash"
+        },
+        {
+          "id": "b",
+          "label": "How the session cookie is encrypted in transit"
+        },
+        {
+          "id": "c",
+          "label": "Which device the user may log in from first"
+        },
+        {
+          "id": "d",
+          "label": "What an identified user is permitted to do"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Authorization decides permissions for an identified user.",
+        "The password-match option describes authentication."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which is the recommended way to store user passwords?",
+      "options": [
+        {
+          "id": "a",
+          "label": "As plain text so support staff can recover them"
+        },
+        {
+          "id": "b",
+          "label": "As a slow, salted hash such as bcrypt or Argon2"
+        },
+        {
+          "id": "c",
+          "label": "As a fast unsalted hash such as MD5 or SHA-1"
+        },
+        {
+          "id": "d",
+          "label": "With reversible encryption, the key kept in the code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Slow salted hashes resist cracking and are not reversible.",
+        "Encryption and fast hashes are common but unsafe choices."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which HTTP status code means the user is authenticated but not permitted to access the resource?",
+      "options": [
+        {
+          "id": "a",
+          "label": "301"
+        },
+        {
+          "id": "b",
+          "label": "403"
+        },
+        {
+          "id": "c",
+          "label": "401"
+        },
+        {
+          "id": "d",
+          "label": "404"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "403 Forbidden means identity is known but access is denied.",
+        "401 is the common confusion; it signals missing or invalid credentials."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the acronym RBAC stand for?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Required basic account credentials"
+        },
+        {
+          "id": "b",
+          "label": "Remote browser access control"
+        },
+        {
+          "id": "c",
+          "label": "Rule-based authentication check"
+        },
+        {
+          "id": "d",
+          "label": "Role-based access control"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "RBAC is role-based access control, granting permissions through roles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are recognised categories of authentication factor? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Something you bookmark"
+        },
+        {
+          "id": "b",
+          "label": "Something you know"
+        },
+        {
+          "id": "c",
+          "label": "Something you have"
+        },
+        {
+          "id": "d",
+          "label": "Something you render"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Knowledge (password) and possession (phone, token) are standard factors.",
+        "Bookmark and render are not factor categories."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A developer sets a session cookie after login. She wants browser JavaScript to be unable to read it, so that a cross-site scripting bug cannot steal the session ID. Which cookie attribute provides this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "HttpOnly"
+        },
+        {
+          "id": "b",
+          "label": "SameSite"
+        },
+        {
+          "id": "c",
+          "label": "Path"
+        },
+        {
+          "id": "d",
+          "label": "Secure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "HttpOnly hides the cookie from JavaScript.",
+        "Secure limits it to HTTPS and SameSite limits cross-site sending, not script access."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is a unique salt added to each password before hashing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Equal passwords get different hashes, so precomputed lookup tables stop working"
+        },
+        {
+          "id": "b",
+          "label": "It encrypts the hash so only the server can read it"
+        },
+        {
+          "id": "c",
+          "label": "It makes the hash reversible so users can recover passwords"
+        },
+        {
+          "id": "d",
+          "label": "It lets the server skip comparing hashes at login time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Salting makes identical passwords hash differently and defeats rainbow tables.",
+        "Salts do not encrypt or make hashes reversible."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which statement best describes a signed token such as a JWT compared with a server-side session ID?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is a random ID the server must always look up in a store"
+        },
+        {
+          "id": "b",
+          "label": "It carries user claims plus a signature, so the server can verify it without a lookup"
+        },
+        {
+          "id": "c",
+          "label": "It is a hashed password sent along with every request"
+        },
+        {
+          "id": "d",
+          "label": "It is a cookie that browsers refuse to send back to servers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Signed tokens are self-contained and verified by signature.",
+        "The random-ID option describes a classic session ID."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main purpose of OAuth?",
+      "options": [
+        {
+          "id": "a",
+          "label": "To encrypt all traffic between the browser and the server"
+        },
+        {
+          "id": "b",
+          "label": "To let an app act for a user with limited access, without seeing the password"
+        },
+        {
+          "id": "c",
+          "label": "To replace the need for any server-side permission checks"
+        },
+        {
+          "id": "d",
+          "label": "To store user passwords in one database shared by many apps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "OAuth delegates limited access without sharing credentials.",
+        "It is not a transport encryption or a replacement for permission checks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why must permission checks run on the server rather than only hiding buttons in the page?",
+      "options": [
+        {
+          "id": "a",
+          "label": "HTTP forbids sending role names to the client at all"
+        },
+        {
+          "id": "b",
+          "label": "Servers can render buttons faster than browsers can"
+        },
+        {
+          "id": "c",
+          "label": "Browsers cannot display different pages for different roles"
+        },
+        {
+          "id": "d",
+          "label": "Clients can send requests directly, bypassing any hidden buttons"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Anyone can craft requests, so only server checks are enforceable.",
+        "Hiding UI is cosmetic, not security."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why should a login form say \"Invalid username or password\" rather than say which one was wrong?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It stops users from reusing their previous passwords"
+        },
+        {
+          "id": "b",
+          "label": "It makes the password hash run faster on the server"
+        },
+        {
+          "id": "c",
+          "label": "It avoids revealing which usernames have accounts"
+        },
+        {
+          "id": "d",
+          "label": "It stops the database from logging failed attempts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Specific messages allow username enumeration.",
+        "The other options describe effects a generic message does not have."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which measures reduce the risk of session hijacking? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Put the session ID in the URL for easy sharing"
+        },
+        {
+          "id": "b",
+          "label": "Mark the session cookie as Secure"
+        },
+        {
+          "id": "c",
+          "label": "Keep the same session ID before and after login"
+        },
+        {
+          "id": "d",
+          "label": "Serve the site over HTTPS only"
+        },
+        {
+          "id": "e",
+          "label": "Issue a new session ID after login"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "HTTPS, the Secure flag and renewing the ID at login protect the session.",
+        "IDs in URLs leak, and reusing the ID enables session fixation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "Priya logs in successfully with her password, then opens the /admin page and receives 403 Forbidden. Her colleague says the login must be broken. What best explains the response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Authentication succeeded, but her account lacks the role that authorization requires"
+        },
+        {
+          "id": "b",
+          "label": "Her session expired, so the server no longer knows who she is"
+        },
+        {
+          "id": "c",
+          "label": "Her password was wrong, so authentication failed"
+        },
+        {
+          "id": "d",
+          "label": "The server could not find any page at the /admin address"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "403 means identity is known but permission is missing.",
+        "A failed login or expired session would typically give 401, and a missing page 404."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does a login system add a unique random salt to each password before hashing it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "So identical passwords get different hashes, which defeats precomputed rainbow tables"
+        },
+        {
+          "id": "b",
+          "label": "So the server can reverse the hash when a user forgets their password"
+        },
+        {
+          "id": "c",
+          "label": "So the hash is long enough that brute-force guessing becomes impossible"
+        },
+        {
+          "id": "d",
+          "label": "So the password is encrypted while it travels from the browser to the server"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A unique salt makes equal passwords hash differently and breaks precomputed tables.",
+        "Distractors confuse hashing with reversible encryption, transport security, or guess-proofing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which of these is an example of authorization rather than authentication?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Checking that a signed-in user may delete a particular invoice"
+        },
+        {
+          "id": "b",
+          "label": "Sending a one-time code to the phone of the user signing in"
+        },
+        {
+          "id": "c",
+          "label": "Verifying a fingerprint scan on a login screen"
+        },
+        {
+          "id": "d",
+          "label": "Checking a submitted password against its stored hash"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Authorization decides what an identified user may do, such as deleting an invoice.",
+        "The other options all verify who the user is, which is authentication."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A signed-in user requests an admin-only page but lacks the admin role. Which HTTP response status best describes the outcome?",
+      "options": [
+        {
+          "id": "a",
+          "label": "401 Unauthorized, because the user's identity is unknown"
+        },
+        {
+          "id": "b",
+          "label": "403 Forbidden, because the user is known but not permitted"
+        },
+        {
+          "id": "c",
+          "label": "400 Bad Request, because the request was malformed"
+        },
+        {
+          "id": "d",
+          "label": "302 Found, because the user should be redirected to the admin page"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "403 means the server knows who the user is and refuses access.",
+        "401 is aimed at missing or invalid credentials, which is the common confusion."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the HttpOnly attribute on a session cookie do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It encrypts the cookie value so the user cannot read it"
+        },
+        {
+          "id": "b",
+          "label": "It stops the browser sending the cookie on cross-site requests"
+        },
+        {
+          "id": "c",
+          "label": "It makes the browser send the cookie only over HTTPS connections"
+        },
+        {
+          "id": "d",
+          "label": "It stops page JavaScript from reading the cookie, limiting theft via XSS"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "HttpOnly hides the cookie from document.cookie and so limits XSS theft.",
+        "The distractors describe Secure, SameSite, and encryption, which are different things."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In OAuth 2.0, what is the main purpose of an access token issued to a client application?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It proves the user's identity to the client with no further checks"
+        },
+        {
+          "id": "b",
+          "label": "It encrypts all traffic between the client and the API server"
+        },
+        {
+          "id": "c",
+          "label": "It stores the user's password so the client can sign in again later"
+        },
+        {
+          "id": "d",
+          "label": "It lets the client call an API for the user with limited scope, without the password"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Access tokens delegate limited access to an API without sharing the password.",
+        "Distractors mistake the token for a password store, an identity proof, or transport encryption."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about a signed (not encrypted) JWT are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Anyone holding the token can read its payload claims"
+        },
+        {
+          "id": "b",
+          "label": "The token can be revoked instantly with no server-side state"
+        },
+        {
+          "id": "c",
+          "label": "The signature lets the server detect modified claims"
+        },
+        {
+          "id": "d",
+          "label": "Base64 encoding of the payload keeps the claims secret"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "A signed JWT is readable but tamper-evident.",
+        "Base64 is an encoding, not secrecy, and stateless tokens stay valid until they expire unless the server tracks revocation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team issues JWT access tokens valid for 24 hours and validates them on every API call. A user logs out, but a copy of their old token still works for the API the next hour. Why does this happen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The server checks only the signature and expiry, so nothing marks the token revoked before it expires"
+        },
+        {
+          "id": "b",
+          "label": "Signature checks pass automatically once a user has logged out"
+        },
+        {
+          "id": "c",
+          "label": "Logout deletes the token from the database, but a cache keeps serving it"
+        },
+        {
+          "id": "d",
+          "label": "JWTs are tied to the user's IP address, which has not changed since login"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Stateless validation checks only signature and expiry, so logout does not invalidate the token.",
+        "Distractors invent server storage, IP binding, or odd signature behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A login handler has just verified a user's password. A visitor's pre-login session ID was set earlier. To prevent session fixation, what should the handler do next?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep the pre-login session ID so the user's cart is preserved"
+        },
+        {
+          "id": "b",
+          "label": "Put the user ID in the URL so the session survives across pages"
+        },
+        {
+          "id": "c",
+          "label": "Extend the old session's expiry to 30 days for convenience"
+        },
+        {
+          "id": "d",
+          "label": "Issue a new session ID and discard the pre-login one"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Regenerating the session ID at login stops an attacker reusing a known ID.",
+        "Distractors keep or extend the old ID, which leaves fixation possible."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Roles: viewer can read; editor can read and update; admin can read, update, delete and manage users. Alice has only the editor role. Which request should the server allow?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`DELETE /docs/7`"
+        },
+        {
+          "id": "b",
+          "label": "`DELETE /users/3`"
+        },
+        {
+          "id": "c",
+          "label": "`POST /users` (create a user)"
+        },
+        {
+          "id": "d",
+          "label": "`PUT /docs/7` (update a document)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Editors may update documents, so the PUT is allowed.",
+        "The other requests need delete or manage_users, which only admins hold."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A site stores passwords with bcrypt. Which line correctly checks a login attempt?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`password == stored_hash`"
+        },
+        {
+          "id": "b",
+          "label": "`bcrypt.hash(stored_hash) == password`"
+        },
+        {
+          "id": "c",
+          "label": "`bcrypt.checkpw(password, stored_hash)`"
+        },
+        {
+          "id": "d",
+          "label": "`stored_hash == bcrypt.hash(password)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The library check re-hashes using the salt inside the stored hash and compares safely.",
+        "Re-hashing and comparing fails because each hash uses a new salt; direct comparisons are wrong."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which Set-Cookie value best suits a session cookie on an HTTPS site, hidden from JavaScript and not sent on most cross-site requests?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`sid=abc; Path=/; Secure; SameSite=None`"
+        },
+        {
+          "id": "b",
+          "label": "`sid=abc; Path=/; Domain=example.com; Secure`"
+        },
+        {
+          "id": "c",
+          "label": "`sid=abc; Path=/; HttpOnly; Max-Age=31536000`"
+        },
+        {
+          "id": "d",
+          "label": "`sid=abc; Path=/; Secure; HttpOnly; SameSite=Lax`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Secure, HttpOnly and SameSite=Lax together meet all three goals.",
+        "The others leave JavaScript access or cross-site sending open, or skip HTTPS-only."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`GET /orders/{id}` returns any order to any signed-in user who knows the ID, so users can read each other's orders. What is the correct fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Hide other users' order links in the front-end interface"
+        },
+        {
+          "id": "b",
+          "label": "Require HTTPS on the endpoint so requests cannot be seen"
+        },
+        {
+          "id": "c",
+          "label": "Make order IDs long random numbers and keep the same checks"
+        },
+        {
+          "id": "d",
+          "label": "Compare the order's owner ID to the current user's ID before returning it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The server must check ownership on every request.",
+        "Obscure IDs, hidden links, and HTTPS do not enforce access control."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Your API receives a JWT access token. Which checks should it perform before trusting the claims? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Accept whatever algorithm the token header requests, including `none`"
+        },
+        {
+          "id": "b",
+          "label": "Verify the signature using the algorithm and key the server is configured to expect"
+        },
+        {
+          "id": "c",
+          "label": "Confirm the exp claim is not in the past"
+        },
+        {
+          "id": "d",
+          "label": "Trust the role claim after decoding, without verifying the signature"
+        },
+        {
+          "id": "e",
+          "label": "Confirm the aud claim names this API"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Valid tokens need a verified signature, an unexpired time, and the right audience.",
+        "Accepting the header's algorithm or skipping verification lets attackers forge claims."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A web app redirects a user to an OAuth provider using the authorization code flow. The provider sends the browser back to the app's callback URL with `code=abc123&state=xyz`. The app stored `state=xyz` in the user's session before the redirect. What should the server do next?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Save the code in a cookie and send it to the API as the access token"
+        },
+        {
+          "id": "b",
+          "label": "Check that state matches the session value, then exchange the code at the token endpoint from the server"
+        },
+        {
+          "id": "c",
+          "label": "Exchange the code in browser JavaScript, with the client secret embedded"
+        },
+        {
+          "id": "d",
+          "label": "Skip the state check, since the provider already signed the user in"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The state check blocks forged callbacks, and the server-side exchange keeps the client secret private.",
+        "Distractors use the code as a token, expose the secret to the browser, or skip the CSRF protection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A team is adding password storage to a new app and will use a standard library. Which approach should they implement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Hash with SHA-256 and one site-wide salt so that lookups stay fast and consistent"
+        },
+        {
+          "id": "b",
+          "label": "Encrypt with AES using a key kept in app config so passwords can be recovered later"
+        },
+        {
+          "id": "c",
+          "label": "Hash with bcrypt or Argon2, using a unique random salt per user and a tuned work factor"
+        },
+        {
+          "id": "d",
+          "label": "Hash with MD5 repeated several times so that the extra rounds slow down guessing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Adaptive, salted password hashes such as bcrypt or Argon2 resist offline cracking.",
+        "Fast hashes like SHA-256 or MD5 and reversible encryption are common misconceptions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A user submits valid credentials and the server marks their session as authenticated. What should the login handler do to prevent session fixation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Issue a fresh session ID on login and discard the old pre-login session ID"
+        },
+        {
+          "id": "b",
+          "label": "Append the user's ID to the existing session ID so each value is unique per user"
+        },
+        {
+          "id": "c",
+          "label": "Keep the pre-login session ID so the cart and preferences stay attached to the user"
+        },
+        {
+          "id": "d",
+          "label": "Shorten the session cookie lifetime after login so a planted ID expires sooner"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Regenerating the ID at login makes any ID an attacker planted before login useless.",
+        "Keeping or modifying the old ID, or shortening its lifetime, still lets a planted ID be used."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An API receives a signed JWT as a bearer token. Which set of checks should it run before trusting the claims in the token?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Verify the signature using the server's expected algorithm and key, then check exp and audience"
+        },
+        {
+          "id": "b",
+          "label": "Check that the token is valid Base64 and that its exp claim is later than the current time"
+        },
+        {
+          "id": "c",
+          "label": "Decode the payload and confirm that the user ID exists in the database, since the signature is optional"
+        },
+        {
+          "id": "d",
+          "label": "Verify with the algorithm named in the token header, then check that the issuer matches"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The signature must be verified with a server-fixed algorithm and key, then claims such as exp and aud checked.",
+        "Base64 validity proves nothing, and trusting the header's algorithm enables forgery."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A logged-in user calls DELETE /projects/42. The app uses RBAC with per-project roles. What should the handler check before deleting?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Whether the request has a valid session, since any logged-in user is trusted to delete"
+        },
+        {
+          "id": "b",
+          "label": "Whether the user's role on project 42, looked up server-side, grants the delete permission"
+        },
+        {
+          "id": "c",
+          "label": "Whether the UI hides the delete button for users without the owner role on that project"
+        },
+        {
+          "id": "d",
+          "label": "Whether the role value in a request header, set by the client at login, equals owner"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Authorization must be enforced on the server using the user's stored role for that resource.",
+        "UI hiding, authentication alone and client-supplied roles can all be bypassed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A single-page app uses the OAuth authorization code flow with PKCE. What does it send to the token endpoint when exchanging the code for tokens?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The code_challenge again, so that the server can compare it with the stored copy"
+        },
+        {
+          "id": "b",
+          "label": "The state value, which proves that the original verifier was generated correctly"
+        },
+        {
+          "id": "c",
+          "label": "The client secret embedded in the app bundle, together with the redirect_uri alone"
+        },
+        {
+          "id": "d",
+          "label": "The code_verifier, whose hash was sent earlier as the code_challenge"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "PKCE sends the hash (challenge) first and the original verifier at exchange, proving the same client started the flow.",
+        "Resending the challenge or relying on an embedded secret misunderstands that public clients cannot keep secrets."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You are configuring the session cookie for a typical same-site web application served over HTTPS. Which settings should you apply? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A readable role=admin cookie, so that checks run faster on the client"
+        },
+        {
+          "id": "b",
+          "label": "HttpOnly, so that page scripts cannot read the cookie"
+        },
+        {
+          "id": "c",
+          "label": "Secure, so that the cookie is only sent over HTTPS"
+        },
+        {
+          "id": "d",
+          "label": "SameSite=Lax, to limit sending the cookie on cross-site requests"
+        },
+        {
+          "id": "e",
+          "label": "Max-Age of ten years, so that users never need to log in again"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "HttpOnly, Secure and SameSite reduce XSS theft, network exposure and CSRF.",
+        "A decade-long lifetime and client-readable role cookies weaken security."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A developer is building password reset. The server emails a link containing a token, and the token must resist guessing and survive a database leak. Which implementation fits these needs?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sign the user's email with a fixed secret, store nothing in the database, and accept the link until the user next logs in"
+        },
+        {
+          "id": "b",
+          "label": "Build the token from the user's ID plus the current timestamp, store it in plain text, and expire it after 24 hours"
+        },
+        {
+          "id": "c",
+          "label": "Generate 32 random bytes from a CSPRNG, store only its hash with a short expiry, and delete it after one use"
+        },
+        {
+          "id": "d",
+          "label": "Generate a random 6-digit code, store a hash of it, and allow unlimited attempts within a one-hour window"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "High-entropy random tokens, stored hashed, short-lived and single-use satisfy both needs.",
+        "Predictable, low-entropy or non-expiring tokens can be guessed or reused."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Users report that changing the number in /invoices/1001 to /invoices/1002 shows another customer's invoice. Login itself works correctly. What is the most likely root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The handler authenticates the user but never checks that the invoice belongs to them"
+        },
+        {
+          "id": "b",
+          "label": "The invoice route lacks CSRF tokens, so other sites can request the invoices"
+        },
+        {
+          "id": "c",
+          "label": "Session IDs are too short, so attackers can guess other users' sessions easily"
+        },
+        {
+          "id": "d",
+          "label": "Passwords are hashed with a weak algorithm, so accounts are being taken over"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "This is an insecure direct object reference: object-level authorization is missing even though authentication works.",
+        "The other options describe different weaknesses that would not produce this symptom."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A server verifies JWTs using a library that picks the verification algorithm from the token's own header. Attackers forge admin tokens by setting alg to none. Which design flaw explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The signing key is too short, so the signature can be brute-forced offline by anyone"
+        },
+        {
+          "id": "b",
+          "label": "The token payload is Base64-encoded rather than encrypted, so its claims are readable"
+        },
+        {
+          "id": "c",
+          "label": "The token has no exp claim, so forged tokens never expire once they are accepted"
+        },
+        {
+          "id": "d",
+          "label": "The server lets attacker-controlled input choose the verification algorithm instead of fixing it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Trusting the header's alg lets an attacker disable or switch verification.",
+        "Readable claims, missing expiry or weak keys are different issues that don't cause this exact forgery."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An OAuth provider accepts any redirect_uri that begins with https://app.example.com, and attackers obtain victims' authorization codes. Which step in the flow is faulty?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Redirect URI is prefix-matched, so https://app.example.com.evil.net would receive the code"
+        },
+        {
+          "id": "b",
+          "label": "The consent screen is shown only once per user, so attackers can skip the approval step"
+        },
+        {
+          "id": "c",
+          "label": "The token endpoint needs the client ID, which lets attackers impersonate any application"
+        },
+        {
+          "id": "d",
+          "label": "Authorization codes travel in the query string, which always exposes them to an attacker"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Redirect URIs must be compared by exact match; prefix matching lets lookalike hosts receive codes.",
+        "The other options misattribute the leak to normal protocol features."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An API uses stateless JWT access tokens with a 15-minute lifetime. After a user logs out, a stolen copy of their token still works for another 10 minutes. Why does this happen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Logout only affects cookies, so bearer tokens can never be changed by any server call"
+        },
+        {
+          "id": "b",
+          "label": "The server keeps no token state, so nothing marks the token as revoked before it expires"
+        },
+        {
+          "id": "c",
+          "label": "Browsers cache tokens in local storage, so the server cannot detect later token reuse"
+        },
+        {
+          "id": "d",
+          "label": "The signature stays valid only until a password change, not until the user logs out"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Stateless tokens remain valid until expiry unless a denylist or short lifetime is added.",
+        "The other options give incorrect mechanisms for token validity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A login endpoint returns 'Invalid credentials' for both unknown emails and wrong passwords. However, unknown emails respond in 5 ms while known emails with a wrong password take 250 ms. What weakness does this show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The generic message is itself the flaw, since it hides failed attempts from real users"
+        },
+        {
+          "id": "b",
+          "label": "The slow hash is the flaw, because a fast hash would hide whether accounts exist"
+        },
+        {
+          "id": "c",
+          "label": "Unknown emails skip the hash check, so timing reveals which emails are registered"
+        },
+        {
+          "id": "d",
+          "label": "Slow responses show the server stores plaintext passwords for known email addresses"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The time difference comes from skipping the password hash for unknown users, allowing account enumeration.",
+        "Generic messages are correct practice, and slow hashing is not the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A review finds that a regular user managed to gain admin rights. Which findings could explain this privilege escalation? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The profile update endpoint binds every JSON field to the user model, including a role field"
+        },
+        {
+          "id": "b",
+          "label": "The role is read from a JWT claim, but the token signature is never verified"
+        },
+        {
+          "id": "c",
+          "label": "The admin menu is hidden in the UI, but admin API routes only check that the user is logged in"
+        },
+        {
+          "id": "d",
+          "label": "Passwords are hashed with bcrypt using a per-user salt"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Mass assignment, missing server-side role checks and unverified tokens each let users grant themselves admin rights.",
+        "Strong password hashing does not affect role assignment."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A gateway validates the user's JWT and forwards requests to internal services with an `X-User-Id` header. The orders service trusts that header. A compromised internal reporting service begins reading any user's orders by setting the header itself. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The orders service accepts an identity header from any internal caller instead of verifying a signed token or an authenticated gateway"
+        },
+        {
+          "id": "b",
+          "label": "The orders service stores plain numeric user IDs, so the reporting service can read and reuse them with no extra effort"
+        },
+        {
+          "id": "c",
+          "label": "The JWT lifetime at the gateway is too long, which lets the reporting service replay the user's token to the orders service"
+        },
+        {
+          "id": "d",
+          "label": "The gateway uses JWTs instead of server-side sessions, and JWTs cannot safely carry a user identity between services"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Internal services must not trust unauthenticated identity headers; identity should be verified per call.",
+        "The other options blame token format, ID format or lifetime, none of which allows the header to be forged."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A breach exposes a table of unsalted SHA-256 password hashes. Within hours, most are recovered even though SHA-256 output is 256 bits. Which analysis explains this best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "SHA-256 has known collisions, so attackers can craft other passwords that hash to the same stored value for each user"
+        },
+        {
+          "id": "b",
+          "label": "SHA-256 is fast, so guesses are cheap, and with no salt one precomputed table cracks every user with the same password"
+        },
+        {
+          "id": "c",
+          "label": "SHA-256 output is reversible with enough compute, so attackers decrypt each stored hash directly back to its password"
+        },
+        {
+          "id": "d",
+          "label": "SHA-256 truncates long passwords, so the effective keyspace is small enough to enumerate for every account in the table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Speed plus missing salts allow massive cheap guessing and shared precomputation.",
+        "Distractors confuse hashing with encryption or invoke collisions, which are irrelevant to password guessing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An API verifies JWTs by reading the `alg` field in the token header and choosing the verification method from it. An attacker takes a valid token, edits the claims, sets `alg` to `HS256`, and signs with the server's RSA public key. The server accepts it. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claims were Base64-encoded rather than encrypted, so the attacker could read and edit the payload freely"
+        },
+        {
+          "id": "b",
+          "label": "The token lacked an expiry claim, so the edited token stayed valid long enough for the server to accept it"
+        },
+        {
+          "id": "c",
+          "label": "The RSA public key was exposed, so the attacker could forge a valid RSA signature using it"
+        },
+        {
+          "id": "d",
+          "label": "The server lets the token choose its own verification algorithm instead of enforcing the expected one"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Trusting the attacker-controlled alg header enables algorithm confusion; the server should pin the algorithm.",
+        "Public keys are meant to be public, and payload readability does not permit forging signatures."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An attacker tricks a victim into visiting the site with a session cookie ID the attacker already knows. The victim logs in, and the attacker then uses that same ID to act as the victim. Which flaw in the login code does this reveal?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The session cookie lacks the Secure flag, so the attacker intercepted the ID after login on the network"
+        },
+        {
+          "id": "b",
+          "label": "The login form lacks CSRF protection, so the attacker could submit credentials on behalf of the victim directly"
+        },
+        {
+          "id": "c",
+          "label": "The session ID is too short, so the attacker could guess the ID that the server issued to the victim"
+        },
+        {
+          "id": "d",
+          "label": "The server keeps the same session ID across the login, so a pre-login ID becomes an authenticated one"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Session fixation occurs when the ID is not regenerated at authentication.",
+        "Distractors describe sniffing, login CSRF or guessing, which do not involve the attacker supplying the ID beforehand."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`GET /api/invoices/4821` returns the invoice for any logged-in user who requests it; unauthenticated requests get 401. A user changes the ID to 4822 and sees another customer's invoice. What does this show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The IDs are sequential, so switching to random UUIDs fully fixes the flaw without any further server checks"
+        },
+        {
+          "id": "b",
+          "label": "Authentication is broken, because the server cannot reliably tell which user is making the request"
+        },
+        {
+          "id": "c",
+          "label": "Authentication works, but object-level authorization is missing, so ownership of the invoice is never checked"
+        },
+        {
+          "id": "d",
+          "label": "The endpoint needs HTTPS, because plain HTTP lets other users read invoices sent to different accounts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The 401 shows identity is checked; the missing ownership check is an IDOR/broken object-level authorization.",
+        "Unpredictable IDs only hide the problem, and transport security is unrelated."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An OAuth server validates `redirect_uri` by checking only that it starts with `https://app.example.com`. An attacker sends victims a link with `redirect_uri=https://app.example.com.evil.net/cb`. Which outcome follows?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The authorization code is sent to the attacker's domain, since the prefix check passes for it"
+        },
+        {
+          "id": "b",
+          "label": "The attacker obtains only a refresh token, because authorization codes are bound to the registered domain name"
+        },
+        {
+          "id": "c",
+          "label": "The login fails, because the browser blocks redirects to domains that differ from the original client's origin"
+        },
+        {
+          "id": "d",
+          "label": "The attacker can read the user's password, because the authorization server forwards credentials to the redirect"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Prefix matching lets a lookalike host pass, so the code is delivered to the attacker; exact matching is required.",
+        "Passwords never go to the redirect, and browsers don't enforce redirect origin rules here."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A security review checks a web app for user enumeration. Which of these behaviours let an attacker learn whether an account exists? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Login hashes the password only when the username exists, so valid usernames respond measurably slower"
+        },
+        {
+          "id": "b",
+          "label": "Password reset shows the same \"If that account exists, we sent an email\" message either way"
+        },
+        {
+          "id": "c",
+          "label": "Registration says \"That email is already registered\" when someone signs up with an existing address"
+        },
+        {
+          "id": "d",
+          "label": "Login says \"No such user\" for unknown names but \"Wrong password\" for known names"
+        },
+        {
+          "id": "e",
+          "label": "Login returns a 429 after five failures from one IP address, regardless of whether the username exists"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Differing messages, timing differences and registration feedback each leak account existence.",
+        "A uniform reset message and an account-independent rate limit give the attacker no signal."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An API gateway validates JWTs and forwards requests to an internal orders service with an `X-User-Id` header. The orders service uses that header as the authenticated identity. A pen tester on the internal network calls the orders service directly with `X-User-Id: 1` and reads the admin's orders. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The header name is predictable, so renaming it to a secret value would remove the vulnerability entirely"
+        },
+        {
+          "id": "b",
+          "label": "The orders service accepts an identity claim from any caller without verifying that it came from the gateway"
+        },
+        {
+          "id": "c",
+          "label": "The gateway's JWT validation is weak, because it should have rejected the tester's direct request"
+        },
+        {
+          "id": "d",
+          "label": "The orders service lacks rate limiting, which let the tester try many user IDs until one returned data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The service trusts an unauthenticated header; it needs service authentication such as mTLS or signed internal tokens.",
+        "The gateway never saw the direct call, and obscuring the header name is not authentication."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A banking app must let support staff end a customer's sessions immediately after a suspected takeover. It has one web front end and one backend, and moderate traffic. Which session design best meets the immediate-revocation requirement with the least added complexity?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A random opaque session ID in an HttpOnly cookie, looked up in a server-side store that support can delete"
+        },
+        {
+          "id": "b",
+          "label": "A 24-hour self-contained JWT in `localStorage`, with the client asked to delete it when support requests logout"
+        },
+        {
+          "id": "c",
+          "label": "A 15-minute JWT plus a 30-day refresh token, accepting up to 15 minutes before revocation takes effect"
+        },
+        {
+          "id": "d",
+          "label": "A JWT signed with a per-user secret derived from the password hash, rotated whenever the user changes passwords"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A server-side session store allows instant, simple revocation at this scale.",
+        "The other options delay revocation, rely on the client, or add complexity without guaranteeing immediate server-controlled revocation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A government contractor must use only FIPS-validated cryptographic primitives for password storage. Criteria: compliance is mandatory, then maximum resistance to offline cracking within that limit. Which choice is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "SHA-512 with a per-user salt, because a longer digest makes offline guessing slower for attackers"
+        },
+        {
+          "id": "b",
+          "label": "bcrypt with cost 12, because it is memory-hard and widely deployed in production frameworks"
+        },
+        {
+          "id": "c",
+          "label": "PBKDF2 with HMAC-SHA-256, a unique salt and a high, regularly reviewed iteration count"
+        },
+        {
+          "id": "d",
+          "label": "Argon2id with high memory cost, because it resists GPU cracking better than every other password hash"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "PBKDF2 is the FIPS-approved option and can be tuned upward to maximise resistance.",
+        "Argon2id and bcrypt are stronger generally but not within the stated compliance constraint; a salted fast hash is weak."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A single-page app with no backend of its own must call an API on behalf of users through a third-party identity provider. Criteria: a public client that cannot keep secrets, no tokens in URLs, and resistance to code interception. Which flow is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Authorization code flow with PKCE, using a per-request verifier instead of a client secret"
+        },
+        {
+          "id": "b",
+          "label": "Resource owner password credentials, since the app collects the login and exchanges it for tokens"
+        },
+        {
+          "id": "c",
+          "label": "Authorization code flow with a client secret embedded in the JavaScript bundle for the exchange"
+        },
+        {
+          "id": "d",
+          "label": "Implicit flow, since it returns the access token directly and avoids an extra token request"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Code flow with PKCE suits public clients and prevents intercepted codes from being redeemed.",
+        "Implicit puts tokens in URLs, the password grant exposes credentials to the app, and a bundled secret is not secret."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A hospital rule says doctors may view a patient's record only if the patient is assigned to them and they are on shift. Assignments and shifts change hourly. Criteria: correctness under change and maintainability. Which model fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Per-request checks of assignment and shift attributes, via ABAC or relationship-based rules"
+        },
+        {
+          "id": "b",
+          "label": "RBAC with a role per doctor-patient pair, regenerated by script whenever assignments change"
+        },
+        {
+          "id": "c",
+          "label": "RBAC with one broad doctor role, plus UI hiding for patients who are not assigned to the user"
+        },
+        {
+          "id": "d",
+          "label": "RBAC with roles for each ward and shift, assigned manually by administrators at the start of each day"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The rule depends on dynamic relationships and time, which attribute or relationship checks evaluate at request time.",
+        "Role-only approaches explode in number, go stale, or enforce nothing on the server."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team stores its JWT access token in `localStorage` to avoid CSRF. The app renders some user-supplied HTML and has had XSS bugs before. Criteria: limit the damage of likely XSS and still handle CSRF. Which critique and alternative is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Move the token to `sessionStorage`, since it is cleared on tab close and so cannot be read by injected scripts"
+        },
+        {
+          "id": "b",
+          "label": "Keep `localStorage` but encrypt the token with a key held in JavaScript, so injected scripts cannot use it"
+        },
+        {
+          "id": "c",
+          "label": "Keep `localStorage`, since CSRF is the more common attack and XSS is mitigated by shortening the token lifetime"
+        },
+        {
+          "id": "d",
+          "label": "Move to an HttpOnly, Secure, SameSite cookie with CSRF defences, so XSS cannot read the token directly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "HttpOnly keeps the token away from scripts, and SameSite plus CSRF tokens handle the CSRF tradeoff.",
+        "Any script-readable storage, including sessionStorage or client-side encryption, is exposed to XSS."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A consumer site faces credential stuffing with passwords leaked from other sites. Criteria: reduce successful takeovers with little added friction for legitimate users. Which measures are well justified? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Throttle failed logins per account and per IP with escalating delays rather than a hard lockout"
+        },
+        {
+          "id": "b",
+          "label": "Force every user to change their password every 30 days, regardless of any evidence of compromise"
+        },
+        {
+          "id": "c",
+          "label": "Offer MFA and prompt for it on risky logins, such as a new device or unusual location"
+        },
+        {
+          "id": "d",
+          "label": "Reject passwords found in known breach corpora when users set or change them"
+        },
+        {
+          "id": "e",
+          "label": "Show a CAPTCHA only on the registration page, since attackers use the signup flow to test passwords"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Breach checks, adaptive throttling and risk-based MFA each target reused credentials with low friction.",
+        "Forced rotation burdens users without addressing reuse, and a registration-only CAPTCHA misses the login endpoint."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A site locks any account for 1 hour after 5 failed logins. Attackers start deliberately failing logins on many employees' accounts to lock them out during a product launch. Criteria: keep brute-force protection, avoid enabling lockout denial of service. Which revised policy is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lock the whole IP range for 24 hours after any failure, which stops the attacker from touching the other accounts"
+        },
+        {
+          "id": "b",
+          "label": "Remove all limits on failed logins and rely on strong password rules to stop any successful brute-force guessing"
+        },
+        {
+          "id": "c",
+          "label": "Raise the lockout threshold to 100 failures per account, which makes mass lockouts rare but still blocks brute force"
+        },
+        {
+          "id": "d",
+          "label": "Replace lockout with per-account and per-IP escalating delays, and add alerts and extra verification on suspicious bursts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Escalating delays with monitoring keep guessing slow without letting attackers disable accounts.",
+        "A high threshold still allows lockout and weak protection, IP blocks hurt shared networks, and removing limits drops protection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A banking web app has one first-party browser client. Criteria: support staff must be able to cut off a compromised user within seconds, and tokens must be hard to steal via XSS. Which session design best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Opaque random session ID in an HttpOnly cookie, mapped to server-side state that can be deleted instantly"
+        },
+        {
+          "id": "b",
+          "label": "Opaque session ID passed in a URL parameter, since server-side lookups allow revocation and avoid cookie-handling issues"
+        },
+        {
+          "id": "c",
+          "label": "Self-contained JWT in localStorage with a 24-hour expiry, since signatures prevent tampering and avoid any server-side session lookups"
+        },
+        {
+          "id": "d",
+          "label": "Self-contained JWT in an HttpOnly cookie, since rotating the signing key invalidates one compromised user's tokens alone"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Server-side state gives instant per-user revocation and HttpOnly limits XSS theft.",
+        "Self-contained JWTs cannot be revoked per user without extra state; key rotation affects all users, and URL IDs leak via logs and referrers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A public single-page app has no place to keep a secret and is used on shared kiosks. Criteria: resist authorization-code interception and avoid exposing access tokens in URLs. Which OAuth approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Authorization code flow with a client secret embedded in the bundle, since the secret authenticates the app to the token endpoint"
+        },
+        {
+          "id": "b",
+          "label": "Resource owner password credentials flow, since the app collects credentials itself and avoids redirect interception entirely"
+        },
+        {
+          "id": "c",
+          "label": "Authorization code flow with PKCE, so an intercepted code is useless without the verifier"
+        },
+        {
+          "id": "d",
+          "label": "Implicit flow, because the access token returns directly in the redirect and no code exchange exists to intercept"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "PKCE binds the code to a verifier held by the client, suiting public clients.",
+        "Implicit puts tokens in URLs, an embedded secret is extractable, and the password grant exposes credentials to the app."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A legacy database holds unsalted MD5 password hashes. Criteria: protect dormant accounts too, avoid a forced mass reset, and keep login working throughout. Which migration plan is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap every stored hash now as argon2id(md5_hash) with a per-user salt, then upgrade to plain argon2id at each user's next login"
+        },
+        {
+          "id": "b",
+          "label": "Delete all hashes and email every user a reset link, since this removes the weak legacy hashes for all accounts at once"
+        },
+        {
+          "id": "c",
+          "label": "Add a global pepper and re-run MD5 over each stored hash, since a secret value makes the dormant hashes uncrackable offline"
+        },
+        {
+          "id": "d",
+          "label": "Keep MD5 until each user logs in, then re-hash only that password with argon2id, leaving dormant accounts as they are"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Wrapping protects all rows immediately and is upgraded transparently on login.",
+        "Lazy-only migration leaves dormant hashes exposed, a pepper over MD5 stays fast, and mass reset violates the criteria."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team says: 'We hide admin menus from non-admins and check the role at the gateway for /api/admin/*, so authorization is covered.' Their API also serves GET /api/orders/{id} to any logged-in user. Which critique matters most?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Order IDs should be sequential integers, so authorization failures can be audited by comparing neighbouring requests in access logs"
+        },
+        {
+          "id": "b",
+          "label": "Gateway role checks are redundant because hiding menu items in the UI already prevents regular users from reaching admin features"
+        },
+        {
+          "id": "c",
+          "label": "Role checks belong in the browser rather than the gateway, so the interface can react immediately when a user's permissions change"
+        },
+        {
+          "id": "d",
+          "label": "Object-level checks are missing: any logged-in user can request another user's order ID unless the service verifies ownership"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Role checks do not stop broken object-level authorization (IDOR) on user-scoped resources.",
+        "UI hiding is not a control, and client-side checks or sequential IDs weaken rather than add enforcement."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A mobile app keeps a refresh token on the device. Criteria: detect theft of that token, limit the attacker's window, and avoid forcing frequent logins. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Bind the refresh token to the client IP address and reject any request from a different address, even after mobile network changes"
+        },
+        {
+          "id": "b",
+          "label": "Issue a one-year refresh token that never changes, since fewer token exchanges means less exposure of the token on the network"
+        },
+        {
+          "id": "c",
+          "label": "Store the refresh token in plain text in the app's preferences file so that the operating system sandbox alone protects it"
+        },
+        {
+          "id": "d",
+          "label": "Rotate the refresh token on every use and, if an old one is replayed, revoke the whole token family and require re-login"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Rotation with reuse detection exposes theft and cuts off the attacker without frequent logins.",
+        "Static long-lived tokens give no detection; IP binding breaks mobile roaming; plain storage ignores theft by other means."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A reset flow emails a 6-digit numeric code, valid 24 hours, accepted any number of times with unlimited guesses. Judged against account-takeover risk, which changes materially reduce that risk? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Make the token single-use and expire it within minutes"
+        },
+        {
+          "id": "b",
+          "label": "Say 'no account with that email' for unknown addresses so typos are fixed"
+        },
+        {
+          "id": "c",
+          "label": "Add a security question whose answer the user set at signup"
+        },
+        {
+          "id": "d",
+          "label": "Use a 128-bit random token and store only its hash server-side"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "High-entropy hashed tokens resist guessing and database leaks; single use and short expiry shrink the window.",
+        "Security questions are guessable and the enumeration message helps attackers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A gateway validates user JWTs, then forwards requests to internal microservices with an `X-User-Id` header that the services trust. The services are reachable from other internal workloads. A reviewer must name the most serious weakness and the best fix.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The services trust a forgeable header, so any internal caller can impersonate users; each service should verify a signed token or mTLS identity"
+        },
+        {
+          "id": "b",
+          "label": "The gateway validates JWTs too slowly, so validation should be removed from it and performed only in the browser before each request"
+        },
+        {
+          "id": "c",
+          "label": "The header should be Base64-encoded, so internal callers cannot read or alter the user identifier as it passes between services"
+        },
+        {
+          "id": "d",
+          "label": "The services should log the header value at startup, so impersonation by internal callers can be detected later by the security team"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Trusting a plain header means gateway checks can be bypassed by anyone with network access to a service.",
+        "Encoding is not integrity protection, and logging or browser-side validation does not prevent impersonation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a multi-tenant SaaS authorization layer. Constraints: tenant isolation must hold even if a developer forgets a check, individual documents can be shared across users, and every decision is auditable. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Derive tenant from the verified token, enforce it automatically in the data layer (e.g. row-level security), and evaluate sharing in one policy service that logs decisions"
+        },
+        {
+          "id": "b",
+          "label": "Give each tenant its own URL prefix, rely on the router to block cross-prefix paths, and make shared documents reachable through unguessable links"
+        },
+        {
+          "id": "c",
+          "label": "Keep tenant_id and roles in a long-lived unsigned cookie that services read directly, and record sharing as notes on each document"
+        },
+        {
+          "id": "d",
+          "label": "Accept tenant_id as a request parameter, check it in each controller, and record denied requests in the application log for later review"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Automatic data-layer scoping survives missed checks, and a central policy point supports sharing and audit.",
+        "Per-controller checks depend on developers, routing and links are not authorization, and unsigned cookies are forgeable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design token handling. Constraints: a stolen session must stop working within about 60 seconds of revocation, there is no database read on each API request, and users stay logged in for weeks. Which design meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Access JWTs live 60 seconds with no refresh token, and users re-enter their password each minute to remain logged in"
+        },
+        {
+          "id": "b",
+          "label": "Access JWTs live 30 days and every request checks a revocation list, so revocation is immediate and only a fast lookup is needed"
+        },
+        {
+          "id": "c",
+          "label": "Access JWTs live 24 hours with a refresh token, and revoked users are blocked by rotating the signing key once every night"
+        },
+        {
+          "id": "d",
+          "label": "Access JWTs live 60 seconds; a server-side revocable refresh token lasting weeks mints new ones, so revoking it stops renewal within a minute"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Short access tokens plus a revocable refresh token meet all three constraints.",
+        "A per-request list check breaks the no-lookup rule, nightly rotation misses 60 seconds, and re-entry breaks weeks-long login."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design MFA recovery. Constraints: users who lose their device regain access, support staff cannot be socially engineered into bypassing MFA, and an attacker holding the password and mailbox cannot bypass it instantly. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Email a link that disables MFA immediately, since control of the mailbox proves the caller is the true account holder"
+        },
+        {
+          "id": "b",
+          "label": "Give hashed single-use recovery codes at enrolment; with no codes, start a delayed reset that alerts existing devices and email, with no agent override"
+        },
+        {
+          "id": "c",
+          "label": "Let support agents disable MFA once the caller correctly answers questions about recent account activity and billing details"
+        },
+        {
+          "id": "d",
+          "label": "Fall back to SMS codes sent to any phone number typed at the login prompt, since entering the code proves control of it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Recovery codes plus a delayed, notified reset with no human override satisfy all constraints.",
+        "Agent overrides invite social engineering, instant email links fail against mailbox compromise, and attacker-chosen phone numbers prove nothing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "The Order service must call the Inventory service on behalf of a signed-in user. Constraints: Inventory must know who the user is, the token must work only at Inventory, and it must carry no more scopes than needed. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Order shares its signing key with Inventory so either service can mint tokens of any audience and scope when acting for a user"
+        },
+        {
+          "id": "b",
+          "label": "Order calls Inventory with its own long-lived admin credentials and passes the user ID in a custom header that Inventory trusts as given"
+        },
+        {
+          "id": "c",
+          "label": "Order forwards the user's original access token unchanged to Inventory so identity and scopes are preserved exactly as issued"
+        },
+        {
+          "id": "d",
+          "label": "Order exchanges the user's token at the authorization server for a new token with audience Inventory and reduced scopes, keeping the user as subject"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Token exchange yields an audience-restricted, down-scoped token that keeps user identity.",
+        "Forwarding the original token permits replay elsewhere, admin credentials plus a header lose least privilege, and shared keys allow unlimited minting."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design social-login account linking. Constraints: a user who signed up by email and password may later use Google and keep one account with their data, and an attacker who pre-registers a victim's email cannot take over the account. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Never link and create a separate account per login method, leaving users to ask support to merge their data by hand later"
+        },
+        {
+          "id": "b",
+          "label": "Link by matching display name and avatar from the provider, then email the user a notice after the two accounts are merged"
+        },
+        {
+          "id": "c",
+          "label": "Link automatically only if Google asserts a verified email and the local email was verified; otherwise require signing into the local account first"
+        },
+        {
+          "id": "d",
+          "label": "Link automatically whenever the Google email matches an existing account, since an email address uniquely identifies the account holder"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Requiring verified email on both sides, or proof of the local login, blocks pre-account takeover while allowing one account.",
+        "Matching on unverified email or profile data enables takeover, and never linking fails the one-account constraint."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A partner API design issues 32-random-byte keys, stores SHA-256 hashes, and shows each key once. Constraints: least privilege, zero-downtime rotation, per-key audit. Which elements is the design missing? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A non-secret key identifier for lookup and audit logs"
+        },
+        {
+          "id": "b",
+          "label": "Partner ID embedded in the key as proof of authorization"
+        },
+        {
+          "id": "c",
+          "label": "Reversible encryption of keys so support can show them"
+        },
+        {
+          "id": "d",
+          "label": "Per-key scopes enforced on every request"
+        },
+        {
+          "id": "e",
+          "label": "Two simultaneously active keys per partner during rotation"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Scopes give least privilege, overlapping keys give zero-downtime rotation, and a public identifier supports lookup and audit.",
+        "Reversible storage weakens secrecy, and an embedded ID is not an authorization proof."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "After suspected compromise, a user changes their password, yet the attacker's existing session and refresh token keep working. Constraints: attacker sessions must end, the user's current device stays logged in, and access tokens last 10 minutes. Which fix meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Log out only the current device and ask the user to sign in again, leaving other sessions to end through their idle timeout"
+        },
+        {
+          "id": "b",
+          "label": "Only hash and store the new password, since sessions are separate from credentials and will eventually expire without any further action"
+        },
+        {
+          "id": "c",
+          "label": "Rotate the global signing key, which signs out every user of the app and forces all of them to log in again"
+        },
+        {
+          "id": "d",
+          "label": "On password change, revoke all the user's sessions and refresh tokens except a fresh one issued to the current device; access tokens lapse within 10 minutes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Revoking all other sessions and refresh tokens while reissuing the current one satisfies every constraint.",
+        "Doing nothing or logging out only the current device leaves the attacker in; global rotation breaks the current-device and scope constraints."
+      ],
+      "reviewed": false
+    }
+  ]
+}

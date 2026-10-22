@@ -1,0 +1,2492 @@
+{
+  "version": 1,
+  "topic": "microservices",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does it mean for a microservice to be \"independently deployable\"?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It can be released without redeploying other services"
+        },
+        {
+          "id": "b",
+          "label": "It is deployed on a fixed schedule set by the whole system"
+        },
+        {
+          "id": "c",
+          "label": "It must run on its own dedicated physical server"
+        },
+        {
+          "id": "d",
+          "label": "It has no runtime dependency on any other service"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Independent deployability means one service can be released on its own.",
+        "Distractors confuse deployment independence with hardware isolation or zero dependencies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which component commonly acts as a single entry point that routes external client requests to the right internal services?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Message broker"
+        },
+        {
+          "id": "b",
+          "label": "API gateway"
+        },
+        {
+          "id": "c",
+          "label": "Service registry"
+        },
+        {
+          "id": "d",
+          "label": "Container image"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An API gateway is the single entry point that routes client requests.",
+        "A service registry tracks instance locations and a broker carries messages; neither is the client entry point."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In a typical microservices design, how is data ownership usually arranged?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each service owns its own data store and exposes it through its API"
+        },
+        {
+          "id": "b",
+          "label": "Only one service may store data, and the rest stay stateless"
+        },
+        {
+          "id": "c",
+          "label": "Data lives only in the API gateway's cache for all services"
+        },
+        {
+          "id": "d",
+          "label": "All services read and write one shared central database"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Database-per-service is the standard guidance.",
+        "A shared central database is the common anti-pattern that couples services."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which pattern stops a service from calling a dependency that has failed repeatedly, so the failure does not spread?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Service registry"
+        },
+        {
+          "id": "b",
+          "label": "Circuit breaker"
+        },
+        {
+          "id": "c",
+          "label": "Sidecar"
+        },
+        {
+          "id": "d",
+          "label": "API composition"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A circuit breaker opens after repeated failures and blocks further calls.",
+        "A sidecar is a helper process and does not stop calls to failing services."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which of these is an example of asynchronous communication between services?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Invoking a gRPC method and blocking until it returns"
+        },
+        {
+          "id": "b",
+          "label": "Querying another service's database table directly"
+        },
+        {
+          "id": "c",
+          "label": "Calling a REST endpoint and waiting for the response"
+        },
+        {
+          "id": "d",
+          "label": "Publishing an event to a message broker and moving on"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Publishing to a broker lets the sender continue without waiting.",
+        "REST and gRPC calls that wait are synchronous; direct database queries break service boundaries."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are typical characteristics of a microservices architecture? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each service is small and owned by a single team"
+        },
+        {
+          "id": "b",
+          "label": "Services are organised around business capabilities"
+        },
+        {
+          "id": "c",
+          "label": "Every service must be written in the same programming language"
+        },
+        {
+          "id": "d",
+          "label": "The whole system is built and released as one deployable unit"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Microservices are organised around business capabilities and owned by small teams.",
+        "A single deployable unit describes a monolith, and a single language is not required."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A team runs many service instances in containers, and instance addresses change whenever containers restart or scale. The order service needs to find the current address of the payment service. Which component is designed to provide this lookup?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A circuit breaker placed around the payment calls"
+        },
+        {
+          "id": "b",
+          "label": "A service registry used for service discovery"
+        },
+        {
+          "id": "c",
+          "label": "A shared database holding the payment code"
+        },
+        {
+          "id": "d",
+          "label": "A saga coordinator for the payment workflow"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Service discovery via a registry maps service names to live instance addresses.",
+        "A circuit breaker handles failures, not lookup, and a saga handles distributed transactions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is it discouraged for several microservices to share one database schema?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Services in different containers cannot reach the same database"
+        },
+        {
+          "id": "b",
+          "label": "Shared databases always cost more than separate ones"
+        },
+        {
+          "id": "c",
+          "label": "A schema change by one service can break others, coupling them"
+        },
+        {
+          "id": "d",
+          "label": "Databases cannot handle connections from several applications"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Shared schemas create hidden coupling, which defeats independent deployment.",
+        "The other options state technical or cost limits that are not the real reason."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A web shop's search feature gets ten times more traffic than its checkout. How do microservices help here?",
+      "options": [
+        {
+          "id": "a",
+          "label": "They make every request faster by default"
+        },
+        {
+          "id": "b",
+          "label": "They guarantee that search can never fail"
+        },
+        {
+          "id": "c",
+          "label": "Only the search service needs more instances, not the whole app"
+        },
+        {
+          "id": "d",
+          "label": "They remove the need to monitor any service"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Services can be scaled individually based on load.",
+        "Microservices do not automatically speed up requests or remove failure and monitoring concerns."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "The order service publishes an `OrderPlaced` event, and the email and inventory services each react to it on their own. How is this best classified?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Event-driven asynchronous communication"
+        },
+        {
+          "id": "b",
+          "label": "A shared-database integration between services"
+        },
+        {
+          "id": "c",
+          "label": "A monolithic in-process method call"
+        },
+        {
+          "id": "d",
+          "label": "Synchronous request-response calls between services"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Publishing events that consumers react to independently is event-driven and asynchronous.",
+        "Request-response and shared databases involve waiting or direct coupling, which this does not."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Service A calls service B synchronously with no timeout. Service B becomes very slow. What is the most likely result?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Service B's slowness is hidden from service A"
+        },
+        {
+          "id": "b",
+          "label": "Service A automatically switches to another service"
+        },
+        {
+          "id": "c",
+          "label": "Service A's code is redeployed by the platform"
+        },
+        {
+          "id": "d",
+          "label": "Service A's requests hang and its threads pile up"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Without timeouts, callers wait and exhaust resources, so failures cascade.",
+        "Services do not switch or hide failures unless resilience patterns are added."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is a saga used for an operation spanning an order service and a payment service?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It lets both services lock one shared table at once"
+        },
+        {
+          "id": "b",
+          "label": "It chains local transactions and undoes earlier ones if a step fails"
+        },
+        {
+          "id": "c",
+          "label": "It replaces the need for either service to store data"
+        },
+        {
+          "id": "d",
+          "label": "It encrypts messages sent between the two services"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A saga sequences local transactions with compensating actions because one ACID transaction cannot span services.",
+        "Locking a shared table breaks service data ownership."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are common drawbacks that microservices add compared with a monolith? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Data is often only eventually consistent across services"
+        },
+        {
+          "id": "b",
+          "label": "Debugging a request across services is harder"
+        },
+        {
+          "id": "c",
+          "label": "Network calls add latency and can fail"
+        },
+        {
+          "id": "d",
+          "label": "Every change requires redeploying the entire system"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Network failure, harder tracing and eventual consistency are real costs of distribution.",
+        "Redeploying everything is a monolith trait, not a microservices drawback."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team of four is starting a new product whose requirements are still changing weekly. A colleague proposes splitting it into twelve microservices from day one. Which response best reflects why this may be unwise?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Unclear boundaries may be wrong, and the operational overhead is heavy for four people"
+        },
+        {
+          "id": "b",
+          "label": "Monoliths cannot ever be split into services later"
+        },
+        {
+          "id": "c",
+          "label": "Microservices cannot be used with Docker containers"
+        },
+        {
+          "id": "d",
+          "label": "Twelve services is above the legal limit for a small team"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Early boundaries are often wrong and many services add overhead a small team struggles to carry.",
+        "Docker works fine with microservices, and monoliths can be decomposed later."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does each microservice usually own its own database instead of sharing one schema with the others?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Separate databases remove the need for any network calls between services"
+        },
+        {
+          "id": "b",
+          "label": "Each service can change its schema and deploy without breaking other services"
+        },
+        {
+          "id": "c",
+          "label": "Separate databases guarantee every service always sees identical, current data"
+        },
+        {
+          "id": "d",
+          "label": "Each service then avoids needing any backups, since data is spread out"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Private data ownership keeps services loosely coupled so they deploy independently.",
+        "Distractors assume splitting databases removes network calls or guarantees consistency, which it does not."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which interaction is an example of asynchronous communication between services?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Search sends an HTTP GET to Catalog and retries until it gets a response"
+        },
+        {
+          "id": "b",
+          "label": "Orders publishes an OrderPlaced event to a broker and carries on without waiting"
+        },
+        {
+          "id": "c",
+          "label": "Checkout calls the Tax service over REST and waits for the returned amount"
+        },
+        {
+          "id": "d",
+          "label": "Cart calls Pricing through a gRPC request and blocks until the reply arrives"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Publishing an event to a broker lets the sender continue without waiting for consumers.",
+        "Distractors are request/response calls where the caller blocks, so they are synchronous."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Order service calls Payment service synchronously with no timeout. Payment becomes very slow. What is the most likely effect on Order service?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Order service simply skips payment and finishes each request with success"
+        },
+        {
+          "id": "b",
+          "label": "Order requests keep waiting, tying up threads until Order itself becomes slow"
+        },
+        {
+          "id": "c",
+          "label": "Order requests are automatically rerouted to a faster service instance"
+        },
+        {
+          "id": "d",
+          "label": "Order service crashes immediately, so the failure is contained and obvious"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Without timeouts, waiting calls hold resources and the failure cascades to the caller.",
+        "Distractors assume automatic rerouting or fast, clean failure, which do not happen by default."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main role of an API gateway in a microservices system?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It stores each service's data so the services can stay stateless"
+        },
+        {
+          "id": "b",
+          "label": "It builds and packages each service into its own container image"
+        },
+        {
+          "id": "c",
+          "label": "It gives clients one entry point and routes requests to the right service"
+        },
+        {
+          "id": "d",
+          "label": "It replaces service-to-service messaging by sending all events itself"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A gateway is a single front door that routes and handles cross-cutting concerns for clients.",
+        "Distractors confuse it with a database, a build tool, or a message broker."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which description best fits a well-chosen microservice boundary?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One service per developer, so each person can deploy their own part"
+        },
+        {
+          "id": "b",
+          "label": "One service per technical layer, such as all controllers in one service"
+        },
+        {
+          "id": "c",
+          "label": "One service per business capability, such as billing, owning its own data"
+        },
+        {
+          "id": "d",
+          "label": "One service per database table, so each table has a dedicated owner"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Boundaries should follow business capabilities so changes stay inside one service.",
+        "Splitting by table, layer or person causes chatty calls and tight coupling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these are genuine benefits that microservices can offer compared with a monolith? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Network failures between components no longer need to be handled"
+        },
+        {
+          "id": "b",
+          "label": "A busy service can be scaled without scaling the whole application"
+        },
+        {
+          "id": "c",
+          "label": "Business transactions become simpler because they stay inside one database"
+        },
+        {
+          "id": "d",
+          "label": "Teams can deploy their own service without redeploying everything"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Independent scaling and deployment are core benefits.",
+        "Distributed transactions and network failures get harder, not easier, with microservices."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team split a monolith into Orders, Inventory and Shipping services. They notice that all three must always be released together, and they read and write the same database tables. A colleague asks how to interpret this. What is the best interpretation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The services are too small, so they should be split further into functions"
+        },
+        {
+          "id": "b",
+          "label": "The boundaries are wrong, giving a distributed monolith with tight coupling"
+        },
+        {
+          "id": "c",
+          "label": "The team needs more containers, since deploy coupling comes from low capacity"
+        },
+        {
+          "id": "d",
+          "label": "The services are well designed, since shared tables keep data consistent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Shared tables and lockstep releases mean the services are not independent: a distributed monolith.",
+        "Distractors treat the coupling as a good sign or a capacity problem rather than a boundary problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A client retries a failed call with exponential backoff: the first retry waits 100 ms and each later wait doubles. How long does it wait before the 4th retry?",
+      "options": [
+        {
+          "id": "a",
+          "label": "800 ms"
+        },
+        {
+          "id": "b",
+          "label": "400 ms"
+        },
+        {
+          "id": "c",
+          "label": "300 ms"
+        },
+        {
+          "id": "d",
+          "label": "1600 ms"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Waits are 100, 200, 400, 800 ms, so the 4th retry waits 800 ms.",
+        "Other values come from linear growth or counting one step too many."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A circuit breaker around the Recommendations service opens after 5 consecutive failures. The breaker is now open and a 6th request arrives. What happens?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The call is queued until Recommendations recovers, then replayed"
+        },
+        {
+          "id": "b",
+          "label": "The call is sent to the database of Recommendations directly instead"
+        },
+        {
+          "id": "c",
+          "label": "The call is sent anyway and the breaker closes on a timeout"
+        },
+        {
+          "id": "d",
+          "label": "The call fails immediately without contacting Recommendations"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An open breaker fails fast and spares the struggling service.",
+        "Distractors describe sending, queuing or bypassing, which an open breaker does not do."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An order saga runs: reserve inventory, charge payment, schedule shipping. Inventory is reserved, then the payment step fails. What should the saga do next?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Roll back the Inventory database using a distributed lock on its rows"
+        },
+        {
+          "id": "b",
+          "label": "Retry the inventory reservation until the payment starts to succeed"
+        },
+        {
+          "id": "c",
+          "label": "Run a compensating action that releases the reserved inventory"
+        },
+        {
+          "id": "d",
+          "label": "Leave the reservation in place and mark the order as shipped anyway"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Sagas undo completed steps with compensating actions.",
+        "Distractors assume a global rollback or ignore the inconsistency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A message broker may deliver the same ChargeCustomer message twice. Which change best prevents a double charge?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Increase the broker's retention so duplicates expire sooner than before"
+        },
+        {
+          "id": "b",
+          "label": "Store each message's idempotency key and ignore any key already processed"
+        },
+        {
+          "id": "c",
+          "label": "Make Payment faster so the second delivery never has time to arrive"
+        },
+        {
+          "id": "d",
+          "label": "Move the Payment code into Orders so only one service sends the message"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Idempotent handling with a stored key makes duplicate delivery harmless.",
+        "Distractors try to prevent duplicates rather than tolerate them, which brokers cannot guarantee."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A new feature awards loyalty points per purchase. Following service-boundary rules, where should the points balances be stored?",
+      "options": [
+        {
+          "id": "a",
+          "label": "In a new Loyalty service that owns the points data and exposes an API"
+        },
+        {
+          "id": "b",
+          "label": "In the Payment database, since points are tied to money spent"
+        },
+        {
+          "id": "c",
+          "label": "In the Orders database, since points come from orders"
+        },
+        {
+          "id": "d",
+          "label": "In the API gateway, since every request passes through it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Loyalty is its own business capability, so it should own its data behind an API.",
+        "Other options attach it to a service because of where the data originates, creating coupling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Orders needs the customer's name to print on invoices, but Customer data belongs to the Customer service. Which approaches fit microservice data ownership? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep a local copy of the name updated from CustomerUpdated events"
+        },
+        {
+          "id": "b",
+          "label": "Query the Customer database tables directly from Orders"
+        },
+        {
+          "id": "c",
+          "label": "Call the Customer service API when the name is needed"
+        },
+        {
+          "id": "d",
+          "label": "Share an ORM library so Orders can open Customer's database"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Using the API or event-fed local copy respects ownership.",
+        "Direct database access, even through a shared library, couples the services' schemas."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A checkout endpoint saves the order, then synchronously calls an Email service to send a confirmation. Email is slow, so checkout takes 4 seconds. Customers only need the order saved before seeing success. What change should the team make?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Publish an OrderPlaced event and let Email consume it in the background"
+        },
+        {
+          "id": "b",
+          "label": "Call Email twice in parallel so one of the calls finishes quickly"
+        },
+        {
+          "id": "c",
+          "label": "Add a larger timeout to the Email call so it waits for each message"
+        },
+        {
+          "id": "d",
+          "label": "Merge Email into Orders so that no network call is involved"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Non-essential work should be moved to an asynchronous event so checkout stays fast.",
+        "Longer timeouts, merging, or duplicate calls keep the wait or add new problems."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An order service reserved stock in the inventory service, then the payment service declined the card. Each service has its own database. Using a saga, what is the next step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run a ROLLBACK on the inventory database from the order service"
+        },
+        {
+          "id": "b",
+          "label": "Delete the order row and let the reservation expire on its own"
+        },
+        {
+          "id": "c",
+          "label": "Send a command that releases the inventory reservation"
+        },
+        {
+          "id": "d",
+          "label": "Retry the payment call until it eventually returns success"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A saga undoes a completed local step with a compensating action, here releasing the reservation.",
+        "The ROLLBACK distractor assumes a single ACID transaction spans services, which it does not."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A circuit breaker around the pricing service opened after repeated failures, and its 30-second wait has now elapsed. How should it handle the next incoming request?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reject all calls until an operator resets it manually"
+        },
+        {
+          "id": "b",
+          "label": "Let a few trial calls through and close if they succeed"
+        },
+        {
+          "id": "c",
+          "label": "Close at once and send full traffic back to the service"
+        },
+        {
+          "id": "d",
+          "label": "Keep failing fast until the failure counter decays to zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "After the wait, the breaker goes half-open and probes with a few calls before closing.",
+        "Closing immediately sends a full load to a service that may still be unhealthy."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A client's POST to a payment service times out, and the client cannot tell whether the charge happened. How should it retry without risking a double charge?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Send the same idempotency key on each retry so the server dedupes"
+        },
+        {
+          "id": "b",
+          "label": "Switch the call to PUT, which makes any retry safe automatically"
+        },
+        {
+          "id": "c",
+          "label": "Generate a new order ID on every retry so requests stay unique"
+        },
+        {
+          "id": "d",
+          "label": "Shorten the timeout so the retry fires before the charge completes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Reusing one idempotency key lets the server recognise a repeat and return the original result.",
+        "A new ID per retry makes duplicates look like distinct requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "When an order ships, three other services (email, analytics, loyalty) must react, and the order service must not wait on them. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Publish an OrderShipped event to a topic that each service subscribes to"
+        },
+        {
+          "id": "b",
+          "label": "Merge the three services into one process so a method call notifies them"
+        },
+        {
+          "id": "c",
+          "label": "Call each of the three services over REST in turn and wait for each 200"
+        },
+        {
+          "id": "d",
+          "label": "Have the three services poll the order database once per second"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Publish-subscribe events decouple the producer from consumers and avoid blocking.",
+        "Synchronous calls and DB polling keep the coupling the question asks to remove."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A request passes through three services in sequence. Each is 99.9% available and fails independently. What is the approximate availability of the whole chain?",
+      "options": [
+        {
+          "id": "a",
+          "label": "99.7%"
+        },
+        {
+          "id": "b",
+          "label": "97.0%"
+        },
+        {
+          "id": "c",
+          "label": "99.9%"
+        },
+        {
+          "id": "d",
+          "label": "99.0%"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Serial availabilities multiply: 0.999^3 is about 0.997.",
+        "99.9% ignores the extra dependencies in the chain."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A reporting service needs order data, but the orders service owns its own database. Which approaches respect that ownership? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Mount the orders tables into the reporting schema as shared tables"
+        },
+        {
+          "id": "b",
+          "label": "Subscribe to order events and keep a local read model"
+        },
+        {
+          "id": "c",
+          "label": "Pull a paginated export from the orders API on a schedule"
+        },
+        {
+          "id": "d",
+          "label": "Query the orders database directly with read-only credentials"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Events and the owning service's API both access data through the owner's interface.",
+        "Direct queries and shared tables couple the reporting service to the orders schema."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "The orders API v1 returns an `address` string. A new version must return `street` and `city` instead. Mobile clients on v1 cannot be updated for several weeks. Which rollout step is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rename `address` to `street` and `city` and tell clients to update"
+        },
+        {
+          "id": "b",
+          "label": "Return both fields but set `address` to null so old clients fail early"
+        },
+        {
+          "id": "c",
+          "label": "Deploy v2 and shut v1 down once the new version passes its tests"
+        },
+        {
+          "id": "d",
+          "label": "Add `street` and `city` while still returning `address`, then remove it later"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An additive, backward-compatible change lets old and new clients work, and the old field is removed after migration.",
+        "Renaming or nulling fields breaks existing consumers during the transition."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Traces show checkout latency growing with cart size. For each cart line, checkout makes one sequential HTTP call to the inventory service. Each call is fast, and inventory CPU is low. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The container image is large, so cold starts delay each request"
+        },
+        {
+          "id": "b",
+          "label": "The service registry is overloaded and slows every call lookup"
+        },
+        {
+          "id": "c",
+          "label": "The inventory database lacks an index, so every query scans a table"
+        },
+        {
+          "id": "d",
+          "label": "Chatty sequential calls add up network latency as the cart grows"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Per-call cost is small, so the per-line sequential calls (N+1 pattern) cause the linear growth; a batch endpoint would help.",
+        "Index and cold-start explanations would not scale with cart size."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Billing and Invoicing are separate services, but almost every change touches both, and they must be released in a fixed order. What is the best diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Their REST contracts should be moved to gRPC to decouple them"
+        },
+        {
+          "id": "b",
+          "label": "They should share one database so releases stop conflicting"
+        },
+        {
+          "id": "c",
+          "label": "They are one cohesive capability split too finely, a distributed monolith"
+        },
+        {
+          "id": "d",
+          "label": "Their teams need faster CI so the two can deploy in parallel"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Changes and releases that always move together signal a wrong boundary rather than a tooling problem.",
+        "A shared database or protocol change would keep or deepen the coupling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Customers receive duplicate confirmation emails. The consumer sends the email, then acknowledges the message. Logs show some consumers crashing right after sending. What explains the duplicates?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The email provider retries on its own and creates the copies"
+        },
+        {
+          "id": "b",
+          "label": "Redelivery after a missed ack, with a handler that is not idempotent"
+        },
+        {
+          "id": "c",
+          "label": "Competing consumers on one queue each receive every message"
+        },
+        {
+          "id": "d",
+          "label": "The broker guarantees exactly once, so the producer must publish twice"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A crash before the ack makes the broker redeliver under at-least-once semantics, and a non-idempotent handler resends.",
+        "Competing consumers on one queue split messages rather than duplicating them."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In a chain A to B to C to D, each caller retries a failed call 3 times (4 attempts total). When D slows down, D collapses within seconds. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Short timeouts make D process each request twice before replying"
+        },
+        {
+          "id": "b",
+          "label": "Retries multiply at each layer, so one request becomes dozens of calls to D"
+        },
+        {
+          "id": "c",
+          "label": "The load balancer sends all traffic to a single D instance"
+        },
+        {
+          "id": "d",
+          "label": "Circuit breakers in each layer are open and block healthy calls to D"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Retry amplification is 4 x 4 x 4 = 64 attempts at D for one user request.",
+        "The other options do not match the retry configuration described."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A service commits an order to its database and then publishes an OrderCreated event. Occasionally the order exists but no event was ever sent, and the service was restarted at those times. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Multiple instances publish at once, so a distributed lock is missing"
+        },
+        {
+          "id": "b",
+          "label": "The commit and the publish are separate steps, so a crash between them loses the event"
+        },
+        {
+          "id": "c",
+          "label": "The broker is not durable, so events vanish after a successful publish"
+        },
+        {
+          "id": "d",
+          "label": "The event is published before the commit, so consumers read stale data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A dual write is not atomic; a transactional outbox makes the event durable with the commit.",
+        "Broker durability and locking do not explain a missing event after a restart."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Which observations suggest that service boundaries were drawn badly? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each service stores its data in its own database"
+        },
+        {
+          "id": "b",
+          "label": "Each service has its own repository and CI pipeline"
+        },
+        {
+          "id": "c",
+          "label": "Most requests to one service trigger a synchronous call to another to finish"
+        },
+        {
+          "id": "d",
+          "label": "Two services read and write the same database table"
+        },
+        {
+          "id": "e",
+          "label": "A single feature change requires coordinated releases of several services"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Coordinated releases, shared tables and heavy synchronous chaining all indicate high coupling across boundaries.",
+        "Separate repositories and private databases are normal features of well-bounded services."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "The API gateway times out after 2 seconds, but the order service waits up to 10 seconds on inventory. Users see 504 errors, yet the orders are often created anyway, and frustrated users resubmit them, creating duplicates. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The gateway timeout is too low and must be raised above 10 seconds"
+        },
+        {
+          "id": "b",
+          "label": "The downstream timeout exceeds the gateway's, so work continues after the caller gave up"
+        },
+        {
+          "id": "c",
+          "label": "Inventory returns errors that the gateway converts into 504 responses"
+        },
+        {
+          "id": "d",
+          "label": "The order service lacks a circuit breaker, which alone causes the 504s"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Timeouts should shrink down the call chain; otherwise work completes after the caller has already given up, inviting duplicate resubmissions.",
+        "Raising the gateway timeout or blaming errors does not explain orders succeeding behind a 504."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Orders calls Inventory synchronously, Inventory calls Pricing, and Pricing calls Orders for discount history. When Pricing slows slightly, all three services stop responding. What best explains the total outage?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pricing has run out of database storage, which forces the other two services to crash in sequence"
+        },
+        {
+          "id": "b",
+          "label": "Orders is deployed with too few replicas, so Pricing is flooded with requests that the gateway cannot queue"
+        },
+        {
+          "id": "c",
+          "label": "REST over HTTP cannot carry cross-service traffic reliably, so the services lose connections under load"
+        },
+        {
+          "id": "d",
+          "label": "The call cycle lets slow replies hold request threads in every service, so all thread pools drain at once"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A synchronous cycle propagates latency: each blocked call ties up a thread upstream, causing a cascading failure.",
+        "Distractors blame capacity or protocol rather than the dependency structure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A service saves an order to its database and then publishes an `OrderCreated` event to a broker. Occasionally the order exists but downstream services never hear about it. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The event payload is too large, so the broker silently rejects it after the transaction commits"
+        },
+        {
+          "id": "b",
+          "label": "The broker uses topics instead of queues, so some consumers are never subscribed to the event"
+        },
+        {
+          "id": "c",
+          "label": "The order service uses an ORM, which delays commits until after the publish call has returned"
+        },
+        {
+          "id": "d",
+          "label": "The database commit and the broker publish are two separate writes, so a crash between them loses the event"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "This is the dual-write problem: no atomicity across the database and the broker; a transactional outbox fixes it.",
+        "Other options name plausible but unrelated configuration issues."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a consumer-group rebalance, a payment service charged some customers twice. The broker guarantees at-least-once delivery and the handler calls the payment gateway directly. Which diagnosis is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The payment gateway retries internally, so every charge is applied twice regardless of the consumer"
+        },
+        {
+          "id": "b",
+          "label": "The broker has a defect that creates new messages during every rebalance of the group"
+        },
+        {
+          "id": "c",
+          "label": "The consumer reads offsets too slowly, so the broker assumes messages were never delivered at all"
+        },
+        {
+          "id": "d",
+          "label": "Uncommitted messages were redelivered, and the handler has no idempotency check to detect repeats"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "At-least-once delivery means redelivery after a rebalance is expected; handlers must be idempotent, e.g. via a dedup key.",
+        "Distractors blame the broker or gateway instead of the handler design."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Team A renames a column in a table that Team B's service also reads directly. Team B's service breaks on deploy even though nobody changed B's code. What does this most clearly reveal?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The migration tool lacked a rollback script, which is the usual cause of cross-team failures"
+        },
+        {
+          "id": "b",
+          "label": "A shared database couples the services' schemas, so one team cannot deploy independently of the other"
+        },
+        {
+          "id": "c",
+          "label": "Team B should have pinned a newer container base image so that the schema change could be absorbed"
+        },
+        {
+          "id": "d",
+          "label": "Team A skipped integration tests, which would have caught the issue regardless of how data is shared"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Sharing a datastore breaks encapsulation; the schema becomes an unversioned API between services.",
+        "Other options address process symptoms rather than the structural coupling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A gateway fans out to 8 services in parallel and waits for all of them. Each service has a p99 of 200 ms, yet the gateway's p99 is around 600 ms. Which explanation best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The gateway's p99 is measured in a different unit, so the figures cannot be compared with the services'"
+        },
+        {
+          "id": "b",
+          "label": "Each service's p99 is inflated by garbage collection, which the gateway then removes by caching"
+        },
+        {
+          "id": "c",
+          "label": "Parallel calls are executed one after another by the HTTP client, so latencies add up for every request"
+        },
+        {
+          "id": "d",
+          "label": "Waiting for the slowest of many parallel calls makes slow outliers show up far more often in the combined response"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Tail latency amplification: with 8 calls, the chance that at least one hits its slow tail is much higher than 1%.",
+        "Distractors invent sequential execution or measurement artefacts."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A system split into 12 services is suspected of being a distributed monolith. Which observations support that diagnosis? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each service lives in its own source repository with its own CI pipeline"
+        },
+        {
+          "id": "b",
+          "label": "A single user request triggers dozens of fine-grained calls between two services"
+        },
+        {
+          "id": "c",
+          "label": "Two of the services are written in different programming languages"
+        },
+        {
+          "id": "d",
+          "label": "Services must be deployed in a fixed order or the system breaks"
+        },
+        {
+          "id": "e",
+          "label": "Most features need coordinated changes and releases across three or more services"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Lockstep changes, ordered deploys and chatty calls show strong coupling across boundaries.",
+        "Separate repos and mixed languages are organisational and technology choices, not evidence of coupling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "Service B is degraded and handles about half its normal load. Service A calls B and retries each failed call three times immediately, without backoff. Within a minute B stops responding entirely, even though the original traffic did not increase. What is the most accurate analysis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The retries multiplied the offered load on an already struggling B, which pushed it from degraded to fully down"
+        },
+        {
+          "id": "b",
+          "label": "B should return HTTP 200 for failures, since error codes make clients retry more aggressively"
+        },
+        {
+          "id": "c",
+          "label": "B's autoscaler is misconfigured, and the retries have no effect on how much load B receives"
+        },
+        {
+          "id": "d",
+          "label": "A's retries succeed too often, which fills B's caches with stale entries and causes the failure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Immediate retries amplify load up to 4x on a dependency that is already short on capacity (retry storm).",
+        "Distractors blame unrelated mechanisms or misread how error codes drive retries."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A checkout workflow spans six services with compensating actions. Criteria: the flow changes monthly, support needs to see exactly which step a failed order is stuck on, and teams want to avoid services knowing each other's events. Which saga style fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Orchestration, where a coordinator owns the flow and its state, so changes and step visibility sit in one place"
+        },
+        {
+          "id": "b",
+          "label": "Choreography, where each service reacts to events and emits its own, so no central component is needed"
+        },
+        {
+          "id": "c",
+          "label": "Choreography with a shared event schema package that every service imports to follow the steps"
+        },
+        {
+          "id": "d",
+          "label": "A two-phase commit across all six databases, so every step commits or aborts together at one point"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Orchestration centralises flow logic and state, meeting the change and visibility criteria and keeping services unaware of each other.",
+        "Choreography spreads the flow across services, making it hard to see and change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A dashboard needs data from Orders, Customers and Shipping. Criteria: it is read about 500 times per second, staleness of a few seconds is acceptable, and it must stay available if Shipping is down. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cache every response in the browser for one hour, so the services are rarely called at all"
+        },
+        {
+          "id": "b",
+          "label": "Build a read model fed by events from the three services, so the dashboard queries only its own store"
+        },
+        {
+          "id": "c",
+          "label": "Call the three services synchronously per request and merge results in the dashboard backend"
+        },
+        {
+          "id": "d",
+          "label": "Query the three services' databases directly through a shared read-only account to avoid network hops"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An event-fed read model gives fast reads and independence from Shipping's availability, and the allowed staleness fits eventual consistency.",
+        "Per-request composition ties availability to all three services; direct DB access breaks ownership."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You are choosing the first module to extract from a monolith. Criteria: highest change frequency, clear ownership of its own data, and few inbound calls from other modules. Which candidate is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reporting, which changes rarely and joins data from every other module in nightly batch queries"
+        },
+        {
+          "id": "b",
+          "label": "Core pricing, which changes weekly but shares four tables with billing, inventory and promotions"
+        },
+        {
+          "id": "c",
+          "label": "Product search, which changes often, owns its index, and is called by only the web front end"
+        },
+        {
+          "id": "d",
+          "label": "User accounts, which are read by nearly every module but change only a few times a year"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Search meets all three criteria: high churn, owned data, low coupling.",
+        "Other candidates fail on coupling, shared data or low change rate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A proposal uses two-phase commit across the Orders, Payments and Inventory databases for checkout. Which critique is strongest given goals of high availability and independent deployment?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Locks are held while waiting on the slowest participant, and a coordinator failure can block all of them"
+        },
+        {
+          "id": "b",
+          "label": "Two-phase commit is unsafe because it can commit only some of the participants' changes at the end"
+        },
+        {
+          "id": "c",
+          "label": "Two-phase commit needs a message broker, and brokers cannot be used for transactional work"
+        },
+        {
+          "id": "d",
+          "label": "Two-phase commit forbids retries, which means that transient network errors always abort the order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "2PC holds locks across services and blocks on coordinator or participant failure, hurting availability and autonomy.",
+        "Distractors misstate 2PC's atomicity or its relationship to brokers and retries."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You configure a circuit breaker on calls to a flaky recommendations service. Criteria: protect the caller's threads, keep the product page usable, and detect recovery within about 30 seconds. Which configuration is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Open after the first failure and stay open until an engineer resets it after reviewing the logs"
+        },
+        {
+          "id": "b",
+          "label": "Open after repeated failures, return a default list, and probe with a few trial calls every 30 seconds"
+        },
+        {
+          "id": "c",
+          "label": "Never open the breaker, but raise the timeout to 30 seconds so slow calls have time to finish"
+        },
+        {
+          "id": "d",
+          "label": "Open after repeated failures and fail the whole page with an error, so users know to retry later"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Opening on failures, falling back, and half-open probing protects threads, degrades gracefully and detects recovery.",
+        "Long timeouts tie up threads; manual reset ignores recovery; failing the page ignores usability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A five-person team plans to launch a new product as 40 microservices from day one. Which criticisms are well-founded? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Containers cannot run more than ten services on one cluster without losing isolation"
+        },
+        {
+          "id": "b",
+          "label": "Most calls will cross the network, so latency and partial failures will occur far more often"
+        },
+        {
+          "id": "c",
+          "label": "Boundaries are guessed before the domain is understood, so they will likely need costly redrawing"
+        },
+        {
+          "id": "d",
+          "label": "The operational load of deployment, monitoring and tracing for 40 services will swamp five people"
+        },
+        {
+          "id": "e",
+          "label": "Microservices cannot be written by a team smaller than the number of services it owns"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Premature boundaries, operational overhead and network failure modes are real costs at this team size.",
+        "The last two claims are false: there is no such team-size rule and no such container limit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "Your Customer service must replace the field `phone` with `phones[]`. Unknown consumers, including some mobile app versions that cannot be force-updated, read `phone`. Criteria: no breaking of existing consumers, and eventual removal of the old field. Which plan is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replace `phone` with `phones[]` now and publish release notes, since consumers are responsible for tracking changes"
+        },
+        {
+          "id": "b",
+          "label": "Rename the service endpoint to `/v2` and delete `/v1` after one week, since unused versions add risk"
+        },
+        {
+          "id": "c",
+          "label": "Add `phones[]` alongside `phone`, keep both populated, track usage of `phone`, then remove it once usage ends"
+        },
+        {
+          "id": "d",
+          "label": "Keep `phone` forever and never add `phones[]`, so no consumer ever needs to change its code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Expand-and-contract keeps old clients working while measuring usage, allowing safe removal later.",
+        "Other options break clients, block the change, or remove the old version too soon."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A checkout flow spans nine services with conditional branches and compensations. Auditors need one place to see each order's current step and why it failed. Judged against these criteria, which saga style fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Choreography with a shared state table, since every service can then read and update the flow state directly"
+        },
+        {
+          "id": "b",
+          "label": "Orchestration, since one coordinator holds the flow state and compensations, so status and failures can be queried"
+        },
+        {
+          "id": "c",
+          "label": "Two-phase commit, since it gives auditors one atomic transaction record across all nine services and their databases"
+        },
+        {
+          "id": "d",
+          "label": "Choreography, since services reacting to each other's events need no central component and keep the flow easy to trace"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An orchestrator centralises flow state and compensation logic, which satisfies the visibility and audit criteria for a complex branching flow.",
+        "Choreography scatters the flow across services, and a shared table or 2PC would break service autonomy."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team proposes letting the reporting service query the orders service's read replica directly, to avoid building and maintaining an API. Which critique of this proposal is most sound?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is unsound only because replicas lag, so it would be fine if replication were synchronous and always up to date"
+        },
+        {
+          "id": "b",
+          "label": "It is unsound because services may only communicate through message brokers, never through any request-response style"
+        },
+        {
+          "id": "c",
+          "label": "It couples reporting to the orders schema, so table changes in orders can break reporting and block independent deployment"
+        },
+        {
+          "id": "d",
+          "label": "The proposal is sound, since a read-only replica cannot change data and so cannot create any coupling between the services"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Reading another service's tables makes its schema a hidden public contract, which defeats independent deployability.",
+        "Read-only access and replication lag are not the core issue; the coupling is."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Service A calls B, B calls C, and C calls D, and each caller retries failed calls 3 times. D degrades and begins to time out. Which assessment of this retry design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Fine, since retries at every layer maximise the chance that each request succeeds while D recovers from its problem"
+        },
+        {
+          "id": "b",
+          "label": "Fine, provided the retry interval is fixed at one second, since a fixed interval prevents any load amplification at D"
+        },
+        {
+          "id": "c",
+          "label": "Flawed, since retries are unsafe on any service call and should be replaced everywhere by much longer timeouts"
+        },
+        {
+          "id": "d",
+          "label": "Flawed, since nested retries can multiply load on D up to 27 times; retry at one layer with a budget and backoff"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Stacked retries multiply (3x3x3) and push a degraded dependency into collapse; a single retry layer with budgets limits this.",
+        "Retrying everywhere or lengthening timeouts does not stop amplification."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A company runs 12 services. Which observation is the strongest evidence that it has built a distributed monolith rather than true microservices?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Most releases require several services to deploy together in a set order because their changes depend on each other"
+        },
+        {
+          "id": "b",
+          "label": "Some services call each other over HTTP synchronously when the user needs an immediate answer to a request"
+        },
+        {
+          "id": "c",
+          "label": "Each service has its own repository and CI pipeline even though engineers often review code across teams"
+        },
+        {
+          "id": "d",
+          "label": "All services are written in one language and share a common logging library maintained by a platform team"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Lockstep deployment shows the services are not independently deployable, the defining property that is lost in a distributed monolith.",
+        "Shared language, sync calls and separate repos are compatible with healthy microservices."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "The orders service must tell six downstream consumers that an order was placed. Some consumers are often offline for maintenance, and order acceptance must never be blocked by them. Which approach best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call all six consumers over REST in sequence, since immediate responses confirm that each one has processed the order"
+        },
+        {
+          "id": "b",
+          "label": "Let each consumer poll the orders database every minute, since polling avoids needing any broker or any contract"
+        },
+        {
+          "id": "c",
+          "label": "Call all six over REST in parallel with a 30-second timeout, since parallel calls remove any dependency on their availability"
+        },
+        {
+          "id": "d",
+          "label": "Publish an OrderPlaced event to a durable broker, so consumers catch up after downtime without blocking acceptance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A durable event decouples availability and time, so offline consumers catch up later while orders are still accepted.",
+        "Synchronous calls, even parallel, tie acceptance to consumer availability; polling the database couples to the schema."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A proposal splits a system into a UI service, a business-logic service and a data-access service. Which criticisms of this decomposition are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The layered services cannot be containerised, since a Docker image cannot hold only one layer of an application"
+        },
+        {
+          "id": "b",
+          "label": "Each request needs a chain of network hops, adding latency and failure points that business-aligned services would avoid"
+        },
+        {
+          "id": "c",
+          "label": "Splitting by layer ignores business capabilities, so no team can deliver a complete feature independently"
+        },
+        {
+          "id": "d",
+          "label": "Almost every feature change touches all three services, so they must be changed and released together"
+        },
+        {
+          "id": "e",
+          "label": "Each service's data is owned by exactly one team, which makes ownership too clear to be useful"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Layer-based splits create cross-service change coupling, extra hops and no end-to-end team ownership.",
+        "Clear data ownership is a benefit, and containerisation is unaffected by layering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A startup with 7 engineers runs a monolith that deploys several times a day with little pain or scaling pressure. A new CTO wants 15 services for 'scalability'. Domain boundaries are still shifting each quarter. Judged on cost and risk, what is the best recommendation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Split into 15 services that share one database, since that removes consistency work while keeping deployments independent"
+        },
+        {
+          "id": "b",
+          "label": "Rewrite everything as services in one big-bang effort, since that avoids running two architectures in parallel for long"
+        },
+        {
+          "id": "c",
+          "label": "Keep a modular monolith with enforced module boundaries, and extract a service only when a concrete scaling or team need appears"
+        },
+        {
+          "id": "d",
+          "label": "Split now along current guesses, since early boundaries are cheap to change once services exist and teams adapt"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "With shifting boundaries and no pain, a modular monolith avoids premature distribution costs while preserving future extraction options.",
+        "Wrong boundaries are costly to fix across services, and a shared database defeats the purpose."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Requirement: when an order row is saved, an OrderPlaced event must be published, with no lost events and no events for unsaved orders, even if the service crashes at any point. Which design meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap the save and publish in a try block and delete the order row if the publish throws any error"
+        },
+        {
+          "id": "b",
+          "label": "Insert the order and an outbox row in one local transaction; a relay publishes outbox rows and marks them sent"
+        },
+        {
+          "id": "c",
+          "label": "Publish to the broker first, then save the order, so only a failed save needs any manual cleanup afterwards"
+        },
+        {
+          "id": "d",
+          "label": "Save the order, then publish to the broker on the next line, retrying the publish from in-memory state on failure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The transactional outbox makes state change and event intent atomic; the relay gives at-least-once delivery.",
+        "The other designs leave a crash window between the database write and the publish."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Service P renames `cust_id` to `customerId` in its response. Consumers X, Y and Z deploy on their own schedules. You need zero downtime and no coordinated release. Which plan meets these constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Release a v2 and shut v1 off immediately, since a version bump counts as backward compatible for existing callers"
+        },
+        {
+          "id": "b",
+          "label": "Rename the field now and email consumers, since consumers must keep up with the provider's current contract"
+        },
+        {
+          "id": "c",
+          "label": "Return both fields, move consumers over at their own pace using contract tests, then remove the old field"
+        },
+        {
+          "id": "d",
+          "label": "Schedule one release window for the provider and all three consumers, so only one form of the field exists"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Expand and contract with consumer contract tests allows independent migration with no downtime.",
+        "Renaming, shutting off v1 or a synchronised release each break the constraints."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A product page needs data from catalogue, pricing and inventory services, with p99 latency under 100 ms, and it must still render if one of those services is down. Which design meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An API composer calling all three services synchronously per request, since fresh data matters more than latency"
+        },
+        {
+          "id": "b",
+          "label": "A browser that calls the three services in sequence, since the page can show whatever data arrives first"
+        },
+        {
+          "id": "c",
+          "label": "A shared database view joining the three services' tables, since a join is the fastest way to combine their data"
+        },
+        {
+          "id": "d",
+          "label": "A read model built from events of the three services, served from its own store, with staleness tolerated on some fields"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A CQRS-style read model gives low latency and resilience to individual outages at the cost of eventual consistency.",
+        "Sync composition and shared views fail the availability or ownership constraints."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A booking saga has three steps: reserve seat, charge card, send confirmation email. The email cannot be unsent; the reservation and charge can be compensated. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Send the email first, since customers like early confirmation and a compensation can send an apology email"
+        },
+        {
+          "id": "b",
+          "label": "Charge, send the email, then reserve, since money is the riskiest step and the email can be recalled later"
+        },
+        {
+          "id": "c",
+          "label": "Reserve, charge, then send the email last, only after all compensable steps have succeeded"
+        },
+        {
+          "id": "d",
+          "label": "Run all three steps in parallel, since this shortens the saga and compensations undo whichever steps fail"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Irreversible steps should come last, after the point where failure and compensation are still possible.",
+        "Sending early or in parallel exposes customers to irreversible, possibly wrong, messages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Service G calls a slow dependency S and a fast dependency T from one shared pool of 50 threads. When S slows down, G also stops serving requests that only need T. Which change meets the goal of keeping T paths healthy?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add retries to every S call, so slow calls are repeated until they complete and release the shared threads"
+        },
+        {
+          "id": "b",
+          "label": "Raise the shared pool to 500 threads, so S can consume more without ever starving the T paths of capacity"
+        },
+        {
+          "id": "c",
+          "label": "Give S and T separate bounded pools, with a timeout and circuit breaker on S so its failures fail fast"
+        },
+        {
+          "id": "d",
+          "label": "Run S calls on the same thread as T calls, so that a slow call blocks only the single current request"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Bulkheads isolate resource pools, and timeouts with circuit breaking stop S from consuming resources indefinitely.",
+        "Bigger pools or retries only delay exhaustion or add load."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "You design a consumer on an at-least-once broker that must charge a customer only once per `paymentId`. Which elements belong in the design? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use a unique constraint on `paymentId`, so concurrent duplicate deliveries cannot both commit the effect"
+        },
+        {
+          "id": "b",
+          "label": "Record the processed `paymentId` in the same local transaction as the charge effect, so duplicates are detected"
+        },
+        {
+          "id": "c",
+          "label": "Acknowledge the message before processing, so the broker never redelivers and duplicates become impossible"
+        },
+        {
+          "id": "d",
+          "label": "Derive the idempotency key from the event's business ID, not from a random value generated on each attempt"
+        },
+        {
+          "id": "e",
+          "label": "Keep processed IDs only in process memory, since restarts are rare and redelivery usually follows restarts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Idempotency needs a stable business key and atomic, durable deduplication tied to the effect.",
+        "Acking early risks lost work, and in-memory IDs vanish on restart."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A monolith and its shared Postgres database serve orders and billing. You must move billing data into its own service with no downtime, no big-bang cutover, and the ability to roll back at each stage. Which plan meets all three constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Create the new service reading the monolith's billing tables directly, and treat the migration as complete after that"
+        },
+        {
+          "id": "b",
+          "label": "Route billing calls through a facade, sync data to the new store via change data capture, verify parity, then shift reads and writes gradually"
+        },
+        {
+          "id": "c",
+          "label": "Rewrite billing in the new service with an empty database and send all new traffic there immediately"
+        },
+        {
+          "id": "d",
+          "label": "Freeze writes for a weekend, copy the billing tables into a new database, and then switch every caller to the new service"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A facade with continuous sync and parity checks allows gradual, reversible migration without downtime.",
+        "The other plans need downtime, keep the shared database, or lose existing data and rollback ability."
+      ],
+      "reviewed": false
+    }
+  ]
+}

@@ -1,0 +1,2494 @@
+{
+  "version": 1,
+  "topic": "numerical-methods",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which condition guarantees that the bisection method has a root to find in the interval [a, b]?",
+      "options": [
+        {
+          "id": "a",
+          "label": "f' is nonzero everywhere on the interval"
+        },
+        {
+          "id": "b",
+          "label": "f is differentiable and f(a) is positive"
+        },
+        {
+          "id": "c",
+          "label": "f(a) equals f(b) at both endpoints"
+        },
+        {
+          "id": "d",
+          "label": "f is continuous and f(a), f(b) have opposite signs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The intermediate value theorem needs continuity and a sign change between endpoints.",
+        "Distractors confuse this with differentiability or derivative conditions used by other methods."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which formula is the Newton's method update for solving f(x) = 0?",
+      "options": [
+        {
+          "id": "a",
+          "label": "x_new = x - f(x)/f'(x)"
+        },
+        {
+          "id": "b",
+          "label": "x_new = x + f(x)/f'(x)"
+        },
+        {
+          "id": "c",
+          "label": "x_new = x - f(x)/f''(x)"
+        },
+        {
+          "id": "d",
+          "label": "x_new = x - f'(x)/f(x)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Newton's update subtracts the function value divided by the derivative.",
+        "Distractors flip the ratio, change the sign, or use the second derivative."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "On each subinterval, the trapezoidal rule approximates the integrand by which kind of curve?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A straight line segment"
+        },
+        {
+          "id": "b",
+          "label": "A parabola through three points"
+        },
+        {
+          "id": "c",
+          "label": "A cubic through four points"
+        },
+        {
+          "id": "d",
+          "label": "A constant equal to the midpoint value"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The trapezoidal rule joins endpoint values with a line, forming a trapezoid.",
+        "Parabola is Simpson's rule; constant is the midpoint rule."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the name of the quantity |exact value - approximate value|?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Absolute error"
+        },
+        {
+          "id": "b",
+          "label": "Residual"
+        },
+        {
+          "id": "c",
+          "label": "Machine epsilon"
+        },
+        {
+          "id": "d",
+          "label": "Condition number"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Absolute error is the magnitude of the difference between exact and approximate values.",
+        "Residual measures how well an approximation satisfies an equation, not distance from the true value."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Gaussian elimination (forward elimination) transforms the matrix of a linear system into which form?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Diagonal form with unit entries"
+        },
+        {
+          "id": "b",
+          "label": "Upper triangular form"
+        },
+        {
+          "id": "c",
+          "label": "Orthogonal form"
+        },
+        {
+          "id": "d",
+          "label": "Symmetric form"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Forward elimination zeroes entries below the diagonal, giving upper triangular form for back substitution.",
+        "Other forms are not produced by elimination alone."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are methods for finding roots of an equation f(x) = 0? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Bisection method"
+        },
+        {
+          "id": "b",
+          "label": "Simpson's rule"
+        },
+        {
+          "id": "c",
+          "label": "Newton's method"
+        },
+        {
+          "id": "d",
+          "label": "Lagrange interpolation"
+        },
+        {
+          "id": "e",
+          "label": "Secant method"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Bisection, secant and Newton's methods all find roots iteratively.",
+        "Simpson's rule is for integration and Lagrange is for interpolation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A student approximates the derivative of f at x using (f(x+h) - f(x))/h with a small h. Their instructor asks for the name of this formula and the order of its truncation error.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Forward difference, with error of order h^2"
+        },
+        {
+          "id": "b",
+          "label": "Central difference, with error of order h^2"
+        },
+        {
+          "id": "c",
+          "label": "Backward difference, with error of order h^2"
+        },
+        {
+          "id": "d",
+          "label": "Forward difference, with error of order h"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The formula uses x+h, so it is a forward difference, first-order accurate with O(h) error.",
+        "Distractors mix up the name or the order with the central difference."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is bisection described as slow but reliable?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It fits a parabola to the function, so it can skip roots"
+        },
+        {
+          "id": "b",
+          "label": "It uses the slope, so it needs a good starting guess"
+        },
+        {
+          "id": "c",
+          "label": "It halves the bracketing interval each step, so error shrinks steadily"
+        },
+        {
+          "id": "d",
+          "label": "It doubles the digits of accuracy per step, but may diverge"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Halving the bracket gives guaranteed linear convergence once a sign change is bracketed.",
+        "Distractors describe Newton-like behaviour or invent a parabola fit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why can Newton's method give a huge, wild step when f'(x_n) is nearly zero?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Dividing by a tiny slope makes the tangent's root very far away"
+        },
+        {
+          "id": "b",
+          "label": "Round-off makes the derivative negative, so steps reverse"
+        },
+        {
+          "id": "c",
+          "label": "The tangent line becomes vertical and meets the axis nearby"
+        },
+        {
+          "id": "d",
+          "label": "The function value f(x_n) must also be near zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A nearly flat tangent crosses the x-axis far from x_n, so the step f/f' is huge.",
+        "A vertical tangent would correspond to a very large slope, not a small one."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is Simpson's rule usually more accurate than the trapezoidal rule for smooth functions with the same step size?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It fits parabolas instead of lines, so its error shrinks like h^4"
+        },
+        {
+          "id": "b",
+          "label": "It uses the exact derivative of f at each node"
+        },
+        {
+          "id": "c",
+          "label": "It evaluates the function at more random points"
+        },
+        {
+          "id": "d",
+          "label": "It ignores the endpoints, which are the least accurate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Quadratic fits capture curvature, giving O(h^4) error versus O(h^2) for trapezoid.",
+        "Distractors invent randomness, derivative use, or dropping endpoints."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "The composite trapezoidal rule has error proportional to h^2. If you halve the step size h for a smooth function, what happens to the error roughly?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It stays about the same"
+        },
+        {
+          "id": "b",
+          "label": "It is cut roughly in half"
+        },
+        {
+          "id": "c",
+          "label": "It is cut by a factor of about 4"
+        },
+        {
+          "id": "d",
+          "label": "It is cut by a factor of about 16"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Error proportional to h^2 drops by (1/2)^2 = 1/4 when h is halved.",
+        "Halving would be for first-order methods; 16 is for fourth-order methods like Simpson's."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does Gaussian elimination usually use partial pivoting?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It guarantees the solution is exact in floating point"
+        },
+        {
+          "id": "b",
+          "label": "It avoids dividing by tiny pivots, which magnify round-off errors"
+        },
+        {
+          "id": "c",
+          "label": "It makes the matrix symmetric, so fewer steps are needed"
+        },
+        {
+          "id": "d",
+          "label": "It reduces the number of operations from n^3 to n^2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Choosing the largest pivot keeps multipliers small and limits round-off growth.",
+        "Pivoting doesn't reduce cost order or make arithmetic exact."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly explain sources of round-off error on a computer? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A number like 0.1 has no exact finite binary floating-point representation"
+        },
+        {
+          "id": "b",
+          "label": "Round-off error disappears if you run more iterations of any method"
+        },
+        {
+          "id": "c",
+          "label": "Subtracting two nearly equal numbers can lose many significant digits"
+        },
+        {
+          "id": "d",
+          "label": "Using a smaller step size h always reduces the total error of a finite-difference formula"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Cancellation and non-representable decimals are both genuine round-off sources.",
+        "Very small h can increase round-off, and extra iterations do not remove it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A student estimates f'(1) for f(x) = sin(x) using (f(x+h) - f(x))/h. With h = 1e-6 the answer is accurate to about 6 digits, but with h = 1e-14 it is much worse. What best explains the worse result?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Subtracting nearly equal values loses digits, so round-off dominates"
+        },
+        {
+          "id": "b",
+          "label": "The truncation error grows as h gets smaller"
+        },
+        {
+          "id": "c",
+          "label": "The formula is only valid for h larger than 1e-6"
+        },
+        {
+          "id": "d",
+          "label": "The sine function is not differentiable for tiny steps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "For tiny h, f(x+h) and f(x) agree to nearly all digits, so cancellation causes large round-off error.",
+        "Truncation error actually shrinks with h; the formula remains valid."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which condition guarantees that the bisection method has a root to find in the starting interval [a, b]?",
+      "options": [
+        {
+          "id": "a",
+          "label": "f is differentiable on [a,b] and f'(a), f'(b) have opposite signs"
+        },
+        {
+          "id": "b",
+          "label": "f is continuous on [a,b] and f(a), f(b) have opposite signs"
+        },
+        {
+          "id": "c",
+          "label": "f is continuous on [a,b] and |f(a)| is smaller than |f(b)|"
+        },
+        {
+          "id": "d",
+          "label": "f is increasing on [a,b] and f(a), f(b) are both positive"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Continuity plus a sign change lets the intermediate value theorem guarantee a root in the interval.",
+        "Distractors confuse the sign of the derivative or the size of the function values with a sign change of f."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "The forward difference (f(x+h) - f(x))/h approximates f'(x). The error caused by dropping the higher-order terms of the Taylor series is called what?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Overflow error, from numbers exceeding the largest float"
+        },
+        {
+          "id": "b",
+          "label": "Absolute error, from the size of the step h chosen"
+        },
+        {
+          "id": "c",
+          "label": "Truncation error, from cutting off the Taylor series"
+        },
+        {
+          "id": "d",
+          "label": "Round-off error, from storing numbers with finite digits"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Truncation error comes from replacing an infinite or exact process by a finite approximation.",
+        "Round-off error stems from finite-precision storage, not from the formula itself."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Newton's method is started close to a simple root of a smooth function. What does quadratic convergence mean for its behaviour?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The error shrinks by about half at each iteration"
+        },
+        {
+          "id": "b",
+          "label": "The error stays fixed once the guess is close enough"
+        },
+        {
+          "id": "c",
+          "label": "One extra correct digit is gained at each iteration"
+        },
+        {
+          "id": "d",
+          "label": "The number of correct digits roughly doubles each iteration"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Quadratic convergence means the new error is about proportional to the square of the old error, so correct digits roughly double.",
+        "Halving the error or gaining one digit describes linear convergence, as in bisection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does the composite trapezoidal rule approximate the integral of f over [a, b]?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It replaces f on each subinterval by a straight line segment"
+        },
+        {
+          "id": "b",
+          "label": "It replaces f by one polynomial passing through all the nodes"
+        },
+        {
+          "id": "c",
+          "label": "It replaces f on each subinterval by a constant equal to the left value"
+        },
+        {
+          "id": "d",
+          "label": "It replaces f on each subinterval by a parabola through three points"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The trapezoidal rule joins neighbouring points with straight lines and sums the trapezoid areas.",
+        "Parabolas describe Simpson's rule and constants describe rectangle rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A linear system Ax = b has a matrix A with a very large condition number. What does this tell you?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The solution vector is too large to be stored in floating point"
+        },
+        {
+          "id": "b",
+          "label": "The matrix is exactly singular and the system has no solution at all"
+        },
+        {
+          "id": "c",
+          "label": "Small relative changes in the data can cause large relative changes in the solution"
+        },
+        {
+          "id": "d",
+          "label": "The elimination algorithm is unstable, so switching to another algorithm will remove the sensitivity"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The condition number measures sensitivity of the problem itself, regardless of algorithm.",
+        "A common misconception is that a large condition number means an algorithm flaw or exact singularity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about error in numerical computation are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Making the step h smaller in a finite difference always reduces the total error"
+        },
+        {
+          "id": "b",
+          "label": "Halving h in a second-order method cuts the truncation error by about a factor of 4"
+        },
+        {
+          "id": "c",
+          "label": "Subtracting two nearly equal numbers can lose many significant digits"
+        },
+        {
+          "id": "d",
+          "label": "Floating-point arithmetic stores decimal fractions such as 0.1 exactly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Cancellation loses digits, and second-order truncation error scales with h^2, so halving h gives about a quarter.",
+        "Very small h increases round-off error, and 0.1 has no exact binary representation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A student solves a 3x3 linear system with Gaussian elimination and no row swapping. The top-left entry is 1e-12 while other entries are near 1, and the computed answer is far from the true solution. The student asks why this happened.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Gaussian elimination is only valid for symmetric matrices, so the method fails on this input"
+        },
+        {
+          "id": "b",
+          "label": "The right-hand side is too large, so dividing the whole system by its largest entry fixes the pivot"
+        },
+        {
+          "id": "c",
+          "label": "The tiny pivot gives huge multipliers that amplify round-off error, so swapping rows to get a larger pivot helps"
+        },
+        {
+          "id": "d",
+          "label": "The matrix must be singular, because any tiny pivot means the determinant is exactly zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Dividing by a tiny pivot creates huge multipliers that magnify round-off; partial pivoting avoids this.",
+        "Distractors wrongly blame singularity, symmetry or scaling of the right-hand side."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Bisection is applied to f(x) = x^2 - 2 on [1, 2]. What is the new interval after one step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "[1.25, 1.75]"
+        },
+        {
+          "id": "b",
+          "label": "[1, 1.5]"
+        },
+        {
+          "id": "c",
+          "label": "[1, 1.25]"
+        },
+        {
+          "id": "d",
+          "label": "[1.5, 2]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The midpoint is 1.5 and f(1.5) = 0.25 > 0, which matches the sign of f(2), so the root lies in [1, 1.5].",
+        "Choosing [1.5, 2] comes from keeping the wrong side of the sign change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Apply one Newton iteration to f(x) = x^2 - 9 starting from x0 = 6. What is x1?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3.0"
+        },
+        {
+          "id": "b",
+          "label": "3.75"
+        },
+        {
+          "id": "c",
+          "label": "4.5"
+        },
+        {
+          "id": "d",
+          "label": "5.25"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "x1 = 6 - f(6)/f'(6) = 6 - 27/12 = 3.75.",
+        "Other values come from using the wrong derivative or forgetting to divide by f'."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Use the composite trapezoidal rule with n = 2 subintervals to approximate the integral of x^2 from 0 to 2. What value results?",
+      "options": [
+        {
+          "id": "a",
+          "label": "8/3"
+        },
+        {
+          "id": "b",
+          "label": "2"
+        },
+        {
+          "id": "c",
+          "label": "4"
+        },
+        {
+          "id": "d",
+          "label": "3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "With h = 1: (h/2)[f(0) + 2f(1) + f(2)] = 0.5(0 + 2 + 4) = 3.",
+        "8/3 is the exact integral, and the other values come from dropping the factor 2 on the middle point."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Use Simpson's rule with n = 2 subintervals to approximate the integral of x^3 from 0 to 2. What value results?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3"
+        },
+        {
+          "id": "b",
+          "label": "5"
+        },
+        {
+          "id": "c",
+          "label": "16/3"
+        },
+        {
+          "id": "d",
+          "label": "4"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "With h = 1: (h/3)[f(0) + 4f(1) + f(2)] = (0 + 4 + 8)/3 = 4.",
+        "Using weights 1, 2, 1 or the wrong factor h/2 gives the other values."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Use the forward difference with h = 0.1 to approximate the derivative of f(x) = x^2 at x = 3. What value results?",
+      "options": [
+        {
+          "id": "a",
+          "label": "6.01"
+        },
+        {
+          "id": "b",
+          "label": "5.9"
+        },
+        {
+          "id": "c",
+          "label": "6.1"
+        },
+        {
+          "id": "d",
+          "label": "6.0"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "(f(3.1) - f(3))/0.1 = (9.61 - 9)/0.1 = 6.1.",
+        "6.0 is the exact derivative or central difference value, and 5.9 comes from a backward-style slip."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Bisection is to be started on [0, 1]. For which functions can it be applied directly and be guaranteed to find a root? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "f(x) = 1/(x - 0.5)"
+        },
+        {
+          "id": "b",
+          "label": "f(x) = x - 0.3"
+        },
+        {
+          "id": "c",
+          "label": "f(x) = x^2 + 1"
+        },
+        {
+          "id": "d",
+          "label": "f(x) = cos(x) - x"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Both are continuous with f(0) and f(1) of opposite signs.",
+        "x^2 + 1 has no sign change, and 1/(x - 0.5) changes sign only through a discontinuity, not a root."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A sensor logs a temperature of 14 C at 2:00 and 20 C at 4:00, with no readings in between. An engineer uses linear interpolation between these two points to estimate the temperature at 3:30.",
+      "options": [
+        {
+          "id": "a",
+          "label": "19.0 C"
+        },
+        {
+          "id": "b",
+          "label": "17.0 C"
+        },
+        {
+          "id": "c",
+          "label": "18.0 C"
+        },
+        {
+          "id": "d",
+          "label": "18.5 C"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The fraction of the interval is 1.5/2 = 0.75, so T = 14 + 0.75 * 6 = 18.5.",
+        "17.0 and 18.0 come from using the wrong fraction of the interval, and 19.0 from misreading the time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Apply two Newton iterations to `f(x) = x^2 - 2` starting at `x0 = 1`. What is `x2`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1.41667"
+        },
+        {
+          "id": "b",
+          "label": "1.41421"
+        },
+        {
+          "id": "c",
+          "label": "1.5"
+        },
+        {
+          "id": "d",
+          "label": "1.33333"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "x1 = 1 - (-1)/2 = 1.5, then x2 = 1.5 - 0.25/3 = 1.41667.",
+        "1.5 is only x1; 1.41421 is the true root, not the second iterate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Bisection is applied to `f(x) = x^3 - x - 2` on [1, 2]. After two iterations, which interval is known to contain the root?",
+      "options": [
+        {
+          "id": "a",
+          "label": "[1.75, 2]"
+        },
+        {
+          "id": "b",
+          "label": "[1.5, 1.75]"
+        },
+        {
+          "id": "c",
+          "label": "[1, 1.5]"
+        },
+        {
+          "id": "d",
+          "label": "[1.5, 2]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "f(1.5) = -0.125 < 0 so the root is in [1.5, 2]; f(1.75) > 0 so it is in [1.5, 1.75].",
+        "[1.5, 2] is the interval after only one iteration."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Use the composite trapezoid rule with n = 4 subintervals to approximate the integral of `x^2` from 0 to 2. What value results?",
+      "options": [
+        {
+          "id": "a",
+          "label": "2.667"
+        },
+        {
+          "id": "b",
+          "label": "2.75"
+        },
+        {
+          "id": "c",
+          "label": "2.5"
+        },
+        {
+          "id": "d",
+          "label": "5.5"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "h = 0.5 and T = 0.5*(0/2 + 0.25 + 1 + 2.25 + 4/2) = 2.75.",
+        "2.667 is the exact value; 5.5 forgets to multiply by h."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "For `f(x) = x^3`, use the central difference with h = 0.1 to approximate `f'(1)`. Which value do you get?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3.00"
+        },
+        {
+          "id": "b",
+          "label": "3.31"
+        },
+        {
+          "id": "c",
+          "label": "3.01"
+        },
+        {
+          "id": "d",
+          "label": "2.71"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "(1.331 - 0.729)/0.2 = 3.01.",
+        "3.31 is the forward difference result, and 2.71 is the backward difference result."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A quadratic polynomial interpolates the points (0, 1), (1, 3) and (2, 7). What value does it give at x = 3?",
+      "options": [
+        {
+          "id": "a",
+          "label": "11"
+        },
+        {
+          "id": "b",
+          "label": "13"
+        },
+        {
+          "id": "c",
+          "label": "9"
+        },
+        {
+          "id": "d",
+          "label": "15"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The interpolant is 1 + x + x^2, so p(3) = 13.",
+        "11 comes from extrapolating linearly with the last slope pattern of the data, ignoring the quadratic term."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Bisection needs a bracket where `f(a)` and `f(b)` have opposite signs. For `f(x) = x^2 - 3`, which intervals are valid starting brackets? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "[-1, 1]"
+        },
+        {
+          "id": "b",
+          "label": "[1, 2]"
+        },
+        {
+          "id": "c",
+          "label": "[2, 3]"
+        },
+        {
+          "id": "d",
+          "label": "[0, 1]"
+        },
+        {
+          "id": "e",
+          "label": "[-2, 0]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "f(1) = -2 and f(2) = 1 differ in sign; f(-2) = 1 and f(0) = -3 differ in sign.",
+        "The other intervals have the same sign at both ends, even though [-1, 1] and others may look symmetric."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A simulation must solve `Ax = b` for 500 different right-hand sides `b`, always with the same dense 2000 x 2000 matrix `A`. You want the lowest total cost while staying accurate. Which approach should you implement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Factor `A = LU` with pivoting once, then do forward and back substitution for each `b`"
+        },
+        {
+          "id": "b",
+          "label": "Run Gaussian elimination from scratch for each `b`, because each system is then solved independently"
+        },
+        {
+          "id": "c",
+          "label": "Apply Cramer's rule with determinants for each `b`, because it gives an exact formula for every component"
+        },
+        {
+          "id": "d",
+          "label": "Use Jacobi iteration for every `b`, because iterative methods always cost less than direct methods"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The O(n^3) factorisation is paid once and each solve costs only O(n^2).",
+        "Re-eliminating repeats the O(n^3) work, and Cramer's rule is far costlier; Jacobi needs convergence conditions that are not given."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Newton's method on `f(x) = x^3 - 2x + 2` from `x0 = 0` gives 0, 1, 0, 1, ... What explains this behaviour?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The root is a multiple root, so convergence is only linear and the iterates stall near 0 and 1"
+        },
+        {
+          "id": "b",
+          "label": "Round-off error accumulates at each step and pushes the iterates back toward the starting value"
+        },
+        {
+          "id": "c",
+          "label": "The derivative is zero at x0 = 0, so the first step is undefined and the code returns the start again"
+        },
+        {
+          "id": "d",
+          "label": "The Newton step from 0 lands at 1 and the step from 1 lands at 0, so the iterates form a 2-cycle"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "f'(0) = -2 gives x1 = 1, and f(1) = 1, f'(1) = 1 gives x2 = 0, a cycle.",
+        "f'(0) is not zero, and the pattern is exact, not caused by round-off or multiplicity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A program computes `(1 - cos(x)) / x^2` in double precision. At `x = 1e-8` it returns 0 instead of about 0.5. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Subtracting two nearly equal numbers cancels almost all significant digits"
+        },
+        {
+          "id": "b",
+          "label": "Truncation error from stopping the Taylor series of cosine after too few terms"
+        },
+        {
+          "id": "c",
+          "label": "Overflow when dividing by the very small quantity `x^2` in floating point"
+        },
+        {
+          "id": "d",
+          "label": "An ill-conditioned input that makes every algorithm unstable for this function"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "cos(1e-8) rounds to 1, so the subtraction yields 0: catastrophic cancellation.",
+        "The function is well-conditioned; a rewrite such as 2 sin^2(x/2)/x^2 avoids the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A forward-difference derivative approximation has error 5e-2 at h = 0.1 and 2.5e-2 at h = 0.05. What do these data indicate about the method's order?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Second order, since the error shrinks as h gets smaller"
+        },
+        {
+          "id": "b",
+          "label": "Fourth order, since the error is small at both step sizes"
+        },
+        {
+          "id": "c",
+          "label": "Round-off dominated, since the error does not fall by a factor of 4"
+        },
+        {
+          "id": "d",
+          "label": "First order, since halving h halves the error"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Error proportional to h means halving h halves the error: first order.",
+        "Second order would give a factor of 4; round-off domination would show the error growing as h shrinks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Gaussian elimination without pivoting on `[[1e-20, 1], [1, 1]] x = [1, 2]` in double precision gives a badly wrong answer. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The right-hand side has too few significant digits for the system to be solved accurately"
+        },
+        {
+          "id": "b",
+          "label": "The tiny pivot creates a multiplier of 1e20 that swamps the other entries and loses information"
+        },
+        {
+          "id": "c",
+          "label": "The matrix is nearly singular, so its condition number is huge and any method fails"
+        },
+        {
+          "id": "d",
+          "label": "The matrix is not diagonally dominant, so elimination cannot finish without iteration"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A multiplier of 1e20 makes the updated entries lose the original data; row swapping fixes it.",
+        "The matrix is well-conditioned (condition number near 2.6), so this is an algorithm instability, not an ill-conditioned problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A degree-10 polynomial interpolates `1/(1 + 25x^2)` at 11 equally spaced points on [-1, 1]. It fits well in the middle but oscillates wildly near the ends. What is the best diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Equally spaced nodes make the node-polynomial factor in the error large near the ends (Runge phenomenon)"
+        },
+        {
+          "id": "b",
+          "label": "Too few nodes were used, so adding more equally spaced nodes will steadily reduce the end error"
+        },
+        {
+          "id": "c",
+          "label": "Round-off in the Lagrange formula is amplified, so a higher-precision type would remove the oscillations"
+        },
+        {
+          "id": "d",
+          "label": "The function has a jump, so no polynomial can approximate it well on any set of nodes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "With equal spacing the factor product(x - xi) is largest near the endpoints, and the error grows with degree for this function.",
+        "The function is smooth, and more equispaced nodes make the oscillation worse; Chebyshev nodes help."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe a linear system `Ax = b` with a very large condition number for `A`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A tiny relative change in `b` can cause a large relative change in the solution `x`"
+        },
+        {
+          "id": "b",
+          "label": "The computed solution can lose many digits even when the elimination is backward stable"
+        },
+        {
+          "id": "c",
+          "label": "Partial pivoting removes the ill-conditioning by changing the system's sensitivity"
+        },
+        {
+          "id": "d",
+          "label": "A tiny residual `||b - Ax_computed||` guarantees that `x_computed` is accurate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Sensitivity to perturbations is what condition number measures, and it limits accuracy even for stable algorithms.",
+        "A small residual does not imply a small error here, and pivoting improves stability, not the conditioning of the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A student applies composite Simpson's rule to the integral of `sqrt(x)` from 0 to 1, doubling n each time. The error shrinks by only about 2.8 per doubling, not the 16 expected for a fourth-order rule. The code's weights (1, 4, 2, 4, ..., 4, 1) are correct. What is the most likely reason?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Simpson's rule needs n to be a multiple of 4, so the odd doublings are invalid"
+        },
+        {
+          "id": "b",
+          "label": "The fourth derivative of `sqrt(x)` is unbounded at 0, so the usual error bound does not apply"
+        },
+        {
+          "id": "c",
+          "label": "The sum of the interior weights is miscounted, which silently lowers the order"
+        },
+        {
+          "id": "d",
+          "label": "Round-off error dominates at these step sizes, so halving h no longer helps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The singular behaviour at x = 0 reduces the convergence to about h^1.5, a factor near 2.8 per halving.",
+        "The weights are stated to be correct, an even n suffices, and round-off would not give a steady factor of 2.8."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Newton's method is applied to f(x) = x^3 - 2x + 2 with x0 = 0. The iterates alternate 0, 1, 0, 1, ... and never converge. Which diagnosis is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The second derivative is negative at both points, which flips the sign of every update and blocks convergence"
+        },
+        {
+          "id": "b",
+          "label": "The tangent at x=0 meets the axis at x=1 and the tangent at x=1 meets it at x=0, so the iteration is trapped in a 2-cycle"
+        },
+        {
+          "id": "c",
+          "label": "Since f'(0) equals zero, the first step divides by zero and every later iterate is only a rounding artifact"
+        },
+        {
+          "id": "d",
+          "label": "The function has no real root, so Newton's method is forced to oscillate instead of converging to anything"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "f(0)=2, f'(0)=-2 gives x1=1, and f(1)=1, f'(1)=1 gives x2=0, so the iteration is a genuine 2-cycle.",
+        "Distractors misstate the facts: f'(0) is -2, a real root exists near -1.77, and f'' is 0 and 6 at the two points."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A forward difference (f(x+h)-f(x))/h for f = sin at x = 1 is computed in double precision. The error falls as h goes from 1e-1 to about 1e-8, then rises as h goes down to 1e-15. What explains the rise?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The truncation term h f''(x)/2 starts to grow once h falls below the square root of machine epsilon"
+        },
+        {
+          "id": "b",
+          "label": "Division by a very small h is itself inexact, which adds an error proportional to h to the computed quotient"
+        },
+        {
+          "id": "c",
+          "label": "Cancellation in f(x+h)-f(x) leaves few correct digits, and dividing by a tiny h magnifies that rounding error"
+        },
+        {
+          "id": "d",
+          "label": "Higher derivatives of sin become unbounded as h shrinks, so the Taylor remainder stops being a small quantity"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Rounding error of size about eps/h from subtractive cancellation grows as h shrinks while truncation error falls.",
+        "Distractors wrongly claim truncation error grows or that derivatives of sin blow up."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Gaussian elimination without row exchanges is applied to [[1e-20, 1],[1, 1]] x = [1, 2] in double precision. It returns x1 = 0, although the true x1 is about 1. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Double precision cannot represent 1e-20, so the entry is stored as zero and the system becomes singular"
+        },
+        {
+          "id": "b",
+          "label": "The multiplier 1e20 fills the updated second row with huge entries, so the original information is rounded away"
+        },
+        {
+          "id": "c",
+          "label": "Back substitution divides by the smallest entry first, so errors pile up there whatever the pivot order is"
+        },
+        {
+          "id": "d",
+          "label": "The matrix is singular to working precision, so no algorithm could recover x1 to any useful accuracy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A tiny pivot gives a giant multiplier and element growth, which swamps the other entries; partial pivoting avoids this.",
+        "The matrix has a small condition number and 1e-20 is representable, so the other options misdiagnose the failure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Composite Simpson's rule on the integral of sqrt(x) over [0, 1] shows error falling only like h^1.5 rather than h^4. Which analysis explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The derivative of sqrt(x) is unbounded at 0, so the fourth-derivative error bound fails and the first panel dominates the error"
+        },
+        {
+          "id": "b",
+          "label": "Rounding error in sqrt grows with the number of panels, so roundoff rather than truncation dominates the total error"
+        },
+        {
+          "id": "c",
+          "label": "An even number of subintervals makes the weights 4 and 2 misalign for non-periodic functions, reducing the order"
+        },
+        {
+          "id": "d",
+          "label": "Simpson's rule drops two orders of accuracy on any integrand that is not a polynomial of degree three or less"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The h^4 order assumes a bounded fourth derivative; the endpoint singularity breaks that and limits the rate.",
+        "Other options invent order loss for all non-polynomials or blame roundoff, which would not give a clean h^1.5 rate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Solving H x = b for the 12x12 Hilbert matrix by LU with partial pivoting gives a residual near 1e-16 times norm(b), yet the computed x has almost no correct digits. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "H is badly ill-conditioned, so a tiny residual is compatible with a large error; the error can reach cond(H) times the relative residual"
+        },
+        {
+          "id": "b",
+          "label": "Hilbert matrices are singular in exact arithmetic, so any computed solution is essentially arbitrary"
+        },
+        {
+          "id": "c",
+          "label": "The residual is computed in the same precision as the solve, so it is always reported small whatever the true error is"
+        },
+        {
+          "id": "d",
+          "label": "Partial pivoting is unstable on symmetric matrices, so the solver reports a misleadingly small residual for a wrong answer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Forward error is bounded by cond(A) times relative residual, and cond of the 12x12 Hilbert matrix is around 1e16.",
+        "Distractors blame pivoting or singularity; Hilbert matrices are nonsingular and pivoted LU is backward stable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "The quadratic formula in double precision is used for x^2 - 1e8 x + 1 = 0. The larger root is accurate but the smaller root (about 1e-8) has few correct digits. Which statements explain this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "For the small root, -b + sqrt(b^2 - 4ac) subtracts two nearly equal numbers, cancelling leading digits"
+        },
+        {
+          "id": "b",
+          "label": "The small root is inherently ill-conditioned in b, so no formula could compute it accurately"
+        },
+        {
+          "id": "c",
+          "label": "The computed discriminant becomes negative through rounding, so the small root comes from a complex pair"
+        },
+        {
+          "id": "d",
+          "label": "The large root also suffers cancellation, but its larger magnitude hides the lost digits"
+        },
+        {
+          "id": "e",
+          "label": "The subtraction's absolute rounding error is about eps times 1e8, which is huge next to a root of size 1e-8"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Cancellation leaves an absolute error near eps*1e8, which overwhelms a root of size 1e-8.",
+        "The discriminant stays positive, the large root adds same-sign terms, and the small root is well conditioned (c/(a*large root) works)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An analyst interpolates f(x) = 1/(1+25x^2) on [-1, 1] with one degree-14 polynomial through 15 equally spaced points. The fit is excellent near the centre but oscillates wildly near x = ±1, and adding more equispaced points makes it worse. Which explanation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The function is discontinuous at its peak, so the interpolation error bound is infinite for every possible node placement"
+        },
+        {
+          "id": "b",
+          "label": "Rounding error in the Vandermonde system dominates, so solving the same problem in exact arithmetic would make the interpolants converge"
+        },
+        {
+          "id": "c",
+          "label": "The node polynomial grows rapidly near the ends for equispaced nodes, and the poles of f at ±i/5 prevent the interpolants from converging"
+        },
+        {
+          "id": "d",
+          "label": "Polynomial interpolation of an even function loses its symmetry, and that asymmetry shows up as error at the endpoints"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "This is the Runge phenomenon: equispaced nodes plus complex singularities near the interval make the interpolation error grow with degree.",
+        "The function is smooth and the divergence occurs even in exact arithmetic, so roundoff and discontinuity explanations fail."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must find a root of a smooth function whose evaluations cost minutes and whose derivative is unavailable. A sign-changing bracket is known. The method must never diverge and should converge faster than bisection. Which is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Brent's method, which takes interpolation steps when safe and falls back to bisection to keep the bracket"
+        },
+        {
+          "id": "b",
+          "label": "Fixed-point iteration on x = x + f(x), because it avoids both a derivative and the need for any bracketing"
+        },
+        {
+          "id": "c",
+          "label": "The secant method started from the bracket ends, because it is superlinear and needs one evaluation per step"
+        },
+        {
+          "id": "d",
+          "label": "Newton's method with a finite-difference derivative, because quadratic convergence minimises the number of expensive evaluations"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Brent's method keeps a guaranteed bracket while usually converging superlinearly, meeting both criteria.",
+        "Newton with finite differences and secant lack a convergence guarantee, and the fixed-point form need not contract."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must integrate an analytic, non-oscillatory function over [0, 1] to absolute error 1e-12. Each function evaluation takes seconds, so the number of evaluations is the main cost. Which method best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Gauss–Legendre quadrature with a modest number of nodes, because error decays geometrically in the node count for analytic integrands"
+        },
+        {
+          "id": "b",
+          "label": "Monte Carlo with 1e6 random samples, because its error does not depend on how smooth the integrand is"
+        },
+        {
+          "id": "c",
+          "label": "Composite trapezoid rule with 1e6 uniform panels, because its weights are all positive and the rule is therefore robust"
+        },
+        {
+          "id": "d",
+          "label": "Composite Simpson's rule with step halving until estimates agree, because it is O(h^4) and reuses all earlier evaluations"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Gauss rules converge exponentially for analytic integrands, so few expensive evaluations reach 1e-12.",
+        "Trapezoid and Simpson need far more evaluations, and Monte Carlo error is about 1e-3 at 1e6 samples."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A 2D Poisson discretisation gives a sparse symmetric positive definite system with 4 million unknowns on a machine with 16 GB of RAM. A relative residual of 1e-8 is required. Which approach best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An explicit inverse from Gauss–Jordan elimination, since the inverse can be reused for later right-hand sides"
+        },
+        {
+          "id": "b",
+          "label": "Dense LU with partial pivoting, since it is backward stable and delivers the answer in a fixed number of steps"
+        },
+        {
+          "id": "c",
+          "label": "Preconditioned conjugate gradients, since it needs only sparse products and a few vectors and exploits symmetric positive definiteness"
+        },
+        {
+          "id": "d",
+          "label": "Jacobi iteration, since each sweep costs one sparse product and the sweep count stays small as the grid is refined"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Preconditioned CG fits in memory and converges in far fewer iterations than stationary methods for SPD systems.",
+        "Dense storage of 4 million unknowns would need about 128 TB, and Jacobi's iteration count grows as the grid is refined."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A degree-9 polynomial least-squares fit to 200 points has a design matrix A with cond(A) about 1e7 in double precision (eps about 1e-16). You need at least 6 correct digits in the coefficients. Which method best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cholesky on the normal equations, since forming A^T A reduces the problem to a small symmetric system that is solved stably"
+        },
+        {
+          "id": "b",
+          "label": "Gaussian elimination on 10 chosen rows, since a square system is more stable than an overdetermined one"
+        },
+        {
+          "id": "c",
+          "label": "Normal equations with iterative refinement in double precision, since refinement restores full accuracy whatever the conditioning"
+        },
+        {
+          "id": "d",
+          "label": "Householder QR on A, since the error scales with cond(A), about 1e7, rather than with its square"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "QR error is about cond(A)*eps, near 1e-9, which meets the 6-digit target.",
+        "Normal equations have condition about 1e14 and leave almost no digits; refinement in the same precision does not fix that."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A colleague stops Newton's method on f(x) = (x-1)^3 when |x_{k+1} - x_k| < 1e-10 and claims the error is below 1e-10. Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sound: the step size bounds the error for any iteration, since the error equals the distance moved in the final step"
+        },
+        {
+          "id": "b",
+          "label": "Flawed: at a triple root Newton converges only linearly with ratio 2/3, so the true error is about twice the step, near 2e-10"
+        },
+        {
+          "id": "c",
+          "label": "Sound: Newton's method is quadratically convergent, so the error is always far smaller than the last step taken"
+        },
+        {
+          "id": "d",
+          "label": "Flawed: Newton's method diverges at multiple roots, so the iterates cannot be approaching 1 in the first place"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "For multiplicity 3 the error ratio is 2/3, so step = e/3 and the remaining error is about 2 times the step.",
+        "Newton converges (linearly) at multiple roots, and a small step bounds the error only when convergence is fast."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "You must interpolate 30 equispaced samples of a smooth function and then evaluate the result at arbitrary points. Which are sound reasons to prefer a cubic spline to one degree-29 polynomial? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The spline coefficients come from a tridiagonal system, so construction costs O(n) rather than a dense solve"
+        },
+        {
+          "id": "b",
+          "label": "Local cubic pieces avoid the endpoint oscillation seen with high-degree equispaced polynomial interpolation"
+        },
+        {
+          "id": "c",
+          "label": "For smooth functions the spline error shrinks like h^4 as samples are added, while the polynomial can get worse"
+        },
+        {
+          "id": "d",
+          "label": "The spline passes through more of the data points than the polynomial, which can match at most 15 points"
+        },
+        {
+          "id": "e",
+          "label": "The spline has continuous derivatives of every order, so it reproduces any smooth function exactly between nodes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Splines avoid Runge oscillation, cost O(n) via a tridiagonal solve, and give O(h^4) error for smooth data.",
+        "A cubic spline is only C2 and not exact between nodes, and both interpolants pass through all 30 points."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A sensor gives position samples every 0.01 s with random noise of about 1e-3 units, and the true motion is smooth with moderate acceleration. You must estimate velocity with the lowest overall error. Which option best meets this goal?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Interpolate to spacing 0.001 and take central differences, because the smaller h reduces the truncation error of the derivative"
+        },
+        {
+          "id": "b",
+          "label": "Fit low-degree polynomials over a sliding window of samples and differentiate the fit, trading a little bias for far less noise amplification"
+        },
+        {
+          "id": "c",
+          "label": "Apply Richardson extrapolation to central differences at spacings 0.01 and 0.02, because removing the leading error term gives the best derivative"
+        },
+        {
+          "id": "d",
+          "label": "Use a 7-point high-order difference stencil, because truncation error falls with stencil order and random noise averages out"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Differencing amplifies noise by about 1/h, so local least-squares smoothing (Savitzky–Golay style) gives the best bias–variance balance.",
+        "Higher-order stencils, extrapolation and finer interpolated spacing do not reduce measurement noise and can amplify it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Newton's method is applied to f(x) = x^3 - 2x + 2 from x0 = 0. The iterates alternate 0, 1, 0, 1, ... Which judgement about a production root finder is best supported?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rounding error causes the oscillation, so switching to extended precision would fix it"
+        },
+        {
+          "id": "b",
+          "label": "The iteration converges slowly to the root, so a tighter tolerance will eventually succeed"
+        },
+        {
+          "id": "c",
+          "label": "Newton is trapped in a 2-cycle here, so the solver needs a bracketing or damped fallback"
+        },
+        {
+          "id": "d",
+          "label": "A multiple root at x = 0 causes linear convergence, so deflation is the right remedy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Newton maps 0 to 1 and 1 back to 0 exactly, a genuine cycle independent of precision or tolerance.",
+        "Distractors confuse cycling with slow convergence, multiple roots, or rounding."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A colleague claims Simpson's rule is always more accurate than the trapezoid rule on the same nodes. Evaluate this for a smooth analytic periodic function integrated over one full period.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claim holds: Simpson's error is O(h^4) against O(h^2), so it wins for every smooth integrand"
+        },
+        {
+          "id": "b",
+          "label": "The claim fails: both rules are exact for periodic functions, because the oscillating parts integrate to zero"
+        },
+        {
+          "id": "c",
+          "label": "The claim holds: trapezoid error always stays O(h^2), because Euler-Maclaurin corrections never cancel"
+        },
+        {
+          "id": "d",
+          "label": "The claim fails: the trapezoid rule converges geometrically there, because endpoint error terms cancel by periodicity"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Euler-Maclaurin endpoint terms cancel for periodic integrands, giving spectral convergence for the trapezoid rule.",
+        "Distractors apply order-of-accuracy rules blindly or overstate exactness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A solver returns x_hat for Ax = b with a relative residual of 1e-16, and cond(A) = 1e12. Which is the best judgement of the relative error in x_hat?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is about 1e-28, because the residual and the conditioning multiply to shrink error"
+        },
+        {
+          "id": "b",
+          "label": "It is about 1e-16, because a tiny residual means the solution is equally accurate"
+        },
+        {
+          "id": "c",
+          "label": "It is exactly zero, because a backward stable solver returns the exact solution"
+        },
+        {
+          "id": "d",
+          "label": "It may be as large as about 1e-4, because error can grow with cond(A) times the residual"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Forward error can reach roughly cond(A) times the relative residual, here about 1e-4.",
+        "Distractors equate small residual with small error or misuse backward stability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You estimate f'(x) with (f(x+h) - f(x))/h in double precision, where f and its derivatives are of order 1 near x. Which h gives the smallest total error?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1e-8, balancing truncation error against rounding error"
+        },
+        {
+          "id": "b",
+          "label": "1e-16, since truncation error vanishes as h shrinks"
+        },
+        {
+          "id": "c",
+          "label": "1e-12, since rounding error is negligible there"
+        },
+        {
+          "id": "d",
+          "label": "1e-4, since rounding error dominates below that"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Truncation error ~h and rounding error ~eps/h balance near h = sqrt(eps), about 1e-8.",
+        "Distractors ignore the growth of rounding error as h shrinks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You need the integral of cos(x)/sqrt(x) over [0,1] to 1e-10 with the fewest function evaluations. Which approach is the best judged choice?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Gauss-Legendre with 20 nodes directly in x, since the integrand is smooth elsewhere"
+        },
+        {
+          "id": "b",
+          "label": "Substitute x = t^2 to get a smooth integrand, then apply Gauss-Legendre in t"
+        },
+        {
+          "id": "c",
+          "label": "Trapezoid rule with Richardson extrapolation, since it cancels the singular term"
+        },
+        {
+          "id": "d",
+          "label": "Composite Simpson with 1e6 equal panels, skipping the sample at x = 0"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The substitution gives 2cos(t^2), which is analytic, so Gauss-Legendre converges rapidly.",
+        "Distractors apply high-order rules to an endpoint singularity, which ruins their convergence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A teammate solves Ax = b for a large sparse nonsingular A by computing inv(A) explicitly and then x = inv(A)*b. Which criticisms are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Nonsingular matrices have no inverse in floating point, so the code cannot run"
+        },
+        {
+          "id": "b",
+          "label": "Factorizations cannot be reused across right-hand sides, so the inverse is needed"
+        },
+        {
+          "id": "c",
+          "label": "Forming the inverse costs more operations than a single factorization and solve"
+        },
+        {
+          "id": "d",
+          "label": "The inverse of a sparse matrix is usually dense, wasting memory and time"
+        },
+        {
+          "id": "e",
+          "label": "The computed x is typically no more accurate than, and often worse than, a direct solve"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Explicit inversion costs more, destroys sparsity, and gives no accuracy gain over a factorization-based solve.",
+        "Distractors claim inverses cannot be computed or that factorizations cannot be reused, both false."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "An adaptive quadrature routine integrates a function whose value is about 1e8. The team sets an absolute tolerance of 1e-10, and the routine hits its maximum subdivision depth without converging. Double precision is used. Which judgement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The depth limit is too low, so raise it until the absolute tolerance is met"
+        },
+        {
+          "id": "b",
+          "label": "The tolerance is below attainable rounding error (about 1e-8 absolute), so use a relative tolerance"
+        },
+        {
+          "id": "c",
+          "label": "The routine's error estimator is biased, so replace it with a higher-order rule on each panel"
+        },
+        {
+          "id": "d",
+          "label": "The integrand must have a singularity, so switch to a random sampling method"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "With value 1e8 and eps near 1e-16, absolute accuracy better than about 1e-8 is unattainable; relative tolerance is appropriate.",
+        "Distractors blame the estimator, depth, or a singularity instead of floating-point limits."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a root finder for a continuous f with a known sign change on [a,b]. Constraints: guaranteed convergence, typically superlinear speed, and no derivative available. Which design meets all of them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Newton's method using a finite-difference derivative, started at the midpoint"
+        },
+        {
+          "id": "b",
+          "label": "Brent's method, combining bisection with secant and inverse quadratic steps in a bracket"
+        },
+        {
+          "id": "c",
+          "label": "Plain bisection, run until the bracket falls below the tolerance"
+        },
+        {
+          "id": "d",
+          "label": "Unbracketed secant iteration, started from the two endpoints"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Brent's method keeps a bracket for guaranteed convergence and uses interpolation steps for superlinear speed without derivatives.",
+        "Distractors drop either the guarantee (Newton, secant) or the speed (bisection)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a routine for log(1+x) accurate to near full double precision for every x in [0,1], including x near 1e-12, using only log and basic arithmetic. Which design meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Set u = 1 + x; if u == 1 return x, else return log(u) * x / (u - 1)"
+        },
+        {
+          "id": "b",
+          "label": "Use the three-term Taylor series x - x^2/2 + x^3/3 for all x"
+        },
+        {
+          "id": "c",
+          "label": "Compute log(1 + x) in single precision, then refine by one Newton step"
+        },
+        {
+          "id": "d",
+          "label": "Compute log(1 + x) directly, since log is correctly rounded"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The correction x/(u-1) compensates for rounding in u = 1 + x, keeping accuracy at all scales.",
+        "Direct evaluation loses digits for tiny x, and a short Taylor series fails near x = 1."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a plan for a dense, nonsymmetric 2000 x 2000 system A x = b where A is fixed and 500 different right-hand sides arrive one at a time. Which plan is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Form inv(A) once and multiply it by each right-hand side"
+        },
+        {
+          "id": "b",
+          "label": "Run LU with partial pivoting once, then do two triangular solves per right-hand side"
+        },
+        {
+          "id": "c",
+          "label": "Run Gaussian elimination without pivoting on every new system"
+        },
+        {
+          "id": "d",
+          "label": "Run Cholesky once, then reuse its factor for each right-hand side"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "One pivoted LU factorization costs O(n^3) and each later solve costs O(n^2), stable for general A.",
+        "Cholesky needs a symmetric positive definite matrix; the other options cost more or lose stability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a quadrature for f over [0,2] where f is smooth except for a derivative jump at the known point x = 0.7. The target is 1e-10 using a high-order rule. Which design works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Apply Gauss-Legendre on [0,0.7] and [0.7,2] separately, so each piece is smooth"
+        },
+        {
+          "id": "b",
+          "label": "Use a composite trapezoid rule on [0,2] with a very small step"
+        },
+        {
+          "id": "c",
+          "label": "Apply one high-order Gauss-Legendre rule over [0,2], since f is continuous"
+        },
+        {
+          "id": "d",
+          "label": "Apply Simpson's rule on [0,2] with a node placed near 0.7"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Splitting at the kink makes each subinterval analytic so Gauss-Legendre converges rapidly.",
+        "A single rule across the kink loses its high-order convergence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design an interpolant through monotone increasing data points. Constraints: it must be monotone between nodes, and its first derivative must be continuous. Which choice meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Piecewise linear interpolation, since it is monotone on every interval"
+        },
+        {
+          "id": "b",
+          "label": "A single polynomial through all points, since it is infinitely smooth"
+        },
+        {
+          "id": "c",
+          "label": "A natural cubic spline, since it is C2 and therefore smooth enough"
+        },
+        {
+          "id": "d",
+          "label": "A monotone piecewise cubic Hermite interpolant (PCHIP) with limited slopes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "PCHIP limits node slopes to enforce monotonicity while remaining C1.",
+        "Splines and global polynomials can overshoot; linear interpolation has discontinuous derivatives."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A proposed adaptive Simpson integrator sometimes loops forever or returns results missing the tolerance. Which additions make it terminate and meet its tolerance sensibly? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Halve the tolerance and never subdivide, to save evaluations"
+        },
+        {
+          "id": "b",
+          "label": "Use tolerance = max(abs_tol, rel_tol * |estimated integral|)"
+        },
+        {
+          "id": "c",
+          "label": "Estimate panel error by comparing one Simpson step with two half-width steps"
+        },
+        {
+          "id": "d",
+          "label": "Cap the recursion depth and report failure if the cap is reached"
+        },
+        {
+          "id": "e",
+          "label": "Accept a panel whenever the midpoint function value is below the tolerance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A depth cap guarantees termination, a combined tolerance respects floating point limits, and the comparison gives an error estimate.",
+        "Midpoint size says nothing about integration error, and never subdividing cannot meet tolerance."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A 1 kHz sensor stream has a smooth signal plus noise of amplitude 1e-3. You must estimate the signal's first derivative in real time. A central difference with h = 1 ms gives noise of order 1, swamping the signal. Which design best satisfies the need to suppress noise while keeping the derivative accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use a one-sided forward difference, since it avoids cancellation"
+        },
+        {
+          "id": "b",
+          "label": "Use a high-order finite-difference stencil over the nearest 3 samples only"
+        },
+        {
+          "id": "c",
+          "label": "Use a smaller step by interpolating the stream to 100 kHz before differencing"
+        },
+        {
+          "id": "d",
+          "label": "Fit a local low-degree polynomial over a sliding window and differentiate it (Savitzky-Golay)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A sliding-window least-squares polynomial fit averages noise while preserving the smooth signal's derivative.",
+        "Smaller steps or short stencils amplify noise further, and forward differences are no less noisy."
+      ],
+      "reviewed": false
+    }
+  ]
+}
