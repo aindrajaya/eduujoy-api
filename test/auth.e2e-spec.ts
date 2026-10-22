@@ -259,6 +259,25 @@ describe('auth (e2e)', () => {
       expect(cookie(res, 'ej_rt')).toMatch(/ej_rt=;/);
     });
 
+    // Prod, 22 Oct 2026: POST /v1/auth/refresh answered 403 at 1 ms. The status tells the two apart:
+    // 403 CSRF_REJECTED means the request lacked the headers (no browser using our UI sends that);
+    // 401 means headers fine, no valid refresh cookie.
+    it.each([
+      ['no X-Requested-With', { Origin: ORIGIN }],
+      ['a disallowed Origin', { Origin: 'https://evil.example', 'X-Requested-With': 'eduujoy' }],
+      ['a wrong X-Requested-With', { Origin: ORIGIN, 'X-Requested-With': 'XMLHttpRequest' }],
+    ])('rejects a refresh with %s as 403 CSRF_REJECTED, before looking at cookies', async (_label, headers) => {
+      const res = await http().post('/v1/auth/refresh').set(headers).set('Cookie', 'ej_rt=whatever').expect(403);
+
+      expect(problem(res).code).toBe('CSRF_REJECTED');
+    });
+
+    it('answers a refresh with the right headers but no refresh cookie with 401', async () => {
+      const res = await http().post('/v1/auth/refresh').set(csrf).expect(401);
+
+      expect(problem(res).code).not.toBe('CSRF_REJECTED');
+    });
+
     it('still requires the CSRF headers to log out', async () => {
       const res = await http().post('/v1/auth/logout').expect(403);
 
