@@ -9,7 +9,9 @@ import { JobQueue, JobRepository, JobSignals } from '../../src/shared/jobs';
 // Operator CLI: `pnpm billing:reprocess <eventId>` shows the event's state (dry run);
 // `pnpm billing:reprocess <eventId> --yes` queues a fresh billing-event job for it. Only events never
 // processed (processed_at null) are queued, and a repeat run cannot credit twice. The API's executor
-// is push-driven, so the job runs on its next wake-up (any webhook or job) or its next restart.
+// is push-driven and never polls, so a job queued from here waits until the API pumps: restart the
+// Koyeb service to run it now; otherwise it runs at the next boot (scale-to-zero wakes on the first
+// request after an idle hour) or when any webhook or job next runs in the API.
 // Prints the target database host first; never prints the event payload. Wired by hand (tsx emits no
 // decorator metadata).
 
@@ -47,7 +49,7 @@ async function main(): Promise<void> {
         process.stdout.write(`${result.type} is unprocessed. Re-run with --yes to queue it.\n`);
         break;
       case 'queued':
-        process.stdout.write(`Queued job ${result.jobId} for ${result.type}. It runs on the API's next wake-up or restart.\n`);
+        process.stdout.write(`Queued job ${result.jobId} for ${result.type}. Restart the Koyeb service to run it now; otherwise it runs at the API's next boot or webhook.\n`);
         break;
     }
   } finally {
