@@ -253,11 +253,11 @@
       "options": [
         {
           "id": "a",
-          "label": "To keep programs from using any memory at all"
+          "label": "To stop programs from reading or writing any memory outside the kernel's own"
         },
         {
           "id": "b",
-          "label": "To make programs run faster by skipping checks"
+          "label": "To make programs run faster by skipping hardware checks on trusted code"
         },
         {
           "id": "c",
@@ -265,7 +265,7 @@
         },
         {
           "id": "d",
-          "label": "To let users edit kernel code while it runs"
+          "label": "To let users edit kernel code safely while the system is still running"
         }
       ],
       "answerKey": {
@@ -2340,19 +2340,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Read the file into one 200 GB malloc buffer, then process it"
+          "label": "Read the file into one 200 GB malloc buffer, letting swap absorb the excess, then process it in place"
         },
         {
           "id": "b",
-          "label": "Read sequentially with large aligned reads, using posix_fadvise sequential and DONTNEED hints after each chunk to drop used pages"
+          "label": "Read sequentially in large aligned chunks, using posix_fadvise SEQUENTIAL and DONTNEED to drop used pages"
         },
         {
           "id": "c",
-          "label": "Use many small random reads so the readahead window stays minimal"
+          "label": "mmap the file and touch every page in order with default settings, so the kernel's LRU keeps the newest pages"
         },
         {
           "id": "d",
-          "label": "mmap the whole file and touch every page, relying on the OOM killer to reclaim memory"
+          "label": "Use many small random reads with a minimal readahead window, so each request stays cheap and cache use stays low"
         }
       ],
       "answerKey": {

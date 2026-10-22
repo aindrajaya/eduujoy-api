@@ -473,19 +473,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The status code says success, so clients and caches cannot tell the request failed"
+          "label": "The 200 status says success, so clients and caches can't tell it failed"
         },
         {
           "id": "b",
-          "label": "The message is too short, and the status code is unrelated to the outcome"
+          "label": "The error message is too brief, so it should list every field that was searched"
         },
         {
           "id": "c",
-          "label": "The error body should be XML, because JSON cannot carry error messages"
+          "label": "The error body should be XML, since JSON is not suited to carrying error details"
         },
         {
           "id": "d",
-          "label": "The response should use 500, because every failure is a server problem"
+          "label": "The response should use 500, since a missing user means the server failed to respond"
         }
       ],
       "answerKey": {
@@ -719,19 +719,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It forces every client to upgrade at once, which keeps the codebase simple"
+          "label": "It makes the old and new formats share one codebase, so the team maintains fewer endpoints"
         },
         {
           "id": "b",
-          "label": "Version numbers in the URL make the API faster to load for every client"
+          "label": "It lets the URL signal which fields exist, so clients can skip reading the documentation"
         },
         {
           "id": "c",
-          "label": "It lets the breaking change ship while existing clients keep working until they migrate"
+          "label": "It ships the breaking change while existing clients keep working until they migrate"
         },
         {
           "id": "d",
-          "label": "It avoids documenting the change, since the version number explains it all"
+          "label": "It gives clients a cached copy of the new format, so the v2 responses load faster for them"
         }
       ],
       "answerKey": {
@@ -1701,19 +1701,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The endpoint ignores the state conflict; it should reject the invalid transition with a 409 and a machine-readable reason"
+          "label": "The endpoint hides a state conflict; it should reject the invalid transition with 409 and a machine-readable reason"
         },
         {
           "id": "b",
-          "label": "The 200 status is correct for a no-op, but the response must drop its body so support sees the failure"
+          "label": "The 200 status is correct for a no-op, but the response should drop its body so that support can see the failure clearly"
         },
         {
           "id": "c",
-          "label": "Cancelling should always return 404 once an order has shipped, because the cancel resource no longer exists"
+          "label": "Cancelling should return 404 once an order has shipped, because the cancel action no longer exists for that order at all"
         },
         {
           "id": "d",
-          "label": "The verb in the path violates REST, so the order status will not persist until it becomes a PUT"
+          "label": "The verb in the path breaks REST naming rules, so the cancel should be a PUT or DELETE and then the 200 would be accurate"
         }
       ],
       "answerKey": {

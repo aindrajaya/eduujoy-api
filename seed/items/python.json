@@ -402,15 +402,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It sets the data type of a variable"
+          "label": "It declares the data type of the variables on that line"
         },
         {
           "id": "b",
-          "label": "It marks a line as a comment"
+          "label": "It marks the rest of the line as a comment to skip"
         },
         {
           "id": "c",
-          "label": "It only makes code easier to read"
+          "label": "It only makes code easier for people to read, as in most languages"
         },
         {
           "id": "d",
@@ -2124,7 +2124,7 @@
         },
         {
           "id": "b",
-          "label": "`except ValueError as e: log.error(e); return 80`"
+          "label": "`except ValueError as e: raise ConfigError(f\"bad port: {e}\") from None`"
         },
         {
           "id": "c",
@@ -2132,7 +2132,7 @@
         },
         {
           "id": "d",
-          "label": "`except ValueError: pass  # fall back to port 80`"
+          "label": "`except ValueError as e: log.error(e); return 80  # default port`"
         }
       ],
       "answerKey": {

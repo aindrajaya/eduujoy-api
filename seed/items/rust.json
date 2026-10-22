@@ -706,11 +706,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`println!` cannot print a String more than once in a function"
+          "label": "`println!` takes its arguments by value, so the first call consumed `name`"
         },
         {
           "id": "b",
-          "label": "`name` needed to be declared `mut` before being passed to any function"
+          "label": "`name` had to be declared `mut` for a function to be allowed to read it"
         },
         {
           "id": "c",
@@ -718,7 +718,7 @@
         },
         {
           "id": "d",
-          "label": "Functions always copy their arguments, so `name` was corrupted"
+          "label": "`show` received a shallow copy of `name`, and the original was freed on return"
         }
       ],
       "answerKey": {

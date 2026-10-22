@@ -1884,19 +1884,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The design is sound, since a lock guarantees the exact count at any scale"
+          "label": "The design is sound, because a lock gives an exact count and the central store can be replicated to handle the load"
         },
         {
           "id": "b",
-          "label": "The limit should be per server rather than per user, which makes locks unnecessary"
+          "label": "The limit should be enforced per server instead of per user, which removes the need for any shared coordination"
         },
         {
           "id": "c",
-          "label": "Locks are only safe for writes, so rate limits can't be counted at all"
+          "label": "Locks protect only writes, so a read-heavy counter check can't be made consistent without a full database transaction"
         },
         {
           "id": "d",
-          "label": "The central lock serialises every request and adds a latency and availability dependency; atomic counters or local approximations fit better"
+          "label": "The lock serialises every request and adds a latency and availability dependency; atomic counters fit better"
         }
       ],
       "answerKey": {

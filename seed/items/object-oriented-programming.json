@@ -723,19 +723,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A public field lets any code skip the rules, so keeping it private behind withdraw() would enforce them"
+          "label": "Public fields let outside code skip the rules; a private balance changed only via withdraw() enforces them"
         },
         {
           "id": "b",
-          "label": "Objects should hold no data, so balance belongs in a separate global variable"
+          "label": "Objects should hold no data of their own, so balance belongs in a separate global variable that every class can read"
         },
         {
           "id": "c",
-          "label": "Polymorphism would let the other class use a safer balance method automatically"
+          "label": "Polymorphism would let the other class call a safer balance method automatically, even when it writes the field directly"
         },
         {
           "id": "d",
-          "label": "Inheritance is needed so a subclass can stop negative values from being set"
+          "label": "Inheritance is needed so that a subclass can override the field and stop negative values from being set on Account"
         }
       ],
       "answerKey": {
@@ -1716,19 +1716,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The chains should use `switch` instead, because the bug came from if/else syntax being error-prone"
+          "label": "The chains should use `switch` instead, because the bug came from if/else syntax being error-prone and a switch makes missing cases easier to spot"
         },
         {
           "id": "b",
-          "label": "The methods are too long, so splitting them into helper methods would remove the need to edit all three"
+          "label": "The methods are too long, so splitting each into smaller helper methods would remove the need to edit all three when a type is added"
         },
         {
           "id": "c",
-          "label": "The type-specific behaviour is scattered across methods, so each new variant forces shotgun edits that polymorphism would localise"
+          "label": "Type-specific behaviour is scattered across methods, so each new variant forces edits everywhere; polymorphism would localise it"
         },
         {
           "id": "d",
-          "label": "The class should make `type` private, because exposing it allowed callers to set an unexpected value"
+          "label": "The class should make `type` private, because exposing it let callers set an unexpected value that the other methods did not handle"
         }
       ],
       "answerKey": {
@@ -1751,19 +1751,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A single `Enemy` class with boolean flags and large conditionals checking them in every method"
+          "label": "A single `Enemy` class with boolean flags and large conditionals checking them in every method, so one class holds all the behaviour"
         },
         {
           "id": "b",
-          "label": "A deep hierarchy with one subclass for every combination, such as `FlyingShootingEnemy`"
+          "label": "A deep hierarchy with one subclass for every combination, such as `FlyingShootingEnemy`, so each enemy type is fully explicit"
         },
         {
           "id": "c",
-          "label": "Multiple inheritance of every capability into one large class and disabling unused ones at runtime"
+          "label": "Multiple inheritance of every capability into one large class and disabling unused ones at runtime through configuration"
         },
         {
           "id": "d",
-          "label": "An `Enemy` composed of swappable behaviour objects such as movement and attack strategies, configured per enemy"
+          "label": "An `Enemy` composed of swappable movement and attack strategy objects, configured per enemy"
         }
       ],
       "answerKey": {

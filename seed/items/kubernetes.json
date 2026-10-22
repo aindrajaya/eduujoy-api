@@ -1377,7 +1377,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The missing readiness probe makes the kubelet restart pods that are not yet serving traffic"
+          "label": "The missing readiness probe makes the kubelet restart pods that are not yet serving traffic, so the container is killed during startup"
         },
         {
           "id": "b",
@@ -1385,11 +1385,11 @@
         },
         {
           "id": "c",
-          "label": "The restart policy is Always, so the kubelet restarts containers that take more than a minute"
+          "label": "The restart policy is Always, so the kubelet restarts any container that has not become ready within about a minute of starting"
         },
         {
           "id": "d",
-          "label": "The image pull policy forces a fresh image pull, which exceeds the probe timeout on each start"
+          "label": "The image pull policy forces a fresh image pull on each start, and the pull time exceeds the probe timeout so the probe fails"
         }
       ],
       "answerKey": {

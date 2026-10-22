@@ -2035,19 +2035,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Use `SELECT max(id)` as the count, since sequence-generated ids are contiguous and always match the row total"
+          "label": "Use `SELECT max(id)` as the count, since ids from a sequence are contiguous and track the row total"
         },
         {
           "id": "b",
-          "label": "Run `SELECT count(*)` every time, since Postgres keeps a row counter and answers it in constant time"
+          "label": "Run `SELECT count(*)` each time, since Postgres keeps a row counter and can answer it from metadata"
         },
         {
           "id": "c",
-          "label": "Read `reltuples` from `pg_class`, which ANALYZE and autovacuum keep updated, accepting a small staleness error"
+          "label": "Read `reltuples` from `pg_class`, which ANALYZE and autovacuum update, accepting some staleness"
         },
         {
           "id": "d",
-          "label": "Run `SELECT count(*)` with `enable_seqscan = off`, so that the index avoids reading any heap pages at all"
+          "label": "Run `SELECT count(*)` with `enable_seqscan = off`, so an index scan answers it without visiting the heap"
         }
       ],
       "answerKey": {
@@ -2140,19 +2140,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is safe on SSD storage, because index scans always cost less there, so only the config reload is a concern"
+          "label": "On SSD storage index scans usually cost less than seq scans, so the setting is mostly harmless and only the config reload needs care"
         },
         {
           "id": "b",
-          "label": "It forces index plans even where a sequential scan is cheaper, and hides the real cause, such as stale stats or a poor `random_page_cost`"
+          "label": "It pushes plans toward indexes even where a seq scan is cheaper, and hides causes like stale stats or a high `random_page_cost`"
         },
         {
           "id": "c",
-          "label": "It has no effect on the planner, because the setting only changes how the executor reads pages during a scan"
+          "label": "It does not change planner choices, because the setting only alters how the executor reads pages once a seq scan has been chosen"
         },
         {
           "id": "d",
-          "label": "It will corrupt statistics, because ANALYZE cannot run while sequential scans are discouraged by the planner"
+          "label": "It degrades statistics quality, because ANALYZE relies on sequential scans and the planner then samples fewer rows from each table"
         }
       ],
       "answerKey": {

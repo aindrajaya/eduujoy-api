@@ -1272,19 +1272,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The map callback has a side effect on shared state, so results depend on call history"
+          "label": "The map callback mutates shared state, so results depend on call history"
         },
         {
           "id": "b",
-          "label": "map is lazy, so the callback runs only when `total` is printed"
+          "label": "map is lazy in JavaScript, so the callback may not have run when `counter` is read"
         },
         {
           "id": "c",
-          "label": "map always runs callbacks in random order, so counter varies"
+          "label": "map may run callbacks out of index order, so counter ends up with different values"
         },
         {
           "id": "d",
-          "label": "The callback returns a number, so map cannot update counter correctly"
+          "label": "A callback returning a number is treated as pure, so the counter update gets skipped"
         }
       ],
       "answerKey": {

@@ -1467,11 +1467,11 @@
       "options": [
         {
           "id": "a",
-          "label": "AUC is unreliable for churn, so switch to accuracy and the same random split"
+          "label": "AUC is misleading for imbalanced churn data, so report accuracy on the same random split to get a more honest estimate"
         },
         {
           "id": "b",
-          "label": "Too few folds were used, so move to 20-fold random cross-validation"
+          "label": "Too few folds gave a noisy estimate, so move to 20-fold random cross-validation and compare the average AUC to 0.76"
         },
         {
           "id": "c",
@@ -1479,7 +1479,7 @@
         },
         {
           "id": "d",
-          "label": "The model underfit the logs, so deepen the model and rerun the same random split"
+          "label": "The model underfit the logs and missed real patterns, so deepen the model and rerun the same random split to confirm the gain"
         }
       ],
       "answerKey": {

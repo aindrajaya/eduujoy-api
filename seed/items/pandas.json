@@ -722,15 +722,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Pandas rounds numbers that begin with a zero"
+          "label": "read_csv rounds any number that begins with a zero when it parses the column"
         },
         {
           "id": "b",
-          "label": "The file was corrupted when it was saved as CSV"
+          "label": "The file was corrupted when it was saved, so the zero was dropped from the text"
         },
         {
           "id": "c",
-          "label": "DataFrames cannot store values that start with zero"
+          "label": "DataFrames cannot store a value that starts with a zero in any column type"
         },
         {
           "id": "d",
@@ -1081,7 +1081,7 @@
         },
         {
           "id": "b",
-          "label": "`df['price'].fillna(df['price'].median(), by='cat')`"
+          "label": "`df['price'].fillna(df.groupby('cat')['price'].agg('median').values)`"
         },
         {
           "id": "c",
@@ -1301,7 +1301,7 @@
         },
         {
           "id": "c",
-          "label": "The column has dtype object because of the '-' placeholder; convert it with `pd.to_numeric(df['qty'], errors='coerce')` and then sum."
+          "label": "The '-' placeholder made the column dtype object; convert with `pd.to_numeric(df['qty'], errors='coerce')`, then sum."
         },
         {
           "id": "d",

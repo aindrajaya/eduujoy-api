@@ -1203,7 +1203,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Build the binary, run it in the background and check it with `curl` from the test"
+          "label": "Build the binary, run it in the background with `exec.Command`, then check it with `curl` from the test and read its exit status"
         },
         {
           "id": "b",
@@ -1211,11 +1211,11 @@
         },
         {
           "id": "c",
-          "label": "Start `http.ListenAndServe` in a goroutine, sleep a second, then call it with `http.Get`"
+          "label": "Start `http.ListenAndServe` in a goroutine, sleep a second, then call `http.Get` on localhost and check `resp.StatusCode`"
         },
         {
           "id": "d",
-          "label": "Replace the `net` package with a hand-written fake so the handler reads from memory"
+          "label": "Replace the `net` package with a hand-written fake so the handler reads from memory, then call `Health` with a nil request"
         }
       ],
       "answerKey": {

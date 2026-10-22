@@ -11,15 +11,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Phase-Integral-Delay"
+          "label": "Phase-Integral-Delay-Compensation"
         },
         {
           "id": "b",
-          "label": "Power-Impulse-Differential"
+          "label": "Power-Impulse-Differential-Response"
         },
         {
           "id": "c",
-          "label": "Position-Input-Damping"
+          "label": "Position-Input-Damping-Regulation"
         },
         {
           "id": "d",
@@ -1575,19 +1575,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The poles at -1 and -3 are overtaken by the zero's dynamics as K increases, so the closed loop loses its stable pole pair."
+          "label": "The poles at -1 and -3 are overtaken by the zero's dynamics as K increases, so the closed loop loses its stable pole pair entirely."
         },
         {
           "id": "b",
-          "label": "The zero adds phase lead that cancels the damping of the poles at -1 and -3, so large K removes the stabilising margin."
+          "label": "The zero adds phase lead that cancels the damping of the poles at -1 and -3, so a large K removes the stabilising phase margin of the loop."
         },
         {
           "id": "c",
-          "label": "As K grows, a closed-loop pole is drawn toward the right-half-plane zero at s = 1, so high gain must eventually push it into instability."
+          "label": "As K grows, a closed-loop pole is drawn toward the right-half-plane zero at s = 1, so high gain eventually pushes it into instability."
         },
         {
           "id": "d",
-          "label": "Raising K lifts the DC loop gain above 1, and any loop gain above 1 at DC makes a feedback system unstable once K is large."
+          "label": "Raising K lifts the DC loop gain above 1, and any loop gain above 1 at DC makes a feedback system unstable once K is large enough."
         }
       ],
       "answerKey": {
@@ -1972,19 +1972,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Increase derivative action on the error signal, since the added damping removes overshoot for setpoint changes and disturbances alike."
+          "label": "Increase derivative action on the error signal, since the added damping removes overshoot for setpoint changes and for load disturbances alike, without needing to retune Kp."
         },
         {
           "id": "b",
-          "label": "Lower Kp until the setpoint overshoot falls below 5%, since overshoot comes from loop gain and disturbance rejection will follow."
+          "label": "Lower Kp until the setpoint overshoot falls below 5%, since overshoot comes from loop gain and the disturbance rejection time will follow the same trend."
         },
         {
           "id": "c",
-          "label": "Use a two-degree-of-freedom structure, with setpoint weighting or a reference prefilter, leaving the feedback loop that rejects disturbances unchanged."
+          "label": "Use a two-degree-of-freedom structure, with setpoint weighting or a reference prefilter, leaving the disturbance-rejecting feedback loop unchanged."
         },
         {
           "id": "d",
-          "label": "Raise Ki so the controller corrects the overshoot faster, since a stronger integral term shortens the time spent above the setpoint."
+          "label": "Raise Ki so the controller corrects the overshoot faster, since a stronger integral term shortens the time the output spends above the setpoint."
         }
       ],
       "answerKey": {

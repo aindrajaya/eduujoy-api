@@ -1361,19 +1361,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The loop is too tight, so the scheduler never lets B run at all"
+          "label": "The loop is so tight that the scheduler starves B, so B never gets any CPU time to run its write"
         },
         {
           "id": "b",
-          "label": "Without synchronization or volatile, A may never see B's write because the read can be hoisted out of the loop"
+          "label": "With no synchronization, A may never see B's write because the read can be hoisted out of the loop"
         },
         {
           "id": "c",
-          "label": "The boolean needs a mutex held by A for the entire duration of the loop"
+          "label": "The boolean needs a mutex that A holds for the entire loop so that B's write cannot interleave with A's reads"
         },
         {
           "id": "d",
-          "label": "Thread B's write is lost because booleans are written in two halves"
+          "label": "B's write is lost because a boolean is stored in two halves, so A can read a torn value that stays false"
         }
       ],
       "answerKey": {
@@ -2206,15 +2206,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Data race on the task queue: guard the queue with a stronger lock so submissions are not lost"
+          "label": "Data race on the shared task queue: submissions are being lost, so guard the queue with a stronger lock and make enqueue operations atomic"
         },
         {
           "id": "b",
-          "label": "Livelock from too many retries: add randomized backoff so handlers stop submitting simultaneously"
+          "label": "Livelock from too many retries: handlers keep resubmitting in lockstep, so add randomized backoff so they stop colliding on the queue"
         },
         {
           "id": "c",
-          "label": "Classic lock-ordering deadlock: acquire the handlers' locks in a consistent order to break the cycle"
+          "label": "Classic lock-ordering deadlock: handlers hold locks in conflicting orders, so acquire the locks in one consistent global order to break the cycle"
         },
         {
           "id": "d",

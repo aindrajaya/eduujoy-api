@@ -2309,19 +2309,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Two stacks where only the in-stack tracks its max; after a transfer, the out-stack max is found by scanning it"
+          "label": "Two stacks where only the in-stack tracks its running max; after each transfer to the out-stack, its max is found by scanning it once"
         },
         {
           "id": "b",
-          "label": "Two stacks (in and out), each storing pairs of value and max so far; move in to out when out is empty; max is the larger of the two tops"
+          "label": "Two stacks storing (value, max so far) pairs; refill out from in when out is empty; max is the larger of the two tops"
         },
         {
           "id": "c",
-          "label": "A max-heap alongside the queue; dequeue removes the matching value from the heap in constant time"
+          "label": "A max-heap kept alongside the two stacks; each dequeue removes the matching value from the heap, which takes constant time by index"
         },
         {
           "id": "d",
-          "label": "One queue plus a single variable for the max, recomputed by scanning only when the dequeued item was the max"
+          "label": "Two stacks plus one global max variable, updated on enqueue and recomputed by scanning both stacks only when the dequeued item was the max"
         }
       ],
       "answerKey": {
