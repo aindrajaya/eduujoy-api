@@ -2,16 +2,7 @@ import { Body, Controller, Get, HttpCode, Post, Req, Res, SerializeOptions, UseI
 import { ApiNoContentResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import { type Request, type Response } from 'express';
-import {
-  ACCESS_COOKIE,
-  accessCookieOptions,
-  AccessTokenService,
-  type AuthUser,
-  CurrentUser,
-  Public,
-  REFRESH_COOKIE,
-  refreshCookieOptions,
-} from '../../../shared/common/auth';
+import { ACCESS_COOKIE, accessCookieOptions, AccessTokenService, type AuthUser, clearSessionCookies, CurrentUser, Public, REFRESH_COOKIE, refreshCookieOptions } from '../../../shared/common/auth';
 import { SessionInvalidError } from '../application/errors';
 import {
   ApiAccessCookieAuth,
@@ -42,11 +33,7 @@ export function setSessionCookies(res: Response, session: IssuedSession): void {
   res.cookie(REFRESH_COOKIE, session.refreshToken, refreshCookieOptions);
 }
 
-export function clearSessionCookies(res: Response): void {
-  // clearCookie must repeat path and flags (but not maxAge) for the browser to match the cookie.
-  res.clearCookie(ACCESS_COOKIE, { ...accessCookieOptions, maxAge: undefined });
-  res.clearCookie(REFRESH_COOKIE, { ...refreshCookieOptions, maxAge: undefined });
-}
+export { clearSessionCookies };
 
 function readCookie(req: Request, name: string): string | undefined {
   const value = (req.cookies as Record<string, unknown> | undefined)?.[name];

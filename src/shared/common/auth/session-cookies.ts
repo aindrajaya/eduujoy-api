@@ -1,4 +1,4 @@
-import { type CookieOptions } from 'express';
+import { type CookieOptions, type Response } from 'express';
 import { ACCESS_TOKEN_TTL_SECONDS } from './access-token.service';
 
 export const ACCESS_COOKIE = 'ej_at';
@@ -16,3 +16,10 @@ export const refreshCookieOptions: CookieOptions = {
   path: REFRESH_COOKIE_PATH,
   maxAge: REFRESH_TTL_SECONDS * 1000,
 };
+
+/** Signs the browser out: clears both cookies (logout, Google sign-in errors, account deletion). */
+export function clearSessionCookies(res: Response): void {
+  // clearCookie must repeat path and flags (but not maxAge) for the browser to match the cookie.
+  res.clearCookie(ACCESS_COOKIE, { ...accessCookieOptions, maxAge: undefined });
+  res.clearCookie(REFRESH_COOKIE, { ...refreshCookieOptions, maxAge: undefined });
+}

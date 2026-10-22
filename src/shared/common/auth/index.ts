@@ -5,6 +5,7 @@ export { CSRF_HEADER_VALUE } from './guards';
 export {
   ACCESS_COOKIE,
   accessCookieOptions,
+  clearSessionCookies,
   REFRESH_COOKIE,
   REFRESH_COOKIE_PATH,
   refreshCookieOptions,
