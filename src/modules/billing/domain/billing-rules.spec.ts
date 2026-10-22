@@ -19,8 +19,9 @@ describe('packCredits', () => {
     expect(packCredits(10)).toBe(10);
   });
 
-  it('refuses quantities outside 1 to 10', () => {
-    for (const q of [0, -1, 11, 2.5, Number.NaN]) expect(packCredits(q)).toBeNull();
+  it('credits a paid quantity over 10 too, and refuses zero, negative and fractional quantities', () => {
+    expect(packCredits(11)).toBe(11);
+    for (const q of [0, -1, 2.5, Number.NaN]) expect(packCredits(q)).toBeNull();
   });
 });
 

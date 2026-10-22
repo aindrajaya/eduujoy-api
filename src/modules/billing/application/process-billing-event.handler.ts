@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { AppConfig } from '../../../shared/config';
 import { EventBus } from '../../../shared/events';
 import { type JobHandler, type JobOutcome } from '../../../shared/jobs';
-import { ended, entitlementFor, packCredits, refundClawback } from '../domain/billing-rules';
+import { ended, entitlementFor, MAX_PACK_QUANTITY, packCredits, refundClawback } from '../domain/billing-rules';
 import { EntitlementChanged } from '../domain/events/entitlement-changed.event';
 import { type BillingNotification, NOTIFICATION_PARSER, type NotificationParser } from './ports/billing-notification';
 import { BILLING_PROVIDER, type BillingProvider } from './ports/billing-provider';
@@ -94,7 +94,12 @@ export class ProcessBillingEvent implements JobHandler<{ eventId: string }> {
     const credits = packCredits(quantity);
     if (credits === null) return { outcome: `held:quantity_${quantity}` };
     const granted = await this.repo.grantPurchase({ userId: n.userId, credits, orderRef: orderRef(n.orderId) });
-    if (granted === 'granted') return { outcome: `credited:${credits}`, changed: { userId: n.userId, reason: 'purchase' } };
+    if (granted === 'granted') {
+      // Over the checkout cap means the order bypassed our checkout; it was paid, so credit it and flag it.
+      const flag = quantity > MAX_PACK_QUANTITY ? `:over_cap_${quantity}` : '';
+      if (flag) this.logger.warn({ orderId: n.orderId, quantity }, 'Credit-pack order above the 10-pack cap was credited');
+      return { outcome: `credited:${credits}${flag}`, changed: { userId: n.userId, reason: 'purchase' } };
+    }
     return { outcome: granted === 'duplicate' ? 'ignored:already_credited' : 'held:unknown_user' };
   }
 

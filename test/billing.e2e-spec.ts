@@ -152,11 +152,51 @@ describe('billing (e2e, PRD-API §13 A12 Verify)', () => {
 
     const res = await checkout({ product: 'credit_pack' }).expect(200);
     expect(res.body).toEqual({ url: provider.checkoutUrl });
-    expect(provider.checkouts.at(-1)).toEqual({ storeId: '100001', variantId: VARIANTS.creditPack, userId, testMode: true });
+    expect(provider.checkouts.at(-1)).toEqual({
+      storeId: '100001',
+      variantId: VARIANTS.creditPack,
+      userId,
+      testMode: true,
+      redirectUrl: 'http://localhost:5173/account?checkout=success',
+      quantity: 1,
+    });
 
-    await checkout({ product: 'gold' }).expect(400);
-    await checkout({ product: 'credit_pack', quantity: 5 }).expect(400);
+    // Contract 0.7.0: 1–10 packs, preset on the checkout; never with a subscription.
+    await checkout({ product: 'credit_pack', quantity: 10 }).expect(200);
+    expect(provider.checkouts.at(-1)?.quantity).toBe(10);
+    for (const body of [
+      { product: 'gold' },
+      { product: 'credit_pack', quantity: 0 },
+      { product: 'credit_pack', quantity: 11 },
+      { product: 'credit_pack', quantity: 2.5 },
+      { product: 'credit_pack', quantity: '3' },
+      { product: 'subscription', quantity: 1 },
+      { product: 'credit_pack', extra: true },
+    ]) {
+      const res = await checkout(body).expect(400);
+      expect((res.body as { code: string }).code).toBe('VALIDATION_FAILED');
+    }
     await http().post('/v1/billing/checkout').set('Cookie', cookie).send({ product: 'subscription' }).expect(403);
     await http().post('/v1/billing/checkout').set(csrf).send({ product: 'subscription' }).expect(401);
+  });
+
+  it('answers 409 for a second subscription and 503 with Retry-After when the provider fails (contract 0.6.0)', async () => {
+    const { userId, cookie } = await signedInUser();
+    const checkout = (product: string) => http().post('/v1/billing/checkout').set(csrf).set('Cookie', cookie).send({ product });
+    await webhook(subscriptionEvent({ userId, subscriptionId: Math.floor(Math.random() * 1e9) })).expect(200);
+    await settled();
+
+    const conflict = await checkout('subscription').expect(409);
+    expect((conflict.body as { code: string }).code).toBe('CONFLICT');
+    await checkout('credit_pack').expect(200);
+
+    provider.failCheckout = true;
+    try {
+      const down = await checkout('credit_pack').expect(503);
+      expect((down.body as { code: string }).code).toBe('SERVICE_UNAVAILABLE');
+      expect(down.headers['retry-after']).toBe('30');
+    } finally {
+      provider.failCheckout = false;
+    }
   });
 });

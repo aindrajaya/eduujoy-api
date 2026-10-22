@@ -38,14 +38,20 @@ export class LemonSqueezyProvider implements BillingProvider {
     private readonly fetcher: typeof fetch = (input, init) => fetch(input, init),
   ) {}
 
-  async createCheckout(input: { storeId: string; variantId: string; userId: string; testMode: boolean }): Promise<{ url: string }> {
+  async createCheckout(input: { storeId: string; variantId: string; userId: string; testMode: boolean; redirectUrl: string; quantity: number }): Promise<{ url: string }> {
     const body = {
       data: {
         type: 'checkouts',
         attributes: {
-          product_options: { enabled_variants: [Number(input.variantId)] },
+          // After payment Lemon Squeezy sends the learner back here; the webhook still decides the plan.
+          product_options: { enabled_variants: [Number(input.variantId)], redirect_url: input.redirectUrl },
           // Our user id comes back in every order and subscription webhook as meta.custom_data.
-          checkout_data: { custom: { user_id: input.userId } },
+          // variant_quantities presets the quantity (docs.lemonsqueezy.com/api/checkouts/create-checkout:
+          // "checkout_data ... variant_quantities, a list of objects with variant_id and quantity").
+          checkout_data: {
+            custom: { user_id: input.userId },
+            variant_quantities: [{ variant_id: Number(input.variantId), quantity: input.quantity }],
+          },
           expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
           test_mode: input.testMode,
         },

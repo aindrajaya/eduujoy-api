@@ -20,6 +20,7 @@ export const PROBLEM_CODES = [
   'NO_REPLACEMENT',
   'CSRF_REJECTED',
   'SERVICE_UNAVAILABLE',
+  'REAUTH_REQUIRED',
   'INTERNAL',
 ] as const;
 export type ProblemCode = (typeof PROBLEM_CODES)[number];

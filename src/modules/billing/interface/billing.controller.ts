@@ -3,7 +3,7 @@ import { ApiBody, ApiHeader, ApiOkResponse, ApiOperation, ApiTags } from '@nestj
 import { SkipThrottle } from '@nestjs/throttler';
 import { type Request, type Response } from 'express';
 import { type AuthUser, CurrentUser, Public, SkipCsrf } from '../../../shared/common/auth';
-import { ApiAccessCookieAuth, ApiCsrfHeader, ApiProblem } from '../../../shared/common/openapi';
+import { ApiAccessCookieAuth, ApiCsrfHeader, ApiProblem, ApiServiceUnavailable } from '../../../shared/common/openapi';
 import { CreateCheckout } from '../application/create-checkout.usecase';
 import { ReceiveWebhook } from '../application/receive-webhook.usecase';
 import { BillingErrorsInterceptor } from './billing-errors.interceptor';
@@ -22,13 +22,24 @@ export class BillingController {
   @HttpCode(200)
   @ApiAccessCookieAuth()
   @SerializeOptions({ type: CheckoutResponseDto })
-  @ApiOperation({ operationId: 'billingCheckout', summary: 'Create a Lemon Squeezy checkout link (FR-23).' })
+  @ApiOperation({
+    operationId: 'billingCheckout',
+    summary: 'Create a Lemon Squeezy checkout link (FR-23).',
+    description:
+      'After payment, Lemon Squeezy sends the learner back to `{origin}/account?checkout=success`,\n' +
+      "where `{origin}` is the request's allow-listed Origin. The flag is only a hint: the plan\n" +
+      'changes when the webhook is processed (`entitlement.changed`, or `GET /v1/auth/me`).\n' +
+      'A `subscription` checkout while a subscription is active returns 409 `CONFLICT`; credit\n' +
+      'packs are unaffected. 503 when the payment provider is unavailable.\n',
+  })
   @ApiCsrfHeader()
   @ApiOkResponse({ description: 'Checkout URL.', type: CheckoutResponseDto })
   @ApiProblem(400)
   @ApiProblem(401)
-  checkout(@CurrentUser() user: AuthUser, @Body() body: CheckoutRequestDto): Promise<{ url: string }> {
-    return this.checkouts.execute(user.userId, body.product);
+  @ApiProblem(409)
+  @ApiServiceUnavailable()
+  checkout(@CurrentUser() user: AuthUser, @Body() body: CheckoutRequestDto, @Headers('origin') origin: string | undefined): Promise<{ url: string }> {
+    return this.checkouts.execute(user.userId, body.product, origin, body.quantity ?? 1);
   }
 
   /** Server to server: no cookie, no CSRF headers; the HMAC over the raw body is the only credential. */

@@ -19,7 +19,7 @@ describe('LemonSqueezyProvider', () => {
   it('creates a JSON:API checkout for one variant with our user id in custom data', async () => {
     const { calls, ls } = provider(() => json({ data: { id: '1', attributes: { url: 'https://eduujoy.lemonsqueezy.com/checkout/custom/1' } } }, 201));
 
-    const result = await ls.createCheckout({ storeId: '100001', variantId: '200002', userId: 'u-1', testMode: true });
+    const result = await ls.createCheckout({ storeId: '100001', variantId: '200002', userId: 'u-1', testMode: true, redirectUrl: 'https://app.example/account?checkout=success', quantity: 3 });
 
     expect(result).toEqual({ url: 'https://eduujoy.lemonsqueezy.com/checkout/custom/1' });
     const [call] = calls;
@@ -28,7 +28,11 @@ describe('LemonSqueezyProvider', () => {
     expect(JSON.parse(call?.init.body as string)).toMatchObject({
       data: {
         type: 'checkouts',
-        attributes: { product_options: { enabled_variants: [200002] }, checkout_data: { custom: { user_id: 'u-1' } }, test_mode: true },
+        attributes: {
+          product_options: { enabled_variants: [200002], redirect_url: 'https://app.example/account?checkout=success' },
+          checkout_data: { custom: { user_id: 'u-1' }, variant_quantities: [{ variant_id: 200002, quantity: 3 }] },
+          test_mode: true,
+        },
         relationships: { store: { data: { type: 'stores', id: '100001' } }, variant: { data: { type: 'variants', id: '200002' } } },
       },
     });
@@ -53,6 +57,6 @@ describe('LemonSqueezyProvider', () => {
 
   it('rejects responses outside the documented shape', async () => {
     const { ls } = provider(() => json({ data: { attributes: { url: 'not a url' } } }));
-    await expect(ls.createCheckout({ storeId: '1', variantId: '2', userId: 'u', testMode: false })).rejects.toThrow();
+    await expect(ls.createCheckout({ storeId: '1', variantId: '2', userId: 'u', testMode: false, redirectUrl: 'https://a.example/', quantity: 1 })).rejects.toThrow();
   });
 });

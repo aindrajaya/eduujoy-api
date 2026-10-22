@@ -8,9 +8,12 @@ export const CREDITS_PER_PACK = 1;
 export const MAX_PACK_QUANTITY = 10;
 export const SUBSCRIPTION_MONTHLY_PATHS = 8;
 
-/** Credits an order grants, or null when its quantity is outside 1..MAX_PACK_QUANTITY (held for review). */
+/**
+ * Credits a paid order grants, or null when its quantity is not a positive integer. A quantity over
+ * MAX_PACK_QUANTITY was paid for, so it is credited too (user decision, 22 Oct 2026); the caller logs it.
+ */
 export function packCredits(quantity: number): number | null {
-  if (!Number.isInteger(quantity) || quantity < 1 || quantity > MAX_PACK_QUANTITY) return null;
+  if (!Number.isInteger(quantity) || quantity < 1) return null;
   return quantity * CREDITS_PER_PACK;
 }
 

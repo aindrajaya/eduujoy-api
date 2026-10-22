@@ -10,9 +10,9 @@ import { UnitOfWork } from '../../src/shared/events/unit-of-work';
 import { type JobQueue } from '../../src/shared/jobs';
 import { type EntitlementChanged } from '../../src/modules/billing/domain/events/entitlement-changed.event';
 import { LemonSqueezyNotificationParser } from '../../src/modules/billing/infrastructure/lemonsqueezy-notification.parser';
-import { FakeBillingProvider, FakeBillingRepository } from '../../src/modules/billing/application/billing.fakes';
+import { FakeBillingProvider, FakeBillingRepository, fakeQuotaRepository } from '../../src/modules/billing/application/billing.fakes';
 import { CreateCheckout, isProviderCheckoutUrl } from '../../src/modules/billing/application/create-checkout.usecase';
-import { CheckoutUnavailableError, QuotaExceededError } from '../../src/modules/billing/application/errors';
+import { CheckoutUnavailableError, QuotaExceededError, SubscriptionActiveError } from '../../src/modules/billing/application/errors';
 import { orderRef, ProcessBillingEvent } from '../../src/modules/billing/application/process-billing-event.handler';
 import { ReceiveWebhook, verifySignature, WebhookSignatureError } from '../../src/modules/billing/application/receive-webhook.usecase';
 import { ReservePath } from '../../src/modules/billing/application/reserve-path.usecase';
@@ -27,6 +27,7 @@ function setup(mode: 'test' | 'live' = 'test') {
     LEMONSQUEEZY_VARIANT_SUBSCRIPTION: VARIANTS.subscription,
     LEMONSQUEEZY_VARIANT_CREDIT_PACK: VARIANTS.creditPack,
     LEMONSQUEEZY_MODE: mode,
+    APP_ORIGIN: ['https://eduujoy.aindrajaya.my.id', 'http://localhost:5173'],
   } as Env);
   const repo = new FakeBillingRepository();
   repo.users.add(USER);
@@ -50,7 +51,7 @@ function setup(mode: 'test' | 'live' = 'test') {
     const outcome = await processor.run(processor.parse(job.payload));
     return (outcome.result as { outcome: string }).outcome;
   }
-  return { repo, provider, changes, enqueued, deliver, receive, checkout: new CreateCheckout(provider, config), reserve: new ReservePath(repo) };
+  return { repo, provider, changes, enqueued, deliver, receive, checkout: new CreateCheckout(provider, fakeQuotaRepository(repo), config), reserve: new ReservePath(repo) };
 }
 
 const sign = (raw: Buffer, secret = SECRET) => createHmac('sha256', secret).update(raw).digest('hex');
@@ -92,15 +93,17 @@ describe('credit packs', () => {
     expect(t.enqueued[0]).toMatchObject({ type: 'billing-event', idempotencyKey: expect.stringMatching(/^billing:/) as unknown });
   });
 
-  it('holds orders over 10 packs, unpaid orders and orders without our user id', async () => {
+  it('credits a paid order over 10 packs with a flag, and holds zero-quantity, unpaid and user-less orders', async () => {
     const t = setup();
     t.provider.orderItems.set('5001', [{ variantId: VARIANTS.creditPack, quantity: 11 }]);
+    t.provider.orderItems.set('5005', []);
 
-    await expect(t.deliver(orderEvent({ userId: USER, orderId: 5001 }))).resolves.toBe('held:quantity_11');
+    await expect(t.deliver(orderEvent({ userId: USER, orderId: 5001 }))).resolves.toBe('credited:11:over_cap_11');
+    await expect(t.deliver(orderEvent({ userId: USER, orderId: 5005 }))).resolves.toBe('held:quantity_0');
     await expect(t.deliver(orderEvent({ userId: USER, orderId: 5002, status: 'pending' }))).resolves.toBe('ignored:order_pending');
     await expect(t.deliver(orderEvent({ userId: null, orderId: 5003 }))).resolves.toBe('held:no_user');
     await expect(t.deliver(orderEvent({ userId: randomUUID(), orderId: 5004 }))).resolves.toMatch(/^held:(quantity_0|unknown_user)$/);
-    expect(t.repo.balance(USER)).toBe(0);
+    expect(t.repo.balance(USER)).toBe(11);
   });
 
   it('ignores unknown variants and events from the other mode', async () => {
@@ -212,22 +215,54 @@ describe('ReservePath (quota blocks generation)', () => {
 });
 
 describe('CreateCheckout', () => {
-  it('creates a checkout for the configured variant with our user id, in the configured mode', async () => {
+  const ORIGIN = 'http://localhost:5173';
+
+  it('creates a checkout for the configured variant, returning the learner to the request origin', async () => {
     const t = setup();
 
-    await expect(t.checkout.execute(USER, 'credit_pack')).resolves.toEqual({ url: 'https://eduujoy.lemonsqueezy.com/checkout/custom/abc' });
-    await t.checkout.execute(USER, 'subscription');
+    await expect(t.checkout.execute(USER, 'credit_pack', ORIGIN)).resolves.toEqual({ url: 'https://eduujoy.lemonsqueezy.com/checkout/custom/abc' });
+    await t.checkout.execute(USER, 'subscription', ORIGIN);
 
     expect(t.provider.checkouts).toEqual([
-      { storeId: '100001', variantId: VARIANTS.creditPack, userId: USER, testMode: true },
-      { storeId: '100001', variantId: VARIANTS.subscription, userId: USER, testMode: true },
+      { storeId: '100001', variantId: VARIANTS.creditPack, userId: USER, testMode: true, redirectUrl: 'http://localhost:5173/account?checkout=success', quantity: 1 },
+      { storeId: '100001', variantId: VARIANTS.subscription, userId: USER, testMode: true, redirectUrl: 'http://localhost:5173/account?checkout=success', quantity: 1 },
     ]);
   });
 
-  it('refuses a checkout URL outside https://*.lemonsqueezy.com', async () => {
+  it('presets the chosen pack quantity on credit-pack checkouts only', async () => {
     const t = setup();
+    await t.checkout.execute(USER, 'credit_pack', ORIGIN, 7);
+    await t.checkout.execute(USER, 'subscription', ORIGIN, 7);
+    expect(t.provider.checkouts.map((c) => c.quantity)).toEqual([7, 1]);
+  });
+
+  it('never returns the learner to an origin outside APP_ORIGIN', async () => {
+    const t = setup();
+    for (const origin of ['https://evil.example', undefined]) await t.checkout.execute(USER, 'credit_pack', origin);
+    expect(t.provider.checkouts.map((c) => c.redirectUrl)).toEqual([
+      'https://eduujoy.aindrajaya.my.id/account?checkout=success',
+      'https://eduujoy.aindrajaya.my.id/account?checkout=success',
+    ]);
+  });
+
+  it('refuses a second subscription while one is active, but still sells credit packs (409)', async () => {
+    const t = setup();
+    await t.deliver(subscriptionEvent({ userId: USER }));
+
+    await expect(t.checkout.execute(USER, 'subscription', ORIGIN)).rejects.toBeInstanceOf(SubscriptionActiveError);
+    await expect(t.checkout.execute(USER, 'credit_pack', ORIGIN)).resolves.toMatchObject({ url: expect.any(String) as unknown });
+    // Once the plan has ended, subscribing again is allowed.
+    await t.deliver(subscriptionEvent({ event: 'subscription_expired', userId: USER, status: 'expired', updatedAt: '2026-10-23T10:00:00Z' }));
+    await expect(t.checkout.execute(USER, 'subscription', ORIGIN)).resolves.toMatchObject({ url: expect.any(String) as unknown });
+  });
+
+  it('answers 503 when the provider fails or returns a URL outside https://*.lemonsqueezy.com', async () => {
+    const t = setup();
+    t.provider.failCheckout = true;
+    await expect(t.checkout.execute(USER, 'credit_pack', ORIGIN)).rejects.toMatchObject({ name: 'CheckoutUnavailableError', retryAfterSeconds: 30 });
+    t.provider.failCheckout = false;
     t.provider.checkoutUrl = 'https://evil.example/checkout';
-    await expect(t.checkout.execute(USER, 'credit_pack')).rejects.toBeInstanceOf(CheckoutUnavailableError);
+    await expect(t.checkout.execute(USER, 'credit_pack', ORIGIN)).rejects.toBeInstanceOf(CheckoutUnavailableError);
     expect(['http://x.lemonsqueezy.com/a', 'https://lemonsqueezy.com.evil.io/a', 'javascript:alert(1)'].map(isProviderCheckoutUrl)).toEqual([false, false, false]);
   });
 });
