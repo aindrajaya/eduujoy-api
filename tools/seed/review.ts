@@ -19,11 +19,13 @@ import { addUsage, estimate, estimateTokens, formatEstimate, fromApiUsage, SEED_
 const COMMAND = 'items-review';
 const REVIEW_DIR = join(SEED_DIR, '_review');
 const FLAGS_FILE = join(REVIEW_DIR, 'flags.json');
-const VERDICTS_FILE = join(REVIEW_DIR, 'verdicts.json');
-const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('item-review', 'v1');
+export const VERDICTS_FILE = join(REVIEW_DIR, 'verdicts.json');
+const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('item-review', 'v2');
+/** Only verdicts from this review prompt version are counted and applied. */
+export const REVIEW_PROMPT_VERSION = PROMPT.version;
 
 const MAX_TOKENS = 8_000;
-const EXPECTED_OUTPUT_TOKENS = 1_500;
+const EXPECTED_OUTPUT_TOKENS = 600; // v1 sample: 240 per novice item; later stages run longer
 
 const verdictSchema = z.object({
   verdict: z.enum(['keep', 'revise', 'drop']),
@@ -39,20 +41,25 @@ const verdictSchema = z.object({
 });
 type Verdict = z.infer<typeof verdictSchema>;
 
-const verdictsFileSchema = z.record(z.string(), z.object({ promptVersion: z.string(), flags: z.array(z.string()), verdict: verdictSchema }));
-type VerdictsFile = z.infer<typeof verdictsFileSchema>;
+export const verdictsFileSchema = z.record(z.string(), z.object({ promptVersion: z.string(), flags: z.array(z.string()), verdict: verdictSchema }));
+export type VerdictsFile = z.infer<typeof verdictsFileSchema>;
 
 export interface ReviewOptions {
   dryRun: boolean;
   go: boolean;
   sample?: number;
-  /** Skip items flagged only as longest-key whose key beats the longest distractor by less than this fraction. */
+  /**
+   * Skip items flagged only as longest-key whose key beats the longest distractor by less than this
+   * fraction. Novice items are always reviewed (user decision, 22 Oct 2026).
+   */
   minMargin: number;
 }
 
-/** Items to review: every flagged item, except longest-key-only items under the margin. */
+/** Items to review: every flagged item, except non-novice longest-key-only items under the margin. */
 function selected(flagged: Flagged[], minMargin: number): Flagged[] {
-  return flagged.filter((f) => !(f.flags.length === 1 && f.flags[0] === 'longest-key' && (f.margin ?? 0) < minMargin));
+  return flagged.filter(
+    (f) => f.item.stage === 'novice' || !(f.flags.length === 1 && f.flags[0] === 'longest-key' && (f.margin ?? 0) < minMargin),
+  );
 }
 
 function reviewId(f: Flagged): string {
@@ -67,10 +74,14 @@ function loadFlags(): { topics: SeedTopic[]; flagged: Flagged[]; itemCount: numb
   return { topics: seed.topics, flagged, itemCount: seed.items.length };
 }
 
+/** Every verdict on file, any prompt version; a newer review of the same item replaces the entry. */
 function loadVerdicts(): VerdictsFile {
   if (!existsSync(VERDICTS_FILE)) return {};
-  const all = verdictsFileSchema.parse(JSON.parse(readFileSync(VERDICTS_FILE, 'utf8')));
-  return Object.fromEntries(Object.entries(all).filter(([, v]) => v.promptVersion === PROMPT.version));
+  return verdictsFileSchema.parse(JSON.parse(readFileSync(VERDICTS_FILE, 'utf8')));
+}
+
+function reviewed(verdicts: VerdictsFile, f: Flagged): boolean {
+  return verdicts[reviewId(f)]?.promptVersion === PROMPT.version;
 }
 
 function userTurn(topics: SeedTopic[], f: Flagged): string {
@@ -111,6 +122,12 @@ function checkRevision(f: Flagged, v: Verdict): string | undefined {
   if (v.revised.correctIds.some((id) => !ids.split(',').includes(id))) return 'revision keys an unknown option';
   const single = f.item.kind !== 'multi_choice';
   if (single ? v.revised.correctIds.length !== 1 : v.revised.correctIds.length < 2) return `revision has ${v.revised.correctIds.length} correct options`;
+  if (f.flags.includes('longest-key') && single) {
+    const keyId = v.revised.correctIds[0];
+    const key = v.revised.options.find((o) => o.id === keyId)?.label.trim().length ?? 0;
+    const longestDistractor = Math.max(...v.revised.options.filter((o) => o.id !== keyId).map((o) => o.label.trim().length));
+    if (key > longestDistractor) return `revision leaves the key the longest option (${key} vs ${longestDistractor} characters)`;
+  }
   return undefined;
 }
 
@@ -140,16 +157,16 @@ function summarise(flagged: Flagged[], itemCount: number): string[] {
     `Flagged ${flagged.length} of ${itemCount} items (${((100 * flagged.length) / Math.max(1, itemCount)).toFixed(1)}%):`,
     ...(Object.keys(FLAG_HELP) as FlagCode[]).map((code) => `  ${code.padEnd(24)} ${String(count(code)).padStart(5)}  ${FLAG_HELP[code]}`),
     `  longest-key by stage: ${longestByStage.join(', ')}`,
-    `  items to review with --min-margin 0 / 0.1 / 0.2: ${[0, 0.1, 0.2].map((m) => selected(flagged, m).length).join(' / ')}`,
+    `  items to review with --min-margin 0 / 0.1 / 0.2 (novice always in full): ${[0, 0.1, 0.2].map((m) => selected(flagged, m).length).join(' / ')}`,
     `  (an item can carry several flags; the report is seed/_review/flags.json, in review order)`,
   ];
 }
 
 function printVerdicts(verdicts: VerdictsFile): void {
-  const all = Object.values(verdicts);
+  const all = Object.values(verdicts).filter((e) => e.promptVersion === PROMPT.version);
   const n = (v: Verdict['verdict']): number => all.filter((e) => e.verdict.verdict === v).length;
   const wrongKey = all.filter((e) => !e.verdict.keyCorrect).length;
-  process.stdout.write(`Verdicts so far: ${all.length} (keep ${n('keep')}, revise ${n('revise')}, drop ${n('drop')}; original key wrong or not single: ${wrongKey}).\n`);
+  process.stdout.write(`Verdicts so far with ${PROMPT.version}: ${all.length} (keep ${n('keep')}, revise ${n('revise')}, drop ${n('drop')}; original key wrong or not single: ${wrongKey}).\n`);
 }
 
 export async function runReview(options: ReviewOptions): Promise<void> {
@@ -176,8 +193,9 @@ export async function runReview(options: ReviewOptions): Promise<void> {
     flagged: flagged.map((f) => ({ id: reviewId(f), stage: f.item.stage, bloom: f.item.bloom, kind: f.item.kind, flags: f.flags, lengthRatio: f.lengthRatio && Number(f.lengthRatio.toFixed(2)), margin: f.margin && Number(f.margin.toFixed(2)) })),
   });
 
-  const pending = selected(flagged, options.minMargin).filter((f) => !verdicts[reviewId(f)]);
-  write(`Review (--min-margin ${options.minMargin}): ${Object.keys(verdicts).length} verdicts on file (prompt ${PROMPT.name}/${PROMPT.version}), ${pending.length} flagged items pending.`);
+  const pending = selected(flagged, options.minMargin).filter((f) => !reviewed(verdicts, f));
+  const current = flagged.filter((f) => reviewed(verdicts, f)).length;
+  write(`Review (--min-margin ${options.minMargin}, novice in full): ${current} flagged items reviewed with ${PROMPT.name}/${PROMPT.version}, ${pending.length} pending.`);
   if (pending.length === 0) return;
 
   const targets = options.sample === undefined ? pending : pending.slice(0, options.sample);
