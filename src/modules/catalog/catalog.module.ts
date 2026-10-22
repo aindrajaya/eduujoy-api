@@ -7,6 +7,8 @@ import { ResolveTopic } from './application/resolve-topic.usecase';
 import { DrizzleTopicRepository } from './infrastructure/drizzle-topic.repository';
 import { HaikuTopicNormalizer } from './infrastructure/haiku-topic-normalizer';
 import { TopicsController } from './interface/topics.controller';
+import { ACCOUNT_DATA } from '../../shared/common/account';
+import { CatalogAccountData } from './infrastructure/catalog-account-data';
 
 /** Catalog (PRD-API §4): topic lookups, resolution with embeddings (FR-01, FR-02) and the embedding backfill. */
 @Module({
@@ -17,7 +19,8 @@ import { TopicsController } from './interface/topics.controller';
     EmbedTopics,
     { provide: TOPIC_REPOSITORY, useClass: DrizzleTopicRepository },
     { provide: TOPIC_NORMALIZER, useClass: HaikuTopicNormalizer },
+    { provide: ACCOUNT_DATA.catalog, useClass: CatalogAccountData },
   ],
-  exports: [GetTopicQuery, EmbedTopics],
+  exports: [GetTopicQuery, EmbedTopics, ACCOUNT_DATA.catalog],
 })
 export class CatalogModule {}
