@@ -1,5 +1,6 @@
 import { Client } from 'pg';
 import { createDatabase, type Database } from '../../src/shared/db/database';
+import { guardConnection } from '../../src/shared/db/cli/guard';
 
 export type TestDb = Database;
 
@@ -20,12 +21,16 @@ const TRANSIENT = /ECONNRESET|ETIMEDOUT|EADDRNOTAVAIL|ECONNREFUSED|Connection te
  */
 export async function connectTestClient(schemaName = testSchema()): Promise<Client> {
   for (let attempt = 1; ; attempt++) {
-    const client = new Client({
-      connectionString: process.env['DATABASE_URL'],
-      options: `-c search_path="${schemaName}",public`,
-      connectionTimeoutMillis: 10_000,
-      keepAlive: true,
-    });
+    // Guarded: a Neon drop on a test client must fail that test, not kill the whole Jest worker.
+    const client = guardConnection(
+      new Client({
+        connectionString: process.env['DATABASE_URL'],
+        options: `-c search_path="${schemaName}",public`,
+        connectionTimeoutMillis: 10_000,
+        keepAlive: true,
+      }),
+      'test-db',
+    );
     try {
       await client.connect();
       return client;
