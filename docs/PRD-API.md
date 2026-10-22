@@ -356,7 +356,7 @@ Caching exists to cut AI spend first and latency second: the expensive layer is 
 | L1 in-process | `lru-cache` behind the `CacheStore` port | Topic lookups, `auth/me` payload, entitlement checks, domain allow/deny lists | 30–120 s | Domain events (`EntitlementChanged`, topic edits) |
 | L2 persistent | Postgres tables | ResourceCards (by URL + prompt version) | 30 days | `ResourceDead`, prompt version bump |
 | L2 persistent | Postgres tables | YouTube video metadata | ≤ 30 days, then refreshed or deleted | Daily liveness job |
-| L2 persistent | Postgres tables | Discovery result sets per topic + stage | 7 days (pending the grounding-terms review in the master PRD) | Manual refresh, low feedback scores |
+| L2 persistent | Postgres tables | Discovery result sets per topic + stage, shared across learners | 30 days (the YouTube metadata limit, YouTube API Services policies III.E.4), then refreshed or deleted | Manual refresh, low feedback scores |
 | HTTP | `ETag` + `Cache-Control: private, no-cache` | `GET /v1/paths/:id`, `/v1/progress` | Revalidate every request | Any write to the resource |
 
 - Cache keys are namespaced and versioned, e.g. `topic:v1:{slug}`, `ent:v1:{userId}`.
@@ -373,7 +373,7 @@ Gemini watches and searches, Claude designs and grades, and every vendor sits be
 | --- | --- | --- | --- |
 | `VideoSearch` | `YouTubeDataApiAdapter` | YouTube Data API v3, Google API key | `search.list` costs 100 of 10,000 daily units, so about 100 searches/day; cache per topic + stage |
 | `VideoAnalyzer` | `GeminiVideoAdapter` | `gemini-3.8-flash`, YouTube URL input, agentic mode | Streams; produces ResourceCards with timestamp ranges and English output for non-English videos |
-| `WebDiscovery` | `GeminiGroundingAdapter` | `gemini-3.8-flash` + Google Search grounding | Articles and official docs; paid Gemini tier only; terms review pending (master PRD) |
+| `WebDiscovery` | `ClaudeWebSearchAdapter` | `claude-haiku-5-5` + the server-side web search tool (`web_search_20260209` or newer), `max_uses` 6 | Articles, official docs and Medium; one query template per resource type and domain, `blocked_domains` for content farms. Stores only URL, title, source and page age, never `encrypted_content`; resources are shown as source links, never search prose (decision 4, revised 22 Oct 2026: Gemini grounding is not used) |
 | `PaperSearch` | `OpenAlexAdapter` | OpenAlex API (free), arXiv fallback | Verify usage terms in slice A7 |
 | `TextAnalyzer` | `GeminiTextAdapter` | `gemini-3.5-flash-lite` | Tags articles, docs and paper abstracts |
 | `Embedder` | `GeminiEmbeddingAdapter` | `gemini-embedding-2`, 768 dims | Batched; Batch API at half price for backfills |
@@ -478,7 +478,7 @@ Fourteen slices, each sized for one Claude Code session and one pull request, in
 | A5 | Jobs and events: `jobs` table, executor, resume on boot, event bus with `afterCommit` | Section 5 | Killed process resumes a running job | `jobs.int-spec.ts` |
 | A6 | Catalog: topic resolve with embeddings and thresholds | FR-01, FR-02 | Golden topic phrases resolve correctly ≥ 95% | `catalog.e2e-spec.ts` |
 | A7 | Assessment I: diagnostic sessions, adaptive item batches, placement | FR-03, FR-04 | Placement matches expected for fixture learners | `diagnostic.e2e-spec.ts` |
-| A8 | Discovery: YouTube search, OpenAlex, grounding, liveness, analysis, ResourceCards, dedupe | FR-06 to FR-12 | 10 fixture topics yield ≥ 3 resource types each, 0 dead links | `discovery.int-spec.ts` + live smoke script |
+| A8 | Discovery: YouTube Data API videos, OpenAlex papers, Claude web search (articles, docs, Medium), liveness, analysis, ResourceCards, dedupe | FR-06 to FR-12 | 10 fixture topics yield ≥ 3 resource types each, 0 dead links; searches, tokens and cost per discovery logged in `llm_calls`, with the measured mean on the 10 fixture topics reported (budget about US$0.08 per cold discovery); a YouTube quota guard counts `search.list` calls per day and degrades gracefully before 100 | `discovery.int-spec.ts` + live smoke script (`pnpm discovery:smoke`, US$5 cap) |
 | A9 | Pathing: SOP generation, validator, regenerate-once, SSE stream | FR-13 to FR-15, Section 9 | Golden-set mean ≥ 4.0 on the eval script; SSE replay works | `pnpm eval:paths`; `paths.e2e-spec.ts` |
 | A10 | Assessment II: checkpoint batch submission, auto and AI grading, remedial insertion | FR-16 to FR-18 | Two fails insert a remedial step | `checkpoints.e2e-spec.ts` |
 | A11 | Progress and realtime: positions, history, WebSocket gateway, feedback, swap | FR-20, FR-22, US-07 | Second tab receives `checkpoint.graded` | `realtime.e2e-spec.ts` |
@@ -504,7 +504,7 @@ Specs: ../docs/PRD-MASTER.md (product, wins on conflict) and docs/PRD-API.md (im
 - [ ] Does Koyeb's free instance accept the custom domain `api.eduujoy.aindrajaya.my.id`? If not, use the cheapest paid instance, or proxy REST and SSE through a Vercel rewrite and run Socket.IO on long-polling.
 - [ ] Link the Max plan to the Console organization and confirm the US$100 appears under Promotional credits on the Console Billing page before 24 Oct.
 - [ ] OpenAlex and arXiv usage terms for storing paper metadata (check in slice A8).
-- [ ] Grounding-terms review outcome (master PRD Section 14); it decides whether the discovery cache in Section 10 may be shared across learners.
+- [x] Discovery terms review (master PRD Section 14, decision 4 revised 22 Oct 2026): Gemini grounding is not used. Articles and docs come from Claude's web search tool, whose result URLs and titles may be stored, so the Section 10 discovery cache is shared across learners within the 30-day YouTube limit.
 
 ## Sources
 
