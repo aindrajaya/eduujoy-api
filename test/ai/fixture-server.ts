@@ -8,6 +8,8 @@ export interface FixtureResponse {
   contentType: string;
   body: unknown;
   headers?: Record<string, string>;
+  /** Send a string body as is (for example a server-sent event stream) instead of as JSON. */
+  raw?: boolean;
 }
 
 export interface Fixture {
@@ -51,7 +53,7 @@ export class FixtureServer {
         this.received.push({ method: req.method ?? '', path: req.url ?? '', headers: req.headers, body });
         const next = this.queue.shift() ?? { status: 500, contentType: 'application/json', body: { error: 'no fixture queued' } };
         res.writeHead(next.status, { 'content-type': next.contentType, ...next.headers });
-        res.end(JSON.stringify(next.body));
+        res.end(next.raw && typeof next.body === 'string' ? next.body : JSON.stringify(next.body));
       });
     });
     await new Promise<void>((resolve) => this.server?.listen(0, '127.0.0.1', resolve));

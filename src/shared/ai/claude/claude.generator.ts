@@ -81,6 +81,8 @@ export class ClaudeStructuredGenerator implements StructuredGenerator {
   async generate<T>(request: StructuredRequest<T>): Promise<StructuredResult<T>> {
     const spec = MODELS[request.model];
     if (spec.provider !== 'anthropic') throw new Error(`${request.model} is not a Claude model`);
+    // Claude's API cannot fetch or watch a YouTube video (PRD-API §11); video goes to Gemini.
+    if (request.media) throw new Error('Claude does not take video input');
     const fallback = FALLBACK_MODELS.has(request.model);
     const started = this.now();
 
@@ -104,7 +106,7 @@ export class ClaudeStructuredGenerator implements StructuredGenerator {
           },
           ...(fallback ? { betas: [FALLBACK_BETA], fallbacks: 'default' } : {}),
         },
-        { timeout: spec.timeoutMs, maxRetries: 2 },
+        { timeout: spec.timeoutMs, maxRetries: 2, ...(request.signal ? { signal: request.signal } : {}) },
       );
     } catch (error) {
       throw toAiError(error);

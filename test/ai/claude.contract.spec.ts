@@ -106,4 +106,12 @@ describe('ClaudeStructuredGenerator (contract, recorded fixtures)', () => {
     await expect(generator.generate(request('claude-haiku-5-5'))).rejects.toMatchObject({ failure: 'bad_request', status: 400 });
     expect(server.received).toHaveLength(1);
   });
+
+  it('refuses video input without calling the API (video analysis is Gemini only)', async () => {
+    await expect(generator.generate({ ...request('claude-haiku-5-5'), media: { youtubeUrl: 'https://www.youtube.com/watch?v=x' } })).rejects.toThrow(
+      'Claude does not take video input',
+    );
+    expect(server.received).toHaveLength(0);
+  });
 });
+
