@@ -77,3 +77,46 @@ export function requestLogProps(req: LoggableRequest): { route?: string; userId?
   return { ...(pattern ? { route: pattern } : {}), ...(userId ? { userId } : {}) };
 }
 
+/** Masks a client address to its network: the last IPv4 octet, or all but the first three IPv6 groups. */
+export function maskAddress(address: string | undefined): string | undefined {
+  if (!address) return undefined;
+  const v4 = /^(?:::ffff:)?(\d{1,3}\.\d{1,3}\.\d{1,3})\.\d{1,3}$/i.exec(address);
+  if (v4) return `${v4[1] ?? ''}.0/24`;
+  if (address.includes(':')) {
+    const groups = address.split('::')[0]?.split(':').filter(Boolean).slice(0, 3) ?? [];
+    return `${groups.join(':')}::/48`;
+  }
+  return undefined;
+}
+
+interface SerializableRequest {
+  method: string;
+  url: string;
+  headers?: Record<string, string | string[] | undefined>;
+  remoteAddress?: string;
+  raw?: { ip?: string };
+}
+
+const header = (req: SerializableRequest, name: string): string | undefined => {
+  const value = req.headers?.[name];
+  return typeof value === 'string' ? value : undefined;
+};
+
+/**
+ * The request line in logs: method and URL (no query), plus what tells a browser from a script when
+ * reading prod logs (23 Oct 2026, unexplained refresh 403s): a truncated user-agent, the Origin header and
+ * the client network (masked; the proxy-corrected address with trust proxy 1). Never cookies or auth headers.
+ */
+export function serializeRequest(req: SerializableRequest): Record<string, string> {
+  const userAgent = header(req, 'user-agent');
+  const origin = header(req, 'origin');
+  const client = maskAddress(req.raw?.ip ?? req.remoteAddress);
+  return {
+    method: req.method,
+    url: sanitizeUrl(req.url),
+    ...(userAgent ? { userAgent: userAgent.slice(0, 160) } : {}),
+    ...(origin ? { origin: origin.slice(0, 120) } : {}),
+    ...(client ? { client } : {}),
+  };
+}
+
