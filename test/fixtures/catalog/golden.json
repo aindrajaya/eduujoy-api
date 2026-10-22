@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "description": "A6 golden set for POST /v1/topics/resolve against the 150 seed topics (seed/topics.json). Written by the API lane, 22 Oct 2026; accepted by the lead as a test design. 'topic': strict-correct when the slug is auto-matched, lenient-correct when it is matched or offered among the choices; 'choices': correct when the result is choices or a match within the listed slugs; 'new': correct when a topic is created. Cases with exact: true are a canonical name or a unique alias, resolved without an embedding call; they are checked but left out of the rates. 'PM' is an alias of two topics, so it reaches the embedder. Gate: lenient rate over the non-exact cases at least 95% (PRD-API §13 A6).",
+  "description": "A6 golden set for POST /v1/topics/resolve against the 160 seed topics (seed/topics.json). Written by the API lane, 22 Oct 2026 (23 Oct 2026: 'learning japanese' expects the new japanese topic); accepted by the lead as a test design. 'topic': strict-correct when the slug is auto-matched, lenient-correct when it is matched or offered among the choices; 'choices': correct when the result is choices or a match within the listed slugs; 'new': correct when a topic is created. Cases with exact: true are a canonical name or a unique alias, resolved without an embedding call; they are checked but left out of the rates. 'PM' is an alias of two topics, so it reaches the embedder. Gate: lenient rate over the non-exact cases at least 95% (PRD-API §13 A6).",
   "cases": [
     {
       "text": "writing my first python script",
@@ -665,7 +665,10 @@
     },
     {
       "text": "learning japanese",
-      "expect": "new"
+      "expect": "topic",
+      "slugs": [
+        "japanese"
+      ]
     },
     {
       "text": "rock climbing technique",

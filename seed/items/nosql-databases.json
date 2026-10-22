@@ -1958,19 +1958,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A compound key of `tenantId` and a hashed `recordId`, balancing the big tenant while keeping routing by tenant"
+          "label": "A compound key of `tenantId` and a hashed `recordId`, splitting the big tenant while keeping tenant routing"
         },
         {
           "id": "b",
-          "label": "`createdAt` ascending, which spreads reads over time but sends all new writes to one shard"
+          "label": "`createdAt` ascending, which spreads reads over time but sends every new write to the one newest shard"
         },
         {
           "id": "c",
-          "label": "`tenantId` alone, which keeps each tenant together but leaves the 40% tenant on one shard"
+          "label": "`tenantId` alone, which keeps each tenant's data together but leaves the 40% tenant stuck on a single shard"
         },
         {
           "id": "d",
-          "label": "A random UUID per write, which spreads load but turns every tenant query into a scatter-gather"
+          "label": "A random UUID per write, which spreads load evenly but turns every tenant query into a scatter-gather"
         }
       ],
       "answerKey": {

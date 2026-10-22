@@ -10,7 +10,7 @@ import { parseSeed, readSeedFiles } from '../seed/seed-data';
 import { loadDirectDatabaseUrl } from './env';
 import { guardConnection } from './guard';
 
-// Usage: pnpm db:seed [--dir seed] [--expect-topics 150]
+// Usage: pnpm db:seed [--dir seed] [--expect-topics 160]
 async function main(): Promise<void> {
   const { values } = parseArgs({
     options: { dir: { type: 'string', default: 'seed' }, 'expect-topics': { type: 'string' }, check: { type: 'boolean', default: false } },

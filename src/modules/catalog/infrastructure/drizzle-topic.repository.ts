@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { and, asc, cosineDistance, eq, gte, isNotNull, ne, or, type SQL, sql } from 'drizzle-orm';
+import { and, asc, cosineDistance, eq, gt, gte, isNotNull, ne, or, type SQL, sql } from 'drizzle-orm';
 import { DATABASE, type Database } from '../../../shared/db';
 import { topics } from '../../../shared/db/schema/catalog';
 import {
@@ -144,6 +144,15 @@ export class DrizzleTopicRepository implements TopicRepository {
         ),
       )
       .orderBy(asc(topics.createdAt), asc(topics.id))
+      .limit(limit);
+  }
+
+  listAll(afterId: string | null, limit: number): Promise<TopicToEmbed[]> {
+    return this.db
+      .select({ id: topics.id, canonicalName: topics.canonicalName, aliases: topics.aliases, description: topics.description })
+      .from(topics)
+      .where(afterId ? gt(topics.id, afterId) : undefined)
+      .orderBy(asc(topics.id))
       .limit(limit);
   }
 
