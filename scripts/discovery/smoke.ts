@@ -34,7 +34,7 @@ import { EventBus } from '../../src/shared/events/event-bus';
 import { UnitOfWork } from '../../src/shared/events/unit-of-work';
 import { type EnqueueRequest, type JobContext, type JobQueue } from '../../src/shared/jobs';
 
-// Run by the user, once: `pnpm discovery:smoke [--cap 5] [--topics 10]` (node --env-file=.env), against
+// Run by the user: `pnpm discovery:smoke [--cap 5] [--topics 10] [--set a|b]` (node --env-file=.env), against
 // eduujoy-dev after `pnpm db:migrate`. Real YouTube, OpenAlex, Claude web search and Gemini; every AI call
 // is metered into llm_calls. Hard spend stop: no new discovery starts unless spent + 0.60 <= cap, and no
 // new analysis unless spent + 0.10 <= cap. Analyse jobs run here, inline (never queued, so a running dev
@@ -46,8 +46,8 @@ import { type EnqueueRequest, type JobContext, type JobQueue } from '../../src/s
 const DISCOVERY_RESERVE_USD = 0.6;
 const ANALYSIS_RESERVE_USD = 0.1;
 
-/** The 10 fixture topics: every domain and stage. */
-const FIXTURES: { slug: string; stage: Stage }[] = [
+/** Two sets of 10 fixture topics, each covering every domain and stage. */
+const FIXTURES_A: { slug: string; stage: Stage }[] = [
   { slug: 'python', stage: 'novice' },
   { slug: 'react-hooks', stage: 'advanced_beginner' },
   { slug: 'kubernetes', stage: 'competent' },
@@ -58,6 +58,23 @@ const FIXTURES: { slug: string; stage: Stage }[] = [
   { slug: 'photography', stage: 'advanced_beginner' },
   { slug: 'public-speaking', stage: 'novice' },
   { slug: 'microeconomics', stage: 'proficient' },
+];
+
+/**
+ * Cards are cached per topic and prompt version, so a second run on set A mostly reuses them and costs
+ * far less than a cold discovery. `--set b` measures cold cost on topics set A never touched.
+ */
+const FIXTURES_B: { slug: string; stage: Stage }[] = [
+  { slug: 'javascript', stage: 'novice' },
+  { slug: 'docker', stage: 'advanced_beginner' },
+  { slug: 'git', stage: 'competent' },
+  { slug: 'nosql-databases', stage: 'proficient' },
+  { slug: 'machine-learning', stage: 'competent' },
+  { slug: 'genetics', stage: 'novice' },
+  { slug: 'probability', stage: 'expert' },
+  { slug: 'drawing', stage: 'advanced_beginner' },
+  { slug: 'investing-fundamentals', stage: 'novice' },
+  { slug: 'world-history', stage: 'proficient' },
 ];
 
 class SpendStop extends Error {
@@ -125,7 +142,10 @@ const ctx = (signal: AbortSignal): JobContext => ({
 async function main(): Promise<void> {
   const check = process.argv.includes('--check');
   const capUsd = Number(arg('cap', '5'));
-  const count = Number(arg('topics', String(FIXTURES.length)));
+  const set = arg('set', 'a');
+  if (set !== 'a' && set !== 'b') throw new Error('--set must be a or b');
+  const fixtures = set === 'a' ? FIXTURES_A : FIXTURES_B;
+  const count = Number(arg('topics', String(fixtures.length)));
   if (!(capUsd > 0 && capUsd <= 5)) throw new Error('--cap must be above 0 and at most 5 (US$)');
   const keys = check
     ? { anthropic: 'check', gemini: 'check', youtube: 'check', openalex: 'check' }
@@ -142,7 +162,7 @@ async function main(): Promise<void> {
   const abort = new AbortController();
   const report: Record<string, unknown>[] = [];
   try {
-    const slugs = FIXTURES.slice(0, count);
+    const slugs = fixtures.slice(0, count);
     const rows = await smoke.db.select({ id: topics.id, slug: topics.slug }).from(topics).where(inArray(topics.slug, slugs.map((f) => f.slug)));
     const ids = new Map(rows.map((r) => [r.slug, r.id]));
     for (const fixture of slugs) {
@@ -156,9 +176,12 @@ async function main(): Promise<void> {
       await smoke.discover.run(smoke.discover.parse({ topicId, stage: fixture.stage, poolVersion }), ctx(abort.signal));
       const jobs = smoke.queued.filter((q) => q.type === ANALYSE_RESOURCE_JOB).splice(0);
       smoke.queued.length = 0;
+      let cachedOrReused = 0;
       for (const job of jobs) {
         if (smoke.meter.total + ANALYSIS_RESERVE_USD > capUsd) throw new SpendStop(`stopping inside ${fixture.slug}: $${smoke.meter.total.toFixed(4)} spent`);
-        await smoke.analyse.run(smoke.analyse.parse(job.payload), ctx(abort.signal));
+        const outcome = await smoke.analyse.run(smoke.analyse.parse(job.payload), ctx(abort.signal));
+        const result = outcome.result as { outcome?: string } | undefined;
+        if (result?.outcome === 'cached' || result?.outcome === 'reused') cachedOrReused += 1;
       }
       const pool = await smoke.repo.findPool(topicId, fixture.stage, poolVersion);
       const served = pool?.resourceIds.length
@@ -180,6 +203,7 @@ async function main(): Promise<void> {
         served: served.length,
         types: [...new Set(served.map((r) => r.type))].sort(),
         dead,
+        cachedOrReused,
         videoFallback: pool?.videoFallback ?? false,
         webSearches: calls.reduce((n, c) => n + c.webSearchRequests, 0),
         inputTokens: calls.reduce((n, c) => n + c.usage.inputTokens + c.usage.cacheReadTokens, 0),
@@ -204,7 +228,10 @@ async function main(): Promise<void> {
     const used = await smoke.quota.used(YOUTUBE_SEARCH_QUOTA, pacificDay(new Date())).catch(() => -1);
     const summary = {
       at: new Date().toISOString(),
+      set,
       topics: done,
+      // Cards reused from an earlier run cost nothing; a cold measurement needs fresh topics (--set b).
+      cachedOrReusedAnalyses: report.reduce((n, r) => n + (r['cachedOrReused'] as number), 0),
       atLeast3Types: report.filter((r) => (r['types'] as string[]).length >= 3).length,
       deadLinks: report.reduce((n, r) => n + (r['dead'] as number), 0),
       meanCostUsd: Math.round(mean('costUsd') * 1_000_000) / 1_000_000,
