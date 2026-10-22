@@ -4,7 +4,9 @@ export {
   type JobHandler,
   type JobOutcome,
   type JobStage,
+  JobWaitExpiredError,
   NonRetryableJobError,
+  RescheduleJob,
 } from './job-handler';
 export { JobQueue, JobSignals } from './job-queue';
 export { JobRepository } from './job.repository';

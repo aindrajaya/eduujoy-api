@@ -90,6 +90,39 @@ export class JobRepository {
     return rows.length > 0;
   }
 
+  /**
+   * RescheduleJob: back to `queued` without using the attempt, due after `delayMs` but never later
+   * than the wait deadline (created_at + maxWaitMs), so the last check lands on the deadline. False
+   * when the deadline has passed (the caller fails the job) or the run no longer holds its lock.
+   */
+  async reschedule(claim: { id: string; lockedAt: Date }, delayMs: number, maxWaitMs: number): Promise<boolean> {
+    const deadline = sql`${jobs.createdAt} + make_interval(secs => ${maxWaitMs / 1000})`;
+    const rows = await this.db
+      .update(jobs)
+      .set({
+        status: 'queued',
+        attempts: sql`greatest(${jobs.attempts} - 1, 0)`,
+        runAfter: sql`least(now() + make_interval(secs => ${delayMs / 1000}), ${deadline})`,
+        lockedAt: null,
+      })
+      .where(and(this.owned(claim), sql`now() < ${deadline}`))
+      .returning({ id: jobs.id });
+    return rows.length > 0;
+  }
+
+  /**
+   * Makes rescheduled jobs of `type` whose payload contains `match` (jsonb @>) due now, e.g. the
+   * path jobs waiting on a topic's pool once its resources are ready. Returns how many it woke.
+   */
+  async wakeWaiting(type: string, match: Record<string, unknown>): Promise<number> {
+    const rows = await this.db
+      .update(jobs)
+      .set({ runAfter: sql`now()` })
+      .where(and(eq(jobs.type, type), eq(jobs.status, 'queued'), gt(jobs.runAfter, sql`now()`), sql`${jobs.payload} @> ${JSON.stringify(match)}::jsonb`))
+      .returning({ id: jobs.id });
+    return rows.length;
+  }
+
   /** On stop: put this instance's unfinished claims back in the queue (attempts kept). */
   async release(claims: { id: string; lockedAt: Date }[]): Promise<string[]> {
     const released: string[] = [];

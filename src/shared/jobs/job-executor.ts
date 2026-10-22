@@ -1,7 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { toProblem } from '../common/problem/problem';
 import { type JobSignals } from './job-queue';
-import { type JobEventListener, type JobHandler, NonRetryableJobError } from './job-handler';
+import { type JobEventListener, type JobHandler, JobWaitExpiredError, NonRetryableJobError, RescheduleJob } from './job-handler';
 import { type JobRepository } from './job.repository';
 import { type JobEventType, type JobRecord } from './job.types';
 
@@ -27,6 +27,9 @@ export interface ExecutorOptions {
   clock?: () => Date;
   random?: () => number;
 }
+
+/** JobHandler.maxWaitMs default (A9: a path waits at most 30 minutes for its resources). */
+const DEFAULT_MAX_WAIT_MS = 30 * 60_000;
 
 /** Timer floor for a job that is already due but was not claimed (scheduleNext). */
 const DUE_RECHECK_MS = 250;
@@ -257,12 +260,26 @@ export class JobExecutor {
       await this.emit(job.id, 'completed', { jobId: job.id, ...outcome });
       this.logger.log({ jobId: job.id, type: job.type, attempt: job.attempts, ms: this.now().getTime() - started }, 'Job succeeded');
     } catch (error) {
+      if (error instanceof RescheduleJob) {
+        await this.reschedule(job, claim, handler, error);
+        return;
+      }
       if (error instanceof TimeoutError && run) await this.settleOrGrace(job.id, run);
       const retryable = !(error instanceof NonRetryableJobError) && job.attempts < job.maxAttempts;
       await this.finishFailed(job, claim, error, retryable);
     } finally {
       clearTimeout(timer);
     }
+  }
+
+  /** RescheduleJob: wait without using an attempt, or fail for good once past the handler's maxWaitMs. */
+  private async reschedule(job: JobRecord, claim: Claim, handler: JobHandler, request: RescheduleJob): Promise<void> {
+    const maxWaitMs = handler.maxWaitMs ?? DEFAULT_MAX_WAIT_MS;
+    if (await this.repo.reschedule(claim, Math.max(0, request.delayMs), maxWaitMs)) {
+      this.logger.log({ jobId: job.id, type: job.type, delayMs: request.delayMs, reason: request.message }, 'Job rescheduled');
+      return;
+    }
+    await this.finishFailed(job, claim, new JobWaitExpiredError(`Gave up waiting after ${maxWaitMs} ms: ${request.message}`), false);
   }
 
   /** Waits for an aborted run to settle, at most abortGraceMs; its late outcome is ignored either way. */
@@ -305,6 +322,18 @@ export class JobExecutor {
       instance: `/v1/jobs/${job.id}`,
     });
     await this.emit(job.id, 'failed', { jobId: job.id, retryable: false, problem: body });
+    await this.notifyDead(job, error);
+  }
+
+  /** JobHandler.onDead, best effort; skipped when the payload itself is unparseable. */
+  private async notifyDead(job: JobRecord, error: unknown): Promise<void> {
+    const handler = this.handlers.get(job.type);
+    if (!handler?.onDead) return;
+    try {
+      await handler.onDead(handler.parse(job.payload), { jobId: job.id, error });
+    } catch (hookError) {
+      this.logger.error({ jobId: job.id, type: job.type, err: hookError instanceof Error ? hookError : new Error(String(hookError)) }, 'Job onDead hook failed');
+    }
   }
 
   /** Exponential backoff, capped, with ±50% jitter (factor in [0.5, 1.5)). */

@@ -28,6 +28,13 @@ export class JobQueue {
     return this.repo.countForUser(type, userId, since);
   }
 
+  /** Runs rescheduled jobs of `type` whose payload contains `match` now (RescheduleJob). */
+  async wakeWaiting(type: string, match: Record<string, unknown>): Promise<number> {
+    const woken = await this.repo.wakeWaiting(type, match);
+    if (woken > 0) this.signals.wake();
+    return woken;
+  }
+
   /**
    * Inside a UnitOfWork, pass `{ tx, scope }`: the job row commits with the state change (outbox) and
    * the executor wakes only after commit. Standalone, the executor wakes immediately.
