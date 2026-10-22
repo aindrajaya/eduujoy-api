@@ -21,7 +21,7 @@ const ITEMS_DIR = join(SEED_DIR, 'items');
 const WORK_DIR = join(SEED_DIR, '_work', 'items');
 const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('diagnostic-items', 'v2');
 
-const MAX_TOKENS = 16_000;
+const MAX_TOKENS = 32_000; // 5 of 740 v2 replies hit 16,000
 const EXPECTED_OUTPUT_TOKENS = 7_000; // prompt v2 sample: 6,872 per request
 
 export const STAGES = [
