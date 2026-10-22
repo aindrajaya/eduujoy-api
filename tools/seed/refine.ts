@@ -19,6 +19,8 @@ const COMMAND = 'topics-refine';
 const TOPICS_FILE = join(SEED_DIR, 'topics.json');
 const ANSWERS_FILE = join(SEED_DIR, '_work', 'topics-refine.json');
 const EMBEDDINGS_FILE = join(ROOT, 'test', 'fixtures', 'catalog', 'embeddings.json');
+/** Eval phrases must never become exact aliases: they would skip the embedding path they measure. */
+const EVAL_FILES = [join(ROOT, 'test', 'fixtures', 'catalog', 'golden.json'), join(SEED_DIR, '_eval', 'topic-resolve-holdout.json'), join(SEED_DIR, '_eval', 'topic-resolve-holdout-v2.json')];
 const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('topic-refine', 'v1');
 
 /** Named in the task: the held-out failures (geometry vs trigonometry, world-history, spanish). */
@@ -216,8 +218,9 @@ async function collect(client: Anthropic, bySlug: Map<string, Target>, answers: 
 /**
  * Rewrites seed/topics.json once every target is answered: only the targets' description and aliases
  * change. A new alias is dropped when it repeats the topic's name or another alias, is another topic's
- * name, or is another topic's alias that this topic didn't already share (shared aliases such as "PM"
- * stay as they were).
+ * name, is another topic's alias that this topic didn't already share, or is an eval phrase it didn't
+ * already have (golden exact cases such as k8s rely on existing aliases). Aliases that
+ * two or more topics shared on purpose (such as "PM") are kept even if the answer left them out.
  */
 function assemble(topics: SeedTopic[], targets: Target[], answers: Map<string, Answer>): void {
   const missing = targets.filter((t) => !answers.has(t.topic.slug)).map((t) => t.topic.slug);
@@ -226,6 +229,11 @@ function assemble(topics: SeedTopic[], targets: Target[], answers: Map<string, A
     return;
   }
   const targetSlugs = new Set(targets.map((t) => t.topic.slug));
+  const evalPhrases = new Set(
+    EVAL_FILES.filter((f) => existsSync(f)).flatMap((f) => z.object({ cases: z.array(z.object({ text: z.string() })) }).parse(JSON.parse(readFileSync(f, 'utf8'))).cases.map((c) => c.text.trim().toLowerCase())),
+  );
+  const holders = new Map<string, number>();
+  for (const t of topics) for (const a of t.aliases) holders.set(a.toLowerCase(), (holders.get(a.toLowerCase()) ?? 0) + 1);
   const names = new Map(topics.map((t) => [t.canonicalName.toLowerCase(), t.slug]));
   const claimed = new Map<string, Set<string>>();
   const claim = (alias: string, slug: string): void => {
@@ -244,13 +252,15 @@ function assemble(topics: SeedTopic[], targets: Target[], answers: Map<string, A
       const key = alias.toLowerCase();
       const otherName = names.has(key) && names.get(key) !== t.slug;
       const otherAlias = [...(claimed.get(key) ?? [])].some((slug) => slug !== t.slug) && !before.has(key);
-      const ok = !seen.has(key) && !otherName && !otherAlias;
+      const newEvalAlias = evalPhrases.has(key) && !before.has(key);
+      const ok = !seen.has(key) && !otherName && !otherAlias && !newEvalAlias;
       seen.add(key);
       if (ok) claim(alias, t.slug);
       else dropped++;
       return ok;
     });
-    return { ...t, description: answer.description, aliases: aliases.slice(0, MAX_ALIASES) };
+    const shared = t.aliases.filter((a) => (holders.get(a.toLowerCase()) ?? 0) > 1 && !seen.has(a.toLowerCase()));
+    return { ...t, description: answer.description, aliases: [...shared, ...aliases].slice(0, MAX_ALIASES) };
   });
   const file = { version: 1, topics: next };
   parseSeed({ topics: file, items: readSeedFiles(SEED_DIR).items });
