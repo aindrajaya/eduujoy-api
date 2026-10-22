@@ -371,7 +371,7 @@ Gemini watches and searches, Claude designs and grades, and every vendor sits be
 
 | Port | Adapter (MVP) | Model or API | Notes |
 | --- | --- | --- | --- |
-| `VideoSearch` | `YouTubeDataApiAdapter` | YouTube Data API v3, Google API key | `search.list` costs 100 of 10,000 daily units, so about 100 searches/day; cache per topic + stage |
+| `VideoSearch` | `YouTubeDataApiAdapter` | YouTube Data API v3, Google API key | `search.list` has its own limit of 100 calls a day at 1 unit each; `videos.list` costs 1 unit from the 10,000-unit daily quota ([quota costs](https://developers.google.com/youtube/v3/determine_quota_cost)); cache per topic + stage |
 | `VideoAnalyzer` | `GeminiVideoAdapter` | `gemini-3.8-flash`, YouTube URL input, agentic mode | Streams; produces ResourceCards with timestamp ranges and English output for non-English videos |
 | `WebDiscovery` | `ClaudeWebSearchAdapter` | `claude-haiku-5-5` + the server-side web search tool (`web_search_20260209` or newer), `max_uses` 6 | Articles, official docs and Medium; one query template per resource type and domain, `blocked_domains` for content farms. Stores only URL, title, source and page age, never `encrypted_content`; resources are shown as source links, never search prose (decision 4, revised 22 Oct 2026: Gemini grounding is not used) |
 | `PaperSearch` | `OpenAlexAdapter` | OpenAlex API (free), arXiv fallback | Verify usage terms in slice A7 |
