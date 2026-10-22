@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "jest",
-    "test:e2e": "node --env-file-if-exists=.env node_modules/jest/bin/jest.js --config test/jest-e2e.config.ts",
+    "test:e2e": "node --env-file-if-exists=.env node_modules/jest/bin/jest.js --config test/jest-e2e.config.ts --runInBand",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx src/shared/db/cli/migrate.ts",
     "test:int": "node --env-file-if-exists=.env node_modules/jest/bin/jest.js --config test/jest-int.config.ts --runInBand",
