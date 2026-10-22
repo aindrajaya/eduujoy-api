@@ -10,7 +10,7 @@ import { loadDirectDatabaseUrl } from '../../src/shared/db/cli/env';
 import { describeError } from '../../src/shared/db/redact';
 
 // Run by the user: `pnpm catalog:embed-topics` (node --env-file=.env --import tsx). Embeds every topic
-// without a current gemini-embedding-2 vector, 50 per request, metered in llm_calls (150 topics cost
+// without a current gemini-embedding-2 vector, 50 per request, metered in llm_calls (160 topics cost
 // well under US$0.01). Idempotent: re-run after a failure, or after an EMBEDDING_VERSION bump.
 // `--all` re-embeds every topic under the current version, after topic texts change (a seed refine);
 // resolve keeps working throughout. A failed --all run is simply run again.

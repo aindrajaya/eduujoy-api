@@ -12,8 +12,8 @@ export interface GoldenEmbeddings {
 }
 
 export const EMBEDDINGS_FILE = join(__dirname, 'embeddings.json');
-/** Held-out phrases (seed/_eval), recorded by `pnpm catalog:record-holdout`; queries only. */
-export const HOLDOUT_EMBEDDINGS_FILE = join(__dirname, 'holdout-embeddings.json');
+/** Held-out v2 phrases (seed/_eval/topic-resolve-holdout-v2.json), recorded by `pnpm catalog:record-holdout`; queries only. */
+export const HOLDOUT_EMBEDDINGS_FILE = join(__dirname, 'holdout-v2-embeddings.json');
 
 /** Float32 little-endian, base64: about a third of the JSON-number size, and exact. */
 export function encodeVector(vector: number[]): string {

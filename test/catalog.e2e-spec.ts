@@ -36,7 +36,7 @@ const golden_ = loadGoldenEmbeddings();
 const holdoutRecording = loadHoldoutEmbeddings();
 // The held-out queries ride on the same recorded embedder (their topic documents are the golden ones).
 const recording = golden_ && holdoutRecording ? { ...golden_, queries: [...golden_.queries, ...holdoutRecording.queries] } : golden_;
-const holdout = JSON.parse(readFileSync(join(__dirname, '..', 'seed', '_eval', 'topic-resolve-holdout.json'), 'utf8')) as {
+const holdout = JSON.parse(readFileSync(join(__dirname, '..', 'seed', '_eval', 'topic-resolve-holdout-v2.json'), 'utf8')) as {
   cases: (GoldenCase & { kind: string; nearSlugs?: string[] })[];
 };
 
@@ -176,12 +176,12 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
     expect(lenientN / scored.length).toBeGreaterThanOrEqual(0.95);
     // The launch gate's second half (EXECUTION-PLAN §4) holds on the tuning set too.
     expect(wrong.map((r) => r.case.text)).toEqual([]);
-    // 150 vector writes and ~100 resolves, each a round trip to the Neon test branch.
+    // 160 vector writes and ~100 resolves, each a round trip to the Neon test branch.
   }, 180_000);
 
   // Launch requirement (EXECUTION-PLAN §4): the held-out set was never used for tuning. It must reach
   // lenient >= 95% with no wrong auto-match. Runs after the golden test, which loads the topic vectors.
-  (holdoutRecording ? it : it.skip)('held-out topic phrases: lenient >= 95% and no wrong auto-match (launch check)', async () => {
+  (holdoutRecording ? it : it.skip)('held-out v2 topic phrases: lenient >= 95% and no wrong auto-match (launch check)', async () => {
     const rows: { kind: string; text: string; got: string; strict: boolean; lenient: boolean; wrongMatch: boolean }[] = [];
     for (const c of holdout.cases) {
       const { cookie } = await signedInUser();
@@ -210,7 +210,7 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
       return `${k} ${of.filter((r) => r.lenient).length}/${of.length}`;
     });
     process.stdout.write(
-      `Held-out set: lenient ${pct(rows.filter((r) => r.lenient).length)}  strict ${pct(rows.filter((r) => r.strict).length)}  wrong auto-matches ${rows.filter((r) => r.wrongMatch).length}\n` +
+      `Held-out set v2: lenient ${pct(rows.filter((r) => r.lenient).length)}  strict ${pct(rows.filter((r) => r.strict).length)}  wrong auto-matches ${rows.filter((r) => r.wrongMatch).length}\n` +
         `  by kind: ${byKind.join(', ')}\n` +
         rows.filter((r) => !r.lenient || r.wrongMatch).map((r) => `  ${r.wrongMatch ? 'WRONG' : 'MISS'} [${r.kind}] "${r.text}": got ${r.got}`).join('\n') +
         '\n',
