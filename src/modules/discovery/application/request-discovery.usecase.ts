@@ -1,6 +1,8 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { AiBudgetGuard } from '../../../shared/ai';
+import { type EventBus } from '../../../shared/events';
 import { JobQueue } from '../../../shared/jobs';
+import { type PlacementComputed } from '../../assessment/domain/events/placement-computed.event';
 import { type Stage } from '../domain';
 import { DISCOVER_RESOURCES_JOB, type DiscoverPayload } from './jobs';
 import { type Clock, DISCOVERY_CLOCK, DISCOVERY_REPOSITORY, type DiscoveryRepository } from './ports/discovery.repository';
@@ -21,6 +23,11 @@ export class RequestDiscovery {
     private readonly budget: AiBudgetGuard,
     @Inject(DISCOVERY_CLOCK) private readonly clock: Clock,
   ) {}
+
+  /** PlacementComputed → discover-resources when the topic + stage pool is missing or expired (PRD-API §5). */
+  listen(bus: EventBus): void {
+    bus.on<PlacementComputed>('PlacementComputed', (e) => this.execute({ topicId: e.topicId, stage: e.stage, userId: e.userId }));
+  }
 
   async execute(input: { topicId: string; stage: Stage; userId?: string }): Promise<DiscoveryRequestOutcome> {
     const latest = await this.repo.latestPool(input.topicId, input.stage);
