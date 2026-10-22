@@ -9,6 +9,7 @@ import {
   type NewTopic,
   type TopicEmbedding,
   type TopicRepository,
+  type TopicProfile,
   type TopicToEmbed,
   type TopicView,
 } from '../application/ports/topic.repository';
@@ -35,6 +36,11 @@ export class DrizzleTopicRepository implements TopicRepository {
 
   async findById(id: string): Promise<TopicView | null> {
     const [row] = await this.db.select(VIEW).from(topics).where(eq(topics.id, id));
+    return row ?? null;
+  }
+
+  async findProfile(id: string): Promise<TopicProfile | null> {
+    const [row] = await this.db.select({ ...VIEW, domain: topics.domain }).from(topics).where(eq(topics.id, id));
     return row ?? null;
   }
 
