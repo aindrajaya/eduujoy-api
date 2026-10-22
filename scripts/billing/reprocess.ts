@@ -5,6 +5,7 @@ import { createDatabase } from '../../src/shared/db';
 import { loadDirectDatabaseUrl } from '../../src/shared/db/cli/env';
 import { describeError } from '../../src/shared/db/redact';
 import { JobQueue, JobRepository, JobSignals } from '../../src/shared/jobs';
+import { guardConnection } from '../../src/shared/db/cli/guard';
 
 // Operator CLI: `pnpm billing:reprocess <eventId>` shows the event's state (dry run);
 // `pnpm billing:reprocess <eventId> --yes` queues a fresh billing-event job for it. Only events never
@@ -24,7 +25,7 @@ async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const check = args.includes('--check');
   const url = check ? 'postgresql://check@localhost/check' : loadDirectDatabaseUrl();
-  const client = new Client({ connectionString: url });
+  const client = guardConnection(new Client({ connectionString: url }), 'billing:reprocess');
   const reprocess = buildReprocess(client);
   if (check) {
     process.stdout.write(`billing:reprocess: ok (${reprocess.constructor.name})\n`);

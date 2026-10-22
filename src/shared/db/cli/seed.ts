@@ -8,6 +8,7 @@ import { topics } from '../schema';
 import { loadSeed } from '../seed/load-seed';
 import { parseSeed, readSeedFiles } from '../seed/seed-data';
 import { loadDirectDatabaseUrl } from './env';
+import { guardConnection } from './guard';
 
 // Usage: pnpm db:seed [--dir seed] [--expect-topics 150]
 async function main(): Promise<void> {
@@ -22,7 +23,8 @@ async function main(): Promise<void> {
     return;
   }
 
-  const client = new Client({ connectionString: loadDirectDatabaseUrl() });
+  // One session (one transaction): a dropped connection fails the load cleanly; re-run it.
+  const client = guardConnection(new Client({ connectionString: loadDirectDatabaseUrl() }), 'db:seed');
   await client.connect();
   try {
     const db = createDatabase(client);

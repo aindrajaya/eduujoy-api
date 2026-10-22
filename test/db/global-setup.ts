@@ -3,6 +3,7 @@ import { runMigrations } from '../../src/shared/db/migrate';
 import { readDatabaseEnv } from './database-env';
 import { sweepStaleTestSchemas } from './sweep';
 import { assertSafeTestDatabase, isTestSchema, newTestSchemaName } from './test-database';
+import { guardConnection } from '../../src/shared/db/cli/guard';
 
 /** Jest globalSetup: a fresh, migrated schema per run on the Neon test branch. */
 export default async function globalSetup(): Promise<void> {
@@ -11,7 +12,7 @@ export default async function globalSetup(): Promise<void> {
   const testUrl = env.test as string;
 
   const schema = newTestSchemaName();
-  const client = new Client({ connectionString: testUrl });
+  const client = guardConnection(new Client({ connectionString: testUrl }), 'test-db');
   try {
     await client.connect();
     await sweepStaleTestSchemas(client);

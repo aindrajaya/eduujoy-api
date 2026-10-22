@@ -8,6 +8,7 @@ import { MeteredEmbedder } from '../../src/shared/ai/metering/metered';
 import { createDatabase } from '../../src/shared/db';
 import { loadDirectDatabaseUrl } from '../../src/shared/db/cli/env';
 import { describeError } from '../../src/shared/db/redact';
+import { guardConnection } from '../../src/shared/db/cli/guard';
 
 // Run by the user: `pnpm catalog:embed-topics` (node --env-file=.env --import tsx). Embeds every topic
 // without a current gemini-embedding-2 vector, 50 per request, metered in llm_calls (150 topics cost
@@ -24,7 +25,8 @@ async function main(): Promise<void> {
   const check = process.argv.includes('--check');
   const key = process.env['GEMINI_API_KEY'];
   if (!key && !check) throw new Error('GEMINI_API_KEY must be in the environment (run with node --env-file=.env)');
-  const client = new Client({ connectionString: check ? 'postgresql://check@localhost/check' : loadDirectDatabaseUrl() });
+  // Idempotent: a dropped connection fails the run cleanly, and a re-run resumes.
+  const client = guardConnection(new Client({ connectionString: check ? 'postgresql://check@localhost/check' : loadDirectDatabaseUrl() }), 'catalog:embed-topics');
   const embedTopics = buildEmbedTopics(client, key ?? 'check');
   // `--check` proves the wiring builds under its runner (test/cli/cli-boot.int-spec.ts) without connecting.
   if (check) {
