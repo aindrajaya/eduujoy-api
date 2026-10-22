@@ -1,0 +1,2488 @@
+{
+  "version": 1,
+  "topic": "system-design",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the main job of a load balancer in a system design?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Split a large table into smaller pieces by key"
+        },
+        {
+          "id": "b",
+          "label": "Hold messages until a worker can process them"
+        },
+        {
+          "id": "c",
+          "label": "Spread incoming requests across several servers"
+        },
+        {
+          "id": "d",
+          "label": "Store query results in memory for faster reads"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A load balancer distributes traffic across servers.",
+        "Distractors describe a cache, a queue and sharding."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which component is typically used to keep frequently read data in memory to reduce database load?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cache"
+        },
+        {
+          "id": "b",
+          "label": "Message queue"
+        },
+        {
+          "id": "c",
+          "label": "Load balancer"
+        },
+        {
+          "id": "d",
+          "label": "Firewall"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A cache keeps hot data in fast memory.",
+        "A queue buffers work and does not speed up reads."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does 'horizontal scaling' mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Adding more CPU and RAM to one machine"
+        },
+        {
+          "id": "b",
+          "label": "Moving servers into a different region"
+        },
+        {
+          "id": "c",
+          "label": "Adding more machines to share the work"
+        },
+        {
+          "id": "d",
+          "label": "Copying data to a backup once a day"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Horizontal scaling adds more machines.",
+        "The second option is vertical scaling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is a message queue used for?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Encrypting traffic between a client and a server"
+        },
+        {
+          "id": "b",
+          "label": "Buffering messages between producers and consumers"
+        },
+        {
+          "id": "c",
+          "label": "Translating domain names into IP addresses for clients"
+        },
+        {
+          "id": "d",
+          "label": "Enforcing foreign keys between relational tables"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Queues decouple producers from consumers by buffering messages.",
+        "Other options describe TLS, DNS and database constraints."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does 'single point of failure' mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A component whose failure stops the whole system"
+        },
+        {
+          "id": "b",
+          "label": "A user whose repeated failed requests get blocked by a rate limiter"
+        },
+        {
+          "id": "c",
+          "label": "A database write that fails and must be retried by the client"
+        },
+        {
+          "id": "d",
+          "label": "A server that is slower than the other servers behind a load balancer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A SPOF is a component whose failure takes the system down.",
+        "Distractors confuse it with concurrency or unrelated single-item ideas."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are common techniques for scaling a database for reads or size? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Adding more comments to code"
+        },
+        {
+          "id": "b",
+          "label": "Read replicas"
+        },
+        {
+          "id": "c",
+          "label": "Sharding"
+        },
+        {
+          "id": "d",
+          "label": "Renaming columns"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Replicas spread reads and sharding splits data across nodes.",
+        "Comments and renaming do not change capacity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A team is drawing the architecture for a photo-sharing app. They need a place to store large image files cheaply, separate from the relational database holding user records. Which kind of component fits storing the image files?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A message queue"
+        },
+        {
+          "id": "b",
+          "label": "A load balancer"
+        },
+        {
+          "id": "c",
+          "label": "A DNS server"
+        },
+        {
+          "id": "d",
+          "label": "An object store"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Object storage suits large binary files.",
+        "Queues, load balancers and DNS do not store files."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do designers often put a cache in front of a database?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Repeated reads are served from fast memory, easing database load"
+        },
+        {
+          "id": "b",
+          "label": "It keeps a copy of every record, so cached data is never out of date"
+        },
+        {
+          "id": "c",
+          "label": "It holds a second copy of the data, so regular database backups are unnecessary"
+        },
+        {
+          "id": "d",
+          "label": "It buffers incoming writes in memory so the database does not need to store them"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Caches cut read load and latency.",
+        "Caches can serve stale data and do not replace storage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is a queue useful between a web server and a slow email-sending job?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It makes each email send faster once a worker picks it up"
+        },
+        {
+          "id": "b",
+          "label": "It encrypts the emails so they stay private while waiting"
+        },
+        {
+          "id": "c",
+          "label": "It guarantees every email reaches the recipient's inbox"
+        },
+        {
+          "id": "d",
+          "label": "The server can reply now and the emails are sent later"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Queues decouple slow work from the request path.",
+        "A queue does not speed up the work itself or guarantee delivery."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main benefit of running two copies of a service behind a load balancer?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each request is processed by both copies so results can be checked"
+        },
+        {
+          "id": "b",
+          "label": "If one copy fails, the other can keep serving requests"
+        },
+        {
+          "id": "c",
+          "label": "The service uses less memory because the work is split in two"
+        },
+        {
+          "id": "d",
+          "label": "Database queries become unnecessary because copies share state"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Redundancy improves availability.",
+        "Requests are not duplicated; memory use rises."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which statement best explains vertical versus horizontal scaling?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Vertical scaling suits only databases, while horizontal scaling suits only caches and stateless web servers"
+        },
+        {
+          "id": "b",
+          "label": "Vertical scaling adds more machines, while horizontal scaling makes one machine bigger"
+        },
+        {
+          "id": "c",
+          "label": "Vertical and horizontal scaling both mean copying data to backups"
+        },
+        {
+          "id": "d",
+          "label": "Vertical makes one machine bigger; horizontal adds more machines"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Vertical means bigger machine; horizontal means more machines.",
+        "The first option swaps the definitions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is a drawback of caching data?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reads become slower than reading from the database each time"
+        },
+        {
+          "id": "b",
+          "label": "Caches cannot hold more than one item at once"
+        },
+        {
+          "id": "c",
+          "label": "Caches need a message queue to work"
+        },
+        {
+          "id": "d",
+          "label": "Cached data can become stale after the source changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Stale data is the key cache trade-off.",
+        "Caches speed reads and hold many items."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which are reasons to add database read replicas? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep serving reads if the primary is slow or down"
+        },
+        {
+          "id": "b",
+          "label": "Spread read traffic across more servers"
+        },
+        {
+          "id": "c",
+          "label": "Make every write faster"
+        },
+        {
+          "id": "d",
+          "label": "Remove the need for any indexes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Replicas add read capacity and some resilience.",
+        "Writes still go to the primary; indexes remain useful."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A small shop's website runs on one server and crashes when a sale brings heavy traffic. The team adds three more identical servers and a load balancer in front. What does this change mainly achieve?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It spreads load and survives a server failure"
+        },
+        {
+          "id": "b",
+          "label": "It keeps customers from seeing outdated prices or stock"
+        },
+        {
+          "id": "c",
+          "label": "It removes the need to back up order data regularly"
+        },
+        {
+          "id": "d",
+          "label": "It makes each page load faster for a single user"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "More servers plus a load balancer add capacity and redundancy.",
+        "It does not address schema, stale data or storage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does adding a cache such as Redis in front of the database help a read-heavy product catalog?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cached data is always identical to the database, so the database no longer needs to store it durably"
+        },
+        {
+          "id": "b",
+          "label": "Caches make writes faster than the database, so the database can be dropped from the write path"
+        },
+        {
+          "id": "c",
+          "label": "A cache keeps data consistent across all replicas, so users never see outdated product details"
+        },
+        {
+          "id": "d",
+          "label": "Repeated reads are served from fast memory, cutting latency and database load"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A cache answers repeated reads from memory, which lowers latency and database load.",
+        "Distractors assume caches are always consistent or replace durable storage, which they do not."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main job of a load balancer placed in front of several identical web servers?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It stores user data on each server so that the servers stay in sync with the database"
+        },
+        {
+          "id": "b",
+          "label": "It encrypts all traffic so the servers no longer need to handle any security checks themselves"
+        },
+        {
+          "id": "c",
+          "label": "It spreads incoming requests across healthy servers so none is overloaded"
+        },
+        {
+          "id": "d",
+          "label": "It speeds up each query by rewriting SQL statements before they reach the database tier"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A load balancer distributes requests across healthy servers.",
+        "Distractors confuse it with data sync, security tooling or a query optimiser."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "An order service publishes 'order placed' messages to a queue, and an email service consumes them. What does the queue mainly provide?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Decoupling, so orders are still accepted when the email service is slow or down"
+        },
+        {
+          "id": "b",
+          "label": "Synchronous replies so the order service can read the email result before it answers the user"
+        },
+        {
+          "id": "c",
+          "label": "Guaranteed delivery of each email to the customer's inbox within a fixed deadline set by the queue"
+        },
+        {
+          "id": "d",
+          "label": "Automatic sharding of the orders table across every database used by both of the services"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A queue decouples producer and consumer so one can be slow or down without blocking the other.",
+        "Distractors credit the queue with delivery deadlines, sharding or synchronous replies, none of which it gives."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A site slows down as traffic grows. Which change is an example of horizontal scaling?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Adding a larger disk to the database server to hold more rows"
+        },
+        {
+          "id": "b",
+          "label": "Rewriting a slow function so it uses fewer CPU cycles per request"
+        },
+        {
+          "id": "c",
+          "label": "Upgrading the single server to one with more CPU cores and memory"
+        },
+        {
+          "id": "d",
+          "label": "Adding more identical servers behind a load balancer to share traffic"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Horizontal scaling adds more machines to share the load.",
+        "Bigger hardware is vertical scaling, and code optimisation is neither."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A user updates their profile, and the next page load reads from a read replica that is a few seconds behind the primary. What will most likely happen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The page may show the old profile, because the replica has not yet received the update"
+        },
+        {
+          "id": "b",
+          "label": "The primary rejects the update until every replica has confirmed that it has applied the change"
+        },
+        {
+          "id": "c",
+          "label": "The page fails with an error because replicas refuse reads for a user who has just written"
+        },
+        {
+          "id": "d",
+          "label": "The replica pushes its older copy back to the primary and overwrites the newly written profile"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Asynchronous replication lag means replicas can return stale data right after a write.",
+        "Distractors invent replica-to-primary overwrites or write blocking, which do not occur in standard replication."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements explain why keeping web servers stateless makes scaling easier? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Stateless servers never need a database, since all data lives in the client browser"
+        },
+        {
+          "id": "b",
+          "label": "Any server can handle any request, so a load balancer can send traffic anywhere"
+        },
+        {
+          "id": "c",
+          "label": "Stateless servers cannot fail, so health checks are no longer required"
+        },
+        {
+          "id": "d",
+          "label": "Servers can be added or removed without losing per-user data held in their memory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "With no local state, requests can go to any server and servers can come and go freely.",
+        "Stateless does not mean no database or no failures; state just lives in a shared store."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A photo app resizes each uploaded image inside the upload request. On busy evenings uploads take 20 seconds and some time out. The team proposes saving the original, putting a resize job on a queue, and returning success immediately. Why does this fix the timeouts?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Returning success early guarantees that the resized image is already available when the user opens it"
+        },
+        {
+          "id": "b",
+          "label": "The queue compresses the original image so that it uploads faster over the user's network connection"
+        },
+        {
+          "id": "c",
+          "label": "Resizing leaves the request path, so users wait only for the save while workers resize later"
+        },
+        {
+          "id": "d",
+          "label": "The queue makes resizing itself faster by running each image's pixel work in parallel inside the queue"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Moving slow work to background workers shortens the request and absorbs spikes.",
+        "Distractors assume the queue speeds up compute or guarantees immediate availability of the result."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An app has 10 million daily active users, each making 10 requests per day spread evenly over 24 hours. About how many requests per second is that on average?",
+      "options": [
+        {
+          "id": "a",
+          "label": "About 115"
+        },
+        {
+          "id": "b",
+          "label": "About 1,150"
+        },
+        {
+          "id": "c",
+          "label": "About 115,000"
+        },
+        {
+          "id": "d",
+          "label": "About 11,500"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "10^8 requests divided by 86,400 seconds is about 1,150 per second.",
+        "Other options come from slipping a factor of ten when dividing by seconds per day."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A service stores 1 million new records per day, each about 2 KB. Roughly how much new storage is needed per year, ignoring replication?",
+      "options": [
+        {
+          "id": "a",
+          "label": "About 7.3 TB"
+        },
+        {
+          "id": "b",
+          "label": "About 73 GB"
+        },
+        {
+          "id": "c",
+          "label": "About 73 TB"
+        },
+        {
+          "id": "d",
+          "label": "About 730 GB"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "2 KB times 1 million is 2 GB per day, and times 365 is about 730 GB.",
+        "Other options are order-of-magnitude slips in units or multiplication."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Using the cache-aside pattern, a request for product 42 misses the cache. Which sequence does the application follow?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Write product 42 to the cache first, then read it back from the database to verify"
+        },
+        {
+          "id": "b",
+          "label": "Read product 42 from the database, store it in the cache, then return it"
+        },
+        {
+          "id": "c",
+          "label": "Return an empty result, then have the cache fetch product 42 from the database later"
+        },
+        {
+          "id": "d",
+          "label": "Ask the database to update the cache itself, then return whatever the cache holds"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "In cache-aside the application loads from the database on a miss, populates the cache, then returns the data.",
+        "Distractors give the cache or database responsibilities that belong to the application in this pattern."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A payments service must debit one account and credit another so that both changes happen or neither does. Which storage choice fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A message queue that applies the debit and credit independently"
+        },
+        {
+          "id": "b",
+          "label": "A CDN that replicates the balances to edge locations"
+        },
+        {
+          "id": "c",
+          "label": "A relational database with one transaction around both updates"
+        },
+        {
+          "id": "d",
+          "label": "A cache with a short TTL that holds both balances in memory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A relational transaction gives all-or-nothing atomicity across both updates.",
+        "Caches, independent queue consumers and CDNs give no atomic multi-row guarantee."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An orders table is split across 8 shards. Most queries fetch all orders for one customer, and customers order at similar rates. Which shard key fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Order creation date, so recent orders sit together on one shard and range scans stay cheap"
+        },
+        {
+          "id": "b",
+          "label": "Hash of customer_id, so a customer's orders share a shard and load spreads evenly"
+        },
+        {
+          "id": "c",
+          "label": "Customer country, so orders from each region stay on their own shard close to local users"
+        },
+        {
+          "id": "d",
+          "label": "Random value per order, so each shard gets the same number of rows and no shard runs hot"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Hashing customer_id keeps one customer's orders together and spreads load evenly.",
+        "Date creates hot shards, country skews load, and random keys force queries across all shards."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A flash sale will send 50 times the usual read traffic to product pages that change rarely. Which measures reduce database load? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cache product pages in memory with a short TTL"
+        },
+        {
+          "id": "b",
+          "label": "Add read replicas and route product reads to them"
+        },
+        {
+          "id": "c",
+          "label": "Have every request bypass the cache to get fresh data"
+        },
+        {
+          "id": "d",
+          "label": "Add an index on every column of the orders table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Caching and read replicas absorb repeated reads for rarely changing data.",
+        "Extra indexes slow writes without helping this load, and bypassing the cache increases database traffic."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A web app runs on three servers behind a load balancer, with login sessions stored in each server's memory. Users report being randomly logged out after a few clicks. Which change fixes this while keeping three servers?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a fourth server so each user is less likely to land on a new machine"
+        },
+        {
+          "id": "b",
+          "label": "Move sessions to a shared store such as Redis that all three servers read"
+        },
+        {
+          "id": "c",
+          "label": "Switch the load balancer to random routing so each user's requests are mixed evenly"
+        },
+        {
+          "id": "d",
+          "label": "Increase each server's memory so that sessions survive longer between requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Sessions held in one server's memory are missing when the next request lands elsewhere; a shared store fixes this.",
+        "Adding memory or servers, or randomising routing, does not make session data available to every server."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A service has 10 million daily active users, and each user makes 20 requests per day on average. Assuming traffic is spread evenly over 24 hours (86,400 seconds), what is the average request rate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "About 2,300 requests per second"
+        },
+        {
+          "id": "b",
+          "label": "About 200,000 requests per second"
+        },
+        {
+          "id": "c",
+          "label": "About 230 requests per second"
+        },
+        {
+          "id": "d",
+          "label": "About 23,000 requests per second"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "10M x 20 = 200M requests/day; divided by about 86,400 seconds gives roughly 2,300 per second.",
+        "Distractors come from misplacing a power of ten when dividing by seconds per day."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You implement a cache-aside read path for a user profile lookup. Which sequence of steps is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Write to the cache and database on every read so the two stay identical, then return the cached value"
+        },
+        {
+          "id": "b",
+          "label": "Check the cache; on a miss, read the database, store the result in the cache, then return it"
+        },
+        {
+          "id": "c",
+          "label": "Query the database first, then write the result to the cache, and only check the cache on the next request"
+        },
+        {
+          "id": "d",
+          "label": "Check the cache; on a miss, return an empty result and let a background job fill the cache later"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Cache-aside checks the cache, falls back to the database on a miss, and populates the cache before returning.",
+        "Distractors skip the cache check or confuse reads with write-through behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A photo app receives 5 million new photos per day, averaging 2 MB each. Photos are kept for 1 year and every object is stored with 3 replicas. Roughly how much raw storage is needed?",
+      "options": [
+        {
+          "id": "a",
+          "label": "About 1.2 PB"
+        },
+        {
+          "id": "b",
+          "label": "About 36 PB"
+        },
+        {
+          "id": "c",
+          "label": "About 3.7 PB"
+        },
+        {
+          "id": "d",
+          "label": "About 11 PB"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "5M x 2 MB = 10 TB/day; x 365 = about 3.65 PB; x 3 replicas = about 11 PB.",
+        "3.7 PB forgets replication; the others are arithmetic or unit slips."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An orders table must be sharded across 8 databases. Nearly all queries fetch or insert orders for a single user, and traffic should spread evenly. Which shard key fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Country code, so regional customers share a shard and most queries stay close to them"
+        },
+        {
+          "id": "b",
+          "label": "Order creation date, so recent orders are grouped together on one shard and reads are fast"
+        },
+        {
+          "id": "c",
+          "label": "Hash of user_id, so one customer's orders share a shard and load is spread"
+        },
+        {
+          "id": "d",
+          "label": "Order status, so open orders are kept apart from completed ones and scans stay small"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Hashing user_id keeps single-user queries on one shard and distributes load evenly.",
+        "Date, country and status keys cause hot shards and uneven or shifting distribution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A token bucket rate limiter has capacity 10 and refills 2 tokens per second; it starts full. A client sends 15 requests at t=0, then 5 more requests at t=1.5s. How many requests are allowed in total?",
+      "options": [
+        {
+          "id": "a",
+          "label": "13"
+        },
+        {
+          "id": "b",
+          "label": "15"
+        },
+        {
+          "id": "c",
+          "label": "10"
+        },
+        {
+          "id": "d",
+          "label": "20"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "At t=0 only 10 tokens exist, so 10 pass; by t=1.5s, 3 tokens have refilled, so 3 of the 5 pass: 13.",
+        "Distractors ignore the refill or the bucket's capacity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A queue gives at-least-once delivery to a consumer that creates shipping labels, so duplicates can occur. Which measures make the consumer safe to retry? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Record processed message IDs and skip any ID already seen"
+        },
+        {
+          "id": "b",
+          "label": "Acknowledge the message on receipt so it is never redelivered"
+        },
+        {
+          "id": "c",
+          "label": "Acknowledge the message only after the label is saved successfully"
+        },
+        {
+          "id": "d",
+          "label": "Disable producer retries so duplicates cannot be sent"
+        },
+        {
+          "id": "e",
+          "label": "Write labels with an upsert keyed by order ID so repeats do not create copies"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Deduplication, idempotent writes and ack-after-success make redelivery harmless.",
+        "Acking on receipt risks losing work on a crash, and disabling retries trades duplicates for lost messages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A web app runs on three servers behind a round-robin load balancer. Login sessions are kept in each server's local memory, and users are randomly logged out as requests land on different servers. The team wants to keep round-robin and avoid sticky routing. What should they do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Shorten the session timeout so stale sessions on each server clear sooner"
+        },
+        {
+          "id": "b",
+          "label": "Increase each server's memory so sessions survive longer in its local storage"
+        },
+        {
+          "id": "c",
+          "label": "Move sessions into a shared store such as Redis that every server uses"
+        },
+        {
+          "id": "d",
+          "label": "Add a fourth server so fewer requests land on any single server's memory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A shared session store makes servers stateless, so any server can handle any request.",
+        "The other options do not make session data visible across servers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a deploy, a cache's hit ratio fell from 92% to near 0% and database load tripled. The diff shows the cache key was changed to `user:{id}:{request_timestamp_ms}`. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The database became slower under load, so cached entries are invalidated sooner than before"
+        },
+        {
+          "id": "b",
+          "label": "The cache's TTL was set too low relative to the read traffic, so entries expire before reuse"
+        },
+        {
+          "id": "c",
+          "label": "The key includes a per-request value, so no key is ever reused"
+        },
+        {
+          "id": "d",
+          "label": "The cache ran out of memory and began evicting entries far faster than they are being read"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A per-request timestamp in the key means every lookup is a new key and always misses.",
+        "Eviction, TTL and DB speed would not drop hit ratio to near zero immediately after this change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Users update their profile, are redirected to the profile page, and sometimes see old values; a refresh seconds later shows the new ones. Writes go to the primary and reads go to replicas. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The read hit a replica that had not yet applied the write"
+        },
+        {
+          "id": "b",
+          "label": "The browser cache is ignoring server responses for profile pages and serving a stored copy"
+        },
+        {
+          "id": "c",
+          "label": "The primary database rejected the write at first and silently retried it a few seconds later"
+        },
+        {
+          "id": "d",
+          "label": "The load balancer dropped the write request on some connections and the client resent it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Asynchronous replication means a replica can briefly lag, so read-after-write may return stale data.",
+        "If writes were lost, a later refresh would not show new values."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Checkout calls the email provider synchronously after payment. When the provider slows down, checkout p99 latency climbs and timeouts increase, though payment itself is healthy. What does this analysis show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Connections are held open too long during payments, so the database pool is exhausted and requests queue"
+        },
+        {
+          "id": "b",
+          "label": "Checkout responses are not cached at the edge, so slow replies reach users instead of being absorbed"
+        },
+        {
+          "id": "c",
+          "label": "The email call is in the request path, so provider slowness reaches checkout"
+        },
+        {
+          "id": "d",
+          "label": "Payment processing is the real bottleneck under load and needs more capacity to cut latency"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A synchronous dependency couples checkout latency to the email provider; a queue would decouple them.",
+        "Payment is stated to be healthy, and a CDN does not help dynamic backend calls."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A multi-tenant system shards data by hash(tenant_id) across 10 shards. One shard runs at 95% CPU while the others sit near 20%. One tenant generates about 40% of all traffic. What explains the imbalance?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Hash-based sharding favors the lowest-numbered shard, so write load piles up there over time as data grows"
+        },
+        {
+          "id": "b",
+          "label": "The hash function is biased and spreads tenants unevenly, so swapping in a stronger hash would even out the load"
+        },
+        {
+          "id": "c",
+          "label": "There are too few shards for this many tenants, so adding more shards would split that tenant's traffic"
+        },
+        {
+          "id": "d",
+          "label": "All of a tenant's data maps to one shard, so a very heavy tenant creates a hotspot"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Skew is in the key's access distribution, not the hash; a single tenant maps to one shard.",
+        "Adding shards or changing the hash does not split one tenant's traffic."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Service A (own availability 99.99%) must call both service B (99.9%) and service C (99.9%) on every request, with no fallback. Failures are independent. What is A's approximate end-to-end availability?",
+      "options": [
+        {
+          "id": "a",
+          "label": "99.99%"
+        },
+        {
+          "id": "b",
+          "label": "99.79%"
+        },
+        {
+          "id": "c",
+          "label": "99.9%"
+        },
+        {
+          "id": "d",
+          "label": "99.69%"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Serial dependencies multiply: 0.9999 x 0.999 x 0.999 is about 0.9979.",
+        "99.99% ignores dependencies; 99.69% overcounts the loss."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A team doubled the number of stateless app servers, but throughput stayed flat. Which findings could explain this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The new servers use a different operating system patch level"
+        },
+        {
+          "id": "b",
+          "label": "Every request takes a global distributed lock, which serialises the work"
+        },
+        {
+          "id": "c",
+          "label": "The load balancer uses IP hashing, and most traffic comes via one corporate proxy IP"
+        },
+        {
+          "id": "d",
+          "label": "The database is already at maximum CPU, so extra app servers just queue on it"
+        },
+        {
+          "id": "e",
+          "label": "The app servers are stateless, so they cannot handle more traffic"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A saturated shared resource, a serialising lock, or skewed routing each cap throughput regardless of server count.",
+        "Statelessness helps scaling, and a patch level does not by itself cap throughput."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A very popular product page is cached with a 60-second TTL. Every minute, database CPU spikes briefly and page latency jumps, then it recovers. Cache hit ratio is otherwise 99%. Which analysis best explains the pattern?",
+      "options": [
+        {
+          "id": "a",
+          "label": "When the key expires, many concurrent requests miss together and query the database"
+        },
+        {
+          "id": "b",
+          "label": "Network latency between the app servers and the cache rises periodically on the minute, delaying cache reads until timeouts fire and fall back to the database"
+        },
+        {
+          "id": "c",
+          "label": "A scheduled job on the database runs every minute, such as a backup or statistics refresh, and competes with the page queries for CPU"
+        },
+        {
+          "id": "d",
+          "label": "The cache evicts the hot key early under memory pressure, so the next requests must reload it from the database"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The spike aligns with TTL expiry: a cache stampede sends many simultaneous misses to the database.",
+        "Eviction or network issues would not produce a regular 60-second pattern tied to the TTL."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a deploy, a product-page cache hit ratio falls from 95% to 20% while database load triples. The only change adds a `?session_id=...` tracking parameter to every page URL, and the cache key is the full URL. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The cache is too small, so entries are evicted before they are reused"
+        },
+        {
+          "id": "b",
+          "label": "Every user now generates a unique key, so repeat requests for the same page miss"
+        },
+        {
+          "id": "c",
+          "label": "The database is slower, so entries are expiring earlier than their TTL"
+        },
+        {
+          "id": "d",
+          "label": "The tracking parameter increased payload size, which disables caching of large pages"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Including a per-user value in the key fragments one page into many keys, so hits collapse.",
+        "Capacity and TTL explanations don't fit a sudden drop tied to a key change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A user edits their display name, the page reloads, and the old name appears for a few seconds before the new one shows. Writes go to a primary, and reads go to asynchronous replicas. Which diagnosis best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replication lag lets a replica serve the read before it has applied the write"
+        },
+        {
+          "id": "b",
+          "label": "The replicas use a weaker isolation level, which blocks the write for seconds"
+        },
+        {
+          "id": "c",
+          "label": "The browser cache served an old response because the database lacked indexes"
+        },
+        {
+          "id": "d",
+          "label": "The primary rolled back the write, which was re-applied later by a retry"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Asynchronous replication means a replica can lag the primary, breaking read-your-writes.",
+        "Isolation level and rollback explanations don't produce a transient stale read that self-heals."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A queue consumer charges customers and acknowledges the message after the charge. Some customers are charged twice after a consumer crash. The broker guarantees at-least-once delivery. Which analysis is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The queue should use more partitions, since partitions cause duplicate delivery"
+        },
+        {
+          "id": "b",
+          "label": "Acknowledging after processing is the flaw, because acking first would prevent all loss and duplicates"
+        },
+        {
+          "id": "c",
+          "label": "The broker has a bug that delivers messages twice during normal operation"
+        },
+        {
+          "id": "d",
+          "label": "Crashing after the charge but before the ack causes redelivery of a non-idempotent handler"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A crash between the side effect and the ack triggers redelivery; the handler needs idempotency.",
+        "Acking first trades duplicates for possible loss; it doesn't fix the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A time-series events table is sharded by day, with each day's range on a different shard. Ingest is steady, yet one shard hits CPU limits while the others sit idle. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The idle shards hold too much old data, which blocks inserts on the busy one"
+        },
+        {
+          "id": "b",
+          "label": "The newest shard has more indexes than the others, which makes inserts slower"
+        },
+        {
+          "id": "c",
+          "label": "Range sharding on a monotonic key sends all current writes to the newest shard"
+        },
+        {
+          "id": "d",
+          "label": "Hash sharding would have caused the same hotspot, since the writes are all inserts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Monotonic range keys concentrate all new writes on one shard.",
+        "Index count and old-data explanations don't account for the skew between shards."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A service fans out each request to 40 backends in parallel and waits for all. Each backend has a p99 latency of 100 ms and a median of 5 ms. Users see slow responses on a large share of requests. What is the best analysis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The median of the backends is too high, so average latency drives the slowness"
+        },
+        {
+          "id": "b",
+          "label": "The chance that at least one of 40 calls hits its slow tail is high, so the tail dominates"
+        },
+        {
+          "id": "c",
+          "label": "Parallel calls add up their latencies, so the total is about 40 times the median"
+        },
+        {
+          "id": "d",
+          "label": "The network between services is saturated, which is the only cause of waiting for all"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Waiting on all calls means one slow call delays the request; with 40 calls about 1-0.99^40 ≈ 33% see a tail hit.",
+        "Parallel latency is the maximum, not the sum, which rules out the additive explanation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A popular cached key expires and the database is overwhelmed by thousands of identical recomputation queries at once. Which factors contribute to this stampede? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "No request coalescing or lock exists to let one request refill the key"
+        },
+        {
+          "id": "b",
+          "label": "Many requests find the key missing at the same moment and all recompute it"
+        },
+        {
+          "id": "c",
+          "label": "The cache is write-through, so each miss forces a synchronous write to the database"
+        },
+        {
+          "id": "d",
+          "label": "The recomputation is expensive relative to what the database can handle concurrently"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A stampede needs simultaneous misses, costly recomputation, and no coalescing.",
+        "LRU tends to keep popular keys, so it isn't a cause here."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A web tier uses a load balancer with sticky sessions (cookie lifetime 24 hours). Autoscaling adds 6 new instances during a traffic spike, yet CPU on the 4 original instances stays at 90% while the new ones sit at 10%. Traffic from existing users continues. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cookies pin returning users to their original instances, so new ones get only new users"
+        },
+        {
+          "id": "b",
+          "label": "The new instances fail health checks intermittently and are pulled out of rotation by the load balancer"
+        },
+        {
+          "id": "c",
+          "label": "The load balancer's least-connections algorithm favours instances that already hold many open connections"
+        },
+        {
+          "id": "d",
+          "label": "New instances are slower to warm their caches, so the load balancer sends them fewer requests than the others"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Sticky sessions pin existing users to their instances, so new capacity only serves new sessions.",
+        "Health-check and instance-size explanations aren't suggested by the symptoms; the original instances stay saturated."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A ticketing system must never oversell seats, can accept 200 ms extra latency on checkout, and has one region. Which approach best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use eventually consistent replicas for seat counts, with a nightly job fixing oversells"
+        },
+        {
+          "id": "b",
+          "label": "Let each web server track its own seat quota and sync quotas every minute"
+        },
+        {
+          "id": "c",
+          "label": "Decrement the seat count in a single transactional database row with a conditional update"
+        },
+        {
+          "id": "d",
+          "label": "Cache seat counts at the edge and reconcile oversold seats with refunds afterward"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A conditional update in a transactional store enforces the no-oversell invariant within the latency budget.",
+        "The other options accept temporary or permanent oversells, which violates the stated criterion."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A product catalogue is read 500 times for every write. Criteria: shoppers must never see a price older than 60 seconds, and write latency matters little. Which cache strategy best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A 24-hour TTL with a nightly full refresh to reduce database load"
+        },
+        {
+          "id": "b",
+          "label": "No cache, with every read going to the primary to keep prices exact"
+        },
+        {
+          "id": "c",
+          "label": "Cache-aside with a 60-second TTL and explicit invalidation on each price write"
+        },
+        {
+          "id": "d",
+          "label": "Write-behind caching that flushes price changes to the database every few minutes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A short TTL bounds staleness and invalidation tightens it, while reads stay cheap.",
+        "Long TTLs and delayed write-behind violate the 60-second bound; skipping the cache ignores the read-heavy load."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A checkout flow must send a confirmation email after payment. Criteria: email provider outages must not fail the checkout, and no confirmation may be lost. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Send the email before taking payment so a provider outage is detected early and checkout is blocked"
+        },
+        {
+          "id": "b",
+          "label": "Call the email provider inline and retry within the request until it finally succeeds or times out"
+        },
+        {
+          "id": "c",
+          "label": "Fire the email call asynchronously from memory after commit and log failures so checkout stays fast"
+        },
+        {
+          "id": "d",
+          "label": "Save the order and an outbox row in one transaction; a queue worker sends and retries emails"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The transactional outbox decouples checkout from the provider while retaining durable pending emails.",
+        "In-memory fire-and-forget loses messages on a crash, and inline calls couple checkout to the provider."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A banking ledger needs multi-row transfers that are atomic, auditable, and consistent. Volume is 2,000 writes per second, which one well-provisioned node can handle. Which storage choice best meets the criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A relational database with ACID transactions, replicated for failover"
+        },
+        {
+          "id": "b",
+          "label": "A document store with per-document atomicity and application-side compensation"
+        },
+        {
+          "id": "c",
+          "label": "A key-value store with eventual consistency, partitioned for write scale"
+        },
+        {
+          "id": "d",
+          "label": "An append-only log with consumers deriving balances, without transactions"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "ACID transactions give atomic multi-row transfers, and the volume doesn't require giving them up.",
+        "The alternatives push atomicity into application code, adding risk without a scale need."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team proposes enforcing an API rate limit of 100 requests per minute per user by taking a distributed lock in a central store on every request. The API handles 50,000 requests per second across 40 servers. What is the strongest critique?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The design is sound, because a lock gives an exact count and the central store can be replicated to handle the load"
+        },
+        {
+          "id": "b",
+          "label": "The limit should be enforced per server instead of per user, which removes the need for any shared coordination"
+        },
+        {
+          "id": "c",
+          "label": "Locks protect only writes, so a read-heavy counter check can't be made consistent without a full database transaction"
+        },
+        {
+          "id": "d",
+          "label": "The lock serialises every request and adds a latency and availability dependency; atomic counters fit better"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A per-request global lock is a throughput and availability bottleneck; atomic increments or approximate local counting are cheaper.",
+        "Exactness isn't worth that cost here, and the other options misstate the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A proposal stores all user sessions in one Redis instance with no persistence, to serve a login-required site with 5 million daily users. Which criticisms are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A single instance is a single point of failure, so its loss logs everyone out"
+        },
+        {
+          "id": "b",
+          "label": "One node's memory and throughput cap how far sessions can scale"
+        },
+        {
+          "id": "c",
+          "label": "With no persistence, a restart drops every session at once"
+        },
+        {
+          "id": "d",
+          "label": "Sessions must live in a relational database, because an in-memory store cannot give the fast lookups that logins need"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "The single node limits availability, durability and capacity.",
+        "Redis is widely used for sessions, so the claim that it cannot store them is wrong."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A chat app must load the latest 50 messages of a conversation quickly. Conversations range from 2 people to 100,000-member channels. Criteria: even write distribution, single-conversation reads hit one shard, and no hot shard from a large channel. Which sharding key is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sender user ID, which groups a user's messages but splits conversations apart"
+        },
+        {
+          "id": "b",
+          "label": "Conversation ID alone, which keeps reads local but can overload one shard for huge channels"
+        },
+        {
+          "id": "c",
+          "label": "Message ID hash, which spreads writes evenly but scatters each conversation"
+        },
+        {
+          "id": "d",
+          "label": "Conversation ID plus a time bucket, so reads stay local and large channels spread over buckets"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A composite key with a time bucket keeps recent reads local while spreading a big channel's history over shards.",
+        "The other keys fail either locality or hotspot criteria."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A ledger service must have an RPO of zero after the loss of any one region, with a write latency budget of 300 ms. Cross-region round trips take about 80 ms. Which replication approach best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Nightly snapshots shipped to a second region, plus a write-ahead log archive uploaded every minute"
+        },
+        {
+          "id": "b",
+          "label": "Asynchronous replication to two other regions, accepting seconds of lag so that writes stay fast"
+        },
+        {
+          "id": "c",
+          "label": "Majority-quorum commit across three regions, so each write is durable in two regions before acknowledgement"
+        },
+        {
+          "id": "d",
+          "label": "Synchronous replication to every region, so that all replicas must acknowledge before each write completes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Quorum commit gives RPO zero with one round trip (~80 ms) inside the budget and survives one region loss.",
+        "Async replication loses recent writes; all-region sync lowers availability and ties latency to the slowest region."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team proposes that every service retry failed calls three times with exponential backoff, claiming this strictly improves reliability. Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Backoff delays make retries ineffective, because a server that failed a request has usually lost the state needed to process it"
+        },
+        {
+          "id": "b",
+          "label": "Retries are safe for most operations, so the main cost is slightly higher latency that clients see while calls are retried"
+        },
+        {
+          "id": "c",
+          "label": "Exponential backoff tends to synchronise clients, so a fixed short retry interval is generally more stable when load is high"
+        },
+        {
+          "id": "d",
+          "label": "Under overload retries multiply load across layers and sustain the outage unless budgets, jitter and idempotency are added"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Retry amplification across call layers can turn a brief overload into a sustained outage.",
+        "Distractors treat retries as free or blame backoff itself."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A multi-tenant SaaS shards by hash(tenant_id). One tenant now produces 40% of traffic and overheats its shard. Queries are always tenant-scoped. Which change best balances load while keeping most queries on one shard?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Move the large tenant to read replicas on its shard, since read traffic leaving the primary removes the hotspot"
+        },
+        {
+          "id": "b",
+          "label": "Re-hash tenants with a different function, since a better hash will spread the large tenant across all shards"
+        },
+        {
+          "id": "c",
+          "label": "Add a tenant-to-shard directory and split the large tenant over a few dedicated shards by hash(tenant_id, user_id)"
+        },
+        {
+          "id": "d",
+          "label": "Switch to random sharding by row, so each shard gets equal volume even though tenant queries become scatter-gather"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A directory allows targeted placement and bounded splitting of the hot tenant while most tenants stay single-shard.",
+        "Re-hashing cannot split one key; row-level sharding loses locality; replicas do not relieve writes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A service uses a TTL lease lock so only one worker writes to a storage system. A worker stalls in a long GC pause, its lease expires, a second worker takes over, then the first resumes and writes. Which evaluation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Unsafe unless storage rejects writes carrying a token older than the latest it has seen"
+        },
+        {
+          "id": "b",
+          "label": "Safe if the TTL is set well above any expected pause, since the lease will then expire only after the worker finishes"
+        },
+        {
+          "id": "c",
+          "label": "Safe, because the worker verified it held the lock just before the write, so the lease was valid at write time"
+        },
+        {
+          "id": "d",
+          "label": "Unsafe mainly when clocks drift, so NTP synchronisation across workers removes the stale-writer problem"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A paused client cannot know its lease expired; only a fencing token checked by the resource guarantees safety.",
+        "Longer TTLs and clock sync reduce but never eliminate the race."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An API autoscales on CPU up to 200 instances, each holding a pool of 20 database connections. The database allows 1,000 connections. During a spike, scaling out is followed by rising errors. Which risk assessment ranks highest?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Scaling out exceeds the database connection limit, so added instances worsen failures; cap instances or pool via a proxy"
+        },
+        {
+          "id": "b",
+          "label": "Instance warm-up time is the main risk, because new instances must load caches before taking requests"
+        },
+        {
+          "id": "c",
+          "label": "Health checks fail on new instances, so they never receive traffic and the spike lands on old instances"
+        },
+        {
+          "id": "d",
+          "label": "CPU is a poor scaling signal, so instances arrive too slowly; switching the metric to memory removes the errors"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "200 x 20 = 4,000 connections exceeds 1,000, so scale-out itself causes the failure.",
+        "Other options propose plausible but unsupported causes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A design keeps shopping carts only in one non-persistent Redis node that also serves as the site's page cache. Requirements: carts survive a node failure, and cache load must not affect carts. Which criticisms are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Memory-pressure eviction policies may evict cart keys along with cached pages"
+        },
+        {
+          "id": "b",
+          "label": "Carts must never have a TTL, so any in-memory store is unsuitable"
+        },
+        {
+          "id": "c",
+          "label": "The single node is a single point of failure for all carts"
+        },
+        {
+          "id": "d",
+          "label": "Cache traffic spikes compete with cart operations for the same node's capacity"
+        },
+        {
+          "id": "e",
+          "label": "Redis cannot store structured data such as carts, so a different store is mandatory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Shared eviction, single point of failure and resource contention each violate a stated requirement.",
+        "Redis does store structured data, and carts can have TTLs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A six-engineer team runs a monolith deployed weekly. Only the image-processing module needs 20x more CPU at peaks, and its crashes occasionally take down checkout. Leadership proposes splitting into 15 microservices. Given the criteria of low operational load and fault isolation, which judgement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Extract only image processing behind a queue, since its load and failure profile differ, and keep the rest modular"
+        },
+        {
+          "id": "b",
+          "label": "Split the monolith along database-table ownership lines into several services, since data boundaries matter more than load profiles here"
+        },
+        {
+          "id": "c",
+          "label": "Approve the full split into 15 services, since independent services give stronger fault isolation and the team can grow into the operational load"
+        },
+        {
+          "id": "d",
+          "label": "Keep the monolith and only add more servers at peak, since weekly deploys show the architecture meets current needs and scaling covers the CPU spike"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Extracting the one component with a different scaling and failure profile meets both criteria without 15 services of overhead.",
+        "Full split overloads a small team; doing nothing ignores the checkout outages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a limit of 10,000 requests/min per API key across 20 edge nodes. Constraints: no remote call on the request path, under 1 ms p99 overhead, and brief overshoot up to 10% is acceptable. Which design meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each node keeps a local token bucket with a share of the quota and rebalances shares by exchanging usage asynchronously"
+        },
+        {
+          "id": "b",
+          "label": "Route every request for a key to one node chosen by consistent hashing, then count locally there so the limit stays exact"
+        },
+        {
+          "id": "c",
+          "label": "Each node calls a central counter on every request and rejects once the global count passes the limit, keeping the limit exact"
+        },
+        {
+          "id": "d",
+          "label": "Each node enforces the full 10,000 locally, since evenly spread traffic will make the totals match the limit across nodes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Local buckets with async rebalancing avoid remote calls and keep overshoot bounded.",
+        "Central counters and key-affinity routing add a remote hop; full local limits can allow 20x the limit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design payment webhook handling on an at-least-once queue so a customer is credited exactly once in effect, even if a worker crashes after crediting but before acknowledging. Which design meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run one worker with no concurrency, so duplicates can never be processed at the same time"
+        },
+        {
+          "id": "b",
+          "label": "Insert the event ID under a unique constraint in the same database transaction as the credit, then acknowledge"
+        },
+        {
+          "id": "c",
+          "label": "Acknowledge the message before crediting, so a crash can never lead to the event being delivered again"
+        },
+        {
+          "id": "d",
+          "label": "Check a cache for the event ID before crediting and set it afterwards, using a one-hour TTL on the key"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Recording the ID atomically with the effect makes redelivery harmless.",
+        "Cache checks race and expire; ack-first loses credits on crash; a single worker does not stop redelivery."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Plan moving a 5 TB orders table to a new sharded store with zero downtime, where rollback must stay possible at every step until the final cutover. Which sequence satisfies this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Backfill history to the new store, switch all traffic, then replay any missed writes from the old store's log"
+        },
+        {
+          "id": "b",
+          "label": "Dual-write to both stores, backfill history, compare shadow reads, switch reads, and retire old writes last"
+        },
+        {
+          "id": "c",
+          "label": "Stop writes, copy the table, switch reads and writes to the new store, then resume traffic"
+        },
+        {
+          "id": "d",
+          "label": "Switch writes to the new store first, then backfill history and migrate reads once the copy completes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Dual writes keep the old store authoritative and current, so rollback is possible until it is retired.",
+        "Other sequences either cause downtime or leave the old store stale."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a leaderboard for 50M players (scores 0 to 1,000,000, 200k score updates/s) that returns the top 100 and any player's exact rank within 1 second of a score change. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cache each player's rank for one hour by player ID, and recompute the top 100 when the cache entry expires"
+        },
+        {
+          "id": "b",
+          "label": "An hourly batch job that sorts all players and writes ranks into a key-value table for lookups"
+        },
+        {
+          "id": "c",
+          "label": "Sorted sets sharded by score range, with per-shard counts summed to compute a player's exact rank"
+        },
+        {
+          "id": "d",
+          "label": "A single in-memory sorted set on one node, because ranked structures need no partitioning at this scale"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Range sharding spreads the write load while counts give exact ranks quickly.",
+        "Caching and batch approaches break the 1-second freshness; one node cannot take 200k updates/s."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A proposed notification design: producers write to a partitioned queue, and a consumer calls an email provider, retrying failures indefinitely in place. Requirement: one malformed message must never delay others in its partition. What is the design missing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A cache in front of the email provider, so repeated sends of the same message return a stored response"
+        },
+        {
+          "id": "b",
+          "label": "A synchronous acknowledgement to producers only after the email has actually been delivered to the user"
+        },
+        {
+          "id": "c",
+          "label": "More partitions, so that each message eventually gets its own consumer and cannot block other messages"
+        },
+        {
+          "id": "d",
+          "label": "A bounded retry policy that moves repeatedly failing messages to a dead-letter queue for later inspection"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Infinite in-place retry blocks the partition; bounded retries plus a DLQ isolate poison messages.",
+        "More partitions or caching do not stop a poison message blocking its partition."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design a global read-heavy product catalog: p99 reads under 50 ms worldwide, writes from one region, staleness up to 30 s is fine, and the origin must survive a 10x read spike. Which components together meet this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Synchronous cross-region commit of every catalog write to all replicas"
+        },
+        {
+          "id": "b",
+          "label": "Read replicas in each major region serving local reads"
+        },
+        {
+          "id": "c",
+          "label": "Edge caching with TTLs under 30 seconds for catalog reads"
+        },
+        {
+          "id": "d",
+          "label": "Request coalescing at the cache so concurrent misses trigger one origin fetch"
+        },
+        {
+          "id": "e",
+          "label": "Disabling caching on hot items so they are always read fresh from origin"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Edge TTL caching, regional replicas and coalescing meet latency, staleness and spike limits.",
+        "Synchronous global commit is unnecessary given 30 s staleness; uncached hot items overload the origin."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "You must design messaging for 10M concurrent connections. Requirements: ordering within each conversation, delivery to offline users when they reconnect, and no message loss after a server crash. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Stateless gateways hold connections; a replicated log partitioned by conversation assigns sequence numbers; clients resume from last acked sequence"
+        },
+        {
+          "id": "b",
+          "label": "Gateways keep messages in memory per connection and flush them to a database every minute, ordering by client timestamps and replaying unsent ones on reconnect"
+        },
+        {
+          "id": "c",
+          "label": "Pin each conversation to one gateway that holds messages in local memory, replicates them lazily at shutdown, and redelivers from that memory when users reconnect"
+        },
+        {
+          "id": "d",
+          "label": "Gateways broadcast every message to all gateways by pub/sub and drop it if the recipient is offline, ordering by arrival time at each gateway"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A replicated, partitioned log with per-conversation sequence numbers gives ordering, durability and resumable delivery.",
+        "Other designs lose messages on crashes or offline users, or order by unreliable timestamps."
+      ],
+      "reviewed": false
+    }
+  ]
+}

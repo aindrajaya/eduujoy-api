@@ -1,0 +1,2516 @@
+{
+  "version": 1,
+  "topic": "infrastructure-as-code",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does infrastructure as code (IaC) mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Configuring each server by hand and keeping written notes of every step"
+        },
+        {
+          "id": "b",
+          "label": "Managing servers and networks through version-controlled code files"
+        },
+        {
+          "id": "c",
+          "label": "Writing application code that is built to run only on cloud servers"
+        },
+        {
+          "id": "d",
+          "label": "Storing copies of server backups inside a source code repository"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "IaC defines infrastructure in code files kept under version control.",
+        "Distractors confuse IaC with app hosting, manual documentation or backups."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which Terraform command previews the changes that would be made without changing any real resources?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`terraform plan`"
+        },
+        {
+          "id": "b",
+          "label": "`terraform destroy`"
+        },
+        {
+          "id": "c",
+          "label": "`terraform init`"
+        },
+        {
+          "id": "d",
+          "label": "`terraform apply`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`terraform plan` shows a preview only.",
+        "`apply` and `destroy` change real resources; `init` only prepares the directory."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In Terraform, what is the name of the data file that records which real resources it manages?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Module"
+        },
+        {
+          "id": "b",
+          "label": "Provider block"
+        },
+        {
+          "id": "c",
+          "label": "State file"
+        },
+        {
+          "id": "d",
+          "label": "Variable file"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The state file maps configuration to real resources.",
+        "Other options are config constructs, not the record of managed resources."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "A declarative IaC configuration primarily describes which of the following?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The history of every change made by staff"
+        },
+        {
+          "id": "b",
+          "label": "The exact ordered commands to run on each server"
+        },
+        {
+          "id": "c",
+          "label": "The logins of people allowed to edit the files"
+        },
+        {
+          "id": "d",
+          "label": "The desired end state of the infrastructure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Declarative code states what should exist, and the tool works out the steps.",
+        "The ordered commands option describes the imperative style."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In AWS CloudFormation, what is the file that describes the resources to create called?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Runbook"
+        },
+        {
+          "id": "b",
+          "label": "Snapshot"
+        },
+        {
+          "id": "c",
+          "label": "Template"
+        },
+        {
+          "id": "d",
+          "label": "Stack"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A template defines the resources.",
+        "A stack is the deployed set of resources created from a template, not the file."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are infrastructure as code tools? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Terraform"
+        },
+        {
+          "id": "b",
+          "label": "Photoshop"
+        },
+        {
+          "id": "c",
+          "label": "Pulumi"
+        },
+        {
+          "id": "d",
+          "label": "AWS CloudFormation"
+        },
+        {
+          "id": "e",
+          "label": "Wireshark"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Terraform, Pulumi and CloudFormation define infrastructure in code.",
+        "Wireshark analyses network traffic and Photoshop edits images."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A new teammate clones a repository containing Terraform files and opens a terminal in that folder. Nothing has been run there before. They are told to run `terraform init` first. What does this command do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Creates all the cloud resources that are described in the configuration files"
+        },
+        {
+          "id": "b",
+          "label": "Uploads the local configuration files to the cloud provider account for storage"
+        },
+        {
+          "id": "c",
+          "label": "Downloads required providers and prepares the working directory"
+        },
+        {
+          "id": "d",
+          "label": "Deletes any existing resources that are not listed in the configuration files"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`init` downloads providers and sets up the working directory.",
+        "Creating or deleting resources is done by `apply`, not `init`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "You run `terraform apply` on a configuration, then run it again immediately with no code changes. What should happen the second time?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The command fails because the state file is already locked by the first run"
+        },
+        {
+          "id": "b",
+          "label": "Duplicate copies of every resource are created, since apply always provisions"
+        },
+        {
+          "id": "c",
+          "label": "No changes are made because infrastructure already matches"
+        },
+        {
+          "id": "d",
+          "label": "Every resource is destroyed and rebuilt so it matches the code exactly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "IaC tools are idempotent: matching state means no changes.",
+        "Distractors assume apply always recreates or duplicates resources."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is it useful to keep IaC files in a Git repository?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It stops anyone from changing the real servers by hand in the console"
+        },
+        {
+          "id": "b",
+          "label": "It keeps a reviewable history so changes can be traced and rolled back"
+        },
+        {
+          "id": "c",
+          "label": "It removes the need to run a plan before applying changes to the cloud"
+        },
+        {
+          "id": "d",
+          "label": "It lets the cloud provider build the resources faster than manual setup"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Git provides history, review and rollback of infrastructure changes.",
+        "Git does not speed up provisioning, replace plans or block manual console changes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why should you avoid writing a database password directly in a committed IaC file?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Terraform cannot read values that are written as plain text, so apply fails"
+        },
+        {
+          "id": "b",
+          "label": "Long password strings slow down every plan because of the file size"
+        },
+        {
+          "id": "c",
+          "label": "Anyone with repository access could read it from the file and history"
+        },
+        {
+          "id": "d",
+          "label": "Cloud providers reject any password that appears in code, so it must be typed by hand"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Committed secrets are visible to all repo readers and persist in history.",
+        "The other options invent technical limits that do not exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A colleague changes a server's size in the cloud console by hand, and the code is unchanged. What will the next `terraform plan` most likely show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "No differences, since the console is the source of truth for sizes"
+        },
+        {
+          "id": "b",
+          "label": "A difference between the code and real server, proposing to revert"
+        },
+        {
+          "id": "c",
+          "label": "The code being rewritten to match the size set in the console"
+        },
+        {
+          "id": "d",
+          "label": "An error saying the server was changed outside Terraform and is locked"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Drift is detected by comparing the code and state to reality, and plan proposes to restore the declared state.",
+        "Terraform never edits your code files automatically."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which description best matches a declarative IaC definition?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A checklist of console clicks for an operator to follow"
+        },
+        {
+          "id": "b",
+          "label": "A pipeline step that reruns the failed create commands hourly"
+        },
+        {
+          "id": "c",
+          "label": "A resource block stating a server with a given size and image"
+        },
+        {
+          "id": "d",
+          "label": "A shell script that runs create commands one after another"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A declarative block states what should exist, not the steps.",
+        "The other options describe step-by-step or manual procedures."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Why is reviewing the output of `terraform plan` before applying valuable? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It shows the effect of a code change without making it"
+        },
+        {
+          "id": "b",
+          "label": "It lets reviewers catch an accidental deletion before it happens"
+        },
+        {
+          "id": "c",
+          "label": "It previews which resources will be created, changed or destroyed"
+        },
+        {
+          "id": "d",
+          "label": "It guarantees the apply will not fail"
+        },
+        {
+          "id": "e",
+          "label": "It removes the need for a state file"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Plan previews changes so reviewers can catch mistakes safely.",
+        "It cannot guarantee success and does not replace the state file."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "An engineer renames a setting on a database resource in Terraform. The plan output marks the database with `-/+` and the note \"must be replaced\". What does this tell the engineer?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The database will only be removed from the state file, not destroyed"
+        },
+        {
+          "id": "b",
+          "label": "The database will be deleted and recreated, risking data loss"
+        },
+        {
+          "id": "c",
+          "label": "The database will be updated in place, so it stays online throughout"
+        },
+        {
+          "id": "d",
+          "label": "The plan has failed on this resource, so nothing can be applied"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`-/+` means destroy and recreate, which can lose data unless backed up.",
+        "It is not an in-place update or a plan error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does it mean that a tool such as Terraform or CloudFormation is declarative?",
+      "options": [
+        {
+          "id": "a",
+          "label": "You describe the desired end state and the tool works out the steps to reach it"
+        },
+        {
+          "id": "b",
+          "label": "You declare only names of resources that were already built in the console"
+        },
+        {
+          "id": "c",
+          "label": "You write configuration in a language that has no variables or loops"
+        },
+        {
+          "id": "d",
+          "label": "You list each command in order and the tool runs them top to bottom"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Declarative means specifying the target state, not the procedure.",
+        "The first distractor describes an imperative script."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does Terraform keep a state file?",
+      "options": [
+        {
+          "id": "a",
+          "label": "To store a backup copy of the application source code for deployment"
+        },
+        {
+          "id": "b",
+          "label": "To map config resources to real ones so differences can be computed"
+        },
+        {
+          "id": "c",
+          "label": "To record who ran each command so that audits can assign blame later"
+        },
+        {
+          "id": "d",
+          "label": "To cache provider downloads so later runs start faster on any machine"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "State links config addresses to real resource IDs so plan can diff.",
+        "Caching and audit logging are not its purpose."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A configuration was applied successfully and nothing was changed in the code or in the cloud. What should applying it again do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Create a second copy of each resource, because apply adds the declared resources again"
+        },
+        {
+          "id": "b",
+          "label": "Recreate the resources so the environment matches a fresh build of the config"
+        },
+        {
+          "id": "c",
+          "label": "Fail with an error, because the config was already applied and the tool blocks repeats"
+        },
+        {
+          "id": "d",
+          "label": "Make no changes, because the real state already matches the config"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Declarative tools are idempotent: matching state means no changes.",
+        "Distractors assume apply is a one-shot imperative script."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In infrastructure as code, what is configuration drift?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Gradual growth in config file size and complexity as more resources get added over time"
+        },
+        {
+          "id": "b",
+          "label": "A provider upgrade that quietly renames resource types in the config"
+        },
+        {
+          "id": "c",
+          "label": "Real resources differing from the config because of changes made outside the code"
+        },
+        {
+          "id": "d",
+          "label": "The delay between running plan and running apply on the same config"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Drift is divergence between actual infrastructure and the declared code, often from manual edits.",
+        "Other options confuse drift with file growth or timing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main benefit of storing infrastructure code in Git rather than only changing resources in a console?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cloud providers charge less for resources that are defined in a repository"
+        },
+        {
+          "id": "b",
+          "label": "Console access is no longer needed for any cloud account whatsoever"
+        },
+        {
+          "id": "c",
+          "label": "Resources are created faster because Git sends them directly to the cloud"
+        },
+        {
+          "id": "d",
+          "label": "Changes are reviewed, tracked in history and can be reverted from code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Version control gives review, history and rollback of infrastructure changes.",
+        "Git does not reduce cost or create resources itself."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which are benefits of defining infrastructure as code? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each change leaves a history showing what changed and when"
+        },
+        {
+          "id": "b",
+          "label": "Changes can be peer reviewed in pull requests before being applied"
+        },
+        {
+          "id": "c",
+          "label": "Testing is no longer necessary because code never has mistakes"
+        },
+        {
+          "id": "d",
+          "label": "Identical environments can be recreated from the same files"
+        },
+        {
+          "id": "e",
+          "label": "Manual console edits automatically become part of the code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Reproducibility, review and history are core benefits.",
+        "Code can still be wrong, and console edits cause drift rather than updating code."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A teammate opens the cloud console and adds a new inbound rule to a security group that Terraform manages. The next day you run `terraform plan` without changing any code, and it shows one change on that security group. What best explains the plan output?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The state file lost its record of the group overnight, so Terraform plans to create a second one"
+        },
+        {
+          "id": "b",
+          "label": "The real group differs from the config, so plan proposes removing the extra rule"
+        },
+        {
+          "id": "c",
+          "label": "Terraform treats every manually opened console session as a lock and plans to release it"
+        },
+        {
+          "id": "d",
+          "label": "The provider caches rules from the last apply, so plan reports the cached rules as outdated"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Plan refreshes real state, sees drift and proposes reverting to the code.",
+        "Distractors invent provider bugs or state loss without evidence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You have just written a new Terraform configuration in an empty directory and have not run any commands yet. Which command should you run first?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`terraform destroy`"
+        },
+        {
+          "id": "b",
+          "label": "`terraform apply -auto-approve`"
+        },
+        {
+          "id": "c",
+          "label": "`terraform refresh`"
+        },
+        {
+          "id": "d",
+          "label": "`terraform init`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "init downloads providers and sets up the backend before plan or apply.",
+        "Apply and destroy cannot work before initialisation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A config creates web servers with `count = 3` and all three exist already. You change it to `count = 5` and run `terraform plan`. What summary do you expect?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Plan: 3 to add, 0 to change, 0 to destroy"
+        },
+        {
+          "id": "b",
+          "label": "Plan: 2 to add, 0 to change, 0 to destroy"
+        },
+        {
+          "id": "c",
+          "label": "Plan: 0 to add, 3 to change, 0 to destroy"
+        },
+        {
+          "id": "d",
+          "label": "Plan: 5 to add, 0 to change, 3 to destroy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Only the two missing instances are created; existing ones match.",
+        "Other options assume everything is rebuilt or add the wrong number."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which snippet correctly defines an input variable named `region` with a default value in Terraform?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`variable = region(\"us-east-1\")`"
+        },
+        {
+          "id": "b",
+          "label": "`variable \"region\" { default = \"us-east-1\" }`"
+        },
+        {
+          "id": "c",
+          "label": "`input \"region\" { default_value = \"us-east-1\" }`"
+        },
+        {
+          "id": "d",
+          "label": "`var \"region\" { default = \"us-east-1\" }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Variables use a variable block with an optional default argument.",
+        "The others use invented or incorrect syntax."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A subnet resource needs the ID of a VPC declared as `resource \"aws_vpc\" \"main\" {}`. Which line inside the subnet block passes it correctly?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`vpc_id = var.aws_vpc.main`"
+        },
+        {
+          "id": "b",
+          "label": "`vpc_id = aws_vpc.main.id`"
+        },
+        {
+          "id": "c",
+          "label": "`vpc_id = main.aws_vpc.id`"
+        },
+        {
+          "id": "d",
+          "label": "`vpc_id = \"aws_vpc.main.id\"`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "References use type.name.attribute and create a dependency.",
+        "A quoted string is literal text, and the other forms are the wrong order or namespace."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A config defines a storage bucket resource that already exists in state. You delete that resource block from the code and run `terraform apply`. What happens by default?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The bucket is renamed with a suffix and kept, since Terraform avoids data loss"
+        },
+        {
+          "id": "b",
+          "label": "Terraform asks you to rewrite the block before it will continue"
+        },
+        {
+          "id": "c",
+          "label": "The plan proposes destroying the bucket, as it is no longer declared"
+        },
+        {
+          "id": "d",
+          "label": "The bucket is left alone and only dropped from state, so it becomes unmanaged"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Resources in state but absent from config are planned for destruction.",
+        "Terraform does not keep undeclared resources unless they are removed from state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You are preparing the first commit for a Terraform project. Which items should be kept out of the Git repository? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `.terraform.lock.hcl` dependency lock file"
+        },
+        {
+          "id": "b",
+          "label": "The local `terraform.tfstate` file, which can hold secrets"
+        },
+        {
+          "id": "c",
+          "label": "The `.tf` files that define the resources"
+        },
+        {
+          "id": "d",
+          "label": "A plaintext database password written inside a `.tf` file"
+        },
+        {
+          "id": "e",
+          "label": "The `.terraform` directory of downloaded provider plugins"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "State, secrets and downloaded plugins should not be committed.",
+        "The code and lock file should be committed for reproducibility."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "Three teammates each run `terraform apply` from their laptops, each with a local state file. Yesterday two applies overlapped and one person's resources were duplicated. You need to prevent conflicting and duplicated applies. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Delete the local state before each apply so every run starts clean"
+        },
+        {
+          "id": "b",
+          "label": "Commit the state file to Git and merge it when conflicts appear"
+        },
+        {
+          "id": "c",
+          "label": "Configure a shared remote backend that supports state locking"
+        },
+        {
+          "id": "d",
+          "label": "Let one person apply from a laptop and the others copy that state"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A remote backend with locking gives one shared state and blocks concurrent applies.",
+        "Deleting or hand-merging state causes duplicates or lost tracking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A teammate must apply exactly the changes you reviewed in a pull request, even if the config or remote resources change later. Which command sequence guarantees that?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`terraform plan -out=tfplan` then `terraform apply tfplan`"
+        },
+        {
+          "id": "b",
+          "label": "`terraform refresh` then `terraform apply`, since refresh records the reviewed changes"
+        },
+        {
+          "id": "c",
+          "label": "`terraform validate` then `terraform apply`, since validation locks the reviewed changes"
+        },
+        {
+          "id": "d",
+          "label": "`terraform plan` then `terraform apply -auto-approve`, since both read the same config"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A saved plan file is applied exactly as reviewed.",
+        "Distractors assume a fresh plan, validate or refresh pins the changes; none of them do."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Subnets are created with `count = length(var.names)` from the list [\"a\",\"b\",\"c\"]. You then remove \"b\" from the list. What happens, and what avoids it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only subnet b is destroyed, because count tracks each name automatically"
+        },
+        {
+          "id": "b",
+          "label": "Subnet c shifts to index 1 and is replaced; `for_each` keyed by name avoids this"
+        },
+        {
+          "id": "c",
+          "label": "Nothing changes, because count ignores the contents of the list entirely"
+        },
+        {
+          "id": "d",
+          "label": "All subnets are recreated; adding `depends_on` to each subnet avoids this"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "count addresses resources by index, so removing a middle item shifts later ones; for_each keys by name.",
+        "Distractors assume count tracks names or that depends_on affects addressing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`variables.tf` sets the default of `instance_type` to `t3.micro`, `terraform.tfvars` sets it to `t3.small`, and you run `terraform apply -var='instance_type=t3.large'`. Which size is used?",
+      "options": [
+        {
+          "id": "a",
+          "label": "None; the command errors on conflicting values"
+        },
+        {
+          "id": "b",
+          "label": "`t3.large`"
+        },
+        {
+          "id": "c",
+          "label": "`t3.small`"
+        },
+        {
+          "id": "d",
+          "label": "`t3.micro`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Command-line -var has higher precedence than tfvars files and defaults.",
+        "Choosing t3.small assumes the file wins; the error option assumes conflicts are not resolved by precedence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which configuration makes Terraform create a VPC before its subnet without using `depends_on`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The subnet block is written below the VPC block in the same file"
+        },
+        {
+          "id": "b",
+          "label": "The subnet sets `vpc_id = \"vpc-main\"` and the VPC is named `main`"
+        },
+        {
+          "id": "c",
+          "label": "The subnet and VPC share identical `tags` block values"
+        },
+        {
+          "id": "d",
+          "label": "The subnet sets `vpc_id = aws_vpc.main.id`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Referencing an attribute of another resource creates an implicit dependency.",
+        "File order, names and tags do not affect the dependency graph."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must pass a database password into a Terraform config without committing it to Git. Which approach does that?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Set a default in `variables.tf` and add that file to `.gitignore` once the first commit is pushed"
+        },
+        {
+          "id": "b",
+          "label": "Base64-encode the password in `terraform.tfvars` and commit that file so the encoded value is versioned"
+        },
+        {
+          "id": "c",
+          "label": "Hardcode it in the resource block, since Terraform state files are always stored encrypted at rest"
+        },
+        {
+          "id": "d",
+          "label": "Mark it `sensitive = true` and inject it as a `TF_VAR_db_password` secret in CI"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Environment-variable injection from a secret store keeps the value out of version control.",
+        "Distractors keep the secret in history or treat encoding or later ignoring as protection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Your team of five shares one Terraform config on AWS. Which setup steps make the state safe to share? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Restrict write access to the state bucket to the CI role and a few admins"
+        },
+        {
+          "id": "b",
+          "label": "Commit `terraform.tfstate` to Git so everyone has the latest copy"
+        },
+        {
+          "id": "c",
+          "label": "Enable versioning and encryption on the state bucket"
+        },
+        {
+          "id": "d",
+          "label": "Store state in a remote backend such as S3 with locking enabled"
+        },
+        {
+          "id": "e",
+          "label": "Give each engineer a separate local state file for the same resources"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Remote, locked, versioned, encrypted and access-controlled state is the standard shared setup.",
+        "Committing state or using separate local states causes leaks, conflicts and divergence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A load balancer was created by hand in the console. You want Terraform to manage it without recreating it, and you have already written a matching `aws_lb` resource block. What should you do next?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add `lifecycle { ignore_changes = all }` to the block so Terraform adopts the existing one and never modifies it"
+        },
+        {
+          "id": "b",
+          "label": "Import it into state with `terraform import` or an `import` block, then run `plan` to check differences"
+        },
+        {
+          "id": "c",
+          "label": "Delete the load balancer in the console so Terraform can create it fresh from the block on the next apply"
+        },
+        {
+          "id": "d",
+          "label": "Run `terraform apply`; Terraform finds the existing load balancer by its name and adopts it into state"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Existing resources must be imported into state; a follow-up plan reveals config mismatches.",
+        "Distractors assume auto-adoption, accept downtime, or hide the resource instead of managing it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A plan shows `aws_instance.web must be replaced`, with `# forces replacement` beside `ami`. The only edit was bumping the AMI id. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The instance has drifted from its config, so Terraform replaces it to bring it back in line"
+        },
+        {
+          "id": "b",
+          "label": "Terraform replaces any resource whose arguments were edited, since it never updates in place"
+        },
+        {
+          "id": "c",
+          "label": "The state file is corrupt, so Terraform rebuilds whatever resource it cannot read back"
+        },
+        {
+          "id": "d",
+          "label": "The provider cannot change `ami` in place, so it destroys and recreates the instance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Some attributes are immutable, and the plan marks them as forcing replacement.",
+        "Distractors blame any edit, corruption or drift rather than the specific attribute."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Someone opened port 22 to 0.0.0.0/0 in the console on a managed security group. The next `terraform plan` shows one in-place change removing that rule. What does this show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Plan compares refreshed real state with config, so apply will revert the manual change"
+        },
+        {
+          "id": "b",
+          "label": "Terraform cannot see console edits, so this change must come from a recent code diff in the repo"
+        },
+        {
+          "id": "c",
+          "label": "The config is out of date and should be edited to match the console, otherwise apply will fail"
+        },
+        {
+          "id": "d",
+          "label": "The state file was edited by hand, so Terraform is repairing the state before touching resources"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Plan refreshes real resources and diffs them against config, revealing drift.",
+        "Distractors misread drift as a code change or a state edit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A CI job was cancelled mid-apply. The next run fails with `Error acquiring the state lock`, showing a lock ID created two hours ago. What is the most likely cause and safe response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Expired credentials blocked the state write, so rerun with `-lock=false` to skip the lock check and finish the apply"
+        },
+        {
+          "id": "b",
+          "label": "A teammate's plan is still running, so wait for the lock to expire on its own and then rerun the job"
+        },
+        {
+          "id": "c",
+          "label": "A stale lock from the killed run; confirm nothing is applying, then `terraform force-unlock <ID>`"
+        },
+        {
+          "id": "d",
+          "label": "The state file is corrupted by the cancelled run, so delete it and re-import every resource by hand"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Killed runs leave locks; verify no active run before force-unlocking.",
+        "Disabling locking or deleting state risks concurrent writes or lost state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`terraform plan` reports `Error: Cycle`. Security group `app` has an inline ingress rule referencing group `db`, and `db` has an inline ingress rule referencing `app`. What is the best fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add `depends_on` to each group pointing at the other, so Terraform orders their creation explicitly"
+        },
+        {
+          "id": "b",
+          "label": "Apply each group separately with `-target` and keep the inline rules, so each exists before the other"
+        },
+        {
+          "id": "c",
+          "label": "Move the rules into separate `aws_security_group_rule` resources so both groups exist first"
+        },
+        {
+          "id": "d",
+          "label": "Set `count = 0` on one group until the other has been created, then restore the count and re-apply"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Inline cross-references make a circular graph; separate rule resources break the cycle.",
+        "depends_on adds edges rather than removing them; count and -target are fragile workarounds."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a staging apply, a production database was destroyed. Both environments use the same backend bucket and key `app/terraform.tfstate`, with different variable files. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Different variable files cannot configure different regions or accounts safely"
+        },
+        {
+          "id": "b",
+          "label": "The bucket lacked versioning, which is what triggered the deletion of the database"
+        },
+        {
+          "id": "c",
+          "label": "Terraform destroys resources whenever the variable file changes between runs"
+        },
+        {
+          "id": "d",
+          "label": "The shared state key made staging's run manage prod resources and plan their removal"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "One state shared by two environments means each run sees the other's resources as its own.",
+        "Versioning helps recovery but does not cause deletion; var files alone do not trigger destroys."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A CI plan showed 2 changes, but the later apply made 5. Which could explain the difference? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Provider versions were not pinned, so a newer provider ran at apply"
+        },
+        {
+          "id": "b",
+          "label": "Apply ran a fresh plan instead of using the saved plan file"
+        },
+        {
+          "id": "c",
+          "label": "A teammate changed the config on the branch between plan and apply"
+        },
+        {
+          "id": "d",
+          "label": "The config had been formatted with `terraform fmt`"
+        },
+        {
+          "id": "e",
+          "label": "The state backend was encrypted"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Unsaved plans, changed config and floating provider versions all let apply diverge from plan.",
+        "Encryption and formatting do not change planned actions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "You refactor `aws_db_instance.main` into a module called `database`. The plan now shows destroying `aws_db_instance.main` and creating `module.database.aws_db_instance.main`. What explains this and what is the fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The provider has a bug with moved resources, so set `ignore_changes = all` on the new database and apply"
+        },
+        {
+          "id": "b",
+          "label": "The plan is stale because state is out of date, so run `terraform refresh` to match up the addresses"
+        },
+        {
+          "id": "c",
+          "label": "Modules always recreate the resources inside them, so keep stateful databases outside of modules"
+        },
+        {
+          "id": "d",
+          "label": "The address changed, so state sees the old gone and the new missing; add a `moved` block"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "State tracks resources by address; a moved block maps old to new without recreation.",
+        "Distractors blame modules, stale state or provider bugs instead of the address change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After you rename a resource block label from `aws_db_instance.main` to `aws_db_instance.primary` with no other edits, `terraform plan` shows one destroy and one create. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A stale state lock made Terraform treat every resource in the configuration as brand new"
+        },
+        {
+          "id": "b",
+          "label": "The label is an immutable attribute in the cloud API, so any change to it forces replacement"
+        },
+        {
+          "id": "c",
+          "label": "State tracks resources by address, so the old address looks removed and the new one looks added"
+        },
+        {
+          "id": "d",
+          "label": "The provider found drift in the live database and now forces a replacement to restore it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Resource addresses are the key into state; a `moved` block or `state mv` preserves the mapping.",
+        "Distractors blame drift or API immutability, but a label is a Terraform-only name."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Two engineers each keep a local `terraform.tfstate` committed to Git. Engineer A applies and pushes. Engineer B, who has not pulled, applies and tries to create the same load balancer again. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The provider caches resource IDs per machine, and B's cache expired, forcing a duplicate create"
+        },
+        {
+          "id": "b",
+          "label": "Terraform refuses to read state older than the cloud resources, so it falls back to empty state"
+        },
+        {
+          "id": "c",
+          "label": "Git merges corrupt the state file's JSON structure, so Terraform can no longer parse any resource"
+        },
+        {
+          "id": "d",
+          "label": "B's state copy lacks A's resources, so B's plan assumes they do not exist and tries to create them"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Divergent state copies cause duplicate creates; remote state with locking prevents this.",
+        "Distractors invent parsing or caching problems; the issue is stale state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An apply fails with `DependencyViolation` while deleting a security group still used by an instance. The instance's config sets `vpc_security_group_ids = [\"sg-0abc123\"]` as a literal string. What is the faulty step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The instance should use `count`, because a single instance cannot be detached from its group"
+        },
+        {
+          "id": "b",
+          "label": "The literal ID gives Terraform no dependency edge, so it may delete the group before updating the instance"
+        },
+        {
+          "id": "c",
+          "label": "The security group needs a `lifecycle` block, because groups can never be deleted while instances exist"
+        },
+        {
+          "id": "d",
+          "label": "The provider caches group IDs and so deletes in alphabetical order rather than dependency order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Referencing `aws_security_group.x.id` creates an implicit dependency that orders operations.",
+        "Distractors point at lifecycle or provider ordering, not the missing reference."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An autoscaling group has `desired_capacity = 3` in code. A scaling policy changes the live value during the day, and every morning `terraform plan` shows a diff back to 3. Which diagnosis is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Code and autoscaler both own the same attribute, so each run sees drift"
+        },
+        {
+          "id": "b",
+          "label": "The provider is buggy and miscalculates capacity, so a version upgrade alone would remove the diff"
+        },
+        {
+          "id": "c",
+          "label": "The scaling policy was created outside the code, so Terraform must destroy it before planning"
+        },
+        {
+          "id": "d",
+          "label": "The state backend is losing writes at night, so Terraform forgets the real capacity before each plan"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Attributes managed at runtime should be excluded, for example with `ignore_changes`.",
+        "Distractors blame state or provider rather than dual ownership."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A config creates subnets with `count = length(var.cidrs)` and `cidr_block = var.cidrs[count.index]`. Removing the first CIDR from the list makes the plan replace every remaining subnet. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`count` tracks resources by index, so the remaining CIDRs shift down and no longer match their state entries"
+        },
+        {
+          "id": "b",
+          "label": "Subnet CIDR blocks are tracked as one group in the VPC, so removing one entry invalidates the CIDRs of its sibling subnets"
+        },
+        {
+          "id": "c",
+          "label": "Terraform replaces the resources in a counted set when its length changes, because the meta-argument is recomputed for each of them"
+        },
+        {
+          "id": "d",
+          "label": "The `length` function forces a refresh of the list variable, which marks every subnet created from that list as tainted in state"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Index-based addressing shifts; `for_each` with stable keys avoids this.",
+        "Distractors claim blanket replacement or taint, which does not happen."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A plan right after a successful apply, with no code change, shows pending changes. Which are plausible causes? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A data source looks up the latest AMI and now returns a newer image"
+        },
+        {
+          "id": "b",
+          "label": "`terraform fmt` reformatted the files, which counts as a resource change"
+        },
+        {
+          "id": "c",
+          "label": "The provider normalises a JSON policy differently from the string written in code"
+        },
+        {
+          "id": "d",
+          "label": "The backend stores state in an encrypted bucket, which hides some attributes"
+        },
+        {
+          "id": "e",
+          "label": "Another process, such as a console edit or an agent, changed a managed attribute"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Moving data sources, external edits and normalisation differences all produce post-apply diffs.",
+        "Backend encryption and formatting do not affect planned resource changes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A pipeline runs `terraform plan` on each pull request and `terraform apply -auto-approve` on merge. A reviewer approved a PR whose plan showed two tag changes. After merge, the apply also destroyed a database. Another PR had merged minutes earlier and removed that database's block. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The merge-time apply computed a fresh plan against newer code and state, so it differed from the reviewed plan"
+        },
+        {
+          "id": "b",
+          "label": "The auto-approve flag makes Terraform ignore `prevent_destroy` and delete resources absent from the plan"
+        },
+        {
+          "id": "c",
+          "label": "The reviewer misread the plan, because tag changes always imply a replacement of attached resources"
+        },
+        {
+          "id": "d",
+          "label": "Terraform plans are nondeterministic, so two plans of identical code often disagree on destroys"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Applying a saved plan file, or serialising merges, ensures the executed change matches the reviewed one.",
+        "Distractors blame the reviewer or nondeterminism instead of the plan/apply gap."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: a bad change in one service must not endanger others, teams deploy independently, and the shared network changes rarely. Which state layout best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One state per individual resource, so every change has the smallest possible blast radius"
+        },
+        {
+          "id": "b",
+          "label": "Separate states per environment and component layer, sharing the network through read-only outputs"
+        },
+        {
+          "id": "c",
+          "label": "One state per environment containing everything, so all dependencies resolve within a single plan"
+        },
+        {
+          "id": "d",
+          "label": "One shared state across environments, with workspaces to separate dev from prod at apply time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Layered states limit blast radius while keeping the number of states manageable.",
+        "A monolithic state couples teams; per-resource states make dependencies unmanageable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: no database password in Git, and no plaintext password in Terraform state if avoidable. Which approach best meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Generate it with `random_password` and expose it as a sensitive output, so teammates can read it from the state file when needed"
+        },
+        {
+          "id": "b",
+          "label": "Let the database service generate and rotate the admin secret in a secrets manager, outside Terraform"
+        },
+        {
+          "id": "c",
+          "label": "Commit the password in a KMS-encrypted variables file and decrypt it during each pipeline run, so Git only holds ciphertext"
+        },
+        {
+          "id": "d",
+          "label": "Mark the password variable `sensitive = true` and pass it with `TF_VAR_db_password` from CI secrets, so it never appears in the repo"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Service-managed secrets never enter the Terraform workflow, so they stay out of state.",
+        "`sensitive` only hides CLI output; the value still lands in state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A reviewer sees a module that wraps `aws_s3_bucket` and exposes every argument as a variable, one to one, with no defaults or policies. Judged on maintainability and reuse, what is the best critique?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It adds indirection but encodes no standard, so it should enforce conventions or be dropped"
+        },
+        {
+          "id": "b",
+          "label": "It is acceptable as written, but only if the module is kept in a separate repository from every caller that uses it"
+        },
+        {
+          "id": "c",
+          "label": "It should be split into one module per argument, so that each individual setting can be versioned and released independently"
+        },
+        {
+          "id": "d",
+          "label": "It is ideal, because exposing every argument means callers will rarely need to edit the module or request changes to it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A module earns its keep by encapsulating decisions such as encryption defaults and naming.",
+        "Pass-through wrappers add cost without abstraction; repo location is irrelevant."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criterion: rank by irreversible impact if applied unnoticed. Which plan line deserves the closest review?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A new security group added, with no attachments to any resource yet"
+        },
+        {
+          "id": "b",
+          "label": "Tags updated in place on forty instances across two availability zones"
+        },
+        {
+          "id": "c",
+          "label": "An IAM policy description changed in place on a role used by one batch job"
+        },
+        {
+          "id": "d",
+          "label": "`aws_db_instance.orders` must be replaced, with no final snapshot configured"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Replacing a stateful database without a snapshot can cause unrecoverable data loss.",
+        "The others are in-place, additive or easily reverted."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: engineers sometimes make emergency console fixes during incidents; changes must not be silently reverted, and every deviation must be auditable. Which drift policy fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Adding `ignore_changes = all` to every resource, so drift never appears in any plan"
+        },
+        {
+          "id": "b",
+          "label": "An hourly auto-apply that restores code-defined state, so the repository is always authoritative"
+        },
+        {
+          "id": "c",
+          "label": "Scheduled plan-only runs that alert on drift, then reconcile by updating code or importing the change"
+        },
+        {
+          "id": "d",
+          "label": "Blocking all console access, so emergency fixes must go through a full pipeline run"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Detect-and-review keeps incident fixes while preserving an audit trail.",
+        "Auto-apply can undo an emergency fix; blanket ignore hides drift entirely."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Criteria for a production pipeline: changes are reviewed before execution, risky changes are blocked automatically, and no long-lived cloud keys exist. Which controls satisfy these? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep a shared admin access key in CI variables, rotated yearly"
+        },
+        {
+          "id": "b",
+          "label": "Require approval of a saved plan file, then apply exactly that file"
+        },
+        {
+          "id": "c",
+          "label": "Authenticate the runner with short-lived OIDC-issued credentials"
+        },
+        {
+          "id": "d",
+          "label": "Run policy-as-code checks against the plan, failing on forbidden changes"
+        },
+        {
+          "id": "e",
+          "label": "Let engineers apply from laptops when the pipeline is slow"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Saved-plan approval, policy checks and short-lived credentials map to the three criteria.",
+        "Long-lived shared keys and laptop applies break the credential and review criteria."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "Thirty services each copy-paste the same VPC-and-ECS Terraform code. A security fix must reach all of them within two weeks, with the ability to roll back per service and reproducible plans. Which approach best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Point every service at the module's `main` branch, so the fix reaches all of them on the next run"
+        },
+        {
+          "id": "b",
+          "label": "Move all thirty services into one root configuration, so one apply updates every service together"
+        },
+        {
+          "id": "c",
+          "label": "Publish a versioned module, pin each service to a tag, and roll out the fix as per-service version bumps"
+        },
+        {
+          "id": "d",
+          "label": "Keep the copies and send a patch file, since each service owner knows their own configuration"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Pinned versions give staged rollout, per-service rollback and reproducible plans.",
+        "Tracking `main` makes plans non-reproducible; a monolith removes per-service rollback."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "40 engineers manage dev, staging and prod with Terraform. Criteria: no concurrent state corruption, small blast radius, and per-environment access control. Which state layout is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One shared state for all environments with locking, so every change sees the full picture"
+        },
+        {
+          "id": "b",
+          "label": "State files committed to Git per branch, since Git history gives versioning and peer review"
+        },
+        {
+          "id": "c",
+          "label": "Separate remote states per environment and component, each with locking and its own access policy"
+        },
+        {
+          "id": "d",
+          "label": "Local state on each engineer's laptop, synced by hand, so no shared backend is required"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Splitting state by environment and component limits blast radius and allows separate access control, while locking prevents concurrent writes.",
+        "A single shared state widens blast radius; Git-stored state has no locking and exposes secrets."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "On-call engineers sometimes hotfix resources in the console during incidents. Criteria: keep code as the source of truth, avoid surprise overwrites of valid fixes, and keep visibility. Which policy is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run scheduled plan-only drift detection that alerts, then reconcile each diff in a reviewed code change"
+        },
+        {
+          "id": "b",
+          "label": "Run a scheduled apply every hour so any console change is overwritten and code always wins"
+        },
+        {
+          "id": "c",
+          "label": "Block all console write access permanently so drift can never occur, even during incidents"
+        },
+        {
+          "id": "d",
+          "label": "Add ignore_changes for every attribute so Terraform never reports differences from manual edits"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Plan-only detection surfaces drift without overwriting valid emergency fixes, and reconciliation through code keeps the source of truth.",
+        "Auto-apply can undo an incident fix; ignore_changes hides drift entirely."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Thirty teams consume a shared network module. Criteria: reproducible plans, controlled upgrades, and visible impact of each change. Which sourcing approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Copy the module into each repository so teams can edit it freely without any upstream releases"
+        },
+        {
+          "id": "b",
+          "label": "Reference the module's main branch so every team receives fixes automatically on its next plan"
+        },
+        {
+          "id": "c",
+          "label": "Use a loose range such as >= 1.0 so plans stay current while remaining roughly compatible"
+        },
+        {
+          "id": "d",
+          "label": "Pin an exact released version and upgrade through a pull request that shows the resulting plan"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Exact pins make plans reproducible, and upgrades via reviewed PRs make impact visible.",
+        "Tracking main or open ranges lets upstream changes alter plans unexpectedly; copies diverge."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A teammate says marking a database password variable `sensitive = true` keeps the secret safe in Terraform. Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It only hides the value in CLI output; plaintext still lands in state, so state needs encryption and tight access"
+        },
+        {
+          "id": "b",
+          "label": "Incorrect, because sensitive variables are written to plan output, which is the only place they are exposed"
+        },
+        {
+          "id": "c",
+          "label": "Correct, provided the variable is supplied from a .tfvars file that is excluded from Git commits"
+        },
+        {
+          "id": "d",
+          "label": "Correct, because sensitive values are stored encrypted in state and cannot be read by anyone with state access"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The sensitive flag only redacts display; the value is still stored in plaintext in state.",
+        "Distractors assume state encryption or Git exclusion solves exposure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A config creates one subnet per entry in a list of five names using `count`. Someone removes the second name. Criteria: no unintended destroys and readable diffs. Which assessment and fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Later entries shift index and get replaced; use for_each keyed by stable names so removal affects only one"
+        },
+        {
+          "id": "b",
+          "label": "Only the removed entry is destroyed, so count is safe here and the design needs no change at all"
+        },
+        {
+          "id": "c",
+          "label": "Shifted indexes are harmless because names are just tags; add create_before_destroy to avoid any outage"
+        },
+        {
+          "id": "d",
+          "label": "Count cannot accept lists, so the plan fails; wrap each name in a separate module call to fix it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Count addresses by index, so removing a middle item shifts and replaces later ones; for_each uses stable keys.",
+        "Distractors wrongly treat index shifts as harmless or count as invalid."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team wants a production apply gate it can trust. Which practices make the gate reliable? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Apply the exact saved plan file that reviewers approved, rather than re-planning at apply time"
+        },
+        {
+          "id": "b",
+          "label": "Run plan and apply with the same pinned tool and provider versions against the same backend"
+        },
+        {
+          "id": "c",
+          "label": "Let apply run a fresh plan automatically so it always reflects the newest cloud state"
+        },
+        {
+          "id": "d",
+          "label": "Have reviewers read only the code diff, since plan output merely repeats the same information"
+        },
+        {
+          "id": "e",
+          "label": "Highlight destroy and replace actions in the plan for explicit reviewer sign-off"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Applying the reviewed plan, flagging destructive actions and keeping versions consistent ensure what is approved is what runs.",
+        "Code diffs do not show real effects, and a fresh plan at apply may differ from what was approved."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A refactor moves an aws_db_instance into a module, changing its address from aws_db_instance.main to module.data.aws_db_instance.main. The production plan shows one destroy and one create, with no attribute changes. Criteria: no data loss and no downtime. What is the best next step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Taint the old address so Terraform treats the module copy as the same database on the next run"
+        },
+        {
+          "id": "b",
+          "label": "Add a moved block from the old address to the new one and confirm the plan then shows no changes"
+        },
+        {
+          "id": "c",
+          "label": "Apply with -target on the new address first so the database exists before the old one is destroyed"
+        },
+        {
+          "id": "d",
+          "label": "Apply after taking a snapshot, since restoring from it is an acceptable recovery for a destroyed database"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A moved block remaps state to the new address so nothing is destroyed or recreated.",
+        "Snapshots and restore still cause downtime; -target or taint do not map identity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a pipeline applying Terraform to dev, staging and prod accounts. Constraints: no long-lived cloud credentials stored, identical code in every environment, manual approval before prod. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Shared modules and one admin access key held in CI secrets, with an approval step added before the prod job"
+        },
+        {
+          "id": "b",
+          "label": "Shared modules applied from engineer laptops using personal credentials, with approval recorded in a ticket"
+        },
+        {
+          "id": "c",
+          "label": "Per-environment copies of the code, with access keys stored as CI secrets and rotated every ninety days"
+        },
+        {
+          "id": "d",
+          "label": "Shared modules, per-environment state, CI assuming per-account roles via OIDC, and an approval gate before prod"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "OIDC role assumption gives short-lived credentials, shared modules keep code identical, and a gate covers prod.",
+        "Stored keys, even rotated, violate the credential constraint; copies break identical code."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a change so replacing an instance group behind a load balancer causes no downtime. The group's name must be unique and cannot be changed in place. Which design meets both constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Leave default ordering with a fixed name; the old group is destroyed, then the new one is created quickly"
+        },
+        {
+          "id": "b",
+          "label": "Use ignore_changes on the name and edit instances by hand so Terraform never needs to replace the group"
+        },
+        {
+          "id": "c",
+          "label": "Set create_before_destroy and keep a fixed name, so the new group takes over the old one in place"
+        },
+        {
+          "id": "d",
+          "label": "Set create_before_destroy and derive the name from a prefix or random suffix so old and new coexist"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Creating the new group first needs a distinct name, so a prefix or suffix avoids the uniqueness conflict.",
+        "A fixed name with create_before_destroy fails on conflict; default ordering causes downtime."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Plan the adoption of 40 hand-built resources into Terraform. Constraints: no recreation, no downtime, and a way to verify that the code matches reality. Which plan meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Delete the resources and apply fresh configuration in a short maintenance window to get clean state"
+        },
+        {
+          "id": "b",
+          "label": "Write matching configuration, import each resource into state, and iterate until the plan shows no changes"
+        },
+        {
+          "id": "c",
+          "label": "Write configuration from memory and apply it; Terraform will detect existing resources and adopt them"
+        },
+        {
+          "id": "d",
+          "label": "Copy a state file from a similar account and edit resource IDs by hand until the plan looks right"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Import maps existing resources to state, and an empty plan verifies the code matches reality.",
+        "Recreation causes downtime; applying without import tries to create duplicates."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a control so no team can create a publicly readable storage bucket. Constraints: it must not rely on reviewers noticing, and it must also cover buckets created outside Terraform. Which design meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A pull request checklist item reminding reviewers to reject public bucket settings in every change"
+        },
+        {
+          "id": "b",
+          "label": "Policy-as-code checks on the plan in CI, plus an organization-level control that blocks public access"
+        },
+        {
+          "id": "c",
+          "label": "A nightly script that lists public buckets and emails owners so they can fix them the next day"
+        },
+        {
+          "id": "d",
+          "label": "A module default of private access, which teams are trusted not to override in their own configs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "CI policy checks automate prevention in code, and an org-level control covers console-created buckets.",
+        "Checklists, notifications and trusted defaults depend on people or only cover Terraform."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Plan how to split a 2,000-resource state into network, data and app states. Constraints: no resource recreated, short lock time, and the result must be verifiable. Which plan meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Split only the configs and keep the single state in place, since states cannot be separated later"
+        },
+        {
+          "id": "b",
+          "label": "Create new configs, destroy resources in the old state, and apply the new configs to recreate them"
+        },
+        {
+          "id": "c",
+          "label": "Copy the full state into each new backend, then delete unwanted resources from each config afterward"
+        },
+        {
+          "id": "d",
+          "label": "Back up state, move each resource group to its new state, then confirm every state plans with no changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Moving resources between states preserves identity, and empty plans in each state verify success.",
+        "Copying state duplicates ownership and deleting from config would destroy resources."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design per-pull-request ephemeral environments with Terraform. Which elements must the design include? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A per-environment state key and resource name suffix derived from the PR number to avoid collisions"
+        },
+        {
+          "id": "b",
+          "label": "Cost-limited sizing and quotas defined in the module so previews cannot exhaust the account budget"
+        },
+        {
+          "id": "c",
+          "label": "Manual cleanup by the author after merge, tracked in the PR description"
+        },
+        {
+          "id": "d",
+          "label": "Automatic destroy on PR close plus a TTL sweep for environments that were abandoned"
+        },
+        {
+          "id": "e",
+          "label": "A shared state file with fixed resource names so every PR updates the same environment"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Isolated state and names prevent collisions, automated teardown prevents leaks, and limits control cost.",
+        "Shared state causes PRs to clobber each other; manual cleanup is routinely forgotten."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A module used by 30 teams has an input `vpc_cidr` that should become `network_cidr`, and the default of `enable_flow_logs` should change to true. Constraint: no team's plan may break or change unexpectedly when upgrading within its current major version. Which release design meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rename the input and flip the default in a patch release, and announce both changes in the changelog so teams can read them before upgrading"
+        },
+        {
+          "id": "b",
+          "label": "Publish a new module with the new names and delete the old one from the registry, so every team is forced to migrate to it at once"
+        },
+        {
+          "id": "c",
+          "label": "Accept both inputs and keep the old default in a minor release with a deprecation notice; switch the default in the next major"
+        },
+        {
+          "id": "d",
+          "label": "Rename the input and flip the default in a minor release, because the new default is safer and teams can override it if they object"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Supporting both inputs and keeping the default until a major release avoids breakage or surprise diffs within a major version.",
+        "Renames or default flips in patch or major releases, or deleting the module, break or alter existing plans."
+      ],
+      "reviewed": false
+    }
+  ]
+}

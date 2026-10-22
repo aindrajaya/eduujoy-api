@@ -1,0 +1,2501 @@
+{
+  "version": 1,
+  "topic": "ci-cd",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the \"CI\" in CI/CD stand for?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Central Infrastructure"
+        },
+        {
+          "id": "b",
+          "label": "Continuous Integration"
+        },
+        {
+          "id": "c",
+          "label": "Continuous Inspection"
+        },
+        {
+          "id": "d",
+          "label": "Code Isolation"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "CI is Continuous Integration: merging and verifying changes frequently.",
+        "Other options are plausible-sounding but are not standard terms."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which pipeline stage turns source code into a deployable package such as a JAR or container image?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rollback"
+        },
+        {
+          "id": "b",
+          "label": "Monitoring"
+        },
+        {
+          "id": "c",
+          "label": "Build"
+        },
+        {
+          "id": "d",
+          "label": "Code review"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The build stage compiles and packages code into an artifact.",
+        "Rollback and monitoring happen around release, not packaging."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is a pipeline trigger?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A test that fails on purpose to check that alerts reach the team"
+        },
+        {
+          "id": "b",
+          "label": "A server setting that limits how many jobs can run at the same time"
+        },
+        {
+          "id": "c",
+          "label": "An event, such as a push or pull request, that starts a run"
+        },
+        {
+          "id": "d",
+          "label": "A script that deletes old build artifacts once storage fills up"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A trigger is the event that starts a pipeline run.",
+        "Distractors describe unrelated pipeline features."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Where should a pipeline's deployment password or API key be stored?",
+      "options": [
+        {
+          "id": "a",
+          "label": "In a committed `.env` file in the repo"
+        },
+        {
+          "id": "b",
+          "label": "In the CI tool's secrets store"
+        },
+        {
+          "id": "c",
+          "label": "In the project README for the team"
+        },
+        {
+          "id": "d",
+          "label": "In the pipeline YAML as plain text"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Secrets belong in the CI tool's encrypted secrets store.",
+        "The other options expose the secret in the repository."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In which directory does GitHub Actions look for workflow definition files?",
+      "options": [
+        {
+          "id": "a",
+          "label": "ci/pipelines/"
+        },
+        {
+          "id": "b",
+          "label": ".actions/jobs/"
+        },
+        {
+          "id": "c",
+          "label": "workflows/.github/"
+        },
+        {
+          "id": "d",
+          "label": ".github/workflows/"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Workflows live in `.github/workflows/` as YAML files.",
+        "Other paths are invented lookalikes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are typical stages in a CI/CD pipeline? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rewrite the Git history"
+        },
+        {
+          "id": "b",
+          "label": "Run automated tests"
+        },
+        {
+          "id": "c",
+          "label": "Build the code"
+        },
+        {
+          "id": "d",
+          "label": "Deploy to an environment"
+        },
+        {
+          "id": "e",
+          "label": "Hire code reviewers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Build, test and deploy are standard pipeline stages.",
+        "Rewriting history and hiring are not pipeline stages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A team's pipeline has three stages in order: build, test, deploy. A developer pushes a commit and one unit test fails in the test stage. By default, what happens to the deploy stage?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is skipped, as the pipeline stops at the failed stage"
+        },
+        {
+          "id": "b",
+          "label": "It runs but only on a staging server, to limit the risk"
+        },
+        {
+          "id": "c",
+          "label": "It runs anyway and the failure is flagged on the report later"
+        },
+        {
+          "id": "d",
+          "label": "It waits in a paused state until the developer fixes the test"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "By default, a failed stage stops later stages from running.",
+        "Distractors assume the pipeline continues or pauses."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do teams run automated tests on every commit rather than once a week?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It removes the need for code review before merging"
+        },
+        {
+          "id": "b",
+          "label": "It lets developers skip running tests on their machines"
+        },
+        {
+          "id": "c",
+          "label": "It catches integration problems while changes are small"
+        },
+        {
+          "id": "d",
+          "label": "It makes the build artifact smaller and faster to ship"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Frequent runs surface problems early, when they are easy to trace.",
+        "Distractors claim unrelated or false benefits."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main difference between continuous delivery and continuous deployment?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Delivery needs manual approval before production; deployment doesn't"
+        },
+        {
+          "id": "b",
+          "label": "Delivery stops after the build and tests; deployment adds a release step"
+        },
+        {
+          "id": "c",
+          "label": "Deployment only builds artifacts; delivery releases them to users"
+        },
+        {
+          "id": "d",
+          "label": "Delivery runs on every commit; deployment runs only on a nightly schedule"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Delivery keeps a manual release gate; deployment automates it.",
+        "Other options confuse the stages or the platforms."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A pipeline is configured to build and test on every push, but deploy only on the `main` branch. What happens when a developer pushes to branch `feature-x`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only the deploy stage runs, to a preview environment"
+        },
+        {
+          "id": "b",
+          "label": "Build, test and deploy all run, since the push triggers it"
+        },
+        {
+          "id": "c",
+          "label": "Build and test run, but deploy is skipped"
+        },
+        {
+          "id": "d",
+          "label": "Nothing runs until the branch is merged into main"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Branch conditions skip deploy while build and test still run.",
+        "Other options misread the trigger and condition rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do teams build an artifact once and promote that same artifact through test, staging and production?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rebuilding in each environment would cost more compute than CI plans allow"
+        },
+        {
+          "id": "b",
+          "label": "Each environment needs its own build so config is compiled in"
+        },
+        {
+          "id": "c",
+          "label": "Artifacts get smaller and faster after each promotion step"
+        },
+        {
+          "id": "d",
+          "label": "The tested binary is exactly what ships to production"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Promoting one artifact ensures what was tested is what is released.",
+        "Distractors give false technical limits."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does a rollback accomplish in a deployment pipeline?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It rebuilds the same code with extra logging enabled to find the fault"
+        },
+        {
+          "id": "b",
+          "label": "It rewrites Git history so the bad commit is removed from the branch"
+        },
+        {
+          "id": "c",
+          "label": "It removes the failing tests so the pipeline can pass and ship again"
+        },
+        {
+          "id": "d",
+          "label": "It redeploys a previous known-good version to restore service"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Rollback restores the last good release quickly.",
+        "Other options describe changes to code or history, not release recovery."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which practices help keep pipeline secrets safe? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rotate a secret right after it leaks"
+        },
+        {
+          "id": "b",
+          "label": "Give every job access to every secret"
+        },
+        {
+          "id": "c",
+          "label": "Limit each secret to the jobs that need it"
+        },
+        {
+          "id": "d",
+          "label": "Print them in logs when debugging a failed job"
+        },
+        {
+          "id": "e",
+          "label": "Store them in the CI secrets store, not in code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Secure storage, rotation and least access reduce exposure.",
+        "Logging or broadly sharing secrets increases leak risk."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team's pipeline builds, tests and, when all tests pass on `main`, releases straight to production with no human approval. A new developer asks what this practice is called.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Continuous integration only"
+        },
+        {
+          "id": "b",
+          "label": "Blue-green testing"
+        },
+        {
+          "id": "c",
+          "label": "Continuous delivery with manual release"
+        },
+        {
+          "id": "d",
+          "label": "Continuous deployment"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Automatic release to production after passing tests is continuous deployment.",
+        "Delivery would include a manual approval step; CI alone stops at testing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the key difference between continuous delivery and continuous deployment?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Delivery needs no pipeline, while deployment requires a pipeline to move code between environments"
+        },
+        {
+          "id": "b",
+          "label": "Delivery only builds artifacts, while deployment is the only practice that runs automated tests"
+        },
+        {
+          "id": "c",
+          "label": "Delivery releases to production on every commit, while deployment is limited to staging environments"
+        },
+        {
+          "id": "d",
+          "label": "Delivery keeps a manual approval before production, while deployment releases every passing change automatically"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Continuous delivery keeps code releasable with a human gate; continuous deployment removes that gate.",
+        "Distractors swap the terms or claim that one practice skips testing or pipelines."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do many pipelines build an artifact once and promote that same artifact through test, staging and production?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It speeds up the pipeline because later stages skip compilation and so need no dependency checks"
+        },
+        {
+          "id": "b",
+          "label": "It lets each environment pull its own source branch, so code can safely differ between stages"
+        },
+        {
+          "id": "c",
+          "label": "It ensures the tested artifact is what ships, not a rebuild that might differ"
+        },
+        {
+          "id": "d",
+          "label": "It removes the need for tests in staging, because the artifact was already verified once"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Promoting one artifact avoids differences between rebuilds, so test results apply to what is deployed.",
+        "Distractors confuse speed or skipping tests with the real reason: consistency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why should an API key be stored in the CI system's secret store rather than committed in the repository?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Private repositories are only visible to trusted people, so a committed key is safe as long as the key is renamed regularly"
+        },
+        {
+          "id": "b",
+          "label": "The secret store makes the key work faster, because stored values are cached on every build agent and skip lookups"
+        },
+        {
+          "id": "c",
+          "label": "Repository history is widely readable and permanent, so a committed key stays exposed even if deleted"
+        },
+        {
+          "id": "d",
+          "label": "Pipeline jobs cannot read committed files during a run, so the key would never be found when the deploy step needs it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Git history keeps deleted secrets and many people can read it, so the key can leak.",
+        "Distractors claim technical impossibility, speed gains or that private repos make it safe."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A pipeline runs fast unit tests first and slow end-to-end tests afterwards. What is the main reason for this order?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Slow tests are more likely to pass once unit tests have run, because the unit tests warm up the shared test environment"
+        },
+        {
+          "id": "b",
+          "label": "Quick checks fail early and give feedback sooner, so slow tests don't waste time on broken code"
+        },
+        {
+          "id": "c",
+          "label": "End-to-end tests depend on the unit test results as inputs, so they must be run after the unit tests finish"
+        },
+        {
+          "id": "d",
+          "label": "Unit tests cover more of the system than end-to-end tests, so a slow test failure is usually safe to ignore"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Failing fast gives quick feedback and saves compute on obviously broken changes.",
+        "Distractors invent dependencies or treat slower tests as optional."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In a typical pipeline with separate test and deploy stages, the test stage fails. What normally happens to the deploy stage?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is skipped, because later stages only run when earlier required stages succeed"
+        },
+        {
+          "id": "b",
+          "label": "It runs anyway, because deploy stages are independent of test results by default"
+        },
+        {
+          "id": "c",
+          "label": "It runs after the test stage is retried automatically until it finally passes"
+        },
+        {
+          "id": "d",
+          "label": "It runs but only to a staging environment, because the failure is downgraded to a warning"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Stages run in sequence and a failure stops the later ones by default.",
+        "Distractors assume independence, automatic downgrade or infinite retry."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are benefits of running a CI pipeline on every pull request? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Test failures are visible to the team before the change is merged"
+        },
+        {
+          "id": "b",
+          "label": "It removes the need for code review because the pipeline checks everything a reviewer would"
+        },
+        {
+          "id": "c",
+          "label": "Every change is built and tested in the same clean, repeatable environment"
+        },
+        {
+          "id": "d",
+          "label": "Merged code is guaranteed to be free of bugs once all tests pass"
+        },
+        {
+          "id": "e",
+          "label": "Integration problems between branches are found early, while changes are still small"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Early integration, clean repeatable builds and visible failures are real CI benefits.",
+        "Pipelines don't replace review or guarantee bug-free code; passing tests only cover what is tested."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team builds releases on a developer's laptop and copies them to the server. Twice, a release worked on the laptop but failed in production because a locally installed library version differed. A colleague proposes a pipeline that builds on a fresh agent. Why would this address the problem?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The pipeline reruns the deployment until it works, which hides any library differences between environments"
+        },
+        {
+          "id": "b",
+          "label": "The agent runs the unit tests on the laptop's libraries before release, so mismatched versions get caught early"
+        },
+        {
+          "id": "c",
+          "label": "A pipeline automatically upgrades every library to the newest version on each run, which makes all environments match"
+        },
+        {
+          "id": "d",
+          "label": "A fresh agent installs dependencies from declared files each run, so builds don't depend on one machine"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A clean agent builds only from declared dependencies, so results are repeatable.",
+        "Distractors suggest encryption, retries or automatic upgrades, none of which fix environment drift."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You want a GitHub Actions workflow to run tests whenever a pull request targets the `main` branch. Which trigger configuration does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`on: { pull_request: { branches: [main] } }`"
+        },
+        {
+          "id": "b",
+          "label": "`on: { push: { tags: [main] } }`"
+        },
+        {
+          "id": "c",
+          "label": "`on: { schedule: { branches: [main] } }`"
+        },
+        {
+          "id": "d",
+          "label": "`on: { workflow_dispatch: { branches: [main] } }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The pull_request event with a branches filter runs for PRs targeting main.",
+        "Distractors use tags, schedule or manual triggers, which don't fire on pull requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You need to order these pipeline steps for a web service: (1) deploy, (2) run tests, (3) check out code, (4) build container image, (5) push image to registry. Which order is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3, 2, 1, 4, 5"
+        },
+        {
+          "id": "b",
+          "label": "3, 4, 2, 5, 1"
+        },
+        {
+          "id": "c",
+          "label": "3, 2, 4, 5, 1"
+        },
+        {
+          "id": "d",
+          "label": "2, 3, 4, 1, 5"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Check out, test, build, push, then deploy so only tested images are pushed and deployed.",
+        "Other orders build before testing, test before checkout, or deploy before the image exists."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In GitHub Actions, a deploy step needs the secret `DEPLOY_TOKEN` stored in repository settings. Which line passes it to the step as an environment variable?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`env: { DEPLOY_TOKEN: \"DEPLOY_TOKEN\" }`"
+        },
+        {
+          "id": "b",
+          "label": "`env: { DEPLOY_TOKEN: $(cat .env) }`"
+        },
+        {
+          "id": "c",
+          "label": "`env: { DEPLOY_TOKEN: ${{ vars.public }} }`"
+        },
+        {
+          "id": "d",
+          "label": "`env: { DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }} }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The secrets context reads the stored secret and masks it in logs.",
+        "Distractors pass a literal string, a wrong context or a file that would need the secret committed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Release v42 was deployed from the pipeline, and its health check fails. Artifact v41 is still in the registry and was healthy. What is the quickest safe rollback?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Revert the commit, then wait for a full rebuild and retest before restoring service"
+        },
+        {
+          "id": "b",
+          "label": "Edit the files on the production server by hand until the check passes"
+        },
+        {
+          "id": "c",
+          "label": "Delete the v42 tag from git so the running service reverts itself"
+        },
+        {
+          "id": "d",
+          "label": "Redeploy the stored v41 artifact through the same deploy job"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Redeploying the known-good artifact restores service fast and uses the normal process.",
+        "Distractors are slower, manual or based on the false idea that deleting a tag changes production."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Node.js pipeline reinstalls all dependencies on every run, taking 4 minutes. You add a cache. Which cache key is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A fixed string like `deps`, so the cache is always reused and installs stay fast"
+        },
+        {
+          "id": "b",
+          "label": "A hash of `package-lock.json`, so it changes when dependencies change"
+        },
+        {
+          "id": "c",
+          "label": "The current date, so the cache is rebuilt once per day and never gets too stale"
+        },
+        {
+          "id": "d",
+          "label": "The commit SHA, so each run gets its own entry and always matches the code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Keying on the lockfile hash reuses the cache until dependencies change.",
+        "A fixed key goes stale, and SHA or date keys rarely produce hits."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You want a `deploy` job to run only after `test` succeeds and only for pushes to `main`. Which GitHub Actions settings help achieve this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`runs-on: main` on the deploy job"
+        },
+        {
+          "id": "b",
+          "label": "`if: github.ref == 'refs/heads/main'` on the deploy job"
+        },
+        {
+          "id": "c",
+          "label": "`continue-on-error: true` on the test job"
+        },
+        {
+          "id": "d",
+          "label": "`needs: test` on the deploy job"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "`needs` makes deploy wait for test, and the `if` condition limits it to main.",
+        "`continue-on-error` lets failures pass, and `runs-on` selects a runner, not a branch."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A workflow has jobs `test` and `deploy`, with no `needs` setting. A pull request has failing tests, yet the deploy job still ran and shipped the change. The team wants deploy to run only when tests pass. What should you change?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add `needs: test` to the deploy job so it waits for a successful test job"
+        },
+        {
+          "id": "b",
+          "label": "Run the workflow twice, so the second run deploys only if the first run passed"
+        },
+        {
+          "id": "c",
+          "label": "Move the deploy commands into the test job's last step and remove the `if` conditions"
+        },
+        {
+          "id": "d",
+          "label": "Set `continue-on-error: true` on the test job so failures are reported separately"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Without `needs`, jobs run in parallel; `needs: test` makes deploy depend on test success.",
+        "Other options hide failures, mix concerns or add manual steps instead of declaring the dependency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A team wants a pipeline that fails as fast and cheaply as possible on a bad commit. Which stage order should they use?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Deploy to staging, lint, unit tests, build artifact, integration tests"
+        },
+        {
+          "id": "b",
+          "label": "Integration tests, build artifact, lint, unit tests, deploy to production"
+        },
+        {
+          "id": "c",
+          "label": "Lint, unit tests, build artifact, integration tests, deploy to production"
+        },
+        {
+          "id": "d",
+          "label": "Build artifact, deploy to production, unit tests, lint, integration tests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Cheap, fast checks run first so failures stop the pipeline before costly stages.",
+        "Distractors put deployment or slow tests ahead of quick checks, wasting time and risking bad releases."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In GitHub Actions, a deploy job must run only when a commit is pushed to `main`, never for pull request runs. Which condition on the job achieves this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`if: github.base_ref == 'main' && github.event_name == 'pull_request'`"
+        },
+        {
+          "id": "b",
+          "label": "`if: github.actor == 'main' && github.event_name == 'push'`"
+        },
+        {
+          "id": "c",
+          "label": "`if: github.ref == 'refs/heads/main' && github.event_name == 'push'`"
+        },
+        {
+          "id": "d",
+          "label": "`if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The ref and event name together restrict the job to pushes on main.",
+        "`base_ref` is set only on pull requests, so it would select PR runs, and the other options test the wrong fields."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Node project installs dependencies on every run. You add a dependency cache. Which cache key best ensures the cache is reused until dependencies change?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The hash of `package-lock.json` combined with the OS name"
+        },
+        {
+          "id": "b",
+          "label": "The commit SHA of the current build, so each commit gets its own cache"
+        },
+        {
+          "id": "c",
+          "label": "The runner's operating system name, so every run on that OS shares one cache"
+        },
+        {
+          "id": "d",
+          "label": "The current date, so the cache refreshes once a day on every branch"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Keying on the lockfile hash reuses the cache until dependencies change.",
+        "A commit SHA never hits across commits, and the date or OS alone ignores real dependency changes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A deploy step needs a cloud API token. Which way of supplying it follows safe secrets handling?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Hardcode it in the workflow YAML as an env value so every pipeline run uses the same token"
+        },
+        {
+          "id": "b",
+          "label": "Store it in the CI secret store and expose it as an env variable to that step"
+        },
+        {
+          "id": "c",
+          "label": "Commit it in a `.env` file in a private repository so only team members can read it"
+        },
+        {
+          "id": "d",
+          "label": "Pass it as a command-line argument in the script so it is never written to any file"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The CI secret store keeps the token out of the repo and limits exposure to the step.",
+        "Committed files and YAML persist in history, and command-line args can show in logs and process lists."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Every build is published as an immutable image tagged with its commit SHA. Release `a1b2c3` is faulty and the previous good release was `9f8e7d`. What is the quickest safe rollback?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Edit the running containers by hand to undo the change"
+        },
+        {
+          "id": "b",
+          "label": "Rebuild the source from `9f8e7d` and deploy the new image"
+        },
+        {
+          "id": "c",
+          "label": "Redeploy the image tagged `9f8e7d` through the deploy step"
+        },
+        {
+          "id": "d",
+          "label": "Revert the commit, wait for the full pipeline, then deploy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Redeploying the existing tested artifact is fast and deterministic.",
+        "Rebuilding or waiting on a full pipeline is slower and may produce a different artifact; manual edits are untracked."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You want builds that give the same result on every run. Which changes help? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Install dependencies with `npm ci` from a committed lockfile"
+        },
+        {
+          "id": "b",
+          "label": "Let the build fetch the newest tool versions each run"
+        },
+        {
+          "id": "c",
+          "label": "Pin the base image to a specific version digest"
+        },
+        {
+          "id": "d",
+          "label": "Use the `latest` tag for the build image"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Lockfile installs and pinned images fix inputs so builds repeat.",
+        "`latest` and floating tool versions change between runs and break reproducibility."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A pipeline runs sequentially: lint (1 min), unit tests (4 min), integration tests (10 min), end-to-end tests (10 min), total 25 minutes. All four only need the checked-out code and are independent of each other. The team wants the fastest feedback without dropping any check. What should they do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run only the end-to-end tests on every push and the rest nightly"
+        },
+        {
+          "id": "b",
+          "label": "Run the four checks as parallel jobs, gated before the deploy job"
+        },
+        {
+          "id": "c",
+          "label": "Merge lint and unit tests into one stage and keep the rest sequential"
+        },
+        {
+          "id": "d",
+          "label": "Skip integration tests on branches and run them after deploying"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Independent checks in parallel cut wall time to about the longest job, around 10 minutes, and keep every check.",
+        "The other options drop or delay checks or save little time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Integration tests pass when run alone in CI but fail intermittently when four test jobs run in parallel against one shared database. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The jobs overwrite each other's data in the shared database"
+        },
+        {
+          "id": "b",
+          "label": "The lockfile is out of date on only some runners"
+        },
+        {
+          "id": "c",
+          "label": "The unit tests are compiled with a different compiler"
+        },
+        {
+          "id": "d",
+          "label": "The runner's Linux kernel version changes between jobs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Parallel jobs sharing mutable state interfere, causing intermittent failures.",
+        "The other causes would fail consistently or not depend on parallelism."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A pipeline has a `build` job, a `test` job that tests the built artifact, and a `deploy` job that runs the build command again and ships the result. Tests pass, yet production behaves differently. What is the flaw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The build runs on a different runner size than production, so the compiled output is tuned to the wrong hardware"
+        },
+        {
+          "id": "b",
+          "label": "Tests should run after deploy, because only the production environment shows whether the code really works"
+        },
+        {
+          "id": "c",
+          "label": "The deployed binary was rebuilt, so it isn't the artifact that was tested"
+        },
+        {
+          "id": "d",
+          "label": "The deploy job repeats build steps, which wastes time but cannot change what is shipped"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Rebuilding at deploy means the shipped output may differ from what was tested; build once and promote.",
+        "The other options don't address the mismatch between tested and deployed artifacts."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A secret is masked in CI logs, yet its value appears in a log after a script prints the base64-encoded form of it. Why did masking not prevent this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Masking only applies to secrets shorter than 64 characters, so longer values pass through unmasked"
+        },
+        {
+          "id": "b",
+          "label": "Masking matches the exact stored string, not transformed versions"
+        },
+        {
+          "id": "c",
+          "label": "Masked secrets are shown again in the log output whenever a failed job is retried"
+        },
+        {
+          "id": "d",
+          "label": "Base64 output is excluded from log filtering by design, since it is treated as binary data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Masking is exact string matching, so encoded or altered values leak.",
+        "The other options invent rules that CI systems don't have."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A workflow uses a trigger that runs on fork pull requests with repository secrets available, and it checks out and runs the PR's code. Which risk does this create?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Fork contributors can no longer open pull requests, because the trigger blocks them"
+        },
+        {
+          "id": "b",
+          "label": "Untrusted PR code can run with access to secrets and exfiltrate them"
+        },
+        {
+          "id": "c",
+          "label": "The workflow skips tests for fork code, so unreviewed changes merge without checks"
+        },
+        {
+          "id": "d",
+          "label": "Builds slow down because forks cannot share the base repository's dependency cache"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Running untrusted code with secrets lets a malicious PR steal them.",
+        "The other options describe harmless or unrelated effects."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A cache is keyed only by branch name, e.g. `deps-main`. After a developer bumps a library version, CI keeps using the old library and tests pass wrongly. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The cache key doesn't change when dependencies change"
+        },
+        {
+          "id": "b",
+          "label": "Tests ran before the cache was saved, so the new library was skipped"
+        },
+        {
+          "id": "c",
+          "label": "The cache exceeded its size limit, so the new library was never stored"
+        },
+        {
+          "id": "d",
+          "label": "The branch name is too generic to identify each separate CI run"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A key that ignores the lockfile restores stale dependencies after a change.",
+        "Size, name length or save timing wouldn't pin an old version."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A rolling deploy shows green and its health check passes, yet users get errors. Which are plausible explanations? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The pipeline's lint stage ran before the unit tests"
+        },
+        {
+          "id": "b",
+          "label": "The health check only confirms the process is up, not that it works"
+        },
+        {
+          "id": "c",
+          "label": "A migration made the schema incompatible with instances still on the old version"
+        },
+        {
+          "id": "d",
+          "label": "The deploy job's log used a different timestamp format"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "A shallow health check and schema incompatibility during a rolling update both cause errors despite green status.",
+        "Stage order of lint and log formats don't affect runtime behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "After release 42 shipped, errors spiked, so the team redeployed the release 41 image. Errors continued: the app now fails with 'column not found'. Release 42 included a migration that dropped a column the old code reads. What best explains why the rollback failed?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The pipeline reused a cached layer, so the redeployed 41 tag still ran release 42 code"
+        },
+        {
+          "id": "b",
+          "label": "Release 41's image was corrupted when it was pulled, so its data access code was incomplete"
+        },
+        {
+          "id": "c",
+          "label": "The rollback job ran on a newer CI runner version, which rebuilt release 41 with changed dependencies"
+        },
+        {
+          "id": "d",
+          "label": "The migration wasn't backward compatible, so old code can't run on the new schema"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Destructive migrations tie data state to the new code; rollback needs backward-compatible, staged schema changes.",
+        "The other causes wouldn't produce a missing-column error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A pull request's pipeline was green, yet the pipeline on `main` fails right after the merge with a test failure in code the PR never touched. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The main-branch pipeline uses a different programming language version than every other branch"
+        },
+        {
+          "id": "b",
+          "label": "The PR was tested on its own branch without the latest `main`, so the combined result was never run"
+        },
+        {
+          "id": "c",
+          "label": "The PR's tests were skipped entirely because pipelines only execute on the default branch"
+        },
+        {
+          "id": "d",
+          "label": "The merge commit changed the file permissions of the test runner scripts on the build agent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Testing a branch in isolation misses semantic conflicts with newer changes on the target branch.",
+        "Distractors invent environment causes that don't fit a failure in untouched code after a clean merge."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A pipeline caches `node_modules` with the key `deps-${branch_name}`. After a teammate bumps a library in the lockfile, builds on that branch still use the old version and fail oddly. What is the flaw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The key never changes when the lockfile changes, so a stale cache keeps being restored"
+        },
+        {
+          "id": "b",
+          "label": "The cache is stored on the runner's disk instead of in a remote registry service"
+        },
+        {
+          "id": "c",
+          "label": "The key includes the branch name, which makes caches unusable across different runners"
+        },
+        {
+          "id": "d",
+          "label": "The cache is too large, so the runner truncates it and drops the newest packages"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Cache keys should include a hash of the lockfile so dependency changes invalidate the cache.",
+        "Distractors blame storage location, size or branch naming, none of which explain a stale version."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Integration tests pass when one pipeline run is active but fail about 10% of the time when two runs overlap. Both runs use the same staging database and seed it at test start. Which diagnosis fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The runner's CPU is throttled when two jobs start, which slows tests past their timeouts"
+        },
+        {
+          "id": "b",
+          "label": "The test framework randomises test order, which breaks tests only when load is high"
+        },
+        {
+          "id": "c",
+          "label": "The database driver caches query plans, which become invalid whenever two clients connect"
+        },
+        {
+          "id": "d",
+          "label": "The runs share mutable state, so one run's seeding or cleanup corrupts the other's data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Concurrent runs sharing one database interfere; isolate per run with ephemeral databases or schemas.",
+        "Distractors offer generic performance or ordering explanations that don't link to overlap of runs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Staging passed all checks, but production shows a bug that staging never did. The deploy job for each environment runs `npm install && npm run build` from the same commit. What is the most probable underlying problem?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each environment builds its own artifact, so unpinned dependencies may resolve differently"
+        },
+        {
+          "id": "b",
+          "label": "Production servers have a faster CPU than staging, so timing-dependent race conditions surface only there"
+        },
+        {
+          "id": "c",
+          "label": "Staging tests run against a mocked backend, so some real integration defects are hidden until production"
+        },
+        {
+          "id": "d",
+          "label": "The deploy jobs check out the branch head at run time, so production may get newer commits than staging"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Building once and promoting the same artifact guarantees what was tested is what ships.",
+        "Distractors name plausible environment differences but ignore that the build step itself is repeated."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A pipeline masks the secret `API_KEY` in logs. A debug step runs `echo $API_KEY | base64`, and the encoded key appears readable in the build log. Why did masking fail?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Masking is limited to jobs on the default branch, so a debug step on a feature branch prints secrets unfiltered"
+        },
+        {
+          "id": "b",
+          "label": "Masking matches the exact secret string, so a transformed value such as base64 is not recognised"
+        },
+        {
+          "id": "c",
+          "label": "Masking runs as a post-processing pass after the job finishes, so streamed output is not filtered while the step runs"
+        },
+        {
+          "id": "d",
+          "label": "Masking is designed for secrets under 16 characters, so a longer key is printed as-is once it is piped to another command"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Log masking is a literal string match; encoded or split values bypass it.",
+        "Distractors invent timing, branch or length limitations that platforms do not generally impose."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A release containing a database migration is deployed, errors spike, and the team redeploys the previous artifact, but errors continue. Which findings would explain why the rollback did not restore service? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The new release changed a shared config value in place that the old version misreads"
+        },
+        {
+          "id": "b",
+          "label": "The migration dropped a column that the previous version still reads"
+        },
+        {
+          "id": "c",
+          "label": "The pipeline's unit tests had passed before the original release"
+        },
+        {
+          "id": "d",
+          "label": "The previous artifact was identical in checksum to the one stored last week"
+        },
+        {
+          "id": "e",
+          "label": "The rollback ran the same deploy script but pulled `latest`, which still points to the new build"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Rollback fails when state, configuration or image references are not reverted along with code.",
+        "Passing tests and an unchanged checksum say nothing about why the rollback failed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An open-source project's workflow runs tests with a `TEST_API_TOKEN` secret. Contributors report that on pull requests from forks, the integration job fails with an authentication error, while PRs from branches in the main repository pass. The workflow file is identical for both. What is the best explanation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The token is single-use, so the first branch PR consumed it and later runs are rejected"
+        },
+        {
+          "id": "b",
+          "label": "Forks have a separate Git history, so the checkout step fetches an outdated copy of the tests that lacks the auth setup"
+        },
+        {
+          "id": "c",
+          "label": "Fork contributors get lower rate limits on the test API, so the server rejects their requests as unauthorized"
+        },
+        {
+          "id": "d",
+          "label": "Fork PR runs get no repository secrets by default, so the token is empty and authentication fails"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Platforms withhold secrets from fork-triggered runs to stop untrusted code from exfiltrating them.",
+        "Distractors suggest checkout, token expiry or rate-limit causes that don't depend on fork origin."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: developers need unit-test feedback within 5 minutes, a 30-minute integration suite is costly, and `main` must stay releasable. Which trigger strategy best meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run unit tests only at release time, and the integration suite on every push for safety"
+        },
+        {
+          "id": "b",
+          "label": "Run every suite on every push to every branch so no defect is missed anywhere"
+        },
+        {
+          "id": "c",
+          "label": "Run unit tests on every push, and the integration suite on PRs before merge via a merge queue"
+        },
+        {
+          "id": "d",
+          "label": "Run all tests only nightly on `main`, and revert any commit that breaks the build"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Fast checks on every push plus the expensive suite as a merge gate balances speed, cost and a releasable main.",
+        "Distractors drop either fast feedback, cost control or protection of main."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: zero downtime, rolling deploys, and the ability to roll back code without data loss. A release must rename a database column. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rename the column manually in production after the pipeline finishes to avoid pipeline failures"
+        },
+        {
+          "id": "b",
+          "label": "Take the service offline briefly, rename the column, then deploy and bring it back"
+        },
+        {
+          "id": "c",
+          "label": "Rename the column in one migration that runs just before the new code starts rolling out"
+        },
+        {
+          "id": "d",
+          "label": "Add the new column, write to both, deploy new code, then drop the old column in a later release"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Expand/contract migrations keep old and new code compatible so rolling deploys and rollbacks stay safe.",
+        "Distractors break compatibility during rollout, cause downtime or bypass the pipeline."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: minimise blast radius if CI is compromised, avoid manual rotation, and keep deploy access to one repository's pipeline. Which credential approach for deploying to a cloud provider is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Commit an encrypted key to the repo and decrypt it at deploy time with a passphrase stored as a CI secret"
+        },
+        {
+          "id": "b",
+          "label": "Store a long-lived admin key as a CI secret, mask it in logs and restrict who can edit the workflow file"
+        },
+        {
+          "id": "c",
+          "label": "Use OIDC federation so the job gets short-lived, scoped tokens bound to that repository"
+        },
+        {
+          "id": "d",
+          "label": "Use the lead engineer's personal access key in CI so every deploy is traceable to a named person in audits"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Short-lived federated tokens limit exposure, need no rotation and can be scoped to a repo.",
+        "Distractors keep long-lived or over-privileged credentials that increase blast radius."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team proposes making a flaky end-to-end suite green by auto-retrying each failed test up to three times with no reporting. Judged against the goals of trustworthy signal and fast delivery, what is the best critique?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is sound, because a test that passes on retry shows the code works and the failure was only noise"
+        },
+        {
+          "id": "b",
+          "label": "It is sound, because flaky failures usually come from test infrastructure and cost more to fix than they save"
+        },
+        {
+          "id": "c",
+          "label": "It is harmful, because retries add enough run time to outweigh the value of the signal the suite gives"
+        },
+        {
+          "id": "d",
+          "label": "It hides intermittent defects and flakiness trends, so track retries and quarantine and fix flaky tests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Silent retries mask both flaky tests and genuine race conditions; tracking and quarantine preserve signal.",
+        "Distractors either accept retries as proof of correctness or overstate their cost."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: protect against supply-chain tampering of third-party pipeline actions while keeping updates reviewable. Which referencing practice is best for an external action?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pin to a major version tag, since maintainers promise never to move it"
+        },
+        {
+          "id": "b",
+          "label": "Reference the default branch to always get the latest security patches instantly"
+        },
+        {
+          "id": "c",
+          "label": "Copy the action's description into the workflow and skip the external code entirely"
+        },
+        {
+          "id": "d",
+          "label": "Pin to a full commit SHA and let an update bot propose reviewed version bumps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A commit SHA is immutable, and bot PRs keep updates visible and reviewable.",
+        "Tags and branches can be moved or hijacked; copying a description doesn't replace the code."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Requirement: every production deployment must be auditable and reproducible months later. Which practices satisfy it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Retain pipeline logs, approvals and deployed artifact versions for the audit period"
+        },
+        {
+          "id": "b",
+          "label": "Define the pipeline and environment config in version control"
+        },
+        {
+          "id": "c",
+          "label": "Deploy only immutable, versioned artifacts built once and traceable to a commit"
+        },
+        {
+          "id": "d",
+          "label": "Redeploy a mutable `latest` tag so the newest build always ships"
+        },
+        {
+          "id": "e",
+          "label": "Let engineers hot-patch servers by SSH when the pipeline is slow"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Immutable traceable artifacts, retained records and versioned config make deployments reproducible and auditable.",
+        "Hot patches and mutable tags destroy traceability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team can't afford to double its production infrastructure. It wants a bad release to reach at most 5% of users and to revert automatically if the error rate rises. Which release strategy best fits these constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Canary release: 5% of traffic to the new version, auto-rollback on error rate"
+        },
+        {
+          "id": "b",
+          "label": "Blue-green with a full duplicate environment, switching all traffic at once and keeping the old one for rollback"
+        },
+        {
+          "id": "c",
+          "label": "Rolling update that replaces instances in batches, relying on readiness probes to catch bad releases before all are replaced"
+        },
+        {
+          "id": "d",
+          "label": "Big-bang deploy at night, followed by manual monitoring and a revert if users complain"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Canary limits exposure, needs only a small extra capacity and can auto-rollback on metrics.",
+        "Blue-green needs duplicate capacity and switches all users at once; the other options lack limited exposure or automation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A monorepo has 30 services and a 45-minute full test suite. Criteria: PR feedback in under 10 minutes and no broken main. Which setup best meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run affected-service tests on PRs and again on main after merge, with no full run, because the dependency graph identifies impacted services"
+        },
+        {
+          "id": "b",
+          "label": "Run the full suite nightly and only lint on PRs, because a broken main can be fixed forward the next morning"
+        },
+        {
+          "id": "c",
+          "label": "Run the full suite on every PR using larger runners, because parallel hardware can cut 45 minutes to under 10"
+        },
+        {
+          "id": "d",
+          "label": "Run affected-service tests on PRs and the full suite in a merge queue before main is updated"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Affected-only PR runs give fast feedback, and the full run in the merge queue guards main against missed dependencies.",
+        "Distractors drop the feedback goal, ignore the time limit, or trust dependency graphs blindly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A deploy job needs cloud access. Criteria: limit the damage if CI logs or a fork leak a credential, and avoid manual rotation. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Put a personal access key for each developer on the shared runner image so any leak can be traced to one person"
+        },
+        {
+          "id": "b",
+          "label": "Federate the runner identity through OIDC to a role limited to this repo and branch, issuing short-lived tokens per run"
+        },
+        {
+          "id": "c",
+          "label": "Store a long-lived deploy key as a masked repository secret and rotate it every quarter using a calendar reminder"
+        },
+        {
+          "id": "d",
+          "label": "Commit an encrypted key file to the repo and keep its decryption passphrase in a masked CI variable for safety"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "OIDC federation gives short-lived, narrowly scoped credentials with no rotation to manage.",
+        "Static keys, even masked or encrypted, stay valid after a leak, and keys baked into runner images widen exposure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A pipeline runs `docker build` separately in its staging job and its prod job from the same commit. Which critique of this design is strongest?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Staging may validate a different image than prod ships, since base-image or dependency drift can change the prod build; build once, promote by digest"
+        },
+        {
+          "id": "b",
+          "label": "Prod images should be built on a release engineer's laptop, where the result can be inspected by hand before shipping, instead of by the CI runners"
+        },
+        {
+          "id": "c",
+          "label": "Building in each job is fine because the same commit guarantees byte-identical output, so only the ordering of the staging and prod jobs matters here"
+        },
+        {
+          "id": "d",
+          "label": "The duplicate builds double compute cost, which is the main flaw, and enabling shared layer caching between the two jobs would resolve the problem entirely"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Testing one artifact and shipping another breaks the guarantee that staging validated what runs in prod.",
+        "Distractors treat the issue as cost, assume a commit determines build output, or add a manual, unreproducible step."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A test fails intermittently and blocks unrelated PRs. Criteria: keep main trustworthy, keep the signal, and avoid permanent debt. Which handling is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Move it to a non-blocking job that still runs and reports, with a named owner and a deadline to fix or remove it"
+        },
+        {
+          "id": "b",
+          "label": "Delete the test now, since its intermittent failures make its results unreliable and it costs reviewers time on unrelated PRs"
+        },
+        {
+          "id": "c",
+          "label": "Retry failing tests up to three times and report success if one attempt passes, so intermittent failures stop blocking merges"
+        },
+        {
+          "id": "d",
+          "label": "Mark the whole suite non-blocking until the flakiness is resolved, since blocking on one test penalizes authors of unrelated changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Quarantine with ownership and a deadline preserves the signal and bounds the debt without blocking others.",
+        "Blanket retries hide real failures, and deleting or unblocking everything loses coverage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A release drops a column that the previous app version still reads. Criteria: zero downtime and the ability to roll back the app within an hour. Which plan is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ship code that stops using the column first, then drop it in a later release once rollback is no longer needed"
+        },
+        {
+          "id": "b",
+          "label": "Run the drop migration first in a pre-deploy job, since old instances will retry failed queries until they update"
+        },
+        {
+          "id": "c",
+          "label": "Deploy the migration and new app together in one step; rollback means redeploying the old app image only"
+        },
+        {
+          "id": "d",
+          "label": "Take a maintenance window, drop the column, and restore from backup if the app needs to be rolled back"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Expand/contract keeps old and new app versions compatible with the schema, so rollback and zero downtime both hold.",
+        "Other options break the old version, add downtime, or rely on retries that cannot succeed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A workflow triggered by `pull_request_target` checks out the PR head from forks and runs `npm test` with repository secrets and a write-scoped token available. Which criticisms are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Untrusted fork code runs beside secrets and a write token, so a malicious test script can exfiltrate them"
+        },
+        {
+          "id": "b",
+          "label": "PR code should never be tested at all, since only code already merged to main is safe to execute"
+        },
+        {
+          "id": "c",
+          "label": "Run untrusted code in a no-secrets `pull_request` workflow and keep privileged steps in a separate workflow that uses only trusted inputs"
+        },
+        {
+          "id": "d",
+          "label": "Limit the token to read-only permissions and require approval before workflows run for first-time contributors"
+        },
+        {
+          "id": "e",
+          "label": "Masking secrets in logs is sufficient, because code that runs in the job cannot reveal a masked value elsewhere"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "The risk is untrusted code running with privileges; the fixes are separation, least privilege and approval gates.",
+        "Masking only hides log output, and refusing to test PRs defeats CI."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A payments service runs on 20 pods. A new version changes retry logic, and bugs would show only under real traffic. A bad version can create duplicate charges that cannot be reversed. Criteria: limit customers exposed and detect problems fast. Which release strategy is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rolling update in batches of five pods, relying on readiness probes to catch any faulty behaviour before it spreads"
+        },
+        {
+          "id": "b",
+          "label": "Canary to a small share of traffic with automated checks on duplicate-charge and error metrics, halting promotion on breach"
+        },
+        {
+          "id": "c",
+          "label": "Blue-green swap of all traffic at once, since an instant switch back makes the amount of exposure irrelevant"
+        },
+        {
+          "id": "d",
+          "label": "Release to staging with synthetic traffic, then to everyone, since staging reproduces production load patterns accurately"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A metric-gated canary caps exposure, which matters because the harm cannot be undone by switching back.",
+        "Blue-green and rolling updates expose many customers, and readiness probes or staging cannot reveal logic bugs found only in real traffic."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design requirements: the same bytes must run in dev, staging and prod; prod needs manual approval; configuration differs per environment. Which pipeline design meets all of them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Build in dev, then copy source to staging and prod, where the same Dockerfile rebuilds it to keep the images consistent"
+        },
+        {
+          "id": "b",
+          "label": "Each environment job rebuilds from the release tag with an environment-specific build argument, and prod waits for approval"
+        },
+        {
+          "id": "c",
+          "label": "Build once, record the image digest, deploy that digest to every environment with config injected at deploy time, prod gated"
+        },
+        {
+          "id": "d",
+          "label": "Build once and bake production config into the image, then override files inside running dev containers by hand"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Build-once, promote-by-digest with deploy-time config satisfies identical bytes, per-environment config and the prod gate.",
+        "Rebuilding or baking config produces different artifacts, and manual edits break reproducibility."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a dependency cache for a Node CI job. Constraints: never restore dependencies that disagree with the lockfile, work across OS runners, and reuse across branches. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Key on the commit SHA so the cache is always exact, caching node_modules and restoring from the previous commit's key"
+        },
+        {
+          "id": "b",
+          "label": "Key on runner OS plus a lockfile hash, cache the content-addressed package store, and run the lockfile install every time"
+        },
+        {
+          "id": "c",
+          "label": "Use one fixed key such as `deps-v1` for all OSes and branches, caching node_modules and bumping the version manually"
+        },
+        {
+          "id": "d",
+          "label": "Key on branch name so each branch has its own cache, caching node_modules and skipping install whenever the cache hits"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Keying on OS and lockfile hash allows cross-branch reuse, and the install step guarantees agreement with the lockfile.",
+        "Branch, SHA or fixed keys either prevent reuse or restore mismatched or OS-specific modules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Merge A then merge B trigger deploys, but A's deploy finishes after B's and overwrites it with the older version. Constraints: every commit still gets tested, an older version must never end up live, and a running deploy must not be cancelled mid-way. Which fix meets all of them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cancel any in-progress deploy when a newer run starts, so the newest commit always wins the race for the environment and no stale deploy can finish"
+        },
+        {
+          "id": "b",
+          "label": "Add a ten-minute wait before each deploy so earlier commits have time to finish before later ones begin, which keeps the order of completion stable"
+        },
+        {
+          "id": "c",
+          "label": "Run deploys in parallel per commit but only after tests pass, and let the environment keep whichever deploy reports success last as the live one"
+        },
+        {
+          "id": "d",
+          "label": "Serialize deploys in one concurrency group without cancelling the running one, and skip a queued deploy if a newer commit is live"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Serialized deploys without cancellation plus a staleness check prevent regressions and half-applied deploys.",
+        "Cancelling mid-way violates a constraint, and sleeps or skipped tests do not remove the race."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design requirements: revert within 5 minutes of an SLO breach after release, lose no data, and ship schema changes separately and compatibly. Which design meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Compare error counts with yesterday in a nightly job that pages on-call, who then restore the last database backup and redeploy the old image"
+        },
+        {
+          "id": "b",
+          "label": "Run a post-deploy smoke test that checks the home page returns 200 and, on failure, reverts the migration with a down script and the old image"
+        },
+        {
+          "id": "c",
+          "label": "Gradual rollout with automated error-rate and latency checks that redeploy the previous digest on breach, with backward-compatible migrations"
+        },
+        {
+          "id": "d",
+          "label": "Keep the old version on standby and have developers flip traffic by hand once they notice alerts in the team chat, then run the down migration"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Automated SLO-driven rollback to the prior digest meets the time limit, and compatible migrations avoid data loss.",
+        "Other options are too slow, too shallow, or rely on destructive restores and manual action."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A pipeline runs PR tests, builds an image, pushes it to a registry and deploys on merge using OIDC credentials. A new requirement says auditors must be able to verify that only unmodified, CI-built images run in prod. What is the design missing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Longer log retention for CI runs so that auditors can read the full build output for each release"
+        },
+        {
+          "id": "b",
+          "label": "A second human approval before the push to the registry, so that every image stored there has been reviewed"
+        },
+        {
+          "id": "c",
+          "label": "A vulnerability scan that fails builds when base images carry high-severity findings before they are pushed"
+        },
+        {
+          "id": "d",
+          "label": "Image signing or provenance attestation in CI, with the cluster verifying it before admitting any image"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Signed or attested artifacts verified at admission prove origin and integrity, which is what the requirement demands.",
+        "Approvals, logs and scans help other goals but do not prove that the running image is the CI-built one."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design a hotfix path with these constraints: ship within 30 minutes, never bypass required checks, and keep an audit trail. Which elements belong in the design? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Deploy from the engineer's laptop with a break-glass key and write up the audit trail after the incident"
+        },
+        {
+          "id": "b",
+          "label": "An admin-only flag that skips tests and merges the fix straight to main when an incident is declared"
+        },
+        {
+          "id": "c",
+          "label": "Reuse the standard promote-by-digest deploy, with a named approver and a linked incident ticket recorded"
+        },
+        {
+          "id": "d",
+          "label": "Branch from the released tag, run the same pipeline with the same required checks, and parallelise its stages"
+        },
+        {
+          "id": "e",
+          "label": "Reserved warm runners and cache so that queue time does not consume the 30-minute budget"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Speed comes from parallelism and reserved capacity, while the checks, artifact flow and approval record stay intact.",
+        "Skip flags and laptop deploys bypass checks or weaken the audit trail."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A service runs in three regions with compatible schemas. Requirements: a bad release reaches at most one region before detection, all regions end on the same version within a day, and no manual per-region steps. Which pipeline design meets all of them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Deploy all three regions in parallel from one job, with health checks after the rollout and an automatic rollback of every region if any check fails"
+        },
+        {
+          "id": "b",
+          "label": "Deploy the first region automatically, then let each regional team trigger its own deployment once it has reviewed the first region's metrics"
+        },
+        {
+          "id": "c",
+          "label": "Deploy region by region in waves with a bake time and automated health gate, halting and reverting the affected region on failure"
+        },
+        {
+          "id": "d",
+          "label": "Deploy only to the lowest-traffic region and leave the others on the old version until the next scheduled release cycle begins"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Automated waves with health gates limit blast radius, converge on one version and need no manual steps.",
+        "Parallel deploys expose every region, manual triggers break automation, and a single-region release violates convergence."
+      ],
+      "reviewed": false
+    }
+  ]
+}

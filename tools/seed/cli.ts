@@ -1,6 +1,9 @@
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { parseSeed, readSeedFiles } from '../../src/shared/db/seed/seed-data';
+import { runApply } from './apply';
+import { runItems } from './items';
+import { runReview } from './review';
 import { runTaxonomy } from './taxonomy';
 import { SEED_DIR, totalSpentUsd } from './ledger';
 import { SPEND_CAP_USD, usd } from './pricing';
@@ -9,6 +12,9 @@ import { SPEND_CAP_USD, usd } from './pricing';
 // with node --env-file; this tool never reads or prints env files or keys.
 //
 //   pnpm seed:taxonomy [--dry-run] [--sample N] [--go]
+//   pnpm seed:items [--dry-run] [--sample N] [--go]     (--sample N: N topics, all five stages)
+//   pnpm seed:items-review [--dry-run] [--sample N] [--min-margin F] [--go]   (flagged items only; --sample N: top N)
+//   pnpm seed:items-apply [--dry-run]   (free: applies review verdicts to seed/items, parser-checked)
 //   pnpm seed:validate [--dir seed] [--expect-topics N]
 //
 // Paid runs need --go and print their estimate first; --dry-run never calls the API.
@@ -22,6 +28,7 @@ async function main(): Promise<void> {
       sample: { type: 'string' },
       dir: { type: 'string' },
       'expect-topics': { type: 'string' },
+      'min-margin': { type: 'string', default: '0' },
     },
   });
   const command = positionals[0];
@@ -33,12 +40,28 @@ async function main(): Promise<void> {
       await runTaxonomy({ dryRun: values['dry-run'], go: values.go, sample });
       return;
     }
+    case 'items': {
+      const sample = values.sample === undefined ? undefined : positiveInt(values.sample, '--sample');
+      await runItems({ dryRun: values['dry-run'], go: values.go, sample });
+      return;
+    }
+    case 'items-review': {
+      const sample = values.sample === undefined ? undefined : positiveInt(values.sample, '--sample');
+      const minMargin = Number(values['min-margin']);
+      if (!(minMargin >= 0 && minMargin < 1)) throw new Error('--min-margin must be a fraction from 0 to under 1');
+      await runReview({ dryRun: values['dry-run'], go: values.go, sample, minMargin });
+      return;
+    }
+    case 'items-apply': {
+      runApply({ dryRun: values['dry-run'] });
+      return;
+    }
     case 'validate': {
       validate(values.dir ? resolve(values.dir) : SEED_DIR, values['expect-topics']);
       return;
     }
     default:
-      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, validate`);
+      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, items, items-review, items-apply, validate`);
   }
 }
 

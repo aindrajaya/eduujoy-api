@@ -1,0 +1,2487 @@
+{
+  "version": 1,
+  "topic": "asynchronous-javascript",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What are the three states a JavaScript promise can be in?",
+      "options": [
+        {
+          "id": "a",
+          "label": "pending, fulfilled, rejected"
+        },
+        {
+          "id": "b",
+          "label": "idle, active, completed, failed"
+        },
+        {
+          "id": "c",
+          "label": "started, running, finished, errored"
+        },
+        {
+          "id": "d",
+          "label": "open, resolved, closed, cancelled"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A promise is pending until it settles as fulfilled or rejected.",
+        "The other options are made-up state names that sound plausible."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which keyword placed before a function declaration makes that function always return a promise?",
+      "options": [
+        {
+          "id": "a",
+          "label": "promise"
+        },
+        {
+          "id": "b",
+          "label": "defer"
+        },
+        {
+          "id": "c",
+          "label": "async"
+        },
+        {
+          "id": "d",
+          "label": "await"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`async` marks a function so that it returns a promise.",
+        "`await` is used inside such functions, not to declare them."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which promise method is used to handle a rejection (an error)?",
+      "options": [
+        {
+          "id": "a",
+          "label": ".resolve()"
+        },
+        {
+          "id": "b",
+          "label": ".catch()"
+        },
+        {
+          "id": "c",
+          "label": ".race()"
+        },
+        {
+          "id": "d",
+          "label": ".all()"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        ".catch() registers a handler for rejected promises.",
+        "The others create or combine promises and are not error handlers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does a call to `fetch(url)` return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A promise for a Response object"
+        },
+        {
+          "id": "b",
+          "label": "A callback for the response"
+        },
+        {
+          "id": "c",
+          "label": "A string with the response body"
+        },
+        {
+          "id": "d",
+          "label": "The parsed JSON data itself"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "fetch returns a promise that fulfills with a Response object.",
+        "Learners often think it returns the data directly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which built-in function schedules a callback to run after a given delay in milliseconds?",
+      "options": [
+        {
+          "id": "a",
+          "label": "wait()"
+        },
+        {
+          "id": "b",
+          "label": "setTimeout()"
+        },
+        {
+          "id": "c",
+          "label": "sleep()"
+        },
+        {
+          "id": "d",
+          "label": "delay()"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "setTimeout is the standard delay-scheduling function.",
+        "sleep, wait and delay do not exist as built-ins in JavaScript."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are built-in static methods of `Promise`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Promise.race()"
+        },
+        {
+          "id": "b",
+          "label": "Promise.all()"
+        },
+        {
+          "id": "c",
+          "label": "Promise.sleep()"
+        },
+        {
+          "id": "d",
+          "label": "Promise.allSettled()"
+        },
+        {
+          "id": "e",
+          "label": "Promise.wait()"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "all, race and allSettled are standard Promise combinators.",
+        "wait and sleep do not exist on Promise."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A developer has `const p = getUser();` where `getUser` returns a promise. She wants a function `show` to run with the value once the promise is fulfilled. Which call should she write?",
+      "options": [
+        {
+          "id": "a",
+          "label": "p.catch(show)"
+        },
+        {
+          "id": "b",
+          "label": "p.wait(show)"
+        },
+        {
+          "id": "c",
+          "label": "p.reject(show)"
+        },
+        {
+          "id": "d",
+          "label": "p.then(show)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        ".then registers a handler for the fulfilled value.",
+        "catch handles rejections; reject and wait are not promise instance methods."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is logged, in order, by this code? `setTimeout(() => console.log('A'), 0); console.log('B');`",
+      "options": [
+        {
+          "id": "a",
+          "label": "A then B"
+        },
+        {
+          "id": "b",
+          "label": "Only A"
+        },
+        {
+          "id": "c",
+          "label": "B then A"
+        },
+        {
+          "id": "d",
+          "label": "Only B"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Even with 0 delay, the callback waits until the current synchronous code finishes.",
+        "Learners who pick 'A then B' think 0 means immediate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `await` do inside an async function?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Blocks the whole program until the promise settles, so no other code can run in the meantime"
+        },
+        {
+          "id": "b",
+          "label": "Turns the promise into a callback that runs immediately"
+        },
+        {
+          "id": "c",
+          "label": "Runs the promise on a separate thread so it finishes faster"
+        },
+        {
+          "id": "d",
+          "label": "Pauses that function until the promise settles; other code keeps running"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "await suspends only the async function; the event loop continues.",
+        "Believing await blocks the whole program is the common misconception."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "An async function contains only `return 42;`. What does calling it give you?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A promise that stays pending forever"
+        },
+        {
+          "id": "b",
+          "label": "The number 42 directly"
+        },
+        {
+          "id": "c",
+          "label": "A promise fulfilled with 42"
+        },
+        {
+          "id": "d",
+          "label": "An array containing 42"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Async functions wrap their return value in a fulfilled promise.",
+        "Returning the raw number is a common misbelief."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the term 'callback hell' describe?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A callback that accidentally runs twice in a row"
+        },
+        {
+          "id": "b",
+          "label": "Deeply nested callbacks that are hard to read and maintain"
+        },
+        {
+          "id": "c",
+          "label": "A callback that throws an uncaught error and crashes the program"
+        },
+        {
+          "id": "d",
+          "label": "A callback that is called before it is defined"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Callback hell is about nesting that harms readability; promises and async/await flatten it.",
+        "The other options describe unrelated bugs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "You call `Promise.all([a, b, c])` and promise `b` rejects while the others succeed. What happens to the returned promise?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It rejects as soon as b rejects"
+        },
+        {
+          "id": "b",
+          "label": "It waits and fulfills with partial results"
+        },
+        {
+          "id": "c",
+          "label": "It ignores b and fulfills with a and c"
+        },
+        {
+          "id": "d",
+          "label": "It retries b until it succeeds"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Promise.all fails fast on the first rejection.",
+        "Partial results describe Promise.allSettled behaviour, not all."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe the JavaScript event loop? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It moves queued callbacks onto the call stack once the stack is empty"
+        },
+        {
+          "id": "b",
+          "label": "It lets waiting tasks proceed without blocking the main thread"
+        },
+        {
+          "id": "c",
+          "label": "It interrupts running code to run a callback the moment it is ready"
+        },
+        {
+          "id": "d",
+          "label": "It runs every callback on its own new thread"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "The loop feeds queued callbacks to an empty stack, so waiting does not block.",
+        "JavaScript callbacks do not run on new threads or interrupt running code."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A function does `try { const r = await fetch(url); show(r); } catch (e) { console.log('failed'); }`. The network is offline, so fetch's promise rejects. What happens?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The await gives undefined and show is called with undefined"
+        },
+        {
+          "id": "b",
+          "label": "The error escapes the try block and crashes the whole page"
+        },
+        {
+          "id": "c",
+          "label": "The function ends silently and the catch block never runs"
+        },
+        {
+          "id": "d",
+          "label": "The await throws the rejection and catch logs 'failed'"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "await turns a rejection into a thrown error that try/catch can handle.",
+        "Other options assume rejections are ignored or cannot be caught."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does `setTimeout(fn, 0)` run `fn` after the lines of code that follow it in the same script?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The callback is queued and runs only after the current synchronous code has finished"
+        },
+        {
+          "id": "b",
+          "label": "The callback runs immediately, but its console output is held back until the script ends"
+        },
+        {
+          "id": "c",
+          "label": "A delay of zero is invalid, so the timer waits until the page has fully reloaded"
+        },
+        {
+          "id": "d",
+          "label": "The callback runs on a second thread that happens to finish after the main code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Timer callbacks go into a queue and wait until the call stack is empty, even with a zero delay.",
+        "Distractors assume extra threads or buffering, which JavaScript's single-threaded event loop does not use."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does a promise represent in JavaScript?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A loop that keeps polling a task until it returns a successful result"
+        },
+        {
+          "id": "b",
+          "label": "A function that runs in the background on its own thread until it finishes"
+        },
+        {
+          "id": "c",
+          "label": "A callback that is guaranteed to run exactly once as soon as it is created"
+        },
+        {
+          "id": "d",
+          "label": "A value that may not be ready yet and will later be fulfilled or rejected"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A promise is a placeholder for a future result with pending, fulfilled and rejected states.",
+        "Distractors confuse promises with threads, callbacks or polling loops."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `await` do when used inside an async function?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It blocks the whole program, including timers and other tasks, until the promise settles"
+        },
+        {
+          "id": "b",
+          "label": "It makes the promise settle faster by moving it to the front of the queue"
+        },
+        {
+          "id": "c",
+          "label": "It pauses only this function until the promise settles, letting other code run"
+        },
+        {
+          "id": "d",
+          "label": "It turns the promise into a plain callback that runs on the next timer tick"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "await suspends just the current async function; the event loop keeps running other work.",
+        "The strongest distractor treats await as blocking the whole program."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is logged by this code?\n`console.log('A'); Promise.resolve().then(() => console.log('B')); console.log('C');`",
+      "options": [
+        {
+          "id": "a",
+          "label": "A C B"
+        },
+        {
+          "id": "b",
+          "label": "C B A"
+        },
+        {
+          "id": "c",
+          "label": "A B C"
+        },
+        {
+          "id": "d",
+          "label": "B A C"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Synchronous logs A and C run first; the .then callback runs afterwards as a microtask.",
+        "'A B C' comes from assuming an already-resolved promise runs its callback immediately."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does an `async` function return when its body ends with `return 42;`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The number 42, unchanged, available immediately to the caller"
+        },
+        {
+          "id": "b",
+          "label": "undefined, unless the function body contains an await"
+        },
+        {
+          "id": "c",
+          "label": "A callback function that the caller must invoke to get 42"
+        },
+        {
+          "id": "d",
+          "label": "A promise that fulfils with the value 42"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Async functions always wrap their return value in a promise.",
+        "Choosing the plain number ignores the automatic promise wrapping."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about promises are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Once settled, a promise keeps its state and result"
+        },
+        {
+          "id": "b",
+          "label": "The executor passed to `new Promise` runs only after the next tick"
+        },
+        {
+          "id": "c",
+          "label": "A fulfilled promise can later become rejected"
+        },
+        {
+          "id": "d",
+          "label": "Calling `.then()` returns a new promise"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "`.then()` returns a new promise, and a settled promise never changes state.",
+        "The executor actually runs synchronously, and a fulfilled promise cannot later reject."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A developer writes `const res = fetch('/api/users'); console.log(res.status);` and sees `undefined` in the console. `fetch` is the standard browser API. What best explains this output?",
+      "options": [
+        {
+          "id": "a",
+          "label": "fetch returns a promise, which has no status property itself"
+        },
+        {
+          "id": "b",
+          "label": "fetch returns undefined outside an async function, so status is missing"
+        },
+        {
+          "id": "c",
+          "label": "status is a method on Response, so it needs calling as `res.status()`"
+        },
+        {
+          "id": "d",
+          "label": "fetch runs synchronously and sets status after the page has finished loading"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "fetch returns a promise; the Response with status exists only after it resolves.",
+        "Distractors misread fetch's behaviour or the Response API."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`a()` returns a promise that resolves after 100 ms and `b()` returns one that resolves after 200 ms. About how long until `await Promise.all([a(), b()])` completes?",
+      "options": [
+        {
+          "id": "a",
+          "label": "About 150 ms"
+        },
+        {
+          "id": "b",
+          "label": "About 200 ms"
+        },
+        {
+          "id": "c",
+          "label": "About 100 ms"
+        },
+        {
+          "id": "d",
+          "label": "About 300 ms"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Both tasks run at once, and Promise.all waits for the slowest, so about 200 ms.",
+        "300 ms assumes sequential execution; 100 ms assumes it finishes with the fastest."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which code catches a rejection from `fetchUser()` inside an async function?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`try { fetchUser(); } catch (e) { log(e); }`"
+        },
+        {
+          "id": "b",
+          "label": "`try { await fetchUser(); } finally { log(e); }`"
+        },
+        {
+          "id": "c",
+          "label": "`try { await fetchUser(); } catch (e) { log(e); }`"
+        },
+        {
+          "id": "d",
+          "label": "`await fetchUser() catch (e) { log(e); }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "try/catch catches a rejection only when the promise is awaited inside the try block.",
+        "Without await the rejection escapes the try block; the other options are invalid or never receive the error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What is logged by this code?\n`Promise.resolve(2).then(v => v * 3).then(v => console.log(v + 1));`",
+      "options": [
+        {
+          "id": "a",
+          "label": "8"
+        },
+        {
+          "id": "b",
+          "label": "7"
+        },
+        {
+          "id": "c",
+          "label": "undefined"
+        },
+        {
+          "id": "d",
+          "label": "6"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The first then gives 6, passed on to the second, which logs 7.",
+        "6 forgets the final +1; undefined assumes the value is not passed along the chain."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`readFile(path, cb)` calls `cb(err, data)` when done. Which wrapper turns it into a promise that rejects on error?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`new Promise((res, rej) => readFile(path, (e, d) => e ? res(e) : res(d)))`"
+        },
+        {
+          "id": "b",
+          "label": "`new Promise((res, rej) => rej(readFile(path, (e, d) => d)))`"
+        },
+        {
+          "id": "c",
+          "label": "`async () => { return readFile(path, (e, d) => d); }`"
+        },
+        {
+          "id": "d",
+          "label": "`new Promise((res, rej) => readFile(path, (e, d) => e ? rej(e) : res(d)))`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The wrapper must call reject with the error and resolve with the data inside the callback.",
+        "Resolving with `e || d` turns errors into fulfilled values, which is the most tempting mistake."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`getA()` and `getB()` are independent and each return a promise. Which line runs them in parallel and waits for both results?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`const a = await getA(); const b = await getB();`"
+        },
+        {
+          "id": "b",
+          "label": "`const [a, b] = [await getA(), await getB()];`"
+        },
+        {
+          "id": "c",
+          "label": "`const [a, b] = await Promise.all([getA(), getB()]);`"
+        },
+        {
+          "id": "d",
+          "label": "`const [a, b] = await Promise.race([getA(), getB()]);`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Promise.all starts both calls together and waits for both results.",
+        "Separate awaits, even in an array literal, run one after the other; race gives only the first result."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "`task1()` and `task2()` each return a promise. Which snippets log 'done' only after both tasks have finished, inside an async function? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`await Promise.all([task1(), task2()]); console.log('done');`"
+        },
+        {
+          "id": "b",
+          "label": "`await task1(); await task2(); console.log('done');`"
+        },
+        {
+          "id": "c",
+          "label": "`await Promise.race([task1(), task2()]); console.log('done');`"
+        },
+        {
+          "id": "d",
+          "label": "`task1(); task2(); console.log('done');`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Awaiting each in turn, or using Promise.all, waits for both tasks.",
+        "Not awaiting logs immediately; race logs after only the first task settles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A developer runs `items.forEach(async (id) => { await save(id); }); console.log('all saved');` and sees 'all saved' before the saves finish. The saves should run one at a time. Which change fixes this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap the log in `setTimeout` with a delay of 0 so it always runs after the saves"
+        },
+        {
+          "id": "b",
+          "label": "Change `forEach` to `map` and keep the same callback without using its result"
+        },
+        {
+          "id": "c",
+          "label": "Add `await` before `items.forEach(...)`, because forEach waits for each async callback"
+        },
+        {
+          "id": "d",
+          "label": "Use a `for...of` loop that awaits `save(id)` inside an async function, then log"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "forEach ignores the promises its callback returns; a for...of loop with await actually waits each save in turn.",
+        "Awaiting forEach or using map without collecting promises still does not wait; a zero timeout is no guarantee."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What order does this log?\n\n`console.log('A'); setTimeout(() => console.log('B'), 0); Promise.resolve().then(() => console.log('C')); console.log('D');`",
+      "options": [
+        {
+          "id": "a",
+          "label": "A C D B"
+        },
+        {
+          "id": "b",
+          "label": "A D C B"
+        },
+        {
+          "id": "c",
+          "label": "A B C D"
+        },
+        {
+          "id": "d",
+          "label": "A D B C"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Sync code runs first (A, D), then the microtask (C), then the timer callback (B).",
+        "Distractors treat setTimeout 0 as running before promise callbacks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "What order does this log?\n\n`async function f() { console.log(1); await null; console.log(2); }\nf(); console.log(3);`",
+      "options": [
+        {
+          "id": "a",
+          "label": "1 3 2"
+        },
+        {
+          "id": "b",
+          "label": "1 3 only"
+        },
+        {
+          "id": "c",
+          "label": "1 2 3"
+        },
+        {
+          "id": "d",
+          "label": "3 1 2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The async function runs synchronously until the first await, then the rest is queued as a microtask.",
+        "Distractors assume await does not yield to the caller."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`get(n)` returns a promise for an independent request. Which line stores all three results in `r` as an array, with the requests running concurrently?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`const r = await Promise.all([get, get, get]);`"
+        },
+        {
+          "id": "b",
+          "label": "`const r = Promise.all([get(1), get(2), get(3)]);`"
+        },
+        {
+          "id": "c",
+          "label": "`const r = await Promise.all([get(1), get(2), get(3)]);`"
+        },
+        {
+          "id": "d",
+          "label": "`const r = [await get(1), await get(2), await get(3)];`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Promise.all starts all requests at once and await unwraps the array.",
+        "The second option is sequential; the third forgets await so r is a promise."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`fetchData()` returns a promise that rejects. What happens when this runs?\n\n`async function g() { try { return fetchData(); } catch (e) { return 'fallback'; } }\nconst out = g();`",
+      "options": [
+        {
+          "id": "a",
+          "label": "`out` resolves to undefined because the rejection is swallowed"
+        },
+        {
+          "id": "b",
+          "label": "The promise in `out` rejects; the catch block never runs"
+        },
+        {
+          "id": "c",
+          "label": "`out` resolves to 'fallback' because catch handles the rejection"
+        },
+        {
+          "id": "d",
+          "label": "`g()` throws synchronously, so the caller needs its own try/catch"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Without await, the rejection occurs after the try block has exited, so catch cannot see it.",
+        "Distractors assume return inside try is covered by catch."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`p1` resolves with 'slow' after 200 ms. `p2` rejects with an Error after 100 ms. What does `await Promise.race([p1, p2])` do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Resolves with undefined once the rejection is handled"
+        },
+        {
+          "id": "b",
+          "label": "Rejects with the Error after about 100 ms"
+        },
+        {
+          "id": "c",
+          "label": "Resolves with 'slow' after about 200 ms, skipping rejections"
+        },
+        {
+          "id": "d",
+          "label": "Waits 200 ms, then rejects with an AggregateError"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Promise.race settles with the first promise to settle, whether it fulfils or rejects.",
+        "Distractors confuse race with Promise.any."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "`process(id)` is async. Which snippets log 'done' only after every id has been processed? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`await Promise.all(ids.map(process)); console.log('done');`"
+        },
+        {
+          "id": "b",
+          "label": "`for (const id of ids) await process(id); console.log('done');`"
+        },
+        {
+          "id": "c",
+          "label": "`ids.forEach(async id => await process(id)); console.log('done');`"
+        },
+        {
+          "id": "d",
+          "label": "`ids.map(process); console.log('done');`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "A for...of with await and Promise.all over map both wait for every promise.",
+        "forEach and a bare map discard the promises, so 'done' logs early."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "Your team has a callback-style helper `readLater(path, cb)` that calls `cb(err, data)` when finished. You want to use it with async/await and have failures surface as rejections. Which wrapper does that?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`new Promise((res, rej) => readLater(p, (err, d) => err ? rej(err) : res(d)))`"
+        },
+        {
+          "id": "b",
+          "label": "`(async () => readLater(p))()`"
+        },
+        {
+          "id": "c",
+          "label": "`Promise.resolve(readLater(p, (err, d) => d))`"
+        },
+        {
+          "id": "d",
+          "label": "`new Promise(res => readLater(p, res))`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The wrapper maps the error-first callback onto reject and resolve.",
+        "The second option resolves with the error argument and never rejects."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A page loads 6 independent resources, each taking about 1 s, using `for (const u of urls) { results.push(await fetch(u)); }`. Total load is about 6 s. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each await pauses the loop until its fetch finishes, so requests run one after another"
+        },
+        {
+          "id": "b",
+          "label": "The fetch calls start together, but results are processed in order, adding delay"
+        },
+        {
+          "id": "c",
+          "label": "The event loop runs only one network request at a time, whatever the code does"
+        },
+        {
+          "id": "d",
+          "label": "Pushing to an array inside a loop forces each fetch to complete before the next"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Awaiting inside the loop serialises independent requests; starting them first and awaiting together fixes it.",
+        "Distractors misattribute the delay to the runtime or to result ordering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In Node, this code crashes with an unhandled rejection even though a try/catch exists:\n\n`const p = failingCall(); await sleep(100); try { await p; } catch (e) { log(e); }`\n\n`failingCall()` rejects after 10 ms. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`sleep` blocks the event loop, so the catch block is skipped"
+        },
+        {
+          "id": "b",
+          "label": "try/catch cannot catch errors from promises created outside the block"
+        },
+        {
+          "id": "c",
+          "label": "`await p` runs a second time and rejects after the catch has finished"
+        },
+        {
+          "id": "d",
+          "label": "The rejection happened before any handler was attached to `p`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A promise that rejects with no handler attached is reported as unhandled, even if one is attached later.",
+        "Distractors blame try/catch scope or blocking instead of timing of handler attachment."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A search box calls `fetch` on each keystroke and renders whatever response arrives. Users sometimes see results for 'ca' after typing 'cat'. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The event loop processes keystrokes in a random order when requests overlap"
+        },
+        {
+          "id": "b",
+          "label": "Responses can settle out of order, and the latest one to arrive overwrites the UI"
+        },
+        {
+          "id": "c",
+          "label": "JavaScript promises run on separate threads, so they corrupt shared UI state"
+        },
+        {
+          "id": "d",
+          "label": "`fetch` caches the first response for a URL prefix and returns it later"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Network latency varies per request, so completion order differs from start order; stale responses need ignoring or aborting.",
+        "Distractors invent threading or event loop randomness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A UI freezes after this code starts: `function loop() { Promise.resolve().then(loop); } loop();`. A `setTimeout` callback and button clicks never run. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The microtask queue is drained fully before timers or rendering, and it is never empty"
+        },
+        {
+          "id": "b",
+          "label": "Promises run synchronously, so the recursion blows the stack and halts the page"
+        },
+        {
+          "id": "c",
+          "label": "setTimeout callbacks are cancelled whenever a promise is pending in the page"
+        },
+        {
+          "id": "d",
+          "label": "Each `then` creates a new thread that starves the UI thread of CPU time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Microtasks added during draining run before the next macrotask, so the loop starves timers and input.",
+        "Distractors confuse this with stack overflow or threads."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`fetch(url).then(r => r.json()).then(show).catch(showError)` shows a blank card when the server returns 404 with a JSON error body, and `showError` never runs. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "catch only handles errors thrown inside the first then callback, not later ones"
+        },
+        {
+          "id": "b",
+          "label": "fetch resolves on HTTP error statuses, so the chain continues with the body"
+        },
+        {
+          "id": "c",
+          "label": "fetch retries a 404 internally, so the rejection is delayed until much later"
+        },
+        {
+          "id": "d",
+          "label": "r.json() rejects for any non-200 response, but catch ignores that rejection"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "fetch rejects only on network failures; checking `r.ok` is needed to treat 4xx and 5xx as errors.",
+        "Distractors misstate how catch scopes or how json parsing behaves."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "`function load() { items.forEach(async i => { await save(i); }); return 'ok'; }` returns before the saves finish, and failed saves crash the process. Which statements correctly explain this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "forEach discards the promises returned by its callbacks, so load cannot wait for them"
+        },
+        {
+          "id": "b",
+          "label": "await pauses only its own callback, not the function containing the forEach call"
+        },
+        {
+          "id": "c",
+          "label": "A rejection in a callback has no handler attached, so it becomes an unhandled rejection"
+        },
+        {
+          "id": "d",
+          "label": "The callbacks run one after another, so 'ok' is returned after the first save"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "The callbacks start concurrently and their promises are dropped, so completion and errors are invisible to load.",
+        "The last option wrongly claims forEach serialises async callbacks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A Node route runs `await Promise.all(users.map(u => sendEmail(u)))` for 5000 users. The email provider returns 429 for some calls. The route responds with an error, yet most emails were delivered. Which analysis is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Promise.all cancels the remaining pending promises after the first rejection, so the unsent emails were skipped"
+        },
+        {
+          "id": "b",
+          "label": "Promise.all rejects on the first failure but does not cancel the other sends, so they still go out"
+        },
+        {
+          "id": "c",
+          "label": "map runs the sends one at a time, so the slow sequential loop triggers the provider's timeouts and rejections"
+        },
+        {
+          "id": "d",
+          "label": "The await in the handler blocks the event loop while waiting, so the provider rejects the later requests it receives"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Promises are not cancellable by Promise.all; all 5000 sends start at once and continue after the first rejection.",
+        "Distractors assume cancellation, sequential map, or event loop blocking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "What order does this code log?\n`console.log('A'); setTimeout(() => console.log('B'), 0); Promise.resolve().then(() => console.log('C')); (async () => { console.log('D'); await null; console.log('E'); })(); console.log('F');`",
+      "options": [
+        {
+          "id": "a",
+          "label": "A D F B C E"
+        },
+        {
+          "id": "b",
+          "label": "A F D C E B"
+        },
+        {
+          "id": "c",
+          "label": "A D F C E B"
+        },
+        {
+          "id": "d",
+          "label": "A D C E F B"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The async function runs synchronously up to its first await, so D logs before F. Microtasks (C, E) then run before the timer callback B.",
+        "Distractors treat the async body as fully deferred or let timers run before microtasks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`items.forEach(async (id) => { await save(id); }); console.log('done');` logs 'done' before any save finishes. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`forEach` ignores the promises its async callback returns, so nothing waits for them"
+        },
+        {
+          "id": "b",
+          "label": "Async callbacks are deferred until the surrounding script has fully finished running"
+        },
+        {
+          "id": "c",
+          "label": "`await` inside a callback blocks only that callback's thread, so saves run in parallel threads"
+        },
+        {
+          "id": "d",
+          "label": "`console.log` is queued as a microtask, so it runs before the saves are even scheduled"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "forEach discards the returned promises, so the code after it cannot wait; use for...of with await or Promise.all with map.",
+        "Distractors invent threads or deferral rules that do not exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`async function load() { try { return fetchData(); } catch (e) { return null; } }` If `fetchData()` returns a promise that later rejects, what does `load()` do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Returns a promise that rejects, because without `await` the catch block never sees the error"
+        },
+        {
+          "id": "b",
+          "label": "Resolves with undefined, because the async wrapper swallows the rejection of a returned promise"
+        },
+        {
+          "id": "c",
+          "label": "Throws synchronously to the caller, because async functions rethrow after the catch block"
+        },
+        {
+          "id": "d",
+          "label": "Resolves with null, because a return inside try is still covered by the catch block"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Returning a promise without await hands it to the caller, so the rejection happens after the try block has exited. Use `return await` to catch it.",
+        "Distractors assume try/catch covers any promise returned inside it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In `p.then(a).then(b).catch(c).then(d)`, handler `a` throws an error. Which handlers run, and what does `d` receive?",
+      "options": [
+        {
+          "id": "a",
+          "label": "b, c and d all run, and d receives the error thrown by a"
+        },
+        {
+          "id": "b",
+          "label": "b is skipped; c runs; d then runs and receives c's return value"
+        },
+        {
+          "id": "c",
+          "label": "Only c runs, and the chain stops once the catch handler has returned"
+        },
+        {
+          "id": "d",
+          "label": "b is skipped and c runs, but d is skipped because the chain already failed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A rejection skips then handlers until a catch; the catch's return value fulfils the next promise, so d runs.",
+        "Distractors treat catch as terminal or as passing the error on."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`Promise.all([t1(), t2(), t3()])` is awaited. t2 rejects after 50 ms while t1 and t3 need 500 ms. What happens to t1 and t3?",
+      "options": [
+        {
+          "id": "a",
+          "label": "They keep running to completion, but Promise.all has already rejected and ignores their results"
+        },
+        {
+          "id": "b",
+          "label": "They keep running, and Promise.all still waits for them before it rejects with t2's error"
+        },
+        {
+          "id": "c",
+          "label": "They pause until the rejection handler has finished, then resume and fulfil normally"
+        },
+        {
+          "id": "d",
+          "label": "They are cancelled automatically as soon as Promise.all rejects, freeing their resources"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Promises cannot be cancelled by Promise.all; it rejects immediately and ignores the later outcomes, while the work continues.",
+        "Distractors assume automatic cancellation or waiting."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A synchronous loop runs for 300 ms right after `setTimeout(cb, 10)` is called. Which statements correctly explain when `cb` runs? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The delay is a minimum, so cb may run later than 10 ms"
+        },
+        {
+          "id": "b",
+          "label": "The 10 ms delay is a guarantee, so the engine pauses the loop to run cb on time"
+        },
+        {
+          "id": "c",
+          "label": "The timer runs on a second JavaScript thread, so cb interrupts the loop at 10 ms"
+        },
+        {
+          "id": "d",
+          "label": "Timer callbacks run only when the call stack is empty, so cb waits for the loop to end"
+        },
+        {
+          "id": "e",
+          "label": "Any queued microtasks run before cb once the stack becomes empty"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "JavaScript is single-threaded per event loop; timers only queue callbacks, and microtasks drain before the next task.",
+        "Distractors treat timers as preemptive or exact."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A search box calls `fetch` on every keystroke and sets the results in a `.then` handler. After the user finishes typing 'cat', the page sometimes shows results for 'ca'. Logs show the 'ca' request completed after the 'cat' request. What best explains the bug?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Responses can arrive in a different order than requests were sent, so a slower earlier one overwrites newer results"
+        },
+        {
+          "id": "b",
+          "label": "fetch caches responses by prefix, so shorter queries return stale data from a cache even after longer queries have been sent"
+        },
+        {
+          "id": "c",
+          "label": "The event loop always runs the callbacks for the oldest pending request last, which reorders the UI updates after typing"
+        },
+        {
+          "id": "d",
+          "label": "Promises resolve in the order their `then` handlers were registered, so the first query's result always renders last"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Network latency varies, so completion order is not request order; the last handler to run wins.",
+        "Distractors blame promise ordering rules or caching rather than the race."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A dashboard loads 5 independent widgets. Each can show its own error state, and a page with 4 working widgets is better than a blank page. Which approach best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Promise.race`, rendering whichever widget finishes first and ignoring the others"
+        },
+        {
+          "id": "b",
+          "label": "`Promise.allSettled`, rendering each widget from its own fulfilled or rejected result"
+        },
+        {
+          "id": "c",
+          "label": "Awaiting each widget in a loop inside one try/catch, so a failure stops later widgets"
+        },
+        {
+          "id": "d",
+          "label": "`Promise.all` with one try/catch around it, showing a single page-level error on failure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "allSettled gives every outcome independently, matching the partial-success criterion.",
+        "Promise.all fails fast and discards successes; the others lose widgets."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A client retries a failed request up to 5 times immediately in a loop on any error, including 400 and 503. Criteria: avoid overloading a struggling server and avoid pointless work. Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It should retry only transient errors such as 503 or network failures, using growing, jittered delays"
+        },
+        {
+          "id": "b",
+          "label": "It should retry just once, because a second failure proves the server will never recover"
+        },
+        {
+          "id": "c",
+          "label": "It should retry more times with no delay, so a recovering server is reached sooner"
+        },
+        {
+          "id": "d",
+          "label": "It is fine, because immediate retries minimise latency and 400 errors sometimes succeed on retry"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Retry only errors that can change, and back off with jitter so clients do not hammer the server in sync.",
+        "Distractors favour speed or an arbitrary single retry."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must fetch 1000 URLs from an API that tolerates about 10 concurrent requests. Criteria: stay under the limit and keep throughput high. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`Promise.all(urls.map(fetch))`, since the platform queues requests to respect the server limit"
+        },
+        {
+          "id": "b",
+          "label": "Run batches of 10 with `Promise.all`, which keeps throughput high because each batch finishes together"
+        },
+        {
+          "id": "c",
+          "label": "Use a pool that keeps at most 10 requests in flight, starting a new one as each finishes"
+        },
+        {
+          "id": "d",
+          "label": "Await each request in a `for` loop, since that guarantees the server limit is never exceeded"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A worker pool keeps concurrency constant without waiting for the slowest item in each batch.",
+        "Promise.all of everything ignores the limit; sequential wastes throughput; batches idle on slow items."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A WebSocket emits many messages. Criteria: handle every message in arrival order, lose none, and keep the code readable. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call `resolve` repeatedly inside `onmessage`, since each call delivers a new value to the awaiter"
+        },
+        {
+          "id": "b",
+          "label": "Expose messages as an async iterator that buffers them, and consume it with `for await`"
+        },
+        {
+          "id": "c",
+          "label": "Wrap `onmessage` in one `new Promise` and await it, since a promise settles on every message"
+        },
+        {
+          "id": "d",
+          "label": "Make `onmessage` an async function, since that guarantees handlers finish in arrival order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A promise settles once; an async iterator with a buffer models repeated events and keeps order.",
+        "Async handlers can interleave, and repeated resolve calls are ignored."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "In a type-ahead search, stale responses must never render, abandoned requests should stop using bandwidth, and the input must stay responsive. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Race each fetch against a timer with `Promise.race`, since the losing request is cancelled"
+        },
+        {
+          "id": "b",
+          "label": "Abort the previous request with `AbortController` and ignore the resulting `AbortError`"
+        },
+        {
+          "id": "c",
+          "label": "Disable the input until each response arrives, so there are never overlapping requests"
+        },
+        {
+          "id": "d",
+          "label": "Set a `latest` flag and ignore stale results, since ignored requests cost nothing once ignored"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "AbortController cancels the in-flight request, satisfying bandwidth and staleness while the input stays enabled.",
+        "A flag leaves requests running; Promise.race does not cancel; disabling input breaks responsiveness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Which judgments about error handling in async code are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "An async function that throws before its first `await` throws synchronously to its caller"
+        },
+        {
+          "id": "b",
+          "label": "A try/catch around `setTimeout(() => { throw e; }, 0)` catches the error thrown in the callback"
+        },
+        {
+          "id": "c",
+          "label": "A try/catch around a call to an async function catches its rejection only if the call is awaited"
+        },
+        {
+          "id": "d",
+          "label": "A `.catch` at the end of a promise chain also handles errors thrown inside earlier `.then` handlers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A trailing catch covers earlier handlers, and a rejection only becomes a catchable exception through await.",
+        "Timer callbacks run after the try block exits, and async functions always report throws as rejections."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A Node server's async endpoint calls `JSON.parse` on an 80 MB body, and every other request stalls for about 400 ms. Criteria: other requests stay responsive, with a small change to the code. Which fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap the parse in `Promise.resolve().then(...)`, which moves it off the main thread"
+        },
+        {
+          "id": "b",
+          "label": "Move the parsing into a worker thread and await its result message"
+        },
+        {
+          "id": "c",
+          "label": "Add `await` before `JSON.parse`, so the parse yields to other requests while it works"
+        },
+        {
+          "id": "d",
+          "label": "Use `setTimeout(parse, 0)`, which runs the parse on a separate thread"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "CPU-bound synchronous work blocks the event loop unless it runs in a worker thread or another process.",
+        "Await, promises and timers only change when code runs, not where, so the parse still blocks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A dashboard loads 5 independent widgets using separate requests. Criteria: one failing widget must not blank the others, and total load time should equal the slowest single request. Which approach best meets both criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Start all five requests, await `Promise.all` inside one try/catch, and render whichever widgets were already assigned on failure"
+        },
+        {
+          "id": "b",
+          "label": "Start all five requests, await `Promise.race`, and render the first result to settle while ignoring the remaining ones"
+        },
+        {
+          "id": "c",
+          "label": "Start all five requests, await `Promise.allSettled`, then render fulfilled results and an error state for rejected ones"
+        },
+        {
+          "id": "d",
+          "label": "Await each request in turn inside its own try/catch, so a failure in one widget stays isolated from the others"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`allSettled` runs requests in parallel and reports every outcome, so failures are isolated and time equals the slowest request.",
+        "Sequential awaits isolate errors but add up latencies; `Promise.all` rejects on the first failure and loses the other results."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A reviewer critiques this code: `items.forEach(async i => { await save(i); }); console.log('all saved');` Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`forEach` ignores the promises its callback returns, so 'all saved' logs before the saves finish and any rejection goes unhandled"
+        },
+        {
+          "id": "b",
+          "label": "`await` inside an arrow function passed to `forEach` is a syntax error, so nothing runs and an exception is thrown at parse time"
+        },
+        {
+          "id": "c",
+          "label": "The saves run strictly one after another, so the log is correct but the approach is slower than `Promise.all` would be"
+        },
+        {
+          "id": "d",
+          "label": "`forEach` waits for each async callback to settle before returning, so the log runs after every save has completed successfully"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`forEach` discards callback return values, so it neither waits for nor handles the promises.",
+        "Distractors assume `forEach` sequences or awaits async callbacks, which it does not."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must fetch 10,000 URLs from a host that answers 429 above 20 concurrent requests. Criteria: no 429 responses, and the shortest total time achievable under that limit. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Process batches of 20 with `Promise.all`, waiting for each whole batch to finish before the next batch of 20 starts"
+        },
+        {
+          "id": "b",
+          "label": "Run `Promise.all(urls.map(fetch))` for full speed, then retry any URL that came back with a 429 status afterwards"
+        },
+        {
+          "id": "c",
+          "label": "Use a `for` loop that awaits each fetch in turn, which guarantees the limit is never reached and avoids all 429 responses"
+        },
+        {
+          "id": "d",
+          "label": "Run 20 workers that each pull the next URL from a shared queue until the queue is empty, keeping 20 requests in flight"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A worker pool keeps concurrency at the limit continuously, so it avoids 429s and minimises time.",
+        "Batching idles slots waiting for the slowest request in each batch; unbounded `Promise.all` violates the limit; the sequential loop is needlessly slow."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "In a browser, a script runs `function spin() { Promise.resolve().then(spin); } spin();`. Which judgement about page behaviour is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The call stack overflows quickly, because each `.then` callback runs nested inside the frame of the previous callback"
+        },
+        {
+          "id": "b",
+          "label": "The page stays responsive, because each `.then` callback is queued as a separate task that lets rendering run between callbacks"
+        },
+        {
+          "id": "c",
+          "label": "The page freezes, because the microtask queue drains completely before the loop continues, so timers and rendering never get a turn"
+        },
+        {
+          "id": "d",
+          "label": "The page stays responsive, because promise callbacks run on a separate thread that does not block the main thread"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Microtasks run until the queue is empty before the event loop proceeds to timers or rendering, so a self-requeueing microtask starves them.",
+        "Distractors confuse microtasks with macrotasks, recursion, or threads."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "`async function load() { try { return fetchJson(url); } catch (e) { return fallback; } }` is called and `fetchJson` rejects. Which evaluation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The catch block runs, because any rejection raised inside a try block is routed to its catch even when the promise is not awaited"
+        },
+        {
+          "id": "b",
+          "label": "The catch block never runs because `async` functions swallow rejections; the only fix is a `.catch()` at every call site"
+        },
+        {
+          "id": "c",
+          "label": "The catch block runs only if callers use `await` on `load()`, because the caller decides where the rejection is caught"
+        },
+        {
+          "id": "d",
+          "label": "The catch block never runs because the promise is returned unawaited; `return await fetchJson(url)` makes the rejection catchable here"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Without `await`, the try block finishes before the promise rejects, so the rejection bypasses the catch.",
+        "Distractors assume try/catch covers un-awaited promises or that the caller changes where it applies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A search box fires a `fetch` per keystroke. Compared with only ignoring stale responses using a request counter, which are genuine advantages of passing an `AbortController` signal to `fetch`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It releases the connection and stops downloading response bodies nobody will use"
+        },
+        {
+          "id": "b",
+          "label": "The aborted fetch rejects with an `AbortError`, so cleanup in `finally` runs promptly"
+        },
+        {
+          "id": "c",
+          "label": "It guarantees the server rolls back any work it started for the cancelled request"
+        },
+        {
+          "id": "d",
+          "label": "One signal can be shared to cancel several related operations together"
+        },
+        {
+          "id": "e",
+          "label": "It forces responses to arrive in request order, removing any need to track staleness"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Abort frees network resources, produces a rejection for cleanup, and a signal can be shared across operations.",
+        "Abort does not undo server-side work and does not order responses."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A checkout service wraps `POST /charge` in a helper that retries up to 3 times when a request times out after 5 seconds. Support reports some customers were charged twice. The gateway sometimes completes a charge but responds slowly. Which change best fixes the duplicates while keeping resilience?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Raise the timeout to 30 seconds so that slow gateway responses are no longer treated as failures by the client"
+        },
+        {
+          "id": "b",
+          "label": "Add exponential backoff between attempts so the gateway has time to finish the first charge before any retry arrives"
+        },
+        {
+          "id": "c",
+          "label": "Send the same unique idempotency key with every attempt so the server can recognise and deduplicate repeated charges"
+        },
+        {
+          "id": "d",
+          "label": "Race each attempt against a timer with `Promise.race` so a timed-out attempt is cancelled before the next one begins"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A timeout does not tell the client whether the charge happened; an idempotency key makes retries safe.",
+        "Longer timeouts and backoff only reduce the odds; `Promise.race` does not cancel the in-flight request."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Several components call `getToken()` at the moment the token expires. Constraints: only one refresh request in flight, every caller gets the same result, and a failed refresh must not block later attempts. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cache the token once the refresh resolves and return it on later calls, refreshing only when the cache is empty"
+        },
+        {
+          "id": "b",
+          "label": "Store the in-flight promise permanently once created and return that same promise to every caller from then on"
+        },
+        {
+          "id": "c",
+          "label": "Set an `isRefreshing` flag and have other callers poll it with `setTimeout` until the flag clears, then read the token"
+        },
+        {
+          "id": "d",
+          "label": "Store the in-flight promise, return it to all callers, and reset the variable to null when the promise settles"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Sharing the in-flight promise dedupes concurrent calls; clearing it on settle lets later calls retry after failure.",
+        "Caching only the result lets concurrent callers each refresh; a permanent promise keeps a rejection forever; polling is fragile."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Inside an async function, `tasks` is an array of functions that each return a promise. Constraints: run one at a time in order, never start later tasks after a rejection, and return results in order. Which body meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`return Promise.allSettled(tasks.map(t => t()));`"
+        },
+        {
+          "id": "b",
+          "label": "`const r = []; for (const t of tasks) r.push(await t()); return r;`"
+        },
+        {
+          "id": "c",
+          "label": "`return Promise.all(tasks.map(t => t()));`"
+        },
+        {
+          "id": "d",
+          "label": "`const r = []; tasks.forEach(async t => r.push(await t())); return r;`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A `for...of` with `await` runs sequentially and a rejection throws out before later tasks start.",
+        "The other options start every task immediately or do not wait for results."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design `fetchWithTimeout(url, ms)`. Constraints: reject if no response arrives within `ms`, actually cancel the underlying request, and leave no pending timer after a normal response. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call `fetch` normally, set a `timedOut` flag inside a `setTimeout`, and discard the response if the flag is set"
+        },
+        {
+          "id": "b",
+          "label": "Create an `AbortController`, call `abort()` from a `setTimeout`, pass its signal to `fetch`, and call `clearTimeout` in `finally`"
+        },
+        {
+          "id": "c",
+          "label": "Return `Promise.race([fetch(url), timeout])` where `timeout` rejects after `ms`, relying on the race to cancel the slower fetch and clear the timer"
+        },
+        {
+          "id": "d",
+          "label": "Await a `setTimeout`-based promise of `ms` first, then reject if the fetch promise has still not resolved by then"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Abort cancels the request itself, and clearing the timer in `finally` avoids a leaked timer.",
+        "`Promise.race` and flag approaches leave the request running and the timer pending."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Existing code: `const a = loadA(); const b = loadB(); const x = await a; const y = await b;`. New requirements: both calls start immediately, any failure is handled in one catch, and no unhandled-rejection warning even if `b` fails first. Which rewrite meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep the code and add `await Promise.resolve()` between the lines so any rejection is observed before it can be reported"
+        },
+        {
+          "id": "b",
+          "label": "`const x = await loadA(); const y = await loadB();` inside a try/catch, so each await is handled in turn"
+        },
+        {
+          "id": "c",
+          "label": "`try { const [x, y] = await Promise.all([loadA(), loadB()]); } catch (e) { /* handle */ }`"
+        },
+        {
+          "id": "d",
+          "label": "Keep the code and wrap those four lines in one try/catch, since the catch will handle the rejection of both promises"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`Promise.all` attaches handlers to both promises immediately, so an early rejection of `b` is handled once.",
+        "In the original, `b` has no handler while `a` is awaited, so try/catch alone does not prevent the warning; sequential awaits break parallelism."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Processing 100,000 records in one loop freezes a browser tab. Constraints: no Web Workers, records stay in order, and the UI must be able to repaint during processing. Which design meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Process 500 records per chunk, then `await new Promise(r => setTimeout(r))` before starting the next chunk"
+        },
+        {
+          "id": "b",
+          "label": "Make the loop body `async` and `await Promise.resolve()` after every record so the loop yields to the browser regularly"
+        },
+        {
+          "id": "c",
+          "label": "Wrap the entire loop in `new Promise` and resolve it at the end, so that the work runs off the main thread"
+        },
+        {
+          "id": "d",
+          "label": "Schedule every record with `queueMicrotask`, so the work is spread across the event loop in many small units"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A timer yields a macrotask boundary, letting rendering and input run between chunks.",
+        "Microtask-based yielding never lets rendering run, and a Promise constructor runs synchronously on the main thread."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "You are building `retry(fn, { signal })` for a rate-limited API. Requirements: avoid synchronised retry storms, never retry permanent failures such as a 400, and stop promptly when the caller aborts. Which elements must the design include? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A check on `signal` that stops waiting and rejects once the caller aborts"
+        },
+        {
+          "id": "b",
+          "label": "Exponential backoff with random jitter between attempts"
+        },
+        {
+          "id": "c",
+          "label": "Catching every error and returning `undefined` after the last attempt so callers never see a rejection"
+        },
+        {
+          "id": "d",
+          "label": "Classification so only network errors, 429 and 5xx responses are retried"
+        },
+        {
+          "id": "e",
+          "label": "A zero-delay retry loop so recovery from failure happens as quickly as possible"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Jitter prevents synchronised retries, signal handling honours cancellation, and classification avoids retrying permanent errors.",
+        "Zero-delay retries worsen rate limiting and swallowing errors hides failures."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A script must search issues in a paginated API with about 5,000 pages. Consumers usually stop after the first match. Requirements: fetch pages lazily, never more than one page beyond what the consumer has asked for, and stop requesting when the consumer stops. Which design meets all requirements?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A function that loops through all pages with `await`, pushes every item into an array, and returns the array at the end"
+        },
+        {
+          "id": "b",
+          "label": "A `Promise.all` over every page number followed by `flat()`, so consumers can pick the first match from the result"
+        },
+        {
+          "id": "c",
+          "label": "A recursive callback that fetches the next page after each response and keeps going until a `done` flag is set"
+        },
+        {
+          "id": "d",
+          "label": "An `async function*` that fetches each page in a loop and yields its items, consumed with `for await` and `break`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An async generator is pull-based: it fetches only when the consumer asks, and `break` stops further requests.",
+        "The other designs fetch eagerly or keep requesting regardless of consumer demand."
+      ],
+      "reviewed": false
+    }
+  ]
+}

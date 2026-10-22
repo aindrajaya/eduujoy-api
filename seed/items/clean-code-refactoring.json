@@ -1,0 +1,2502 @@
+{
+  "version": 1,
+  "topic": "clean-code-refactoring",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does refactoring change about a program?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Its expected test results, so that they match the new code"
+        },
+        {
+          "id": "b",
+          "label": "Its programming language, so that the code is easier to read"
+        },
+        {
+          "id": "c",
+          "label": "Its visible features, so that users get new capabilities"
+        },
+        {
+          "id": "d",
+          "label": "Its internal structure, so that the behavior stays the same"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Refactoring restructures code without altering what it does externally.",
+        "Distractors confuse refactoring with adding features or rewriting tests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which term names the code smell where the same logic is copied into several places?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Dead code"
+        },
+        {
+          "id": "b",
+          "label": "Duplicated code"
+        },
+        {
+          "id": "c",
+          "label": "Long parameter list"
+        },
+        {
+          "id": "d",
+          "label": "Magic number"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Duplicated code means repeated logic in multiple places.",
+        "Other options are real smells but describe different problems."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which refactoring move takes a block of code from inside a long function and puts it into a new, named function?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Inline Function"
+        },
+        {
+          "id": "b",
+          "label": "Extract Function"
+        },
+        {
+          "id": "c",
+          "label": "Rename Variable"
+        },
+        {
+          "id": "d",
+          "label": "Move Field"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Extract Function creates a new named function from a code block.",
+        "Inline Function is the opposite move; the others do different things."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is a \"magic number\" in code?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A number produced by a random number generator seeded at startup"
+        },
+        {
+          "id": "b",
+          "label": "A bare literal whose meaning isn't explained in the code"
+        },
+        {
+          "id": "c",
+          "label": "A constant that must always be a power of two, such as a buffer size"
+        },
+        {
+          "id": "d",
+          "label": "A value stored in a variable whose name is very long and descriptive"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A magic number is a bare literal with no explained meaning.",
+        "Distractors misread 'magic' as random, special, or named."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which naming guideline is part of clean code?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reuse generic names such as data so they stay familiar"
+        },
+        {
+          "id": "b",
+          "label": "Add a type prefix to every name so types are visible"
+        },
+        {
+          "id": "c",
+          "label": "Use short single-letter names to keep lines compact"
+        },
+        {
+          "id": "d",
+          "label": "Choose names that reveal what the thing is or does"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Clean code favors intention-revealing names.",
+        "Distractors promote brevity or generic names that hide meaning."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are commonly listed code smells? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Large class"
+        },
+        {
+          "id": "b",
+          "label": "Long function"
+        },
+        {
+          "id": "c",
+          "label": "Duplicated code"
+        },
+        {
+          "id": "d",
+          "label": "Descriptive variable name"
+        },
+        {
+          "id": "e",
+          "label": "Passing unit test"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Long functions, duplication and large classes are classic smells.",
+        "Descriptive names and passing tests are good signs, not smells."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A developer finds a variable named `d` that holds the number of days since a user last logged in. She wants a clearer name without changing behavior. Which refactoring move should she use?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rename Variable"
+        },
+        {
+          "id": "b",
+          "label": "Inline Variable"
+        },
+        {
+          "id": "c",
+          "label": "Pull Up Method"
+        },
+        {
+          "id": "d",
+          "label": "Extract Function"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Rename Variable gives the value a meaningful name safely.",
+        "Other moves restructure code rather than rename."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why should you run the tests both before and after a refactoring step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "To confirm behavior is the same before and after"
+        },
+        {
+          "id": "b",
+          "label": "To show that the old code contained failing tests"
+        },
+        {
+          "id": "c",
+          "label": "To produce a coverage report required by the language"
+        },
+        {
+          "id": "d",
+          "label": "To check that the refactoring made the code run faster"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Passing tests before and after show behavior was preserved.",
+        "Distractors treat tests as a performance or reporting tool."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do clean-code guidelines prefer small functions that each do one thing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each one is easier to name, read, test and change"
+        },
+        {
+          "id": "b",
+          "label": "Each one lets the program get by with fewer variables overall"
+        },
+        {
+          "id": "c",
+          "label": "Each one usually runs faster than a single large function"
+        },
+        {
+          "id": "d",
+          "label": "Each one lowers the amount of testing the code needs overall"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Small focused functions are easier to understand and modify.",
+        "Distractors claim speed or fewer tests, which are not the reason."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A 200-line function validates input, saves to a database and sends an email. Which smell best classifies it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Magic number: unexplained literal values scattered through the code"
+        },
+        {
+          "id": "b",
+          "label": "Poor variable naming: names that hide what the data means"
+        },
+        {
+          "id": "c",
+          "label": "Long function doing several jobs"
+        },
+        {
+          "id": "d",
+          "label": "Dead code: statements that can never be executed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Mixing several responsibilities in one big function is the long function smell.",
+        "Other smells may exist but do not describe this situation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is `if (age >= MIN_ADULT_AGE)` easier to maintain than `if (age >= 18)`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Named constants are resolved at compile time, so they run faster"
+        },
+        {
+          "id": "b",
+          "label": "The name explains the value and it changes in one place"
+        },
+        {
+          "id": "c",
+          "label": "Most compilers reject numeric literals inside conditions"
+        },
+        {
+          "id": "d",
+          "label": "Comparing with a name gives more accurate results than a number"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A named constant explains meaning and centralizes changes.",
+        "Distractors invent performance or correctness differences."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is duplicated code a maintenance risk?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Copies make the program run slower at every call"
+        },
+        {
+          "id": "b",
+          "label": "Duplicated lines are rejected by most test tools"
+        },
+        {
+          "id": "c",
+          "label": "Copies use more variable names than a single version"
+        },
+        {
+          "id": "d",
+          "label": "A fix made in one copy can be missed in the others"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Copies drift apart; fixes must be repeated in each one.",
+        "Distractors give performance or tooling reasons that are not the main risk."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these changes are refactorings, meaning they keep behavior the same? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Renaming a variable to a clearer name"
+        },
+        {
+          "id": "b",
+          "label": "Adding a new discount feature for customers"
+        },
+        {
+          "id": "c",
+          "label": "Extracting repeated lines into a function"
+        },
+        {
+          "id": "d",
+          "label": "Changing a calculation so that its output differs"
+        },
+        {
+          "id": "e",
+          "label": "Replacing a literal 0.2 with a named constant"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Renaming, extracting and naming constants keep behavior unchanged.",
+        "Adding features or changing outputs alters behavior, so they are not refactorings."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A shop's code calculates sales tax with the same three lines in five different functions. The tax rate is about to change. A teammate suggests extracting the lines into one `calculateTax` function first. Why is that a good idea?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each caller will then compute tax with higher precision"
+        },
+        {
+          "id": "b",
+          "label": "The program will then need fewer tests to be trusted"
+        },
+        {
+          "id": "c",
+          "label": "The rate then needs to be changed in only one place"
+        },
+        {
+          "id": "d",
+          "label": "The compiler will then ignore the old rate completely"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Removing duplication means one change updates all uses.",
+        "Distractors claim testing, precision or compiler effects that extraction does not give."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does refactoring mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Fixing bugs found in production by changing how the code behaves"
+        },
+        {
+          "id": "b",
+          "label": "Restructuring code without changing its behavior"
+        },
+        {
+          "id": "c",
+          "label": "Speeding up slow code so that it can handle much larger inputs"
+        },
+        {
+          "id": "d",
+          "label": "Adding new features by rewriting old code to behave differently"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Refactoring restructures code while keeping observable behavior the same.",
+        "Distractors confuse it with feature work, bug fixing, or performance tuning, which all change behavior or aim at something else."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is a code smell?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A failing automated test that shows the code has a bug"
+        },
+        {
+          "id": "b",
+          "label": "A compiler warning that points to a definite error in the code"
+        },
+        {
+          "id": "c",
+          "label": "A surface sign in code that hints at a deeper design problem"
+        },
+        {
+          "id": "d",
+          "label": "A comment marking work left unfinished, such as a TODO note"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A smell is a hint of a possible deeper problem, not a definite bug.",
+        "Distractors treat smells as errors, test failures, or TODO notes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A function is declared as `create_user(name, email, age, city, phone, role, team, plan, locale)`. Which smell does this most clearly show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Long parameter list"
+        },
+        {
+          "id": "b",
+          "label": "Duplicated code"
+        },
+        {
+          "id": "c",
+          "label": "Magic number"
+        },
+        {
+          "id": "d",
+          "label": "Dead code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Many parameters make calls hard to read and easy to get wrong: a long parameter list.",
+        "Other options name real smells but they are not shown by the signature."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is it good to move a calculation copied in four places into one shared function?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The calculation no longer needs to be tested"
+        },
+        {
+          "id": "b",
+          "label": "The program then runs faster because it executes far fewer instructions"
+        },
+        {
+          "id": "c",
+          "label": "The file then needs fewer comments to compile"
+        },
+        {
+          "id": "d",
+          "label": "A change to the rule only has to be made in one place"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Removing duplication means a rule change is made once, so copies cannot drift apart.",
+        "Distractors claim performance, test, or compilation benefits that do not follow."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which comment adds the most value to the line it sits above?",
+      "options": [
+        {
+          "id": "a",
+          "label": "// loop over every order in the list and handle each one in turn"
+        },
+        {
+          "id": "b",
+          "label": "// increment i by one each time we go around, moving to the next item"
+        },
+        {
+          "id": "c",
+          "label": "// Retry once: the API often drops the first call after idle"
+        },
+        {
+          "id": "d",
+          "label": "// this function is defined below, after the main entry point runs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Good comments explain why, which the code cannot show.",
+        "Other comments just restate what the code already says."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these are code smells that a refactoring should address? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A 200-line function that validates, saves and emails in one body"
+        },
+        {
+          "id": "b",
+          "label": "A variable named `x2` holding a customer's discount rate"
+        },
+        {
+          "id": "c",
+          "label": "The same 5-line price calculation pasted into three files"
+        },
+        {
+          "id": "d",
+          "label": "A 4-line function named `calculate_shipping_cost` that only calls one helper"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Oversized functions, duplication and meaningless names are classic smells.",
+        "`is_expired` is a clear, intention-revealing name and not a smell."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A developer opens a function `process(data)`. Inside, three blocks are separated by comments reading `# validate`, `# calculate totals` and `# save to database`. What does this layout most likely suggest?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The function should be rewritten to use one loop instead"
+        },
+        {
+          "id": "b",
+          "label": "The comments should be deleted and the blocks left unchanged"
+        },
+        {
+          "id": "c",
+          "label": "Each block could become its own function named after its comment"
+        },
+        {
+          "id": "d",
+          "label": "The function is already clean because every block has a comment"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Comments labelling sections hint the function does several jobs; extracting them gives small, named functions.",
+        "Distractors treat comments as a fix or suggest changes that ignore the multiple responsibilities."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Code contains `if (speed > 120) { fine(driver); }`. Which change best removes the magic number?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`if (speed > 60 * 2)` so the limit is shown as a calculation"
+        },
+        {
+          "id": "b",
+          "label": "`if (s > 120)` after renaming `speed` to a shorter name"
+        },
+        {
+          "id": "c",
+          "label": "`if (speed > MAX_SPEED_KMH)` with `MAX_SPEED_KMH = 120`"
+        },
+        {
+          "id": "d",
+          "label": "`if (speed > 120) // limit` with a comment naming the value"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A named constant gives the value meaning and one place to change.",
+        "Other options hide or obscure the number without naming it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `def f(l): return [x for x in l if x.paid]`, which rewrite gives the clearest names?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`def paid_orders(orders)`"
+        },
+        {
+          "id": "b",
+          "label": "`def process_data(items)`"
+        },
+        {
+          "id": "c",
+          "label": "`def get_x(l)`"
+        },
+        {
+          "id": "d",
+          "label": "`def filter_list(l)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The name should say what is returned and use meaningful parameter names.",
+        "Other names are generic and say nothing about the paid filter."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which refactor of `if user: if user.active: send(user)` uses a guard clause and keeps behavior the same?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`if not user or not user.active: return` then `send(user)`"
+        },
+        {
+          "id": "b",
+          "label": "`send(user)` wrapped in a try block that ignores errors"
+        },
+        {
+          "id": "c",
+          "label": "`if user.active: send(user)` with the first check removed"
+        },
+        {
+          "id": "d",
+          "label": "`if user or user.active: send(user)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A guard clause exits early for the unwanted cases, flattening nesting.",
+        "Other options change the conditions and so change behavior."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A function `rename_me` is called in five files. Tests exist. What is the safest way to rename it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Copy it under the new name and keep both forever"
+        },
+        {
+          "id": "b",
+          "label": "Rename the definition and fix breakages as they show in production"
+        },
+        {
+          "id": "c",
+          "label": "Run tests, use the IDE rename tool, then run tests again"
+        },
+        {
+          "id": "d",
+          "label": "Rename it and tweak its logic in the same commit"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Tests before and after plus a tool-driven rename confirm behavior is unchanged.",
+        "Other options risk breakage, leave clutter, or mix behavior changes with refactoring."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`price_with_vat(p)` returns `p * 1.2` and `price_with_reduced_vat(p)` returns `p * 1.1`. What is the best refactor?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Merge them into one function with a boolean flag that picks the rate"
+        },
+        {
+          "id": "b",
+          "label": "Add a third copy for any new rate"
+        },
+        {
+          "id": "c",
+          "label": "Use one global rate variable that callers change before calling"
+        },
+        {
+          "id": "d",
+          "label": "Merge them into `price_with_tax(p, rate)` and pass `0.2` or `0.1`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The only difference is the rate, so make it a parameter.",
+        "Globals and flags add hidden state or branching and do not scale."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which changes are behavior-preserving refactorings? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Extracting a loop body into a helper that returns the same value"
+        },
+        {
+          "id": "b",
+          "label": "Switching a calculation from floor to round while tidying the code"
+        },
+        {
+          "id": "c",
+          "label": "Renaming local variable `d` to `days_left` everywhere in its scope"
+        },
+        {
+          "id": "d",
+          "label": "Returning `None` for bad input where the code used to raise an error"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Renaming and extracting keep outputs identical.",
+        "Changing rounding or error handling alters observable behavior."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A 30-line `checkout` function computes discounts inline. You must add a new discount type, and unit tests for `checkout` pass today. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add the new discount branch inline now, then extract the discount logic once the feature works"
+        },
+        {
+          "id": "b",
+          "label": "Extract the discount logic into its own function, rerun tests, then add the new type"
+        },
+        {
+          "id": "c",
+          "label": "Add the new discount and update any existing tests that fail so they match the new output"
+        },
+        {
+          "id": "d",
+          "label": "Rewrite checkout from scratch around the new rule, then write fresh tests for the whole function"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Refactor under passing tests first, then make the behavior change in a clean spot.",
+        "Other options pile on risk by mixing changes or discarding the safety net."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which guard-clause version behaves identically to this function?\n```def fee(u):\n    if u.active:\n        if not u.banned:\n            return 10\n        else:\n            return 0\n    else:\n        return 0```",
+      "options": [
+        {
+          "id": "a",
+          "label": "`if not u.active or u.banned: return 0` then `return 10`"
+        },
+        {
+          "id": "b",
+          "label": "`if not u.active and u.banned: return 0` then `return 10`"
+        },
+        {
+          "id": "c",
+          "label": "`if u.active and u.banned: return 0` then `return 10`"
+        },
+        {
+          "id": "d",
+          "label": "`if u.active or not u.banned: return 10` then `return 0`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The function returns 0 when the user is inactive or banned, and 10 otherwise, so one combined guard is equivalent.",
+        "Distractors flip `or`/`and` or negate the wrong term, which changes the result for some inputs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A function is written as `def f(d, n): return d + timedelta(days=n)`. Which name and parameter list best express what it does?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`add_days(date, days)`"
+        },
+        {
+          "id": "b",
+          "label": "`calculate_result(date, delta)`"
+        },
+        {
+          "id": "c",
+          "label": "`process_date_value(d, n)`"
+        },
+        {
+          "id": "d",
+          "label": "`get_new_date(start, number)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`add_days(date, days)` names the operation and its inputs precisely.",
+        "Distractors use vague verbs such as get, process or calculate that say nothing about what happens."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`uk_price` returns `price * 1.20` and `us_price` returns `price * 1.08`; the rest of both functions is identical. Which refactoring removes the duplication most cleanly?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Create `with_tax(price, rate)` and make each existing function call it with its own rate"
+        },
+        {
+          "id": "b",
+          "label": "Write a third function `price_for_region` that calls whichever of the two matches the region"
+        },
+        {
+          "id": "c",
+          "label": "Keep both functions and add a comment saying they must always be edited together"
+        },
+        {
+          "id": "d",
+          "label": "Add a module-level `RATE` that callers must set before each call to one shared function"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Parameterising the one varying value gives a single implementation with no hidden state.",
+        "The global is hidden coupling, and the comment and wrapper keep the duplicated bodies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must refactor a 120-line legacy function that has no tests and whose exact behavior is not documented. What should you do first?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Write characterization tests that record its current outputs for representative inputs"
+        },
+        {
+          "id": "b",
+          "label": "Fix any bugs you spot in it so the refactoring starts from correct behavior and the tests describe the right results"
+        },
+        {
+          "id": "c",
+          "label": "Delete branches that look unreachable to shrink it before adding any tests"
+        },
+        {
+          "id": "d",
+          "label": "Split it into small functions first and then write tests for each new piece"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Characterization tests pin current behavior so later changes can be checked.",
+        "The distractors change code before a safety net exists, or mix bug fixes with refactoring."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`book_room(start_date, end_date, start_time, end_time, tz, guest, room_type)` is called from 12 places, and most callers pass the same date, time and timezone values together. Which move fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pull Up Method"
+        },
+        {
+          "id": "b",
+          "label": "Inline Method"
+        },
+        {
+          "id": "c",
+          "label": "Replace Inheritance with Delegation"
+        },
+        {
+          "id": "d",
+          "label": "Introduce Parameter Object"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Values that travel together belong in one object such as a `TimeSlot`.",
+        "The other moves address method size or class hierarchy, not a long parameter list with a data clump."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which edits are behavior-preserving refactorings of a function that has no other callers or side effects? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Change `raise NotFound` to `return None` when the lookup fails"
+        },
+        {
+          "id": "b",
+          "label": "Replace `count = count + 1` with `count += 1` on an integer"
+        },
+        {
+          "id": "c",
+          "label": "Swap two statements that both append to the same list"
+        },
+        {
+          "id": "d",
+          "label": "Rename a local variable everywhere it is used in the function"
+        },
+        {
+          "id": "e",
+          "label": "Move a block of statements into a new function that takes the values it reads as arguments and returns what it sets"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Extraction with explicit inputs and outputs, a consistent rename and an equivalent operator form do not change behavior.",
+        "Changing the error path or reordering writes to shared state alters what callers observe."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A 40-line `generate_report(rows)` mixes a loop that computes totals with code that formats the output. Existing tests cover the output and pass. You want to separate the calculation from the formatting with minimal risk. What do you do next?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Extract totals and formatting into new functions, rename every caller, and run the tests once at the end"
+        },
+        {
+          "id": "b",
+          "label": "Extract the totals loop into `compute_totals(rows)` that returns values, then rerun the tests before touching the formatting"
+        },
+        {
+          "id": "c",
+          "label": "Rewrite the function from scratch using the spec, then compare its output with the old version on a few sample reports to confirm"
+        },
+        {
+          "id": "d",
+          "label": "Extract the totals loop and switch rounding to the new finance rule in the same step so the function is final"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "One small extraction followed by a test run keeps each step verifiable.",
+        "Other options mix behavior changes into the refactoring or batch many changes before checking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`Order.shipping_label()` reads `customer.name`, `customer.street`, `customer.city` and `customer.zip`, and uses only one field of `Order` itself. Which smell does this most clearly show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Shotgun Surgery"
+        },
+        {
+          "id": "b",
+          "label": "Divergent Change"
+        },
+        {
+          "id": "c",
+          "label": "Primitive Obsession"
+        },
+        {
+          "id": "d",
+          "label": "Feature Envy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A method that mostly uses another class's data envies that class and probably belongs there.",
+        "The other smells concern scattered edits, one class changing for many reasons, or overuse of primitive types."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Each time a new payment type is added, you must make small edits in the checkout, invoice, refund, email and report modules. Which smell does this describe?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Divergent Change"
+        },
+        {
+          "id": "b",
+          "label": "Large Class"
+        },
+        {
+          "id": "c",
+          "label": "Shotgun Surgery"
+        },
+        {
+          "id": "d",
+          "label": "Speculative Generality"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "One change that forces small edits across many modules is Shotgun Surgery.",
+        "Divergent Change is the reverse: one class edited for many unrelated reasons."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A function looped over items and executed `return found` inside the loop on the first match. A developer extracted the loop body into a helper, tests still pass, but production now returns later and sometimes differs. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The helper copies its arguments, so changes to the list inside it are lost to the caller"
+        },
+        {
+          "id": "b",
+          "label": "The `return` now exits only the helper, so the loop keeps running after the match"
+        },
+        {
+          "id": "c",
+          "label": "The loop variable became local to the helper, so its final value is no longer available"
+        },
+        {
+          "id": "d",
+          "label": "Extraction changes evaluation order, so conditions in the loop run before the loop starts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A `return` moved into a helper no longer ends the outer function, so control flow changed.",
+        "The distractors invent scoping or copying effects that do not explain the early-exit change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Two blocks look nearly identical: one applies tax rules, the other shipping rules, and both happen to round and clamp values the same way. A teammate wants to merge them into one function. Which analysis is the strongest argument against it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The merged function adds a call and extra arguments, which makes it slower than two inline blocks in most cases"
+        },
+        {
+          "id": "b",
+          "label": "A shared function is harder to test, because each caller would need its own full suite to cover the shared logic"
+        },
+        {
+          "id": "c",
+          "label": "They change for different reasons, so merging couples unrelated rules and one edit risks the other"
+        },
+        {
+          "id": "d",
+          "label": "Duplication becomes a smell at about three copies, so two copies are below the threshold and should stay"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Accidental duplication hides different reasons to change; merging creates coupling.",
+        "The distractors rely on invented performance, copy-count or testing rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After an IDE rename of `calc_total` to `compute_total`, the unit tests for the class pass, but a plugin loader fails at runtime with an AttributeError. The loader runs `getattr(obj, name)` with names read from a config file. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The config file still holds the old name as a string, which the rename tool did not update"
+        },
+        {
+          "id": "b",
+          "label": "Python caches bound methods by name, so a renamed method needs a full process restart"
+        },
+        {
+          "id": "c",
+          "label": "The tests were written before the rename, so they must be regenerated from scratch"
+        },
+        {
+          "id": "d",
+          "label": "The rename tool changed the method's signature, so callers pass arguments in the wrong order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Names used as strings in config or reflection are invisible to automated renames.",
+        "The distractors blame signature changes, stale tests or caching, none of which produce an AttributeError for a missing name."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Which observations support replacing an `if/elif` chain on a type code with polymorphism? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The chain has two branches in one private function and the types are fixed"
+        },
+        {
+          "id": "b",
+          "label": "The same chain on the type code appears in several functions"
+        },
+        {
+          "id": "c",
+          "label": "New types are added every few months, and each addition touches every chain"
+        },
+        {
+          "id": "d",
+          "label": "The type code is read once to pick a log message"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Repeated chains and frequent new types make the switch a change hotspot that polymorphism localises.",
+        "A small, stable, single-use conditional gains little from the extra classes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A developer extracts `apply_discount(order)`, which updates `order.total`. To keep related lines together, they move the line `tax = order.total * 0.2` below the new call. Unit tests with no discount still pass, but the nightly report is now 3% lower on discounted orders. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Moving the tax line below the call changed which total it reads, so tax is now computed after the discount"
+        },
+        {
+          "id": "b",
+          "label": "The unit tests ran against a stale build, so they could not have shown the discount behaviour"
+        },
+        {
+          "id": "c",
+          "label": "Floating-point rounding differs inside the new function, so each order drifts slightly from its old value"
+        },
+        {
+          "id": "d",
+          "label": "The new function's name hides that it applies a discount, so the report calls it twice by mistake"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Reordering across a mutation changed a data dependency: tax now uses the discounted total.",
+        "Rounding, a double call or stale tests do not explain a consistent drop only on discounted orders while no-discount tests pass."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Two functions, `invoiceTax` and `shippingTax`, contain near-identical 15-line rounding and bracket logic. Tax law governs one and a carrier contract governs the other. Why is merging them into one shared helper risky?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Extracting rounding logic means passing in the caller's local state, which makes the helper harder to test than either original function"
+        },
+        {
+          "id": "b",
+          "label": "Duplication is tolerable only until a third copy appears, so merging two copies now is premature and adds little value"
+        },
+        {
+          "id": "c",
+          "label": "A shared helper adds a call layer on a hot path, and the resulting slowdown would affect both tax calculations"
+        },
+        {
+          "id": "d",
+          "label": "The rules change for different reasons, so a shared helper couples them and a change to one risks breaking the other"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Similar code with different reasons to change is accidental duplication; merging couples unrelated rules.",
+        "Distractors rely on performance or file-count myths rather than change-reason analysis."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Adding a new payment method forced edits to a switch in `Cart`, a switch in `Receipt`, a label map in `Refund`, and a validator in `Checkout`. Which smell does this pattern most directly indicate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Divergent change, because one class is edited for many unrelated reasons over time"
+        },
+        {
+          "id": "b",
+          "label": "Primitive obsession, because payment methods are stored as plain strings in several places"
+        },
+        {
+          "id": "c",
+          "label": "Speculative generality, because the payment code was abstracted before any real need existed"
+        },
+        {
+          "id": "d",
+          "label": "Shotgun surgery, because one conceptual change is scattered across many places"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "One change touching many classes is shotgun surgery.",
+        "Divergent change is the inverse: one class changing for many reasons."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After an Extract Method on a loop body, a total comes out wrong though the extracted code was copied verbatim. The original body did `count += 1; sum += x;` on locals. What most likely caused the regression?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The extracted method changes its own copies of the locals, so the caller's values never update"
+        },
+        {
+          "id": "b",
+          "label": "The extracted method now runs after the loop condition is checked, so the final iteration is skipped and the total ends one element short"
+        },
+        {
+          "id": "c",
+          "label": "Extract Method changes evaluation order, so the loop body's additions are applied in a different sequence and give a different sum"
+        },
+        {
+          "id": "d",
+          "label": "The new method's name is too vague, so the compiler binds the call to a different overload with other behavior"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Locals modified in extracted code must be returned or passed by reference, or the caller loses the updates.",
+        "Other options invent compiler or ordering effects that extraction does not cause."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A method `Order.shippingLabel()` reads ten fields from `Customer` through getters and uses only one field of `Order`. Which diagnosis and move fit best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Long method; split it into ten helpers, one per getter call, and keep them all on `Order`"
+        },
+        {
+          "id": "b",
+          "label": "Feature envy; the behaviour belongs on `Customer`, so use Move Method toward its data"
+        },
+        {
+          "id": "c",
+          "label": "Data clump; the ten fields should be copied into `Order` so the getters can be removed from `Customer`"
+        },
+        {
+          "id": "d",
+          "label": "Lazy class; `Customer` does too little to justify existing, so it should be inlined into `Order` entirely"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Heavy use of another class's data signals feature envy; move the behaviour to the data.",
+        "Copying fields or inlining the class creates duplication or coupling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A team refactored `if (user != null && user.isActive() && load(user.id))` into three separate guard clauses reordered for readability. Tests passed, but production now logs extra loads. What is the most plausible cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Logging libraries buffer duplicate lines after a refactor, so the extra entries are cosmetic and no extra loads happened"
+        },
+        {
+          "id": "b",
+          "label": "The tests ran on a different compiler version than production, so the extra loads come from the build environment"
+        },
+        {
+          "id": "c",
+          "label": "Reordering put side-effecting `load(...)` before a check that used to short-circuit it; tests never asserted on loads"
+        },
+        {
+          "id": "d",
+          "label": "Separate guard clauses evaluate every condition before returning, unlike an `&&` chain, so the extra loads are unavoidable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Reordering conditions changes behaviour when a call has side effects previously guarded by short-circuiting.",
+        "Tests lacked an assertion on that side effect."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A 60-line function `processOrder` is being reviewed. Which observations are evidence that it mixes levels of abstraction and should be split? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It uses a `for` loop where a stream pipeline would also work"
+        },
+        {
+          "id": "b",
+          "label": "Comments divide the body into sections such as `// validate`, `// price`, `// persist`"
+        },
+        {
+          "id": "c",
+          "label": "It parses raw strings with index arithmetic, then applies a high-level discount policy in the same block"
+        },
+        {
+          "id": "d",
+          "label": "It calls SQL string builders directly between business rule checks"
+        },
+        {
+          "id": "e",
+          "label": "It has a single return at the end and one clearly named local variable per step"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Low-level parsing or SQL beside policy logic, and sectioning comments, signal mixed abstraction levels.",
+        "Loop style and single return are unrelated to abstraction levels."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A `ReportService` constructor opens a database connection and reads a config file. Developers avoid unit testing it, and each test run takes 40 seconds because of setup. Method bodies are short and well named. What is the root cause of the testing pain?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Method names are too short to convey intent, so tests cannot be written without reading the bodies"
+        },
+        {
+          "id": "b",
+          "label": "The class is too small, so a larger class with more methods would amortise the setup cost"
+        },
+        {
+          "id": "c",
+          "label": "Hidden dependencies are created inside the constructor, so the class cannot run without real infrastructure"
+        },
+        {
+          "id": "d",
+          "label": "Unit tests are the wrong tool for services, so the team should only use end-to-end tests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Constructing collaborators internally prevents substitution; inject dependencies instead.",
+        "Naming and size are not the problem described."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: names must be understandable by new hires and survive a later change in implementation. A function `getUserListFromSqlAndFilterInactive()` is proposed for rename. Which name best meets both criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`getActiveUsers()`, since it states the result and hides the storage and filtering mechanics"
+        },
+        {
+          "id": "b",
+          "label": "`usersFilter()`, since a short noun-based name is always easier to scan than a verb phrase"
+        },
+        {
+          "id": "c",
+          "label": "`getUserListFromDbThenFilter()`, since naming each step prevents readers from guessing the behaviour"
+        },
+        {
+          "id": "d",
+          "label": "`fetchUsersSql()`, since it records the data source so readers know where the data comes from"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Intent-revealing names that avoid implementation details survive changes.",
+        "Distractors encode mechanism or are vague."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: minimise future change cost and avoid premature abstraction. Two report exporters share about 10 lines of formatting code. A third exporter is rumoured but unscheduled. What is the best judgement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Leave the duplication and revisit when a third real case shows what truly varies"
+        },
+        {
+          "id": "b",
+          "label": "Extract a generic exporter framework with plugins now, since the third exporter will certainly arrive"
+        },
+        {
+          "id": "c",
+          "label": "Copy the code into a third file now so all exporters stay symmetrical and independent forever"
+        },
+        {
+          "id": "d",
+          "label": "Delete one exporter and route all output through the other, since duplicated features should never coexist"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "With two cases and a speculative third, wait for evidence (rule of three) before abstracting.",
+        "Other options over-engineer, remove features, or multiply duplication."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: ship value monthly, keep production stable, and the 80k-line module has weak tests. Which strategy best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap behaviour in characterization tests and refactor in small steps alongside feature work in the touched areas"
+        },
+        {
+          "id": "b",
+          "label": "Pause feature work for a quarter and rewrite the module in a separate branch, then switch over once it matches the old behaviour"
+        },
+        {
+          "id": "c",
+          "label": "Refactor the whole module in one large commit so the structure stays consistent, and rely on manual QA before release to catch regressions"
+        },
+        {
+          "id": "d",
+          "label": "Leave the module untouched and wrap it behind an adapter, rejecting any change to its internals until a full test suite exists first"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Characterization tests plus incremental refactors keep releases safe while improving code.",
+        "Big-bang rewrite and no-touch policies conflict with stated criteria."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A reviewer proposes replacing a two-branch `if` on a stable `isPremium` flag with a `Customer` class hierarchy and polymorphic `discount()`. The flag has not changed in three years. Which critique is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The proposal should be rejected because polymorphism hides the discount rules, whereas a conditional keeps them visible in one place"
+        },
+        {
+          "id": "b",
+          "label": "The proposal should be accepted because a hierarchy removes the branch and a design without conditionals is easier to test"
+        },
+        {
+          "id": "c",
+          "label": "The hierarchy is justified once there are two customer types, because each type then deserves its own class and its own tests"
+        },
+        {
+          "id": "d",
+          "label": "The added indirection costs more than it returns, because the variation is small and stable, so the conditional is clearer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Conditional-to-polymorphism pays off when variants grow; for a stable two-way split it adds indirection.",
+        "Absolute claims in other options are false."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: lowest risk of silent behaviour change. You must modify a 300-line untested legacy function. Which first step is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rename every variable and reorder statements for clarity, then run the app and look for errors"
+        },
+        {
+          "id": "b",
+          "label": "Rewrite it in a new style from the specification, then compare it against the old function by reading"
+        },
+        {
+          "id": "c",
+          "label": "Add comments explaining each line, then trust the comments to catch mistakes in later refactoring"
+        },
+        {
+          "id": "d",
+          "label": "Pin current outputs for representative inputs with characterization tests, then refactor in small steps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Characterization tests pin existing behaviour so refactoring can be verified.",
+        "Other options lack an automated safety net."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A pull request titled 'cleanup' renames 40 symbols, reformats files, and also changes a discount rule. Judged against the criteria of reviewability and safe rollback, which criticisms are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Mixing a behaviour change with refactoring hides the rule change inside noise, so reviewers may miss it"
+        },
+        {
+          "id": "b",
+          "label": "A 'cleanup' label is accurate only if the observable behaviour is unchanged, which this PR violates"
+        },
+        {
+          "id": "c",
+          "label": "Renaming symbols is forbidden in any refactoring because names are part of the public contract"
+        },
+        {
+          "id": "d",
+          "label": "Behaviour-preserving cleanups need no tests because the diff is mechanical"
+        },
+        {
+          "id": "e",
+          "label": "Rename and formatting churn should be separate commits from logic changes so that a revert is targeted"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Refactoring and behaviour change should be separated for review and rollback.",
+        "Renames are normal, and tests are still needed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A function `createInvoice(customer, items, taxRate, currency, dueDate, notes)` is called from 30 places; callers often mix up `currency` and `notes` since both are strings. Criteria: fewer call-site errors and a low-risk migration. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reorder the parameters so currency and notes are far apart, and update all 30 callers by hand in a single commit"
+        },
+        {
+          "id": "b",
+          "label": "Add a seventh optional positional parameter for new callers who want clearer behaviour, and leave the existing callers alone"
+        },
+        {
+          "id": "c",
+          "label": "Introduce a parameter object with named fields, keep the old signature delegating to it, and migrate callers gradually"
+        },
+        {
+          "id": "d",
+          "label": "Merge currency and notes into one delimited string parameter, so a swapped order is parsed and corrected inside the function"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A parameter object with a delegating old signature removes ordering errors and allows incremental migration.",
+        "Other options worsen ambiguity or force risky big changes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Two modules each contain a 15-line routine that looks nearly identical: one computes invoice late fees, the other computes library fines. Different teams own them and the rules come from unrelated policies. Judged on cost of future change, what is the best call?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Merge them into one parameterized function now, since any duplicated logic is a defect to remove immediately"
+        },
+        {
+          "id": "b",
+          "label": "Leave them separate for now, since they change for different reasons and a shared abstraction would couple them"
+        },
+        {
+          "id": "c",
+          "label": "Merge them through a common base class, since inheritance guarantees both stay in sync when either policy changes"
+        },
+        {
+          "id": "d",
+          "label": "Delete one routine and call the other, since identical-looking code always means identical requirements"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The routines have different reasons to change, so merging risks a wrong abstraction that couples unrelated policies.",
+        "Distractors treat textual similarity as shared knowledge."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must change a 200-line untested pricing function that production relies on. Criteria: no behavior change, minimal risk, fast feedback. Which first step is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Have reviewers read the diff closely, since careful review can substitute for automated checks on refactors"
+        },
+        {
+          "id": "b",
+          "label": "Rewrite it from the specification in a clean style, then compare results on a few sample orders by hand"
+        },
+        {
+          "id": "c",
+          "label": "Rename variables and extract methods first, since small mechanical edits are safe even without any tests"
+        },
+        {
+          "id": "d",
+          "label": "Record current outputs for many representative inputs as characterization tests, then refactor under them"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Characterization tests pin current behavior, including quirks, so each refactoring step can be verified quickly.",
+        "Distractors rely on manual confidence or rewriting, which can silently change behavior."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A style guide states: \"Every function must be at most 5 lines.\" Evaluate this rule as a team standard for readability and ease of change.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Flawed, since line count is only a proxy and forced splitting can scatter a cohesive algorithm into vague fragments"
+        },
+        {
+          "id": "b",
+          "label": "Flawed, since long functions run faster because call overhead is removed in every language and runtime"
+        },
+        {
+          "id": "c",
+          "label": "Sound, since five lines matches the measured limit of human working memory when reading code"
+        },
+        {
+          "id": "d",
+          "label": "Sound, since shorter functions are always easier to understand and test, however the logic ends up divided"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Size is a heuristic; cohesion and naming matter more, and mechanical limits can hurt readability.",
+        "Distractors cite performance or invented research instead of readability criteria."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "`export(report, true)` uses a boolean meaning \"include totals\". The function body is two mostly separate branches sharing little code. Judged on call-site clarity and low coupling, what is the best option?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replace the boolean with an integer mode, since numbers extend more easily than booleans without any naming"
+        },
+        {
+          "id": "b",
+          "label": "Keep the flag, since one function means one place to maintain even when the branches share almost nothing"
+        },
+        {
+          "id": "c",
+          "label": "Add a comment above each call site explaining what `true` means, since comments keep the signature stable"
+        },
+        {
+          "id": "d",
+          "label": "Split it into two well-named functions, since the branches share little and call sites then state their intent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Disjoint branches signal two responsibilities; separate named functions make intent visible at call sites.",
+        "Distractors keep the opaque argument or swap it for another opaque one."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Which comment is best justified under clean code principles, where comments should add what the code cannot say?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`// Author: J. Lee, last edited March` at the top of each function body in the file"
+        },
+        {
+          "id": "b",
+          "label": "`// old version kept just in case` above a large block of commented-out earlier code"
+        },
+        {
+          "id": "c",
+          "label": "`// Retry once: vendor returns a spurious 502 on first call after idle` above a retry"
+        },
+        {
+          "id": "d",
+          "label": "`// loop over the orders and add each total to sum` above a loop that sums order totals"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The comment explains why, recording an external quirk the code cannot express.",
+        "Distractors restate code, duplicate version-control data, or leave dead code."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team weighs replacing a long `switch` on order type with polymorphic classes. Which facts favor doing it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The switch has two branches that have not changed in years"
+        },
+        {
+          "id": "b",
+          "label": "The team wants fewer files in the project"
+        },
+        {
+          "id": "c",
+          "label": "The same switch on order type is repeated in several modules"
+        },
+        {
+          "id": "d",
+          "label": "New order types are added every few weeks"
+        },
+        {
+          "id": "e",
+          "label": "Each type carries distinct behavior, not just different data values"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Repeated switches, frequent new variants and behavior differences are what polymorphism handles well.",
+        "Stable two-branch switches and file count do not justify the added structure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A pull request renames three modules, reorders parameters across 40 call sites, and also fixes a rounding bug in tax calculation. All tests pass. The reviewer must judge it by the ability to catch regressions and revert safely. What is the best response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ask for a longer commit message, since documentation lets later readers separate the fix from the renames"
+        },
+        {
+          "id": "b",
+          "label": "Ask to revert the renames, since refactoring should never happen while a known bug exists nearby"
+        },
+        {
+          "id": "c",
+          "label": "Approve it, since passing tests prove the renames did not hide any unintended behavior change"
+        },
+        {
+          "id": "d",
+          "label": "Ask to split it into a behavior-preserving refactor and a separate fix, so each can be reviewed and reverted alone"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Mixing refactoring with behavior change hides regressions and makes partial revert impossible.",
+        "Distractors trust tests or documentation instead of separating the two kinds of change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "`LegacyMailer` is called from 120 places. You must replace it with a new `Notifier` while the team ships daily, avoids a big-bang merge, and can roll back at any point. Which plan meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add an interface both classes implement, migrate callers in batches behind a toggle, then delete the old class"
+        },
+        {
+          "id": "b",
+          "label": "Change `LegacyMailer` internals step by step until it matches `Notifier`, then rename it so callers keep compiling and no migration is needed"
+        },
+        {
+          "id": "c",
+          "label": "Pause feature work for a quarter, swap the class in one commit, and use end-to-end tests to find callers that were missed"
+        },
+        {
+          "id": "d",
+          "label": "Rewrite all 120 callers on a long-lived branch and merge once everything passes, so no half-migrated state ever ships"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "An abstraction plus incremental migration keeps each release small and reversible.",
+        "Distractors are big-bang or freeze approaches that violate the daily-shipping and rollback constraints."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A 300-line method reads rows from a database, computes discounts and sends emails, all interleaved. Constraints: tests stay green after every step, and discount logic must become unit-testable without a database. Which design meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Split the method into `part1`, `part2` and `part3` by line count, keeping the shared state in fields so each part reads what it needs"
+        },
+        {
+          "id": "b",
+          "label": "Move the method unchanged into a utility class, then add tests that use a real database and mail server for every discount case"
+        },
+        {
+          "id": "c",
+          "label": "Wrap the method in a class with a mocked database, so the interleaved discount and email logic can be tested without changes"
+        },
+        {
+          "id": "d",
+          "label": "Extract the discount rules into a pure function over plain values, call it from the method, then move I/O to the edges"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A pure function separates rules from I/O and can be extracted in small, test-verified steps.",
+        "Distractors keep rules entangled with I/O or split along arbitrary lines."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "`Report` requires `load()`, then `validate()`, then `render()` in order, otherwise it silently outputs blanks. Constraint: wrong order must be impossible to write in compiled code, while callers keep a simple fluent API. Which design meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a public `isReady` boolean that callers must check first, and throw a runtime error from `render()` whenever it is still false"
+        },
+        {
+          "id": "b",
+          "label": "Make each step return a new type (`Loaded`, `Validated`) exposing only the next step, so wrong order won't compile"
+        },
+        {
+          "id": "c",
+          "label": "Document the call order in the class comment and log a warning whenever a step is called out of order at runtime"
+        },
+        {
+          "id": "d",
+          "label": "Merge all three steps into one long `run()` method, so the order lives in a single place and callers cannot reorder it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Typed step results encode the order in the compiler, removing temporal coupling.",
+        "Distractors rely on documentation, runtime checks or a monolith, so misuse stays possible or the design gets worse."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Prices are stored as `double amount` plus a separate `String currency`. Bugs include adding USD to EUR and rounding drift. Constraints: mixed-currency arithmetic must be rejected, cents must be exact, call sites should change little. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep `double`, round after every addition, and add a currency comparison at each existing call site"
+        },
+        {
+          "id": "b",
+          "label": "An immutable `Money` value object with integer minor units and a currency, whose `add` rejects mismatched currencies"
+        },
+        {
+          "id": "c",
+          "label": "Store amounts as `long` cents and keep each currency in a lookup table keyed by customer id"
+        },
+        {
+          "id": "d",
+          "label": "A `Money` class with a mutable `double` amount and a public currency field that callers compare themselves"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A value object holding integer units and currency enforces both constraints in one place.",
+        "Distractors keep floating point, scatter checks to callers, or detach currency from the amount."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Column `cust_nm` must become `customer_name`. Five independently deployed services read it, and any service may need to roll back. Constraint: zero downtime. Which sequence meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add the new column and keep both in sync, migrate services one by one, then drop the old column last"
+        },
+        {
+          "id": "b",
+          "label": "Rename the column in one migration and deploy all five services at the same moment, then verify"
+        },
+        {
+          "id": "c",
+          "label": "Rename during a maintenance window and let services retry failed queries until they are redeployed"
+        },
+        {
+          "id": "d",
+          "label": "Create a view named `customer_name`, drop the old column, and ask each team to update later"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Expand and contract keeps old and new readers working during the whole migration, allowing rollback.",
+        "Distractors cause breakage or downtime while services still use the old name."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A plan extracts pricing into a new module and switches all callers in one release. Constraints: no behavior change, instant rollback, equivalence verified on real traffic. Which additions fix what the plan lacks? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rename the new module's functions to match the team naming guide"
+        },
+        {
+          "id": "b",
+          "label": "Delete the old pricing code in the same release to avoid maintaining two versions"
+        },
+        {
+          "id": "c",
+          "label": "Put the switch behind a runtime flag so the old path can be restored instantly"
+        },
+        {
+          "id": "d",
+          "label": "Run old and new paths side by side on live requests and log any differing results"
+        },
+        {
+          "id": "e",
+          "label": "Pin the old module's outputs with characterization tests that the new module must also pass"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "A flag gives rollback, shadow comparison verifies live equivalence, and characterization tests pin behavior.",
+        "Renaming does not address the constraints, and deleting the old code removes the rollback path."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "Unit tests for `OrderService` mock six collaborators and assert the exact call sequence, so each internal refactor breaks about 30 tests though behavior is unchanged. Constraints: keep coverage of business rules and let internals change freely. Which redesign of the tests fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replace the mocks with finer-grained mocks so each failing test points to a single internal call"
+        },
+        {
+          "id": "b",
+          "label": "Make the collaborators public so tests can verify their internal state after each call in the sequence"
+        },
+        {
+          "id": "c",
+          "label": "Assert observable outcomes through the public API, using fakes only at slow boundaries, and drop call-order assertions"
+        },
+        {
+          "id": "d",
+          "label": "Mark the tests ignored during refactors and re-enable them afterwards, updating expected call sequences once"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Testing behavior through the public interface decouples tests from structure while keeping rule coverage.",
+        "Distractors keep tests coupled to implementation details or disable them."
+      ],
+      "reviewed": false
+    }
+  ]
+}

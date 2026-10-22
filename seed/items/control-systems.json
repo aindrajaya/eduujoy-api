@@ -1,0 +1,2500 @@
+{
+  "version": 1,
+  "topic": "control-systems",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In control engineering, what does the abbreviation PID stand for in a PID controller?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Phase-Integral-Delay-Compensation"
+        },
+        {
+          "id": "b",
+          "label": "Power-Impulse-Differential-Response"
+        },
+        {
+          "id": "c",
+          "label": "Position-Input-Damping-Regulation"
+        },
+        {
+          "id": "d",
+          "label": "Proportional-Integral-Derivative"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "PID names the three terms: proportional, integral and derivative.",
+        "The other options are invented expansions that sound plausible."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "A unity negative feedback loop has a controller C(s) in series with a plant G(s). What is the closed-loop transfer function from reference to output?",
+      "options": [
+        {
+          "id": "a",
+          "label": "C(s)G(s) / (1 - C(s)G(s))"
+        },
+        {
+          "id": "b",
+          "label": "C(s)G(s) * (1 + C(s)G(s))"
+        },
+        {
+          "id": "c",
+          "label": "C(s)G(s) / (1 + C(s)G(s))"
+        },
+        {
+          "id": "d",
+          "label": "1 / (1 + C(s)G(s))"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Negative feedback gives forward path over one plus the loop gain.",
+        "The minus-sign form is for positive feedback; 1/(1+CG) is the sensitivity function, not the reference-to-output response."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "The poles of a transfer function are the values of s where which of the following holds?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The output magnitude equals the input"
+        },
+        {
+          "id": "b",
+          "label": "The variable s itself equals zero"
+        },
+        {
+          "id": "c",
+          "label": "The denominator polynomial equals zero"
+        },
+        {
+          "id": "d",
+          "label": "The numerator polynomial equals zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Poles are the roots of the denominator.",
+        "Roots of the numerator are zeros, which students often confuse with poles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "A continuous-time linear time-invariant system is stable when all of its poles have which property?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Strictly negative real parts"
+        },
+        {
+          "id": "b",
+          "label": "Magnitude greater than one"
+        },
+        {
+          "id": "c",
+          "label": "Zero imaginary parts"
+        },
+        {
+          "id": "d",
+          "label": "Strictly positive real parts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Continuous-time stability requires poles in the open left half-plane.",
+        "Magnitude greater than one is the discrete-time unit-circle idea applied wrongly (it is actually the unstable side there)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which term of a PID controller produces an output based on the accumulated past error?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Feedforward term"
+        },
+        {
+          "id": "b",
+          "label": "Derivative term"
+        },
+        {
+          "id": "c",
+          "label": "Proportional term"
+        },
+        {
+          "id": "d",
+          "label": "Integral term"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The integral term sums error over time.",
+        "Proportional uses the present error and derivative uses its rate of change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are standard measures used to describe a system's step response? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Settling time"
+        },
+        {
+          "id": "b",
+          "label": "Sampling jitter"
+        },
+        {
+          "id": "c",
+          "label": "Percent overshoot"
+        },
+        {
+          "id": "d",
+          "label": "Rise time"
+        },
+        {
+          "id": "e",
+          "label": "Input impedance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Rise time, overshoot and settling time are the classic step-response specifications.",
+        "Input impedance and sampling jitter are not step-response metrics."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A room thermostat measures the room temperature and subtracts it from the temperature the user has set. The difference is sent to the heater controller. What is this difference signal called in a feedback loop?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The disturbance signal"
+        },
+        {
+          "id": "b",
+          "label": "The plant gain"
+        },
+        {
+          "id": "c",
+          "label": "The control law"
+        },
+        {
+          "id": "d",
+          "label": "The error signal"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Reference minus measured output is the error signal.",
+        "A disturbance is an external unwanted input, and the control law is the rule that maps error to action."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is negative feedback commonly used in control systems?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It drives the output toward the reference despite disturbances"
+        },
+        {
+          "id": "b",
+          "label": "It removes the need for a model by measuring only the input signal"
+        },
+        {
+          "id": "c",
+          "label": "It guarantees the closed loop stays stable no matter how high the gain"
+        },
+        {
+          "id": "d",
+          "label": "It cancels the plant's own dynamics so the output follows instantly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Feedback corrects deviations, reducing disturbance and uncertainty effects.",
+        "Feedback does not guarantee stability; high gain can destabilise a loop."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A stable plant has no integrator (type 0) and is under proportional control with a step reference. What happens to steady-state error as proportional gain increases?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It grows because the actuator saturates sooner"
+        },
+        {
+          "id": "b",
+          "label": "It stays the same regardless of gain"
+        },
+        {
+          "id": "c",
+          "label": "It shrinks but is not exactly zero"
+        },
+        {
+          "id": "d",
+          "label": "It becomes exactly zero at a high enough gain"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "For a type-0 loop the error is 1/(1+Kp) times the step, which decreases but never reaches zero.",
+        "Believing high gain removes error ignores the need for an integrator."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Two first-order systems have real poles at s = -2 and s = -10. How do their step responses compare?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The s = -10 system settles faster, with a time constant of 0.1 s"
+        },
+        {
+          "id": "b",
+          "label": "The s = -2 system settles faster, with a time constant of 2 s"
+        },
+        {
+          "id": "c",
+          "label": "Both settle equally fast, because both poles are in the left half-plane"
+        },
+        {
+          "id": "d",
+          "label": "The s = -10 system oscillates more, because its pole is larger"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The time constant is 1/|pole|, so the pole at -10 decays faster.",
+        "Stability alone does not set speed, and real poles do not oscillate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does adding integral action remove steady-state error for a constant reference?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It keeps changing the control output until the error is zero"
+        },
+        {
+          "id": "b",
+          "label": "It raises the loop gain at high frequencies so the error shrinks"
+        },
+        {
+          "id": "c",
+          "label": "It filters out measurement noise in the feedback path to cut error"
+        },
+        {
+          "id": "d",
+          "label": "It predicts future error and acts before it appears in the output"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The integrator output keeps growing while any error remains, so equilibrium needs zero error.",
+        "Predicting error describes derivative action, not integral."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A closed-loop system has a pair of complex poles with a small negative real part and a large imaginary part. What does its step response look like?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A lightly damped oscillation that decays slowly"
+        },
+        {
+          "id": "b",
+          "label": "An oscillation that grows without bound"
+        },
+        {
+          "id": "c",
+          "label": "A constant output equal to the reference immediately"
+        },
+        {
+          "id": "d",
+          "label": "A slow, smooth rise with no overshoot"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Small negative real part means slow decay and a large imaginary part means fast oscillation.",
+        "Growing oscillation needs a positive real part."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about the derivative term in a PID controller are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It removes steady-state error for step references"
+        },
+        {
+          "id": "b",
+          "label": "It makes the proportional term unnecessary"
+        },
+        {
+          "id": "c",
+          "label": "It tends to amplify high-frequency measurement noise"
+        },
+        {
+          "id": "d",
+          "label": "It reacts to the rate of change of the error"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Derivative action responds to error rate, adds damping, and magnifies noise.",
+        "Removing steady-state error is the integral term's job, and derivative alone cannot replace proportional action."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A car's cruise control uses proportional feedback. After a step in set speed, the speed overshoots slightly and settles. An engineer doubles then quadruples the gain, and the speed now oscillates with growing amplitude. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Higher gain pushed the loop past its stability limit"
+        },
+        {
+          "id": "b",
+          "label": "The set speed is too far from the starting speed, so the error is too large"
+        },
+        {
+          "id": "c",
+          "label": "Sensor noise has increased in proportion to the gain and is being amplified"
+        },
+        {
+          "id": "d",
+          "label": "The actuator saturated and stopped responding to the controller's commands"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Raising gain can push poles across the imaginary axis, causing growing oscillation, i.e. instability.",
+        "The loop is proportional only, so integral saturation does not apply, and noise would not cause smooth growth."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is negative feedback commonly used in a control loop?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It makes every plant stable regardless of how large the loop gain is"
+        },
+        {
+          "id": "b",
+          "label": "It guarantees the plant has no delay in responding to the setpoint"
+        },
+        {
+          "id": "c",
+          "label": "It reduces sensitivity to disturbances and plant changes"
+        },
+        {
+          "id": "d",
+          "label": "It removes the need to know the setpoint at all"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Negative feedback corrects the output using the measured error, which reduces sensitivity to disturbances and parameter variation.",
+        "Distractors treat feedback as a guarantee of stability, which is false because high gain can destabilise a loop."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A closed-loop transfer function has all its poles in the left half of the s-plane. What does this tell you?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The step response oscillates forever"
+        },
+        {
+          "id": "b",
+          "label": "The step response settles to a finite value"
+        },
+        {
+          "id": "c",
+          "label": "The step response has zero steady-state error"
+        },
+        {
+          "id": "d",
+          "label": "The step response grows without bound"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Left-half-plane poles mean every mode decays, so the system is stable and the response settles.",
+        "Settling does not imply zero steady-state error, which is the trap in the last option."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main role of the integral term in a PID controller?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It removes steady-state error by accumulating past error"
+        },
+        {
+          "id": "b",
+          "label": "It speeds up the response by scaling the instantaneous error at each moment"
+        },
+        {
+          "id": "c",
+          "label": "It predicts future error from the current rate of change of the error"
+        },
+        {
+          "id": "d",
+          "label": "It filters out measurement noise from the feedback signal"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Integral action accumulates error over time, so the output keeps changing until the error is zero.",
+        "The rate-of-change option describes derivative action and the instantaneous-error option describes proportional action."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In a typical second-order loop with a P controller, what usually happens when you raise the proportional gain?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The response gets slower and overshoot decreases"
+        },
+        {
+          "id": "b",
+          "label": "The response is unchanged but the steady-state error grows"
+        },
+        {
+          "id": "c",
+          "label": "The response gets faster but overshoot increases"
+        },
+        {
+          "id": "d",
+          "label": "The response becomes critically damped at any gain"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Higher Kp raises the natural frequency and lowers damping, so the response is faster with more overshoot.",
+        "Learners who think more gain always means more damping choose the slower, less-overshoot option."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does derivative action often improve the transient response of a loop?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It raises the DC gain so the output reaches setpoint"
+        },
+        {
+          "id": "b",
+          "label": "It adds a pole at the origin to remove offset"
+        },
+        {
+          "id": "c",
+          "label": "It averages the error over time to smooth the output"
+        },
+        {
+          "id": "d",
+          "label": "It reacts to the error's rate of change and adds damping"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Derivative action responds to how fast the error changes, which acts like damping and reduces overshoot.",
+        "A pole at the origin and DC gain describe integral and proportional effects; averaging describes integration."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "A plant is G(s) = K/(tau s + 1) with K > 0 and tau > 0. Which statements about its unit step response are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "After one time constant it reaches about 63% of its final value"
+        },
+        {
+          "id": "b",
+          "label": "It oscillates before settling"
+        },
+        {
+          "id": "c",
+          "label": "The output approaches the final value K"
+        },
+        {
+          "id": "d",
+          "label": "It has no overshoot"
+        },
+        {
+          "id": "e",
+          "label": "Its pole is at s = +1/tau"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A first-order lag has DC gain K, rises exponentially with no overshoot, and reaches 63.2% of K at t = tau.",
+        "The pole is at s = -1/tau, in the left half-plane, and a single real pole cannot oscillate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A car's cruise control uses only a proportional controller. On a flat road it holds 100 km/h closely, but on a steady uphill it settles at 96 km/h and stays there. Why does the speed not return to 100 km/h?",
+      "options": [
+        {
+          "id": "a",
+          "label": "P control needs a nonzero error to produce the extra throttle the hill requires"
+        },
+        {
+          "id": "b",
+          "label": "The controller has become unstable and the speed is stuck in a steady limit cycle"
+        },
+        {
+          "id": "c",
+          "label": "The proportional gain is too high, so the controller overshoots and leaves an offset"
+        },
+        {
+          "id": "d",
+          "label": "The hill adds a pole that moves into the right half-plane and blocks the speed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "With P-only control, output is Kp times error, so holding extra throttle requires a persistent error; integral action would remove it.",
+        "A constant offset is not instability or a limit cycle, and a load disturbance does not add poles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A plant G(s) = 4/(s + 2) is controlled with a proportional gain K = 1 in a unity negative feedback loop. What is the final value of the output for a unit step reference?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1/3"
+        },
+        {
+          "id": "b",
+          "label": "2"
+        },
+        {
+          "id": "c",
+          "label": "2/3"
+        },
+        {
+          "id": "d",
+          "label": "1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The closed loop is 4/(s+6), so the DC gain is 4/6 = 2/3.",
+        "Answering 1 assumes feedback gives perfect tracking, and 2 is the open-loop DC gain."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A closed-loop characteristic equation is s^2 + 4s + 16 = 0. What is the damping ratio?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.5"
+        },
+        {
+          "id": "b",
+          "label": "1"
+        },
+        {
+          "id": "c",
+          "label": "2"
+        },
+        {
+          "id": "d",
+          "label": "0.25"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Here wn^2 = 16 so wn = 4, and 2*zeta*wn = 4 gives zeta = 0.5.",
+        "0.25 comes from forgetting the factor of 2 in 2*zeta*wn."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "The characteristic equation of a loop is s^3 + 2s^2 + 3s + K = 0. Using the Routh criterion, what is the largest K for which the loop is stable (K > 0)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3"
+        },
+        {
+          "id": "b",
+          "label": "6"
+        },
+        {
+          "id": "c",
+          "label": "12"
+        },
+        {
+          "id": "d",
+          "label": "2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The first column is 1, 2, (6-K)/2, K, so stability needs K < 6.",
+        "Other values come from mistakes in forming the s^1 row, such as using 2*3 divided by 1 or by 2 wrongly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A unity-feedback loop has open-loop L(s) = 10/(s(s + 1)). What is the steady-state error for a unit ramp input?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1"
+        },
+        {
+          "id": "b",
+          "label": "0"
+        },
+        {
+          "id": "c",
+          "label": "0.1"
+        },
+        {
+          "id": "d",
+          "label": "10"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Kv = lim s*L(s) = 10, so the ramp error is 1/Kv = 0.1.",
+        "Zero error applies to a step for this type-1 system, not to a ramp."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A PI controller is C(s) = 2 + 6/s. Written as Kp(1 + 1/(Ti s)), what is the integral time Ti?",
+      "options": [
+        {
+          "id": "a",
+          "label": "12 s"
+        },
+        {
+          "id": "b",
+          "label": "2 s"
+        },
+        {
+          "id": "c",
+          "label": "3 s"
+        },
+        {
+          "id": "d",
+          "label": "1/3 s"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Matching terms gives Kp = 2 and Kp/Ti = 6, so Ti = 1/3 s.",
+        "3 s inverts the ratio, and 12 s multiplies Kp by Ki."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which characteristic polynomials describe an asymptotically stable system? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "s^2 + 5s + 6"
+        },
+        {
+          "id": "b",
+          "label": "s^2 + 4"
+        },
+        {
+          "id": "c",
+          "label": "s^2 + 3s + 2"
+        },
+        {
+          "id": "d",
+          "label": "s^2 - s + 4"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "For second-order polynomials, all coefficients positive means stable; s^2+3s+2 and s^2+5s+6 have roots in the left half-plane.",
+        "s^2 - s + 4 has a negative coefficient, and s^2 + 4 has poles on the imaginary axis, so it is only marginally stable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A motor position loop uses a P controller. The step response overshoots by 40% and rings several times before settling, though the final error is acceptable. You want less overshoot while keeping the same speed of response as far as possible. Which change should you make?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Double the proportional gain to push through the ringing"
+        },
+        {
+          "id": "b",
+          "label": "Add an integral term to flatten the overshoot"
+        },
+        {
+          "id": "c",
+          "label": "Add a derivative term to increase damping"
+        },
+        {
+          "id": "d",
+          "label": "Remove feedback and drive the motor open loop"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Derivative action adds damping, which cuts overshoot and ringing without slowing the response much.",
+        "Integral action usually increases overshoot, and more gain lowers damping further."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A plant `G(s) = 10/(s+2)` is placed in a unity negative feedback loop with proportional controller `K = 3`. What is the DC gain of the closed-loop transfer function from reference to output?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.9375"
+        },
+        {
+          "id": "b",
+          "label": "1.0"
+        },
+        {
+          "id": "c",
+          "label": "0.8333"
+        },
+        {
+          "id": "d",
+          "label": "0.9"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Closed loop is 30/(s+32), so the DC gain is 30/32 = 0.9375.",
+        "0.8333 comes from forgetting K; 1.0 wrongly assumes feedback forces unity gain."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A unity-feedback loop has characteristic equation `s^3 + 4s^2 + 5s + K = 0`. For which values of K is the closed loop stable?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0 < K < 5"
+        },
+        {
+          "id": "b",
+          "label": "0 < K < 9"
+        },
+        {
+          "id": "c",
+          "label": "0 < K < 20"
+        },
+        {
+          "id": "d",
+          "label": "K > 20"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The Routh s^1 entry is (20 - K)/4, which must be positive, and the s^0 entry K must be positive, so 0 < K < 20.",
+        "The other ranges come from mis-building the Routh array or reversing the inequality."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A unity-feedback loop has `L(s) = 10/(s(s+5))`. What is the steady-state error to a unit ramp input?",
+      "options": [
+        {
+          "id": "a",
+          "label": "2"
+        },
+        {
+          "id": "b",
+          "label": "0.5"
+        },
+        {
+          "id": "c",
+          "label": "0.1"
+        },
+        {
+          "id": "d",
+          "label": "0.2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Kv = lim s*L(s) = 10/5 = 2, so ess = 1/Kv = 0.5.",
+        "0.2 uses 1/10 scaled wrongly; 2 reports Kv instead of its inverse."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A closed-loop system behaves like `wn^2/(s^2 + 2*zeta*wn*s + wn^2)` with `wn = 4` rad/s and `zeta = 0.5`. What is its approximate percent overshoot to a unit step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "5%"
+        },
+        {
+          "id": "b",
+          "label": "30%"
+        },
+        {
+          "id": "c",
+          "label": "50%"
+        },
+        {
+          "id": "d",
+          "label": "16%"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Overshoot = exp(-pi*zeta/sqrt(1-zeta^2)) = exp(-1.81), about 16%.",
+        "Taking zeta directly as the overshoot fraction gives 50%."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Ziegler-Nichols closed-loop tuning gives ultimate gain `Ku = 12` and ultimate period `Pu = 2 s`. Using the classic PID rules (`Kp = 0.6*Ku`, `Ti = Pu/2`, `Td = Pu/8`), what is the integral gain `Ki = Kp/Ti`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "14.4"
+        },
+        {
+          "id": "b",
+          "label": "1.8"
+        },
+        {
+          "id": "c",
+          "label": "7.2"
+        },
+        {
+          "id": "d",
+          "label": "3.6"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Kp = 7.2 and Ti = 1 s, so Ki = 7.2.",
+        "3.6 uses Ti = Pu; 14.4 uses Ti = Pu/4; 1.8 is Kd, not Ki."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A unity-feedback loop has `L(s) = K/(s(s+2))`, so the characteristic equation is `s^2 + 2s + K = 0`. Which statements are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The closed loop is stable for every K > 0."
+        },
+        {
+          "id": "b",
+          "label": "The closed loop becomes unstable for K > 2."
+        },
+        {
+          "id": "c",
+          "label": "At K = 4 the damping ratio is 0.25."
+        },
+        {
+          "id": "d",
+          "label": "At K = 1 the closed loop is critically damped."
+        },
+        {
+          "id": "e",
+          "label": "At K = 9 the closed loop is overdamped."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Both coefficients are positive for K > 0, and K = 1 gives (s+1)^2, so zeta = 1.",
+        "K = 4 gives zeta = 0.5, K = 9 gives zeta = 1/3 (underdamped), and no K > 0 causes instability for a second-order loop."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A heater chamber is modelled as `G(s) = 2/(10s + 1)`, with output in degrees C per unit input. A technician closes a unity-feedback loop using proportional gain `K = 4` and applies a unit step in setpoint. What is the final steady-state error?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.11"
+        },
+        {
+          "id": "b",
+          "label": "0.33"
+        },
+        {
+          "id": "c",
+          "label": "0.20"
+        },
+        {
+          "id": "d",
+          "label": "0"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "ess = 1/(1 + K*G(0)) = 1/(1 + 8) = 0.11.",
+        "Zero error is wrong because proportional control on a type-0 plant leaves residual error; 0.33 and 0.20 use the wrong loop gain."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A well-damped loop with a PI controller starts to oscillate heavily after Ki is raised several times with Kp unchanged. Which explanation best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Integral action lowers the system type, which weakens damping and makes the loop ring for a constant setpoint"
+        },
+        {
+          "id": "b",
+          "label": "Integral action adds phase lag near crossover, which cuts phase margin and leaves the closed-loop poles lightly damped"
+        },
+        {
+          "id": "c",
+          "label": "Integral action adds a right-half-plane zero, which makes the response non-minimum-phase and therefore oscillatory"
+        },
+        {
+          "id": "d",
+          "label": "Integral action raises loop gain at high frequency, which pushes crossover far beyond the plant bandwidth and destabilises it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Integral action contributes lag (up to -90 degrees) at frequencies near crossover when Ki is large, reducing phase margin.",
+        "Integral gain is large at low, not high, frequency, and the PI zero is in the left half plane."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After Kd on a PID loop is increased, the motor command becomes jittery even though the measured output looks smooth on average. The sensor has high-frequency noise. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The derivative term has high gain at high frequency, so it amplifies sensor noise into the control signal"
+        },
+        {
+          "id": "b",
+          "label": "The derivative term adds phase lag at crossover, which reduces damping and makes the actuator chatter"
+        },
+        {
+          "id": "c",
+          "label": "The derivative term raises the system type, so noise gets integrated into a drifting command signal"
+        },
+        {
+          "id": "d",
+          "label": "The derivative term lowers the DC loop gain, so steady-state error forces the actuator to keep hunting"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "An ideal derivative has gain proportional to frequency, so it amplifies measurement noise; a filtered derivative is the usual fix.",
+        "Derivative action adds phase lead, not lag, and does not change DC gain or system type."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A unity-feedback loop has characteristic polynomial `s^3 + s^2 + 2s + 8`. Using the Routh array, how many closed-loop poles lie in the right half plane?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Zero"
+        },
+        {
+          "id": "b",
+          "label": "Three"
+        },
+        {
+          "id": "c",
+          "label": "One"
+        },
+        {
+          "id": "d",
+          "label": "Two"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The first column is 1, 1, -6, 8, which has two sign changes, so there are two RHP poles.",
+        "Zero comes from checking only positive coefficients; one comes from counting a single negative entry."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A type-0 plant `G(s) = 5/(s+1)` under proportional gain K = 1 leaves a step error of 1/6. An engineer plans to remove the error by raising K. Why will this not fully work?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The error is 1/(5K), so it reaches zero at K = 0.2, but the loop then becomes unstable for larger gains"
+        },
+        {
+          "id": "b",
+          "label": "The error stays nonzero because the closed-loop pole moves left, which slows the response and leaves a residual"
+        },
+        {
+          "id": "c",
+          "label": "The error is 1/(1+5K), which falls with K but is never zero for finite K, so integral action is needed"
+        },
+        {
+          "id": "d",
+          "label": "The error is fixed at 1/6 for any proportional gain, since it depends only on the plant pole location"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "For a type-0 loop, ess = 1/(1 + Kp*G(0)) which only tends to zero as K grows without bound; an integrator removes it.",
+        "Distractors wrongly claim K has no effect, confuse pole speed with final value, or misstate the error formula."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A plant's step response first moves in the opposite direction to its final value, then reverses and settles. Which feature of `G(s)` most likely produces this behaviour?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A pole at the origin"
+        },
+        {
+          "id": "b",
+          "label": "A left-half-plane pole far from the origin"
+        },
+        {
+          "id": "c",
+          "label": "A zero in the right half plane"
+        },
+        {
+          "id": "d",
+          "label": "A pair of lightly damped complex poles"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A right-half-plane zero gives a non-minimum-phase plant with initial inverse response.",
+        "Lightly damped poles cause oscillation about the final value, not an initial reversal."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A stable loop has a phase margin of 50 degrees. Which changes would be expected to reduce its phase margin? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Raising loop gain so crossover moves to where the plant phase is more negative"
+        },
+        {
+          "id": "b",
+          "label": "Adding 50 ms of transport delay in the loop"
+        },
+        {
+          "id": "c",
+          "label": "Lowering loop gain so crossover moves to a lower frequency on a plant with falling phase"
+        },
+        {
+          "id": "d",
+          "label": "Adding a lead compensator whose peak phase is near crossover"
+        },
+        {
+          "id": "e",
+          "label": "Adding a left-half-plane zero well below crossover"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Delay adds phase lag proportional to frequency, and a higher crossover on a plant with falling phase lowers phase margin.",
+        "Lead, a lower crossover and an LHP zero all add or recover phase at crossover."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A temperature loop with PI control drives a heater limited to 0-100% power. After a large setpoint step, the linear design predicted 5% overshoot, yet the output overshoots by 40% and takes minutes to recover. The heater sat at 100% throughout the rise. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Insufficient phase margin: the linear design was marginal, so any gain error produced a large, slowly decaying oscillation"
+        },
+        {
+          "id": "b",
+          "label": "Sensor lag: the measurement delay hid the true temperature, which made the controller overshoot during the rise"
+        },
+        {
+          "id": "c",
+          "label": "Derivative kick: the setpoint step produced a spike in the derivative term that drove the plant past its target"
+        },
+        {
+          "id": "d",
+          "label": "Integrator windup: the integral state kept accumulating error during saturation and must unwind through overshoot"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Saturation breaks the linear model, and the unclamped integrator grows large, so the error must stay negative for a long time to unwind it; anti-windup fixes this.",
+        "The loop is PI, so no derivative kick occurs, and the prolonged saturation points to windup rather than a margin or sensor issue."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A unity-feedback loop has open-loop transfer function `L(s) = K / (s(s+2)(s+5))`. What is the largest K for which the closed loop stays stable?",
+      "options": [
+        {
+          "id": "a",
+          "label": "10"
+        },
+        {
+          "id": "b",
+          "label": "70"
+        },
+        {
+          "id": "c",
+          "label": "140"
+        },
+        {
+          "id": "d",
+          "label": "35"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The characteristic polynomial is `s^3 + 7s^2 + 10s + K`. The Routh condition gives `7*10 > K`, so K < 70.",
+        "35 and 140 come from slipping a factor of 2 in the Routh condition; 10 is just the coefficient of s."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A PI-controlled heater loop is tuned for 8% overshoot on small steps. A large setpoint step holds the heater at 100% for 40 s. The response then overshoots by 35% and takes minutes to settle, while small steps still behave as designed. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Saturation adds an extra plant pole, which cuts the phase margin below the linear design for every step size, large or small."
+        },
+        {
+          "id": "b",
+          "label": "The integrator keeps accumulating error while the output is saturated, so it must unwind against opposite-sign error before control recovers."
+        },
+        {
+          "id": "c",
+          "label": "The controller has no derivative term, so nothing opposes the rate of change of error during large setpoint steps in the loop."
+        },
+        {
+          "id": "d",
+          "label": "Proportional gain is effectively doubled during saturation, which moves the closed-loop poles into the right half-plane for large steps only."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Integrator windup explains why the problem appears only when the actuator saturates.",
+        "Distractors treat saturation as a linear change in gain or poles, which would also affect small steps."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "With proportional unity feedback `u = K(r - y)`, the plant `G(s) = (1 - s) / ((s+1)(s+3))` is stable for small K but unstable for large K, although it has no unstable poles. Which explanation is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The poles at -1 and -3 are overtaken by the zero's dynamics as K increases, so the closed loop loses its stable pole pair entirely."
+        },
+        {
+          "id": "b",
+          "label": "The zero adds phase lead that cancels the damping of the poles at -1 and -3, so a large K removes the stabilising phase margin of the loop."
+        },
+        {
+          "id": "c",
+          "label": "As K grows, a closed-loop pole is drawn toward the right-half-plane zero at s = 1, so high gain eventually pushes it into instability."
+        },
+        {
+          "id": "d",
+          "label": "Raising K lifts the DC loop gain above 1, and any loop gain above 1 at DC makes a feedback system unstable once K is large enough."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The characteristic polynomial `s^2 + (4-K)s + 3 + K` loses stability at K = 4, as a pole moves toward the zero at s = 1.",
+        "A right-half-plane zero adds phase lag, not lead. A DC loop gain above 1 does not by itself cause instability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A PID loop's output slams to the actuator limit for one sample every time the operator steps the setpoint, but disturbance responses are smooth. The derivative term is `Kd * d(e)/dt` with `e = r - y`. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The step in r makes e jump, so its derivative is momentarily huge, while y changes smoothly under disturbances."
+        },
+        {
+          "id": "b",
+          "label": "The proportional term responds to the step in e with an unbounded impulse that the derivative term would only reduce."
+        },
+        {
+          "id": "c",
+          "label": "The integral term resets at each setpoint change and dumps its stored value into the output within a single sample."
+        },
+        {
+          "id": "d",
+          "label": "Measurement noise is amplified by the derivative only when the setpoint changes, because the reference adds noise to y."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Derivative on error differentiates a step in r. Derivative on measurement avoids this kick.",
+        "Proportional action gives a finite jump, not an impulse. The integral term does not reset on setpoint changes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A loop has a gain-crossover frequency of 10 rad/s and a phase margin of 30°. A software change adds a pure delay T to the loop, with no change in magnitude. About what T drives the loop to the edge of instability?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.017 s"
+        },
+        {
+          "id": "b",
+          "label": "0.52 s"
+        },
+        {
+          "id": "c",
+          "label": "0.30 s"
+        },
+        {
+          "id": "d",
+          "label": "0.052 s"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A delay T adds phase lag `wc*T` radians, so T = (30° in rad)/10 = 0.524/10 ≈ 0.052 s.",
+        "The other values come from using degrees instead of radians or dividing by the wrong quantity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A unity-feedback loop with gain K is stable for all K < 20. At K = 20 it shows a sustained oscillation at 4 rad/s. Which statements follow? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The open-loop transfer function L(s) has poles at s = ±j4."
+        },
+        {
+          "id": "b",
+          "label": "The gain margin at K = 10 is 6 dB, since K is half of 20."
+        },
+        {
+          "id": "c",
+          "label": "The closed-loop system has a pair of poles at s = ±j4."
+        },
+        {
+          "id": "d",
+          "label": "A small increase of K above 20 produces a growing oscillation."
+        },
+        {
+          "id": "e",
+          "label": "At w = 4 rad/s the loop satisfies `|L(j4)| = 1` with phase -180°."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Sustained oscillation means the closed-loop poles are on the imaginary axis, i.e. L(j4) = -1. Since the loop was stable below 20, higher K gives growing oscillation.",
+        "The open-loop poles are unrelated to the closed-loop crossing. Halving K gives 6 dB of margin only if K = 20 is the critical gain, so the claim is true as arithmetic but not about open-loop poles; here the distractor mislabels the K value."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A PI level controller on a conical tank behaves well when the tank is nearly full. When the level drops to 20%, the same controller produces sustained oscillation. The tank's cross-section area shrinks toward the bottom, and the controller is unchanged. What is the best diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Low level makes the sensor noisier relative to the signal, and the controller amplifies that noise into a sustained oscillation."
+        },
+        {
+          "id": "b",
+          "label": "The integrator state has drifted at low level, so its accumulated error now exceeds the proportional term and produces oscillation."
+        },
+        {
+          "id": "c",
+          "label": "The closed-loop poles are fixed by the controller alone, so the oscillation must come from a changed setpoint at low levels."
+        },
+        {
+          "id": "d",
+          "label": "The plant's gain and time constant depend on the operating point, so the loop gain at low level is higher and the margins shrink."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A smaller area means the level responds faster per unit inflow, so plant gain rises and the unchanged controller loses margin.",
+        "Drift and noise do not explain a sustained oscillation tied to level; poles depend on plant and controller together."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A position loop needs about 45° more phase near its 20 rad/s crossover. The encoder is noisy, and the amplifier saturates when high-frequency content is large. Which compensator best meets both criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A lag compensator, since it adds phase near crossover and rejects noise by cutting gain at high frequency in the loop."
+        },
+        {
+          "id": "b",
+          "label": "A lead compensator with its zero below and its pole above 20 rad/s, giving phase boost while capping high-frequency gain."
+        },
+        {
+          "id": "c",
+          "label": "A higher proportional gain alone, since raising crossover moves it to where the plant has more phase to spare there."
+        },
+        {
+          "id": "d",
+          "label": "An ideal PD controller, since its zero supplies the phase boost and the growth of its gain at high frequency is harmless here."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Lead gives phase boost with bounded high-frequency gain, which suits noise and saturation.",
+        "A lag adds negative phase. An ideal PD amplifies noise without limit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A PI speed loop with a saturating drive shows long recoveries after large load disturbances. Criteria: keep the linear tuning and the zero steady-state error, and handle disturbances as well as setpoint steps. Which fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rate-limiting the setpoint so steps never drive the actuator into saturation, since windup only arises from setpoint changes and not from load disturbances."
+        },
+        {
+          "id": "b",
+          "label": "Back-calculation anti-windup, which bleeds the integrator toward the saturation limit while saturated and keeps the linear tuning."
+        },
+        {
+          "id": "c",
+          "label": "Removing the integral term and relying on a high proportional gain, since proportional action cannot wind up while the drive is saturated."
+        },
+        {
+          "id": "d",
+          "label": "Permanently lowering Ki until windup is negligible, since a slower integrator stores less error while the drive is saturated in a load event."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Back-calculation or tracking anti-windup bleeds the integrator only during saturation, so linear behaviour and zero offset are kept.",
+        "The other options sacrifice disturbance rejection or offset, or ignore load-induced saturation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A loop with dead time larger than its main time constant must have under 10% overshoot. A colleague tunes it with closed-loop Ziegler-Nichols PID and wants to ship it. Which critique is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The rule cannot apply, since an ultimate gain cannot be found on any process that contains dead time in its loop."
+        },
+        {
+          "id": "b",
+          "label": "The rule is fine, since it was derived to minimise overshoot at the ultimate gain it measures on the plant before tuning."
+        },
+        {
+          "id": "c",
+          "label": "The rule is fine if Ti is shortened further, since stronger integral action reduces overshoot when the loop has dead time."
+        },
+        {
+          "id": "d",
+          "label": "The rule aims at roughly quarter-amplitude decay, which typically overshoots well beyond 10%, so detune it or use a model-based rule."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Ziegler-Nichols targets quarter-amplitude decay, which is oscillatory and conflicts with a 10% overshoot limit.",
+        "Dead time does not prevent finding the ultimate gain. More integral action raises overshoot."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Delay in a plant may vary up to 0.15 s. Design A has phase margin 25°, crossover 2 rad/s, gain margin 12 dB. Design B has phase margin 55°, crossover 8 rad/s, gain margin 8 dB. The criterion is to remain stable across the whole delay range. Which design is better?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Design A, because its delay margin is about 0.22 s, above 0.15 s, while Design B's is about 0.12 s."
+        },
+        {
+          "id": "b",
+          "label": "Design B, because its higher crossover frequency gives faster response, which lets it ride out delay variations safely."
+        },
+        {
+          "id": "c",
+          "label": "Design B, because its larger phase margin means it tolerates more added phase lag and so more delay than Design A."
+        },
+        {
+          "id": "d",
+          "label": "Design A, because its larger gain margin of 12 dB is the only measure that governs tolerance to added delay."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Delay margin is phase margin in radians divided by crossover: A ≈ 0.436/2 ≈ 0.22 s, B ≈ 0.96/8 ≈ 0.12 s.",
+        "Larger phase margin alone ignores that high crossover makes the same delay cost more phase. Gain margin does not govern delay tolerance."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A furnace loop sees large, frequent changes in feed flow, which is measured. Feedback alone gives temperature excursions that violate the spec, and raising feedback gain erodes the margins. The flow-to-temperature model is only approximate. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Raise the feedback gain and add a notch filter, since the filter restores the margins that the higher gain removes."
+        },
+        {
+          "id": "b",
+          "label": "Replace feedback with feedforward alone, since the flow is measured and a model-based compensation needs no correction loop."
+        },
+        {
+          "id": "c",
+          "label": "Raise the derivative gain on temperature, since a faster derivative reaction counters flow changes without costing any margin."
+        },
+        {
+          "id": "d",
+          "label": "Add feedforward from the measured flow through an approximate inverse model, and keep feedback to remove the residual model error."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Feedforward acts before the error appears, while feedback handles model error and unmeasured disturbances.",
+        "Feedforward alone is not robust to model error. More derivative or gain still trades against margin and noise."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A designer cancels an unstable plant pole at s = +1 with a controller zero at s = +1 and signs off because the reference-to-output transfer function looks stable. Which are valid criticisms of this design? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A PID controller can never contain a zero, so this compensator cannot be implemented with the PID structure at all."
+        },
+        {
+          "id": "b",
+          "label": "Pole-zero cancellation always raises steady-state error, so the design fails its accuracy requirement in any application."
+        },
+        {
+          "id": "c",
+          "label": "A disturbance entering at the plant input excites the uncancelled unstable mode, so the signal grows even when the reference response is fine."
+        },
+        {
+          "id": "d",
+          "label": "Any small mismatch between the plant pole and the controller zero leaves an unstable pole in the response, since exact cancellation cannot be realised."
+        },
+        {
+          "id": "e",
+          "label": "The cancelled mode is still present internally, so the loop is internally unstable even though the reference-to-output transfer function looks stable."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Hidden unstable modes make the loop internally unstable. Mismatch and plant-input disturbances reveal the unstable mode.",
+        "Cancellation does not inherently change steady-state error, and PID controllers do have zeros."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A pick-and-place axis uses a PI controller with high Kp so load disturbances are rejected within 50 ms. Operators now report 25% overshoot on setpoint steps with the same gains. The spec says disturbance rejection must not change and setpoint overshoot must be under 5%. Which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Increase derivative action on the error signal, since the added damping removes overshoot for setpoint changes and for load disturbances alike, without needing to retune Kp."
+        },
+        {
+          "id": "b",
+          "label": "Lower Kp until the setpoint overshoot falls below 5%, since overshoot comes from loop gain and the disturbance rejection time will follow the same trend."
+        },
+        {
+          "id": "c",
+          "label": "Use a two-degree-of-freedom structure, with setpoint weighting or a reference prefilter, leaving the disturbance-rejecting feedback loop unchanged."
+        },
+        {
+          "id": "d",
+          "label": "Raise Ki so the controller corrects the overshoot faster, since a stronger integral term shortens the time the output spends above the setpoint."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A reference prefilter or setpoint weighting shapes the setpoint response independently from disturbance rejection.",
+        "Lowering Kp breaks the disturbance requirement. Raising Ki increases overshoot, and derivative on error causes kick."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A plant has a right-half-plane zero at s = 4 rad/s. A spec demands a loop crossover of 10 rad/s with 45 degrees of phase margin using simple linear feedback. Judge this spec against achievable limits.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Infeasible: crossover must stay below the zero frequency divided by ten, about 0.4 rad/s"
+        },
+        {
+          "id": "b",
+          "label": "Infeasible: a RHP zero adds phase lag, limiting crossover to roughly half its frequency, about 2 rad/s"
+        },
+        {
+          "id": "c",
+          "label": "Feasible: the zero only adds gain at high frequency, so a lead compensator can simply restore the phase margin at 10 rad/s"
+        },
+        {
+          "id": "d",
+          "label": "Feasible: place a controller pole at s = 4 to cancel the zero and remove its lag"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A RHP zero cannot be cancelled and adds phase lag with rising gain, so crossover is practically limited to about z/2.",
+        "Distractors treat the zero as a benign gain term or as cancellable, or invent an overly strict limit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A pump's process gain varies tenfold with operating flow. Flow is measured reliably, and the loop must keep similar damping and speed at every operating point. Judge the options: which is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Tune one fixed PI for the highest gain, accepting sluggish response at low flow because the loop then stays stable everywhere"
+        },
+        {
+          "id": "b",
+          "label": "Add a larger integral term so the slow low-gain response is compensated"
+        },
+        {
+          "id": "c",
+          "label": "Schedule the controller gain inversely to the process gain using measured flow, keeping loop gain near constant"
+        },
+        {
+          "id": "d",
+          "label": "Tune one fixed PI for the lowest gain, since extra loop gain at high flow is harmless"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Gain scheduling on a reliable measured variable keeps loop gain, and hence damping and speed, uniform.",
+        "A fixed tuning at either extreme violates the uniform-performance criterion or the stability margin."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A motor PID loop uses a noisy velocity signal. Criteria: no large control spikes on setpoint steps, limited high-frequency noise amplification, and phase lead retained near crossover. Which derivative implementation is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Derivative of the error with no filter, since it gives the most phase lead near crossover and the best damping"
+        },
+        {
+          "id": "b",
+          "label": "Derivative of the error through a very heavy filter with time constant 10 Td, to remove all noise"
+        },
+        {
+          "id": "c",
+          "label": "Drop derivative action and double Kp, because proportional gain supplies equivalent lead"
+        },
+        {
+          "id": "d",
+          "label": "Derivative of the measurement through a first-order filter with time constant about Td/10"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Derivative on measurement avoids setpoint kick, and a modest filter caps noise gain while keeping lead near crossover.",
+        "The unfiltered option amplifies noise and kicks; the heavy filter removes the lead; extra Kp provides no phase lead."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Two loops for the same plant. Loop A: gain margin 8 dB, phase margin 60 degrees, peak sensitivity Ms = 2.5. Loop B: gain margin 6 dB, phase margin 45 degrees, Ms = 1.3. Plant gain and phase both drift. Which is more robust, and why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Loop A: margins at the crossover frequencies already capture the worst-case distance to the -1 point"
+        },
+        {
+          "id": "b",
+          "label": "Loop B: Ms is the reciprocal of the closest approach to -1, so it covers combined gain and phase drift"
+        },
+        {
+          "id": "c",
+          "label": "Neither: Ms describes only disturbance rejection and says nothing about robustness to plant variation"
+        },
+        {
+          "id": "d",
+          "label": "Loop A: its larger gain and phase margins guarantee the Nyquist curve stays far from -1 in every direction"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Minimum distance from the Nyquist curve to -1 equals 1/Ms, so low Ms guards against simultaneous gain and phase changes.",
+        "Margins are single-direction measures; a curve can pass close to -1 between the crossover points despite large margins."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A colleague stabilises the unstable plant 1/(s-1) with a controller C(s) = K(s-1)/(s+3), placing the zero exactly on the unstable pole. Critique this approach.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Flawed only for large K, since cancellation is exact when the loop gain is small"
+        },
+        {
+          "id": "b",
+          "label": "Sound if the controller is implemented digitally with a fast enough sampling rate"
+        },
+        {
+          "id": "c",
+          "label": "Flawed: the unstable mode remains, hidden from the reference response but excited by disturbances and model error"
+        },
+        {
+          "id": "d",
+          "label": "Sound: the cancelled pole disappears from the loop, so the closed loop is stable for any chosen gain K and small model errors"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Unstable pole-zero cancellation leaves an uncontrollable or unobservable unstable mode, causing internal instability.",
+        "Distractors treat the cancellation as exact and robust, which real parameter mismatch breaks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Consider a SISO loop L(s) with relative degree of at least 2. Which statements about the Bode sensitivity integral are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pushing |S| far below 1 over a wide band forces a higher |S| peak nearby, eroding robustness margins"
+        },
+        {
+          "id": "b",
+          "label": "If L is open-loop stable, the integral of ln|S| over all frequencies is zero, so attenuating disturbances in one band amplifies them elsewhere"
+        },
+        {
+          "id": "c",
+          "label": "With enough gain, |S| can be made below 1 at every frequency"
+        },
+        {
+          "id": "d",
+          "label": "Open-loop unstable poles add a positive amount to the integral, worsening the amplification elsewhere"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "The waterbed effect: the area of ln|S| is zero for stable L and pi times the sum of unstable pole real parts otherwise, so reduction in one band costs elsewhere.",
+        "|S| below 1 at all frequencies is impossible under this constraint, whatever the gain."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A furnace loop has process gain 2, time constant 100 s and dead time 20 s. A Ziegler-Nichols PI gives 40% overshoot, and operators see oscillation when the dead time drifts by 30%. The goal is under 5% overshoot and robustness to that drift. Which action is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add derivative action with Td = 20 s so the controller cancels the dead time"
+        },
+        {
+          "id": "b",
+          "label": "Replace the PI by pure proportional control, since overshoot comes from integral action alone"
+        },
+        {
+          "id": "c",
+          "label": "Raise Kp substantially so the output reaches setpoint before the dead time can influence the loop dynamics at all"
+        },
+        {
+          "id": "d",
+          "label": "Retune with lambda/IMC rules, using a closed-loop time constant at least the dead time, trading speed for robustness"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Detuning with a closed-loop time constant comparable to or above the dead time gives low overshoot and margin against delay drift.",
+        "Higher gain erodes delay margin; derivative cannot cancel a delay; removing the integral gives offset and does not fix delay sensitivity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Plant G(s) = 1/(s-2). Requirements: the closed loop is stable and the steady-state error to a step reference is zero. Which controller meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "C(s) = 5(s+1)/s"
+        },
+        {
+          "id": "b",
+          "label": "C(s) = 5(s-1)/s"
+        },
+        {
+          "id": "c",
+          "label": "C(s) = 10"
+        },
+        {
+          "id": "d",
+          "label": "C(s) = 1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "With C = 5(s+1)/s the characteristic polynomial is s^2 + 3s + 5, which is stable, and the integrator gives zero step error.",
+        "C = 10 is stable but leaves offset; C = 5/s gives s^2 - 2s + 5 (unstable); C = 1 gives s - 1 (unstable)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A heater's valve supply pressure disturbs flow, which then changes temperature slowly. Constraint: reject pressure disturbances before they reach temperature, using only feedback sensors on flow and temperature. Which design meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A cascade: an inner flow loop several times faster than the outer temperature loop, which sets the flow setpoint"
+        },
+        {
+          "id": "b",
+          "label": "A single temperature PID with much higher gain, so pressure disturbances are corrected as soon as temperature moves"
+        },
+        {
+          "id": "c",
+          "label": "A cascade whose inner flow loop is slower than the outer temperature loop, so the outer loop stays dominant"
+        },
+        {
+          "id": "d",
+          "label": "Feedforward from the temperature setpoint to the valve, with no flow measurement used"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Cascade works when the inner loop sees the disturbance first and is much faster than the outer loop.",
+        "A slower inner loop breaks the time-scale separation; high gain alone risks instability; setpoint feedforward does not address pressure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "State feedback places regulator poles at -10 rad/s. A full-order observer must converge faster than the regulator, but sensor noise is significant above 100 rad/s. Which observer pole location is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "All at -10"
+        },
+        {
+          "id": "b",
+          "label": "All at -3"
+        },
+        {
+          "id": "c",
+          "label": "All at -1000"
+        },
+        {
+          "id": "d",
+          "label": "All at -30"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "About 3x faster than the regulator gives timely estimates while staying well inside the noise-free band.",
+        "-3 and -10 are not faster than the regulator; -1000 amplifies sensor noise heavily."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Plant G = 2/(10s+1). A measured disturbance reaches the output through Gd = 1/(5s+1). Design a realisable feedforward Gff, acting at the plant input, that cancels the disturbance at the output exactly.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Gff = (10s+1) / (2(5s+1))"
+        },
+        {
+          "id": "b",
+          "label": "Gff = -(5s+1) / (2(10s+1))"
+        },
+        {
+          "id": "c",
+          "label": "Gff = -2 / ((10s+1)(5s+1))"
+        },
+        {
+          "id": "d",
+          "label": "Gff = -(10s+1) / (2(5s+1))"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Cancellation needs G*Gff + Gd = 0, so Gff = -Gd/G, which is proper and therefore realisable.",
+        "Distractors invert the ratio, multiply G and Gd, or drop the sign."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A design stabilises the plant 1/((s-3)(s+1)) with a pure proportional gain K. What is this design missing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A gain K above 3, which makes every coefficient of the characteristic polynomial positive"
+        },
+        {
+          "id": "b",
+          "label": "Integral action, since a proportional controller cannot remove steady-state error and so cannot stabilise"
+        },
+        {
+          "id": "c",
+          "label": "A lag compensator to raise low-frequency gain and push the unstable pole into the left half-plane"
+        },
+        {
+          "id": "d",
+          "label": "Phase lead such as derivative action, because s^2 - 2s + (K-3) has a negative s coefficient for every K"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The closed-loop polynomial s^2 - 2s + (K-3) is never stable for any K, so lead or derivative action is needed.",
+        "Raising K fixes only the constant term; integral or lag actions do not supply the missing damping."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A PID loop needs zero steady-state error, smooth recovery from a large setpoint step that saturates the actuator, no control spikes on setpoint steps, and tolerance of measurement noise. The draft is an ideal PID on the error with no limits. Which changes does it need? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Derivative acting on the measurement through a low-pass filter"
+        },
+        {
+          "id": "b",
+          "label": "Remove the integral term to prevent windup"
+        },
+        {
+          "id": "c",
+          "label": "Back-calculation anti-windup on the integrator"
+        },
+        {
+          "id": "d",
+          "label": "Raise Kd to shorten settling during saturation"
+        },
+        {
+          "id": "e",
+          "label": "Setpoint weighting or a reference prefilter for the proportional path"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Anti-windup, filtered derivative on measurement and setpoint shaping address saturation, noise and kicks while keeping the integrator.",
+        "Removing the integral breaks the zero-error requirement; raising Kd worsens noise and does nothing under saturation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A positioning stage has a lightly damped resonance near 40 rad/s whose frequency varies by 20% with load. The loop crossover target is 5 rad/s, and the resonance peak is 20 dB above the rigid-body trend. Which design keeps the loop stable over all loads?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Roll the loop off so |L| including the peak stays below -10 dB over 32 to 48 rad/s, using a low-pass or broad notch"
+        },
+        {
+          "id": "b",
+          "label": "Raise crossover to 40 rad/s so feedback actively damps the mode at the nominal load, accepting the larger noise sensitivity"
+        },
+        {
+          "id": "c",
+          "label": "Place a very narrow notch at 40 rad/s to cancel the resonance at the nominal load, which keeps the loop gain near 0 dB elsewhere"
+        },
+        {
+          "id": "d",
+          "label": "Add phase lead near 40 rad/s so the resonance phase stays in the stable region at the nominal load and the peak can stay above 0 dB"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Gain stabilisation with margin across the whole frequency range is robust to load-dependent resonance shifts.",
+        "A narrow notch misses shifted resonances; crossover at the mode and phase stabilisation both depend on a precise, fixed mode frequency."
+      ],
+      "reviewed": false
+    }
+  ]
+}

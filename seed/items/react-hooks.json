@@ -1,0 +1,2485 @@
+{
+  "version": 1,
+  "topic": "react-hooks",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which hook adds a piece of local state to a function component?",
+      "options": [
+        {
+          "id": "a",
+          "label": "useMemo"
+        },
+        {
+          "id": "b",
+          "label": "useEffect"
+        },
+        {
+          "id": "c",
+          "label": "useState"
+        },
+        {
+          "id": "d",
+          "label": "useRef"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "useState declares state and returns the value plus a setter.",
+        "useEffect handles side effects, useRef holds mutable values, useMemo caches computed values."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does `useState(0)` return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A promise that resolves to the current state value"
+        },
+        {
+          "id": "b",
+          "label": "An object with `value` and `setValue` properties"
+        },
+        {
+          "id": "c",
+          "label": "Only the current state value, which is then changed directly"
+        },
+        {
+          "id": "d",
+          "label": "An array with the current state and a function to update it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "useState returns a two-item array: state and setter.",
+        "The object-return distractor confuses it with other APIs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the name of the second argument to `useEffect` that controls when the effect re-runs?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The initial state"
+        },
+        {
+          "id": "b",
+          "label": "The render callback"
+        },
+        {
+          "id": "c",
+          "label": "The cleanup function"
+        },
+        {
+          "id": "d",
+          "label": "The dependency array"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The second argument is the dependency array.",
+        "The cleanup function is returned from the effect, not passed as an argument."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which hook reads the current value of a React context?",
+      "options": [
+        {
+          "id": "a",
+          "label": "useContext"
+        },
+        {
+          "id": "b",
+          "label": "useReducer"
+        },
+        {
+          "id": "c",
+          "label": "useLayoutEffect"
+        },
+        {
+          "id": "d",
+          "label": "useCallback"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "useContext reads the nearest provider's value.",
+        "The others serve state, memoization or effect timing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "By convention, what must the name of a custom hook start with?",
+      "options": [
+        {
+          "id": "a",
+          "label": "hook"
+        },
+        {
+          "id": "b",
+          "label": "get"
+        },
+        {
+          "id": "c",
+          "label": "use"
+        },
+        {
+          "id": "d",
+          "label": "with"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Custom hooks must start with 'use' so React and linters recognise them.",
+        "Other prefixes are not recognised by the rules of hooks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are built-in React hooks? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "useFetchData"
+        },
+        {
+          "id": "b",
+          "label": "useStore"
+        },
+        {
+          "id": "c",
+          "label": "useRef"
+        },
+        {
+          "id": "d",
+          "label": "useMemo"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "useRef and useMemo ship with React.",
+        "useStore and useFetchData are not built in; they would be library or custom hooks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A teammate is writing a function component and wants to call `useState` to track a counter. They ask where in the component the call is allowed. Which rule of hooks answers this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call hooks only inside event handlers such as onClick, so state updates run when the user acts"
+        },
+        {
+          "id": "b",
+          "label": "Call hooks inside any nested function that runs on render, since each render calls it anyway"
+        },
+        {
+          "id": "c",
+          "label": "Call hooks at the top level, never inside loops or conditions"
+        },
+        {
+          "id": "d",
+          "label": "Call hooks after the return statement, once the JSX has been built for the render"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Hooks must be called at the top level so their order is stable across renders.",
+        "Handlers, nested functions and conditions break the call order."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A component calls `setCount(count + 1)` in a click handler. What happens next?",
+      "options": [
+        {
+          "id": "a",
+          "label": "React schedules a re-render with the new count value"
+        },
+        {
+          "id": "b",
+          "label": "The count variable changes immediately and no render occurs"
+        },
+        {
+          "id": "c",
+          "label": "The page reloads to show the new count value"
+        },
+        {
+          "id": "d",
+          "label": "The component is unmounted and mounted again from scratch"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Calling a setter schedules a re-render with the new state.",
+        "State is not mutated in place, and the component is not remounted."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `useEffect(() => { document.title = name; }, [name])` do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Updates the title whenever the document itself is changed"
+        },
+        {
+          "id": "b",
+          "label": "Updates the title once, only when the component first mounts"
+        },
+        {
+          "id": "c",
+          "label": "Updates the title after render, only when name has changed"
+        },
+        {
+          "id": "d",
+          "label": "Updates the title before every render, whatever changed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The dependency array limits the effect to renders where name changed.",
+        "An empty array would run only on mount; no array would run every render."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why use `useRef` instead of `useState` to hold a DOM element reference?",
+      "options": [
+        {
+          "id": "a",
+          "label": "State cannot store objects, so DOM nodes must go in refs"
+        },
+        {
+          "id": "b",
+          "label": "Refs are faster than state at storing large amounts of data"
+        },
+        {
+          "id": "c",
+          "label": "Refs are reset to null on every render, so they stay current"
+        },
+        {
+          "id": "d",
+          "label": "Changing ref.current does not trigger a re-render"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Refs persist across renders and updating them doesn't re-render.",
+        "Refs are not reset each render, and state can hold objects."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the purpose of the function returned from a `useEffect` callback?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It supplies the value that the component will render next"
+        },
+        {
+          "id": "b",
+          "label": "It runs first on mount to set up the effect's initial state, before the effect body runs"
+        },
+        {
+          "id": "c",
+          "label": "It cleans up, for example removing a listener, before the next run or unmount"
+        },
+        {
+          "id": "d",
+          "label": "It tells React to skip the effect on the next render"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The returned function is cleanup, run before re-running and on unmount.",
+        "It does not provide render output or skip effects."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do two components that each call the same custom hook, such as `useCounter()`, not share their count?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The hook keeps its state in one global store keyed by the hook's name"
+        },
+        {
+          "id": "b",
+          "label": "Each call creates its own separate state inside its component"
+        },
+        {
+          "id": "c",
+          "label": "React locks the count to whichever component called the hook first"
+        },
+        {
+          "id": "d",
+          "label": "Custom hooks cannot hold state, since only built-in hooks can do that"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Custom hooks share logic, not state; each call gets its own state.",
+        "They don't use a global store, and they can hold state via built-in hooks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe `useEffect` with an empty dependency array `[]`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The effect runs after the first render"
+        },
+        {
+          "id": "b",
+          "label": "The effect runs after every single render"
+        },
+        {
+          "id": "c",
+          "label": "The effect runs before the component first renders"
+        },
+        {
+          "id": "d",
+          "label": "The effect does not re-run when props change"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "An empty array means run once after mount.",
+        "Running every render happens with no array; effects never run before the first render."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A component shows a theme color read with `useContext(ThemeContext)`. A parent provider's value changes from 'light' to 'dark'. What should a learner expect to happen to the component?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It ignores the change because context is read once"
+        },
+        {
+          "id": "b",
+          "label": "It re-renders and shows the new 'dark' value"
+        },
+        {
+          "id": "c",
+          "label": "It keeps showing 'light' until it is remounted"
+        },
+        {
+          "id": "d",
+          "label": "It throws an error since context values cannot change"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Components using useContext re-render when the provider value changes.",
+        "Context is not read once, and its value may change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does calling `useState(0)` return inside a function component?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A getter function and a setter function for the state value"
+        },
+        {
+          "id": "b",
+          "label": "Only the current state value, which you reassign directly"
+        },
+        {
+          "id": "c",
+          "label": "An array holding the current state value and a function to update it"
+        },
+        {
+          "id": "d",
+          "label": "An object with a `state` property and a `dispatch` method on it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "useState returns a two-item array: value and setter.",
+        "Distractors confuse it with useReducer, with plain variables, or with getter/setter pairs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the purpose of the dependency array in `useEffect(fn, [a, b])`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It freezes `a` and `b` so the effect cannot update them"
+        },
+        {
+          "id": "b",
+          "label": "It lists the only props and state values the component may read during render"
+        },
+        {
+          "id": "c",
+          "label": "It sets the order in which several effects in one component will run"
+        },
+        {
+          "id": "d",
+          "label": "It makes React re-run the effect only when `a` or `b` changed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The array lets React skip the effect when listed values are unchanged.",
+        "Distractors treat it as a permissions list, an ordering tool, or a freeze on values."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A click handler calls `setCount(count + 1)` three times in a row, starting from `count = 0`. Why does count become 1 and not 3?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The setter ignores a new value when it is close to the old one"
+        },
+        {
+          "id": "b",
+          "label": "React drops every state update after the first one in a handler"
+        },
+        {
+          "id": "c",
+          "label": "Each call reads the same `count` of 0 from that render, so all set 1"
+        },
+        {
+          "id": "d",
+          "label": "Updates run after a timer, so the later calls get cancelled"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The state value is a snapshot per render, so count + 1 is 1 each time.",
+        "Distractors invent dropping or cancelling of updates."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does changing `ref.current` from `useRef` differ from calling a `useState` setter?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Changing the ref is lost on every render, but state persists"
+        },
+        {
+          "id": "b",
+          "label": "Changing the ref does not re-render, but a state update does"
+        },
+        {
+          "id": "c",
+          "label": "Changing the ref re-renders the component, but state does not"
+        },
+        {
+          "id": "d",
+          "label": "Both re-render, but the ref is only reset when unmounting"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Refs persist across renders without triggering a render.",
+        "Distractors reverse the behaviour or claim refs reset each render."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why must hooks be called in the same order on every render of a component?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each hook needs a unique name that is based on its position"
+        },
+        {
+          "id": "b",
+          "label": "Hooks run faster when the engine sees a fixed order of calls"
+        },
+        {
+          "id": "c",
+          "label": "Conditional calls would be flagged as errors by the JavaScript engine"
+        },
+        {
+          "id": "d",
+          "label": "React matches each hook call to its stored state by call order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "React tracks hooks by call order, so skipping one shifts the state.",
+        "Distractors give performance or language-engine reasons."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about the cleanup function returned from a `useEffect` callback are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It runs once before the component's first render"
+        },
+        {
+          "id": "b",
+          "label": "It runs after every state update even when the dependencies are unchanged"
+        },
+        {
+          "id": "c",
+          "label": "It runs when the component unmounts"
+        },
+        {
+          "id": "d",
+          "label": "It runs before the effect re-runs after a dependency changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Cleanup runs before the next effect run and on unmount.",
+        "Distractors place it before the first render or ignore the dependency array."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A `Profile` component receives a `userId` prop and loads the user in `useEffect(() => { fetchUser(userId).then(setUser) }, [])`. When the parent changes `userId`, the old user stays on screen. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`setUser` is ignored when it is called from inside a promise callback after render"
+        },
+        {
+          "id": "b",
+          "label": "The empty array means the effect only ran on mount, not for new `userId`"
+        },
+        {
+          "id": "c",
+          "label": "React keeps the first value of each prop and ignores later changes to `userId`"
+        },
+        {
+          "id": "d",
+          "label": "`fetchUser` must be called during render, because effects never run again after mount"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "With [] the effect runs only after the first render, so it misses new props.",
+        "Distractors blame promises, prop caching, or effects in general."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Starting at `count = 0`, which handler body makes `count` equal 3 after one click?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`setCount(c => c + 1); setCount(c => c + 1); setCount(c => c + 1)`"
+        },
+        {
+          "id": "b",
+          "label": "`setCount(c => c + 1); setCount(count)`"
+        },
+        {
+          "id": "c",
+          "label": "`setCount(count + 1); setCount(count + 1); setCount(count + 1)`"
+        },
+        {
+          "id": "d",
+          "label": "`setCount(count + 3); setCount(count)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Functional updates chain on the latest pending state.",
+        "Other options reuse the stale count value of 0."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `useEffect(() => { document.title = `Clicks: ${n}` }, [n])`, `n` starts at 0 and the user clicks twice, so `n` goes 0, 1, 2. How many times does the effect run in total?",
+      "options": [
+        {
+          "id": "a",
+          "label": "4"
+        },
+        {
+          "id": "b",
+          "label": "3"
+        },
+        {
+          "id": "c",
+          "label": "1"
+        },
+        {
+          "id": "d",
+          "label": "2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "It runs on mount and after each change of n: 3 runs.",
+        "Choosing 2 forgets the mount run; 1 or 4 misread the dependency array."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which implementation of a custom hook `useToggle` correctly returns `[on, toggle]`, where `toggle` flips the boolean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`const [on, setOn] = useState(false); return [on, setOn(!on)]`"
+        },
+        {
+          "id": "b",
+          "label": "`const [on, setOn] = useState(false); return [on, () => setOn(o => !o)]`"
+        },
+        {
+          "id": "c",
+          "label": "`const [on, setOn] = useState(false); return [on, () => { on = !on; }]`"
+        },
+        {
+          "id": "d",
+          "label": "`const on = useRef(false); return [on, () => { on.current = !on.current; }]`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The toggle must be a function that calls the setter with the flipped value.",
+        "Other options call the setter during render or never update state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A component calls `const theme = useContext(ThemeContext)` where `ThemeContext = createContext('light')`. It is rendered outside any `ThemeContext.Provider`. What is `theme`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`'light'`, the default passed to `createContext`"
+        },
+        {
+          "id": "b",
+          "label": "`null`, because context is empty without a provider"
+        },
+        {
+          "id": "c",
+          "label": "`undefined`, because no provider supplies a value"
+        },
+        {
+          "id": "d",
+          "label": "It throws an error, because a provider is required"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Without a provider, useContext returns the createContext default.",
+        "Distractors assume undefined, null, or an error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A component has `useEffect(() => { setCount(count + 1) })` with no dependency array, and it re-renders endlessly. Which change makes the effect increment only once after mount?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pass `[count]` as the dependency array to the effect"
+        },
+        {
+          "id": "b",
+          "label": "Wrap the call in `setTimeout(..., 0)` inside the effect"
+        },
+        {
+          "id": "c",
+          "label": "Pass `[]` as the dependency array to the effect"
+        },
+        {
+          "id": "d",
+          "label": "Replace `setCount` with a direct `count = count + 1`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An empty array limits the effect to the mount run.",
+        "[count] still loops because count changes each time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which of these usages break the rules of hooks? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Calling `useEffect` inside a `for` loop body"
+        },
+        {
+          "id": "b",
+          "label": "Calling `useState` inside an `if` block in a component"
+        },
+        {
+          "id": "c",
+          "label": "Calling `useContext` inside a button's `onClick` handler"
+        },
+        {
+          "id": "d",
+          "label": "Calling `useRef` at the top level of a function component"
+        },
+        {
+          "id": "e",
+          "label": "Calling `useState` at the top level of a custom hook `useForm`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Hooks must not be called conditionally, in loops, or in handlers.",
+        "Top-level calls in components or custom hooks are allowed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A form keeps `const [form, setForm] = useState({ name: '', age: '' })`. The name input uses `onChange={e => setForm({ name: e.target.value })}`. After typing a name, the age field's value disappears. Which change fixes it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`setForm({ ...form, name: e.target.value })`"
+        },
+        {
+          "id": "b",
+          "label": "`setForm.name(e.target.value)`"
+        },
+        {
+          "id": "c",
+          "label": "`setForm({ name: e.target.value }, form.age)`"
+        },
+        {
+          "id": "d",
+          "label": "`setForm(form.name = e.target.value)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The setter replaces state, so the other fields must be copied with spread.",
+        "Other options misuse the setter's signature or mutate state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A component has `const [n, setN] = useState(0)`. A click handler runs `setN(n + 1); setN(n + 1); setN(n + 1);`. What is `n` after one click and the re-render?",
+      "options": [
+        {
+          "id": "a",
+          "label": "2"
+        },
+        {
+          "id": "b",
+          "label": "0"
+        },
+        {
+          "id": "c",
+          "label": "1"
+        },
+        {
+          "id": "d",
+          "label": "3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "All three calls use the same render's `n` (0), so each sets state to 1.",
+        "Choosing 3 assumes updates accumulate; a functional update `setN(c => c + 1)` would give 3."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which effect fetches the user only when `userId` changes (and on mount)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`useEffect(() => { fetchUser(userId); }, [userId]);`"
+        },
+        {
+          "id": "b",
+          "label": "`useEffect(() => { fetchUser(userId); }, []);`"
+        },
+        {
+          "id": "c",
+          "label": "`useEffect(() => { fetchUser(userId); });`"
+        },
+        {
+          "id": "d",
+          "label": "`useEffect(() => { fetchUser(userId); }, [fetchUser]);`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The dependency array lists `userId`, so the effect reruns only when it changes.",
+        "No array runs every render; an empty array runs once and ignores later ids."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An effect starts `const id = setInterval(tick, 1000);`. Which return statement correctly stops the timer on unmount?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`return () => setInterval(id);`"
+        },
+        {
+          "id": "b",
+          "label": "`return id;`"
+        },
+        {
+          "id": "c",
+          "label": "`return () => clearInterval(id);`"
+        },
+        {
+          "id": "d",
+          "label": "`return clearInterval(id);`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An effect must return a cleanup function that calls `clearInterval`.",
+        "`return clearInterval(id)` runs immediately and returns undefined rather than a function."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A component does `const r = useRef(null);` and renders `<input ref={r} />`. After the first mount, what does `r.current` hold?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A copy of the component's latest state values"
+        },
+        {
+          "id": "b",
+          "label": "A function that returns the input's current value"
+        },
+        {
+          "id": "c",
+          "label": "The DOM input element, assigned after mount"
+        },
+        {
+          "id": "d",
+          "label": "The React element object created by the JSX"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "React assigns the DOM node to `ref.current` once mounted.",
+        "Confusing it with the JSX element or state misunderstands refs as handles to DOM nodes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must recompute `filter(items, query)` only when `items` or `query` changes. Which call does that?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`useMemo(() => filter(items, query), [items, query])`"
+        },
+        {
+          "id": "b",
+          "label": "`useMemo(() => filter(items, query), [items])`"
+        },
+        {
+          "id": "c",
+          "label": "`useMemo(filter(items, query), [items, query])`"
+        },
+        {
+          "id": "d",
+          "label": "`useMemo(() => filter(items, query), [items, query, filter])`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Every value the computation reads belongs in the dependency array.",
+        "Omitting `query` gives stale results; the last option calls filter immediately and passes its result, not a function."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "State is `const [user, setUser] = useState({ name: 'Ana', age: 30 })`. Which updates correctly set age to 31 while keeping the name and triggering a re-render? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`setUser({ age: 31 })`"
+        },
+        {
+          "id": "b",
+          "label": "`setUser(u => ({ ...u, age: 31 }))`"
+        },
+        {
+          "id": "c",
+          "label": "`user.age = 31; setUser(user);`"
+        },
+        {
+          "id": "d",
+          "label": "`setUser({ ...user, age: 31 })`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Spreading into a new object keeps name and creates a new reference.",
+        "Mutating then passing the same object is skipped by React; the last option drops `name`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A theme context is created with `createContext('light')`. The app renders `<ThemeContext.Provider value=\"dark\"><Header /></ThemeContext.Provider><Footer />`. Both Header and Footer call `useContext(ThemeContext)`. What does Footer receive?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`'dark'`"
+        },
+        {
+          "id": "b",
+          "label": "`undefined`"
+        },
+        {
+          "id": "c",
+          "label": "An error is thrown"
+        },
+        {
+          "id": "d",
+          "label": "`'light'`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Outside any provider, useContext returns the default value passed to createContext.",
+        "Assuming the nearest sibling's provider applies, or that it errors, misreads how providers scope."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A counter uses `useEffect(() => { const id = setInterval(() => setCount(count + 1), 1000); return () => clearInterval(id); }, []);`. It shows 1 and never increases. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The interval callback closes over `count` from the first render, which is always 0"
+        },
+        {
+          "id": "b",
+          "label": "The empty array makes React skip state updates made from inside effects"
+        },
+        {
+          "id": "c",
+          "label": "Calling setCount inside an interval is batched and dropped until the next click"
+        },
+        {
+          "id": "d",
+          "label": "The cleanup function clears the interval after every tick, so only one update fires"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A stale closure keeps `count` at 0, so it always sets 1; use `setCount(c => c + 1)`.",
+        "Cleanup runs only on unmount with an empty array; effects can set state freely."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A component has `const opts = { page: 1 };` in its body and `useEffect(() => { load(opts); }, [opts]);`. The effect runs after every render. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Object dependencies are compared by key count and this one grows"
+        },
+        {
+          "id": "b",
+          "label": "`opts` is a new object each render, so its reference differs every time"
+        },
+        {
+          "id": "c",
+          "label": "`load` is called with an object, which React treats as a changed value"
+        },
+        {
+          "id": "d",
+          "label": "Effects always rerun when the dependency array has any object in it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Dependencies are compared with Object.is, and a fresh object literal has a new identity each render.",
+        "Fix by moving it outside, memoizing it, or depending on primitives like `page`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A component starts with `if (!user) return null;` and then calls `useEffect(...)` below it. It works until `user` goes from set to null, then React errors. What is the fault?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Effects declared after a return statement are ignored on the first render"
+        },
+        {
+          "id": "b",
+          "label": "Hooks must run in the same order each render, and the early return skips one"
+        },
+        {
+          "id": "c",
+          "label": "useEffect cannot read props that may be null during a render"
+        },
+        {
+          "id": "d",
+          "label": "Returning null unmounts the component and discards its effect permanently"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The early return changes how many hooks are called between renders, breaking the rules of hooks.",
+        "Move the hook above the return and put the condition inside it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A profile page fetches in `useEffect(..., [id])` and calls `setProfile(data)`. When users click through ids quickly, sometimes an older profile appears. What is the cause and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Responses can arrive out of order; ignore stale ones with a flag set in cleanup"
+        },
+        {
+          "id": "b",
+          "label": "React caches the first fetch per component; remounting with a key avoids it"
+        },
+        {
+          "id": "c",
+          "label": "The dependency array is too narrow; adding `profile` to it orders the responses"
+        },
+        {
+          "id": "d",
+          "label": "setProfile is asynchronous; wrapping it in useMemo makes it apply in order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Earlier requests may resolve after later ones; cleanup can mark them ignored or abort them.",
+        "Adding state to dependencies or memoizing does not control response order."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`const onSave = useCallback(() => save(draft), [draft]);` is passed to a `React.memo` child, which still re-renders on every keystroke in a draft textbox. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "React.memo compares function props by value, and the new closure over the latest draft never matches"
+        },
+        {
+          "id": "b",
+          "label": "The child must also call useCallback itself before the parent's memoized callback is respected"
+        },
+        {
+          "id": "c",
+          "label": "useCallback only memoizes during the first render, so later memo comparisons see a new function"
+        },
+        {
+          "id": "d",
+          "label": "`draft` changes on each keystroke, so a new `onSave` function is created each time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The callback depends on `draft`, so its identity changes whenever the draft does.",
+        "Reading draft through a ref or restructuring would keep the callback stable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "An effect has the dependency array `[items]`. In which cases will it rerun on every render of the component? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`const [items] = useState([]);` with no setter calls"
+        },
+        {
+          "id": "b",
+          "label": "`const items = data.filter(isActive);` in the component body"
+        },
+        {
+          "id": "c",
+          "label": "`const items = [1, 2, 3];` in the component body"
+        },
+        {
+          "id": "d",
+          "label": "`const items = useMemo(() => build(data), [data]);` with stable `data`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Body-level filter and array literals produce new references on every render.",
+        "State and memoized values keep the same reference until their inputs change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A custom hook `useCounter()` wraps `useState(0)` and returns `[count, increment]`. A header and a sidebar both call it and the developer expects one shared count, but clicking in one never changes the other. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The header renders first, so its state shadows the sidebar's state during updates"
+        },
+        {
+          "id": "b",
+          "label": "useState inside custom hooks resets whenever another component reads the value"
+        },
+        {
+          "id": "c",
+          "label": "Each call to a hook creates its own state, so the components hold separate counts"
+        },
+        {
+          "id": "d",
+          "label": "Custom hooks must be wrapped in useMemo to share their state between components"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Hooks share logic, not state; every call gets independent state per component instance.",
+        "To share state, lift it up or put it in context; memoization does not merge instances."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A component runs `useEffect(() => { const id = setInterval(() => setCount(count + 1), 1000); return () => clearInterval(id); }, []);` The counter moves to 1 and then stays there. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The callback closes over `count` from the first render, so every tick sets it to 1"
+        },
+        {
+          "id": "b",
+          "label": "React throttles state updates made from timers, so only the first update is ever applied"
+        },
+        {
+          "id": "c",
+          "label": "The empty dependency array makes the cleanup run before every tick, so the timer restarts"
+        },
+        {
+          "id": "d",
+          "label": "`setCount` is asynchronous, so ticks overwrite each other before React applies the updates"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The effect runs once, so its closure keeps the first-render `count` (0) and always sets 1.",
+        "Distractors blame async setState or timer throttling, which misread how closures and dependencies work."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A component declares `const opts = { limit: 10 };` and runs `useEffect(() => { load(opts); }, [opts]);`. The effect fires after every render even though the values never change. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`opts` is a new object on each render, and dependencies are compared by identity with `Object.is`"
+        },
+        {
+          "id": "b",
+          "label": "The `load` call sets state internally, and a state update always re-triggers every effect"
+        },
+        {
+          "id": "c",
+          "label": "Any dependency array containing a non-primitive value is treated by React as if it were missing"
+        },
+        {
+          "id": "d",
+          "label": "React compares object dependencies by key order, and the key order changes between renders"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A fresh object literal has a new identity each render, so the shallow comparison reports a change.",
+        "Distractors invent key-order or deep-comparison rules that React does not use."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A search box runs an effect that calls `fetch(`/api?q=${q}`)` and then `setResults(data)` whenever `q` changes. Occasionally the list shows results for an older query than the one typed. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Responses can arrive out of order, and the effect has no cleanup to ignore a stale response"
+        },
+        {
+          "id": "b",
+          "label": "State setters called after an `await` are queued separately, so they apply in the wrong order"
+        },
+        {
+          "id": "c",
+          "label": "The effect runs before `q` updates, so it requests the previous query value each time"
+        },
+        {
+          "id": "d",
+          "label": "React batches the fetches and delivers their responses in reverse order of the requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Without a cleanup flag or abort, a slow earlier request can resolve last and overwrite newer results.",
+        "Distractors suggest React reorders or delays requests, which it does not do."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`const Row = React.memo(RowImpl);` is rendered by a parent as `<Row onSelect={() => select(id)} />`. Profiling shows `Row` re-renders on every parent render. Why does `memo` not help?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The inline arrow is a new function each render, so the shallow prop check sees a change"
+        },
+        {
+          "id": "b",
+          "label": "React.memo compares props deeply, and functions with identical source text fail deep equality checks"
+        },
+        {
+          "id": "c",
+          "label": "React.memo is bypassed when a parent re-renders, unless the child also wraps its state in useMemo"
+        },
+        {
+          "id": "d",
+          "label": "React.memo skips renders for components that don't call hooks, and Row's hooks cause it to re-render"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Memo does a shallow comparison, and a new function identity each render defeats it.",
+        "Distractors misstate memo's rules about hooks, deep comparison or forced child renders."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`App` renders `<Ctx.Provider value={{ user, setUser }}>` and also re-renders often because of unrelated state. Components that read only `user` re-render each time, though `user` never changes. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`useContext` subscribes to the whole provider tree, so any state change inside `App` notifies it"
+        },
+        {
+          "id": "b",
+          "label": "`setUser` is recreated each render, and context compares each field of the value separately"
+        },
+        {
+          "id": "c",
+          "label": "Consumers re-render whenever any ancestor re-renders, regardless of what the context value is"
+        },
+        {
+          "id": "d",
+          "label": "The value object is recreated every render, so consumers receive a new context value each time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A new object literal as the provider value changes identity, which triggers all consumers.",
+        "Distractors claim setters change identity or that context does per-field comparison; neither is true."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Which of these cause React to discard a component instance's hook state and start it fresh? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The parent re-rendering and passing the component new prop values"
+        },
+        {
+          "id": "b",
+          "label": "Giving the component a different `key` than it had on the previous render"
+        },
+        {
+          "id": "c",
+          "label": "Rendering a different component type at the same position in the tree"
+        },
+        {
+          "id": "d",
+          "label": "Calling a state setter with a value equal to the current state"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "A changed key or changed element type at the same position unmounts the old instance and mounts a new one.",
+        "New props or an identical setter value never reset state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A list component keeps `const [visible, setVisible] = useState([])` and runs `useEffect(() => { setVisible(items.filter(i => i.name.includes(query))); }, [items, query]);`. Users report that after typing, the list briefly shows old results for one frame before updating. What is the most accurate diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`setVisible` is debounced by React, so the update applies several frames after the call"
+        },
+        {
+          "id": "b",
+          "label": "The filter is too slow to finish inside one render, so React paints the previous result"
+        },
+        {
+          "id": "c",
+          "label": "The dependency array is missing `visible`, so the effect works with a stale copy of it"
+        },
+        {
+          "id": "d",
+          "label": "The effect runs after the render is committed, so one painted frame uses stale derived state"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Derived state set in an effect lags one committed render behind; computing it during render avoids that.",
+        "Distractors blame filter speed, debouncing or dependencies rather than effect timing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A checkout form has six fields plus a status (idle, submitting, error). Many handlers update several fields together, and bugs come from inconsistent combinations. Criteria: make invalid combinations hard, centralise transitions, keep logic testable. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A `useRef` holding all fields, because it avoids re-renders while the user types"
+        },
+        {
+          "id": "b",
+          "label": "`useReducer` with explicit actions, so every transition lives in one pure, testable function"
+        },
+        {
+          "id": "c",
+          "label": "One `useState` object spread in each handler, because it keeps all fields together in one place"
+        },
+        {
+          "id": "d",
+          "label": "Six separate `useState` calls, because each setter stays small and independent of the others"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A reducer centralises coordinated transitions in one pure function that is easy to test.",
+        "Separate states or spread objects scatter the transition logic, and refs do not trigger renders."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Profiling shows an `items.reduce(...)` over 20 items takes 0.02 ms, and the component renders on every keystroke. A teammate proposes wrapping it in `useMemo`. Criteria: simplicity, correctness, real performance gain. What is the best judgement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap it in `useMemo`, because every computation inside a component body should be memoized by default"
+        },
+        {
+          "id": "b",
+          "label": "Leave it unmemoized, because dependency tracking and caching cost more than the tiny computation saves"
+        },
+        {
+          "id": "c",
+          "label": "Wrap it in `useMemo`, because that guarantees the result is never recomputed during the app's lifetime"
+        },
+        {
+          "id": "d",
+          "label": "Move it into `useEffect` with state, because effects run off the render path and cost nothing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Memoizing a trivial computation adds complexity and overhead without measurable benefit.",
+        "useMemo is a performance hint with no recompute guarantee, and moving derived values into effects adds renders."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "One context holds `{ theme, cursor }`. The cursor updates 60 times per second, and 200 components read only `theme`. Criteria: minimal re-renders, little code change. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap the single provider value in `useMemo` keyed on both fields, so consumers skip unrelated updates"
+        },
+        {
+          "id": "b",
+          "label": "Store both values in a `useRef` inside the provider, so consumers re-render only when they choose to"
+        },
+        {
+          "id": "c",
+          "label": "Split into `ThemeContext` and `CursorContext`, so theme readers never re-render on cursor updates"
+        },
+        {
+          "id": "d",
+          "label": "Keep one context and wrap the 200 consumers in `React.memo`, since memo blocks context-driven renders"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Separate contexts isolate frequent updates from rarely changing values.",
+        "Memoizing a combined value still changes whenever cursor changes, and memo does not block context updates."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "`ProfileForm` uses `useEffect(() => setDraft(''), [userId])` to clear its draft when the user changes, and a stale draft flashes for one render. Criteria: correctness, simplicity, no extra render. Which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep the effect but add `draft` to the dependency array, so the reset always sees the latest value"
+        },
+        {
+          "id": "b",
+          "label": "Render `<ProfileForm key={userId} />` so React remounts it with fresh state and no reset effect"
+        },
+        {
+          "id": "c",
+          "label": "Switch the effect to `useLayoutEffect`, since it runs synchronously and avoids any second render pass"
+        },
+        {
+          "id": "d",
+          "label": "Store the draft in `useRef` and reset it in the render body, since refs reset on prop change"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A key change resets all state in the subtree without an extra render pass.",
+        "useLayoutEffect still renders twice, and refs do not reset on prop changes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Fifteen components each combine `useEffect`, `fetch` and `useState` for loading and error. The team needs caching, deduping of identical requests, cancellation and consistent error handling. Which approach best meets all these needs?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Copy the effect into a shared `useFetch` custom hook, which adds caching by sharing the code"
+        },
+        {
+          "id": "b",
+          "label": "Add `AbortController` to each effect, because cancelling requests also provides caching and deduping"
+        },
+        {
+          "id": "c",
+          "label": "Adopt a hooks-based data-fetching library, so caching and deduping are handled once for all components"
+        },
+        {
+          "id": "d",
+          "label": "Lift every fetch into a root context provider, because shared state automatically dedupes requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A dedicated library provides a shared cache and request deduping that hand-rolled hooks lack.",
+        "A shared hook only shares code, not cache; abort handles cancellation only."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team writes `useEventListener(name, handler)`. Criteria: no missed events, no needless re-subscribing, no stale handler. Which design choices are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use no dependency array so the listener is recreated every render with the latest handler"
+        },
+        {
+          "id": "b",
+          "label": "Omit `handler` from the dependencies and silence the lint rule, keeping the first handler"
+        },
+        {
+          "id": "c",
+          "label": "Return a cleanup that calls `removeEventListener` with the same function that was added"
+        },
+        {
+          "id": "d",
+          "label": "Store `handler` in a ref updated each render, and subscribe once per `name`"
+        },
+        {
+          "id": "e",
+          "label": "Subscribe inside the render body so no events are missed between render and effect"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A ref gives the latest handler without re-subscribing, and cleanup must remove the exact listener added.",
+        "The other options keep a stale handler, cause side effects in render, or re-subscribe needlessly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A tooltip measures its own height with `getBoundingClientRect` inside `useEffect` and then sets a `top` state. Users see it flash at the wrong position for one frame. Criteria: no visible flash, minimal blocking of paint. Which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Read the ref's size during render, since refs are populated before the first render finishes"
+        },
+        {
+          "id": "b",
+          "label": "Keep `useEffect` but wrap `setTop` in `useMemo`, since memoized values are applied before paint"
+        },
+        {
+          "id": "c",
+          "label": "Delay showing the tooltip with `setTimeout` in `useEffect`, since a timer hides the flash at no cost"
+        },
+        {
+          "id": "d",
+          "label": "Measure and set the position in `useLayoutEffect`, since it runs before paint and the measure is cheap"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "useLayoutEffect runs after DOM updates but before paint, so measure-then-position produces no flash.",
+        "Refs are null during first render, useMemo does not schedule effects, and timers just hide the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A search box calls `fetch` inside `useEffect` keyed on `query`. Slow responses sometimes arrive after newer ones and overwrite the results. Criteria: no stale overwrite, no wasted network work, minimal code. Which fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Remove `query` from the dependency array so that only one request is ever in flight at a time"
+        },
+        {
+          "id": "b",
+          "label": "Wrap the fetch call in `useMemo` keyed on `query` so older responses get discarded by React"
+        },
+        {
+          "id": "c",
+          "label": "Abort the request with an `AbortController` in the effect cleanup and ignore the resulting `AbortError`"
+        },
+        {
+          "id": "d",
+          "label": "Add a 500ms `setTimeout` before each fetch so that responses finish in the order they were sent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Aborting in cleanup cancels superseded requests and prevents stale state writes.",
+        "Distractors assume memoization or delays control response order, or that an empty dependency list avoids races."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A provider renders `<Ctx.Provider value={{user, setUser}}>` and its parent re-renders often for unrelated reasons. Dozens of consumers re-render each time. Criteria: stop needless consumer renders, keep the consumer API unchanged. Which option is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Memoize the value with `useMemo` over `[user]`; `setUser` is stable, so identity changes only with `user`"
+        },
+        {
+          "id": "b",
+          "label": "Keep the value in a `useRef` so the provider never triggers any consumer update, even when `user` changes later on"
+        },
+        {
+          "id": "c",
+          "label": "Copy `user` into each consumer's own state with a `useEffect` so consumers no longer depend on the context at all"
+        },
+        {
+          "id": "d",
+          "label": "Wrap every consumer in `React.memo`, which blocks re-renders that are triggered by a changed context value from the provider"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A new object each render changes context identity; memoizing it limits updates to real changes of `user`.",
+        "`React.memo` does not block context-driven updates, and refs or copied state lose needed updates or duplicate truth."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A checkout flow tracks `status`, `items` and `error`. Transitions are interdependent (for example, a failure must clear `items` loading and set `error` together). Criteria: impossible states are avoided and the logic is testable without rendering. Which approach fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One `useEffect` per field that re-syncs it with the others whenever any of the other fields change"
+        },
+        {
+          "id": "b",
+          "label": "A mutable `useRef` object changed in handlers, so updates never have to wait for a render to finish"
+        },
+        {
+          "id": "c",
+          "label": "A `useReducer` with a pure reducer over named actions, so each transition sets all related fields together"
+        },
+        {
+          "id": "d",
+          "label": "Several `useState` calls that handlers update one after another, so that each field stays simple on its own"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A pure reducer centralises transitions, prevents inconsistent combinations and can be unit-tested.",
+        "Separate setters and sync effects allow intermediate inconsistent states; refs skip re-rendering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A teammate proposes wrapping every function in every component with `useCallback` \"for performance\". Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It breaks the rules of hooks, because `useCallback` may only be called once in each component body"
+        },
+        {
+          "id": "b",
+          "label": "It is harmless, because memoized functions cost nothing and always let React skip work on later renders"
+        },
+        {
+          "id": "c",
+          "label": "It only pays off when identity matters, such as memoized children or effect dependencies; elsewhere it adds cost"
+        },
+        {
+          "id": "d",
+          "label": "It is required, because otherwise each recreated function causes React to rebuild the DOM nodes it touches"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Memoizing helps only where referential equality is consumed; otherwise it adds comparison and dependency overhead.",
+        "Distractors claim it is free, mandatory for DOM efficiency, or forbidden by the rules of hooks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A tooltip measures its own height via a ref to position itself above its anchor. With `useEffect` it flashes at the wrong place for one frame. Criteria: no visible flicker, and the trade-off is acknowledged. Which hook is the best choice?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`useLayoutEffect`, because it runs after DOM updates but before paint, at the cost of blocking paint"
+        },
+        {
+          "id": "b",
+          "label": "`useMemo` reading `ref.current.offsetHeight`, since memo callbacks run after the DOM has been committed"
+        },
+        {
+          "id": "c",
+          "label": "`useEffect` with an empty dependency array, since it always runs earlier than any layout effect would"
+        },
+        {
+          "id": "d",
+          "label": "`useInsertionEffect`, because it is the hook intended for measuring DOM nodes and positioning elements"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Layout effects run synchronously before paint so measured updates avoid flicker, but they delay painting.",
+        "`useEffect` runs after paint; `useMemo` runs during render before refs are set; `useInsertionEffect` is for style injection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A component copies a prop into state with `useEffect(() => setLocal(props.value), [props.value])` and renders `local`. Which are valid criticisms of this pattern? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Effects cannot read props, so `props.value` is always the initial value inside the effect callback"
+        },
+        {
+          "id": "b",
+          "label": "It creates two sources of truth for one value, which can drift apart when `local` is also edited elsewhere"
+        },
+        {
+          "id": "c",
+          "label": "If `local` is only a transformation of the prop, computing it during render avoids the extra render pass"
+        },
+        {
+          "id": "d",
+          "label": "A `setLocal` call inside an effect always causes an infinite render loop, whatever the dependency list is"
+        },
+        {
+          "id": "e",
+          "label": "Each prop change renders once with the stale `local` before the effect runs, so users can see an out-of-date frame"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Effect-synced state adds a stale render and a duplicate source of truth; derived values belong in render.",
+        "Effects do read current props, and a dependency list prevents an infinite loop here."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A `useWindowSize` hook returns `{width, height}` from a resize listener. Forty components use it only to check `width < 768`, and profiling shows them re-rendering on every pixel of a resize. Criteria: re-render only when the breakpoint flips, and use a subscription that is safe under concurrent rendering. Which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Subscribe with `useSyncExternalStore` to a `matchMedia('(max-width: 767px)')` snapshot that returns a boolean"
+        },
+        {
+          "id": "b",
+          "label": "Throttle the resize handler to 16ms so that state still updates about sixty times per second"
+        },
+        {
+          "id": "c",
+          "label": "Wrap each of the forty components in `React.memo` so they skip updates even though hook state changes"
+        },
+        {
+          "id": "d",
+          "label": "Store the width in a `useRef` and read it during render so that no component is notified of changes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A boolean snapshot from an external store only triggers renders when the value changes and is tear-free.",
+        "Throttling still renders often; refs never notify; `React.memo` cannot stop a component's own hook state from re-rendering it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design `useEventListener(target, name, handler)`. Constraints: subscribe once per `target` and `name`, never call a stale `handler` even though it closes over changing state. Which design meets every constraint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Wrap `handler` in `useMemo` with an empty array so the listener always receives its newest version"
+        },
+        {
+          "id": "b",
+          "label": "Capture `handler` in the subscribing effect with an empty dependency array so the first closure gets reused"
+        },
+        {
+          "id": "c",
+          "label": "Store `handler` in a ref updated each render, and subscribe once with a listener that calls `ref.current`"
+        },
+        {
+          "id": "d",
+          "label": "Put `handler` in a dependency array and resubscribe on each change, treating resubscription as cheap and correct"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A ref holding the latest handler plus a stable listener satisfies both once-only subscription and freshness.",
+        "Resubscribing violates the once constraint, and empty-array capture or memo freezes the first closure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A counter uses `useEffect(() => { const id = setInterval(() => setCount(count + 1), 1000); return () => clearInterval(id); }, [])` and sticks at 1. Constraints: the interval is created once, the count rises every second, and no extra refs are used. Which fix meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Change `[]` to `[count]` so the interval is recreated whenever the count changes"
+        },
+        {
+          "id": "b",
+          "label": "Move `count` into a `useRef` and read `count.current + 1` inside the callback each tick"
+        },
+        {
+          "id": "c",
+          "label": "Call `setCount(count + 1)` twice per tick so that one of the calls sees the updated value"
+        },
+        {
+          "id": "d",
+          "label": "Change the callback to `setCount(c => c + 1)` and keep the empty dependency array"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A functional update reads the latest state, so the single interval needs no fresh closure.",
+        "Other options recreate the interval, still use the stale closure, or add the ref the constraints exclude."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design `useDebouncedValue(value, delay)`. Constraints: it returns the latest value only after `delay` ms without changes, leaves no timer running after unmount, and reacts correctly if `delay` changes. Which implementation fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`useState` plus a `useEffect` that sets a `setTimeout` and returns `clearTimeout`, depending on `[value, delay]`"
+        },
+        {
+          "id": "b",
+          "label": "A `useRef` holding the value, changed by a `setTimeout` that is started in the render body on each render"
+        },
+        {
+          "id": "c",
+          "label": "`useMemo(() => value, [])` wrapped in a `setTimeout` so the value updates only after the delay passes"
+        },
+        {
+          "id": "d",
+          "label": "A `useEffect` with `setTimeout`, no cleanup, and `[]` dependencies so only the first timer is ever created"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Effect cleanup cancels pending timers on change and unmount; both inputs are dependencies.",
+        "Other options skip cleanup, ignore dependencies, or start side effects during render."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A reducer-based provider must satisfy: components that only call `dispatch` never re-render when state changes, there is one provider component, and `dispatch` is stable. Which design meets every constraint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Two contexts from one provider: the state in one context and the stable `dispatch` in the other"
+        },
+        {
+          "id": "b",
+          "label": "One context carrying `state`, with `dispatch` imported from a module variable assigned during render"
+        },
+        {
+          "id": "c",
+          "label": "One context carrying `{state, dispatch}` in `useMemo`, since consumers re-render only when memo dependencies change"
+        },
+        {
+          "id": "d",
+          "label": "One context whose value is a ref to the state, with consumers calling a forced update on every dispatch"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Separating state and dispatch contexts lets dispatch-only consumers avoid state updates.",
+        "A combined value changes whenever state does; the other options are fragile or defeat the goal."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design `useChatRoom(roomId)`. Constraints: connect to the room, switch cleanly when `roomId` changes, and behave correctly when StrictMode mounts, unmounts and remounts effects in development. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Connect in the component body behind `if (!connection)` so that rendering twice opens only one connection and the room is reused"
+        },
+        {
+          "id": "b",
+          "label": "Connect in an effect with `[]` dependencies and disconnect only in a `beforeunload` listener, so room changes cause no reconnect churn"
+        },
+        {
+          "id": "c",
+          "label": "Connect in an effect and guard it with a `useRef` flag so the second development invocation is skipped and only one connection opens"
+        },
+        {
+          "id": "d",
+          "label": "Connect in an effect keyed on `[roomId]` that returns a cleanup which disconnects, so remounting ends with one connection"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A symmetric setup and cleanup keyed on `roomId` is correct under re-invocation and room changes.",
+        "Flags, render-time connections and page-level cleanup hide bugs and leak connections on room change."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design `useLocalStorage(key, initial)`. Constraints: safe to render on a server, values sync across browser tabs, rapid updates compose correctly. Which elements does a design need? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Guard with `typeof window` or provide a server snapshot so server rendering never touches `localStorage`"
+        },
+        {
+          "id": "b",
+          "label": "Read `localStorage` in the component body on every render with no subscription, since reading is always fresh"
+        },
+        {
+          "id": "c",
+          "label": "Write `useState(JSON.parse(localStorage.getItem(key)))` so parsing reruns on each render for correctness"
+        },
+        {
+          "id": "d",
+          "label": "Accept functional updates in the setter and compute from the latest stored value before writing it"
+        },
+        {
+          "id": "e",
+          "label": "Subscribe to the `storage` event and return an unsubscribe cleanup, so other tabs' writes reach the hook"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Tab sync needs a storage subscription, server safety needs a guard, and composed updates need functional setters.",
+        "Unsubscribed reads never notify of changes, and the eager initializer runs each render and breaks on the server."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A `ProfileEditor` holds a dozen `useState` fields. When the route's `userId` changes, the previous user's draft flashes and sometimes persists. Constraints: all local state resets on a change, no frame shows old data, and no effect is used to sync state. Which fix meets every constraint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a `useEffect` on `[userId]` that calls every setter with defaults, resetting after the next paint"
+        },
+        {
+          "id": "b",
+          "label": "Wrap the editor in `React.memo` with a comparator on `userId` so it re-renders just for new users"
+        },
+        {
+          "id": "c",
+          "label": "Store each field in a `useRef` so a changed `userId` does not leave stale drafts inside state"
+        },
+        {
+          "id": "d",
+          "label": "Render `<ProfileEditor key={userId} />` so React remounts it with fresh state for each user"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Changing `key` remounts the component, resetting all state before any stale frame is shown.",
+        "Reset effects run after paint, refs retain values, and memo comparators do not reset state."
+      ],
+      "reviewed": false
+    }
+  ]
+}

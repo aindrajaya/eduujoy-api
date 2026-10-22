@@ -1,0 +1,2480 @@
+{
+  "version": 1,
+  "topic": "regression-analysis",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In a regression model, what is the response variable?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The constant term added to the model"
+        },
+        {
+          "id": "b",
+          "label": "The variable being predicted or explained"
+        },
+        {
+          "id": "c",
+          "label": "The difference between fitted and observed values"
+        },
+        {
+          "id": "d",
+          "label": "The variable used to predict the outcome"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The response is the outcome the model explains or predicts.",
+        "Distractors confuse it with predictors, the intercept, or residuals."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Ordinary least squares chooses the line that minimizes which quantity?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The number of points off the line"
+        },
+        {
+          "id": "b",
+          "label": "The largest single residual only"
+        },
+        {
+          "id": "c",
+          "label": "The sum of the raw residuals"
+        },
+        {
+          "id": "d",
+          "label": "The sum of squared residuals"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "OLS minimizes the sum of squared residuals.",
+        "Raw residual sums are zero for any line through the means, so they are not what OLS minimizes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is a residual in a fitted regression?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Predictor value minus its mean"
+        },
+        {
+          "id": "b",
+          "label": "Fitted value minus the mean response"
+        },
+        {
+          "id": "c",
+          "label": "Observed value minus fitted value"
+        },
+        {
+          "id": "d",
+          "label": "Slope estimate minus the true slope"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A residual is observed minus fitted.",
+        "Distractors describe other quantities such as the explained deviation or centred predictor."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which type of response is logistic regression designed to model?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An outcome measured over time only"
+        },
+        {
+          "id": "b",
+          "label": "A binary outcome such as yes or no"
+        },
+        {
+          "id": "c",
+          "label": "A count with no upper limit"
+        },
+        {
+          "id": "d",
+          "label": "A continuous outcome such as height"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Logistic regression models binary outcomes via probabilities.",
+        "Continuous outcomes suit linear regression."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In the model y = b0 + b1*x, what does b0 represent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The slope, the change in y for each one-unit increase in x"
+        },
+        {
+          "id": "b",
+          "label": "The correlation between x and y"
+        },
+        {
+          "id": "c",
+          "label": "The residual for the first observation"
+        },
+        {
+          "id": "d",
+          "label": "The intercept, the fitted y when x is 0"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "b0 is the intercept.",
+        "Slope confusion is the main distractor."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are standard assumptions of the linear regression model? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The relationship between predictors and mean response is linear"
+        },
+        {
+          "id": "b",
+          "label": "Predictors must all be uncorrelated with the intercept"
+        },
+        {
+          "id": "c",
+          "label": "The response must be binary"
+        },
+        {
+          "id": "d",
+          "label": "Residuals have roughly constant variance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Linearity and constant variance are standard assumptions.",
+        "A binary response belongs to logistic regression; the last option is invented."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A student fits a model predicting exam score from hours studied. The output lists an R-squared value of 0.64. The student wants to recall what this statistic is called and measures. Which description is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The probability that the slope is truly zero, given the data"
+        },
+        {
+          "id": "b",
+          "label": "The share of score variance explained by the model"
+        },
+        {
+          "id": "c",
+          "label": "The increase in predicted score for each extra hour studied"
+        },
+        {
+          "id": "d",
+          "label": "The average size of the residuals, in exam score points"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "R-squared is the proportion of variance explained.",
+        "Distractors confuse it with residual error, a p-value, or the slope."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A model gives fitted weight = 10 + 0.5*height. What is the correct interpretation of 0.5?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Height rises 0.5 units for each unit of weight"
+        },
+        {
+          "id": "b",
+          "label": "Weight rises by exactly 0.5 units for every person per height unit"
+        },
+        {
+          "id": "c",
+          "label": "Half of the variation in weight is explained by height alone"
+        },
+        {
+          "id": "d",
+          "label": "Each extra unit of height goes with 0.5 more weight on average"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The slope is the average change in response per unit predictor.",
+        "Distractors overstate certainty, reverse the variables, or confuse slope with R-squared."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A residual plot shows a clear U-shaped curve around zero. What does this most likely indicate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The response variable must be binary, so logistic regression is needed"
+        },
+        {
+          "id": "b",
+          "label": "The residuals are perfectly random, so the fit is good"
+        },
+        {
+          "id": "c",
+          "label": "The straight-line relationship is not adequate"
+        },
+        {
+          "id": "d",
+          "label": "The sample is too large, so the model cannot be trusted"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A curved residual pattern signals non-linearity.",
+        "Random scatter, not a pattern, indicates a good fit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In a logistic regression, a predictor has a coefficient of 0. What does this say about that predictor?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It makes the outcome impossible at every value"
+        },
+        {
+          "id": "b",
+          "label": "It has no association with the log-odds of the outcome"
+        },
+        {
+          "id": "c",
+          "label": "It doubles the odds of the outcome per unit increase"
+        },
+        {
+          "id": "d",
+          "label": "It lowers the probability of the outcome by zero percent only"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A zero coefficient means odds ratio of 1, so no association.",
+        "Doubling odds would need a coefficient of about 0.69."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is it wrong to say a regression slope proves that x causes y in observational data?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Slopes are usually reliable only when the data come from a randomized experiment"
+        },
+        {
+          "id": "b",
+          "label": "Other factors that also affect y can produce the association"
+        },
+        {
+          "id": "c",
+          "label": "Least squares assumes random assignment, so it fits observational data poorly"
+        },
+        {
+          "id": "d",
+          "label": "Causal claims need a larger R-squared than observational data tend to give"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Confounding means association alone does not show causation.",
+        "Distractors wrongly limit the method or treat fit as proof."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A fitted line predicts well for ages 20 to 40 in the data. Why is predicting at age 90 risky?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The linear pattern may not hold outside the observed range"
+        },
+        {
+          "id": "b",
+          "label": "The slope estimate becomes unreliable once ages pass the sample's mean age"
+        },
+        {
+          "id": "c",
+          "label": "Least squares only guarantees a good fit for ages inside the middle of the data"
+        },
+        {
+          "id": "d",
+          "label": "Predictions are only valid at the sample mean, not at other values"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Extrapolation assumes the pattern continues beyond the data.",
+        "Distractors invent rules about sign or the mean."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly interpret a positive slope of 2 in a simple linear regression? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Higher x values are associated with higher average y"
+        },
+        {
+          "id": "b",
+          "label": "The correlation between x and y must be negative"
+        },
+        {
+          "id": "c",
+          "label": "The fitted line rises 2 units in y per 1 unit of x"
+        },
+        {
+          "id": "d",
+          "label": "Every observation lies exactly 2 units above the prior one"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "A positive slope means upward trend of 2 per unit.",
+        "Distractors misread the slope as a deterministic step or as negative correlation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "An analyst fits a logistic regression predicting whether a customer buys (1) or not (0). The model outputs a predicted value of 0.8 for one customer. A colleague asks what this number means. Which explanation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The model estimates an 80% chance this customer buys"
+        },
+        {
+          "id": "b",
+          "label": "The customer has completed 80% of the steps toward buying"
+        },
+        {
+          "id": "c",
+          "label": "The model classifies 80% of all customers correctly overall"
+        },
+        {
+          "id": "d",
+          "label": "The customer is expected to buy 0.8 items on average"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Logistic regression outputs a probability of the event.",
+        "Distractors misread it as a count, progress, or overall accuracy."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In a simple linear regression of exam score on hours studied, the slope is 4.5. What does this slope mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Studying causes a 4.5% rise in the score for every student who studies one more hour"
+        },
+        {
+          "id": "b",
+          "label": "Each extra hour studied is associated with a 4.5-point higher predicted score"
+        },
+        {
+          "id": "c",
+          "label": "A student who studies 0 hours is predicted to score 4.5, the value where the line crosses the axis"
+        },
+        {
+          "id": "d",
+          "label": "Hours studied explains 4.5 percent of the variation in exam scores across all the students"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The slope is the predicted change in the response per one-unit increase in the predictor.",
+        "Distractors confuse slope with intercept, causation, or R-squared."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the least squares method choose when fitting a regression line?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The line minimizing the sum of the perpendicular distances"
+        },
+        {
+          "id": "b",
+          "label": "The line making the sum of the predictor values equal zero"
+        },
+        {
+          "id": "c",
+          "label": "The line minimizing the sum of squared vertical residuals"
+        },
+        {
+          "id": "d",
+          "label": "The line passing through as many data points as possible"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "OLS minimizes the sum of squared residuals in the response direction.",
+        "Distractors confuse it with exact fitting or perpendicular (orthogonal) distance."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A model has R-squared = 0.64. Which interpretation is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "About 64% of the response variation is explained by the model"
+        },
+        {
+          "id": "b",
+          "label": "The model's predictions land on the observed value 64% of the time"
+        },
+        {
+          "id": "c",
+          "label": "The correlation between predictor and response is exactly 0.64"
+        },
+        {
+          "id": "d",
+          "label": "The slope is statistically significant at the 64% confidence level"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "R-squared is the proportion of response variance explained by the model.",
+        "Distractors confuse it with accuracy, correlation r, or significance."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In a logistic regression, the coefficient for a predictor is 0.7. How should it be interpreted?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A one-unit increase raises the odds of the outcome by 0.7 units"
+        },
+        {
+          "id": "b",
+          "label": "A one-unit increase raises the log-odds of the outcome by 0.7"
+        },
+        {
+          "id": "c",
+          "label": "A one-unit increase raises the probability of the outcome by 0.7"
+        },
+        {
+          "id": "d",
+          "label": "A one-unit increase raises the outcome's value by 0.7 on average"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Logistic coefficients are changes in log-odds per unit.",
+        "Distractors treat the coefficient as a change in probability, odds, or a linear outcome."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which plot pattern of residuals versus fitted values suggests a straight-line model is inadequate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Residuals scattered randomly around zero"
+        },
+        {
+          "id": "b",
+          "label": "A clear U-shaped curve in the residuals"
+        },
+        {
+          "id": "c",
+          "label": "Residuals with roughly equal spread everywhere"
+        },
+        {
+          "id": "d",
+          "label": "Residuals that sum to zero overall"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A curved residual pattern signals non-linearity.",
+        "Other options describe a good fit or a property that always holds in OLS with an intercept."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are standard assumptions checked for a linear regression model used for inference? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Residuals have roughly constant variance"
+        },
+        {
+          "id": "b",
+          "label": "The relationship between predictors and response is linear"
+        },
+        {
+          "id": "c",
+          "label": "The predictors must be normally distributed"
+        },
+        {
+          "id": "d",
+          "label": "The response must be binary"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Linearity and constant variance (homoscedasticity) are core assumptions.",
+        "Predictors need not be normal, and a binary response calls for logistic regression."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "An analyst regresses house price (in thousands of dollars) on floor area (square metres) and gets an intercept of 50 and a slope of 2. A colleague says the intercept means a house with zero area costs 50 thousand, so it is a realistic price. Which response is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The intercept shows that every house costs 50 thousand more than its area implies, which is a fixed fee"
+        },
+        {
+          "id": "b",
+          "label": "The intercept is meaningful when the slope is also statistically significant, since then the line fits well at zero"
+        },
+        {
+          "id": "c",
+          "label": "The intercept is the average price of all houses in the dataset, found by setting area to its mean"
+        },
+        {
+          "id": "d",
+          "label": "The intercept is the fitted value at area 0, which is outside the data and may have no real meaning"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The intercept is the prediction at x=0, which is often an extrapolation with no real meaning.",
+        "Distractors confuse the intercept with the mean response or add invented interpretations."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A fitted line is `y = 3 + 2x`. What is the predicted y for x = 5, and what is the residual if the observed y is 16?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Predicted 10, residual 6"
+        },
+        {
+          "id": "b",
+          "label": "Predicted 13, residual -3"
+        },
+        {
+          "id": "c",
+          "label": "Predicted 16, residual 0"
+        },
+        {
+          "id": "d",
+          "label": "Predicted 13, residual 3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Predicted = 3 + 10 = 13; residual = observed - predicted = 16 - 13 = 3.",
+        "Distractors flip the residual sign or drop the intercept."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In logistic regression the fitted log-odds for a customer is 0. What is the predicted probability of the outcome?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1"
+        },
+        {
+          "id": "b",
+          "label": "0.5"
+        },
+        {
+          "id": "c",
+          "label": "0.25"
+        },
+        {
+          "id": "d",
+          "label": "0"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Odds = e^0 = 1, so probability = 1/(1+1) = 0.5.",
+        "Distractors treat log-odds 0 as probability 0 or 1."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A logistic model has a coefficient of 0.693 for a binary predictor (ln 2 ≈ 0.693). By what factor do the odds of the outcome change when the predictor goes from 0 to 1?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Multiplied by 2"
+        },
+        {
+          "id": "b",
+          "label": "Increased by 2 percentage points"
+        },
+        {
+          "id": "c",
+          "label": "Increased by 0.693"
+        },
+        {
+          "id": "d",
+          "label": "Multiplied by 0.693"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Odds ratio = exp(0.693) ≈ 2.",
+        "Distractors apply the coefficient additively to odds or probability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A model predicts salary (in thousands) as `20 + 3*years + 5*degree`, where degree = 1 if the person has a degree and 0 otherwise. What is the predicted salary for a person with 4 years of experience and a degree?",
+      "options": [
+        {
+          "id": "a",
+          "label": "57"
+        },
+        {
+          "id": "b",
+          "label": "37"
+        },
+        {
+          "id": "c",
+          "label": "32"
+        },
+        {
+          "id": "d",
+          "label": "29"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "20 + 3*4 + 5*1 = 37.",
+        "Distractors omit the degree term, omit years, or multiply terms incorrectly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Data on x range from 10 to 30. The fitted line is `y = 5 + 0.8x`. For which x is using the model for prediction most appropriate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "x = 22"
+        },
+        {
+          "id": "b",
+          "label": "x = 100"
+        },
+        {
+          "id": "c",
+          "label": "x = 0"
+        },
+        {
+          "id": "d",
+          "label": "x = 60"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Prediction within the observed range is interpolation and is reliable.",
+        "The others are extrapolation beyond the observed data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A residual plot for a fitted line shows a funnel shape, with residuals spreading wider as fitted values grow. Which actions are reasonable next steps? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Try transforming the response, such as taking its log"
+        },
+        {
+          "id": "b",
+          "label": "Treat the funnel as evidence that the slope is zero"
+        },
+        {
+          "id": "c",
+          "label": "Use weighted least squares or robust standard errors"
+        },
+        {
+          "id": "d",
+          "label": "Delete the intercept to flatten the funnel"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "A funnel indicates non-constant variance; transformations or weighting/robust errors address it.",
+        "Removing the intercept does not fix it and the pattern says nothing about a zero slope."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A student fits a regression of sales on advertising spend for 30 stores and gets slope 1.8 with a standard error of 0.6. Using the rough rule that |t| > 2 suggests significance, what should the student conclude?",
+      "options": [
+        {
+          "id": "a",
+          "label": "t = 0.33, so the slope is not distinguishable from zero"
+        },
+        {
+          "id": "b",
+          "label": "t = 3, so advertising causes sales to rise by a factor of three"
+        },
+        {
+          "id": "c",
+          "label": "t = 1.08, so the slope is not distinguishable from zero"
+        },
+        {
+          "id": "d",
+          "label": "t = 3, so the slope differs from zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "t = estimate / SE = 1.8/0.6 = 3, which exceeds 2.",
+        "Distractors invert the ratio, miscompute it, or claim causation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A fitted model is `price = 50 + 12*size - 8*age`, where price is in thousands, size is in 100 sq ft and age is in years. What is the predicted price for a house with size = 20 and age = 5?",
+      "options": [
+        {
+          "id": "a",
+          "label": "290"
+        },
+        {
+          "id": "b",
+          "label": "210"
+        },
+        {
+          "id": "c",
+          "label": "250"
+        },
+        {
+          "id": "d",
+          "label": "330"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "50 + 240 - 40 = 250.",
+        "290 ignores the age term; 330 adds the age term instead of subtracting it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A logistic regression has log-odds `-3 + 0.5*x`. What is the predicted probability of the event when x = 6?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.25"
+        },
+        {
+          "id": "b",
+          "label": "0.50"
+        },
+        {
+          "id": "c",
+          "label": "0.95"
+        },
+        {
+          "id": "d",
+          "label": "0.05"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Log-odds are -3 + 3 = 0, so odds = 1 and p = 0.5.",
+        "Other options come from treating the log-odds or the coefficient as a probability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In a logistic regression, the coefficient for `treatment` (1 = treated, 0 = control) is 0.69, and exp(0.69) is about 2. Which statement correctly applies this to the fitted model?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The odds of the event increase by 0.69 for treated cases"
+        },
+        {
+          "id": "b",
+          "label": "The odds of the event roughly double for treated cases"
+        },
+        {
+          "id": "c",
+          "label": "The probability of the event doubles for treated cases"
+        },
+        {
+          "id": "d",
+          "label": "The probability rises by 0.69 for treated cases versus control"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Exponentiating a logistic coefficient gives an odds ratio, so the odds multiply by about 2.",
+        "Distractors confuse odds with probability or treat the log-odds scale as additive on odds or probability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "For simple OLS, the data give mean x = 4, mean y = 30, Sxy = 60 and Sxx = 20 (sums of deviation products and squares). What is the least-squares intercept?",
+      "options": [
+        {
+          "id": "a",
+          "label": "-18"
+        },
+        {
+          "id": "b",
+          "label": "42"
+        },
+        {
+          "id": "c",
+          "label": "18"
+        },
+        {
+          "id": "d",
+          "label": "30"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Slope = 60/20 = 3; intercept = 30 - 3*4 = 18.",
+        "42 adds the slope term instead of subtracting it; 30 is just the mean of y."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A linear model has SST = 200 and SSE = 40. What is R^2?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.80"
+        },
+        {
+          "id": "b",
+          "label": "0.25"
+        },
+        {
+          "id": "c",
+          "label": "0.84"
+        },
+        {
+          "id": "d",
+          "label": "0.20"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "R^2 = 1 - SSE/SST = 1 - 0.2 = 0.80.",
+        "0.20 is the unexplained share; 0.25 comes from dividing SST by SSE incorrectly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You must include `region` (4 categories: North, South, East, West) as a predictor in an OLS model that has an intercept. Which steps are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Drop the intercept and also drop one indicator"
+        },
+        {
+          "id": "b",
+          "label": "Create 4 indicator variables and keep the intercept in the model"
+        },
+        {
+          "id": "c",
+          "label": "Code regions as 1, 2, 3, 4 and enter as one numeric variable"
+        },
+        {
+          "id": "d",
+          "label": "Interpret each indicator coefficient as a difference from the reference region"
+        },
+        {
+          "id": "e",
+          "label": "Create 3 indicator variables and leave one region as the reference"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "With an intercept, k categories need k-1 indicators, and coefficients are contrasts with the reference.",
+        "Four indicators plus an intercept are perfectly collinear; numeric coding imposes a false ordering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "An analyst fits a model of house price on size and age. A client wants a range that will contain the sale price of one specific new house of 1,800 sq ft with 95% probability under the model. The analyst has the fitted values and the residual standard error.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Report the fitted value plus or minus one residual standard error"
+        },
+        {
+          "id": "b",
+          "label": "Report a 95% prediction interval, adding residual variance"
+        },
+        {
+          "id": "c",
+          "label": "Report a 95% confidence interval for the mean price, since it covers the average house"
+        },
+        {
+          "id": "d",
+          "label": "Report a 95% confidence interval for the size coefficient only"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A single new observation needs a prediction interval, which adds error variance to the uncertainty in the mean.",
+        "A confidence interval for the mean is too narrow for an individual outcome."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In a model predicting sales, the coefficient on `ad_spend` is +4.1 when alone, but becomes -1.3 with a large standard error once `ad_spend_lagged` (correlation 0.97 with it) is added. What best explains this change?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The relationship is nonlinear, so adding any second predictor makes the linear slope on ad_spend flip sign"
+        },
+        {
+          "id": "b",
+          "label": "The model is overfitting, because adding a second predictor always inflates coefficient variance"
+        },
+        {
+          "id": "c",
+          "label": "The residuals are heteroscedastic, which biases the OLS coefficient estimates and changes their sign"
+        },
+        {
+          "id": "d",
+          "label": "The predictors are nearly collinear, so their separate effects are poorly identified"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Very high correlation between predictors makes coefficients unstable with inflated standard errors.",
+        "Heteroscedasticity affects standard errors, not the point estimates' sign in this way."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A residuals-versus-fitted plot of an OLS model shows a clear U shape, while the residual spread stays about constant. Which diagnosis fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The observations are autocorrelated, so the intercept is wrong"
+        },
+        {
+          "id": "b",
+          "label": "The errors are not normal, so the coefficient estimates are biased"
+        },
+        {
+          "id": "c",
+          "label": "The errors have nonconstant variance, so weighted least squares is needed"
+        },
+        {
+          "id": "d",
+          "label": "The mean of y is not linear in x; a curvature term is missing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A systematic U shape in residuals with steady spread signals misspecified functional form.",
+        "Nonconstant variance would show as a funnel, not curvature."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "One observation has a very high leverage and a large Cook's distance. Removing it changes the slope from 0.8 to 2.1 and R^2 from 0.35 to 0.71. What is the most reasonable reading?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The sample is too large, because a single point should not be able to move a slope this much"
+        },
+        {
+          "id": "b",
+          "label": "One influential point drives the fit, so check it is valid and report both fits"
+        },
+        {
+          "id": "c",
+          "label": "The point is mainly an outlier in y, so its leverage is not what changed the slope here"
+        },
+        {
+          "id": "d",
+          "label": "The model is correct, because R^2 rises sharply once the point has been removed from it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "High leverage with large Cook's distance means the point strongly drives the fit.",
+        "Removing points just to raise R^2 is not justified; the point needs investigation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A logistic regression returns a coefficient of 18 with standard error 4,000 for `has_flag`. Cross-tabulation shows every case with `has_flag` = 1 had outcome 1, and none with 0 did. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Heteroscedasticity in the residuals makes the standard error unstable"
+        },
+        {
+          "id": "b",
+          "label": "Multicollinearity between has_flag and the intercept inflates the error"
+        },
+        {
+          "id": "c",
+          "label": "The odds ratio is correctly large, so the standard error is expected"
+        },
+        {
+          "id": "d",
+          "label": "Perfect separation means the maximum likelihood estimate does not exist"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "When a predictor perfectly separates outcomes, the likelihood keeps increasing and the coefficient diverges.",
+        "The huge standard error signals a failed estimate, not a precise one."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A regression of monthly sales on price uses 60 consecutive months. Coefficients look sensible and p-values are tiny, but consecutive residuals are strongly positively correlated (Durbin-Watson about 0.6). What is the main consequence?",
+      "options": [
+        {
+          "id": "a",
+          "label": "R^2 must be above 0.9 whenever residuals are autocorrelated"
+        },
+        {
+          "id": "b",
+          "label": "The standard errors are understated, so significance is overstated"
+        },
+        {
+          "id": "c",
+          "label": "The residuals cannot have mean zero, so the intercept is invalid"
+        },
+        {
+          "id": "d",
+          "label": "The slope estimates are biased because residuals are correlated with x"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Positive autocorrelation makes OLS standard errors too small, exaggerating significance, even though estimates stay unbiased.",
+        "Correlation among errors does not by itself bias the slope."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A multiple regression has a significant overall F-test but no individually significant coefficients. Which findings would support multicollinearity as the cause? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "R^2 is very low, around 0.05"
+        },
+        {
+          "id": "b",
+          "label": "Dropping a few rows changes coefficients substantially"
+        },
+        {
+          "id": "c",
+          "label": "Pairwise correlations among predictors are above 0.9"
+        },
+        {
+          "id": "d",
+          "label": "The residuals fan out as fitted values increase"
+        },
+        {
+          "id": "e",
+          "label": "Several predictors have variance inflation factors above 10"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "High VIFs, high predictor correlations and coefficient instability all indicate collinear predictors.",
+        "A funnel pattern points to heteroscedasticity, and a very low R^2 would not give a significant F with many data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An analyst models test score on study hours and a group indicator (A or B) with no interaction. A scatterplot shows group A gaining about 5 points per hour and group B about 1 point per hour. Residuals are positive for A at high hours and negative for B at high hours.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Study hours and group are collinear, so one should be dropped"
+        },
+        {
+          "id": "b",
+          "label": "The slope differs by group, so an hours-by-group interaction is missing"
+        },
+        {
+          "id": "c",
+          "label": "An outlier in group A is causing the pattern, so it should be removed"
+        },
+        {
+          "id": "d",
+          "label": "The response needs a log transform to correct the heteroscedasticity"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Different slopes across groups, with residuals that depend on group and hours, indicate a missing interaction term.",
+        "The no-interaction model forces a common slope, producing the systematic residual pattern."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A residuals-versus-fitted plot for an OLS model fans out: small spread at low fitted values, large spread at high ones. The mean of the residuals is near zero at every fitted value. What does this pattern most directly threaten?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Consistency of the intercept, since the spread grows with the size of the fitted values"
+        },
+        {
+          "id": "b",
+          "label": "Unbiasedness of the slope estimates, since unequal spread shifts the fitted line"
+        },
+        {
+          "id": "c",
+          "label": "Linearity of the mean function, since a fan shape shows curvature in the relationship"
+        },
+        {
+          "id": "d",
+          "label": "Valid standard errors and p-values, since the usual formulas assume constant error variance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Non-constant variance leaves OLS coefficients unbiased but makes the conventional standard errors wrong.",
+        "Distractors confuse heteroscedasticity with bias or nonlinearity; the mean of the residuals is fine here."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "The slope of x1 is +2.1 in a simple regression on y, but -0.8 once x2 is added. x1 and x2 correlate at 0.9, and x2 has a strong positive effect on y. What is the best explanation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The software has made a rounding error, because the two slopes should always be similar"
+        },
+        {
+          "id": "b",
+          "label": "The multiple regression is wrong, because adding a predictor should never reverse a sign"
+        },
+        {
+          "id": "c",
+          "label": "The simple slope was partly picking up x2's effect, because x1 acts as a proxy for x2"
+        },
+        {
+          "id": "d",
+          "label": "The sign flip shows x1 is irrelevant, because its effect disappears once x2 enters the model"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The marginal slope mixes x1's own effect with x2's; the conditional slope holds x2 fixed.",
+        "Distractors treat the coefficient as fixed regardless of model, or read a sign change as irrelevance."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A logistic regression on 200 patients returns a coefficient of 18.4 with a standard error of 5,200 for one binary predictor, and a warning about fitted probabilities of 0 or 1. Which diagnosis fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One predictor level perfectly predicts the outcome, so the likelihood has no finite maximum"
+        },
+        {
+          "id": "b",
+          "label": "The model is overfit to noise, so a lower learning rate would remove the huge standard error"
+        },
+        {
+          "id": "c",
+          "label": "The outcome is not binary, so the logit link cannot be used on this variable"
+        },
+        {
+          "id": "d",
+          "label": "The predictor is nearly constant, so its variance is too small to estimate a slope"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Perfect (quasi-)separation sends the maximum likelihood coefficient toward infinity with a huge SE.",
+        "Distractors blame low variance or overfitting generally, which do not produce the 0/1 fitted probabilities."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In a simple OLS fit, one observation has an x value far outside the rest, but it lies almost exactly on the line fitted to the other points. Which description of its effect is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "High influence, since a point with extreme x usually drags the slope toward itself and so distorts the fitted line"
+        },
+        {
+          "id": "b",
+          "label": "Low leverage, since a point that sits on the line has little pull on the slope and leaves the fit nearly unchanged"
+        },
+        {
+          "id": "c",
+          "label": "High leverage but small residual, so it barely moves the slope yet inflates R^2 and shrinks the standard errors"
+        },
+        {
+          "id": "d",
+          "label": "No effect on inference, since mainly the points with large residuals change the standard errors and the R^2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Leverage is about x position; influence needs leverage plus a residual off the trend.",
+        "Distractors equate extreme x with influence or ignore how such a point changes R^2 and the SEs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A model is `y = b0 + b1*dose + b2*group + b3*dose*group`, with group coded 0 for control and 1 for treated. After adding the interaction, the p-value for `dose` jumps from 0.001 to 0.40. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The added term has used up degrees of freedom, so p-values for every term must rise sharply"
+        },
+        {
+          "id": "b",
+          "label": "The interaction has caused multicollinearity, so the dose effect is no longer real in either group"
+        },
+        {
+          "id": "c",
+          "label": "The `dose` term now estimates the slope only in the control group, which may be nearly flat"
+        },
+        {
+          "id": "d",
+          "label": "The `dose` term now estimates the average slope over both groups, which is weaker than before"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "With an interaction, the main effect of dose is the slope at group = 0, the reference group.",
+        "Distractors treat the term as an average effect or blame collinearity and degrees of freedom."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Which of the following problems cause biased OLS slope estimates for the predictor of interest, rather than only affecting standard errors? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "An omitted variable that affects y and is correlated with the predictor"
+        },
+        {
+          "id": "b",
+          "label": "Classical random measurement error in the predictor itself"
+        },
+        {
+          "id": "c",
+          "label": "Error variance that grows with the fitted values"
+        },
+        {
+          "id": "d",
+          "label": "Non-normal errors in a sample of several thousand observations"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Omitted confounders and measurement error in x (attenuation) bias the slope.",
+        "Heteroscedasticity and non-normality with large n affect inference, not unbiasedness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An analyst regresses daily sales on ad spend over 300 consecutive days. The slope is highly significant, but residuals show long runs of positive then negative values, and the Durbin-Watson statistic is 0.7. Neighbouring days' errors clearly resemble each other. What is the most likely consequence for the reported results?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Normally distributed residuals make the long runs harmless, so the reported tests need no adjustment"
+        },
+        {
+          "id": "b",
+          "label": "The standard errors are too small, so significance is overstated though the slope stays unbiased"
+        },
+        {
+          "id": "c",
+          "label": "R^2 is understated because the runs add noise, so the model is better than the output suggests"
+        },
+        {
+          "id": "d",
+          "label": "The slope is biased upward because errors carry over between days, so the true ad effect is smaller"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Positive autocorrelation makes OLS standard errors too small, so tests are overconfident.",
+        "Distractors claim bias in the slope or dismiss the pattern; the issue concerns inference."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team has 120 observations and 40 candidate predictors. They run stepwise selection, then report the final model's coefficients with their ordinary p-values as evidence of real effects. Which critique is strongest?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The p-values ignore that the same data chose the variables, so they are too optimistic; validate on held-out data"
+        },
+        {
+          "id": "b",
+          "label": "Stepwise cannot add variables once removed, so the final model is always worse than the full one"
+        },
+        {
+          "id": "c",
+          "label": "Stepwise uses R^2 for choosing variables, which is invalid for models with more than ten predictors"
+        },
+        {
+          "id": "d",
+          "label": "The p-values are too conservative, since stepwise removes weak predictors and shrinks the error variance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Post-selection inference on the same data inflates significance; holdout or penalised methods are better.",
+        "Distractors misdescribe how stepwise works or reverse the direction of the bias."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "The goal is out-of-sample prediction. There are 80 observations, 30 correlated predictors and moderate noise. Criteria: stable predictions and no need to interpret single coefficients. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "OLS with all 30 predictors, because it is unbiased and so gives the lowest expected prediction error"
+        },
+        {
+          "id": "b",
+          "label": "OLS on the few predictors with the smallest p-values, because screening on p-values removes noise variables and cuts variance"
+        },
+        {
+          "id": "c",
+          "label": "A model with many added transformations and interactions chosen to minimise training error, because it fits the data closely"
+        },
+        {
+          "id": "d",
+          "label": "Ridge regression with the penalty tuned by cross-validation, because shrinkage trades a little bias for lower variance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "With many correlated predictors and small n, shrinkage cuts variance and improves prediction.",
+        "Distractors favour unbiasedness, naive selection or training fit over expected test error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A logistic model flags fraud, which occurs in 1% of cases. It reports 99% accuracy. The firm wants to catch most fraud while keeping manual reviews affordable. Which judgement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Accuracy is uninformative since predicting all non-fraud scores 99%; compare recall and precision across thresholds"
+        },
+        {
+          "id": "b",
+          "label": "Accuracy is the right metric here, since 99% means almost every case is classified correctly and few reviews are wasted"
+        },
+        {
+          "id": "c",
+          "label": "Raise the threshold to 0.9 to maximise accuracy, since flagging fewer cases means fewer errors and cheaper reviews"
+        },
+        {
+          "id": "d",
+          "label": "Report AUC alone, since it states how well the model works at every possible threshold in the business setting"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "With 1% prevalence, accuracy hides missed fraud; recall and precision at thresholds match the stated goals.",
+        "Distractors rely on accuracy or on a single summary that ignores the review-cost trade-off."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "One observation in a regression has a Cook's distance of 3 and halves the slope when removed. It cannot be traced to any recording error and comes from a real, rare customer type. Criteria: honest reporting and defensible conclusions. What is the best action?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replace its value with the mean, because this keeps the sample size and removes the influence"
+        },
+        {
+          "id": "b",
+          "label": "Report results with and without it, noting the rare group, and consider a robust method"
+        },
+        {
+          "id": "c",
+          "label": "Delete it, because any point that changes the slope this much must be an error"
+        },
+        {
+          "id": "d",
+          "label": "Keep it silently, because removing real data is never allowed in any analysis"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A genuine but influential point should be disclosed with a sensitivity analysis, not hidden or deleted.",
+        "Distractors either delete on influence alone, hide the issue, or fabricate a value."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Predictors x1 and x2 correlate at 0.95. The aim is an unbiased estimate of x1's effect on y, and theory says x2 also affects y. Which choice best fits these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Drop x2, since removing collinear variables always gives a more precise and trustworthy x1 estimate"
+        },
+        {
+          "id": "b",
+          "label": "Drop x1 instead, since the predictor with the higher p-value should always be the one removed"
+        },
+        {
+          "id": "c",
+          "label": "Keep both and accept the wide interval on x1, or gather data where they vary independently"
+        },
+        {
+          "id": "d",
+          "label": "Keep both but standardise y, since rescaling the response removes the collinearity between predictors"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Dropping a true cause correlated with x1 biases x1's estimate; collinearity costs precision, not validity.",
+        "Distractors trade bias for apparent precision or suggest rescaling fixes collinearity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A report says, \"R^2 = 0.92, so the linear model is correct and its predictions can be trusted anywhere.\" Which criticisms are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A high R^2 on the sample guarantees accurate predictions outside the observed x range"
+        },
+        {
+          "id": "b",
+          "label": "A high R^2 proves the residuals are normal, so the model's confidence intervals are sound"
+        },
+        {
+          "id": "c",
+          "label": "A high R^2 can occur with a misspecified, curved relationship, so residual plots are still needed"
+        },
+        {
+          "id": "d",
+          "label": "Two trending time series can give a high R^2 with no real relationship"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "R^2 does not diagnose misspecification and can be inflated by shared trends.",
+        "R^2 says nothing about residual normality or extrapolation validity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A hospital uses predicted readmission risk to give home visits to patients above 20% absolute risk. Model A has AUC 0.82 but predicts 35% for groups that readmit at 20%. Model B has AUC 0.80 and is well calibrated. Criteria: the fixed 20% cutoff must mean what it says. Which choice is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use Model A unchanged and raise the cutoff to 35%, since calibration errors cancel out"
+        },
+        {
+          "id": "b",
+          "label": "Use whichever model has the lower training deviance, since calibration is a cosmetic property"
+        },
+        {
+          "id": "c",
+          "label": "Use Model A, since a higher AUC always means better decisions at any cutoff"
+        },
+        {
+          "id": "d",
+          "label": "Use Model B or recalibrate A, since the absolute-risk cutoff needs calibrated probabilities"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A cutoff on absolute risk requires calibrated probabilities; AUC measures ranking only.",
+        "Distractors prefer AUC alone or assume miscalibration is uniform or cosmetic."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team wants only accurate predictions for new data from the same population. Two predictors have correlation 0.95, and each is individually strong. Judging by that goal, which decision is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep both, because collinearity inflates coefficient variance but barely harms predictions in the same population"
+        },
+        {
+          "id": "b",
+          "label": "Drop one, because collinearity violates the OLS assumptions needed for predictions to be unbiased and efficient in new data"
+        },
+        {
+          "id": "c",
+          "label": "Keep both but report only the larger coefficient, since the smaller one is invalid under collinearity"
+        },
+        {
+          "id": "d",
+          "label": "Drop one, because collinearity biases the fitted values and makes predictions systematically wrong for new cases"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Collinearity mainly inflates coefficient standard errors; predictions stay stable if new data share the same correlation structure.",
+        "Distractors confuse unstable coefficients with biased predictions or a violated OLS assumption."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A logistic regression has one binary predictor that perfectly separates the outcomes in the training data, so the maximum likelihood estimate diverges. Criteria: finite estimates, all observations kept, valid probabilities. Which response is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Raise the iteration limit until the algorithm converges, since divergence only reflects a loose tolerance"
+        },
+        {
+          "id": "b",
+          "label": "Fit with a penalty such as Firth or ridge, which gives finite estimates and keeps every observation"
+        },
+        {
+          "id": "c",
+          "label": "Delete the separating predictor, since it must be an error in the data and cannot be a real signal"
+        },
+        {
+          "id": "d",
+          "label": "Switch to OLS on the 0/1 outcome, since it always gives finite coefficients and avoids separation"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Penalized or bias-reduced likelihood yields finite estimates while keeping the data.",
+        "Distractors ignore that the divergence is a property of the likelihood, not of iteration limits, and give up the data or the model form."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An analyst reports that adding last period's sales as a predictor raised R^2 from 0.60 to 0.85 and concludes the model now better explains the effect of a price promotion. Which critique is strongest?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The lagged term is invalid because predictors must be independent of the response in any regression, so the model is misspecified"
+        },
+        {
+          "id": "b",
+          "label": "The gain mostly reflects persistence in sales, so higher R^2 says little about the promotion effect"
+        },
+        {
+          "id": "c",
+          "label": "R^2 can never be compared across models, so the conclusion is invalid whatever predictors are added or removed"
+        },
+        {
+          "id": "d",
+          "label": "The jump proves the promotion coefficient is now unbiased, since a higher R^2 shows the omitted variable is fixed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Lagged outcomes raise fit through autocorrelation, which does not show better causal identification of the promotion.",
+        "Distractors equate R^2 with identification or misstate regression rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "With 50,000 observations and clear heteroskedasticity of unknown form, the goal is valid confidence intervals for OLS coefficients. Which approach is best on robustness and validity?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run WLS with weights estimated from a single predictor, since a correct weight model gives the most efficient estimates"
+        },
+        {
+          "id": "b",
+          "label": "Keep the OLS estimates and use heteroskedasticity-robust standard errors, valid without a variance model"
+        },
+        {
+          "id": "c",
+          "label": "Drop the observations with the largest residuals until the residual plot looks even, since outliers drive the unequal variance"
+        },
+        {
+          "id": "d",
+          "label": "Log-transform the response and keep the usual standard errors, since the log scale usually stabilises the variance"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Robust SEs give valid inference without specifying the variance function; large n makes them reliable.",
+        "Distractors risk a misspecified weight model, change the estimand, or trim data arbitrarily."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A logistic model predicts a 1%-prevalence event, and predicted probabilities will be multiplied by costs to decide interventions. Which evaluation is most appropriate for judging model quality?",
+      "options": [
+        {
+          "id": "a",
+          "label": "R^2 from refitting OLS on the 0/1 outcome, because it is easy to compare across model families"
+        },
+        {
+          "id": "b",
+          "label": "The count of significant coefficients, because more significant terms means better probability estimates"
+        },
+        {
+          "id": "c",
+          "label": "Log loss or Brier score plus a calibration plot, since decisions depend on probabilities being well calibrated"
+        },
+        {
+          "id": "d",
+          "label": "Accuracy at a 0.5 threshold, because it summarises how often the classifications are correct"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Cost-weighted decisions need calibrated probabilities, which proper scoring rules and calibration plots assess.",
+        "Accuracy is near 99% for a trivial model; significance counts do not measure predictive quality."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A report picks predictors by stepwise selection on p-values and then presents the final model's coefficients, p-values and confidence intervals as if the model had been specified in advance. Which are valid criticisms? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Stepwise selection invalidates the least squares estimates, so the fitted line cannot be computed"
+        },
+        {
+          "id": "b",
+          "label": "Selected coefficients tend to be biased away from zero, since variables that look strong by chance are retained"
+        },
+        {
+          "id": "c",
+          "label": "The final model will be the one with the lowest possible prediction error on new data"
+        },
+        {
+          "id": "d",
+          "label": "Reported p-values and intervals ignore the selection step, so they are too optimistic"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Post-selection inference ignores the data-driven search and exaggerates effects.",
+        "Least squares can still be computed, and stepwise selection does not guarantee best out-of-sample error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "An evaluator regresses test scores on a school-level tutoring program using 4,000 students from 40 schools, 20 of which adopted the program. Students in a school share unmeasured influences. The OLS standard error for the program effect is tiny. Which judgement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The standard error is too small because errors are correlated within schools; use cluster-robust errors by school"
+        },
+        {
+          "id": "b",
+          "label": "Adding more student-level covariates will fix the standard error, since they absorb the shared influences"
+        },
+        {
+          "id": "c",
+          "label": "The result is reliable, because 4,000 students give enough power to make standard errors this small"
+        },
+        {
+          "id": "d",
+          "label": "Switching to heteroskedasticity-robust errors will fix it, since correlation within schools is a variance issue"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Treatment varies at school level, so the effective sample is near the number of schools and errors cluster.",
+        "HC errors do not address within-cluster correlation; sample size at the student level does not help."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A health agency models monthly infection counts in districts with populations from 5,000 to 2 million. Counts are overdispersed. The model must give rate ratios per unit of a predictor. Which design meets all these constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Negative binomial regression with a log link and a log(population) offset, so coefficients are rate ratios"
+        },
+        {
+          "id": "b",
+          "label": "Logistic regression on whether any infection occurred, since a binary outcome removes the effect of district size and overdispersion"
+        },
+        {
+          "id": "c",
+          "label": "OLS on the raw counts with population as a predictor, since it keeps the model linear and the coefficients easy to read"
+        },
+        {
+          "id": "d",
+          "label": "Poisson regression with a log link and no offset, since the log link alone adjusts for district size and overdispersion"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Count outcome, differing exposure and overdispersion call for negative binomial with a log-exposure offset.",
+        "Distractors drop exposure handling, discard count information or ignore overdispersion."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "An economist models revenue (strictly positive, right-skewed) and needs coefficients read as percentage changes in revenue per percentage change in price. Which specification fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Regress log(revenue) on log(price), so the slope is the elasticity of revenue with respect to price"
+        },
+        {
+          "id": "b",
+          "label": "Regress revenue on log(price), since the slope gives the percentage change in revenue per percent price rise"
+        },
+        {
+          "id": "c",
+          "label": "Regress log(revenue) on price, since the slope gives revenue elasticity with respect to price"
+        },
+        {
+          "id": "d",
+          "label": "Regress revenue on price, since the slope is read directly as percent change per percent change"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Log-log gives elasticities and suits a positive skewed response.",
+        "The other forms are level-level, log-level or level-log, which have different interpretations."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A team forecasts weekly demand with regression and validates it using random 5-fold cross-validation over three years of weekly rows. They plan to deploy it for next quarter. What is the design missing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Standardised predictors inside every fold, since unscaled inputs make cross-validated error estimates optimistic and unreliable"
+        },
+        {
+          "id": "b",
+          "label": "A fixed random seed for each fold split, since irreproducible fold assignments are the main threat to forecast validation"
+        },
+        {
+          "id": "c",
+          "label": "A larger number of folds such as 20, since 5 folds leave too little training data and bias the error estimate upward"
+        },
+        {
+          "id": "d",
+          "label": "Forward-chaining validation that trains on past weeks and tests on later ones, so no future data leaks"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Random folds mix future and past, leaking autocorrelation and trend; time-ordered validation mimics deployment.",
+        "Other options address minor issues that do not fix leakage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A trial wants to test whether a drug's effect on blood pressure differs between men and women, using one regression. Which specification is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Include only the drug-by-sex product term, since main effects are captured by the interaction"
+        },
+        {
+          "id": "b",
+          "label": "Include drug and sex as main effects only, then compare residuals between sexes"
+        },
+        {
+          "id": "c",
+          "label": "Include drug, sex and the drug-by-sex product, and test the product coefficient"
+        },
+        {
+          "id": "d",
+          "label": "Fit separate models for each sex and compare whether one drug p-value is significant and the other is not"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The interaction with both main effects directly tests effect difference.",
+        "Comparing significance across subgroups is not a test of difference; dropping main effects distorts the interaction."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Claim costs are positive and right-skewed with variance growing with the mean. The business needs predicted mean cost in dollars, unbiased on the original scale, without retransformation correction. Which model meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "OLS on log(cost), exponentiating the fitted values to get dollar predictions"
+        },
+        {
+          "id": "b",
+          "label": "A gamma GLM with a log link, modelling the mean cost directly on the dollar scale"
+        },
+        {
+          "id": "c",
+          "label": "OLS on the square root of cost, squaring the fitted values for dollar predictions"
+        },
+        {
+          "id": "d",
+          "label": "OLS on cost with robust standard errors, since the errors then become homoscedastic"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A gamma GLM with log link models E[cost] directly, so no retransformation bias arises.",
+        "Exponentiating or squaring OLS fits on transformed responses estimates a different quantity unless corrected."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "You must design a regression to estimate the effect of a hospital program on later costs from observational data, avoiding bias from confounding and from adjusting for the wrong variables. Which design choices fit? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Include baseline illness severity measured before enrolment, since it drives both enrolment and costs"
+        },
+        {
+          "id": "b",
+          "label": "Include prior-year spending, since it predicts both enrolment and later costs"
+        },
+        {
+          "id": "c",
+          "label": "Drop all covariates, since adjustment can only add bias in observational data"
+        },
+        {
+          "id": "d",
+          "label": "Include a variable caused by both the program and costs, since extra fit sharpens the estimate"
+        },
+        {
+          "id": "e",
+          "label": "Exclude readmissions measured after enrolment, since they are outcomes of the program itself"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Adjust for pre-treatment confounders and avoid post-treatment mediators.",
+        "Conditioning on a collider or dropping every covariate introduces or leaves bias."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A clinic has 40 patients with the outcome, 30 candidate predictors and needs stable, well-calibrated risk probabilities for a new logistic risk score. Which plan meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Fit all 30 predictors by maximum likelihood, then refit with only those at p < 0.05 and report the cross-validated AUC"
+        },
+        {
+          "id": "b",
+          "label": "Pre-specify a few predictors from clinical knowledge or use ridge with a cross-validated penalty, then bootstrap validate"
+        },
+        {
+          "id": "c",
+          "label": "Fit a very flexible model with interactions and splines, since the added terms capture the risk structure and improve calibration"
+        },
+        {
+          "id": "d",
+          "label": "Run best-subset selection on the full data, then report the apparent AUC and calibration slope from that same sample"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "With 40 events, shrinkage or heavy pre-specification plus resampling validation controls overfitting and improves calibration.",
+        "Other plans overfit or report optimistic apparent performance."
+      ],
+      "reviewed": false
+    }
+  ]
+}

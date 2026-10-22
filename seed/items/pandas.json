@@ -1,0 +1,2508 @@
+{
+  "version": 1,
+  "topic": "pandas",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which pandas function reads a CSV file into a DataFrame?",
+      "options": [
+        {
+          "id": "a",
+          "label": "pd.import_csv()"
+        },
+        {
+          "id": "b",
+          "label": "pd.read_csv()"
+        },
+        {
+          "id": "c",
+          "label": "pd.open_csv()"
+        },
+        {
+          "id": "d",
+          "label": "pd.load_csv()"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`pd.read_csv()` is the standard CSV reader.",
+        "The other names sound plausible but do not exist in pandas."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the name of pandas' one-dimensional labeled array type?",
+      "options": [
+        {
+          "id": "a",
+          "label": "DataFrame"
+        },
+        {
+          "id": "b",
+          "label": "Series"
+        },
+        {
+          "id": "c",
+          "label": "Index"
+        },
+        {
+          "id": "d",
+          "label": "Array"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A Series is a one-dimensional labeled array.",
+        "A DataFrame is two-dimensional, and an Index only holds labels."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which method shows the first five rows of a DataFrame by default?",
+      "options": [
+        {
+          "id": "a",
+          "label": "df.first_rows()"
+        },
+        {
+          "id": "b",
+          "label": "df.head()"
+        },
+        {
+          "id": "c",
+          "label": "df.peek()"
+        },
+        {
+          "id": "d",
+          "label": "df.top()"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`head()` returns the first 5 rows by default.",
+        "The other names do not exist as defaults for this purpose."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which expression counts the missing values in each column of `df`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "df.isna().sum()"
+        },
+        {
+          "id": "b",
+          "label": "df.nulls().count()"
+        },
+        {
+          "id": "c",
+          "label": "df.missing().sum()"
+        },
+        {
+          "id": "d",
+          "label": "df.count_missing()"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`isna()` flags missing values and `sum()` counts them per column.",
+        "The other methods are not part of pandas."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which pandas function joins two DataFrames using a shared key column?",
+      "options": [
+        {
+          "id": "a",
+          "label": "pd.merge()"
+        },
+        {
+          "id": "b",
+          "label": "pd.pivot()"
+        },
+        {
+          "id": "c",
+          "label": "pd.stack()"
+        },
+        {
+          "id": "d",
+          "label": "pd.melt()"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`pd.merge()` combines DataFrames on key columns, like a SQL join.",
+        "`melt`, `stack` and `pivot` reshape a single table."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are real pandas methods for handling missing values in a DataFrame? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "df.dropna()"
+        },
+        {
+          "id": "b",
+          "label": "df.clearna()"
+        },
+        {
+          "id": "c",
+          "label": "df.purgena()"
+        },
+        {
+          "id": "d",
+          "label": "df.fillna()"
+        },
+        {
+          "id": "e",
+          "label": "df.removenan()"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "`dropna()` removes missing data and `fillna()` replaces it.",
+        "The other names are invented."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "An analyst has a DataFrame `df` with columns `city` and `sales`. She wants the average sales for each city. Which line does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "df.groupby(\"city\")[\"sales\"].mean()"
+        },
+        {
+          "id": "b",
+          "label": "df.sort_values(\"city\")[\"sales\"].mean()"
+        },
+        {
+          "id": "c",
+          "label": "df[\"city\"].groupby(\"sales\").mean()"
+        },
+        {
+          "id": "d",
+          "label": "df.groupby(\"sales\")[\"city\"].mean()"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`groupby` splits by city, then `mean()` is applied to `sales`.",
+        "The other lines use invalid signatures."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `df[df[\"age\"] > 30]` return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only the age column, with values above 30"
+        },
+        {
+          "id": "b",
+          "label": "A Series of True and False values for each row"
+        },
+        {
+          "id": "c",
+          "label": "A DataFrame of the rows where age is above 30"
+        },
+        {
+          "id": "d",
+          "label": "A single number counting rows where age is above 30"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The boolean Series is used as a mask, so matching rows are kept.",
+        "The boolean Series is the inner expression, not the final result."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does `df.loc` differ from `df.iloc`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`loc` selects by integer position, `iloc` by label"
+        },
+        {
+          "id": "b",
+          "label": "`loc` selects by label, `iloc` by integer position"
+        },
+        {
+          "id": "c",
+          "label": "`loc` returns copies, `iloc` always returns views"
+        },
+        {
+          "id": "d",
+          "label": "`loc` selects columns only, `iloc` rows only"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`loc` is label-based and `iloc` is position-based.",
+        "The first distractor reverses the two."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `df.groupby(\"team\")[\"pts\"].sum()` produce?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A Series indexed by team holding each team's total pts"
+        },
+        {
+          "id": "b",
+          "label": "A single number: the total of pts across every team and game"
+        },
+        {
+          "id": "c",
+          "label": "A Series of every game's pts values, reordered and sorted by team"
+        },
+        {
+          "id": "d",
+          "label": "A DataFrame with one row per game and a running pts total"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Grouping by team then summing gives one total per team, indexed by team.",
+        "A single number would need no grouping."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A learner runs `df.dropna()` on its own line, then finds `df` still has missing values. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It returns a new DataFrame; `df` itself is unchanged"
+        },
+        {
+          "id": "b",
+          "label": "It only drops columns with NaN, never whole rows"
+        },
+        {
+          "id": "c",
+          "label": "It only marks the NaN cells until `df.commit()` is called"
+        },
+        {
+          "id": "d",
+          "label": "It only works on a Series, never on a whole DataFrame"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Most pandas methods return new objects unless reassigned or given inplace.",
+        "Other options invent behaviours."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What type of object does `df[[\"price\"]]` (double brackets) return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A Python list of prices"
+        },
+        {
+          "id": "b",
+          "label": "A Series of the price values"
+        },
+        {
+          "id": "c",
+          "label": "A single scalar price"
+        },
+        {
+          "id": "d",
+          "label": "A DataFrame with one column"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A list of column names selects a DataFrame, even with one name.",
+        "Single brackets with a string would return a Series."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe `pd.merge()` join types? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`how=\"left\"` drops rows from the left table without a match"
+        },
+        {
+          "id": "b",
+          "label": "`how=\"inner\"` keeps only rows whose keys appear in both tables"
+        },
+        {
+          "id": "c",
+          "label": "`how=\"inner\"` keeps all rows from both tables"
+        },
+        {
+          "id": "d",
+          "label": "`how=\"left\"` keeps every row from the left table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Inner keeps matches only; left keeps all left rows.",
+        "The other two swap the behaviours."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "An analyst merges `orders` with `customers` using `how=\"left\"` on `customer_id`. Some rows in the result show NaN in the `name` column. What most likely explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The merge dropped names whenever a customer ID appeared twice"
+        },
+        {
+          "id": "b",
+          "label": "Pandas fills right-table columns with NaN whenever the key names match"
+        },
+        {
+          "id": "c",
+          "label": "The `name` column was stored as a different data type before merging"
+        },
+        {
+          "id": "d",
+          "label": "Some orders have an ID that has no match in the customer table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A left merge keeps unmatched left rows and fills right columns with NaN.",
+        "Right-table columns are not always NaN; only unmatched rows are."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the expression `df[df['age'] > 30]` return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A list holding only the age values that are above 30"
+        },
+        {
+          "id": "b",
+          "label": "A single row, the first one where age is above 30"
+        },
+        {
+          "id": "c",
+          "label": "A boolean Series of True and False values for each row"
+        },
+        {
+          "id": "d",
+          "label": "A DataFrame containing only the rows where age is above 30"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The boolean Series is used as a mask, so only rows marked True are kept, as a DataFrame.",
+        "Distractors confuse the mask itself with the filtered result."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does `df.loc[...]` differ from `df.iloc[...]` when selecting rows?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`loc` selects by integer position, while `iloc` selects by index label"
+        },
+        {
+          "id": "b",
+          "label": "`loc` returns a copy of the data, while `iloc` always returns a view"
+        },
+        {
+          "id": "c",
+          "label": "`loc` works only on columns, while `iloc` works only on rows"
+        },
+        {
+          "id": "d",
+          "label": "`loc` selects by index label, while `iloc` selects by integer position"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "loc is label-based and iloc is position-based.",
+        "The swapped option targets learners who mix up the two names."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `df.groupby('city')['sales'].sum()` produce?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A Series of total sales with one entry for each city"
+        },
+        {
+          "id": "b",
+          "label": "A single number, the sum of sales across all cities"
+        },
+        {
+          "id": "c",
+          "label": "A DataFrame with the original rows sorted by city"
+        },
+        {
+          "id": "d",
+          "label": "A Series of sales values with the cities dropped"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "groupby splits by city, sums sales in each group, and returns a Series indexed by city.",
+        "Distractors treat groupby as sorting or as a plain total."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A column has values 4, 6, NaN and 10. What does `df['x'].mean()` return by default?",
+      "options": [
+        {
+          "id": "a",
+          "label": "6.67, because NaN is skipped and 3 values are used"
+        },
+        {
+          "id": "b",
+          "label": "NaN, because one missing value spoils the result"
+        },
+        {
+          "id": "c",
+          "label": "5.0, because NaN is counted as zero in the average"
+        },
+        {
+          "id": "d",
+          "label": "An error, because the column holds a missing value"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Pandas skips NaN by default (skipna=True), so the mean is 20/3.",
+        "Distractors assume NaN propagates, counts as zero, or raises an error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In `pd.merge(a, b, on='id', how='left')`, what happens to rows of `a` whose id does not appear in `b`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "They are dropped from the result, since no match exists"
+        },
+        {
+          "id": "b",
+          "label": "They trigger an error because the keys are not matched"
+        },
+        {
+          "id": "c",
+          "label": "They are kept, with NaN in the columns that came from b"
+        },
+        {
+          "id": "d",
+          "label": "They are kept, but only the id column is retained"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A left merge keeps every row of the left table and fills unmatched right columns with NaN.",
+        "Dropping unmatched rows describes an inner merge."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about `df['price']`, selecting one column from a DataFrame, are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It returns a one-column DataFrame"
+        },
+        {
+          "id": "b",
+          "label": "It keeps the same index as the DataFrame"
+        },
+        {
+          "id": "c",
+          "label": "It returns a Series"
+        },
+        {
+          "id": "d",
+          "label": "It returns a plain Python list of values"
+        },
+        {
+          "id": "e",
+          "label": "It has no index of its own"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Single-bracket selection gives a Series that shares the DataFrame's row index.",
+        "Distractors confuse Series with DataFrame, list, or an index-free object."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "An analyst loads a CSV with `pd.read_csv('customers.csv')`. The zip code 02134 in the file appears as 2134 in the DataFrame. The column dtype is int64. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "read_csv rounds any number that begins with a zero when it parses the column"
+        },
+        {
+          "id": "b",
+          "label": "The file was corrupted when it was saved, so the zero was dropped from the text"
+        },
+        {
+          "id": "c",
+          "label": "DataFrames cannot store a value that starts with a zero in any column type"
+        },
+        {
+          "id": "d",
+          "label": "read_csv inferred an integer type, so the leading zero was lost"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Type inference turned the digits into integers, which have no leading zeros; dtype=str would preserve them.",
+        "Distractors blame the file or pandas limits rather than dtype inference."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A DataFrame `df` has columns `dept` and `salary`. Which line gives the average salary for each department?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df.mean('dept')['salary']`"
+        },
+        {
+          "id": "b",
+          "label": "`df.groupby('salary')['dept'].mean()`"
+        },
+        {
+          "id": "c",
+          "label": "`df.groupby('dept')['salary'].mean()`"
+        },
+        {
+          "id": "d",
+          "label": "`df['salary'].groupby().mean('dept')`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Group by dept, select salary, then average.",
+        "Distractors swap the grouping and value columns or use invalid syntax."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `s = pd.Series([10, 20, 30, 40], index=['a','b','c','d'])`, what does `s.iloc[0:2].sum()` return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "60"
+        },
+        {
+          "id": "b",
+          "label": "10"
+        },
+        {
+          "id": "c",
+          "label": "50"
+        },
+        {
+          "id": "d",
+          "label": "30"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "iloc[0:2] takes positions 0 and 1, so 10 + 20 = 30.",
+        "60 assumes the slice end is inclusive."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which line replaces missing values in the `score` column with that column's mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df['score'] = df['score'].replace(df['score'].mean())`"
+        },
+        {
+          "id": "b",
+          "label": "`df['score'] = df['score'].fillna(df['score'].mean())`"
+        },
+        {
+          "id": "c",
+          "label": "`df['score'] = df['score'].dropna(df['score'].mean())`"
+        },
+        {
+          "id": "d",
+          "label": "`df['score'] = df['score'].isna(df['score'].mean())`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "fillna with the mean fills only the NaN entries.",
+        "Other options misuse dropna, replace or isna, which have different purposes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A DataFrame has several rows with the same `email`. Which call keeps only the first row for each email?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df.unique('email')`"
+        },
+        {
+          "id": "b",
+          "label": "`df.dropna(subset='email')`"
+        },
+        {
+          "id": "c",
+          "label": "`df.drop_duplicates(subset='email')`"
+        },
+        {
+          "id": "d",
+          "label": "`df.drop_duplicates(keep='last')`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "drop_duplicates with subset compares only email and keeps the first by default.",
+        "keep='last' without subset keeps the wrong rows and compares whole rows."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which expression selects rows where `a` is greater than 5 and `b` equals 'x'?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df[(df['a'] > 5) | (df['b'] == 'x')]`"
+        },
+        {
+          "id": "b",
+          "label": "`df[df['a'] > 5 and df['b'] == 'x']`"
+        },
+        {
+          "id": "c",
+          "label": "`df[df['a'] > 5 & df['b'] == 'x']`"
+        },
+        {
+          "id": "d",
+          "label": "`df[(df['a'] > 5) & (df['b'] == 'x')]`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Element-wise & with parentheses combines both conditions correctly.",
+        "`and` fails on Series, missing parentheses break precedence, and | means OR."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which expressions return the number of missing values in each column of `df`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df.isna().sum()`"
+        },
+        {
+          "id": "b",
+          "label": "`df.isnull().sum()`"
+        },
+        {
+          "id": "c",
+          "label": "`df.count()`"
+        },
+        {
+          "id": "d",
+          "label": "`df.isna().any()`"
+        },
+        {
+          "id": "e",
+          "label": "`df.notna().sum()`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "isna and isnull are aliases, and summing the booleans counts NaN per column.",
+        "notna().sum() and count() count non-missing values, and any() gives only True or False."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You have an `orders` DataFrame and a `customers` DataFrame, both with a `customer_id` column. Some orders have ids that are missing from `customers`. You need a result containing only orders that have a matching customer, with customer details attached.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`pd.merge(orders, customers, on='customer_id', how='outer')`"
+        },
+        {
+          "id": "b",
+          "label": "`pd.merge(orders, customers, on='customer_id', how='left')`"
+        },
+        {
+          "id": "c",
+          "label": "`pd.concat([orders, customers], axis=0)`"
+        },
+        {
+          "id": "d",
+          "label": "`pd.merge(orders, customers, on='customer_id', how='inner')`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An inner merge keeps only rows whose key appears in both tables.",
+        "Left and outer merges keep unmatched orders, and concat stacks rows rather than matching keys."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `df = pd.DataFrame({'a':[1,2,3,4],'b':[10,20,30,40]})`, what does `df[(df.a > 1) & (df.b < 40)]['b'].sum()` return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "90"
+        },
+        {
+          "id": "b",
+          "label": "50"
+        },
+        {
+          "id": "c",
+          "label": "20"
+        },
+        {
+          "id": "d",
+          "label": "60"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Rows with a=2 and a=3 satisfy both conditions, so 20+30=50.",
+        "90 comes from applying only a>1; 60 and 20 come from misreading the combined mask."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`left` has key values [1, 2, 3]. `right` has key values [2, 2, 4]. How many rows does `left.merge(right, on='key', how='left')` return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "4"
+        },
+        {
+          "id": "b",
+          "label": "6"
+        },
+        {
+          "id": "c",
+          "label": "3"
+        },
+        {
+          "id": "d",
+          "label": "5"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Key 1 gives 1 row, key 2 matches twice and gives 2 rows, key 3 gives 1 row, so 4 in total.",
+        "3 ignores duplicate matches in the right table; 5 and 6 wrongly add unmatched right keys or a cross product."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A DataFrame has columns `cat` and `price`, and some prices are NaN. Which line fills each missing price with the median price of its own category?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df['price'].fillna(df.groupby('cat')['price'].median())`"
+        },
+        {
+          "id": "b",
+          "label": "`df['price'].fillna(df.groupby('cat')['price'].agg('median').values)`"
+        },
+        {
+          "id": "c",
+          "label": "`df.groupby('cat')['price'].fillna('median')`"
+        },
+        {
+          "id": "d",
+          "label": "`df['price'].fillna(df.groupby('cat')['price'].transform('median'))`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`transform` returns a row-aligned Series, so `fillna` matches each row to its category median.",
+        "The plain `median()` result is indexed by category and does not align with the row index, so nothing is filled; the other two misuse arguments."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A DataFrame has `date` as strings like '2024-03-15' and a numeric `amt`. Which expression gives total `amt` per calendar month?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df.resample('M')['amt'].sum()`"
+        },
+        {
+          "id": "b",
+          "label": "`df.groupby(pd.to_datetime(df['date']).dt.to_period('M'))['amt'].sum()`"
+        },
+        {
+          "id": "c",
+          "label": "`df.groupby(df['date'].dt.month)['amt'].sum()`"
+        },
+        {
+          "id": "d",
+          "label": "`df.groupby('date')['amt'].sum()`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Strings must be converted to datetimes before `.dt` works; the period 'M' groups by year and month.",
+        "The `.dt` accessor fails on strings, `resample` needs a datetime index, and grouping by raw date gives daily totals."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `s = pd.Series([5, 6, 7], index=[2, 0, 1])`, what is `s.loc[0] + s.iloc[0]`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "12"
+        },
+        {
+          "id": "b",
+          "label": "11"
+        },
+        {
+          "id": "c",
+          "label": "13"
+        },
+        {
+          "id": "d",
+          "label": "10"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`loc[0]` uses the label 0 and gives 6; `iloc[0]` uses position 0 and gives 5; the sum is 11.",
+        "Other answers treat both lookups as positional or both as label-based."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A DataFrame `df` has a default integer index and a `city` column. Which expressions return a DataFrame containing only the rows where `city` equals 'Oslo'? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df.loc[df['city'] == 'Oslo']`"
+        },
+        {
+          "id": "b",
+          "label": "`df.query(\"city == 'Oslo'\")`"
+        },
+        {
+          "id": "c",
+          "label": "`df[df['city'] == 'Oslo']`"
+        },
+        {
+          "id": "d",
+          "label": "`df['city'] == 'Oslo'`"
+        },
+        {
+          "id": "e",
+          "label": "`df.loc['Oslo']`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Boolean masks used via `[]`, `loc`, or `query` all filter rows.",
+        "The bare comparison returns a boolean Series, and `loc['Oslo']` looks up an index label that does not exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "An analyst has an `orders` DataFrame with one row per order and columns `customer_id` and `amount`. A manager asks for the three customers who spent the most in total across all their orders. Which code answers this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`orders.groupby('customer_id')['amount'].sum().nlargest(3)`"
+        },
+        {
+          "id": "b",
+          "label": "`orders.sort_values('amount').groupby('customer_id').head(3)`"
+        },
+        {
+          "id": "c",
+          "label": "`orders.nlargest(3, 'amount')['customer_id'].unique()`"
+        },
+        {
+          "id": "d",
+          "label": "`orders.groupby('customer_id')['amount'].max().nlargest(3)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Total spend needs a per-customer sum, then the three largest.",
+        "The other options rank single orders, use the max instead of the sum, or return three rows per customer."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "The code `sub = df[df['x'] > 0]` followed by `sub['y'] = 1` raises a SettingWithCopyWarning. What is the best explanation and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The column 'y' does not exist yet, so pandas requires `df.insert` to create new columns before any assignment."
+        },
+        {
+          "id": "b",
+          "label": "Boolean indexing may return a copy, so pandas can't tell if the write should reach df; calling `.copy()` makes the intent explicit."
+        },
+        {
+          "id": "c",
+          "label": "Boolean filtering always returns a view of df, so the assignment silently overwrites original rows and pandas warns about it."
+        },
+        {
+          "id": "d",
+          "label": "Assigning a scalar to a whole column is deprecated, so pandas expects an equal-length Series to avoid broadcasting problems."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The filtered object's relationship to df is ambiguous, so an explicit `.copy()` states the intent.",
+        "Distractors misread the warning as being about new columns, views, or scalar broadcasting."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After reading a CSV, `df['qty'].sum()` returns a long string such as '1020-5' instead of a number. A '-' placeholder appears in some rows. What is the root cause and best fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The file was read with the wrong encoding so digits became text, so re-read the CSV with `encoding='utf-8'` to fix it."
+        },
+        {
+          "id": "b",
+          "label": "`sum` concatenates values when the index is non-unique, so call `df.reset_index(drop=True)` before summing the column."
+        },
+        {
+          "id": "c",
+          "label": "The '-' placeholder made the column dtype object; convert with `pd.to_numeric(df['qty'], errors='coerce')`, then sum."
+        },
+        {
+          "id": "d",
+          "label": "`Series.sum` skips numeric values when NaN is present, so pass `skipna=False` to force numeric addition of all values."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "One non-numeric token makes the whole column object dtype, and `sum` on strings concatenates them.",
+        "Index uniqueness, encoding, and `skipna` do not change the dtype."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "You want each row's share of its group total. `df['v'] / df.groupby('g')['v'].sum()` returns mostly NaN. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`sum` returns one value per group indexed by 'g', which doesn't align with the row index; `transform('sum')` keeps row alignment."
+        },
+        {
+          "id": "b",
+          "label": "`sum` returns a numpy scalar per group, and dividing a Series by a scalar of that kind is undefined in pandas."
+        },
+        {
+          "id": "c",
+          "label": "`sum` promotes `v` to float inside each group, and division between mismatched dtypes yields NaN in pandas."
+        },
+        {
+          "id": "d",
+          "label": "The groupby result is lazily evaluated, so the division sees an empty object unless you call `.compute()` first."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Arithmetic aligns on index labels, and group labels don't match row labels; `transform` returns a row-aligned result.",
+        "The distractors invent lazy evaluation, dtype problems, or scalar-division issues."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A DataFrame of daily sales is in random row order. `df['sales'].rolling(7).mean()` produces averages that look wrong. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`rolling` only works on a DatetimeIndex, so the integer index makes pandas ignore the window size entirely."
+        },
+        {
+          "id": "b",
+          "label": "`rolling(7)` averages seven calendar days, so duplicate dates in the data inflate each window unless deduplicated first."
+        },
+        {
+          "id": "c",
+          "label": "`rolling` is positional, so unsorted rows place non-adjacent days in one window; sort by date before rolling."
+        },
+        {
+          "id": "d",
+          "label": "`rolling` drops the first six rows and shifts alignment, so pass `min_periods=0` to restore the original positions."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An integer window covers seven consecutive rows regardless of dates, so row order matters.",
+        "Integer windows are not calendar-based, do not drop rows, and work without a DatetimeIndex."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`df.groupby('k')['v'].sum().sum()` is smaller than `df['v'].sum()`, though no `v` values are NaN. Column `k` has some missing values. What explains the gap and the fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Missing keys form a group that sums to zero, so use `fillna(0)` on `k` before grouping to restore the totals."
+        },
+        {
+          "id": "b",
+          "label": "Groupby sums only the first occurrence of each key by default, so add `.agg('sum')` to include all repeated rows."
+        },
+        {
+          "id": "c",
+          "label": "Groupby sorts keys and truncates unmatched ones, so pass `sort=False` to keep every row in the totals."
+        },
+        {
+          "id": "d",
+          "label": "Rows with NaN in `k` are dropped by default; use `groupby('k', dropna=False)` to keep them as their own group."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "By default groupby excludes rows whose key is NaN, so their `v` is lost; `dropna=False` keeps them.",
+        "The other options invent first-occurrence behaviour, zero groups, or truncation from sorting."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "After `orders.merge(customers, on='cust', how='inner')`, the result has fewer rows than `orders`. Which could explain this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keys differ by trailing spaces or case, such as 'A12 ' versus 'A12'."
+        },
+        {
+          "id": "b",
+          "label": "`customers` contains duplicate `cust` rows."
+        },
+        {
+          "id": "c",
+          "label": "`customers` had earlier been filtered to one time period."
+        },
+        {
+          "id": "d",
+          "label": "The merge should have used `how='left'` to keep the right table's rows."
+        },
+        {
+          "id": "e",
+          "label": "Some `cust` values in `orders` don't appear in `customers`."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "An inner merge keeps only matching keys, so unmatched values, whitespace or case mismatches, and a pre-filtered right table all drop rows.",
+        "Duplicate right keys add rows rather than remove them, and `how='left'` keeps left rows, not right rows."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "After `orders.merge(prices, on='sku', how='left')`, a table of 1,000 orders totalling $50,000 grows to 1,180 rows and $58,000 in revenue. The analyst expected the same row count. Which is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `sku` column has mixed dtypes, so pandas matches each order against every row in `prices`."
+        },
+        {
+          "id": "b",
+          "label": "A left merge keeps rows from both tables, so `prices` rows that have no matching order were appended."
+        },
+        {
+          "id": "c",
+          "label": "Some orders have a sku missing from `prices`, so the left merge adds extra rows filled with NaN."
+        },
+        {
+          "id": "d",
+          "label": "`prices` has several rows for some sku values, so each matching order is repeated once per price row."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Duplicate keys on the right side multiply matching left rows, inflating both the row count and the revenue.",
+        "Unmatched keys keep one row each, a left merge doesn't append right-only rows, and dtype mismatches don't create cross matches."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An analyst runs `df[df['score'] > 80]['grade'] = 'A'` and finds `df['grade']` unchanged, with no error raised. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The assignment only takes effect when the index is sorted, otherwise the matching rows are skipped"
+        },
+        {
+          "id": "b",
+          "label": "The filter returns a new object, so the assignment is applied to a temporary copy rather than to df"
+        },
+        {
+          "id": "c",
+          "label": "Boolean masks are read-only in pandas, so any assignment through a filtered frame is silently discarded"
+        },
+        {
+          "id": "d",
+          "label": "The filter casts 'grade' to object dtype, which blocks writes from reaching the original frame"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Chained indexing assigns into an intermediate object, not the original frame; `df.loc[mask, 'grade'] = 'A'` is the fix.",
+        "Distractors treat masks as read-only or blame dtype and index order, which are not the cause."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`orders` has 1,000 rows. After `orders.merge(promos, on='code', how='left')` the result has 1,340 rows. Which diagnosis is most likely?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The left join adds a row for every promo code that has no matching order"
+        },
+        {
+          "id": "b",
+          "label": "Codes with different dtypes were coerced, which creates extra rows for the mismatched values"
+        },
+        {
+          "id": "c",
+          "label": "Some codes appear several times in `promos`, so each matching order row is repeated per match"
+        },
+        {
+          "id": "d",
+          "label": "Left joins always return the union of both tables' keys, so extra rows are expected"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Duplicate keys on the right side multiply matching left rows.",
+        "Distractors confuse left with outer join behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "For group 'A', `df.groupby('g')['x'].mean()` gives 20, but `df[df.g=='A']['x'].sum() / (df.g=='A').sum()` gives 15. Column x has no infinities. What explains the gap?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`groupby` sorts group keys first, so the sum is taken over a different set of rows"
+        },
+        {
+          "id": "b",
+          "label": "`mean` skips NaN in both sum and count, while the manual division counts every row including NaN ones"
+        },
+        {
+          "id": "c",
+          "label": "The manual version uses integer division, which truncates the quotient to a lower value"
+        },
+        {
+          "id": "d",
+          "label": "`mean` rounds each value to the nearest group median before averaging, which shifts the result"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "mean divides by the non-null count, so NaN rows lower the manual figure.",
+        "Distractors invent rounding, sorting or integer division effects that do not occur."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "The sum of `df.groupby('region')['sales'].sum()` is 4% lower than `df['sales'].sum()`. No sales values are missing. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Region labels with trailing whitespace are merged into the nearest clean label, hiding rows"
+        },
+        {
+          "id": "b",
+          "label": "The groupby sums are computed on float32, which loses precision on large totals by a few percent"
+        },
+        {
+          "id": "c",
+          "label": "Groups with a single row are excluded because groupby needs at least two rows per group"
+        },
+        {
+          "id": "d",
+          "label": "Some rows have NaN in `region`, and groupby drops them from the result by default"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "groupby has dropna=True by default, so null-key rows vanish; use dropna=False to check.",
+        "Distractors propose precision loss, minimum group sizes, or merging labels, none of which pandas does."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After `df = df.set_index('user_id')`, code that does `df.loc[42, 'plan'].lower()` raises `AttributeError: 'Series' object has no attribute 'lower'` for user 42 only. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `user_id` index contains 42 more than once, so `loc` returns several rows as a Series"
+        },
+        {
+          "id": "b",
+          "label": "`set_index` converts string columns to a Series dtype that has no string methods"
+        },
+        {
+          "id": "c",
+          "label": "The `plan` column for user 42 holds NaN, which turns the result into a Series"
+        },
+        {
+          "id": "d",
+          "label": "`loc` with an integer always treats 42 as a position, so it returns a whole slice of rows"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A duplicated index label makes `loc` return multiple values (a Series) instead of a scalar.",
+        "Distractors confuse NaN with duplicates or misdescribe loc as positional."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "`pd.read_csv('sales.csv')` loads the `amount` column as object dtype, so `astype(float)` fails. Which are plausible causes? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Some cells use a placeholder like '-' for missing values"
+        },
+        {
+          "id": "b",
+          "label": "Values are written like '$1,200' with symbols and commas"
+        },
+        {
+          "id": "c",
+          "label": "The file has more than 65,536 rows"
+        },
+        {
+          "id": "d",
+          "label": "The rows are not sorted by date"
+        },
+        {
+          "id": "e",
+          "label": "A footer row such as 'Total' sits in the same column"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Any non-numeric text, like a footer label, '-' placeholders or currency symbols, forces object dtype.",
+        "Row count and sort order do not affect dtype inference."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An analyst merges `orders` (one row per order, with a `shipping_fee` column) with `order_items` (several rows per order) on `order_id`. She then runs `merged.groupby('customer')['shipping_fee'].sum()` and totals come out far above the finance figures. Items and fees are individually correct. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each order's fee is repeated once per item row after the join, so the sum counts it several times"
+        },
+        {
+          "id": "b",
+          "label": "`shipping_fee` was cast to a string during the merge, so sum concatenates the values instead of adding"
+        },
+        {
+          "id": "c",
+          "label": "The merge defaulted to an outer join, which added orders that have no rows in `order_items` and inflated the totals"
+        },
+        {
+          "id": "d",
+          "label": "The groupby summed `shipping_fee` across the full table rather than within each customer, so every customer got the grand total"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Joining on the one-to-many side repeats order-level values per item, inflating sums.",
+        "Distractors blame groupby scope, join type or dtype, which would not give this pattern."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A 6-million-row frame needs a `tier` column: 'high' if `spend` >= 500, 'mid' if >= 100, else 'low'. Criteria: fast, and readable by teammates. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A `for` loop over `df.iterrows()` that writes into `df.at[i, 'tier']`"
+        },
+        {
+          "id": "b",
+          "label": "`df.apply(lambda r: ..., axis=1)` with an if/elif chain inside the function"
+        },
+        {
+          "id": "c",
+          "label": "Three separate `df.loc[...]` assignments in ascending order of threshold, each overwriting the last"
+        },
+        {
+          "id": "d",
+          "label": "`np.select([df.spend >= 500, df.spend >= 100], ['high', 'mid'], 'low')` in one vectorized call"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "np.select is vectorized, handles ordered conditions and stays readable.",
+        "Row-wise apply and iterrows are slow at this scale; ascending overwrites give wrong tiers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Sensor readings have NaN where a device was offline. A teammate proposes `fillna(0)` before computing each device's mean temperature. Which critique is most valid?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Calling fillna always overwrites the source CSV on disk, so the raw readings are permanently lost"
+        },
+        {
+          "id": "b",
+          "label": "Offline gaps are unknown, not zero, so zeros drag means down; mean() already skips NaN"
+        },
+        {
+          "id": "c",
+          "label": "fillna only works on string columns, so numeric NaN stays and every device mean comes out NaN"
+        },
+        {
+          "id": "d",
+          "label": "Zero is an int while readings are floats, so the mixed dtypes make the groupby mean raise a TypeError"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Imputing 0 invents values and biases the mean; default NaN skipping is more faithful.",
+        "Distractors claim dtype errors, disk writes or string-only behaviour, all false."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A 20 GB CSV must be summed by `category` on a 16 GB machine. Criteria: stay within memory, read the file once, give exact totals. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Load the file with `read_csv(low_memory=False)` and drop the unused columns after loading, then run a single groupby sum"
+        },
+        {
+          "id": "b",
+          "label": "Read a random 10% sample with `skiprows`, sum each category, and scale the sums up by ten to estimate totals"
+        },
+        {
+          "id": "c",
+          "label": "Load the whole file once with `dtype=object` so no values are converted wrongly, then run a single groupby sum"
+        },
+        {
+          "id": "d",
+          "label": "Use `read_csv(chunksize=...)` with `usecols`, and add up each chunk's groupby sums"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Chunked reading with incremental aggregation keeps memory bounded and totals exact.",
+        "Loading everything or sampling breaks the memory or exactness criterion."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A pipeline joins fact rows to a `customers` dimension on `cust_id`. Criteria: fail loudly if the dimension ever has duplicate IDs, and leave results unchanged otherwise. Which option fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pass `validate='many_to_one'` to `merge` so it raises on duplicate right keys"
+        },
+        {
+          "id": "b",
+          "label": "Call `customers.drop_duplicates('cust_id')` before merging so duplicate dimension rows vanish silently"
+        },
+        {
+          "id": "c",
+          "label": "Add `indicator=True` to `merge` and then inspect the `_merge` column for unexpected values afterwards"
+        },
+        {
+          "id": "d",
+          "label": "Switch to `how='inner'` so unmatched rows cannot appear and the row count stays stable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "validate='many_to_one' raises MergeError on duplicate right keys without altering valid output.",
+        "indicator shows match status only, dedupe hides the problem, inner join does not address duplicates."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Monthly revenue is needed from a `DatetimeIndex` frame covering 2022-2024 with some months having no sales. Criteria: keep years separate and show empty months as 0. Which is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df['rev'].resample('MS').sum()`, which builds a continuous monthly range"
+        },
+        {
+          "id": "b",
+          "label": "`df.groupby(df.index.strftime('%Y-%m'))['rev'].sum()`, which labels each month"
+        },
+        {
+          "id": "c",
+          "label": "`df['rev'].rolling('30D').sum()`, which gives a running 30-day total"
+        },
+        {
+          "id": "d",
+          "label": "`df.groupby(df.index.month)['rev'].sum()`, which gives twelve rows"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "resample creates every month in the range, with sum of empty bins equal to 0.",
+        "month grouping merges years; strftime grouping omits empty months; rolling is not monthly totals."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A customer table has several rows per `id`, with an `updated` timestamp. Criteria: keep exactly one row per id, the most recent whole row; the index is unique. Which approaches are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df.groupby('id').first()` on the file as loaded"
+        },
+        {
+          "id": "b",
+          "label": "`df.drop_duplicates('id')` on the file as loaded"
+        },
+        {
+          "id": "c",
+          "label": "`df.sort_values('updated').groupby('id').tail(1)`"
+        },
+        {
+          "id": "d",
+          "label": "`df.sort_values('updated').drop_duplicates('id', keep='last')`"
+        },
+        {
+          "id": "e",
+          "label": "`df.loc[df.groupby('id')['updated'].idxmax()]`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Sorting then keeping last, idxmax with a unique index, and sorted tail(1) all pick the latest whole row.",
+        "Unsorted drop_duplicates keeps the first in file order; groupby.first() mixes first non-null values across rows."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A product team ranks items by `df.groupby('item')['rating'].mean()` and the top ten are all items with one or two five-star reviews. They want a ranking that stakeholders can trust and that stays easy to explain. Which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Delete all items with fewer than 100 reviews and report only the remaining mean ratings"
+        },
+        {
+          "id": "b",
+          "label": "Keep ranking by mean but round ratings to one decimal so ties are broken by name"
+        },
+        {
+          "id": "c",
+          "label": "Switch the mean to a median, which fixes small groups and needs no extra columns"
+        },
+        {
+          "id": "d",
+          "label": "Report mean and review count together and rank only items above a stated minimum count"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A minimum-count threshold with visible counts handles small-sample noise and is easy to explain.",
+        "Median on one or two reviews is still noisy, deleting hides data silently, rounding does not address sample size."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A reviewer sees `df[df['a'] > 0]['b'] = 0` in a cleaning script that must update `df` itself. Which critique and fix is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is correct as written, because boolean masks always return views of df, so the assignment always reaches df itself"
+        },
+        {
+          "id": "b",
+          "label": "It drops column a from df as a side effect, so the mask must be built from a copy made beforehand with df.copy()"
+        },
+        {
+          "id": "c",
+          "label": "It works but is slow, so `df.query('a > 0')['b'] = 0` is the faster equivalent that still writes back to df"
+        },
+        {
+          "id": "d",
+          "label": "It may assign into a temporary copy, leaving df unchanged; a single `df.loc[mask, 'b'] = 0` writes to df"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Chained indexing may operate on a copy; a single .loc setitem targets df.",
+        "Distractors assume masks return views or that query() writes back."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Orders (2M rows) are joined to customers, where `customer_id` should be unique. Criterion: the job must fail loudly if duplicate customer keys would inflate the row count, with no extra cleanup pass. Which call is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`orders.merge(customers, on='customer_id').drop_duplicates()`, which restores the original row count after the join"
+        },
+        {
+          "id": "b",
+          "label": "`orders.merge(customers, on='customer_id', validate='many_to_one')`, which raises if customer_id repeats in customers"
+        },
+        {
+          "id": "c",
+          "label": "`orders.merge(customers, on='customer_id', indicator=True)`, which raises if the right table has repeated keys"
+        },
+        {
+          "id": "d",
+          "label": "`orders.merge(customers, on='customer_id', how='inner')`, which removes duplicated keys from the right table automatically"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "validate checks key uniqueness and raises MergeError on violation.",
+        "Inner joins do not dedupe keys, and indicator only adds a column."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A revenue-by-region report built with `df.groupby('region')['revenue'].sum()` totals less than `df['revenue'].sum()`. Some rows have a null region. Which diagnosis and fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "groupby drops NaN keys by default; use `groupby('region', dropna=False)` so that revenue appears as its own row"
+        },
+        {
+          "id": "b",
+          "label": "groupby sorts keys and silently truncates tied groups; pass `sort=False` so every region's revenue stays in the result"
+        },
+        {
+          "id": "c",
+          "label": "groupby sums skip NaN revenue values by default; use `sum(skipna=False)` so the missing revenue shows up in the totals"
+        },
+        {
+          "id": "d",
+          "label": "groupby treats NaN keys as an empty-string group that is hidden; call `fillna('')` on the result to expose the missing revenue"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Rows with null group keys are excluded unless dropna=False.",
+        "Distractors blame NaN values, sorting or an imagined empty-string group."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A 40M-row frame has a `country` string column with about 200 distinct labels. Criteria: cut memory sharply, keep groupby on the labels, lose no information. Which option is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replace it with `pd.factorize(...)[0]` integer codes and discard the strings, which gives the smallest memory at no cost"
+        },
+        {
+          "id": "b",
+          "label": "Convert it with `astype('category')`, which stores each label once plus small integer codes and keeps labels intact"
+        },
+        {
+          "id": "c",
+          "label": "Convert it with `astype('string')`, which stores each distinct label once and so shrinks memory like categories do"
+        },
+        {
+          "id": "d",
+          "label": "Keep it as object dtype but sort the frame by country, which lets pandas share repeated string storage across rows"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Categorical dtype dedupes labels and keeps them usable in groupby.",
+        "Discarding strings loses information; string dtype and sorting do not dedupe storage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Monthly revenue is needed across several years. Criteria: one row for every calendar month in the range, 0 for months with no orders, and different years kept separate. Which expression best meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df.groupby(df['date'].dt.month)['rev'].sum()`, since it keeps each year separate and emits every month in the range"
+        },
+        {
+          "id": "b",
+          "label": "`df.set_index('date')['rev'].resample('MS').sum()`, since it emits every month in the range, with 0 for empty ones"
+        },
+        {
+          "id": "c",
+          "label": "`df.set_index('date')['rev'].rolling('30D').sum()`, since it yields one value per calendar month with 0 for empty ones"
+        },
+        {
+          "id": "d",
+          "label": "`df.groupby(df['date'].dt.to_period('M'))['rev'].sum()`, since it emits every month in the range with 0 for empty ones"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "resample builds a complete regular date grid, so empty months get 0 with sum.",
+        "groupby on period only returns periods present in the data; dt.month merges years."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A teammate computes `df['total'] = df.apply(lambda r: r['qty'] * r['price'], axis=1)` on 10M rows that include NaN. Which critiques are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Vectorized multiplication gives the same NaN-propagating result, so nothing is lost by switching"
+        },
+        {
+          "id": "b",
+          "label": "Vectorized multiplication ignores index alignment, so row order must be checked first"
+        },
+        {
+          "id": "c",
+          "label": "It runs a Python function per row, so `df['qty'] * df['price']` is typically far faster"
+        },
+        {
+          "id": "d",
+          "label": "It fails on NaN values, so vectorized code needs `fillna(0)` first to avoid an error"
+        },
+        {
+          "id": "e",
+          "label": "It builds a Series per row, which can upcast mixed int and float columns to a common dtype"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Row-wise apply is slow, upcasts via per-row Series, and matches vectorized NaN behavior.",
+        "Distractors invent NaN errors and missing index alignment."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A pipeline keeps each user's latest event with `events.groupby('user').apply(lambda g: g.sort_values('ts').iloc[-1])` on 20M rows, and it takes hours. The output must be identical full rows, including nulls in any column, with no per-group Python calls. Which replacement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`events.sort_values('ts').groupby('user').last()`, which returns each user's last row including nulls unchanged"
+        },
+        {
+          "id": "b",
+          "label": "`events.sort_values('ts').drop_duplicates('user', keep='last')`, which keeps whole last rows with no per-group calls"
+        },
+        {
+          "id": "c",
+          "label": "`events.groupby('user').max()`, which returns the row with the latest ts for each user"
+        },
+        {
+          "id": "d",
+          "label": "`events.groupby('user').head(1)`, which returns each user's latest row because groups keep the sorted ts order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Sorting then drop_duplicates keeps whole rows vectorized.",
+        "groupby.last() skips nulls per column; max() mixes rows; head(1) takes the first row in original order."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Purchases have columns `cust`, `ts`, `amt`. Design a column `prior` holding each customer's total of earlier purchases only, excluding the current row, with no leakage across customers. Which build meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sort by `ts`, then `df['prior'] = df['amt'].shift().cumsum()`, which lags amounts by one row and so skips the current purchase"
+        },
+        {
+          "id": "b",
+          "label": "Sort by `ts`, then `df.groupby('cust')['amt'].cumsum()`, which already leaves out the current purchase"
+        },
+        {
+          "id": "c",
+          "label": "Sort by `ts`, then `df['prior'] = df.groupby('cust')['amt'].cumsum() - df['amt']`, subtracting the current row"
+        },
+        {
+          "id": "d",
+          "label": "Sort by `ts`, then `df['prior'] = df.groupby('cust')['amt'].transform('sum') - df['amt']`, which gives earlier totals only"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Grouped cumsum includes the current row, so subtracting it leaves earlier totals.",
+        "Plain cumsum includes current; ungrouped shift leaks across customers; transform sum includes later rows."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Build a region-by-month sales table from long data. Constraints: sum repeated region and month rows, put 0 in empty cells, and include every month in a list `all_months` even if no rows exist. Use the same index, columns and values arguments in each option. Which meets all?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df.pivot_table(..., aggfunc='sum').fillna(0)`, because pivot_table builds one column for every month in `all_months` and fillna zero-fills them"
+        },
+        {
+          "id": "b",
+          "label": "`df.pivot_table(..., aggfunc='sum', fill_value=0)` alone, because fill_value also adds columns for months with no rows in the data"
+        },
+        {
+          "id": "c",
+          "label": "`df.pivot(...).fillna(0)`, because pivot sums repeated region and month pairs and fillna(0) zero-fills the absent months"
+        },
+        {
+          "id": "d",
+          "label": "`df.pivot_table(..., aggfunc='sum', fill_value=0).reindex(columns=all_months, fill_value=0)`, adding the absent months"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The pivot sums and zero-fills cells; reindex adds missing month columns.",
+        "Other options never create absent months, or pivot raises on duplicate pairs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Attach to each trade the latest quote for the same `ticker` at or before the trade `time`, but only if the quote is at most 5 minutes old; otherwise leave NaN. Which design meets every constraint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`pd.merge_asof(trades, quotes, on='time', by='ticker', tolerance=pd.Timedelta('5min'))` with both frames sorted by `time`"
+        },
+        {
+          "id": "b",
+          "label": "`pd.merge_asof(trades, quotes, on='time', tolerance=pd.Timedelta('5min'))` with both frames sorted by `time`"
+        },
+        {
+          "id": "c",
+          "label": "`pd.merge_asof(trades, quotes, on='time', by='ticker', direction='forward', tolerance=pd.Timedelta('5min'))` with both frames sorted by `time`"
+        },
+        {
+          "id": "d",
+          "label": "`trades.merge(quotes, on=['ticker','time'], how='left').ffill()` with both frames sorted by `time`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "merge_asof backward search with by and tolerance meets all constraints.",
+        "Forward direction looks at future quotes; omitting by mixes tickers; ffill ignores tolerance and ticker boundaries."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Customer records repeat per `id`. Keep one row per id: the most recent `updated`, and on equal dates the row with the larger `n_filled` count. Rows must stay whole. Which design satisfies this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sort by `['updated', 'n_filled']`, then `drop_duplicates('id', keep='last')`, so the newest record wins and ties go to the fuller one"
+        },
+        {
+          "id": "b",
+          "label": "Sort by `'updated'` only, then `drop_duplicates('id', keep='last')`, so the newest record wins and the fuller record is kept on ties"
+        },
+        {
+          "id": "c",
+          "label": "Use `groupby('id').first()` after sorting by `['updated','n_filled']`, which keeps the newest record's values in every column"
+        },
+        {
+          "id": "d",
+          "label": "Call `drop_duplicates('id')` with defaults, which keeps the first row per id and so tends to keep the newest"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Ascending two-key sort plus keep='last' picks newest, then fullest, as whole rows.",
+        "Sorting only by date ignores ties; defaults keep the first; first() takes the oldest and skips nulls."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A frame has columns `id`, `sales_2022`, `sales_2023`, `cost_2022`, `cost_2023`. Produce one row per id and year with separate `sales` and `cost` columns, in a single call. Which meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`pd.wide_to_long(df, stubnames=['sales','cost'], i='id', j='year', sep='_')`, which yields one row per id and year with both measures"
+        },
+        {
+          "id": "b",
+          "label": "`df.stack()`, which yields one row per id and year with sales and cost as separate columns"
+        },
+        {
+          "id": "c",
+          "label": "`df.melt(id_vars='id', var_name='year')`, which yields one row per id and year with both measures as columns"
+        },
+        {
+          "id": "d",
+          "label": "`df.pivot(index='id', columns='year', values=['sales','cost'])`, which yields one row per id and year"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "wide_to_long handles multiple stubs and splits the year suffix in one call.",
+        "melt gives one value column with combined names; stack and pivot do not reshape this naming pattern."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A loader must keep ID codes like '007' intact, and flag (not drop, not crash on) unparseable amounts and dates. Which changes to `pd.read_csv(path)` plus cleanup meet all of this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use `pd.to_datetime(df['date'], errors='coerce')` and flag rows where the result is NaT"
+        },
+        {
+          "id": "b",
+          "label": "Call `df.dropna()` right after loading so bad rows never reach later steps"
+        },
+        {
+          "id": "c",
+          "label": "Convert `id` with `astype(int)` so every ID has a consistent dtype"
+        },
+        {
+          "id": "d",
+          "label": "Use `pd.to_numeric(df['amt'], errors='coerce')` and flag rows where the result is NaN"
+        },
+        {
+          "id": "e",
+          "label": "Read with `dtype={'id': str}` so leading zeros survive"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "String dtype preserves zeros; coerce converts bad values to NaN/NaT so they can be flagged.",
+        "dropna removes rather than flags; astype(int) strips leading zeros."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "Daily sales per store have missing dates, and rows are sorted by date. You must add a feature holding each store's average over the trailing 7 calendar days, using only that store's rows. Which build meets every requirement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`df.groupby('store')['sales'].rolling(7).mean()`, a 7-row window computed within each store"
+        },
+        {
+          "id": "b",
+          "label": "`df.set_index('date')['sales'].rolling('7D').mean()`, a time window computed across all stores together"
+        },
+        {
+          "id": "c",
+          "label": "`df.set_index('date').groupby('store')['sales'].resample('7D').mean()`, a trailing window computed within each store"
+        },
+        {
+          "id": "d",
+          "label": "`df.set_index('date').groupby('store')['sales'].rolling('7D').mean()`, a time window computed within each store"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A grouped rolling with an offset string gives a calendar-based trailing window per store.",
+        "rolling(7) counts rows not days; ungrouped mixes stores; resample gives fixed bins, not trailing windows."
+      ],
+      "reviewed": false
+    }
+  ]
+}

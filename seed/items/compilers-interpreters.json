@@ -1,0 +1,2495 @@
+{
+  "version": 1,
+  "topic": "compilers-interpreters",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the lexer (scanner) produce from the source text?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A symbol table"
+        },
+        {
+          "id": "b",
+          "label": "A syntax tree"
+        },
+        {
+          "id": "c",
+          "label": "A stream of tokens"
+        },
+        {
+          "id": "d",
+          "label": "Machine code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The lexer groups characters into tokens such as identifiers, numbers and operators.",
+        "Syntax trees come from the parser, not the lexer."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which structure does a parser typically build from the token stream?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A table of register values"
+        },
+        {
+          "id": "b",
+          "label": "A file of object code"
+        },
+        {
+          "id": "c",
+          "label": "A list of characters"
+        },
+        {
+          "id": "d",
+          "label": "An abstract syntax tree"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Parsers organise tokens into a tree following the grammar.",
+        "Object code is the output of code generation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which compiler phase typically checks that a variable is declared before it is used?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lexical analysis"
+        },
+        {
+          "id": "b",
+          "label": "Code generation"
+        },
+        {
+          "id": "c",
+          "label": "Semantic analysis"
+        },
+        {
+          "id": "d",
+          "label": "Tokenisation"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Semantic analysis checks meaning rules such as declarations and types.",
+        "Lexing only splits text into tokens."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the output of a compiler's code generation phase?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A stream of tokens produced from the raw characters"
+        },
+        {
+          "id": "b",
+          "label": "A grammar definition describing the language's syntax"
+        },
+        {
+          "id": "c",
+          "label": "Target code such as machine code or bytecode"
+        },
+        {
+          "id": "d",
+          "label": "A list of syntax errors found in the source code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Code generation emits target code for a machine or virtual machine.",
+        "Tokens and errors come from earlier phases."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does an interpreter do with a program?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Translates all of it into a separate machine-code file before any of it runs"
+        },
+        {
+          "id": "b",
+          "label": "Executes it directly, without first producing a separate executable"
+        },
+        {
+          "id": "c",
+          "label": "Checks it for syntax errors only, and never actually runs the code"
+        },
+        {
+          "id": "d",
+          "label": "Rewrites it into a different source language so a person can read it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An interpreter runs the program itself, often by walking the tree.",
+        "Distractors describe tasks that are not interpretation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are standard phases or stages in a compiler? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Semantic analysis"
+        },
+        {
+          "id": "b",
+          "label": "Database indexing"
+        },
+        {
+          "id": "c",
+          "label": "Lexical analysis"
+        },
+        {
+          "id": "d",
+          "label": "Spell checking comments"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Lexing and semantic analysis are standard compiler phases.",
+        "Indexing and spell checking are not compiler phases."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A student writes `int x = ;` and the compiler reports 'expected expression after ='. All characters in the line are valid symbols of the language. Which phase most likely reported this error?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Linking"
+        },
+        {
+          "id": "b",
+          "label": "Code generation"
+        },
+        {
+          "id": "c",
+          "label": "Lexical analysis"
+        },
+        {
+          "id": "d",
+          "label": "Parsing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The tokens are valid but their order breaks the grammar, so the parser reports it.",
+        "A lexer error would concern an invalid character or malformed token."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do compilers build a syntax tree rather than just keeping the flat list of tokens?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A tree shows nesting and operator precedence explicitly"
+        },
+        {
+          "id": "b",
+          "label": "A tree takes less memory than any token list"
+        },
+        {
+          "id": "c",
+          "label": "A tree is needed so the lexer can find keywords"
+        },
+        {
+          "id": "d",
+          "label": "A tree makes the program run faster without further steps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The tree encodes structure like grouping and precedence that a flat list lacks.",
+        "The tree is not about memory or speed, and the lexer runs before it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "For the expression `2 + 3 * 4` under normal precedence, how does the syntax tree look and what is the result?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`*` is the root with `+` below it; result 20"
+        },
+        {
+          "id": "b",
+          "label": "`*` is the root with `+` below it; result 14"
+        },
+        {
+          "id": "c",
+          "label": "`+` is the root with `*` below it; result 14"
+        },
+        {
+          "id": "d",
+          "label": "`+` is the root with `*` below it; result 20"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Multiplication binds tighter, so it sits deeper in the tree and 3*4 is computed first, giving 14.",
+        "Other options mix up root and result by evaluating left to right."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A compiler reports 'variable count is not declared' for a program that is otherwise grammatically valid. How should this error be classified?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A lexical error, because the scanner cannot turn count into a valid token"
+        },
+        {
+          "id": "b",
+          "label": "A runtime error, because the name can only be checked once the program runs"
+        },
+        {
+          "id": "c",
+          "label": "A semantic error, because the grammar is satisfied but the meaning is not"
+        },
+        {
+          "id": "d",
+          "label": "A syntax error, because the parser could not fit the line into the grammar"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The structure is valid; the problem is a violated meaning rule found in semantic analysis.",
+        "Calling it syntax or lexical confuses grammar with meaning."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do most lexers discard whitespace and comments instead of passing them on as tokens?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Comments are run later by the interpreter's runtime"
+        },
+        {
+          "id": "b",
+          "label": "The parser does not need them in most languages"
+        },
+        {
+          "id": "c",
+          "label": "The lexer cannot tell spaces apart from identifiers"
+        },
+        {
+          "id": "d",
+          "label": "The code generator would fail on any space character"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Whitespace and comments rarely affect the grammar, so removing them simplifies parsing.",
+        "Lexers can recognise spaces; they drop them by design."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does running bytecode on a virtual machine differ from running native machine code?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Native code is run by a VM, while bytecode is run by the CPU directly"
+        },
+        {
+          "id": "b",
+          "label": "Bytecode is kept as source text that the VM lexes and parses again at run time"
+        },
+        {
+          "id": "c",
+          "label": "A program (the VM) executes bytecode; the CPU runs native code directly"
+        },
+        {
+          "id": "d",
+          "label": "Bytecode needs no compiling step, since the VM reads the programmer's code as written"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Bytecode is an intermediate form executed by a VM; native code runs on hardware.",
+        "Other options reverse or misstate the roles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly explain how compilers and interpreters differ? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A compiler translates a program to target code before it runs"
+        },
+        {
+          "id": "b",
+          "label": "An interpreter never needs a lexer or parser"
+        },
+        {
+          "id": "c",
+          "label": "A compiler cannot detect any errors before running"
+        },
+        {
+          "id": "d",
+          "label": "An interpreter carries out the program's actions while reading its structure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Compilers translate ahead of time; interpreters execute as they process the program.",
+        "Interpreters still lex and parse, and compilers detect many errors early."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team wants one build of its program to run on both Windows and Linux without recompiling for each. They compile the source to bytecode and ship a virtual machine for each operating system. Why does this approach meet their goal?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The bytecode skips lexing and parsing on each machine, so no OS-specific work is left"
+        },
+        {
+          "id": "b",
+          "label": "Windows and Linux share one CPU instruction set, so the bytecode runs natively on both"
+        },
+        {
+          "id": "c",
+          "label": "Each VM turns the same bytecode into actions on its own platform"
+        },
+        {
+          "id": "d",
+          "label": "The bytecode is rewritten as source on each machine and then compiled again to native code"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Bytecode is platform-neutral; each platform's VM handles the machine-specific work.",
+        "Distractors misunderstand what bytecode is or what the VM does."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does the lexer (tokenizer) stage of a compiler produce from the raw source text?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A syntax tree showing how the expressions are nested in the program"
+        },
+        {
+          "id": "b",
+          "label": "Machine code that the target processor can execute directly"
+        },
+        {
+          "id": "c",
+          "label": "A table recording the declared type of every variable"
+        },
+        {
+          "id": "d",
+          "label": "A sequence of tokens such as names, numbers and operators"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The lexer groups characters into tokens; it does not build structure.",
+        "Distractors confuse lexing with parsing (tree), code generation (machine code) or semantic analysis (types)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which problem would normally be reported by semantic analysis rather than by the lexer or parser?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Using a variable `count` that was never declared in scope"
+        },
+        {
+          "id": "b",
+          "label": "Two binary operators in a row, as in the line `3 + * 4`"
+        },
+        {
+          "id": "c",
+          "label": "A string literal that opens a quote but never closes it"
+        },
+        {
+          "id": "d",
+          "label": "A missing closing parenthesis in the expression `(1 + 2`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Undeclared names are about meaning, which is checked after parsing succeeds.",
+        "The other options are grammar or token-level errors caught by the parser or lexer."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does the AST for `(2 + 3) * 4` usually contain no node for the parentheses?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Parentheses never change the result of an arithmetic expression"
+        },
+        {
+          "id": "b",
+          "label": "The code generator re-inserts them later from the original text"
+        },
+        {
+          "id": "c",
+          "label": "The nesting of the tree already encodes the grouping"
+        },
+        {
+          "id": "d",
+          "label": "The lexer discards parentheses before the parser ever sees them"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "In an AST the shape of the tree carries grouping, so the punctuation is redundant.",
+        "Distractors wrongly claim parentheses are dropped by the lexer, are meaningless, or are restored later."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which statement best describes the core difference between a compiler and an interpreter?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A compiler runs the program line by line as it reads it, while an interpreter translates the whole program ahead of time"
+        },
+        {
+          "id": "b",
+          "label": "An interpreter usually produces a standalone executable file that runs without it, while a compiler keeps the program in source form"
+        },
+        {
+          "id": "c",
+          "label": "A compiler translates the program into another form before it runs; an interpreter carries out its steps as it reads it"
+        },
+        {
+          "id": "d",
+          "label": "A compiler mostly checks syntax, whereas an interpreter also checks types and meaning before the program starts running"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A compiler translates ahead of execution; an interpreter executes directly from source or a tree.",
+        "Distractors swap the roles or invent checking differences."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How many tokens does a lexer produce for the source text `x = 42 + y`, ignoring whitespace?",
+      "options": [
+        {
+          "id": "a",
+          "label": "5"
+        },
+        {
+          "id": "b",
+          "label": "4"
+        },
+        {
+          "id": "c",
+          "label": "6"
+        },
+        {
+          "id": "d",
+          "label": "3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The tokens are x, =, 42, +, y, which makes 5.",
+        "Smaller counts come from merging pieces such as `42 + y`; 6 counts a spurious extra token."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these typically happen before code generation in a compiler? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Checking that names and types are used consistently"
+        },
+        {
+          "id": "b",
+          "label": "Executing the compiled program on test input"
+        },
+        {
+          "id": "c",
+          "label": "Parsing tokens into a syntax tree"
+        },
+        {
+          "id": "d",
+          "label": "Lexical analysis of the source text"
+        },
+        {
+          "id": "e",
+          "label": "Reclaiming unused memory while the program runs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Lexing, parsing and semantic analysis are front-end phases that precede code generation.",
+        "Running the program and garbage collection happen after compilation, at run time."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A student's compiler reports `line 3: expected ')' but found end of line` for the source `print((1 + 2)`. Every character used is a valid symbol in the language. Which stage most likely raised this error, and why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The lexer, because a lone parenthesis is not a valid token without a matching partner"
+        },
+        {
+          "id": "b",
+          "label": "The parser, because the tokens break the grammar's rule for matching parentheses"
+        },
+        {
+          "id": "c",
+          "label": "Semantic analysis, because `print` cannot accept a numeric argument in this position"
+        },
+        {
+          "id": "d",
+          "label": "The code generator, because it cannot emit a call instruction with that many operands"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Unbalanced parentheses violate the grammar, so the parser reports them.",
+        "Lexer and semantic distractors confuse token validity or meaning with structure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "With standard precedence rules, which node is the root of the AST for `1 + 2 * 3`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`3`"
+        },
+        {
+          "id": "b",
+          "label": "`1`"
+        },
+        {
+          "id": "c",
+          "label": "`*`"
+        },
+        {
+          "id": "d",
+          "label": "`+`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Multiplication binds tighter, so `2 * 3` is a subtree under the root `+`.",
+        "Choosing `*` ignores precedence and reads left to right."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A tree-walking interpreter evaluates the AST for `(8 - 2) / 3` by evaluating children first. What value does it return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "7.33"
+        },
+        {
+          "id": "b",
+          "label": "2"
+        },
+        {
+          "id": "c",
+          "label": "5"
+        },
+        {
+          "id": "d",
+          "label": "6"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The subtree 8 - 2 gives 6, then 6 / 3 gives 2.",
+        "7.33 ignores the grouping; 5 and 6 come from using the wrong operands."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A recursive-descent parser uses the rule `expr -> term ('+' term)*`, and `term` matches one integer. How many times is `term()` called when parsing `2 + 3 + 4`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3"
+        },
+        {
+          "id": "b",
+          "label": "1"
+        },
+        {
+          "id": "c",
+          "label": "2"
+        },
+        {
+          "id": "d",
+          "label": "4"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "One call for the first term plus one per loop iteration: 3 integers means 3 calls.",
+        "Other counts miscount the loop iterations."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A stack machine runs `PUSH 2, PUSH 5, PUSH 3, MUL, ADD`. MUL and ADD pop two values and push the result. What is left on the stack?",
+      "options": [
+        {
+          "id": "a",
+          "label": "17"
+        },
+        {
+          "id": "b",
+          "label": "30"
+        },
+        {
+          "id": "c",
+          "label": "10"
+        },
+        {
+          "id": "d",
+          "label": "21"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "MUL gives 5*3 = 15, then ADD gives 2 + 15 = 17.",
+        "21 applies ADD to the wrong pair; 30 and 10 use the same operator throughout."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A language uses lexical block scoping. What does this program print? `let x = 1; { let x = 2; { print(x); } }`",
+      "options": [
+        {
+          "id": "a",
+          "label": "2"
+        },
+        {
+          "id": "b",
+          "label": "1"
+        },
+        {
+          "id": "c",
+          "label": "nothing is printed"
+        },
+        {
+          "id": "d",
+          "label": "an undeclared-variable error"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Lookup starts in the innermost scope and finds the nearest declaration, x = 2.",
+        "Printing 1 ignores shadowing; the error option ignores enclosing scopes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A lexer uses maximal munch, with rules for `=`, `==`, `<`, `<=`, `+`, names and integers, and skips spaces. Which inputs produce exactly 3 tokens? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`x<=5`"
+        },
+        {
+          "id": "b",
+          "label": "`n<5`"
+        },
+        {
+          "id": "c",
+          "label": "`a==b`"
+        },
+        {
+          "id": "d",
+          "label": "`i=i+1`"
+        },
+        {
+          "id": "e",
+          "label": "`a= =b`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "`x<=5`, `a==b` and `n<5` each give name, operator, value.",
+        "`i=i+1` gives 5 tokens, and `a= =b` gives 4 because the space splits `==` into two `=`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You add an AST pass that replaces any binary node whose two children are both integer literals with one literal holding the result. It visits children before parents. The source line is `y = x + 2 * 3`, where `x` is a variable. What does the line become after the pass?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`y = x + 2 * 3`, because the variable `x` blocks any folding in the expression"
+        },
+        {
+          "id": "b",
+          "label": "`y = 8`, because every node in the expression is folded into a constant"
+        },
+        {
+          "id": "c",
+          "label": "`y = (x + 2) * 3`, because folding regroups the operands from left to right"
+        },
+        {
+          "id": "d",
+          "label": "`y = x + 6`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The `2 * 3` subtree has two literal children and folds to 6, leaving `x + 6`.",
+        "Distractors assume x blocks all folding, that precedence changes, or that x is a constant."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A lexer using maximal munch reads `a>=b`, where `>`, `=` and `>=` are all valid operator tokens. Which token sequence does it produce?",
+      "options": [
+        {
+          "id": "a",
+          "label": "IDENT(a), GT, IDENT(=b)"
+        },
+        {
+          "id": "b",
+          "label": "IDENT(a), GE, IDENT(b)"
+        },
+        {
+          "id": "c",
+          "label": "IDENT(a), GT, ASSIGN, IDENT(b)"
+        },
+        {
+          "id": "d",
+          "label": "IDENT(a), GE, ASSIGN, IDENT(b)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Maximal munch takes the longest matching token, so `>=` becomes one GE token.",
+        "Distractors split the operator or leave a stray `=`, ignoring the longest-match rule."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A recursive-descent parser implements `expr -> term (('-') term)*` and builds a left-associative tree, then evaluates it. What does it compute for `1-2-3`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0"
+        },
+        {
+          "id": "b",
+          "label": "-2"
+        },
+        {
+          "id": "c",
+          "label": "2"
+        },
+        {
+          "id": "d",
+          "label": "-4"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Left associativity gives (1-2)-3 = -4.",
+        "Result 2 comes from treating it as 1-(2-3)."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Using standard precedence (`*` binds tighter than `+` and `-`, left-associative), what is the postfix form of `a + b * c - d`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "a b c d * + -"
+        },
+        {
+          "id": "b",
+          "label": "a b c * d - +"
+        },
+        {
+          "id": "c",
+          "label": "a b c * + d -"
+        },
+        {
+          "id": "d",
+          "label": "a b + c * d -"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The expression parses as (a + (b*c)) - d, giving a b c * + d -.",
+        "Other options ignore precedence or associativity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A stack VM runs: `PUSH 2`, `PUSH 3`, `PUSH 4`, `MUL`, `ADD`. Each binary op pops two values and pushes the result. What value is on top of the stack at the end?",
+      "options": [
+        {
+          "id": "a",
+          "label": "24"
+        },
+        {
+          "id": "b",
+          "label": "14"
+        },
+        {
+          "id": "c",
+          "label": "9"
+        },
+        {
+          "id": "d",
+          "label": "20"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "MUL pops 3 and 4 giving 12, then ADD gives 2+12 = 14.",
+        "20 comes from applying ADD before MUL, i.e. (2+3)*4."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A compiler's constant-folding pass runs on the AST for `x = 2 * 3 + y`, where `y` is a variable. What does the folded AST represent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`x = 2 * 3 + y`"
+        },
+        {
+          "id": "b",
+          "label": "`x = 2 * (3 + y)`"
+        },
+        {
+          "id": "c",
+          "label": "`x = 6 + y`"
+        },
+        {
+          "id": "d",
+          "label": "`x = 6y`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The subtree `2 * 3` has only constants and folds to 6; `y` is unknown so the addition stays.",
+        "Distractors change the tree shape or skip folding."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A typical lexer for a C-like language scans `x = 3; /* init */ y = x + 1;`. Which parts of the input are normally discarded and not passed to the parser as tokens? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The identifier `y`"
+        },
+        {
+          "id": "b",
+          "label": "The comment `/* init */`"
+        },
+        {
+          "id": "c",
+          "label": "The spaces between `x` and `=`"
+        },
+        {
+          "id": "d",
+          "label": "The semicolon after `3`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Whitespace and comments are discarded by the lexer.",
+        "Identifiers and semicolons are real tokens the parser needs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "Your compiler pushes a new symbol-table scope on entering a block and pops it on leaving. It analyses this code: `{ int a = 1; { int b = 2; } print(a + b); }`. What should semantic analysis do at the `print` call?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Report `b` as undeclared because its scope was already popped"
+        },
+        {
+          "id": "b",
+          "label": "Resolve `b` to the inner declaration and accept the code"
+        },
+        {
+          "id": "c",
+          "label": "Warn that `b` shadows `a` but accept the code"
+        },
+        {
+          "id": "d",
+          "label": "Report `a` as undeclared because it was declared in an outer block"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Popping the inner scope removes `b`, so lookup fails.",
+        "Distractors assume declarations persist or confuse shadowing with scope exit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A recursive-descent parser implements `expr -> expr '-' term | term` with a `parseExpr()` that first calls `parseExpr()`. On any input it overflows the stack. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The grammar is ambiguous, so the parser keeps trying both alternatives forever without committing"
+        },
+        {
+          "id": "b",
+          "label": "The rule is left-recursive, so the parser recurses without consuming a token"
+        },
+        {
+          "id": "c",
+          "label": "The lexer never returns an end-of-file token, so the parser keeps requesting tokens forever"
+        },
+        {
+          "id": "d",
+          "label": "The term rule has no base case, so recursion never reaches a literal"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Left recursion means infinite descent with no input consumed.",
+        "Distractors blame ambiguity, EOF or the term rule, which are not where the loop occurs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A grammar has `stmt -> 'if' expr stmt | 'if' expr stmt 'else' stmt`. The input `if a if b s1 else s2` yields two valid parse trees. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The grammar lacks a rule for statements that are not `if` statements"
+        },
+        {
+          "id": "b",
+          "label": "The lexer can tokenise `else` as an identifier in one case"
+        },
+        {
+          "id": "c",
+          "label": "The expression rule allows `a` and `b` to be combined two ways"
+        },
+        {
+          "id": "d",
+          "label": "The `else` can attach to either the inner or the outer `if`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The dangling else makes the grammar ambiguous: else may bind to either if.",
+        "Other options point to unrelated parts of the grammar."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A tree-walking interpreter evaluates variable lookups in an environment stored in the call stack frame. A function returns an inner function that reads a local of the outer function. Calling it later reads garbage. Which is the faulty design step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The returned function does not keep the environment, so the frame is gone"
+        },
+        {
+          "id": "b",
+          "label": "The lexer produced the local's name as the wrong token type, so lookups miss"
+        },
+        {
+          "id": "c",
+          "label": "The inner function is type-checked before the outer one, so its local has no type"
+        },
+        {
+          "id": "d",
+          "label": "The inner function was parsed with the wrong precedence, so it binds to the wrong scope"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Closures must capture their defining environment beyond the frame's lifetime, e.g. on the heap.",
+        "Distractors point to earlier phases that do not affect lifetime."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A parser's binary-operator code is `left = parseTerm(); if (peek is '-') { advance(); right = parseExpr(); return Sub(left, right); }`. It evaluates `10-4-3` as 9. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The right operand is parsed by a recursive call, giving Sub(10, Sub(4, 3))"
+        },
+        {
+          "id": "b",
+          "label": "The evaluator pops the two operands off its stack in the wrong order, so each subtraction is reversed"
+        },
+        {
+          "id": "c",
+          "label": "The lexer reads `-4` as a negative literal, so the input becomes 10 followed by -4 and -3"
+        },
+        {
+          "id": "d",
+          "label": "The parser applies constant folding before building the tree, so 4-3 is merged early"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Recursing into parseExpr for the right operand nests to the right: 10-(4-3)=9.",
+        "A loop that builds the tree leftward would give 3."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "The same numeric loop runs about ten times slower in a tree-walking interpreter than in a bytecode VM for the same language. Which factor best explains the gap?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each AST node costs a recursive call and pointer chase; bytecode is a flat array"
+        },
+        {
+          "id": "b",
+          "label": "The tree walker repeats semantic analysis on every node each time through the loop body"
+        },
+        {
+          "id": "c",
+          "label": "The bytecode VM skips type information that the tree walker must always check at run time"
+        },
+        {
+          "id": "d",
+          "label": "The tree walker re-lexes and re-parses the source text of the loop body on every iteration"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Per-node dispatch and poor locality make tree walking slower than a flat instruction stream.",
+        "Re-lexing or re-analysing each iteration is not how either interpreter works."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "In a language with side effects, `x = f() + f()` where `f` prints a line and returns a counter that increments each call. Which optimisations can change the program's observable behaviour? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rewriting it as `2 * f()`"
+        },
+        {
+          "id": "b",
+          "label": "Reusing the first call's result for the second call"
+        },
+        {
+          "id": "c",
+          "label": "Evaluating the left call before the right call"
+        },
+        {
+          "id": "d",
+          "label": "Inlining `f`'s body at both call sites, keeping the original order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Removing or merging calls changes printed output and counter values.",
+        "Order-preserving inlining and left-to-right evaluation keep behaviour the same."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A new compiler translates `p != null && p.x > 0`. For `p = null` the compiled program crashes with a null dereference. The generated code evaluates both comparisons into registers and then applies a bitwise AND. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Code generation ignored short-circuit semantics for `&&`"
+        },
+        {
+          "id": "b",
+          "label": "The register allocator reused the register holding `p` for the comparison result"
+        },
+        {
+          "id": "c",
+          "label": "The type checker accepted `p.x` even though `p` is a nullable reference"
+        },
+        {
+          "id": "d",
+          "label": "The lexer merged `&&` and `>` into one token before parsing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`&&` must skip the right operand when the left is false, which needs a conditional jump.",
+        "Distractors blame other phases, but evaluating both operands is the defect."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A lexer for a language with tokens `-`, `--`, `->` and identifiers uses the maximal munch rule. What token sequence results from the input `x--->y`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "x, --, ->, y"
+        },
+        {
+          "id": "b",
+          "label": "x, --, -, >, y"
+        },
+        {
+          "id": "c",
+          "label": "x, -, -, ->, y"
+        },
+        {
+          "id": "d",
+          "label": "x, -, --, >, y"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Maximal munch takes `--` first because `---` is not a token, then `->` from the remainder.",
+        "Other options split a longer valid token or treat `>` as a stray token."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A hand-written parser uses the rule `expr -> term ('-' expr)?` and builds one node per `-`. The input `10 - 4 - 3` evaluates to 9 instead of 3. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A single grammar level merges both operators into one node, so each repeated `-` needs its own precedence level"
+        },
+        {
+          "id": "b",
+          "label": "The right-recursive rule groups the input as `10 - (4 - 3)`, which makes subtraction right-associative"
+        },
+        {
+          "id": "c",
+          "label": "The lexer merges `- 4` into a negative literal, so the parser sees `10` followed by `-4` and drops one operator"
+        },
+        {
+          "id": "d",
+          "label": "The evaluator visits the right child before the left child, so `4 - 3` is computed first and then subtracted from 10"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Right recursion in the grammar produces a right-leaning tree, giving 10 - (4 - 3) = 9.",
+        "Evaluation order of children does not change the result for a correctly shaped left-associative tree."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In a tree-walking interpreter, a block declares `fun show() { print a; }` where global `var a = 1` exists, then later in the same block declares `var a = 2` as a new binding and calls `show()`. It prints 2, but lexical scoping requires 1. The interpreter looks up names by walking the live environment chain at call time. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Closures copy variable values at definition time, but the copy is taken lazily on the first call, after `a = 2` exists"
+        },
+        {
+          "id": "b",
+          "label": "The closure keeps the live block environment, so a call-time lookup finds the later binding of `a`"
+        },
+        {
+          "id": "c",
+          "label": "Function declarations are hoisted above variable declarations, so `a = 2` runs before `show` is defined in that block"
+        },
+        {
+          "id": "d",
+          "label": "The parser attaches `print a` to the call site, so `a` is resolved in the caller's scope rather than the declaration's scope"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Name lookup at call time sees bindings added after the function was defined; a resolver pass fixes the binding to the declaration scope.",
+        "Hoisting and copy-on-capture explanations do not match the stated call-time lookup."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A compiler for a stack VM emits `push x; call log` for the statement `log(x);`. A loop calling this statement ten million times crashes with a value-stack overflow, though output is correct until then. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Call frames are not popped on return, so the call stack grows by one frame per iteration"
+        },
+        {
+          "id": "b",
+          "label": "The call leaves its return value on the stack, and the expression statement emits no pop to discard it"
+        },
+        {
+          "id": "c",
+          "label": "The argument is pushed twice, once for the callee and once for the call instruction, so two slots are leaked"
+        },
+        {
+          "id": "d",
+          "label": "The back-jump targets the loop setup code, so the initialisation is re-executed on every iteration"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An expression statement must discard its result; without a pop, each iteration leaks one stack slot.",
+        "Frame leaks or double pushes would not match a one-slot-per-iteration value-stack growth with correct output."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An LR parser generator reports a shift/reduce conflict for `stmt -> if expr then stmt | if expr then stmt else stmt` on the input `if a then if b then s1 else s2`. What causes the conflict at the `else` token?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The lexer emits `else` as an identifier after a statement, so the parser sees an unexpected token"
+        },
+        {
+          "id": "b",
+          "label": "After `if b then s1`, the parser may reduce the inner if or shift `else`, so the grammar is ambiguous"
+        },
+        {
+          "id": "c",
+          "label": "Two productions for `stmt` begin with `if`, so one token of lookahead cannot choose the production at the start"
+        },
+        {
+          "id": "d",
+          "label": "The grammar is left-recursive in `stmt`, so the table cannot decide how many `if` tokens to push before reducing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The dangling else makes both reducing the inner if and shifting `else` valid, which is a true ambiguity.",
+        "Common-prefix productions are an LL lookahead concern, and LR parsers handle them without conflict."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Which are genuine reasons a naive AST tree-walking interpreter runs slower than a bytecode VM on the same program? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Variables are resolved by name in hash maps at each access, which a compiler could replace with slot indices"
+        },
+        {
+          "id": "b",
+          "label": "The parser must re-run on each loop iteration because the tree is not retained after the first execution"
+        },
+        {
+          "id": "c",
+          "label": "Heap-allocated nodes linked by pointers scatter data in memory, causing more cache misses than a flat instruction array"
+        },
+        {
+          "id": "d",
+          "label": "Each node evaluation is a recursive host call or virtual dispatch, adding call overhead and poor instruction-cache locality"
+        },
+        {
+          "id": "e",
+          "label": "Tree-walkers cannot implement closures, so they copy whole environments on every call"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Dispatch overhead, pointer-chasing and name-based lookup are real costs that bytecode with slot indices avoids.",
+        "Tree-walkers implement closures fine and do not re-parse during execution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A team adds constant folding to their compiler. A valid program contains `if (DEBUG) { y = 10 / 0; }` where `DEBUG` is the constant false, and the compiler now aborts with 'division by zero' at compile time. The language defines division by zero as a runtime error. Which analysis best explains and resolves the problem?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The grammar accepted `10 / 0` as valid syntax, so the parser should reject zero literals used as divisors"
+        },
+        {
+          "id": "b",
+          "label": "The lexer should have removed the dead branch before parsing, because `DEBUG` is a known constant"
+        },
+        {
+          "id": "c",
+          "label": "The folder evaluates dead code too; it should skip folding a zero divisor so the error occurs only if executed"
+        },
+        {
+          "id": "d",
+          "label": "The type checker should have rejected `y = 10 / 0`, because the result type cannot be determined for division by zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Folding must preserve runtime semantics: an operation that would trap at runtime must be left in place, even in unreachable code.",
+        "Other options push a runtime-semantics issue onto syntax, lexing or typing phases that cannot know about it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A two-person team builds a front end for a language whose grammar changes weekly. Criteria: quick grammar edits, context-specific syntax error messages, and no code-generation tool in the build. Which parsing approach fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A backtracking parser that tries every alternative, since it needs no grammar restructuring and reports errors accurately"
+        },
+        {
+          "id": "b",
+          "label": "Regular expressions for each statement kind, since weekly grammar changes then need only one pattern edited"
+        },
+        {
+          "id": "c",
+          "label": "A hand-written recursive descent parser, since grammar edits are local code changes and messages can be tailored per rule"
+        },
+        {
+          "id": "d",
+          "label": "An LALR parser generator, since generated tables detect ambiguity automatically and default errors are descriptive"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Recursive descent needs no external tool, edits stay local, and each rule can emit tailored errors.",
+        "A generator violates the no-tool criterion, and backtracking gives poor error locations."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An application embeds a config language. Scripts are under 200 lines and run once at startup with no large loops. Criteria: minimise implementation effort and bugs, and peak speed is irrelevant. Which execution strategy is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ahead-of-time compilation to LLVM IR, because optimisation passes guarantee the lowest total runtime for small scripts"
+        },
+        {
+          "id": "b",
+          "label": "A bytecode VM with a register allocator, because compiled instructions always run faster than tree traversal at any scale"
+        },
+        {
+          "id": "c",
+          "label": "A tree-walking interpreter over the AST, because it is simplest to build and debug and speed is not a criterion here"
+        },
+        {
+          "id": "d",
+          "label": "A JIT compiler to native code, because startup cost is repaid even in scripts that execute each statement once"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "With speed irrelevant and effort the main criterion, the simplest design wins.",
+        "The other options pay large complexity for speed gains that these scripts never realise."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A small team targets three operating systems and needs optimised native executables. They want no dependency beyond a system C compiler and little backend work. Which code generation strategy best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Compile to custom bytecode and ship a VM, because it removes the need for a native toolchain on user machines"
+        },
+        {
+          "id": "b",
+          "label": "Generate LLVM IR through its C++ API, because LLVM's optimiser and backends cover all three systems well"
+        },
+        {
+          "id": "c",
+          "label": "Emit C source and invoke the system C compiler, because it reuses an existing optimiser and portability"
+        },
+        {
+          "id": "d",
+          "label": "Emit machine code directly for each target, because it gives full control over instruction selection and layout"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Emitting C reuses each platform's optimiser and needs only the allowed C compiler, minimising backend work.",
+        "Direct machine code multiplies backend work, LLVM adds a dependency, and a VM does not produce native executables."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A language spec allows nested block comments such as `/* a /* b */ c */`. Criteria: one pass, linear time, correct on any nesting depth. Which lexer design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A non-greedy regex `/\\*.*?\\*/`, since it stops at the first `*/` and closes each comment as early as possible"
+        },
+        {
+          "id": "b",
+          "label": "A lexer mode with a depth counter, incrementing on `/*` and decrementing on `*/` until it returns to zero"
+        },
+        {
+          "id": "c",
+          "label": "A greedy regex `/\\*.*\\*/`, since it consumes through the final `*/` and therefore covers every nested level"
+        },
+        {
+          "id": "d",
+          "label": "A regex permitting nesting up to depth three, since deeper nesting in real files is rare enough to ignore"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A depth counter handles arbitrary nesting in one linear pass, which regular expressions cannot count.",
+        "Non-greedy ends too early, greedy swallows code between separate comments, and a fixed depth fails the any-depth criterion."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A compiler desugars `for (init; cond; inc) body` in the parser into `{ init; while (cond) { body; inc; } }`. The language has `continue`. Judged by correctness, what is the most serious flaw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A `continue` in the body skips `inc`, so the loop can run forever instead of advancing to the next iteration"
+        },
+        {
+          "id": "b",
+          "label": "The `while` form evaluates `cond` only once, so loop bounds that change inside the body become stale"
+        },
+        {
+          "id": "c",
+          "label": "A `break` cannot be compiled because `while` has no exit target, so early exits need a flag variable"
+        },
+        {
+          "id": "d",
+          "label": "Wrapping in a block leaks `init` variables into the enclosing scope, so later loops see stale counters"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`continue` jumps to the loop condition and skips the appended increment, so the desugaring changes semantics.",
+        "The other claims are false: while re-evaluates its condition, the block scopes `init`, and break works in while."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A language must report every undefined-name error before any code runs, and allow mutually recursive top-level functions without forward declarations. Which designs meet both criteria? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Two passes: first collect all top-level declarations, then check each function body against them"
+        },
+        {
+          "id": "b",
+          "label": "Resolve names lazily when each function is first called, reporting an error at that moment"
+        },
+        {
+          "id": "c",
+          "label": "Require forward declarations for any function used before its definition"
+        },
+        {
+          "id": "d",
+          "label": "A separate resolver pass over the complete AST, run before execution starts"
+        },
+        {
+          "id": "e",
+          "label": "Check names in a single pass in source order, reporting an error when a name has not yet been seen"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Both a declaration-collecting pass and a full-AST resolver see all names before execution, allowing mutual recursion and early errors.",
+        "Source-order checking breaks mutual recursion, lazy resolution reports errors too late, and forward declarations violate the stated criteria."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A bytecode interpreter for a dynamic language spends about 60% of its time in property lookups on hash tables. Profiling shows hot loops access the same properties on objects with identical layout. The team must stay portable, avoid a JIT, and keep the change small. Which option best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Grow each object's property hash table and lower its load factor so collisions are rarer, which shortens the probe sequence on every lookup"
+        },
+        {
+          "id": "b",
+          "label": "Intern all property-name strings so key comparison becomes a pointer check, which speeds up each probe but still hashes and searches the table"
+        },
+        {
+          "id": "c",
+          "label": "Rewrite the interpreter dispatch loop in hand-tuned assembly for each platform so hash lookups and dispatch take fewer cycles per instruction"
+        },
+        {
+          "id": "d",
+          "label": "Add an inline cache at each property-access instruction keyed on the object's shape, so repeated lookups skip hashing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Inline caches exploit stable object layouts at each access site, are portable and need no JIT.",
+        "Bigger tables only reduce collisions, interning still needs a lookup, and assembly breaks portability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A language lets modules declare operator precedence with `infixl 6 +++` anywhere in a file, including after the operator's first use. Criteria: every use must parse with the declared precedence, and errors must be clear. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Parse operator chains as flat lists, collect all fixity declarations, then re-associate each chain in a later pass"
+        },
+        {
+          "id": "b",
+          "label": "Run a Pratt parser whose precedence table updates as declarations are read, parsing each use immediately"
+        },
+        {
+          "id": "c",
+          "label": "Hard-code precedence for known operators in the lexer and treat user declarations as hints for the type checker"
+        },
+        {
+          "id": "d",
+          "label": "Generate an LALR table from the base grammar and add a rule for each operator when its declaration is read"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Declarations may follow uses, so uses must be re-associated after all fixities are known; this is how Haskell does it.",
+        "A Pratt parser with an incrementally updated table mis-parses uses that appear before the declaration."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An interpreter's closures capture their defining environments, so reference cycles (a function stored in the environment it captures) are common. Criteria: cyclic garbage must be reclaimed, the implementation should stay simple, and pauses of a few milliseconds are acceptable. Which memory strategy fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Arena allocation released at program exit, since interpreter runs are short and individual frees cost time"
+        },
+        {
+          "id": "b",
+          "label": "Plain reference counting, since decrementing on scope exit frees a closure once its function has returned"
+        },
+        {
+          "id": "c",
+          "label": "Reference counting with weak pointers from closures to their own environment, which breaks cycles automatically"
+        },
+        {
+          "id": "d",
+          "label": "Mark-and-sweep run when allocation passes a threshold, tracing from the stack and globals, which reclaims cycles"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Tracing collection reclaims cycles with little machinery and the pauses are acceptable.",
+        "Weak self-pointers break only some cycles and can free environments still in use; plain refcounting leaks cycles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A colleague says: 'Compiling the AST to bytecode makes an interpreter faster in every case, so we should drop our tree walker.' Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claim holds because bytecode is machine code that the CPU executes directly, so no interpretive overhead remains at all"
+        },
+        {
+          "id": "b",
+          "label": "Bytecode is slower in principle because each instruction needs a decode step that a tree walker avoids entirely, so trees always win"
+        },
+        {
+          "id": "c",
+          "label": "The gain comes from cheaper dispatch and locality, so it shrinks when runtime calls dominate or the walker is closure-compiled"
+        },
+        {
+          "id": "d",
+          "label": "The claim is wrong because bytecode cannot express loops or branches, which only a tree structure can represent in an interpreter"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Bytecode benefits are real but conditional on where time is spent and on how well the tree walker is built.",
+        "Distractors confuse bytecode with machine code or claim it lacks control flow."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A language specifies that integer division by zero raises a catchable exception, and the optimizer must preserve observable behaviour. Which transformation is unsound without further proof?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Folding `2 + 3 * 4` to `14` at compile time in a pure expression with no side effects"
+        },
+        {
+          "id": "b",
+          "label": "Deleting `t = a / b` because `t` is never read later, when `b` is not known to be nonzero"
+        },
+        {
+          "id": "c",
+          "label": "Replacing `x * 8` with `x << 3` for a fixed-width integer type that has wraparound semantics"
+        },
+        {
+          "id": "d",
+          "label": "Reusing an earlier pure `a + b` result when neither operand has changed between the two evaluations"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Deleting the division removes a possible exception, which is observable behaviour.",
+        "The other transformations preserve results and cannot trap."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A self-hosted compiler is built each release by the previous release's binary. Criterion: detect a backdoor that lives in the shipped binary but not in the published source. Which control gives the strongest evidence?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rerunning the full test suite on the self-built compiler, including the compiler's own bootstrap tests, since a backdoor would cause some test to fail"
+        },
+        {
+          "id": "b",
+          "label": "Independent review of the compiler source by several maintainers, since a backdoor would have to appear in the source to be real"
+        },
+        {
+          "id": "c",
+          "label": "Diverse double-compiling: build the source with an independent trusted compiler, rebuild with that result, and compare with the shipped binary"
+        },
+        {
+          "id": "d",
+          "label": "Signing release binaries with a maintainer key and publishing the hashes, since a valid signature proves the binary has not been altered"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Independent rebuild and comparison detects a binary that does not correspond to its source.",
+        "Review, signing and tests cannot see a backdoor that is absent from the source and behaves normally."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Which are sound reasons to choose a hand-written recursive-descent parser over a parser generator for a production compiler? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It guarantees the grammar is unambiguous without any further checking"
+        },
+        {
+          "id": "b",
+          "label": "It makes it easy to build partial trees that editors and tools can use"
+        },
+        {
+          "id": "c",
+          "label": "It parses in better than linear time on typical inputs"
+        },
+        {
+          "id": "d",
+          "label": "It lets the parser consult semantic state, such as whether a name is a type, to resolve ambiguity"
+        },
+        {
+          "id": "e",
+          "label": "It allows precise, context-aware error messages and recovery at chosen points"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Control over errors, context-sensitivity and partial trees are real advantages of hand-written parsers.",
+        "Ambiguity checking is a generator strength, and both approaches are linear in practice."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team ships a CLI tool whose scripts run 50 to 300 ms. Profiling shows about 60% of time is spent in startup and parsing, and hot loops are rare. A proposal adds a tracing JIT. Criteria: lowest median wall time and low complexity. Which judgement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Adopt the JIT, since compiled machine code beats bytecode and removes most of the startup and parsing time too"
+        },
+        {
+          "id": "b",
+          "label": "Adopt the JIT with eager compilation at startup, since hot loops then never spend time in the interpreter"
+        },
+        {
+          "id": "c",
+          "label": "Rewrite the lexer in assembly, since lexing is the main startup cost and a faster lexer cuts the median most"
+        },
+        {
+          "id": "d",
+          "label": "Defer the JIT and cache parsed bytecode, since warm-up would cost more than it saves on short runs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Time is dominated by startup, so caching and lazy loading attack the real cost; JIT warm-up would hurt short runs.",
+        "Distractors assume JIT helps startup or that eager compilation is free."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design requirement for a bytecode VM: mutual recursion across modules must run in unbounded depth, with no per-call heap allocation. Which design meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return thunks from tail calls to a trampoline loop that evaluates them one at a time at the call site"
+        },
+        {
+          "id": "b",
+          "label": "Have semantic analysis mark tail positions, then emit a `TAILCALL` that replaces the current frame with the callee's"
+        },
+        {
+          "id": "c",
+          "label": "Rewrite directly self-recursive functions into loops during optimisation and leave other calls on the normal stack"
+        },
+        {
+          "id": "d",
+          "label": "Grow the VM stack dynamically on overflow so that deep mutual recursion eventually completes without error"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Frame replacement gives constant stack for any tail call, including mutual recursion, without allocation.",
+        "Loop rewriting handles only self-calls, trampolines allocate thunks, and growth is not constant space."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design closures for a stack-based VM. Constraints: uncaptured locals must never be heap-allocated, and two closures capturing the same variable must see each other's writes. Which design meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Copy the captured value into each closure when it is created, so each closure owns its private value"
+        },
+        {
+          "id": "b",
+          "label": "Let closures reference stack slots as upvalues, moving the value to a heap cell when its scope exits"
+        },
+        {
+          "id": "c",
+          "label": "Snapshot the entire enclosing frame into each closure at creation, so every captured variable is available"
+        },
+        {
+          "id": "d",
+          "label": "Allocate every local variable in a heap cell on declaration, so that any closure can reference it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Open upvalues share a slot, and closing them moves the value to the heap only when needed.",
+        "Copying breaks shared mutation; heap-allocating everything and frame snapshots break constraints or sharing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a parser for an IDE. Constraints: it must tolerate syntax errors, keep unchanged subtrees across small edits, and reparse in time proportional to the edit rather than the file. Which design meets these?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An LALR parser that restarts from the first token after each edit and discards the tree on any error"
+        },
+        {
+          "id": "b",
+          "label": "A strict parser that rejects the file on the first error and reuses the last valid tree until the file is correct"
+        },
+        {
+          "id": "c",
+          "label": "A regex-based tokenizer that rebuilds a flat token list per edit and has no tree until a build is run"
+        },
+        {
+          "id": "d",
+          "label": "A lossless immutable syntax tree with structural sharing, reparsing only the smallest enclosing block of the edit"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Structural sharing with local reparse meets the incremental and error-tolerant constraints.",
+        "The others reparse everything, lose the tree, or fail on errors."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A type system treats `Array<Dog>` as a subtype of `Array<Animal>` and allows writes, so `a[0] = Cat()` through an `Array<Animal>` alias corrupts a dog array. Constraint: restore soundness with no new runtime checks. Which fix works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Insert a runtime type tag check on every array store, which throws if the element type does not match"
+        },
+        {
+          "id": "b",
+          "label": "Warn at compile time when a covariant array is written to, but still allow the program to be built and run"
+        },
+        {
+          "id": "c",
+          "label": "Make `Cat` a subtype of `Dog` in this program, so the stored value always fits the original array type"
+        },
+        {
+          "id": "d",
+          "label": "Make array types invariant in their element type, so that `Array<Dog>` is not accepted as `Array<Animal>`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Invariance statically prevents the unsound aliasing without runtime cost.",
+        "A runtime check violates the constraint; warnings and bogus subtyping do not restore soundness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design lexer error handling for an unterminated string literal. Constraints: report exactly one error for it, and tokens on later lines must still be lexed normally. Which design meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Treat the rest of the file as string contents and report the missing quote once at end of input"
+        },
+        {
+          "id": "b",
+          "label": "Insert a quote at the start of the next token and relex, reporting an error for every token that was changed"
+        },
+        {
+          "id": "c",
+          "label": "Close the string at end of line, emit an error token with its span, and resume lexing on the next line"
+        },
+        {
+          "id": "d",
+          "label": "Stop lexing on the first error and let the parser report that no further tokens exist after that point"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Ending at the line boundary yields one error and resynchronises the lexer.",
+        "Other options swallow later tokens, abort, or produce multiple errors."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "You are designing a hygienic macro expander. Which elements must the design include to prevent accidental capture between macro-introduced and user identifiers? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Renaming bindings that a macro introduces so they cannot collide with user bindings"
+        },
+        {
+          "id": "b",
+          "label": "Marking identifiers introduced by a macro expansion, for instance with scopes or fresh marks"
+        },
+        {
+          "id": "c",
+          "label": "Resolving each identifier using the syntactic context of the place it was written"
+        },
+        {
+          "id": "d",
+          "label": "Expanding macros after code generation so that all bindings have already been resolved"
+        },
+        {
+          "id": "e",
+          "label": "Textual substitution of macro bodies before lexing, so that name clashes are visible to the lexer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Hygiene needs marks or scopes, resolution by origin context, and renaming of introduced binders.",
+        "Textual substitution is the source of capture, and post-codegen expansion is impossible."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "You design a compiler for a language with generics. Requirements: separate compilation of modules, unboxed integer performance in generic containers, and no duplicate code for the same instantiation across modules. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ship generic IR in module interfaces, monomorphize at use sites, and deduplicate instances by key at link time"
+        },
+        {
+          "id": "b",
+          "label": "Require whole-program compilation, monomorphizing every instantiation once at link time with full program knowledge"
+        },
+        {
+          "id": "c",
+          "label": "Compile modules separately, but monomorphize each module's uses independently, even where another module repeats them"
+        },
+        {
+          "id": "d",
+          "label": "Erase generics to a single boxed representation, so each generic function is compiled once and shared by all callers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Exporting generic IR keeps modules separately compiled, specialisation gives unboxed speed, and deduplication removes repeats.",
+        "Erasure boxes ints, independent monomorphization duplicates code, and whole-program breaks separate compilation."
+      ],
+      "reviewed": false
+    }
+  ]
+}

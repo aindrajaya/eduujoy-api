@@ -1,0 +1,2493 @@
+{
+  "version": 1,
+  "topic": "postgresql",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In the psql command-line client, which meta-command lists the tables in the current database?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`\\l`"
+        },
+        {
+          "id": "b",
+          "label": "`\\c`"
+        },
+        {
+          "id": "c",
+          "label": "`\\dt`"
+        },
+        {
+          "id": "d",
+          "label": "`\\du`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`\\dt` lists tables in the connected database.",
+        "`\\l` lists databases, `\\du` lists roles and `\\c` connects to another database."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the default TCP port a PostgreSQL server listens on?",
+      "options": [
+        {
+          "id": "a",
+          "label": "27017"
+        },
+        {
+          "id": "b",
+          "label": "5432"
+        },
+        {
+          "id": "c",
+          "label": "3306"
+        },
+        {
+          "id": "d",
+          "label": "1433"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "PostgreSQL defaults to port 5432.",
+        "3306 is MySQL, 1433 is SQL Server and 27017 is MongoDB."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which PostgreSQL data type stores JSON in a decomposed binary format that can be indexed with GIN?",
+      "options": [
+        {
+          "id": "a",
+          "label": "JSONB"
+        },
+        {
+          "id": "b",
+          "label": "JSON"
+        },
+        {
+          "id": "c",
+          "label": "TEXT"
+        },
+        {
+          "id": "d",
+          "label": "BYTEA"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "JSONB is the binary JSON type and supports GIN indexes.",
+        "JSON keeps raw text and is not GIN-indexable as such; TEXT and BYTEA have no JSON structure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which statement shows the query plan PostgreSQL chooses for a query?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`TRACE`"
+        },
+        {
+          "id": "b",
+          "label": "`SHOW PLAN`"
+        },
+        {
+          "id": "c",
+          "label": "`DESCRIBE`"
+        },
+        {
+          "id": "d",
+          "label": "`EXPLAIN`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`EXPLAIN` displays the planner's chosen plan.",
+        "`DESCRIBE`, `SHOW PLAN` and `TRACE` come from other systems or do not exist in Postgres."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which index type does `CREATE INDEX` build by default when no `USING` method is given?",
+      "options": [
+        {
+          "id": "a",
+          "label": "B-tree"
+        },
+        {
+          "id": "b",
+          "label": "BRIN"
+        },
+        {
+          "id": "c",
+          "label": "GIN"
+        },
+        {
+          "id": "d",
+          "label": "Hash"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "B-tree is the default index method.",
+        "Hash, GIN and BRIN must be requested explicitly with `USING`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are index types built into PostgreSQL? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "GIN"
+        },
+        {
+          "id": "b",
+          "label": "B-tree"
+        },
+        {
+          "id": "c",
+          "label": "ISAM"
+        },
+        {
+          "id": "d",
+          "label": "Columnstore"
+        },
+        {
+          "id": "e",
+          "label": "BRIN"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "B-tree, GIN and BRIN are built-in index access methods.",
+        "ISAM and Columnstore are not Postgres index types."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A new administrator wants trigram text search in a database. The `pg_trgm` extension files are already installed on the server. She is connected with psql and needs to enable it in the current database. Which statement does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`ALTER DATABASE ADD pg_trgm;`"
+        },
+        {
+          "id": "b",
+          "label": "`CREATE EXTENSION pg_trgm;`"
+        },
+        {
+          "id": "c",
+          "label": "`LOAD PLUGIN pg_trgm;`"
+        },
+        {
+          "id": "d",
+          "label": "`INSTALL EXTENSION pg_trgm;`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`CREATE EXTENSION` enables an installed extension in a database.",
+        "The other statements are not valid PostgreSQL syntax for this."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main difference between `EXPLAIN` and `EXPLAIN ANALYZE`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`EXPLAIN ANALYZE` rewrites the query to make it run faster"
+        },
+        {
+          "id": "b",
+          "label": "`EXPLAIN ANALYZE` refreshes table statistics and nothing else"
+        },
+        {
+          "id": "c",
+          "label": "`EXPLAIN ANALYZE` actually runs the query and reports real timings"
+        },
+        {
+          "id": "d",
+          "label": "`EXPLAIN ANALYZE` only checks the query's syntax without running it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "ANALYZE executes the query and shows actual times and row counts.",
+        "Distractors confuse it with syntax checking, optimisation, or the separate ANALYZE statistics command."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A query plan contains the node `Seq Scan on orders`. What does this node mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The rows are fetched in sorted order from a sequence"
+        },
+        {
+          "id": "b",
+          "label": "The rows are found by walking a B-tree index"
+        },
+        {
+          "id": "c",
+          "label": "The table is scanned in parallel on several servers"
+        },
+        {
+          "id": "d",
+          "label": "The table is read row by row from start to end"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Seq Scan reads the whole table sequentially.",
+        "Distractors confuse it with index scans or the word 'sequence'."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Inside a transaction opened with `BEGIN`, two `UPDATE` statements succeed and then you run `ROLLBACK`. What is the result?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Both updates are kept but marked as pending"
+        },
+        {
+          "id": "b",
+          "label": "Only the last update is undone"
+        },
+        {
+          "id": "c",
+          "label": "Both updates are saved and a log entry is added"
+        },
+        {
+          "id": "d",
+          "label": "Both updates are undone as if they never ran"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "ROLLBACK discards all changes since BEGIN.",
+        "Distractors think rollback only reverts one statement or keeps the data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A column is declared as `tags text[]`. How is this column best described?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One column holding an ordered list of text values per row"
+        },
+        {
+          "id": "b",
+          "label": "A separate table that stores each tag as its own row, linked by a foreign key"
+        },
+        {
+          "id": "c",
+          "label": "A column that holds exactly one text value of any length per row"
+        },
+        {
+          "id": "d",
+          "label": "A column that stores key-value pairs, with each key unique in a row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`text[]` is an array type storing multiple ordered values in one field.",
+        "Distractors confuse arrays with child tables, plain text, or hstore/JSON objects."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `SELECT '{\"a\": 1}'::jsonb ->> 'a';` return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The JSON object {\"a\": 1}"
+        },
+        {
+          "id": "b",
+          "label": "NULL because the key is quoted"
+        },
+        {
+          "id": "c",
+          "label": "A syntax error from the cast"
+        },
+        {
+          "id": "d",
+          "label": "The text value 1"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`->>` extracts a field as text, giving 1.",
+        "`->` would return JSON; the other options misread the operator or cast."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe the difference between JSON and JSONB in PostgreSQL? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "JSON supports more operators than JSONB"
+        },
+        {
+          "id": "b",
+          "label": "JSON keeps the exact input text"
+        },
+        {
+          "id": "c",
+          "label": "JSONB does not preserve whitespace from the input"
+        },
+        {
+          "id": "d",
+          "label": "JSONB can be indexed with GIN"
+        },
+        {
+          "id": "e",
+          "label": "JSONB keeps duplicate keys as given"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "JSON stores text as given; JSONB stores a parsed form that drops whitespace and supports GIN.",
+        "JSONB keeps only the last duplicate key, and JSONB has the richer operator and index support."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A table `users` has 10 million rows. The query `SELECT * FROM users WHERE email = 'a@example.com'` is slow, and `EXPLAIN` shows a `Seq Scan`. The `email` column has no index. Why is the query slow?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `SELECT *` forces Postgres to lock the whole table"
+        },
+        {
+          "id": "b",
+          "label": "Sequential scans always run slowly regardless of table size"
+        },
+        {
+          "id": "c",
+          "label": "Postgres cannot filter by text columns without a cast"
+        },
+        {
+          "id": "d",
+          "label": "With no index on email, Postgres must read every row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Without an index the planner must check every row, which is costly at 10 million rows.",
+        "Distractors blame text filtering, locking or scans in general rather than the missing index."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What distinguishes the JSONB type from the JSON type in PostgreSQL?",
+      "options": [
+        {
+          "id": "a",
+          "label": "JSONB keeps the original text and whitespace exactly as inserted"
+        },
+        {
+          "id": "b",
+          "label": "JSONB stores a parsed binary form and can be indexed with GIN"
+        },
+        {
+          "id": "c",
+          "label": "JSONB is a text alias that is validated only when it is queried"
+        },
+        {
+          "id": "d",
+          "label": "JSONB accepts only flat objects with no nested values inside"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "JSONB stores a decomposed binary representation, which allows GIN indexing and faster operators.",
+        "The 'keeps original text' distractor describes the plain JSON type."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does running EXPLAIN (without ANALYZE) on a SELECT statement do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It shows the planner's estimated plan without executing the query"
+        },
+        {
+          "id": "b",
+          "label": "It lists every index that exists on the tables used by the query"
+        },
+        {
+          "id": "c",
+          "label": "It runs the query and reports the actual time spent in each step"
+        },
+        {
+          "id": "d",
+          "label": "It rewrites the query into a faster form and saves it permanently"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Plain EXPLAIN only displays the chosen plan with estimated costs and does not run the query.",
+        "The 'actual time' distractor describes EXPLAIN ANALYZE."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A B-tree index exists on users(email). Why is it not used for `WHERE lower(email) = 'a@x.com'`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "B-tree indexes are built for numeric ordering, so text columns like email need a hash index to be searched"
+        },
+        {
+          "id": "b",
+          "label": "The stored entries are the original values, so a comparison on a transformed value can't be looked up in them"
+        },
+        {
+          "id": "c",
+          "label": "The planner skips the index for equality tests on text unless the query also sorts the rows with ORDER BY"
+        },
+        {
+          "id": "d",
+          "label": "Calling a function in WHERE makes the planner discard index statistics until the next ANALYZE refreshes them"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The index stores email values, not lower(email) results, so an expression index would be needed.",
+        "Distractors claim indexes never work with text or with any function, which is false."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does PostgreSQL's MVCC let readers and writers work at the same time?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reads come from a cache that is refreshed once every minute"
+        },
+        {
+          "id": "b",
+          "label": "Each transaction reads a snapshot, so readers don't wait for writers"
+        },
+        {
+          "id": "c",
+          "label": "Writers overwrite rows in place while readers retry until it ends"
+        },
+        {
+          "id": "d",
+          "label": "Readers take table locks that queue behind any pending writers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "MVCC keeps multiple row versions so each transaction sees a consistent snapshot without blocking.",
+        "Distractors describe lock-based or cache-based designs, which are not how Postgres reads work."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main purpose of the VACUUM command?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It copies the database to a backup file that can be restored later"
+        },
+        {
+          "id": "b",
+          "label": "It removes dead row versions left by updates and deletes for reuse"
+        },
+        {
+          "id": "c",
+          "label": "It locks tables so that only one session can run queries at once"
+        },
+        {
+          "id": "d",
+          "label": "It rebuilds every index in the database from scratch each time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Updates and deletes leave dead tuples; VACUUM marks that space reusable.",
+        "Confusing VACUUM with REINDEX or with backup tools is a common mistake."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about transactions in PostgreSQL are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Changes become visible to other sessions only after COMMIT"
+        },
+        {
+          "id": "b",
+          "label": "After a failed statement inside a transaction block, the transaction stays aborted until ROLLBACK"
+        },
+        {
+          "id": "c",
+          "label": "A CREATE TABLE run inside a transaction can be undone with ROLLBACK"
+        },
+        {
+          "id": "d",
+          "label": "A single UPDATE outside a transaction block may be left half-applied if an error occurs partway through"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Postgres aborts the transaction on error and supports transactional DDL; commits publish changes.",
+        "Outside a block, each statement runs in its own implicit transaction, so BEGIN is not required for atomicity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A developer creates an index on products(category_id). The products table has only 40 rows. EXPLAIN for `WHERE category_id = 3` shows a Seq Scan, and the developer suspects the index is broken. What is the best explanation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A Seq Scan means PostgreSQL ignored the filter on that column"
+        },
+        {
+          "id": "b",
+          "label": "Indexes on integer columns are ignored until the table is clustered"
+        },
+        {
+          "id": "c",
+          "label": "The planner estimates that reading the tiny table directly costs less"
+        },
+        {
+          "id": "d",
+          "label": "The index is corrupt and must be dropped and recreated right away"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "For very small tables the planner often finds a sequential scan cheaper than an index lookup.",
+        "Distractors assume a Seq Scan always signals a broken index or an ignored filter."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Table docs has a jsonb column data. Which statement creates an index that can speed up `WHERE data @> '{\"type\": \"a\"}'`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`CREATE INDEX ON docs USING hash (data);`"
+        },
+        {
+          "id": "b",
+          "label": "`CREATE INDEX ON docs USING btree ((data->>'type'));`"
+        },
+        {
+          "id": "c",
+          "label": "`CREATE INDEX ON docs USING gin (data);`"
+        },
+        {
+          "id": "d",
+          "label": "`CREATE UNIQUE INDEX ON docs (data);`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A GIN index supports the containment operator @> on jsonb.",
+        "A B-tree on an extracted key only helps queries that use that same expression, and hash does not support @>."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Column data is jsonb and holds {\"name\": \"Ana\"}. Which expression returns the name as plain text (Ana)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`data -> 'name'`"
+        },
+        {
+          "id": "b",
+          "label": "`data #> 'name'`"
+        },
+        {
+          "id": "c",
+          "label": "`data ->> 'name'`"
+        },
+        {
+          "id": "d",
+          "label": "`data @> 'name'`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The ->> operator returns the value as text.",
+        "-> returns jsonb (with quotes), and #> needs a path array."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Table posts has a text[] column tags. Which condition selects rows whose tags include 'sql'?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`WHERE 'sql' = ANY(tags)`"
+        },
+        {
+          "id": "b",
+          "label": "`WHERE tags = 'sql'`"
+        },
+        {
+          "id": "c",
+          "label": "`WHERE tags IN ('sql')`"
+        },
+        {
+          "id": "d",
+          "label": "`WHERE tags[0] = 'sql'`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "= ANY(array) tests membership of a value in the array.",
+        "Comparing the array to a scalar fails, and PostgreSQL arrays are 1-indexed, so tags[0] returns NULL."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In psql, which command lists the tables in the current schema?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`\\l`"
+        },
+        {
+          "id": "b",
+          "label": "`\\du`"
+        },
+        {
+          "id": "c",
+          "label": "`\\dt`"
+        },
+        {
+          "id": "d",
+          "label": "`\\c`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "\\dt lists tables.",
+        "\\l lists databases, \\du lists roles, and \\c connects to a database."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must insert a user, but if a row with the same email (unique) exists, update its name instead. Which statement does this in PostgreSQL?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`INSERT ... ON DUPLICATE KEY UPDATE name = VALUES(name);`"
+        },
+        {
+          "id": "b",
+          "label": "`INSERT ... ON CONFLICT (email) DO NOTHING;`"
+        },
+        {
+          "id": "c",
+          "label": "`INSERT ... WHERE NOT EXISTS UPDATE name = EXCLUDED.name;`"
+        },
+        {
+          "id": "d",
+          "label": "`INSERT ... ON CONFLICT (email) DO UPDATE SET name = EXCLUDED.name;`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "ON CONFLICT ... DO UPDATE with EXCLUDED performs the upsert.",
+        "ON DUPLICATE KEY is MySQL syntax, and DO NOTHING skips the update."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "After loading millions of rows into the orders table, which commands refresh the planner statistics for it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`VACUUM ANALYZE orders;`"
+        },
+        {
+          "id": "b",
+          "label": "`ANALYZE orders;`"
+        },
+        {
+          "id": "c",
+          "label": "`EXPLAIN orders;`"
+        },
+        {
+          "id": "d",
+          "label": "`REINDEX TABLE orders;`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "ANALYZE, alone or with VACUUM, collects the statistics the planner uses.",
+        "REINDEX rebuilds indexes and EXPLAIN only shows a plan; neither updates statistics."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "The orders table has 10 million rows. The query `SELECT * FROM orders WHERE customer_id = 42 AND status = 'open'` is slow and EXPLAIN shows a Seq Scan. Each customer has about 20 orders, and status has only 3 distinct values. Which step should you take first?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run VACUUM FULL on orders to rewrite the table and remove dead space that slows the scan"
+        },
+        {
+          "id": "b",
+          "label": "Create an index on status alone, because every query on orders filters on that column"
+        },
+        {
+          "id": "c",
+          "label": "Create an index on customer_id, which narrows the search to about 20 rows"
+        },
+        {
+          "id": "d",
+          "label": "Raise work_mem so that the sequential scan can run entirely in memory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An index on the selective column customer_id lets the planner fetch a few rows instead of scanning all.",
+        "An index on a low-cardinality column barely narrows results, and VACUUM FULL or work_mem do not remove the full scan."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Table `events` has a JSONB column `payload` like `{\"tags\": [\"alpha\", \"beta\"]}`. Which condition returns rows whose `tags` array includes \"beta\"?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`payload @> '{\"tags\": [\"beta\"]}'`"
+        },
+        {
+          "id": "b",
+          "label": "`payload ? 'beta'`"
+        },
+        {
+          "id": "c",
+          "label": "`payload->'tags' = '[\"beta\"]'::jsonb`"
+        },
+        {
+          "id": "d",
+          "label": "`payload->>'tags' = 'beta'`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "JSONB containment `@>` matches an array that includes the element, whatever else it holds.",
+        "Equality on `tags` only matches the exact array; `?` checks top-level keys, not nested array values."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Queries use `WHERE lower(email) = 'a@x.com'` on `users`, which has a plain btree index on `email`. Which statement creates an index the planner can use for this filter?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`CREATE INDEX ON users (email) WHERE email = lower(email);`"
+        },
+        {
+          "id": "b",
+          "label": "`CREATE INDEX ON users USING gin (email);`"
+        },
+        {
+          "id": "c",
+          "label": "`CREATE INDEX ON users (lower(email));`"
+        },
+        {
+          "id": "d",
+          "label": "`CREATE INDEX ON users (email text_pattern_ops);`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An expression index on `lower(email)` matches the filter expression exactly.",
+        "Indexes on the raw column do not serve a predicate on a function of it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Column `tags` is `text[]`. Which condition returns rows whose array contains both 'sql' and 'pg', in any order and with any other elements?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`'sql' = ANY(tags) OR 'pg' = ANY(tags)`"
+        },
+        {
+          "id": "b",
+          "label": "`tags = ARRAY['sql','pg']`"
+        },
+        {
+          "id": "c",
+          "label": "`tags @> ARRAY['sql','pg']`"
+        },
+        {
+          "id": "d",
+          "label": "`tags && ARRAY['sql','pg']`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`@>` means the left array contains every element of the right array.",
+        "`&&` and the OR form match any element; `=` requires the exact same array."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In psql, `t.id` is the primary key and `t` is empty. You run: `BEGIN; INSERT INTO t VALUES (1); INSERT INTO t VALUES (1); SELECT count(*) FROM t; COMMIT;` What happens?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The second INSERT errors, SELECT returns 1, and COMMIT keeps the first row"
+        },
+        {
+          "id": "b",
+          "label": "The server retries the failed INSERT, SELECT returns 1, and COMMIT saves one row"
+        },
+        {
+          "id": "c",
+          "label": "The second INSERT errors, SELECT is rejected, and COMMIT rolls back so `t` stays empty"
+        },
+        {
+          "id": "d",
+          "label": "The second INSERT errors, SELECT is rejected, but COMMIT still saves the first row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "After an error, Postgres aborts the transaction; later commands fail and COMMIT acts as ROLLBACK.",
+        "Other databases may let you continue and commit the earlier work; Postgres does not."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You want real row counts and timings for `UPDATE t SET x = 1 WHERE id < 100` without keeping the changes. Which approach works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run `BEGIN; EXPLAIN ANALYZE UPDATE t SET x = 1 WHERE id < 100; ROLLBACK;`"
+        },
+        {
+          "id": "b",
+          "label": "Run `EXPLAIN (ANALYZE false, COSTS) UPDATE t SET x = 1 WHERE id < 100;`"
+        },
+        {
+          "id": "c",
+          "label": "Run `EXPLAIN UPDATE t SET x = 1 WHERE id < 100;` on its own"
+        },
+        {
+          "id": "d",
+          "label": "Run `SET TRANSACTION READ ONLY;` then `EXPLAIN ANALYZE UPDATE t SET x = 1 WHERE id < 100;`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "EXPLAIN ANALYZE really executes the statement, so wrapping it in a transaction you roll back discards the changes.",
+        "Plain EXPLAIN only shows estimates, and a read-only transaction would reject the UPDATE."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Table `t` has a JSONB column `data` and is queried with `data @> '{\"a\": 1}'`. Which indexes can the planner use for this condition? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`CREATE INDEX ON t USING hash (data);`"
+        },
+        {
+          "id": "b",
+          "label": "`CREATE INDEX ON t USING gin (data);`"
+        },
+        {
+          "id": "c",
+          "label": "`CREATE INDEX ON t USING gin (data jsonb_path_ops);`"
+        },
+        {
+          "id": "d",
+          "label": "`CREATE INDEX ON t USING btree (data);`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Both GIN operator classes support the containment operator `@>`.",
+        "Btree and hash only support equality-style comparisons on the whole JSONB value, not containment."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A teammate gives you `shop.dump`, created with `pg_dump -Fc shop`. You have created an empty database `shop_copy` on your server. Which command loads the dump into it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`psql -d shop_copy -f shop.dump`"
+        },
+        {
+          "id": "b",
+          "label": "`pg_restore -d shop_copy shop.dump`"
+        },
+        {
+          "id": "c",
+          "label": "`pg_dump -d shop_copy -f shop.dump`"
+        },
+        {
+          "id": "d",
+          "label": "`pg_restore -l shop.dump | psql shop_copy`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Custom-format dumps (-Fc) are loaded with `pg_restore`.",
+        "`psql -f` only reads plain SQL scripts, and `pg_restore -l` just lists the contents."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`orders` has a btree index on `created_at`. `EXPLAIN` for `WHERE created_at::date = '2024-05-01'` shows a Seq Scan over 5M rows. What most likely explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The index stays invalid until `VACUUM FULL` has rewritten the table at least once"
+        },
+        {
+          "id": "b",
+          "label": "The planner always scans sequentially when a table holds more than a million rows"
+        },
+        {
+          "id": "c",
+          "label": "Btree indexes can't serve equality on date-like values, only range predicates over them"
+        },
+        {
+          "id": "d",
+          "label": "The cast wraps the indexed column, so the plain index can't match the predicate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Applying a cast or function to the column stops a plain index on that column from matching.",
+        "Btree handles equality and ranges on timestamps; row count alone doesn't force a Seq Scan."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`EXPLAIN ANALYZE` shows a Nested Loop whose inner scan estimated `rows=1` but returned about 180000 rows per pass, and the query takes minutes. The table was bulk-loaded an hour ago. What is the best diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Stale statistics after the bulk load made the planner underestimate rows and choose a nested loop"
+        },
+        {
+          "id": "b",
+          "label": "`work_mem` is too small, which forces the planner to estimate one row for every join input"
+        },
+        {
+          "id": "c",
+          "label": "The inner index is corrupted and returns duplicate rows, so the loop repeats work needlessly"
+        },
+        {
+          "id": "d",
+          "label": "Nested loops always misestimate row counts, so the planner should be forced to use hash joins"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A large gap between estimated and actual rows after a bulk load points to missing statistics; run ANALYZE.",
+        "Corruption, `work_mem` and blanket join forcing don't explain a one-row estimate on freshly loaded data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A heavily updated table keeps growing although autovacuum runs often and logs show it processing the table. `pg_stat_activity` shows one session `idle in transaction` for two days. Which explains the bloat?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The old open transaction holds back the cleanup horizon, so vacuum can't remove recently dead rows"
+        },
+        {
+          "id": "b",
+          "label": "Idle sessions fill shared buffers, so autovacuum can't read the pages it needs to clean"
+        },
+        {
+          "id": "c",
+          "label": "Autovacuum only returns space to the OS and never reuses it inside the table, so growth is expected"
+        },
+        {
+          "id": "d",
+          "label": "Frequent updates always need `VACUUM FULL`, because plain vacuum can't mark dead rows reusable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A long-open transaction keeps old row versions visible, so vacuum cannot reclaim them.",
+        "Plain VACUUM does make dead space reusable; the blocker is the old snapshot, not buffer use."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A table has one index: `CREATE INDEX ON t (a, b);`. The query `SELECT * FROM t WHERE b = 5` on 10M rows is slow and EXPLAIN shows a Seq Scan. Which analysis is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Composite indexes are only used when every indexed column has an equality filter in the query"
+        },
+        {
+          "id": "b",
+          "label": "The planner ignores multicolumn indexes unless `ANALYZE` was run with the column list given"
+        },
+        {
+          "id": "c",
+          "label": "Index column order is irrelevant, so the Seq Scan means the index must be marked invalid"
+        },
+        {
+          "id": "d",
+          "label": "Btree entries are sorted by `a` first, so a filter on `b` alone can't narrow the search efficiently"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A btree on (a, b) is ordered by `a` then `b`, so a filter only on `b` lacks a usable leading column.",
+        "The other options invent rules; the fix is an index led by `b` or including `a` in the query."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "The log shows `deadlock detected`. Transaction A updated row 1 then tried row 2; transaction B updated row 2 then tried row 1. What is the root cause and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Updates need an index on each changed column, otherwise rows are locked twice per statement"
+        },
+        {
+          "id": "b",
+          "label": "The two transactions lock rows in opposite orders; make both update rows in the same order"
+        },
+        {
+          "id": "c",
+          "label": "READ COMMITTED allows dirty reads, so switching to READ UNCOMMITTED would prevent the conflict"
+        },
+        {
+          "id": "d",
+          "label": "Row locks escalate to table locks, so raise `max_locks_per_transaction` to avoid the waits"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Each transaction holds a lock the other needs, a cycle caused by inconsistent lock ordering.",
+        "Postgres has no lock escalation, and isolation level or indexes don't remove the cycle."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A table has `CREATE INDEX ON t USING gin (data);` on JSONB column `data`. A query with `WHERE data->>'user_id' = '5'` does a Seq Scan. Which statements are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The default GIN operator class supports `@>` and `?`, not `->>` comparisons"
+        },
+        {
+          "id": "b",
+          "label": "GIN indexes apply only to array columns, never to JSONB columns"
+        },
+        {
+          "id": "c",
+          "label": "Running `ANALYZE` will make the planner use the GIN index for the `->>` filter"
+        },
+        {
+          "id": "d",
+          "label": "Rewriting as `data @> '{\"user_id\": \"5\"}'` lets the planner use the GIN index"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "The predicate must use an operator the index supports; `@>` qualifies, `->>` equality does not.",
+        "Statistics don't change operator support, and GIN does support JSONB."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An app runs 300 worker processes, each opening its own connection to a server with `max_connections = 100`. Under load the logs show `FATAL: sorry, too many clients already`, while server CPU stays low. What is the most sensible diagnosis and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Upgrade the CPU cores until all 300 connections fit, because the server is saturated by query work"
+        },
+        {
+          "id": "b",
+          "label": "Demand exceeds the connection limit; put a pooler such as PgBouncer between the app and the server"
+        },
+        {
+          "id": "c",
+          "label": "Add indexes until queries finish faster, because slow queries holding locks are using up the slots"
+        },
+        {
+          "id": "d",
+          "label": "Raise `shared_buffers`, because connection slots are carved out of it and are starved under load"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Many mostly idle connections exceed the limit; a pooler multiplexes them onto few server connections.",
+        "Low CPU rules out compute saturation, and `shared_buffers` doesn't set the connection limit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A table has a btree index on `users(email)`. The query `SELECT * FROM users WHERE lower(email) = 'a@x.com'` does a sequential scan on 10M rows. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The index stores raw email values, so it cannot match a predicate on the expression `lower(email)`"
+        },
+        {
+          "id": "b",
+          "label": "Btree indexes only support equality on integer columns, so text lookups always fall back to scanning the whole table"
+        },
+        {
+          "id": "c",
+          "label": "The index is skipped because `SELECT *` forces the planner to read every column from the heap anyway"
+        },
+        {
+          "id": "d",
+          "label": "The planner ignores indexes whenever any function call appears anywhere in the WHERE clause of a query"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "An expression predicate needs a matching expression index such as `(lower(email))`.",
+        "Distractors assume btrees are integer-only or that any function or `SELECT *` disables indexes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "`EXPLAIN ANALYZE` shows a nested loop estimated at 1 row but returning 200000, and the query is slow. The two filtered columns are strongly correlated. What is the most likely root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The join order was forced by `join_collapse_limit`, which always produces nested loops when inputs are large"
+        },
+        {
+          "id": "b",
+          "label": "The `work_mem` setting is too low, so the planner shrinks its row estimates to fit in available memory"
+        },
+        {
+          "id": "c",
+          "label": "The planner treats the correlated predicates as independent, multiplying selectivities and underestimating rows"
+        },
+        {
+          "id": "d",
+          "label": "The table has too many indexes, so the planner picks a nested loop in order to make use of as many as possible"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Default statistics assume column independence; extended statistics (`CREATE STATISTICS`) address correlation.",
+        "Distractors blame settings unrelated to row-estimate errors."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A heavily updated table keeps growing although autovacuum runs regularly. `pg_stat_activity` shows one session `idle in transaction` for 3 days. Which diagnosis fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "That old transaction's snapshot keeps dead row versions visible, so vacuum cannot reclaim them and the table bloats"
+        },
+        {
+          "id": "b",
+          "label": "The session's uncommitted changes are written to the table file twice, once as new row versions and again as a copy, which doubles its on-disk size"
+        },
+        {
+          "id": "c",
+          "label": "Autovacuum skips any table that has an open transaction against it, so dead tuples are never counted in the statistics views and cleanup is never triggered"
+        },
+        {
+          "id": "d",
+          "label": "Idle sessions hold an exclusive table lock, so autovacuum is blocked from ever starting on that table until the session ends"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The oldest snapshot defines the xmin horizon; vacuum cannot remove tuples still visible to it.",
+        "Distractors invent lock or accounting behaviours that autovacuum does not have."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A `jsonb` column has `CREATE INDEX ON events USING gin (data);`. The query `WHERE data->>'status' = 'active'` still scans the whole table. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The GIN index entries are stale until `VACUUM FULL` rebuilds them, so the planner skips the index for key lookups"
+        },
+        {
+          "id": "b",
+          "label": "GIN indexes are meant for array columns, so the planner ignores one built on jsonb for key lookups"
+        },
+        {
+          "id": "c",
+          "label": "The default GIN operator class supports containment and key-existence operators, not an `->>` comparison"
+        },
+        {
+          "id": "d",
+          "label": "The `->>` operator returns jsonb, which the planner cannot match to a text literal when choosing an index"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The default `jsonb_ops` supports `@>`, `?` and similar; `->>` equality needs a btree expression index or a rewrite to `@>`.",
+        "Distractors misstate GIN type support or operator return types."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A btree index exists on `orders(customer_id, created_at)`. A query filtering only `WHERE created_at > now() - interval '1 day'` is slow on a large table. What is the best analysis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Composite indexes are used for range filters only when the leading column also has an equality predicate, so a bare range on created_at is rejected by the planner"
+        },
+        {
+          "id": "b",
+          "label": "Without a restriction on the leading column, the index can't be descended by range, so a full scan is needed"
+        },
+        {
+          "id": "c",
+          "label": "The index sorts created_at before customer_id, so the range filter matches the index order and the slowness points to stale statistics"
+        },
+        {
+          "id": "d",
+          "label": "The now() function is volatile, so the planner evaluates it per row and treats the predicate as not indexable in this query"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Btree search efficiency depends on constraints on the leading column(s); `now()` is stable, not volatile.",
+        "Distractors misstate column ordering and index usage rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A query filters on an indexed column, yet `EXPLAIN` shows a sequential scan. Which are plausible explanations? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Statistics are stale, so the planner overestimates how many rows will match the predicate"
+        },
+        {
+          "id": "b",
+          "label": "The predicate matches a large fraction of the rows, so sequential heap reads cost less than many random fetches"
+        },
+        {
+          "id": "c",
+          "label": "The table is tiny and fits in a few pages, so scanning it is cheaper than an index lookup"
+        },
+        {
+          "id": "d",
+          "label": "Btree indexes cannot be used on integer columns when the table also has a primary key constraint"
+        },
+        {
+          "id": "e",
+          "label": "An index built with `CREATE INDEX CONCURRENTLY` is permanently ignored by the planner once it is valid"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Selectivity, table size and stale statistics all push the planner toward a seq scan.",
+        "Valid concurrent indexes are used normally; primary keys do not disable other indexes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A reporting query on a hot standby runs for 20 minutes and fails with `canceling statement due to conflict with recovery`. The primary has heavy updates and autovacuum is active. What most directly causes the cancellation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The standby's `max_connections` is lower than the primary's, so long queries are evicted while WAL is replayed"
+        },
+        {
+          "id": "b",
+          "label": "The primary's synchronous commit setting forces standby queries to abort whenever a new commit arrives from clients"
+        },
+        {
+          "id": "c",
+          "label": "The query holds a lock on a replicated table, and the primary then times out while waiting for that lock"
+        },
+        {
+          "id": "d",
+          "label": "Replay of WAL from vacuum would remove row versions that the standby query's snapshot still needs, causing a conflict"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Vacuum cleanup records replayed on the standby conflict with old snapshots; `hot_standby_feedback` or delay settings trade this off.",
+        "Distractors invoke connection limits or lock behaviour that don't cross replication."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A `jobs` table has 20M rows, 0.5% with `status='pending'`. The hot query is `WHERE status='pending' ORDER BY created_at LIMIT 50`. Criteria: fastest reads and the lowest index maintenance cost. Which index is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`CREATE INDEX ON jobs (status)`"
+        },
+        {
+          "id": "b",
+          "label": "`CREATE INDEX ON jobs (created_at) WHERE status = 'pending'`"
+        },
+        {
+          "id": "c",
+          "label": "`CREATE INDEX ON jobs (status, created_at)`"
+        },
+        {
+          "id": "d",
+          "label": "`CREATE INDEX ON jobs (status, created_at, id) INCLUDE (payload)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A partial index covers only pending rows, is ordered for the sort and is touched only by pending-row changes.",
+        "Full indexes also index the 99.5% of rows never queried, raising size and maintenance."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Products need tags. Criteria: foreign-key integrity to a `tags` table, per-tag metadata such as color, and renaming a tag in a single place. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A `jsonb` array of tag names with a GIN index, which allows flexible tag attributes per product"
+        },
+        {
+          "id": "b",
+          "label": "A comma-separated `text` column, which avoids extra joins and works with simple `LIKE` queries"
+        },
+        {
+          "id": "c",
+          "label": "A `text[]` column with a GIN index, which keeps tags next to the product row and speeds lookups"
+        },
+        {
+          "id": "d",
+          "label": "A `product_tags` link table of product and tag ids, which stores each tag once and lets a rename touch one row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Only a join table gives FK integrity and a single place for tag metadata and renames.",
+        "Array and jsonb options are fast for lookups but can't enforce references."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A nightly read-only export runs several queries that must see one consistent snapshot, must not block writers, and must not need client retry logic. Which isolation level best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`REPEATABLE READ`, because all statements share one snapshot and a read-only transaction won't hit serialization failures"
+        },
+        {
+          "id": "b",
+          "label": "`SERIALIZABLE`, because it is the strongest level and never needs client retries when used for read-only work"
+        },
+        {
+          "id": "c",
+          "label": "`READ COMMITTED`, because each statement sees committed data so the export stays consistent across all its queries"
+        },
+        {
+          "id": "d",
+          "label": "`READ UNCOMMITTED`, because it avoids snapshots entirely and therefore never blocks or is blocked by any writers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Repeatable read gives one snapshot for the whole transaction and read-only use avoids serialization failures.",
+        "Read committed takes a new snapshot per statement; serializable can still raise retryable errors."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must add an index to a 500 GB table receiving constant writes. Criteria: writes must not be blocked during the build; a longer build and extra I/O are acceptable. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Build the index on a replica and copy its files to the primary, since copying never blocks any writer"
+        },
+        {
+          "id": "b",
+          "label": "`CREATE INDEX CONCURRENTLY`, accepting extra table scans and dropping any invalid index if it fails"
+        },
+        {
+          "id": "c",
+          "label": "Plain `CREATE INDEX` inside a transaction, since a rollback makes failures safe and keeps writes uninterrupted"
+        },
+        {
+          "id": "d",
+          "label": "Plain `CREATE INDEX` in a maintenance window, since it builds faster and writers only queue for a short time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The concurrent build avoids write-blocking locks at the cost of time and possible invalid leftovers.",
+        "Plain builds block writes for the whole build; index files can't be copied between servers like that."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An app opens 3000 short-lived connections; the server (max_connections 200) struggles and raising it to 3000 would exhaust RAM. Clients use no session features like temp tables or advisory locks. Which fix best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Switch to `SERIALIZABLE` isolation so the server queues clients rather than allocating new backends"
+        },
+        {
+          "id": "b",
+          "label": "Put PgBouncer in transaction pooling mode in front, so few server backends serve many clients"
+        },
+        {
+          "id": "c",
+          "label": "Use session pooling with one server backend per client, which preserves every session-level feature"
+        },
+        {
+          "id": "d",
+          "label": "Raise `max_connections` to 3000 and lower `work_mem`, since idle backends cost almost no memory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Transaction pooling multiplexes many clients over few backends, safe when no session state is used.",
+        "Each backend is a process with real memory cost; isolation levels don't queue connections."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team proposes indexing every column of a write-heavy `events` table \"to be safe\". Which are valid critiques of this plan? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Updates to indexed columns can't be heap-only tuple updates, increasing bloat and vacuum work"
+        },
+        {
+          "id": "b",
+          "label": "Every insert and non-HOT update must maintain each index, amplifying write cost and WAL volume"
+        },
+        {
+          "id": "c",
+          "label": "Unused indexes still consume disk and cache, displacing more useful pages from memory"
+        },
+        {
+          "id": "d",
+          "label": "Indexes on low-cardinality columns raise errors on insert once duplicates pass a threshold"
+        },
+        {
+          "id": "e",
+          "label": "Postgres allows at most 32 indexes per table, so the plan cannot be implemented as stated"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Write amplification, lost HOT updates and wasted cache/storage are real costs.",
+        "There is no 32-index table limit and low cardinality never causes insert errors."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A 2 TB Postgres database has an RPO of 5 minutes and must be restorable to just before an accidental `DELETE`. Today only a nightly `pg_dump` runs. Which strategy best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run `pg_dump` every 5 minutes, since each dump is a restore point and adds no meaningful load to a 2 TB database"
+        },
+        {
+          "id": "b",
+          "label": "Periodic physical base backups plus continuous WAL archiving, enabling point-in-time recovery to a chosen timestamp"
+        },
+        {
+          "id": "c",
+          "label": "Keep the nightly `pg_dump` but add `--inserts`, since the file can be replayed up to any statement in the day"
+        },
+        {
+          "id": "d",
+          "label": "Rely on one synchronous streaming replica, since you can pause it before the delete is replayed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Base backups plus WAL archiving give PITR with minutes of data-loss exposure.",
+        "Replicas replay deletes immediately; dumps are snapshots, not continuous logs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An `orders` table has 500M rows and 2% have `status = 'pending'`. The hot query is `WHERE status = 'pending' ORDER BY created_at LIMIT 50`. Criteria: fast reads, smallest index, least write overhead. Which index is the best fit?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Separate btree indexes on `status` and `created_at`, since the planner can always merge them without a sort step"
+        },
+        {
+          "id": "b",
+          "label": "`CREATE INDEX ON orders (created_at) WHERE status = 'pending'`, which holds only pending rows already in order"
+        },
+        {
+          "id": "c",
+          "label": "`CREATE INDEX ON orders (status, created_at)`, which is ordered but covers every row and is touched on each status change"
+        },
+        {
+          "id": "d",
+          "label": "`CREATE INDEX ON orders USING hash (status)`, since hash lookups are the fastest way to match equality on status"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A partial index covers only the 2% of rows needed, is ordered for the LIMIT, and avoids write cost for non-pending rows.",
+        "The composite index indexes all rows; hash indexes give no ordering; separate indexes can't avoid the sort."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A dashboard shows 'about N results' for a 2B-row table. Criteria: no table scan, response in milliseconds, a few percent of error is acceptable. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use `SELECT max(id)` as the count, since ids from a sequence are contiguous and track the row total"
+        },
+        {
+          "id": "b",
+          "label": "Run `SELECT count(*)` each time, since Postgres keeps a row counter and can answer it from metadata"
+        },
+        {
+          "id": "c",
+          "label": "Read `reltuples` from `pg_class`, which ANALYZE and autovacuum update, accepting some staleness"
+        },
+        {
+          "id": "d",
+          "label": "Run `SELECT count(*)` with `enable_seqscan = off`, so an index scan answers it without visiting the heap"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`reltuples` is a cheap planner estimate that meets the latency and tolerance criteria.",
+        "Postgres has no constant-time exact count (MVCC), and ids have gaps from rollbacks and deletes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Two on-call doctors each run a transaction: check that `count(*) >= 2` on-call, then set their own row off-call. Under READ COMMITTED both commit, leaving none. Criteria: enforce the invariant, no hand-written row locks, retries acceptable. Which choice is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "SERIALIZABLE, with the application retrying on SQLSTATE `40001` serialization failures"
+        },
+        {
+          "id": "b",
+          "label": "READ COMMITTED with a higher threshold in the check, because a margin makes the race harmless"
+        },
+        {
+          "id": "c",
+          "label": "READ COMMITTED with `SELECT ... FOR SHARE` on the count query, since share locks stop updates elsewhere"
+        },
+        {
+          "id": "d",
+          "label": "REPEATABLE READ, because its snapshot prevents write skew when each transaction updates a different row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "SERIALIZABLE (SSI) detects the dangerous read-write dependency and aborts one transaction, which the app retries.",
+        "REPEATABLE READ allows write skew; a margin or FOR SHARE on an aggregate doesn't lock the rows' future state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A 300M-row table has a `jsonb` column. Every query uses only containment, `doc @> '{\"type\":\"x\"}'`. No `?`, `?|` or `?&` operators are used. Criteria: smallest index and fastest lookups. Which GIN operator class is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A btree index on the `doc` column, because btree supports `@>` containment on jsonb values"
+        },
+        {
+          "id": "b",
+          "label": "`jsonb_ops`, because it indexes keys and values separately and so is the most general choice"
+        },
+        {
+          "id": "c",
+          "label": "`jsonb_ops`, because only it can serve `@>` while `jsonb_path_ops` handles just key-existence tests"
+        },
+        {
+          "id": "d",
+          "label": "`jsonb_path_ops`, because it hashes whole key-value paths, giving a smaller index for `@>`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "jsonb_path_ops supports @> and jsonb path matches with a smaller, faster index when existence operators aren't needed.",
+        "jsonb_ops is needed only for `?` operators; btree on jsonb doesn't support containment searches."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team fixes one slow query by setting `enable_seqscan = off` in `postgresql.conf` for the whole cluster. Which critique is strongest?",
+      "options": [
+        {
+          "id": "a",
+          "label": "On SSD storage index scans usually cost less than seq scans, so the setting is mostly harmless and only the config reload needs care"
+        },
+        {
+          "id": "b",
+          "label": "It pushes plans toward indexes even where a seq scan is cheaper, and hides causes like stale stats or a high `random_page_cost`"
+        },
+        {
+          "id": "c",
+          "label": "It does not change planner choices, because the setting only alters how the executor reads pages once a seq scan has been chosen"
+        },
+        {
+          "id": "d",
+          "label": "It degrades statistics quality, because ANALYZE relies on sequential scans and the planner then samples fewer rows from each table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The setting only penalises seq scans globally, causing bad plans elsewhere and masking stats or cost-parameter problems.",
+        "Seq scans are still optimal for large fractions of a table, and the setting does not affect ANALYZE."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A proposal adds a btree index on every column of a write-heavy `events` table 'just in case'. Which criticisms are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Updating an indexed column prevents HOT updates, which increases bloat and vacuum work"
+        },
+        {
+          "id": "b",
+          "label": "Every insert must also write an entry into each index, which multiplies write cost and WAL volume"
+        },
+        {
+          "id": "c",
+          "label": "Postgres allows at most eight indexes per table, so the ninth `CREATE INDEX` will fail"
+        },
+        {
+          "id": "d",
+          "label": "Indexes that are never used still take disk and cache space and must be maintained by vacuum"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Index maintenance cost on writes, loss of HOT updates, and space/vacuum overhead are real costs.",
+        "There is no eight-index limit in Postgres."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "Analysts run 20-minute reports on a hot standby and get 'canceling statement due to conflict with recovery'. Criteria: reports must finish, the primary must not accumulate bloat from replica queries, and replica lag of up to 30 minutes is acceptable. Which change best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Raise `max_standby_streaming_delay` to about 30 minutes, so replay waits for queries and the replica lags"
+        },
+        {
+          "id": "b",
+          "label": "Set `synchronous_commit = remote_apply`, so commits wait for replay and cannot conflict with readers"
+        },
+        {
+          "id": "c",
+          "label": "Raise `wal_keep_size`, so the standby has WAL segments available and no longer hits any recovery conflict"
+        },
+        {
+          "id": "d",
+          "label": "Enable `hot_standby_feedback`, so the primary retains old row versions for the replica's queries"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Delaying WAL replay lets queries finish, trading replica lag, which the criteria accept, and primary bloat stays unaffected.",
+        "hot_standby_feedback causes primary bloat; wal_keep_size and remote_apply don't prevent replay conflicts."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a constraint so each user can have at most one `active` subscription, while any number of `cancelled` or `expired` rows remain allowed, with the database enforcing it. Which design meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A `CHECK (status <> 'active')` constraint, which rejects a second active row through the row's own values"
+        },
+        {
+          "id": "b",
+          "label": "An application-level `SELECT` before each insert, which finds an existing active row within the same session"
+        },
+        {
+          "id": "c",
+          "label": "`CREATE UNIQUE INDEX ON subs (user_id) WHERE status = 'active'`, which makes only active rows unique per user"
+        },
+        {
+          "id": "d",
+          "label": "`UNIQUE (user_id, status)`, which allows only one row per status value for each user"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A partial unique index enforces uniqueness only among active rows, atomically.",
+        "UNIQUE(user_id,status) also blocks multiple cancelled rows; CHECK sees one row only; read-then-insert races."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a schema rule that prevents two bookings for the same room with overlapping time ranges, enforced by the database even under concurrent inserts. Which design works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A before-insert trigger that runs `SELECT` for overlaps, which concurrent transactions can't see until commit"
+        },
+        {
+          "id": "b",
+          "label": "`UNIQUE (room_id, starts_at, ends_at)`, which rejects bookings with the exact same start and end"
+        },
+        {
+          "id": "c",
+          "label": "`EXCLUDE USING gist (room_id WITH =, during WITH &&)` on a `tstzrange` column, with `btree_gist` installed"
+        },
+        {
+          "id": "d",
+          "label": "A `CHECK (starts_at < ends_at)` constraint, which keeps every booking interval valid for its own room"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An exclusion constraint with range overlap enforces non-overlap atomically via the index.",
+        "Unique only catches identical ranges; CHECK is per row; trigger checks race under concurrency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "You must enforce NOT NULL on an existing column of a 1B-row busy table with minimal time holding an exclusive lock. Which plan meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Create a copy of the table with the constraint, then rename it over the original inside a single transaction"
+        },
+        {
+          "id": "b",
+          "label": "Run `ALTER TABLE t ALTER COLUMN c SET NOT NULL` directly, since the check is always instantaneous in Postgres"
+        },
+        {
+          "id": "c",
+          "label": "Add `CHECK (c IS NOT NULL) NOT VALID`, then `VALIDATE CONSTRAINT`, then `SET NOT NULL` and drop the check"
+        },
+        {
+          "id": "d",
+          "label": "Lock the table with `LOCK TABLE t IN ACCESS EXCLUSIVE MODE`, then update null rows and set NOT NULL"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "NOT VALID adds the constraint cheaply, VALIDATE takes a weaker lock, and SET NOT NULL can then skip the full scan.",
+        "Direct SET NOT NULL scans the table under an exclusive lock; copy-and-rename or explicit locks are worse."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a job-queue consumer: many workers poll a `jobs` table, and each job must be claimed by exactly one worker without workers blocking each other. Which design meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use `LOCK TABLE jobs IN EXCLUSIVE MODE` per poll, so only one worker reads at a time and none collide"
+        },
+        {
+          "id": "b",
+          "label": "Each worker runs `SELECT ... LIMIT 1`, then `UPDATE` the row to claimed, which the primary key keeps safe"
+        },
+        {
+          "id": "c",
+          "label": "Use `SELECT ... FOR UPDATE LIMIT 1` in a transaction, so every worker waits in line for the same first row"
+        },
+        {
+          "id": "d",
+          "label": "Use `SELECT ... FOR UPDATE SKIP LOCKED LIMIT 1` in a transaction, then update the job and commit"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "SKIP LOCKED lets each worker claim a different unlocked row without blocking.",
+        "Plain read-then-update races; FOR UPDATE alone and table locks serialise workers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design storage for time-series logs: 100M rows per day, only 90 days kept, with the old data removed without long deletes or vacuum bloat. Which design meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One table, and a nightly `DELETE FROM logs WHERE ts < now() - interval '90 days'`"
+        },
+        {
+          "id": "b",
+          "label": "One table with a btree on `ts`, and `VACUUM FULL` after each nightly delete to reclaim space"
+        },
+        {
+          "id": "c",
+          "label": "Hash partitions on `ts`, so rows spread evenly and old data is removed by dropping some hash partitions"
+        },
+        {
+          "id": "d",
+          "label": "Daily range partitions on `ts`, creating future partitions ahead and dropping or detaching expired ones"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Range partitions by time let retention be a cheap DROP/DETACH with no dead tuples.",
+        "Mass DELETE creates bloat; VACUUM FULL locks the table; hash partitions don't align with age."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design tenant isolation with row-level security on a shared `invoices` table accessed through a transaction-mode connection pooler. Which elements are needed for it to work? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Setting the tenant per transaction with `SET LOCAL app.tenant`, so pooled connections never carry a stale value"
+        },
+        {
+          "id": "b",
+          "label": "An application role that does not own the table and lacks `BYPASSRLS` (or the table uses `FORCE ROW LEVEL SECURITY`)"
+        },
+        {
+          "id": "c",
+          "label": "`ALTER TABLE invoices ENABLE ROW LEVEL SECURITY` plus a policy `USING (tenant_id = current_setting('app.tenant')::int)`"
+        },
+        {
+          "id": "d",
+          "label": "Running the application as a superuser, so that policies are evaluated with the most reliable privileges"
+        },
+        {
+          "id": "e",
+          "label": "Creating the policy alone, since policies filter rows even when RLS is not enabled on the table"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "RLS must be enabled with a policy, the role must be subject to it, and tenant context must be transaction-scoped under pooling.",
+        "Superusers bypass RLS, and policies do nothing until RLS is enabled."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A 50M-row `products` table is queried with `WHERE name ILIKE '%widget%'` and takes seconds in a sequential scan. Requirements: keep substring semantics, stay inside Postgres, no new search service. Which fix meets all of them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`CREATE INDEX ON products (lower(name))`, since a btree on the lowercase name serves any ILIKE pattern"
+        },
+        {
+          "id": "b",
+          "label": "`CREATE INDEX ON products (name text_pattern_ops)`, since it speeds up pattern matching even with a leading wildcard"
+        },
+        {
+          "id": "c",
+          "label": "`CREATE EXTENSION pg_trgm`, then `CREATE INDEX ON products USING gin (name gin_trgm_ops)`"
+        },
+        {
+          "id": "d",
+          "label": "A `tsvector` column with a GIN index, queried by `to_tsquery('widget')` to match any word position"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A trigram GIN index supports ILIKE with leading wildcards while preserving substring semantics.",
+        "Btree variants can't serve a leading wildcard; full-text search matches words, not arbitrary substrings."
+      ],
+      "reviewed": false
+    }
+  ]
+}

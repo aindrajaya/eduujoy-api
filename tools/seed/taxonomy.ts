@@ -5,18 +5,10 @@ import { z } from 'zod';
 import { toStructuredSchema } from '../../src/shared/ai/json-schema';
 import { PromptRegistry } from '../../src/shared/ai/prompts/prompt-registry';
 import { type SeedTopic } from '../../src/shared/db/seed/seed-data';
-import {
-  assertWithinCap,
-  closeRun,
-  logSpend,
-  openRun,
-  recordOpenRun,
-  reject,
-  ROOT,
-  SEED_DIR,
-  writeJson,
-} from './ledger';
+import { collectBatch, replyJson, submitBatch } from './batch';
+import { assertWithinCap, logSpend, openRun, reject, ROOT, SEED_DIR, writeJson } from './ledger';
 import { addUsage, estimate, estimateTokens, formatEstimate, fromApiUsage, SEED_MODEL, usd, ZERO_USAGE, type Usage } from './pricing';
+import { spread } from './sample';
 
 // seed:taxonomy. Input: seed/_taxonomy-proposal.json (slug, name, domain, parent; reviewed by a human).
 // Claude adds aliases, a description and prerequisite edges per topic; the result is seed/topics.json in
@@ -32,7 +24,6 @@ const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('taxonomy', 
 
 const MAX_TOKENS = 8_000;
 const EXPECTED_OUTPUT_TOKENS = 2_000;
-const POLL_MS = 30_000;
 
 const slug = z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/).max(64);
 const proposalSchema = z.object({
@@ -109,18 +100,8 @@ function requestParams(topics: ProposedTopic[], topic: ProposedTopic): Anthropic
 
 /** Parses one reply; on failure writes a reject row and returns undefined. */
 function acceptReply(topics: ProposedTopic[], topicSlug: string, message: Anthropic.Message): Answer | undefined {
-  if (message.stop_reason !== 'end_turn') {
-    reject(COMMAND, topicSlug, `stop_reason ${String(message.stop_reason)}`);
-    return undefined;
-  }
-  const text = message.content.find((block) => block.type === 'text')?.text ?? '';
-  let json: unknown;
-  try {
-    json = JSON.parse(text);
-  } catch {
-    reject(COMMAND, topicSlug, 'reply is not JSON', text);
-    return undefined;
-  }
+  const json = replyJson(COMMAND, topicSlug, message);
+  if (json === undefined) return undefined;
   const parsed = answerSchema(topics.map((t) => t.slug) as [string, ...string[]]).safeParse(json);
   if (!parsed.success) {
     reject(COMMAND, topicSlug, parsed.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; '), json);
@@ -135,19 +116,6 @@ function estimateFor(topics: ProposedTopic[], pending: ProposedTopic[], batch: b
   return estimate(pending.length, { prefixTokens, suffixTokens, outputTokens: EXPECTED_OUTPUT_TOKENS }, batch);
 }
 
-/** Round-robin across domains so a small sample covers all three. */
-function spread(topics: ProposedTopic[], n: number): ProposedTopic[] {
-  const byDomain = ['software', 'stem', 'non_technical'].map((d) => topics.filter((t) => t.domain === d));
-  const out: ProposedTopic[] = [];
-  for (let i = 0; out.length < n && byDomain.some((list) => i < list.length); i++) {
-    for (const list of byDomain) {
-      const topic = list[i];
-      if (topic && out.length < n) out.push(topic);
-    }
-  }
-  return out;
-}
-
 export async function runTaxonomy(options: TaxonomyOptions): Promise<void> {
   const topics = loadProposal();
   const answers = loadAnswers();
@@ -159,7 +127,7 @@ export async function runTaxonomy(options: TaxonomyOptions): Promise<void> {
       write(`Batch ${open.batchId} (${open.requests} requests) is still open; a real run collects it at no extra cost.`);
       return;
     }
-    await collectBatch(topics, answers, open.batchId);
+    await collect(new Anthropic(), topics, answers, open.batchId);
     assemble(topics, answers);
     return;
   }
@@ -167,7 +135,7 @@ export async function runTaxonomy(options: TaxonomyOptions): Promise<void> {
   const pending = topics.filter((t) => !answers.has(t.slug));
   write(`Taxonomy: ${topics.length} topics in the proposal, ${answers.size} answered (prompt ${PROMPT.name}/${PROMPT.version}), ${pending.length} pending.`);
   if (pending.length === 0) {
-    assemble(topics, answers);
+    if (!options.dryRun) assemble(topics, answers);
     return;
   }
 
@@ -183,14 +151,12 @@ export async function runTaxonomy(options: TaxonomyOptions): Promise<void> {
   assertWithinCap(est.usdNoCache);
 
   const client = new Anthropic();
-  if (batch) {
-    await submitBatch(client, topics, targets);
-  } else {
+  if (!batch) {
     await runSample(client, topics, targets, answers);
     return;
   }
-  const submitted = openRun(COMMAND);
-  if (submitted) await collectBatch(topics, answers, submitted.batchId, client);
+  const requests = targets.map((topic) => ({ custom_id: topic.slug, params: requestParams(topics, topic) }));
+  await collect(client, topics, answers, await submitBatch(client, COMMAND, PROMPT.version, requests));
   assemble(topics, answers);
 }
 
@@ -215,43 +181,16 @@ async function runSample(client: Anthropic, topics: ProposedTopic[], targets: Pr
   }
 }
 
-async function submitBatch(client: Anthropic, topics: ProposedTopic[], targets: ProposedTopic[]): Promise<void> {
-  const created = await client.messages.batches.create({
-    requests: targets.map((topic) => ({ custom_id: topic.slug, params: requestParams(topics, topic) })),
-  });
-  recordOpenRun(COMMAND, { batchId: created.id, submittedAt: new Date().toISOString(), requests: targets.length, promptVersion: PROMPT.version });
-  process.stdout.write(`Submitted batch ${created.id} (${targets.length} requests). Safe to interrupt: rerun to resume.\n`);
-}
-
-async function collectBatch(topics: ProposedTopic[], answers: Map<string, Answer>, batchId: string, client = new Anthropic()): Promise<void> {
-  for (;;) {
-    const batch = await client.messages.batches.retrieve(batchId);
-    if (batch.processing_status === 'ended') break;
-    const c = batch.request_counts;
-    process.stdout.write(`Batch ${batchId}: ${batch.processing_status}, ${c.processing} processing, ${c.succeeded} succeeded, ${c.errored} errored\n`);
-    await new Promise((resolve) => setTimeout(resolve, POLL_MS));
+async function collect(client: Anthropic, topics: ProposedTopic[], answers: Map<string, Answer>, batchId: string): Promise<void> {
+  try {
+    await collectBatch(client, COMMAND, batchId, (slug, message) => {
+      const answer = acceptReply(topics, slug, message);
+      if (answer) answers.set(slug, answer);
+      return answer !== undefined;
+    });
+  } finally {
+    saveAnswers(answers);
   }
-
-  let usage: Usage = ZERO_USAGE;
-  let requests = 0;
-  let accepted = 0;
-  for await (const row of await client.messages.batches.results(batchId)) {
-    requests++;
-    if (row.result.type !== 'succeeded') {
-      reject(COMMAND, row.custom_id, `batch result ${row.result.type}`, row.result.type === 'errored' ? row.result.error : undefined);
-      continue;
-    }
-    usage = addUsage(usage, fromApiUsage(row.result.message.usage));
-    const answer = acceptReply(topics, row.custom_id, row.result.message);
-    if (answer) {
-      answers.set(row.custom_id, answer);
-      accepted++;
-    }
-  }
-  saveAnswers(answers);
-  const cost = logSpend({ command: COMMAND, batch: true, requests, usage, ref: batchId });
-  closeRun(COMMAND);
-  process.stdout.write(`Collected batch ${batchId}: ${accepted}/${requests} accepted, actual cost ${usd(cost)}.\n`);
 }
 
 /** Builds seed/topics.json once every proposed topic has an answer; otherwise reports what is missing. */

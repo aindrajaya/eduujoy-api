@@ -1,0 +1,2475 @@
+{
+  "version": 1,
+  "topic": "rest-api-design",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which HTTP method is normally used to retrieve a resource without changing it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "PUT"
+        },
+        {
+          "id": "b",
+          "label": "DELETE"
+        },
+        {
+          "id": "c",
+          "label": "GET"
+        },
+        {
+          "id": "d",
+          "label": "POST"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "GET is the read-only retrieval method.",
+        "POST, PUT and DELETE all change server state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which status code means a new resource was successfully created?",
+      "options": [
+        {
+          "id": "a",
+          "label": "200"
+        },
+        {
+          "id": "b",
+          "label": "302"
+        },
+        {
+          "id": "c",
+          "label": "201"
+        },
+        {
+          "id": "d",
+          "label": "204"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "201 Created signals a new resource was made.",
+        "200 is generic success, 204 means no content, and 302 is a redirect."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which URL best follows REST naming conventions for the collection of all orders?",
+      "options": [
+        {
+          "id": "a",
+          "label": "/getOrders"
+        },
+        {
+          "id": "b",
+          "label": "/createOrders"
+        },
+        {
+          "id": "c",
+          "label": "/orders"
+        },
+        {
+          "id": "d",
+          "label": "/order/list"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "REST URLs name resources with plural nouns, and the HTTP method gives the action.",
+        "The other options put verbs or actions in the path."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which status code means the requested resource could not be found?",
+      "options": [
+        {
+          "id": "a",
+          "label": "404"
+        },
+        {
+          "id": "b",
+          "label": "401"
+        },
+        {
+          "id": "c",
+          "label": "400"
+        },
+        {
+          "id": "d",
+          "label": "500"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "404 Not Found is the code for a missing resource.",
+        "400 is a malformed request, 401 is unauthenticated, and 500 is a server error."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does it mean for an HTTP method to be idempotent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Repeating the same request leaves the server in the same state as sending it once"
+        },
+        {
+          "id": "b",
+          "label": "The request can be repeated safely because it only reads data and never changes any server state"
+        },
+        {
+          "id": "c",
+          "label": "The server returns the same status code and identical response body for every repeat of the request"
+        },
+        {
+          "id": "d",
+          "label": "The response can be stored by caches and reused for later requests without contacting the server"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Idempotent means repeated identical requests leave the server in the same state as one request.",
+        "Distractors confuse idempotency with security, speed or caching."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these HTTP methods are defined as safe, meaning they should not modify server state? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "POST"
+        },
+        {
+          "id": "b",
+          "label": "DELETE"
+        },
+        {
+          "id": "c",
+          "label": "OPTIONS"
+        },
+        {
+          "id": "d",
+          "label": "GET"
+        },
+        {
+          "id": "e",
+          "label": "HEAD"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "GET, HEAD and OPTIONS are read-only and therefore safe.",
+        "POST and DELETE change state, so they are not safe."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A developer is writing a client for a bookstore API. Books live at `/books`, and each has an id. The developer wants to remove the book with id 7. Which request should the client send?",
+      "options": [
+        {
+          "id": "a",
+          "label": "PUT /books/7"
+        },
+        {
+          "id": "b",
+          "label": "POST /books/7/delete"
+        },
+        {
+          "id": "c",
+          "label": "DELETE /books/7"
+        },
+        {
+          "id": "d",
+          "label": "GET /books/delete?id=7"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "DELETE on the resource URL removes that resource.",
+        "Distractors put the action in the path or use methods that do not delete."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do REST APIs use nouns in URLs, such as `/users`, instead of verbs, such as `/getUsers`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The URL names the resource and the HTTP method already says the action"
+        },
+        {
+          "id": "b",
+          "label": "Nouns let the API skip status codes because the URL implies the result"
+        },
+        {
+          "id": "c",
+          "label": "Nouns make the URL shorter, and length decides how fast requests run"
+        },
+        {
+          "id": "d",
+          "label": "Verbs in URLs are rejected by HTTP servers as invalid"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The URL identifies the resource while the method expresses the action, which keeps APIs consistent.",
+        "Distractors invent technical limits or performance effects that do not exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How do PUT and PATCH differ when updating a resource?",
+      "options": [
+        {
+          "id": "a",
+          "label": "PUT only creates resources, while PATCH only deletes fields from them"
+        },
+        {
+          "id": "b",
+          "label": "They are identical and differ only in which browsers support them"
+        },
+        {
+          "id": "c",
+          "label": "PATCH replaces the whole resource, while PUT changes only the fields sent"
+        },
+        {
+          "id": "d",
+          "label": "PUT replaces the whole resource, while PATCH changes only the fields sent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "PUT sends a full replacement; PATCH sends a partial update.",
+        "The strongest distractor swaps the two meanings."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A client sends the same `POST /orders` request with an identical body twice. What will typically happen in a standard REST API?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One order is created, because the server detects the duplicate body"
+        },
+        {
+          "id": "b",
+          "label": "Two separate orders are created, because POST is not idempotent"
+        },
+        {
+          "id": "c",
+          "label": "The second request is rejected, because POST can only run once"
+        },
+        {
+          "id": "d",
+          "label": "The first order is overwritten, because POST replaces existing data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "POST is not idempotent, so each call usually creates a new resource.",
+        "Distractors treat POST like PUT or assume automatic duplicate detection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A user is logged in with a valid token but tries to delete another person's account and is not allowed to. Which status code fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "401 Unauthorized"
+        },
+        {
+          "id": "b",
+          "label": "409 Conflict"
+        },
+        {
+          "id": "c",
+          "label": "403 Forbidden"
+        },
+        {
+          "id": "d",
+          "label": "404 Not Found"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "403 means the identity is known but lacks permission.",
+        "401 is for missing or invalid authentication, which is the usual confusion."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why should an API paginate a collection such as `/products` with thousands of items?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pagination lets the server skip authentication checks on every page after the first request"
+        },
+        {
+          "id": "b",
+          "label": "Pagination encrypts the data in transit so that only the page being viewed can be read"
+        },
+        {
+          "id": "c",
+          "label": "Returning everything at once is slow and heavy, so clients fetch it in pages"
+        },
+        {
+          "id": "d",
+          "label": "HTTP itself requires pagination and caps every single response at 100 items per request"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Pages keep responses small and fast and reduce load on server and client.",
+        "Distractors invent security or protocol rules that do not exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these are good reasons to version a public REST API, for example with `/v1/` and `/v2/`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Breaking changes can ship without breaking existing clients"
+        },
+        {
+          "id": "b",
+          "label": "Every small bug fix should get its own new version number"
+        },
+        {
+          "id": "c",
+          "label": "Clients can migrate to the new version on their own schedule"
+        },
+        {
+          "id": "d",
+          "label": "Versioning removes the need to document the API"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Versions let breaking changes coexist with old clients and give them time to migrate.",
+        "Versioning does not replace documentation, and minor bug fixes do not need new versions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team's API returns HTTP 200 with the body `{\"error\": \"user not found\"}` when a requested user does not exist. A client developer complains that this is hard to work with. What is the main problem with this design?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The 200 status says success, so clients and caches can't tell it failed"
+        },
+        {
+          "id": "b",
+          "label": "The error message is too brief, so it should list every field that was searched"
+        },
+        {
+          "id": "c",
+          "label": "The error body should be XML, since JSON is not suited to carrying error details"
+        },
+        {
+          "id": "d",
+          "label": "The response should use 500, since a missing user means the server failed to respond"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Status codes should reflect the outcome, so a missing resource should return 404.",
+        "Distractors misplace the issue on body format, server-error codes or message length."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do REST APIs favour URLs like `/orders` over `/getOrders`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Clients cache only URLs that contain nouns, so verbs would disable all caching"
+        },
+        {
+          "id": "b",
+          "label": "The HTTP method already states the action, so the URL only needs to name the resource"
+        },
+        {
+          "id": "c",
+          "label": "Nouns in URLs make responses smaller, so the API runs faster over slow networks"
+        },
+        {
+          "id": "d",
+          "label": "Verbs in URLs are rejected by most web servers, so action words must be avoided"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The method (GET, POST, ...) carries the action, so the URL identifies the resource.",
+        "Distractors invent technical limits on verbs in URLs; it is a convention, not a server restriction."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A method is described as idempotent. What does that mean for `PUT /users/5` sent three times with the same body?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each call creates a new user, and the server assigns three different ids"
+        },
+        {
+          "id": "b",
+          "label": "The server state after three calls is the same as after one call"
+        },
+        {
+          "id": "c",
+          "label": "Only the first call is processed and later ones are rejected with an error"
+        },
+        {
+          "id": "d",
+          "label": "The response body must be identical every time, including any timestamps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Idempotent means repeating the request has the same effect on server state as sending it once.",
+        "Distractors confuse idempotency with rejecting duplicates or with identical response bodies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A client calls `GET /users/999`, well-formed and authorised, but no user 999 exists. Which status code should the API return?",
+      "options": [
+        {
+          "id": "a",
+          "label": "403 Forbidden, because the client is not allowed to see user 999"
+        },
+        {
+          "id": "b",
+          "label": "200 OK, with an empty body to show nothing was found"
+        },
+        {
+          "id": "c",
+          "label": "500 Internal Server Error, because the lookup did not succeed"
+        },
+        {
+          "id": "d",
+          "label": "404 Not Found, because the requested resource does not exist"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "404 signals that the identified resource does not exist.",
+        "Distractors mistake a missing resource for a server fault, a success, or a permission problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main purpose of pagination on `GET /products` when the catalogue has 200,000 items?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It sorts the products so the newest ones always appear first"
+        },
+        {
+          "id": "b",
+          "label": "It compresses large result sets so they download much faster"
+        },
+        {
+          "id": "c",
+          "label": "It stops clients from requesting the same product twice"
+        },
+        {
+          "id": "d",
+          "label": "It returns the collection in small, manageable chunks"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Pagination limits response size and load by splitting large collections into pages.",
+        "Distractors attribute security, sorting or deduplication to pagination, which it does not provide."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which of these HTTP methods is classified as safe, meaning it should not change server state?",
+      "options": [
+        {
+          "id": "a",
+          "label": "GET"
+        },
+        {
+          "id": "b",
+          "label": "POST"
+        },
+        {
+          "id": "c",
+          "label": "PUT"
+        },
+        {
+          "id": "d",
+          "label": "DELETE"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "GET is a safe read-only method.",
+        "PUT and DELETE are idempotent but change state; POST is neither safe nor idempotent."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Why is it good practice for an API to return every error in one consistent JSON format? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Clients can write one error-handling routine for all endpoints"
+        },
+        {
+          "id": "b",
+          "label": "Developers can read the cause and fix their requests more easily"
+        },
+        {
+          "id": "c",
+          "label": "It guarantees that no errors will occur in the API"
+        },
+        {
+          "id": "d",
+          "label": "It removes the need to use HTTP status codes at all"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "A consistent format simplifies client code and makes errors easier to understand.",
+        "Error bodies complement status codes rather than replace them, and they cannot prevent errors."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team runs `/v1/customers`, where `name` is one string. They want to split it into `first_name` and `last_name`, which would break existing mobile apps that read `name`. They plan to publish `/v2/customers` and keep `/v1` running for a while. What is the main reason for this approach?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It makes the old and new formats share one codebase, so the team maintains fewer endpoints"
+        },
+        {
+          "id": "b",
+          "label": "It lets the URL signal which fields exist, so clients can skip reading the documentation"
+        },
+        {
+          "id": "c",
+          "label": "It ships the breaking change while existing clients keep working until they migrate"
+        },
+        {
+          "id": "d",
+          "label": "It gives clients a cached copy of the new format, so the v2 responses load faster for them"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Versioning lets breaking changes ship without breaking existing consumers.",
+        "Distractors claim speed, no documentation needed, or forced upgrades, which versioning does not do."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You need an endpoint returning all comments on the post with id 7. Which request follows REST naming conventions?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`GET /posts/7/comments`"
+        },
+        {
+          "id": "b",
+          "label": "`POST /posts/7/comments/list`"
+        },
+        {
+          "id": "c",
+          "label": "`GET /getComments?post=7`"
+        },
+        {
+          "id": "d",
+          "label": "`GET /comments/post/fetch/7`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Nested plural nouns express that comments belong to post 7, and GET reads.",
+        "Distractors put verbs in the path or use POST for a read."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`POST /invoices` successfully creates invoice 310. Which response best fits REST conventions?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`200 OK` with the text \"done\" and no other information"
+        },
+        {
+          "id": "b",
+          "label": "`201 Created` with a `Location: /invoices/310` header"
+        },
+        {
+          "id": "c",
+          "label": "`202 Accepted` with a `Location: /invoices` header"
+        },
+        {
+          "id": "d",
+          "label": "`204 No Content` with no header pointing to the new invoice"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "201 plus a Location header tells the client where the new resource lives.",
+        "Distractors give a generic success, hide the new URL, or imply asynchronous processing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A user record has 12 fields. A client wants to change only the email of user 12. Which request is the best fit?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`POST /users/12/changeEmail` with the full record"
+        },
+        {
+          "id": "b",
+          "label": "`PATCH /users/12` with body `{\"email\": \"new@example.com\"}`"
+        },
+        {
+          "id": "c",
+          "label": "`PUT /users/12` with only `{\"email\": \"new@example.com\"}`"
+        },
+        {
+          "id": "d",
+          "label": "`GET /users/12?email=new@example.com` to update it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "PATCH applies a partial update to the resource.",
+        "PUT expects a full replacement, so a one-field PUT could wipe the other fields; GET must not modify state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An API uses `offset` and `limit` for pagination. With a page size of 20, which query returns the third page, counting from page 1?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`?offset=20&limit=40`"
+        },
+        {
+          "id": "b",
+          "label": "`?offset=3&limit=20`"
+        },
+        {
+          "id": "c",
+          "label": "`?offset=40&limit=20`"
+        },
+        {
+          "id": "d",
+          "label": "`?offset=60&limit=20`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Page 3 skips 2 pages x 20 = 40 items, so offset=40.",
+        "Distractors skip three pages, change the limit, or treat offset as a page number."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "`DELETE /sessions/abc` successfully removes the session. The API has nothing useful to return in the body. Which status code should it send?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`301 Moved Permanently`"
+        },
+        {
+          "id": "b",
+          "label": "`201 Created`"
+        },
+        {
+          "id": "c",
+          "label": "`100 Continue`"
+        },
+        {
+          "id": "d",
+          "label": "`204 No Content`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "204 means success with no response body, which fits a delete.",
+        "Other codes describe creation, redirection or an interim response."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which of these requests are designed in line with REST conventions? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`DELETE /orders/88` to remove order 88"
+        },
+        {
+          "id": "b",
+          "label": "`GET /users/5/orders` to list the orders of user 5"
+        },
+        {
+          "id": "c",
+          "label": "`GET /orders/88/delete` to remove order 88"
+        },
+        {
+          "id": "d",
+          "label": "`POST /users/5/deleteOrder` to remove an order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Nested resource reads with GET and removals with DELETE on the resource URL are conventional.",
+        "The other two put the action in the URL, and a GET that deletes breaks the safe-method rule."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A client sends `POST /users` with syntactically valid JSON, `{\"name\": \"Ana\"}`, but the API requires an `email` field too. You are implementing the handler. Which response is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`404 Not Found`, because the required email resource was not found"
+        },
+        {
+          "id": "b",
+          "label": "`500 Internal Server Error`, because the user could not be saved without it"
+        },
+        {
+          "id": "c",
+          "label": "`400 Bad Request` with a JSON error body naming the missing `email`"
+        },
+        {
+          "id": "d",
+          "label": "`200 OK` with `{\"status\": \"failed\", \"reason\": \"email is missing\"}` in the body"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A client mistake gets a 4xx code, and the body should say which field is wrong.",
+        "Distractors hide the failure in a 200, misuse 404, or blame the server with 500."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A client sends `POST /articles` and the server successfully creates the article, which is now available at `/articles/981`. Which response best follows REST conventions?",
+      "options": [
+        {
+          "id": "a",
+          "label": "201 Created, with a Location header pointing to /articles/981"
+        },
+        {
+          "id": "b",
+          "label": "200 OK, returning the new article in the response body"
+        },
+        {
+          "id": "c",
+          "label": "202 Accepted, with a Location header pointing to /articles/981"
+        },
+        {
+          "id": "d",
+          "label": "204 No Content, since the client already sent the data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "201 Created plus a Location header tells the client the resource now exists and where to find it.",
+        "202 means processing is not finished, and plain 200 or 204 omit the new resource's location."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must let clients fetch the comments on post 7 written by author 3. Which endpoint is the best resource-oriented design?",
+      "options": [
+        {
+          "id": "a",
+          "label": "GET /getComments?post=7&author=3"
+        },
+        {
+          "id": "b",
+          "label": "GET /posts/7/comments/author/3"
+        },
+        {
+          "id": "c",
+          "label": "GET /posts/7/comments?author=3"
+        },
+        {
+          "id": "d",
+          "label": "POST /posts/7/comments/search?author=3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The collection is nested under its parent and filtering is a query parameter on a GET.",
+        "Distractors use a verb in the path, treat a filter as a sub-resource, or use POST for a read."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "An API uses `?offset=&limit=` pagination with `limit=25` and offsets start at 0. Which offset returns the 4th page?",
+      "options": [
+        {
+          "id": "a",
+          "label": "4"
+        },
+        {
+          "id": "b",
+          "label": "100"
+        },
+        {
+          "id": "c",
+          "label": "25"
+        },
+        {
+          "id": "d",
+          "label": "75"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Page 4 skips 3 pages of 25 items, so offset = 75.",
+        "100 is the common off-by-one error and 4 confuses page number with offset."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which change to an existing, widely used API version is backward-compatible for current clients?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Changing `id` from an integer to a string for flexibility"
+        },
+        {
+          "id": "b",
+          "label": "Renaming the response field `name` to `full_name` for clarity"
+        },
+        {
+          "id": "c",
+          "label": "Making the optional `status` query parameter required for safety"
+        },
+        {
+          "id": "d",
+          "label": "Adding a new optional `nickname` field to existing responses"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Adding an optional response field is additive, and well-behaved clients ignore unknown fields.",
+        "Renames, type changes and newly required parameters break existing callers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A valid token for user A is used to call `GET /orders/42`, which belongs to user B. The API deliberately reveals that the order exists but refuses access. Which status fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "404, because the caller cannot see the order"
+        },
+        {
+          "id": "b",
+          "label": "400, because the request asks for the wrong order"
+        },
+        {
+          "id": "c",
+          "label": "401, because the caller must authenticate again"
+        },
+        {
+          "id": "d",
+          "label": "403, because the caller is known but not permitted"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "403 means the caller is authenticated but lacks permission for this resource.",
+        "401 is for missing or invalid credentials, and 404 hides existence, which the prompt rules out."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which requests are idempotent, so a client may safely retry them automatically after a timeout? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`PUT /users/5` with a full replacement body"
+        },
+        {
+          "id": "b",
+          "label": "`PATCH /users/5` with body `{\"loginCount\": {\"increment\": 1}}`"
+        },
+        {
+          "id": "c",
+          "label": "`POST /users` creating a new user on each call"
+        },
+        {
+          "id": "d",
+          "label": "`DELETE /users/5`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A profile resource has 20 fields. A mobile app lets users change only their phone number, and the team does not want to resend or overwrite the other 19 fields. Which request should the app send?",
+      "options": [
+        {
+          "id": "a",
+          "label": "PATCH /profiles/9 sending only the phone field"
+        },
+        {
+          "id": "b",
+          "label": "POST /profiles/9/update-phone sending the phone field"
+        },
+        {
+          "id": "c",
+          "label": "GET /profiles/9 with the new phone as a query parameter"
+        },
+        {
+          "id": "d",
+          "label": "PUT /profiles/9 sending only the phone field"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "PATCH is meant for partial updates, so only the changed field is sent.",
+        "PUT with a partial body would replace the whole resource and wipe the other fields."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A feed API uses `?offset=&limit=20`, newest first. Users scrolling see some items twice, and new posts arrive every few seconds. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "New inserts at the top shift older items down, so later offsets re-cover seen items"
+        },
+        {
+          "id": "b",
+          "label": "Sorting newest first is unstable, so the database returns rows in a different random order on every page request"
+        },
+        {
+          "id": "c",
+          "label": "The limit of 20 is too small, so consecutive pages overlap by a few items at their shared boundaries"
+        },
+        {
+          "id": "d",
+          "label": "Offsets are zero-based, so each page repeats the last item of the previous page at its start"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Offset pagination is positional, so inserts before the current position push items into the next page.",
+        "Page size, sort direction and zero-based offsets do not cause duplicates by themselves."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An API returns `200 OK` with an error message in the body for missing resources. Dashboards show a 0% error rate while users complain of failures. Why does this design cause the problem?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Clients cannot parse JSON error messages unless the status is exactly 404"
+        },
+        {
+          "id": "b",
+          "label": "Tools key off status codes, so failures sent as 200 look like successes to them"
+        },
+        {
+          "id": "c",
+          "label": "Servers return 200 faster than 404, so latency metrics become skewed and misleading"
+        },
+        {
+          "id": "d",
+          "label": "HTTP forbids a JSON body from containing an error field when the status is 200"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Monitoring, caches, retries and client libraries rely on status codes to detect failure.",
+        "The other options invent rules about bodies, parsing or latency that HTTP does not impose."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Customers are charged twice when the mobile app times out on `POST /payments` and retries. Which fix addresses the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add rate limiting so the client cannot send two payment requests within a few seconds of each other"
+        },
+        {
+          "id": "b",
+          "label": "Switch the endpoint to GET so that a retried request is safe to repeat without side effects"
+        },
+        {
+          "id": "c",
+          "label": "Require an `Idempotency-Key` header and return the stored result for repeats"
+        },
+        {
+          "id": "d",
+          "label": "Raise the client timeout so the response usually arrives before any retry would be sent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The server cannot tell a retry from a new payment; an idempotency key lets it deduplicate.",
+        "Longer timeouts and rate limits do not remove duplicates, and GET must not change state."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a search crawler indexed an admin page, several users vanished. Their deletion endpoint is `GET /users/5/delete`. What is the underlying design flaw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A state change is exposed through GET, which crawlers may call freely"
+        },
+        {
+          "id": "b",
+          "label": "The endpoint should return 200 rather than 204 so crawlers know the deletion succeeded"
+        },
+        {
+          "id": "c",
+          "label": "The verb `delete` is placed in the path, which breaks the API's resource naming style"
+        },
+        {
+          "id": "d",
+          "label": "User ids should be passed in the query string instead of the URL path to avoid indexing"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "GET is defined as safe, so tools assume it can be called without side effects.",
+        "The other options address style or status codes, not why the deletions happened."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A team compares URL versioning (`/v2/orders`) with header versioning (`Accept: application/vnd.shop.v2+json`). Which statement correctly analyses the trade-off?",
+      "options": [
+        {
+          "id": "a",
+          "label": "URL versions are invisible to shared caches, so they need a `Vary` header to avoid serving wrong versions"
+        },
+        {
+          "id": "b",
+          "label": "Header versioning keeps URIs stable, but is harder to test in a browser and needs `Vary` for caches"
+        },
+        {
+          "id": "c",
+          "label": "Header versioning moves clients to the newest version at once, since the server picks the media type"
+        },
+        {
+          "id": "d",
+          "label": "URL versioning gives one resource several URIs, so clients that send a custom header see a different identity"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Header versioning keeps one URI per resource but hides the version from simple tools and cache keys.",
+        "URL versions are visible to caches, and neither scheme forces clients to upgrade automatically."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A team lists these endpoints. Which ones violate consistent REST naming and method conventions? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`PUT /users/5/Profile` mixes capitalised and lowercase path segments"
+        },
+        {
+          "id": "b",
+          "label": "`POST /getUsers` puts a verb in the path and uses POST to read data"
+        },
+        {
+          "id": "c",
+          "label": "`GET /users/5/orders` nests orders under their owning user"
+        },
+        {
+          "id": "d",
+          "label": "`DELETE /order?id=3` uses a singular noun and a query parameter to identify the resource"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Verbs in paths, singular names with query-string identity and inconsistent casing break conventions.",
+        "Nesting a collection under its owner is a standard, consistent pattern."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A product list is sorted by `price` and paginated with a cursor holding the last `price` seen, so the next page uses `price > cursor`. Clients report that some products never appear, mostly cheap ones. Many products share the same price. What is the cause and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The page size is too small; raise the limit so ties never straddle a page boundary"
+        },
+        {
+          "id": "b",
+          "label": "Price is a float; store prices as strings so that comparisons stay exact across pages"
+        },
+        {
+          "id": "c",
+          "label": "Cursors expire too quickly; extend the cursor lifetime so clients can finish paging"
+        },
+        {
+          "id": "d",
+          "label": "Ties at a page boundary are skipped by `>`; sort by price then id and cursor on both"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A non-unique sort key with a strict comparison drops tied items; a unique tiebreaker makes the cursor unambiguous.",
+        "Expiry, float type and page size do not explain the missing items or reliably remove ties."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A client retries `POST /payments` after a network timeout and customers are occasionally charged twice. The server processes each request it receives independently. Which root cause best explains the duplicate charges?",
+      "options": [
+        {
+          "id": "a",
+          "label": "POST is not idempotent and the API gives the server no way to recognise a retried request as the same operation"
+        },
+        {
+          "id": "b",
+          "label": "POST responses cannot be cached, so the client resends the request until it receives a fresh response"
+        },
+        {
+          "id": "c",
+          "label": "The endpoint should have returned 202 Accepted, because 201 Created tells clients to retry the call"
+        },
+        {
+          "id": "d",
+          "label": "The URL uses a plural noun, which makes the server treat each request as a new collection entry"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Without an idempotency key or similar, a retried POST is indistinguishable from a new one, so it is processed twice.",
+        "Distractors confuse caching, status codes and URL naming with retry safety."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An API's `GET /orders?page=3&per_page=50` sometimes shows the same order on two consecutive pages while new orders are being created at the top of the list. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Offset pagination shifts when rows are inserted ahead of the offset, so items move between pages"
+        },
+        {
+          "id": "b",
+          "label": "The sort column is not unique, so rows with equal values come back in a random order on each request"
+        },
+        {
+          "id": "c",
+          "label": "The per_page value of 50 is above the maximum page size HTTP permits, so the server repeats rows"
+        },
+        {
+          "id": "d",
+          "label": "A shared proxy caches each query string separately, so adjacent pages are served from overlapping snapshots"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Inserts at the head push existing rows to later offsets, producing duplicates or skips.",
+        "Distractors invent HTTP limits or blame stable sorting and caching."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A team's `PUT /users/42` handler replaces the user with the request body. A mobile client sends only `{\"email\": \"a@b.com\"}` and users report their names disappearing. What does the analysis show?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The email field must be moved into the URL path, because PUT treats every field left in the body as optional and unchanged"
+        },
+        {
+          "id": "b",
+          "label": "PUT is only valid for creating new resources, so the server wiped the existing record before recreating it from the body"
+        },
+        {
+          "id": "c",
+          "label": "PUT has full-replacement semantics, so omitted fields are dropped; partial updates belong under PATCH"
+        },
+        {
+          "id": "d",
+          "label": "The server should return 204 instead of 200, because a 200 response makes clients clear any fields they did not send"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "PUT replaces the whole representation; partial changes should use PATCH.",
+        "Distractors misattribute the loss to status codes or claim PUT only creates."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An API returns 200 with `{\"error\": \"not found\"}` for missing resources. Monitoring shows a 0% error rate while customers complain. Which consequence of this design best explains the gap?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Status 200 is only sent for POST requests, so GET failures are logged under a separate metric"
+        },
+        {
+          "id": "b",
+          "label": "HTTP forbids a JSON body on a 200 response, so monitoring discards those requests entirely"
+        },
+        {
+          "id": "c",
+          "label": "Tools, caches and clients keyed on status codes see every response as a success, hiding failures"
+        },
+        {
+          "id": "d",
+          "label": "The error text is too short for monitoring to classify, which makes it count as a redirect"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Intermediaries and monitors rely on the status line, so errors hidden in 200 bodies go unseen.",
+        "Distractors state false HTTP rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A v1 API's `GET /products/7` returned `price` as a string like \"9.99\". A developer changes it to a number in place, and several partner integrations break, though no endpoint was removed. Which analysis is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Numbers and strings are interchangeable in JSON, so the breakage came from the payload growing larger and hitting partners' response size limits"
+        },
+        {
+          "id": "b",
+          "label": "Changing a field's type breaks consumers that parse it, even though the URL and field name stay the same"
+        },
+        {
+          "id": "c",
+          "label": "Only removed endpoints or renamed fields can break clients, so the partners must have been relying on undocumented URLs or behaviour"
+        },
+        {
+          "id": "d",
+          "label": "The change was safe, but partners had cached the old 200 responses and replayed them against the new schema, causing parse errors"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Type changes break strictly typed or parsing consumers; compatibility covers schema, not only URLs.",
+        "Distractors dismiss schema changes as non-breaking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A `GET /reports?from=2024-01-01` endpoint is slow and its responses are never served from a shared cache, though the data changes hourly. Which findings could explain the missing cache hits? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The response sends `Cache-Control: no-store`"
+        },
+        {
+          "id": "b",
+          "label": "The endpoint is a GET, which makes it uncacheable by definition"
+        },
+        {
+          "id": "c",
+          "label": "The response carries `Vary: *`, preventing reuse across requests"
+        },
+        {
+          "id": "d",
+          "label": "The response lacks validators such as `ETag` or `Last-Modified` and any freshness lifetime"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "no-store, absent freshness/validators and Vary: * each block shared cache reuse.",
+        "GET is the canonical cacheable method, so that option is false."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A team exposes `POST /orders/{id}/cancel`. A new engineer finds that cancelling an already-shipped order returns 200 with an unchanged order, and the support team cannot tell whether cancellations worked. Which diagnosis fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The endpoint hides a state conflict; it should reject the invalid transition with 409 and a machine-readable reason"
+        },
+        {
+          "id": "b",
+          "label": "The 200 status is correct for a no-op, but the response should drop its body so that support can see the failure clearly"
+        },
+        {
+          "id": "c",
+          "label": "Cancelling should return 404 once an order has shipped, because the cancel action no longer exists for that order at all"
+        },
+        {
+          "id": "d",
+          "label": "The verb in the path breaks REST naming rules, so the cancel should be a PUT or DELETE and then the 200 would be accurate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Invalid state transitions are conflicts; 409 with a reason makes outcomes observable.",
+        "Distractors misdiagnose via naming purity, body removal or 404 misuse."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You must paginate a feed of 50 million events that receives constant inserts. Criteria: stable results while paging, consistent performance deep into the list, and clients only moving forward. Which design best meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cursor (keyset) pagination using an opaque token encoding the last seen sort key and id"
+        },
+        {
+          "id": "b",
+          "label": "Offset pagination with a larger default page size so fewer deep pages are requested"
+        },
+        {
+          "id": "c",
+          "label": "Offset pagination with `page` and `per_page`, since it is the simplest for clients to compute"
+        },
+        {
+          "id": "d",
+          "label": "Returning the whole feed in one response and letting clients slice it locally"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Keyset cursors stay stable under inserts and avoid deep-offset scans.",
+        "Offset variants shift under inserts and slow with depth."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A public API has many third-party clients you cannot force to upgrade. Criteria: existing clients must never break, new capabilities must ship regularly, and maintenance cost should stay low. Which versioning approach is the best trade-off?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Change fields in place and announce changes by email a few weeks ahead, since consumers should keep up with the API"
+        },
+        {
+          "id": "b",
+          "label": "Add fields without breaking existing ones, and release a new major version only rarely, with a long deprecation window"
+        },
+        {
+          "id": "c",
+          "label": "Release a new major version for every field addition and keep all old versions running, so each client pins an exact schema"
+        },
+        {
+          "id": "d",
+          "label": "Drop explicit versions and let each client negotiate fields through query flags that are documented only in release notes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Additive evolution plus rare, well-announced major versions balances stability and cost.",
+        "Distractors either explode maintenance or break clients."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Choose the best error response for a failed validation on `POST /users`, given criteria: clients must programmatically identify which fields failed, humans must read the cause, and the format should follow a widely adopted standard.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return 400 with an empty body, since the status code alone tells clients the request was invalid and which input to fix"
+        },
+        {
+          "id": "b",
+          "label": "Return 422 or 400 with an `application/problem+json` body (RFC 9457) with type, title, detail and per-field errors"
+        },
+        {
+          "id": "c",
+          "label": "Return 200 with `{\"ok\": false, \"error\": \"invalid\"}` so every client can parse a single response shape for all outcomes"
+        },
+        {
+          "id": "d",
+          "label": "Return 400 with a plain text message such as \"name is required\", written clearly so that any developer can read the cause"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A standard problem-details body with field errors serves machines and humans.",
+        "Distractors misuse status codes or omit structure."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Two URL designs for line items of an order are proposed. A: `/orders/{id}/items/{itemId}`. B: `/items/{itemId}`, with `orderId` as a query filter. Items never exist outside an order and are always accessed with their order. Which judgement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "B, because a flat URL lets you check access on the item alone without loading the order first"
+        },
+        {
+          "id": "b",
+          "label": "B, because flat URLs keep paths short and make caching easier for every kind of child resource"
+        },
+        {
+          "id": "c",
+          "label": "A, because the HTTP specification requires child resources to be nested under their parent path"
+        },
+        {
+          "id": "d",
+          "label": "A, because the path shows ownership so access checks and lifecycle follow the order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Nesting fits strict containment and eases scoping and access checks.",
+        "Distractors claim false universals or spec requirements."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A long-running video export takes up to 10 minutes. Criteria: HTTP connections should not be held open, clients need progress, and results must be retrievable afterwards. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Hold the POST open until finished and raise server timeouts to 15 minutes"
+        },
+        {
+          "id": "b",
+          "label": "Return 201 immediately with an empty file URL that returns 200 and a partial file until ready"
+        },
+        {
+          "id": "c",
+          "label": "Return 200 with the final file URL before the work starts, and tell clients to retry on failures"
+        },
+        {
+          "id": "d",
+          "label": "Return 202 Accepted with a `Location` to a job resource that clients poll for status and result link"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The async job pattern with 202 and a status resource meets all criteria.",
+        "Distractors hold connections, expose partial results or misreport status."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "You are reviewing a design for `GET /search` that accepts a complex filter, sometimes 20 KB long. Criteria: keep semantics honest, stay cacheable where practical, and avoid URL length failures. Which judgements are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Saving a complex filter as a resource and fetching results by its id can restore cacheability"
+        },
+        {
+          "id": "b",
+          "label": "Every search must use POST, since GET can never carry filters"
+        },
+        {
+          "id": "c",
+          "label": "Short, common filters should stay on GET with query parameters so they remain cacheable"
+        },
+        {
+          "id": "d",
+          "label": "A POST-based search endpoint is a defensible trade-off for oversized filters, documented as safe-in-effect"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Hybrid designs balance cacheability and URL limits.",
+        "GET carries filters fine; 'always POST' is overreach."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "Your team must rate-limit a public API. Criteria: clients should self-throttle without guessing, bursts from one client must not starve others, and responses must be standard. A teammate proposes silently dropping requests over the limit. Which alternative is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return 503 for every limited request so clients assume the whole service is down"
+        },
+        {
+          "id": "b",
+          "label": "Close the TCP connection without a response, because limited clients should reconnect later"
+        },
+        {
+          "id": "c",
+          "label": "Return 200 with an empty body so clients do not trigger error handling"
+        },
+        {
+          "id": "d",
+          "label": "Return 429 with a `Retry-After` header and documented rate-limit headers, enforced per client key"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "429 with Retry-After lets clients back off per key predictably.",
+        "Distractors mislead clients or give no signal."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A feed API holds 20M rows and receives constant inserts at the head. Criteria: no duplicated or skipped items while a client pages, and roughly constant cost for deep pages. Which pagination design best meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Offset and limit with a larger default page size to reduce the number of pages"
+        },
+        {
+          "id": "b",
+          "label": "Keyset cursor on (created_at, id), returning an opaque next cursor with each page"
+        },
+        {
+          "id": "c",
+          "label": "Offset and limit, because page numbers are simple for clients and stay stable even while new rows are inserted at the head"
+        },
+        {
+          "id": "d",
+          "label": "Page numbers plus a cached total count that is refreshed once every minute"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Keyset pagination anchors on the last seen sort key, so inserts do not shift pages and deep pages use an index seek.",
+        "Offset-based options shift under inserts and get slower with depth; learners assume page numbers are stable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Clients retry POST /payments after network timeouts and sometimes double-charge. Criteria: safe retries, no guessing of client intent, minimal client burden. Which fix is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Require a client-generated Idempotency-Key; store it with the first result and replay that result on repeats"
+        },
+        {
+          "id": "b",
+          "label": "Reject any POST from the same customer within five minutes as a duplicate, returning 409"
+        },
+        {
+          "id": "c",
+          "label": "Deduplicate by matching customer and amount, because identical requests in a short window almost certainly mean the same charge"
+        },
+        {
+          "id": "d",
+          "label": "Document that clients must never retry a POST and should call GET to check the outcome"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A client-supplied key lets the server distinguish a retry from a new intent and return the stored result.",
+        "Heuristic dedupe wrongly blocks legitimate repeat purchases; forbidding retries pushes the burden onto clients."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A teammate wants to ship /v2 because a response gains a new optional field `currency`. Third-party clients upgrade slowly. Judge the proposal against two criteria: avoid breaking clients and avoid version sprawl.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Sound: the published API description is a contract, so a new field must be released as a new version before clients can rely on it"
+        },
+        {
+          "id": "b",
+          "label": "Unnecessary only if the field is added to all other endpoints too, since mixed response shapes in one version would confuse clients"
+        },
+        {
+          "id": "c",
+          "label": "Unnecessary: an optional field is backward compatible for tolerant clients, so add it to v1 and document it"
+        },
+        {
+          "id": "d",
+          "label": "Sound: clients that validate responses strictly could fail on any new field, so every such change needs its own major version"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Additive, optional changes are non-breaking under the tolerant reader principle, so a major version is wasteful.",
+        "Distractors treat any change as breaking or tie compatibility to unrelated uniformity or documentation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "In a multi-tenant API, a user from tenant A requests GET /invoices/9001, which exists but belongs to tenant B. Criteria: do not leak the existence of other tenants' data, and stay consistent with truly missing IDs. Which response is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "401 Unauthorized, because the credentials are not valid for that tenant's data"
+        },
+        {
+          "id": "b",
+          "label": "404 Not Found, identical to the response for an ID that does not exist"
+        },
+        {
+          "id": "c",
+          "label": "403 Forbidden, because the caller is authenticated but lacks permission, and an honest status helps client debugging"
+        },
+        {
+          "id": "d",
+          "label": "200 with an empty body, so the client never sees an error status"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Returning the same 404 for foreign and missing IDs prevents enumeration of other tenants' resources.",
+        "403 reveals that the resource exists; 401 is about authentication, not authorisation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A profile resource has a nullable `middle_name`, where a stored null is meaningful and distinct from 'unchanged'. Clients must also edit single elements of an `emails` array. Which PATCH format best fits these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "PUT with the full document, because replacing everything avoids ambiguity and removes any need for partial array edits"
+        },
+        {
+          "id": "b",
+          "label": "JSON Patch (RFC 6902) with explicit operations, since it can set null distinctly and address array elements"
+        },
+        {
+          "id": "c",
+          "label": "A custom POST /update-profile endpoint, because PATCH cannot carry null values at all"
+        },
+        {
+          "id": "d",
+          "label": "JSON Merge Patch, because omitted fields stay unchanged and null cleanly stores a null value"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Merge Patch treats null as 'delete', so it cannot store null and replaces arrays wholesale; JSON Patch uses explicit ops and paths.",
+        "Full PUT fails the partial array edit need and risks lost updates."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A service cancels an order when a client calls `GET /orders/17/cancel` and returns 200. Which criticisms of this design are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A state-changing GET may only return 3xx codes, so 200 is invalid for this request"
+        },
+        {
+          "id": "b",
+          "label": "A verb in any URI automatically breaks REST, so the endpoint would be invalid whatever method it used"
+        },
+        {
+          "id": "c",
+          "label": "GET is defined as safe, so prefetchers, crawlers or link checkers can cancel orders unintentionally"
+        },
+        {
+          "id": "d",
+          "label": "Intermediaries may cache or replay GET responses, so a cancellation might be skipped or repeated"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "The core problem is GET semantics: safety and cacheability are violated.",
+        "Verbs in URIs are a style concern, and there is no rule restricting GET status codes in that way."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "One tenant's batch job sends 500 requests per second and slows the API. The gateway currently returns 503 to everyone when CPU is high, so other tenants fail too. Criteria: protect other tenants, let well-behaved clients recover automatically, and make the cause visible. Which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return 400 to the heavy tenant, because its request pattern is malformed and should be rejected as invalid"
+        },
+        {
+          "id": "b",
+          "label": "Per-tenant rate limits that return 429 with a Retry-After header to the offending tenant"
+        },
+        {
+          "id": "c",
+          "label": "Keep 503 for all callers but add a Retry-After header so that every client waits the same amount of time"
+        },
+        {
+          "id": "d",
+          "label": "Return 500 with an explanatory message so clients treat the overload as a server bug and raise an alert"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "429 with Retry-After isolates the heavy tenant, tells it what to do and leaves others unaffected.",
+        "Shared 503s still hurt everyone; 400 and 500 misdescribe the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Generating a report takes up to 10 minutes. Design constraints: no connection held open, clients can discover progress, and the finished file is fetchable by URL. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "POST /reports returns 201 with the file URL immediately; GET on that URL returns 404 until the file is ready"
+        },
+        {
+          "id": "b",
+          "label": "GET /reports?generate=true returns 200 and streams progress lines until the file has finished"
+        },
+        {
+          "id": "c",
+          "label": "POST /reports returns 202 with a Location to a status resource; when finished, the status links to the file"
+        },
+        {
+          "id": "d",
+          "label": "POST /reports holds the connection open and returns 200 with the file, after raising every timeout to fifteen minutes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "202 plus a pollable status resource frees the connection, exposes progress and links to the result.",
+        "Other options hold connections, offer no progress signal or misuse GET."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Two editors may PUT the same document. Design constraints: no lost updates, no server locks held between requests, and clients that omit a precondition must be detected. Which design meets all?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lock the document when it is read and release the lock when the same client sends its PUT or after a timeout expires"
+        },
+        {
+          "id": "b",
+          "label": "Return an ETag on GET; require If-Match on PUT; answer 412 on mismatch and 428 if the header is missing"
+        },
+        {
+          "id": "c",
+          "label": "Accept every PUT and keep the one with the latest client timestamp, discarding the older update entirely"
+        },
+        {
+          "id": "d",
+          "label": "Return an ETag on GET; honour If-None-Match on PUT so that only unseen versions are accepted"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "If-Match with 412 and 428 gives optimistic concurrency without locks and flags missing preconditions.",
+        "Locks violate the constraint, last-write-wins loses updates, and If-None-Match is the wrong precondition."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design the error body for a public API. Constraints: a stable machine-readable category independent of language, a human-readable detail, field-level validation errors, and room for extension. Which design meets all?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A JSON body with a numeric internal error code and a localised message string, with field errors packed into the message text"
+        },
+        {
+          "id": "b",
+          "label": "application/problem+json with a type URI, title, status, detail and an `errors` array of field and message pairs"
+        },
+        {
+          "id": "c",
+          "label": "A JSON body with an `error` string holding the English exception class name, plus a `fields` map of field names to messages"
+        },
+        {
+          "id": "d",
+          "label": "Return 200 with `{\"success\": false, \"message\": \"...\"}` and localise the message per Accept-Language for clients to parse"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Problem Details gives a stable type URI, human detail and allows extension members for field errors.",
+        "Localised messages as the only signal, bare status codes and stack traces are not stable or safe machine contracts."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Users belong to many groups. Design constraints: add or remove a single membership, adding the same membership twice must be harmless, and clients can list a group's members and a user's groups. Which design meets all?",
+      "options": [
+        {
+          "id": "a",
+          "label": "PATCH /users/{u} with a full replacement `groups` array, listing a group's members by scanning every user record"
+        },
+        {
+          "id": "b",
+          "label": "PUT and DELETE on /groups/{g}/members/{u}, plus GET /groups/{g}/members and GET /users/{u}/groups"
+        },
+        {
+          "id": "c",
+          "label": "POST /groups/{g}/members with a user id to add, GET to list members, and POST /groups/{g}/remove-member to take a member out"
+        },
+        {
+          "id": "d",
+          "label": "POST /memberships to add, which creates a new record on every call, with listing only through query-string filters"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "PUT and DELETE on the membership URI are idempotent and the two GETs cover both directions.",
+        "POST-based adds create duplicates, and array replacement is coarse and cannot list members efficiently."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "You must retire a v1 endpoint. Constraints: clients get a machine-readable warning, a stated end date, and you can identify who still calls it. Which plan meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Redirect v1 calls to v2 with a 301, log which clients follow it, and tell clients to update their saved URLs when convenient"
+        },
+        {
+          "id": "b",
+          "label": "Send Deprecation and Sunset headers linking to migration docs, log calls per API key, and contact remaining callers"
+        },
+        {
+          "id": "c",
+          "label": "Keep v1 running with no end date, remove it from the docs, and watch per-key traffic until usage falls to a low level"
+        },
+        {
+          "id": "d",
+          "label": "Announce the retirement on the blog and list the date there, then return 410 Gone to v1 callers when the sunset date arrives"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Deprecation and Sunset headers give machine-readable notice and date, while per-key logs identify stragglers.",
+        "Other options give no header warning, break clients abruptly or lack an end date."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "You are designing the pagination cursor for a feed sorted by created_at. Which elements make the design robust? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Bind the token to the sort order and filters, rejecting reuse with different parameters using 400"
+        },
+        {
+          "id": "b",
+          "label": "Make the token opaque (such as base64 or signed) so server internals can change without breaking clients"
+        },
+        {
+          "id": "c",
+          "label": "Embed the page number and offset so the server can compute the next page with a SQL OFFSET"
+        },
+        {
+          "id": "d",
+          "label": "Document that clients may build their own cursors from timestamps for convenience"
+        },
+        {
+          "id": "e",
+          "label": "Encode the last item's created_at plus a unique id tiebreaker, so equal timestamps neither repeat nor skip items"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "A unique tiebreaker, an opaque token and parameter binding keep keyset paging correct and evolvable.",
+        "Offsets reintroduce drift, and client-built cursors turn internals into a public contract."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "Mobile apps in the wild read `name` from GET /users/{id}. The team must rename it to `full_name` for consistency. Constraints: existing apps keep working without updates, new clients can use the new name, and removal of the old field must be driven by data. Which plan meets all?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return `full_name` only when clients send an opt-in header, leave `name` in place for everyone else, and never remove it, so no client is ever broken"
+        },
+        {
+          "id": "b",
+          "label": "Rename it in place in v1, since JSON clients ignore missing fields and fall back to defaults"
+        },
+        {
+          "id": "c",
+          "label": "Return both `name` and `full_name`, mark `name` deprecated, track its use per client, and remove it once usage reaches zero"
+        },
+        {
+          "id": "d",
+          "label": "Rename it in place and release /v2 only, telling app owners to update before the old field disappears from v1 on a fixed date"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Serving both fields keeps old apps working, and usage tracking makes removal data-driven.",
+        "Renaming in place breaks apps that read `name`; keeping both forever fails the data-driven removal constraint."
+      ],
+      "reviewed": false
+    }
+  ]
+}

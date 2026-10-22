@@ -1,0 +1,2501 @@
+{
+  "version": 1,
+  "topic": "deep-learning",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the ReLU activation function compute for an input x?",
+      "options": [
+        {
+          "id": "a",
+          "label": "min(0, x)"
+        },
+        {
+          "id": "b",
+          "label": "max(0, x)"
+        },
+        {
+          "id": "c",
+          "label": "1 / (1 + e^(-x))"
+        },
+        {
+          "id": "d",
+          "label": "x^2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "ReLU outputs x when x is positive and 0 otherwise, which is max(0, x).",
+        "The sigmoid formula and min(0, x) are common mix-ups with other functions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which algorithm computes the gradient of the loss with respect to every weight in a neural network?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Batch sampling"
+        },
+        {
+          "id": "b",
+          "label": "Dropout"
+        },
+        {
+          "id": "c",
+          "label": "Backpropagation"
+        },
+        {
+          "id": "d",
+          "label": "Forward chaining"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Backpropagation applies the chain rule backward through the layers to get all gradients.",
+        "Dropout is a regularisation technique, not a gradient method."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which type of layer slides a small set of learned filters across its input, such as an image?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Softmax layer"
+        },
+        {
+          "id": "b",
+          "label": "Convolutional layer"
+        },
+        {
+          "id": "c",
+          "label": "Recurrent layer"
+        },
+        {
+          "id": "d",
+          "label": "Embedding layer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Convolutional layers apply learned filters at every position of the input.",
+        "Recurrent layers step through sequences instead of sliding spatial filters."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which mechanism is the central building block of the transformer architecture?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Gradient clipping"
+        },
+        {
+          "id": "b",
+          "label": "Self-attention"
+        },
+        {
+          "id": "c",
+          "label": "Weight decay"
+        },
+        {
+          "id": "d",
+          "label": "Max pooling"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Transformers are built around self-attention layers.",
+        "Pooling is a CNN operation, and clipping and decay are training tricks."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In training a neural network, what is one epoch?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One evaluation on the held-out test set"
+        },
+        {
+          "id": "b",
+          "label": "One full pass through the training dataset"
+        },
+        {
+          "id": "c",
+          "label": "One update to a single weight"
+        },
+        {
+          "id": "d",
+          "label": "One forward and backward pass on a single mini-batch"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An epoch means the network has seen every training example once.",
+        "A mini-batch pass is one iteration, not an epoch."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are commonly used activation functions in neural networks? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Learning rate"
+        },
+        {
+          "id": "b",
+          "label": "Mean squared error"
+        },
+        {
+          "id": "c",
+          "label": "ReLU"
+        },
+        {
+          "id": "d",
+          "label": "tanh"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "ReLU and tanh are activation functions.",
+        "Mean squared error is a loss function and learning rate is a hyperparameter."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A student reads a description of a network with an input layer, two hidden layers and an output layer. The text says gradient descent adjusts certain values after each batch so the loss goes down. What are these adjusted values called?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Weights and biases"
+        },
+        {
+          "id": "b",
+          "label": "Epochs completed"
+        },
+        {
+          "id": "c",
+          "label": "Class labels"
+        },
+        {
+          "id": "d",
+          "label": "Hyperparameters like learning rate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Weights and biases are the learned parameters updated by gradient descent.",
+        "Hyperparameters are set by the practitioner before training and are not learned."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do neural networks need nonlinear activation functions between layers?",
+      "options": [
+        {
+          "id": "a",
+          "label": "They make each epoch run faster by letting a GPU parallelize the layers"
+        },
+        {
+          "id": "b",
+          "label": "They convert input features into integer values before each layer"
+        },
+        {
+          "id": "c",
+          "label": "Without them, stacked layers collapse into one linear transformation"
+        },
+        {
+          "id": "d",
+          "label": "They keep the weights from growing too large during training updates"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Composing linear maps gives another linear map, so depth adds nothing without nonlinearity.",
+        "Weight growth and speed are not the reason for activations."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A network is trained with a learning rate far too large. What is the most likely behaviour of the training loss?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It stays exactly constant from the start"
+        },
+        {
+          "id": "b",
+          "label": "It drops smoothly to zero"
+        },
+        {
+          "id": "c",
+          "label": "It falls slowly but always reaches the minimum"
+        },
+        {
+          "id": "d",
+          "label": "It swings up and down or diverges"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Oversized steps overshoot the minimum, so loss oscillates or blows up.",
+        "Slow smooth decrease is the symptom of a learning rate that is too small."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does dropout do during training, and why does it help?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It lowers the learning rate when loss stops improving"
+        },
+        {
+          "id": "b",
+          "label": "It randomly zeroes units, which reduces overfitting"
+        },
+        {
+          "id": "c",
+          "label": "It removes training examples that are hard to fit"
+        },
+        {
+          "id": "d",
+          "label": "It deletes the layers that have the highest loss"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Randomly zeroing units stops the network from relying on specific units, which reduces overfitting.",
+        "Dropout acts on units, not on examples or the learning rate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does a convolutional layer reuse the same filter at every image position?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It removes the need to train the filter, since one fixed filter suits every image"
+        },
+        {
+          "id": "b",
+          "label": "It lets the filter find a feature anywhere, with fewer parameters"
+        },
+        {
+          "id": "c",
+          "label": "It makes the network ignore pixel colour, so only the shapes in the image matter"
+        },
+        {
+          "id": "d",
+          "label": "It guarantees the output has the same size as the input, whatever the filter size"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Weight sharing gives translation-friendly detection and a much smaller parameter count.",
+        "Output size depends on padding and stride, not on sharing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "During training, the training loss keeps falling while the validation loss starts rising. What does this most likely indicate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The model is underfitting the data"
+        },
+        {
+          "id": "b",
+          "label": "The model is overfitting the training data"
+        },
+        {
+          "id": "c",
+          "label": "The labels are all incorrect"
+        },
+        {
+          "id": "d",
+          "label": "The learning rate is too small"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Diverging training and validation loss is the classic sign of overfitting.",
+        "Underfitting shows high loss on both sets."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about transformers are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Self-attention lets each token weigh every other token in the sequence"
+        },
+        {
+          "id": "b",
+          "label": "They must process tokens strictly one at a time, as RNNs do"
+        },
+        {
+          "id": "c",
+          "label": "Positional information must be added because attention ignores order"
+        },
+        {
+          "id": "d",
+          "label": "They need convolutional layers to read text"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Attention relates all tokens at once and needs positional encodings to know order.",
+        "Transformers process tokens in parallel and do not require convolutions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A three-class image classifier ends with a softmax layer. For one photo it outputs [0.70, 0.20, 0.10]. A teammate asks how to read these numbers.",
+      "options": [
+        {
+          "id": "a",
+          "label": "They are errors, so class 3 has the smallest error and is the best fit"
+        },
+        {
+          "id": "b",
+          "label": "They are probabilities summing to 1, so class 1 is most likely"
+        },
+        {
+          "id": "c",
+          "label": "They are raw scores before normalising, so only their order matters"
+        },
+        {
+          "id": "d",
+          "label": "They are weights, so class 1 will be updated the most in training"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Softmax turns scores into a probability distribution that sums to 1.",
+        "Treating outputs as errors or weights confuses predictions with training quantities."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do deep networks place nonlinear activation functions such as ReLU between layers?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Without them, weights would be stuck positive and never update"
+        },
+        {
+          "id": "b",
+          "label": "Without them, gradients would point the wrong way in backpropagation"
+        },
+        {
+          "id": "c",
+          "label": "Without them, a batch could not hold inputs of different sizes"
+        },
+        {
+          "id": "d",
+          "label": "Without them, stacked linear layers collapse into one linear map"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Composing linear maps gives another linear map, so depth adds no expressive power without nonlinearity.",
+        "Distractors confuse activations with gradient direction, batching or weight sign constraints."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "During training, the loss jumps up and down wildly and sometimes becomes NaN. Which explanation is most likely?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The learning rate is too large, so updates overshoot the minimum"
+        },
+        {
+          "id": "b",
+          "label": "The network has too few layers, so it cannot reduce the loss"
+        },
+        {
+          "id": "c",
+          "label": "The learning rate is too small, so updates cannot leave a minimum"
+        },
+        {
+          "id": "d",
+          "label": "The training set is too large, so each epoch takes too long"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Overly large steps overshoot and can diverge.",
+        "A too-small rate gives slow, smooth progress, not wild jumps."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main benefit of a convolutional layer applying the same small filter at every image position?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It lets the layer detect a pattern anywhere, using few parameters"
+        },
+        {
+          "id": "b",
+          "label": "It guarantees the output has the same size as the input image"
+        },
+        {
+          "id": "c",
+          "label": "It makes the layer ignore pixel neighbours and treat each pixel alone"
+        },
+        {
+          "id": "d",
+          "label": "It removes the need for any learned weights in the first layer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Weight sharing gives translation-friendly detection and far fewer parameters than a dense layer.",
+        "Distractors misstate locality, output size or the need for learned filters."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A 4-class classifier ends with a softmax layer. How should its outputs be interpreted?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Four non-negative scores that sum to 1, read as class probabilities"
+        },
+        {
+          "id": "b",
+          "label": "Four binary labels where exactly two are set to 1 per input"
+        },
+        {
+          "id": "c",
+          "label": "Four raw scores that can be any real number, read as distances"
+        },
+        {
+          "id": "d",
+          "label": "Four independent probabilities, each between 0 and 1, summing to 4"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Softmax normalises scores into a probability distribution over classes.",
+        "Independent probabilities that need not sum to 1 describe sigmoid outputs, not softmax."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Training loss keeps falling, but validation loss starts rising after epoch 12. What does this pattern indicate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The learning rate is too low, so validation loss lags behind training loss"
+        },
+        {
+          "id": "b",
+          "label": "The model is overfitting, memorising training data instead of generalising"
+        },
+        {
+          "id": "c",
+          "label": "The model is underfitting, so it needs far more epochs and capacity to learn"
+        },
+        {
+          "id": "d",
+          "label": "The validation set is mislabelled, so training should be stopped immediately"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Diverging train and validation loss is the classic overfitting signature.",
+        "Underfitting would show both losses high, not a widening gap."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of the following help reduce overfitting in a neural network? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Increasing the learning rate tenfold"
+        },
+        {
+          "id": "b",
+          "label": "Applying weight decay (L2 regularisation)"
+        },
+        {
+          "id": "c",
+          "label": "Adding dropout to hidden layers"
+        },
+        {
+          "id": "d",
+          "label": "Collecting more varied training data"
+        },
+        {
+          "id": "e",
+          "label": "Removing the validation set to train on more data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Dropout, weight decay and more diverse data all improve generalisation.",
+        "Raising the learning rate or removing validation does not regularise; removing validation hides overfitting."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A team removes positional encodings from a small transformer for translation. Afterwards the model produces nearly the same output for \"dog bites man\" and \"man bites dog\". Why does this happen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Word embeddings are looked up from a fixed table, so they lose the order in which the words were typed"
+        },
+        {
+          "id": "b",
+          "label": "The softmax in attention spreads weight so evenly across the words that each word's own meaning is blurred"
+        },
+        {
+          "id": "c",
+          "label": "Self-attention has no sense of word order, so order information is lost"
+        },
+        {
+          "id": "d",
+          "label": "Attention heads mostly compare words that sit near each other, so distant word order gets ignored"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Self-attention treats tokens as a set; positional encodings supply order.",
+        "Attention is not limited to adjacent words and weights are not forced to be equal."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A 32x32 grayscale image goes through a 5x5 convolution with stride 1 and no padding. What is the output height and width?",
+      "options": [
+        {
+          "id": "a",
+          "label": "30x30"
+        },
+        {
+          "id": "b",
+          "label": "28x28"
+        },
+        {
+          "id": "c",
+          "label": "32x32"
+        },
+        {
+          "id": "d",
+          "label": "27x27"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Output size = 32 - 5 + 1 = 28.",
+        "27 and 30 come from wrong kernel offsets; 32 would need padding."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A dense layer maps 100 inputs to 20 outputs and includes a bias for each output. How many trainable parameters does it have?",
+      "options": [
+        {
+          "id": "a",
+          "label": "2020"
+        },
+        {
+          "id": "b",
+          "label": "2120"
+        },
+        {
+          "id": "c",
+          "label": "2000"
+        },
+        {
+          "id": "d",
+          "label": "120"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "100*20 weights plus 20 biases = 2020.",
+        "2000 forgets biases; 120 adds instead of multiplying."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A weight is w = 0.5 and its gradient is 2.0. With plain gradient descent and learning rate 0.1, what is the weight after one update?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0.7"
+        },
+        {
+          "id": "b",
+          "label": "0.2"
+        },
+        {
+          "id": "c",
+          "label": "0.3"
+        },
+        {
+          "id": "d",
+          "label": "-1.5"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "w_new = 0.5 - 0.1*2.0 = 0.3.",
+        "0.7 adds the step instead of subtracting it."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You build a 10-class digit classifier whose last layer outputs 10 raw scores per image. Which loss should you use, given integer class labels?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Mean squared error against the label number"
+        },
+        {
+          "id": "b",
+          "label": "Cross-entropy loss on the scores"
+        },
+        {
+          "id": "c",
+          "label": "Binary cross-entropy on a single sigmoid output"
+        },
+        {
+          "id": "d",
+          "label": "Hinge loss on the sum of all scores"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Multi-class classification with one correct class suits (softmax) cross-entropy.",
+        "MSE on label numbers wrongly treats classes as ordered quantities."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A neuron computes z = w*x + b, then y = ReLU(z), with x = 1, w = -2, b = 1. If dL/dy = 3, what is dL/dw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "0"
+        },
+        {
+          "id": "b",
+          "label": "-3"
+        },
+        {
+          "id": "c",
+          "label": "-6"
+        },
+        {
+          "id": "d",
+          "label": "3"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "z = -1, so ReLU's derivative is 0, and the chain rule gives 0.",
+        "3, -6 and -3 ignore the zero ReLU gradient for negative z."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "In a standard PyTorch training loop, which calls belong inside each iteration over a mini-batch? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reloading the full dataset from disk"
+        },
+        {
+          "id": "b",
+          "label": "`optimizer.zero_grad()` to clear old gradients"
+        },
+        {
+          "id": "c",
+          "label": "`optimizer.step()` to update parameters"
+        },
+        {
+          "id": "d",
+          "label": "`loss.backward()` to compute gradients"
+        },
+        {
+          "id": "e",
+          "label": "Re-creating the model so weights start fresh"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Each iteration clears gradients, backpropagates, then updates the weights.",
+        "Re-creating the model would discard all learning; reloading data per batch is unnecessary."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You train on 10,000 images with batch size 100 for 5 epochs, taking one optimizer step per batch. A colleague asks how many parameter updates will happen in total.",
+      "options": [
+        {
+          "id": "a",
+          "label": "500"
+        },
+        {
+          "id": "b",
+          "label": "50"
+        },
+        {
+          "id": "c",
+          "label": "5,000"
+        },
+        {
+          "id": "d",
+          "label": "50,000"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "10,000/100 = 100 steps per epoch, times 5 epochs = 500.",
+        "50 and 5,000 miscount batches or epochs; 50,000 confuses updates with samples seen."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A 32x32 grayscale image goes through a convolution layer with a 5x5 kernel, stride 1 and no padding. What is the spatial size of the output feature map?",
+      "options": [
+        {
+          "id": "a",
+          "label": "32x32"
+        },
+        {
+          "id": "b",
+          "label": "28x28"
+        },
+        {
+          "id": "c",
+          "label": "27x27"
+        },
+        {
+          "id": "d",
+          "label": "26x26"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Output size = (32 - 5)/1 + 1 = 28.",
+        "27 and 26 come from off-by-one slips in the formula; 32 assumes 'same' padding."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A fully connected layer maps 100 input features to 50 output units and includes a bias for each unit. How many trainable parameters does it have?",
+      "options": [
+        {
+          "id": "a",
+          "label": "5000"
+        },
+        {
+          "id": "b",
+          "label": "5100"
+        },
+        {
+          "id": "c",
+          "label": "5050"
+        },
+        {
+          "id": "d",
+          "label": "150"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Weights 100*50 = 5000 plus 50 biases = 5050.",
+        "5000 forgets biases; 150 adds the dimensions instead of multiplying."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A 3-class softmax outputs probabilities [0.7, 0.2, 0.1]. The true class is the second one (one-hot [0, 1, 0]). What is the gradient of the cross-entropy loss with respect to the logits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "[-0.3, 0.2, 0.1]"
+        },
+        {
+          "id": "b",
+          "label": "[0, -1, 0]"
+        },
+        {
+          "id": "c",
+          "label": "[0.7, -0.8, 0.1]"
+        },
+        {
+          "id": "d",
+          "label": "[0.7, 0.2, 0.1]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "For softmax with cross-entropy, the gradient is p - y = [0.7, -0.8, 0.1].",
+        "[0, -1, 0] is -y and ignores the predicted probabilities; the others subtract from the wrong entries or skip the subtraction."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A convolution layer takes an input with 3 channels and has 16 filters of size 3x3, each with its own bias. How many trainable parameters does the layer have?",
+      "options": [
+        {
+          "id": "a",
+          "label": "432"
+        },
+        {
+          "id": "b",
+          "label": "448"
+        },
+        {
+          "id": "c",
+          "label": "144"
+        },
+        {
+          "id": "d",
+          "label": "160"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Weights 3*3*3*16 = 432 plus 16 biases = 448.",
+        "432 omits biases; 144 and 160 forget to multiply by the input channels."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A neuron computes z = w*x + b and a = relu(z), with w = -1, x = 2, b = 0.5. The loss is L = (a - 1)^2. Using backpropagation, what is dL/dw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "-4"
+        },
+        {
+          "id": "b",
+          "label": "-2"
+        },
+        {
+          "id": "c",
+          "label": "0"
+        },
+        {
+          "id": "d",
+          "label": "4"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "z = -1.5, so relu'(z) = 0 and the chain rule gives zero gradient to w.",
+        "The other values ignore the relu derivative and treat it as 1."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A CNN reaches 99% training accuracy but only 78% validation accuracy on a small image dataset. Which changes are standard ways to reduce this overfitting? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add dropout between the dense layers so units cannot co-adapt"
+        },
+        {
+          "id": "b",
+          "label": "Train for many more epochs until the training loss reaches zero"
+        },
+        {
+          "id": "c",
+          "label": "Add weight decay so that large weights are penalised in the loss"
+        },
+        {
+          "id": "d",
+          "label": "Tune hyperparameters on the test set so the final score is higher"
+        },
+        {
+          "id": "e",
+          "label": "Apply random flips and crops to training images to vary the data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Dropout, weight decay and augmentation are standard regularisers.",
+        "Longer training worsens overfitting, and tuning on the test set leaks information and invalidates the estimate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You are writing PyTorch code for an image classifier. A batch of 64 RGB images of size 224x224 is passed through `nn.Conv2d(in_channels=3, out_channels=8, kernel_size=3, stride=2, padding=1)`. You need to size the next layer, so you must predict the output tensor shape in (N, C, H, W) order.",
+      "options": [
+        {
+          "id": "a",
+          "label": "(64, 8, 224, 224)"
+        },
+        {
+          "id": "b",
+          "label": "(64, 8, 111, 111)"
+        },
+        {
+          "id": "c",
+          "label": "(64, 112, 112, 8)"
+        },
+        {
+          "id": "d",
+          "label": "(64, 8, 112, 112)"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "H = floor((224 + 2 - 3)/2) + 1 = 112 with channels 8 in NCHW order.",
+        "224 ignores the stride, 111 drops the padding, and the last option uses channels-last order."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A 20-layer MLP is trained with plain SGD at learning rate 0.5. The loss climbs rapidly for a few dozen steps and then shows NaN. Which diagnosis best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The model underfits because it has too few parameters for the data"
+        },
+        {
+          "id": "b",
+          "label": "Gradients vanished in early layers, so weights froze and became NaN"
+        },
+        {
+          "id": "c",
+          "label": "The batch is too large, so averaged gradients cancel and give NaN"
+        },
+        {
+          "id": "d",
+          "label": "Gradients exploded because the step is too large, so weights overflow"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A rapidly growing loss followed by NaN signals exploding gradients or divergence from a too-large step.",
+        "Vanishing gradients cause stalled loss, not growth; underfitting and cancelling gradients do not produce NaN."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A network with dropout 0.5 reports 82% accuracy on the training set, averaged over the batches during each epoch, but 90% on a validation set from the same distribution. Which explanation is most likely?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The validation set leaked into training, so the network has effectively memorised those examples and scores above its training figure"
+        },
+        {
+          "id": "b",
+          "label": "The optimizer fits validation examples first because they are cleaner than training ones, so early epochs favour them"
+        },
+        {
+          "id": "c",
+          "label": "Dropout acts as a regulariser that lowers validation loss more than training loss, so validation accuracy ends up higher"
+        },
+        {
+          "id": "d",
+          "label": "The running training metric uses dropout-perturbed forward passes, while validation runs with dropout off"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Training-mode accuracy is measured with units randomly dropped, so it is handicapped compared to eval mode.",
+        "Leakage is possible but not the most likely cause; the other options misstate how dropout and optimisation work."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In a 30-layer network using sigmoid activations, the gradient norms in the first layers are about 1e-9 while those in the last layer are about 1e-2. Which mechanism best accounts for this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Early layers hold more parameters, so float32 rounding errors accumulate mostly there and swamp the update"
+        },
+        {
+          "id": "b",
+          "label": "Cross-entropy loss saturates at the output, so the error signal reaching the early layers is mostly lost"
+        },
+        {
+          "id": "c",
+          "label": "Backprop multiplies many sigmoid derivatives, each at most 0.25, so the gradient shrinks with depth"
+        },
+        {
+          "id": "d",
+          "label": "Zero-initialised weights make most units identical, so early layers receive averaged gradients that cancel"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The chain rule multiplies per-layer derivatives; sigmoid' <= 0.25 makes the product decay with depth.",
+        "The other options invent mechanisms that don't give this depth-dependent decay."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In scaled dot-product attention, scores are computed as `QK^T / sqrt(d_k)`. A colleague removes the scaling and trains with d_k = 512; training becomes unstable and attention is nearly one-hot. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Dot products grow in variance with d_k, pushing softmax into saturation with tiny gradients"
+        },
+        {
+          "id": "b",
+          "label": "Dot products shrink as d_k grows, so softmax becomes uniform and attention is lost"
+        },
+        {
+          "id": "c",
+          "label": "Without scaling, the softmax outputs no longer sum to one, so the loss is mis-specified"
+        },
+        {
+          "id": "d",
+          "label": "Without scaling, the keys and queries lose their positional information in later layers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Dot products of d_k-dimensional vectors have variance about d_k, so large scores saturate the softmax.",
+        "Softmax still sums to one, scaling has no relation to position, and the effect is saturation, not uniformity."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A CNN with batch normalization gives 95% accuracy in the training loop but predictions on a single test image change depending on which other images are in its batch. The code never calls `model.eval()` at inference. What is the faulty step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Softmax normalises over the batch dimension instead of the class dimension at test time"
+        },
+        {
+          "id": "b",
+          "label": "Batch norm still uses current-batch statistics in training mode, so outputs depend on batch mates"
+        },
+        {
+          "id": "c",
+          "label": "The convolution kernels are shared across positions, so they mix information between images"
+        },
+        {
+          "id": "d",
+          "label": "Weights are updated during inference, so each prediction shifts the model for the next image"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "In training mode, batch norm normalises with batch statistics, coupling samples in a batch.",
+        "Inference does not update weights without an optimiser step; kernel sharing and softmax axis do not mix samples."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A 10-class classifier's training loss stays at about 2.30 (ln 10) from the first epoch and never improves. Which are plausible causes? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cross-entropy was used instead of MSE, so gradients cannot flow to the weights"
+        },
+        {
+          "id": "b",
+          "label": "The batch size is a power of two, which stalls GPU-based gradient updates"
+        },
+        {
+          "id": "c",
+          "label": "Inputs and labels were shuffled independently, so labels no longer match images"
+        },
+        {
+          "id": "d",
+          "label": "A learning rate far too small means the weights barely move from initialisation"
+        },
+        {
+          "id": "e",
+          "label": "A very high learning rate killed most ReLU units, so outputs are constant"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Loss at ln 10 means uniform predictions: misaligned labels, dead units, or negligible updates all produce this.",
+        "Batch size being a power of two is harmless, and cross-entropy is the standard classification loss."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A team trains a small transformer encoder for sentiment analysis. They forgot to add positional encodings. They notice that shuffling the words in a review gives exactly the same predicted sentiment score, even for reviews where word order flips the meaning, such as 'not good, bad service'. What is the underlying cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Self-attention is permutation-equivariant, so without position signals pooled outputs ignore word order"
+        },
+        {
+          "id": "b",
+          "label": "Layer normalization rescales tokens across the sequence, so sequence order cannot be recovered"
+        },
+        {
+          "id": "c",
+          "label": "The feed-forward layers apply the same weights to each token, which erases the tokens' identity"
+        },
+        {
+          "id": "d",
+          "label": "Multi-head attention averages heads, so each head's separate view of the sequence is lost"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Attention treats tokens as a set; without positional encodings, permuting inputs just permutes outputs, and pooling removes order.",
+        "Shared feed-forward weights, head averaging and layer norm do not by themselves cause order invariance."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A hand-written loss computes `p = exp(z) / sum(exp(z))` and then `-log(p[y])`. After hours of training the loss becomes NaN once some logits reach about 100. What is the most precise cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Cross-entropy requires inputs in [0,1], so unnormalised logits above 1 make the logarithm undefined in float32"
+        },
+        {
+          "id": "b",
+          "label": "`exp` of large logits overflows to inf, so the ratio becomes inf/inf = NaN; a max-shifted log-softmax avoids it"
+        },
+        {
+          "id": "c",
+          "label": "Float32 cannot represent probabilities close to 1, so the denominator rounds to exactly zero and divides by it"
+        },
+        {
+          "id": "d",
+          "label": "The softmax gradient is undefined for logits above 1, so backpropagation returns NaN for any large logit value"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Large logits overflow `exp`, and the shift-by-max trick (log-sum-exp) fixes it.",
+        "Distractors invent domain limits on softmax or cross-entropy that do not exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A CNN with BatchNorm gets 92% validation accuracy when run in train mode but 71% in eval mode. Training images are heavily augmented; validation images are clean. Which explanation fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Running statistics came from augmented images, so they mismatch clean validation activations that batch statistics fit"
+        },
+        {
+          "id": "b",
+          "label": "Eval mode normalises each image with its own mean and variance, which removes the contrast information the classes need"
+        },
+        {
+          "id": "c",
+          "label": "Eval mode disables the bias terms of the convolutions, so every activation shifts away from the values seen in training"
+        },
+        {
+          "id": "d",
+          "label": "Train mode applies dropout to the validation inputs, which acts as a regulariser and raises the measured accuracy there"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Eval mode uses running estimates from augmented training data, which differ from clean data statistics.",
+        "Distractors misdescribe what train and eval modes change in BatchNorm."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A decoder-only language model trained with teacher forcing reaches near-zero training loss within minutes, yet sampled text is gibberish. Inspection shows attention scores are computed with no mask. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Unmasked attention is quadratic in length, which makes the loss artificially small through accumulated rounding error"
+        },
+        {
+          "id": "b",
+          "label": "Each position can attend to the next token, which is its own label, so the model learns to copy instead of predict"
+        },
+        {
+          "id": "c",
+          "label": "Without a mask the padding tokens dominate the softmax, so the model ignores real context during training steps"
+        },
+        {
+          "id": "d",
+          "label": "Without a mask the attention weights no longer sum to one, so logits are scaled wrongly when sampling at inference time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Missing causal mask leaks the target token into the context, so training loss is trivially low.",
+        "Distractors blame normalisation, padding or numerics, none of which explains near-zero loss."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A CNN applies 3x3 conv (stride 1), 3x3 conv (stride 1), 2x2 max pool (stride 2), then 3x3 conv (stride 1), with no dilation or padding effects considered. What is the receptive field per side, in input pixels, of one output unit of the last conv?",
+      "options": [
+        {
+          "id": "a",
+          "label": "8"
+        },
+        {
+          "id": "b",
+          "label": "12"
+        },
+        {
+          "id": "c",
+          "label": "10"
+        },
+        {
+          "id": "d",
+          "label": "9"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "RF grows 3, 5, then 6 after the pool (jump becomes 2), then adds 2*2=4 for the last conv, giving 10.",
+        "Other values come from ignoring the stride's effect on later layers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In a 30-layer plain tanh MLP, gradient norms are about 1e-9 in the first layers and 1e-2 in the last, and early weights barely change. Which diagnosis best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Backprop multiplies many Jacobians with norms below 1 because tanh saturates, so the signal shrinks exponentially with depth"
+        },
+        {
+          "id": "b",
+          "label": "The learning rate is too high, so updates overshoot and gradients in the earliest layers are clipped down to nearly zero"
+        },
+        {
+          "id": "c",
+          "label": "Dead units with negative pre-activations output zero for every input, which is the standard failure mode of tanh layers"
+        },
+        {
+          "id": "d",
+          "label": "The loss is non-convex, so gradients necessarily vanish near any local minimum located in the earliest layers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Repeated multiplication of small Jacobians from saturating tanh causes vanishing gradients.",
+        "Distractors confuse this with dead ReLUs, large learning rates or local minima."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A CNN trained with dropout and heavy augmentation logs 84% training accuracy but 91% validation accuracy. Which factors can explain the gap? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Weight decay is applied during validation forward passes, which sharpens the predictions"
+        },
+        {
+          "id": "b",
+          "label": "A very low learning rate makes validation accuracy exceed training accuracy by design"
+        },
+        {
+          "id": "c",
+          "label": "Training images are augmented, so they are harder than the clean validation images"
+        },
+        {
+          "id": "d",
+          "label": "Training accuracy is averaged over the epoch while dropout is active and weights are still improving"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Dropout-on running averages and augmentation both depress logged training accuracy.",
+        "Learning rate and weight decay do not create a validation-over-training gap this way."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A team fine-tunes an ImageNet-pretrained ResNet on 3,000 X-ray images using Adam at lr 1e-2 for all layers. Training accuracy climbs, but final validation accuracy is below that of a frozen-backbone linear probe on the same data. Which diagnosis is most likely?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The large rate overwrote the general pretrained features early, so training behaves like scratch training on little data"
+        },
+        {
+          "id": "b",
+          "label": "Adam's adaptive steps mostly leave pretrained weights unchanged, so the backbone stayed near its start while only the head fitted the data"
+        },
+        {
+          "id": "c",
+          "label": "Batch normalisation statistics from ImageNet were kept fixed, so the backbone's features were shifted and the head overfitted the training split"
+        },
+        {
+          "id": "d",
+          "label": "The X-rays are grayscale, which most ImageNet-trained filters handle poorly, so the transferred features were largely unusable at any learning rate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A high learning rate on pretrained layers destroys transferable features and overfits a small set.",
+        "Distractors assert impossible transfer limits or ignore the probe comparison."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You design a transformer encoder trained with 4 sequences per GPU of highly variable length. Criteria: normalisation must not depend on other samples in the batch and must behave identically in training and inference. Which choice best meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "LayerNorm over the feature dimension of each token"
+        },
+        {
+          "id": "b",
+          "label": "BatchNorm with running statistics, because it normalises across the whole batch and stabilises training"
+        },
+        {
+          "id": "c",
+          "label": "No normalisation at all, using a smaller learning rate so that activations stay bounded across layers"
+        },
+        {
+          "id": "d",
+          "label": "BatchNorm using each test batch's own statistics at inference, so it adapts to the incoming sequences"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "LayerNorm is per-token and identical in train and inference, meeting both criteria.",
+        "BatchNorm variants depend on batch statistics, which are noisy at batch size 4 or differ at inference."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A LayerNorm model fits only 32 samples per GPU, but the recipe needs an effective batch of 256 with the same update dynamics. Criteria: no extra hardware, minimal extra compute, same gradient estimate. Which option is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Train with batch 32 and multiply the learning rate by 8, so each update matches the larger batch's size"
+        },
+        {
+          "id": "b",
+          "label": "Accumulate gradients over 8 micro-batches of 32, scaling the loss by 1/8, before each optimizer step"
+        },
+        {
+          "id": "c",
+          "label": "Enable gradient checkpointing, which saves activations and thereby makes the effective batch size larger"
+        },
+        {
+          "id": "d",
+          "label": "Average the model weights after each of 8 independent batch-32 optimizer steps taken from the same start"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Gradient accumulation reproduces the large-batch gradient with the same compute and no extra memory.",
+        "Learning-rate scaling, checkpointing and weight averaging do not give the same gradient estimate."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Task: classify 2,000 photos of everyday objects into 5 classes, with one GPU for one hour and accuracy as the priority. Which approach best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Train a large vision transformer from scratch, since attention scales better than convolution as data grows"
+        },
+        {
+          "id": "b",
+          "label": "Train a ResNet-50 from random initialisation with heavy augmentation until the training loss reaches nearly zero"
+        },
+        {
+          "id": "c",
+          "label": "Train a three-layer MLP on flattened raw pixels, avoiding convolutional bias that might limit what it can learn"
+        },
+        {
+          "id": "d",
+          "label": "Fine-tune an ImageNet-pretrained CNN, using a small backbone learning rate and a larger one for the new head"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "With little data, a similar domain and a tight budget, transfer learning dominates.",
+        "Scratch training or pixel MLPs need far more data than 2,000 images."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You classify 8,000-token contracts. Criteria: memory must grow roughly linearly with length, and the label depends mostly on local clauses plus a title and summary at the start. Which attention design best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replacing attention with mean pooling of token embeddings, ignoring token order and position entirely"
+        },
+        {
+          "id": "b",
+          "label": "Sliding-window local attention plus a few global tokens covering the title and summary"
+        },
+        {
+          "id": "c",
+          "label": "Full self-attention at every layer, since it is the only design able to model every token pair"
+        },
+        {
+          "id": "d",
+          "label": "Truncating each contract to its first 512 tokens and then using standard full self-attention"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Windowed attention with global tokens is linear in memory and keeps local plus global cues.",
+        "Full attention is quadratic; truncation and pooling discard needed information."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A paper reports a new activation raises CIFAR-10 accuracy from 93.1% to 93.5%, using one training run per variant. Criterion: judge the strength of the evidence. Which critique is strongest?",
+      "options": [
+        {
+          "id": "a",
+          "label": "CIFAR-10 accuracy is saturated, so any change under 1% is by definition not meaningful"
+        },
+        {
+          "id": "b",
+          "label": "Seed variance is often a few tenths of a percent, so one run each cannot separate the gain from noise"
+        },
+        {
+          "id": "c",
+          "label": "The evidence is weak mainly because ImageNet was not used, which is the only valid benchmark for activations"
+        },
+        {
+          "id": "d",
+          "label": "A 0.4% gain is too small to matter in practice, so the activation must be flawed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Without repeated seeds, a 0.4-point gap may be within run-to-run noise.",
+        "Other options dismiss the result by size or benchmark choice, not by statistical evidence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A classifier must flag fraud in 0.5% of transactions; the criterion is recall at a fixed precision on untouched, real-distribution data. Which practices are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use class-weighted loss, or resample minority cases, within the training split only"
+        },
+        {
+          "id": "b",
+          "label": "Report accuracy on a balanced test set built by discarding most legitimate cases"
+        },
+        {
+          "id": "c",
+          "label": "Pick the decision threshold on a validation set that keeps the real class ratio"
+        },
+        {
+          "id": "d",
+          "label": "Oversample the minority class before splitting so each split has enough fraud cases"
+        },
+        {
+          "id": "e",
+          "label": "Evaluate precision and recall on a held-out set with the natural class ratio"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Rebalancing belongs only in training; threshold selection and evaluation need the natural distribution.",
+        "Oversampling before the split leaks duplicates, and a balanced test set misstates precision."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A 12-layer transformer trained from scratch with Adam at lr 1e-3 diverges within 500 steps. Criteria: keep 1e-3 as the peak rate for final quality, change as little as possible, and stabilise early training. Which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lower the learning rate permanently to 1e-6, since sufficiently small steps can never diverge in training"
+        },
+        {
+          "id": "b",
+          "label": "Add linear warmup over the first few thousand steps with gradient clipping, then decay from the 1e-3 peak"
+        },
+        {
+          "id": "c",
+          "label": "Remove all normalisation layers, since they amplify early gradient noise and so cause the divergence seen"
+        },
+        {
+          "id": "d",
+          "label": "Switch to plain SGD at the same 1e-3 rate, since it has no adaptive denominator that could misbehave"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Warmup plus clipping tames early instability while retaining the target peak rate.",
+        "Other options abandon the peak rate or remove components that normally stabilise training."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You train a 48-layer transformer without a long learning-rate warmup and need stable optimisation. Judged on gradient flow through depth, which layer-norm placement is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pre-LN, because the residual path stays an identity route and gradients reach early layers without passing through a norm"
+        },
+        {
+          "id": "b",
+          "label": "Pre-LN, because normalising inputs removes the need for any learning-rate schedule since attention logits stay bounded then"
+        },
+        {
+          "id": "c",
+          "label": "Post-LN, because normalising after each residual add keeps activations bounded and so gives the best gradient scale in deep stacks"
+        },
+        {
+          "id": "d",
+          "label": "Post-LN, because the final norm on each block output makes gradient magnitudes equal across all layers regardless of depth"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Pre-LN leaves an unnormalised identity path along the residual stream, so deep models train stably with little warmup.",
+        "Post-LN distractors confuse bounded activations with healthy gradients; post-LN usually needs careful warmup."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Fine-tuning a detector with a ConvNet backbone, each GPU holds only 2 images per step. Criteria: training and inference behaviour should match, and results should not depend on batch size. Which normalisation is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "LayerNorm over the whole batch, because pooling all samples in the batch gives the most stable mean and variance estimate"
+        },
+        {
+          "id": "b",
+          "label": "BatchNorm with running statistics, since averaging over all spatial positions makes even 2 images enough for stable estimates"
+        },
+        {
+          "id": "c",
+          "label": "GroupNorm, because its statistics are per sample over channel groups, so batch size is irrelevant"
+        },
+        {
+          "id": "d",
+          "label": "No normalisation, because normalisation always hurts when fine-tuning from pretrained weights on a new task"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "GroupNorm uses per-sample statistics so tiny batches and train/test mismatch are not an issue.",
+        "BatchNorm statistics get noisy at batch size 2; spatial averaging does not fix the shared per-batch noise."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A colleague claims: \"Adding an L2 penalty to the loss with Adam is equivalent to weight decay, so AdamW is pointless.\" Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claim fails only for biases, because Adam exempts them from the L2 penalty but still decays every weight matrix by the same factor"
+        },
+        {
+          "id": "b",
+          "label": "The claim holds, because both shrink weights toward zero by the same factor each step, and AdamW only changes the learning-rate schedule"
+        },
+        {
+          "id": "c",
+          "label": "The claim fails, because an L2 penalty changes the location of the loss minimum, whereas weight decay applied to the weights leaves it unchanged"
+        },
+        {
+          "id": "d",
+          "label": "The claim fails, because Adam divides the L2 gradient by its adaptive denominator, so decay strength varies by weight"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "With adaptive optimisers the L2 gradient is divided by the second-moment estimate, so regularisation is not uniform; AdamW decouples it.",
+        "The equivalence holds for plain SGD, which is why the misconception is common."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A language model's benchmark score rose 6 points after a new pretraining run. Criterion: which finding most threatens the validity of claiming better generalisation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Many test questions appear near-verbatim in the new pretraining corpus but not in the old one"
+        },
+        {
+          "id": "b",
+          "label": "The new run used a larger batch size and a different learning-rate schedule from the baseline"
+        },
+        {
+          "id": "c",
+          "label": "The model's training loss was lower than its validation loss at the end of training"
+        },
+        {
+          "id": "d",
+          "label": "The benchmark has only 1,500 questions, so the score has a nonzero confidence interval"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Test-set contamination directly invalidates the generalisation interpretation of the gain.",
+        "The other options are routine confounds or noise that do not by themselves undermine the claim."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Training a large transformer in fp16 shows occasional overflow and loss spikes. Criteria: avoid per-run loss-scale tuning and keep the dynamic range of fp32. Which choice is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use bf16, because it keeps the fp32 exponent range so overflow is rare and loss scaling is not needed"
+        },
+        {
+          "id": "b",
+          "label": "Keep fp16 and lower the learning rate, since overflow is caused by large weight updates"
+        },
+        {
+          "id": "c",
+          "label": "Use fp8 for activations, because fewer bits shrink values and so avoid overflow in the forward pass"
+        },
+        {
+          "id": "d",
+          "label": "Use fp16 with a larger fixed loss scale, because scaling up gradients prevents overflow entirely"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "bf16 has 8 exponent bits like fp32, removing most overflow and the need for loss scaling.",
+        "A larger loss scale increases overflow risk, and fewer bits narrow range rather than avoid overflow."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team proposes presenting attention weights from a trained transformer as faithful explanations of its predictions. Which are valid criticisms? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Different attention distributions can yield nearly identical outputs, so weights are not uniquely tied to the prediction"
+        },
+        {
+          "id": "b",
+          "label": "Softmax outputs cannot be interpreted as probabilities, so they cannot be plotted"
+        },
+        {
+          "id": "c",
+          "label": "Multi-head layers mix and re-project heads, so a single layer's weights do not trace the full computation path"
+        },
+        {
+          "id": "d",
+          "label": "Residual connections and value vectors also carry information, so weights alone do not show each token's contribution"
+        },
+        {
+          "id": "e",
+          "label": "Attention weights are always uniform after training, so they cannot be informative"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Attention is only one part of the information flow; value norms, residuals and later layers matter, and alternatives give the same outputs.",
+        "Weights are not uniform after training, and plotting softmax is not the problem."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "You have 2,000 labelled legal-clause examples and one 24 GB GPU. A 7B pretrained LLM already reads legal text reasonably. Criteria: fit memory, limit forgetting of general ability, and finish within a day. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Training a small transformer from scratch on the 2,000 examples to avoid inheriting pretraining bias"
+        },
+        {
+          "id": "b",
+          "label": "Full fine-tuning of all weights in fp32 with a high learning rate to fit the small dataset"
+        },
+        {
+          "id": "c",
+          "label": "Freezing all layers and only changing the tokenizer vocabulary to include legal terms"
+        },
+        {
+          "id": "d",
+          "label": "Low-rank adapter fine-tuning on a quantised base model, leaving base weights frozen"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Adapters on a quantised frozen base fit memory, limit forgetting and train quickly on small data.",
+        "Full fp32 fine-tuning will not fit 24 GB for 7B parameters; from-scratch training overfits 2,000 examples."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design an attention scheme for 100k-token documents. Constraints: memory linear in length, and every token must still be able to retrieve a few designated summary tokens anywhere. Which design meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Random sparse attention where each token samples 64 positions per step, with no fixed designated tokens"
+        },
+        {
+          "id": "b",
+          "label": "Down-sampling the sequence by 100 with average pooling before the first layer, then using full attention"
+        },
+        {
+          "id": "c",
+          "label": "Sliding-window local attention plus a few global tokens that attend to and are attended by all positions"
+        },
+        {
+          "id": "d",
+          "label": "Full quadratic attention with activation checkpointing, since it recomputes values and so makes memory linear"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Local windows give linear memory and global tokens provide guaranteed long-range access.",
+        "Checkpointing does not remove the quadratic attention cost, and random or pooled schemes cannot guarantee access to designated tokens."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A classifier faces 1:1000 class imbalance. Constraints: the deployed model must output calibrated probabilities at the true base rate, yet learn minority features well. Which plan meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Train on class-balanced samples and deploy as is, since balanced training yields calibrated probabilities"
+        },
+        {
+          "id": "b",
+          "label": "Oversample the minority class by duplication and threshold at 0.5 so errors are balanced on both classes"
+        },
+        {
+          "id": "c",
+          "label": "Train on the raw distribution with a 1000x minority loss weight and deploy as is, trusting the weights"
+        },
+        {
+          "id": "d",
+          "label": "Train on class-balanced samples, then shift output logits by the log of the true prior ratio at inference"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Balanced training helps feature learning; a logit prior correction restores calibration at the true base rate.",
+        "Reweighting or resampling alone shifts the implied prior, so outputs are miscalibrated."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A pipeline packs several short documents into one 4,096-token sequence for efficiency, using ordinary causal attention and positions 0..4095. Which element is missing to avoid training artefacts?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A separate optimiser for the end-of-text token embedding to hold its norm fixed"
+        },
+        {
+          "id": "b",
+          "label": "A per-document attention mask, with position indices restarting at each document"
+        },
+        {
+          "id": "c",
+          "label": "A larger vocabulary so documents separated by tokens are not confused"
+        },
+        {
+          "id": "d",
+          "label": "A bidirectional mask so each token can see the rest of its own document, both before and after it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Without block masking, tokens attend to unrelated documents and positions are misleading.",
+        "The other options do not address cross-document leakage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "You need an effective batch of 1,024 sequences on 8 GPUs, each fitting 16 sequences. Plan must give the same gradient as a true batch of 1,024 and minimise communication. Which plan works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run 8 micro-steps per GPU, stepping the optimiser after each, and multiply the learning rate by 8"
+        },
+        {
+          "id": "b",
+          "label": "Run 8 micro-steps per GPU, sum losses unscaled, and all-reduce every micro-step for synchronised statistics"
+        },
+        {
+          "id": "c",
+          "label": "Use batch 128 and multiply the learning rate by 8, since both change the update size equally"
+        },
+        {
+          "id": "d",
+          "label": "Run 8 micro-steps per GPU, scale each loss by 1/8, and all-reduce gradients only on the last micro-step"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Gradient accumulation with loss scaling matches the large batch; syncing only once saves communication.",
+        "Stepping after each micro-step or skipping scaling changes the gradient, not just its size."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Medical scans have no canonical orientation. Design a CNN for guaranteed invariance to 90-degree rotations, without more training data or extra parameters per filter. What design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rotate each filter four times, share weights across rotations, and pool over rotation outputs before the classifier"
+        },
+        {
+          "id": "b",
+          "label": "Increase kernel size to 9x9 and add dilated convolutions so filters can learn every rotated pattern without being told"
+        },
+        {
+          "id": "c",
+          "label": "Add a rotation-prediction head and use its predicted angle to switch among four separately trained classifiers"
+        },
+        {
+          "id": "d",
+          "label": "Apply heavy random rotation augmentation, since with enough epochs the network is guaranteed to become invariant"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Group-equivariant convolution with weight sharing and rotation pooling gives exact invariance with shared parameters.",
+        "Augmentation encourages but does not guarantee invariance, and the other options add parameters or are not invariant."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "You will train a 1B-parameter transformer from scratch. Constraint: avoid early divergence and rare gradient spikes without changing the architecture. Which components belong in the plan? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Global gradient-norm clipping"
+        },
+        {
+          "id": "b",
+          "label": "Removing the optimiser's epsilon so updates are maximally precise"
+        },
+        {
+          "id": "c",
+          "label": "Initialising all weights to zero so early updates are small"
+        },
+        {
+          "id": "d",
+          "label": "Monitoring loss and gradient norm to roll back to a checkpoint after a spike"
+        },
+        {
+          "id": "e",
+          "label": "Linear learning-rate warmup followed by a decay schedule"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Warmup, clipping and spike monitoring directly target early divergence and rare spikes.",
+        "Zero init breaks symmetry, and removing epsilon risks division blow-ups."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A vision model must run on a phone in under 50 ms with accuracy within 1% of the 300 MB teacher, and the phone supports int8 kernels. Which plan best meets all constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Prune 90% of teacher weights at once without retraining, then run in fp32 using sparse storage"
+        },
+        {
+          "id": "b",
+          "label": "Distil into a smaller student, then apply quantisation-aware training so it runs in int8"
+        },
+        {
+          "id": "c",
+          "label": "Quantise the teacher to int8 after training with a single scale for all layers and ship it"
+        },
+        {
+          "id": "d",
+          "label": "Replace the teacher with logistic regression on raw pixels to guarantee latency under 50 ms"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Distillation reduces size and quantisation-aware training retains accuracy under int8.",
+        "One-shot pruning or crude single-scale quantisation typically loses more than 1%, and a linear model will not match accuracy."
+      ],
+      "reviewed": false
+    }
+  ]
+}

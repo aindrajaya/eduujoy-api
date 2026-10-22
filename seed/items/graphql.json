@@ -1,0 +1,2491 @@
+{
+  "version": 1,
+  "topic": "graphql",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does SDL stand for in GraphQL, the notation used to write out types and operations?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Structured Data Layer"
+        },
+        {
+          "id": "b",
+          "label": "Simple Document Loader"
+        },
+        {
+          "id": "c",
+          "label": "Schema Definition Language"
+        },
+        {
+          "id": "d",
+          "label": "Server Data Query Language"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "SDL is the Schema Definition Language used to declare types and operations.",
+        "Distractors invent plausible-sounding expansions of the acronym."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which GraphQL operation type is meant for changing data on the server?",
+      "options": [
+        {
+          "id": "a",
+          "label": "directive"
+        },
+        {
+          "id": "b",
+          "label": "query"
+        },
+        {
+          "id": "c",
+          "label": "fragment"
+        },
+        {
+          "id": "d",
+          "label": "mutation"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Mutations are the operation type for writes and other side effects.",
+        "Queries are for reading; fragments and directives are not operation types."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which built-in scalar type is used for unique identifiers?",
+      "options": [
+        {
+          "id": "a",
+          "label": "ID"
+        },
+        {
+          "id": "b",
+          "label": "Key"
+        },
+        {
+          "id": "c",
+          "label": "Ref"
+        },
+        {
+          "id": "d",
+          "label": "UUID"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "ID is the built-in scalar for unique identifiers.",
+        "UUID, Key and Ref are not built-in GraphQL scalars."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In a schema, what does the exclamation mark in `name: String!` indicate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The field is input-only"
+        },
+        {
+          "id": "b",
+          "label": "The field is never null"
+        },
+        {
+          "id": "c",
+          "label": "The field returns a list"
+        },
+        {
+          "id": "d",
+          "label": "The field is deprecated"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The `!` marks a non-null type.",
+        "Learners confuse it with lists, deprecation or input-only markers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is the name for the function that supplies the data for a single field in a GraphQL server?",
+      "options": [
+        {
+          "id": "a",
+          "label": "controller"
+        },
+        {
+          "id": "b",
+          "label": "middleware"
+        },
+        {
+          "id": "c",
+          "label": "reducer"
+        },
+        {
+          "id": "d",
+          "label": "resolver"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Resolvers fetch or compute the value of a field.",
+        "Reducer, controller and middleware belong to other frameworks or patterns."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are built-in scalar types in GraphQL? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Int"
+        },
+        {
+          "id": "b",
+          "label": "Long"
+        },
+        {
+          "id": "c",
+          "label": "Boolean"
+        },
+        {
+          "id": "d",
+          "label": "Date"
+        },
+        {
+          "id": "e",
+          "label": "String"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Int, Boolean and String are built-in scalars, alongside Float and ID.",
+        "Date and Long are common in other systems but must be defined as custom scalars in GraphQL."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A team is building a chat app. The client should be told automatically whenever a new message is posted, without polling the server. Which GraphQL operation type is designed for this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "fragment"
+        },
+        {
+          "id": "b",
+          "label": "subscription"
+        },
+        {
+          "id": "c",
+          "label": "mutation"
+        },
+        {
+          "id": "d",
+          "label": "query"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Subscriptions push events from server to client over a long-lived connection.",
+        "Queries and mutations are request/response; fragments only reuse field selections."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does GraphQL help avoid over-fetching compared with a fixed REST endpoint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The schema hides most fields, so every response is kept small"
+        },
+        {
+          "id": "b",
+          "label": "The server caches all fields so repeated requests skip the database"
+        },
+        {
+          "id": "c",
+          "label": "The client names the fields it wants, so only those come back"
+        },
+        {
+          "id": "d",
+          "label": "The server compresses every response so unused fields cost less"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The query names exact fields and the response mirrors that selection.",
+        "Distractors confuse field selection with compression, caching or schema hiding."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does a typical GraphQL API over HTTP differ from a typical REST API in its endpoints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It exposes one URL, with the operation sent in the request body"
+        },
+        {
+          "id": "b",
+          "label": "It exposes one URL per resource, each one using a different HTTP verb"
+        },
+        {
+          "id": "c",
+          "label": "It exposes one URL per field, so clients fetch each field separately"
+        },
+        {
+          "id": "d",
+          "label": "It exposes one URL per query, which the server generates when needed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "GraphQL usually uses a single endpoint and the query is carried in the request body.",
+        "One URL per resource describes REST; the other options are invented."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A server receives the query `{ user(id: 1) { name } }` and the user is named Ada. Which response shape is expected?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`{\"data\":[\"Ada\"]}`"
+        },
+        {
+          "id": "b",
+          "label": "`{\"data\":{\"user\":{\"name\":\"Ada\"}}}`"
+        },
+        {
+          "id": "c",
+          "label": "`{\"user\":{\"id\":1,\"name\":\"Ada\"}}`"
+        },
+        {
+          "id": "d",
+          "label": "`{\"name\":\"Ada\",\"status\":200}`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The response is wrapped in `data` and mirrors the query's shape, with only the requested fields.",
+        "Other options add unrequested fields, flatten the shape or mimic REST status bodies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What role does the schema play in a GraphQL API?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It stores the data so resolvers can read it"
+        },
+        {
+          "id": "b",
+          "label": "It is a typed contract of what clients can request"
+        },
+        {
+          "id": "c",
+          "label": "It encrypts queries so clients can't see field names"
+        },
+        {
+          "id": "d",
+          "label": "It routes each request to a different microservice"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The schema describes the types and operations available, acting as a contract between client and server.",
+        "Distractors give it storage, routing or encryption roles it does not have."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A client sends a query that asks for a field not defined in the schema. What most likely happens?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The server rejects it with a validation error before running resolvers"
+        },
+        {
+          "id": "b",
+          "label": "The server skips the unknown field and returns the other requested fields without an error"
+        },
+        {
+          "id": "c",
+          "label": "The server returns null for that field and still runs every other resolver as usual"
+        },
+        {
+          "id": "d",
+          "label": "The server adds the field to the schema and returns an empty value until a resolver exists"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Queries are validated against the schema, and unknown fields cause errors before execution.",
+        "Distractors assume lenient behaviour like REST ignoring extra parameters."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about GraphQL mutations are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "They can return fields the client selects afterwards"
+        },
+        {
+          "id": "b",
+          "label": "They can accept arguments such as an input object"
+        },
+        {
+          "id": "c",
+          "label": "They cannot return any data to the client"
+        },
+        {
+          "id": "d",
+          "label": "They must be sent with an HTTP GET request"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Mutations take arguments and return a selectable result, such as the updated object.",
+        "Mutations are normally sent as POST and do return data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A mobile app shows only a user's name and avatar. The existing REST endpoint returns 30 fields for each user, which slows the app on poor networks. The team is considering GraphQL. How would GraphQL help here?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The app would call a separate endpoint for each of the 30 fields and merge the results on the device"
+        },
+        {
+          "id": "b",
+          "label": "The app would still receive all 30 fields, but GraphQL would compress the response to shrink it"
+        },
+        {
+          "id": "c",
+          "label": "The app would query only `name` and `avatar`, so the response carries just those"
+        },
+        {
+          "id": "d",
+          "label": "The server would guess which fields the app needs from its past requests and send only those"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A GraphQL query selects specific fields, reducing payload size.",
+        "Other options misdescribe GraphQL as compressing, guessing or splitting requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `String!` mean in a GraphQL field definition?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The field returns a list of strings"
+        },
+        {
+          "id": "b",
+          "label": "The field can never return null"
+        },
+        {
+          "id": "c",
+          "label": "The field is deprecated and will be removed"
+        },
+        {
+          "id": "d",
+          "label": "The field accepts only uppercase strings"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The `!` marks a non-null type, so the server must always return a value.",
+        "Distractors confuse `!` with deprecation, formatting or list types."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which statement best describes the purpose of a mutation in GraphQL?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It defines the shape of the types available in a schema"
+        },
+        {
+          "id": "b",
+          "label": "It changes data on the server, such as creating a record"
+        },
+        {
+          "id": "c",
+          "label": "It reads data and caches the result for later requests"
+        },
+        {
+          "id": "d",
+          "label": "It subscribes the client to live events from the server"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Mutations are the operation type for writes and side effects.",
+        "Distractors describe subscriptions, schema definitions or caching reads."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why does a GraphQL query reduce over-fetching compared with a fixed REST endpoint?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The selection set lists exactly the fields the client wants"
+        },
+        {
+          "id": "b",
+          "label": "The server compresses every response so unused fields cost less"
+        },
+        {
+          "id": "c",
+          "label": "Resolvers delete unused fields from the database after each call"
+        },
+        {
+          "id": "d",
+          "label": "The schema limits each type to a very small number of fields"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The client chooses fields in the selection set, so only those are returned.",
+        "Distractors invent compression, field limits or deletion behaviour that GraphQL does not have."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In a GraphQL server, what is a resolver?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A directive that marks a field as optional in a query"
+        },
+        {
+          "id": "b",
+          "label": "A type that lists every allowed value for an enum field"
+        },
+        {
+          "id": "c",
+          "label": "A function that supplies the value for a single field"
+        },
+        {
+          "id": "d",
+          "label": "A client library that caches query results in the browser"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A resolver is the function that produces the data for one field.",
+        "Distractors confuse resolvers with enums, client caches and directives."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does a typical GraphQL server receive operations over HTTP?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Clients send operations to a single endpoint, usually via POST"
+        },
+        {
+          "id": "b",
+          "label": "Clients must use GET with the field names placed in the URL path"
+        },
+        {
+          "id": "c",
+          "label": "Each field is fetched through its own separate WebSocket channel"
+        },
+        {
+          "id": "d",
+          "label": "Each type has its own URL path, with verbs mapped to operations"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "GraphQL usually exposes one endpoint and takes the operation in the request body.",
+        "Distractors apply REST-style routing or misplace WebSockets, which are for subscriptions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which of these are root operation types in a GraphQL schema? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Mutation"
+        },
+        {
+          "id": "b",
+          "label": "Subscription"
+        },
+        {
+          "id": "c",
+          "label": "Input"
+        },
+        {
+          "id": "d",
+          "label": "Fragment"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A mobile app calls a REST endpoint `/users/1` that returns 40 fields, but the profile screen shows only the name and avatar. The team is considering GraphQL for this screen. What is the main benefit they would gain?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The schema will automatically rename fields to be shorter"
+        },
+        {
+          "id": "b",
+          "label": "The app can skip authentication for public profile data"
+        },
+        {
+          "id": "c",
+          "label": "The query can request just the name and avatar fields"
+        },
+        {
+          "id": "d",
+          "label": "The server will cache the user so the extra fields vanish"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Clients pick fields, so only name and avatar travel over the network.",
+        "Distractors attribute caching, auth removal or renaming to GraphQL itself."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given a schema field `user(id: ID!): User`, which query fetches the `name` and `email` of the user with id 5?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`query user = 5 { name email }`"
+        },
+        {
+          "id": "b",
+          "label": "`{ user(5) { name email } }`"
+        },
+        {
+          "id": "c",
+          "label": "`{ user(id: 5) { name email } }`"
+        },
+        {
+          "id": "d",
+          "label": "`{ user { id: 5, name, email } }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Arguments are named and passed in parentheses, followed by a selection set.",
+        "Distractors use invalid argument or variable syntax."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A schema declares `posts: [Post!]!`. Which value can its resolver return without causing an error?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A list with one post followed by `null`"
+        },
+        {
+          "id": "b",
+          "label": "An empty list `[]`"
+        },
+        {
+          "id": "c",
+          "label": "A list containing `null`"
+        },
+        {
+          "id": "d",
+          "label": "`null`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The outer `!` forbids null and the inner `!` forbids null items, but an empty list is valid.",
+        "Distractors return null at either level."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given the query `{ a: user(id: 1) { name } b: user(id: 2) { name } }`, which keys appear inside `data` in the response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`id1` and `id2`"
+        },
+        {
+          "id": "b",
+          "label": "`a` and `b`"
+        },
+        {
+          "id": "c",
+          "label": "`user1` and `user2`"
+        },
+        {
+          "id": "d",
+          "label": "`user` twice, once for each id"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Aliases rename result keys, so the response uses `a` and `b`.",
+        "Distractors ignore aliases or invent key names."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Which operation correctly declares a variable for a required id and uses it in a field argument?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`query(id: ID!) { user($id) { name } }`"
+        },
+        {
+          "id": "b",
+          "label": "`query($id) { user(id: id) { name } }`"
+        },
+        {
+          "id": "c",
+          "label": "`query { user(id: $id: ID!) { name } }`"
+        },
+        {
+          "id": "d",
+          "label": "`query($id: ID!) { user(id: $id) { name } }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Variables are declared with a type after the operation name and referenced with `$`.",
+        "Distractors misplace the declaration or omit the type or `$`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A resolver is `user: (parent, args) => db.users.get(args.id)` for `user(id: ID!): User`. For the query `{ user(id: \"7\") { name } }`, what is `args.id`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The string `\"7\"`"
+        },
+        {
+          "id": "b",
+          "label": "The parent object of the field"
+        },
+        {
+          "id": "c",
+          "label": "The value `undefined`"
+        },
+        {
+          "id": "d",
+          "label": "The object `{ id: \"7\" }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Arguments arrive in the second parameter as an object keyed by name, and ID values are strings.",
+        "Distractors confuse args with parent or with the whole argument object."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "Which values are valid results for a field declared `tags: [String!]!`? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`[\"a\", null]`"
+        },
+        {
+          "id": "b",
+          "label": "`null`"
+        },
+        {
+          "id": "c",
+          "label": "`[]`"
+        },
+        {
+          "id": "d",
+          "label": "`[\"a\", \"b\"]`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "An empty list and a list of strings satisfy both non-null markers.",
+        "`null` breaks the outer `!` and a null item breaks the inner `!`."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A blog schema has `type Mutation { addComment(postId: ID!, text: String!): Comment }` and `type Comment { id: ID! text: String! }`. The client must add the text \"Nice!\" to post 3 and then show the new comment's id. Which operation does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`mutation { addComment(text: \"Nice!\") { id } }`"
+        },
+        {
+          "id": "b",
+          "label": "`mutation { addComment(postId: 3, text: \"Nice!\") { id } }`"
+        },
+        {
+          "id": "c",
+          "label": "`mutation { addComment(postId: 3, text: \"Nice!\") }`"
+        },
+        {
+          "id": "d",
+          "label": "`query { addComment(postId: 3, text: \"Nice!\") { id } }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "It uses a mutation, supplies both required arguments and selects a subfield of Comment.",
+        "Distractors use query, omit a required argument or omit the selection set."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A schema has `type Query { user(id: ID!): User }`. Which operation correctly declares and uses a variable to fetch a user's name?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`query GetUser($id: ID!) { user(id: $id) { name } }`"
+        },
+        {
+          "id": "b",
+          "label": "`query GetUser(id: ID!) { user(id: id) { name } }`"
+        },
+        {
+          "id": "c",
+          "label": "`query GetUser($id: ID) { user(id: $id) { name } }`"
+        },
+        {
+          "id": "d",
+          "label": "`query GetUser($id: ID!) { user($id) { name } }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The variable type must be non-null to feed a non-null argument, and it is referenced as `id: $id`.",
+        "Distractors drop the `$` or pass a nullable variable into a non-null argument."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `{ a: user(id: \"1\") { name } b: user(id: \"2\") { name } }`, what is the shape of the `data` value in the response?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`{ \"a\": { \"name\": ... }, \"b\": { \"name\": ... } }`"
+        },
+        {
+          "id": "b",
+          "label": "The query fails because `user` cannot be requested twice"
+        },
+        {
+          "id": "c",
+          "label": "`{ \"user\": [ { \"name\": ... }, { \"name\": ... } ] }`"
+        },
+        {
+          "id": "d",
+          "label": "`{ \"user\": { \"name\": ... } }` with only the last result kept"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Aliases rename the response keys, so both results appear under a and b.",
+        "Distractors assume merging into one key or that duplicate fields are rejected."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A schema defines `type Mutation { addTodo(title: String!): Todo }` and `type Todo { id: ID! title: String! }`. Which request creates a todo and returns its id and title?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`mutation { addTodo(title: \"Buy milk\") { id title } }`"
+        },
+        {
+          "id": "b",
+          "label": "`mutation { addTodo: \"Buy milk\" { id title } }`"
+        },
+        {
+          "id": "c",
+          "label": "`query { addTodo(title: \"Buy milk\") { id title } }`"
+        },
+        {
+          "id": "d",
+          "label": "`mutation { addTodo(title: \"Buy milk\") }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Todo is an object type, so the mutation needs a selection set.",
+        "Distractors omit the selection set, use the query root, or misuse argument syntax."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "With `type Author { id: ID! books: [Book!]! }`, the parent object passed to the resolver contains `id`. Which resolver for `Author.books` is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`books: (context, parent) => context.books.get(parent)`"
+        },
+        {
+          "id": "b",
+          "label": "`books: (parent, args, ctx) => ctx.db.books.byAuthor(parent.id)`"
+        },
+        {
+          "id": "c",
+          "label": "`books: (args, context) => context.db.books.findByAuthor(args.id)`"
+        },
+        {
+          "id": "d",
+          "label": "`books: (parent, args, context) => context.db.books.findAll()`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Resolvers receive (parent, args, context, info) and use parent.id to scope the lookup.",
+        "Distractors swap argument positions or ignore the parent."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You define `fragment UserBits on User { id name }`. Which query reuses it correctly for the user with id \"1\"?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`{ user(id: \"1\") on UserBits { id name } }`"
+        },
+        {
+          "id": "b",
+          "label": "`{ user(id: \"1\") { ...UserBits } }`"
+        },
+        {
+          "id": "c",
+          "label": "`{ user(id: \"1\") { UserBits { id name } } }`"
+        },
+        {
+          "id": "d",
+          "label": "`{ user(id: \"1\") { fragment UserBits } }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A fragment is spread with `...Name` inside a selection set.",
+        "Distractors invent syntax that resembles field selection or type conditions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "The schema has `type Query { user(id: ID!): User users: [User!]! }` and `type User { id: ID! name: String! email: String }`. Which queries are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`{ user(id: \"7\") { email } }`"
+        },
+        {
+          "id": "b",
+          "label": "`{ user { name } }`"
+        },
+        {
+          "id": "c",
+          "label": "`{ users }`"
+        },
+        {
+          "id": "d",
+          "label": "`{ users { id age } }`"
+        },
+        {
+          "id": "e",
+          "label": "`{ users { id name } }`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Valid queries pick defined fields, supply required arguments and select subfields on object types.",
+        "Distractors omit the selection set, omit a required argument, or request an undefined field."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A client uses a schema with `posts(first: Int, after: String): PostConnection`, where the connection has `edges`, `pageInfo { endCursor hasNextPage }`. The first request used `first: 10` and returned `endCursor: \"abc\"` and `hasNextPage: true`. What should the next request be to get the following page?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`posts(first: 10, after: \"abc\")`"
+        },
+        {
+          "id": "b",
+          "label": "`posts(first: 10, before: \"abc\")`"
+        },
+        {
+          "id": "c",
+          "label": "`posts(first: 10, after: 10)`"
+        },
+        {
+          "id": "d",
+          "label": "`posts(first: 20)` and discard the first ten"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Cursor pagination passes the previous endCursor as `after`.",
+        "Distractors use offsets, refetch everything, or page backwards."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A query for 50 posts, each with its `author { name }`, produces 51 database queries in the logs. What is the most likely cause and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `posts` resolver paginates badly, so the database gets one query per page; fix it by raising the page size and fetching all posts in one query"
+        },
+        {
+          "id": "b",
+          "label": "`Post.author` queries per post, so 50 posts cost 50 extra queries; batch per request with DataLoader"
+        },
+        {
+          "id": "c",
+          "label": "GraphQL sends every nested field as a separate HTTP request, so each field costs a round trip; fix it by merging fields into one request"
+        },
+        {
+          "id": "d",
+          "label": "The database lacks an index on `Post.id`, so the same lookup repeats 50 times; fix it by adding an index on that column"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "This is the N+1 pattern: a per-item resolver fires a query for each parent; batching collapses them.",
+        "Distractors blame pagination, transport or indexing, which do not explain exactly one query per item."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A query returns `{\"data\":{\"user\":null},\"errors\":[{\"path\":[\"user\",\"email\"]}]}`. The schema has `user: User` and `email: String!`. Why is the whole `user` null when only `email` failed?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A null in a non-null field propagates up to the nearest nullable parent, here `user`"
+        },
+        {
+          "id": "b",
+          "label": "The client library drops the `user` object because the error path points inside it and the partial result cannot be merged into its cache"
+        },
+        {
+          "id": "c",
+          "label": "The server discards the parent object when a resolver logs an error, because the spec forbids returning partial results alongside errors"
+        },
+        {
+          "id": "d",
+          "label": "The error in a leaf field halts execution of the whole query, so the server returns null for the parent field that was being resolved"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Non-null violation bubbles to the closest nullable ancestor.",
+        "Distractors assume blanket partial-result suppression, execution halting, or client behaviour."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Your uptime dashboard alerts on HTTP 5xx rates. Users report broken pages, yet the dashboard is green while the GraphQL server's resolvers are throwing exceptions. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Errors in nested fields are never reported to the client, so nothing signals the failure at all"
+        },
+        {
+          "id": "b",
+          "label": "The dashboard counts only POST requests and GraphQL queries are always sent as GET requests"
+        },
+        {
+          "id": "c",
+          "label": "Resolver exceptions are cached by the CDN, which hides the 5xx status codes from the monitor"
+        },
+        {
+          "id": "d",
+          "label": "Resolver failures return HTTP 200 with an `errors` array, so status-code monitoring misses them"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Execution errors are reported in the response body with a 200 status, so monitoring must inspect `errors`.",
+        "Distractors invent caching or method issues, or claim errors are not reported."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A developer implemented `transferFunds` as a Query field and sends `{ debit(id: 1) credit(id: 2) }`. Occasionally credit completes before debit. Which analysis is correct?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only the first root field of an operation is executed by the server, and the second one is run later by a client retry mechanism"
+        },
+        {
+          "id": "b",
+          "label": "Asynchronous resolvers make GraphQL ignore field order in a document, so even a Mutation would run its root fields in random order"
+        },
+        {
+          "id": "c",
+          "label": "HTTP/2 multiplexing reorders the two fields on the wire, so the server receives the credit field before the debit field"
+        },
+        {
+          "id": "d",
+          "label": "Query root fields may run in parallel, so order is not guaranteed; Mutation root fields run serially, so side effects belong there"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The spec allows parallel execution of query fields but requires mutation root fields to run serially.",
+        "Distractors blame transport, async resolvers, or invented execution rules."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After an `updateUser` mutation, an Apollo Client list of users still shows the old name though the server saved it. The mutation selected `{ name }` only. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Mutations never write to the cache automatically, so a manual refetch or cache update is always required after any change"
+        },
+        {
+          "id": "b",
+          "label": "The response lacks `id`, so the normalized cache cannot match it to the cached User entity"
+        },
+        {
+          "id": "c",
+          "label": "The list query used a fragment, which makes the cached fields immutable once the first response has been stored"
+        },
+        {
+          "id": "d",
+          "label": "Apollo caches each mutation result for 24 hours, so the list stays stale until that cache entry expires"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Normalized caches merge by type and id; without id the update is not tied to the entity.",
+        "Distractors invent TTLs, fragment immutability, or that mutations never update the cache."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A public API has `type User { friends(first: Int): [User!]! }` and no query limits. Which factors make it easy to overload the server with a single request? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Circular types let a query nest `friends` many levels deep"
+        },
+        {
+          "id": "b",
+          "label": "Aliases let one query call an expensive field many times"
+        },
+        {
+          "id": "c",
+          "label": "The unbounded `first` argument lets a client request huge lists"
+        },
+        {
+          "id": "d",
+          "label": "Selecting `__typename` doubles resolver work on every field"
+        },
+        {
+          "id": "e",
+          "label": "Naming operations makes the server re-run them repeatedly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Depth, unbounded list sizes and alias multiplication all amplify cost per request.",
+        "Operation names and `__typename` do not add meaningful execution cost."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A team deploys a GraphQL server on three instances behind a load balancer. Subscriptions use an in-memory PubSub. Clients subscribed to `messageAdded` receive events only when the `addMessage` mutation happens to hit the same instance as their websocket. What is the root cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The subscription resolver returns an async iterator, and an async iterator can serve only one subscriber per server process at a time"
+        },
+        {
+          "id": "b",
+          "label": "The mutation must return the subscription payload to the client, otherwise the event is dropped by every instance that did not run it"
+        },
+        {
+          "id": "c",
+          "label": "Websockets cannot carry subscriptions through a load balancer, so the balancer must convert them into HTTP polling requests"
+        },
+        {
+          "id": "d",
+          "label": "The in-memory PubSub is local to each process, so events published on one instance never reach subscribers on another"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "An in-process PubSub is not shared, so a shared broker such as Redis is needed across instances.",
+        "Distractors misattribute the failure to transport, iterator limits or mutation payloads."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A query `posts { title author { name } }` returns 50 posts. Database logs show 1 query on posts and then 50 separate queries on users. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "GraphQL validates each nested field against the schema by querying the database per value"
+        },
+        {
+          "id": "b",
+          "label": "The posts table lacks an index, so each row is fetched by its own separate table scan"
+        },
+        {
+          "id": "c",
+          "label": "The client sends one HTTP request per selected field, so each field triggers a query"
+        },
+        {
+          "id": "d",
+          "label": "The `author` resolver does its own lookup for each post, with no batching of user IDs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Per-parent resolver lookups without batching produce the N+1 pattern; batching (e.g. DataLoader) fixes it.",
+        "Distractors blame indexing, transport or validation, none of which cause one query per parent object."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A response arrives with HTTP 200 and `data: { user: { name: \"Ana\", email: null } }`, plus an `errors` entry with path `[\"user\",\"email\"]`. Why is `name` still present?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`email` is nullable, so its error nulls only that field and sibling fields keep their results"
+        },
+        {
+          "id": "b",
+          "label": "Errors are collected apart from `data`, so `data` always holds every field with last-known values"
+        },
+        {
+          "id": "c",
+          "label": "HTTP 200 means the resolver succeeded, and `errors` only lists non-fatal client warnings"
+        },
+        {
+          "id": "d",
+          "label": "The server retried `email` with a cached value and then dropped the failure from `data`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A nullable field that throws becomes null with an error entry; siblings are unaffected.",
+        "Distractors misread the errors array and HTTP status as indicating success or caching."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Schema: `type Query { posts: [Post] }` and `type Post { id: ID! author: User! }`. A query selects `posts { id author { name } }` and the `author` resolver throws for the second of three posts. What does `data.posts` look like?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The whole `posts` field is null, because an error in one list item invalidates the entire list that contains it"
+        },
+        {
+          "id": "b",
+          "label": "The second entry is null, because the null from the non-null `author` propagates to the nearest nullable parent"
+        },
+        {
+          "id": "c",
+          "label": "The second post stays with `author: null`, since a resolver error never changes the shape of the returned data"
+        },
+        {
+          "id": "d",
+          "label": "The entire `data` is null, because any non-null violation nulls the root of the response before it is sent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Non-null violations bubble up to the nearest nullable field, which is the list item since `[Post]` allows null items.",
+        "Distractors over- or under-propagate the null."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A client calls `mutation { updateTodo(id: \"7\", done: true) { done } }`. The server saves it, but the Apollo-style normalised cache does not update the todo list on screen. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The server must also publish a subscription event, or clients ignore the mutation result"
+        },
+        {
+          "id": "b",
+          "label": "Mutations never write to the client cache, so a manual refetch is always required afterwards"
+        },
+        {
+          "id": "c",
+          "label": "The list query was stored by the HTTP layer, which blocks any normalised cache update"
+        },
+        {
+          "id": "d",
+          "label": "The result omits `id` and `__typename`, so the cache cannot identify which entity to merge into"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Normalised caches key entities by type and id; without them the result cannot update the stored todo.",
+        "Distractors invent rules about mutations, subscriptions or HTTP caching."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An app runs two server instances behind a load balancer, using an in-memory PubSub. Users on a `messageAdded` subscription often miss messages, though the mutation succeeds. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Subscriptions stop delivering after the first event on a connection unless the client re-subscribes"
+        },
+        {
+          "id": "b",
+          "label": "The `messageAdded` resolver filters events by sender, so some users are excluded from receiving them"
+        },
+        {
+          "id": "c",
+          "label": "The mutation publishes on one instance while the subscriber's socket sits on the other instance"
+        },
+        {
+          "id": "d",
+          "label": "The load balancer cannot keep WebSocket connections open, so many clients fall back to polling and miss events"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "In-memory PubSub is local to a process; multi-instance setups need a shared broker such as Redis.",
+        "Distractors assert false protocol limits or filtering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A public endpoint is overloaded by `{ users { friends { friends { posts { comments { id } } } } } }`. Which factors contribute? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each nested list level multiplies the number of objects that must be resolved"
+        },
+        {
+          "id": "b",
+          "label": "The server has no depth or complexity limit to reject the query before execution"
+        },
+        {
+          "id": "c",
+          "label": "Cyclic type references are invalid, so the server repeats work to resolve them"
+        },
+        {
+          "id": "d",
+          "label": "Sending the query by POST instead of GET slows execution of every nested field"
+        },
+        {
+          "id": "e",
+          "label": "Per-parent resolver lookups turn the fan-out into a very large number of DB calls"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Multiplicative fan-out, missing limits and unbatched resolvers all amplify load.",
+        "HTTP method and cyclic types are not causes; cycles are legal in GraphQL."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A team puts a CDN in front of their GraphQL API to cache a public product catalogue. After launch, the cache hit rate is near zero, though many users send identical queries. All requests go to `POST /graphql` with the query in the JSON body. What is the best diagnosis?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The CDN treats each query string as a distinct cache key, so small whitespace differences between clients prevent matches"
+        },
+        {
+          "id": "b",
+          "label": "GraphQL responses usually carry per-request tracing data in the extensions field, which makes each cached body differ"
+        },
+        {
+          "id": "c",
+          "label": "The CDN cannot cache JSON payloads by default, so it treats every GraphQL response as a non-cacheable content type"
+        },
+        {
+          "id": "d",
+          "label": "The CDN keys on URL and method and does not cache POST bodies, so identical queries look uncacheable"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "CDNs typically cache by URL on GET; a single POST endpoint gives no cacheable key unless queries use persisted IDs over GET.",
+        "Distractors invent response properties or CDN parsing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Old mobile apps still request `User.fullName`. The team wants `firstName` and `lastName` instead. Criteria: no client breaks, and removal happens only when safe. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep `fullName` forever and add no new fields, since any schema change must break some client"
+        },
+        {
+          "id": "b",
+          "label": "Remove `fullName` now and require every user to update the app, since versioning a GraphQL schema is forbidden"
+        },
+        {
+          "id": "c",
+          "label": "Rename `fullName` in place so old queries are silently mapped onto the new names by the server"
+        },
+        {
+          "id": "d",
+          "label": "Add the new fields, mark `fullName` `@deprecated`, track its usage, and remove it once usage reaches zero"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Additive change plus deprecation and usage monitoring evolves the schema without breaking clients.",
+        "Distractors break clients, freeze the schema, or assume impossible automatic mapping."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A feed gets new items every few seconds, and users scroll through it. Criteria: no duplicated or skipped items between pages, and stable performance deep into the list. Which pagination design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Page-number arguments with a server-side session that remembers each user's last page"
+        },
+        {
+          "id": "b",
+          "label": "Returning the full feed in one response, so the client paginates locally without server state"
+        },
+        {
+          "id": "c",
+          "label": "Offset pagination with `limit`/`offset`, since page numbers stay valid when new items arrive"
+        },
+        {
+          "id": "d",
+          "label": "Cursor-based pagination with `first`/`after` and an opaque cursor tied to the item's sort key"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Cursors anchor to a position, so inserts do not shift pages, and keyset lookups stay fast.",
+        "Offsets shift as rows are inserted and slow down with depth."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A `transferFunds` mutation can fail for expected reasons: insufficient funds or a frozen account. Criteria: clients must see each failure kind in the schema and handle it with type-checked code. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return `Boolean` and let clients call a second query to find out why it failed"
+        },
+        {
+          "id": "b",
+          "label": "Return a union such as `TransferResult = Transfer | InsufficientFunds | AccountFrozen`"
+        },
+        {
+          "id": "c",
+          "label": "Throw an exception per failure and let clients parse the `errors[0].message` text"
+        },
+        {
+          "id": "d",
+          "label": "Always return a `Transfer` with nullable fields, and signal failure through a null `id`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Typed result unions put expected failures into the schema so clients can handle each case explicitly.",
+        "String parsing, booleans and null signals hide the error kinds from the schema."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "The same business rules, such as 'only the account owner may read balances', must hold for the GraphQL API, a REST webhook and nightly jobs. Criteria: one source of truth and no bypass. Where should authorisation live?",
+      "options": [
+        {
+          "id": "a",
+          "label": "In schema directives only, since REST and jobs can then read the same rules from the schema"
+        },
+        {
+          "id": "b",
+          "label": "In a shared domain or service layer that every resolver, endpoint and job calls"
+        },
+        {
+          "id": "c",
+          "label": "In the client app, which hides the fields from users that are not allowed to see them"
+        },
+        {
+          "id": "d",
+          "label": "In each resolver, copied by hand, since only resolvers know which fields clients selected"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A shared layer enforces the rules for every entry point, so none can bypass them.",
+        "Resolver copies, schema-only directives and client hiding leave other paths unprotected or duplicated."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A GraphQL API will be opened to unknown third-party developers who write arbitrary queries. Criteria: protect the server from expensive queries without forcing partners to pre-register every query. Which defence is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Query cost analysis with depth limits, pagination caps and per-client rate budgets"
+        },
+        {
+          "id": "b",
+          "label": "Caching responses for an hour, so that repeated costly queries are mostly served without re-execution"
+        },
+        {
+          "id": "c",
+          "label": "A persisted-query allow-list that rejects queries not registered at build time by the client"
+        },
+        {
+          "id": "d",
+          "label": "Disabling introspection in production, so developers have a harder time finding expensive fields"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Cost limits protect against arbitrary queries without pre-registration.",
+        "Allow-lists suit first-party clients; hiding introspection and caching do not bound query cost."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "You are designing mutation inputs for a long-lived public schema. Criteria: new optional fields must not break existing clients, and results must be easy to extend. Which judgements are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return a payload type that wraps the changed object, so related data can be added later"
+        },
+        {
+          "id": "b",
+          "label": "Take one `input` argument of an input object type, so adding optional fields is non-breaking"
+        },
+        {
+          "id": "c",
+          "label": "Reuse the output type `User` as the input type, so the two shapes always stay in sync"
+        },
+        {
+          "id": "d",
+          "label": "Make every newly added input field required, so clients are forced to supply complete data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "Single input objects and payload types let the schema grow additively.",
+        "Output types cannot be used as inputs, and new required fields break existing callers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A team creates `DataLoader` instances once at server startup to raise cache hits across requests. Soon, one user occasionally sees another user's private data, and edits take minutes to appear. Criteria: correct per-user data and fresh results. What is the best judgement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep the global loaders and add a short timer that clears the cache every minute"
+        },
+        {
+          "id": "b",
+          "label": "Remove DataLoader entirely, since batching and caching cannot be done safely in resolvers"
+        },
+        {
+          "id": "c",
+          "label": "Keep global loaders but key them by the HTTP method, so reads and writes use separate caches"
+        },
+        {
+          "id": "d",
+          "label": "Create new loaders per request in the context, so batching stays but caching never crosses requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "DataLoader's cache is meant to be request-scoped; per-request instances keep batching without leaking data or going stale.",
+        "A timer still leaks within the window; dropping batching reintroduces N+1; HTTP method keys are irrelevant."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A social feed API receives new posts every few seconds, and users scroll infinitely. Criteria: no duplicated or skipped posts while scrolling, and steady performance deep into the feed. Which pagination design best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Offset pagination with a very large page size, so users rarely need to request a second page of posts"
+        },
+        {
+          "id": "b",
+          "label": "Offset pagination with `limit` and `offset`, because page numbers are simple and easy for clients to cache"
+        },
+        {
+          "id": "c",
+          "label": "Return the whole feed in one query and let the client slice it, so pages never shift under the users"
+        },
+        {
+          "id": "d",
+          "label": "Cursor-based connection using an opaque cursor that encodes the last post's sort key and id"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A cursor anchors to a position, so inserts at the head do not shift later pages.",
+        "Offset distractors ignore that inserts move row positions and cause duplicates or skips."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A `Product` query includes `reviewSummary`, served by a flaky downstream service. The product page is still useful without it. Which schema choice best fits this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Declare it non-null so failures are reported clearly, accepting that null bubbles up to the nearest nullable parent field"
+        },
+        {
+          "id": "b",
+          "label": "Catch the failure in the resolver and return an empty summary with zero counts, so clients never see any sign of an error or outage"
+        },
+        {
+          "id": "c",
+          "label": "Return HTTP 503 whenever any resolver throws, so that clients retry the complete query until every field resolves without errors"
+        },
+        {
+          "id": "d",
+          "label": "Make it nullable, so a failure gives null plus an entry in `errors` while the other product fields still return"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Nullable fields contain failures to one field and keep the partial data.",
+        "Non-null propagation discards the surrounding data; masking errors with fake zeros hides real failures."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A public GraphQL API serves unknown third-party clients, and some send deeply nested, expensive queries. Criteria: protect the servers without requiring clients to pre-register queries. Which defence is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Rate limiting by HTTP request count, since each request costs the server roughly the same amount of work"
+        },
+        {
+          "id": "b",
+          "label": "Disabling introspection, because attackers cannot craft an expensive query without first seeing the whole schema"
+        },
+        {
+          "id": "c",
+          "label": "Static cost analysis with depth limits and per-client budgets, rejecting expensive queries before they execute"
+        },
+        {
+          "id": "d",
+          "label": "A persisted-query allowlist only, since it blocks every unapproved query, including those from outside developers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Cost and depth analysis addresses per-query expense for open clients.",
+        "An allowlist conflicts with the no-registration criterion; request-count limits ignore that one query can be very costly."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Field `fullname` on `User` must become `displayName`. Old mobile apps cannot be forced to update. Criteria: no breakage for existing clients, and a clear path to removing the old name. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add `displayName`, mark `fullname` with `@deprecated(reason:)`, track usage, and remove it once traffic stops"
+        },
+        {
+          "id": "b",
+          "label": "Rename the field in place and bump a version header, since clients should upgrade whenever the API version number changes"
+        },
+        {
+          "id": "c",
+          "label": "Publish a `/graphql/v2` endpoint with the new name and shut the old endpoint down after one release cycle"
+        },
+        {
+          "id": "d",
+          "label": "Keep both fields indefinitely with no deprecation marker, so that no client ever has to change its queries"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Additive change plus deprecation and usage tracking keeps old clients working and enables safe removal.",
+        "In-place rename breaks old apps; a new endpoint abandons GraphQL's versionless evolution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A teammate creates one `DataLoader` for `userById` at module scope, shared by all requests, to maximise cache hits. Judge this design: what is the most serious flaw?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Batching works only within a single tick of the event loop, so a shared loader sends more database queries than per-request loaders would"
+        },
+        {
+          "id": "b",
+          "label": "Its cache lives across requests, so one user's data can leak to another and stale values are never refreshed"
+        },
+        {
+          "id": "c",
+          "label": "Loaders can only be created inside resolvers, so a module-scope instance throws an error when the schema is built"
+        },
+        {
+          "id": "d",
+          "label": "A shared cache increases memory use, which is the only drawback, as correctness is unaffected by request scope"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "DataLoader's cache should be per request to avoid cross-user leaks and staleness.",
+        "The batching and construction claims are false; memory is not the only concern."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team proposes `updateOrder(id: ID!, status: String, itemIds: [ID], street: String, city: String, coupon: String): Boolean`. Which are sound critiques of this mutation design? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`status` as a free String loses validation; an enum lets the schema reject invalid values"
+        },
+        {
+          "id": "b",
+          "label": "Mutations must be named like queries, so `updateOrder` should be renamed simply `order`"
+        },
+        {
+          "id": "c",
+          "label": "Many positional arguments make adding fields awkward; one input object type evolves more safely"
+        },
+        {
+          "id": "d",
+          "label": "Mutations may not take arguments, so all inputs should move into HTTP headers"
+        },
+        {
+          "id": "e",
+          "label": "Returning Boolean stops clients from fetching the updated order in the same round trip"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Payload objects, input types and enums are standard schema-design practice for mutations.",
+        "Naming and no-argument claims are false; mutations take arguments."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A public product catalog is served through GraphQL over POST to `/graphql`. Traffic is read-heavy and the CDN caches nothing. Data may be up to 5 minutes stale, and existing clients should keep working. Which approach best improves caching?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Turn on CDN caching for POST responses keyed by URL alone, so the single public /graphql path is cached for 5 minutes"
+        },
+        {
+          "id": "b",
+          "label": "Cache each resolver's results for 5 minutes in server memory, so repeated queries skip the database and the CDN is not needed"
+        },
+        {
+          "id": "c",
+          "label": "Persisted queries sent by GET, with `Cache-Control` derived from per-field cache hints so the CDN keys on the query ID"
+        },
+        {
+          "id": "d",
+          "label": "Replace the catalog queries with one REST endpoint per screen, so each URL gets its own CDN cache entry and headers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "GET with persisted query IDs gives distinct cacheable URLs and cache headers from hints.",
+        "Keying POST by URL would serve one query's result for all queries; resolver caches do not offload the network or CDN."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design live order tracking with a subscription. Constraints: the API runs on several server instances, and a user may only see their own orders. Which design meets both constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use an in-process event emitter on each server instance, publishing from whichever instance handled the mutation that changed the order"
+        },
+        {
+          "id": "b",
+          "label": "Poll the order table in the resolver every second, trusting the order id the client sends without verifying who owns it"
+        },
+        {
+          "id": "c",
+          "label": "The resolver subscribes to a shared pub/sub topic per order id, checking order ownership when the subscription starts"
+        },
+        {
+          "id": "d",
+          "label": "Subscribe everyone to one global topic and rely on the client app to ignore events for orders that are not its own"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A shared broker spans instances and the start-time check enforces ownership.",
+        "In-process emitters miss events across instances; global topics and unverified ids leak data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design `createUser` so clients can show per-field validation messages for expected failures, while network, auth and server faults remain distinct. Which design meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Return `Boolean` and send the validation messages in a custom HTTP response header that the client reads after each call"
+        },
+        {
+          "id": "b",
+          "label": "Return a non-null `User!` and respond with HTTP 400 for bad input, so clients branch on the status code of the response"
+        },
+        {
+          "id": "c",
+          "label": "Return a payload with nullable `user` and a `userErrors` list of `{ field, message }`; keep top-level errors for unexpected faults"
+        },
+        {
+          "id": "d",
+          "label": "Throw one exception per invalid field inside the resolver and have clients parse the message strings in the top-level `errors` array"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Typed, expected errors in the payload separate user mistakes from system faults.",
+        "Other options rely on string parsing, headers or status codes, which GraphQL clients cannot type."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "In a federated graph, the Reviews team must add `reviews` to `Product`, which the Catalog team owns. Constraints: Reviews must not copy product data, and Catalog must not know about reviews. Which design fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Reviews exposes a separate `productReviews(id)` query, so clients must stitch the two query results together themselves"
+        },
+        {
+          "id": "b",
+          "label": "Reviews declares `Product @key(fields: \"id\")` as an entity stub, adds `reviews`, and resolves it from the product id"
+        },
+        {
+          "id": "c",
+          "label": "Reviews copies the product table nightly and defines its own full `Product` type under a different name to avoid conflicts"
+        },
+        {
+          "id": "d",
+          "label": "Catalog imports the reviews code and adds a `reviews` field to `Product` that reads directly from the Reviews database"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Entity references let each subgraph contribute fields to a type it does not own.",
+        "Other options copy data, couple Catalog to Reviews, or push composition onto clients."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A `DataLoader` batch function receives keys `[3, 1, 2]`. The query `WHERE id IN (3,1,2)` returns only users 1 and 2, in that order. Which return value satisfies the batch contract?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`[user1, user2, null]`, padding missing results at the end"
+        },
+        {
+          "id": "b",
+          "label": "`[user1, user2]`, because the database already filtered the rows"
+        },
+        {
+          "id": "c",
+          "label": "`[null, user1, user2]`, built by mapping each key to its row"
+        },
+        {
+          "id": "d",
+          "label": "`[user2, user1]`, sorted descending to match the key order"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The result array must match the keys in length and order, using null for missing.",
+        "Padding at the end or returning raw rows breaks position alignment."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "The `Invoice` type is reachable via `me.invoices`, `order.invoice` and `search`. Rule: only the owner or finance role may read `amount`. Which design guarantees the rule on every path?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Check roles in each top-level query resolver, since nested fields can only be reached through those entry points anyway"
+        },
+        {
+          "id": "b",
+          "label": "Enforce it in the `Invoice.amount` resolver or a shared domain-layer check that every path to an invoice goes through"
+        },
+        {
+          "id": "c",
+          "label": "Check the role once in HTTP middleware and reject any request whose query text contains the word `amount` anywhere"
+        },
+        {
+          "id": "d",
+          "label": "Hide `amount` from the schema documentation and client libraries so only finance tools know that the field exists"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Authorization belongs near the data so every path inherits it.",
+        "Entry-point checks miss new paths; hiding docs and text matching are not security."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Design a `search(term: String!)` connection over millions of records. Requirements: bounded server work and stable paging. Which elements must the design include? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Client-side slicing of a full result set, so the server does not track any paging state"
+        },
+        {
+          "id": "b",
+          "label": "Arguments `first` and `after`, returning `pageInfo` with `endCursor` and `hasNextPage`"
+        },
+        {
+          "id": "c",
+          "label": "A default of returning all matches when `first` is omitted, so clients never miss results"
+        },
+        {
+          "id": "d",
+          "label": "A deterministic sort with a unique tiebreaker such as id, so each cursor maps to one position"
+        },
+        {
+          "id": "e",
+          "label": "A server-enforced maximum for `first`, applied even when a client asks for more"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Capped page size, cursor args and a unique ordering bound work and keep paging stable.",
+        "Returning everything or slicing on the client defeats the bounded-work requirement."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A dashboard query returns widgets in 100 ms, except `recommendations`, which takes about 2 s. Constraints: widgets must render immediately, the schema stays unchanged, and every client must work against standard servers. Which design meets these constraints?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Convert `recommendations` into a mutation so it runs outside the main query's execution and finishes asynchronously afterwards"
+        },
+        {
+          "id": "b",
+          "label": "Raise the HTTP timeout and keep one query, since GraphQL returns each field to the client as soon as it has resolved"
+        },
+        {
+          "id": "c",
+          "label": "Split into two operations: fetch widgets first, and send `recommendations` as a separate parallel query with a loading placeholder"
+        },
+        {
+          "id": "d",
+          "label": "Mark `recommendations` with `@skip(if: true)` on the server so that the field never delays the response for any client"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Separate operations let fast data render without schema or server changes.",
+        "A standard query response is returned only when all fields finish; mutations and server-side @skip do not solve this."
+      ],
+      "reviewed": false
+    }
+  ]
+}

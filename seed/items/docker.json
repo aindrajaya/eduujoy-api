@@ -1,0 +1,2491 @@
+{
+  "version": 1,
+  "topic": "docker",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which command lists the containers that are currently running?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker ps`"
+        },
+        {
+          "id": "b",
+          "label": "`docker run ls`"
+        },
+        {
+          "id": "c",
+          "label": "`docker images`"
+        },
+        {
+          "id": "d",
+          "label": "`docker list`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`docker ps` lists running containers.",
+        "`docker images` lists images, not containers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which Dockerfile instruction sets the base image a new image is built on?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`IMAGE`"
+        },
+        {
+          "id": "b",
+          "label": "`USE`"
+        },
+        {
+          "id": "c",
+          "label": "`FROM`"
+        },
+        {
+          "id": "d",
+          "label": "`BASE`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "`FROM` names the base image.",
+        "`BASE`, `IMAGE` and `USE` are not Dockerfile instructions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which `docker run` flag starts the container in the background (detached mode)?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`-d`"
+        },
+        {
+          "id": "b",
+          "label": "`-v`"
+        },
+        {
+          "id": "c",
+          "label": "`-e`"
+        },
+        {
+          "id": "d",
+          "label": "`-p`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`-d` detaches the container.",
+        "`-p` publishes ports, `-v` mounts volumes and `-e` sets environment variables."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which command builds an image from a Dockerfile?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker build`"
+        },
+        {
+          "id": "b",
+          "label": "`docker create`"
+        },
+        {
+          "id": "c",
+          "label": "`docker compile`"
+        },
+        {
+          "id": "d",
+          "label": "`docker commit`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`docker build` builds an image from a Dockerfile.",
+        "`docker create` makes a container from an existing image; `docker commit` snapshots a container."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which Dockerfile instruction defines the default command that runs when a container starts?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`CMD`"
+        },
+        {
+          "id": "b",
+          "label": "`RUN`"
+        },
+        {
+          "id": "c",
+          "label": "`ENV`"
+        },
+        {
+          "id": "d",
+          "label": "`COPY`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "`CMD` sets the default start command.",
+        "`RUN` executes a command at build time, which is a common mix-up."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of the following are Docker objects you can create and manage? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Volumes"
+        },
+        {
+          "id": "b",
+          "label": "Kernels"
+        },
+        {
+          "id": "c",
+          "label": "Networks"
+        },
+        {
+          "id": "d",
+          "label": "Hypervisors"
+        },
+        {
+          "id": "e",
+          "label": "Images"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Images, volumes and networks are Docker objects.",
+        "Hypervisors and kernels are not objects managed by Docker."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A teammate gives you a project with a Compose file defining a web service and a database service. You are in the project folder and want to create and start all the services with one command. Which command do you use?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker compose exec`"
+        },
+        {
+          "id": "b",
+          "label": "`docker compose up`"
+        },
+        {
+          "id": "c",
+          "label": "`docker compose run all`"
+        },
+        {
+          "id": "d",
+          "label": "`docker compose ps`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "`docker compose up` creates and starts all defined services.",
+        "`ps` only lists services and `exec` runs a command in a running one."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the relationship between a Docker image and a container?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An image and a container are the same thing, but a container is shown while it runs"
+        },
+        {
+          "id": "b",
+          "label": "An image is a read-only template; a container is a running instance"
+        },
+        {
+          "id": "c",
+          "label": "A container is a read-only template, and an image is a running copy of it"
+        },
+        {
+          "id": "d",
+          "label": "An image is a running process, and a container is the file that stores it"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "An image is the template; a container is an instance created from it.",
+        "The reversed option swaps the two roles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A container writes files to its own filesystem with no volume attached. The container is then removed with `docker rm`. What happens to those files?",
+      "options": [
+        {
+          "id": "a",
+          "label": "They stay in a hidden Docker folder and are reused by the next container"
+        },
+        {
+          "id": "b",
+          "label": "They are committed into the original image so later containers include them"
+        },
+        {
+          "id": "c",
+          "label": "They are copied to the host home folder when the container stops"
+        },
+        {
+          "id": "d",
+          "label": "They are deleted along with the container's writable layer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Files live in the container's writable layer, which is deleted with the container.",
+        "Containers never modify the image they came from."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What does `docker run -p 8080:80 nginx` do with the ports?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Opens ports 8080 and 80 on the container"
+        },
+        {
+          "id": "b",
+          "label": "Maps container port 8080 to host port 80"
+        },
+        {
+          "id": "c",
+          "label": "Limits the container to ports 80 through 8080"
+        },
+        {
+          "id": "d",
+          "label": "Maps host port 8080 to container port 80"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Format is host:container, so host 8080 forwards to container 80.",
+        "The reversed option misreads the order."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "How does a container differ from a traditional virtual machine?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It can only run on Linux hosts"
+        },
+        {
+          "id": "b",
+          "label": "It shares the host's kernel instead of booting its own"
+        },
+        {
+          "id": "c",
+          "label": "It runs its own guest operating system with a separate kernel"
+        },
+        {
+          "id": "d",
+          "label": "It always needs a hypervisor to run"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Containers share the host kernel, which makes them lighter than VMs.",
+        "Having a guest kernel and hypervisor describes VMs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A Dockerfile contains `EXPOSE 3000`. What does this instruction do by itself?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Forces the app inside the container to listen on port 3000 at startup"
+        },
+        {
+          "id": "b",
+          "label": "Opens port 3000 in the host firewall so outside traffic can reach it"
+        },
+        {
+          "id": "c",
+          "label": "Publishes port 3000 on a random host port when the container runs"
+        },
+        {
+          "id": "d",
+          "label": "Documents the port the app uses without publishing it to the host"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`EXPOSE` is documentation; publishing needs `-p` or `-P`.",
+        "Many learners assume it publishes the port."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about Docker volumes are true? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A volume is deleted whenever its container stops"
+        },
+        {
+          "id": "b",
+          "label": "Data in a volume survives removal of the container using it"
+        },
+        {
+          "id": "c",
+          "label": "Volume data is stored inside the image layers"
+        },
+        {
+          "id": "d",
+          "label": "Several containers can mount the same volume"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Volumes persist independently of containers and can be shared.",
+        "Volumes are not part of image layers and are not removed on stop."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A Compose file defines two services, `web` and `db`. The web app's config points to `localhost:5432` for the database and fails to connect. Both services are running on the default Compose network. Why does it fail and what should the host be?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Compose blocks port 5432 between services, so publish it and use port 3306 instead"
+        },
+        {
+          "id": "b",
+          "label": "Containers on the default network cannot reach each other, so use the host machine's IP"
+        },
+        {
+          "id": "c",
+          "label": "`localhost` is the web container itself, so use the service name `db`"
+        },
+        {
+          "id": "d",
+          "label": "`localhost` is not resolved inside containers, so use the IP `127.0.0.1` for the database"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Inside a container `localhost` refers to that container; Compose DNS resolves service names like `db`.",
+        "`127.0.0.1` is the same as `localhost`, and services on one network can talk to each other."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which statement best describes the relationship between a Docker image and a Docker container?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An image is a container that has been renamed after it was stopped"
+        },
+        {
+          "id": "b",
+          "label": "A container is the text file that lists the build steps for an image"
+        },
+        {
+          "id": "c",
+          "label": "A container is a running instance created from a read-only image"
+        },
+        {
+          "id": "d",
+          "label": "An image is a running instance created from a stopped container"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A container is a runnable instance of an image, which is the read-only template.",
+        "Distractors reverse the relationship or confuse images with Dockerfiles."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A Dockerfile has `COPY . /app` placed before `RUN pip install -r requirements.txt`. You edit one source file and rebuild. What happens?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Only the changed file is re-copied, and the pip install layer below it stays cached"
+        },
+        {
+          "id": "b",
+          "label": "Docker skips the build because the Dockerfile itself did not change at all"
+        },
+        {
+          "id": "c",
+          "label": "The COPY layer is invalidated, so the pip install layer below it runs again"
+        },
+        {
+          "id": "d",
+          "label": "Docker rebuilds only the layers above the COPY line because they are older"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Once a layer's inputs change, that layer and every layer after it are rebuilt.",
+        "Distractors assume file-level or upward cache invalidation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why would you store a database's files in a Docker volume instead of the container's own writable layer?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Volumes stop the container from needing any network access to be reachable"
+        },
+        {
+          "id": "b",
+          "label": "Volume data lives outside the container lifecycle, so it survives container removal"
+        },
+        {
+          "id": "c",
+          "label": "Volumes let several containers use different versions of the database engine"
+        },
+        {
+          "id": "d",
+          "label": "Volumes make the database run faster because they compress all stored data"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Volumes are managed separately from containers, so data persists after the container is deleted.",
+        "Distractors attribute unrelated benefits such as speed, versioning or networking to volumes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A Dockerfile contains `EXPOSE 3000`. What does this instruction do on its own?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It documents the port the app listens on but does not publish it to the host"
+        },
+        {
+          "id": "b",
+          "label": "It opens port 3000 on the host so outside clients can connect to the app"
+        },
+        {
+          "id": "c",
+          "label": "It forwards port 3000 to port 80 on the host whenever the container starts"
+        },
+        {
+          "id": "d",
+          "label": "It blocks every other port inside the container from receiving connections"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "EXPOSE is metadata; publishing requires -p or -P at run time.",
+        "Distractors treat EXPOSE as publishing or as a firewall."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the difference between `RUN` and `CMD` in a Dockerfile?",
+      "options": [
+        {
+          "id": "a",
+          "label": "RUN is used for shell commands only, and CMD is used for Linux binaries only"
+        },
+        {
+          "id": "b",
+          "label": "RUN sets the command used when a container starts, while CMD runs once during the image build"
+        },
+        {
+          "id": "c",
+          "label": "RUN executes during the image build, while CMD sets the default command at container start"
+        },
+        {
+          "id": "d",
+          "label": "RUN and CMD both execute at build time, but only CMD is limited to one instruction per file"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "RUN creates image layers at build time; CMD defines the default startup command.",
+        "Distractors swap the two or invent a shell-versus-binary split."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly explain how containers differ from virtual machines? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each container boots its own full guest kernel"
+        },
+        {
+          "id": "b",
+          "label": "Containers need a hypervisor to emulate hardware for each app"
+        },
+        {
+          "id": "c",
+          "label": "Containers share the host operating system's kernel"
+        },
+        {
+          "id": "d",
+          "label": "Isolation relies on kernel features such as namespaces and cgroups"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Containers share the host kernel and are isolated with namespaces and cgroups.",
+        "Booting a guest kernel and hardware emulation describe virtual machines."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A teammate runs a container from a custom image with `docker run -d --name notes notes-app`. The app saves notes to /app/data inside the container, and the image declares no volumes. After adding notes, they run `docker rm -f notes` and start a new container with the same command. The notes are gone. No volume options were used. Why did this happen?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The notes were in the removed container's writable layer; no volume kept them"
+        },
+        {
+          "id": "b",
+          "label": "The app wipes its notes file automatically whenever a new container starts up"
+        },
+        {
+          "id": "c",
+          "label": "Docker deletes all images on the host when a container is removed with the force flag"
+        },
+        {
+          "id": "d",
+          "label": "The new container joined a different network, which hides the notes the app saved earlier"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Without a volume, data lives in the container's writable layer, which is deleted with the container.",
+        "Distractors blame MySQL, image deletion or networking."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You want to run the `nginx` image in the background and reach it at port 8080 on your machine, while nginx listens on port 80 inside the container. Which command does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker run -d -p 80:8080 nginx`"
+        },
+        {
+          "id": "b",
+          "label": "`docker run -it -v 8080:80 nginx`"
+        },
+        {
+          "id": "c",
+          "label": "`docker run -d -e 8080:80 nginx`"
+        },
+        {
+          "id": "d",
+          "label": "`docker run -d -p 8080:80 nginx`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The -p flag uses host_port:container_port, and -d runs detached.",
+        "Distractors reverse the ports or use -e or -v instead of -p."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You are in a folder containing a Dockerfile. Which command builds an image named `shop` with the tag `2.1`?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker build -t shop:2.1 .`"
+        },
+        {
+          "id": "b",
+          "label": "`docker build shop:2.1 Dockerfile`"
+        },
+        {
+          "id": "c",
+          "label": "`docker image create --name shop 2.1`"
+        },
+        {
+          "id": "d",
+          "label": "`docker run -t shop:2.1 .`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "docker build -t name:tag followed by the build context path builds and tags an image.",
+        "Distractors misuse the context argument or use run or nonexistent subcommands."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "For a Node.js app, you want rebuilds after source edits to skip re-downloading dependencies. Which Dockerfile order achieves this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`COPY . .`, then `RUN npm install`, then `COPY package.json .`"
+        },
+        {
+          "id": "b",
+          "label": "`COPY . .`, then `COPY package.json .`, then `RUN npm install`"
+        },
+        {
+          "id": "c",
+          "label": "`COPY package.json .`, then `RUN npm install`, then `COPY . .`"
+        },
+        {
+          "id": "d",
+          "label": "`RUN npm install`, then `COPY package.json .`, then `COPY . .`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Copying only the manifest first lets the install layer stay cached until dependencies change.",
+        "Distractors copy source before installing, or install before the manifest exists."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You want Postgres data to persist in a named volume `pgdata`. Postgres stores data in `/var/lib/postgresql/data`. Which command does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker run -d -p pgdata:/var/lib/postgresql/data postgres`"
+        },
+        {
+          "id": "b",
+          "label": "`docker run -d --volume-name pgdata postgres`"
+        },
+        {
+          "id": "c",
+          "label": "`docker run -d -v /var/lib/postgresql/data:pgdata postgres`"
+        },
+        {
+          "id": "d",
+          "label": "`docker run -d -v pgdata:/var/lib/postgresql/data postgres`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The syntax is -v volume_name:container_path.",
+        "Distractors reverse the order, use -p, or invent a flag."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Compose file defines services `web` and `db` (Postgres on its default port 5432) on the default Compose network. What host and port should the `web` code use to connect to the database?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`db:5432`, because Compose resolves service names as hostnames"
+        },
+        {
+          "id": "b",
+          "label": "`web:5432`, because the client service name is used as the host"
+        },
+        {
+          "id": "c",
+          "label": "`127.0.0.1:5432`, because Compose publishes every port to the host"
+        },
+        {
+          "id": "d",
+          "label": "`localhost:5432`, because both containers share one loopback interface"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "On a Compose network, services reach each other by service name.",
+        "Distractors use localhost, which refers to the web container itself."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A container named `app` starts and exits within a second. Which commands help you find out why? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker logs app`"
+        },
+        {
+          "id": "b",
+          "label": "`docker images -a`"
+        },
+        {
+          "id": "c",
+          "label": "`docker ps -a`"
+        },
+        {
+          "id": "d",
+          "label": "`docker volume prune`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "docker ps -a shows the exited container and its exit code, and docker logs shows its output.",
+        "Listing images or pruning volumes does not reveal why the container exited."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "You run `docker run -d -p 8080:80 --name site nginx` and get the error \"Bind for 0.0.0.0:8080 failed: port is already allocated\". Another program on your machine is already using host port 8080, and you cannot stop it. Which command fixes the problem?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker run -d -p 8080:80 --name site nginx` again, after running `docker rm site` to clear the failed container"
+        },
+        {
+          "id": "b",
+          "label": "`docker run -d -p 80:80:8080 --name site nginx` after running `docker rm site` to clear the failed container"
+        },
+        {
+          "id": "c",
+          "label": "`docker rm site`, then `docker run -d -p 8081:80 --name site nginx`"
+        },
+        {
+          "id": "d",
+          "label": "`docker rm site`, then `docker run -d -p 8080:8080 --name site nginx`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Choose a free host port and remove the leftover container so the name can be reused.",
+        "Distractors keep the busy host port or use invalid port syntax."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Node.js app changes its source files many times a day but its dependencies rarely. Which Dockerfile step order rebuilds fastest by reusing the dependency layer?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`COPY . .` last, with `RUN npm install` placed after it, so the cache is always reused on rebuilds"
+        },
+        {
+          "id": "b",
+          "label": "`RUN npm install` first, then `COPY . .`, so dependencies are fetched before any code is copied"
+        },
+        {
+          "id": "c",
+          "label": "`COPY package*.json ./`, `RUN npm install`, then `COPY . .`, so installs rerun only when manifests change"
+        },
+        {
+          "id": "d",
+          "label": "`COPY . .` first, then `RUN npm install`, so every file exists when packages install"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Copying only manifests first keeps the install layer cached until they change.",
+        "Copying everything first invalidates the install layer on every source edit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must start `nginx` in the background so that a browser on the host can open it at port 8080, while nginx listens on port 80 inside the container. Which command does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker run -d -p 8080:80 nginx`"
+        },
+        {
+          "id": "b",
+          "label": "`docker run -d -p 80:8080 nginx`"
+        },
+        {
+          "id": "c",
+          "label": "`docker run -d -P 8080 nginx`"
+        },
+        {
+          "id": "d",
+          "label": "`docker run -d -e PORT=8080:80 nginx`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The `-p` format is host:container, so 8080:80 is correct.",
+        "Reversing the pair is the common mistake."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You run `postgres` and want its data to survive `docker rm` of the container. The data directory is `/var/lib/postgresql/data`. Which option does that?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`--tmpfs /var/lib/postgresql/data`"
+        },
+        {
+          "id": "b",
+          "label": "`--workdir /var/lib/postgresql/data`"
+        },
+        {
+          "id": "c",
+          "label": "`-v /var/lib/postgresql/data:pgdata`"
+        },
+        {
+          "id": "d",
+          "label": "`-v pgdata:/var/lib/postgresql/data`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A named volume is mounted as name:path and outlives the container.",
+        "Reversed arguments or tmpfs do not give persistent storage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A Compose file defines services `web` and `db` (Postgres on its default port) with no custom networks. Which host and port should the code in `web` use to connect to the database?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`127.0.0.1:5432`, since Compose maps every service onto the loopback interface of all containers"
+        },
+        {
+          "id": "b",
+          "label": "`db:5432`, since Compose DNS resolves service names on the project network"
+        },
+        {
+          "id": "c",
+          "label": "`host.docker.internal:5432`, since services reach each other only by going through the host machine"
+        },
+        {
+          "id": "d",
+          "label": "`localhost:5432`, since both containers run on the same machine and share its network"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Compose puts services on a shared network where the service name resolves.",
+        "localhost inside a container refers to that container itself."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A multi-stage Dockerfile has a first stage `FROM node:20 AS build` that writes static files to `/app/dist`. The final stage is `FROM nginx:alpine`. Which line in the final stage copies the build output?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`COPY --from=nginx /app/dist /usr/share/nginx/html`"
+        },
+        {
+          "id": "b",
+          "label": "`RUN cp --from=build /app/dist /usr/share/nginx/html`"
+        },
+        {
+          "id": "c",
+          "label": "`COPY /app/dist /usr/share/nginx/html`"
+        },
+        {
+          "id": "d",
+          "label": "`COPY --from=build /app/dist /usr/share/nginx/html`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "`COPY --from=<stage name>` pulls files from an earlier stage.",
+        "Plain COPY reads from the build context, not from a prior stage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You want a smaller final image for a compiled Go service built from a large base image. Which actions reduce the final image size? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Start the final stage from a slim or minimal base image"
+        },
+        {
+          "id": "b",
+          "label": "Delete build tools with a separate later `RUN rm -rf` step"
+        },
+        {
+          "id": "c",
+          "label": "Run `docker image prune` on the host before building"
+        },
+        {
+          "id": "d",
+          "label": "Build in one stage and copy only the binary into a minimal final stage"
+        },
+        {
+          "id": "e",
+          "label": "Run `apt-get install` and cache cleanup within the same `RUN` instruction"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Multi-stage builds, smaller bases and same-layer cleanup all cut what ends up in the image.",
+        "Deleting files in a later layer does not shrink earlier layers; pruning affects only local storage."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A Compose file has `image: shop:${TAG}` and a `.env` file next to it containing `TAG=1.2`. You want to start the stack once with version 1.3 without editing any files. Which command achieves this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker compose up -d --tag 1.3`"
+        },
+        {
+          "id": "b",
+          "label": "`docker compose up -d` after running `docker tag shop:1.2 1.3`"
+        },
+        {
+          "id": "c",
+          "label": "`docker compose --env 1.2=1.3 up -d`"
+        },
+        {
+          "id": "d",
+          "label": "`TAG=1.3 docker compose up -d`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Variables set in the shell take precedence over values in `.env`.",
+        "The other commands use flags or steps that do not change variable substitution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A container built with `CMD service nginx start` runs with `docker run -d`, then immediately shows `Exited (0)`. Nginx is installed correctly. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `-d` flag detaches the container from the terminal, so Docker stops it as soon as the starting shell session closes"
+        },
+        {
+          "id": "b",
+          "label": "The command starts nginx as a daemon and returns, so the main process ends and the container stops"
+        },
+        {
+          "id": "c",
+          "label": "The image has no `HEALTHCHECK` defined, so Docker stops containers that it cannot verify as healthy after startup"
+        },
+        {
+          "id": "d",
+          "label": "Exit code 0 shows nginx crashed because port 80 is already taken on the host, so the port binding failed at startup"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A container lives only as long as its main process; a daemonising command returns at once.",
+        "Exit code 0 means a clean exit, not a crash; missing healthchecks do not stop containers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A Dockerfile has `RUN apt-get update` and, on the next line, `RUN apt-get install -y curl=7.88.1-10`. After months of working, a rebuild on a new machine fails with a 404 on the package. Another machine still builds fine. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The older machine's cached `update` layer holds a stale index, while the fresh build fetched a newer index without that version"
+        },
+        {
+          "id": "b",
+          "label": "The new machine's Docker engine is older and cannot resolve version-pinned packages passed to `apt-get install` during builds"
+        },
+        {
+          "id": "c",
+          "label": "Docker only keeps separate `RUN` lines valid for builds on the machine where they were first written, so new hosts reject them"
+        },
+        {
+          "id": "d",
+          "label": "The pinned version never existed in any repository, and the older machine's build silently skips package versions that are invalid"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Separate update and install lines let a cached stale index diverge from a fresh one.",
+        "Combining them in one RUN and pinning properly avoids the mismatch."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In development you run `docker run -v $(pwd):/app myapp`. The image installed `node_modules` in `/app` at build time, yet the app now fails with 'Cannot find module'. The host folder has no `node_modules`. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Docker deletes `node_modules` whenever a volume is mounted over a path with the same owner"
+        },
+        {
+          "id": "b",
+          "label": "Node cannot resolve modules when the working directory is mounted from a different filesystem"
+        },
+        {
+          "id": "c",
+          "label": "The `-v` flag makes the container read-only, which blocks Node from loading modules at runtime"
+        },
+        {
+          "id": "d",
+          "label": "The bind mount hides the image's `/app` contents, including `node_modules`, behind the host directory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A bind mount overlays the image path with the host directory's contents.",
+        "Fixes include a separate anonymous volume for node_modules or installing on the host."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Two containers started with plain `docker run` on the default bridge network cannot reach each other by container name, though pinging the other's IP works. What is the cause and the standard fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The default bridge lacks automatic name DNS; put both containers on a user-defined network"
+        },
+        {
+          "id": "b",
+          "label": "Containers need `-p` published ports to talk to each other, so republish the ports on both"
+        },
+        {
+          "id": "c",
+          "label": "The DNS cache inside each container has expired, so restarting the Docker daemon will restore it"
+        },
+        {
+          "id": "d",
+          "label": "Names resolve only after `--link` is removed, so recreate both containers without any network flag"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "User-defined bridge networks provide built-in DNS by container name; the default bridge does not.",
+        "Published ports are for host access, not container-to-container traffic."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "In Compose, `app` has `depends_on: [db]`. On `docker compose up`, `app` sometimes crashes with 'connection refused' to the database, then works after a manual restart. What best explains it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`app` and `db` sit on different networks until a restart creates a shared one, so the hostname `db` fails at first"
+        },
+        {
+          "id": "b",
+          "label": "`depends_on` only applies to services built from a Dockerfile, so the prebuilt `db` image is started with no ordering at all"
+        },
+        {
+          "id": "c",
+          "label": "`db` is started but not yet accepting connections, since `depends_on` alone does not wait for readiness"
+        },
+        {
+          "id": "d",
+          "label": "Compose starts `db` first but stops waiting once its container is created, so `app` begins before the image has been pulled"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Plain depends_on controls start order only, not readiness.",
+        "Use a healthcheck on db with `condition: service_healthy`, or add retry logic in the app."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "You run `docker run -p 3000:3000 api`. The container is running, yet `curl localhost:3000` from the host gets 'connection reset' or 'refused'. Which could be the cause? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The app listens on port 8080 inside, while the mapping targets container port 3000"
+        },
+        {
+          "id": "b",
+          "label": "The image tag was `latest` rather than a fixed version number"
+        },
+        {
+          "id": "c",
+          "label": "The app inside binds to `127.0.0.1` rather than `0.0.0.0`"
+        },
+        {
+          "id": "d",
+          "label": "The container has no volume mounted for logs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Published ports reach only apps listening on all interfaces and on the mapped container port.",
+        "Tags and log volumes do not affect network reachability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A Dockerfile runs `RUN make build` which leaves 900 MB of intermediates in `/tmp/build`. A teammate adds `RUN rm -rf /tmp/build` on the next line, rebuilds, and finds the image is still almost 900 MB larger than expected. What explains it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each instruction creates a layer, and a later delete hides files without shrinking the earlier layer"
+        },
+        {
+          "id": "b",
+          "label": "`rm` inside `RUN` only marks files hidden until the container first starts, then frees the space"
+        },
+        {
+          "id": "c",
+          "label": "Docker keeps `/tmp` contents in a volume, so deleting them has no effect on the image"
+        },
+        {
+          "id": "d",
+          "label": "The build cache restored the old image, so the new `RUN` line was never executed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Layers are additive; deleting in a later layer only masks files from the earlier one.",
+        "Clean up in the same RUN or use a multi-stage build."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A Dockerfile runs `COPY . .` and then `RUN npm ci`. Every small source edit makes the build reinstall all dependencies, which takes minutes. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "COPY instructions run at container start, so dependencies are reinstalled every time the container runs"
+        },
+        {
+          "id": "b",
+          "label": "The npm registry is queried before each build step, so the cache is skipped whenever network access exists"
+        },
+        {
+          "id": "c",
+          "label": "Changing any source file invalidates the COPY layer, so the later dependency install layer is rebuilt too"
+        },
+        {
+          "id": "d",
+          "label": "Docker reinstalls packages each build because RUN layers are never cached when the base image is large"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Layer cache keys depend on the content copied; a changed COPY invalidates every later layer.",
+        "Distractors misunderstand when RUN executes or when caching applies."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A Debian-based image ends with `CMD service nginx start`. Running it with `docker run` makes the container exit immediately with code 0, though nginx did start. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The service command starts nginx in the background and returns, so PID 1 exits and the container stops"
+        },
+        {
+          "id": "b",
+          "label": "Without the `-t` flag no TTY is attached, so nginx receives a hangup signal after init and shuts down cleanly"
+        },
+        {
+          "id": "c",
+          "label": "CMD is run while the image is built, so when the container starts there is no process left to keep it alive"
+        },
+        {
+          "id": "d",
+          "label": "Nginx fails to bind to port 80 unless the port is published, so the start command ends and the container exits"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A container lives only as long as its main process; a daemonizing command returns at once.",
+        "Distractors blame ports, build time or TTY flags."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An image runs `npm install` in /app at build time. Started with `-v $(pwd):/app`, the app fails with 'Cannot find module', though it works without the mount. The host project has no node_modules. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The bind mount overlays /app, so the host directory lacking node_modules hides what the image installed"
+        },
+        {
+          "id": "b",
+          "label": "The image layers were lost because bind mounts delete the image cache whenever a container starts with them"
+        },
+        {
+          "id": "c",
+          "label": "The build ran npm install as root, so the mounted files are hidden from the non-root runtime user"
+        },
+        {
+          "id": "d",
+          "label": "Bind mounts are read-only by default, so Node cannot load modules from any mounted host directory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "A bind mount shadows the image's content at that path.",
+        "Distractors invent cache deletion, default read-only mounts or user effects."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Two containers were started with plain `docker run` on the default bridge network. The app connects to the database at `db:5432` and gets a name resolution error, but the database's IP address works. What is the cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Container names resolve on the default bridge only after the app container is restarted with a matching hostname alias"
+        },
+        {
+          "id": "b",
+          "label": "The default bridge gives no automatic DNS by container name, which user-defined networks provide"
+        },
+        {
+          "id": "c",
+          "label": "Port 5432 is not published to the host, so name lookups from other containers fail even though the IP works"
+        },
+        {
+          "id": "d",
+          "label": "The database container needs a `--link` to the app container, since the bridge resolves names in one direction"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Name-based discovery works on user-defined networks, not the default bridge.",
+        "Distractors confuse published ports with inter-container reachability."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A Dockerfile has `COPY .env /app/.env`, then `RUN ./build.sh`, then `RUN rm /app/.env`. A reviewer says the secrets can still be extracted from the final image. Why?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Docker restores deleted files from the build cache whenever the image is pulled on another host"
+        },
+        {
+          "id": "b",
+          "label": "Each instruction makes a layer, and the COPY layer still contains the file despite the later deletion"
+        },
+        {
+          "id": "c",
+          "label": "The rm command only marks the file hidden until the container starts, when it reappears"
+        },
+        {
+          "id": "d",
+          "label": "Environment files are embedded in image metadata, which rm cannot change in any layer"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Deleting in a later layer only masks the file; earlier layers keep it.",
+        "Distractors invent restore or metadata mechanisms."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "In Compose, `app` has `depends_on: [db]`. On a cold start, app crashes with 'connection refused' to the database, though db later runs fine. Which statements help explain this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Compose ignores depends_on and starts all services in random order on every run"
+        },
+        {
+          "id": "b",
+          "label": "By default depends_on waits for the db container to start, not for the database to accept connections"
+        },
+        {
+          "id": "c",
+          "label": "The app may lack retry logic, so one early failed connection ends the process"
+        },
+        {
+          "id": "d",
+          "label": "The database process may need several seconds to initialise after its container is already running"
+        },
+        {
+          "id": "e",
+          "label": "Compose creates networks only after every container has passed its health check"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Started is not ready: the db needs init time and the app needs to tolerate it.",
+        "Random ordering and late network creation are false."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A Java service runs in a container limited to 512m. The team set `-Xmx512m`. Under load the container is restarted with exit code 137, and `docker inspect` shows OOMKilled true. Heap usage in logs never exceeded 480 MB. What best explains the kill?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Docker counts the image layers on disk toward the memory limit, which pushed the total over 512m"
+        },
+        {
+          "id": "b",
+          "label": "The JVM also uses non-heap memory, like metaspace and thread stacks, so the total passed 512m"
+        },
+        {
+          "id": "c",
+          "label": "The heap limit is ignored inside containers, so logs underreport the real heap use by about half"
+        },
+        {
+          "id": "d",
+          "label": "Exit code 137 means the image was built for another architecture, so the kernel killed it on start"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Process memory is heap plus non-heap, so heap equal to the limit is too high.",
+        "Distractors misread exit 137 or confuse disk with memory."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A Node service uses native modules that ship prebuilt glibc binaries. The team wants a small image and common debugging tools available. Which base image best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`node:alpine`, since its musl libc gives the smallest size and runs all glibc prebuilt binaries unchanged"
+        },
+        {
+          "id": "b",
+          "label": "The full `node` image, since it is the only variant that offers a shell and package manager"
+        },
+        {
+          "id": "c",
+          "label": "`scratch` with the app copied in, since an empty base is smallest and needs no libc for Node"
+        },
+        {
+          "id": "d",
+          "label": "`node:slim` on Debian, since it is much smaller than the full image and keeps glibc for prebuilt binaries"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Slim Debian balances size with glibc compatibility and tooling.",
+        "Alpine's musl can break glibc binaries; scratch lacks the Node runtime; slim has a shell."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A Go service needs a compiler to build, but the final image must not contain the toolchain or sources, and dependency downloads should stay cached. Which approach best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use a multi-stage build that compiles in a builder stage and copies only the binary into a minimal final stage"
+        },
+        {
+          "id": "b",
+          "label": "Build the binary on each developer laptop and `COPY` it in, which skips the Dockerfile build stage"
+        },
+        {
+          "id": "c",
+          "label": "Use one stage, then run `docker export` and `docker import` so the history is flattened into one layer"
+        },
+        {
+          "id": "d",
+          "label": "Use one stage and add `RUN rm -rf` for the compiler and sources at the end of the build"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Multi-stage keeps the toolchain out of the final image while preserving cache.",
+        "Single-stage rm leaves earlier layers; local builds lose reproducibility; flattening loses cache."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A single-host production Postgres container must keep data after the container is removed, not depend on host directory layout or ownership, and be backed up with Docker tooling. Which storage option best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A named volume managed by Docker, mounted at the Postgres data directory"
+        },
+        {
+          "id": "b",
+          "label": "The container's writable layer, since Postgres writes fastest there"
+        },
+        {
+          "id": "c",
+          "label": "A bind mount of a host directory, since the path is explicit and visible"
+        },
+        {
+          "id": "d",
+          "label": "A tmpfs mount, since memory-backed storage gives the best read speed"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Named volumes survive container removal and avoid host path coupling.",
+        "Bind mounts tie data to host layout; writable layer is lost on removal; tmpfs is not persistent."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A CI job must build images, and the main criterion is limiting damage if a build script is malicious. Which setup is the best choice?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use a rootless or isolated builder with no host Docker socket exposed to the build steps"
+        },
+        {
+          "id": "b",
+          "label": "Run the job as root with the host network, which avoids any permission problems when building"
+        },
+        {
+          "id": "c",
+          "label": "Mount `/var/run/docker.sock` into the job container, since it is the fastest and needs no extra daemon"
+        },
+        {
+          "id": "d",
+          "label": "Run the job container with `--privileged` so a nested daemon can start, which keeps everything isolated"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Socket access or privileged mode is roughly host root; an isolated rootless builder limits blast radius.",
+        "Distractors trade safety for convenience."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "For production deploys, the team needs reproducible rollbacks, certainty about what a tag contains, and base-image patches only through deliberate review. Which tagging approach best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pin to an immutable version tag or digest, and update it through a reviewed change"
+        },
+        {
+          "id": "b",
+          "label": "Build on each host at deploy time from the base image's newest tag to get fresh layers"
+        },
+        {
+          "id": "c",
+          "label": "Reuse a tag like `stable` that is repointed, so the Dockerfile never needs to change"
+        },
+        {
+          "id": "d",
+          "label": "Deploy `latest` everywhere, so every host automatically gets the newest patched content"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Pinned versions or digests give reproducibility; updates stay deliberate.",
+        "Moving tags and host-time builds make deployed content unpredictable."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "Goal: shrink a Debian-based image and keep the build cache efficient. Which changes meet it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a `.dockerignore` that excludes `.git` and local `node_modules` from the build context"
+        },
+        {
+          "id": "b",
+          "label": "Copy the whole source before installing dependencies so everything is in one early layer"
+        },
+        {
+          "id": "c",
+          "label": "Delete build files in a later `RUN` so the earlier layer shrinks in size"
+        },
+        {
+          "id": "d",
+          "label": "Run `apt-get update`, install and list cleanup in the same `RUN` instruction"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A smaller context and same-layer cleanup cut size without hurting cache.",
+        "Copying source first breaks caching; later deletion does not shrink earlier layers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A single-host Compose stack runs a chatty API with the default `json-file` log driver. After weeks, the disk fills with container logs. The team needs recent logs via `docker logs`, bounded disk use and minimal new infrastructure. Which option fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Set `max-size` and `max-file` options on the json-file driver so Docker rotates logs per container"
+        },
+        {
+          "id": "b",
+          "label": "Switch the service to the `none` driver, which saves space and keeps logs available through `docker logs`"
+        },
+        {
+          "id": "c",
+          "label": "Run `docker system prune` weekly from cron, which deletes old logs together with running containers' data"
+        },
+        {
+          "id": "d",
+          "label": "Redirect output to a file inside the container's writable layer, where it is rotated automatically"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "json-file rotation options bound disk use and keep docker logs working.",
+        "The none driver disables docker logs; pruning is the wrong tool; the writable layer has no automatic rotation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An integration-test Postgres container runs in CI. Criteria: fastest possible disk I/O, data must vanish when the container stops, and no explicit cleanup step may be needed. Which storage choice is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Mount a tmpfs at the data directory, so data lives in RAM and is discarded as soon as the container stops"
+        },
+        {
+          "id": "b",
+          "label": "Bind mount a runner workspace directory, which is fast and gets wiped whenever the workspace is cleaned"
+        },
+        {
+          "id": "c",
+          "label": "Rely on the image's declared VOLUME, since anonymous volumes are discarded automatically when the container stops"
+        },
+        {
+          "id": "d",
+          "label": "Use a named volume and add an after-script step that runs `docker volume rm` once the test job finishes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "tmpfs is memory-backed and removed on stop, so it meets speed and no-cleanup criteria.",
+        "Named volumes and anonymous volumes persist until explicitly removed; bind mounts depend on host cleanup."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A reviewer claims: \"Adding `USER 1000` to our Dockerfile makes container breakout a non-issue.\" Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It is accurate, because UID 1000 in the container maps to an unprivileged host UID by default through user namespaces, so a breakout lands with no host privileges"
+        },
+        {
+          "id": "b",
+          "label": "It is inaccurate, because processes in containers always run as root on the host regardless of the USER instruction"
+        },
+        {
+          "id": "c",
+          "label": "Non-root limits privileges inside the container, but the kernel is still shared, so capabilities, seccomp and patching still matter"
+        },
+        {
+          "id": "d",
+          "label": "It is accurate, because kernel exploits need root inside the container and a non-root user cannot trigger them, so hardening is unnecessary"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "USER reduces in-container privilege but the container still shares the host kernel, so other hardening remains necessary.",
+        "Distractors assume user-namespace remapping is default or that non-root blocks kernel exploits."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A Python service depends on numpy and pandas installed from PyPI wheels. Criteria: fast, reliable builds, no compiling from source, and a modest image size. Which base image is the best fit?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`python:3.12-alpine` plus build-base, because compiling from source on musl is the supported path for these packages"
+        },
+        {
+          "id": "b",
+          "label": "`python:3.12-alpine`, because it is the smallest and pip installs the same prebuilt wheels as on any distribution"
+        },
+        {
+          "id": "c",
+          "label": "`python:3.12-slim`, because its glibc matches the prebuilt manylinux wheels, so installs need no compiler"
+        },
+        {
+          "id": "d",
+          "label": "`ubuntu:latest` with Python from apt, because distribution packages avoid pip entirely and keep images small"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Common manylinux wheels target glibc, so a Debian slim base installs them without compiling.",
+        "Alpine uses musl, which often forces slow source builds; the other options miss the criteria."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A build must install packages from a private registry using an auth token. Criterion: the token must not appear in any image layer or in `docker history` output. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pass `ARG NPM_TOKEN` and use it in `RUN npm ci`, since ARG values are not kept in the final image"
+        },
+        {
+          "id": "b",
+          "label": "Run `COPY .npmrc .` then `RUN npm ci && rm .npmrc`, since the file is gone by the end of that command"
+        },
+        {
+          "id": "c",
+          "label": "Use `RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm ci` and supply the secret at build time through BuildKit"
+        },
+        {
+          "id": "d",
+          "label": "Set `ENV NPM_TOKEN` for the install and then `ENV NPM_TOKEN=` afterwards, so the value stored at the end is empty"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "BuildKit secret mounts are never written to a layer or recorded in history.",
+        "ARG values appear in history, COPY'd files persist in their own layer, and earlier ENV values remain in earlier layers."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A Compose stack has an API that needs Postgres. Criteria: the API must not crash-loop at cold start and must also survive a later Postgres restart. Which approach best meets both?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Short-form `depends_on: [db]`, since Compose waits until Postgres accepts connections before starting the API"
+        },
+        {
+          "id": "b",
+          "label": "A `sleep 15` at the top of the API entrypoint, which covers both cold start and any later database restart"
+        },
+        {
+          "id": "c",
+          "label": "A db healthcheck with `depends_on` `condition: service_healthy`, plus connection retry with backoff inside the API"
+        },
+        {
+          "id": "d",
+          "label": "Healthcheck-gated `depends_on` alone, since Compose restarts the API whenever the db healthcheck turns unhealthy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Healthcheck gating handles startup ordering; app-level retry handles later outages, which Compose ordering never does.",
+        "Short-form depends_on only waits for container start, and Compose does not restart dependents on health changes."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A CI tool container is started with `-v /var/run/docker.sock:/var/run/docker.sock`. Which critiques of this setup are sound? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It lets the container ask the daemon to start a container that mounts the host root filesystem"
+        },
+        {
+          "id": "b",
+          "label": "Running the tool as a non-root user inside the container makes the socket access safe"
+        },
+        {
+          "id": "c",
+          "label": "A rootless daemon or a filtering socket proxy would reduce what a compromised tool can do"
+        },
+        {
+          "id": "d",
+          "label": "Adding `:ro` to the mount does not stop API calls sent over the socket, so it does not restrict control"
+        },
+        {
+          "id": "e",
+          "label": "The socket only exposes read-only information about containers, so the risk is low"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Socket access equals root-equivalent control of the host, and read-only mounting only affects file operations on the socket node, not API calls.",
+        "Non-root users can still use a socket whose permissions allow it, and the API is not read-only."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A Go service's image is 900 MB because it ships the full toolchain. The team wants a final image with no shell or package manager, with TLS CA certificates present and a non-root user available, and with minimal manual setup. The binary is statically compiled. Which final stage best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The `golang` image with build output deleted afterwards, since removing files in later layers shrinks the image"
+        },
+        {
+          "id": "b",
+          "label": "`scratch`, copying in only the binary, since it is the smallest and TLS roots and user entries are built in"
+        },
+        {
+          "id": "c",
+          "label": "`alpine`, adding the binary and `apk add --no-cache ca-certificates`, since this removes the shell from the image"
+        },
+        {
+          "id": "d",
+          "label": "`gcr.io/distroless/static:nonroot`, copying in the statically compiled binary from the build stage"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Distroless static includes CA certificates and a nonroot user without a shell or package manager.",
+        "scratch has no certificates or users, alpine ships a shell, and deleting files in later layers does not shrink earlier ones."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a Dockerfile for a Python app with a pinned `requirements.txt` and frequently changing source, built with BuildKit. Constraints: the dependency layer rebuilds only when `requirements.txt` changes, and pip downloads are reused even when it does. Which design works?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`COPY requirements.txt .` then `RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt` then `COPY . .`"
+        },
+        {
+          "id": "b",
+          "label": "`COPY . .` then `RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt`, so downloads are reused on every build"
+        },
+        {
+          "id": "c",
+          "label": "`COPY . .` then `RUN pip install --no-cache-dir -r requirements.txt`, so the cache never holds stale packages"
+        },
+        {
+          "id": "d",
+          "label": "`COPY requirements.txt .` then `RUN pip install --no-cache-dir -r requirements.txt` then `COPY . .`, so layers stay small"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Copying only the requirements file first isolates the dependency layer, and the cache mount reuses downloads when it must rebuild.",
+        "Other options either rebuild dependencies on every source change or discard pip's download cache."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design Compose networking for proxy, api and db. Constraints: proxy reaches api, api reaches db, proxy must not be able to reach db, and only the proxy is reachable from the host. Which design meets all of them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Network `front` for proxy and api plus `links: [db]` on api, since links isolate db from the proxy"
+        },
+        {
+          "id": "b",
+          "label": "`network_mode: host` for proxy and api and a bridge network for db, so the proxy cannot see the database"
+        },
+        {
+          "id": "c",
+          "label": "One default network for all three services with no `ports` on db, since unpublished ports block other containers"
+        },
+        {
+          "id": "d",
+          "label": "Networks `front` (proxy, api) and `back` (api, db) with `internal: true` on `back`, and `ports` only on proxy"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Separate networks give api access to both sides while keeping db off the proxy's network; internal blocks outside access.",
+        "Unpublished ports do not stop containers on a shared network, and links or host mode do not isolate as claimed."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A Python worker is started with shell-form `CMD python worker.py`, so `docker stop` waits for the timeout and kills it. Constraints: no code changes, the worker must get SIGTERM for graceful shutdown, and orphaned child processes must be reaped. Which fix meets all?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Keep shell-form `CMD` and raise `stop_grace_period`, so the shell has time to pass the signal to Python"
+        },
+        {
+          "id": "b",
+          "label": "Run `python worker.py &` followed by `wait` in shell form, so the shell stays PID 1 and relays signals"
+        },
+        {
+          "id": "c",
+          "label": "Use exec-form `CMD [\"python\", \"worker.py\"]` alone, since Python as PID 1 gets SIGTERM and reaps zombie children"
+        },
+        {
+          "id": "d",
+          "label": "Use exec-form `CMD [\"python\", \"worker.py\"]` and set `init: true`, so a small init is PID 1, forwards signals and reaps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Exec form removes the shell wrapper and an init process forwards signals and reaps zombies without code changes.",
+        "A longer grace period does not make the shell forward signals; PID 1 gets no default signal handling or reaping."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a release step on an amd64 CI runner that publishes one tag `app:1.4` usable on both amd64 and arm64 hosts, with users never choosing an architecture manually. Which command or process does this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker buildx build --platform linux/amd64,linux/arm64 -t app:1.4 --load .` so both variants land in the local store"
+        },
+        {
+          "id": "b",
+          "label": "Run `docker build --platform` twice with the same tag so the second build merges into the first manifest"
+        },
+        {
+          "id": "c",
+          "label": "Push `app:1.4-amd64` and `app:1.4-arm64` and tell users to pick the suffix that matches their host"
+        },
+        {
+          "id": "d",
+          "label": "`docker buildx build --platform linux/amd64,linux/arm64 -t app:1.4 --push .` using a builder that can reach or emulate arm64"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "buildx with --push produces a manifest list under a single tag that clients resolve by architecture.",
+        "Rebuilding with the same tag overwrites, suffixes require user choice, and --load cannot store multi-platform results."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a backup of the named volume `uploads` used by a running container. Constraints: add no tools to the app image, avoid depending on Docker's internal storage path, and write the archive to the current directory. Which command fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`docker commit app backup:1` then `docker save backup:1 -o uploads.tgz`, which captures the volume data in the image"
+        },
+        {
+          "id": "b",
+          "label": "`docker run --rm -v uploads:/data:ro -v \"$PWD\":/backup alpine tar czf /backup/uploads.tgz -C /data .`"
+        },
+        {
+          "id": "c",
+          "label": "`docker export app > uploads.tgz`, which includes the contents of mounted volumes in the exported archive"
+        },
+        {
+          "id": "d",
+          "label": "`sudo tar czf uploads.tgz /var/lib/docker/volumes/uploads/_data`, which reads the files directly from the host"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A throwaway container mounts the volume read-only plus a bind mount for output, with no host path assumptions.",
+        "Direct host paths depend on Docker's storage layout, and export or commit never include volume data."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "Create a hardened run configuration for a stateless web service. Constraints: the root filesystem is immutable, only `/tmp` is writable, no Linux capabilities beyond what is needed, and default syscall filtering stays on. Which flags belong? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "`--security-opt seccomp=unconfined`"
+        },
+        {
+          "id": "b",
+          "label": "`--privileged`"
+        },
+        {
+          "id": "c",
+          "label": "`--cap-drop=ALL`"
+        },
+        {
+          "id": "d",
+          "label": "`--tmpfs /tmp`"
+        },
+        {
+          "id": "e",
+          "label": "`--read-only`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "read-only, a tmpfs for /tmp and dropping all capabilities meet the stated constraints.",
+        "seccomp=unconfined and privileged both weaken the default protections the constraints require."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A Node image installs dependencies into `/app/node_modules` at build time. The dev Compose file bind mounts `./` onto `/app` for hot reload, but the app now fails with missing modules because the host folder has none. The team wants live source edits and to keep the image's modules. Which change achieves this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Run `npm install` on the host and keep the bind mount, since the container then uses the host's modules"
+        },
+        {
+          "id": "b",
+          "label": "Keep `./:/app` and add a volume at `/app/node_modules`, so the image's modules show through the bind mount"
+        },
+        {
+          "id": "c",
+          "label": "Replace the bind mount with `COPY . /app` and rebuild on every save, since edits then appear in the image"
+        },
+        {
+          "id": "d",
+          "label": "Add a `.dockerignore` entry for `node_modules` so the bind mount skips that directory when mounting"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A more specific volume at /app/node_modules is initialised from the image and overlays the bind mount for that path.",
+        "The other options give up hot reload, depend on host-built modules, or misuse .dockerignore, which does not affect mounts."
+      ],
+      "reviewed": false
+    }
+  ]
+}

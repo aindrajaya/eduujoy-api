@@ -1,0 +1,2493 @@
+{
+  "version": 1,
+  "topic": "observability-monitoring",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which three signal types are commonly called the pillars of observability?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Metrics, logs and traces"
+        },
+        {
+          "id": "b",
+          "label": "CPU, memory and disk"
+        },
+        {
+          "id": "c",
+          "label": "Debuggers, profilers and linters"
+        },
+        {
+          "id": "d",
+          "label": "Alerts, dashboards and reports"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Metrics, logs and traces are the standard three telemetry signals.",
+        "Alerts and dashboards are tools built on top of signals, not signals themselves."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is a metric in monitoring?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A free-text line describing one event"
+        },
+        {
+          "id": "b",
+          "label": "A rule that sends a notification"
+        },
+        {
+          "id": "c",
+          "label": "A numeric measurement recorded over time"
+        },
+        {
+          "id": "d",
+          "label": "A record of one request across services"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A metric is a numeric value sampled over time.",
+        "Other options describe a log, a trace and an alert rule."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does a distributed trace record?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The total CPU used by a host, sampled every minute"
+        },
+        {
+          "id": "b",
+          "label": "The path and timing of one request across services"
+        },
+        {
+          "id": "c",
+          "label": "The list of all alert rules in a system"
+        },
+        {
+          "id": "d",
+          "label": "The text of every error message an application writes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A trace follows a single request through services with timing for each step.",
+        "Host CPU is a metric and error text is a log."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which log level is normally used for a failure that stops an operation from completing?",
+      "options": [
+        {
+          "id": "a",
+          "label": "ERROR"
+        },
+        {
+          "id": "b",
+          "label": "INFO"
+        },
+        {
+          "id": "c",
+          "label": "TRACE"
+        },
+        {
+          "id": "d",
+          "label": "DEBUG"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "ERROR marks failed operations.",
+        "DEBUG, INFO and TRACE are for diagnostic or routine detail."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the acronym SLO stand for?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Service level objective"
+        },
+        {
+          "id": "b",
+          "label": "Service latency overview"
+        },
+        {
+          "id": "c",
+          "label": "System log output"
+        },
+        {
+          "id": "d",
+          "label": "Standard load operation"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "SLO means service level objective, a reliability target.",
+        "Other options are invented expansions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are commonly used as the 'golden signals' of monitoring a service? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Errors"
+        },
+        {
+          "id": "b",
+          "label": "Traffic"
+        },
+        {
+          "id": "c",
+          "label": "Saturation"
+        },
+        {
+          "id": "d",
+          "label": "Uptime of the build server"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A new teammate asks you where an application writes its time-stamped lines such as 'user 42 login failed'. They want to know what this kind of telemetry is called. What do you tell them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Metrics"
+        },
+        {
+          "id": "b",
+          "label": "Dashboards"
+        },
+        {
+          "id": "c",
+          "label": "Traces"
+        },
+        {
+          "id": "d",
+          "label": "Logs"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Time-stamped event lines are logs.",
+        "Metrics are numeric series; traces follow requests."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is a dashboard usually paired with alerts rather than replacing them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Dashboards only show data from after an incident ends, so alerts are needed to see live values"
+        },
+        {
+          "id": "b",
+          "label": "Dashboards cannot display metrics from many services, so alerts are used to combine them"
+        },
+        {
+          "id": "c",
+          "label": "Alerts keep metric history for longer than dashboards can, so they are better for later review"
+        },
+        {
+          "id": "d",
+          "label": "Nobody watches a dashboard constantly, so alerts notify people when something goes wrong"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Alerts push attention to humans; dashboards need someone to look.",
+        "Other options misstate what each does."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why do many teams write logs as structured JSON instead of plain sentences?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Tools can filter and search fields such as user_id reliably"
+        },
+        {
+          "id": "b",
+          "label": "Plain sentences cannot contain timestamps"
+        },
+        {
+          "id": "c",
+          "label": "JSON makes logs impossible to read by tools that parse text"
+        },
+        {
+          "id": "d",
+          "label": "JSON logs use no disk space at all"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Structured fields make searching and aggregation dependable.",
+        "Distractors make false claims about size, timestamps or parsing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the difference between monitoring and observability?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Monitoring checks known conditions; observability helps explore unexpected problems from rich telemetry"
+        },
+        {
+          "id": "b",
+          "label": "Monitoring covers production systems only; observability covers test environments, where more detailed data is collected"
+        },
+        {
+          "id": "c",
+          "label": "Monitoring is done by operations staff on hardware; observability is done by developers on application code only"
+        },
+        {
+          "id": "d",
+          "label": "Monitoring relies on logs for diagnosis; observability replaces logs with traces and drops metrics altogether"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Observability emphasises asking new questions of telemetry beyond predefined checks.",
+        "Other options invent strict splits or deny any difference."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A metric shows average response time of 200 ms, yet some users report very slow pages. Which statistic better reveals their experience?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Total request count per minute"
+        },
+        {
+          "id": "b",
+          "label": "Minimum latency observed"
+        },
+        {
+          "id": "c",
+          "label": "Average CPU usage per host"
+        },
+        {
+          "id": "d",
+          "label": "99th percentile latency"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Percentiles expose slow tail requests that averages hide.",
+        "Minimum and the others do not show tail latency."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is an alert such as 'CPU above 50% for one second' considered a poor alert?",
+      "options": [
+        {
+          "id": "a",
+          "label": "CPU cannot exceed 50% on a healthy server, so the alert can never fire"
+        },
+        {
+          "id": "b",
+          "label": "Alerts on CPU cannot be routed to an on-call person, only shown on dashboards"
+        },
+        {
+          "id": "c",
+          "label": "Such a short window hides real outages because the rule fires too rarely to notice"
+        },
+        {
+          "id": "d",
+          "label": "It fires often without user impact, causing alert fatigue"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Noisy, non-actionable alerts cause fatigue and get ignored.",
+        "Distractors state wrong behaviour of the rule."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly explain why a trace ID is added to log lines? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It links logs to the matching trace"
+        },
+        {
+          "id": "b",
+          "label": "It lets you find logs belonging to one request"
+        },
+        {
+          "id": "c",
+          "label": "It makes the log file smaller"
+        },
+        {
+          "id": "d",
+          "label": "It replaces the need for timestamps"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      },
+      "rubric": [
+        "The ID correlates logs with a request and its trace.",
+        "It does not shrink logs or replace timestamps."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "Your website's error-rate graph jumps from 0.1% to 5% at 14:05. A teammate wants to know why you check logs next. Which explanation is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The graph shows that something changed, and logs show the specific errors behind it"
+        },
+        {
+          "id": "b",
+          "label": "The graph shows exactly which code change caused the jump, and logs only confirm the time"
+        },
+        {
+          "id": "c",
+          "label": "Logs are where the error-rate metric is stored, so the graph can't be trusted without them"
+        },
+        {
+          "id": "d",
+          "label": "The graph is usually inaccurate for short spikes, so logs should replace it for detection"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Metrics detect the symptom; logs give detail about causes.",
+        "Other options misstate roles of metrics and logs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which telemetry type is the best fit for showing the trend of error rate over the last 24 hours on a dashboard?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Traces, because they store the call path of every request"
+        },
+        {
+          "id": "b",
+          "label": "Logs, because each line records full detail of every event"
+        },
+        {
+          "id": "c",
+          "label": "Core dumps, because they capture memory at the moment of failure"
+        },
+        {
+          "id": "d",
+          "label": "Metrics, because they are cheap numeric series that aggregate well"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Metrics are compact time series built for trends and aggregation.",
+        "Logs and traces hold per-event detail but are costly to aggregate over a day."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is a latency percentile such as p99 often more useful than the average latency?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Averages can hide a slow tail that a high percentile exposes"
+        },
+        {
+          "id": "b",
+          "label": "Histograms take less storage than a single gauge value does"
+        },
+        {
+          "id": "c",
+          "label": "Averages cannot be calculated from data that services export"
+        },
+        {
+          "id": "d",
+          "label": "Percentiles always equal the average when traffic is normal"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Averages are dominated by fast requests and mask slow outliers; p99 shows them.",
+        "Distractors invent technical limits that do not exist."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Which of these quantities is best modelled as a gauge rather than a counter?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Total errors since the last deploy"
+        },
+        {
+          "id": "b",
+          "label": "Total HTTP requests served since the process started"
+        },
+        {
+          "id": "c",
+          "label": "Total bytes sent since the process started"
+        },
+        {
+          "id": "d",
+          "label": "Current number of jobs waiting in a queue"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A gauge can go up and down, like queue depth.",
+        "The other options only ever increase, so they are counters."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In distributed tracing, what does a single span represent?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One group of alerts fired for the same service within a window"
+        },
+        {
+          "id": "b",
+          "label": "One structured log line that carries a severity level and a request ID"
+        },
+        {
+          "id": "c",
+          "label": "One timed unit of work in a request, such as a database call"
+        },
+        {
+          "id": "d",
+          "label": "One sampled reading of CPU usage on a host at a single instant"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A span is a timed operation; spans together form a trace.",
+        "Distractors confuse spans with logs, metrics samples or alert groups."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main benefit of structured logging, such as JSON with fields like status and user_id?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Timestamps become unnecessary because fields keep order"
+        },
+        {
+          "id": "b",
+          "label": "Tools can filter and query entries by field values"
+        },
+        {
+          "id": "c",
+          "label": "Log levels are no longer needed because all is kept"
+        },
+        {
+          "id": "d",
+          "label": "Log files always become smaller than plain text files"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Named fields let tools search, filter and aggregate reliably.",
+        "Structured logs are often larger, and still need timestamps and levels."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Why do teams add a correlation (request) ID to every log line in a multi-service system? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "To cut log volume without any configuration"
+        },
+        {
+          "id": "b",
+          "label": "To find every log line produced by one request across services"
+        },
+        {
+          "id": "c",
+          "label": "To make timestamps unnecessary in log lines"
+        },
+        {
+          "id": "d",
+          "label": "To link log entries to the matching trace"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "A shared ID joins records from different services and signals.",
+        "It does not replace timestamps or reduce volume."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A checkout service shows a steady p50 latency of 120 ms. Users report slowness, and the p99 latency has risen from 400 ms to 6 s over the last hour. What does this pattern most likely mean?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The metrics are broken because p50 and p99 must always move together"
+        },
+        {
+          "id": "b",
+          "label": "All requests slowed equally, so the median should have moved too"
+        },
+        {
+          "id": "c",
+          "label": "A small share of requests are very slow while most remain fine"
+        },
+        {
+          "id": "d",
+          "label": "Traffic fell, because percentiles drop when load is low"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A flat median with a rising p99 means a slow tail affecting some requests.",
+        "Percentiles are independent and need not move together."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "In a 5-minute window a service handled 1,200 requests, of which 30 returned errors. The alert fires when the error rate exceeds 2%. What happens?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It fires, since the error rate is 4%"
+        },
+        {
+          "id": "b",
+          "label": "It fires, since the error rate is 2.5%"
+        },
+        {
+          "id": "c",
+          "label": "It does not fire, since the error rate is 0.25%"
+        },
+        {
+          "id": "d",
+          "label": "It does not fire, since 30 is far below 1,200"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "30 / 1200 = 2.5%, above the 2% threshold.",
+        "Other options miscalculate the ratio."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A counter `http_requests_total` reads 5,000 at t=0 s and 8,000 at t=60 s. What is the average request rate over that minute, per second?",
+      "options": [
+        {
+          "id": "a",
+          "label": "50"
+        },
+        {
+          "id": "b",
+          "label": "3000"
+        },
+        {
+          "id": "c",
+          "label": "0.02"
+        },
+        {
+          "id": "d",
+          "label": "133"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Rate = (8000-5000)/60 = 50 per second.",
+        "133 divides the raw value by time instead of using the increase."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You must page the on-call engineer for a web API. Which alert rule is best because it reflects user-visible impact?",
+      "options": [
+        {
+          "id": "a",
+          "label": "5xx response rate above 2% for five minutes"
+        },
+        {
+          "id": "b",
+          "label": "Memory use rises on a single instance by 5%"
+        },
+        {
+          "id": "c",
+          "label": "Disk read operations above their weekly average"
+        },
+        {
+          "id": "d",
+          "label": "CPU above 70% on any host for one minute"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Symptom-based alerts on error rate are actionable and tied to users.",
+        "Resource-level alerts often fire with no user impact."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You add labels to a request-count metric. Which label set avoids a cardinality explosion in the metrics store?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Unique request ID"
+        },
+        {
+          "id": "b",
+          "label": "Full URL including query string"
+        },
+        {
+          "id": "c",
+          "label": "User ID of the caller"
+        },
+        {
+          "id": "d",
+          "label": "HTTP method and status code class"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Method and status class have few values, so series count stays small.",
+        "User ID, full URLs and request IDs create unbounded series."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A dashboard shows errors rising at 14:02. A deploy finished at 14:01. What is the best next step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Delete old logs so that queries run faster"
+        },
+        {
+          "id": "b",
+          "label": "Filter logs from 14:02 for new error messages"
+        },
+        {
+          "id": "c",
+          "label": "Raise the alert threshold so it stops firing now"
+        },
+        {
+          "id": "d",
+          "label": "Restart every host to clear any stale state at once"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Correlating the spike with the deploy and reading new errors narrows the cause.",
+        "Other options hide or disturb evidence without diagnosing."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You are instrumenting a web service using the RED method (Rate, Errors, Duration). Which metrics should you add? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Failed requests per second"
+        },
+        {
+          "id": "b",
+          "label": "Distribution of request durations"
+        },
+        {
+          "id": "c",
+          "label": "Requests handled per second"
+        },
+        {
+          "id": "d",
+          "label": "Count of Git commits per day"
+        },
+        {
+          "id": "e",
+          "label": "Number of source files in the repo"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "RED covers request rate, errors and duration.",
+        "Repo statistics say nothing about runtime service health."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A trace of a slow 900 ms request shows a 20 ms auth span, then 40 sequential `db.query` spans of about 21 ms each, all for the same table. What is the most likely cause and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Many small sequential queries (N+1); batch them into one query"
+        },
+        {
+          "id": "b",
+          "label": "Excess log volume; lower the log level in production"
+        },
+        {
+          "id": "c",
+          "label": "A slow auth service; add a cache in front of auth"
+        },
+        {
+          "id": "d",
+          "label": "Packet loss between client and server; raise the client timeouts"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Repeated short sequential queries are an N+1 pattern; batching removes the repeated round trips.",
+        "Auth took only 20 ms, and nothing in the trace points to network loss or logging."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A counter `http_requests_total` carries a `status` label. Which Prometheus-style expression gives the fraction of requests returning 5xx over the last 5 minutes?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`sum(increase(http_requests_total{status=~\"5..\"}[5m])) * sum(rate(http_requests_total[5m]))`"
+        },
+        {
+          "id": "b",
+          "label": "`sum(rate(http_requests_total{status=~\"5..\"}[5m])) / sum(rate(http_requests_total[5m]))`"
+        },
+        {
+          "id": "c",
+          "label": "`avg(http_requests_total{status=~\"5..\"}) / avg(http_requests_total)`"
+        },
+        {
+          "id": "d",
+          "label": "`rate(http_requests_total{status=~\"5..\"}[5m]) / http_requests_total`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Dividing the 5xx request rate by the total request rate gives a ratio over the same window.",
+        "Distractors use raw counter values or multiply instead of dividing, which ignore the time window or give meaningless units."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A histogram metric `http_request_duration_seconds_bucket` is exported by many instances. Which expression gives the fleet-wide 95th percentile latency over 5 minutes?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`histogram_quantile(0.95, sum by (instance) (rate(http_request_duration_seconds_bucket[5m])))`"
+        },
+        {
+          "id": "b",
+          "label": "`histogram_quantile(95, sum by (le) (rate(http_request_duration_seconds_bucket[5m])))`"
+        },
+        {
+          "id": "c",
+          "label": "`avg(histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])))`"
+        },
+        {
+          "id": "d",
+          "label": "`histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket[5m])))`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Buckets must be summed across instances while keeping the `le` label, and the quantile argument is a fraction between 0 and 1.",
+        "Averaging per-instance percentiles, using 95, or dropping `le` all produce wrong or invalid results."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Your service has a 99.9% availability SLO measured over a 30-day window. Assuming full-outage minutes are the only failures, how much downtime does the error budget allow?",
+      "options": [
+        {
+          "id": "a",
+          "label": "432 minutes"
+        },
+        {
+          "id": "b",
+          "label": "86.4 minutes"
+        },
+        {
+          "id": "c",
+          "label": "4.32 minutes"
+        },
+        {
+          "id": "d",
+          "label": "43.2 minutes"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "30 days is 43,200 minutes and 0.1% of that is 43.2 minutes.",
+        "Other values come from shifting the decimal point or doubling the budget."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You want to jump from an error log entry straight to the distributed trace of the failing request. Which log line is best suited to this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "`{\"level\":\"error\",\"msg\":\"charge failed\",\"order\":\"A17\",\"host\":\"web-3\"}`"
+        },
+        {
+          "id": "b",
+          "label": "`{\"level\":\"error\",\"msg\":\"charge failed\",\"trace_id\":\"4bf92f35\",\"order\":\"A17\"}`"
+        },
+        {
+          "id": "c",
+          "label": "`{\"level\":\"error\",\"msg\":\"charge failed\",\"order\":\"A17\",\"span_count\":4,\"host\":\"web-3\"}`"
+        },
+        {
+          "id": "d",
+          "label": "`ERROR charge failed for order A17 at 12:01:07 on web-3 (span count 4)`"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Logging the trace ID as a structured field lets you search traces by that ID.",
+        "Host, order or span count fields do not uniquely identify a trace; plain text is also hard to query."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Service A calls service B over HTTP, and both are instrumented with a tracing library. For the call to appear as part of one trace, what must A do on the outgoing request?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Inject the current trace context into a `traceparent` header"
+        },
+        {
+          "id": "b",
+          "label": "Send the span to B's metrics endpoint after the call ends"
+        },
+        {
+          "id": "c",
+          "label": "Copy the host's log file path into a custom header for B"
+        },
+        {
+          "id": "d",
+          "label": "Create a new trace ID per call so each span stays independent"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Context propagation via the `traceparent` header lets B create child spans under A's trace.",
+        "A new trace ID per call breaks the trace into disconnected pieces."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A CPU alert pages the on-call engineer nightly because a batch job spikes CPU for about 30 seconds, and nothing is user-visible. Which changes apply good alerting practice to fix this? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Delete the alert and rely on users to report slowness"
+        },
+        {
+          "id": "b",
+          "label": "Route this non-urgent alert to a ticket queue instead of the pager"
+        },
+        {
+          "id": "c",
+          "label": "Lower the threshold so the alert triggers earlier and clears faster"
+        },
+        {
+          "id": "d",
+          "label": "Evaluate the average over a 10-minute window instead of instant samples"
+        },
+        {
+          "id": "e",
+          "label": "Add a `for: 10m` clause so only sustained high CPU fires the alert"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Requiring a sustained condition, smoothing over a window and routing non-urgent signals to tickets all cut noise without losing the signal.",
+        "Lowering the threshold increases noise, and deleting the alert removes detection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "Your team has a 99.9% availability SLO over 30 days. During an incident, your dashboard shows that 1.44% of requests failed in the last hour. The error budget corresponds to a 0.1% failure ratio. What burn rate is the service running at?",
+      "options": [
+        {
+          "id": "a",
+          "label": "144"
+        },
+        {
+          "id": "b",
+          "label": "1.44"
+        },
+        {
+          "id": "c",
+          "label": "14.4"
+        },
+        {
+          "id": "d",
+          "label": "0.144"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Burn rate is the observed error ratio divided by the budgeted ratio: 1.44% / 0.1% = 14.4.",
+        "Other values come from misplacing the decimal point or ignoring the budget ratio."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A dashboard shows mean request latency steady at 120 ms, yet users report timeouts. The p99 latency panel shows 4 s. What is the best explanation?",
+      "options": [
+        {
+          "id": "a",
+          "label": "p99 always exceeds the mean by a fixed factor, so nothing here is abnormal"
+        },
+        {
+          "id": "b",
+          "label": "Timeouts come from the dashboard's refresh interval rather than from the service"
+        },
+        {
+          "id": "c",
+          "label": "The mean is miscalculated because p99 comes from a separate, more accurate data source"
+        },
+        {
+          "id": "d",
+          "label": "A few very slow requests barely move the mean but dominate those users' experience"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Means hide tail latency; a small share of slow requests can leave the average almost unchanged.",
+        "The distractors treat the discrepancy as a data error or a normal fixed ratio, which it is not."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A trace shows an 800 ms parent span with two sequential child spans of 100 ms and 120 ms, and nothing else. What does the remaining time most likely indicate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Network time between the two child spans, which spans never record"
+        },
+        {
+          "id": "b",
+          "label": "Sampling dropped about 580 ms of the trace, so the data is unreliable"
+        },
+        {
+          "id": "c",
+          "label": "Time in the parent outside its instrumented children, such as uninstrumented work or waiting"
+        },
+        {
+          "id": "d",
+          "label": "Clock drift between hosts, since child spans always include their own network transit time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Parent time not covered by children means work or waiting that is not instrumented as a span.",
+        "Sampling decides whether a whole trace is kept and does not drop part of a span's duration."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a deploy that added `user_id` as a label on a request counter, the metrics server's memory climbs and queries slow down. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The counter now increments too fast for the scrape interval to handle"
+        },
+        {
+          "id": "b",
+          "label": "Each unique user ID creates a new time series, so series count explodes"
+        },
+        {
+          "id": "c",
+          "label": "Labels on counters make the server store raw request bodies"
+        },
+        {
+          "id": "d",
+          "label": "The new label turns the counter into a gauge that needs more memory"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "High-cardinality labels multiply the number of stored time series, driving memory and query cost.",
+        "The other options invent mechanisms that labels do not have."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "During an outage users saw 503 errors, but the app-level error-rate alert stayed silent. The 503s were generated by the load balancer because all backends failed health checks. What is the monitoring gap?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The alert only sees requests that reach the app, so upstream failures are invisible"
+        },
+        {
+          "id": "b",
+          "label": "Error-rate alerts only evaluate correctly when the threshold is set above 50 percent of traffic"
+        },
+        {
+          "id": "c",
+          "label": "503 responses are never counted as errors by any monitoring system"
+        },
+        {
+          "id": "d",
+          "label": "The metrics endpoint was scraped too often to record any errors"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "App metrics cannot count requests that never reach the app; the signal needs to come from the load balancer or an external probe.",
+        "The distractors blame thresholds or scrape settings rather than the measurement point."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Traces assembled from two hosts show a child span starting 40 ms before its parent, and log lines from the hosts interleave out of order. Which cause best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Head-based sampling at 1% drops spans, so span ordering breaks within a trace"
+        },
+        {
+          "id": "b",
+          "label": "Clock skew between the hosts, as each stamps its own clock"
+        },
+        {
+          "id": "c",
+          "label": "Mismatched log levels make the hosts flush entries in a different order"
+        },
+        {
+          "id": "d",
+          "label": "The tracing library exported the parent span twice, so a stale copy is shown"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A child starting before its parent plus out-of-order logs across hosts points to unsynchronised clocks.",
+        "Sampling, duplicate export and log levels do not shift timestamps."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A service shows low CPU, rising p95 latency, a growing request queue and long waits to acquire database connections. Which explanations are consistent with all of this evidence? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The service is CPU-bound while parsing requests"
+        },
+        {
+          "id": "b",
+          "label": "Slow queries are holding connections longer than before"
+        },
+        {
+          "id": "c",
+          "label": "The database connection pool is too small for current concurrency"
+        },
+        {
+          "id": "d",
+          "label": "Packet loss on the metrics scrape path is slowing requests"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "A small pool or connections held by slow queries explains queueing and connection waits with idle CPU.",
+        "CPU-bound work contradicts the low CPU, and scrape-path loss affects monitoring, not request handling."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "After a release, checkout p95 latency rose from 300 ms to 2.3 s. Traces show the client span for the payment call lasting about 2 s, while the matching server span in the payment service lasts 150 ms. Payment service CPU and error metrics are normal. Where should you investigate first?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The checkout service's log verbosity, since it writes the most output"
+        },
+        {
+          "id": "b",
+          "label": "Gap between caller and callee, such as client pool waits, DNS or TLS setup"
+        },
+        {
+          "id": "c",
+          "label": "The payment handler's business logic, since the payment service is the slowest component involved"
+        },
+        {
+          "id": "d",
+          "label": "The payment service's database, since queries usually dominate latency"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A 2 s client span against a 150 ms server span puts the delay between the two, such as connection pool waits or connection setup.",
+        "Investigating the payment handler or its database targets time the server span shows is not spent."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A dashboard shows mean API latency flat at 80ms, yet users report occasional timeouts. Which diagnosis best fits this evidence?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The mean is miscalculated because latency is sampled; count requests per second instead of timing them"
+        },
+        {
+          "id": "b",
+          "label": "Averages of latency are exact for every request, so packet loss on the network must be the cause"
+        },
+        {
+          "id": "c",
+          "label": "Timeouts originate in clients, since a flat mean proves the server always responds within 80ms"
+        },
+        {
+          "id": "d",
+          "label": "A small slow fraction of requests is hidden by the mean; check p99 from a latency histogram"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Means hide tail behaviour; a few very slow requests barely move the average but cause timeouts.",
+        "Distractors assume the mean fully characterises the distribution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A dashboard computes fleet 'p99 latency' as the average of each pod's p99 across 12 pods. One pod is very slow. Why can this figure mislead?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Percentiles cannot be averaged; merging histogram buckets first gives the true fleet p99"
+        },
+        {
+          "id": "b",
+          "label": "Pods report in different time zones, so their p99 values are never aligned on the same axis"
+        },
+        {
+          "id": "c",
+          "label": "Averaging overstates latency because each pod's p99 includes the same slow requests twice"
+        },
+        {
+          "id": "d",
+          "label": "p99 is valid only per host, so the fleet figure should be the maximum of the pods' means"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "An average of percentiles is not the percentile of the combined data; histograms must be aggregated first.",
+        "Distractors invent timing or double-counting artefacts."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a release adds a `user_id` label to `http_requests_total`, the metrics server's memory climbs steadily. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Each unique `user_id` value creates its own time series, so series count grows with the user base"
+        },
+        {
+          "id": "b",
+          "label": "Labelled counters are stored internally as histograms, which use many buckets for each series"
+        },
+        {
+          "id": "c",
+          "label": "Label values are stored on every sample, so memory grows with request rate whatever labels exist"
+        },
+        {
+          "id": "d",
+          "label": "The scrape interval shortens automatically when a metric gains labels, multiplying stored samples"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "High-cardinality labels multiply the number of series.",
+        "Distractors blame sample rate or invented storage behaviour rather than series count."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A trace shows a parent span of 900ms whose child spans (database and cache calls) sum to about 200ms, with no overlap between them. What does the gap most likely indicate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Time spent inside the parent itself, such as lock waits, queueing or uninstrumented calls"
+        },
+        {
+          "id": "b",
+          "label": "Latency to the tracing backend is added to the parent span's duration when it is exported"
+        },
+        {
+          "id": "c",
+          "label": "Clock skew between services, which always inflates the parent span by the missing amount"
+        },
+        {
+          "id": "d",
+          "label": "Child spans were sampled out, so their durations are hidden but still counted in the total"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Unaccounted parent time means work happening outside instrumented children.",
+        "Distractors blame tooling artefacts that do not typically add to span duration."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An alert on 5xx error ratio above 5% fires nightly at 3am for a minute, when traffic is about two requests per minute. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Nightly batch jobs remap status codes, so 5xx counts shift at exactly that hour"
+        },
+        {
+          "id": "b",
+          "label": "The ratio counters are reset each night, so the 3am reset produces a spurious spike"
+        },
+        {
+          "id": "c",
+          "label": "The evaluation interval is too long, so it reads stale data from the previous day's peak"
+        },
+        {
+          "id": "d",
+          "label": "One failure among two requests gives 50%; the rule has no minimum-traffic guard"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Ratios on tiny denominators are noisy; a volume condition is needed.",
+        "Distractors invent resets or stale data not supported by the evidence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Checkout p99 jumps from 300ms to 4s. Which findings support the conclusion that database connection-pool saturation, not application CPU, is the cause? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The pool-wait time histogram has risen close to its timeout value"
+        },
+        {
+          "id": "b",
+          "label": "Active connections sit at the pool maximum while database CPU is low"
+        },
+        {
+          "id": "c",
+          "label": "Disk usage on the application hosts has stayed stable all day"
+        },
+        {
+          "id": "d",
+          "label": "The rate of 4xx client errors has risen slightly over the same period"
+        },
+        {
+          "id": "e",
+          "label": "Thread dumps show many request threads blocked acquiring a connection"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Pool wait, pinned connections and blocked threads directly show queueing for connections.",
+        "4xx rates and stable disk usage are unrelated to pool saturation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "Service A calls service B with a 2s timeout and up to 3 retries. When B slows down, B's dashboard shows its incoming request rate nearly tripling, though user traffic at the edge is unchanged. Which explanation best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "B's autoscaler tripled the replicas, which tripled the per-instance request metric shown"
+        },
+        {
+          "id": "b",
+          "label": "Edge traffic really tripled, but the edge dashboard undercounts because of its sampling rate"
+        },
+        {
+          "id": "c",
+          "label": "B's histogram buckets were changed, so counts are triple-counted whenever latency rises"
+        },
+        {
+          "id": "d",
+          "label": "A's retries multiply load on B: each timed-out call is retried, adding to B's incoming rate"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Retries amplify load on a struggling dependency, a retry storm.",
+        "Distractors explain the rate by metric artefacts instead of the call pattern."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team has a 99.9% monthly availability SLO. Criteria: page only for user-visible problems that threaten the error budget, and avoid pages for brief blips. Which alert best meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A page whenever any host's CPU stays above 80% for one minute, since this precedes most outages"
+        },
+        {
+          "id": "b",
+          "label": "A page on every single 5xx response, so no failing request goes unnoticed by the on-call"
+        },
+        {
+          "id": "c",
+          "label": "A multi-window burn-rate alert on the error-ratio SLI, paging when the budget is used up fast"
+        },
+        {
+          "id": "d",
+          "label": "A page when the error ratio exceeds 0.1% over any single five-minute window, since that matches the SLO target"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Burn-rate alerts tie paging to budget consumption and the dual window filters short blips.",
+        "Distractors page on causes, single events or absolute counts that ignore traffic."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: retain every trace containing an error or a request over 2s, and keep tracing cost under budget at 50k requests per second. Which sampling design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Head-based sampling at 100% with seven-day retention, because full capture guarantees no error or slow trace is lost"
+        },
+        {
+          "id": "b",
+          "label": "Head-based sampling at 1% in each service, because the random choice keeps a fair share of error and slow traces"
+        },
+        {
+          "id": "c",
+          "label": "Tail-based sampling in a collector that keeps errors, slow traces and a few others"
+        },
+        {
+          "id": "d",
+          "label": "Head-based sampling that raises the rate to 20% for services with recent alerts, because it targets problem services"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Only tail-based sampling can decide after seeing errors and duration.",
+        "Head sampling drops most error traces; full capture breaks the cost limit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Debug logs reach 2TB/day and cost too much. Criteria: keep incidents debuggable, cut cost by over 60%. Which plan is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Drop debug and info logging in production, because metrics and traces can cover most of what those log lines recorded"
+        },
+        {
+          "id": "b",
+          "label": "Keep warn and error at full fidelity, sample debug logs by trace ID, and shorten debug retention"
+        },
+        {
+          "id": "c",
+          "label": "Keep all levels but switch to a denser compression format, because storage cost mainly follows the stored byte format"
+        },
+        {
+          "id": "d",
+          "label": "Log debug only during 3am low-traffic hours, because that window gives a fair sample of the issues users hit"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Trace-ID sampling keeps whole request stories while cutting volume.",
+        "Removing logs or sampling by hour loses incident detail."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "On-call engineers must judge within two minutes whether a page is user-visible and which service is at fault. Which landing dashboard design best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A single average-latency number for the whole platform, since fewer panels are quicker to read"
+        },
+        {
+          "id": "b",
+          "label": "Per-service request rate, errors and latency with SLO status at top, and links to drill-down views"
+        },
+        {
+          "id": "c",
+          "label": "A grid of every host's CPU, memory and disk graphs so any resource anomaly is visible instantly"
+        },
+        {
+          "id": "d",
+          "label": "One large table of the last 500 log lines, because logs contain the full detail of every failure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "RED metrics with SLO context give fast symptom-first triage and routes to detail.",
+        "Others show causes without impact, raw detail or an over-aggregated number."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Product wants per-customer latency for 20 key customers out of 50,000, with a tight metrics budget. Which approach is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a `customer_id` label to every latency histogram, since complete data is always preferable"
+        },
+        {
+          "id": "b",
+          "label": "Skip per-customer data entirely, since aggregate latency is statistically the same for everyone"
+        },
+        {
+          "id": "c",
+          "label": "Emit one metric name per customer dynamically, so each has its own independent dashboard"
+        },
+        {
+          "id": "d",
+          "label": "Add a customer label only for the 20 key accounts and bucket the rest as 'other'"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Bounding label values keeps cardinality small while meeting the need.",
+        "Full labels or per-customer metric names explode series count."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A proposal pages on-call when p99 latency across all endpoints exceeds 500ms for one minute. Which are valid criticisms? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A slow-by-design batch endpoint could dominate or pollute the combined p99"
+        },
+        {
+          "id": "b",
+          "label": "Latency alerts are invalid unless the threshold is exactly 1 second"
+        },
+        {
+          "id": "c",
+          "label": "p99 can never be used for alerting, so only the mean is acceptable"
+        },
+        {
+          "id": "d",
+          "label": "The rule is not linked to an SLO or error budget, so urgency is unclear"
+        },
+        {
+          "id": "e",
+          "label": "One-minute windows give noisy p99 values at low traffic"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Mixed endpoints, short windows and missing SLO linkage weaken the alert.",
+        "Percentiles are valid for alerting and no fixed threshold is mandatory."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "Customers reported failed checkouts 25 minutes before any alert fired. The only check was a synthetic ping to `/health`, which kept returning 200. Criteria: detect user-visible failures quickly with few false pages. Which follow-up is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Build a larger dashboard of checkout logs, so engineers can notice failures when they look"
+        },
+        {
+          "id": "b",
+          "label": "Alert on the checkout success ratio from real traffic, plus a synthetic end-to-end purchase probe"
+        },
+        {
+          "id": "c",
+          "label": "Add CPU and memory alerts on all checkout hosts, since resource limits cause most failures"
+        },
+        {
+          "id": "d",
+          "label": "Shorten the `/health` ping interval to ten seconds so any failure appears sooner"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Symptom-based alerts on real user outcomes catch failures a shallow health check misses.",
+        "Faster pings, resource alerts and dashboards still miss functional failure or need human attention."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A team has a 99.9% monthly availability SLO. They must page only when the error budget is burning fast enough to be exhausted well before month end, while ignoring brief blips. Which alert policy best meets these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Page when the daily error count passes a fixed number, because a fixed count is simple and traffic-independent"
+        },
+        {
+          "id": "b",
+          "label": "Page once month-to-date availability drops below 99.9%, because that proves the SLO has actually been breached"
+        },
+        {
+          "id": "c",
+          "label": "Page whenever the 5-minute error rate exceeds the 0.1% budget rate, so that no budget loss goes unnoticed for long"
+        },
+        {
+          "id": "d",
+          "label": "Page on a high burn rate (e.g. 14x) over matching 1-hour and 5-minute windows; route slow burns to tickets"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Multiwindow burn-rate alerting pages on fast budget consumption and filters blips with the short window.",
+        "Instant-threshold and month-to-date options either flood pages or fire only after the budget is already gone."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A service's request counter carries labels endpoint, status and user_id (about 2 million active users), and metrics server memory keeps climbing. Criteria: keep per-user debugging possible and keep the metrics system stable. Which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Remove user_id from metric labels and keep it as a field in structured logs and trace attributes"
+        },
+        {
+          "id": "b",
+          "label": "Keep the label but shorten the scrape interval, so stale per-user series expire from server memory faster"
+        },
+        {
+          "id": "c",
+          "label": "Keep the label and add server memory, since cardinality only affects query speed and never ingestion stability"
+        },
+        {
+          "id": "d",
+          "label": "Hash user_id into 1,000 buckets as a label, which bounds series while still giving near-exact per-user answers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Unbounded label values multiply time series; per-entity detail belongs in logs and traces.",
+        "Hashing loses per-user exactness, and scrape interval or memory changes don't fix cardinality growth."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Tracing costs force the team to keep roughly 1% of traces. Requirements: nearly every error trace and slow-request trace must be retained, and the collector can buffer a whole trace for 30 seconds. Which sampling approach best fits?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Head-based sampling at 10% at the gateway, because a higher rate makes rare errors likely to be captured"
+        },
+        {
+          "id": "b",
+          "label": "Independent 1% span sampling in each service, so every team controls its own tracing cost without coordination"
+        },
+        {
+          "id": "c",
+          "label": "Tail-based sampling that keeps all error and slow traces plus 1% of the rest, using the collector's buffer"
+        },
+        {
+          "id": "d",
+          "label": "Head-based sampling at 1% in every service, since deciding before the outcome is known keeps cost lowest and simple"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Only tail-based sampling decides after the outcome is known, so it can keep all errors and slow traces.",
+        "Head-based and per-span sampling drop most rare failures or produce broken, incomplete traces."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A dashboard computes fleet p99 latency as the average of each instance's own p99. Traffic is very uneven across instances. Which critique is most accurate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Averaging per-instance p99s is not the fleet p99; merge histogram buckets across instances, then compute the quantile"
+        },
+        {
+          "id": "b",
+          "label": "The method only misleads when instances restart, so filtering out recently started instances would fix the value"
+        },
+        {
+          "id": "c",
+          "label": "Averaging is acceptable if each instance is weighted by its traffic, because percentiles combine linearly under weighting"
+        },
+        {
+          "id": "d",
+          "label": "The method is sound but should use the median of instance p99s, as the median resists the effect of uneven traffic"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Quantiles are not linear and can't be averaged; histograms can be summed and the quantile derived afterwards.",
+        "Weighting or taking medians still combines quantiles, which doesn't recover the true fleet percentile."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "An on-call team is paged nightly by 'CPU above 80% for 5 minutes' during batch jobs, with no user impact. Judging against the goal that every page is urgent and actionable, which change is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Page on user-facing symptoms such as SLO burn, and keep CPU as a dashboard signal for diagnosis"
+        },
+        {
+          "id": "b",
+          "label": "Raise the threshold to 95% so only extreme saturation pages, which keeps the alert tied to the underlying cause"
+        },
+        {
+          "id": "c",
+          "label": "Mute the CPU alert every night, since batch jobs are the known source of the noise and need no response"
+        },
+        {
+          "id": "d",
+          "label": "Send the CPU alert to a shared email list, so more people can judge whether the load matters to users"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Symptom-based paging ties pages to user harm; cause metrics support diagnosis rather than waking people.",
+        "Threshold tweaks and muting keep a cause-based page that can hide real problems or still fire without impact."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A proposal says: page the on-call for every log line at level ERROR. Which criticisms of this proposal are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A hung process that stops logging would produce no ERROR lines and so would never trigger a page"
+        },
+        {
+          "id": "b",
+          "label": "Page volume would track traffic and log verbosity rather than the actual harm users experience"
+        },
+        {
+          "id": "c",
+          "label": "Log lines cannot be queried during incidents, so an alert built from them is technically impossible"
+        },
+        {
+          "id": "d",
+          "label": "Error-level logs always arrive too late for alerting, so no log-based alert can ever be useful"
+        },
+        {
+          "id": "e",
+          "label": "Retried errors that eventually succeed would page the on-call even though users saw no failure"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "e"
+        ]
+      },
+      "rubric": [
+        "Valid points: retried errors create false pages, volume is decoupled from user harm, and silent failures are missed.",
+        "Log-based alerts are technically feasible and can be timely, so those two criticisms are false."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A payments API has a 400 ms p99 SLO. Its latency histogram has buckets at 100 ms, 500 ms, 1 s and 5 s. The dashboard interpolates p99 as 380 ms and the team lead declares the SLO met, though customers report slowness. What is the best judgement?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claim holds, because interpolation inside a bucket is exact whenever the bucket's counts come from a large enough number of requests"
+        },
+        {
+          "id": "b",
+          "label": "The claim fails because histograms cannot represent a p99 at all, so the team must switch to per-instance quantile summaries"
+        },
+        {
+          "id": "c",
+          "label": "The claim is unsupported: interpolation inside the 100–500 ms bucket assumes an even spread, so add a bucket boundary near 400 ms"
+        },
+        {
+          "id": "d",
+          "label": "The claim holds, since 380 ms is below 400 ms and bucket boundaries only affect the precision of average latency, not percentiles"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Quantile estimates inside a wide bucket depend on an assumed distribution, so compliance near a boundary needs a nearby bucket.",
+        "Sample size doesn't remove interpolation error, and histograms can represent percentiles within bucket resolution."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a signal for a pipeline (queue, processor, database) that must page when user-visible data is over 5 minutes stale, including when the processor is completely stuck and emits no metrics or errors. Which design best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Alert when the processor's error rate exceeds 1% for 5 minutes, because errors show the pipeline is failing and data is going stale"
+        },
+        {
+          "id": "b",
+          "label": "Alert when queue depth exceeds 10,000 messages for 5 minutes, because a backlog means data arrives faster than it is processed"
+        },
+        {
+          "id": "c",
+          "label": "Alert on the age of the oldest unprocessed message and time since the last database write, measured outside the processor"
+        },
+        {
+          "id": "d",
+          "label": "Alert when processor CPU stays under 5% for 5 minutes, since an idle processor means nothing is being handled and data is going stale"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Freshness is best measured as age from independent sources, so it works even when the processor is silent.",
+        "Error rate, depth and CPU are indirect and can look normal or misleading when data is stale."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design trace propagation for an order service publishing to Kafka and a worker that processes messages in batches. Constraints: producer and consumer work must connect in one trace view, and batch processing must not misrepresent parentage. Which design best meets these?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Make the batch span a child of the first message's producer span, since a span can have only one parent in a trace"
+        },
+        {
+          "id": "b",
+          "label": "Put the trace id in the payload body and start a new root trace in the consumer, then join traces by searching the id"
+        },
+        {
+          "id": "c",
+          "label": "Inject trace context into message headers; the consumer starts a batch span with links to each message's producer span"
+        },
+        {
+          "id": "d",
+          "label": "Use the consumer group id as the trace id so every message processed by the group appears in a single trace"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Header propagation plus span links models many-to-one batching without false parent-child relationships.",
+        "The other options break the connection, misattribute the batch to one message, or merge unrelated work."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A service gets about 20 requests per hour, so one failure is a 5% error ratio. Design an alert that avoids noise from single failures yet still detects sustained outages and fast total failure. Which design best meets this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Disable paging and review error ratios weekly, because the sample is too small to support any reliable alert at all"
+        },
+        {
+          "id": "b",
+          "label": "Alert whenever any single request fails within an hour, because with so little traffic each failure matters a great deal"
+        },
+        {
+          "id": "c",
+          "label": "Use a burn-rate alert over a long window with a minimum request count, plus a synthetic probe for fast outage detection"
+        },
+        {
+          "id": "d",
+          "label": "Reuse the 5-minute, 1% error-ratio threshold from busy services, because consistent thresholds are easier to maintain across teams"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Long windows with a traffic floor reduce small-sample noise, and probes supply the traffic needed to detect fast outages.",
+        "Busy-service thresholds and single-failure alerts are noisy; disabling alerting misses outages."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "A proposed design runs Prometheus and Alertmanager in the same cluster as the application and routes every alert through them to the pager. Which missing element is most important to add?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One more dashboard per service, so engineers can see every golden signal without writing ad-hoc queries"
+        },
+        {
+          "id": "b",
+          "label": "Lowering the scrape interval to one second, so any outage in the monitored services is detected faster"
+        },
+        {
+          "id": "c",
+          "label": "An always-firing heartbeat alert sent to an external system that pages when the heartbeat stops arriving"
+        },
+        {
+          "id": "d",
+          "label": "Longer metrics retention, so post-incident reviews can compare behaviour against several months of history"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "A dead-man's switch detects failure of the monitoring stack itself, which would otherwise fail silently with the cluster.",
+        "Retention, dashboards and scrape rate don't cover the monitoring pipeline going down."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a logging standard for 40 microservices. It must support cross-service incident search, protect personal data, and keep storage cost bounded. Which standard best meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Log full request and response bodies for every call so nothing is missing, protected by strict access control on storage"
+        },
+        {
+          "id": "b",
+          "label": "Structured JSON with shared field names and trace_id, personal data redacted in the logging library, debug logs sampled"
+        },
+        {
+          "id": "c",
+          "label": "Plain-text lines with a trace id only on errors, kept indefinitely so any old incident can still be searched later"
+        },
+        {
+          "id": "d",
+          "label": "Free-text lines in each team's own format, parsed by regexes in the pipeline, with personal data masked at query time"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Shared structured fields enable joins across services, redaction at source protects data, and sampling bounds cost.",
+        "Other options leave data stored unredacted, make search unreliable, or ignore cost."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "You are designing automated canary analysis for deployments, and the verdict must be trustworthy. Which elements should the design include? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Require a minimum number of requests before the verdict so that small samples don't drive it"
+        },
+        {
+          "id": "b",
+          "label": "Compare the canary's metrics with last week's production values, since a fixed history is more stable"
+        },
+        {
+          "id": "c",
+          "label": "Judge user-facing indicators such as error ratio and latency percentiles, not only resource usage"
+        },
+        {
+          "id": "d",
+          "label": "Base the verdict on average CPU alone, because CPU is the earliest sign of any regression"
+        },
+        {
+          "id": "e",
+          "label": "Compare the canary against a baseline running at the same time on comparable traffic"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "c",
+          "e"
+        ]
+      },
+      "rubric": [
+        "A concurrent baseline, user-facing SLIs and a minimum sample size make the verdict valid.",
+        "Last week's values ignore traffic and time differences, and CPU alone misses most regressions."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "A team has an SLO that 99% of requests finish within 300 ms. Their latency histogram uses default exponential buckets from 5 ms to 10 s. They need an exact compliance ratio for dashboards and alerts while keeping the time-series count low. Which redesign best meets both needs?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add 200 linear 5 ms buckets across the whole range so that some boundary lands near every possible target"
+        },
+        {
+          "id": "b",
+          "label": "Switch to per-instance summaries of the 0.99 quantile and average them across instances for the fleet value"
+        },
+        {
+          "id": "c",
+          "label": "Keep the default buckets and interpolate the 99th percentile, then compare it to 300 ms on the dashboard"
+        },
+        {
+          "id": "d",
+          "label": "Add an explicit 0.3 s bucket boundary and keep few others, so compliance is the ratio of le=0.3 to total count"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "A boundary at the SLO threshold gives an exact good-over-total ratio with few extra series.",
+        "Interpolation is approximate, hundreds of buckets inflate cardinality, and summaries can't be aggregated."
+      ],
+      "reviewed": false
+    }
+  ]
+}

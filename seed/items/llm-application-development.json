@@ -1,0 +1,2488 @@
+{
+  "version": 1,
+  "topic": "llm-application-development",
+  "items": [
+    {
+      "key": "nov-c1-sc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What does the acronym RAG stand for in LLM application development?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Randomized Answer Generation"
+        },
+        {
+          "id": "b",
+          "label": "Ranked Agent Gateway Routing"
+        },
+        {
+          "id": "c",
+          "label": "Retrieval-Augmented Generation"
+        },
+        {
+          "id": "d",
+          "label": "Recursive Attention Graph Search"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "RAG means Retrieval-Augmented Generation: retrieved text is added to the prompt.",
+        "The other options are invented expansions that sound plausible."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc2",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In a chat-style LLM API, which message role is normally used to set the model's overall behaviour and instructions?",
+      "options": [
+        {
+          "id": "a",
+          "label": "tool"
+        },
+        {
+          "id": "b",
+          "label": "system"
+        },
+        {
+          "id": "c",
+          "label": "user"
+        },
+        {
+          "id": "d",
+          "label": "assistant"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The system message carries high-level instructions and behaviour.",
+        "Learners confuse it with the user role, which carries the end user's input."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc3",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "Which API parameter mainly controls how random the model's token sampling is?",
+      "options": [
+        {
+          "id": "a",
+          "label": "stop"
+        },
+        {
+          "id": "b",
+          "label": "logprobs"
+        },
+        {
+          "id": "c",
+          "label": "temperature"
+        },
+        {
+          "id": "d",
+          "label": "max_tokens"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Temperature scales sampling randomness.",
+        "max_tokens limits length, stop ends output at a sequence, logprobs only reports probabilities."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc4",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "In LLM APIs, what is a token?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A single character of text, which the API counts one by one in every prompt"
+        },
+        {
+          "id": "b",
+          "label": "A row of data stored in a vector database index and returned at query time"
+        },
+        {
+          "id": "c",
+          "label": "A secret credential string that authenticates each request sent to the API"
+        },
+        {
+          "id": "d",
+          "label": "A chunk of text, often a word or word piece, the model reads"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Tokens are text pieces the model reads and writes; pricing and limits use them.",
+        "Confusing tokens with API keys or characters is a common mistake."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sc5",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "single_choice",
+      "prompt": "What is a text embedding?",
+      "options": [
+        {
+          "id": "a",
+          "label": "A short summary of the text that a model writes out in words"
+        },
+        {
+          "id": "b",
+          "label": "A keyword index that maps each word to the pages it appears on"
+        },
+        {
+          "id": "c",
+          "label": "A list of numbers that represents the meaning of the text"
+        },
+        {
+          "id": "d",
+          "label": "A compressed copy of the original text file to save storage"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "An embedding is a numeric vector representing meaning, used for similarity search.",
+        "Distractors treat it as compression, summary or keyword index."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-mc1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "multi_choice",
+      "prompt": "Which of these are typical steps or components of a RAG pipeline? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Compiling the documents into a binary file"
+        },
+        {
+          "id": "b",
+          "label": "Splitting documents into chunks"
+        },
+        {
+          "id": "c",
+          "label": "Retraining the model's weights on every user query"
+        },
+        {
+          "id": "d",
+          "label": "Searching a vector store for similar chunks"
+        },
+        {
+          "id": "e",
+          "label": "Adding the retrieved text to the prompt"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "d",
+          "e"
+        ]
+      },
+      "rubric": [
+        "RAG chunks documents, retrieves similar chunks and puts them in the prompt.",
+        "RAG does not retrain weights per query; that is a different technique."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c1-sn1",
+      "stage": "novice",
+      "bloom": "C1",
+      "kind": "scenario",
+      "prompt": "A developer's Python code calls an LLM and then runs json.loads on the reply, but the model sometimes adds chatty text around the JSON. The developer wants the API to constrain replies to a given schema. Which API feature is designed for this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Lowering temperature to zero so replies stay deterministic"
+        },
+        {
+          "id": "b",
+          "label": "Increasing the max_tokens limit so replies are not cut off"
+        },
+        {
+          "id": "c",
+          "label": "Structured outputs with a JSON schema"
+        },
+        {
+          "id": "d",
+          "label": "Adding more few-shot chat history showing bare JSON replies"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Structured outputs (schema-constrained responses) make replies parseable.",
+        "Other settings change randomness or length, not format guarantees."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why can an LLM state a false fact in a confident tone?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It generates likely-sounding text and does not verify claims"
+        },
+        {
+          "id": "b",
+          "label": "It deliberately hides the real answer when the prompt is short"
+        },
+        {
+          "id": "c",
+          "label": "It only repeats the exact sentences from its training data"
+        },
+        {
+          "id": "d",
+          "label": "It looks facts up in a database and sometimes reads the wrong row"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Models predict plausible next tokens and have no built-in fact check.",
+        "Distractors assume lookup, intent or pure copying."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc2",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why is retrieved text put into the prompt in RAG instead of relying on what the model memorised?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It means the prompt no longer needs any instructions to the model"
+        },
+        {
+          "id": "b",
+          "label": "It updates the model's weights so the documents are stored permanently"
+        },
+        {
+          "id": "c",
+          "label": "It lets the model use current or private data without retraining"
+        },
+        {
+          "id": "d",
+          "label": "It guarantees the answer is grounded and can never contain a mistake"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Retrieval supplies current or private knowledge at query time.",
+        "RAG does not change weights or guarantee correctness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc3",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In tool calling (function calling), what does the model itself do when it decides a tool is needed?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It rewrites your Python source to add the function body"
+        },
+        {
+          "id": "b",
+          "label": "It runs your function on the provider's servers and sends the result into the reply"
+        },
+        {
+          "id": "c",
+          "label": "It returns a request naming the function and arguments for your code to run"
+        },
+        {
+          "id": "d",
+          "label": "It connects to your database directly using credentials stored in its settings"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The model only emits a structured call; your application executes it.",
+        "Learners often think the model runs code itself."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc4",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why are long documents usually split into chunks before they are embedded for retrieval?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Embedding models only accept short inputs, so chunking is needed to keep them under the token limit"
+        },
+        {
+          "id": "b",
+          "label": "Splitting stops the vector store from saving duplicate words and so keeps the index small"
+        },
+        {
+          "id": "c",
+          "label": "Small chunks give focused matches and fit within the context window"
+        },
+        {
+          "id": "d",
+          "label": "Chunks let the embedding model skip the API key check that whole documents trigger"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Focused chunks retrieve better and fit context limits.",
+        "The other options misattribute chunking to keys, temperature or deduplication."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sc5",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A developer sets temperature to 0 and sends the same prompt ten times. What is the best prediction?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Replies will be identical every time, because temperature 0 removes all randomness from the API"
+        },
+        {
+          "id": "b",
+          "label": "Replies will be shorter because the model stops early"
+        },
+        {
+          "id": "c",
+          "label": "Replies will be random because zero disables sampling control"
+        },
+        {
+          "id": "d",
+          "label": "Replies will be much more consistent, though not always identical"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Low temperature makes output more deterministic but not guaranteed identical.",
+        "Absolute-determinism claims are a common misconception."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-mc1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements about evaluating an LLM feature are correct? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "If a prompt passes once, it will pass on every future input"
+        },
+        {
+          "id": "b",
+          "label": "One impressive demo shows the feature is ready to ship"
+        },
+        {
+          "id": "c",
+          "label": "Automated checks, such as valid-schema tests, can score outputs at scale"
+        },
+        {
+          "id": "d",
+          "label": "A fixed set of example inputs lets you compare prompt versions fairly"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Fixed test sets and automated checks make evaluation repeatable.",
+        "A single demo or single pass says little about variable outputs."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "nov-c2-sn1",
+      "stage": "novice",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A support bot answers from a company policy document inserted into the prompt. When asked about a topic not in the document, it invents a policy. Which prompt change best addresses this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Shorten the system message so the bot has fewer rules to juggle and is less likely to improvise"
+        },
+        {
+          "id": "b",
+          "label": "Raise the temperature so the bot explores more answers and is more likely to find one that fits"
+        },
+        {
+          "id": "c",
+          "label": "Tell it to answer only from the given context and say it doesn't know otherwise"
+        },
+        {
+          "id": "d",
+          "label": "Increase max_tokens so the bot has room to explain its reasoning fully before it answers"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Grounding instructions plus an allowed 'I don't know' reduce invented answers.",
+        "More randomness or length does not add missing knowledge."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "A developer extracts invoice fields with an LLM and wants the same invoice to give nearly the same result on every run. Which setting helps most?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add more top-k results to the retrieval step of the app"
+        },
+        {
+          "id": "b",
+          "label": "Increase max tokens so the output becomes more consistent"
+        },
+        {
+          "id": "c",
+          "label": "Raise temperature to 1.5 so answers settle on one value"
+        },
+        {
+          "id": "d",
+          "label": "Lower temperature toward 0 to reduce sampling randomness"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Lower temperature makes token sampling more deterministic, so repeated runs agree more often.",
+        "Higher temperature adds randomness; max tokens only caps length."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "What is the main purpose of a system message in a chat-style LLM API call?",
+      "options": [
+        {
+          "id": "a",
+          "label": "To grant the model permission to call external tools by itself"
+        },
+        {
+          "id": "b",
+          "label": "To fix the model's knowledge cutoff to the current date today"
+        },
+        {
+          "id": "c",
+          "label": "To set standing instructions, such as role and rules, for replies"
+        },
+        {
+          "id": "d",
+          "label": "To store the user's earlier questions on the server between calls"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The system message gives persistent behavioural instructions that shape every reply.",
+        "Chat APIs do not store history server-side, and permissions or knowledge cutoffs are not set this way."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "Why are long documents usually split into chunks before being embedded for RAG?",
+      "options": [
+        {
+          "id": "a",
+          "label": "So each retrieved piece is focused and several fit in the prompt"
+        },
+        {
+          "id": "b",
+          "label": "So the LLM will memorize each chunk after seeing it just once"
+        },
+        {
+          "id": "c",
+          "label": "So the vector database can skip storing the original text entirely"
+        },
+        {
+          "id": "d",
+          "label": "So the embedding model can be fine-tuned on each separate piece"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Focused chunks give more precise matches and let several fit within the context window.",
+        "Chunking does not fine-tune models, remove the need for source text, or make the model memorize."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In a RAG system, what does a high cosine similarity between a query vector and a chunk vector indicate?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The chunk was written more recently than the query was"
+        },
+        {
+          "id": "b",
+          "label": "The chunk contains the exact words typed in the query"
+        },
+        {
+          "id": "c",
+          "label": "The two texts are close in meaning, so the chunk is a candidate"
+        },
+        {
+          "id": "d",
+          "label": "The chunk is guaranteed to be factually correct and complete"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Embedding similarity reflects semantic closeness, making the chunk a good candidate for retrieval.",
+        "It does not mean exact word overlap, recency, or factual correctness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "single_choice",
+      "prompt": "In tool calling, what does the model return when it decides to use a tool?",
+      "options": [
+        {
+          "id": "a",
+          "label": "An embedding vector describing which function it would pick"
+        },
+        {
+          "id": "b",
+          "label": "Python source code that the API then executes by itself"
+        },
+        {
+          "id": "c",
+          "label": "The function's final output, already run on the provider servers"
+        },
+        {
+          "id": "d",
+          "label": "A tool name plus JSON arguments, which your code must execute"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The model only proposes a call with a name and arguments; your application runs the function.",
+        "Providers do not execute your functions or return embeddings for tool selection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "multi_choice",
+      "prompt": "Which statements correctly describe why RAG is used instead of relying only on what the model learned in training? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "It lets answers draw on private or recent documents the model never saw"
+        },
+        {
+          "id": "b",
+          "label": "It permanently adds the retrieved documents to the model's weights"
+        },
+        {
+          "id": "c",
+          "label": "It guarantees the model can never produce a wrong statement"
+        },
+        {
+          "id": "d",
+          "label": "It lets you ground answers in retrieved text and show the sources"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "RAG supplies external, current or private text at query time and enables citing sources.",
+        "It does not guarantee correctness and does not change model weights."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c2-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C2",
+      "kind": "scenario",
+      "prompt": "A support bot built on a chat completion API answers the first question well. When the user then asks 'what about the second option?', it replies that it doesn't know what option is meant. The code sends only the newest user message on each call. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The temperature is too low, so the model drops earlier context"
+        },
+        {
+          "id": "b",
+          "label": "The model needs fine-tuning before it can remember one chat"
+        },
+        {
+          "id": "c",
+          "label": "The system message expires after one reply and must be renewed"
+        },
+        {
+          "id": "d",
+          "label": "The API is stateless, so earlier turns must be resent in messages"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Chat APIs keep no memory between calls; the app must resend prior turns in the messages list.",
+        "Temperature, system message expiry and fine-tuning are not the cause."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A call uses 2,000 input tokens at $0.50 per million and 500 output tokens at $1.50 per million. What is the cost of the call?",
+      "options": [
+        {
+          "id": "a",
+          "label": "$0.002"
+        },
+        {
+          "id": "b",
+          "label": "$0.00175"
+        },
+        {
+          "id": "c",
+          "label": "$0.0175"
+        },
+        {
+          "id": "d",
+          "label": "$0.00125"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Input: 2000 x 0.50 / 1,000,000 = $0.001; output: 500 x 1.50 / 1,000,000 = $0.00075; total $0.00175.",
+        "Other values come from decimal slips or using one rate for all tokens."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc2",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Your code calls `json.loads` on a model reply, but it fails because the JSON is wrapped in a Markdown code fence. Which fix is most robust?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use a regex to cut from the first brace and skip any validation"
+        },
+        {
+          "id": "b",
+          "label": "Wrap `json.loads` in try/except and silently return an empty dict"
+        },
+        {
+          "id": "c",
+          "label": "Request structured output with a JSON schema and validate the result"
+        },
+        {
+          "id": "d",
+          "label": "Add 'please be careful' to the prompt and parse the text as before"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Schema-constrained output plus validation removes the formatting issue and catches bad fields.",
+        "Swallowing errors, polite prompting, or unvalidated regex cutting leave failures hidden or fragile."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc3",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Given `scores = [0.2, 0.9, 0.5, 0.7]` for four chunks, which list gives the indices of the top 2 chunks, highest score first?",
+      "options": [
+        {
+          "id": "a",
+          "label": "[1, 2]"
+        },
+        {
+          "id": "b",
+          "label": "[0, 2]"
+        },
+        {
+          "id": "c",
+          "label": "[3, 1]"
+        },
+        {
+          "id": "d",
+          "label": "[1, 3]"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "The highest scores are 0.9 (index 1) and 0.7 (index 3), in that order.",
+        "[0, 2] picks the lowest; [1, 2] misses 0.7; [3, 1] reverses the order."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc4",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "The model returns a tool call with id `call_42` for `get_weather`. Your code runs the function. What do you send in the next request?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The history with the tool call removed and the result in the system message"
+        },
+        {
+          "id": "b",
+          "label": "Only a new user message containing the weather result as text"
+        },
+        {
+          "id": "c",
+          "label": "The history, the assistant tool-call message, and a tool message with `call_42`"
+        },
+        {
+          "id": "d",
+          "label": "Only the tool result, since the API remembers the earlier turns"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The model needs the full history, including its tool call, plus a tool-role message linked by tool_call_id.",
+        "The API is stateless, and the result belongs in a tool message, not the user or system message."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sc5",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You test a new prompt on 60 labeled examples and 46 outputs match the expected label. What is the accuracy, rounded to one decimal place?",
+      "options": [
+        {
+          "id": "a",
+          "label": "78.3%"
+        },
+        {
+          "id": "b",
+          "label": "76.7%"
+        },
+        {
+          "id": "c",
+          "label": "73.3%"
+        },
+        {
+          "id": "d",
+          "label": "23.3%"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "46 / 60 = 0.7667, which is 76.7%.",
+        "23.3% is the error rate; the others are arithmetic slips."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-mc1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "A RAG bot inserts retrieved web pages into the prompt. Which steps reduce the risk from instructions hidden in those pages? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Place the retrieved text in the system message so it is trusted more"
+        },
+        {
+          "id": "b",
+          "label": "Limit which tools the bot can call and check arguments before running them"
+        },
+        {
+          "id": "c",
+          "label": "Wrap retrieved text in delimiters and tell the model it is data, not instructions"
+        },
+        {
+          "id": "d",
+          "label": "Rely on the model to notice hidden commands with no other safeguard"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Marking retrieved text as data and restricting and validating tool use both limit injection damage.",
+        "Putting untrusted text in the system message raises its authority; relying on the model alone is weak."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "adb-c3-sn1",
+      "stage": "advanced_beginner",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A RAG app splits manuals into 4,000-token chunks. Questions about one specific setting often retrieve chunks where the answer is buried among unrelated text, and the answers come out vague. Which change fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Split into chunks of a few hundred tokens with slight overlap"
+        },
+        {
+          "id": "b",
+          "label": "Switch to even bigger chunks so each holds a whole chapter"
+        },
+        {
+          "id": "c",
+          "label": "Raise temperature so the model explores more of each chunk"
+        },
+        {
+          "id": "d",
+          "label": "Remove the embedding step and send the full manual each call"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Smaller, overlapping chunks make embeddings more specific and retrieved text more focused.",
+        "Bigger chunks worsen dilution, and temperature does not fix retrieval quality."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "A model has an 8,000-token context window. The system prompt uses 500 tokens, three retrieved chunks use 1,200 tokens each, and you reserve 1,000 tokens for the output. How many tokens remain for the user message and chat history?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1,900"
+        },
+        {
+          "id": "b",
+          "label": "3,900"
+        },
+        {
+          "id": "c",
+          "label": "3,400"
+        },
+        {
+          "id": "d",
+          "label": "2,900"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "8,000 - 500 - 3,600 - 1,000 = 2,900.",
+        "3,400 forgets the system prompt; 3,900 forgets the output reservation."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc2",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "You split a 1,300-token document into chunks of 500 tokens with a 100-token overlap, starting at token 0 and stopping once a chunk reaches the end of the document. How many chunks result?",
+      "options": [
+        {
+          "id": "a",
+          "label": "3"
+        },
+        {
+          "id": "b",
+          "label": "5"
+        },
+        {
+          "id": "c",
+          "label": "4"
+        },
+        {
+          "id": "d",
+          "label": "2"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "The stride is 400, so chunks start at 0, 400 and 800; the third ends at 1,300.",
+        "Using a stride of 500 or ignoring overlap gives the wrong count."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc3",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Your code parses model output with a Pydantic model, and validation fails because a required field is missing. Which handling is the standard next step?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Retry once or twice, appending the validation error to the prompt"
+        },
+        {
+          "id": "b",
+          "label": "Skip validation on later calls and trust the model's output format"
+        },
+        {
+          "id": "c",
+          "label": "Raise temperature to 1.0 and resend the identical prompt"
+        },
+        {
+          "id": "d",
+          "label": "Fill the missing field with a default value and continue silently"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Feeding the validation error back lets the model correct itself within bounded retries.",
+        "Silent defaults hide data errors; higher temperature adds randomness rather than information."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc4",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "The model replies with a tool call `get_weather(city=\"Oslo\")` carrying id `call_1`. What does your code do next in the standard tool-calling loop?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Append the result as a plain user message with no call id, then end the turn without calling the model"
+        },
+        {
+          "id": "b",
+          "label": "Ask the model to run the function itself and wait for its confirmation message"
+        },
+        {
+          "id": "c",
+          "label": "Show the tool call JSON to the user as the final answer and skip any second model call"
+        },
+        {
+          "id": "d",
+          "label": "Run the function, append its result as a tool message with id `call_1`, then call the model again"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Your code executes tools; the result goes back with the matching call id so the model can compose the final answer.",
+        "Models cannot execute functions themselves, and results need the call id."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sc5",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "single_choice",
+      "prompt": "Embedding a = (1, 0) and embedding b = (1, 1). What is their cosine similarity, rounded to 2 decimals?",
+      "options": [
+        {
+          "id": "a",
+          "label": "1.41"
+        },
+        {
+          "id": "b",
+          "label": "0.71"
+        },
+        {
+          "id": "c",
+          "label": "1.00"
+        },
+        {
+          "id": "d",
+          "label": "0.50"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "dot = 1, |a| = 1, |b| = sqrt(2), so 1/1.414 = 0.71.",
+        "1.41 is the norm of b, and 1.00 would require the same direction."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-mc1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "multi_choice",
+      "prompt": "You are writing a RAG prompt to reduce unsupported answers. Which instructions or layouts help? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Label each passage with a source id and ask for citations"
+        },
+        {
+          "id": "b",
+          "label": "Tell it to say it cannot answer when the passages lack the information"
+        },
+        {
+          "id": "c",
+          "label": "Raise temperature so the model explores more phrasing"
+        },
+        {
+          "id": "d",
+          "label": "Tell the model to answer only from the passages provided"
+        },
+        {
+          "id": "e",
+          "label": "Append extra unrelated passages to fill the context window"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Grounding, an explicit refusal path and citations all constrain answers to the retrieved text.",
+        "Higher temperature and irrelevant padding increase noise and unsupported claims."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c3-sn1",
+      "stage": "competent",
+      "bloom": "C3",
+      "kind": "scenario",
+      "prompt": "A support chatbot resends the full conversation on every turn. Around turn 30, requests fail with a context-length error. Users still need the bot to remember the order number given at turn 2. Which change fixes the error while keeping that detail?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Raise temperature so the model infers earlier details without seeing them"
+        },
+        {
+          "id": "b",
+          "label": "Summarise older turns into a short note and keep recent turns verbatim"
+        },
+        {
+          "id": "c",
+          "label": "Drop the oldest turns until the request fits, keeping only the latest ones"
+        },
+        {
+          "id": "d",
+          "label": "Set max output tokens to zero so that more input fits in the window"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Rolling summarisation compresses old turns while preserving key facts such as the order number.",
+        "Dropping old turns loses the order number; the other options do not solve the limit."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A RAG app gives wrong answers. Logs show the correct passage exists in the index but ranks 12th, while `top_k` is 5 and the model answers from those top 5. Where is the fault?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Tokenisation, since the passage is cut mid-word by the API"
+        },
+        {
+          "id": "b",
+          "label": "Retrieval ranking, since the right passage never reaches the prompt"
+        },
+        {
+          "id": "c",
+          "label": "Output parsing, since the answer is truncated after generation"
+        },
+        {
+          "id": "d",
+          "label": "Generation, since the model ignores the correct passage it was given"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "The passage is never in the prompt, so the fault is in retrieval or ranking, not generation.",
+        "Blaming the model ignores that it never saw the correct text."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc2",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A team tuned its prompt over many rounds against the same 50 test questions, and the score rose from 62% to 91%. On fresh user traffic, quality is unchanged. What best explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The 91% score hit a ceiling, so further tuning cannot show real gains on new traffic"
+        },
+        {
+          "id": "b",
+          "label": "The model was silently downgraded between runs, so fresh traffic is scored lower"
+        },
+        {
+          "id": "c",
+          "label": "The prompt overfit to the 50 test questions, so the gain does not generalise"
+        },
+        {
+          "id": "d",
+          "label": "Fresh user traffic is longer than the test questions and overflows the context window"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Repeated tuning against one fixed set fits its quirks; a held-out set is needed to measure real gains.",
+        "The other options invent causes with no supporting evidence."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc3",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "After a model upgrade, every response still parses against your JSON schema, but `due_date` is now often the email's send date rather than the deadline. Why did your tests not catch it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The new model partly ignores the schema, so outputs parse only by luck"
+        },
+        {
+          "id": "b",
+          "label": "Schema validation checks structure and types, not whether values are correct"
+        },
+        {
+          "id": "c",
+          "label": "Strict-mode schemas check dates against the email text, which missed this case"
+        },
+        {
+          "id": "d",
+          "label": "Date fields with a format constraint are skipped by validators, so wrong dates pass"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A valid date string passes the schema even when it is the wrong date; value-level evals are needed.",
+        "Structured output guarantees shape, not semantic correctness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc4",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An agent calls `search_orders` with identical arguments six times in a row. Each time the tool returns only the string `Error`. What is the most likely cause of the loop?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The error carries no reason, so the model has nothing to change"
+        },
+        {
+          "id": "b",
+          "label": "Temperature is too low, which forces every tool call to repeat"
+        },
+        {
+          "id": "c",
+          "label": "The context window resets after each tool call, erasing history"
+        },
+        {
+          "id": "d",
+          "label": "The tool schema has too many parameters for the model to fill"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "An uninformative error gives the model no signal to adjust arguments, so it retries unchanged.",
+        "Good tool errors state what failed and how to fix it; also cap retries."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sc5",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "Answers to policy questions omit conditions that appear two sentences after the retrieved text. Chunks are 80 tokens with no overlap. What is the likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Small chunks split conditions from the rule they qualify"
+        },
+        {
+          "id": "b",
+          "label": "Top_k is set too high, so the extra retrieved chunks crowd the conditions out of the prompt"
+        },
+        {
+          "id": "c",
+          "label": "The embedding model is too large to represent short passages well, so nearby chunks rank poorly"
+        },
+        {
+          "id": "d",
+          "label": "The vector index uses cosine rather than dot-product similarity, which reorders close neighbours"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Tiny non-overlapping chunks separate a rule from its conditions, so only half is retrieved.",
+        "Larger chunks or overlap keep related sentences together."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-mc1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "Your RAG bot's logs are under review for signs of indirect prompt injection from retrieved web pages. Which observations point to it? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Similarity scores for top chunks are lower than last week"
+        },
+        {
+          "id": "b",
+          "label": "The model calls an email tool the user never asked for after reading a page"
+        },
+        {
+          "id": "c",
+          "label": "The reply tells users to visit a link that appears only in a page's hidden text"
+        },
+        {
+          "id": "d",
+          "label": "The reply obeys an instruction found inside a retrieved page"
+        },
+        {
+          "id": "e",
+          "label": "Retrieval latency rose by 40 ms after an index rebuild"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b",
+          "c",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Following embedded instructions, unrequested tool use and hidden-text links are classic injection signs.",
+        "Latency and score changes point to retrieval performance, not injection."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "cmp-c4-sn1",
+      "stage": "competent",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "An HR assistant answers a leave question with the old 15-day policy, yet cites its source correctly. Retrieval returns both the 2022 and 2024 policy files, with the 2022 file ranked first. What is the best diagnosis and fix?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The model hallucinated, so setting temperature to zero will fix the answer"
+        },
+        {
+          "id": "b",
+          "label": "Stale duplicates compete; add version metadata and filter to the current policy"
+        },
+        {
+          "id": "c",
+          "label": "Embeddings are broken, so a larger model with both files kept will help"
+        },
+        {
+          "id": "d",
+          "label": "Chunks are too big, so halving chunk size will separate the two policies"
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Both versions are retrieved and the old one ranks first, so the model faithfully used a stale source; filter by version.",
+        "Temperature, chunk size and embedding size do not remove the outdated document."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A RAG bot answers pricing questions. Logs show the correct document is always in the top 5 results, yet answers often quote the wrong tier's price. Chunks are 200 tokens with no overlap, and table rows get split across chunks. What is the most likely cause?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The vector index is stale, so it returns older document versions that list outdated tier names."
+        },
+        {
+          "id": "b",
+          "label": "The embedding dimension is too small, so the top 5 results are ranked in the wrong order every time."
+        },
+        {
+          "id": "c",
+          "label": "The temperature is above zero, which makes the model invent prices that appear nowhere in context."
+        },
+        {
+          "id": "d",
+          "label": "Splitting rows detaches tier labels from prices, so the model sees numbers without their tier."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Retrieval finds the right document, so the fault is in how chunks represent table data: labels and values are separated.",
+        "Distractors blame ranking, sampling or staleness, which do not explain a correct document yielding the wrong tier's price."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc2",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A pipeline uses the provider's JSON mode. Every response parses as JSON, yet about 2% of requests crash with `KeyError: 'total'` in downstream code. Which explanation fits these symptoms?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The max_tokens limit truncates every response, which removes the final key in about 2% of cases."
+        },
+        {
+          "id": "b",
+          "label": "The model's output is always valid JSON, so the crash must come from a bug in the Python json library."
+        },
+        {
+          "id": "c",
+          "label": "Temperature 0 is required for JSON mode, and higher values make the model drop required fields."
+        },
+        {
+          "id": "d",
+          "label": "JSON mode guarantees syntax only, so some responses omit or rename keys that the schema requires."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "JSON mode ensures well-formed JSON, not conformance to a schema; validate or use schema-constrained outputs.",
+        "Truncation would produce invalid JSON, and the library-bug and temperature explanations ignore how JSON mode works."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc3",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "An agent calls `search_orders` with identical arguments 10 times until it hits the step limit. The tool returns `{\"error\": \"failed\"}` each time because the date argument is formatted `DD/MM/YYYY` instead of the expected `YYYY-MM-DD`. What best explains the loop?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The model cannot issue parallel tool calls, so it has to repeat the same call sequentially until the backend eventually accepts it."
+        },
+        {
+          "id": "b",
+          "label": "The error gives the model no signal about what to change, so it retries the same arguments rather than fixing the date."
+        },
+        {
+          "id": "c",
+          "label": "The step limit is set too high, so the agent keeps going; a lower limit would have let the model recover by changing its arguments."
+        },
+        {
+          "id": "d",
+          "label": "The tool schema lacks a description for the date field, so the model cannot produce any valid date and keeps resending its best guess."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Tool errors should be actionable; a vague error offers no signal for changing the arguments.",
+        "The step limit only stops the loop, and parallel calling or a missing description does not explain identical retries."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc4",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A team tuned a prompt over 30 iterations, each time checking the same fixed set of 80 questions. It now scores 94% there, but accuracy on fresh user traffic is 78%. Which diagnosis fits best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Production inputs are longer, which proves the prompt's instructions are too short for every possible input."
+        },
+        {
+          "id": "b",
+          "label": "Accuracy on 80 questions is too coarse, so the true score is certainly higher than 94% on fresh traffic."
+        },
+        {
+          "id": "c",
+          "label": "The prompt overfit the 80 reused questions, so the score no longer estimates performance on new traffic."
+        },
+        {
+          "id": "d",
+          "label": "The model was silently downgraded, since a fixed eval set cannot reveal any difference between prompt versions."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Repeatedly tuning against one eval set leaks it into the prompt; a held-out set is needed.",
+        "Distractors assert causes without evidence or claim the gap must be noise in the favourable direction."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sc5",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "single_choice",
+      "prompt": "A support chatbot resends the full conversation on every turn. Turn 1 uses 1,000 input tokens. By turn 20, latency and cost per call are about 10x higher, with no change in answer length. What explains this?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Output tokens accumulate in the model's memory between calls, so each new reply takes longer to generate."
+        },
+        {
+          "id": "b",
+          "label": "Rate limiting adds a delay proportional to the turn count, which also raises the billed token total."
+        },
+        {
+          "id": "c",
+          "label": "The API caches earlier replies server-side and recomputes them every turn using an ever larger context."
+        },
+        {
+          "id": "d",
+          "label": "Input size grows each turn because the whole history is resent, so prompt tokens dominate cost and time."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Chat APIs are stateless; resending history makes prompt size, and so cost and latency, grow with each turn.",
+        "Distractors invent server-side memory or rate-limit effects that do not match stateless billing by input tokens."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-mc1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "multi_choice",
+      "prompt": "A team sets temperature 0 but sees different outputs for identical requests over one week. Which are plausible causes? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Floating-point nondeterminism in batched GPU inference can flip near-tied tokens."
+        },
+        {
+          "id": "b",
+          "label": "The API raises temperature 0 to a minimum of 0.7 to avoid repetitive text."
+        },
+        {
+          "id": "c",
+          "label": "The tokenizer randomly splits words differently on each request."
+        },
+        {
+          "id": "d",
+          "label": "The model name is an alias that the provider repointed to a newer snapshot."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Alias repointing and nondeterministic numerics both change outputs even at temperature 0.",
+        "Tokenizers are deterministic and APIs do not silently raise temperature 0."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c4-sn1",
+      "stage": "proficient",
+      "bloom": "C4",
+      "kind": "scenario",
+      "prompt": "A store's RAG assistant uses dense embeddings only. Queries like 'return policy' work well, but 'status of order XJ-4402-B' returns generic shipping articles, even though the order-lookup document is indexed. What is the best analysis of this failure?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Embeddings capture meaning but blur exact identifiers, so rare tokens like SKUs need lexical matching alongside vectors."
+        },
+        {
+          "id": "b",
+          "label": "Cosine similarity cannot score queries containing digits or hyphens, so the index must switch to Euclidean distance for such queries."
+        },
+        {
+          "id": "c",
+          "label": "The generation model ignores retrieved passages that contain numeric strings, so the real failure is in generation, not in retrieval."
+        },
+        {
+          "id": "d",
+          "label": "The chunks are too large, so every chunk embeds to nearly the same vector regardless of the identifiers each chunk contains."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Dense retrieval is weak on exact identifiers; hybrid search with BM25 addresses this.",
+        "Distractors misattribute the failure to chunk size, generation or similarity metrics that work on such queries."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: product docs change daily, answers must cite the source page, and a wrong answer must be correctable within hours. Which approach best meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Fine-tune nightly on the docs, because weights can be traced back to the pages that shaped them."
+        },
+        {
+          "id": "b",
+          "label": "Retrieve from an index refreshed on every doc change, and cite the retrieved passages in each answer."
+        },
+        {
+          "id": "c",
+          "label": "Fine-tune monthly on the docs, because baked-in knowledge removes retrieval latency and citation work."
+        },
+        {
+          "id": "d",
+          "label": "Paste the entire documentation into every prompt, because it avoids any retrieval errors entirely."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "RAG gives freshness, citations and quick corrections by editing the index.",
+        "Fine-tuning cannot cite sources or update within hours, and pasting all docs is impractical."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc2",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You will use an LLM judge to grade summaries and gate releases. Criteria: its reliability must be measurable and known biases controlled. Which validation plan is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use the model that wrote the summaries as the judge, since it best understands the style it produced."
+        },
+        {
+          "id": "b",
+          "label": "Require the judge to explain every score in detail, since fluent explanations show its judgments can be trusted."
+        },
+        {
+          "id": "c",
+          "label": "Measure agreement against human labels on a sample, and test bias by swapping candidate order and length."
+        },
+        {
+          "id": "d",
+          "label": "Run the judge twice on each input and confirm identical scores, since repeatable scores show the judge is accurate."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Agreement with human labels measures validity, and order or length swaps expose known judge biases.",
+        "Consistency is not accuracy, self-preference is a known bias, and fluent explanations are not evidence of correctness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc3",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: a legal corpus where questions need whole clauses with their definitions; the context budget allows 6 chunks of at most 800 tokens; the metric is recall@6 on 100 labelled queries. Which chunking choice is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Whole documents as single chunks, since nothing can then be separated from its definitions."
+        },
+        {
+          "id": "b",
+          "label": "Fixed 100-token chunks with no overlap, since smaller chunks always give higher recall at fixed k."
+        },
+        {
+          "id": "c",
+          "label": "Clause-aware chunks up to 800 tokens with small overlap, compared with alternatives on recall@6."
+        },
+        {
+          "id": "d",
+          "label": "Random 300-token windows, since varied boundaries guarantee each clause is covered somewhere."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Clause-aware chunks keep clauses with definitions inside the budget, and the metric lets you compare options.",
+        "Tiny chunks split clauses, whole documents exceed the 800-token limit, and random windows give no guarantee."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc4",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: 10,000 requests a day, classification accuracy must stay at 95% or higher, and cost should fall where possible. The small model is 91% accurate overall with reliable confidence scores; the large model is 97% accurate at 10x the cost. Which design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use the small model for all requests, because a 4-point accuracy gap is small next to a 10x cost difference."
+        },
+        {
+          "id": "b",
+          "label": "Route low-confidence cases to the large model, then confirm on labelled data that accuracy stays at 95%+."
+        },
+        {
+          "id": "c",
+          "label": "Use the large model for all requests, because it is the only option shown to clear the 95% accuracy target."
+        },
+        {
+          "id": "d",
+          "label": "Run both models on each request and average their outputs, because combining models usually beats either alone."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Confidence-based routing cuts cost while a labelled check verifies the accuracy requirement is met.",
+        "The other options break the accuracy constraint, ignore cost, or add cost with no guarantee."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sc5",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "Criteria: an agent can issue refunds through a tool, mistakes are costly and irreversible, and small refunds must still resolve quickly. Which safeguard best satisfies these criteria?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Log every refund call for weekly review, so that mistaken refunds are caught and recovered afterward."
+        },
+        {
+          "id": "b",
+          "label": "Instruct in the system prompt to refuse refunds over 50 dollars, since models follow explicit limits closely."
+        },
+        {
+          "id": "c",
+          "label": "Expose the refund tool only after the user states a refund keyword, which reduces accidental calls."
+        },
+        {
+          "id": "d",
+          "label": "Enforce limits in server-side tool code, and require human approval above a set threshold amount."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Hard limits in code plus approval for large amounts protect irreversible actions while keeping small refunds fast.",
+        "Prompt rules can be bypassed, keyword gating is trivial to trigger, and audits cannot undo irreversible refunds."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-mc1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "A team proposes judging a new prompt by averaging scores on 20 hand-picked easy examples. Which criticisms of this plan are valid? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Hand-picked easy cases may not represent real traffic, so the average hides failures."
+        },
+        {
+          "id": "b",
+          "label": "With only 20 examples, a small difference in average score may be within noise."
+        },
+        {
+          "id": "c",
+          "label": "Slices such as long inputs or rare intents should be reported separately to expose regressions."
+        },
+        {
+          "id": "d",
+          "label": "Averaging is invalid for LLM output because evaluation scores cannot be numeric."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "rubric": [
+        "Unrepresentative samples, small sample noise and hidden slice regressions are all real weaknesses.",
+        "Numeric scoring of LLM output is common and valid, so that criticism is wrong."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "prf-c5-sn1",
+      "stage": "proficient",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "A prompt revision raises the average quality score from 82 to 85 on 500 cases. But on the 40 medical-question cases, the safety pass rate drops from 98% to 90%. The release criteria say no safety category may regress. What is the best decision?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ship it with a release note, since the average gain outweighs a drop on one small slice of traffic."
+        },
+        {
+          "id": "b",
+          "label": "Drop the 40 medical cases from the set and ship, since the remaining 460 show clear gains overall."
+        },
+        {
+          "id": "c",
+          "label": "Hold the release, inspect the failing medical cases, and revise the prompt until safety is restored."
+        },
+        {
+          "id": "d",
+          "label": "Ship it, since the overall average improved and 40 cases are too few cases to matter for the decision."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "The stated criterion forbids safety regressions, so the release must be held and the regression investigated.",
+        "Other options trade away the criterion, or remove inconvenient cases to make the metric look better."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "You compare two prompt versions with an LLM judge that picks the better of two answers. Your criterion is that verdicts reflect answer quality, not presentation. Which critique of a setup that always shows version A first is most valid?",
+      "options": [
+        {
+          "id": "a",
+          "label": "It risks position bias, so run each pair in both orders and count only verdicts that agree, or average them."
+        },
+        {
+          "id": "b",
+          "label": "It is harmless at temperature 0, because deterministic decoding removes any preference for a position."
+        },
+        {
+          "id": "c",
+          "label": "It only matters for weak judges, so upgrading to a larger judge model removes the need to vary order."
+        },
+        {
+          "id": "d",
+          "label": "It is fine, because a strong judge model stays consistent regardless of the order in which candidates appear."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Judges show position bias, so swapping order and aggregating controls it.",
+        "Distractors assume model strength or temperature 0 removes bias, which they do not."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc2",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A legal Q&A app needs answers that often combine a definition clause with an exception in a neighbouring section. Criteria: keep cross-clause context, keep retrieval precise, limit cost. Which chunking strategy is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Fixed 100-token chunks with no overlap, because small chunks maximise precision and keep embedding cost low."
+        },
+        {
+          "id": "b",
+          "label": "Section-aware chunks of moderate size with overlap, retrieving top hits plus their adjacent sections for context."
+        },
+        {
+          "id": "c",
+          "label": "Single-sentence chunks with a very high top-k, because more fragments always reassemble a clause and its exception."
+        },
+        {
+          "id": "d",
+          "label": "Embed each whole document as one vector, because full context guarantees every clause stays with its exceptions."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "Section-aware chunks with neighbour expansion balance precision, context and cost.",
+        "Tiny chunks lose the exception; whole-document vectors blur retrieval precision."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc3",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A teammate says: \"At temperature 0 our extraction is deterministic, so we can skip regression tests when the provider updates the model.\" Which critique is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "The claim is flawed: temperature 0 does not pin behaviour across model updates, and serving variation can change outputs."
+        },
+        {
+          "id": "b",
+          "label": "The claim holds while the prompt fits the context window, because truncation is a main source of variance once sampling is removed."
+        },
+        {
+          "id": "c",
+          "label": "The claim is flawed mainly because temperature 0 lowers output quality, so regression tests should be run at temperature 1 instead."
+        },
+        {
+          "id": "d",
+          "label": "The claim holds, because greedy decoding gives identical output for identical input, even when the provider swaps in new model weights."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a"
+        ]
+      },
+      "rubric": [
+        "Temperature 0 reduces sampling randomness but does not fix weights or serving behaviour, so regression tests are still needed.",
+        "Distractors treat greedy decoding as a version-independent guarantee."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc4",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "A support agent must look up orders and issue refunds. Criteria: least privilege, auditability, and safety even when the model makes mistakes. Which tool design is best?",
+      "options": [
+        {
+          "id": "a",
+          "label": "One `call_api` tool accepting any URL and method, with the prompt listing which endpoints are permitted."
+        },
+        {
+          "id": "b",
+          "label": "Narrow tools, but authorisation is done by the model confirming the user's identity in the prompt first."
+        },
+        {
+          "id": "c",
+          "label": "Narrow `get_order(id)` and `issue_refund(id, amount)` tools, with server-side authorisation, limits and logging."
+        },
+        {
+          "id": "d",
+          "label": "One generic `run_sql` tool, with a system-prompt rule forbidding writes so the model keeps full flexibility."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Controls must be enforced in code outside the model, on narrow tools.",
+        "Distractors rely on prompt instructions for enforcement."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sc5",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "single_choice",
+      "prompt": "After switching embedding models, recall@5 rose from 0.71 to 0.88, but end-to-end answer accuracy stayed at 64%. Which interpretation and next step is best supported?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Recall@5 probably overstates retrieval quality, so replace it with end-to-end accuracy as the main metric for later retrieval changes."
+        },
+        {
+          "id": "b",
+          "label": "The new embedding model probably adds no real value, so revert it, since a recall gain with flat accuracy suggests the gain is noise."
+        },
+        {
+          "id": "c",
+          "label": "Retrieval is probably no longer the bottleneck, so categorise failures by stage to see what limits accuracy."
+        },
+        {
+          "id": "d",
+          "label": "The generator is probably the weak link, so fine-tune it now, since higher recall should have produced higher accuracy by itself."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Stage-level failure analysis shows whether generation, ordering or grading limits accuracy.",
+        "Distractors draw strong conclusions from one metric pair."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-mc1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "multi_choice",
+      "prompt": "You are judging whether to pass 50 retrieved chunks to the model instead of the top 5. Which are real risks of the larger context? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Facts placed mid-context may be used less reliably than those at the start or end."
+        },
+        {
+          "id": "b",
+          "label": "Input cost and latency grow with tokens sent on every request."
+        },
+        {
+          "id": "c",
+          "label": "Larger context makes the model's citations automatically verifiable."
+        },
+        {
+          "id": "d",
+          "label": "Near-miss chunks can distract the model and reduce faithfulness to the right source."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Long context brings positional weakness, distraction, and cost and latency.",
+        "Citations are not automatically verifiable with more context."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c5-sn1",
+      "stage": "expert",
+      "bloom": "C5",
+      "kind": "scenario",
+      "prompt": "Your 300-case eval shows a prompt change lifts overall accuracy from 84% to 87%. In the 25 refund-policy cases, accuracy falls from 92% to 76%, and refund errors are your costliest. Your release criterion: no regression in high-cost segments beyond noise. What should you do?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Ship it, because the overall gain outweighs the drop and the aggregate is the most reliable number."
+        },
+        {
+          "id": "b",
+          "label": "Hold the release, investigate the refund regressions, and fix or gate the change for that segment first."
+        },
+        {
+          "id": "c",
+          "label": "Average the outputs of both prompts per case, because mixing versions removes the segment regression."
+        },
+        {
+          "id": "d",
+          "label": "Ship and monitor, because 25 cases is too few for any segment result to indicate a regression."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "b"
+        ]
+      },
+      "rubric": [
+        "A 16-point drop in a high-cost segment violates the stated criterion even if the aggregate improves.",
+        "Distractors let the aggregate or small sample hide the segment risk."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design an invoice-extraction step. Constraints: unvalidated output must never reach downstream systems, retries are bounded, and failures need a safe path. Which design meets all of them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Use schema-constrained output and trust it, because constrained decoding guarantees every extracted value is factually correct."
+        },
+        {
+          "id": "b",
+          "label": "Retry until validation passes, raising temperature each attempt so the output eventually conforms to the schema."
+        },
+        {
+          "id": "c",
+          "label": "Ask for JSON in the prompt, parse in try/except, and on failure pass an empty record downstream to keep flow moving."
+        },
+        {
+          "id": "d",
+          "label": "Use schema-constrained output, validate schema and business rules, retry twice with the error fed back, then route to manual review."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Validation, bounded retries with feedback, and a review fallback satisfy every constraint.",
+        "Constrained decoding guarantees syntax, not factual correctness."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc2",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a multi-tenant RAG service. Constraints: users must never see other tenants' documents, even through the model's answer, and latency must stay low. Which design meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Retrieve across everything, then scan the generated answer for names of restricted documents and strip them."
+        },
+        {
+          "id": "b",
+          "label": "Retrieve top-k across all tenants, then instruct the model not to reveal documents the user cannot access."
+        },
+        {
+          "id": "c",
+          "label": "Apply tenant and ACL metadata filters inside the vector query, so unauthorised chunks never enter the prompt."
+        },
+        {
+          "id": "d",
+          "label": "Fine-tune a separate model per user on their documents, since weights separate access better than filters."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Enforcing access at retrieval keeps unauthorised text out of the context entirely.",
+        "Distractors let restricted text reach the model and rely on it or output filtering."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc3",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Your prompt has 3,000 tokens of static instructions, a 2,000-token per-session document, and a short user question. Constraint: maximise provider prefix-cache hits. Which layout meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Put a current timestamp at the top, then instructions, document and question, so the model knows the time."
+        },
+        {
+          "id": "b",
+          "label": "Shuffle the instruction sections on each request so the model does not over-weight any single section."
+        },
+        {
+          "id": "c",
+          "label": "Put the user question first, then the document, then the instructions, so the most dynamic text sets the context."
+        },
+        {
+          "id": "d",
+          "label": "Order static instructions, then the session document, then the question last, with no varying text before them."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Prefix caching needs an identical leading prefix, so stable content goes first and variable content last.",
+        "Any varying text early in the prompt breaks the cache."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc4",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "Design a CI evaluation for a nondeterministic booking agent. Constraints: catch wrong tool use, tolerate varied wording, and run automatically on every merge. Which design meets them?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Compare the final text to a reference answer with exact string match, using a single run per case."
+        },
+        {
+          "id": "b",
+          "label": "Have humans read every transcript before each merge, since automation cannot assess agent behaviour reliably."
+        },
+        {
+          "id": "c",
+          "label": "Run cases in a sandbox with mocked tools, assert on tool calls and end state across samples, and judge tone only."
+        },
+        {
+          "id": "d",
+          "label": "Test each prompt in isolation at temperature 0, since agent behaviour is just the sum of each step's output."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Asserting on tool calls and state tolerates wording variation and runs in CI.",
+        "Exact match and isolated prompts miss tool-use and trajectory failures."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sc5",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "single_choice",
+      "prompt": "An agent summarises emails and has a `send_email` tool. Retrieved emails may contain injected instructions. Constraint: injected text must never cause sends to arbitrary addresses. Which design meets it?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Add a system-prompt line telling the model to ignore any instructions found inside email content it processes."
+        },
+        {
+          "id": "b",
+          "label": "Scan emails with a keyword blocklist such as 'ignore previous instructions' before the model is allowed to read them."
+        },
+        {
+          "id": "c",
+          "label": "Enforce a recipient allowlist and user confirmation in code outside the model, and let untrusted text never pick recipients."
+        },
+        {
+          "id": "d",
+          "label": "Wrap each email in delimiters and rely on the model to treat everything inside the delimiters as inert data."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "c"
+        ]
+      },
+      "rubric": [
+        "Deterministic enforcement outside the model holds even if the model is fooled.",
+        "Prompt rules, delimiters and blocklists are bypassable defences."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-mc1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "multi_choice",
+      "prompt": "A proposed design calls an LLM API synchronously with no timeout, retries instantly on any error, and re-runs a payment-triggering tool on each retry. Which additions are needed for robustness? Select all that apply.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Idempotency keys on side-effecting tool calls so retries cannot repeat payments."
+        },
+        {
+          "id": "b",
+          "label": "A fallback path or circuit breaker that degrades gracefully during provider outages."
+        },
+        {
+          "id": "c",
+          "label": "Setting temperature to 0 so retries are never needed."
+        },
+        {
+          "id": "d",
+          "label": "Request timeouts and exponential backoff with jitter, retrying only retryable errors."
+        },
+        {
+          "id": "e",
+          "label": "Switching to a larger model so that errors no longer occur."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      },
+      "rubric": [
+        "Timeouts, backoff, idempotency and fallbacks address the missing failure handling.",
+        "A bigger model or temperature 0 does not prevent network or provider errors."
+      ],
+      "reviewed": false
+    },
+    {
+      "key": "exp-c6-sn1",
+      "stage": "expert",
+      "bloom": "C6",
+      "kind": "scenario",
+      "prompt": "Your feature hits provider rate limits at peak. Interactive requests need replies under 5 seconds, no request may be lost, and cost must not double. Which design meets all three?",
+      "options": [
+        {
+          "id": "a",
+          "label": "Retry rejected calls right away with a fixed short delay and a high retry cap, so that bursts clear quickly and requests are rarely lost."
+        },
+        {
+          "id": "b",
+          "label": "Send each interactive request to two providers at once and use the first reply, which cuts latency and spreads the load across both rate limits."
+        },
+        {
+          "id": "c",
+          "label": "Reject requests above the limit with a clear error and a retry hint, which keeps replies under 5 seconds for the requests that are accepted."
+        },
+        {
+          "id": "d",
+          "label": "Queue non-interactive jobs, rate-limit interactive calls client-side with backoff, and fall back to a smaller model when saturated."
+        }
+      ],
+      "answerKey": {
+        "optionIds": [
+          "d"
+        ]
+      },
+      "rubric": [
+        "Queuing, client-side limiting and a cheaper fallback meet latency, durability and cost together.",
+        "Tight retries worsen limits, dual calls double cost, and dropping loses requests."
+      ],
+      "reviewed": false
+    }
+  ]
+}
