@@ -31,7 +31,7 @@ export class CreateCheckout {
   ) {}
 
   /** `origin` is the request's Origin, which CsrfGuard has already matched against APP_ORIGIN. */
-  async execute(userId: string, product: Product, origin: string | undefined): Promise<{ url: string }> {
+  async execute(userId: string, product: Product, origin: string | undefined, quantity = 1): Promise<{ url: string }> {
     const env = this.config.env;
     if (product === 'subscription' && isActive(await this.quota.findEntitlement(userId), new Date())) {
       throw new SubscriptionActiveError('A subscription is already active');
@@ -47,6 +47,8 @@ export class CreateCheckout {
         userId,
         testMode: env.LEMONSQUEEZY_MODE === 'test',
         redirectUrl: `${appOrigin ?? ''}${CHECKOUT_RETURN_PATH}`,
+        // The DTO allows a quantity only with credit packs; a subscription is always 1.
+        quantity: product === 'credit_pack' ? quantity : 1,
       }));
     } catch (error) {
       this.logger.warn({ err: error instanceof Error ? error : new Error(String(error)) }, 'Checkout provider failed');

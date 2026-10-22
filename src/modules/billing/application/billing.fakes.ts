@@ -131,12 +131,12 @@ export function fakeQuotaRepository(repo: FakeBillingRepository): QuotaRepositor
 /** Scripted provider: checkout URLs and order items by order id. */
 export class FakeBillingProvider implements BillingProvider {
   checkoutUrl = 'https://eduujoy.lemonsqueezy.com/checkout/custom/abc';
-  readonly checkouts: { storeId: string; variantId: string; userId: string; testMode: boolean; redirectUrl: string }[] = [];
+  readonly checkouts: { storeId: string; variantId: string; userId: string; testMode: boolean; redirectUrl: string; quantity: number }[] = [];
   failCheckout = false;
   readonly orderItems = new Map<string, { variantId: string; quantity: number }[]>();
   failOrderItems = false;
 
-  createCheckout(input: { storeId: string; variantId: string; userId: string; testMode: boolean; redirectUrl: string }): Promise<{ url: string }> {
+  createCheckout(input: { storeId: string; variantId: string; userId: string; testMode: boolean; redirectUrl: string; quantity: number }): Promise<{ url: string }> {
     if (this.failCheckout) return Promise.reject(new Error('Lemon Squeezy API returned HTTP 500'));
     this.checkouts.push(input);
     return Promise.resolve({ url: this.checkoutUrl });

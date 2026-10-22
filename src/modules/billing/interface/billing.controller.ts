@@ -39,7 +39,7 @@ export class BillingController {
   @ApiProblem(409)
   @ApiServiceUnavailable()
   checkout(@CurrentUser() user: AuthUser, @Body() body: CheckoutRequestDto, @Headers('origin') origin: string | undefined): Promise<{ url: string }> {
-    return this.checkouts.execute(user.userId, body.product, origin);
+    return this.checkouts.execute(user.userId, body.product, origin, body.quantity ?? 1);
   }
 
   /** Server to server: no cookie, no CSRF headers; the HMAC over the raw body is the only credential. */

@@ -3,7 +3,7 @@ import { DocumentBuilder, type OpenAPIObject, SwaggerModule } from '@nestjs/swag
 import { PROBLEM_SCHEMAS } from './schemas';
 
 /** The frozen contract version this build implements (docs/contract/openapi.v0.yaml). */
-export const CONTRACT_VERSION = '0.6.0-v0';
+export const CONTRACT_VERSION = '0.7.0-v0';
 
 function sortKeys(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(sortKeys);

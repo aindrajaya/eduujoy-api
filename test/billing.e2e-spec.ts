@@ -158,10 +158,24 @@ describe('billing (e2e, PRD-API §13 A12 Verify)', () => {
       userId,
       testMode: true,
       redirectUrl: 'http://localhost:5173/account?checkout=success',
+      quantity: 1,
     });
 
-    await checkout({ product: 'gold' }).expect(400);
-    await checkout({ product: 'credit_pack', quantity: 5 }).expect(400);
+    // Contract 0.7.0: 1–10 packs, preset on the checkout; never with a subscription.
+    await checkout({ product: 'credit_pack', quantity: 10 }).expect(200);
+    expect(provider.checkouts.at(-1)?.quantity).toBe(10);
+    for (const body of [
+      { product: 'gold' },
+      { product: 'credit_pack', quantity: 0 },
+      { product: 'credit_pack', quantity: 11 },
+      { product: 'credit_pack', quantity: 2.5 },
+      { product: 'credit_pack', quantity: '3' },
+      { product: 'subscription', quantity: 1 },
+      { product: 'credit_pack', extra: true },
+    ]) {
+      const res = await checkout(body).expect(400);
+      expect((res.body as { code: string }).code).toBe('VALIDATION_FAILED');
+    }
     await http().post('/v1/billing/checkout').set('Cookie', cookie).send({ product: 'subscription' }).expect(403);
     await http().post('/v1/billing/checkout').set(csrf).send({ product: 'subscription' }).expect(401);
   });
