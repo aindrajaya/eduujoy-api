@@ -4,6 +4,7 @@ import { type Client } from 'pg';
 import { diagnosticItems, topicPrerequisites, topics } from '../../src/shared/db/schema';
 import { loadSeed } from '../../src/shared/db/seed/load-seed';
 import { parseSeed, readSeedFiles, type SeedData } from '../../src/shared/db/seed/seed-data';
+import { topicCounts } from '../../src/shared/db/seed/topic-counts';
 import { connectTestClient, type TestDb, testDb } from './connect';
 
 const FIXTURE = join(__dirname, '..', 'fixtures', 'seed');
@@ -70,4 +71,17 @@ describe('seed loader (integration)', () => {
     expect(edges).toHaveLength(1);
     expect(item?.bloom).toBe('C2');
   });
+
+  it('counts seed topics apart from learner topics, so db:seed --expect-topics ignores learner topics', async () => {
+    // Prod, 23 Oct 2026: one learner topic made the 160-topic check fail with 161.
+    const before = await topicCounts(db);
+    const tag = `${Date.now()}`;
+    await db.insert(topics).values({ slug: `learner-${tag}`, canonicalName: `Learner ${tag}`, origin: 'learner', needsReview: true });
+    const withLearner = await topicCounts(db);
+    expect(withLearner).toEqual({ seed: before.seed, other: before.other + 1 });
+
+    await db.insert(topics).values({ slug: `seeded-${tag}`, canonicalName: `Seeded ${tag}`, origin: 'seed' });
+    expect(await topicCounts(db)).toEqual({ seed: before.seed + 1, other: before.other + 1 });
+  });
 });
+
