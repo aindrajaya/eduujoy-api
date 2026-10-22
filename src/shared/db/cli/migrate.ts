@@ -2,6 +2,7 @@ import { Client } from 'pg';
 import { runMigrations } from '../migrate';
 import { describeError } from '../redact';
 import { loadDirectDatabaseUrl } from './env';
+import { guardConnection } from './guard';
 
 async function main(): Promise<void> {
   // `--check` proves the script loads under its runner (test/cli/cli-boot.int-spec.ts) without connecting.
@@ -9,7 +10,8 @@ async function main(): Promise<void> {
     process.stdout.write('db:migrate: ok\n');
     return;
   }
-  const client = new Client({ connectionString: loadDirectDatabaseUrl() });
+  // One session (advisory lock, transactions): a dropped connection fails the run cleanly; re-run it.
+  const client = guardConnection(new Client({ connectionString: loadDirectDatabaseUrl() }), 'db:migrate');
   await client.connect();
   try {
     const applied = await runMigrations(client);

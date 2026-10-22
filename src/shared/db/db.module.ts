@@ -32,10 +32,38 @@ export function poolConfig(config: AppConfig): ConstructorParameters<typeof Pool
   };
 }
 
+/**
+ * pg-pool listens for 'error' only on idle clients; a client checked out for a query or transaction has
+ * no listener, so a connection Neon drops mid-query was an uncaught exception that killed the process
+ * (found 23 Oct 2026 after the A8 smoke crash). Every physical client gets a permanent listener when the
+ * pool creates it: the drop is logged and the in-flight query rejects; the pool discards the client.
+ */
+export function guardPool(pool: Pool, log: (message: string) => void): Pool {
+  pool.on('connect', (client) => {
+    client.on('error', (error) => {
+      log(`Database client error: ${describeError(error)}`);
+    });
+  });
+  pool.on('error', (error) => {
+    log(`Idle database client error: ${describeError(error)}`);
+  });
+  return pool;
+}
+
+const poolLogger = new Logger('DbPool');
+
 @Global()
 @Module({
   providers: [
-    { provide: PG_POOL, inject: [AppConfig], useFactory: (config: AppConfig) => new Pool(poolConfig(config)) },
+    {
+      provide: PG_POOL,
+      inject: [AppConfig],
+      // Guarded at creation, so no client can exist without an 'error' listener.
+      useFactory: (config: AppConfig) =>
+        guardPool(new Pool(poolConfig(config)), (message) => {
+          poolLogger.error(message);
+        }),
+    },
     {
       provide: DATABASE,
       inject: [PG_POOL],
@@ -45,8 +73,6 @@ export function poolConfig(config: AppConfig): ConstructorParameters<typeof Pool
   exports: [DATABASE],
 })
 export class DbModule implements OnModuleInit, OnApplicationShutdown {
-  private readonly logger = new Logger(DbModule.name);
-
   constructor(
     @Inject(PG_POOL) private readonly pool: Pool,
     // Absent in contexts without the HTTP health stack (workers, CLIs); /ready then has nothing to check.
@@ -54,9 +80,6 @@ export class DbModule implements OnModuleInit, OnApplicationShutdown {
   ) {}
 
   onModuleInit(): void {
-    this.pool.on('error', (error) => {
-      this.logger.error(`Idle database client error: ${describeError(error)}`);
-    });
     this.readiness?.register('db', () => this.pool.query('SELECT 1'));
   }
 

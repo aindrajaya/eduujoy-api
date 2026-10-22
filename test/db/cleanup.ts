@@ -3,12 +3,13 @@ import { describeError } from '../../src/shared/db/redact';
 import { readDatabaseEnv } from './database-env';
 import { sweepStaleTestSchemas } from './sweep';
 import { assertSafeTestDatabase } from './test-database';
+import { guardConnection } from '../../src/shared/db/cli/guard';
 
 // pnpm db:test:cleanup — also runs daily in CI (.github/workflows/test-db-cleanup.yml).
 async function main(): Promise<void> {
   const env = readDatabaseEnv();
   assertSafeTestDatabase(env.test, [env.app, env.direct]);
-  const client = new Client({ connectionString: env.test });
+  const client = guardConnection(new Client({ connectionString: env.test }), 'test-db');
   await client.connect();
   try {
     const dropped = await sweepStaleTestSchemas(client);
