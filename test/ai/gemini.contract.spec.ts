@@ -183,6 +183,16 @@ describe('Gemini adapters (contract: recorded generateContent, synthetic embeddi
       });
     });
 
+    it('sends a lower frame rate and an end offset as videoMetadata when asked (the analysis cap)', async () => {
+      server.enqueue(stream(['{"canonicalName":"React Hooks","domain":"software"}']));
+
+      await generator.generate({ ...video, media: { ...video.media, fps: 0.25, endOffsetSec: 2969 } });
+
+      expect(server.received[0]?.body).toMatchObject({
+        contents: [{ role: 'user', parts: [{ fileData: { fileUri: video.media.youtubeUrl }, videoMetadata: { fps: 0.25, startOffset: '0s', endOffset: '2969s' } }, { text: 'react hooks' }] }],
+      });
+    });
+
     it('reports a truncated stream as invalid output, with its usage', async () => {
       server.enqueue(stream(['{"canonicalName":"Re'], 'MAX_TOKENS'));
 

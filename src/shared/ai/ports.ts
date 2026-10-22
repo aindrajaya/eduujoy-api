@@ -23,8 +23,11 @@ export interface StructuredRequest<T> {
   schema: ZodType<T>;
   maxTokens?: number;
   effort?: 'low' | 'medium' | 'high';
-  /** A public YouTube video the model watches with the prompt (Gemini only; master PRD §8). */
-  media?: { youtubeUrl: string };
+  /**
+   * A public YouTube video the model watches with the prompt (Gemini only; master PRD §8). `fps` lowers
+   * the frame rate and `endOffsetSec` clips the video, to keep long videos inside the analysis cap.
+   */
+  media?: { youtubeUrl: string; fps?: number; endOffsetSec?: number };
   jobId?: string;
   /** Aborts the provider call (a job's timeout signal). */
   signal?: AbortSignal;

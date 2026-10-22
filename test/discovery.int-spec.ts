@@ -323,5 +323,42 @@ describe('discovery (integration, A8 Verify)', () => {
     // 8k x $0.1/M + 400 x $0.5/M + 6 searches x $0.01.
     expect(rows.find((r) => r.jobId === discoverJob)?.cost).toBe('0.061000');
   }, 60_000);
+
+  it('never analyses an oversized video: a 3-hour one is skipped and the pool still settles', async () => {
+    const p = pipeline(new Date('2026-10-28T12:00:00Z'));
+    const id = await topic('Oversized');
+    const [video] = await db
+      .insert(resources)
+      .values({ url: `https://www.youtube.com/watch?v=huge${tag.slice(0, 7)}`, type: 'youtube', title: 'Three-hour talk', source: 'C', youtubeId: `huge${tag.slice(0, 7)}`, durationMin: 180 })
+      .returning({ id: resources.id });
+    if (!video) throw new Error('resource not created');
+    const pool = await db.transaction((tx) => p.repo.createPool(tx, { topicId: id, stage: 'expert', poolVersion: 1, candidateIds: [video.id], videoFallback: false, expiresAt: new Date('2026-11-28T00:00:00Z') }));
+    const analyse = new AnalyseResource(p.repo, p.analyzer, p.links, p.embedder, p.clock, new GetTopicProfileQuery(new DrizzleTopicRepository(db)), new ReviewQueue(), new UnitOfWork(db, p.bus));
+
+    const outcome = await analyse.run(analyse.parse({ poolId: pool.id, resourceId: video.id, topicId: id, stage: 'expert', abstract: null }), ctx());
+
+    expect(outcome.result).toMatchObject({ outcome: 'skipped', poolSettled: true });
+    expect(p.analyzer.calls).toHaveLength(0);
+    expect(p.embedder.requests).toHaveLength(0);
+    const [settled] = await db.select().from(discoveryResults).where(eq(discoveryResults.id, pool.id));
+    expect(settled).toMatchObject({ status: 'thin', resourceIds: [] });
+  });
+
+  it('analyses a 45-minute video at a lower frame rate, inside the cap', async () => {
+    const p = pipeline(new Date('2026-10-29T12:00:00Z'));
+    const id = await topic('Long talk');
+    const [video] = await db
+      .insert(resources)
+      .values({ url: `https://www.youtube.com/watch?v=long${tag.slice(0, 7)}`, type: 'youtube', title: 'Long talk', source: 'C', youtubeId: `long${tag.slice(0, 7)}`, durationMin: 45 })
+      .returning({ id: resources.id });
+    if (!video) throw new Error('resource not created');
+    const pool = await db.transaction((tx) => p.repo.createPool(tx, { topicId: id, stage: 'proficient', poolVersion: 1, candidateIds: [video.id], videoFallback: false, expiresAt: new Date('2026-11-29T00:00:00Z') }));
+    const analyse = new AnalyseResource(p.repo, p.analyzer, p.links, p.embedder, p.clock, new GetTopicProfileQuery(new DrizzleTopicRepository(db)), new ReviewQueue(), new UnitOfWork(db, p.bus));
+
+    await analyse.run(analyse.parse({ poolId: pool.id, resourceId: video.id, topicId: id, stage: 'proficient', abstract: null }), ctx());
+
+    expect(p.analyzer.calls).toHaveLength(1);
+    expect(p.analyzer.calls[0]?.clip).toEqual({ fps: 0.25, endSec: null });
+  });
 });
 

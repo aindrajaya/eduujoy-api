@@ -12,6 +12,8 @@ export interface AnalysisInput {
   title: string;
   source: string;
   durationMin: number | null;
+  /** Videos only: the frame rate and optional end offset that keep the analysis inside the cap. */
+  clip?: { fps: number; endSec: number | null };
   /** Page text or a paper abstract (untrusted); null for videos. */
   content: string | null;
   jobId?: string;
@@ -32,6 +34,8 @@ export interface Analysis {
   language: string;
   readingMin: number | null;
   model: string;
+  /** Input tokens the analysis actually used (uncached plus cache reads), for the cap check. */
+  inputTokens: number;
 }
 
 /** Gemini video and text analysis (`VideoAnalyzer`, `TextAnalyzer` in PRD-API §11). */

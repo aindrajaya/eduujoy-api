@@ -6,15 +6,18 @@ import { type TxScope, UnitOfWork } from '../../../shared/events';
 import { type JobContext, type JobHandler, type JobOutcome } from '../../../shared/jobs';
 import { GetTopicProfileQuery } from '../../catalog/application/get-topic-profile.query';
 import {
+  ANALYSIS_TOKEN_CAP,
   CARD_TTL_DAYS,
   type CardStatus,
   DUPLICATE_SIMILARITY,
   embeddingText,
   judgeCard,
+  MAX_TEXT_CHARS,
   POOL_TTL_DAYS,
   poolStatus,
   qualityScore,
   ResourcesReady,
+  videoPlan,
 } from '../domain';
 import { ANALYSE_RESOURCE_JOB, type AnalysePayload, analysePayload, DAY_MS } from './jobs';
 import {
@@ -28,10 +31,8 @@ import {
   type ReusableAnalysis,
 } from './ports/discovery.repository';
 import { LINK_CHECKER, type LinkChecker } from './ports/link-checker';
-import { RESOURCE_ANALYZER, type ResourceAnalyzer } from './ports/resource-analyzer';
+import { type AnalysisInput, RESOURCE_ANALYZER, type ResourceAnalyzer } from './ports/resource-analyzer';
 
-/** About 8k tokens of page text per article (master PRD §8 cost table). */
-export const MAX_PAGE_CHARS = 32_000;
 
 type Outcome = 'cached' | 'reused' | 'analysed' | 'skipped';
 
@@ -114,8 +115,26 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
     const reused = await this.repo.findRecentAnalysis(resource.id, promptVersion, new Date(now.getTime() - CARD_TTL_DAYS * DAY_MS));
     if (reused) return { card: await this.judge(resource, payload, promptVersion, reused, reused.embedding, ctx), reused: true };
 
-    const content = isVideo ? null : (payload.abstract ?? (await this.links.fetchText(resource.url, MAX_PAGE_CHARS, ctx.signal)));
-    if (!isVideo && !content) return null;
+    // The per-resource cap (user requirement, 23 Oct 2026): decided before the Gemini call, from the
+    // video's length or the text's size, so one resource can never exceed ANALYSIS_TOKEN_CAP.
+    let clip: AnalysisInput['clip'];
+    if (isVideo) {
+      const plan = videoPlan(resource.durationMin);
+      if (plan.action === 'skip') {
+        this.logger.log({ url: resource.url, topicId: payload.topicId, durationMin: resource.durationMin, reason: plan.reason }, 'Resource analysis skipped: over the analysis cap');
+        return null;
+      }
+      clip = { fps: plan.fps, endSec: plan.endSec };
+      if (plan.fps < 1 || plan.clipped) {
+        this.logger.log(
+          { url: resource.url, topicId: payload.topicId, durationMin: resource.durationMin, fps: plan.fps, endSec: plan.endSec, estimatedTokens: plan.estimatedTokens },
+          plan.clipped ? 'Resource analysis clipped to fit the analysis cap' : 'Resource analysis at a lower frame rate to fit the analysis cap',
+        );
+      }
+    }
+    const raw = isVideo ? null : (payload.abstract ?? (await this.links.fetchText(resource.url, MAX_TEXT_CHARS, ctx.signal)));
+    if (!isVideo && !raw) return null;
+    const content = raw === null ? null : raw.slice(0, MAX_TEXT_CHARS);
 
     const analysis = await this.analyzer.analyse({
       kind: isVideo ? 'video' : 'text',
@@ -126,9 +145,14 @@ export class AnalyseResource implements JobHandler<AnalysePayload> {
       source: resource.source,
       durationMin: resource.durationMin,
       content,
+      ...(clip ? { clip } : {}),
       jobId: ctx.jobId,
       signal: ctx.signal,
     });
+    if (analysis.inputTokens > ANALYSIS_TOKEN_CAP) {
+      // The estimate was too low; the call is already billed, so make it visible for recalibration.
+      this.logger.warn({ url: resource.url, inputTokens: analysis.inputTokens, cap: ANALYSIS_TOKEN_CAP }, 'Resource analysis exceeded the analysis cap');
+    }
     const embedding = judgeCard({ quality: analysis.quality, confidence: analysis.confidence, concepts: analysis.concepts, durationMin: resource.durationMin, isVideo }).status === 'dropped'
       ? null
       : await this.embed(resource, analysis, ctx);

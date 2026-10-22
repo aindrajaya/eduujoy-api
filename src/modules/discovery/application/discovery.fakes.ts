@@ -99,6 +99,7 @@ export class FakeResourceAnalyzer implements ResourceAnalyzer {
       language: 'en',
       readingMin: input.kind === 'video' ? null : 8,
       model: input.kind === 'video' ? 'gemini-3.8-flash' : 'gemini-3.5-flash-lite',
+      inputTokens: 1_000,
       ...this.overrides.get(input.url),
     });
   }

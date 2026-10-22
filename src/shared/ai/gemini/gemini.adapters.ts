@@ -113,7 +113,14 @@ export class GeminiStructuredGenerator implements StructuredGenerator {
           if (!request.media) return await this.client.models.generateContent({ model: request.model, contents: request.input, config });
           // A public YouTube URL goes in as file data (ai.google.dev/gemini-api/docs/video-understanding);
           // video calls stream so a long analysis never sits on an idle connection (PRD-API §11).
-          const contents: Content[] = [{ role: 'user', parts: [{ fileData: { fileUri: request.media.youtubeUrl } }, { text: request.input }] }];
+          const { youtubeUrl, fps, endOffsetSec } = request.media;
+          const videoMetadata = {
+            ...(fps === undefined ? {} : { fps }),
+            ...(endOffsetSec === undefined ? {} : { startOffset: '0s', endOffset: `${endOffsetSec}s` }),
+          };
+          const contents: Content[] = [
+            { role: 'user', parts: [{ fileData: { fileUri: youtubeUrl }, ...(Object.keys(videoMetadata).length ? { videoMetadata } : {}) }, { text: request.input }] },
+          ];
           return await collect(await this.client.models.generateContentStream({ model: request.model, contents, config }));
         } catch (error) {
           throw toAiError(error);

@@ -23,9 +23,10 @@ export interface PoolPlan {
 const STAGE_WORDS: Record<Stage, { video: [string, string]; paper: boolean; duration: VideoDuration; maxVideoMin: number }> = {
   novice: { video: ['for beginners', 'explained'], paper: false, duration: 'medium', maxVideoMin: 20 },
   advanced_beginner: { video: ['tutorial', 'step by step'], paper: false, duration: 'any', maxVideoMin: 45 },
-  competent: { video: ['in depth', 'best practices'], paper: true, duration: 'any', maxVideoMin: 90 },
-  proficient: { video: ['advanced talk', 'internals'], paper: true, duration: 'long', maxVideoMin: 120 },
-  expert: { video: ['conference talk', 'research'], paper: true, duration: 'long', maxVideoMin: 180 },
+  // At most VIDEO_MAX_MIN (60) everywhere: longer videos are never analysed (analysis-budget.ts).
+  competent: { video: ['in depth', 'best practices'], paper: true, duration: 'any', maxVideoMin: 60 },
+  proficient: { video: ['advanced talk', 'internals'], paper: true, duration: 'long', maxVideoMin: 60 },
+  expert: { video: ['conference talk', 'research'], paper: true, duration: 'long', maxVideoMin: 60 },
 };
 
 /** How one topic and stage is searched; one template per resource type and stage (PRD-API §11). */

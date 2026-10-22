@@ -61,10 +61,12 @@ export class GeminiResourceAnalyzer implements ResourceAnalyzer {
       input: lines.join('\n'),
       schema: analysisSchema,
       maxTokens: 4_000,
-      ...(video ? { media: { youtubeUrl: input.url } } : {}),
+      ...(video
+        ? { media: { youtubeUrl: input.url, ...(input.clip ? { fps: input.clip.fps, ...(input.clip.endSec === null ? {} : { endOffsetSec: input.clip.endSec }) } : {}) } }
+        : {}),
       ...(input.jobId ? { jobId: input.jobId } : {}),
       ...(input.signal ? { signal: input.signal } : {}),
     });
-    return { ...(output as Omit<Analysis, 'model'>), model: call.model };
+    return { ...(output as Omit<Analysis, 'model' | 'inputTokens'>), model: call.model, inputTokens: call.usage.inputTokens + call.usage.cacheReadTokens };
   }
 }
