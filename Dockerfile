@@ -18,7 +18,11 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --prod --ignore-scripts
 
 FROM node:24-slim AS runtime
-ARG APP_VERSION=dev
+# Koyeb passes KOYEB_GIT_SHA to Dockerfile builds only when declared as an ARG (GitHub deployments;
+# koyeb.com/docs/build-and-deploy/environment-variables). An explicit APP_VERSION build arg wins.
+# Empty means unset: /health then falls back to the runtime KOYEB_GIT_SHA, then to "dev".
+ARG KOYEB_GIT_SHA
+ARG APP_VERSION=${KOYEB_GIT_SHA}
 ENV NODE_ENV=production \
     APP_VERSION=$APP_VERSION \
     PORT=8000 \
