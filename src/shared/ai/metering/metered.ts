@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common';
-import { costUsd, MODELS, type Provider } from '../catalog';
+import { type ZodType } from 'zod';
+import { costUsd, MODELS, type Provider, WEB_SEARCH_USD_PER_REQUEST } from '../catalog';
 import { AiCallError, type AiFailure } from '../errors';
 import {
   type CallRecord,
@@ -9,6 +10,9 @@ import {
   type StructuredGenerator,
   type StructuredRequest,
   type StructuredResult,
+  type WebSearcher,
+  type WebSearchRequest,
+  type WebSearchResult,
 } from '../ports';
 import { type LlmCallEntry, type LlmCallRecorder, type LlmCallStatus } from './llm-call.recorder';
 
@@ -43,18 +47,25 @@ class Meter {
       const call = error instanceof AiCallError ? error.call : undefined;
       const usageFields = call
         ? this.fromCall(call)
-        : { model: meta.model, usage: NO_USAGE, costUsd: 0, latencyMs: Math.round(this.now() - started) };
+        : { model: meta.model, usage: NO_USAGE, webSearchRequests: 0, costUsd: 0, latencyMs: Math.round(this.now() - started) };
       await this.write({ ...meta, ...usageFields, status: statusOf(failure), failure });
       throw error;
     }
   }
 
-  private fromCall(call: CallRecord): Pick<LlmCallEntry, 'model' | 'usage' | 'costUsd' | 'latencyMs'> {
+  private fromCall(call: CallRecord): Pick<LlmCallEntry, 'model' | 'usage' | 'webSearchRequests' | 'costUsd' | 'latencyMs'> {
     const at = this.clock();
     // A fallback call bills every attempt at its own model's rates.
     const parts = call.parts ?? [{ model: call.model, usage: call.usage }];
-    const cost = parts.reduce((total, part) => total + costUsd(part.model, part.usage, at), 0);
-    return { model: call.model, usage: call.usage, costUsd: Math.round(cost * 1_000_000) / 1_000_000, latencyMs: call.latencyMs };
+    const searches = call.webSearchRequests ?? 0;
+    const cost = parts.reduce((total, part) => total + costUsd(part.model, part.usage, at), 0) + searches * WEB_SEARCH_USD_PER_REQUEST;
+    return {
+      model: call.model,
+      usage: call.usage,
+      webSearchRequests: searches,
+      costUsd: Math.round(cost * 1_000_000) / 1_000_000,
+      latencyMs: call.latencyMs,
+    };
   }
 
   /** Metering must never break the AI call it describes; a failed insert is logged instead. */
@@ -113,6 +124,33 @@ export class MeteredEmbedder implements Embedder {
     return this.meter.run(
       { stage: request.stage, provider: 'google', model: this.model, promptName: null, promptVersion: null, jobId: request.jobId ?? null },
       () => this.inner.embed(request),
+    );
+  }
+}
+
+export class MeteredWebSearcher implements WebSearcher {
+  private readonly meter: Meter;
+
+  constructor(
+    private readonly inner: WebSearcher,
+    recorder: LlmCallRecorder,
+    now: () => number = () => performance.now(),
+    clock: () => Date = () => new Date(),
+  ) {
+    this.meter = new Meter(recorder, now, clock);
+  }
+
+  search<T>(request: WebSearchRequest & { schema: ZodType<T> }): Promise<WebSearchResult<T>> {
+    return this.meter.run(
+      {
+        stage: request.stage,
+        provider: MODELS[request.model].provider,
+        model: request.model,
+        promptName: request.prompt.name,
+        promptVersion: request.prompt.version,
+        jobId: request.jobId ?? null,
+      },
+      () => this.inner.search(request),
     );
   }
 }

@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { AiCallError } from '../errors';
-import { type CallRecord, type StructuredGenerator, type StructuredRequest, type StructuredResult } from '../ports';
+import { type CallRecord, type StructuredGenerator, type StructuredRequest, type StructuredResult, type WebSearcher } from '../ports';
 import { type LlmCallEntry, type LlmCallRecorder } from './llm-call.recorder';
-import { MeteredEmbedder, MeteredStructuredGenerator } from './metered';
+import { MeteredEmbedder, MeteredStructuredGenerator, MeteredWebSearcher } from './metered';
 
 const call = (model: string): CallRecord => ({
   provider: model.startsWith('claude') ? 'anthropic' : 'google',
@@ -56,6 +56,7 @@ describe('MeteredStructuredGenerator', () => {
         promptName: 'path-designer',
         promptVersion: 'v1',
         usage: call('claude-sonnet-5-5').usage,
+        webSearchRequests: 0,
         costUsd: 2,
         latencyMs: 42,
         status: 'ok',
@@ -103,5 +104,55 @@ describe('MeteredEmbedder', () => {
     await new MeteredEmbedder(inner, 'gemini-embedding-2', recorder, () => 0, () => NOW).embed({ stage: 'embed', texts: ['a'], kind: 'query' });
 
     expect(recorder.entries[0]).toMatchObject({ stage: 'embed', provider: 'google', model: 'gemini-embedding-2', costUsd: 0.2, promptName: null });
+  });
+});
+
+describe('MeteredWebSearcher', () => {
+  const searchRequest = {
+    stage: 'discover',
+    model: 'claude-haiku-5-5' as const,
+    prompt: { name: 'web-discovery', version: 'v1', text: 'x' },
+    input: 'react hooks',
+    maxUses: 6,
+    schema: z.object({ picks: z.array(z.string()) }),
+  };
+
+  it('adds US$0.01 per web search to the token cost and records the search count', async () => {
+    const recorder = new FakeRecorder();
+    const inner: WebSearcher = {
+      search: () =>
+        Promise.resolve({
+          hits: [],
+          answer: null,
+          queries: [],
+          call: {
+            provider: 'anthropic',
+            model: 'claude-haiku-5-5',
+            usage: { inputTokens: 20_000, cacheWriteTokens: 0, cacheReadTokens: 0, outputTokens: 2_000 },
+            webSearchRequests: 6,
+            latencyMs: 9_000,
+          },
+        }) as never,
+    };
+
+    await new MeteredWebSearcher(inner, recorder, () => 0, () => NOW).search(searchRequest);
+
+    // 20k x $0.1/M + 2k x $0.5/M = $0.003, plus 6 x $0.01.
+    expect(recorder.entries[0]).toMatchObject({ stage: 'discover', webSearchRequests: 6, costUsd: 0.063, promptName: 'web-discovery', status: 'ok' });
+  });
+
+  it('records a failed search call with the searches it was billed for', async () => {
+    const recorder = new FakeRecorder();
+    const billed: CallRecord = {
+      provider: 'anthropic',
+      model: 'claude-haiku-5-5',
+      usage: { inputTokens: 0, cacheWriteTokens: 0, cacheReadTokens: 0, outputTokens: 0 },
+      webSearchRequests: 2,
+      latencyMs: 5,
+    };
+    const inner: WebSearcher = { search: () => Promise.reject(new AiCallError('invalid_output', 'truncated', undefined, billed)) };
+
+    await expect(new MeteredWebSearcher(inner, recorder, () => 0, () => NOW).search(searchRequest)).rejects.toThrow('truncated');
+    expect(recorder.entries[0]).toMatchObject({ status: 'invalid_output', webSearchRequests: 2, costUsd: 0.02 });
   });
 });
