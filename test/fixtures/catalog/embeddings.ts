@@ -12,6 +12,8 @@ export interface GoldenEmbeddings {
 }
 
 export const EMBEDDINGS_FILE = join(__dirname, 'embeddings.json');
+/** Held-out phrases (seed/_eval), recorded by `pnpm catalog:record-holdout`; queries only. */
+export const HOLDOUT_EMBEDDINGS_FILE = join(__dirname, 'holdout-embeddings.json');
 
 /** Float32 little-endian, base64: about a third of the JSON-number size, and exact. */
 export function encodeVector(vector: number[]): string {
@@ -25,6 +27,10 @@ export function decodeVector(encoded: string): number[] {
 
 export function loadGoldenEmbeddings(): GoldenEmbeddings | null {
   return existsSync(EMBEDDINGS_FILE) ? (JSON.parse(readFileSync(EMBEDDINGS_FILE, 'utf8')) as GoldenEmbeddings) : null;
+}
+
+export function loadHoldoutEmbeddings(): GoldenEmbeddings | null {
+  return existsSync(HOLDOUT_EMBEDDINGS_FILE) ? (JSON.parse(readFileSync(HOLDOUT_EMBEDDINGS_FILE, 'utf8')) as GoldenEmbeddings) : null;
 }
 
 const key = (kind: 'query' | 'document', text: string, title?: string | null) => `${kind}\u0000${title ?? ''}\u0000${text}`;

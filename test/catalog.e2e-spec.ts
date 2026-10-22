@@ -12,7 +12,8 @@ import { users } from '../src/shared/db/schema/identity';
 import { loadSeed } from '../src/shared/db/seed/load-seed';
 import { parseSeed, readSeedFiles } from '../src/shared/db/seed/seed-data';
 import { createTestApp, type TestApp } from './app';
-import { decodeVector, loadGoldenEmbeddings, RecordedEmbedder } from './fixtures/catalog/embeddings';
+import { readFileSync } from 'node:fs';
+import { decodeVector, loadGoldenEmbeddings, loadHoldoutEmbeddings, RecordedEmbedder } from './fixtures/catalog/embeddings';
 import golden from './fixtures/catalog/golden.json';
 
 const csrf = { Origin: 'http://localhost:5173', 'X-Requested-With': 'eduujoy' };
@@ -31,7 +32,13 @@ interface ResolveBody {
   choices?: { id: string; similarity: number }[];
 }
 
-const recording = loadGoldenEmbeddings();
+const golden_ = loadGoldenEmbeddings();
+const holdoutRecording = loadHoldoutEmbeddings();
+// The held-out queries ride on the same recorded embedder (their topic documents are the golden ones).
+const recording = golden_ && holdoutRecording ? { ...golden_, queries: [...golden_.queries, ...holdoutRecording.queries] } : golden_;
+const holdout = JSON.parse(readFileSync(join(__dirname, '..', 'seed', '_eval', 'topic-resolve-holdout.json'), 'utf8')) as {
+  cases: (GoldenCase & { kind: string; nearSlugs?: string[] })[];
+};
 
 /** Normaliser stand-in: the learner's words as the name, so created topics stay distinct. */
 const normalizer: TopicNormalizer = {
@@ -161,6 +168,46 @@ describe('catalog (e2e, PRD-API §13 A6 Verify)', () => {
     expect(embedder.misses.filter((m) => m.startsWith('query:'))).toEqual([]);
     expect(lenientN / scored.length).toBeGreaterThanOrEqual(0.95);
     // 150 vector writes and ~100 resolves, each a round trip to the Neon test branch.
+  }, 180_000);
+
+  // Launch requirement (EXECUTION-PLAN §4): the held-out set was never used for tuning. It must reach
+  // lenient >= 95% with no wrong auto-match. Runs after the golden test, which loads the topic vectors.
+  (holdoutRecording ? it : it.skip)('held-out topic phrases: lenient >= 95% and no wrong auto-match (launch check)', async () => {
+    const rows: { kind: string; text: string; got: string; strict: boolean; lenient: boolean; wrongMatch: boolean }[] = [];
+    for (const c of holdout.cases) {
+      const { cookie } = await signedInUser();
+      const body = (await resolve(cookie, { text: c.text }).expect(200)).body as ResolveBody;
+      const matched = body.topic ? slugById.get(body.topic.id) : undefined;
+      const offered = (body.choices ?? []).map((ch) => slugById.get(ch.id) ?? '?');
+      const inSet = (slug: string | undefined) => slug !== undefined && (c.slugs ?? []).includes(slug);
+      let strict: boolean;
+      let lenient: boolean;
+      if (c.expect === 'new') {
+        strict = lenient = body.status === 'created';
+      } else if (c.expect === 'topic') {
+        strict = body.status === 'matched' && matched === c.slugs?.[0];
+        lenient = strict || (body.status === 'choices' && offered.includes(c.slugs?.[0] ?? ''));
+      } else {
+        strict = lenient = (body.status === 'choices' && offered.some(inSet)) || (body.status === 'matched' && inSet(matched));
+      }
+      // A wrong auto-match: matched a topic the case doesn't accept (for near-miss and new, any match).
+      const wrongMatch = body.status === 'matched' && (c.expect === 'new' || !inSet(matched));
+      const got = body.status === 'choices' ? `choices ${offered.join(', ')}` : `${body.status} ${matched ?? body.topic?.canonicalName ?? ''}`;
+      rows.push({ kind: c.kind, text: c.text, got, strict, lenient, wrongMatch });
+    }
+    const pct = (n: number) => `${n}/${rows.length} (${((n / rows.length) * 100).toFixed(1)}%)`;
+    const byKind = [...new Set(rows.map((r) => r.kind))].map((k) => {
+      const of = rows.filter((r) => r.kind === k);
+      return `${k} ${of.filter((r) => r.lenient).length}/${of.length}`;
+    });
+    process.stdout.write(
+      `Held-out set: lenient ${pct(rows.filter((r) => r.lenient).length)}  strict ${pct(rows.filter((r) => r.strict).length)}  wrong auto-matches ${rows.filter((r) => r.wrongMatch).length}\n` +
+        `  by kind: ${byKind.join(', ')}\n` +
+        rows.filter((r) => !r.lenient || r.wrongMatch).map((r) => `  ${r.wrongMatch ? 'WRONG' : 'MISS'} [${r.kind}] "${r.text}": got ${r.got}`).join('\n') +
+        '\n',
+    );
+    expect(rows.filter((r) => r.wrongMatch).map((r) => r.text)).toEqual([]);
+    expect(rows.filter((r) => r.lenient).length / rows.length).toBeGreaterThanOrEqual(0.95);
   }, 180_000);
 
   it('matches an exact name without an embedding call and returns only contract fields', async () => {
