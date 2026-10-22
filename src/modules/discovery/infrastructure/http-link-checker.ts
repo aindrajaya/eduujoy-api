@@ -38,7 +38,7 @@ export function publicLookup(hostname: string, options: { all?: boolean; family?
   });
 }
 
-interface Fetched {
+export interface Fetched {
   status: number;
   contentType: string;
   response: IncomingMessage;
@@ -49,7 +49,11 @@ interface Fetched {
  * (PRD-API §5), and an SSRF guard: literal and resolved addresses must be public.
  */
 export class HttpLinkChecker implements LinkChecker {
-  constructor(private readonly lookup: typeof publicLookup = publicLookup) {}
+  /** `send` makes one request (no redirects); tests replace it to script redirects without a TLS server. */
+  constructor(
+    private readonly lookup: typeof publicLookup = publicLookup,
+    private readonly send?: (url: URL, signal: AbortSignal) => Promise<Fetched>,
+  ) {}
 
   async check(url: string, signal?: AbortSignal): Promise<LinkCheck> {
     try {
@@ -97,7 +101,7 @@ export class HttpLinkChecker implements LinkChecker {
     let url = new URL(start);
     for (let hop = 0; ; hop += 1) {
       this.assertAllowed(url);
-      const fetched = await this.once(url, abort);
+      const fetched = await (this.send ?? this.once.bind(this))(url, abort);
       const location = fetched.response.headers.location;
       if (fetched.status >= 300 && fetched.status < 400 && location) {
         fetched.response.destroy();

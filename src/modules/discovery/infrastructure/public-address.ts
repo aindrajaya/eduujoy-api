@@ -22,8 +22,9 @@ for (const [net, prefix] of [
   blocked.addSubnet(net, prefix, 'ipv4');
 }
 for (const [net, prefix] of [
-  ['::', 128],
-  ['::1', 128],
+  // IPv4-compatible (::a.b.c.d, which includes :: and ::1) and 6to4 (2002::/16 embeds any IPv4).
+  ['::', 96],
+  ['2002::', 16],
   ['64:ff9b::', 96],
   ['100::', 64],
   ['2001::', 23],
