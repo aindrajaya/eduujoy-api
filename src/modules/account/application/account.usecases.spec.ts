@@ -64,10 +64,17 @@ describe('DeleteAccount', () => {
 describe('ExportAccount', () => {
   it('collects every module section for that learner only', async () => {
     const calls: string[] = [];
-    const sections = ['account', 'assessment', 'progress', 'billing', 'topicsCreated'].map((s) => contributor(s, calls));
-    const [identity, assessment, progress, billing, catalog] = sections as [AccountDataContributor, AccountDataContributor, AccountDataContributor, AccountDataContributor, AccountDataContributor];
+    const sections = ['account', 'assessment', 'progress', 'billing', 'topicsCreated', 'pathing'].map((s) => contributor(s, calls));
+    const [identity, assessment, progress, billing, catalog, pathing] = sections as [
+      AccountDataContributor,
+      AccountDataContributor,
+      AccountDataContributor,
+      AccountDataContributor,
+      AccountDataContributor,
+      AccountDataContributor,
+    ];
 
-    const data = await new ExportAccount(identity, assessment, progress, billing, catalog).execute('u1');
+    const data = await new ExportAccount(identity, assessment, progress, billing, catalog, pathing).execute('u1');
 
     expect(data).toMatchObject({
       format: EXPORT_FORMAT,
@@ -76,6 +83,7 @@ describe('ExportAccount', () => {
       progress: { owner: 'u1' },
       billing: { owner: 'u1' },
       topicsCreated: { owner: 'u1' },
+      pathing: { owner: 'u1' },
     });
     expect(typeof data['exportedAt']).toBe('string');
   });

@@ -62,7 +62,7 @@ describe('account export and deletion (e2e, contract 0.6.0/0.7.1)', () => {
     expect(res.headers['access-control-expose-headers']).toContain('Content-Disposition');
     const body = res.body as { format: string; account: { user: { email: string; name: string } } };
     expect(body).toMatchObject({ format: 'eduujoy-export-v1', account: { user: { email: me.email, name: 'Ada Account' } } });
-    expect(Object.keys(body).sort()).toEqual(['account', 'assessment', 'billing', 'exportedAt', 'format', 'progress', 'topicsCreated']);
+    expect(Object.keys(body).sort()).toEqual(['account', 'assessment', 'billing', 'exportedAt', 'format', 'pathing', 'progress', 'topicsCreated']);
     const text = JSON.stringify(body);
     expect(text).not.toContain(other.email);
     expect(text).not.toContain(other.userId);

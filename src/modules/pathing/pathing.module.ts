@@ -1,4 +1,5 @@
 import { Inject, Module, type OnApplicationBootstrap, type OnModuleInit } from '@nestjs/common';
+import { ACCOUNT_DATA } from '../../shared/common/account';
 import { ReviewQueue } from '../../shared/common/review';
 import { AppConfig } from '../../shared/config';
 import { EventBus } from '../../shared/events';
@@ -18,6 +19,7 @@ import { RefundRejectedPaths } from './application/review-resolved.listener';
 import { WakeWaitingPaths } from './application/wake-waiting-paths.listener';
 import { ClaudePathDesigner } from './infrastructure/claude-path-designer';
 import { DrizzlePathRepository } from './infrastructure/drizzle-path.repository';
+import { PathingAccountData } from './infrastructure/pathing-account-data';
 import { PathsController, StepsController } from './interface/paths.controller';
 
 /** Pathing (PRD-API §4, A9): path requests, the generate-path job, reads and step progress. */
@@ -36,7 +38,9 @@ import { PathsController, StepsController } from './interface/paths.controller';
     ReviewQueue,
     { provide: PATH_REPOSITORY, useClass: DrizzlePathRepository },
     { provide: PATH_DESIGNER, useClass: ClaudePathDesigner },
+    { provide: ACCOUNT_DATA.pathing, useClass: PathingAccountData },
   ],
+  exports: [ACCOUNT_DATA.pathing],
 })
 export class PathingModule implements OnModuleInit, OnApplicationBootstrap {
   constructor(

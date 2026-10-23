@@ -119,6 +119,20 @@ describe('paths (e2e, PRD-API §13 A9 Verify)', () => {
     expect((await http().get(`/v1/paths/${path?.id ?? ''}`).set('Cookie', cookie).set('If-None-Match', etag)).status).toBe(200);
   });
 
+  it("exports the learner's paths and steps without checkpoint answer keys", async () => {
+    const { cookie, placementId } = await ready();
+    const accepted = (await post(cookie, { placementId })).body as Accepted;
+    await settled(accepted.jobId);
+    const path = await pathOf(accepted.jobId);
+
+    const res = await http().get('/v1/me/export').set('Origin', 'http://localhost:5173').set('Cookie', cookie);
+    expect(res.status).toBe(200);
+    const pathing = (res.body as { pathing: { paths: { id: string }[]; steps: { pathId: string }[] } }).pathing;
+    expect(pathing.paths.map((p) => p.id)).toEqual([path?.id]);
+    expect(pathing.steps).toHaveLength(6);
+    expect(JSON.stringify(pathing)).not.toMatch(/correctOptionIds|expectedAnswer|answerKeys/);
+  });
+
   it('replays a key, rejects a reused key with another body, and joins a second request for the placement', async () => {
     const { cookie, placementId } = await ready();
     const key = `key-${randomUUID()}`;
