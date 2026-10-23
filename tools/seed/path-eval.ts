@@ -15,7 +15,7 @@ import { addUsage, estimate, estimateTokens, formatEstimate, fromApiUsage, SEED_
 //   draft    (paid)  Sonnet writes each case's goal and reference
 //   review   (paid)  Sonnet keeps, revises or drops each draft
 //   assemble (free)  seed/_eval/path-eval-v1.json from the plan, drafts and reviews, then the file check
-// startBloomMax and endBloom come from the rules in code, so a rule change is one field per case.
+// startBloomMax and endBloom come from the rules in code.
 
 const PLAN_FILE = join(SEED_DIR, '_eval', 'path-eval-plan.json');
 const OUT_FILE = join(SEED_DIR, '_eval', 'path-eval-v1.json');
@@ -35,7 +35,7 @@ const BAND: Record<Stage, [Bloom, Bloom]> = {
   proficient: ['C4', 'C5'],
   expert: ['C5', 'C6'],
 };
-/** Agreed with the API lane, 23 Oct 2026: novice stays in the novice band (pending the lead's confirmation). */
+/** Agreed with the API lane, 23 Oct 2026; novice ending at C2 (a novice-band path) confirmed by the user (master PRD §5). */
 const END_BLOOM: Record<Stage, Bloom> = { novice: 'C2', advanced_beginner: 'C4', competent: 'C5', proficient: 'C6', expert: 'C6' };
 const FORMATS = ['video', 'text', 'papers'] as const;
 const URL_LIKE = /https?:\/\/|www\.|\.(com|org|io|dev|net)\b/i;

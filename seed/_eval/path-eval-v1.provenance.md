@@ -13,8 +13,8 @@ agreed with the API lane (docs/plans/A9-pathing.md, "Eval case format"; answers 
   Claude Sonnet 5.5 (prompt `path-eval-review/v1`: keep, revise or drop). Every draft and revision passed the
   rule check in code (step range, sop length, Bloom start/end and never going down, novice band, every
   `mustCover` concept in the sop, order constraints held, no URLs). `startBloomMax` and `endBloom` come from
-  code: novice ends at C2 (provisional, pending the lead), advanced_beginner C4, competent C5, proficient
-  and expert C6.
+  code: novice ends at C2 (a novice-band path, confirmed by the user, master PRD §5), advanced_beginner C4,
+  competent C5, proficient and expert C6.
 - **Retries:** pe-007's draft was rejected three times for a Bloom drop and passed when the request named
   the broken rule; 11 smoke reviews over the agreed limits passed on a re-review that named the limits.
 - **Human check:** the user spot-checks samples; the master PRD's two in-house reviewers still score
