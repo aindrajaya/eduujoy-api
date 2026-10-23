@@ -76,7 +76,7 @@ export class DrizzlePathRepository implements PathRepository {
 
   async create(
     tx: Tx,
-    input: { userId: string; topicId: string; placementId: string; from: PathRecord['from']; to: PathRecord['to']; goal: string | null; weeklyHours: number },
+    input: { id?: string; userId: string; topicId: string; placementId: string; from: PathRecord['from']; to: PathRecord['to']; goal: string | null; weeklyHours: number },
   ): Promise<string | null> {
     try {
       // A savepoint, so a lost race on the live-placement index doesn't abort the caller's transaction.
@@ -84,6 +84,7 @@ export class DrizzlePathRepository implements PathRepository {
         const [row] = await inner
           .insert(paths)
           .values({
+            ...(input.id ? { id: input.id } : {}),
             userId: input.userId,
             topicId: input.topicId,
             placementId: input.placementId,

@@ -84,7 +84,7 @@ export interface PathRepository {
   /** Null when this learner already has a live path for the placement (the partial unique index). */
   create(
     tx: Tx,
-    input: { userId: string; topicId: string; placementId: string; from: PathRecord['from']; to: PathRecord['to']; goal: string | null; weeklyHours: number },
+    input: { id?: string; userId: string; topicId: string; placementId: string; from: PathRecord['from']; to: PathRecord['to']; goal: string | null; weeklyHours: number },
   ): Promise<string | null>;
   findLiveForPlacement(userId: string, placementId: string): Promise<PathRecord | null>;
   setJob(tx: Tx, pathId: string, jobId: string): Promise<void>;
