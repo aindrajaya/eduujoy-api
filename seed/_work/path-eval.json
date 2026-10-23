@@ -1,0 +1,4313 @@
+{
+  "pe-001": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I've never coded. I'd like to read simple Python scripts at work and understand what they do, using about an hour a week.",
+        "steps": {
+          "min": 6,
+          "max": 7
+        },
+        "mustCover": [
+          "Indentation and basic syntax",
+          "Variables and data types",
+          "Lists and dictionaries",
+          "Conditionals and loops",
+          "Defining simple functions",
+          "Reading short scripts"
+        ],
+        "orderConstraints": [
+          [
+            "Variables and data types",
+            "Lists and dictionaries"
+          ],
+          [
+            "Variables and data types",
+            "Conditionals and loops"
+          ],
+          [
+            "Conditionals and loops",
+            "Defining simple functions"
+          ],
+          [
+            "Defining simple functions",
+            "Reading short scripts"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Indentation is just cosmetic formatting and does not change what the program does",
+          "The = sign means equality like in maths rather than assigning a value to a name",
+          "A list and a dictionary are interchangeable; both are looked up by position"
+        ],
+        "notes": "With no format preference, mix short readable explanations with small interactive or run-and-observe examples; keep each step to about 15-20 minutes so total time stays within 2 hours. Checkpoints must be recall quizzes and explain-in-own-words tasks, with no project work, and the path must stay at C1-C2 and end on understanding code, not writing it.",
+        "sop": [
+          {
+            "objective": "Recall what Python is and how indentation and basic syntax structure a simple script.",
+            "bloom": "C1",
+            "concepts": [
+              "Indentation and basic syntax"
+            ]
+          },
+          {
+            "objective": "Name the common data types and describe how variables hold values, checked by a short recall quiz.",
+            "bloom": "C1",
+            "concepts": [
+              "Variables and data types"
+            ]
+          },
+          {
+            "objective": "Explain in own words how lists and dictionaries store items and how to read values from each.",
+            "bloom": "C2",
+            "concepts": [
+              "Lists and dictionaries"
+            ]
+          },
+          {
+            "objective": "Explain what an if statement and a for loop do by predicting the output of short snippets.",
+            "bloom": "C2",
+            "concepts": [
+              "Conditionals and loops"
+            ]
+          },
+          {
+            "objective": "Describe how a def function takes inputs and returns a result, explaining a simple example in own words.",
+            "bloom": "C2",
+            "concepts": [
+              "Defining simple functions"
+            ]
+          },
+          {
+            "objective": "Explain line by line what a short workplace-style script does, summarising its purpose in own words.",
+            "bloom": "C2",
+            "concepts": [
+              "Reading short scripts"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "Steps range 6-7 with ~15-20 min each gives 1.5-2.3 hours for 7 steps; max 7 risks exceeding 2 hours, so cap at 6 steps to stay safely within the limit.",
+          "'Defining simple functions' sits in a path that ends at C2 and is framed as reading, not writing; the concept should be about reading/understanding function definitions, not defining them.",
+          "'Reading short scripts' is vague and not a Python concept; it is an activity, which makes it hard to judge. Should be a concrete concept like tracing a script's flow.",
+          "Order constraint Variables -> Conditionals/loops is genuine, but Indentation and basic syntax has no ordering constraint even though it must precede conditionals, loops and functions (indentation defines blocks).",
+          "Misconception 3 is slightly off: lists are indexed by position and dicts by key; phrasing 'both looked up by position' is fine but the learner at novice stage also commonly confuses = with ==; fine as is.",
+          "First sop step bundles 'what Python is' with syntax; goal step objectives should map one concept clearly.",
+          "Notes mention 'no project work' and checkpoint types, which is fine, but the time guidance conflicts with the 6-7 step range."
+        ],
+        "revised": {
+          "goal": "I've never coded. I'd like to read simple Python scripts at work and understand what they do, using about an hour a week.",
+          "steps": {
+            "min": 6,
+            "max": 6
+          },
+          "mustCover": [
+            "Indentation and basic syntax",
+            "Variables and data types",
+            "Lists and dictionaries",
+            "Conditionals and loops",
+            "Reading function definitions and return values",
+            "Tracing a short script's flow"
+          ],
+          "orderConstraints": [
+            [
+              "Indentation and basic syntax",
+              "Conditionals and loops"
+            ],
+            [
+              "Variables and data types",
+              "Lists and dictionaries"
+            ],
+            [
+              "Variables and data types",
+              "Conditionals and loops"
+            ],
+            [
+              "Conditionals and loops",
+              "Reading function definitions and return values"
+            ],
+            [
+              "Reading function definitions and return values",
+              "Tracing a short script's flow"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Indentation is just cosmetic formatting and does not change what the program does",
+            "The = sign means equality like in maths rather than assigning a value to a name",
+            "A list and a dictionary are interchangeable; lists are looked up by position, dictionaries by key"
+          ],
+          "notes": "With no format preference, mix short readable explanations with small run-and-observe examples. Keep each of the 6 steps to about 15-20 minutes so total time is at most 2 hours. Checkpoints must be recall quizzes, predict-the-output and explain-in-own-words tasks, with no project work. The path stays at C1-C2 and ends on understanding code, not writing it.",
+          "sop": [
+            {
+              "objective": "Recall how indentation and basic syntax (statements, comments, colons) structure a simple Python script.",
+              "bloom": "C1",
+              "concepts": [
+                "Indentation and basic syntax"
+              ]
+            },
+            {
+              "objective": "Name the common data types (int, float, str, bool) and describe how a variable holds a value, checked by a short recall quiz.",
+              "bloom": "C1",
+              "concepts": [
+                "Variables and data types"
+              ]
+            },
+            {
+              "objective": "Explain in own words how lists and dictionaries store items and how to read a value from each.",
+              "bloom": "C2",
+              "concepts": [
+                "Lists and dictionaries"
+              ]
+            },
+            {
+              "objective": "Explain what an if statement and a for loop do by predicting the output of short snippets.",
+              "bloom": "C2",
+              "concepts": [
+                "Conditionals and loops"
+              ]
+            },
+            {
+              "objective": "Describe how a def function takes inputs and returns a result by explaining a simple example in own words.",
+              "bloom": "C2",
+              "concepts": [
+                "Reading function definitions and return values"
+              ]
+            },
+            {
+              "objective": "Explain step by step what a short workplace-style script does, summarising its purpose in own words.",
+              "bloom": "C2",
+              "concepts": [
+                "Tracing a short script's flow"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-002": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I know basic programming and some JavaScript. I want to understand scope, closures and array methods well enough to fix bugs in the small form-validation script on my team's website.",
+        "steps": {
+          "min": 6,
+          "max": 7
+        },
+        "mustCover": [
+          "let const var scope",
+          "hoisting basics",
+          "closures",
+          "array map filter reduce",
+          "arrow functions and this",
+          "destructuring and spread",
+          "DOM event listeners"
+        ],
+        "orderConstraints": [
+          [
+            "let const var scope",
+            "hoisting basics"
+          ],
+          [
+            "let const var scope",
+            "closures"
+          ],
+          [
+            "closures",
+            "DOM event listeners"
+          ],
+          [
+            "array map filter reduce",
+            "destructuring and spread"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Teaching var, let and const as interchangeable, or claiming let and const are not hoisted at all rather than sitting in a temporal dead zone.",
+          "Presenting arrow functions as just shorter syntax for function expressions, ignoring that they do not bind their own this.",
+          "Suggesting const makes objects and arrays immutable rather than preventing reassignment of the binding."
+        ],
+        "notes": "Use short videos (5–15 min) paired with concise text references, since the learner prefers video and text; avoid long courses. With 2 hours a week the path must be about 4 hours total, so 6–7 steps of roughly 30–40 minutes each, each ending in a small guided exercise or a short bug-fix task on a form script. Must not skip the closure-in-event-handler link, since it is what the learner's goal depends on.",
+        "sop": [
+          {
+            "objective": "Explain how let, const and var differ in scope and reassignment, and apply them correctly in short examples.",
+            "bloom": "C2",
+            "concepts": [
+              "let const var scope"
+            ]
+          },
+          {
+            "objective": "Predict the output of short snippets that rely on hoisting and the temporal dead zone, in a guided exercise.",
+            "bloom": "C2",
+            "concepts": [
+              "hoisting basics"
+            ]
+          },
+          {
+            "objective": "Use map, filter and reduce to transform arrays of data in guided exercises, such as processing a list of form fields.",
+            "bloom": "C3",
+            "concepts": [
+              "array map filter reduce"
+            ]
+          },
+          {
+            "objective": "Apply destructuring and spread to simplify object and array handling in code the learner has already written.",
+            "bloom": "C3",
+            "concepts": [
+              "destructuring and spread",
+              "arrow functions and this"
+            ]
+          },
+          {
+            "objective": "Apply closures to build a function that keeps private state, such as a counter or validator factory.",
+            "bloom": "C3",
+            "concepts": [
+              "closures"
+            ]
+          },
+          {
+            "objective": "Attach event listeners to form elements and use them to trigger validation logic, checking that handlers behave correctly.",
+            "bloom": "C3",
+            "concepts": [
+              "DOM event listeners"
+            ]
+          },
+          {
+            "objective": "Debug a broken form-validation script by tracing scope, closure and this problems, and explain the cause of each bug.",
+            "bloom": "C4",
+            "concepts": [
+              "closures",
+              "arrow functions and this",
+              "DOM event listeners"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "Sop Bloom levels violate the rules: step 1 objective says 'Explain ... and apply' but is tagged C2, and the step 2 'Predict the output' verb is closer to C3/C2 ambiguity but fine; step 4 mixes destructuring/spread with arrow functions and this, which is a different topic bundle and the arrow/this concept gets taught before closures without its own objective.",
+          "Order constraint closures before DOM event listeners is fine, but arrow functions and this has no constraint although the debug step needs it; arrow functions and this should come after let const var scope/closures context and before the debugging step.",
+          "Order constraint array map filter reduce before destructuring and spread is arbitrary; neither is a prerequisite of the other.",
+          "Time realism: 7 sop steps at 30-40 minutes is 3.5-4.7 hours, which can exceed the 4 hour cap; steps should be 6-7 with about 30 minutes each, and the notes should state that.",
+          "Step 1 combines explain and apply in one objective; hoisting step is tagged C2 yet starts at C2 which is fine, but the first step should be a clear single level.",
+          "Goal says 'fix bugs' which requires C4 debugging; fine, but mustCover lacks form validation relevant concepts like reading the event object, though that is optional.",
+          "Notes mention 'short videos' and formats generally, no specific resources named, which is fine."
+        ],
+        "revised": {
+          "goal": "I know basic programming and some JavaScript. I want to understand scope, closures and array methods well enough to fix bugs in the small form-validation script on my team's website.",
+          "steps": {
+            "min": 6,
+            "max": 7
+          },
+          "mustCover": [
+            "let const var scope",
+            "hoisting basics",
+            "closures",
+            "array map filter reduce",
+            "arrow functions and this",
+            "destructuring and spread",
+            "DOM event listeners"
+          ],
+          "orderConstraints": [
+            [
+              "let const var scope",
+              "hoisting basics"
+            ],
+            [
+              "let const var scope",
+              "closures"
+            ],
+            [
+              "closures",
+              "DOM event listeners"
+            ],
+            [
+              "closures",
+              "arrow functions and this"
+            ],
+            [
+              "arrow functions and this",
+              "DOM event listeners"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Teaching var, let and const as interchangeable, or claiming let and const are not hoisted at all rather than sitting in a temporal dead zone.",
+            "Presenting arrow functions as just shorter syntax for function expressions, ignoring that they do not bind their own this.",
+            "Suggesting const makes objects and arrays immutable rather than preventing reassignment of the binding."
+          ],
+          "notes": "Use short videos (5-15 min) paired with concise text references, since the learner prefers video and text; avoid long courses. With 2 hours a week the path must total at most 4 hours, so 6-7 steps of about 30 minutes each (about 3.5 hours at 7 steps), each ending in a small guided exercise or a short bug-fix task on a form script. Must not skip the closure-in-event-handler link, since the learner's goal depends on it.",
+          "sop": [
+            {
+              "objective": "Explain how let, const and var differ in scope and reassignment, including that const prevents rebinding but not mutation.",
+              "bloom": "C2",
+              "concepts": [
+                "let const var scope"
+              ]
+            },
+            {
+              "objective": "Explain how hoisting and the temporal dead zone affect var, let and const, using short snippets.",
+              "bloom": "C2",
+              "concepts": [
+                "hoisting basics"
+              ]
+            },
+            {
+              "objective": "Use map, filter and reduce to transform arrays of data in guided exercises, such as processing a list of form fields.",
+              "bloom": "C3",
+              "concepts": [
+                "array map filter reduce"
+              ]
+            },
+            {
+              "objective": "Apply destructuring and spread to simplify object and array handling in code the learner has already written.",
+              "bloom": "C3",
+              "concepts": [
+                "destructuring and spread"
+              ]
+            },
+            {
+              "objective": "Apply closures to build a function that keeps private state, such as a counter or validator factory.",
+              "bloom": "C3",
+              "concepts": [
+                "closures"
+              ]
+            },
+            {
+              "objective": "Use arrow functions and attach event listeners to form elements, applying the correct this behaviour in handlers that trigger validation logic.",
+              "bloom": "C3",
+              "concepts": [
+                "arrow functions and this",
+                "DOM event listeners"
+              ]
+            },
+            {
+              "objective": "Debug a broken form-validation script by tracing scope, closure and this problems, and analyse the cause of each bug.",
+              "bloom": "C4",
+              "concepts": [
+                "closures",
+                "arrow functions and this",
+                "DOM event listeners"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-003": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I run a small online shop and keep orders in a spreadsheet. I want to understand how SQL pulls answers out of tables so I can talk to our developer and read simple queries.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Tables, rows and columns",
+          "SELECT and FROM basics",
+          "Filtering with WHERE",
+          "Sorting and limiting results",
+          "Aggregate functions and GROUP BY",
+          "Primary and foreign keys",
+          "How JOINs combine tables",
+          "INSERT, UPDATE, DELETE purpose"
+        ],
+        "orderConstraints": [
+          [
+            "Tables, rows and columns",
+            "SELECT and FROM basics"
+          ],
+          [
+            "SELECT and FROM basics",
+            "Filtering with WHERE"
+          ],
+          [
+            "Filtering with WHERE",
+            "Aggregate functions and GROUP BY"
+          ],
+          [
+            "Primary and foreign keys",
+            "How JOINs combine tables"
+          ],
+          [
+            "SELECT and FROM basics",
+            "INSERT, UPDATE, DELETE purpose"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "A database table is just a spreadsheet and SQL cell references work like spreadsheet formulas.",
+          "UPDATE or DELETE without a WHERE clause only affects one row.",
+          "A JOIN copies or merges tables permanently instead of combining rows in the query result."
+        ],
+        "notes": "Text-only resources (written tutorials, reference pages, annotated examples) suit this learner; avoid video or interactive-sandbox-dependent steps. About 5 hours a week means steps of roughly 1-1.5 hours, 10 hours total at most. Checkpoints must be recall quizzes and explain-in-own-words tasks, with no step asking the learner to write complex queries from scratch.",
+        "sop": [
+          {
+            "objective": "Recall what a relational database, table, row and column are and compare them to the learner's order spreadsheet.",
+            "bloom": "C1",
+            "concepts": [
+              "Tables, rows and columns"
+            ]
+          },
+          {
+            "objective": "Explain in their own words what a SELECT ... FROM query returns by reading simple example queries on an orders table.",
+            "bloom": "C1",
+            "concepts": [
+              "SELECT and FROM basics"
+            ]
+          },
+          {
+            "objective": "Explain how a WHERE clause narrows results by predicting the output of short filtered queries.",
+            "bloom": "C2",
+            "concepts": [
+              "Filtering with WHERE",
+              "Sorting and limiting results"
+            ]
+          },
+          {
+            "objective": "Describe what COUNT, SUM and AVG do and explain how GROUP BY produces one result row per group.",
+            "bloom": "C2",
+            "concepts": [
+              "Aggregate functions and GROUP BY"
+            ]
+          },
+          {
+            "objective": "Explain how primary and foreign keys link customers to orders and why data is split across tables.",
+            "bloom": "C2",
+            "concepts": [
+              "Primary and foreign keys"
+            ]
+          },
+          {
+            "objective": "Explain in a written summary how a JOIN matches rows between two tables, using a customers and orders example.",
+            "bloom": "C2",
+            "concepts": [
+              "How JOINs combine tables"
+            ]
+          },
+          {
+            "objective": "Explain what INSERT, UPDATE and DELETE do, why WHERE matters for them, and summarise how to read a simple query end to end.",
+            "bloom": "C2",
+            "concepts": [
+              "INSERT, UPDATE, DELETE purpose"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-004": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I've built small JavaScript pages and want to build a working to-do and filter app in React for my portfolio, and understand why my components re-render when state changes.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "JSX and components",
+          "Props passing data down",
+          "Component state",
+          "Event handling and forms",
+          "Conditional rendering",
+          "Lists and keys",
+          "Lifting state up",
+          "Re-rendering and reconciliation"
+        ],
+        "orderConstraints": [
+          [
+            "JSX and components",
+            "Props passing data down"
+          ],
+          [
+            "Props passing data down",
+            "Component state"
+          ],
+          [
+            "Component state",
+            "Lifting state up"
+          ],
+          [
+            "Lists and keys",
+            "Re-rendering and reconciliation"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Mutating state directly (e.g. pushing to an array in state) is fine as long as the page seems to update",
+          "Using array index as a key is always safe, even when the list is reordered or items are removed",
+          "The virtual DOM makes React fast because it never touches the real DOM"
+        ],
+        "notes": "Learner prefers video and text, so mix short walkthrough videos with written guides and docs-style explanations, with each step having a guided exercise. At 4 hours a week, the path must fit in about 8 hours total, so steps are 60-90 minutes each; do not skip the build of a small app that uses lifted state, and the final analysis step should compare or debug re-render behaviour.",
+        "sop": [
+          {
+            "objective": "Explain how JSX describes UI and write simple function components that render it.",
+            "bloom": "C2",
+            "concepts": [
+              "JSX and components"
+            ]
+          },
+          {
+            "objective": "Pass data into components through props and build a small reusable component with guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Props passing data down"
+            ]
+          },
+          {
+            "objective": "Add local state to a component and update it correctly without mutating the previous value.",
+            "bloom": "C3",
+            "concepts": [
+              "Component state"
+            ]
+          },
+          {
+            "objective": "Handle click and input events and build a controlled form that adds a to-do item.",
+            "bloom": "C3",
+            "concepts": [
+              "Event handling and forms",
+              "Conditional rendering"
+            ]
+          },
+          {
+            "objective": "Render a to-do list from an array with stable keys and show an empty-state message conditionally.",
+            "bloom": "C3",
+            "concepts": [
+              "Lists and keys",
+              "Conditional rendering"
+            ]
+          },
+          {
+            "objective": "Lift shared state up to a parent so the filter and the list stay in sync, and break the app into a clear component tree.",
+            "bloom": "C4",
+            "concepts": [
+              "Lifting state up"
+            ]
+          },
+          {
+            "objective": "Analyse why components re-render after state changes and how keys affect reconciliation by debugging a list with faulty keys.",
+            "bloom": "C4",
+            "concepts": [
+              "Re-rendering and reconciliation",
+              "Lists and keys"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-005": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm new to coding and my team uses Git. I want to understand what commits, branches and remotes are so I can follow along in code reviews without feeling lost.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Repository and working directory",
+          "Staging area and commits",
+          "Commit history and log",
+          "Branches and HEAD",
+          "Merging branches",
+          "Local versus remote repositories"
+        ],
+        "orderConstraints": [
+          [
+            "Repository and working directory",
+            "Staging area and commits"
+          ],
+          [
+            "Staging area and commits",
+            "Branches and HEAD"
+          ],
+          [
+            "Branches and HEAD",
+            "Merging branches"
+          ],
+          [
+            "Staging area and commits",
+            "Local versus remote repositories"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Git and GitHub are the same thing",
+          "A commit stores only the lines that changed rather than a snapshot of the project, so history is just a list of diffs",
+          "A branch is a full copy of the project folder"
+        ],
+        "notes": "With no format preference, mix short explanatory reading or video with small hands-on or visual demos, but keep the learner at recall and explain-in-own-words level (C1-C2). Total time must stay within about 6 hours across the two weeks (steps of roughly 45-60 minutes), with no step demanding heavy practice, conflict resolution or history rewriting.",
+        "sop": [
+          {
+            "objective": "Recall what version control is and why teams use it, and name the parts of a repository and the working directory.",
+            "bloom": "C1",
+            "concepts": [
+              "Repository and working directory"
+            ]
+          },
+          {
+            "objective": "Explain in your own words how changes move from the working directory to the staging area and into a commit.",
+            "bloom": "C2",
+            "concepts": [
+              "Staging area and commits"
+            ]
+          },
+          {
+            "objective": "Describe what a commit records and read a commit log to explain what happened in a project's history.",
+            "bloom": "C2",
+            "concepts": [
+              "Commit history and log"
+            ]
+          },
+          {
+            "objective": "Explain what a branch is and what HEAD points to, using a simple diagram.",
+            "bloom": "C2",
+            "concepts": [
+              "Branches and HEAD"
+            ]
+          },
+          {
+            "objective": "Explain in your own words what happens when two branches are merged and why a merge may be needed.",
+            "bloom": "C2",
+            "concepts": [
+              "Merging branches"
+            ]
+          },
+          {
+            "objective": "Explain the difference between local and remote repositories and what pushing and pulling do, including how Git differs from a hosting service.",
+            "bloom": "C2",
+            "concepts": [
+              "Local versus remote repositories"
+            ]
+          },
+          {
+            "objective": "Summarise a typical team workflow from commit to branch to merge to push, as a short written explanation or labelled diagram.",
+            "bloom": "C2",
+            "concepts": [
+              "Staging area and commits",
+              "Branches and HEAD",
+              "Merging branches",
+              "Local versus remote repositories"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-006": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I've copied some HTML and CSS snippets before. I want to build a simple one-page site for my dog-walking side business, and understand why my layouts keep breaking.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Semantic HTML structure",
+          "CSS selectors and specificity",
+          "Box model",
+          "Flexbox layout",
+          "Media queries",
+          "Debugging layout with DevTools"
+        ],
+        "orderConstraints": [
+          [
+            "Semantic HTML structure",
+            "CSS selectors and specificity"
+          ],
+          [
+            "Box model",
+            "Flexbox layout"
+          ],
+          [
+            "Flexbox layout",
+            "Media queries"
+          ],
+          [
+            "Box model",
+            "Debugging layout with DevTools"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Using div elements for everything is fine because styling makes the page look the same",
+          "Fixing layout problems by adding fixed pixel widths and margins instead of understanding the box model and flexible sizing",
+          "Responsive design means shrinking the desktop page, rather than adapting the layout at breakpoints"
+        ],
+        "notes": "Use short videos and text tutorials, each small enough to finish with a guided exercise in about 15-20 minutes. Total time must stay within 2 hours, so the path should use small steps and skip CSS Grid and advanced topics, but it must include a guided check of the box model and DevTools debugging since the learner's layouts break.",
+        "sop": [
+          {
+            "objective": "Explain why semantic elements such as header, nav, main and footer are used instead of generic divs, and mark up a simple page outline.",
+            "bloom": "C2",
+            "concepts": [
+              "Semantic HTML structure"
+            ]
+          },
+          {
+            "objective": "Apply basic CSS selectors to style the page and predict which rule wins when two rules conflict.",
+            "bloom": "C3",
+            "concepts": [
+              "CSS selectors and specificity"
+            ]
+          },
+          {
+            "objective": "Describe the box model parts (content, padding, border, margin) and use them in a guided exercise to size and space page sections.",
+            "bloom": "C3",
+            "concepts": [
+              "Box model"
+            ]
+          },
+          {
+            "objective": "Apply flexbox in a guided exercise to lay out a nav bar and a row of service cards.",
+            "bloom": "C3",
+            "concepts": [
+              "Flexbox layout"
+            ]
+          },
+          {
+            "objective": "Apply media queries to change the card layout on small screens in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Media queries"
+            ]
+          },
+          {
+            "objective": "Use browser DevTools to inspect a broken layout, trace the faults to box model or flexbox causes, and fix them.",
+            "bloom": "C4",
+            "concepts": [
+              "Debugging layout with DevTools",
+              "Box model"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "Steps min 6 / max 8 is unrealistic for 2 hours: the notes say each step takes 15-20 minutes, so 6 steps already take 1.5-2 hours and 8 steps would exceed the limit.",
+          "The sop has 6 steps, so max 8 does not match the sop. Max 6 or 7 is the realistic ceiling.",
+          "The first sop step is C2, which is allowed. A C2 first step is below startBloomMax C3, so this is fine.",
+          "Box model is an order-constraint prerequisite for DevTools and appears in the DevTools step, but the box model step comes before it, so that is fine. Still, 'Debugging layout with DevTools' needs flexbox in its objective, so it should follow flexbox as a constraint.",
+          "Responsive design depends on a viewport meta tag and flexible sizing, which is not mentioned; the misconception about shrinking the desktop page is fine but the concept coverage is thin without relative units.",
+          "Notes say 'skip CSS Grid and advanced topics', which is vague and drifts from the topic description; the notes should only state the time constraint and the scope.",
+          "The misconception about using divs for everything is sound for this stage; the fixed pixel widths misconception is real and relevant.",
+          "Semantic HTML before selectors is a weak prerequisite: selectors can be learned without semantics. It is arbitrary, so it should be removed or justified.",
+          "Selectors and specificity are arguably above advanced_beginner depth when combined with a C3 predict task, but it is acceptable.",
+          "The goal mixes a personal story with the target and is fine, but the 2 hour budget makes a full one-page site unrealistic; scope the goal to a small one-page layout."
+        ],
+        "revised": {
+          "goal": "I've copied some HTML and CSS snippets before. I want to build a simple responsive one-page layout for my dog-walking side business, and understand why my layouts keep breaking.",
+          "steps": {
+            "min": 6,
+            "max": 6
+          },
+          "mustCover": [
+            "Semantic HTML structure",
+            "CSS selectors and specificity",
+            "Box model",
+            "Flexbox layout",
+            "Media queries",
+            "Debugging layout with DevTools"
+          ],
+          "orderConstraints": [
+            [
+              "Box model",
+              "Flexbox layout"
+            ],
+            [
+              "Flexbox layout",
+              "Media queries"
+            ],
+            [
+              "Box model",
+              "Debugging layout with DevTools"
+            ],
+            [
+              "Flexbox layout",
+              "Debugging layout with DevTools"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Using div elements for everything is fine because styling makes the page look the same",
+            "Fixing layout problems by adding fixed pixel widths and margins instead of understanding the box model and flexible sizing",
+            "Responsive design means shrinking the desktop page, rather than adapting the layout at breakpoints"
+          ],
+          "notes": "Total time must stay within 2 hours, so use six short steps of about 15-20 minutes each, each finishing with a guided exercise. Use video and text only. Cover the core layout tools (box model, flexbox, media queries) and a guided DevTools debugging check, and leave out CSS Grid.",
+          "sop": [
+            {
+              "objective": "Explain why semantic elements such as header, nav, main and footer are used instead of generic divs, and mark up a simple page outline.",
+              "bloom": "C2",
+              "concepts": [
+                "Semantic HTML structure"
+              ]
+            },
+            {
+              "objective": "Apply basic CSS selectors to style the page and predict which rule wins when two rules conflict.",
+              "bloom": "C3",
+              "concepts": [
+                "CSS selectors and specificity"
+              ]
+            },
+            {
+              "objective": "Describe the box model parts (content, padding, border, margin) and use them in a guided exercise to size and space page sections.",
+              "bloom": "C3",
+              "concepts": [
+                "Box model"
+              ]
+            },
+            {
+              "objective": "Apply flexbox in a guided exercise to lay out a nav bar and a row of service cards.",
+              "bloom": "C3",
+              "concepts": [
+                "Flexbox layout"
+              ]
+            },
+            {
+              "objective": "Apply media queries to change the card layout on small screens in a guided exercise.",
+              "bloom": "C3",
+              "concepts": [
+                "Media queries"
+              ]
+            },
+            {
+              "objective": "Use browser DevTools to inspect a broken layout, trace the faults to box model or flexbox causes, and fix them.",
+              "bloom": "C4",
+              "concepts": [
+                "Debugging layout with DevTools",
+                "Box model",
+                "Flexbox layout"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-020": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I have to give a 5-minute team update at work next month and I've never spoken to a group. I want to understand how to structure it and handle my nerves.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Speech purpose and audience",
+          "Basic speech structure",
+          "Opening and closing basics",
+          "Simple slide design principles",
+          "Rehearsal and timing",
+          "Managing stage fright",
+          "Voice pace and eye contact"
+        ],
+        "orderConstraints": [
+          [
+            "Speech purpose and audience",
+            "Basic speech structure"
+          ],
+          [
+            "Basic speech structure",
+            "Opening and closing basics"
+          ],
+          [
+            "Basic speech structure",
+            "Simple slide design principles"
+          ],
+          [
+            "Rehearsal and timing",
+            "Managing stage fright"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Memorising a speech word for word is the best way to prepare",
+          "Feeling nervous means you are a bad speaker, and confident speakers feel no nerves",
+          "More text on slides makes a talk clearer, and slides should be read aloud"
+        ],
+        "notes": "Text-only learner: use short readable articles, guides and checklists, with written self-check tasks such as outlining a talk in one's own words, since no video or audio is preferred. At 6 hours a week, steps of about 1.5 to 2 hours fit within the 12-hour cap; keep it at the recall and understand level, with no full delivery or Q&A mastery expected.",
+        "sop": [
+          {
+            "objective": "Recall what makes a talk effective and identify the purpose and audience of a short work update.",
+            "bloom": "C1",
+            "concepts": [
+              "Speech purpose and audience"
+            ]
+          },
+          {
+            "objective": "Recall the three-part structure of a speech and name the job of each part.",
+            "bloom": "C1",
+            "concepts": [
+              "Basic speech structure"
+            ]
+          },
+          {
+            "objective": "Explain in your own words how a speech opening and closing work, and why they matter.",
+            "bloom": "C2",
+            "concepts": [
+              "Opening and closing basics"
+            ]
+          },
+          {
+            "objective": "Explain basic slide design principles such as one idea per slide and limited text, and describe why they help an audience.",
+            "bloom": "C2",
+            "concepts": [
+              "Simple slide design principles"
+            ]
+          },
+          {
+            "objective": "Explain why rehearsal and timing matter and describe how to practise a 5-minute talk using notes rather than a script.",
+            "bloom": "C2",
+            "concepts": [
+              "Rehearsal and timing"
+            ]
+          },
+          {
+            "objective": "Explain what causes stage fright and summarise simple techniques for managing nerves before and during a talk.",
+            "bloom": "C2",
+            "concepts": [
+              "Managing stage fright"
+            ]
+          },
+          {
+            "objective": "Describe in your own words how pace, voice and eye contact affect how a talk is received, and write a short reflection on your own plan.",
+            "bloom": "C2",
+            "concepts": [
+              "Voice pace and eye contact"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "The order constraint Rehearsal and timing before Managing stage fright is not a true prerequisite, because nerve-management ideas can be understood independently.",
+          "A talk has to be structured before it can be rehearsed or timed, and no constraint says so.",
+          "The final sop objective asks for a written reflection on the learner's own plan, which is above the C2 ceiling.",
+          "The first sop objective includes 'what makes a talk effective', which no mustCover concept covers.",
+          "The notes suggest 1.5 to 2 hours per step, so 7 steps could reach 14 hours, over the 12-hour cap."
+        ],
+        "revised": {
+          "goal": "I have to give a 5-minute team update at work next month and I've never spoken to a group. I want to understand how to structure it and how nerves work and can be managed.",
+          "steps": {
+            "min": 6,
+            "max": 8
+          },
+          "mustCover": [
+            "Speech purpose and audience",
+            "Basic speech structure",
+            "Opening and closing basics",
+            "Simple slide design principles",
+            "Rehearsal and timing",
+            "Managing stage fright",
+            "Voice pace and eye contact"
+          ],
+          "orderConstraints": [
+            [
+              "Speech purpose and audience",
+              "Basic speech structure"
+            ],
+            [
+              "Basic speech structure",
+              "Opening and closing basics"
+            ],
+            [
+              "Basic speech structure",
+              "Simple slide design principles"
+            ],
+            [
+              "Basic speech structure",
+              "Rehearsal and timing"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Memorising a speech word for word is the best way to prepare",
+            "Feeling nervous means you are a bad speaker, and confident speakers feel no nerves",
+            "More text on slides makes a talk clearer, and slides should be read aloud"
+          ],
+          "notes": "Text-only learner: use short readable articles, guides and checklists, with written self-check tasks such as outlining a talk in one's own words; no video or audio. With 6 hours a week and a 12-hour cap, keep steps to about 1 to 1.5 hours each (7 steps is roughly 7 to 10.5 hours). Stay at the recall and understand level, with no full delivery or Q&A mastery expected.",
+          "sop": [
+            {
+              "objective": "Identify the purpose and audience of a short work update and recall why both shape what you say.",
+              "bloom": "C1",
+              "concepts": [
+                "Speech purpose and audience"
+              ]
+            },
+            {
+              "objective": "Recall the three-part structure of a speech and name the job of each part.",
+              "bloom": "C1",
+              "concepts": [
+                "Basic speech structure"
+              ]
+            },
+            {
+              "objective": "Explain in your own words how a speech opening and closing work, and why they matter.",
+              "bloom": "C2",
+              "concepts": [
+                "Opening and closing basics"
+              ]
+            },
+            {
+              "objective": "Explain basic slide design principles such as one idea per slide and limited text, and describe why they help an audience.",
+              "bloom": "C2",
+              "concepts": [
+                "Simple slide design principles"
+              ]
+            },
+            {
+              "objective": "Explain why rehearsal and timing matter and describe how to practise a 5-minute talk using notes rather than a script.",
+              "bloom": "C2",
+              "concepts": [
+                "Rehearsal and timing"
+              ]
+            },
+            {
+              "objective": "Explain what causes stage fright and summarise simple techniques for managing nerves before and during a talk.",
+              "bloom": "C2",
+              "concepts": [
+                "Managing stage fright"
+              ]
+            },
+            {
+              "objective": "Describe in your own words how pace, voice and eye contact affect how a talk is received.",
+              "bloom": "C2",
+              "concepts": [
+                "Voice pace and eye contact"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-011": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I can run a container with Docker. I want to deploy my small web app to our team's Kubernetes cluster and work out why it fails when a pod won't start.",
+        "steps": {
+          "min": 6,
+          "max": 7
+        },
+        "mustCover": [
+          "Pods and containers",
+          "Deployments and ReplicaSets",
+          "Services and selectors",
+          "ConfigMaps and Secrets",
+          "Readiness and liveness probes",
+          "Rolling updates and rollback",
+          "Debugging with kubectl"
+        ],
+        "orderConstraints": [
+          [
+            "Pods and containers",
+            "Deployments and ReplicaSets"
+          ],
+          [
+            "Deployments and ReplicaSets",
+            "Services and selectors"
+          ],
+          [
+            "Deployments and ReplicaSets",
+            "Rolling updates and rollback"
+          ],
+          [
+            "Readiness and liveness probes",
+            "Debugging with kubectl"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "A pod is a long-lived, hand-managed server that you fix in place rather than a replaceable unit managed by a controller",
+          "A Service is a load balancer that finds pods by name or image instead of by label selectors",
+          "Secrets are encrypted by default, so storing them in a manifest is safe"
+        ],
+        "notes": "No format preference, so mix short reads with hands-on kubectl exercises on a local or sandbox cluster; with 1 hour a week the whole path is about 2 hours, so steps must be roughly 15-20 minutes each and avoid setup-heavy installs. Exclude Helm, StatefulSets, Ingress and autoscaling, and do not skip a guided exercise for each core object or a final debugging exercise.",
+        "sop": [
+          {
+            "objective": "Explain what a pod is and how it wraps the container the learner already knows from Docker.",
+            "bloom": "C2",
+            "concepts": [
+              "Pods and containers"
+            ]
+          },
+          {
+            "objective": "Create and inspect a pod from a YAML manifest using kubectl in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Pods and containers"
+            ]
+          },
+          {
+            "objective": "Deploy the app with a Deployment and observe how the ReplicaSet keeps the desired number of pods running.",
+            "bloom": "C3",
+            "concepts": [
+              "Deployments and ReplicaSets"
+            ]
+          },
+          {
+            "objective": "Expose the Deployment with a Service and confirm that its label selector routes traffic to the right pods.",
+            "bloom": "C3",
+            "concepts": [
+              "Services and selectors"
+            ]
+          },
+          {
+            "objective": "Inject configuration and credentials into the app using a ConfigMap and a Secret, and add readiness and liveness probes.",
+            "bloom": "C3",
+            "concepts": [
+              "ConfigMaps and Secrets",
+              "Readiness and liveness probes"
+            ]
+          },
+          {
+            "objective": "Perform a rolling update and roll it back after a bad image tag, then compare what the rollout status and events show.",
+            "bloom": "C4",
+            "concepts": [
+              "Rolling updates and rollback"
+            ]
+          },
+          {
+            "objective": "Diagnose a pod stuck in a failing state by analysing describe output, logs and events to find the root cause.",
+            "bloom": "C4",
+            "concepts": [
+              "Debugging with kubectl"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-017": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I need to check whether our new onboarding email changed sign-up rates, and I want to pick the right test and explain the result to my manager.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Null and alternative hypotheses",
+          "Sampling distribution and standard error",
+          "P-value interpretation",
+          "Type I and Type II errors",
+          "Choosing the appropriate test",
+          "Running t-test and chi-square",
+          "Effect size and confidence intervals"
+        ],
+        "orderConstraints": [
+          [
+            "Null and alternative hypotheses",
+            "P-value interpretation"
+          ],
+          [
+            "Sampling distribution and standard error",
+            "P-value interpretation"
+          ],
+          [
+            "P-value interpretation",
+            "Type I and Type II errors"
+          ],
+          [
+            "Choosing the appropriate test",
+            "Running t-test and chi-square"
+          ],
+          [
+            "Running t-test and chi-square",
+            "Effect size and confidence intervals"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "The p-value is the probability that the null hypothesis is true.",
+          "A non-significant result proves there is no effect.",
+          "A statistically significant result means the effect is large or practically important."
+        ],
+        "notes": "Video suits intuition-building for sampling distributions and p-values, with text for worked examples and test-selection tables. At 5 hours a week, steps should be about 1 to 1.5 hours each, totalling no more than 10 hours, with guided exercises using small datasets and a final step analysing a sign-up comparison with a written interpretation.",
+        "sop": [
+          {
+            "objective": "Explain in own words how a null and alternative hypothesis are framed for a sign-up rate comparison.",
+            "bloom": "C2",
+            "concepts": [
+              "Null and alternative hypotheses"
+            ]
+          },
+          {
+            "objective": "Describe how sample statistics vary between samples and how standard error quantifies that variation.",
+            "bloom": "C2",
+            "concepts": [
+              "Sampling distribution and standard error"
+            ]
+          },
+          {
+            "objective": "Compute a test statistic and p-value in a guided exercise and state what the p-value does and does not mean.",
+            "bloom": "C3",
+            "concepts": [
+              "P-value interpretation"
+            ]
+          },
+          {
+            "objective": "Apply the significance level to decisions in scenarios and identify Type I and Type II errors in each.",
+            "bloom": "C3",
+            "concepts": [
+              "Type I and Type II errors"
+            ]
+          },
+          {
+            "objective": "Use data type, group count and pairing to select the appropriate test for several scenarios.",
+            "bloom": "C3",
+            "concepts": [
+              "Choosing the appropriate test"
+            ]
+          },
+          {
+            "objective": "Run a t-test and a chi-square test on small datasets and report the results.",
+            "bloom": "C3",
+            "concepts": [
+              "Running t-test and chi-square"
+            ]
+          },
+          {
+            "objective": "Analyse a sign-up dataset by comparing test results with effect size and confidence intervals, and distinguish statistical from practical significance.",
+            "bloom": "C4",
+            "concepts": [
+              "Effect size and confidence intervals",
+              "P-value interpretation"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-007": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm new to Java and want to read simple Java programs at work and explain what the classes and the compile-and-run steps are doing, without writing much myself yet.",
+        "steps": {
+          "min": 6,
+          "max": 7
+        },
+        "mustCover": [
+          "JDK, JRE and JVM roles",
+          "Compiling with javac",
+          "Static typing and primitives",
+          "Classes and objects",
+          "Methods and fields",
+          "ArrayList basics",
+          "Reading simple Java programs"
+        ],
+        "orderConstraints": [
+          [
+            "JDK, JRE and JVM roles",
+            "Compiling with javac"
+          ],
+          [
+            "Static typing and primitives",
+            "Classes and objects"
+          ],
+          [
+            "Classes and objects",
+            "Methods and fields"
+          ],
+          [
+            "Classes and objects",
+            "ArrayList basics"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Java source code runs directly on the machine without compilation to bytecode",
+          "JDK, JRE and JVM are three names for the same thing",
+          "A class and an object are the same thing"
+        ],
+        "notes": "Text-only resources such as short written tutorials and reference pages suit this learner; each step should be a brief reading of 20 to 40 minutes with a recall quiz or explain-in-own-words checkpoint. Total must stay within 4 hours, so skip build tools, generics, streams and exceptions, and keep all steps at C1-C2 with Bloom never decreasing.",
+        "sop": [
+          {
+            "objective": "Recall what the JDK, JRE and JVM are and state the role of each.",
+            "bloom": "C1",
+            "concepts": [
+              "JDK, JRE and JVM roles"
+            ]
+          },
+          {
+            "objective": "Describe in your own words how javac turns source code into bytecode that the JVM runs.",
+            "bloom": "C2",
+            "concepts": [
+              "Compiling with javac"
+            ]
+          },
+          {
+            "objective": "Explain what static typing means and identify the common primitive types in short code snippets.",
+            "bloom": "C2",
+            "concepts": [
+              "Static typing and primitives"
+            ]
+          },
+          {
+            "objective": "Explain the difference between a class and an object using a simple everyday example.",
+            "bloom": "C2",
+            "concepts": [
+              "Classes and objects"
+            ]
+          },
+          {
+            "objective": "Explain how fields hold state and methods define behaviour within a class.",
+            "bloom": "C2",
+            "concepts": [
+              "Methods and fields"
+            ]
+          },
+          {
+            "objective": "Explain what an ArrayList stores and how it differs from a fixed-size array.",
+            "bloom": "C2",
+            "concepts": [
+              "ArrayList basics"
+            ]
+          },
+          {
+            "objective": "Walk through a short Java program and explain in your own words what each part does.",
+            "bloom": "C2",
+            "concepts": [
+              "Reading simple Java programs"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-013": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm a junior analyst and need to check whether a change in our survey scores is real or just noise, and explain the result to my manager using a t-test or chi-square test.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Sampling methods and bias",
+          "Mean, median, standard deviation",
+          "Normal distribution and z-scores",
+          "Standard error",
+          "Confidence intervals",
+          "Hypothesis testing and p-values",
+          "t-test and chi-square choice",
+          "Interpreting results in context"
+        ],
+        "orderConstraints": [
+          [
+            "Mean, median, standard deviation",
+            "Normal distribution and z-scores"
+          ],
+          [
+            "Normal distribution and z-scores",
+            "Standard error"
+          ],
+          [
+            "Standard error",
+            "Confidence intervals"
+          ],
+          [
+            "Confidence intervals",
+            "Hypothesis testing and p-values"
+          ],
+          [
+            "Hypothesis testing and p-values",
+            "t-test and chi-square choice"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "A p-value is the probability that the null hypothesis is true.",
+          "A 95% confidence interval means there is a 95% chance the true value lies in the one computed interval.",
+          "A non-significant result proves there is no effect."
+        ],
+        "notes": "Video and text suit this learner: short video explanations for concepts paired with text worked examples to practise. With 4 hours a week and a cap of 8 hours total, steps should be about 60-75 minutes each, with 6-8 steps, and the path must not skip checking test assumptions or interpreting results in plain language.",
+        "sop": [
+          {
+            "objective": "Summarise a small survey dataset with mean, median and standard deviation and explain when each is appropriate.",
+            "bloom": "C2",
+            "concepts": [
+              "Mean, median, standard deviation"
+            ]
+          },
+          {
+            "objective": "Explain how random and biased sampling methods affect whether a sample represents the population.",
+            "bloom": "C2",
+            "concepts": [
+              "Sampling methods and bias"
+            ]
+          },
+          {
+            "objective": "Use the normal distribution and z-scores to work out how unusual a value is in guided exercises.",
+            "bloom": "C3",
+            "concepts": [
+              "Normal distribution and z-scores"
+            ]
+          },
+          {
+            "objective": "Calculate standard error for a sample mean and show how sample size changes it.",
+            "bloom": "C3",
+            "concepts": [
+              "Standard error"
+            ]
+          },
+          {
+            "objective": "Build and interpret confidence intervals for a mean from survey data in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Confidence intervals"
+            ]
+          },
+          {
+            "objective": "Apply the steps of a hypothesis test and interpret a p-value correctly on a worked scenario.",
+            "bloom": "C3",
+            "concepts": [
+              "Hypothesis testing and p-values"
+            ]
+          },
+          {
+            "objective": "Analyse scenarios to decide between a t-test and a chi-square test and justify the choice from the data type and design.",
+            "bloom": "C4",
+            "concepts": [
+              "t-test and chi-square choice"
+            ]
+          },
+          {
+            "objective": "Analyse a survey-score change by running the appropriate test and write a plain-language interpretation of the result for a manager.",
+            "bloom": "C4",
+            "concepts": [
+              "Interpreting results in context",
+              "t-test and chi-square choice"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-029": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm an analyst at a retailer and want to build and defend a churn model on our customer table, picking sensible metrics and showing it generalises before I present it to my manager.",
+        "steps": {
+          "min": 7,
+          "max": 10
+        },
+        "mustCover": [
+          "Train/test split and leakage",
+          "Cross-validation for model selection",
+          "Bias-variance and overfitting",
+          "Regularization and tuning",
+          "Tree ensembles and boosting",
+          "Precision, recall, ROC AUC",
+          "Feature engineering for tabular data",
+          "Model comparison and critique"
+        ],
+        "orderConstraints": [
+          [
+            "Train/test split and leakage",
+            "Cross-validation for model selection"
+          ],
+          [
+            "Bias-variance and overfitting",
+            "Regularization and tuning"
+          ],
+          [
+            "Tree ensembles and boosting",
+            "Model comparison and critique"
+          ],
+          [
+            "Precision, recall, ROC AUC",
+            "Model comparison and critique"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Higher accuracy always means a better model, even on imbalanced classes such as churn.",
+          "Fitting preprocessing or feature selection on the full dataset before splitting is harmless.",
+          "Boosted or ensemble models do not overfit, so tuning and validation are unnecessary."
+        ],
+        "notes": "Video and text suit this learner; favour short video walk-throughs paired with written references and hands-on notebook exercises. With 10 hours a week and a 20-hour cap, steps should run roughly 1.5-3 hours each, and the path must not skip leakage-safe validation or metric choice for imbalanced data before the final comparison step.",
+        "sop": [
+          {
+            "objective": "Apply a proper train/test split and identify common sources of data leakage on a tabular dataset.",
+            "bloom": "C3",
+            "concepts": [
+              "Train/test split and leakage"
+            ]
+          },
+          {
+            "objective": "Use cross-validation to get reliable performance estimates and select between baseline models.",
+            "bloom": "C3",
+            "concepts": [
+              "Cross-validation for model selection"
+            ]
+          },
+          {
+            "objective": "Compute and interpret precision, recall and ROC AUC on an imbalanced classification problem.",
+            "bloom": "C3",
+            "concepts": [
+              "Precision, recall, ROC AUC"
+            ]
+          },
+          {
+            "objective": "Diagnose underfitting and overfitting by analysing learning curves and train versus validation gaps.",
+            "bloom": "C4",
+            "concepts": [
+              "Bias-variance and overfitting"
+            ]
+          },
+          {
+            "objective": "Apply regularization and hyperparameter tuning to reduce overfitting and analyse the effect on validation scores.",
+            "bloom": "C4",
+            "concepts": [
+              "Regularization and tuning"
+            ]
+          },
+          {
+            "objective": "Build random forest and gradient boosting models and analyse how they differ from a single tree.",
+            "bloom": "C4",
+            "concepts": [
+              "Tree ensembles and boosting"
+            ]
+          },
+          {
+            "objective": "Engineer and analyse tabular features such as encodings, aggregates and tenure measures, and test their effect on the metrics.",
+            "bloom": "C4",
+            "concepts": [
+              "Feature engineering for tabular data"
+            ]
+          },
+          {
+            "objective": "Compare candidate churn models using cross-validated metrics and justify the final choice in a written critique.",
+            "bloom": "C5",
+            "concepts": [
+              "Model comparison and critique",
+              "Precision, recall, ROC AUC"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-021": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I just moved into an associate product owner role and need to prioritise our messy backlog and write clear user stories and a short PRD for our next feature within a few weeks.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "User story structure",
+          "Acceptance criteria",
+          "RICE scoring",
+          "MoSCoW categories",
+          "Kano model basics",
+          "PRD core sections",
+          "Prioritisation trade-off analysis"
+        ],
+        "orderConstraints": [
+          [
+            "User story structure",
+            "Acceptance criteria"
+          ],
+          [
+            "RICE scoring",
+            "Prioritisation trade-off analysis"
+          ],
+          [
+            "MoSCoW categories",
+            "Prioritisation trade-off analysis"
+          ],
+          [
+            "Acceptance criteria",
+            "PRD core sections"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "A framework score such as RICE gives the objectively correct priority and replaces judgement.",
+          "A PRD is a fixed contract written once, rather than a living document aligned with stakeholders.",
+          "Every request a customer makes should be treated as a must-have."
+        ],
+        "notes": "Video suits this learner, so favour short walkthroughs with worked examples over long lectures; keep each step to about 1 hour so the whole path fits in 8 hours at 4 hours a week. Include a guided exercise per step (e.g. score a sample backlog, rewrite a vague story) and do not skip the final analysis of when frameworks disagree.",
+        "sop": [
+          {
+            "objective": "Explain in own words the product owner role and how backlog items, user stories and PRDs relate to each other.",
+            "bloom": "C2",
+            "concepts": [
+              "User story structure"
+            ]
+          },
+          {
+            "objective": "Write user stories in the standard format for a sample feature, with a guided exercise to fix vague stories.",
+            "bloom": "C3",
+            "concepts": [
+              "User story structure"
+            ]
+          },
+          {
+            "objective": "Write testable acceptance criteria for the stories and check them against a sample example.",
+            "bloom": "C3",
+            "concepts": [
+              "Acceptance criteria"
+            ]
+          },
+          {
+            "objective": "Apply MoSCoW categories to a sample backlog and justify each assignment.",
+            "bloom": "C3",
+            "concepts": [
+              "MoSCoW categories"
+            ]
+          },
+          {
+            "objective": "Score a small backlog using RICE, estimating reach, impact, confidence and effort in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "RICE scoring"
+            ]
+          },
+          {
+            "objective": "Classify sample features using the Kano model and explain how this changes what to build first.",
+            "bloom": "C3",
+            "concepts": [
+              "Kano model basics"
+            ]
+          },
+          {
+            "objective": "Draft a one-page PRD for a feature using the core sections and the earlier stories and criteria.",
+            "bloom": "C3",
+            "concepts": [
+              "PRD core sections"
+            ]
+          },
+          {
+            "objective": "Compare RICE, MoSCoW and Kano results on the same backlog, analyse where they disagree and write a reflective note on the trade-offs.",
+            "bloom": "C4",
+            "concepts": [
+              "Prioritisation trade-off analysis"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-028": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I write SQL daily as an analyst, but our slow reports need fixing. I want to tune queries and design a reliable reporting query set for our team's dashboards.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Reading query execution plans",
+          "Index design tradeoffs",
+          "Window functions",
+          "CTEs versus subqueries",
+          "Set-based versus row-by-row",
+          "Transactions and isolation levels",
+          "Query rewrite benchmarking"
+        ],
+        "orderConstraints": [
+          [
+            "Reading query execution plans",
+            "Index design tradeoffs"
+          ],
+          [
+            "Reading query execution plans",
+            "Query rewrite benchmarking"
+          ],
+          [
+            "Window functions",
+            "CTEs versus subqueries"
+          ],
+          [
+            "Index design tradeoffs",
+            "Query rewrite benchmarking"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Adding more indexes always speeds up queries, ignoring write cost and planner choices.",
+          "Subqueries are always slower than joins, or CTEs always materialise and speed things up.",
+          "Rewriting a query is an improvement without measuring it against realistic data volumes."
+        ],
+        "notes": "Use short videos for planner and indexing demonstrations and text (documentation-style articles, worked examples) for reference-heavy topics like window functions and isolation. At 6 hours a week, keep steps to 1–2 hours each, totalling no more than 12 hours, with a hands-on comparison or critique at each step and a final artefact the learner builds on their own data.",
+        "sop": [
+          {
+            "objective": "Interpret execution plans for a slow query to identify scans, joins and costly operations.",
+            "bloom": "C4",
+            "concepts": [
+              "Reading query execution plans"
+            ]
+          },
+          {
+            "objective": "Analyse how different index designs change plans and compare read gains against write costs.",
+            "bloom": "C4",
+            "concepts": [
+              "Index design tradeoffs"
+            ]
+          },
+          {
+            "objective": "Apply window functions to replace self-joins and correlated logic in reporting queries.",
+            "bloom": "C4",
+            "concepts": [
+              "Window functions",
+              "Set-based versus row-by-row"
+            ]
+          },
+          {
+            "objective": "Compare CTEs and subqueries for readability and performance in the same query.",
+            "bloom": "C5",
+            "concepts": [
+              "CTEs versus subqueries"
+            ]
+          },
+          {
+            "objective": "Evaluate how transactions and isolation levels affect reporting accuracy during concurrent writes.",
+            "bloom": "C5",
+            "concepts": [
+              "Transactions and isolation levels"
+            ]
+          },
+          {
+            "objective": "Design and benchmark rewritten versions of slow queries, justifying the chosen one with plan and timing evidence.",
+            "bloom": "C5",
+            "concepts": [
+              "Query rewrite benchmarking"
+            ]
+          },
+          {
+            "objective": "Create a tuned reporting query set with documented indexes and a short teach-back write-up for the team.",
+            "bloom": "C6",
+            "concepts": [
+              "Query rewrite benchmarking",
+              "Index design tradeoffs",
+              "Reading query execution plans"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "Order constraint Window functions -> CTEs versus subqueries is arbitrary; neither is needed to learn the other.",
+          "Order constraint Index design tradeoffs -> Query rewrite benchmarking is not a real prerequisite, since rewrites can be benchmarked from plans alone.",
+          "SOP step 3 uses 'Apply' (C3) but is labelled C4, so the verb and Bloom level disagree.",
+          "SOP step 6 uses 'Design' (a C6 verb) but is labelled C5.",
+          "SOP step 1 uses 'Interpret' (a C2 verb) but is labelled C4, which is too low for a proficient learner.",
+          "SOP step 4 uses 'Compare', which maps to C4, but is labelled C5.",
+          "Set-based versus row-by-row feeds rewrite benchmarking but had no order constraint.",
+          "Misconception about CTE materialisation is vendor-dependent and should be worded as such."
+        ],
+        "revised": {
+          "goal": "I write SQL daily as an analyst, but our slow reports need fixing. I want to tune queries and design a reliable reporting query set for our team's dashboards.",
+          "steps": {
+            "min": 6,
+            "max": 8
+          },
+          "mustCover": [
+            "Reading query execution plans",
+            "Index design tradeoffs",
+            "Window functions",
+            "CTEs versus subqueries",
+            "Set-based versus row-by-row",
+            "Transactions and isolation levels",
+            "Query rewrite benchmarking"
+          ],
+          "orderConstraints": [
+            [
+              "Reading query execution plans",
+              "Index design tradeoffs"
+            ],
+            [
+              "Reading query execution plans",
+              "Query rewrite benchmarking"
+            ],
+            [
+              "Set-based versus row-by-row",
+              "Query rewrite benchmarking"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Adding more indexes always speeds up queries, ignoring write cost and planner choices.",
+            "Subqueries are always slower than joins, or CTEs always speed things up; behaviour depends on the engine and the planner.",
+            "Rewriting a query is an improvement without measuring it against realistic data volumes."
+          ],
+          "notes": "Use short videos for planner and indexing demonstrations and text (documentation-style articles, worked examples) for reference-heavy topics like window functions and isolation. At 6 hours a week, keep steps to 1-2 hours each, totalling no more than 12 hours, with a hands-on comparison or critique at each step and a final artefact the learner builds on their own data.",
+          "sop": [
+            {
+              "objective": "Analyse execution plans for a slow query to identify scans, join methods and costly operations.",
+              "bloom": "C4",
+              "concepts": [
+                "Reading query execution plans"
+              ]
+            },
+            {
+              "objective": "Analyse how different index designs change plans and compare read gains against write costs.",
+              "bloom": "C4",
+              "concepts": [
+                "Index design tradeoffs"
+              ]
+            },
+            {
+              "objective": "Analyse where window functions replace self-joins and correlated row-by-row logic with set-based queries in reporting.",
+              "bloom": "C4",
+              "concepts": [
+                "Window functions",
+                "Set-based versus row-by-row"
+              ]
+            },
+            {
+              "objective": "Evaluate CTEs against subqueries for readability and performance in the same query.",
+              "bloom": "C5",
+              "concepts": [
+                "CTEs versus subqueries"
+              ]
+            },
+            {
+              "objective": "Evaluate how transactions and isolation levels affect reporting accuracy during concurrent writes.",
+              "bloom": "C5",
+              "concepts": [
+                "Transactions and isolation levels"
+              ]
+            },
+            {
+              "objective": "Evaluate rewritten versions of slow queries and justify the chosen one with plan and timing evidence.",
+              "bloom": "C5",
+              "concepts": [
+                "Query rewrite benchmarking"
+              ]
+            },
+            {
+              "objective": "Create a tuned reporting query set with documented indexes and a short teach-back write-up for the team.",
+              "bloom": "C6",
+              "concepts": [
+                "Query rewrite benchmarking",
+                "Index design tradeoffs",
+                "Reading query execution plans"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-023": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I run a small online shop and have launched a few ads and newsletters by following tutorials. I want to plan a two-channel campaign, read the results and decide where to put my next budget.",
+        "steps": {
+          "min": 6,
+          "max": 9
+        },
+        "mustCover": [
+          "Campaign goals and KPIs",
+          "Conversion funnel stages",
+          "Audience targeting basics",
+          "Paid ads campaign setup",
+          "Email newsletter automation",
+          "A/B testing fundamentals",
+          "ROAS and CPA analysis",
+          "Budget allocation decisions"
+        ],
+        "orderConstraints": [
+          [
+            "Campaign goals and KPIs",
+            "Paid ads campaign setup"
+          ],
+          [
+            "Conversion funnel stages",
+            "Audience targeting basics"
+          ],
+          [
+            "Paid ads campaign setup",
+            "A/B testing fundamentals"
+          ],
+          [
+            "ROAS and CPA analysis",
+            "Budget allocation decisions"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Treating clicks, impressions or likes as proof a campaign worked, rather than tying KPIs to business goals",
+          "Declaring an A/B test winner after a few days or conversions without enough data, or changing several variables at once",
+          "Assuming the channel with the highest ROAS should automatically get all the budget without considering scale, margin and CPA limits"
+        ],
+        "notes": "Learner prefers video, so each step should use short video lessons or walkthroughs (1–3 per step) paired with a guided exercise on their own or a sample shop. About 10 hours a week fits 6–9 steps of roughly 2–3 hours each, with total time at most 20 hours; the path must not skip interpreting results before budget decisions.",
+        "sop": [
+          {
+            "objective": "Define a campaign goal and choose KPIs that match each funnel stage for a small online shop.",
+            "bloom": "C3",
+            "concepts": [
+              "Campaign goals and KPIs",
+              "Conversion funnel stages"
+            ]
+          },
+          {
+            "objective": "Apply targeting options to define audiences for awareness, consideration and purchase stages in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Audience targeting basics"
+            ]
+          },
+          {
+            "objective": "Set up a paid ad campaign with a goal, audience, budget and tracking in a guided walkthrough.",
+            "bloom": "C3",
+            "concepts": [
+              "Paid ads campaign setup"
+            ]
+          },
+          {
+            "objective": "Build a simple email welcome or abandoned-cart automation tied to a funnel stage and KPI.",
+            "bloom": "C3",
+            "concepts": [
+              "Email newsletter automation"
+            ]
+          },
+          {
+            "objective": "Design a valid A/B test for an ad or email, with one variable, a hypothesis and a success metric.",
+            "bloom": "C3",
+            "concepts": [
+              "A/B testing fundamentals"
+            ]
+          },
+          {
+            "objective": "Calculate and interpret ROAS and CPA from sample campaign data for both channels and diagnose weak funnel stages.",
+            "bloom": "C4",
+            "concepts": [
+              "ROAS and CPA analysis"
+            ]
+          },
+          {
+            "objective": "Analyse two-channel results and write a justified recommendation for splitting next month's budget.",
+            "bloom": "C4",
+            "concepts": [
+              "Budget allocation decisions",
+              "ROAS and CPA analysis"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-030": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm a product owner on a B2B SaaS team and need to defend our next-quarter roadmap to leadership with a clear prioritisation rationale and measurable OKRs.",
+        "steps": {
+          "min": 6,
+          "max": 9
+        },
+        "mustCover": [
+          "Outcome-based roadmaps",
+          "RICE scoring",
+          "MoSCoW and Kano comparison",
+          "PRD structure and scope",
+          "Writing testable user stories",
+          "Product KPIs and OKRs",
+          "Evaluating prioritisation trade-offs"
+        ],
+        "orderConstraints": [
+          [
+            "Outcome-based roadmaps",
+            "RICE scoring"
+          ],
+          [
+            "RICE scoring",
+            "MoSCoW and Kano comparison"
+          ],
+          [
+            "Writing testable user stories",
+            "PRD structure and scope"
+          ],
+          [
+            "Product KPIs and OKRs",
+            "Evaluating prioritisation trade-offs"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "A roadmap is a fixed delivery-date commitment list of features rather than a statement of outcomes and bets.",
+          "A RICE score is an objective answer to be followed mechanically, rather than an estimate-driven input to judgement.",
+          "Output metrics such as features shipped are the same as outcome metrics such as retention or activation."
+        ],
+        "notes": "Video and text suit this learner; favour short explainers paired with written templates and case write-ups. At 8 hours a week the path totals no more than 16 hours, so steps average about 2 hours with a mini project or critique checkpoint (e.g. scoring a real backlog and defending the ranking), and it must not skip linking KPIs/OKRs to the roadmap rationale.",
+        "sop": [
+          {
+            "objective": "Apply outcome-based roadmap formats (now/next/later) to restructure a feature list into outcome-led themes for your product.",
+            "bloom": "C3",
+            "concepts": [
+              "Outcome-based roadmaps"
+            ]
+          },
+          {
+            "objective": "Apply RICE scoring to a sample of your own backlog, documenting each estimate and its confidence.",
+            "bloom": "C3",
+            "concepts": [
+              "RICE scoring"
+            ]
+          },
+          {
+            "objective": "Analyse where MoSCoW and Kano give different rankings than RICE for the same items and why.",
+            "bloom": "C4",
+            "concepts": [
+              "MoSCoW and Kano comparison"
+            ]
+          },
+          {
+            "objective": "Write user stories with acceptance criteria that can be tested and debug vague or oversized ones.",
+            "bloom": "C4",
+            "concepts": [
+              "Writing testable user stories"
+            ]
+          },
+          {
+            "objective": "Analyse a PRD for a roadmap item and draft one with clear problem, scope, non-goals and success criteria.",
+            "bloom": "C4",
+            "concepts": [
+              "PRD structure and scope"
+            ]
+          },
+          {
+            "objective": "Analyse the link between product vision, outcome KPIs and OKRs and draft OKRs for next quarter's roadmap themes.",
+            "bloom": "C4",
+            "concepts": [
+              "Product KPIs and OKRs"
+            ]
+          },
+          {
+            "objective": "Evaluate your prioritised roadmap against alternatives by critiquing trade-offs, risks and metrics, and prepare a leadership defence.",
+            "bloom": "C5",
+            "concepts": [
+              "Evaluating prioritisation trade-offs"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-009": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I want to move my small team's static site and simple API from a shared host onto AWS and keep it reasonably secure, without running up a surprise bill.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "IAM users and roles",
+          "Least-privilege policies",
+          "Regions and availability zones",
+          "EC2 instance launch",
+          "S3 bucket configuration",
+          "VPC and security groups",
+          "Lambda basic function",
+          "CloudWatch monitoring and billing alerts"
+        ],
+        "orderConstraints": [
+          [
+            "IAM users and roles",
+            "Least-privilege policies"
+          ],
+          [
+            "Regions and availability zones",
+            "EC2 instance launch"
+          ],
+          [
+            "VPC and security groups",
+            "EC2 instance launch"
+          ],
+          [
+            "IAM users and roles",
+            "S3 bucket configuration"
+          ],
+          [
+            "EC2 instance launch",
+            "CloudWatch monitoring and billing alerts"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Using the root account or broad admin permissions for everyday work is acceptable.",
+          "Making an S3 bucket public is the normal way to share or serve content, rather than a deliberate, reviewed choice.",
+          "AWS secures everything by default, so the customer has no security responsibilities beyond choosing a region."
+        ],
+        "notes": "No format preference, so a mix of short reading, console and CLI walkthroughs and hands-on labs works; guided exercises should dominate at this stage. With 4 hours a week the path totals at most 8 hours, so steps should be about 60-80 minutes each, and it must cover account security and billing alerts before launching any billable resources.",
+        "sop": [
+          {
+            "objective": "Explain how regions and availability zones affect where resources run and what they cost, and how the shared responsibility model divides security duties.",
+            "bloom": "C2",
+            "concepts": [
+              "Regions and availability zones"
+            ]
+          },
+          {
+            "objective": "Secure a new account by creating IAM users and roles, explaining why root is not used day to day.",
+            "bloom": "C2",
+            "concepts": [
+              "IAM users and roles"
+            ]
+          },
+          {
+            "objective": "Write and attach a least-privilege policy for a deployer user in a guided exercise and test what it allows and denies.",
+            "bloom": "C3",
+            "concepts": [
+              "Least-privilege policies"
+            ]
+          },
+          {
+            "objective": "Create an S3 bucket with public access blocked, upload site files and configure access for static hosting in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "S3 bucket configuration"
+            ]
+          },
+          {
+            "objective": "Build a VPC security group configuration and launch an EC2 instance into it, connecting through the console and CLI.",
+            "bloom": "C3",
+            "concepts": [
+              "VPC and security groups",
+              "EC2 instance launch"
+            ]
+          },
+          {
+            "objective": "Deploy a simple API as a Lambda function and compare its fit against an EC2 instance for the team's workload.",
+            "bloom": "C4",
+            "concepts": [
+              "Lambda basic function"
+            ]
+          },
+          {
+            "objective": "Set up CloudWatch metrics, logs and billing alerts, then analyse them to diagnose a misbehaving or costly resource.",
+            "bloom": "C4",
+            "concepts": [
+              "CloudWatch monitoring and billing alerts"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "Notes say billing alerts must come before launching billable resources, but the order constraint puts EC2 launch before CloudWatch and billing alerts, and the sop does the same.",
+          "The goal includes serving a static site, but CloudFront and Route 53 are not covered. The goal should be scoped to what the path covers.",
+          "The sop objective for regions mentions the shared responsibility model, which is not in mustCover. The model is one of the misconceptions, so it should be a mustCover concept.",
+          "The IAM objective says 'secure a new account' but billing alerts and MFA are not covered there. The root-account point needs to be explicit.",
+          "Step 4 asks for public access blocked and also static hosting. Static website hosting on S3 needs public read, so the objective contradicts itself and teaches the public-bucket misconception.",
+          "The Lambda step is C4 'compare', which is valid, but it is the only API deploy step and has no prerequisite on IAM. Lambda needs an execution role, so an IAM-before-Lambda constraint is missing.",
+          "The notes say 60-80 minutes per step, which with 7 steps is about 7-9 hours. That exceeds the 8-hour cap at the upper end, so the time guidance should be tightened to 50-65 minutes.",
+          "The first step is C2, which is fine, but the final step has Bloom C4 only in the last step, so progression is fine. Nothing is wrong here.",
+          "The previous attempt exceeded list limits, so the revised lists must stay within them."
+        ],
+        "revised": {
+          "goal": "I want to move my small team's static site and simple API from a shared host onto AWS, keep it reasonably secure, and set up alerts so I don't get a surprise bill.",
+          "steps": {
+            "min": 6,
+            "max": 8
+          },
+          "mustCover": [
+            "Regions, availability zones and shared responsibility",
+            "IAM users and roles",
+            "Least-privilege policies",
+            "Billing alerts and budgets",
+            "S3 bucket configuration",
+            "VPC and security groups",
+            "EC2 instance launch",
+            "Lambda function basics"
+          ],
+          "orderConstraints": [
+            [
+              "IAM users and roles",
+              "Least-privilege policies"
+            ],
+            [
+              "Billing alerts and budgets",
+              "EC2 instance launch"
+            ],
+            [
+              "VPC and security groups",
+              "EC2 instance launch"
+            ],
+            [
+              "IAM users and roles",
+              "Lambda function basics"
+            ],
+            [
+              "Least-privilege policies",
+              "S3 bucket configuration"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Using the root account or broad admin permissions for everyday work is acceptable.",
+            "Making an S3 bucket public is the normal way to share content, rather than a deliberate, reviewed choice.",
+            "AWS secures everything by default, so the customer has no security responsibilities."
+          ],
+          "notes": "No format preference, so a mix of short reading, console and CLI walkthroughs and guided hands-on labs works; guided exercises should dominate at this stage. With 4 hours a week the path totals at most 8 hours, so each step should be about 50-65 minutes. Cover account security and billing alerts before launching any billable resources. CloudFront and Route 53 are out of scope for this path.",
+          "sop": [
+            {
+              "objective": "Explain how regions and availability zones affect where resources run and what they cost, and describe how the shared responsibility model divides security duties.",
+              "bloom": "C2",
+              "concepts": [
+                "Regions, availability zones and shared responsibility"
+              ]
+            },
+            {
+              "objective": "Describe why the root account is not used day to day, and create IAM users and roles for everyday work.",
+              "bloom": "C2",
+              "concepts": [
+                "IAM users and roles"
+              ]
+            },
+            {
+              "objective": "Write and attach a least-privilege policy for a deployer user in a guided exercise and test what it allows and denies.",
+              "bloom": "C3",
+              "concepts": [
+                "Least-privilege policies"
+              ]
+            },
+            {
+              "objective": "Set up a billing alert and budget in the console so spending is flagged before launching billable resources.",
+              "bloom": "C3",
+              "concepts": [
+                "Billing alerts and budgets"
+              ]
+            },
+            {
+              "objective": "Configure an S3 bucket with public access blocked by default, upload the site files and set up access for serving the static site in a guided exercise.",
+              "bloom": "C3",
+              "concepts": [
+                "S3 bucket configuration"
+              ]
+            },
+            {
+              "objective": "Configure a VPC security group and launch an EC2 instance into it, connecting through the console and CLI.",
+              "bloom": "C3",
+              "concepts": [
+                "VPC and security groups",
+                "EC2 instance launch"
+              ]
+            },
+            {
+              "objective": "Deploy a simple API as a Lambda function with an execution role, and compare its fit against an EC2 instance for the team's workload.",
+              "bloom": "C4",
+              "concepts": [
+                "Lambda function basics"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-022": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm new to UX and want to understand the basics well enough to follow my team's Figma screens and sketch a simple flow for our booking app.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "UX versus UI",
+          "User flow basics",
+          "Information architecture basics",
+          "Wireframe versus mockup",
+          "Visual hierarchy principles",
+          "Common navigation patterns",
+          "Basic accessibility principles"
+        ],
+        "orderConstraints": [
+          [
+            "UX versus UI",
+            "User flow basics"
+          ],
+          [
+            "User flow basics",
+            "Information architecture basics"
+          ],
+          [
+            "Information architecture basics",
+            "Wireframe versus mockup"
+          ],
+          [
+            "Wireframe versus mockup",
+            "Visual hierarchy principles"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "UX design is just making screens look attractive",
+          "Accessibility is an optional extra added after the design is finished",
+          "Wireframes should include final colours, images and polished styling"
+        ],
+        "notes": "With no format preference, mix short readable explainers with brief demos or visuals of real screens, and keep each step to roughly 45-60 minutes so the total stays within 6 hours. Checkpoints must be recall quizzes and explain-in-own-words tasks, with no open-ended design projects and nothing above C2.",
+        "sop": [
+          {
+            "objective": "Recall what UX design covers and distinguish it from UI design.",
+            "bloom": "C1",
+            "concepts": [
+              "UX versus UI"
+            ]
+          },
+          {
+            "objective": "Describe what a user flow is and name its basic parts such as start, screens, decisions and end.",
+            "bloom": "C1",
+            "concepts": [
+              "User flow basics"
+            ]
+          },
+          {
+            "objective": "Explain in your own words how information architecture groups and labels content so people can find it.",
+            "bloom": "C2",
+            "concepts": [
+              "Information architecture basics"
+            ]
+          },
+          {
+            "objective": "Explain the difference between a wireframe and a mockup and when each is used.",
+            "bloom": "C2",
+            "concepts": [
+              "Wireframe versus mockup"
+            ]
+          },
+          {
+            "objective": "Explain how size, contrast, spacing and position create visual hierarchy on a screen.",
+            "bloom": "C2",
+            "concepts": [
+              "Visual hierarchy principles"
+            ]
+          },
+          {
+            "objective": "Recognise common navigation patterns such as tab bars, hamburger menus and breadcrumbs and explain what each suits.",
+            "bloom": "C2",
+            "concepts": [
+              "Common navigation patterns"
+            ]
+          },
+          {
+            "objective": "Explain basic accessibility principles such as colour contrast, text size and alternative text, and why they matter to all users.",
+            "bloom": "C2",
+            "concepts": [
+              "Basic accessibility principles"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "Goal asks the learner to 'sketch a simple flow', which is C3 Apply, but the path is capped at C2 and notes forbid design tasks; goal and endBloom conflict.",
+          "The sop has 7 steps, but the notes' 45-60 minutes per step gives only about 5-7 hours at 6-8 steps; 8 steps at 60 minutes would be 8 hours, over the 6-hour cap. The max of 8 steps is not time-realistic.",
+          "Order constraints are too linear and arbitrary: visual hierarchy does not strictly require wireframe versus mockup first, and IA does not strictly require user flow first.",
+          "Concepts like 'basics' and 'principles' are vague for a judge; they need concrete named elements.",
+          "The Bloom verb for 'Recognise' on navigation patterns plus 'explain' is fine at C2, but the step 2 'Describe' at C1 is borderline since describing is a C2 verb.",
+          "Misconceptions are reasonable and stage-appropriate."
+        ],
+        "revised": {
+          "goal": "I'm new to UX and want to understand the core ideas well enough to follow my team's Figma screens and explain how a flow in our booking app fits together.",
+          "steps": {
+            "min": 6,
+            "max": 7
+          },
+          "mustCover": [
+            "UX versus UI",
+            "User flow elements",
+            "Information architecture and labelling",
+            "Wireframe versus mockup",
+            "Visual hierarchy cues",
+            "Common navigation patterns",
+            "Accessibility fundamentals"
+          ],
+          "orderConstraints": [
+            [
+              "UX versus UI",
+              "User flow elements"
+            ],
+            [
+              "Information architecture and labelling",
+              "Common navigation patterns"
+            ],
+            [
+              "Wireframe versus mockup",
+              "Visual hierarchy cues"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "UX design is just making screens look attractive",
+            "Accessibility is an optional extra added after the design is finished",
+            "Wireframes should include final colours, images and polished styling"
+          ],
+          "notes": "With no format preference, mix short readable explainers with brief visuals of real screens. Keep each step to roughly 50 minutes so the total stays within 6 hours. Checkpoints must be recall quizzes and explain-in-own-words tasks; no design projects and nothing above C2. Following a flow means reading and explaining one, not producing one.",
+          "sop": [
+            {
+              "objective": "Recall what UX design covers and state how it differs from UI design.",
+              "bloom": "C1",
+              "concepts": [
+                "UX versus UI"
+              ]
+            },
+            {
+              "objective": "Identify the elements of a user flow, such as entry point, screens, decision points and end point.",
+              "bloom": "C1",
+              "concepts": [
+                "User flow elements"
+              ]
+            },
+            {
+              "objective": "Explain in your own words how information architecture groups and labels content so people can find it.",
+              "bloom": "C2",
+              "concepts": [
+                "Information architecture and labelling"
+              ]
+            },
+            {
+              "objective": "Explain how common navigation patterns such as tab bars, hamburger menus and breadcrumbs reflect an information structure and what each suits.",
+              "bloom": "C2",
+              "concepts": [
+                "Common navigation patterns"
+              ]
+            },
+            {
+              "objective": "Explain the difference between a wireframe and a mockup and when each is used.",
+              "bloom": "C2",
+              "concepts": [
+                "Wireframe versus mockup"
+              ]
+            },
+            {
+              "objective": "Explain how size, contrast, spacing and position create visual hierarchy on a screen.",
+              "bloom": "C2",
+              "concepts": [
+                "Visual hierarchy cues"
+              ]
+            },
+            {
+              "objective": "Explain accessibility fundamentals such as colour contrast, text size and alternative text, and why they matter to all users.",
+              "bloom": "C2",
+              "concepts": [
+                "Accessibility fundamentals"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-016": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm a marketing analyst who keeps hearing about neural networks at work. I want to explain in plain words how deep learning models learn and what CNNs and transformers are for.",
+        "steps": {
+          "min": 6,
+          "max": 7
+        },
+        "mustCover": [
+          "Neurons, layers and weights",
+          "Activation functions role",
+          "Loss and learning from error",
+          "Backpropagation intuition",
+          "CNNs for images",
+          "Transformers and attention overview",
+          "Overfitting and dropout idea"
+        ],
+        "orderConstraints": [
+          [
+            "Neurons, layers and weights",
+            "Activation functions role"
+          ],
+          [
+            "Neurons, layers and weights",
+            "Loss and learning from error"
+          ],
+          [
+            "Loss and learning from error",
+            "Backpropagation intuition"
+          ],
+          [
+            "Backpropagation intuition",
+            "CNNs for images"
+          ],
+          [
+            "Backpropagation intuition",
+            "Transformers and attention overview"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Neural networks work like the human brain and think or understand the way people do.",
+          "Deeper or bigger networks always perform better, so overfitting is not a concern.",
+          "Backpropagation is a separate learning algorithm from gradient-based training rather than the way gradients are computed."
+        ],
+        "notes": "With no format preference, mix short explainer-style reading or video with light interactive visualisations, keeping each step to about 30-40 minutes so the total stays within 4 hours. Stay at the remember/understand level with recall quizzes and explain-in-own-words checkpoints; do not require coding, calculus derivations or framework setup.",
+        "sop": [
+          {
+            "objective": "Recall what a neural network is and describe neurons, layers and weights in simple terms.",
+            "bloom": "C1",
+            "concepts": [
+              "Neurons, layers and weights"
+            ]
+          },
+          {
+            "objective": "Explain in your own words why activation functions let networks model more than straight-line relationships.",
+            "bloom": "C2",
+            "concepts": [
+              "Activation functions role"
+            ]
+          },
+          {
+            "objective": "Explain how a loss measures error and how a network improves by reducing it.",
+            "bloom": "C2",
+            "concepts": [
+              "Loss and learning from error"
+            ]
+          },
+          {
+            "objective": "Describe in plain language how backpropagation passes error backward to adjust weights.",
+            "bloom": "C2",
+            "concepts": [
+              "Backpropagation intuition"
+            ]
+          },
+          {
+            "objective": "Explain what a convolutional network does with images and why it suits them.",
+            "bloom": "C2",
+            "concepts": [
+              "CNNs for images"
+            ]
+          },
+          {
+            "objective": "Summarise how attention lets transformers handle text and why they are used for language models.",
+            "bloom": "C2",
+            "concepts": [
+              "Transformers and attention overview"
+            ]
+          },
+          {
+            "objective": "Explain overfitting and how dropout helps, then write a short teach-back summary of how deep learning models learn.",
+            "bloom": "C2",
+            "concepts": [
+              "Overfitting and dropout idea"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-012": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm new to machine learning and want to understand how models learn from spreadsheet-style data, so I can follow my team's data discussions and explain the basic ideas to my manager.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Supervised vs unsupervised learning",
+          "Features and labels",
+          "Train/test split",
+          "Overfitting and underfitting",
+          "Decision trees basics",
+          "Classification vs regression",
+          "Precision and recall",
+          "Cross-validation idea"
+        ],
+        "orderConstraints": [
+          [
+            "Features and labels",
+            "Train/test split"
+          ],
+          [
+            "Supervised vs unsupervised learning",
+            "Decision trees basics"
+          ],
+          [
+            "Train/test split",
+            "Overfitting and underfitting"
+          ],
+          [
+            "Overfitting and underfitting",
+            "Cross-validation idea"
+          ],
+          [
+            "Classification vs regression",
+            "Precision and recall"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "A model that scores perfectly on its training data is the best model",
+          "Accuracy alone is a sufficient measure of performance for every problem",
+          "Machine learning models understand cause and effect rather than finding statistical patterns"
+        ],
+        "notes": "With no format preference, a mix of short readable explanations and visual or video walkthroughs suits a novice; avoid heavy math or coding-first resources. Steps of about 1–1.5 hours fit 5 hours a week and the path should total no more than 10 hours, with each step ending in a recall quiz or an explain-in-own-words checkpoint.",
+        "sop": [
+          {
+            "objective": "Define machine learning and distinguish supervised from unsupervised learning using everyday examples.",
+            "bloom": "C1",
+            "concepts": [
+              "Supervised vs unsupervised learning"
+            ]
+          },
+          {
+            "objective": "Identify features and labels in a small tabular dataset and name what a model is trying to predict.",
+            "bloom": "C1",
+            "concepts": [
+              "Features and labels"
+            ]
+          },
+          {
+            "objective": "Explain in your own words the difference between classification and regression using example problems.",
+            "bloom": "C2",
+            "concepts": [
+              "Classification vs regression"
+            ]
+          },
+          {
+            "objective": "Explain why data is split into training and test sets and what each set is used for.",
+            "bloom": "C2",
+            "concepts": [
+              "Train/test split"
+            ]
+          },
+          {
+            "objective": "Describe how a decision tree makes a prediction by following questions about features.",
+            "bloom": "C2",
+            "concepts": [
+              "Decision trees basics"
+            ]
+          },
+          {
+            "objective": "Explain overfitting and underfitting and how they show up as a gap between training and test results.",
+            "bloom": "C2",
+            "concepts": [
+              "Overfitting and underfitting"
+            ]
+          },
+          {
+            "objective": "Explain how cross-validation gives a more reliable estimate of performance than one split.",
+            "bloom": "C2",
+            "concepts": [
+              "Cross-validation idea"
+            ]
+          },
+          {
+            "objective": "Explain precision and recall with a scenario and say which matters more in a given case.",
+            "bloom": "C2",
+            "concepts": [
+              "Precision and recall"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-024": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm preparing for a new office job and want to write clear, correct emails. I need to learn the basic parts of a sentence and fix my common mistakes.",
+        "steps": {
+          "min": 8,
+          "max": 12
+        },
+        "mustCover": [
+          "Parts of speech",
+          "Subject and verb",
+          "Simple sentence structure",
+          "Subject-verb agreement",
+          "Verb tenses basics",
+          "Basic punctuation marks",
+          "Common usage errors"
+        ],
+        "orderConstraints": [
+          [
+            "Parts of speech",
+            "Subject and verb"
+          ],
+          [
+            "Subject and verb",
+            "Simple sentence structure"
+          ],
+          [
+            "Subject and verb",
+            "Subject-verb agreement"
+          ],
+          [
+            "Simple sentence structure",
+            "Basic punctuation marks"
+          ],
+          [
+            "Verb tenses basics",
+            "Common usage errors"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Never start a sentence with 'and' or 'but' or end one with a preposition are absolute rules",
+          "Longer, more complex sentences are always better writing",
+          "Punctuation marks a pause where you breathe rather than following sentence structure"
+        ],
+        "notes": "Text-only learner: use readable lessons, annotated examples and written exercises with answer keys, no audio or video. With 12 hours a week, 24 hours total allows about 2-3 hours per step across 8-12 steps. Keep every step at C1-C2 with recall quizzes and explain-in-own-words checkpoints, and do not skip a short email-style rewrite at the end.",
+        "sop": [
+          {
+            "objective": "Recall the eight parts of speech and identify nouns, verbs, adjectives and adverbs in short sentences.",
+            "bloom": "C1",
+            "concepts": [
+              "Parts of speech"
+            ]
+          },
+          {
+            "objective": "Recall the remaining parts of speech (pronouns, prepositions, conjunctions, articles) and name their jobs in a sentence.",
+            "bloom": "C1",
+            "concepts": [
+              "Parts of speech"
+            ]
+          },
+          {
+            "objective": "Identify the subject and the verb in simple sentences and state in own words what each does.",
+            "bloom": "C1",
+            "concepts": [
+              "Subject and verb"
+            ]
+          },
+          {
+            "objective": "Explain how a simple sentence is built and tell a complete sentence from a fragment.",
+            "bloom": "C2",
+            "concepts": [
+              "Simple sentence structure"
+            ]
+          },
+          {
+            "objective": "Explain why a verb must match its subject in number and choose the matching form in short sentences.",
+            "bloom": "C2",
+            "concepts": [
+              "Subject-verb agreement"
+            ]
+          },
+          {
+            "objective": "Describe the present, past and future tenses and explain when each is used in everyday writing.",
+            "bloom": "C2",
+            "concepts": [
+              "Verb tenses basics"
+            ]
+          },
+          {
+            "objective": "Explain what full stops, commas, question marks and apostrophes signal and why they sit where they do.",
+            "bloom": "C2",
+            "concepts": [
+              "Basic punctuation marks"
+            ]
+          },
+          {
+            "objective": "Explain frequent usage mix-ups such as their/there/they're, its/it's and your/you're and choose the correct form in context.",
+            "bloom": "C2",
+            "concepts": [
+              "Common usage errors"
+            ]
+          },
+          {
+            "objective": "Explain in own words the corrections made to a short flawed workplace email, covering structure, agreement, tense, punctuation and usage.",
+            "bloom": "C2",
+            "concepts": [
+              "Simple sentence structure",
+              "Subject-verb agreement",
+              "Common usage errors"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-019": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm training as a healthcare assistant and want to explain how the heart, lungs and kidneys work together to keep blood pressure and oxygen steady, so I can understand patient observations on the ward.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Heart chambers and blood flow",
+          "Cardiac cycle and blood pressure",
+          "Gas exchange in lungs",
+          "Kidney filtration and urine formation",
+          "Homeostasis negative feedback loops",
+          "Organ system interactions"
+        ],
+        "orderConstraints": [
+          [
+            "Heart chambers and blood flow",
+            "Cardiac cycle and blood pressure"
+          ],
+          [
+            "Homeostasis negative feedback loops",
+            "Organ system interactions"
+          ],
+          [
+            "Cardiac cycle and blood pressure",
+            "Organ system interactions"
+          ],
+          [
+            "Gas exchange in lungs",
+            "Organ system interactions"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Believing all arteries carry oxygenated blood and all veins carry deoxygenated blood, ignoring pulmonary vessels",
+          "Treating negative feedback as 'bad' feedback or as something that only switches a response off rather than restoring a set point",
+          "Thinking the kidneys only remove waste and play no role in blood pressure or fluid balance"
+        ],
+        "notes": "Video suits visualising blood flow, breathing mechanics and nephron function, with short text readings for terminology and diagrams to label. Keep the load to about 45-60 minutes per step so the path totals no more than 6 hours across two weeks, and do not skip the feedback-loop step that links the three systems before the final analysis.",
+        "sop": [
+          {
+            "objective": "Describe the heart's chambers, valves and the route blood takes through the lungs and body.",
+            "bloom": "C2",
+            "concepts": [
+              "Heart chambers and blood flow"
+            ]
+          },
+          {
+            "objective": "Apply the cardiac cycle to explain what systolic and diastolic readings represent and what changes them.",
+            "bloom": "C3",
+            "concepts": [
+              "Cardiac cycle and blood pressure"
+            ]
+          },
+          {
+            "objective": "Work through examples of how breathing moves oxygen and carbon dioxide across the alveolar membrane.",
+            "bloom": "C3",
+            "concepts": [
+              "Gas exchange in lungs"
+            ]
+          },
+          {
+            "objective": "Trace filtration, reabsorption and secretion through the nephron to explain how urine forms and how fluid is regulated.",
+            "bloom": "C3",
+            "concepts": [
+              "Kidney filtration and urine formation"
+            ]
+          },
+          {
+            "objective": "Apply the idea of set points and sensors to a guided example, such as blood pressure or body temperature regulation.",
+            "bloom": "C3",
+            "concepts": [
+              "Homeostasis negative feedback loops"
+            ]
+          },
+          {
+            "objective": "Analyse a scenario such as blood loss or dehydration, breaking down how the heart, lungs and kidneys respond together to restore balance.",
+            "bloom": "C4",
+            "concepts": [
+              "Organ system interactions"
+            ]
+          },
+          {
+            "objective": "Compare two patient scenarios with different observations and explain in a short write-up which systems explain the differences.",
+            "bloom": "C4",
+            "concepts": [
+              "Organ system interactions",
+              "Cardiac cycle and blood pressure",
+              "Gas exchange in lungs"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-008": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I can write basic programs but I want to pick the right data structure for my coding interview practice problems and explain the cost of each choice.",
+        "steps": {
+          "min": 6,
+          "max": 9
+        },
+        "mustCover": [
+          "Array and list operations",
+          "Linked list pointers",
+          "Stacks and queues",
+          "Hash tables and collisions",
+          "Binary search tree operations",
+          "Heaps and priority queues",
+          "Operation cost comparison"
+        ],
+        "orderConstraints": [
+          [
+            "Array and list operations",
+            "Linked list pointers"
+          ],
+          [
+            "Linked list pointers",
+            "Stacks and queues"
+          ],
+          [
+            "Array and list operations",
+            "Hash tables and collisions"
+          ],
+          [
+            "Binary search tree operations",
+            "Heaps and priority queues"
+          ],
+          [
+            "Stacks and queues",
+            "Operation cost comparison"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Hash table lookup is always constant time regardless of collisions or hash quality.",
+          "A linked list is faster than an array for all insertions, ignoring the cost of finding the position.",
+          "A binary search tree always gives logarithmic operations even when it is unbalanced."
+        ],
+        "notes": "Video and text suit this learner: short explainer videos paired with text references for cost tables, with guided exercises at each step rather than large projects. At 5 hours a week, about 10 hours total means steps of roughly 1 to 1.5 hours; the path must not skip cost analysis or move past C4 into evaluation or design tasks.",
+        "sop": [
+          {
+            "objective": "Explain how arrays and dynamic lists store data and state the cost of access, insertion and deletion.",
+            "bloom": "C2",
+            "concepts": [
+              "Array and list operations"
+            ]
+          },
+          {
+            "objective": "Implement singly and doubly linked list insert and delete by rewiring pointers in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Linked list pointers"
+            ]
+          },
+          {
+            "objective": "Use stacks and queues to solve guided problems such as bracket matching and simple task scheduling.",
+            "bloom": "C3",
+            "concepts": [
+              "Stacks and queues"
+            ]
+          },
+          {
+            "objective": "Apply a hash table to a counting or lookup problem and trace what happens when keys collide.",
+            "bloom": "C3",
+            "concepts": [
+              "Hash tables and collisions"
+            ]
+          },
+          {
+            "objective": "Implement insert, search and delete on a binary search tree and trace how tree shape affects cost.",
+            "bloom": "C3",
+            "concepts": [
+              "Binary search tree operations"
+            ]
+          },
+          {
+            "objective": "Use a heap as a priority queue in a guided exercise and explain why it suits repeated min or max retrieval.",
+            "bloom": "C3",
+            "concepts": [
+              "Heaps and priority queues"
+            ]
+          },
+          {
+            "objective": "Compare the structures by operation cost and analyse which one fits each of several interview-style scenarios.",
+            "bloom": "C4",
+            "concepts": [
+              "Operation cost comparison"
+            ]
+          },
+          {
+            "objective": "Analyse a set of practice problems, justify the structure choice for each and identify where a poor choice would slow the solution.",
+            "bloom": "C4",
+            "concepts": [
+              "Operation cost comparison",
+              "Hash tables and collisions"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "Order constraint Binary search tree operations before Heaps and priority queues is not a genuine prerequisite; heaps are array-based complete trees and can be learned without BSTs.",
+          "Order constraint Array and list operations before Hash tables and collisions is weak, since hash tables are usually built on arrays, so keep it only as a true dependency.",
+          "Order constraint Stacks and queues before Operation cost comparison is incomplete: the comparison needs every structure first, not just stacks and queues.",
+          "Stacks and queues are listed after linked lists as if they need pointers, but they can be built on arrays; the constraint is arbitrary.",
+          "Hash tables appear in the final sop step only to reach a concept, which makes it a vague C4 duplicate; the final steps overlap.",
+          "Goal says explain cost of each choice but mustCover omits trees' balance cost; the BST misconception is present but no concept covers balance, so tree shape is only touched in a sop objective.",
+          "Stacks and queues objective mentions simple task scheduling, which is vague and not clearly in scope."
+        ],
+        "revised": {
+          "goal": "I can write basic programs but I want to pick the right data structure for my coding interview practice problems and explain the cost of each choice.",
+          "steps": {
+            "min": 6,
+            "max": 9
+          },
+          "mustCover": [
+            "Array and list operations",
+            "Linked list pointers",
+            "Stacks and queues",
+            "Hash tables and collisions",
+            "Binary search tree operations",
+            "Heaps and priority queues",
+            "Operation cost comparison"
+          ],
+          "orderConstraints": [
+            [
+              "Array and list operations",
+              "Hash tables and collisions"
+            ],
+            [
+              "Array and list operations",
+              "Heaps and priority queues"
+            ],
+            [
+              "Linked list pointers",
+              "Operation cost comparison"
+            ],
+            [
+              "Hash tables and collisions",
+              "Operation cost comparison"
+            ],
+            [
+              "Binary search tree operations",
+              "Operation cost comparison"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Hash table lookup is always constant time regardless of collisions or hash quality.",
+            "A linked list is faster than an array for all insertions, ignoring the cost of finding the position.",
+            "A binary search tree always gives logarithmic operations even when it is unbalanced."
+          ],
+          "notes": "Video and text suit this learner: short explainer videos paired with text references for cost tables, with guided exercises at each step rather than large projects. At 5 hours a week, about 10 hours total means steps of roughly 1 to 1.5 hours; the path must not skip cost analysis or move past C4 into evaluation or design tasks.",
+          "sop": [
+            {
+              "objective": "Explain how arrays and dynamic lists store data and state the cost of access, insertion and deletion.",
+              "bloom": "C2",
+              "concepts": [
+                "Array and list operations"
+              ]
+            },
+            {
+              "objective": "Implement singly and doubly linked list insert and delete by rewiring pointers in a guided exercise.",
+              "bloom": "C3",
+              "concepts": [
+                "Linked list pointers"
+              ]
+            },
+            {
+              "objective": "Use stacks and queues to solve guided problems such as bracket matching and breadth-first order processing.",
+              "bloom": "C3",
+              "concepts": [
+                "Stacks and queues"
+              ]
+            },
+            {
+              "objective": "Apply a hash table to a counting or lookup problem and trace what happens when keys collide.",
+              "bloom": "C3",
+              "concepts": [
+                "Hash tables and collisions"
+              ]
+            },
+            {
+              "objective": "Implement insert, search and delete on a binary search tree and trace how tree shape affects cost.",
+              "bloom": "C3",
+              "concepts": [
+                "Binary search tree operations"
+              ]
+            },
+            {
+              "objective": "Use an array-based heap as a priority queue in a guided exercise and explain why it suits repeated min or max retrieval.",
+              "bloom": "C3",
+              "concepts": [
+                "Heaps and priority queues"
+              ]
+            },
+            {
+              "objective": "Compare the structures by operation cost and analyse which one fits each of several interview-style scenarios.",
+              "bloom": "C4",
+              "concepts": [
+                "Operation cost comparison"
+              ]
+            },
+            {
+              "objective": "Analyse a set of practice problems, justify the structure choice for each and identify where a poor choice would slow the solution.",
+              "bloom": "C4",
+              "concepts": [
+                "Operation cost comparison",
+                "Stacks and queues"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-014": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm new to linear algebra and want to understand vectors and matrices well enough to follow my data science course's first lecture notes without getting lost.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Vectors and vector operations",
+          "Linear combinations and span",
+          "Matrix-vector multiplication",
+          "Matrix multiplication rules",
+          "Systems of linear equations",
+          "Row reduction basics",
+          "Linear independence idea"
+        ],
+        "orderConstraints": [
+          [
+            "Vectors and vector operations",
+            "Linear combinations and span"
+          ],
+          [
+            "Vectors and vector operations",
+            "Matrix-vector multiplication"
+          ],
+          [
+            "Matrix-vector multiplication",
+            "Matrix multiplication rules"
+          ],
+          [
+            "Systems of linear equations",
+            "Row reduction basics"
+          ],
+          [
+            "Linear combinations and span",
+            "Linear independence idea"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Matrix multiplication is commutative, so AB always equals BA",
+          "A vector is only a list of numbers with no geometric meaning",
+          "Matrix multiplication works entry by entry like element-wise multiplication"
+        ],
+        "notes": "Learner prefers text, so use readable written explanations and worked examples with small 2x2 and 3x3 numbers; no video or code dependence. At 3 hours a week, keep each step to about 45-60 minutes so the whole path fits in 6 hours, with recall quizzes and explain-in-own-words checkpoints and no proofs or C3+ tasks.",
+        "sop": [
+          {
+            "objective": "Recall what vectors are and perform addition and scalar multiplication on small examples.",
+            "bloom": "C1",
+            "concepts": [
+              "Vectors and vector operations"
+            ]
+          },
+          {
+            "objective": "Explain in your own words how a vector can be seen as both a list of numbers and an arrow in the plane.",
+            "bloom": "C1",
+            "concepts": [
+              "Vectors and vector operations"
+            ]
+          },
+          {
+            "objective": "Describe linear combinations and the span of a set of vectors using 2D pictures.",
+            "bloom": "C2",
+            "concepts": [
+              "Linear combinations and span"
+            ]
+          },
+          {
+            "objective": "Explain how a matrix acts on a vector as a combination of its columns.",
+            "bloom": "C2",
+            "concepts": [
+              "Matrix-vector multiplication"
+            ]
+          },
+          {
+            "objective": "Summarize the rules for multiplying matrices, including size compatibility and why order matters.",
+            "bloom": "C2",
+            "concepts": [
+              "Matrix multiplication rules"
+            ]
+          },
+          {
+            "objective": "Explain how a system of linear equations can be written as a matrix equation and what a solution means.",
+            "bloom": "C2",
+            "concepts": [
+              "Systems of linear equations"
+            ]
+          },
+          {
+            "objective": "Describe in your own words how row reduction simplifies a system step by step.",
+            "bloom": "C2",
+            "concepts": [
+              "Row reduction basics"
+            ]
+          },
+          {
+            "objective": "Explain intuitively what it means for vectors to be linearly independent, using examples and non-examples.",
+            "bloom": "C2",
+            "concepts": [
+              "Linear independence idea"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-015": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I have a calculus quiz in two weeks on derivatives and basic integrals. I can do simple problems and want to understand why the rules work and solve harder ones.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Limits and continuity",
+          "Derivative as rate of change",
+          "Power, product, chain rules",
+          "Related rates and optimization",
+          "Definite integral as area",
+          "Fundamental Theorem of Calculus"
+        ],
+        "orderConstraints": [
+          [
+            "Limits and continuity",
+            "Derivative as rate of change"
+          ],
+          [
+            "Derivative as rate of change",
+            "Power, product, chain rules"
+          ],
+          [
+            "Power, product, chain rules",
+            "Related rates and optimization"
+          ],
+          [
+            "Definite integral as area",
+            "Fundamental Theorem of Calculus"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "The derivative is only a set of rules to memorize rather than an instantaneous rate of change or slope of the tangent",
+          "The integral and derivative are unrelated operations, or an integral is only an antiderivative with no area meaning",
+          "A limit is the function's value at the point, ignoring approach from both sides"
+        ],
+        "notes": "Video and text suit this learner; use short lessons of about 10–20 minutes plus a few worked problems with guided checkpoints. Total time must stay within 2 hours, so steps are small (about 15–20 minutes each) and the path should not attempt series or Taylor series.",
+        "sop": [
+          {
+            "objective": "Explain in own words what a limit is and decide when a function is continuous at a point using simple examples.",
+            "bloom": "C2",
+            "concepts": [
+              "Limits and continuity"
+            ]
+          },
+          {
+            "objective": "Connect the limit definition of the derivative to slope of a tangent and rate of change, and compute a simple derivative from the definition in a guided exercise.",
+            "bloom": "C2",
+            "concepts": [
+              "Derivative as rate of change"
+            ]
+          },
+          {
+            "objective": "Apply power, product and chain rules to differentiate polynomial and composite functions in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Power, product, chain rules"
+            ]
+          },
+          {
+            "objective": "Solve a related rates and an optimization problem by setting up equations and using derivatives, with a worked-problem checkpoint.",
+            "bloom": "C3",
+            "concepts": [
+              "Related rates and optimization"
+            ]
+          },
+          {
+            "objective": "Apply Riemann sums and the definite integral to compute area under a curve in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Definite integral as area"
+            ]
+          },
+          {
+            "objective": "Analyse how the Fundamental Theorem of Calculus links derivatives and integrals, and use it to evaluate a definite integral and justify each step.",
+            "bloom": "C4",
+            "concepts": [
+              "Fundamental Theorem of Calculus"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "Time is unrealistic: 6 steps in 2 hours is about 20 min each, yet the case covers limits, derivatives, three rules, related rates, optimization, Riemann sums and the FTC. Related rates and optimization are bundled into one step, and Riemann sums with FTC are too heavy for 20 minutes.",
+          "Goal says 'derivatives and basic integrals', but the path adds limits, continuity and related rates/optimization, so the goal and mustCover do not match.",
+          "Missing integration: there is no antiderivative or basic integration rule step, though the goal names basic integrals and the FTC evaluation needs antiderivatives.",
+          "Order constraint puts related rates and optimization after the chain rule, which is fine, but nothing links antiderivatives to the FTC. The definite integral as area does not depend on the derivative, so the integral track is correctly separate.",
+          "Misconception about an 'integral being only an antiderivative with no area meaning' is muddled and mixes two ideas. The limit misconception is fine.",
+          "Sop Bloom levels start at C2 and end at C4, which is valid. The step 2 objective 'Connect...and compute' mixes C2 and C3 verbs, and the step 3 and 4 objectives have several tasks each, which is too much for the time.",
+          "Notes say steps are 15–20 min, which contradicts the 1h/week cap in spirit since total must be at most 2h; this works only with six steps at 20 min, with no slack. Goal says 'two weeks', matching the 2h cap.",
+          "The 'steps' range 6–8 is inconsistent with time; use 6–7 at about 15–20 min each."
+        ],
+        "revised": {
+          "goal": "I have a calculus quiz in two weeks on derivatives and basic integrals. I can do simple problems and want to understand why the rules work and solve harder ones.",
+          "steps": {
+            "min": 6,
+            "max": 7
+          },
+          "mustCover": [
+            "Limit definition of the derivative",
+            "Power, product, chain rules",
+            "Optimization with derivatives",
+            "Antiderivatives and basic integration rules",
+            "Definite integral as area",
+            "Fundamental Theorem of Calculus"
+          ],
+          "orderConstraints": [
+            [
+              "Limit definition of the derivative",
+              "Power, product, chain rules"
+            ],
+            [
+              "Power, product, chain rules",
+              "Optimization with derivatives"
+            ],
+            [
+              "Antiderivatives and basic integration rules",
+              "Fundamental Theorem of Calculus"
+            ],
+            [
+              "Definite integral as area",
+              "Fundamental Theorem of Calculus"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Treating the derivative as only a set of rules to memorize rather than the slope of the tangent or instantaneous rate of change",
+            "Believing derivatives and integrals are unrelated operations, rather than inverse processes linked by the Fundamental Theorem of Calculus",
+            "Forgetting the chain rule's inner derivative, or dropping the constant of integration for indefinite integrals"
+          ],
+          "notes": "Learner is an advanced beginner with a quiz in two weeks; total time at most 2 hours, so use about six or seven short video or text lessons of 15–20 minutes each, with a few worked problems. Limits are treated only through the derivative's definition; the path excludes series, Taylor series and related rates. Bloom runs C2 to C4 with no decrease.",
+          "sop": [
+            {
+              "objective": "Explain the derivative as the limit of average rates of change and as the slope of a tangent line.",
+              "bloom": "C2",
+              "concepts": [
+                "Limit definition of the derivative"
+              ]
+            },
+            {
+              "objective": "Apply the power, product and chain rules to differentiate polynomial and composite functions.",
+              "bloom": "C3",
+              "concepts": [
+                "Power, product, chain rules"
+              ]
+            },
+            {
+              "objective": "Solve an optimization problem by setting up a function, finding critical points with the derivative and checking the result.",
+              "bloom": "C3",
+              "concepts": [
+                "Optimization with derivatives"
+              ]
+            },
+            {
+              "objective": "Compute antiderivatives of polynomial functions using basic integration rules, including the constant of integration.",
+              "bloom": "C3",
+              "concepts": [
+                "Antiderivatives and basic integration rules"
+              ]
+            },
+            {
+              "objective": "Explain how the definite integral measures area under a curve as the limit of Riemann sums.",
+              "bloom": "C3",
+              "concepts": [
+                "Definite integral as area"
+              ]
+            },
+            {
+              "objective": "Analyse how the Fundamental Theorem of Calculus links derivatives and integrals, and use it to evaluate a definite integral.",
+              "bloom": "C4",
+              "concepts": [
+                "Fundamental Theorem of Calculus"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-026": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I track our club's monthly dues and expenses in a messy sheet. I want to clean it up, use formulas to total things, and build a pivot table that shows where our money goes.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Relative and absolute references",
+          "Core formulas and functions",
+          "Lookup functions",
+          "Sorting and filtering data",
+          "Data cleaning basics",
+          "Pivot table summaries",
+          "Choosing appropriate charts"
+        ],
+        "orderConstraints": [
+          [
+            "Relative and absolute references",
+            "Lookup functions"
+          ],
+          [
+            "Core formulas and functions",
+            "Lookup functions"
+          ],
+          [
+            "Data cleaning basics",
+            "Pivot table summaries"
+          ],
+          [
+            "Sorting and filtering data",
+            "Pivot table summaries"
+          ],
+          [
+            "Pivot table summaries",
+            "Choosing appropriate charts"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Typing totals as hard-coded numbers instead of using formulas that update when data changes",
+          "Merging cells or leaving blank rows and columns in a data table, which breaks sorting, filtering and pivot tables",
+          "Treating a chart as correct simply because it looks good, without checking it suits the data and message"
+        ],
+        "notes": "The learner prefers text and papers, so use written tutorials, reference guides and printable cheat sheets with step-by-step exercises on a sample dataset, not video. About 4 hours a week and 8 hours total means short steps of roughly 1 hour each with no more than two resources per step. Each step needs a guided exercise checkpoint, and the path must include a final analysis task on messy data that compares ways of summarizing it.",
+        "sop": [
+          {
+            "objective": "Apply relative and absolute references when copying formulas across the club's dues and expense table.",
+            "bloom": "C3",
+            "concepts": [
+              "Relative and absolute references"
+            ]
+          },
+          {
+            "objective": "Use core functions such as SUM, IF, COUNTIF and SUMIF to total dues and expenses by guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Core formulas and functions"
+            ]
+          },
+          {
+            "objective": "Sort and filter a table to answer specific questions about members and spending in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Sorting and filtering data"
+            ]
+          },
+          {
+            "objective": "Clean a messy sheet by trimming spaces, fixing inconsistent labels, removing blanks and standardizing dates.",
+            "bloom": "C3",
+            "concepts": [
+              "Data cleaning basics"
+            ]
+          },
+          {
+            "objective": "Apply a lookup function to pull member or category details from a reference table and explain why it returns each result.",
+            "bloom": "C3",
+            "concepts": [
+              "Lookup functions"
+            ]
+          },
+          {
+            "objective": "Build a pivot table that summarizes expenses by category and month and analyse which categories drive the spending.",
+            "bloom": "C4",
+            "concepts": [
+              "Pivot table summaries"
+            ]
+          },
+          {
+            "objective": "Compare chart types for the pivot results, pick the one that best shows where money goes and justify the choice in a short write-up.",
+            "bloom": "C4",
+            "concepts": [
+              "Choosing appropriate charts"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-025": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I just became a team lead of five people and I want to run my first team meetings and one-to-ones with more confidence, and understand why some leadership approaches work better with my team.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Transformational, servant, situational styles",
+          "Matching style to team readiness",
+          "Building trust with team members",
+          "Communicating a clear team vision",
+          "Leading by example",
+          "Analysing a leadership scenario"
+        ],
+        "orderConstraints": [
+          [
+            "Transformational, servant, situational styles",
+            "Matching style to team readiness"
+          ],
+          [
+            "Building trust with team members",
+            "Communicating a clear team vision"
+          ],
+          [
+            "Matching style to team readiness",
+            "Analysing a leadership scenario"
+          ],
+          [
+            "Leading by example",
+            "Analysing a leadership scenario"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Leaders are born with charisma and leadership cannot be learned",
+          "One leadership style is best in every situation",
+          "Leading means giving orders and being in control rather than building trust and enabling the team"
+        ],
+        "notes": "Video suits this learner: short talks, case-study walkthroughs and role-play demonstrations, with 6 hours a week as roughly 30-45 minute video segments plus short practice tasks. Total time must stay within 12 hours, so keep steps small and include a guided exercise (such as planning a one-to-one) at each step, not only passive watching.",
+        "sop": [
+          {
+            "objective": "Describe the main leadership styles (transformational, servant, situational) and give an example of each in a team setting.",
+            "bloom": "C2",
+            "concepts": [
+              "Transformational, servant, situational styles"
+            ]
+          },
+          {
+            "objective": "Explain in own words how trust is built through consistency, openness and follow-through, and identify trust signals in a short video case.",
+            "bloom": "C2",
+            "concepts": [
+              "Building trust with team members"
+            ]
+          },
+          {
+            "objective": "Apply a situational leadership model to choose a style for a team member at a given readiness level in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Matching style to team readiness"
+            ]
+          },
+          {
+            "objective": "Draft a short, clear team vision statement and a plan to communicate it in a team meeting, using a template.",
+            "bloom": "C3",
+            "concepts": [
+              "Communicating a clear team vision"
+            ]
+          },
+          {
+            "objective": "Apply the idea of leading by example by planning concrete behaviours to model for the team in a guided exercise.",
+            "bloom": "C3",
+            "concepts": [
+              "Leading by example"
+            ]
+          },
+          {
+            "objective": "Analyse a realistic team scenario by comparing the effects of two different leadership styles and trust-building actions, and write up which fits better and why.",
+            "bloom": "C4",
+            "concepts": [
+              "Analysing a leadership scenario",
+              "Matching style to team readiness",
+              "Leading by example"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-027": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I have a senior backend interview in three weeks and want to design systems like a news feed or chat app, justify my trade-offs, and do the back-of-envelope sizing without freezing.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Capacity estimation",
+          "Load balancing",
+          "Caching strategies",
+          "Sharding and replication",
+          "Message queues",
+          "CAP and consistency trade-offs",
+          "Latency versus throughput",
+          "Design trade-off critique"
+        ],
+        "orderConstraints": [
+          [
+            "Capacity estimation",
+            "Sharding and replication"
+          ],
+          [
+            "Caching strategies",
+            "Design trade-off critique"
+          ],
+          [
+            "Sharding and replication",
+            "CAP and consistency trade-offs"
+          ],
+          [
+            "Latency versus throughput",
+            "Design trade-off critique"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Adding a cache or queue is always an improvement, regardless of consistency, invalidation and failure costs.",
+          "CAP means a system permanently picks two of three properties, rather than choosing a trade-off during partitions.",
+          "Sharding is the first answer to scale, instead of first estimating load and trying vertical scaling, replication or caching."
+        ],
+        "notes": "Suit video lectures and written walkthroughs for core concepts and a few papers or engineering write-ups for real trade-offs, with about 5 hours a week and at most 10 in total, so steps of roughly 1 to 1.5 hours. Each step needs a competent-level checkpoint such as a timed mini design with sizing, or debugging a flawed design, and the path must not skip hands-on capacity estimation or a final comparison of alternative designs.",
+        "sop": [
+          {
+            "objective": "Estimate traffic, storage and bandwidth for a URL shortener using back-of-envelope calculations.",
+            "bloom": "C3",
+            "concepts": [
+              "Capacity estimation"
+            ]
+          },
+          {
+            "objective": "Apply load balancing algorithms and health checks to spread traffic across stateless servers in a sample design.",
+            "bloom": "C3",
+            "concepts": [
+              "Load balancing"
+            ]
+          },
+          {
+            "objective": "Apply caching patterns and invalidation approaches to reduce read latency for a news feed and analyse the failure modes.",
+            "bloom": "C3",
+            "concepts": [
+              "Caching strategies",
+              "Latency versus throughput"
+            ]
+          },
+          {
+            "objective": "Analyse how sharding keys and replication choices affect hot spots, availability and the sizing estimate for a chat app.",
+            "bloom": "C4",
+            "concepts": [
+              "Sharding and replication"
+            ]
+          },
+          {
+            "objective": "Analyse how message queues decouple services and what delivery guarantees mean for a feed fan-out pipeline.",
+            "bloom": "C4",
+            "concepts": [
+              "Message queues"
+            ]
+          },
+          {
+            "objective": "Analyse consistency choices under partitions using CAP and relate them to latency and throughput needs.",
+            "bloom": "C4",
+            "concepts": [
+              "CAP and consistency trade-offs",
+              "Latency versus throughput"
+            ]
+          },
+          {
+            "objective": "Critique and compare two alternative designs for a chat app, justifying trade-offs against estimated load.",
+            "bloom": "C5",
+            "concepts": [
+              "Design trade-off critique",
+              "Capacity estimation"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "The goal says three weeks, but 5 hours a week with a 10-hour cap only supports about two weeks of study, so the goal and time budget disagree.",
+          "The notes allow 1 to 1.5 hours per step, which over 7 steps can reach 10.5 hours and break the 10-hour cap.",
+          "The caching step mixes 'apply' (C3) with 'analyse the failure modes' (C4), so its Bloom level is ambiguous.",
+          "The caching step also lists 'Latency versus throughput', but its objective only covers read latency, so throughput is not addressed there.",
+          "The caching step applies the C3 level to concepts that are properly assessed later, which weakens judgeability."
+        ],
+        "revised": {
+          "goal": "I have a senior backend interview in two weeks and want to design systems like a news feed or chat app, justify my trade-offs, and do the back-of-envelope sizing without freezing.",
+          "steps": {
+            "min": 6,
+            "max": 8
+          },
+          "mustCover": [
+            "Capacity estimation",
+            "Load balancing",
+            "Caching strategies",
+            "Sharding and replication",
+            "Message queues",
+            "CAP and consistency trade-offs",
+            "Latency versus throughput",
+            "Design trade-off critique"
+          ],
+          "orderConstraints": [
+            [
+              "Capacity estimation",
+              "Sharding and replication"
+            ],
+            [
+              "Caching strategies",
+              "Design trade-off critique"
+            ],
+            [
+              "Sharding and replication",
+              "CAP and consistency trade-offs"
+            ],
+            [
+              "Latency versus throughput",
+              "Design trade-off critique"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Adding a cache or queue is always an improvement, regardless of consistency, invalidation and failure costs.",
+            "CAP means a system permanently picks two of three properties, rather than choosing a trade-off during partitions.",
+            "Sharding is the first answer to scale, instead of first estimating load and trying vertical scaling, replication or caching."
+          ],
+          "notes": "Suit video lectures and written walkthroughs for core concepts and a few papers or engineering write-ups for real trade-offs. With about 5 hours a week and at most 10 in total, keep each step to roughly 1 to 1.4 hours so 7 steps fit the cap. Each step needs a competent-level checkpoint such as a timed mini design with sizing, or debugging a flawed design. The path must not skip hands-on capacity estimation or a final comparison of alternative designs.",
+          "sop": [
+            {
+              "objective": "Estimate traffic, storage and bandwidth for a URL shortener using back-of-envelope calculations.",
+              "bloom": "C3",
+              "concepts": [
+                "Capacity estimation"
+              ]
+            },
+            {
+              "objective": "Apply load balancing algorithms and health checks to spread traffic across stateless servers in a sample design.",
+              "bloom": "C3",
+              "concepts": [
+                "Load balancing"
+              ]
+            },
+            {
+              "objective": "Apply caching patterns and invalidation approaches to reduce read latency in a news feed design.",
+              "bloom": "C3",
+              "concepts": [
+                "Caching strategies"
+              ]
+            },
+            {
+              "objective": "Analyse how sharding keys and replication choices affect hot spots, availability and the sizing estimate for a chat app.",
+              "bloom": "C4",
+              "concepts": [
+                "Sharding and replication"
+              ]
+            },
+            {
+              "objective": "Analyse how message queues decouple services and what delivery guarantees mean for a feed fan-out pipeline.",
+              "bloom": "C4",
+              "concepts": [
+                "Message queues"
+              ]
+            },
+            {
+              "objective": "Analyse consistency choices under partitions using CAP and relate them to latency and throughput needs.",
+              "bloom": "C4",
+              "concepts": [
+                "CAP and consistency trade-offs",
+                "Latency versus throughput"
+              ]
+            },
+            {
+              "objective": "Critique and compare two alternative designs for a chat app, justifying trade-offs against estimated load.",
+              "bloom": "C5",
+              "concepts": [
+                "Design trade-off critique",
+                "Capacity estimation"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "pe-010": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I have a system design interview in a few weeks and can only study 3 hours a week. I want to sketch a URL shortener and explain why I chose caching and sharding.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Back-of-envelope capacity estimation",
+          "Latency versus throughput",
+          "Load balancing basics",
+          "Caching strategies",
+          "Replication and sharding",
+          "Message queues",
+          "CAP theorem trade-offs"
+        ],
+        "orderConstraints": [
+          [
+            "Back-of-envelope capacity estimation",
+            "Caching strategies"
+          ],
+          [
+            "Load balancing basics",
+            "Replication and sharding"
+          ],
+          [
+            "Replication and sharding",
+            "CAP theorem trade-offs"
+          ],
+          [
+            "Latency versus throughput",
+            "Message queues"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Treating CAP as a free choice of any two of three, ignoring that partitions are unavoidable in distributed systems",
+          "Believing caching always improves performance without considering invalidation, staleness and consistency cost",
+          "Assuming sharding or adding more servers is the first fix, before estimating actual load"
+        ],
+        "notes": "Video suits explanations of components and walkthroughs of a worked design, with short text for estimation formulas and trade-off summaries. Six hours total means small steps of roughly 45-60 minutes, each with 1-2 resources; do not skip the estimation practice or the final guided design with a written justification of trade-offs.",
+        "sop": [
+          {
+            "objective": "Explain latency, throughput and the main building blocks of a large-scale system in your own words.",
+            "bloom": "C2",
+            "concepts": [
+              "Latency versus throughput"
+            ]
+          },
+          {
+            "objective": "Work through guided back-of-envelope estimates of traffic, storage and bandwidth for a URL shortener.",
+            "bloom": "C3",
+            "concepts": [
+              "Back-of-envelope capacity estimation"
+            ]
+          },
+          {
+            "objective": "Describe how load balancers distribute requests and apply a simple balancing strategy to a given scenario.",
+            "bloom": "C3",
+            "concepts": [
+              "Load balancing basics"
+            ]
+          },
+          {
+            "objective": "Apply caching strategies to the read-heavy URL shortener and identify what to cache and when entries go stale.",
+            "bloom": "C3",
+            "concepts": [
+              "Caching strategies"
+            ]
+          },
+          {
+            "objective": "Compare replication and sharding approaches and pick a shard key for the shortener's data.",
+            "bloom": "C4",
+            "concepts": [
+              "Replication and sharding"
+            ]
+          },
+          {
+            "objective": "Analyse where a message queue decouples work, such as analytics or async tasks, and what it costs in latency and complexity.",
+            "bloom": "C4",
+            "concepts": [
+              "Message queues"
+            ]
+          },
+          {
+            "objective": "Analyse consistency versus availability choices for the design under network partitions and justify them in a written trade-off summary.",
+            "bloom": "C4",
+            "concepts": [
+              "CAP theorem trade-offs"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "keep",
+        "issues": [],
+        "revised": null
+      }
+    }
+  },
+  "pe-018": {
+    "draft": {
+      "promptVersion": "v1",
+      "value": {
+        "goal": "I'm starting college physics next month and want to understand how motion and forces work so I can follow the first mechanics lectures without getting lost.",
+        "steps": {
+          "min": 6,
+          "max": 8
+        },
+        "mustCover": [
+          "Position, velocity, acceleration",
+          "Free fall motion",
+          "Newton's three laws",
+          "Net force and acceleration",
+          "Work and kinetic energy",
+          "Conservation of momentum",
+          "Vector components"
+        ],
+        "orderConstraints": [
+          [
+            "Vector components",
+            "Net force and acceleration"
+          ],
+          [
+            "Position, velocity, acceleration",
+            "Newton's three laws"
+          ],
+          [
+            "Newton's three laws",
+            "Net force and acceleration"
+          ],
+          [
+            "Work and kinetic energy",
+            "Conservation of momentum"
+          ]
+        ],
+        "misconceptionsToAvoid": [
+          "Believing a constant force is needed to keep an object moving at constant velocity",
+          "Confusing velocity with acceleration, e.g. thinking zero velocity means zero acceleration at the top of a throw",
+          "Thinking heavier objects fall faster in free fall when air resistance is negligible"
+        ],
+        "notes": "Text formats only: readable explanations, short worked examples and written practice questions suit this learner; no video or simulations required. At 4 hours a week the path must fit within about 8 hours total, so steps are roughly 60-80 minutes each, with 1-2 short resources per step; checkpoints are recall quizzes and explain-in-own-words write-ups, with no step above C2 and no advanced topics like torque or orbits.",
+        "sop": [
+          {
+            "objective": "Recall the definitions of position, velocity and acceleration and describe how they differ in everyday motion.",
+            "bloom": "C1",
+            "concepts": [
+              "Position, velocity, acceleration"
+            ]
+          },
+          {
+            "objective": "Explain in own words how vectors are split into components and why direction matters in motion.",
+            "bloom": "C2",
+            "concepts": [
+              "Vector components"
+            ]
+          },
+          {
+            "objective": "Describe free fall and explain why objects fall with the same acceleration when air resistance is negligible.",
+            "bloom": "C2",
+            "concepts": [
+              "Free fall motion",
+              "Position, velocity, acceleration"
+            ]
+          },
+          {
+            "objective": "State Newton's three laws and explain each with an everyday example.",
+            "bloom": "C2",
+            "concepts": [
+              "Newton's three laws"
+            ]
+          },
+          {
+            "objective": "Explain how net force relates to acceleration and interpret simple force situations in words.",
+            "bloom": "C2",
+            "concepts": [
+              "Net force and acceleration",
+              "Vector components"
+            ]
+          },
+          {
+            "objective": "Explain what work is and how it changes kinetic energy in simple scenarios.",
+            "bloom": "C2",
+            "concepts": [
+              "Work and kinetic energy"
+            ]
+          },
+          {
+            "objective": "Explain in own words why total momentum is conserved in an isolated system such as two colliding carts.",
+            "bloom": "C2",
+            "concepts": [
+              "Conservation of momentum"
+            ]
+          }
+        ]
+      }
+    },
+    "review": {
+      "promptVersion": "v1",
+      "value": {
+        "verdict": "revise",
+        "issues": [
+          "The order constraint Work and kinetic energy before Conservation of momentum is not a real prerequisite, since momentum conservation follows from Newton's third law and does not need work-energy.",
+          "Notes say 60-80 minutes per step. With 7 sop steps that can reach about 9.3 hours, over the 8-hour cap.",
+          "Free fall depending on Position, velocity, acceleration is a genuine prerequisite but is not stated, and work depending on net force is also missing.",
+          "Everything else is sound: the C1 to C2 progression suits a novice, the misconceptions are real and within the limit, and the goal fits."
+        ],
+        "revised": {
+          "goal": "I'm starting college physics next month and want to understand how motion and forces work so I can follow the first mechanics lectures without getting lost.",
+          "steps": {
+            "min": 6,
+            "max": 8
+          },
+          "mustCover": [
+            "Position, velocity, acceleration",
+            "Free fall motion",
+            "Newton's three laws",
+            "Net force and acceleration",
+            "Work and kinetic energy",
+            "Conservation of momentum",
+            "Vector components"
+          ],
+          "orderConstraints": [
+            [
+              "Vector components",
+              "Net force and acceleration"
+            ],
+            [
+              "Position, velocity, acceleration",
+              "Free fall motion"
+            ],
+            [
+              "Position, velocity, acceleration",
+              "Newton's three laws"
+            ],
+            [
+              "Newton's three laws",
+              "Net force and acceleration"
+            ],
+            [
+              "Net force and acceleration",
+              "Work and kinetic energy"
+            ]
+          ],
+          "misconceptionsToAvoid": [
+            "Believing a constant force is needed to keep an object moving at constant velocity",
+            "Confusing velocity with acceleration, e.g. thinking zero velocity means zero acceleration at the top of a throw",
+            "Thinking heavier objects fall faster in free fall when air resistance is negligible"
+          ],
+          "notes": "Text formats only: readable explanations, short worked examples and written practice questions suit this learner. At 4 hours a week the path must fit within 8 hours total, so steps are roughly 45-60 minutes each (about 7 hours for 7 steps), with 1-2 short text resources per step. Checkpoints are recall quizzes and explain-in-own-words write-ups, with no step above C2 and no advanced topics like torque or orbits.",
+          "sop": [
+            {
+              "objective": "Recall the definitions of position, velocity and acceleration and describe how they differ in everyday motion.",
+              "bloom": "C1",
+              "concepts": [
+                "Position, velocity, acceleration"
+              ]
+            },
+            {
+              "objective": "Explain in own words how vectors are split into components and why direction matters in motion.",
+              "bloom": "C2",
+              "concepts": [
+                "Vector components"
+              ]
+            },
+            {
+              "objective": "Describe free fall and explain why objects fall with the same acceleration when air resistance is negligible.",
+              "bloom": "C2",
+              "concepts": [
+                "Free fall motion",
+                "Position, velocity, acceleration"
+              ]
+            },
+            {
+              "objective": "State Newton's three laws and explain each with an everyday example.",
+              "bloom": "C2",
+              "concepts": [
+                "Newton's three laws"
+              ]
+            },
+            {
+              "objective": "Explain how net force relates to acceleration and interpret simple force situations in words.",
+              "bloom": "C2",
+              "concepts": [
+                "Net force and acceleration",
+                "Vector components"
+              ]
+            },
+            {
+              "objective": "Explain what work is and how it changes kinetic energy in simple scenarios.",
+              "bloom": "C2",
+              "concepts": [
+                "Work and kinetic energy"
+              ]
+            },
+            {
+              "objective": "Explain in own words why total momentum is conserved in an isolated system such as two colliding carts.",
+              "bloom": "C2",
+              "concepts": [
+                "Conservation of momentum"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

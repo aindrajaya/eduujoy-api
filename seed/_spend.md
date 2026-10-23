@@ -24,3 +24,10 @@ Actual cost of every paid run, from API usage at catalog list prices. Hard stop 
 | 2026-10-23 00:00 | console reconciliation | manual | 0 | 0 | 0 | 0 | 0 | $0.7800 | Console $38.36 vs _spend.md $37.58: timed-out standard items retries (22 Oct) |
 | 2026-10-22 20:09 | items | batch | 1 | 209 | 2526 | 0 | 8086 | $0.0438 | msgbatch_012KnssBCMPko8tjxBpLvETb |
 | 2026-10-22 20:15 | items-review | batch | 200 | 104827 | 1419 | 282381 | 73562 | $0.4885 | msgbatch_01MqT1uh37bbMwVkDbJtvEcZ |
+| 2026-10-23 00:18 | path-eval-draft --sample | standard | 6 | 1223 | 1874 | 9370 | 5279 | $0.0609 | v1 |
+| 2026-10-23 00:24 | path-eval-draft | batch | 24 | 5323 | 1874 | 43102 | 22564 | $0.1226 | msgbatch_01N2DeDw5oWZdmnN8hUcRuqJ |
+| 2026-10-23 00:25 | path-eval-draft --sample | standard | 1 | 220 | 1874 | 0 | 779 | $0.0129 | v1 |
+| 2026-10-23 00:25 | path-eval-draft --sample | standard | 1 | 220 | 0 | 1874 | 830 | $0.0089 | v1 |
+| 2026-10-23 00:26 | path-eval-draft --sample | standard | 1 | 305 | 0 | 1874 | 810 | $0.0089 | v1 |
+| 2026-10-23 00:32 | path-eval-review | batch | 30 | 42070 | 1709 | 49561 | 22076 | $0.1571 | msgbatch_017yiPHaXkT8zEVT9teQhucE |
+| 2026-10-23 00:39 | path-eval-review | batch | 11 | 17144 | 0 | 18799 | 12384 | $0.0800 | msgbatch_01PGBJ3Pb8jwKKAMxTypnTo5 |
