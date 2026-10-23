@@ -230,8 +230,22 @@ function params(system: string, user: string, schema: z.ZodType): Anthropic.Mess
   };
 }
 
+const REJECTS_FILE = join(SEED_DIR, '_rejects', 'path-eval.jsonl');
+
+/** The rule a case's last rejected draft broke, so a redraft can fix it instead of repeating it. */
+function lastDraftProblem(id: string): string | undefined {
+  if (!existsSync(REJECTS_FILE)) return undefined;
+  const rows = readFileSync(REJECTS_FILE, 'utf8').trim().split('\n').filter(Boolean);
+  const mine = rows.map((l) => z.object({ id: z.string(), reason: z.string() }).parse(JSON.parse(l))).filter((r) => r.id === `${id} draft`);
+  return mine.at(-1)?.reason;
+}
+
 function draftParams(topics: SeedTopic[], c: PlanCase): Anthropic.MessageCreateParamsNonStreaming {
-  return params(DRAFT_PROMPT.text, `<topic>\n${topicBlock(topics, c.topic)}\n</topic>\n<case>\n${caseBlock(c)}\n</case>`, apiDraftSchema);
+  const problem = lastDraftProblem(c.id);
+  const retry = problem
+    ? `\n<previous_attempt>\nA previous draft for this case broke a rule: ${problem}. Every step's Bloom level must be equal to or higher than the step before it; introduce a new concept at the current level instead of dropping back.\n</previous_attempt>`
+    : '';
+  return params(DRAFT_PROMPT.text, `<topic>\n${topicBlock(topics, c.topic)}\n</topic>\n<case>\n${caseBlock(c)}\n</case>${retry}`, apiDraftSchema);
 }
 
 function reviewParams(topics: SeedTopic[], c: PlanCase, d: Draft): Anthropic.MessageCreateParamsNonStreaming {
