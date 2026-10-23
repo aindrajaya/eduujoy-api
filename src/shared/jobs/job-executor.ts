@@ -80,9 +80,13 @@ export class JobExecutor {
     this.handlers.set(handler.type, handler);
   }
 
-  /** Subscribe to persisted job events (A9 streams them over SSE). */
-  onEvent(listener: JobEventListener): void {
+  /** Subscribe to persisted job events (A9 streams them over SSE); returns the unsubscribe. */
+  onEvent(listener: JobEventListener): () => void {
     this.listeners.push(listener);
+    return () => {
+      const i = this.listeners.indexOf(listener);
+      if (i >= 0) this.listeners.splice(i, 1);
+    };
   }
 
   /** Resume on boot: requeue jobs whose process is gone (stale locks), then run. */
