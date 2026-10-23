@@ -13,8 +13,11 @@ import { ANALYSIS_RESERVE_USD, coldPoolsToday, poolStop, SEARCHES_PER_POOL } fro
 import { buildSmoke, ctx, env } from './runner';
 
 // Run by the user 1-3 days before beta, then every 30 days (YouTube's 30-day storage limit); D1 (user,
-// 23 Oct 2026): `pnpm discovery:pregen [--topics scripts/discovery/pregen-topics.json]
-// [--stages novice,advanced_beginner] [--cap 35] [--youtube-reserve 20] [--dry-run]`.
+// 23 Oct 2026; three stages and a $45 one-off ceiling): `pnpm discovery:pregen
+// [--topics scripts/discovery/pregen-topics.json] [--stages novice,advanced_beginner,competent] [--cap 45]
+// [--youtube-reserve 20] [--dry-run]`. An advanced-beginner learner's path also draws on the competent
+// pool (A9), hence three stages. A topic entry may name its own stages ({"slug", "stages"}), e.g. for
+// the pools an eval subset needs.
 // - Builds the shared topic + stage pools learners would otherwise pay for cold, metered under budget
 //   scope `operator` (counted in neither daily budget) with its own hard stop: no pool starts unless
 //   spent + 0.60 <= cap, and no analysis unless spent + 0.10 <= cap (in-memory tally first, like the smoke).
@@ -29,7 +32,8 @@ import { buildSmoke, ctx, env } from './runner';
 /** Post-cap estimate per cold pool (EXECUTION-PLAN §8 D1); replaced by this run's own measurement. */
 const ESTIMATED_POOL_USD = 0.3;
 
-const topicFile = z.object({ version: z.literal(1), approved: z.boolean(), topics: z.array(z.string().min(1)).min(1) }).loose();
+const topicEntry = z.union([z.string().min(1), z.object({ slug: z.string().min(1), stages: z.array(z.string()).min(1) }).strict()]);
+const topicFile = z.object({ version: z.literal(1), approved: z.boolean(), topics: z.array(topicEntry).min(1) }).loose();
 
 class Stop extends Error {
   override name = 'Stop';
@@ -45,13 +49,17 @@ type Plan = { slug: string; stage: Stage; action: 'skip-ready' | 'resume' | 'col
 async function main(): Promise<void> {
   const check = process.argv.includes('--check');
   const dryRun = process.argv.includes('--dry-run');
-  const capUsd = Number(arg('cap', '35'));
+  const capUsd = Number(arg('cap', '45'));
   const reserve = Number(arg('youtube-reserve', '20'));
-  const stages = arg('stages', 'novice,advanced_beginner').split(',').map((s) => s.trim());
+  const stages = arg('stages', 'novice,advanced_beginner,competent').split(',').map((s) => s.trim());
   if (stages.some((s) => !(STAGES as readonly string[]).includes(s))) throw new Error(`--stages must be among ${STAGES.join(', ')}`);
   if (!(capUsd > 0 && capUsd <= 50)) throw new Error('--cap must be above 0 and at most 50 (US$)');
   if (!(reserve >= 0 && reserve < YOUTUBE_SEARCH_GUARD)) throw new Error(`--youtube-reserve must be 0 to ${YOUTUBE_SEARCH_GUARD - 1}`);
   const file = topicFile.parse(JSON.parse(readFileSync(resolve(arg('topics', join(__dirname, 'pregen-topics.json'))), 'utf8')));
+  // Each topic with its stages: its own list, or --stages.
+  const entries = file.topics.map((t) => (typeof t === 'string' ? { slug: t, stages } : t));
+  if (entries.some((e) => e.stages.some((s) => !(STAGES as readonly string[]).includes(s)))) throw new Error(`Topic stages must be among ${STAGES.join(', ')}`);
+  const slugs = entries.map((e) => e.slug);
   if (!check && !dryRun && !file.approved) throw new Error('The topic file is not approved yet (approved: false); review it, or use --dry-run');
 
   const keys = check || dryRun
@@ -62,22 +70,22 @@ async function main(): Promise<void> {
   });
   const run = buildSmoke(pool, keys, capUsd);
   if (check) {
-    process.stdout.write(`discovery:pregen: ok (${file.topics.length} topics x ${stages.length} stages)\n`);
+    process.stdout.write(`discovery:pregen: ok (${entries.length} topics, ${entries.reduce((n, e) => n + e.stages.length, 0)} pools)\n`);
     return;
   }
 
   const report: Record<string, unknown>[] = [];
   let stopped: string | null = null;
   try {
-    const rows = await run.db.select({ id: topics.id, slug: topics.slug }).from(topics).where(inArray(topics.slug, file.topics));
+    const rows = await run.db.select({ id: topics.id, slug: topics.slug }).from(topics).where(inArray(topics.slug, slugs));
     const ids = new Map(rows.map((r) => [r.slug, r.id]));
-    const missing = file.topics.filter((s) => !ids.has(s));
+    const missing = slugs.filter((s) => !ids.has(s));
     if (missing.length) throw new Error(`Topics not in the database: ${missing.join(', ')}`);
 
     const plans: Plan[] = [];
     const now = new Date();
-    for (const slug of file.topics) {
-      for (const stage of stages as Stage[]) {
+    for (const { slug, stages: own } of entries) {
+      for (const stage of own as Stage[]) {
         const topicId = ids.get(slug) as string;
         const latest = await run.repo.latestPool(topicId, stage);
         const fresh = latest !== null && latest.expiresAt > now;
