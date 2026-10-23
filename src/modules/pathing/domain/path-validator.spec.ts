@@ -78,7 +78,9 @@ describe('validatePath (A9 plan §2)', () => {
         'Step 1 is C5, above the top of the competent band (C4).',
       ]),
     );
-    expect(errorsOf((i) => i.steps.forEach((s) => (s.bloom = 'C3')))).toContain('The last step is C3; it must reach the top of the competent band (C4).');
+    expect(errorsOf((i) => {
+      i.steps.forEach((s) => (s.bloom = 'C3'));
+    })).toContain('The last step is C3; it must reach the top of the competent band (C4).');
     // A C1 learner can't open on C3.
     expect(errorsOf((i) => (i.placementBloom = 'C1'))).toContain(
       "Step 1 jumps to C3; each step may rise at most one Bloom level above the learner's level.",
