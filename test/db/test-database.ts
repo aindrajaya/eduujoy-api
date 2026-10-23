@@ -1,4 +1,5 @@
 import { randomBytes } from 'node:crypto';
+import { describeTarget, isProdDatabase } from '../../src/shared/db/prod-endpoints';
 
 // Safety rules for the Neon test branch (PRD-API §12): tests never touch the app databases,
 // and only ever create or drop schemas named test_<UTC timestamp>_<8 hex>.
@@ -26,8 +27,12 @@ function identify(url: string): DbIdentity {
   };
 }
 
-export function assertSafeTestDatabase(testUrl: string | undefined, appUrls: (string | undefined)[]): void {
+export function assertSafeTestDatabase(testUrl: string | undefined, appUrls: (string | undefined)[], env: NodeJS.ProcessEnv = process.env): void {
   if (!testUrl) throw new UnsafeTestDatabaseError('DATABASE_URL_TEST is not set; integration and e2e tests need it.');
+  // Tests create schemas and the sweep drops test_* schemas: never on prod, and no override (lead, 23 Oct 2026).
+  if (isProdDatabase(testUrl, env['PROD_DATABASE_ENDPOINTS'])) {
+    throw new UnsafeTestDatabaseError(`DATABASE_URL_TEST is the prod database (${describeTarget(testUrl).endpoint}); refusing to run tests or the schema sweep there.`);
+  }
   const test = identify(testUrl);
   if (test.pooled) {
     throw new UnsafeTestDatabaseError('DATABASE_URL_TEST is a pooled connection; use the direct Neon connection string.');
