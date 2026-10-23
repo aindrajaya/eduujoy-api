@@ -21,6 +21,8 @@ const CLIS = [
   { script: 'billing:reprocess', file: 'scripts/billing/reprocess.ts', args: [], out: 'billing:reprocess: ok (ReprocessBillingEvent)' },
   { script: 'discovery:smoke', file: 'scripts/discovery/smoke.ts', args: [], out: 'discovery:smoke: ok (DiscoverResources, AnalyseResource)' },
   { script: 'discovery:verify-video', file: 'scripts/discovery/verify-video.ts', args: [], out: 'discovery:verify-video: ok (GeminiResourceAnalyzer)' },
+  { script: 'discovery:pregen', file: 'scripts/discovery/pregen.ts', args: [], out: 'discovery:pregen: ok (50 topics, 150 pools)' },
+  { script: 'discovery:pregen (per-topic stages)', file: 'scripts/discovery/pregen.ts', args: ['--topics', 'test/fixtures/pregen/per-topic-stages.json'], out: 'discovery:pregen: ok (2 topics, 4 pools)' },
 ];
 
 describe('CLI boot (integration)', () => {
