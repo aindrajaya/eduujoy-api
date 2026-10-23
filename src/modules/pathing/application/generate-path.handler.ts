@@ -7,11 +7,12 @@ import { GetTopicProfileQuery } from '../../catalog/application/get-topic-profil
 import { type ServedCard } from '../../discovery/application/ports/card.reader';
 import { RequestDiscovery } from '../../discovery/application/request-discovery.usecase';
 import { ServedCardsQuery } from '../../discovery/application/served-cards.query';
-import { PATH_LENGTH_WEEKS, PathGenerated, type Stage, validatePath } from '../domain';
+import { PATH_LENGTH_WEEKS, PathGenerated, type Stage } from '../domain';
 import { aliasPool, assembleSteps } from './assemble';
+import { designPath } from './design-loop';
 import { GENERATE_PATH_JOB, type GeneratePathPayload, generatePathPayload } from './jobs';
 import { stepView } from './path.view';
-import { PATH_DESIGNER, type DesignedPath, type PathDesigner } from './ports/path-designer';
+import { PATH_DESIGNER, type PathDesigner } from './ports/path-designer';
 import { PATH_REPOSITORY, type PathRecord, type PathRepository } from './ports/path.repository';
 import { RefundPathCharge } from './refund-path-charge.usecase';
 
@@ -79,20 +80,14 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
       signal: ctx.signal,
     };
 
-    let designed: DesignedPath | undefined;
-    let errors: string[] = [];
-    let flags: string[] = [];
-    for (let attempt = 1; attempt <= 2; attempt += 1) {
-      await ctx.progress('design', attempt - 1, 2, attempt === 1 ? 'Designing your path' : 'Fixing the plan');
-      designed = await this.designer.design(attempt === 1 ? request : { ...request, feedback: errors });
-      await ctx.progress('validate', attempt, 2);
-      const result = validatePath({ steps: designed.steps, pool: validate, placementBloom: path.from.bloom, target: path.to.stage, weeklyHours });
-      errors = result.errors;
-      flags = result.flags;
-      if (result.ok) break;
-      this.logger.warn({ pathId: path.id, attempt, errors: errors.length }, 'Designed path failed validation');
-    }
-    if (!designed) throw new Error('No design attempt ran');
+    const { designed, errors, flags, attempts } = await designPath(
+      this.designer,
+      request,
+      { pool: validate, placementBloom: path.from.bloom, target: path.to.stage, weeklyHours },
+      (phase, attempt) =>
+        phase === 'design' ? ctx.progress('design', attempt - 1, 2, attempt === 1 ? 'Designing your path' : 'Fixing the plan') : ctx.progress('validate', attempt, 2),
+    );
+    if (errors.length > 0 || attempts > 1) this.logger.warn({ pathId: path.id, attempts, errors: errors.length }, 'Designed path needed a regeneration');
     const meta = { model: designed.model, promptVersion: designed.promptVersion };
 
     if (errors.length > 0) {
