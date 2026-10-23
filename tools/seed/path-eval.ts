@@ -232,25 +232,29 @@ function params(system: string, user: string, schema: z.ZodType): Anthropic.Mess
 
 const REJECTS_FILE = join(SEED_DIR, '_rejects', 'path-eval.jsonl');
 
-/** The rule a case's last rejected draft broke, so a redraft can fix it instead of repeating it. */
-function lastDraftProblem(id: string): string | undefined {
+/** The rule a case's last rejected draft or revision broke, so a retry can fix it instead of repeating it. */
+function lastProblem(id: string, label: 'draft' | 'revision'): string | undefined {
   if (!existsSync(REJECTS_FILE)) return undefined;
   const rows = readFileSync(REJECTS_FILE, 'utf8').trim().split('\n').filter(Boolean);
-  const mine = rows.map((l) => z.object({ id: z.string(), reason: z.string() }).parse(JSON.parse(l))).filter((r) => r.id === `${id} draft`);
+  const mine = rows.map((l) => z.object({ id: z.string(), reason: z.string() }).parse(JSON.parse(l))).filter((r) => r.id === `${id} ${label}`);
   return mine.at(-1)?.reason;
 }
 
 function draftParams(topics: SeedTopic[], c: PlanCase): Anthropic.MessageCreateParamsNonStreaming {
-  const problem = lastDraftProblem(c.id);
+  const problem = lastProblem(c.id, 'draft');
   const retry = problem
     ? `\n<previous_attempt>\nA previous draft for this case broke a rule: ${problem}. Every step's Bloom level must be equal to or higher than the step before it; introduce a new concept at the current level instead of dropping back.\n</previous_attempt>`
     : '';
   return params(DRAFT_PROMPT.text, `<topic>\n${topicBlock(topics, c.topic)}\n</topic>\n<case>\n${caseBlock(c)}\n</case>${retry}`, apiDraftSchema);
 }
 
+const LIMITS = 'Limits for a revision: steps min 6 to max 12; mustCover 4-8; orderConstraints 2-5; misconceptionsToAvoid 1-3; sop length within steps.';
+
 function reviewParams(topics: SeedTopic[], c: PlanCase, d: Draft): Anthropic.MessageCreateParamsNonStreaming {
+  const problem = lastProblem(c.id, 'revision');
+  const retry = problem ? `\n<previous_attempt>\nA previous revision of this case broke a rule: ${problem}. ${LIMITS} Merge or cut items to stay within them.\n</previous_attempt>` : '';
   const apiReview = z.object({ verdict: z.enum(['keep', 'revise', 'drop']), issues: z.array(z.string()), revised: apiDraftSchema.nullable() });
-  return params(REVIEW_PROMPT.text, `<topic>\n${topicBlock(topics, c.topic)}\n</topic>\n<case>\n${caseBlock(c)}\n</case>\n<reference>\n${JSON.stringify(d, null, 2)}\n</reference>`, apiReview);
+  return params(REVIEW_PROMPT.text, `<topic>\n${topicBlock(topics, c.topic)}\n</topic>\n<case>\n${caseBlock(c)}\n</case>\n<reference>\n${JSON.stringify(d, null, 2)}\n</reference>${retry}`, apiReview);
 }
 
 /** Parses and rule-checks a draft or revision; problems go to seed/_rejects/path-eval.jsonl. */
