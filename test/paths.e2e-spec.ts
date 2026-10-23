@@ -17,6 +17,10 @@ import { FakeLinkChecker, FakeWebDiscovery } from '../src/modules/discovery/appl
 import { LINK_CHECKER } from '../src/modules/discovery/application/ports/link-checker';
 import { WEB_DISCOVERY } from '../src/modules/discovery/application/ports/web-discovery';
 import { topics } from '../src/shared/db/schema/catalog';
+import { ReservePath } from '../src/modules/billing/application/reserve-path.usecase';
+import { PathRefundSweep } from '../src/modules/pathing/application/path-refund-sweep.handler';
+import { ReviewResolved } from '../src/shared/common/review';
+import { EventBus } from '../src/shared/events';
 import { createTestApp, type TestApp } from './app';
 import { learner, placement, readyPool, topic } from './pathing/fixtures';
 
@@ -174,9 +178,10 @@ describe('paths (e2e, PRD-API §13 A9 Verify)', () => {
   });
 
   it('sends a path that fails validation twice to review, and the job still completes', async () => {
-    const { cookie, placementId } = await ready();
+    const { cookie, placementId, topicId } = await ready();
     const broken = validSteps({ placement: { stage: 'advanced_beginner', bloom: 'C3' }, target: 'competent', budgetMinutes: 480, cards: [] } as never).map((s) => ({ ...s, resources: ['r99'] }));
-    designer.script.push(broken, broken);
+    const [named] = await db.select({ name: topics.canonicalName }).from(topics).where(eq(topics.id, topicId));
+    designer.byTopic.set(named?.name ?? '', [broken, broken]);
 
     const accepted = (await post(cookie, { placementId })).body as Accepted;
     expect(await settled(accepted.jobId)).toBe('succeeded');
@@ -247,6 +252,91 @@ describe('paths (e2e, PRD-API §13 A9 Verify)', () => {
     expect((await http().patch(`/v1/steps/${first?.id ?? ''}`).set(csrf).set('Cookie', cookie).send({ status: 'completed' })).body).toMatchObject({ status: 'completed' });
     const after = (await http().get(`/v1/paths/${path?.id ?? ''}`).set('Cookie', cookie)).body as { stepsDone: number; currentStep: { id: string } };
     expect(after).toMatchObject({ stepsDone: 1, currentStep: { id: second?.id } });
+  });
+});
+
+describe('path refunds (e2e, user decision 23 Oct 2026)', () => {
+  let app: TestApp;
+  let db: Database;
+
+  beforeAll(async () => {
+    app = await createTestApp();
+    db = app.get<Database>(DATABASE);
+  });
+
+  afterAll(async () => {
+    await app.close();
+  });
+
+  /** A charged path in `status`, created `ageMs` ago, with an optional job in `jobStatus`. */
+  async function chargedPath(status: 'generating' | 'active' | 'failed' | 'under_review', ageMs = 0, jobStatus?: 'queued' | 'dead') {
+    const userId = await learner(db);
+    const topicId = await topic(db);
+    const placementId = await placement(db, userId, topicId);
+    const at = new Date(Date.now() - ageMs);
+    let jobId: string | null = null;
+    if (jobStatus) {
+      const { job } = await app.get(JobRepository).enqueue({ type: 'sweep-e2e-idle', idempotencyKey: randomUUID(), payload: {}, userId });
+      await db.execute(sql`update jobs set status = ${jobStatus} where id = ${job.id}`);
+      jobId = job.id;
+    }
+    const [row] = await db
+      .insert(paths)
+      .values({ userId, topicId, placementId, fromStage: 'advanced_beginner', fromBloom: 'C3', toStage: 'competent', toBloom: 'C4', status, jobId, createdAt: at, updatedAt: at })
+      .returning({ id: paths.id });
+    const pathId = row?.id ?? '';
+    await app.get(ReservePath).execute(userId, pathId);
+    // ReservePath's own writes don't touch the path; restore the age the sweep compares.
+    await db.update(paths).set({ updatedAt: at }).where(eq(paths.id, pathId));
+    return { userId, pathId };
+  }
+
+  const refundRows = async (userId: string) => (await db.select().from(creditLedger).where(eq(creditLedger.userId, userId))).filter((r) => r.reason === 'refund');
+  const pathRow = async (pathId: string) => (await db.select().from(paths).where(eq(paths.id, pathId)))[0];
+
+  it('refunds a path left in review past 48 hours once, and keeps it in review', async () => {
+    const late = await chargedPath('under_review', 49 * 3600_000);
+    const recent = await chargedPath('under_review', 47 * 3600_000);
+    const sweep = app.get(PathRefundSweep);
+
+    await sweep.sweep(new Date());
+    await sweep.sweep(new Date());
+    expect(await refundRows(late.userId)).toHaveLength(1);
+    expect(await pathRow(late.pathId)).toMatchObject({ status: 'under_review', refundedAt: expect.any(Date) as Date });
+    expect(await refundRows(recent.userId)).toEqual([]);
+  });
+
+  it("finishes refunds a dead job's onDead missed, and leaves a waiting job alone", async () => {
+    const failed = await chargedPath('failed');
+    const stuck = await chargedPath('generating', 3 * 3600_000, 'dead');
+    const waiting = await chargedPath('generating', 3 * 3600_000, 'queued');
+    const young = await chargedPath('generating', 60_000, 'dead');
+    const sweep = app.get(PathRefundSweep);
+
+    await sweep.sweep(new Date());
+    await sweep.sweep(new Date());
+    expect(await refundRows(failed.userId)).toHaveLength(1);
+    expect(await refundRows(stuck.userId)).toHaveLength(1);
+    expect(await pathRow(stuck.pathId)).toMatchObject({ status: 'failed', refundedAt: expect.any(Date) as Date });
+    expect(await refundRows(waiting.userId)).toEqual([]);
+    expect(await refundRows(young.userId)).toEqual([]);
+  });
+
+  it('refunds and fails a path a reviewer rejects, held or active, and ignores approvals', async () => {
+    const held = await chargedPath('under_review');
+    const active = await chargedPath('active');
+    const approved = await chargedPath('under_review');
+    const bus = app.get(EventBus);
+
+    await bus.publish(new ReviewResolved(randomUUID(), 'path', held.pathId, 'rejected'));
+    await bus.publish(new ReviewResolved(randomUUID(), 'path', held.pathId, 'rejected'));
+    await bus.publish(new ReviewResolved(randomUUID(), 'path', active.pathId, 'rejected'));
+    await bus.publish(new ReviewResolved(randomUUID(), 'path', approved.pathId, 'approved'));
+    expect(await refundRows(held.userId)).toHaveLength(1);
+    expect(await pathRow(held.pathId)).toMatchObject({ status: 'failed', refundedAt: expect.any(Date) as Date });
+    expect(await pathRow(active.pathId)).toMatchObject({ status: 'failed' });
+    expect(await refundRows(active.userId)).toHaveLength(1);
+    expect(await pathRow(approved.pathId)).toMatchObject({ status: 'under_review', refundedAt: null });
   });
 });
 

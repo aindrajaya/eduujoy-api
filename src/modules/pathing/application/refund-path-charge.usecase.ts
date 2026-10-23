@@ -26,7 +26,8 @@ export class RefundPathCharge {
     const outcome = await this.refunds.execute(path.userId, path.id, reason);
     await this.uow.run(async (tx) => {
       if (fail) await this.repo.setStatus(tx, path.id, fail.from, 'failed');
-      if (outcome !== 'not_charged') await this.repo.markRefunded(tx, path.id);
+      // Marked even with nothing to give back, so the sweep settles each path once.
+      await this.repo.markRefunded(tx, path.id);
     });
     if (outcome === 'not_charged') this.logger.warn({ pathId, reason }, 'Path had no charge to refund');
     return outcome === 'refunded' ? 'refunded' : outcome === 'duplicate' ? 'already' : 'not_charged';

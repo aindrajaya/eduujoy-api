@@ -289,6 +289,26 @@ export class DrizzlePathRepository implements PathRepository {
     });
   }
 
+  async failedUnrefunded(limit: number): Promise<PathRecord[]> {
+    const rows = await this.db
+      .select()
+      .from(paths)
+      .where(and(eq(paths.status, 'failed'), isNull(paths.refundedAt)))
+      .orderBy(asc(paths.updatedAt))
+      .limit(limit);
+    return rows.map(toPath);
+  }
+
+  async generatingSince(before: Date, limit: number): Promise<PathRecord[]> {
+    const rows = await this.db
+      .select()
+      .from(paths)
+      .where(and(eq(paths.status, 'generating'), lt(paths.createdAt, before)))
+      .orderBy(asc(paths.createdAt))
+      .limit(limit);
+    return rows.map(toPath);
+  }
+
   async reviewOverdue(cutoff: Date, limit: number): Promise<PathRecord[]> {
     const rows = await this.db
       .select()

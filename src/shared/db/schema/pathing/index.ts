@@ -43,7 +43,7 @@ export const paths = pgTable(
     model: text('model'),
     promptVersion: text('prompt_version'),
     jobId: uuid('job_id'),
-    /** Set once the path's charge was given back (A9: dead job, rejected or unreviewed for 48 h, wait cap). */
+    /** Set once the path's charge is settled: given back, or nothing to give (A9: dead job, rejected or unreviewed for 48 h, wait cap). */
     refundedAt: timestamp('refunded_at', { withTimezone: true }),
     ...withCreatedAt,
     ...withUpdatedAt,

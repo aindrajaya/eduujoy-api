@@ -4,15 +4,18 @@ import { type DesignedPath, type DesignedStep, type DesignRequest, type PathDesi
 /**
  * A designer that builds a valid six-step path from whatever pool it gets (tests and e2e): Bloom climbs
  * at most one level a step to the band's top, resources rotate through the pool, and the steps fill
- * half the time budget. `script` answers are used first, e.g. to force a regeneration or a review.
+ * half the time budget. Scripted answers (`byTopic`, then `script`) come first, e.g. to force a
+ * regeneration or a review.
  */
 export class FakePathDesigner implements PathDesigner {
   readonly requests: DesignRequest[] = [];
   readonly script: DesignedStep[][] = [];
+  /** Topic name → scripted answers, used before `script`; keeps a test's answers from other jobs. */
+  readonly byTopic = new Map<string, DesignedStep[][]>();
 
   design(request: DesignRequest): Promise<DesignedPath> {
     this.requests.push(request);
-    const steps = this.script.shift() ?? validSteps(request);
+    const steps = this.byTopic.get(request.topic.name)?.shift() ?? this.script.shift() ?? validSteps(request);
     return Promise.resolve({ steps, model: 'fake-designer', promptVersion: 'v1' });
   }
 }

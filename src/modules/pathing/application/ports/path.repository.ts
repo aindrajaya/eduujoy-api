@@ -111,4 +111,8 @@ export interface PathRepository {
    * approval moves a path out of under_review, so its updated_at marks when review began.
    */
   reviewOverdue(cutoff: Date, limit: number): Promise<PathRecord[]>;
+  /** Failed paths whose refund never landed (onDead is best effort). */
+  failedUnrefunded(limit: number): Promise<PathRecord[]>;
+  /** Paths still generating that were created before `before` (their job may be dead or gone). */
+  generatingSince(before: Date, limit: number): Promise<PathRecord[]>;
 }
