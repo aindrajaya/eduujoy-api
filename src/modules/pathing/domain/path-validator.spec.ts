@@ -144,6 +144,19 @@ describe('validatePath (A9 plan §2)', () => {
   });
 });
 
+describe('validatePath at the top stage (pe-090: expert C5, no next stage)', () => {
+  it('accepts an expert-band path from C5 to C6 and rejects one that never reaches C6', () => {
+    const expert = (blooms: Bloom[]): ValidationInput => ({
+      ...valid(),
+      placementBloom: 'C5',
+      target: targetStage('expert'),
+      steps: blooms.map((b, i) => step(i + 1, b, i === 0 ? { resources: ['r1'], actions: [{ text: 'Watch' }] } : {})),
+    });
+    expect(validatePath(expert(['C5', 'C5', 'C6', 'C6', 'C6', 'C6'])).errors).toEqual([]);
+    expect(validatePath(expert(['C5', 'C5', 'C5', 'C5', 'C5', 'C5'])).errors).toContain('The last step is C5; it must reach the top of the expert band (C6).');
+  });
+});
+
 describe('targetStage', () => {
   it('climbs to the next stage; novice stays novice first, expert stays expert', () => {
     expect(targetStage('novice')).toBe('novice');
