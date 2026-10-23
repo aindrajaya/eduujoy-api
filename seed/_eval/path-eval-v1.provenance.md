@@ -15,9 +15,12 @@ agreed with the API lane (docs/plans/A9-pathing.md, "Eval case format"; answers 
   `mustCover` concept in the sop, order constraints held, no URLs). `startBloomMax` and `endBloom` come from
   code: novice ends at C2 (a novice-band path, confirmed by the user, master PRD §5), advanced_beginner C4,
   competent C5, proficient and expert C6.
-- **Retries:** pe-007's draft was rejected three times for a Bloom drop and passed when the request named
-  the broken rule; 11 smoke reviews over the agreed limits passed on a re-review that named the limits.
+- **Retries:** drafts that broke a rule (pe-007 three times; 8 of pe-031..090: Bloom drops, sop order,
+  limits) passed when the request named the broken rule. Reviews whose revisions went over the agreed
+  limits (11 smoke, 26 of the rest) passed on a re-review that named the limits. Final review mix over all
+  90: keep 61, revise 29, drop 0.
 - **Human check:** the user spot-checks samples; the master PRD's two in-house reviewers still score
   generated paths at Gate B.
 
-Status: the 30 smoke cases (pe-001 to pe-030) are written; pe-031 to pe-090 follow after the user's go.
+Status: complete, 90 cases (pe-001 to pe-090), 30 of them smoke. The smoke cases are unchanged since the
+lead's review of fa72b25.
