@@ -12,3 +12,5 @@ export {
   validatePath,
 } from './path-validator';
 export { BANDS, type Bloom, BLOOMS, bloomRank, PATH_LENGTH_WEEKS, type ResourceType, type Stage, STAGES, targetStage } from './vocab';
+export { PathGenerated } from './events/path-generated.event';
+export { StepCompleted } from './events/step-completed.event';

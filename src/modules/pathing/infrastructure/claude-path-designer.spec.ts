@@ -49,6 +49,11 @@ describe('ClaudePathDesigner', () => {
     expect(text).toMatch(/Your previous answer failed these checks; fix every one:\n- Step 2 cites r9/);
   });
 
+  it('accepts the handler tests\' fixture under the output schema', () => {
+    const fixture: unknown = JSON.parse(readFileSync(join(__dirname, '..', '..', '..', '..', 'test', 'fixtures', 'ai', 'path-designer-v1.valid.json'), 'utf8'));
+    expect(designSchema.safeParse(fixture).success).toBe(true);
+  });
+
   it("accepts the prompt's own example step under the output schema", () => {
     const prompt = readFileSync(join(__dirname, '..', '..', '..', 'prompts', 'path-designer', 'v1.md'), 'utf8');
     const example = prompt.slice(prompt.lastIndexOf('\n{') + 1).trim();

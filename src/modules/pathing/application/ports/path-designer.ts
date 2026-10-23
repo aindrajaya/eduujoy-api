@@ -43,7 +43,7 @@ export interface DesignedItem {
   expectedAnswer: string | null;
 }
 
-export type DesignedStep = DraftStep & { checkpoint: { items: DesignedItem[]; rubric: string[]; passScore: number } };
+export type DesignedStep = Omit<DraftStep, 'checkpoint'> & { checkpoint: { items: DesignedItem[]; rubric: string[]; passScore: number } };
 
 export interface DesignedPath {
   steps: DesignedStep[];
