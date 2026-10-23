@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { and, eq, gte, isNull, like, lt, sql } from 'drizzle-orm';
+import { and, eq, isNull, like, sql } from 'drizzle-orm';
 import { DATABASE, type Database, type Tx } from '../../../shared/db';
 import { billingEvents, creditLedger, entitlements } from '../../../shared/db/schema/billing';
 import {
@@ -9,6 +9,7 @@ import {
   type StoredBillingEvent,
 } from '../application/ports/billing.repository';
 import { type Entitlement } from '../domain/quota';
+import { planCoveredPaths } from './ledger-conditions';
 
 /** Postgres foreign_key_violation: the webhook's user id doesn't exist (deleted, or forged custom data). */
 const FOREIGN_KEY_VIOLATION = '23503';
@@ -174,21 +175,31 @@ export class DrizzleBillingRepository implements BillingRepository {
           const [row] = await tx
             .select({ n: sql<number>`count(*)::int` })
             .from(creditLedger)
-            .where(
-              and(
-                eq(creditLedger.userId, input.userId),
-                eq(creditLedger.reason, 'path'),
-                eq(creditLedger.delta, 0),
-                gte(creditLedger.createdAt, from),
-                lt(creditLedger.createdAt, to),
-              ),
-            );
+            .where(planCoveredPaths(input.userId, from, to));
           return row?.n ?? 0;
         },
       });
       if (charge === 'exceeded') return charge;
       await tx.insert(creditLedger).values({ userId: input.userId, delta: charge === 'plan' ? 0 : -1, reason: 'path', externalRef });
       return charge;
+    });
+  }
+
+  refundPath(input: { userId: string; pathRef: string }): Promise<'refunded' | 'duplicate' | 'not_charged'> {
+    return this.db.transaction(async (tx) => {
+      await lockUser(tx, input.userId);
+      const externalRef = `path:${input.pathRef}`;
+      const [charge] = await tx
+        .select({ delta: creditLedger.delta })
+        .from(creditLedger)
+        .where(and(eq(creditLedger.userId, input.userId), eq(creditLedger.reason, 'path'), eq(creditLedger.externalRef, externalRef)));
+      if (!charge) return 'not_charged';
+      const written = await tx
+        .insert(creditLedger)
+        .values({ userId: input.userId, delta: -charge.delta, reason: 'refund', externalRef })
+        .onConflictDoNothing()
+        .returning({ id: creditLedger.id });
+      return written.length > 0 ? 'refunded' : 'duplicate';
     });
   }
 }

@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { and, eq, gte, lt, sql } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { DATABASE, type Database } from '../../../shared/db';
 import { creditLedger, entitlements } from '../../../shared/db/schema/billing';
 import { type QuotaRepository } from '../application/ports/quota.repository';
 import { type Entitlement } from '../domain/quota';
+import { planCoveredPaths } from './ledger-conditions';
 
 @Injectable()
 export class DrizzleQuotaRepository implements QuotaRepository {
@@ -34,15 +35,7 @@ export class DrizzleQuotaRepository implements QuotaRepository {
     const [row] = await this.db
       .select({ n: sql<number>`count(*)::int` })
       .from(creditLedger)
-      .where(
-        and(
-          eq(creditLedger.userId, userId),
-          eq(creditLedger.reason, 'path'),
-          eq(creditLedger.delta, 0),
-          gte(creditLedger.createdAt, from),
-          lt(creditLedger.createdAt, to),
-        ),
-      );
+      .where(planCoveredPaths(userId, from, to));
     return row?.n ?? 0;
   }
 }

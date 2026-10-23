@@ -12,6 +12,7 @@ import { BILLING_CLOCK } from './application/ports/clock';
 import { QUOTA_REPOSITORY } from './application/ports/quota.repository';
 import { ProcessBillingEvent } from './application/process-billing-event.handler';
 import { ReceiveWebhook } from './application/receive-webhook.usecase';
+import { RefundPath } from './application/refund-path.usecase';
 import { ReservePath } from './application/reserve-path.usecase';
 import { DrizzleBillingRepository } from './infrastructure/drizzle-billing.repository';
 import { DrizzleQuotaRepository } from './infrastructure/drizzle-quota.repository';
@@ -31,6 +32,7 @@ import { BillingAccountData } from './infrastructure/billing-account-data';
     ReceiveWebhook,
     ProcessBillingEvent,
     ReservePath,
+    RefundPath,
     CheckKeyMode,
     { provide: QUOTA_REPOSITORY, useClass: DrizzleQuotaRepository },
     { provide: BILLING_REPOSITORY, useClass: DrizzleBillingRepository },
@@ -39,7 +41,7 @@ import { BillingAccountData } from './infrastructure/billing-account-data';
     { provide: BILLING_CLOCK, useValue: () => new Date() },
     { provide: ACCOUNT_DATA.billing, useClass: BillingAccountData },
   ],
-  exports: [GetQuotaQuery, GetBudgetScopeQuery, ReservePath, ACCOUNT_DATA.billing],
+  exports: [GetQuotaQuery, GetBudgetScopeQuery, ReservePath, RefundPath, ACCOUNT_DATA.billing],
 })
 export class BillingModule implements OnModuleInit, OnApplicationBootstrap {
   constructor(

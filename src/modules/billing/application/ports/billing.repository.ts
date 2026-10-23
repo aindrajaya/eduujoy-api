@@ -14,7 +14,7 @@ export interface StoredBillingEvent {
 export interface LockedQuotaState {
   entitlement: Entitlement | null;
   balance: number;
-  /** Plan-covered paths (ledger reason `path`, delta 0) in [from, to). */
+  /** Plan-covered paths (ledger reason `path`, delta 0) in [from, to), not counting refunded ones. */
   usedPathsBetween(from: Date, to: Date): Promise<number>;
 }
 
@@ -61,4 +61,9 @@ export interface BillingRepository {
    * earlier charge.
    */
   reservePath(input: { userId: string; pathRef: string }, decide: (state: LockedQuotaState) => Promise<PathCharge>): Promise<PathCharge>;
+  /**
+   * Gives back one path's charge once (a `refund` row keyed like the charge): a credit returns +1, a
+   * plan charge frees its allowance slot. `not_charged` when the path was never charged.
+   */
+  refundPath(input: { userId: string; pathRef: string }): Promise<'refunded' | 'duplicate' | 'not_charged'>;
 }
