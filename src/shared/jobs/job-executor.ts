@@ -22,6 +22,11 @@ export interface ExecutorOptions {
    * and scheduling the retry, so a run and its retry don't overlap.
    */
   abortGraceMs?: number;
+  /**
+   * Rechecks of a job that is due but was not claimed back off from `baseMs`, doubling to `maxMs`,
+   * with one warning once a wait passes `warnMs`; any claim resets it. Defaults 250 ms, 30 s, 5 s.
+   */
+  dueRecheck?: { baseMs: number; maxMs: number; warnMs: number };
   /** Finished jobs (and their events) are pruned after this long; checked on start and daily. */
   retentionMs?: number;
   clock?: () => Date;
@@ -31,8 +36,8 @@ export interface ExecutorOptions {
 /** JobHandler.maxWaitMs default (A9: a path waits at most 30 minutes for its resources). */
 const DEFAULT_MAX_WAIT_MS = 30 * 60_000;
 
-/** Timer floor for a job that is already due but was not claimed (scheduleNext). */
-const DUE_RECHECK_MS = 250;
+/** scheduleNext's backoff for a job that is due but was not claimed (ExecutorOptions.dueRecheck). */
+const DUE_RECHECK = { baseMs: 250, maxMs: 30_000, warnMs: 5_000 };
 
 class TimeoutError extends Error {
   override name = 'JobTimeoutError';
@@ -63,6 +68,9 @@ export class JobExecutor {
   private pumpTask: Promise<void> = Promise.resolve();
   private pumpAgain = false;
   private stopped = true;
+  /** Consecutive rechecks of a due job that no claim took (scheduleNext backoff). */
+  private dueMisses = 0;
+  private dueWarned = false;
 
   constructor(
     private readonly repo: JobRepository,
@@ -177,6 +185,8 @@ export class JobExecutor {
         for (;;) {
           const job = await this.repo.claimNext(this.typesWithFreeSlots());
           if (!job) break;
+          this.dueMisses = 0;
+          this.dueWarned = false;
           if (this.stopped) {
             // Claimed while stop() ran: hand it straight back rather than start work during shutdown.
             if (job.lockedAt) await this.repo.release([{ id: job.id, lockedAt: job.lockedAt }]);
@@ -205,16 +215,28 @@ export class JobExecutor {
 
   /**
    * Arms one timer for the earliest run_after among types with a free slot. Saturated types need no
-   * timer (a finishing job pumps). A job already due (it fell due after the claim missed it, or
-   * another instance holds its row) is retried after DUE_RECHECK_MS, so this can't spin.
+   * timer (a finishing job pumps). A job already due but not claimed (it fell due after the claim
+   * missed it, or another instance holds its row) is rechecked with backoff, so a row the claim keeps
+   * skipping can't poll the database several times a second or keep Neon from suspending.
    */
   private async scheduleNext(): Promise<void> {
     clearTimeout(this.timer);
     const untilDue = await this.repo.msUntilNextDue(this.typesWithFreeSlots());
     if (untilDue === null || this.stopped) return;
-    const delay = untilDue <= 0 ? DUE_RECHECK_MS : Math.min(Math.ceil(untilDue), 2 ** 31 - 1);
+    const delay = untilDue <= 0 ? this.dueRecheckDelay() : Math.min(Math.ceil(untilDue), 2 ** 31 - 1);
     this.timer = setTimeout(() => void this.pump(), delay);
     this.timer.unref();
+  }
+
+  private dueRecheckDelay(): number {
+    const { baseMs, maxMs, warnMs } = this.options.dueRecheck ?? DUE_RECHECK;
+    const delay = Math.min(maxMs, baseMs * 2 ** Math.min(this.dueMisses, 30));
+    this.dueMisses += 1;
+    if (delay > warnMs && !this.dueWarned) {
+      this.dueWarned = true;
+      this.logger.warn({ misses: this.dueMisses, delayMs: delay }, 'A due job keeps going unclaimed; rechecking with backoff');
+    }
+    return delay;
   }
 
   private launch(job: JobRecord): void {

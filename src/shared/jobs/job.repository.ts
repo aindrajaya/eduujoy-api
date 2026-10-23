@@ -6,6 +6,14 @@ import { type EnqueueRequest, type EnqueueResult, type JobEvent, type JobEventTy
 
 const CLAIMABLE = ['queued', 'failed'] as const;
 
+/**
+ * Waiting jobs of `types` that claimNext may take once due. claimNext and msUntilNextDue share it, so
+ * the timer never waits on a row the claim would skip (a mismatch would re-arm forever).
+ */
+function claimable(types: string[]): ReturnType<typeof and> {
+  return and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types));
+}
+
 @Injectable()
 export class JobRepository {
   constructor(@Inject(DATABASE) private readonly db: Database) {}
@@ -48,7 +56,7 @@ export class JobRepository {
     const candidate = this.db
       .select({ id: jobs.id })
       .from(jobs)
-      .where(and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types), lte(jobs.runAfter, sql`now()`)))
+      .where(and(claimable(types), lte(jobs.runAfter, sql`now()`)))
       .orderBy(asc(jobs.runAfter), asc(jobs.createdAt))
       .limit(1)
       .for('update', { skipLocked: true });
@@ -174,7 +182,7 @@ export class JobRepository {
     const [row] = await this.db
       .select({ ms: sql<string | null>`extract(epoch from (min(${jobs.runAfter}) - now())) * 1000` })
       .from(jobs)
-      .where(and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types)));
+      .where(claimable(types));
     return row?.ms == null ? null : Number(row.ms);
   }
 
