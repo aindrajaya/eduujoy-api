@@ -49,6 +49,11 @@ export const envSchema = z
     // D1 (user, 23 Oct 2026): a separate daily ceiling for paid traffic (subscription or credit charges),
     // so paying users are never blocked by free-tier spend. No default, like the free budget.
     AI_DAILY_PAID_BUDGET_USD: z.coerce.number().positive().max(1000),
+    // Cold discoveries one learner's placements may trigger per UTC day (D1 lead review, 23 Oct 2026):
+    // diagnostics are free and unlimited, so without a cap one account could drain a whole daily scope.
+    // Over the cap the discovery waits for that learner's path request (A9 charges first).
+    DISCOVERY_DAILY_PER_LEARNER_FREE: z.coerce.number().int().min(0).max(100).default(1),
+    DISCOVERY_DAILY_PER_LEARNER_PAID: z.coerce.number().int().min(0).max(100).default(5),
     API_PUBLIC_URL: z.url({ protocol: /^https?$/ }).transform((value) => value.replace(/\/+$/, '')),
     // Billing (A12, FR-23). LEMONSQUEEZY_MODE has no default: a test-mode event must never credit in a
     // live deployment, or the other way round, so the operator states which one this is.

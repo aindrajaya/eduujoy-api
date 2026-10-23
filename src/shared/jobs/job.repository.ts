@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { and, asc, eq, gt, inArray, lt, lte, sql } from 'drizzle-orm';
+import { and, asc, eq, gt, gte, inArray, lt, lte, sql } from 'drizzle-orm';
 import { DATABASE, type Database, type DbExecutor } from '../db';
 import { jobEvents, jobs } from '../db/schema/jobs';
 import { type EnqueueRequest, type EnqueueResult, type JobEvent, type JobEventType, type JobRecord } from './job.types';
@@ -148,6 +148,15 @@ export class JobRepository {
    * Account deletion (A13): removes the learner's jobs that aren't running (their events cascade).
    * A running job finishes on its own; deleting the user then sets its user_id to null.
    */
+  /** Jobs of one type a user triggered since `since` (any status; finished jobs are kept 30 days). */
+  async countForUser(type: string, userId: string, since: Date): Promise<number> {
+    const [row] = await this.db
+      .select({ n: sql<number>`count(*)::int` })
+      .from(jobs)
+      .where(and(eq(jobs.type, type), eq(jobs.userId, userId), gte(jobs.createdAt, since)));
+    return row?.n ?? 0;
+  }
+
   async deleteForUser(userId: string, exec: DbExecutor = this.db): Promise<number> {
     const rows = await exec
       .delete(jobs)

@@ -3,6 +3,7 @@ import { parseArgs } from 'node:util';
 import { parseSeed, readSeedFiles } from '../../src/shared/db/seed/seed-data';
 import { runApply } from './apply';
 import { runItems } from './items';
+import { runPathEval, validatePathEval } from './path-eval';
 import { runRefine } from './refine';
 import { runReview } from './review';
 import { runTaxonomy } from './taxonomy';
@@ -17,6 +18,8 @@ import { SPEND_CAP_USD, usd } from './pricing';
 //   pnpm seed:items-review [--dry-run] [--sample N] [--min-margin F] [--go]   (flagged items only; --sample N: top N)
 //   pnpm seed:items-apply [--dry-run]   (free: applies review verdicts to seed/items, parser-checked)
 //   pnpm seed:topics-refine [--dry-run] [--sample N] [--min-cosine F | --topics a,b,c] [--go]   (near-neighbour topics: description and aliases)
+//   pnpm seed:path-eval --stage plan|draft|review|assemble [--only smoke|rest|all] [--dry-run] [--sample N] [--go] [--pregen file] [--expect-cases N]
+//   pnpm seed:path-eval-validate [--expect-cases N]
 //   pnpm seed:validate [--dir seed] [--expect-topics N]
 //
 // Paid runs need --go and print their estimate first; --dry-run never calls the API.
@@ -34,6 +37,10 @@ async function main(): Promise<void> {
       // Geometry vs trigonometry, the pair behind the held-out failure (22 Oct 2026).
       'min-cosine': { type: 'string', default: '0.789' },
       topics: { type: 'string' },
+      stage: { type: 'string' },
+      only: { type: 'string', default: 'all' },
+      pregen: { type: 'string' },
+      'expect-cases': { type: 'string' },
     },
   });
   const command = positionals[0];
@@ -69,12 +76,26 @@ async function main(): Promise<void> {
       await runRefine({ dryRun: values['dry-run'], go: values.go, sample, minCosine, topics });
       return;
     }
+    case 'path-eval': {
+      const stage = values.stage;
+      if (stage !== 'plan' && stage !== 'draft' && stage !== 'review' && stage !== 'assemble') throw new Error('--stage must be plan, draft, review or assemble');
+      const only = values.only;
+      if (only !== 'smoke' && only !== 'rest' && only !== 'all') throw new Error('--only must be smoke, rest or all');
+      const sample = values.sample === undefined ? undefined : positiveInt(values.sample, '--sample');
+      const expectCases = values['expect-cases'] === undefined ? undefined : positiveInt(values['expect-cases'], '--expect-cases');
+      await runPathEval({ stage, only, dryRun: values['dry-run'], go: values.go, sample, pregen: values.pregen, expectCases });
+      return;
+    }
+    case 'path-eval-validate': {
+      validatePathEval(values['expect-cases'] === undefined ? undefined : positiveInt(values['expect-cases'], '--expect-cases'));
+      return;
+    }
     case 'validate': {
       validate(values.dir ? resolve(values.dir) : SEED_DIR, values['expect-topics']);
       return;
     }
     default:
-      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, items, items-review, items-apply, topics-refine, validate`);
+      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, items, items-review, items-apply, topics-refine, path-eval, path-eval-validate, validate`);
   }
 }
 
