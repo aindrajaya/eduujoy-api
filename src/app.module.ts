@@ -4,6 +4,7 @@ import { AssessmentModule } from './modules/assessment/assessment.module';
 import { CatalogModule } from './modules/catalog/catalog.module';
 import { DiscoveryModule } from './modules/discovery/discovery.module';
 import { IdentityModule } from './modules/identity/identity.module';
+import { PathingModule } from './modules/pathing/pathing.module';
 import { ProgressModule } from './modules/progress/progress.module';
 import { AiModule } from './shared/ai';
 import { AuthKernelModule } from './shared/common/auth';
@@ -32,6 +33,7 @@ import { JobsModule } from './shared/jobs';
     CatalogModule,
     AssessmentModule,
     DiscoveryModule,
+    PathingModule,
     ProgressModule,
     AccountModule,
   ],
