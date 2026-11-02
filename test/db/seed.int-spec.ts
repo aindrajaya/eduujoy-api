@@ -30,7 +30,7 @@ describe('seed loader (integration)', () => {
   };
 
   it('loads the 5-topic fixture with parents, prerequisite edges and items', async () => {
-    await expect(loadSeed(db, data)).resolves.toEqual({ topics: 5, prerequisites: 3, items: 3 });
+    await expect(loadSeed(db, data)).resolves.toEqual({ topics: 5, prerequisites: 3, items: 3, retired: [], restored: 0 });
 
     const hooks = await db.query.topics.findFirst({ where: eq(topics.slug, 'react-hooks') });
     const js = await db.query.topics.findFirst({ where: eq(topics.slug, 'javascript') });

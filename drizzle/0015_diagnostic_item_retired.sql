@@ -1,0 +1,1 @@
+ALTER TABLE "diagnostic_items" ADD COLUMN "retired_at" timestamp with time zone;
