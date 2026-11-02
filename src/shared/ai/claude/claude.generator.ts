@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { z } from 'zod';
 import { MODELS, type TokenUsage } from '../catalog';
 import { AiCallError, classifyStatus } from '../errors';
-import { toStructuredSchema } from '../json-schema';
+import { toClaudeSchema } from '../json-schema';
 import { type CallPart, type CallRecord, type StructuredGenerator, type StructuredRequest, type StructuredResult } from '../ports';
 import { UNTRUSTED_DATA_RULE } from '../untrusted';
 
@@ -101,7 +101,7 @@ export class ClaudeStructuredGenerator implements StructuredGenerator {
           ],
           messages: [{ role: 'user', content: request.input }],
           output_config: {
-            format: { type: 'json_schema', schema: toStructuredSchema(request.schema) },
+            format: { type: 'json_schema', schema: toClaudeSchema(request.schema) },
             ...(request.effort ? { effort: request.effort } : {}),
           },
           ...(fallback ? { betas: [FALLBACK_BETA], fallbacks: 'default' } : {}),
