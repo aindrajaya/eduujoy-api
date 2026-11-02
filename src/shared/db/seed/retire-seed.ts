@@ -13,12 +13,49 @@ export interface RetireCandidate {
   heldBy: Record<string, number>;
 }
 
+export type RetireOutcome =
+  | 'dry_run'
+  | 'deleted'
+  | 'nothing_to_do'
+  | 'refused_referenced'
+  | 'refused_files_short'
+  | 'refused_over_cap'
+  | 'refused_expect_missing'
+  | 'refused_count_mismatch'
+  | 'rolled_back_fk';
+
 export interface RetireResult {
   candidates: RetireCandidate[];
   referenced: RetireCandidate[];
   deleted: number;
-  /** Why nothing was deleted: a dry run, references found, or a foreign-key violation (rolled back). */
-  outcome: 'dry_run' | 'deleted' | 'refused_referenced' | 'rolled_back_fk' | 'nothing_to_do';
+  outcome: RetireOutcome;
+  /** The ceiling this run was held to, and the counts it compared. */
+  limits: { cap: number; seedTopicItems: number; filesItems: number };
+}
+
+/**
+ * At most 1% of the seed topics' items, or 200, whichever is lower: no override (lead gate, 2 Nov 2026).
+ * A wrong --dir, a partial checkout or a seed_key format change would otherwise make every item a
+ * candidate, and on prod almost none is referenced.
+ */
+export function retirementCap(seedTopicItems: number): number {
+  return Math.min(Math.floor(seedTopicItems * 0.01), 200);
+}
+
+/** The safety checks, in order; null when the run may proceed (a dry run, or an apply that matches). */
+export function refusal(input: {
+  candidates: number;
+  seedTopicItems: number;
+  filesItems: number;
+  apply: boolean;
+  expectRemoved: number | undefined;
+}): Exclude<RetireOutcome, 'dry_run' | 'deleted' | 'nothing_to_do' | 'refused_referenced' | 'rolled_back_fk'> | null {
+  const cap = retirementCap(input.seedTopicItems);
+  if (input.filesItems < input.seedTopicItems - cap) return 'refused_files_short';
+  if (input.candidates > cap) return 'refused_over_cap';
+  if (input.apply && input.expectRemoved === undefined) return 'refused_expect_missing';
+  if (input.apply && input.candidates !== input.expectRemoved) return 'refused_count_mismatch';
+  return null;
 }
 
 class Rollback extends Error {
@@ -83,10 +120,15 @@ async function nonKeyReferences(tx: DbExecutor, ids: string[]): Promise<Map<stri
  * transaction with the candidates locked. Any reference, by foreign key or held in another table's
  * jsonb or arrays, means nothing is deleted. A dry run (the default) always rolls back.
  */
-export async function retireSeedItems(db: Database, seedKeys: string[], options: { apply: boolean }): Promise<RetireResult> {
-  let result: RetireResult = { candidates: [], referenced: [], deleted: 0, outcome: 'nothing_to_do' };
+export async function retireSeedItems(db: Database, seedKeys: string[], options: { apply: boolean; expectRemoved?: number }): Promise<RetireResult> {
+  let result: RetireResult = { candidates: [], referenced: [], deleted: 0, outcome: 'nothing_to_do', limits: { cap: 0, seedTopicItems: 0, filesItems: seedKeys.length } };
   try {
     await db.transaction(async (tx) => {
+      const counted = await tx.execute<{ n: number }>(
+        sql`SELECT count(*)::int AS n FROM diagnostic_items i JOIN topics t ON t.id = i.topic_id WHERE t.origin = 'seed' AND i.seed_key IS NOT NULL`,
+      );
+      const seedTopicItems = counted.rows[0]?.n ?? 0;
+      const limits = { cap: retirementCap(seedTopicItems), seedTopicItems, filesItems: seedKeys.length };
       const rows = await lockCandidates(tx, seedKeys);
       const ids = rows.map((r) => r.id);
       const answers = new Map<string, number>();
@@ -99,13 +141,22 @@ export async function retireSeedItems(db: Database, seedKeys: string[], options:
       const held = await nonKeyReferences(tx, ids);
       const candidates = rows.map((r) => ({ ...r, answers: answers.get(r.id) ?? 0, heldBy: held.get(r.id) ?? {} }));
       const referenced = candidates.filter((c) => c.answers > 0 || Object.keys(c.heldBy).length > 0);
-      result = { candidates, referenced, deleted: 0, outcome: candidates.length === 0 ? 'nothing_to_do' : 'dry_run' };
+      result = { candidates, referenced, deleted: 0, outcome: candidates.length === 0 ? 'nothing_to_do' : 'dry_run', limits };
+      const refused = refusal({ candidates: candidates.length, seedTopicItems, filesItems: seedKeys.length, apply: options.apply, expectRemoved: options.expectRemoved });
+      if (refused === 'refused_files_short' || refused === 'refused_over_cap') {
+        result.outcome = refused;
+        throw new Rollback();
+      }
       if (candidates.length === 0) return;
       if (referenced.length > 0) {
         result.outcome = 'refused_referenced';
         throw new Rollback();
       }
       if (!options.apply) throw new Rollback();
+      if (refused) {
+        result.outcome = refused;
+        throw new Rollback();
+      }
       const deleted = await tx.execute(sql`DELETE FROM diagnostic_items WHERE id = ANY(${sql.param(ids)}::uuid[])`);
       result = { ...result, deleted: deleted.rowCount ?? 0, outcome: 'deleted' };
     });
