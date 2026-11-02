@@ -106,7 +106,10 @@ describe('db:seed retires items that left the files (user decision, 2 Nov 2026)'
 
     expect(await refusal(without(['q1']))).toBe('expect_missing');
     expect(await refusal(without(['q1']), 2)).toBe('count_mismatch');
-    expect(await refusal(without(['q1', 'q2', 'q3']), 3)).toBe('over_cap');
+    // Over the cap needs files that are not short: three items leave, three new ones arrive (the count
+    // stays 250). Dropping three alone trips files_short first (247 < 250 - cap 2).
+    const renamed = edited.map((i) => (['q1', 'q2', 'q3'].includes(i.key) ? { ...i, key: `${i.key}-new`, seedKey: `${i.seedKey}-new` } : i));
+    expect(await refusal({ ...full, items: renamed }, 3)).toBe('over_cap');
     expect(await refusal({ ...full, items: edited.slice(0, 100) }, 150)).toBe('files_short');
     // Every refusal rolled the whole seed back: nothing retired, and the edit in the same run is gone.
     const now = await rows(slug);
