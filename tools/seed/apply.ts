@@ -15,6 +15,24 @@ const ITEMS_DIR = join(SEED_DIR, 'items');
 const APPLIED_FILE = join(SEED_DIR, '_review', 'applied.json');
 const THIN_CELL = 3;
 const SKIPPED_FILE = join(SEED_DIR, '_review', 'skipped-cue.json');
+const MANUAL_FILE = join(SEED_DIR, '_review', 'manual-9.json');
+
+export type VerdictAction = 'keep' | 'revise' | 'drop' | 'needs-manual';
+
+/**
+ * A keep that says the key is wrong applies no change, so the wrong key would stay (lead review,
+ * 2 Nov 2026): it needs a person's decision unless that decision is recorded in manual-9.json.
+ */
+export function verdictAction(verdict: { verdict: 'keep' | 'revise' | 'drop'; keyCorrect: boolean }, resolvedByHand: boolean): VerdictAction {
+  if (verdict.verdict === 'keep' && !verdict.keyCorrect && !resolvedByHand) return 'needs-manual';
+  return verdict.verdict;
+}
+
+function resolvedIds(): Set<string> {
+  if (!existsSync(MANUAL_FILE)) return new Set();
+  const file = JSON.parse(readFileSync(MANUAL_FILE, 'utf8')) as { items?: { id: string }[] };
+  return new Set((file.items ?? []).map((i) => i.id));
+}
 
 /** For a single-answer item: is the key the one longest or the one shortest option? */
 export function lengthCue(options: readonly { id: string; label: string }[], keyIds: readonly string[]): 'longest' | 'shortest' | null {
@@ -58,9 +76,16 @@ export function runApply(options: ApplyOptions): void {
 
   const tally = { keep: 0, revise: 0, drop: 0, keyChanged: 0, cueSkipped: 0, already: 0, stale: 0 };
   const skippedCue: string[] = [];
+  const needsManual: string[] = [];
+  const resolved = resolvedIds();
   const stale: string[] = [];
   const touched = new Set<string>();
   for (const [id, entry] of Object.entries(verdicts).sort(([a], [b]) => a.localeCompare(b))) {
+    // Checked before the applied list, so an unresolved wrong-key keep is reported even if it was applied.
+    if (verdictAction(entry.verdict, resolved.has(id)) === 'needs-manual') {
+      needsManual.push(id);
+      continue;
+    }
     if (applied.has(id)) {
       tally.already++;
       continue;
@@ -127,6 +152,10 @@ export function runApply(options: ApplyOptions): void {
       `already applied ${tally.already}; skipped as stale ${tally.stale}; revisions skipped because they would make the key the shortest option ${tally.cueSkipped}.`,
   );
   for (const line of stale.slice(0, 10)) write(`  stale: ${line}`);
+  if (needsManual.length > 0) {
+    write(`Not applied, need a manual decision (keep verdict but the reviewer judged the key wrong; record it in seed/_review/manual-9.json): ${needsManual.length}`);
+    for (const id of needsManual) write(`  needs-manual: ${id}`);
+  }
   write(`Parser check passed: ${parsed.topics.length} topics, ${parsed.items.length} items after applying.`);
 
   const thin: string[] = [];
