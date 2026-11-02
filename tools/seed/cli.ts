@@ -3,6 +3,7 @@ import { parseArgs } from 'node:util';
 import { parseSeed, readSeedFiles } from '../../src/shared/db/seed/seed-data';
 import { runApply } from './apply';
 import { runItems } from './items';
+import { runLengthRound } from './length-round';
 import { runPathEval, validatePathEval } from './path-eval';
 import { runRefine } from './refine';
 import { runReview } from './review';
@@ -20,6 +21,7 @@ import { SPEND_CAP_USD, usd } from './pricing';
 //   pnpm seed:topics-refine [--dry-run] [--sample N] [--min-cosine F | --topics a,b,c] [--go]   (near-neighbour topics: description and aliases)
 //   pnpm seed:path-eval --stage plan|draft|review|assemble [--only smoke|rest|all] [--dry-run] [--sample N] [--go] [--pregen file] [--expect-cases N]
 //   pnpm seed:path-eval-validate [--expect-cases N]
+//   pnpm seed:length-round --stage rewrite|apply [--dry-run] [--sample N] [--go]   (shortest-key cue: rewrite distractors only)
 //   pnpm seed:validate [--dir seed] [--expect-topics N]
 //
 // Paid runs need --go and print their estimate first; --dry-run never calls the API.
@@ -93,12 +95,19 @@ async function main(): Promise<void> {
       validatePathEval(values['expect-cases'] === undefined ? undefined : positiveInt(values['expect-cases'], '--expect-cases'));
       return;
     }
+    case 'length-round': {
+      const stage = values.stage;
+      if (stage !== 'rewrite' && stage !== 'apply') throw new Error('--stage must be rewrite or apply');
+      const sample = values.sample === undefined ? undefined : positiveInt(values.sample, '--sample');
+      await runLengthRound({ stage, dryRun: values['dry-run'], go: values.go, sample });
+      return;
+    }
     case 'validate': {
       validate(values.dir ? resolve(values.dir) : SEED_DIR, values['expect-topics']);
       return;
     }
     default:
-      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, items, items-review, items-apply, topics-refine, path-eval, path-eval-validate, validate`);
+      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, items, items-review, items-apply, topics-refine, length-round, path-eval, path-eval-validate, validate`);
   }
 }
 
