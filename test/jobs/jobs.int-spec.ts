@@ -70,7 +70,9 @@ describe('jobs: a killed process resumes its running job (PRD-API §13 A5 Verify
     executor.register({
       type,
       concurrency: 1,
-      timeoutMs: 500,
+      // Long enough for the database round trips of one run from a local machine to Frankfurt (500 ms
+      // timed the second attempt out); the lock then goes stale after this plus staleGraceMs 0.
+      timeoutMs: 5_000,
       parse: (p): { topic: string } => p as { topic: string },
       run: async (p, ctx) => {
         await ctx.progress('design', 3, 3);
@@ -78,7 +80,7 @@ describe('jobs: a killed process resumes its running job (PRD-API §13 A5 Verify
       },
     });
     await executor.start();
-    const until = Date.now() + 10_000;
+    const until = Date.now() + 20_000;
     while ((await repo.findById(job.id))?.status !== 'succeeded' && Date.now() < until) await new Promise((r) => setTimeout(r, 50));
     await executor.idle();
     await executor.stop();
@@ -90,5 +92,5 @@ describe('jobs: a killed process resumes its running job (PRD-API §13 A5 Verify
     });
     const events = await repo.eventsAfter(job.id);
     expect(events.map((e) => e.type)).toEqual(['progress', 'progress', 'completed']);
-  });
+  }, 60_000);
 });
