@@ -239,8 +239,26 @@ function request(system: string, user: string, schema: z.ZodType): Anthropic.Mes
   };
 }
 
+/** Surplus misconceptions (over 3) and aliases (over 4) are cut, keeping the first: nothing refers to them. */
+function trimSurplus(json: unknown): unknown {
+  const raw = z.object({ stages: z.array(z.record(z.string(), z.unknown())) }).safeParse(json);
+  if (!raw.success) return json;
+  return {
+    stages: raw.data.stages.map((s) => ({
+      ...s,
+      misconceptions: Array.isArray(s['misconceptions']) ? s['misconceptions'].slice(0, 3) : s['misconceptions'],
+      concepts: Array.isArray(s['concepts'])
+        ? s['concepts'].map((c: unknown) => {
+            const concept = z.record(z.string(), z.unknown()).safeParse(c);
+            return concept.success && Array.isArray(concept.data['aliases']) ? { ...concept.data, aliases: concept.data['aliases'].slice(0, 4) } : c;
+          })
+        : s['concepts'],
+    })),
+  };
+}
+
 function parseMap(topic: Topic, topics: Topic[], json: unknown, label: 'draft' | 'revision'): ConceptMap | undefined {
-  const parsed = mapSchema.safeParse(json);
+  const parsed = mapSchema.safeParse(trimSurplus(json));
   if (!parsed.success) {
     reject(COMMAND, `${topic.slug} ${label}`, parsed.error.issues.slice(0, 6).map((i) => `${i.path.join('.')}: ${i.message}`).join('; '), json);
     return undefined;
