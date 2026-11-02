@@ -18,6 +18,7 @@ const CLIS = [
   { script: 'db:migrate', file: 'src/shared/db/cli/migrate.ts', args: [], out: 'db:migrate: ok' },
   { script: 'db:seed', file: 'src/shared/db/cli/seed.ts', args: ['--dir', 'seed'], out: 'db:seed: ok (160 topics)' },
   { script: 'db:audit', file: 'scripts/ops/audit-db.ts', args: [], out: 'db:audit: ok' },
+  { script: 'db:seed:retire', file: 'src/shared/db/cli/retire.ts', args: ['--dir', 'seed'], out: expect.stringMatching(/^db:seed:retire: ok \(\d+ items in the files\)$/) as unknown as string },
   { script: 'catalog:embed-topics', file: 'scripts/catalog/embed-topics.ts', args: [], out: 'catalog:embed-topics: ok (EmbedTopics)' },
   { script: 'billing:reprocess', file: 'scripts/billing/reprocess.ts', args: [], out: 'billing:reprocess: ok (ReprocessBillingEvent)' },
   { script: 'discovery:smoke', file: 'scripts/discovery/smoke.ts', args: [], out: 'discovery:smoke: ok (DiscoverResources, AnalyseResource)' },
@@ -30,7 +31,14 @@ describe('CLI boot (integration)', () => {
   it.each(CLIS)('$script loads and wires under tsx', async ({ file, args, out }) => {
     const { stdout } = await run(process.execPath, ['--import', 'tsx', file, ...args, '--check'], { cwd: ROOT, env: { ...process.env, LOG_LEVEL: 'silent' } });
 
-    expect(stdout.trim()).toBe(out);
+    expect(stdout.trim()).toEqual(out);
+  }, 60_000);
+
+  // `--prod` must parse in every CLI (db:seed's strict parser rejected it before 2 Nov 2026).
+  it.each(CLIS)('$script accepts --prod', async ({ file, args, out }) => {
+    const { stdout } = await run(process.execPath, ['--import', 'tsx', file, ...args, '--prod', '--check'], { cwd: ROOT, env: { ...process.env, LOG_LEVEL: 'silent' } });
+
+    expect(stdout.trim()).toEqual(out);
   }, 60_000);
 
   // User decision (23 Oct 2026): every CLI that connects refuses eduujoy-prod unless `--prod` is passed.
@@ -39,6 +47,7 @@ describe('CLI boot (integration)', () => {
     ['src/shared/db/cli/migrate.ts'],
     ['src/shared/db/cli/seed.ts', '--dir', 'seed'],
     ['scripts/ops/audit-db.ts'],
+    ['src/shared/db/cli/retire.ts', '--dir', 'seed'],
     ['scripts/catalog/embed-topics.ts'],
     ['scripts/billing/reprocess.ts', '00000000-0000-4000-8000-000000000000'],
     ['scripts/discovery/smoke.ts'],
