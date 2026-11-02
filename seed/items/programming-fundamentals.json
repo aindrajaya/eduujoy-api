@@ -1198,7 +1198,7 @@
         },
         {
           "id": "c",
-          "label": "`for i in range(1, 7):` print i only if `i % 2 == 0`"
+          "label": "`for i in range(1, 7): if i % 2 == 0: print(i)`"
         },
         {
           "id": "d",
@@ -1797,7 +1797,7 @@
       "stage": "proficient",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "`average(xs)` is used by reporting code and may receive an empty list. Criterion: a caller must never mistake a failure for a real result. Which design for the empty case is best?",
+      "prompt": "`average(xs)` is used by reporting code and may receive an empty list. Criterion: a caller must never mistake a failure for a real result, and the function returns a number when it succeeds. Which design for the empty case is best?",
       "options": [
         {
           "id": "a",
@@ -1809,7 +1809,7 @@
         },
         {
           "id": "c",
-          "label": "Return -1, because averages of real data rarely go negative so the value stands out"
+          "label": "Return -1, because it is a value the caller can test for and treat as the failure signal"
         },
         {
           "id": "d",
@@ -2055,11 +2055,11 @@
         },
         {
           "id": "b",
-          "label": "Add another boolean flag for each new format that is introduced later on"
+          "label": "Add one more boolean flag per new format, so each call switches on only its own format"
         },
         {
           "id": "c",
-          "label": "Make the flag a global setting that the function reads on every call"
+          "label": "Make the flag a global setting that the function reads, so callers no longer pass it"
         },
         {
           "id": "d",
@@ -2090,7 +2090,7 @@
         },
         {
           "id": "b",
-          "label": "Loop over `nums` and set each negative item to `None`"
+          "label": "Loop over `nums` and replace each negative item with `0` in place"
         },
         {
           "id": "c",
@@ -2486,7 +2486,7 @@
         },
         {
           "id": "c",
-          "label": "Read the whole file into one string and use `split` to count matches"
+          "label": "Read 64 MB blocks and count 'ERROR' in each block, adding the counts as you go"
         },
         {
           "id": "d",

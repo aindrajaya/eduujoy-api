@@ -61,6 +61,32 @@ describe('ClaudeStructuredGenerator (contract, recorded fixtures)', () => {
     expect(sent?.body).not.toHaveProperty('fallbacks');
   });
 
+  it('sends no keyword Claude rejects, restates the bound, and fails a reply that breaks it as metered invalid output', async () => {
+    // Claude 400s on maxItems and numeric bounds (2 Nov 2026); Zod still enforces them on the reply.
+    const tags = z.object({ tags: z.array(z.string()).max(2), score: z.number().int().min(1).max(5) });
+    server.enqueue(
+      edited('claude-haiku-5-5.structured', (body) => {
+        body['content'] = [{ type: 'text', text: JSON.stringify({ tags: ['a', 'b', 'c'], score: 3 }) }];
+      }),
+    );
+
+    const error = (await generator.generate({ ...request('claude-haiku-5-5'), schema: tags }).catch((e: unknown) => e)) as AiCallError;
+
+    const sent = server.received[0]?.body as { output_config: { format: { schema: { properties: Record<string, Record<string, unknown>> } } } };
+    const schema = sent.output_config.format.schema;
+    expect(schema.properties['tags']).not.toHaveProperty('maxItems');
+    expect(schema.properties['tags']?.['description']).toBe('At most 2 items.');
+    expect(schema.properties['score']).not.toHaveProperty('minimum');
+    expect(schema.properties['score']?.['description']).toBe('Integer from 1 to 5.');
+    expect(error).toBeInstanceOf(AiCallError);
+    expect(error).toMatchObject({ failure: 'invalid_output', retryable: false });
+    expect(error.message).toMatch(/failed validation/);
+    // The billed usage travels with the error, so metering records the call's cost.
+    expect(error.call?.usage.outputTokens).toBeGreaterThan(0);
+    // Not retried inside the call (PRD-API §11): one request only.
+    expect(server.received).toHaveLength(1);
+  });
+
   it('enables server-side refusal fallbacks on Sonnet 5.5', async () => {
     server.enqueue(loadFixture('claude-sonnet-5-5.structured').response);
 

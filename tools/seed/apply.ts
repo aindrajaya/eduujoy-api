@@ -14,6 +14,36 @@ import { REVIEW_PROMPT_VERSION, VERDICTS_FILE, verdictsFileSchema } from './revi
 const ITEMS_DIR = join(SEED_DIR, 'items');
 const APPLIED_FILE = join(SEED_DIR, '_review', 'applied.json');
 const THIN_CELL = 3;
+const SKIPPED_FILE = join(SEED_DIR, '_review', 'skipped-cue.json');
+const MANUAL_FILE = join(SEED_DIR, '_review', 'manual-9.json');
+
+export type VerdictAction = 'keep' | 'revise' | 'drop' | 'needs-manual';
+
+/**
+ * A keep that says the key is wrong applies no change, so the wrong key would stay (lead review,
+ * 2 Nov 2026): it needs a person's decision unless that decision is recorded in manual-9.json.
+ */
+export function verdictAction(verdict: { verdict: 'keep' | 'revise' | 'drop'; keyCorrect: boolean }, resolvedByHand: boolean): VerdictAction {
+  if (verdict.verdict === 'keep' && !verdict.keyCorrect && !resolvedByHand) return 'needs-manual';
+  return verdict.verdict;
+}
+
+function resolvedIds(): Set<string> {
+  if (!existsSync(MANUAL_FILE)) return new Set();
+  const file = JSON.parse(readFileSync(MANUAL_FILE, 'utf8')) as { items?: { id: string }[] };
+  return new Set((file.items ?? []).map((i) => i.id));
+}
+
+/** For a single-answer item: is the key the one longest or the one shortest option? */
+export function lengthCue(options: readonly { id: string; label: string }[], keyIds: readonly string[]): 'longest' | 'shortest' | null {
+  if (keyIds.length !== 1) return null;
+  const key = options.find((o) => o.id === keyIds[0])?.label.trim().length ?? 0;
+  const others = options.filter((o) => o.id !== keyIds[0]).map((o) => o.label.trim().length);
+  if (others.length === 0) return null;
+  if (key > Math.max(...others)) return 'longest';
+  if (key < Math.min(...others)) return 'shortest';
+  return null;
+}
 
 interface ItemsFile {
   version: 1;
@@ -44,10 +74,18 @@ export function runApply(options: ApplyOptions): void {
     return files.get(topic);
   };
 
-  const tally = { keep: 0, revise: 0, drop: 0, keyChanged: 0, already: 0, stale: 0 };
+  const tally = { keep: 0, revise: 0, drop: 0, keyChanged: 0, cueSkipped: 0, already: 0, stale: 0 };
+  const skippedCue: string[] = [];
+  const needsManual: string[] = [];
+  const resolved = resolvedIds();
   const stale: string[] = [];
   const touched = new Set<string>();
   for (const [id, entry] of Object.entries(verdicts).sort(([a], [b]) => a.localeCompare(b))) {
+    // Checked before the applied list, so an unresolved wrong-key keep is reported even if it was applied.
+    if (verdictAction(entry.verdict, resolved.has(id)) === 'needs-manual') {
+      needsManual.push(id);
+      continue;
+    }
     if (applied.has(id)) {
       tally.already++;
       continue;
@@ -77,6 +115,17 @@ export function runApply(options: ApplyOptions): void {
       const labels = new Map(revised.options.map((o) => [o.id, o.label.trim()]));
       const newKey = [...revised.correctIds].sort();
       const keyChanged = newKey.join(',') !== [...(item.answerKey?.optionIds ?? [])].sort().join(',');
+      // A revision of a correct item must not make the key the shortest option: removing a longest-key cue
+      // that way only swaps it for the opposite cue (2 Nov 2026: 994 of 2,130 new revisions did). The
+      // original stays. Correctness fixes (key judged wrong, or a different key) always apply.
+      const revisedOptions = ids.map((optionId) => ({ id: optionId, label: labels.get(optionId) ?? '' }));
+      const originalCue = lengthCue(item.options ?? [], item.answerKey?.optionIds ?? []);
+      if (verdict.keyCorrect && !keyChanged && originalCue !== 'shortest' && lengthCue(revisedOptions, newKey) === 'shortest') {
+        tally.cueSkipped++;
+        skippedCue.push(id);
+        applied.add(id);
+        continue;
+      }
       file.items[index] = {
         ...item,
         prompt: revised.prompt.trim(),
@@ -100,13 +149,18 @@ export function runApply(options: ApplyOptions): void {
 
   write(
     `Verdicts: keep ${tally.keep}, revise ${tally.revise} (key changed in ${tally.keyChanged}; their rubrics removed), drop ${tally.drop}; ` +
-      `already applied ${tally.already}; skipped as stale ${tally.stale}.`,
+      `already applied ${tally.already}; skipped as stale ${tally.stale}; revisions skipped because they would make the key the shortest option ${tally.cueSkipped}.`,
   );
   for (const line of stale.slice(0, 10)) write(`  stale: ${line}`);
+  if (needsManual.length > 0) {
+    write(`Not applied, need a manual decision (keep verdict but the reviewer judged the key wrong; record it in seed/_review/manual-9.json): ${needsManual.length}`);
+    for (const id of needsManual) write(`  needs-manual: ${id}`);
+  }
   write(`Parser check passed: ${parsed.topics.length} topics, ${parsed.items.length} items after applying.`);
 
   const thin: string[] = [];
   let longest = 0;
+  let shortest = 0;
   let single = 0;
   for (const topic of touched) {
     const file = files.get(topic);
@@ -116,8 +170,10 @@ export function runApply(options: ApplyOptions): void {
     for (const [cell, n] of cells) if (n < THIN_CELL) thin.push(`${topic} ${cell}: ${n}`);
     longest += flagTopic(topic, file.items).filter((f) => f.flags.includes('longest-key')).length;
     single += file.items.filter((i) => (i.answerKey?.optionIds ?? []).length === 1).length;
+    shortest += file.items.filter((i) => lengthCue(i.options ?? [], i.answerKey?.optionIds ?? []) === 'shortest').length;
   }
-  if (single > 0) write(`Key is the longest option in ${longest}/${single} single-answer items of the ${touched.size} changed topics (${Math.round((100 * longest) / single)}%).`);
+  const pct = (n: number): string => `${n}/${single} (${Math.round((100 * n) / single)}%)`;
+  if (single > 0) write(`In the ${touched.size} changed topics' single-answer items the key is the longest option in ${pct(longest)} and the shortest in ${pct(shortest)}; chance is 25% each.`);
   if (thin.length > 0) write(`Cells left with fewer than ${THIN_CELL} items: ${thin.join('; ')}`);
 
   if (options.dryRun) {
@@ -129,5 +185,9 @@ export function runApply(options: ApplyOptions): void {
     if (file) writeJson(join(ITEMS_DIR, `${topic}.json`), file);
   }
   writeJson(APPLIED_FILE, [...applied].sort());
+  if (skippedCue.length > 0) {
+    const before = existsSync(SKIPPED_FILE) ? (JSON.parse(readFileSync(SKIPPED_FILE, 'utf8')) as string[]) : [];
+    writeJson(SKIPPED_FILE, [...new Set([...before, ...skippedCue])].sort());
+  }
   write(`Wrote ${touched.size} item files and seed/_review/applied.json.`);
 }

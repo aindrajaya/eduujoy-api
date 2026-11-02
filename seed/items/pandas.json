@@ -519,7 +519,7 @@
         },
         {
           "id": "d",
-          "label": "A DataFrame containing only the rows where age is above 30"
+          "label": "A DataFrame with only the rows where age exceeds 30"
         }
       ],
       "answerKey": {
@@ -862,15 +862,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`df.unique('email')`"
+          "label": "`df.groupby('email').unique()`"
         },
         {
           "id": "b",
-          "label": "`df.dropna(subset='email')`"
+          "label": "`df.dropna(subset=['email'])`"
         },
         {
           "id": "c",
-          "label": "`df.drop_duplicates(subset='email')`"
+          "label": "`df.drop_duplicates('email')`"
         },
         {
           "id": "d",
@@ -1258,19 +1258,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The column 'y' does not exist yet, so pandas requires `df.insert` to create new columns before any assignment."
+          "label": "The column 'y' does not exist yet, so pandas requires `df.insert` to create new columns before any assignment can be made."
         },
         {
           "id": "b",
-          "label": "Boolean indexing may return a copy, so pandas can't tell if the write should reach df; calling `.copy()` makes the intent explicit."
+          "label": "Boolean indexing may return a copy, so pandas can't tell if the write should reach df; `.copy()` makes the intent explicit."
         },
         {
           "id": "c",
-          "label": "Boolean filtering always returns a view of df, so the assignment silently overwrites original rows and pandas warns about it."
+          "label": "Boolean filtering always returns a view of df, so the assignment silently overwrites the original rows; use `.loc` on df to stop the warning."
         },
         {
           "id": "d",
-          "label": "Assigning a scalar to a whole column is deprecated, so pandas expects an equal-length Series to avoid broadcasting problems."
+          "label": "Assigning a scalar to a whole column is deprecated, so pandas expects an equal-length Series to avoid broadcasting problems in the result."
         }
       ],
       "answerKey": {
@@ -1768,7 +1768,7 @@
         },
         {
           "id": "c",
-          "label": "Three separate `df.loc[...]` assignments in ascending order of threshold, each overwriting the last"
+          "label": "Two `df.loc[...]` assignments, first `spend >= 500` then `spend >= 100`, each overwriting the last"
         },
         {
           "id": "d",
@@ -2151,7 +2151,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`df.groupby(df['date'].dt.month)['rev'].sum()`, since it keeps each year separate and emits every month in the range"
+          "label": "`df.groupby(df['date'].dt.month)['rev'].sum()`, since it groups by month number and so returns all twelve months with 0 where a month had no orders"
         },
         {
           "id": "b",
@@ -2159,11 +2159,11 @@
         },
         {
           "id": "c",
-          "label": "`df.set_index('date')['rev'].rolling('30D').sum()`, since it yields one value per calendar month with 0 for empty ones"
+          "label": "`df.set_index('date')['rev'].rolling('30D').sum()`, since a 30-day window approximates a calendar month and fills gaps with 0"
         },
         {
           "id": "d",
-          "label": "`df.groupby(df['date'].dt.to_period('M'))['rev'].sum()`, since it emits every month in the range with 0 for empty ones"
+          "label": "`df.groupby(df['date'].dt.to_period('M'))['rev'].sum()`, since it separates years and emits every month in the range with 0 for empty ones"
         }
       ],
       "answerKey": {
@@ -2227,19 +2227,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`events.sort_values('ts').groupby('user').last()`, which returns each user's last row including nulls unchanged"
+          "label": "`events.sort_values('ts').groupby('user').last()`, which returns each user's last row with nulls kept as they are"
         },
         {
           "id": "b",
-          "label": "`events.sort_values('ts').drop_duplicates('user', keep='last')`, which keeps whole last rows with no per-group calls"
+          "label": "`events.sort_values('ts').drop_duplicates('user', keep='last')`, which keeps whole last rows"
         },
         {
           "id": "c",
-          "label": "`events.groupby('user').max()`, which returns the row with the latest ts for each user"
+          "label": "`events.groupby('user').max()`, which returns the row holding the latest ts for each user"
         },
         {
           "id": "d",
-          "label": "`events.groupby('user').head(1)`, which returns each user's latest row because groups keep the sorted ts order"
+          "label": "`events.groupby('user').head(1)`, which returns each user's latest row because groups keep ts order"
         }
       ],
       "answerKey": {

@@ -42,7 +42,7 @@
       "stage": "novice",
       "bloom": "C1",
       "kind": "single_choice",
-      "prompt": "Which term names the code smell where the same logic is copied into several places?",
+      "prompt": "A team finds that the same tax calculation has been pasted into the checkout, invoice and refund modules. Which term names this code smell?",
       "options": [
         {
           "id": "a",
@@ -834,7 +834,7 @@
         },
         {
           "id": "b",
-          "label": "`send(user)` wrapped in a try block that ignores errors"
+          "label": "`if not user and not user.active: return` then `send(user)`"
         },
         {
           "id": "c",
@@ -842,7 +842,7 @@
         },
         {
           "id": "d",
-          "label": "`if user or user.active: send(user)`"
+          "label": "`if user or user.active: send(user)` as a single flat check"
         }
       ],
       "answerKey": {
@@ -900,19 +900,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Merge them into one function with a boolean flag that picks the rate"
+          "label": "Merge them into one function with a boolean flag that picks 1.2 or 1.1"
         },
         {
           "id": "b",
-          "label": "Add a third copy for any new rate"
+          "label": "Keep both and add a third copy for each new rate that appears later"
         },
         {
           "id": "c",
-          "label": "Use one global rate variable that callers change before calling"
+          "label": "Use one global rate variable that callers set before each call"
         },
         {
           "id": "d",
-          "label": "Merge them into `price_with_tax(p, rate)` and pass `0.2` or `0.1`"
+          "label": "Merge them into `price_with_tax(p, rate)` and pass 1.2 or 1.1"
         }
       ],
       "answerKey": {
@@ -1037,23 +1037,23 @@
       "stage": "competent",
       "bloom": "C3",
       "kind": "single_choice",
-      "prompt": "A function is written as `def f(d, n): return d + timedelta(days=n)`. Which name and parameter list best express what it does?",
+      "prompt": "A function is written as `def f(d, n): return d + timedelta(days=n)`. Which name and parameter list best express what it does and keep call sites clear?",
       "options": [
         {
           "id": "a",
-          "label": "`add_days(date, days)`"
+          "label": "`add_days(start_date, days)`"
         },
         {
           "id": "b",
-          "label": "`calculate_result(date, delta)`"
+          "label": "`shift_date(start_date, offset)`, where offset is a day count"
         },
         {
           "id": "c",
-          "label": "`process_date_value(d, n)`"
+          "label": "`get_new_date(start_date, number_of_days)` for the resulting date"
         },
         {
           "id": "d",
-          "label": "`get_new_date(start, number)`"
+          "label": "`update_date(date_value, days)`, changing the date it receives"
         }
       ],
       "answerKey": {
@@ -1719,19 +1719,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Method names are too short to convey intent, so tests cannot be written without reading the bodies"
+          "label": "The methods are too short and do too little, so each test must repeat the whole setup to check anything"
         },
         {
           "id": "b",
-          "label": "The class is too small, so a larger class with more methods would amortise the setup cost"
+          "label": "The class has too few methods, so a larger class would amortise the cost of its setup across more tests"
         },
         {
           "id": "c",
-          "label": "Hidden dependencies are created inside the constructor, so the class cannot run without real infrastructure"
+          "label": "Dependencies are created inside the constructor, so the class cannot run without real infrastructure"
         },
         {
           "id": "d",
-          "label": "Unit tests are the wrong tool for services, so the team should only use end-to-end tests"
+          "label": "Unit tests suit pure functions poorly, so services should be covered only by slower end-to-end tests"
         }
       ],
       "answerKey": {
@@ -2075,7 +2075,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Flawed, since line count is only a proxy and forced splitting can scatter a cohesive algorithm into vague fragments"
+          "label": "Flawed, since line count is only a proxy and forced splitting can scatter a cohesive algorithm"
         },
         {
           "id": "b",
@@ -2087,7 +2087,7 @@
         },
         {
           "id": "d",
-          "label": "Sound, since shorter functions are always easier to understand and test, however the logic ends up divided"
+          "label": "Sound, since small functions are easier to test and name, so a hard cap makes each piece clearer to review"
         }
       ],
       "answerKey": {
@@ -2110,7 +2110,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Replace the boolean with an integer mode, since numbers extend more easily than booleans without any naming"
+          "label": "Replace the boolean with an integer mode, since numbers extend more easily than booleans when more variants are added later"
         },
         {
           "id": "b",
@@ -2373,7 +2373,7 @@
         },
         {
           "id": "d",
-          "label": "A `Money` class with a mutable `double` amount and a public currency field that callers compare themselves"
+          "label": "A `Money` class with a mutable `double` amount and a public currency field, leaving each caller to compare currencies before adding"
         }
       ],
       "answerKey": {

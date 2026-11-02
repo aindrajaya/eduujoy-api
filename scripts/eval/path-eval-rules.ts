@@ -92,3 +92,14 @@ export function summarise(results: CaseResult[]): { means: Record<Dimension, num
   const underReview = results.filter((r) => r.scores === null).length;
   return { means, badLinks, underReview, pass: results.length > 0 && DIMENSIONS.every((d) => means[d] >= 4) && badLinks === 0 };
 }
+
+/** The judge's answer (prompt path-judge); also in the Claude schema registry test. */
+const score = z.object({ score: z.number().int().min(1).max(5), reason: z.string().min(1).max(600) });
+export const judgeSchema = z.object({
+  prerequisiteOrder: score,
+  bloomProgression: score,
+  resourceFit: score,
+  timeRealism: score,
+  missingConcepts: z.array(z.string().max(200)).max(20),
+  misconceptionsReinforced: z.array(z.string().max(300)).max(10),
+});

@@ -1312,7 +1312,7 @@
         },
         {
           "id": "b",
-          "label": "`n++` is a read-modify-write, so concurrent goroutines overwrite each other's updates"
+          "label": "`n++` is a read-modify-write, so concurrent updates overwrite each other"
         },
         {
           "id": "c",
@@ -1343,7 +1343,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Struct fields named with lowercase letters cannot be changed from outside their type"
+          "label": "Lowercase struct fields cannot be modified from outside their own type, even in the same package"
         },
         {
           "id": "b",
@@ -1351,11 +1351,11 @@
         },
         {
           "id": "c",
-          "label": "Map values are not addressable, so a field of a stored struct cannot be assigned in place"
+          "label": "Map values are not addressable, so a stored struct's field cannot be assigned in place"
         },
         {
           "id": "d",
-          "label": "The `++` operator is not allowed on struct fields, only on plain variables"
+          "label": "The `++` operator is not allowed on struct fields, only on plain variables or array elements"
         }
       ],
       "answerKey": {
@@ -1488,7 +1488,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The compiler converts any typed nil pointer into a zero-value struct, which compares as non-nil"
+          "label": "The compiler converts any typed nil pointer into a zero-value struct when it is returned as an interface, and that struct compares as non-nil"
         },
         {
           "id": "b",
@@ -1628,15 +1628,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`defer wg.Done()` runs before `run(j)` finishes, so the counter drops too early"
+          "label": "`defer wg.Done()` runs before `run(j)` finishes, so the counter drops to zero too early"
         },
         {
           "id": "b",
-          "label": "Passing `j` as a parameter copies it, so each goroutine sees a stale job value"
+          "label": "Passing `j` as a parameter copies it, so each goroutine sees a stale job value instead of the current one"
         },
         {
           "id": "c",
-          "label": "`wg.Add(1)` runs inside the goroutine, so `Wait` may see a zero counter before goroutines have started"
+          "label": "`wg.Add(1)` runs inside the goroutine, so `Wait` may see a zero counter before goroutines start"
         },
         {
           "id": "d",
@@ -1781,7 +1781,7 @@
         },
         {
           "id": "d",
-          "label": "`return fmt.Errorf(\"load user %d: %v\", id, err)`, since %v preserves the original text"
+          "label": "`return fmt.Errorf(\"load user %d: %v\", id, err)`, since %v preserves the original error text"
         }
       ],
       "answerKey": {
@@ -1942,11 +1942,11 @@
       "stage": "proficient",
       "bloom": "C5",
       "kind": "scenario",
-      "prompt": "A service keeps an in-memory `map[string]Config` read on every request (thousands per second) and updated about once a minute. Criteria: correctness under concurrency, low read contention, simplicity. Which design is best?",
+      "prompt": "A service keeps an in-memory `map[string]Config` read on every request (thousands per second, from many goroutines) and updated about once a minute. Criteria: correctness under concurrency, letting reads proceed in parallel, simplicity. Which design is best?",
       "options": [
         {
           "id": "a",
-          "label": "Guard the map with a `sync.Mutex` held for each read and write, since that is the simplest safe option"
+          "label": "Guard the map with a `sync.Mutex` held for each read and write, so only one goroutine touches it at a time"
         },
         {
           "id": "b",
@@ -1954,11 +1954,11 @@
         },
         {
           "id": "c",
-          "label": "Guard the map with a `sync.RWMutex`, taking read locks for lookups and a write lock for updates"
+          "label": "Guard the map with a `sync.RWMutex`: `RLock` for lookups, `Lock` for the rare update"
         },
         {
           "id": "d",
-          "label": "Share the map freely and rely on map reads being atomic, since writes are rare enough"
+          "label": "Share the map without locks, since concurrent reads are safe and writes happen only once a minute"
         }
       ],
       "answerKey": {
@@ -2086,19 +2086,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is wrong only because struct fields cannot hold interface values that carry cancellation behaviour"
+          "label": "It is wrong only because struct fields cannot hold interface values that carry cancellation behaviour or deadlines at all"
         },
         {
           "id": "b",
-          "label": "It is fine if the context is `context.Background()`, because that guarantees cancellation reaches every request"
+          "label": "It is fine if the context is `context.Background()`, because that guarantees cancellation reaches every in-flight request"
         },
         {
           "id": "c",
-          "label": "It is a flaw, because request deadlines and cancellation are per call; pass `ctx` as the first parameter of each method"
+          "label": "It is a flaw, because deadlines and cancellation are per call; pass `ctx` as the first parameter of each method"
         },
         {
           "id": "d",
-          "label": "It is fine, because one context for the process is cheaper than creating one per request on the hot path"
+          "label": "It is fine, because one context for the whole process is cheaper than creating one per request on the hot path"
         }
       ],
       "answerKey": {

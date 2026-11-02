@@ -3,7 +3,6 @@ import { join, resolve } from 'node:path';
 import Anthropic from '@anthropic-ai/sdk';
 import { inArray } from 'drizzle-orm';
 import { Pool } from 'pg';
-import { z } from 'zod';
 import { type ServedCard } from '../../src/modules/discovery/application/ports/card.reader';
 import { ServedCardsQuery } from '../../src/modules/discovery/application/served-cards.query';
 import { DrizzleCardReader } from '../../src/modules/discovery/infrastructure/drizzle-card.reader';
@@ -22,7 +21,7 @@ import { loadDirectDatabaseUrl } from '../../src/shared/db/cli/env';
 import { guardPool, POOL_SETTINGS } from '../../src/shared/db/db.module';
 import { describeError } from '../../src/shared/db/redact';
 import { topics } from '../../src/shared/db/schema/catalog';
-import { CASE_RESERVE_USD, type CaseResult, caseStages, DIMENSIONS, estimate, type EvalCase, evalFile, poolsNeeded, selectCases, summarise } from './path-eval-rules';
+import { CASE_RESERVE_USD, type CaseResult, caseStages, DIMENSIONS, estimate, type EvalCase, evalFile, judgeSchema, poolsNeeded, selectCases, summarise } from './path-eval-rules';
 
 // Run by the user (A9, Q8): `pnpm eval:paths [--smoke] [--ids pe-001,pe-002] [--cases seed/_eval/path-eval-v1.json]
 // [--cap 6] [--dry-run]` (node --env-file=.env), against a database whose pools exist (pregen, or the smoke).
@@ -38,15 +37,6 @@ import { CASE_RESERVE_USD, type CaseResult, caseStages, DIMENSIONS, estimate, ty
 const JUDGE_MODEL = 'claude-sonnet-5-5';
 const JUDGE_PROMPT = 'path-judge';
 
-const score = z.object({ score: z.number().int().min(1).max(5), reason: z.string().min(1).max(600) });
-const judgeSchema = z.object({
-  prerequisiteOrder: score,
-  bloomProgression: score,
-  resourceFit: score,
-  timeRealism: score,
-  missingConcepts: z.array(z.string().max(200)).max(20),
-  misconceptionsReinforced: z.array(z.string().max(300)).max(10),
-});
 
 function env(name: string): string {
   const value = process.env[name];

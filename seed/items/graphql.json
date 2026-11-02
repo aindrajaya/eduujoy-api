@@ -551,11 +551,11 @@
         },
         {
           "id": "c",
-          "label": "It reads data and caches the result for later requests"
+          "label": "It reads data without side effects and caches the result for later requests"
         },
         {
           "id": "d",
-          "label": "It subscribes the client to live events from the server"
+          "label": "It subscribes the client to live events pushed from the server over time"
         }
       ],
       "answerKey": {
@@ -969,7 +969,7 @@
         },
         {
           "id": "c",
-          "label": "`mutation { addComment(postId: 3, text: \"Nice!\") }`"
+          "label": "`mutation { addComment(postId: 3, text: \"Nice!\") { comment { id } } }`"
         },
         {
           "id": "d",
@@ -1078,7 +1078,7 @@
         },
         {
           "id": "d",
-          "label": "`mutation { addTodo(title: \"Buy milk\") }`"
+          "label": "`mutation { addTodo(title: \"Buy milk\") { title } id }`"
         }
       ],
       "answerKey": {
@@ -2284,7 +2284,7 @@
         },
         {
           "id": "b",
-          "label": "Return a non-null `User!` and respond with HTTP 400 for bad input, so clients branch on the status code of the response"
+          "label": "Return a non-null `User!` and respond with HTTP 400 for bad input, so clients branch on the HTTP status code of each response"
         },
         {
           "id": "c",
@@ -2292,7 +2292,7 @@
         },
         {
           "id": "d",
-          "label": "Throw one exception per invalid field inside the resolver and have clients parse the message strings in the top-level `errors` array"
+          "label": "Throw a separate GraphQL error per invalid field in the resolver, setting `path` to the field, and have clients read `message` from the top-level `errors` array"
         }
       ],
       "answerKey": {
@@ -2350,19 +2350,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`[user1, user2, null]`, padding missing results at the end"
+          "label": "`[user1, user2, null]`, padding the missing result at the end"
         },
         {
           "id": "b",
-          "label": "`[user1, user2]`, because the database already filtered the rows"
+          "label": "`[user1, user2]`, since the database already filtered the rows"
         },
         {
           "id": "c",
-          "label": "`[null, user1, user2]`, built by mapping each key to its row"
+          "label": "`[null, user1, user2]`, with null at the position of missing key 3"
         },
         {
           "id": "d",
-          "label": "`[user2, user1]`, sorted descending to match the key order"
+          "label": "`[user2, user1, null]`, sorted descending by id, with null for the missing key"
         }
       ],
       "answerKey": {
@@ -2461,7 +2461,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Convert `recommendations` into a mutation so it runs outside the main query's execution and finishes asynchronously afterwards"
+          "label": "Convert `recommendations` into a mutation so it runs outside the main query's execution and finishes asynchronously, returning its result to the client when it is done"
         },
         {
           "id": "b",
@@ -2469,7 +2469,7 @@
         },
         {
           "id": "c",
-          "label": "Split into two operations: fetch widgets first, and send `recommendations` as a separate parallel query with a loading placeholder"
+          "label": "Split into two operations: fetch widgets first, and send `recommendations` as a separate parallel query with a placeholder"
         },
         {
           "id": "d",

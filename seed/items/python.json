@@ -980,15 +980,15 @@
         },
         {
           "id": "b",
-          "label": "`print(sum(map(int, \"4 8 15\")))`"
+          "label": "`print(sum(int(n) for n in \"4 8 15\".strip()))`"
         },
         {
           "id": "c",
-          "label": "`print(int(\"4 8 15\".split()))`"
+          "label": "`print(sum(map(int, \"4 8 15\".replace(\" \", \"\"))))`"
         },
         {
           "id": "d",
-          "label": "`print(sum(\"4 8 15\".split()))`"
+          "label": "`print(sum(n for n in \"4 8 15\".split(\" \")))`"
         }
       ],
       "answerKey": {
@@ -1227,19 +1227,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`with open('log.txt') as f: n = len(f.read().split('\\n'))`"
+          "label": "`with open('log.txt') as f: n = len([l for l in f if l != '\\n'])`"
         },
         {
           "id": "b",
-          "label": "`with open('log.txt') as f: n = sum(line.strip() for line in f)`"
+          "label": "`with open('log.txt') as f: n = sum(len(line.strip()) for line in f)`"
         },
         {
           "id": "c",
-          "label": "`n = len(open('log.txt').readlines())`"
+          "label": "`n = len(open('log.txt').read().strip().split('\\n'))`"
         },
         {
           "id": "d",
-          "label": "`with open('log.txt') as f: n = sum(1 for line in f if line.strip())`"
+          "label": "`with open('log.txt') as f: n = sum(1 for l in f if l.strip())`"
         }
       ],
       "answerKey": {
@@ -1305,7 +1305,7 @@
         },
         {
           "id": "c",
-          "label": "The loop stops at the first odd number, leaving later evens in place"
+          "label": "The loop stops at the first odd number it meets, leaving later evens in place"
         },
         {
           "id": "d",
@@ -1367,7 +1367,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Item assignment on nested lists always writes to every row of the outer list"
+          "label": "Item assignment on nested lists always writes to every row of the outer list at once"
         },
         {
           "id": "b",
@@ -1375,7 +1375,7 @@
         },
         {
           "id": "c",
-          "label": "The outer `*` repeats a reference to one inner list, so all rows are the same object"
+          "label": "The outer `*` repeats one inner-list reference, so every row is the same object"
         },
         {
           "id": "d",
@@ -1912,7 +1912,7 @@
         },
         {
           "id": "c",
-          "label": "`multiprocessing.Pool(8)`, since separate processes sidestep the GIL and network waits scale with core count"
+          "label": "`multiprocessing.Pool(8)`, since separate processes sidestep the GIL and network waits scale with the number of cores used"
         },
         {
           "id": "d",
@@ -2062,7 +2062,7 @@
         },
         {
           "id": "d",
-          "label": "The cache is shared across threads without any locking, so concurrent calls corrupt cached results in the service."
+          "label": "The cache is shared across threads without any locking, so concurrent calls can corrupt cached results and return stale values in the service."
         }
       ],
       "answerKey": {
@@ -2481,19 +2481,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A decorator factory taking `attempts`, `delay` and `exceptions`; it catches only `exceptions`, sleeps `delay * 2**i`, and re-raises the last error"
+          "label": "A decorator factory taking `attempts`, `delay` and `exceptions`; it catches only `exceptions`, sleeps `delay * 2**i`, re-raises the last error"
         },
         {
           "id": "b",
-          "label": "A plain decorator catching only the listed `exceptions`, retrying in a tight loop without sleeping, and re-raising the last error at the end"
+          "label": "A plain decorator that catches only the listed `exceptions`, retries immediately in a tight loop with no sleep, and re-raises the last error at the end"
         },
         {
           "id": "c",
-          "label": "A decorator factory using bare `except:`, sleeping `delay * 2**i` between tries, and returning `None` once the final attempt has failed"
+          "label": "A decorator factory using a bare `except:`, sleeping `delay * 2**i` between tries, and returning `None` once the final attempt has failed"
         },
         {
           "id": "d",
-          "label": "A decorator factory catching `Exception`, sleeping a fixed `delay` between tries, and re-raising the last error once attempts run out"
+          "label": "A decorator factory catching `Exception`, sleeping a fixed `delay` between tries, and re-raising the last error once all attempts have run out"
         }
       ],
       "answerKey": {

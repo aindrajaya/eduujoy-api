@@ -25,7 +25,7 @@ const PROMPT = new PromptRegistry(join(ROOT, 'src', 'prompts')).get('item-review
 export const REVIEW_PROMPT_VERSION = PROMPT.version;
 
 const MAX_TOKENS = 8_000;
-const EXPECTED_OUTPUT_TOKENS = 600; // v1 sample: 240 per novice item; later stages run longer
+const EXPECTED_OUTPUT_TOKENS = 420; // measured on the v2 batches: 368-395 per item
 
 const verdictSchema = z.object({
   verdict: z.enum(['keep', 'revise', 'drop']),
@@ -53,6 +53,10 @@ export interface ReviewOptions {
    * fraction. Novice items are always reviewed (user decision, 22 Oct 2026).
    */
   minMargin: number;
+  /** Review every item without a current verdict, flagged or not (user decision, 2 Nov 2026). */
+  allItems: boolean;
+  /** Batch only the first N pending items (priority order), to split a large run under a budget. */
+  limit?: number;
 }
 
 /** Items to review: every flagged item, except non-novice longest-key-only items under the margin. */
@@ -66,12 +70,15 @@ function reviewId(f: Flagged): string {
   return `${f.topic}--${f.item.key}`;
 }
 
-function loadFlags(): { topics: SeedTopic[]; flagged: Flagged[]; itemCount: number } {
+function loadFlags(): { topics: SeedTopic[]; flagged: Flagged[]; everyItem: Flagged[]; itemCount: number } {
   const seed = parseSeed(readSeedFiles(SEED_DIR));
   const byTopic = new Map<string, SeedItem[]>();
   for (const item of seed.items) byTopic.set(item.topic, [...(byTopic.get(item.topic) ?? []), item]);
   const flagged = [...byTopic].flatMap(([topic, items]) => flagTopic(topic, items)).sort(byPriority);
-  return { topics: seed.topics, flagged, itemCount: seed.items.length };
+  // Unflagged items too (flags: []), for --all-items; flagged ones keep their flags and lead the order.
+  const flaggedIds = new Set(flagged.map((f) => reviewId(f)));
+  const unflagged = [...byTopic].flatMap(([topic, items]) => items.map((item): Flagged => ({ topic, item, flags: [] }))).filter((f) => !flaggedIds.has(reviewId(f)));
+  return { topics: seed.topics, flagged, everyItem: [...flagged, ...unflagged], itemCount: seed.items.length };
 }
 
 /** Every verdict on file, any prompt version; a newer review of the same item replaces the entry. */
@@ -97,7 +104,9 @@ function userTurn(topics: SeedTopic[], f: Flagged): string {
   };
   return [
     `<topic>\nName: ${topic?.canonicalName ?? f.topic}\nDescription: ${topic?.description ?? ''}\n</topic>`,
-    `Flags: ${f.flags.map((code) => `${code} (${FLAG_HELP[code]})`).join('; ')}`,
+    f.flags.length > 0
+      ? `Flags: ${f.flags.map((code) => `${code} (${FLAG_HELP[code]})`).join('; ')}`
+      : 'Flags: none (full-bank review: no automatic flag; check the key, a second defensible answer and the stage fit)',
     `<item>\n${JSON.stringify(item, null, 2)}\n</item>`,
   ].join('\n\n');
 }
@@ -122,7 +131,8 @@ function checkRevision(f: Flagged, v: Verdict): string | undefined {
   if (v.revised.correctIds.some((id) => !ids.split(',').includes(id))) return 'revision keys an unknown option';
   const single = f.item.kind !== 'multi_choice';
   if (single ? v.revised.correctIds.length !== 1 : v.revised.correctIds.length < 2) return `revision has ${v.revised.correctIds.length} correct options`;
-  if (f.flags.includes('longest-key') && single) {
+  // Any single-answer revision: fixing an item must never leave or create a longest-key cue.
+  if (single) {
     const keyId = v.revised.correctIds[0];
     const key = v.revised.options.find((o) => o.id === keyId)?.label.trim().length ?? 0;
     const longestDistractor = Math.max(...v.revised.options.filter((o) => o.id !== keyId).map((o) => o.label.trim().length));
@@ -171,8 +181,8 @@ function printVerdicts(verdicts: VerdictsFile): void {
 
 export async function runReview(options: ReviewOptions): Promise<void> {
   const write = (line: string): boolean => process.stdout.write(`${line}\n`);
-  const { topics, flagged, itemCount } = loadFlags();
-  const byId = new Map(flagged.map((f) => [reviewId(f), f]));
+  const { topics, flagged, everyItem, itemCount } = loadFlags();
+  const byId = new Map(everyItem.map((f) => [reviewId(f), f]));
   const verdicts = loadVerdicts();
 
   const open = openRun(COMMAND);
@@ -193,17 +203,17 @@ export async function runReview(options: ReviewOptions): Promise<void> {
     flagged: flagged.map((f) => ({ id: reviewId(f), stage: f.item.stage, bloom: f.item.bloom, kind: f.item.kind, flags: f.flags, lengthRatio: f.lengthRatio && Number(f.lengthRatio.toFixed(2)), margin: f.margin && Number(f.margin.toFixed(2)) })),
   });
 
-  const pending = selected(flagged, options.minMargin).filter((f) => !reviewed(verdicts, f));
-  const current = flagged.filter((f) => reviewed(verdicts, f)).length;
-  write(`Review (--min-margin ${options.minMargin}, novice in full): ${current} flagged items reviewed with ${PROMPT.name}/${PROMPT.version}, ${pending.length} pending.`);
+  const pending = (options.allItems ? everyItem : selected(flagged, options.minMargin)).filter((f) => !reviewed(verdicts, f));
+  const current = (options.allItems ? everyItem : flagged).filter((f) => reviewed(verdicts, f)).length;
+  write(`Review (${options.allItems ? '--all-items' : `--min-margin ${options.minMargin}, novice in full`}): ${current} ${options.allItems ? '' : 'flagged '}items reviewed with ${PROMPT.name}/${PROMPT.version}, ${pending.length} pending.`);
   if (pending.length === 0) return;
 
-  const targets = options.sample === undefined ? pending : pending.slice(0, options.sample);
+  const targets = options.sample !== undefined ? pending.slice(0, options.sample) : options.limit !== undefined ? pending.slice(0, options.limit) : pending;
   const batch = options.sample === undefined;
   const prefixTokens = estimateTokens(PROMPT.text) + 300; // + output schema
   const suffixTokens = Math.max(...targets.map((f) => estimateTokens(userTurn(topics, f))));
   const est = estimate(targets.length, { prefixTokens, suffixTokens, outputTokens: EXPECTED_OUTPUT_TOKENS }, batch);
-  write(formatEstimate(batch ? 'seed:items-review' : `seed:items-review --sample ${targets.length} (highest priority first)`, est, batch));
+  write(formatEstimate(batch ? `seed:items-review${options.limit !== undefined ? ` --limit ${targets.length} of ${pending.length}` : ''}` : `seed:items-review --sample ${targets.length} (highest priority first)`, est, batch));
   if (options.dryRun) return;
   if (!options.go) {
     write('Not started: rerun with --go once the estimate is approved.');

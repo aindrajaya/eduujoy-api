@@ -17,10 +17,13 @@ const ROOT = join(__dirname, '..', '..');
 const CLIS = [
   { script: 'db:migrate', file: 'src/shared/db/cli/migrate.ts', args: [], out: 'db:migrate: ok' },
   { script: 'db:seed', file: 'src/shared/db/cli/seed.ts', args: ['--dir', 'seed'], out: 'db:seed: ok (160 topics)' },
+  { script: 'db:audit', file: 'scripts/ops/audit-db.ts', args: [], out: 'db:audit: ok' },
   { script: 'catalog:embed-topics', file: 'scripts/catalog/embed-topics.ts', args: [], out: 'catalog:embed-topics: ok (EmbedTopics)' },
   { script: 'billing:reprocess', file: 'scripts/billing/reprocess.ts', args: [], out: 'billing:reprocess: ok (ReprocessBillingEvent)' },
   { script: 'discovery:smoke', file: 'scripts/discovery/smoke.ts', args: [], out: 'discovery:smoke: ok (DiscoverResources, AnalyseResource)' },
   { script: 'discovery:verify-video', file: 'scripts/discovery/verify-video.ts', args: [], out: 'discovery:verify-video: ok (GeminiResourceAnalyzer)' },
+  { script: 'discovery:pregen', file: 'scripts/discovery/pregen.ts', args: [], out: 'discovery:pregen: ok (50 topics, 150 pools)' },
+  { script: 'discovery:pregen (per-topic stages)', file: 'scripts/discovery/pregen.ts', args: ['--topics', 'test/fixtures/pregen/per-topic-stages.json'], out: 'discovery:pregen: ok (2 topics, 4 pools)' },
   { script: 'eval:paths', file: 'scripts/eval/paths.ts', args: [], out: 'eval:paths: ok (ClaudePathDesigner v1, judge v1)' },
 ];
 
@@ -29,6 +32,38 @@ describe('CLI boot (integration)', () => {
     const { stdout } = await run(process.execPath, ['--import', 'tsx', file, ...args, '--check'], { cwd: ROOT, env: { ...process.env, LOG_LEVEL: 'silent' } });
 
     expect(stdout.trim()).toBe(out);
+  }, 60_000);
+
+  // User decision (23 Oct 2026): every CLI that connects refuses eduujoy-prod unless `--prod` is passed.
+  // A fake prod URL (nothing listens there) and fake keys get each script to its database step.
+  const PROD_REFUSALS = [
+    ['src/shared/db/cli/migrate.ts'],
+    ['src/shared/db/cli/seed.ts', '--dir', 'seed'],
+    ['scripts/ops/audit-db.ts'],
+    ['scripts/catalog/embed-topics.ts'],
+    ['scripts/billing/reprocess.ts', '00000000-0000-4000-8000-000000000000'],
+    ['scripts/discovery/smoke.ts'],
+    ['scripts/discovery/verify-video.ts'],
+    ['scripts/discovery/pregen.ts', '--dry-run'],
+    ['scripts/eval/paths.ts', '--dry-run'],
+  ];
+  it.each(PROD_REFUSALS)('%s refuses the prod database without --prod', async (file, ...args) => {
+    const env = {
+      ...process.env,
+      LOG_LEVEL: 'silent',
+      DATABASE_URL_DIRECT: 'postgresql://u:p@ep-raspy-recipe-bamuza67.c-8.eu-central-1.aws.neon.tech/neondb',
+      ANTHROPIC_API_KEY: 'x',
+      GEMINI_API_KEY: 'x',
+      YOUTUBE_API_KEY: 'x',
+      OPENALEX_API_KEY: 'x',
+    };
+    const failed = await run(process.execPath, ['--import', 'tsx', file, ...args], { cwd: ROOT, env }).then(
+      () => null,
+      (error: unknown) => error as { stderr?: string },
+    );
+
+    expect(failed?.stderr).toContain('Target database: ep-raspy-recipe-bamuza67 (c-8.eu-central-1) [PROD]');
+    expect(failed?.stderr).toContain('Refusing the prod database ep-raspy-recipe-bamuza67: pass --prod');
   }, 60_000);
 
   it('boots a Nest context with the database but without the HTTP health stack', async () => {

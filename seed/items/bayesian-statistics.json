@@ -574,11 +574,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Given the model and data, there is a 95% probability the mean lies in this range"
+          "label": "Given the model and data, there is a 95% probability the mean is in this range"
         },
         {
           "id": "b",
-          "label": "About 95% of individual observations fall between 2.1 and 4.3"
+          "label": "About 95% of the individual observations in the dataset fall between 2.1 and 4.3"
         },
         {
           "id": "c",
@@ -586,7 +586,7 @@
         },
         {
           "id": "d",
-          "label": "Across repeated samples, 95% of such intervals would contain the true mean"
+          "label": "Across repeated samples, 95% of such intervals would contain the true mean value"
         }
       ],
       "answerKey": {
@@ -1285,7 +1285,7 @@
         },
         {
           "id": "d",
-          "label": "The prior is too weak, so it should be replaced with a flat prior in every chain"
+          "label": "The chains are mixing slowly only within themselves, so thinning each chain will fix the R-hat value"
         }
       ],
       "answerKey": {
@@ -1378,19 +1378,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The plug-in ignores uncertainty in the parameter, so only sampling variability is reflected"
+          "label": "The plug-in ignores parameter uncertainty, so only Poisson sampling variability is reflected"
         },
         {
           "id": "b",
-          "label": "The plug-in ignores the likelihood, so the prediction does not depend on the data"
+          "label": "The plug-in ignores the likelihood, so the prediction no longer depends on the observed data"
         },
         {
           "id": "c",
-          "label": "The plug-in double counts the prior, so the predictive distribution comes out too wide"
+          "label": "The plug-in counts the prior twice, so the posterior is too concentrated around its mean"
         },
         {
           "id": "d",
-          "label": "The posterior mean is biased, so predictions are shifted away from future observations"
+          "label": "The posterior mean is a biased estimate of the rate, so predictions are shifted off target"
         }
       ],
       "answerKey": {
@@ -1496,7 +1496,7 @@
         },
         {
           "id": "d",
-          "label": "It is a weighted average of prior mean and sample proportion, with weights set by prior pseudo-counts (4) and sample size (20)"
+          "label": "It is a weighted average of prior mean and sample proportion, weighted by prior pseudo-counts (4) and n (20)"
         }
       ],
       "answerKey": {
@@ -1519,11 +1519,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Specificity and sensitivity are conditional on test result, so they cannot be combined with prevalence directly"
+          "label": "Sensitivity and specificity are conditional on the test result, so they cannot be combined with prevalence without extra assumptions"
         },
         {
           "id": "b",
-          "label": "The test's 5% false-positive rate is applied to a huge healthy group, so false positives far outnumber the few true positives"
+          "label": "The 5% false-positive rate applies to a huge healthy group, so false positives far outnumber true positives"
         },
         {
           "id": "c",
@@ -1627,15 +1627,15 @@
         },
         {
           "id": "b",
-          "label": "Likelihoods change under reparameterisation, so the same data support different values of p on each scale"
+          "label": "Likelihoods change under reparameterisation, so the same data support different values of p depending on which scale is used"
         },
         {
           "id": "c",
-          "label": "A prior that is flat on one scale is not flat on a nonlinear transformation, so the two priors encode different beliefs about p"
+          "label": "A prior flat on one scale is not flat after a nonlinear transformation, so the two priors encode different beliefs about p"
         },
         {
           "id": "d",
-          "label": "The log-odds prior is improper, so its posterior cannot be compared with the posterior from the proper Uniform(0,1) prior"
+          "label": "The log-odds prior is truncated at ±10, and with little data the posterior depends on that truncation rather than on the prior shape"
         }
       ],
       "answerKey": {
@@ -1694,11 +1694,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Its sampling variance is large relative to between-school variance, so partial pooling gives its own data little weight"
+          "label": "Its sampling variance is large relative to between-school variance, so its own data get little weight"
         },
         {
           "id": "b",
-          "label": "Its raw gain is the largest, and the model always shrinks the most extreme group by a fixed percentage"
+          "label": "Its raw gain is the largest, and the model always shrinks the most extreme group by a fixed percentage toward the grand mean"
         },
         {
           "id": "c",
@@ -1741,7 +1741,7 @@
         },
         {
           "id": "d",
-          "label": "Normal(0, 2.5) on standardised predictors, which regularises the divergence yet leaves room for large plausible effects"
+          "label": "Normal(0, 2.5) on standardised predictors, which regularises the divergence yet allows large effects"
         }
       ],
       "answerKey": {
@@ -2330,7 +2330,7 @@
         },
         {
           "id": "b",
-          "label": "Fill each missing y with the posterior mean from a first fit, then refit treating the filled values as observed"
+          "label": "Fill each missing y with the posterior mean from a first fit, then refit treating the filled values as observed data in a second pass"
         },
         {
           "id": "c",

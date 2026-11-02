@@ -133,6 +133,21 @@ describe('parseEnv', () => {
     expect(() => parseEnv({ ...valid, DATABASE_URL: 'mysql://x@h/db' })).toThrow(EnvValidationError);
   });
 
+  it('refuses the prod database outside production (lead gate, 23 Oct 2026)', () => {
+    const prod = 'postgresql://app:pw@ep-raspy-recipe-bamuza67-pooler.c-8.eu-central-1.aws.neon.tech/neondb?sslmode=require';
+    expect(parseEnv({ ...valid, DATABASE_URL: prod }).DATABASE_URL).toBe(prod);
+    for (const NODE_ENV of ['development', 'test']) {
+      expect(() => parseEnv({ ...valid, NODE_ENV, APP_ORIGIN: 'http://localhost:5173', API_PUBLIC_URL: 'http://localhost:3000', DATABASE_URL: prod })).toThrow(
+        /DATABASE_URL: is the prod database; only NODE_ENV=production may use it/,
+      );
+    }
+    const dev = { ...valid, NODE_ENV: 'development', APP_ORIGIN: 'http://localhost:5173', API_PUBLIC_URL: 'http://localhost:3000' };
+    expect(parseEnv({ ...dev, DATABASE_URL: 'postgresql://app:pw@ep-cold-dew-ba8tyrlc-pooler.c-8.eu-central-1.aws.neon.tech/neondb' }).NODE_ENV).toBe('development');
+    expect(() => parseEnv({ ...dev, PROD_DATABASE_ENDPOINTS: 'ep-cold-dew-ba8tyrlc', DATABASE_URL: 'postgresql://app:pw@ep-cold-dew-ba8tyrlc.c-8.eu-central-1.aws.neon.tech/neondb' })).toThrow(
+      EnvValidationError,
+    );
+  });
+
   it('accepts only safe identifiers for DATABASE_SCHEMA', () => {
     expect(parseEnv({ ...valid, DATABASE_SCHEMA: 'test_20261021100000_ab12cd34' }).DATABASE_SCHEMA).toBe(
       'test_20261021100000_ab12cd34',

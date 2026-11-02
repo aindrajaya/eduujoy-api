@@ -194,7 +194,7 @@
         },
         {
           "id": "c",
-          "label": "P = R / I^2"
+          "label": "P = V^2 * R"
         },
         {
           "id": "d",
@@ -393,7 +393,7 @@
       "stage": "novice",
       "bloom": "C2",
       "kind": "single_choice",
-      "prompt": "A resistor dissipates 2 A at 5 V. How much power does it use?",
+      "prompt": "A resistor carries a current of 2 A with 5 V across it. How much power does it dissipate?",
       "options": [
         {
           "id": "a",
@@ -428,7 +428,7 @@
       "stage": "novice",
       "bloom": "C2",
       "kind": "multi_choice",
-      "prompt": "Which statements correctly describe a capacitor in a DC circuit after it has fully charged? Select all that apply.",
+      "prompt": "A capacitor is connected in series with a resistor to a DC source and has fully charged. Which statements correctly describe the capacitor? Select all that apply.",
       "options": [
         {
           "id": "a",
@@ -1254,7 +1254,7 @@
         },
         {
           "id": "c",
-          "label": "R2 is open, so all 12 V drops across the gap and no current flows"
+          "label": "R2 is open, so all 12 V drops across it and no current flows"
         },
         {
           "id": "d",
@@ -1505,11 +1505,11 @@
         },
         {
           "id": "c",
-          "label": "R1 receives the extra current that R3 can no longer carry because of its smaller value"
+          "label": "R1 receives the extra current that R3 can no longer carry because its smaller resistance blocks flow"
         },
         {
           "id": "d",
-          "label": "The source voltage across R1 increases because parallel branches add their voltages"
+          "label": "The voltage across R1 rises because the smaller resistor in parallel adds its own voltage to the source"
         }
       ],
       "answerKey": {
@@ -1598,34 +1598,30 @@
       "stage": "proficient",
       "bloom": "C4",
       "kind": "single_choice",
-      "prompt": "A 9 V battery with internal resistance 1 ohm powers a load. Terminal voltage reads 8.0 V under load. Which value best matches the load resistance?",
+      "prompt": "A 9 V battery with unknown internal resistance powers a load. With the load connected, the terminal voltage reads 8.0 V and the circuit current is 1 A. Which statement correctly analyses the circuit?",
       "options": [
         {
           "id": "a",
-          "label": "9 ohm"
+          "label": "Internal resistance is 1 ohm and load resistance is 8 ohm, since 1 V drops internally and 8 V across the load at 1 A"
         },
         {
           "id": "b",
-          "label": "72 ohm"
+          "label": "Internal resistance is 8 ohm and load resistance is 1 ohm, since the terminal voltage equals the drop across the internal resistance"
         },
         {
           "id": "c",
-          "label": "8 ohm"
+          "label": "Internal resistance is 1 ohm and load resistance is 9 ohm, since the full EMF appears across the load at 1 A"
         },
         {
           "id": "d",
-          "label": "1 ohm"
+          "label": "Internal resistance is 0.125 ohm and load resistance is 8 ohm, since the internal drop is the terminal voltage divided by 8 ohm"
         }
       ],
       "answerKey": {
         "optionIds": [
-          "c"
+          "a"
         ]
       },
-      "rubric": [
-        "Drop across internal resistance is 1 V so I = 1 A, and load = 8 V / 1 A = 8 ohm.",
-        "Distractors ignore the internal drop or mix up values."
-      ],
       "reviewed": false
     },
     {
@@ -1840,23 +1836,23 @@
       "stage": "proficient",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "Three 100 ohm resistors must replace one 150 ohm resistor. Criteria: exact value using only these parts, fewest parts. Which arrangement is best?",
+      "prompt": "You need a 150 ohm resistance and have only three 100 ohm resistors, all of which must be used. Which arrangement meets the requirement exactly?",
       "options": [
         {
           "id": "a",
-          "label": "Three in series"
+          "label": "All three in series, giving 300 ohm"
         },
         {
           "id": "b",
-          "label": "Two in series, in parallel with the third"
+          "label": "Two in series, in parallel with the third, giving 66.7 ohm"
         },
         {
           "id": "c",
-          "label": "Three in parallel"
+          "label": "All three in parallel, giving 33.3 ohm"
         },
         {
           "id": "d",
-          "label": "Two in parallel, in series with the third"
+          "label": "Two in parallel, in series with the third, giving 150 ohm"
         }
       ],
       "answerKey": {
@@ -1875,7 +1871,7 @@
       "stage": "proficient",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "An LED needs 20 mA at 2 V forward drop. Supply may vary from 4.5 V to 5.5 V. Criteria: LED current never above 30 mA. Which series resistor is the best choice?",
+      "prompt": "An LED needs 20 mA at a 2 V forward drop. The supply may vary from 4.5 V to 5.5 V. The LED current must never exceed 30 mA. Which of these series resistors meets that requirement?",
       "options": [
         {
           "id": "a",
@@ -2130,7 +2126,7 @@
         },
         {
           "id": "b",
-          "label": "A capacitor in series with the load, cancelling its inductive reactance so the line current falls"
+          "label": "A capacitor in series with the load, cancelling its inductive reactance so the line current falls and the load keeps its supply"
         },
         {
           "id": "c",
@@ -2193,7 +2189,7 @@
       "stage": "expert",
       "bloom": "C5",
       "kind": "scenario",
-      "prompt": "A 12 V, 5 A load sits 20 m from its supply on a two-wire copper cable, so the round trip is 40 m (resistivity 0.0175 Ω·mm²/m). Criteria: cable voltage drop of at most 3% of 12 V, using the smallest cross-section that meets it to save cost. Which cable is best?",
+      "prompt": "A 12 V, 5 A load sits 20 m from its supply on a two-wire copper cable, so the round trip is 40 m (resistivity 0.0175 Ω·mm²/m). Criteria: total cable voltage drop of at most 3% of 12 V, using the smallest standard cross-section that meets it to save cost. Standard sizes are 4, 6, 10 and 16 mm². Which cable is best?",
       "options": [
         {
           "id": "a",
@@ -2325,41 +2321,6 @@
       "rubric": [
         "t = RC·ln 3 so R = 10 / (100 µF × 1.0986) ≈ 91 kΩ.",
         "100 kΩ treats t as one time constant (63%); 43 kΩ uses ln 10; 240 kΩ uses ln 1.5."
-      ],
-      "reviewed": false
-    },
-    {
-      "key": "exp-c6-sc4",
-      "stage": "expert",
-      "bloom": "C6",
-      "kind": "single_choice",
-      "prompt": "Design a parallel LC tank, using an ideal 100 µH inductor, that resonates at 1 MHz. Which capacitor value is required?",
-      "options": [
-        {
-          "id": "a",
-          "label": "25.3 nF"
-        },
-        {
-          "id": "b",
-          "label": "1.01 nF"
-        },
-        {
-          "id": "c",
-          "label": "63 pF"
-        },
-        {
-          "id": "d",
-          "label": "253 pF"
-        }
-      ],
-      "answerKey": {
-        "optionIds": [
-          "d"
-        ]
-      },
-      "rubric": [
-        "C = 1/((2πf)²L) ≈ 253 pF.",
-        "1.01 nF drops the factor 4 from (2π)², 63 pF is a further factor of 4 off, and 25.3 nF is a power-of-ten slip."
       ],
       "reviewed": false
     },

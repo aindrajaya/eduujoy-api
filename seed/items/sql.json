@@ -639,7 +639,7 @@
         },
         {
           "id": "b",
-          "label": "A syntax error, because NULL cannot appear after an equals sign"
+          "label": "A syntax error, because NULL cannot appear after an equals sign in a WHERE clause"
         },
         {
           "id": "c",
@@ -647,7 +647,7 @@
         },
         {
           "id": "d",
-          "label": "Every row where phone is empty, because NULL equals NULL"
+          "label": "Only rows where phone is empty, because NULL is equal to another NULL value"
         }
       ],
       "answerKey": {
@@ -859,7 +859,7 @@
         },
         {
           "id": "c",
-          "label": "SELECT c.name, o.total FROM customers c, orders o;"
+          "label": "SELECT c.name, o.total FROM customers c, orders o WHERE o.total > 0 AND c.id > 0;"
         },
         {
           "id": "d",
@@ -2236,15 +2236,15 @@
         },
         {
           "id": "b",
-          "label": "Rank with `ROW_NUMBER() OVER (PARTITION BY category ORDER BY revenue DESC)` and keep `rn <= 3`"
+          "label": "Use `ROW_NUMBER() OVER (PARTITION BY category ORDER BY revenue DESC)` in a subquery and keep `rn <= 3`"
         },
         {
           "id": "c",
-          "label": "Rank with `RANK() OVER (PARTITION BY category ORDER BY revenue DESC)` and keep `rank <= 3`"
+          "label": "Use `RANK() OVER (PARTITION BY category ORDER BY revenue DESC)` in a subquery and keep `rank <= 3`"
         },
         {
           "id": "d",
-          "label": "Rank with `DENSE_RANK() OVER (PARTITION BY category ORDER BY revenue DESC)` in a subquery, then keep `rank <= 3`"
+          "label": "Use `DENSE_RANK() OVER (PARTITION BY category ORDER BY revenue DESC)` in a subquery, keep `rank <= 3`"
         }
       ],
       "answerKey": {

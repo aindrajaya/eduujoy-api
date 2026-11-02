@@ -7,7 +7,7 @@
       "stage": "novice",
       "bloom": "C1",
       "kind": "single_choice",
-      "prompt": "Which type of NoSQL database stores data as unique keys that each map to a value?",
+      "prompt": "Which type of NoSQL database is built around the simplest data model, where each record is looked up only by its unique identifier and the database treats the stored content as opaque?",
       "options": [
         {
           "id": "a",
@@ -579,7 +579,7 @@
         },
         {
           "id": "b",
-          "label": "The database silently drops the data on the smaller side"
+          "label": "Both sides keep serving reads and writes, then reconcile conflicts"
         },
         {
           "id": "c",
@@ -895,7 +895,7 @@
         },
         {
           "id": "b",
-          "label": "No partition key, relying on a full table scan for filtering"
+          "label": "Partition key `user_id`, clustering column `event_id` ascending"
         },
         {
           "id": "c",
@@ -903,7 +903,7 @@
         },
         {
           "id": "d",
-          "label": "Partition key `user_id`, clustering column `timestamp` descending"
+          "label": "Partition key `user_id`, clustering by `timestamp` DESC"
         }
       ],
       "answerKey": {
@@ -1781,7 +1781,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A leaderless replicated store that accepts writes anywhere and merges divergent carts on read"
+          "label": "A leaderless replicated store that accepts writes anywhere and merges carts on read"
         },
         {
           "id": "b",
@@ -1816,7 +1816,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Store each comment as its own post copy so reads never need to touch another document"
+          "label": "Duplicate the post's fields into every comment document so a read never needs a second document"
         },
         {
           "id": "b",
@@ -1828,7 +1828,7 @@
         },
         {
           "id": "d",
-          "label": "Store comments in a separate collection with a post id, to keep post documents small"
+          "label": "Store comments in a separate collection keyed by post id, so post documents stay small and comments can be indexed alone"
         }
       ],
       "answerKey": {
@@ -2247,7 +2247,7 @@
         },
         {
           "id": "c",
-          "label": "PRIMARY KEY (msg_id) plus a secondary index on room_id to find each room's messages"
+          "label": "PRIMARY KEY (msg_id) with a secondary index on room_id, so each room's messages are found by the index"
         },
         {
           "id": "d",
