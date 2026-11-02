@@ -17,8 +17,6 @@ export interface DesignCard {
   prerequisites: string[];
   concepts: { name: string; start: string | null; end: string | null }[];
   keyTakeaways: string[];
-  /** The card's relevance to the topic and stage, 0–100 (resource analysis). */
-  relevance: number;
 }
 
 export interface DesignRequest {

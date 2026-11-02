@@ -96,7 +96,7 @@ export function renderRequest(r: DesignRequest): string {
   const band = BANDS[r.target];
   const cards = r.cards.map((c) =>
     [
-      `${c.alias}: ${c.type}, stage ${c.stage}, Bloom ${c.bloomLevels.join('/')}, relevance ${c.relevance}/100, ${c.durationMin !== null ? `video ${c.durationMin} min` : c.readingMin !== null ? `reading ${c.readingMin} min` : 'length unknown'}`,
+      `${c.alias}: ${c.type}, stage ${c.stage}, Bloom ${c.bloomLevels.join('/')}, ${c.durationMin !== null ? `video ${c.durationMin} min` : c.readingMin !== null ? `reading ${c.readingMin} min` : 'length unknown'}`,
       wrapUntrusted(`${c.alias}-title`, `${c.title} (${c.source})`),
       c.prerequisites.length ? wrapUntrusted(`${c.alias}-prerequisites`, c.prerequisites.join('; ')) : `${c.alias} prerequisites: none`,
       c.concepts.length
