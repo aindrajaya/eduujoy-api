@@ -51,10 +51,32 @@ describe('selectCards and the step cap', () => {
   });
 });
 
-describe('coreConcepts', () => {
-  it('ranks the cards’ concepts by how many cards teach them, then first seen, case-insensitively', () => {
-    const named = (n: number, names: string[]) => card(n, { concepts: names.map((name) => ({ name, start: null, end: null })) });
-    expect(coreConcepts([named(1, ['Loops', 'Variables']), named(2, ['variables', 'Lists']), named(3, ['Variables', 'Variables'])])).toEqual(['Variables', 'Loops', 'Lists']);
-    expect(coreConcepts([named(1, ['A', 'B', 'C'])], 2)).toEqual(['A', 'B']);
+describe('coreConcepts (denoised, lead 2 Nov 2026)', () => {
+  const named = (n: number, names: string[], stage: ServedCard['stage'] = 'novice') => card(n, { stage, concepts: names.map((name) => ({ name, start: null, end: null })) });
+  const novice = { stages: ['novice'], target: 'novice' };
+
+  it('ranks concepts taught by at least 2 cards, most common first, case-insensitively', () => {
+    const cards = [named(1, ['Loops', 'Variables', 'A', 'B']), named(2, ['variables', 'Lists', 'Loops', 'A', 'B']), named(3, ['Variables', 'Variables', 'Tuples'])];
+    expect(coreConcepts(cards, novice)).toEqual(['Variables', 'Loops', 'A', 'B']);
+    expect(coreConcepts([named(1, ['A', 'B']), named(2, ['A', 'B'])], novice, 1)).toEqual(['A']);
+  });
+
+  it('fills up to 4 from single-card concepts when few are shared, most common first', () => {
+    const cards = [named(1, ['Loops', 'Variables']), named(2, ['variables', 'Lists']), named(3, ['Tuples'])];
+    expect(coreConcepts(cards, novice)).toEqual(['Variables', 'Loops', 'Lists', 'Tuples']);
+    expect(coreConcepts([named(1, ['Only'])], novice)).toEqual(['Only']);
+  });
+
+  it("counts only cards of the path's own stages", () => {
+    const cards = [named(1, ['Joins'], 'competent'), named(2, ['Joins'], 'expert'), named(3, ['Joins'], 'competent'), named(4, ['Window functions'], 'expert'), named(5, ['Window functions'], 'expert')];
+    // Window functions are taught only by expert cards, outside the path's stages.
+    expect(coreConcepts(cards, { stages: ['competent', 'proficient'], target: 'proficient' })).toEqual(['Joins']);
+  });
+
+  it('drops meta terms, and OOP terms for a novice-band path only', () => {
+    const cards = [named(1, ['Installation', 'Classes', 'API Reference', 'Loops']), named(2, ['installation', 'Classes', 'API reference', 'Loops'])];
+    expect(coreConcepts(cards, novice)).toEqual(['Loops']);
+    const competent = cards.map((c) => ({ ...c, stage: 'competent' as const }));
+    expect(coreConcepts(competent, { stages: ['competent'], target: 'proficient' })).toEqual(['Classes', 'Loops']);
   });
 });

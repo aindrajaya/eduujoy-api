@@ -28,7 +28,7 @@ export function buildEvalRequest(
     budgetMinutes: Math.round(c.weeklyHours * 60 * PATH_LENGTH_WEEKS),
     formats: c.formats,
     cards: design,
-    coreConcepts: coreConcepts(selection.cards),
+    coreConcepts: coreConcepts(selection.cards, { stages: target === c.placement.stage ? [target] : [c.placement.stage, target], target }),
     formatFallback: selection.formatFallback,
     budgetScope: 'operator',
   };

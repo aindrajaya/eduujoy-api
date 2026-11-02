@@ -168,7 +168,8 @@ describe('GeneratePath (A9)', () => {
     const t = setup({ pools: { competent: { pool: pool('ready'), cards: [withConcepts(3, ['Effects', 'Cleanup']), withConcepts(4, ['Effects']), withConcepts(5, ['Reducers', 'effects'])] } } });
 
     await t.handler.run(t.payload, t.ctx);
-    expect(t.requests[0]?.coreConcepts.slice(0, 3)).toEqual(['Effects', 'Cleanup', 'Reducers']);
+    // Effects: three cards; Cleanup: two (one competent, the placement-stage video); Reducers fills up from one card.
+    expect(t.requests[0]?.coreConcepts).toEqual(['Effects', 'Cleanup', 'Reducers']);
   });
 
   it('regenerates once with the validator errors, then saves', async () => {

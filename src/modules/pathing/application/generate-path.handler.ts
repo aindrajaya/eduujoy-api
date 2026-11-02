@@ -85,7 +85,7 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
       budgetMinutes: Math.round(weeklyHours * 60 * PATH_LENGTH_WEEKS),
       formats: payload.formats,
       cards: design,
-      coreConcepts: coreConcepts(selection.cards),
+      coreConcepts: coreConcepts(selection.cards, { stages: payload.stages, target: path.to.stage }),
       formatFallback: selection.formatFallback,
       jobId: ctx.jobId,
       budgetScope: payload.budgetScope,

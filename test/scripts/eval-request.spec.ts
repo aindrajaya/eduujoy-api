@@ -53,6 +53,8 @@ describe('the eval designer input (lead, 2 Nov 2026: references must never reach
     expect(renderRequest(request)).not.toContain(SENTINEL);
     expect(Object.keys(request)).not.toEqual(expect.arrayContaining(['reference']));
     // What it does carry comes from the learner fields and the pool.
-    expect(request).toMatchObject({ goal: 'Read scripts at work', weeklyHours: 2, coreConcepts: ['Variables'], target: 'novice' });
+    expect(request).toMatchObject({ goal: 'Read scripts at work', weeklyHours: 2, target: 'novice' });
+    // One card teaches Variables: below two shared concepts, single-card ones fill the list.
+    expect(request.coreConcepts).toEqual(['Variables']);
   });
 });
