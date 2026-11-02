@@ -15,7 +15,7 @@ import { SPEND_CAP_USD, usd } from './pricing';
 //
 //   pnpm seed:taxonomy [--dry-run] [--sample N] [--go]
 //   pnpm seed:items [--dry-run] [--sample N] [--go]     (--sample N: N topics, all five stages)
-//   pnpm seed:items-review [--dry-run] [--sample N] [--min-margin F] [--go]   (flagged items only; --sample N: top N)
+//   pnpm seed:items-review [--dry-run] [--sample N] [--min-margin F | --all-items] [--limit N] [--go]   (flagged items, or every unreviewed item)
 //   pnpm seed:items-apply [--dry-run]   (free: applies review verdicts to seed/items, parser-checked)
 //   pnpm seed:topics-refine [--dry-run] [--sample N] [--min-cosine F | --topics a,b,c] [--go]   (near-neighbour topics: description and aliases)
 //   pnpm seed:path-eval --stage plan|draft|review|assemble [--only smoke|rest|all] [--dry-run] [--sample N] [--go] [--pregen file] [--expect-cases N]
@@ -41,6 +41,8 @@ async function main(): Promise<void> {
       only: { type: 'string', default: 'all' },
       pregen: { type: 'string' },
       'expect-cases': { type: 'string' },
+      'all-items': { type: 'boolean', default: false },
+      limit: { type: 'string' },
     },
   });
   const command = positionals[0];
@@ -61,7 +63,8 @@ async function main(): Promise<void> {
       const sample = values.sample === undefined ? undefined : positiveInt(values.sample, '--sample');
       const minMargin = Number(values['min-margin']);
       if (!(minMargin >= 0 && minMargin < 1)) throw new Error('--min-margin must be a fraction from 0 to under 1');
-      await runReview({ dryRun: values['dry-run'], go: values.go, sample, minMargin });
+      const limit = values.limit === undefined ? undefined : positiveInt(values.limit, '--limit');
+      await runReview({ dryRun: values['dry-run'], go: values.go, sample, minMargin, allItems: values['all-items'], limit });
       return;
     }
     case 'items-apply': {
