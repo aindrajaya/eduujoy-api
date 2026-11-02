@@ -4,6 +4,8 @@ import { type ReviewFlag, type ReviewQueue } from '../../../shared/common/review
 import { type DomainEvent, type UnitOfWork } from '../../../shared/events';
 import { type JobContext, JobWaitExpiredError, RescheduleJob } from '../../../shared/jobs';
 import { type GetTopicProfileQuery } from '../../catalog/application/get-topic-profile.query';
+import { type GetConceptMapQuery } from '../../catalog/application/get-concept-map.query';
+import { type ConceptMap } from '../../../shared/common/concept-map';
 import { type PoolSnapshot, type ServedCard } from '../../discovery/application/ports/card.reader';
 import { type RequestDiscovery } from '../../discovery/application/request-discovery.usecase';
 import { type ServedCardsQuery } from '../../discovery/application/served-cards.query';
@@ -54,7 +56,7 @@ const pool = (status: PoolSnapshot['status'], over: Partial<PoolSnapshot> = {}):
   ...over,
 });
 
-function setup(opts: { designs?: DesignedPath['steps'][]; pools?: Partial<Record<string, { pool: PoolSnapshot | null; cards: ServedCard[] }>>; status?: PathStatus; discovery?: string } = {}) {
+function setup(opts: { designs?: DesignedPath['steps'][]; pools?: Partial<Record<string, { pool: PoolSnapshot | null; cards: ServedCard[] }>>; status?: PathStatus; discovery?: string; map?: ConceptMap } = {}) {
   const path: PathRecord = {
     id: PATH_ID,
     userId: 'u-1',
@@ -117,7 +119,8 @@ function setup(opts: { designs?: DesignedPath['steps'][]; pools?: Partial<Record
     progress: (stage, done, total, message) => (progress.push([stage, done, total, message]), Promise.resolve()),
     partial: (data) => (partials.push(data), Promise.resolve()),
   };
-  const handler = new GeneratePath(repo, designer, served, discovery, topics, reviews, uow, refund, { language: 'en' });
+  const maps = { execute: () => Promise.resolve(opts.map ?? null) } as unknown as GetConceptMapQuery;
+  const handler = new GeneratePath(repo, designer, served, discovery, topics, maps, reviews, uow, refund, { language: 'en' });
   const payload: GeneratePathPayload = { pathId: PATH_ID, topicId: TOPIC_ID, stages: ['advanced_beginner', 'competent'], budgetScope: 'paid', formats: [] };
   return { handler, payload, ctx, path, saved, statuses, requests, discoveryCalls, flags, events, refunds, progress, partials };
 }
@@ -170,6 +173,36 @@ describe('GeneratePath (A9)', () => {
     await t.handler.run(t.payload, t.ctx);
     // Effects: three cards; Cleanup: two (one competent, the placement-stage video); Reducers fills up from one card.
     expect(t.requests[0]?.coreConcepts).toEqual(['Effects', 'Cleanup', 'Reducers']);
+  });
+
+  it("gives the designer the topic's stored concept map for the path's stages, and enforces its order (user, 3 Nov 2026)", async () => {
+    const stage = (name: ConceptMap['stages'][number]['stage'], p: string, prerequisites: [string, string][] = []) => ({
+      stage: name,
+      bloomBand: ['C3' as const],
+      concepts: [1, 2].map((n) => ({ id: `${p}-${n}`, name: `${p} ${n}`, aliases: [], bloom: 'C3' as const, summary: '' })),
+      prerequisites,
+      misconceptions: [],
+    });
+    const map: ConceptMap = {
+      version: 1,
+      topic: 'react-hooks',
+      language: 'en',
+      stages: [stage('novice', 'nov'), stage('advanced_beginner', 'adb'), stage('competent', 'com', [['adb-1', 'com-1']]), stage('proficient', 'pro'), stage('expert', 'exp')],
+    };
+    const backwards = VALID.map((s, i) => ({ ...s, concepts: i === 0 ? ['com-1'] : i === 1 ? ['adb-1'] : [] }));
+    const t = setup({ map, designs: [backwards, VALID] });
+
+    await t.handler.run(t.payload, t.ctx);
+    expect(t.requests[0]?.conceptMap?.stages.map((s) => s.stage)).toEqual(['advanced_beginner', 'competent']);
+    expect(t.requests[0]?.conceptMap?.prerequisites).toEqual([['adb-1', 'com-1']]);
+    expect(t.requests[1]?.feedback).toEqual(['Step 1 teaches com-1 before adb-1, which it depends on (first taught in step 2); reorder so adb-1 comes first.']);
+    expect(t.saved).toHaveLength(1);
+  });
+
+  it('designs without a map when the topic has none', async () => {
+    const t = setup();
+    await t.handler.run(t.payload, t.ctx);
+    expect(t.requests[0]?.conceptMap).toBeNull();
   });
 
   it('regenerates once with the validator errors, then saves', async () => {

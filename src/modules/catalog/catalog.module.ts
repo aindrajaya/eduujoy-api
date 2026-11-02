@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { EmbedTopics } from './application/embed-topics.usecase';
+import { GetConceptMapQuery } from './application/get-concept-map.query';
+import { CONCEPT_MAP_READER } from './application/ports/concept-map.reader';
+import { DrizzleConceptMapReader } from './infrastructure/drizzle-concept-map.reader';
 import { GetTopicProfileQuery } from './application/get-topic-profile.query';
 import { GetTopicQuery } from './application/get-topic.query';
 import { TOPIC_NORMALIZER } from './application/ports/topic-normalizer';
@@ -18,13 +21,15 @@ import { CatalogAccountData } from './infrastructure/catalog-account-data';
   providers: [
     GetTopicQuery,
     GetTopicProfileQuery,
+    GetConceptMapQuery,
     ResolveTopic,
     EmbedTopics,
     { provide: TOPIC_REPOSITORY, useClass: DrizzleTopicRepository },
+    { provide: CONCEPT_MAP_READER, useClass: DrizzleConceptMapReader },
     { provide: TOPIC_NORMALIZER, useClass: HaikuTopicNormalizer },
     { provide: TOPIC_BANKS, useClass: DrizzleTopicBanks },
     { provide: ACCOUNT_DATA.catalog, useClass: CatalogAccountData },
   ],
-  exports: [GetTopicQuery, GetTopicProfileQuery, EmbedTopics, ACCOUNT_DATA.catalog],
+  exports: [GetTopicQuery, GetTopicProfileQuery, GetConceptMapQuery, EmbedTopics, ACCOUNT_DATA.catalog],
 })
 export class CatalogModule {}

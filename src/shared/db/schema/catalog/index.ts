@@ -5,6 +5,7 @@ import {
   check,
   index,
   integer,
+  jsonb,
   pgEnum,
   pgTable,
   primaryKey,
@@ -65,3 +66,19 @@ export const topicPrerequisites = pgTable(
     check('topic_prerequisites_no_self_edge', sql`${t.topicId} <> ${t.prerequisiteId}`),
   ],
 );
+
+/**
+ * A seed topic's concept map (seed/concept-maps, user 3 Nov 2026): per stage, the concepts to teach,
+ * their prerequisite pairs and misconceptions (shared/common/concept-map). Loaded by db:seed (upsert,
+ * never deleted); read by pathing through the catalog's GetConceptMapQuery, never from files at runtime.
+ */
+export const topicConceptMaps = pgTable('topic_concept_maps', {
+  topicId: uuid('topic_id')
+    .primaryKey()
+    .references(() => topics.id, { onDelete: 'cascade' }),
+  version: integer('version').notNull(),
+  promptVersion: text('prompt_version').notNull(),
+  map: jsonb('map').notNull(),
+  ...withCreatedAt,
+  ...withUpdatedAt,
+});

@@ -13,6 +13,8 @@ export const conceptMapSchema = z.object({
   version: z.literal(1),
   topic: z.string().min(1).max(200),
   language: z.string().regex(/^[a-z]{2}$/),
+  /** The generator prompt's version (provenance). */
+  promptVersion: z.string().min(1).max(20).optional(),
   stages: z
     .array(
       z.object({

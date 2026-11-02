@@ -16,7 +16,7 @@ const ROOT = join(__dirname, '..', '..');
 // it loads and wires everything, then exits without connecting or calling a provider.
 const CLIS = [
   { script: 'db:migrate', file: 'src/shared/db/cli/migrate.ts', args: [], out: 'db:migrate: ok' },
-  { script: 'db:seed', file: 'src/shared/db/cli/seed.ts', args: ['--dir', 'seed'], out: 'db:seed: ok (160 topics)' },
+  { script: 'db:seed', file: 'src/shared/db/cli/seed.ts', args: ['--dir', 'seed'], out: 'db:seed: ok (160 topics, 160 concept maps)' },
   { script: 'db:audit', file: 'scripts/ops/audit-db.ts', args: [], out: 'db:audit: ok' },
   { script: 'catalog:embed-topics', file: 'scripts/catalog/embed-topics.ts', args: [], out: 'catalog:embed-topics: ok (EmbedTopics)' },
   { script: 'billing:reprocess', file: 'scripts/billing/reprocess.ts', args: [], out: 'billing:reprocess: ok (ReprocessBillingEvent)' },
@@ -24,7 +24,7 @@ const CLIS = [
   { script: 'discovery:verify-video', file: 'scripts/discovery/verify-video.ts', args: [], out: 'discovery:verify-video: ok (GeminiResourceAnalyzer)' },
   { script: 'discovery:pregen', file: 'scripts/discovery/pregen.ts', args: [], out: 'discovery:pregen: ok (50 topics, 150 pools)' },
   { script: 'discovery:pregen (per-topic stages)', file: 'scripts/discovery/pregen.ts', args: ['--topics', 'test/fixtures/pregen/per-topic-stages.json'], out: 'discovery:pregen: ok (2 topics, 4 pools)' },
-  { script: 'eval:paths', file: 'scripts/eval/paths.ts', args: [], out: 'eval:paths: ok (ClaudePathDesigner v3, judge v2)' },
+  { script: 'eval:paths', file: 'scripts/eval/paths.ts', args: [], out: 'eval:paths: ok (ClaudePathDesigner v5, judge v3)' },
 ];
 
 describe('CLI boot (integration)', () => {

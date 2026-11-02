@@ -4,6 +4,8 @@ import { ReviewQueue } from '../../../shared/common/review';
 import { UnitOfWork } from '../../../shared/events';
 import { type JobContext, type JobHandler, JobWaitExpiredError, type JobOutcome, NonRetryableJobError, RescheduleJob } from '../../../shared/jobs';
 import { GetTopicProfileQuery } from '../../catalog/application/get-topic-profile.query';
+import { GetConceptMapQuery } from '../../catalog/application/get-concept-map.query';
+import { conceptMapCheck, pathConceptMap } from '../../../shared/common/concept-map';
 import { type ServedCard } from '../../discovery/application/ports/card.reader';
 import { RequestDiscovery } from '../../discovery/application/request-discovery.usecase';
 import { ServedCardsQuery } from '../../discovery/application/served-cards.query';
@@ -47,6 +49,7 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
     private readonly served: ServedCardsQuery,
     private readonly discovery: RequestDiscovery,
     private readonly topics: GetTopicProfileQuery,
+    private readonly maps: GetConceptMapQuery,
     private readonly reviews: ReviewQueue,
     private readonly uow: UnitOfWork,
     private readonly refund: RefundPathCharge,
@@ -76,6 +79,9 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
     const selection = selectCards(cards, { language: this.settings.language, formats: payload.formats, stepMax: stepMaxMinutes(weeklyHours) });
     if (selection.cards.length === 0) throw new NonRetryableJobError(`No usable resources in ${this.settings.language} for this topic and stage`);
     const { design, validate, byAlias } = aliasPool(selection.cards);
+    // The stored map for the path's stages (catalog, topic_concept_maps); learner topics have none.
+    const stored = await this.maps.execute(path.topicId);
+    const conceptMap = stored ? pathConceptMap(stored, payload.stages) : null;
     const request = {
       topic: { name: topic.canonicalName, domain: topic.domain ?? 'unknown' },
       placement: path.from,
@@ -88,8 +94,7 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
       cards: design,
       coreConcepts: coreConcepts(selection.cards, { stages: payload.stages, target: path.to.stage }),
       formatFallback: selection.formatFallback,
-      // Wired to the catalog's stored maps in the next commit (fix 4, production wiring).
-      conceptMap: null,
+      conceptMap,
       jobId: ctx.jobId,
       budgetScope: payload.budgetScope,
       signal: ctx.signal,
@@ -98,7 +103,7 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
     const { designed, errors, flags, attempts } = await designPath(
       this.designer,
       request,
-      { pool: validate, placementBloom: path.from.bloom, target: path.to.stage, weeklyHours },
+      { pool: validate, placementBloom: path.from.bloom, target: path.to.stage, weeklyHours, conceptMap: conceptMapCheck(conceptMap) },
       (phase, attempt) =>
         phase === 'design' ? ctx.progress('design', attempt - 1, 2, attempt === 1 ? 'Designing your path' : 'Fixing the plan') : ctx.progress('validate', attempt, 2),
     );
