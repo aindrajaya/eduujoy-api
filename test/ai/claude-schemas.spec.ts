@@ -1,5 +1,5 @@
 import { type ZodType } from 'zod';
-import { judgeSchema } from '../../scripts/eval/path-eval-rules';
+import { judgeSchema, legacyJudgeSchema } from '../../scripts/eval/path-eval-rules';
 import { NORMALISED_TOPIC_SCHEMA } from '../../src/modules/catalog/infrastructure/haiku-topic-normalizer';
 import { designSchema } from '../../src/modules/pathing/infrastructure/claude-path-designer';
 import { claudeRejectedKeys, toClaudeSchema, toStructuredSchema } from '../../src/shared/ai/json-schema';
@@ -14,6 +14,7 @@ const CLAUDE_SCHEMAS: Record<string, ZodType> = {
   'catalog topic-normalise (Haiku)': NORMALISED_TOPIC_SCHEMA,
   'pathing path-designer (Sonnet)': designSchema,
   'eval path-judge (Sonnet)': judgeSchema,
+  'eval path-judge v1/v2 (Sonnet)': legacyJudgeSchema,
 };
 
 describe('schemas sent to Claude', () => {
@@ -25,7 +26,8 @@ describe('schemas sent to Claude', () => {
     const before = Object.fromEntries(Object.entries(CLAUDE_SCHEMAS).map(([name, schema]) => [name, claudeRejectedKeys(toStructuredSchema(schema))]));
     expect(before['catalog topic-normalise (Haiku)']).toEqual(['$.properties.aliases.maxItems']);
     expect(before['pathing path-designer (Sonnet)']).toHaveLength(17);
-    expect(before['eval path-judge (Sonnet)']).toHaveLength(10);
+    expect(before['eval path-judge (Sonnet)']).toHaveLength(12);
+    expect(before['eval path-judge v1/v2 (Sonnet)']).toHaveLength(10);
   });
 
   it('still enforces the stripped bounds on the reply (Zod)', () => {

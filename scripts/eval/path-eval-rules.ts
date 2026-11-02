@@ -72,30 +72,43 @@ export function estimate(cases: number, missingPools: number): { poolsUsd: numbe
   return { poolsUsd, pathsUsd, totalUsd: round(poolsUsd + pathsUsd) };
 }
 
-export const DIMENSIONS = ['prerequisiteOrder', 'bloomProgression', 'resourceFit', 'timeRealism'] as const;
+/** Judge v3 and later (lead, 3 Nov 2026; master Gate B): coverage split out of prerequisiteOrder. */
+export const DIMENSIONS = ['prerequisiteOrder', 'bloomProgression', 'resourceFit', 'timeRealism', 'coverage'] as const;
 export type Dimension = (typeof DIMENSIONS)[number];
+/** Judge v1 and v2: four dimensions, missing concepts scored under prerequisiteOrder. Kept for comparison. */
+export const LEGACY_DIMENSIONS = ['prerequisiteOrder', 'bloomProgression', 'resourceFit', 'timeRealism'] as const satisfies readonly Dimension[];
+
+/** The dimensions a judge prompt version scores. */
+export function dimensionsFor(judgeVersion: string): readonly Dimension[] {
+  return judgeVersion === 'v1' || judgeVersion === 'v2' ? LEGACY_DIMENSIONS : DIMENSIONS;
+}
 
 export interface CaseResult {
   id: string;
   /** Null when the path failed validation twice (it would go to review): it scores 1 everywhere. */
-  scores: Record<Dimension, number> | null;
+  /** The dimensions its judge version scores (v1/v2 have no coverage). */
+  scores: Partial<Record<Dimension, number>> | null;
   /** Resources the path cited that were not in its pool. */
   badLinks: number;
 }
 
-/** Master §11 ship gate: mean ≥ 4.0 on every dimension and 0 invented or dead links. */
-export function summarise(results: CaseResult[]): { means: Record<Dimension, number>; badLinks: number; underReview: number; pass: boolean } {
-  const means = Object.fromEntries(
-    DIMENSIONS.map((d) => [d, results.length ? Math.round((results.reduce((n, r) => n + (r.scores?.[d] ?? 1), 0) / results.length) * 100) / 100 : 0]),
-  ) as Record<Dimension, number>;
+/** Master §11 ship gate: mean ≥ 4.0 on every scored dimension and 0 invented or dead links. */
+export function summarise(
+  results: CaseResult[],
+  dimensions: readonly Dimension[] = DIMENSIONS,
+): { means: Partial<Record<Dimension, number>>; badLinks: number; underReview: number; pass: boolean } {
+  const means: Partial<Record<Dimension, number>> = Object.fromEntries(
+    dimensions.map((d) => [d, results.length ? Math.round((results.reduce((n, r) => n + (r.scores?.[d] ?? 1), 0) / results.length) * 100) / 100 : 0]),
+  );
   const badLinks = results.reduce((n, r) => n + r.badLinks, 0);
   const underReview = results.filter((r) => r.scores === null).length;
-  return { means, badLinks, underReview, pass: results.length > 0 && DIMENSIONS.every((d) => means[d] >= 4) && badLinks === 0 };
+  return { means, badLinks, underReview, pass: results.length > 0 && dimensions.every((d) => (means[d] ?? 0) >= 4) && badLinks === 0 };
 }
 
-/** The judge's answer (prompt path-judge); also in the Claude schema registry test. */
+/** The judge's answer (prompt path-judge); both are in the Claude schema registry test. */
 const score = z.object({ score: z.number().int().min(1).max(5), reason: z.string().min(1).max(600) });
-export const judgeSchema = z.object({
+/** Judge v1 and v2. */
+export const legacyJudgeSchema = z.object({
   prerequisiteOrder: score,
   bloomProgression: score,
   resourceFit: score,
@@ -103,3 +116,10 @@ export const judgeSchema = z.object({
   missingConcepts: z.array(z.string().max(200)).max(20),
   misconceptionsReinforced: z.array(z.string().max(300)).max(10),
 });
+/** Judge v3 and later: adds coverage. */
+export const judgeSchema = legacyJudgeSchema.extend({ coverage: score });
+export type JudgeOutput = z.infer<typeof legacyJudgeSchema> & { coverage?: z.infer<typeof score> };
+
+export function judgeSchemaFor(judgeVersion: string): typeof judgeSchema | typeof legacyJudgeSchema {
+  return dimensionsFor(judgeVersion) === LEGACY_DIMENSIONS ? legacyJudgeSchema : judgeSchema;
+}

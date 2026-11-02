@@ -10,7 +10,6 @@ import { designPath } from '../../src/modules/pathing/application/design-loop';
 import { ClaudePathDesigner } from '../../src/modules/pathing/infrastructure/claude-path-designer';
 import { BANDS, type Stage, targetStage } from '../../src/modules/pathing/domain';
 import { type DesignedStep } from '../../src/modules/pathing/application/ports/path-designer';
-import { type z } from 'zod';
 import { PromptRegistry, type StructuredGenerator, wrapUntrusted } from '../../src/shared/ai';
 import { ClaudeStructuredGenerator } from '../../src/shared/ai/claude/claude.generator';
 import { DrizzleLlmCallRecorder } from '../../src/shared/ai/metering/llm-call.recorder';
@@ -22,7 +21,7 @@ import { guardPool, POOL_SETTINGS } from '../../src/shared/db/db.module';
 import { describeError } from '../../src/shared/db/redact';
 import { topics } from '../../src/shared/db/schema/catalog';
 import { buildEvalRequest } from './eval-request';
-import { CASE_RESERVE_USD, type CaseResult, caseStages, DIMENSIONS, estimate, type EvalCase, evalFile, judgeSchema, poolsNeeded, selectCases, summarise } from './path-eval-rules';
+import { CASE_RESERVE_USD, type CaseResult, caseStages, type Dimension, dimensionsFor, estimate, type EvalCase, evalFile, type JudgeOutput, judgeSchemaFor, poolsNeeded, selectCases, summarise } from './path-eval-rules';
 
 // Run by the user (A9, Q8): `pnpm eval:paths [--smoke] [--ids pe-001,pe-002] [--cases seed/_eval/path-eval-v1.json]
 // [--cap 6] [--dry-run]` (node --env-file=.env), against a database whose pools exist (pregen, or the smoke).
@@ -146,7 +145,7 @@ async function main(): Promise<void> {
       try {
         results.push(await evaluate(run, c, bySlug.get(c.topic) as { id: string; name: string; domain: string | null }));
         const last = results.at(-1);
-        process.stdout.write(`${c.id} ${c.topic}: ${last?.scores ? DIMENSIONS.map((d) => last.scores?.[d]).join('/') : 'under review'} ($${String(last?.['costUsd'])})\n`);
+        process.stdout.write(`${c.id} ${c.topic}: ${last?.scores ? dims(run).map((d) => last.scores?.[d]).join('/') : 'under review'} ($${String(last?.['costUsd'])})\n`);
       } catch (error) {
         const calls = run.meter.take();
         process.stdout.write(`${c.id} ${c.topic}: FAILED, ${describeError(error)}\n`);
@@ -154,9 +153,10 @@ async function main(): Promise<void> {
       }
     }
 
-    const gate = summarise(results);
+    const gate = summarise(results, dims(run));
     const summary = {
       at: new Date().toISOString(),
+      judgeVersion: activeJudgeVersion(run),
       cases: cases.length,
       judged: results.length,
       skipped: cases.length - runnable.length,
@@ -208,11 +208,10 @@ async function evaluate(run: EvalRun, c: EvalCase, topic: { id: string; name: st
   }
 
   const output = await judge(run, c, topic, target, outcome.designed.steps, byAlias);
-  const scores = Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].score])) as CaseResult['scores'];
   return {
     ...base,
-    scores,
-    reasons: Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].reason])),
+    scores: scoresOf(run, output),
+    reasons: reasonsOf(run, output),
     missingConcepts: output.missingConcepts,
     misconceptionsReinforced: output.misconceptionsReinforced,
     costUsd: round(run.meter.take().reduce((n, x) => n + x.costUsd, 0)),
@@ -227,7 +226,7 @@ async function judge(
   target: Stage,
   steps: DesignedStep[],
   byAlias: Map<string, ServedCard>,
-): Promise<z.infer<typeof judgeSchema>> {
+): Promise<JudgeOutput> {
   const path = steps.map((s) => ({
     n: s.n,
     bloom: s.bloom,
@@ -256,12 +255,30 @@ async function judge(
     model: JUDGE_MODEL,
     prompt: run.prompts.get(JUDGE_PROMPT, judgeVersion()),
     input,
-    schema: judgeSchema,
+    schema: judgeSchemaFor(activeJudgeVersion(run)),
     maxTokens: 4_000,
     effort: 'medium',
     budgetScope: 'operator',
   });
   return output;
+}
+
+/** The judge prompt version this run uses (`--judge-version`, or the latest). */
+function activeJudgeVersion(run: EvalRun): string {
+  return run.prompts.get(JUDGE_PROMPT, judgeVersion()).version;
+}
+
+/** The dimensions this run's judge scores: four up to v2, five (with coverage) from v3. */
+function dims(run: EvalRun): readonly Dimension[] {
+  return dimensionsFor(activeJudgeVersion(run));
+}
+
+function scoresOf(run: EvalRun, output: JudgeOutput): CaseResult['scores'] {
+  return Object.fromEntries(dims(run).map((d) => [d, output[d]?.score ?? 1]));
+}
+
+function reasonsOf(run: EvalRun, output: JudgeOutput): Record<string, string> {
+  return Object.fromEntries(dims(run).map((d) => [d, output[d]?.reason ?? '']));
 }
 
 /** `--judge-version v1` re-judges with an earlier yardstick; the latest by default. */
@@ -301,13 +318,13 @@ async function rejudge(run: EvalRun, reportPath: string, cases: EvalCase[], capU
     }
     run.meter.take();
     const output = await judge(run, c, topic, targetStage(c.placement.stage), saved.path, byAlias);
-    const scores = Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].score])) as CaseResult['scores'];
+    const scores = scoresOf(run, output);
     const costUsd = round(run.meter.take().reduce((n, x) => n + x.costUsd, 0));
-    results.push({ id: c.id, scores, badLinks: 0, reasons: Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].reason])), missingConcepts: output.missingConcepts, misconceptionsReinforced: output.misconceptionsReinforced, costUsd, before: saved['scores'] });
-    process.stdout.write(`${c.id} ${c.topic}: ${DIMENSIONS.map((d) => scores?.[d]).join('/')} (was ${DIMENSIONS.map((d) => (saved['scores'] as Record<string, number> | null)?.[d] ?? '-').join('/')}) ($${costUsd})\n`);
+    results.push({ id: c.id, scores, badLinks: 0, reasons: reasonsOf(run, output), missingConcepts: output.missingConcepts, misconceptionsReinforced: output.misconceptionsReinforced, costUsd, before: saved['scores'] });
+    process.stdout.write(`${c.id} ${c.topic}: ${dims(run).map((d) => scores?.[d]).join('/')} (was ${dims(run).map((d) => (saved['scores'] as Record<string, number> | null)?.[d] ?? '-').join('/')}) ($${costUsd})\n`);
   }
-  const gate = summarise(results);
-  const summary = { at: new Date().toISOString(), rejudged: reportPath, judgeVersion: run.prompts.get(JUDGE_PROMPT, judgeVersion()).version, ...gate, totalSpentUsd: round(run.meter.total), capUsd };
+  const gate = summarise(results, dims(run));
+  const summary = { at: new Date().toISOString(), rejudged: reportPath, judgeVersion: activeJudgeVersion(run), ...gate, totalSpentUsd: round(run.meter.total), capUsd };
   const dir = join(__dirname, '..', '..', '.smoke');
   mkdirSync(dir, { recursive: true });
   const out = join(dir, `eval-paths-rejudge-${summary.at.replace(/[:.]/g, '-')}.json`);

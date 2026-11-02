@@ -1,4 +1,4 @@
-import { caseStages, estimate, type EvalCase, evalFile, poolsNeeded, selectCases, summarise } from '../../scripts/eval/path-eval-rules';
+import { caseStages, dimensionsFor, judgeSchema, judgeSchemaFor, LEGACY_DIMENSIONS, legacyJudgeSchema, poolsNeeded, selectCases, estimate, summarise, type EvalCase, evalFile } from '../../scripts/eval/path-eval-rules';
 
 const base = (id: string, topic: string, stage: EvalCase['placement']['stage'], bloom: string, smoke = true): EvalCase => ({
   id,
@@ -45,7 +45,7 @@ describe('path eval rules', () => {
   });
 
   it('passes the gate only at a mean of 4.0 on every dimension with no bad links, counting review as 1', () => {
-    const good = { prerequisiteOrder: 5, bloomProgression: 4, resourceFit: 4, timeRealism: 4 };
+    const good = { prerequisiteOrder: 5, bloomProgression: 4, resourceFit: 4, timeRealism: 4, coverage: 4 };
     expect(summarise([{ id: 'a', scores: good, badLinks: 0 }])).toMatchObject({ pass: true, underReview: 0 });
     expect(summarise([{ id: 'a', scores: good, badLinks: 1 }]).pass).toBe(false);
     const withReview = summarise([
@@ -54,5 +54,18 @@ describe('path eval rules', () => {
     ]);
     expect(withReview).toMatchObject({ means: { prerequisiteOrder: 3, resourceFit: 3 }, underReview: 1, pass: false });
     expect(summarise([]).pass).toBe(false);
+  });
+
+  it('scores coverage from judge v3, and only the four legacy dimensions for v1 and v2 (lead, 3 Nov 2026)', () => {
+    expect(dimensionsFor('v2')).toEqual(LEGACY_DIMENSIONS);
+    expect(dimensionsFor('v1')).toEqual(LEGACY_DIMENSIONS);
+    expect(dimensionsFor('v3')).toEqual([...LEGACY_DIMENSIONS, 'coverage']);
+    expect(judgeSchemaFor('v2')).toBe(legacyJudgeSchema);
+    expect(judgeSchemaFor('v3')).toBe(judgeSchema);
+    // A v2 re-judge has no coverage score: it is left out, not counted as 1.
+    const legacy = { prerequisiteOrder: 4, bloomProgression: 4, resourceFit: 4, timeRealism: 4 };
+    expect(summarise([{ id: 'a', scores: legacy, badLinks: 0 }], LEGACY_DIMENSIONS)).toEqual({ means: legacy, badLinks: 0, underReview: 0, pass: true });
+    // Under v3 a missing coverage score fails the gate.
+    expect(summarise([{ id: 'a', scores: legacy, badLinks: 0 }]).pass).toBe(false);
   });
 });
