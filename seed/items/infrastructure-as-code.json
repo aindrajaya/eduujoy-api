@@ -1062,7 +1062,7 @@
         },
         {
           "id": "d",
-          "label": "All subnets are recreated; adding `depends_on` to each subnet avoids this"
+          "label": "All subnets are destroyed and recreated, since count rebuilds the whole set; `depends_on` on each subnet avoids this"
         }
       ],
       "answerKey": {
@@ -1525,7 +1525,7 @@
         },
         {
           "id": "c",
-          "label": "State tracks resources by address, so the old address looks removed and the new one looks added"
+          "label": "State tracks resources by address, so the old address looks removed and the new one added"
         },
         {
           "id": "d",
@@ -1768,7 +1768,7 @@
       "options": [
         {
           "id": "a",
-          "label": "One state per individual resource, so every change has the smallest possible blast radius"
+          "label": "One state per individual resource, so every change has the smallest possible blast radius and dependencies are explicit"
         },
         {
           "id": "b",
@@ -1776,11 +1776,11 @@
         },
         {
           "id": "c",
-          "label": "One state per environment containing everything, so all dependencies resolve within a single plan"
+          "label": "One state per environment containing everything, so all dependencies resolve within a single plan and apply"
         },
         {
           "id": "d",
-          "label": "One shared state across environments, with workspaces to separate dev from prod at apply time"
+          "label": "One shared state across environments, with workspaces to separate dev from prod at apply time only"
         }
       ],
       "answerKey": {
@@ -1920,7 +1920,7 @@
         },
         {
           "id": "d",
-          "label": "Blocking all console access, so emergency fixes must go through a full pipeline run"
+          "label": "Blocking all console access, so emergency fixes must go through a full pipeline run with peer approval"
         }
       ],
       "answerKey": {
@@ -2159,7 +2159,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Later entries shift index and get replaced; use for_each keyed by stable names so removal affects only one"
+          "label": "Later entries shift index and get replaced; use for_each keyed by stable names so removal affects one"
         },
         {
           "id": "b",
@@ -2344,11 +2344,11 @@
         },
         {
           "id": "b",
-          "label": "Write matching configuration, import each resource into state, and iterate until the plan shows no changes"
+          "label": "Write matching configuration, import each resource into state, and iterate until the plan is empty"
         },
         {
           "id": "c",
-          "label": "Write configuration from memory and apply it; Terraform will detect existing resources and adopt them"
+          "label": "Write configuration from memory and apply it, since Terraform detects existing resources and adopts them automatically"
         },
         {
           "id": "d",

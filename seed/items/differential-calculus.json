@@ -898,11 +898,11 @@
         },
         {
           "id": "b",
-          "label": "ln(2x)"
+          "label": "2x/(x^2 + 1)^2"
         },
         {
           "id": "c",
-          "label": "2x"
+          "label": "2x ln(x^2 + 1)"
         },
         {
           "id": "d",
@@ -1637,7 +1637,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Local minimum at x = -2 only; f' does not change sign at x = 1, so x = 1 is a flat point, not an extremum"
+          "label": "Local minimum at x = -2 only; f' stays positive on both sides of x = 1, so there is no extremum there"
         },
         {
           "id": "b",
@@ -1649,7 +1649,7 @@
         },
         {
           "id": "d",
-          "label": "Local minimum at x = -2 and local minimum at x = 1, because the squared factor keeps f' nonnegative near 1"
+          "label": "Local minimum at x = -2 and local minimum at x = 1, because f' is zero at both and the squared factor keeps it nonnegative"
         }
       ],
       "answerKey": {
@@ -1712,19 +1712,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A'(q) = 0 reduces to C'(q) = 0 after multiplying through by q, so her equation is right and the minimum really does not exist"
+          "label": "A'(q) = 0 reduces to C'(q) = 0 after multiplying through by q, so her equation is right and the minimum really does not exist for q > 0"
         },
         {
           "id": "b",
-          "label": "She should solve A'(q) = 0, which gives C'(q) = C(q)/q; C'(q) = 0 targets total cost, so her conclusion is unfounded"
+          "label": "She should solve A'(q) = 0, giving C'(q) = C(q)/q; C'(q) = 0 targets total cost, so her conclusion is unfounded"
         },
         {
           "id": "c",
-          "label": "Setting C'(q) = 0 is right, because minimising cost per unit is the same problem as minimising total cost over the same range"
+          "label": "Setting C'(q) = 0 is right, because minimising cost per unit is the same problem as minimising total cost over the same range of output"
         },
         {
           "id": "d",
-          "label": "Her equation is right, and only the second derivative test is missing, since C'(q) = 0 locates the minimum average cost directly"
+          "label": "Her equation is right, and only the second derivative test is missing, since C'(q) = 0 would locate the minimum average cost directly"
         }
       ],
       "answerKey": {
@@ -1922,7 +1922,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Use the sign of f'' to decide the absolute extremum without comparing values"
+          "label": "Use the sign of f'' at one critical point to decide the absolute extremum without comparing values"
         },
         {
           "id": "b",
@@ -1938,7 +1938,7 @@
         },
         {
           "id": "e",
-          "label": "Include any points inside (a, b) where f' does not exist"
+          "label": "Include interior points where f'(x) = 0 or f' does not exist"
         }
       ],
       "answerKey": {
@@ -2068,19 +2068,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Invalid: the rule gives no conclusion when the derivative ratio has no limit; dividing by x shows the limit is 1"
+          "label": "Invalid: the rule says nothing when the derivative ratio has no limit; the quotient is 1 + (sin x)/x, which tends to 1"
         },
         {
           "id": "b",
-          "label": "Invalid: the form is not indeterminate, so the limit is 0 because sin x is bounded"
+          "label": "Invalid: the form is infinity over infinity, but the rule needs the numerator's derivative to be bounded, so the limit is 0"
         },
         {
           "id": "c",
-          "label": "Valid: the oscillation of sin x prevents the quotient from settling, so the limit does not exist"
+          "label": "Valid: the oscillation of sin x prevents the quotient from settling on any one value, so the limit does not exist"
         },
         {
           "id": "d",
-          "label": "Valid: L'Hôpital's rule is an equivalence, so a nonexistent derivative-ratio limit means no limit exists"
+          "label": "Valid: L'Hôpital's rule is an equivalence, so a nonexistent derivative-ratio limit means the original limit does not exist"
         }
       ],
       "answerKey": {
@@ -2146,11 +2146,11 @@
         },
         {
           "id": "c",
-          "label": "L overestimates for all x>-1, x≠0, because f''<0 so f is concave and lies below its tangent"
+          "label": "L overestimates for all x>-1, x≠0, because f''<0 so f lies below its tangent line"
         },
         {
           "id": "d",
-          "label": "L overestimates for all x>-1, x≠0, because f''>0 so f lies below its tangent line"
+          "label": "L overestimates for all x>-1, x≠0, because f''>0 so f is convex and lies below its tangent line"
         }
       ],
       "answerKey": {
@@ -2240,23 +2240,23 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "Which function is continuous on all real numbers, increasing everywhere, and has a vertical tangent line at x=0?",
+      "prompt": "A student claims that f is continuous on all real numbers, increasing everywhere, and has a vertical tangent line at x=0. Which function makes this claim valid?",
       "options": [
         {
           "id": "a",
-          "label": "x^(1/3)"
+          "label": "x^(1/3), since f'(x)=(1/3)x^(-2/3) is positive for x≠0 and tends to infinity at 0"
         },
         {
           "id": "b",
-          "label": "|x|"
+          "label": "|x|, since its slope has magnitude 1 on both sides of 0 and the graph is continuous at 0"
         },
         {
           "id": "c",
-          "label": "x^(2/3)"
+          "label": "x^(2/3), since f'(x)=(2/3)x^(-1/3) is unbounded as x approaches 0 from both sides"
         },
         {
           "id": "d",
-          "label": "x^3"
+          "label": "x^3, since it is increasing everywhere and its tangent at 0 is steepest there"
         }
       ],
       "answerKey": {
@@ -2267,41 +2267,6 @@
       "rubric": [
         "x^(1/3) is increasing with derivative (1/3)x^(-2/3) tending to infinity at 0.",
         "x^(2/3) has a cusp and |x| a corner; neither is increasing, and x^3 has a horizontal tangent."
-      ],
-      "reviewed": false
-    },
-    {
-      "key": "exp-c6-sc2",
-      "stage": "expert",
-      "bloom": "C6",
-      "kind": "single_choice",
-      "prompt": "Which cubic passes through the origin, has a local maximum at x=1 and a local minimum at x=3?",
-      "options": [
-        {
-          "id": "a",
-          "label": "x^3-6x^2+9x"
-        },
-        {
-          "id": "b",
-          "label": "x^3-6x^2+9"
-        },
-        {
-          "id": "c",
-          "label": "-x^3+6x^2-9x"
-        },
-        {
-          "id": "d",
-          "label": "x^3-4x^2+3x"
-        }
-      ],
-      "answerKey": {
-        "optionIds": [
-          "a"
-        ]
-      },
-      "rubric": [
-        "f'=3(x-1)(x-3) with positive leading coefficient gives a max at 1 and a min at 3; f(0)=0.",
-        "The negated cubic swaps max and min; the others have wrong critical points or miss the origin."
       ],
       "reviewed": false
     },

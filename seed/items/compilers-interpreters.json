@@ -982,7 +982,7 @@
         },
         {
           "id": "d",
-          "label": "`y = x + 6`"
+          "label": "`y = x + 6`, because only the `2 * 3` node has two literal children"
         }
       ],
       "answerKey": {
@@ -2350,7 +2350,7 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "A type system treats `Array<Dog>` as a subtype of `Array<Animal>` and allows writes, so `a[0] = Cat()` through an `Array<Animal>` alias corrupts a dog array. Constraint: restore soundness with no new runtime checks. Which fix works?",
+      "prompt": "A type system treats `Array<Dog>` as a subtype of `Array<Animal>` and allows writes, so `a[0] = Cat()` through an `Array<Animal>` alias corrupts a dog array. Constraint: restore soundness with no new runtime checks, keeping arrays mutable. Which fix works?",
       "options": [
         {
           "id": "a",
@@ -2362,7 +2362,7 @@
         },
         {
           "id": "c",
-          "label": "Make `Cat` a subtype of `Dog` in this program, so the stored value always fits the original array type"
+          "label": "Make array types contravariant in their element type, so Array<Animal> is accepted wherever Array<Dog> is expected"
         },
         {
           "id": "d",
@@ -2389,7 +2389,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Treat the rest of the file as string contents and report the missing quote once at end of input"
+          "label": "Treat the rest of the file as string contents, then report the missing quote once at end of input with the span of the whole string"
         },
         {
           "id": "b",
@@ -2397,7 +2397,7 @@
         },
         {
           "id": "c",
-          "label": "Close the string at end of line, emit an error token with its span, and resume lexing on the next line"
+          "label": "Close the string at end of line, emit one error token with its span, and resume lexing on the next line"
         },
         {
           "id": "d",

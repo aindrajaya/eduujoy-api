@@ -643,7 +643,7 @@
         },
         {
           "id": "b",
-          "label": "The pod finished its work successfully and Kubernetes will not restart it"
+          "label": "The pod finished its work successfully, so Kubernetes will not restart its container"
         },
         {
           "id": "c",
@@ -651,7 +651,7 @@
         },
         {
           "id": "d",
-          "label": "The container image cannot be found in the registry that the pod names"
+          "label": "The container image cannot be pulled because the registry rejects the pod's credentials"
         }
       ],
       "answerKey": {
@@ -1553,7 +1553,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The liveness probe timeout is shorter than the app startup time"
+          "label": "The liveness probe timeout is shorter than the app startup time, so the kubelet kills the container before it is ready"
         },
         {
           "id": "b",
@@ -1588,19 +1588,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Pending pods are automatically deleted once the old pods are terminated"
+          "label": "The Deployment controller deletes Pending pods once the old pods have terminated"
         },
         {
           "id": "b",
-          "label": "Surge pods must be created first and none can be removed until one is Ready"
+          "label": "No old pod may be removed until a new pod is Ready, so the Pending surge pod blocks it"
         },
         {
           "id": "c",
-          "label": "The ReplicaSet controller ignores maxUnavailable when nodes are full"
+          "label": "The scheduler lets the rollout exceed maxSurge only when a node reports Insufficient cpu"
         },
         {
           "id": "d",
-          "label": "Rolling updates always pause after the first pod is created"
+          "label": "The Deployment treats the Insufficient cpu event as a failed update and rolls back at once"
         }
       ],
       "answerKey": {
@@ -2224,19 +2224,19 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "Design a placement for 6 replicas across 3 zones. Replicas must spread evenly in normal operation, yet pods must still schedule if one zone is down. Which spec meets both constraints?",
+      "prompt": "Design a placement for 6 replicas across 3 zones. Replicas must spread evenly in normal operation, yet the scheduler must treat the spread as a preference so pods still schedule when one zone is down or short on capacity. Which spec meets both constraints?",
       "options": [
         {
           "id": "a",
-          "label": "A nodeSelector pinning the Deployment to a single zone with the most capacity"
+          "label": "A nodeSelector pinning the Deployment to a single zone with the most spare capacity"
         },
         {
           "id": "b",
-          "label": "topologySpreadConstraints on the zone key, maxSkew 1, whenUnsatisfiable: DoNotSchedule"
+          "label": "topologySpreadConstraints on the zone key, maxSkew 1, whenUnsatisfiable: DoNotSchedule, a hard rule"
         },
         {
           "id": "c",
-          "label": "Required podAntiAffinity on the hostname key, so no two replicas share a node"
+          "label": "Required podAntiAffinity on the hostname key, so that no two replicas ever share a node"
         },
         {
           "id": "d",

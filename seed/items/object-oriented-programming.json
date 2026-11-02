@@ -336,11 +336,11 @@
         },
         {
           "id": "b",
-          "label": "Polymorphism, because both are objects of some type"
+          "label": "Polymorphism, because Car and Engine can both be used through one shared interface"
         },
         {
           "id": "c",
-          "label": "Encapsulation, because Engine is a private word here"
+          "label": "Encapsulation, because Engine's data is hidden inside the Car object"
         },
         {
           "id": "d",
@@ -871,11 +871,11 @@
         },
         {
           "id": "c",
-          "label": "Engine extends Car so every engine also gets wheels"
+          "label": "Engine extends Car so every engine also gets wheels and doors"
         },
         {
           "id": "d",
-          "label": "Car extends Engine so it inherits start() directly"
+          "label": "Car extends Engine so it inherits start() and can reuse it directly"
         }
       ],
       "answerKey": {
@@ -1149,15 +1149,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Make every `FileLogger` method static so tests can call them without needing an instance"
+          "label": "Make every `FileLogger` method static so tests can call them without needing an instance of it"
         },
         {
           "id": "b",
-          "label": "Add a boolean flag to `OrderService` that switches between real logging and fake logging"
+          "label": "Add a boolean flag to `OrderService` that switches between real logging and fake logging at runtime"
         },
         {
           "id": "c",
-          "label": "Subclass `OrderService` once per logger type and override the constructor in each subclass"
+          "label": "Subclass `OrderService` once per logger type and override the constructor in each subclass to choose it"
         },
         {
           "id": "d",
@@ -1403,7 +1403,7 @@
         },
         {
           "id": "b",
-          "label": "`SavingsAccount` needs all of `Account`'s behaviour, must be usable wherever an `Account` is expected, and adds interest"
+          "label": "`SavingsAccount` must be usable wherever an `Account` is expected, keeps all its behaviour, and adds interest"
         },
         {
           "id": "c",
@@ -1645,11 +1645,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Equal points inherit different default hash codes, so they land in different buckets and `equals` is never invoked on them"
+          "label": "Equal points get different default hash codes, so they usually land in different buckets and `equals` is never called"
         },
         {
           "id": "b",
-          "label": "The `equals` override must have the wrong parameter type, so the set cannot identify any duplicates at all"
+          "label": "The `equals` override must have the wrong parameter type, so the set cannot identify duplicates for any class that defines it"
         },
         {
           "id": "c",
@@ -1657,7 +1657,7 @@
         },
         {
           "id": "d",
-          "label": "`HashSet` compares elements by reference first, so `equals` is never consulted for any objects in it"
+          "label": "`HashSet` compares elements by reference first, so `equals` is never consulted for any objects stored in the set"
         }
       ],
       "answerKey": {
@@ -1856,19 +1856,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Generate a subclass per operation and node pair, so each combination has its own class"
+          "label": "Generate a subclass per operation and node pair, so each combination gets its own dedicated class"
         },
         {
           "id": "b",
-          "label": "Put each operation as a virtual method in every node class so nodes own all their behaviour"
+          "label": "Put each operation as a virtual method in every node class so nodes own all of their behaviour"
         },
         {
           "id": "c",
-          "label": "Use a visitor or pattern-matching function per operation, so one new operation touches one place"
+          "label": "Use a visitor or pattern-matching function per operation, so a new operation touches one place"
         },
         {
           "id": "d",
-          "label": "Keep a type string on nodes and let each operation parse it with ad hoc conditionals"
+          "label": "Keep a type string on nodes and let each operation parse it with ad hoc conditionals everywhere"
         }
       ],
       "answerKey": {
@@ -2106,7 +2106,7 @@
         },
         {
           "id": "b",
-          "label": "Override `addAll` to add the count, call `super.addAll`, then subtract the duplicates the base class creates"
+          "label": "Override `addAll` to add the count, call `super.addAll`, then subtract the duplicates the base class creates per element"
         },
         {
           "id": "c",
@@ -2321,11 +2321,11 @@
         },
         {
           "id": "b",
-          "label": "A `synchronized` keyword on `notify()`, so panels created on different threads never get called at the same time"
+          "label": "A `synchronized` keyword on `notify()` and `subscribe()`, so panels created on different threads never modify or traverse the list at once"
         },
         {
           "id": "c",
-          "label": "A second list of listeners sorted by priority, so the important panels are told before the less important ones"
+          "label": "A second list of listeners sorted by priority, so the important panels are told before the less important ones are"
         },
         {
           "id": "d",

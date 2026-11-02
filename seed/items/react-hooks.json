@@ -515,7 +515,7 @@
         },
         {
           "id": "d",
-          "label": "An object with a `state` property and a `dispatch` method on it"
+          "label": "An object with a `state` property and a `dispatch` method for sending update actions"
         }
       ],
       "answerKey": {
@@ -1070,11 +1070,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`return () => setInterval(id);`"
+          "label": "`return () => setInterval(id, 0);`"
         },
         {
           "id": "b",
-          "label": "`return id;`"
+          "label": "`return () => { clearTimeout(tick); };`"
         },
         {
           "id": "c",
@@ -1324,11 +1324,11 @@
         },
         {
           "id": "c",
-          "label": "useEffect cannot read props that may be null during a render"
+          "label": "useEffect cannot read props that may be null, so it throws when the effect callback runs"
         },
         {
           "id": "d",
-          "label": "Returning null unmounts the component and discards its effect permanently"
+          "label": "Returning null unmounts the component and discards its effect permanently, so it cannot re-render"
         }
       ],
       "answerKey": {
@@ -1953,7 +1953,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Read the ref's size during render, since refs are populated before the first render finishes"
+          "label": "Read the ref's size during render, since refs are populated before the first render finishes and the DOM node is ready"
         },
         {
           "id": "b",
@@ -1996,7 +1996,7 @@
         },
         {
           "id": "c",
-          "label": "Abort the request with an `AbortController` in the effect cleanup and ignore the resulting `AbortError`"
+          "label": "Abort the request via an `AbortController` in the effect cleanup and ignore the `AbortError`"
         },
         {
           "id": "d",
@@ -2270,7 +2270,7 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "A counter uses `useEffect(() => { const id = setInterval(() => setCount(count + 1), 1000); return () => clearInterval(id); }, [])` and sticks at 1. Constraints: the interval is created once, the count rises every second, and no extra refs are used. Which fix meets them?",
+      "prompt": "A counter uses `useEffect(() => { const id = setInterval(() => setCount(count + 1), 1000); return () => clearInterval(id); }, [])` and sticks at 1. Constraints: the interval is created once, the count rises every second, and no extra refs are used. Which fix meets all of them?",
       "options": [
         {
           "id": "a",

@@ -767,7 +767,7 @@
         },
         {
           "id": "b",
-          "label": "`git commit -b login`"
+          "label": "`git branch -m login`"
         },
         {
           "id": "c",
@@ -986,11 +986,11 @@
         },
         {
           "id": "c",
-          "label": "`git branch -d main` then `git merge main`"
+          "label": "`git switch main` then `git rebase feature`"
         },
         {
           "id": "d",
-          "label": "`git switch feature` then `git merge main`"
+          "label": "`git merge main` while staying on `feature`"
         }
       ],
       "answerKey": {
@@ -1618,7 +1618,7 @@
         },
         {
           "id": "c",
-          "label": "A semantic conflict: edits in separate regions were each valid but rely on assumptions the other branch changed"
+          "label": "A semantic conflict: edits in separate regions were each valid but rely on assumptions the other changed"
         },
         {
           "id": "d",
@@ -1725,11 +1725,11 @@
         },
         {
           "id": "b",
-          "label": "Rebase replays commits one at a time, so each commit touching those lines must be reconciled against the new base separately"
+          "label": "Rebase replays commits one at a time, so each commit touching those lines is reconciled against the new base separately"
         },
         {
           "id": "c",
-          "label": "Conflicts in rebases are reported once per remote-tracking branch, and this branch has several of them configured"
+          "label": "Rebase does not record conflict resolutions in the new commits, so later commits reintroduce the original conflicting text each time"
         },
         {
           "id": "d",
@@ -2429,7 +2429,7 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "multi_choice",
-      "prompt": "A `git rebase main` on your feature branch has completed, and you now see it dropped three commits by mistake. No other Git operation has run since. Which actions restore the pre-rebase tip? Select all that apply.",
+      "prompt": "A `git rebase main` on your feature branch has completed, and you now see it dropped three commits by mistake. No other Git operation has run since. Which actions make the dropped commits reachable again from a branch? Select all that apply.",
       "options": [
         {
           "id": "a",

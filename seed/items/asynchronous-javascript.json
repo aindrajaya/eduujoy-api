@@ -793,7 +793,7 @@
         },
         {
           "id": "b",
-          "label": "`try { await fetchUser(); } finally { log(e); }`"
+          "label": "`try { await fetchUser(); } finally { log('failed'); }`"
         },
         {
           "id": "c",
@@ -801,7 +801,7 @@
         },
         {
           "id": "d",
-          "label": "`await fetchUser() catch (e) { log(e); }`"
+          "label": "`try { return fetchUser(); } catch (e) { log(e); }`"
         }
       ],
       "answerKey": {
@@ -1070,7 +1070,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`const r = await Promise.all([get, get, get]);`"
+          "label": "`const r = await Promise.all([get, get, get].map(f => f()));`"
         },
         {
           "id": "b",
@@ -1246,11 +1246,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Each await pauses the loop until its fetch finishes, so requests run one after another"
+          "label": "Each await pauses the loop until its fetch finishes, so requests run one by one"
         },
         {
           "id": "b",
-          "label": "The fetch calls start together, but results are processed in order, adding delay"
+          "label": "The fetch calls all start together, but their results are processed in order, adding delay"
         },
         {
           "id": "c",
@@ -1258,7 +1258,7 @@
         },
         {
           "id": "d",
-          "label": "Pushing to an array inside a loop forces each fetch to complete before the next"
+          "label": "Pushing to an array inside a loop forces each fetch to complete before the next begins"
         }
       ],
       "answerKey": {
@@ -1316,7 +1316,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The event loop processes keystrokes in a random order when requests overlap"
+          "label": "The event loop processes keystrokes in a random order whenever several requests overlap, so the handlers run out of sequence"
         },
         {
           "id": "b",
@@ -1324,7 +1324,7 @@
         },
         {
           "id": "c",
-          "label": "JavaScript promises run on separate threads, so they corrupt shared UI state"
+          "label": "JavaScript promises run on separate threads, so they corrupt shared UI state when two callbacks write at once"
         },
         {
           "id": "d",
@@ -1351,11 +1351,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The microtask queue is drained fully before timers or rendering, and it is never empty"
+          "label": "Microtasks drain fully before timers or rendering, and this queue never empties"
         },
         {
           "id": "b",
-          "label": "Promises run synchronously, so the recursion blows the stack and halts the page"
+          "label": "Promises run synchronously, so the recursion blows the call stack and halts the page"
         },
         {
           "id": "c",
@@ -1633,7 +1633,7 @@
       "options": [
         {
           "id": "a",
-          "label": "They keep running to completion, but Promise.all has already rejected and ignores their results"
+          "label": "They keep running to completion, but Promise.all has already rejected and ignores them"
         },
         {
           "id": "b",
@@ -1779,15 +1779,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It should retry only transient errors such as 503 or network failures, using growing, jittered delays"
+          "label": "It should retry only transient errors like 503 or network failures, with growing, jittered delays"
         },
         {
           "id": "b",
-          "label": "It should retry just once, because a second failure proves the server will never recover"
+          "label": "It should retry just once, because a second failure proves the server is down and will never recover"
         },
         {
           "id": "c",
-          "label": "It should retry more times with no delay, so a recovering server is reached sooner"
+          "label": "It should retry more times with no delay, so a recovering server is reached again as soon as possible"
         },
         {
           "id": "d",
@@ -2350,7 +2350,7 @@
         },
         {
           "id": "b",
-          "label": "`const x = await loadA(); const y = await loadB();` inside a try/catch, so each await is handled in turn"
+          "label": "`try { const x = await loadA(); const y = await loadB(); } catch (e) { /* handle */ }`, so each await is handled in turn"
         },
         {
           "id": "c",

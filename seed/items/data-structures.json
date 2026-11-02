@@ -1269,7 +1269,7 @@
         },
         {
           "id": "d",
-          "label": "Each `pop(0)` shifts every remaining element left, so each removal costs O(n) and the loop is O(n^2) overall"
+          "label": "Each `pop(0)` shifts every remaining element left, so each removal is O(n) and the whole loop is O(n^2)"
         }
       ],
       "answerKey": {
@@ -1362,19 +1362,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It raises an error on the first iteration because `prev` is `None`"
+          "label": "It raises an error on the first iteration because `prev` is `None` and has no `next`"
         },
         {
           "id": "b",
-          "label": "It loops forever because `curr.next` points back to a visited node"
+          "label": "It loops forever because `curr.next` points back to a node already visited"
         },
         {
           "id": "c",
-          "label": "It returns only node 1, and nodes 2 and 3 are lost from the list"
+          "label": "It returns only node 1, whose next is None, so nodes 2 and 3 are lost"
         },
         {
           "id": "d",
-          "label": "It returns 3 -> 2 -> 1 because each link is flipped in turn"
+          "label": "It returns 3 -> 2 -> 1 because each link is flipped in turn as curr advances"
         }
       ],
       "answerKey": {
@@ -2027,19 +2027,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The claim is wrong: bottom-up construction sorts the array first, so it costs O(n) comparisons using counting sort"
+          "label": "The claim is wrong: bottom-up construction first sorts the array with an O(n) pass, so the heap order comes for free"
         },
         {
           "id": "b",
-          "label": "The claim is wrong: sift-down cost is bounded by node height and most nodes have small height, so the total sums to O(n)"
+          "label": "The claim is wrong: sift-down cost is bounded by node height and most nodes sit low, so the total is O(n)"
         },
         {
           "id": "c",
-          "label": "The claim holds: n/2 sift-downs at log n each is a tight bound, and the sum cannot be any lower"
+          "label": "The claim holds: n/2 sift-downs at log n each is a tight bound, and the sum cannot be any lower than that"
         },
         {
           "id": "d",
-          "label": "The claim is wrong: sift-down on internal nodes costs O(1) regardless of their height, so the total is O(n)"
+          "label": "The claim is wrong: each sift-down on an internal node does O(1) swaps whatever its height, so the total is O(n)"
         }
       ],
       "answerKey": {
@@ -2243,15 +2243,15 @@
         },
         {
           "id": "b",
-          "label": "Balanced BST; getRandom picks a random rank and walks down the tree using subtree sizes for all three operations"
+          "label": "Balanced BST keeping subtree sizes; getRandom picks a random rank and walks down by those sizes, and insert and delete rebalance along the path"
         },
         {
           "id": "c",
-          "label": "Hash map only; getRandom picks a random bucket and returns the first item found in it, which is uniform enough"
+          "label": "Hash map with chaining only; getRandom picks a random bucket and returns its first item, which stays uniform as long as the load factor is kept low"
         },
         {
           "id": "d",
-          "label": "Doubly linked list plus a hash map to nodes; getRandom jumps to a node at a random list position by index"
+          "label": "Doubly linked list plus a hash map from item to node; getRandom jumps to a node at a random list position by index"
         }
       ],
       "answerKey": {
@@ -2450,7 +2450,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep one min-heap of all values; find the median by popping half the elements and pushing them back"
+          "label": "Keep one min-heap of all values; find the median by popping half the elements and pushing them back afterward"
         },
         {
           "id": "b",
@@ -2458,11 +2458,11 @@
         },
         {
           "id": "c",
-          "label": "Keep a sorted array, inserting by binary search and shifting; the median is the middle element"
+          "label": "Keep a sorted array, inserting by binary search and shifting later elements right; the median is the middle element"
         },
         {
           "id": "d",
-          "label": "Keep a hash map of value counts and a running mean; report the mean as an approximation of the median"
+          "label": "Keep a hash map of value counts and a running mean; report the mean as a close approximation of the median"
         }
       ],
       "answerKey": {

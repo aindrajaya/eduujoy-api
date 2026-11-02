@@ -1365,15 +1365,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The limit along every line through the origin equals 0, but along the parabola y = x^2 it equals 1/2, so f is discontinuous"
+          "label": "Along the x-axis and y-axis f is identically 0, so the limit at the origin is 0, and f is continuous but its tangent plane z = 0 fails to fit"
         },
         {
           "id": "b",
-          "label": "Existence of both partials at a point guarantees continuity there, so the failure must come from the vanishing denominator"
+          "label": "Existence of both partials at a point guarantees continuity there, so the failure must come from the vanishing denominator at the origin"
         },
         {
           "id": "c",
-          "label": "Both partials are 0, forcing the tangent plane z = 0, but the second partials fail to exist, so f is not differentiable"
+          "label": "Both partials are 0, forcing the tangent plane z = 0, but the second partials fail to exist, so f is not differentiable there"
         },
         {
           "id": "d",
@@ -1942,7 +1942,7 @@
         },
         {
           "id": "b",
-          "label": "Use Stokes' theorem, since a sphere is closed and has no boundary, so the flux reduces to zero"
+          "label": "Use Stokes' theorem on the sphere, since curl F = 0 makes the flux of F through the closed surface vanish"
         },
         {
           "id": "c",
@@ -2082,15 +2082,15 @@
         },
         {
           "id": "b",
-          "label": "Wrong: F is singular at the origin, so the theorem fails for surfaces enclosing it; the flux there is 4*pi, and 0 otherwise"
+          "label": "Wrong: F is singular at the origin, so the theorem fails for surfaces enclosing it; flux is 4*pi there, 0 otherwise"
         },
         {
           "id": "c",
-          "label": "Wrong: only spheres centred at the origin have nonzero flux; any other enclosing surface gives flux 0 by symmetry"
+          "label": "Wrong: only spheres centred at the origin give nonzero flux; any other surface enclosing the origin gives flux 0 by symmetry"
         },
         {
           "id": "d",
-          "label": "Wrong: div F is actually nonzero away from the origin, so the flux depends on the shape and size of the surface"
+          "label": "Wrong: div F is actually nonzero away from the origin, so the flux depends on the shape and size of the closed surface"
         }
       ],
       "answerKey": {
@@ -2255,15 +2255,15 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "Which function f satisfies grad f = (2xy + z, x^2, x) everywhere and also f(0,0,0) = 5?",
+      "prompt": "A conservative field F = (2xy + z, x^2, x) is given. You must construct a potential f with grad f = F and f(1,2,3) = 0. Which f works?",
       "options": [
         {
           "id": "a",
-          "label": "f = x^2*y + x*z + 5"
+          "label": "f = x^2*y + x*z - 5"
         },
         {
           "id": "b",
-          "label": "f = x^2*y + x*z + 5*z"
+          "label": "f = x^2*y + x*z + 5"
         },
         {
           "id": "c",
@@ -2271,7 +2271,7 @@
         },
         {
           "id": "d",
-          "label": "f = x^2*y + 2*x*z + 5"
+          "label": "f = x^2*y + 2*x*z - 8"
         }
       ],
       "answerKey": {
@@ -2440,7 +2440,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A check that grad g is nonzero on the circle must be added, since that condition fails there and voids Lagrange"
+          "label": "A check that grad g is nonzero on the circle must be added, since that condition fails there and voids the Lagrange method"
         },
         {
           "id": "b",
@@ -2452,7 +2452,7 @@
         },
         {
           "id": "d",
-          "label": "A second-derivative test at each interior critical point must be added, since values alone cannot identify the minimum"
+          "label": "A second-derivative test at each interior critical point must be added, since values alone cannot identify the true minimum"
         }
       ],
       "answerKey": {

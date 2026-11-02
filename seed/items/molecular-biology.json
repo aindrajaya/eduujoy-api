@@ -725,19 +725,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The second template strand is RNA so it must be copied in pieces"
+          "label": "The second template strand is RNA, so primase must copy it in short pieces"
         },
         {
           "id": "b",
-          "label": "Ligase prevents long strands from forming on one template"
+          "label": "Ligase joins nucleotides only in short stretches, so long strands cannot form on one template"
         },
         {
           "id": "c",
-          "label": "DNA polymerase only adds nucleotides 5' to 3', so the strand running away from the fork is made in segments"
+          "label": "Polymerase adds nucleotides only 5' to 3', so the strand running away from the fork is made in segments"
         },
         {
           "id": "d",
-          "label": "Helicase can only unwind a short stretch at a time"
+          "label": "Helicase can unwind only a short stretch at a time, so each stretch is copied separately on that strand"
         }
       ],
       "answerKey": {
@@ -931,7 +931,7 @@
       "stage": "advanced_beginner",
       "bloom": "C3",
       "kind": "multi_choice",
-      "prompt": "In E. coli, which mutations would cause the lac genes to be transcribed even when lactose is absent? Select all that apply.",
+      "prompt": "In an otherwise wild-type E. coli cell grown with no lactose, which single mutations would cause the lac structural genes to be transcribed anyway? Select all that apply.",
       "options": [
         {
           "id": "a",
@@ -1608,19 +1608,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The mutation changes the reading frame in the 5' UTR, so the 5' cap is not added"
+          "label": "The mutation lies in the 5' UTR region, so the 5' cap is not added and the mRNA is unstable"
         },
         {
           "id": "b",
-          "label": "The mutation creates a new polyadenylation signal, so the transcript ends in intron 3"
+          "label": "The mutation creates a new polyadenylation signal, so the transcript is cleaved and ends within intron 3"
         },
         {
           "id": "c",
-          "label": "The mutation blocks RNA polymerase II elongation, giving truncated transcripts only"
+          "label": "The mutation blocks RNA polymerase II elongation at intron 3, so only truncated transcripts are made"
         },
         {
           "id": "d",
-          "label": "The spliceosome cannot recognise the donor site, causing exon skipping or intron retention"
+          "label": "The spliceosome cannot recognise the donor site, so exons are skipped or the intron is retained"
         }
       ],
       "answerKey": {
@@ -1643,7 +1643,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The vector re-ligated to itself because single-enzyme ends were not dephosphorylated"
+          "label": "The cut vector re-ligated to itself because its ends were not dephosphorylated"
         },
         {
           "id": "b",
@@ -1754,19 +1754,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Cloning each amplicon into a plasmid and Sanger sequencing several colonies"
+          "label": "Cloning each amplicon into a plasmid and Sanger sequencing several colonies per sample"
         },
         {
           "id": "b",
-          "label": "Allele-specific PCR or a restriction digest of a short amplicon covering the site"
+          "label": "Allele-specific PCR or a restriction digest of a short amplicon at the site"
         },
         {
           "id": "c",
-          "label": "Whole-genome sequencing of each sample at 30x coverage to read the site"
+          "label": "Whole-genome sequencing of each sample at 30x coverage to read the site directly"
         },
         {
           "id": "d",
-          "label": "RNA-seq of each sample to infer the genotype from expression levels"
+          "label": "RNA-seq of each sample to infer the genotype from allele expression levels"
         }
       ],
       "answerKey": {
@@ -2247,23 +2247,23 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "Design a system to express a toxic protein only when wanted in E. coli. Constraints: very low basal expression, tight inducibility, and no need for a special host. Which design best meets all?",
+      "prompt": "Design a system to express a toxic protein only when wanted in E. coli. Constraints: very low basal expression and tight inducibility, using a standard T7-expression host strain. Which design best meets all?",
       "options": [
         {
           "id": "a",
-          "label": "A lac promoter with glucose absent from the medium to maximise repression"
+          "label": "A lac promoter, with glucose omitted from the medium so that repression by LacI is maximised"
         },
         {
           "id": "b",
-          "label": "A T7 promoter in a host with no repressor, relying on low plasmid copy"
+          "label": "A T7 promoter in a host with no repressor, relying on a low-copy plasmid to limit leaky expression"
         },
         {
           "id": "c",
-          "label": "A strong constitutive promoter on a high-copy plasmid, with the protein tagged for later cleavage"
+          "label": "A strong constitutive promoter on a high-copy plasmid, with the protein tagged so it can be cleaved off later"
         },
         {
           "id": "d",
-          "label": "A T7 promoter with lac operator, a host carrying T7 lysozyme (pLysS), and a repressed uninduced state"
+          "label": "A T7lac promoter in a host that also expresses T7 lysozyme from pLysS, kept uninduced until IPTG is added"
         }
       ],
       "answerKey": {
@@ -2430,15 +2430,15 @@
         },
         {
           "id": "b",
-          "label": "A reporter placed so the flip permanently turns on expression"
+          "label": "A signal-induced recombinase that inverts a DNA segment so a promoter then drives a reporter permanently, even after the signal ends"
         },
         {
           "id": "c",
-          "label": "A signal-induced recombinase that irreversibly flips a promoter or gene"
+          "label": "A signal-induced integrase that irreversibly flips a promoter or gene, and the flipped state is copied to daughter cells at division"
         },
         {
           "id": "d",
-          "label": "A repressor-free constitutive reporter that is always on"
+          "label": "A repressor-free constitutive reporter that is always on, so output is present whether or not the signal was ever seen"
         }
       ],
       "answerKey": {

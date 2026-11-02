@@ -1062,41 +1062,6 @@
       "reviewed": false
     },
     {
-      "key": "cmp-c3-sc3",
-      "stage": "competent",
-      "bloom": "C3",
-      "kind": "single_choice",
-      "prompt": "The curve x^2 + xy + y^2 = 7 passes through (1, 2). What is dy/dx at that point?",
-      "options": [
-        {
-          "id": "a",
-          "label": "-5/4"
-        },
-        {
-          "id": "b",
-          "label": "-4/5"
-        },
-        {
-          "id": "c",
-          "label": "4/5"
-        },
-        {
-          "id": "d",
-          "label": "-2/5"
-        }
-      ],
-      "answerKey": {
-        "optionIds": [
-          "b"
-        ]
-      },
-      "rubric": [
-        "Implicit differentiation gives 2x + y + x y' + 2y y' = 0, so y' = -(2x + y)/(x + 2y) = -4/5.",
-        "Distractors come from inverting the ratio or dropping the sign or the product-rule term."
-      ],
-      "reviewed": false
-    },
-    {
       "key": "cmp-c3-sc4",
       "stage": "competent",
       "bloom": "C3",
@@ -1457,19 +1422,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Total cost C(x) is smallest at that output, so its slope matches the average"
+          "label": "C(x) is smallest at that output, so its slope C'(x) must equal the average cost there"
         },
         {
           "id": "b",
-          "label": "Fixed costs vanish at the minimum, so C'(x) and A(x) must coincide there"
+          "label": "Fixed costs vanish at the minimum of A, so C'(x) and A(x) must coincide at that output"
         },
         {
           "id": "c",
-          "label": "A'(x) = (xC'(x) - C(x))/x^2, which is zero exactly when C'(x) = C(x)/x"
+          "label": "A'(x) = (xC'(x) - C(x))/x^2, zero exactly when C'(x) = C(x)/x"
         },
         {
           "id": "d",
-          "label": "Marginal cost always equals average cost, so the condition holds at every output level"
+          "label": "Marginal cost always equals average cost for any cost function, so it holds at every output level"
         }
       ],
       "answerKey": {
@@ -1644,7 +1609,7 @@
         },
         {
           "id": "d",
-          "label": "The student is right: when the ratio of derivatives has no limit, the original quotient cannot have a limit either, by the rule's logic"
+          "label": "The student is right: when the ratio of derivatives has no limit, the original quotient cannot have a limit either, since the rule works in both directions"
         }
       ],
       "answerKey": {
@@ -2208,11 +2173,11 @@
         },
         {
           "id": "c",
-          "label": "A bug: Newton's method converges for any continuous function with a root whenever the start is within distance 1 of it."
+          "label": "A bug: Newton's method is guaranteed to converge for any continuous function with a root whenever the starting point lies within distance 1 of that root."
         },
         {
           "id": "d",
-          "label": "A bug: the root is at 0 where f'(0) = 0, so the update divides by zero and the code must damp the step size."
+          "label": "A bug: the root is at 0 where f'(0) = 0, so the update divides by zero at every step and the code must damp the step size to recover."
         }
       ],
       "answerKey": {
@@ -2406,7 +2371,7 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "multi_choice",
-      "prompt": "You are building examples that need g(0) = 0 and g differentiable at 0. Which formulas, each applied for x not equal to 0, with g(0) = 0, qualify? Select all that apply.",
+      "prompt": "You are building examples of functions with g(0) = 0 that are differentiable at 0. Each formula below defines g(x) for x not equal to 0. Which ones qualify? Select all that apply.",
       "options": [
         {
           "id": "a",

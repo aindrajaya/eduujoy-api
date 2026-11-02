@@ -711,7 +711,7 @@
       "stage": "advanced_beginner",
       "bloom": "C2",
       "kind": "scenario",
-      "prompt": "A developer sees that a browser sent a request with `Cache-Control: no-cache` removed, and the response had `Cache-Control: max-age=3600`. The user reloads the page by clicking a link 10 minutes later. What is the browser most likely to do?",
+      "prompt": "A browser sent a request with no Cache-Control header, and the response had `Cache-Control: max-age=3600`. Ten minutes later the user clicks a link to the same URL. What is the browser most likely to do?",
       "options": [
         {
           "id": "a",
@@ -723,11 +723,11 @@
         },
         {
           "id": "c",
-          "label": "Always ask the server for a fresh copy first"
+          "label": "Always ask the server for a fresh copy before showing it"
         },
         {
           "id": "d",
-          "label": "Reuse its stored copy without contacting the server"
+          "label": "Reuse its stored copy without asking the server"
         }
       ],
       "answerKey": {
@@ -1414,23 +1414,23 @@
       "stage": "competent",
       "bloom": "C4",
       "kind": "multi_choice",
-      "prompt": "Users report being logged out when moving from `https://shop.example` to a checkout at `https://pay.other.com` and back. The session cookie has `SameSite=Strict`. Which factors could explain the lost session? Select all that apply.",
+      "prompt": "Users report being logged out when they return to `https://shop.example` after paying at `https://pay.other.com`. The session cookie has `SameSite=Strict`. Which factors could explain the lost session? Select all that apply.",
       "options": [
         {
           "id": "a",
-          "label": "The cookie was set for `shop.example` and is not sent to `pay.other.com`"
+          "label": "The return navigation is initiated from another site, so the browser withholds the Strict cookie on that first request"
         },
         {
           "id": "b",
-          "label": "The `Secure` attribute prevents sending over TLS"
+          "label": "The `Secure` attribute stops the browser from sending the cookie over HTTPS connections to shop.example"
         },
         {
           "id": "c",
-          "label": "Strict forces the browser to delete the cookie at redirects"
+          "label": "Strict makes the browser delete the cookie whenever a redirect crosses to a different site"
         },
         {
           "id": "d",
-          "label": "Strict cookies are withheld on cross-site navigations arriving from another site"
+          "label": "The server treats the first request without a session cookie as unauthenticated and issues a new anonymous session"
         }
       ],
       "answerKey": {
@@ -2053,7 +2053,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Send `Strict-Transport-Security` with a max-age of two years and `preload` at once, since it protects everyone sooner"
+          "label": "Send `Strict-Transport-Security` with a max-age of two years, `includeSubDomains` and `preload` at once, since it protects every returning visitor sooner"
         },
         {
           "id": "b",
@@ -2088,7 +2088,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Serve a fixed name with `no-cache` and an ETag, so every request is revalidated cheaply"
+          "label": "Serve a fixed name with `no-cache` and an ETag, so every request is revalidated with a cheap 304"
         },
         {
           "id": "b",
@@ -2226,7 +2226,7 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "Design a response for `GET /reports/42` that is generated per user language via `Accept-Language`, cached by a shared CDN, and must never return the wrong language. Which header set is correct?",
+      "prompt": "Design a response for `GET /reports/42` that is generated per user language via `Accept-Language`, must be cached and reused by a shared CDN for each language, and must never return the wrong language. Which header set is correct?",
       "options": [
         {
           "id": "a",
