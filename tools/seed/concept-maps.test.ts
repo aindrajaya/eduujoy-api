@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { describe, it } from 'node:test';
+import { normaliseConcept } from './concept-stoplist';
 import { ALLOWED_INPUTS, checkMap, draftRequest, inputReads, inPrerequisiteOrder, loadTopics, readInput, type ConceptMap } from './concept-maps';
 
 // Run with `pnpm seed:test`. Isolation (user and lead, 3 Nov 2026): the concept-map generator reads only
@@ -51,6 +52,14 @@ void describe('concept-maps isolation', () => {
     // Control: the shared cli.ts does reach the eval tool, which is why concept maps have their own entry.
     const shared = [...importGraph(join(__dirname, 'cli.ts'))].map((f) => f.split('/').slice(-2).join('/'));
     assert.ok(shared.includes('seed/path-eval.ts') && shared.includes('prompts/prompt-registry.ts'));
+  });
+});
+
+void describe('normaliseConcept', () => {
+  void it('keeps non-Latin letters, so Hangul aliases stay distinct', () => {
+    assert.equal(normaliseConcept('은/는 Topic'), '은 는 topic');
+    assert.notEqual(normaliseConcept('은/는'), normaliseConcept('이/가'));
+    assert.equal(normaliseConcept('  Big-O   Notation! '), 'big o notation');
   });
 });
 

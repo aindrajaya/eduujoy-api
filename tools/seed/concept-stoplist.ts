@@ -31,6 +31,7 @@ export const VAGUE_CONCEPTS = ['basics', 'fundamentals', 'advanced topics', 'mis
 export function normaliseConcept(name: string): string {
   return name
     .toLowerCase()
-    .replace(/[^a-z0-9+#]+/g, ' ')
+    // Unicode letters and digits: Hangul, kana or Devanagari aliases must not collapse to an empty string.
+    .replace(/[^\p{L}\p{N}+#]+/gu, ' ')
     .trim();
 }
