@@ -24,7 +24,7 @@ const CLIS = [
   { script: 'discovery:verify-video', file: 'scripts/discovery/verify-video.ts', args: [], out: 'discovery:verify-video: ok (GeminiResourceAnalyzer)' },
   { script: 'discovery:pregen', file: 'scripts/discovery/pregen.ts', args: [], out: 'discovery:pregen: ok (50 topics, 150 pools)' },
   { script: 'discovery:pregen (per-topic stages)', file: 'scripts/discovery/pregen.ts', args: ['--topics', 'test/fixtures/pregen/per-topic-stages.json'], out: 'discovery:pregen: ok (2 topics, 4 pools)' },
-  { script: 'eval:paths', file: 'scripts/eval/paths.ts', args: [], out: 'eval:paths: ok (ClaudePathDesigner v1, judge v1)' },
+  { script: 'eval:paths', file: 'scripts/eval/paths.ts', args: [], out: 'eval:paths: ok (ClaudePathDesigner v2, judge v1)' },
 ];
 
 describe('CLI boot (integration)', () => {

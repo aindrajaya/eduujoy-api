@@ -9,12 +9,19 @@ import { RequestDiscovery } from '../../discovery/application/request-discovery.
 import { ServedCardsQuery } from '../../discovery/application/served-cards.query';
 import { PATH_LENGTH_WEEKS, PathGenerated, type Stage } from '../domain';
 import { aliasPool, assembleSteps } from './assemble';
+import { coreConcepts, selectCards } from './select-cards';
 import { designPath } from './design-loop';
 import { GENERATE_PATH_JOB, type GeneratePathPayload, generatePathPayload } from './jobs';
 import { stepView } from './path.view';
 import { PATH_DESIGNER, type PathDesigner } from './ports/path-designer';
 import { PATH_REPOSITORY, type PathRecord, type PathRepository } from './ports/path.repository';
 import { RefundPathCharge } from './refund-path-charge.usecase';
+
+/** Settings for path generation: the resources' language (PATH_RESOURCE_LANGUAGE, default en). */
+export const PATH_SETTINGS = Symbol('PathSettings');
+export interface PathSettings {
+  language: string;
+}
 
 /** How long a waiting path sleeps before it rechecks its pools; ResourcesReady usually wakes it first. */
 export const POOL_RECHECK_MS = 60_000;
@@ -43,6 +50,7 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
     private readonly reviews: ReviewQueue,
     private readonly uow: UnitOfWork,
     private readonly refund: RefundPathCharge,
+    @Inject(PATH_SETTINGS) private readonly settings: PathSettings,
   ) {}
 
   parse(payload: unknown): GeneratePathPayload {
@@ -64,7 +72,9 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
 
     const topic = await this.topics.execute(path.topicId);
     if (!topic) throw new NonRetryableJobError('Topic not found');
-    const { design, validate, byAlias } = aliasPool(cards);
+    const selection = selectCards(cards, { language: this.settings.language, formats: payload.formats });
+    if (selection.cards.length === 0) throw new NonRetryableJobError(`No usable resources in ${this.settings.language} for this topic and stage`);
+    const { design, validate, byAlias } = aliasPool(selection.cards);
     const weeklyHours = path.weeklyHours ?? 3;
     const request = {
       topic: { name: topic.canonicalName, domain: topic.domain ?? 'unknown' },
@@ -75,6 +85,8 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
       budgetMinutes: Math.round(weeklyHours * 60 * PATH_LENGTH_WEEKS),
       formats: payload.formats,
       cards: design,
+      coreConcepts: coreConcepts(selection.cards),
+      formatFallback: selection.formatFallback,
       jobId: ctx.jobId,
       budgetScope: payload.budgetScope,
       signal: ctx.signal,
@@ -99,7 +111,7 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
       return { resultRef };
     }
 
-    const steps = assembleSteps(designed.steps, byAlias);
+    const steps = assembleSteps(designed.steps, byAlias, { formatFallback: selection.formatFallback });
     const activated = await this.uow.run(async (tx, scope) => {
       if (!(await this.repo.activate(tx, path.id, steps, meta))) return false;
       if (flags.includes('few_resource_types')) await this.reviews.flag(tx, { kind: 'path', targetId: path.id, reason: 'few_resource_types' });

@@ -8,7 +8,7 @@ import { AssessmentModule } from '../assessment/assessment.module';
 import { BillingModule } from '../billing/billing.module';
 import { CatalogModule } from '../catalog/catalog.module';
 import { DiscoveryModule } from '../discovery/discovery.module';
-import { GeneratePath } from './application/generate-path.handler';
+import { GeneratePath, PATH_SETTINGS } from './application/generate-path.handler';
 import { PATH_REFUND_SWEEP_CLOCK, PathRefundSweep, refundSweepRequest } from './application/path-refund-sweep.handler';
 import { PathsQueries } from './application/paths.queries';
 import { PATH_DESIGNER } from './application/ports/path-designer';
@@ -35,6 +35,7 @@ import { PathsController, StepsController } from './interface/paths.controller';
     PathRefundSweep,
     RefundRejectedPaths,
     { provide: PATH_REFUND_SWEEP_CLOCK, useValue: () => new Date() },
+    { provide: PATH_SETTINGS, inject: [AppConfig], useFactory: ({ env }: AppConfig) => ({ language: env.PATH_RESOURCE_LANGUAGE }) },
     ReviewQueue,
     { provide: PATH_REPOSITORY, useClass: DrizzlePathRepository },
     { provide: PATH_DESIGNER, useClass: ClaudePathDesigner },

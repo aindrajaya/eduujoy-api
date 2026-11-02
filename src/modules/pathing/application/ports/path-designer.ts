@@ -27,6 +27,10 @@ export interface DesignRequest {
   budgetMinutes: number;
   formats: ('video' | 'text' | 'papers')[];
   cards: DesignCard[];
+  /** The concepts the pool's cards teach, most common first (from the cards only, never eval data). */
+  coreConcepts: string[];
+  /** The learner's formats couldn't be honoured (too few matching cards), so every format is in the pool. */
+  formatFallback: boolean;
   /** The validator's errors from the first attempt, for the one regeneration. */
   feedback?: string[];
   jobId?: string;

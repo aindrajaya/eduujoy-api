@@ -40,6 +40,7 @@ export function aliasPool(cards: ServedCard[]): { design: DesignCard[]; validate
       alias,
       type: c.type,
       durationSec: c.type === 'youtube' && c.durationMin !== null ? c.durationMin * 60 : null,
+      readingMin: c.type === 'youtube' ? null : c.readingMin,
       prerequisites: c.prerequisites,
       concepts: concepts.map((k) => ({ name: k.name, startSec: toSeconds(k.start), endSec: toSeconds(k.end) })),
     });
@@ -51,12 +52,18 @@ export function aliasPool(cards: ServedCard[]): { design: DesignCard[]; validate
  * A validated design as rows: aliases become resource ids, video ranges are written into the action
  * text (the contract's actions are text only), items get ids, and answer keys go to their own column.
  */
-export function assembleSteps(steps: DesignedStep[], byAlias: Map<string, ServedCard>): NewStep[] {
-  return steps.map((step) => ({
+/** Added to step 1 when the learner's formats couldn't be honoured (v2): code says it, not the model. */
+export const FORMAT_FALLBACK_NOTE = 'Note: this topic has few resources in your preferred format yet, so this path mixes in other formats.';
+
+export function assembleSteps(steps: DesignedStep[], byAlias: Map<string, ServedCard>, options: { formatFallback?: boolean } = {}): NewStep[] {
+  return steps.map((step, index) => ({
     n: step.n,
     objective: step.objective.trim(),
     bloom: step.bloom,
-    actions: step.actions.map((a, i) => ({
+    actions: [
+      ...(index === 0 && options.formatFallback ? [{ text: FORMAT_FALLBACK_NOTE, resource: null, startSec: null, endSec: null }] : []),
+      ...step.actions,
+    ].map((a, i) => ({
       n: i + 1,
       text: a.resource && a.startSec != null && a.endSec != null ? `${a.text.trim()} (${clock(a.startSec)}–${clock(a.endSec)})` : a.text.trim(),
       done: false,

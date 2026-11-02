@@ -117,8 +117,8 @@ function setup(opts: { designs?: DesignedPath['steps'][]; pools?: Partial<Record
     progress: (stage, done, total, message) => (progress.push([stage, done, total, message]), Promise.resolve()),
     partial: (data) => (partials.push(data), Promise.resolve()),
   };
-  const handler = new GeneratePath(repo, designer, served, discovery, topics, reviews, uow, refund);
-  const payload: GeneratePathPayload = { pathId: PATH_ID, topicId: TOPIC_ID, stages: ['advanced_beginner', 'competent'], budgetScope: 'paid', formats: ['video'] };
+  const handler = new GeneratePath(repo, designer, served, discovery, topics, reviews, uow, refund, { language: 'en' });
+  const payload: GeneratePathPayload = { pathId: PATH_ID, topicId: TOPIC_ID, stages: ['advanced_beginner', 'competent'], budgetScope: 'paid', formats: [] };
   return { handler, payload, ctx, path, saved, statuses, requests, discoveryCalls, flags, events, refunds, progress, partials };
 }
 
@@ -136,7 +136,7 @@ describe('GeneratePath (A9)', () => {
       ['r4', 'Resource 4'],
       ['r5', 'Resource 5'],
     ]);
-    expect(t.requests[0]).toMatchObject({ target: 'competent', budgetMinutes: 480, formats: ['video'], budgetScope: 'paid', jobId: 'job-1' });
+    expect(t.requests[0]).toMatchObject({ target: 'competent', budgetMinutes: 480, formats: [], formatFallback: false, budgetScope: 'paid', jobId: 'job-1' });
     expect(t.requests[0]?.feedback).toBeUndefined();
     const steps = t.saved[0] ?? [];
     expect(steps).toHaveLength(6);
@@ -151,6 +151,24 @@ describe('GeneratePath (A9)', () => {
     expect(t.partials).toHaveLength(1);
     expect(t.partials[0]).toMatchObject({ kind: 'path_step', pathId: PATH_ID, step: { n: 1, status: 'active', resources: [{ id: card(1).resourceId, type: 'youtube' }] } });
     expect(JSON.stringify(t.partials)).not.toContain('correctOptionIds');
+  });
+
+  it('notes in step 1 when the preferred format has too few resources, and drops other-language cards', async () => {
+    const t = setup({ pools: { advanced_beginner: { pool: pool('ready'), cards: [...PLACEMENT_CARDS, card(6, { language: 'id', stage: 'advanced_beginner' })] } } });
+
+    await t.handler.run({ ...t.payload, formats: ['papers'] }, t.ctx);
+    expect(t.requests[0]?.cards.map((c) => c.title)).not.toContain('Resource 6');
+    expect(t.requests[0]).toMatchObject({ formats: ['papers'], formatFallback: true });
+    expect(t.saved[0]?.[0]?.actions[0]?.text).toMatch(/^Note: this topic has few resources in your preferred format yet/);
+    expect(t.saved[0]?.[1]?.actions[0]?.text).not.toMatch(/^Note:/);
+  });
+
+  it('gives the designer the concepts its cards teach, most common first', async () => {
+    const withConcepts = (n: number, names: string[]) => card(n, { stage: 'competent', concepts: names.map((name) => ({ name, start: null, end: null })) });
+    const t = setup({ pools: { competent: { pool: pool('ready'), cards: [withConcepts(3, ['Effects', 'Cleanup']), withConcepts(4, ['Effects']), withConcepts(5, ['Reducers', 'effects'])] } } });
+
+    await t.handler.run(t.payload, t.ctx);
+    expect(t.requests[0]?.coreConcepts.slice(0, 3)).toEqual(['Effects', 'Cleanup', 'Reducers']);
   });
 
   it('regenerates once with the validator errors, then saves', async () => {

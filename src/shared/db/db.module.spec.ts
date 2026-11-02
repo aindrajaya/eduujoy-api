@@ -10,6 +10,7 @@ function config(overrides: Partial<Env>): AppConfig {
     APP_ORIGIN: ['http://localhost:5173'],
     API_PUBLIC_URL: 'http://localhost:3000',
     DATABASE_URL: 'postgresql://u:p@h/db',
+    PATH_RESOURCE_LANGUAGE: 'en',
     DATABASE_SCHEMA: 'public',
     JWT_ACCESS_SECRET: 'j'.repeat(64),
     REFRESH_TOKEN_PEPPER: 'p'.repeat(64),
