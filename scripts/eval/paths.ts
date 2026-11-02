@@ -6,11 +6,9 @@ import { Pool } from 'pg';
 import { type ServedCard } from '../../src/modules/discovery/application/ports/card.reader';
 import { ServedCardsQuery } from '../../src/modules/discovery/application/served-cards.query';
 import { DrizzleCardReader } from '../../src/modules/discovery/infrastructure/drizzle-card.reader';
-import { aliasPool } from '../../src/modules/pathing/application/assemble';
 import { designPath } from '../../src/modules/pathing/application/design-loop';
-import { type DesignRequest } from '../../src/modules/pathing/application/ports/path-designer';
 import { ClaudePathDesigner } from '../../src/modules/pathing/infrastructure/claude-path-designer';
-import { BANDS, PATH_LENGTH_WEEKS, targetStage } from '../../src/modules/pathing/domain';
+import { BANDS, targetStage } from '../../src/modules/pathing/domain';
 import { PromptRegistry, type StructuredGenerator, wrapUntrusted } from '../../src/shared/ai';
 import { ClaudeStructuredGenerator } from '../../src/shared/ai/claude/claude.generator';
 import { DrizzleLlmCallRecorder } from '../../src/shared/ai/metering/llm-call.recorder';
@@ -21,6 +19,7 @@ import { loadDirectDatabaseUrl } from '../../src/shared/db/cli/env';
 import { guardPool, POOL_SETTINGS } from '../../src/shared/db/db.module';
 import { describeError } from '../../src/shared/db/redact';
 import { topics } from '../../src/shared/db/schema/catalog';
+import { buildEvalRequest } from './eval-request';
 import { CASE_RESERVE_USD, type CaseResult, caseStages, DIMENSIONS, estimate, type EvalCase, evalFile, judgeSchema, poolsNeeded, selectCases, summarise } from './path-eval-rules';
 
 // Run by the user (A9, Q8): `pnpm eval:paths [--smoke] [--ids pe-001,pe-002] [--cases seed/_eval/path-eval-v1.json]
@@ -175,18 +174,7 @@ async function evaluate(run: EvalRun, c: EvalCase, topic: { id: string; name: st
     for (const card of (await run.served.pool(topic.id, stage)).cards) if (!cards.some((x) => x.resourceId === card.resourceId)) cards.push(card);
   }
   const target = targetStage(c.placement.stage);
-  const { design, validate, byAlias } = aliasPool(cards);
-  const request: DesignRequest = {
-    topic: { name: topic.name, domain: topic.domain ?? 'unknown' },
-    placement: { stage: c.placement.stage, bloom: c.placement.bloom as DesignRequest['placement']['bloom'] },
-    target,
-    goal: c.goal,
-    weeklyHours: c.weeklyHours,
-    budgetMinutes: Math.round(c.weeklyHours * 60 * PATH_LENGTH_WEEKS),
-    formats: c.formats,
-    cards: design,
-    budgetScope: 'operator',
-  };
+  const { request, validate, byAlias, selection } = buildEvalRequest(c, topic, cards, process.env['PATH_RESOURCE_LANGUAGE'] ?? 'en');
   const outcome = await designPath(run.designer, request, { pool: validate, placementBloom: request.placement.bloom, target, weeklyHours: c.weeklyHours });
   const invented = outcome.designed.steps.flatMap((s) => s.resources).filter((a) => !byAlias.has(a)).length;
   const base = {
@@ -200,6 +188,10 @@ async function evaluate(run: EvalRun, c: EvalCase, topic: { id: string; name: st
     steps: outcome.designed.steps.length,
     totalMinutes: outcome.designed.steps.reduce((n, s) => n + s.estMinutes, 0),
     badLinks: invented,
+    selection: { cards: selection.cards.length, droppedForLanguage: selection.droppedForLanguage, formatFallback: selection.formatFallback, coreConcepts: request.coreConcepts },
+    // The full designed path, for reviewing the judge's calibration (lead, 2 Nov 2026).
+    path: outcome.designed.steps,
+    pool: [...byAlias.entries()].map(([alias, card]) => ({ alias, type: card.type, language: card.language, title: card.title, durationMin: card.durationMin, readingMin: card.readingMin })),
   };
   if (outcome.errors.length > 0) {
     return { ...base, scores: null, costUsd: round(run.meter.take().reduce((n, x) => n + x.costUsd, 0)) };
