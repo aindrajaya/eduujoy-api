@@ -116,7 +116,14 @@ function request(t: Target): Anthropic.MessageCreateParamsNonStreaming {
     model: SEED_MODEL,
     max_tokens: 4_000,
     system: [{ type: 'text', text: PROMPT.text, cache_control: { type: 'ephemeral' } }],
-    messages: [{ role: 'user', content: `<item>\n${JSON.stringify(view, null, 2)}\n</item>` }],
+    messages: [
+      {
+        role: 'user',
+        content:
+          `<item>\n${JSON.stringify(view, null, 2)}\n</item>\n` +
+          `Target: the key has ${view.keyLength ?? 0} characters. Make at least one distractor ${view.keyLength ?? 0} characters or fewer and at least one ${view.keyLength ?? 0} characters or more, all within about 40% of the key's length.`,
+      },
+    ],
     output_config: { format: { type: 'json_schema', schema: toStructuredSchema(z.object({ distractors: z.array(z.object({ id: z.string(), label: z.string() })) })) }, effort: 'medium' },
   };
 }
