@@ -1,0 +1,678 @@
+{
+  "version": 1,
+  "topic": "statistics",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "algebra",
+    "probability"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Population versus sample",
+          "aliases": [
+            "sample vs population"
+          ],
+          "bloom": "C1",
+          "summary": "Distinguish the whole group of interest from the subset actually measured, and recognise why we sample."
+        },
+        {
+          "id": "nov-2",
+          "name": "Types of variables",
+          "aliases": [
+            "categorical and numerical data"
+          ],
+          "bloom": "C2",
+          "summary": "Classify variables as categorical or numerical and explain which summaries suit each."
+        },
+        {
+          "id": "nov-3",
+          "name": "Mean, median and mode",
+          "aliases": [
+            "measures of centre",
+            "averages"
+          ],
+          "bloom": "C2",
+          "summary": "Compute and interpret the three measures of centre and say what each tells about a data set."
+        },
+        {
+          "id": "nov-4",
+          "name": "Range and spread",
+          "aliases": [
+            "variability",
+            "dispersion"
+          ],
+          "bloom": "C2",
+          "summary": "Explain spread as how far values vary and compute the range as a simple measure of it."
+        },
+        {
+          "id": "nov-5",
+          "name": "Reading histograms",
+          "aliases": [
+            "frequency histogram",
+            "frequency distribution"
+          ],
+          "bloom": "C2",
+          "summary": "Read a histogram to describe the shape, centre and spread of a numerical data set."
+        },
+        {
+          "id": "nov-6",
+          "name": "Five-number summary and boxplots",
+          "aliases": [
+            "box-and-whisker plot",
+            "quartiles"
+          ],
+          "bloom": "C2",
+          "summary": "Identify the minimum, quartiles, median and maximum and read them from a boxplot."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The mean is always the best description of the typical value.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A taller bar in a histogram means the value is larger rather than more frequent.",
+          "concepts": [
+            "nov-5"
+          ]
+        },
+        {
+          "text": "The median line in a boxplot sits at the centre of the box, and each quarter of the box holds the same number of values only by width.",
+          "concepts": [
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Variance and standard deviation",
+          "aliases": [
+            "SD",
+            "sample standard deviation"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate the standard deviation of a sample and interpret it as typical distance from the mean."
+        },
+        {
+          "id": "adb-2",
+          "name": "Skewness and outliers",
+          "aliases": [
+            "distribution shape",
+            "extreme values"
+          ],
+          "bloom": "C3",
+          "summary": "Identify skew and outliers in plots and predict their effect on the mean and median."
+        },
+        {
+          "id": "adb-3",
+          "name": "Interquartile range and outlier rule",
+          "aliases": [
+            "IQR",
+            "1.5 IQR rule"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the IQR and use the 1.5×IQR fences to flag outliers on a boxplot."
+        },
+        {
+          "id": "adb-4",
+          "name": "Random sampling methods",
+          "aliases": [
+            "simple random, stratified, cluster sampling"
+          ],
+          "bloom": "C2",
+          "summary": "Describe simple random, stratified, cluster and systematic sampling and when each is used."
+        },
+        {
+          "id": "adb-5",
+          "name": "Sampling bias",
+          "aliases": [
+            "selection bias",
+            "non-response bias"
+          ],
+          "bloom": "C3",
+          "summary": "Spot how a sampling procedure can systematically distort results, such as voluntary response or convenience samples."
+        },
+        {
+          "id": "adb-6",
+          "name": "Comparing distributions",
+          "aliases": [
+            "side-by-side boxplots"
+          ],
+          "bloom": "C3",
+          "summary": "Compare two groups using centre, spread and shape from histograms or parallel boxplots."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-6",
+          "adb-3"
+        ],
+        [
+          "nov-3",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "nov-1",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-3",
+          "adb-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A large sample automatically removes bias from a poorly designed sampling method.",
+          "concepts": [
+            "adb-5",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Outliers should always be deleted from the data.",
+          "concepts": [
+            "adb-2",
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Standard deviation can be negative or measures the total distance of values from the mean.",
+          "concepts": [
+            "adb-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Normal distribution and z-scores",
+          "aliases": [
+            "Gaussian distribution",
+            "standardisation"
+          ],
+          "bloom": "C3",
+          "summary": "Use z-scores and the empirical rule to find proportions and percentiles under a normal model."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Sampling distribution of the mean",
+          "aliases": [
+            "sampling variability"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how sample means vary across repeated samples and how that distribution differs from the data distribution."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Central limit theorem",
+          "aliases": [
+            "CLT"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why sample means become approximately normal for large samples regardless of population shape."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Standard error",
+          "aliases": [
+            "SE",
+            "standard error of the mean"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the standard error and show how it shrinks with sample size."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Confidence intervals for a mean",
+          "aliases": [
+            "CI",
+            "interval estimate"
+          ],
+          "bloom": "C4",
+          "summary": "Construct and interpret an interval estimate using the estimate, critical value and standard error."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Null and alternative hypotheses",
+          "aliases": [
+            "H0 and H1",
+            "hypothesis formulation"
+          ],
+          "bloom": "C3",
+          "summary": "State null and alternative hypotheses, one- or two-sided, for a research question."
+        },
+        {
+          "id": "cmp-7",
+          "name": "p-values and significance level",
+          "aliases": [
+            "alpha",
+            "significance testing"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret a p-value as the probability of data this extreme under the null and compare it with alpha."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "cmp-4",
+          "cmp-7"
+        ],
+        [
+          "cmp-6",
+          "cmp-7"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A 95% confidence interval contains 95% of the individual data values.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "The p-value is the probability that the null hypothesis is true.",
+          "concepts": [
+            "cmp-7",
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "The central limit theorem says the data themselves become normal as the sample grows.",
+          "concepts": [
+            "cmp-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "One-sample and two-sample t-tests",
+          "aliases": [
+            "Student's t-test",
+            "Welch test"
+          ],
+          "bloom": "C4",
+          "summary": "Choose and carry out the right t-test for one mean or two independent means and interpret the t statistic."
+        },
+        {
+          "id": "prf-2",
+          "name": "Paired t-test",
+          "aliases": [
+            "matched-pairs test",
+            "dependent samples"
+          ],
+          "bloom": "C4",
+          "summary": "Recognise paired designs and test the mean of the within-pair differences."
+        },
+        {
+          "id": "prf-3",
+          "name": "Chi-square test of independence",
+          "aliases": [
+            "contingency table test",
+            "chi-square association"
+          ],
+          "bloom": "C4",
+          "summary": "Compute expected counts and the chi-square statistic to test association between two categorical variables."
+        },
+        {
+          "id": "prf-4",
+          "name": "Chi-square goodness of fit",
+          "aliases": [
+            "observed versus expected counts"
+          ],
+          "bloom": "C4",
+          "summary": "Test whether observed category counts match a hypothesised distribution."
+        },
+        {
+          "id": "prf-5",
+          "name": "Test assumptions and checks",
+          "aliases": [
+            "conditions for inference",
+            "robustness"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate independence, normality, equal variance and expected-count conditions and judge whether a test is valid."
+        },
+        {
+          "id": "prf-6",
+          "name": "Type I and Type II errors",
+          "aliases": [
+            "false positive and false negative",
+            "alpha and beta"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish the two error types and how significance level and sample size affect them."
+        },
+        {
+          "id": "prf-7",
+          "name": "Statistical power",
+          "aliases": [
+            "power analysis",
+            "sensitivity of a test"
+          ],
+          "bloom": "C5",
+          "summary": "Judge how effect size, variability, alpha and sample size determine power and what that means for study design."
+        },
+        {
+          "id": "prf-8",
+          "name": "Statistical versus practical significance",
+          "aliases": [
+            "effect size",
+            "practical importance"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate whether a statistically significant result is large enough to matter, using effect sizes and intervals."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-7",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "prf-1",
+          "prf-5"
+        ],
+        [
+          "prf-3",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "prf-6",
+          "prf-7"
+        ],
+        [
+          "prf-1",
+          "prf-8"
+        ],
+        [
+          "prf-7",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A non-significant result proves there is no effect.",
+          "concepts": [
+            "prf-6",
+            "prf-7"
+          ]
+        },
+        {
+          "text": "A smaller p-value means a larger or more important effect.",
+          "concepts": [
+            "prf-8"
+          ]
+        },
+        {
+          "text": "A chi-square test shows that one variable causes the other.",
+          "concepts": [
+            "prf-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Multiple comparisons problem",
+          "aliases": [
+            "multiple testing",
+            "Bonferroni correction"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how running many tests inflates false positives and choose corrections such as Bonferroni or false discovery rate."
+        },
+        {
+          "id": "exp-2",
+          "name": "p-hacking and researcher degrees of freedom",
+          "aliases": [
+            "data dredging",
+            "forking paths"
+          ],
+          "bloom": "C5",
+          "summary": "Critique analyses whose flexibility in choices invalidates reported p-values."
+        },
+        {
+          "id": "exp-3",
+          "name": "Bootstrap and permutation methods",
+          "aliases": [
+            "resampling",
+            "randomisation tests"
+          ],
+          "bloom": "C6",
+          "summary": "Design resampling procedures to estimate uncertainty or test hypotheses when parametric assumptions fail."
+        },
+        {
+          "id": "exp-4",
+          "name": "Interpretation of confidence intervals",
+          "aliases": [
+            "frequentist coverage",
+            "long-run coverage"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the frequentist meaning of coverage and contrast it with Bayesian credible intervals."
+        },
+        {
+          "id": "exp-5",
+          "name": "Nonparametric alternatives",
+          "aliases": [
+            "rank-based tests",
+            "Mann-Whitney test"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when rank-based tests are preferable to t-tests and what they actually test."
+        },
+        {
+          "id": "exp-6",
+          "name": "Study design and confounding",
+          "aliases": [
+            "randomised experiments",
+            "observational bias"
+          ],
+          "bloom": "C6",
+          "summary": "Design studies with randomisation, control and blinding to support causal claims and handle confounders."
+        },
+        {
+          "id": "exp-7",
+          "name": "Replication and reporting",
+          "aliases": [
+            "reproducibility",
+            "pre-registration"
+          ],
+          "bloom": "C6",
+          "summary": "Plan analyses and reports, including pre-registration, effect sizes and intervals, that hold up under replication."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-5",
+          "exp-3"
+        ],
+        [
+          "cmp-5",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "exp-3",
+          "exp-5"
+        ],
+        [
+          "adb-5",
+          "exp-6"
+        ],
+        [
+          "prf-8",
+          "exp-7"
+        ],
+        [
+          "exp-2",
+          "exp-7"
+        ],
+        [
+          "exp-6",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "If the test is run once on the final chosen analysis, earlier exploratory tests do not affect the p-value.",
+          "concepts": [
+            "exp-2",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Bootstrapping can fix a biased or unrepresentative sample.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "A particular computed 95% interval has a 95% probability of containing the true parameter.",
+          "concepts": [
+            "exp-4"
+          ]
+        }
+      ]
+    }
+  ]
+}

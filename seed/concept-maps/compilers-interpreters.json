@@ -1,0 +1,741 @@
+{
+  "version": 1,
+  "topic": "compilers-interpreters",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "data-structures",
+    "algorithms",
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Compiler versus interpreter distinction",
+          "aliases": [
+            "compiled vs interpreted"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a compiler translates a whole program to another form before running while an interpreter executes the program directly, and that many implementations mix both."
+        },
+        {
+          "id": "nov-2",
+          "name": "Phases of translation pipeline",
+          "aliases": [
+            "compiler phases",
+            "compilation stages"
+          ],
+          "bloom": "C2",
+          "summary": "Describe the sequence from source text through lexing, parsing, analysis and code generation to output, and what each phase consumes and produces."
+        },
+        {
+          "id": "nov-3",
+          "name": "Tokens and lexemes",
+          "aliases": [
+            "lexical units"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that a lexer groups characters into tokens such as identifiers, keywords, literals and operators, discarding whitespace and comments."
+        },
+        {
+          "id": "nov-4",
+          "name": "Grammar as language specification",
+          "aliases": [
+            "syntax rules",
+            "context-free grammar"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a grammar with terminals, nonterminals and productions defines which token sequences are valid programs."
+        },
+        {
+          "id": "nov-5",
+          "name": "Syntax tree structure",
+          "aliases": [
+            "parse tree",
+            "AST basics"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that program structure is represented as a tree where operators and constructs are nodes and operands are children."
+        },
+        {
+          "id": "nov-6",
+          "name": "Syntax versus semantics errors",
+          "aliases": [
+            "error kinds"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish errors in program form (syntax) from errors in meaning (such as undeclared variables or type mismatches) and runtime errors."
+        },
+        {
+          "id": "nov-7",
+          "name": "Machine code, bytecode, and targets",
+          "aliases": [
+            "output forms",
+            "target languages"
+          ],
+          "bloom": "C1",
+          "summary": "Name the kinds of output a compiler can produce, including native machine code, bytecode and another high-level language."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-1",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A language is either compiled or interpreted, as an inherent property of the language itself.",
+          "concepts": [
+            "nov-1",
+            "nov-7"
+          ]
+        },
+        {
+          "text": "A compiler only checks syntax and does not look at the meaning of the program.",
+          "concepts": [
+            "nov-2",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "The lexer understands program structure such as nested expressions.",
+          "concepts": [
+            "nov-3",
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-2",
+          "name": "Regular expressions for tokens",
+          "aliases": [
+            "token patterns",
+            "finite automata for lexing"
+          ],
+          "bloom": "C2",
+          "summary": "Describe token classes with regular expressions and relate them to finite automata that recognise them."
+        },
+        {
+          "id": "adb-1",
+          "name": "Writing a hand-coded lexer",
+          "aliases": [
+            "scanner implementation"
+          ],
+          "bloom": "C3",
+          "summary": "Implement a scanner that reads characters and emits tokens with type, text and position, using longest-match for operators and keywords."
+        },
+        {
+          "id": "adb-5",
+          "name": "Abstract syntax tree design",
+          "aliases": [
+            "AST node types"
+          ],
+          "bloom": "C3",
+          "summary": "Define node types for expressions and statements that keep meaning and drop punctuation and grouping tokens."
+        },
+        {
+          "id": "adb-3",
+          "name": "Recursive descent parsing",
+          "aliases": [
+            "top-down parser"
+          ],
+          "bloom": "C3",
+          "summary": "Write a parser with one function per grammar rule that consumes tokens and builds an abstract syntax tree."
+        },
+        {
+          "id": "adb-4",
+          "name": "Operator precedence and associativity",
+          "aliases": [
+            "precedence climbing",
+            "expression grammar levels"
+          ],
+          "bloom": "C3",
+          "summary": "Encode precedence and associativity in the grammar or with precedence climbing so expressions parse into the correct tree."
+        },
+        {
+          "id": "adb-6",
+          "name": "Tree-walking evaluation",
+          "aliases": [
+            "AST interpreter"
+          ],
+          "bloom": "C3",
+          "summary": "Evaluate an AST by recursively visiting nodes to compute values and carry out statements."
+        },
+        {
+          "id": "adb-7",
+          "name": "Environments and variable scope",
+          "aliases": [
+            "symbol bindings",
+            "scope chain"
+          ],
+          "bloom": "C3",
+          "summary": "Store variable bindings in nested environments so lookups and assignments respect block scope."
+        },
+        {
+          "id": "adb-8",
+          "name": "Syntax error reporting",
+          "aliases": [
+            "error messages with positions"
+          ],
+          "bloom": "C3",
+          "summary": "Report errors with line and column and recover enough to continue and report further errors."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-5",
+          "adb-5"
+        ],
+        [
+          "adb-5",
+          "adb-3"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ],
+        [
+          "adb-1",
+          "adb-8"
+        ],
+        [
+          "adb-3",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Precedence is handled by the evaluator, so the parser can build any tree shape for an expression.",
+          "concepts": [
+            "adb-4",
+            "adb-6"
+          ]
+        },
+        {
+          "text": "A recursive descent parser can handle any grammar, including left-recursive rules, without changes.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "The AST should keep every token from the source, including parentheses and semicolons.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Grammar ambiguity and LL/LR",
+          "aliases": [
+            "parsing classes",
+            "FIRST and FOLLOW"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse a grammar for ambiguity, left recursion and lookahead conflicts, and decide whether LL(k) or LR parsing suits it."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Bottom-up shift-reduce parsing",
+          "aliases": [
+            "LR parsing",
+            "parser generators"
+          ],
+          "bloom": "C3",
+          "summary": "Trace a shift-reduce parse using a stack and tables, and interpret shift/reduce conflicts reported by a parser generator."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Symbol tables and name resolution",
+          "aliases": [
+            "static scoping",
+            "binding analysis"
+          ],
+          "bloom": "C3",
+          "summary": "Build symbol tables during a pass over the AST to resolve each name to its declaration and detect undeclared or duplicate names."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Static type checking",
+          "aliases": [
+            "type checker",
+            "type rules"
+          ],
+          "bloom": "C4",
+          "summary": "Apply typing rules to expressions and statements to detect mismatches and annotate the tree with types."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Intermediate representations",
+          "aliases": [
+            "IR",
+            "three-address code"
+          ],
+          "bloom": "C3",
+          "summary": "Lower an AST into a linear IR such as three-address code with temporaries and labelled jumps."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Control flow graphs",
+          "aliases": [
+            "basic blocks",
+            "CFG"
+          ],
+          "bloom": "C4",
+          "summary": "Partition IR into basic blocks and connect them into a graph that shows all possible execution paths."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Stack-based bytecode virtual machine",
+          "aliases": [
+            "bytecode interpreter",
+            "VM dispatch loop"
+          ],
+          "bloom": "C3",
+          "summary": "Compile an AST to stack bytecode and run it in a dispatch loop, and compare this with tree walking."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Runtime call stack and frames",
+          "aliases": [
+            "activation records"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how activation records hold arguments, locals and return addresses to implement function calls and recursion."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-3"
+        ],
+        [
+          "adb-5",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-5",
+          "cmp-7"
+        ],
+        [
+          "adb-6",
+          "cmp-7"
+        ],
+        [
+          "cmp-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Any grammar that accepts the right programs is fine for a parser, since ambiguity only affects performance.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Static type checking can be skipped for dynamic languages because they have no notion of types.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "A bytecode VM is always faster than a tree-walking interpreter regardless of design.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Data-flow analysis",
+          "aliases": [
+            "liveness analysis",
+            "reaching definitions"
+          ],
+          "bloom": "C4",
+          "summary": "Formulate forward and backward data-flow problems over the CFG and solve them iteratively to a fixed point."
+        },
+        {
+          "id": "prf-2",
+          "name": "Static single assignment form",
+          "aliases": [
+            "SSA",
+            "phi functions"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how SSA gives each variable one definition, using phi nodes at merges, to simplify optimisations."
+        },
+        {
+          "id": "prf-3",
+          "name": "Local and global optimisations",
+          "aliases": [
+            "constant folding",
+            "dead code elimination",
+            "CSE"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when optimisations such as constant propagation, dead code elimination and inlining are safe and worthwhile."
+        },
+        {
+          "id": "prf-4",
+          "name": "Register allocation",
+          "aliases": [
+            "graph colouring allocation",
+            "linear scan"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how live ranges, interference and spilling determine register assignment, and compare graph colouring with linear scan."
+        },
+        {
+          "id": "prf-5",
+          "name": "Instruction selection and calling conventions",
+          "aliases": [
+            "code generation for targets",
+            "ABI"
+          ],
+          "bloom": "C4",
+          "summary": "Map IR operations to target instructions and conform to the ABI for argument passing, stack layout and saved registers."
+        },
+        {
+          "id": "prf-6",
+          "name": "Type inference and polymorphism",
+          "aliases": [
+            "Hindley-Milner",
+            "generics implementation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate unification-based inference and generic implementation strategies such as monomorphisation versus boxing."
+        },
+        {
+          "id": "prf-7",
+          "name": "Closures and first-class functions",
+          "aliases": [
+            "lexical closures",
+            "upvalues"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how captured variables are stored so functions outlive their defining scope, including heap-allocated environments."
+        },
+        {
+          "id": "prf-8",
+          "name": "Garbage collection strategies",
+          "aliases": [
+            "memory management",
+            "tracing GC",
+            "reference counting"
+          ],
+          "bloom": "C5",
+          "summary": "Compare mark-sweep, copying, generational and reference-counting collectors by cost, pauses and handling of cycles."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "prf-1",
+          "prf-4"
+        ],
+        [
+          "cmp-8",
+          "prf-5"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "cmp-4",
+          "prf-6"
+        ],
+        [
+          "cmp-8",
+          "prf-7"
+        ],
+        [
+          "cmp-8",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "An optimisation that speeds up one benchmark is always valid and beneficial for all programs.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Reference counting reclaims all unreachable memory, including cyclic structures.",
+          "concepts": [
+            "prf-8"
+          ]
+        },
+        {
+          "text": "Closures copy the values of captured variables at creation time, so later changes are never visible.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "JIT compilation and tiering",
+          "aliases": [
+            "just-in-time compiler",
+            "adaptive optimisation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate profile-guided JIT designs, including speculation, deoptimisation and tier trade-offs between warm-up and peak speed."
+        },
+        {
+          "id": "exp-2",
+          "name": "Optimisation correctness and undefined behaviour",
+          "aliases": [
+            "compiler soundness",
+            "UB exploitation"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how language semantics, undefined behaviour and memory models constrain valid transformations."
+        },
+        {
+          "id": "exp-3",
+          "name": "Interprocedural and alias analysis",
+          "aliases": [
+            "points-to analysis",
+            "whole-program optimisation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate precision versus cost of analyses like points-to and escape analysis and their effect on optimisation."
+        },
+        {
+          "id": "exp-4",
+          "name": "Language design and implementation trade-offs",
+          "aliases": [
+            "semantics-to-implementation mapping"
+          ],
+          "bloom": "C6",
+          "summary": "Design language features such as exceptions, coroutines or pattern matching with a plan for their efficient implementation."
+        },
+        {
+          "id": "exp-5",
+          "name": "Compiler infrastructure and retargetability",
+          "aliases": [
+            "LLVM-style design",
+            "multi-stage IR"
+          ],
+          "bloom": "C6",
+          "summary": "Design a compiler architecture with layered IRs and reusable passes that supports multiple front ends and back ends."
+        },
+        {
+          "id": "exp-6",
+          "name": "Verifying compilers and testing",
+          "aliases": [
+            "translation validation",
+            "differential testing",
+            "fuzzing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate approaches such as differential testing, fuzzing and formal verification for finding miscompilation."
+        },
+        {
+          "id": "exp-7",
+          "name": "Advanced parsing and incremental tooling",
+          "aliases": [
+            "GLR",
+            "PEG",
+            "error recovery",
+            "language servers"
+          ],
+          "bloom": "C6",
+          "summary": "Create parsers and front ends that support ambiguity, robust error recovery and incremental reparsing for editors."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "prf-1",
+          "exp-3"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "prf-2",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "cmp-2",
+          "exp-7"
+        ],
+        [
+          "prf-6",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "prf-8",
+          "exp-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A JIT compiler always outperforms ahead-of-time compilation because it has runtime information.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Compilers treat undefined behaviour as a platform-specific result that behaves predictably at runtime.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "If a compiler passes its test suite, it is free of miscompilation bugs.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,750 @@
+{
+  "version": 1,
+  "topic": "deep-learning",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "machine-learning",
+    "python",
+    "linear-algebra",
+    "multivariable-calculus"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Artificial neuron and weights",
+          "aliases": [
+            "perceptron unit",
+            "node"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a neuron computes a weighted sum of inputs plus a bias and passes it through a nonlinearity."
+        },
+        {
+          "id": "nov-2",
+          "name": "Layers and network depth",
+          "aliases": [
+            "hidden layers",
+            "multilayer perceptron"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how stacking input, hidden and output layers lets a network build progressively more abstract features."
+        },
+        {
+          "id": "nov-3",
+          "name": "Activation functions",
+          "aliases": [
+            "nonlinearity",
+            "ReLU",
+            "sigmoid",
+            "tanh"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why nonlinear activations such as ReLU, sigmoid and tanh are needed and how their output ranges differ."
+        },
+        {
+          "id": "nov-5",
+          "name": "Forward pass",
+          "aliases": [
+            "forward propagation",
+            "inference pass"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that a forward pass computes layer by layer from input to prediction."
+        },
+        {
+          "id": "nov-4",
+          "name": "Loss function",
+          "aliases": [
+            "cost function",
+            "objective"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a loss measures prediction error and that training aims to minimise it, e.g. cross-entropy or mean squared error."
+        },
+        {
+          "id": "nov-6",
+          "name": "Training by gradient descent",
+          "aliases": [
+            "weight updates",
+            "learning rate"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that weights are repeatedly nudged opposite the gradient of the loss, scaled by a learning rate."
+        },
+        {
+          "id": "nov-7",
+          "name": "Backpropagation idea",
+          "aliases": [
+            "backprop",
+            "error propagation"
+          ],
+          "bloom": "C2",
+          "summary": "Describe backpropagation as applying the chain rule backward to get the gradient of the loss for every weight."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-5",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ],
+        [
+          "nov-6",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A neural network with more layers is always more accurate.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Stacking layers without activation functions still gives a more powerful model than a single layer.",
+          "concepts": [
+            "nov-3",
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Backpropagation is the algorithm that updates the weights.",
+          "concepts": [
+            "nov-7",
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Mini-batch SGD and epochs",
+          "aliases": [
+            "stochastic gradient descent",
+            "batch size"
+          ],
+          "bloom": "C3",
+          "summary": "Train a model with mini-batches, setting batch size and number of epochs and reading the resulting loss curves."
+        },
+        {
+          "id": "adb-2",
+          "name": "Tensors and autograd",
+          "aliases": [
+            "automatic differentiation",
+            "tensor operations"
+          ],
+          "bloom": "C3",
+          "summary": "Use a framework such as PyTorch to build tensors, compute gradients automatically and apply optimiser steps."
+        },
+        {
+          "id": "adb-3",
+          "name": "Training loop structure",
+          "aliases": [
+            "train/eval loop",
+            "zero_grad step"
+          ],
+          "bloom": "C3",
+          "summary": "Write a loop with forward pass, loss, backward pass, optimiser step and gradient reset, plus separate evaluation mode."
+        },
+        {
+          "id": "adb-4",
+          "name": "Overfitting and validation curves",
+          "aliases": [
+            "generalisation gap",
+            "early stopping"
+          ],
+          "bloom": "C3",
+          "summary": "Diagnose overfitting from diverging training and validation loss and apply early stopping."
+        },
+        {
+          "id": "adb-5",
+          "name": "Convolution and pooling layers",
+          "aliases": [
+            "CNN basics",
+            "filters",
+            "feature maps"
+          ],
+          "bloom": "C3",
+          "summary": "Apply convolutional filters, stride, padding and pooling to image tensors and compute output shapes."
+        },
+        {
+          "id": "adb-6",
+          "name": "Softmax and cross-entropy",
+          "aliases": [
+            "classification output",
+            "logits"
+          ],
+          "bloom": "C3",
+          "summary": "Turn logits into class probabilities with softmax and train classifiers with cross-entropy loss."
+        },
+        {
+          "id": "adb-7",
+          "name": "Weight initialisation",
+          "aliases": [
+            "Xavier init",
+            "He init"
+          ],
+          "bloom": "C2",
+          "summary": "Understand why random, scaled initial weights are needed to break symmetry and keep signals stable."
+        },
+        {
+          "id": "adb-8",
+          "name": "Using GPUs for training",
+          "aliases": [
+            "CUDA device",
+            "device placement"
+          ],
+          "bloom": "C3",
+          "summary": "Move models and data to a GPU and understand why parallel matrix operations speed training."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-7",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-3",
+          "adb-5"
+        ],
+        [
+          "nov-4",
+          "adb-6"
+        ],
+        [
+          "adb-3",
+          "adb-8"
+        ],
+        [
+          "nov-1",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Training loss going down means the model is getting better in general.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Initialising all weights to zero is a safe default.",
+          "concepts": [
+            "adb-7"
+          ]
+        },
+        {
+          "text": "Softmax outputs are calibrated probabilities that can be trusted as certainty.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Vanishing and exploding gradients",
+          "aliases": [
+            "gradient flow",
+            "gradient clipping"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how repeated multiplication through depth shrinks or inflates gradients and choose remedies such as ReLU, init and clipping."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Batch normalisation",
+          "aliases": [
+            "batchnorm",
+            "layer normalisation"
+          ],
+          "bloom": "C3",
+          "summary": "Apply normalisation layers, and handle their different behaviour in training versus evaluation mode."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Dropout and weight decay",
+          "aliases": [
+            "regularisation",
+            "L2 penalty"
+          ],
+          "bloom": "C3",
+          "summary": "Apply dropout and weight decay to reduce overfitting and tune their strength."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Adaptive optimisers and schedules",
+          "aliases": [
+            "Adam",
+            "momentum",
+            "learning rate schedule"
+          ],
+          "bloom": "C4",
+          "summary": "Compare SGD with momentum and Adam, and use learning rate schedules and warmup."
+        },
+        {
+          "id": "cmp-5",
+          "name": "CNN architecture patterns",
+          "aliases": [
+            "ResNet",
+            "residual connections",
+            "VGG"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how depth, receptive field and skip connections shape CNN design and trainability."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Transfer learning and fine-tuning",
+          "aliases": [
+            "pretrained models",
+            "feature extraction"
+          ],
+          "bloom": "C3",
+          "summary": "Reuse a pretrained network by freezing layers or fine-tuning for a new dataset."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Recurrent networks and LSTMs",
+          "aliases": [
+            "RNN",
+            "GRU",
+            "sequence models"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how recurrence and gated memory cells process sequences and mitigate gradient problems."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Data augmentation and pipelines",
+          "aliases": [
+            "DataLoader",
+            "augmentation"
+          ],
+          "bloom": "C3",
+          "summary": "Build input pipelines with batching, shuffling and augmentation to improve generalisation."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-7",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "adb-1",
+          "cmp-4"
+        ],
+        [
+          "adb-5",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "adb-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Dropout and batch normalisation behave the same during training and inference.",
+          "concepts": [
+            "cmp-2",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Adam always outperforms SGD and needs no learning rate tuning.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "LSTMs completely eliminate vanishing gradients and long-range dependency problems.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Self-attention mechanism",
+          "aliases": [
+            "scaled dot-product attention",
+            "queries keys values"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how queries, keys and values yield context-weighted representations and why scaling and softmax matter."
+        },
+        {
+          "id": "prf-2",
+          "name": "Transformer block design",
+          "aliases": [
+            "multi-head attention",
+            "positional encoding"
+          ],
+          "bloom": "C4",
+          "summary": "Dissect transformer blocks including multi-head attention, feed-forward layers, residuals, normalisation and positional information."
+        },
+        {
+          "id": "prf-3",
+          "name": "Encoder, decoder and masking",
+          "aliases": [
+            "causal mask",
+            "encoder-decoder"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish encoder-only, decoder-only and encoder-decoder models and the role of causal and padding masks."
+        },
+        {
+          "id": "prf-5",
+          "name": "Tokenisation and embeddings",
+          "aliases": [
+            "subword tokens",
+            "BPE",
+            "word embeddings"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how subword tokenisation and learned embeddings represent text for neural models."
+        },
+        {
+          "id": "prf-4",
+          "name": "Pretraining and fine-tuning paradigms",
+          "aliases": [
+            "self-supervised learning",
+            "language modelling objective"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate masked and autoregressive pretraining objectives and adaptation methods such as fine-tuning and parameter-efficient tuning."
+        },
+        {
+          "id": "prf-6",
+          "name": "Training diagnostics and debugging",
+          "aliases": [
+            "loss curve analysis",
+            "overfit a single batch"
+          ],
+          "bloom": "C5",
+          "summary": "Judge causes of training failure from loss, gradient norms and activations, and verify with sanity checks."
+        },
+        {
+          "id": "prf-7",
+          "name": "Mixed precision and multi-GPU training",
+          "aliases": [
+            "data parallelism",
+            "FP16",
+            "bf16"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse memory and throughput tradeoffs of mixed precision, gradient accumulation and data-parallel training."
+        },
+        {
+          "id": "prf-8",
+          "name": "Model evaluation and ablation",
+          "aliases": [
+            "ablation study",
+            "metric selection"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate architectural choices with controlled ablations, appropriate metrics and multiple seeds."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-7",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-2",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "prf-5",
+          "prf-4"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "cmp-6",
+          "prf-4"
+        ],
+        [
+          "cmp-4",
+          "prf-6"
+        ],
+        [
+          "adb-8",
+          "prf-7"
+        ],
+        [
+          "prf-6",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Self-attention inherently understands word order without positional information.",
+          "concepts": [
+            "prf-1",
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Transformers are strictly better than CNNs and RNNs on any task and data size.",
+          "concepts": [
+            "prf-2",
+            "prf-8"
+          ]
+        },
+        {
+          "text": "Attention weights are a faithful explanation of why a model made its prediction.",
+          "concepts": [
+            "prf-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Scaling laws and compute tradeoffs",
+          "aliases": [
+            "Chinchilla scaling",
+            "compute-optimal training"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how loss scales with parameters, data and compute and decide allocations for a given budget."
+        },
+        {
+          "id": "exp-2",
+          "name": "Efficient attention and long context",
+          "aliases": [
+            "FlashAttention",
+            "sparse attention",
+            "KV cache"
+          ],
+          "bloom": "C5",
+          "summary": "Judge approaches to reduce quadratic attention cost and memory, including caching and sparse or linear variants."
+        },
+        {
+          "id": "exp-3",
+          "name": "Generative model families",
+          "aliases": [
+            "diffusion models",
+            "VAEs",
+            "GANs"
+          ],
+          "bloom": "C5",
+          "summary": "Compare autoregressive, latent-variable, adversarial and diffusion generative models by objective, quality and stability."
+        },
+        {
+          "id": "exp-4",
+          "name": "Novel architecture design",
+          "aliases": [
+            "inductive bias design",
+            "custom layers"
+          ],
+          "bloom": "C6",
+          "summary": "Design architectures whose inductive biases match a problem's structure, such as equivariance or modality fusion."
+        },
+        {
+          "id": "exp-5",
+          "name": "Large-scale distributed training",
+          "aliases": [
+            "model parallelism",
+            "ZeRO sharding",
+            "pipeline parallelism"
+          ],
+          "bloom": "C6",
+          "summary": "Design a training setup combining data, tensor and pipeline parallelism and sharding for models that exceed one device."
+        },
+        {
+          "id": "exp-6",
+          "name": "Generalisation and optimisation theory",
+          "aliases": [
+            "double descent",
+            "loss landscape",
+            "implicit regularisation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate explanations for why overparameterised networks generalise, including flat minima and double descent."
+        },
+        {
+          "id": "exp-7",
+          "name": "Robustness and distribution shift",
+          "aliases": [
+            "adversarial examples",
+            "out-of-distribution"
+          ],
+          "bloom": "C5",
+          "summary": "Assess model vulnerability to adversarial and shifted inputs and choose mitigations and evaluation protocols."
+        },
+        {
+          "id": "exp-8",
+          "name": "Alignment and preference tuning",
+          "aliases": [
+            "RLHF",
+            "instruction tuning"
+          ],
+          "bloom": "C6",
+          "summary": "Create pipelines that adapt pretrained models to human preferences and critique their failure modes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-8",
+          "exp-1"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-3"
+        ],
+        [
+          "prf-2",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "prf-8",
+          "exp-7"
+        ],
+        [
+          "prf-4",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Scaling up model size alone will reliably fix reasoning and robustness failures.",
+          "concepts": [
+            "exp-1",
+            "exp-7"
+          ]
+        },
+        {
+          "text": "Classical bias-variance reasoning implies overparameterised networks must overfit.",
+          "concepts": [
+            "exp-6"
+          ]
+        },
+        {
+          "text": "Adversarial robustness comes for free with higher clean accuracy.",
+          "concepts": [
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,707 @@
+{
+  "version": 1,
+  "topic": "regression-analysis",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "statistics"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Response and predictor variables",
+          "aliases": [
+            "dependent and independent variables",
+            "outcome and explanatory variables"
+          ],
+          "bloom": "C1",
+          "summary": "Identify which variable is being explained (response) and which are used to explain it (predictors) in a given question."
+        },
+        {
+          "id": "nov-2",
+          "name": "Scatterplot and association",
+          "aliases": [
+            "scatter diagram",
+            "bivariate plot"
+          ],
+          "bloom": "C2",
+          "summary": "Read a scatterplot to describe direction, form and strength of the relationship between two quantitative variables."
+        },
+        {
+          "id": "nov-3",
+          "name": "Correlation coefficient",
+          "aliases": [
+            "Pearson r",
+            "linear correlation"
+          ],
+          "bloom": "C2",
+          "summary": "Explain what r measures, its range from -1 to 1, and that it captures only linear association."
+        },
+        {
+          "id": "nov-4",
+          "name": "Line of best fit",
+          "aliases": [
+            "regression line",
+            "fitted line"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a straight line summarises how the response changes on average with the predictor."
+        },
+        {
+          "id": "nov-5",
+          "name": "Slope and intercept meaning",
+          "aliases": [
+            "coefficients",
+            "line parameters"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret the slope as the average change in response per one-unit increase in predictor and the intercept as the predicted value at zero."
+        },
+        {
+          "id": "nov-6",
+          "name": "Predicted values and residuals",
+          "aliases": [
+            "fitted values",
+            "prediction error"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a prediction as a point on the line and a residual as the observed value minus the predicted value."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A strong correlation proves that changes in the predictor cause changes in the response.",
+          "concepts": [
+            "nov-3",
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A correlation near zero means the two variables are unrelated.",
+          "concepts": [
+            "nov-3",
+            "nov-2"
+          ]
+        },
+        {
+          "text": "The intercept always has a meaningful real-world interpretation.",
+          "concepts": [
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Least squares estimation",
+          "aliases": [
+            "ordinary least squares",
+            "OLS"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that the fitted line minimises the sum of squared residuals and compute slope and intercept from summary statistics."
+        },
+        {
+          "id": "adb-2",
+          "name": "Making predictions from a fit",
+          "aliases": [
+            "prediction with a model",
+            "fitted equation use"
+          ],
+          "bloom": "C3",
+          "summary": "Use a fitted equation to predict the response for new predictor values and avoid extrapolating beyond the data range."
+        },
+        {
+          "id": "adb-3",
+          "name": "Coefficient of determination",
+          "aliases": [
+            "R-squared",
+            "R²"
+          ],
+          "bloom": "C3",
+          "summary": "Compute and interpret R² as the proportion of response variability explained by the model."
+        },
+        {
+          "id": "adb-4",
+          "name": "Residual plots",
+          "aliases": [
+            "residuals versus fitted plot"
+          ],
+          "bloom": "C3",
+          "summary": "Plot residuals against fitted values and spot curvature or changing spread that signals a poor linear fit."
+        },
+        {
+          "id": "adb-5",
+          "name": "Multiple regression with categorical predictors",
+          "aliases": [
+            "dummy variables",
+            "indicator variables"
+          ],
+          "bloom": "C3",
+          "summary": "Encode a categorical predictor as indicator variables and interpret its coefficient relative to the reference group."
+        },
+        {
+          "id": "adb-6",
+          "name": "Outliers and influential points",
+          "aliases": [
+            "leverage points",
+            "high-influence observations"
+          ],
+          "bloom": "C3",
+          "summary": "Recognise how an extreme point can pull the fitted line and check its effect by refitting without it."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "nov-6",
+          "adb-4"
+        ],
+        [
+          "nov-5",
+          "adb-5"
+        ],
+        [
+          "adb-4",
+          "adb-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A high R² means the model is correct and its predictions are reliable.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "The regression line can safely be used to predict at any predictor value.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Outliers should always be deleted because they are errors.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Multiple linear regression model",
+          "aliases": [
+            "multivariable regression",
+            "several-predictor model"
+          ],
+          "bloom": "C3",
+          "summary": "Fit a model with several predictors and interpret each coefficient as the effect holding the other predictors fixed."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Inference on coefficients",
+          "aliases": [
+            "t-tests for slopes",
+            "confidence intervals for coefficients"
+          ],
+          "bloom": "C3",
+          "summary": "Use standard errors, t-tests and confidence intervals to judge whether a coefficient differs from zero and how precisely it is estimated."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Overall F-test and adjusted R²",
+          "aliases": [
+            "model significance test",
+            "adjusted R-squared"
+          ],
+          "bloom": "C4",
+          "summary": "Test whether the predictors jointly explain the response and compare models of different size using adjusted R²."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Linear model assumptions diagnostics",
+          "aliases": [
+            "LINE assumptions",
+            "assumption checking"
+          ],
+          "bloom": "C4",
+          "summary": "Assess linearity, independence, constant variance and normality of errors using residual plots and Q-Q plots."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Interaction terms",
+          "aliases": [
+            "effect modification",
+            "product terms"
+          ],
+          "bloom": "C4",
+          "summary": "Include and interpret an interaction so that the effect of one predictor depends on the level of another."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Multicollinearity",
+          "aliases": [
+            "collinear predictors",
+            "variance inflation factor"
+          ],
+          "bloom": "C4",
+          "summary": "Detect correlated predictors with VIF and explain how they inflate standard errors and destabilise coefficients."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Logistic regression and odds",
+          "aliases": [
+            "binary outcome model",
+            "logit model"
+          ],
+          "bloom": "C3",
+          "summary": "Model a binary outcome with the logit link and interpret exponentiated coefficients as odds ratios."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Transforming variables",
+          "aliases": [
+            "log transformation",
+            "polynomial terms"
+          ],
+          "bloom": "C3",
+          "summary": "Apply log or polynomial transformations to fix nonlinearity or skew and interpret the resulting coefficients."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-3"
+        ],
+        [
+          "adb-4",
+          "cmp-4"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "cmp-1",
+          "cmp-5"
+        ],
+        [
+          "adb-5",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "cmp-4",
+          "cmp-8"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The response variable itself must be normally distributed for linear regression to be valid.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "A non-significant coefficient proves that the predictor has no effect.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "An odds ratio of 2 means the probability of the outcome doubles.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Model selection criteria",
+          "aliases": [
+            "AIC and BIC",
+            "stepwise selection"
+          ],
+          "bloom": "C5",
+          "summary": "Compare candidate models using AIC, BIC and subject knowledge and justify the choice while recognising selection bias."
+        },
+        {
+          "id": "prf-2",
+          "name": "Cross-validation for prediction",
+          "aliases": [
+            "out-of-sample validation",
+            "k-fold CV"
+          ],
+          "bloom": "C5",
+          "summary": "Estimate predictive error on held-out data to judge generalisation and detect overfitting."
+        },
+        {
+          "id": "prf-3",
+          "name": "Regularisation methods",
+          "aliases": [
+            "ridge and lasso",
+            "penalised regression"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how ridge and lasso penalties trade bias for variance and when each helps with many or correlated predictors."
+        },
+        {
+          "id": "prf-4",
+          "name": "Influence diagnostics",
+          "aliases": [
+            "Cook's distance",
+            "leverage and DFBETAS"
+          ],
+          "bloom": "C4",
+          "summary": "Use leverage, studentised residuals and Cook's distance to separate outliers from points that change conclusions."
+        },
+        {
+          "id": "prf-5",
+          "name": "Heteroscedasticity and robust errors",
+          "aliases": [
+            "weighted least squares",
+            "sandwich standard errors"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose non-constant variance and choose between transformation, weighting or robust standard errors."
+        },
+        {
+          "id": "prf-6",
+          "name": "Logistic model evaluation",
+          "aliases": [
+            "ROC and AUC",
+            "calibration and classification metrics"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate a logistic model through discrimination, calibration and threshold-dependent metrics suited to the problem."
+        },
+        {
+          "id": "prf-7",
+          "name": "Generalised linear models",
+          "aliases": [
+            "GLM",
+            "Poisson regression"
+          ],
+          "bloom": "C4",
+          "summary": "Relate response distribution, link function and linear predictor to select models for counts, proportions and binary data."
+        },
+        {
+          "id": "prf-8",
+          "name": "Confounding and causal interpretation",
+          "aliases": [
+            "omitted variable bias",
+            "adjustment for confounders"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when adjusted coefficients can be read causally and how omitted variables or colliders bias estimates."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-6",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-4",
+          "prf-4"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "cmp-1",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Stepwise selection reliably finds the true set of predictors and its p-values remain valid.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Accuracy on the training data shows how well the model will predict new data.",
+          "concepts": [
+            "prf-2",
+            "prf-6"
+          ]
+        },
+        {
+          "text": "Controlling for more variables always moves the estimate closer to the causal effect.",
+          "concepts": [
+            "prf-8"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Bias-variance trade-off in modelling",
+          "aliases": [
+            "bias-variance decomposition",
+            "estimator risk"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how model complexity, sample size and regularisation shape error, and choose a strategy accordingly."
+        },
+        {
+          "id": "exp-2",
+          "name": "Hierarchical and mixed models",
+          "aliases": [
+            "multilevel regression",
+            "random effects models"
+          ],
+          "bloom": "C6",
+          "summary": "Design models with random effects for clustered or repeated data and justify partial pooling over ignoring the structure."
+        },
+        {
+          "id": "exp-3",
+          "name": "Bayesian regression",
+          "aliases": [
+            "priors and posteriors for coefficients",
+            "Bayesian linear model"
+          ],
+          "bloom": "C5",
+          "summary": "Specify priors, interpret posterior and predictive distributions and assess sensitivity to prior choices."
+        },
+        {
+          "id": "exp-4",
+          "name": "Flexible nonlinear regression",
+          "aliases": [
+            "splines and GAMs",
+            "nonparametric smoothing"
+          ],
+          "bloom": "C6",
+          "summary": "Build models with splines or additive terms to capture nonlinear effects while controlling smoothness."
+        },
+        {
+          "id": "exp-5",
+          "name": "Causal inference with regression",
+          "aliases": [
+            "instrumental variables",
+            "difference-in-differences"
+          ],
+          "bloom": "C6",
+          "summary": "Design analyses using DAGs, instruments or quasi-experimental designs and defend the identifying assumptions."
+        },
+        {
+          "id": "exp-6",
+          "name": "Missing data and measurement error",
+          "aliases": [
+            "multiple imputation",
+            "errors-in-variables"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how missingness mechanisms and noisy predictors bias estimates and select appropriate corrections."
+        },
+        {
+          "id": "exp-7",
+          "name": "Time series and dependent errors",
+          "aliases": [
+            "autocorrelated residuals",
+            "GLS"
+          ],
+          "bloom": "C5",
+          "summary": "Detect serial or spatial correlation in residuals and apply generalised least squares or other models that handle it."
+        },
+        {
+          "id": "exp-8",
+          "name": "Reproducible modelling workflow",
+          "aliases": [
+            "analysis pipeline design",
+            "model reporting"
+          ],
+          "bloom": "C6",
+          "summary": "Create an end-to-end analysis plan covering pre-specification, validation, uncertainty reporting and communication of limitations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-2",
+          "exp-1"
+        ],
+        [
+          "prf-7",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ],
+        [
+          "exp-1",
+          "exp-4"
+        ],
+        [
+          "prf-8",
+          "exp-5"
+        ],
+        [
+          "prf-5",
+          "exp-7"
+        ],
+        [
+          "prf-4",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-8"
+        ],
+        [
+          "exp-5",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Mixed models are only a fancier way to get smaller p-values and can be replaced by adding group dummies without consequence.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Multiple imputation or complete-case analysis gives unbiased results regardless of why data are missing.",
+          "concepts": [
+            "exp-6"
+          ]
+        },
+        {
+          "text": "A flexible model with enough terms to fit the data closely is the best choice for inference.",
+          "concepts": [
+            "exp-4",
+            "exp-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

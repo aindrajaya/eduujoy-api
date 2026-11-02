@@ -1,0 +1,754 @@
+{
+  "version": 1,
+  "topic": "operating-systems",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals",
+    "linux-command-line"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Role of the kernel",
+          "aliases": [
+            "OS kernel",
+            "kernel responsibilities"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that the kernel manages CPU, memory, and devices on behalf of programs and provides a protected abstraction layer over hardware."
+        },
+        {
+          "id": "nov-2",
+          "name": "User mode versus kernel mode",
+          "aliases": [
+            "privilege levels",
+            "protection rings"
+          ],
+          "bloom": "C2",
+          "summary": "Describe why the CPU runs user code with restricted privileges and kernel code with full privileges, and how this protects the system."
+        },
+        {
+          "id": "nov-3",
+          "name": "Process as running program",
+          "aliases": [
+            "process",
+            "program vs process"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish a program on disk from a process, which has its own address space, state, and resources."
+        },
+        {
+          "id": "nov-4",
+          "name": "Process states",
+          "aliases": [
+            "process lifecycle",
+            "ready running blocked"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the main process states (new, ready, running, waiting, terminated) and what causes transitions between them."
+        },
+        {
+          "id": "nov-5",
+          "name": "System call interface",
+          "aliases": [
+            "syscalls",
+            "kernel entry points"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that programs request kernel services such as file I/O or process creation through system calls rather than direct hardware access."
+        },
+        {
+          "id": "nov-6",
+          "name": "Threads within a process",
+          "aliases": [
+            "thread",
+            "lightweight process"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a thread is an execution path inside a process sharing its address space while having its own stack and registers."
+        },
+        {
+          "id": "nov-7",
+          "name": "Files and directories abstraction",
+          "aliases": [
+            "file abstraction",
+            "file system hierarchy"
+          ],
+          "bloom": "C2",
+          "summary": "Understand files as named byte sequences organised in a directory tree, hiding physical disk layout."
+        },
+        {
+          "id": "nov-8",
+          "name": "Virtual memory idea",
+          "aliases": [
+            "address space abstraction",
+            "virtual addresses"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that each process sees its own private virtual address space which the OS maps onto physical memory."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-3",
+          "nov-8"
+        ],
+        [
+          "nov-1",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The operating system is just the graphical desktop and bundled applications.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A process and a program are the same thing.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Threads of the same process have completely separate memory.",
+          "concepts": [
+            "nov-6",
+            "nov-8"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Process creation with fork and exec",
+          "aliases": [
+            "fork exec model",
+            "spawning processes"
+          ],
+          "bloom": "C3",
+          "summary": "Use fork, exec, wait, and exit to create, replace, and reap child processes in a Unix-like system."
+        },
+        {
+          "id": "adb-2",
+          "name": "Context switch mechanics",
+          "aliases": [
+            "context switching",
+            "task switch"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how the kernel saves and restores register state and process control block data to switch the CPU between processes."
+        },
+        {
+          "id": "adb-3",
+          "name": "Basic CPU scheduling policies",
+          "aliases": [
+            "FCFS SJF round robin",
+            "scheduling algorithms"
+          ],
+          "bloom": "C3",
+          "summary": "Apply first-come-first-served, shortest-job-first, and round-robin to a set of jobs and compute waiting and turnaround times."
+        },
+        {
+          "id": "adb-4",
+          "name": "Interrupts and handlers",
+          "aliases": [
+            "hardware interrupts",
+            "interrupt service routine"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how devices signal the CPU via interrupts and how the handler runs and returns control."
+        },
+        {
+          "id": "adb-5",
+          "name": "Paging and page tables",
+          "aliases": [
+            "page table translation",
+            "virtual to physical mapping"
+          ],
+          "bloom": "C3",
+          "summary": "Translate a virtual address into a physical address using page number, offset, and a page table."
+        },
+        {
+          "id": "adb-6",
+          "name": "File descriptors and open files",
+          "aliases": [
+            "fd table",
+            "file handles"
+          ],
+          "bloom": "C3",
+          "summary": "Use file descriptors, including standard streams, redirection, and pipes, and relate them to kernel open-file structures."
+        },
+        {
+          "id": "adb-7",
+          "name": "Race conditions",
+          "aliases": [
+            "data race",
+            "critical section problem"
+          ],
+          "bloom": "C3",
+          "summary": "Identify a race condition on shared data between threads and locate the critical section."
+        },
+        {
+          "id": "adb-8",
+          "name": "Inter-process communication basics",
+          "aliases": [
+            "IPC",
+            "pipes and signals"
+          ],
+          "bloom": "C2",
+          "summary": "Describe pipes, signals, and shared memory as ways for processes to exchange data or notifications."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "nov-2",
+          "adb-4"
+        ],
+        [
+          "nov-8",
+          "adb-5"
+        ],
+        [
+          "nov-7",
+          "adb-6"
+        ],
+        [
+          "nov-6",
+          "adb-7"
+        ],
+        [
+          "adb-1",
+          "adb-8"
+        ],
+        [
+          "adb-6",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "fork starts a brand new program in the child process.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "A context switch is free and has no performance cost.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Shortest-job-first is always practical because the OS knows each job's run time in advance.",
+          "concepts": [
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Mutexes and locking discipline",
+          "aliases": [
+            "mutual exclusion locks",
+            "spinlock vs mutex"
+          ],
+          "bloom": "C3",
+          "summary": "Protect critical sections with mutexes, choosing between blocking locks and spinlocks and avoiding lock misuse."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Semaphores and condition variables",
+          "aliases": [
+            "counting semaphore",
+            "wait and signal"
+          ],
+          "bloom": "C3",
+          "summary": "Coordinate threads with semaphores and condition variables to solve producer-consumer and readers-writers problems."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Deadlock conditions and handling",
+          "aliases": [
+            "Coffman conditions",
+            "deadlock prevention avoidance"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse a system for the four necessary deadlock conditions and compare prevention, avoidance, detection, and recovery."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Demand paging and page faults",
+          "aliases": [
+            "page fault handling",
+            "lazy loading"
+          ],
+          "bloom": "C4",
+          "summary": "Trace how a page fault is handled and how demand paging, copy-on-write, and swap affect performance."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Page replacement algorithms",
+          "aliases": [
+            "FIFO LRU clock",
+            "page eviction"
+          ],
+          "bloom": "C4",
+          "summary": "Compare FIFO, LRU, and clock replacement on reference strings and analyse page fault behaviour."
+        },
+        {
+          "id": "cmp-6",
+          "name": "TLB and translation cost",
+          "aliases": [
+            "translation lookaside buffer",
+            "effective access time"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how the TLB hit rate affects effective memory access time and why multi-level page tables save space."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Priority and multilevel feedback scheduling",
+          "aliases": [
+            "MLFQ",
+            "priority inversion"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse priority-based and multilevel feedback schedulers, including starvation, aging, and priority inversion."
+        },
+        {
+          "id": "cmp-8",
+          "name": "File system structures",
+          "aliases": [
+            "inodes",
+            "allocation methods"
+          ],
+          "bloom": "C3",
+          "summary": "Apply inode, directory, and block allocation structures to explain how files are located, linked, and read."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-7",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-3"
+        ],
+        [
+          "adb-5",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-4"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-7"
+        ],
+        [
+          "adb-6",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Deadlock occurs whenever a program is slow or waits for a lock.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "A mutex and a binary semaphore are identical, including ownership semantics.",
+          "concepts": [
+            "cmp-1",
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "LRU replacement always gives fewer page faults than FIFO on any reference string.",
+          "concepts": [
+            "cmp-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Multiprocessor scheduling and affinity",
+          "aliases": [
+            "SMP scheduling",
+            "load balancing"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse trade-offs of per-core run queues, load balancing, and CPU affinity on cache locality and fairness."
+        },
+        {
+          "id": "prf-2",
+          "name": "Memory consistency and atomics",
+          "aliases": [
+            "memory barriers",
+            "compare-and-swap"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how atomic instructions and memory ordering enable lock-free structures and why naive code breaks on modern CPUs."
+        },
+        {
+          "id": "prf-3",
+          "name": "Thrashing and working set",
+          "aliases": [
+            "working set model",
+            "memory pressure"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose thrashing and evaluate working-set or page-fault-frequency policies for memory allocation."
+        },
+        {
+          "id": "prf-4",
+          "name": "File system consistency and journaling",
+          "aliases": [
+            "journaling",
+            "crash recovery"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate journaling, copy-on-write, and fsck approaches for keeping file systems consistent after crashes."
+        },
+        {
+          "id": "prf-5",
+          "name": "Device drivers and I/O paths",
+          "aliases": [
+            "driver model",
+            "DMA and interrupt handling"
+          ],
+          "bloom": "C4",
+          "summary": "Trace an I/O request through the VFS, block layer, driver, DMA, and interrupt completion, including top and bottom halves."
+        },
+        {
+          "id": "prf-6",
+          "name": "Linux process and scheduler internals",
+          "aliases": [
+            "task_struct",
+            "CFS"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how Linux represents tasks and uses a fair scheduler with virtual runtime and cgroups to share CPU."
+        },
+        {
+          "id": "prf-7",
+          "name": "Isolation with namespaces and cgroups",
+          "aliases": [
+            "containers kernel mechanisms",
+            "resource control"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how namespaces and control groups provide process isolation and resource limits without virtualising hardware."
+        },
+        {
+          "id": "prf-8",
+          "name": "Performance diagnosis with tracing",
+          "aliases": [
+            "OS profiling",
+            "strace perf"
+          ],
+          "bloom": "C5",
+          "summary": "Use syscall tracing, profiling, and kernel counters to judge whether a bottleneck is CPU, memory, I/O, or locking."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-7",
+          "prf-1"
+        ],
+        [
+          "cmp-1",
+          "prf-2"
+        ],
+        [
+          "cmp-4",
+          "prf-3"
+        ],
+        [
+          "cmp-8",
+          "prf-4"
+        ],
+        [
+          "adb-4",
+          "prf-5"
+        ],
+        [
+          "cmp-8",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "prf-6",
+          "prf-7"
+        ],
+        [
+          "prf-3",
+          "prf-8"
+        ],
+        [
+          "prf-5",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Lock-free code is always faster than lock-based code.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Journaling guarantees no data loss for any application write.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Containers are lightweight virtual machines with their own kernel.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Designing kernel synchronization schemes",
+          "aliases": [
+            "RCU and fine-grained locking",
+            "scalable locking"
+          ],
+          "bloom": "C6",
+          "summary": "Design synchronization for kernel data structures that balances scalability, latency, and correctness using fine-grained locks, RCU, or per-CPU data."
+        },
+        {
+          "id": "exp-2",
+          "name": "Evaluating scheduler designs",
+          "aliases": [
+            "scheduler trade-offs",
+            "real-time scheduling"
+          ],
+          "bloom": "C5",
+          "summary": "Judge scheduler designs against throughput, latency, fairness, and real-time guarantees such as EDF or rate-monotonic analysis."
+        },
+        {
+          "id": "exp-3",
+          "name": "Virtualization and hypervisor support",
+          "aliases": [
+            "hardware virtualization",
+            "nested paging"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how hypervisors use trap-and-emulate, hardware extensions, and nested page tables to share hardware among guest kernels."
+        },
+        {
+          "id": "exp-4",
+          "name": "Kernel security and isolation design",
+          "aliases": [
+            "OS security mechanisms",
+            "sandboxing"
+          ],
+          "bloom": "C5",
+          "summary": "Assess mitigations such as ASLR, capabilities, seccomp, and speculative-execution defences, including their performance and coverage limits."
+        },
+        {
+          "id": "exp-5",
+          "name": "Designing a file system or storage stack",
+          "aliases": [
+            "storage design",
+            "log-structured design"
+          ],
+          "bloom": "C6",
+          "summary": "Create a file system design choosing on-disk layout, caching, and consistency strategy for given workloads and media such as SSDs."
+        },
+        {
+          "id": "exp-6",
+          "name": "Kernel architecture trade-offs",
+          "aliases": [
+            "monolithic vs microkernel",
+            "unikernels"
+          ],
+          "bloom": "C5",
+          "summary": "Compare monolithic, microkernel, and hybrid structures such as Linux and Windows NT for performance, reliability, and security."
+        },
+        {
+          "id": "exp-7",
+          "name": "Debugging kernel failures",
+          "aliases": [
+            "crash dump analysis",
+            "kernel debugging"
+          ],
+          "bloom": "C6",
+          "summary": "Devise a method to diagnose panics, deadlocks, and memory corruption using dumps, tracing, and debuggers in a live or post-mortem kernel."
+        },
+        {
+          "id": "exp-8",
+          "name": "Memory management subsystem design",
+          "aliases": [
+            "kernel allocators",
+            "NUMA and huge pages"
+          ],
+          "bloom": "C6",
+          "summary": "Design memory policies for allocators, NUMA placement, and huge pages that fit specific workloads."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-2",
+          "exp-1"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "cmp-6",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "prf-4",
+          "exp-5"
+        ],
+        [
+          "prf-5",
+          "exp-6"
+        ],
+        [
+          "prf-8",
+          "exp-7"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "prf-3",
+          "exp-8"
+        ],
+        [
+          "cmp-6",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Microkernels are always slower and therefore never used in practice.",
+          "concepts": [
+            "exp-6"
+          ]
+        },
+        {
+          "text": "Hardware virtualization removes any need for the host kernel to manage guest memory.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Fine-grained locking always improves scalability over coarse locking.",
+          "concepts": [
+            "exp-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

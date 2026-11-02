@@ -1,0 +1,750 @@
+{
+  "version": 1,
+  "topic": "product-management",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "user-research",
+    "business-strategy"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Product manager role",
+          "aliases": [
+            "PM role",
+            "product owner role"
+          ],
+          "bloom": "C1",
+          "summary": "Can describe what a product manager or product owner is responsible for and how the role differs from engineering, design and project management."
+        },
+        {
+          "id": "nov-2",
+          "name": "Product lifecycle stages",
+          "aliases": [
+            "product life cycle"
+          ],
+          "bloom": "C2",
+          "summary": "Can explain the stages of introduction, growth, maturity and decline and how product priorities shift across them."
+        },
+        {
+          "id": "nov-3",
+          "name": "Product vision statement",
+          "aliases": [
+            "product vision"
+          ],
+          "bloom": "C2",
+          "summary": "Can explain that a vision describes the long-term change a product aims to create for its users and why it guides decisions."
+        },
+        {
+          "id": "nov-4",
+          "name": "Product backlog",
+          "aliases": [
+            "backlog"
+          ],
+          "bloom": "C1",
+          "summary": "Can define the backlog as an ordered list of work items and state who owns and maintains it."
+        },
+        {
+          "id": "nov-5",
+          "name": "User story format",
+          "aliases": [
+            "user stories",
+            "As a, I want, so that"
+          ],
+          "bloom": "C2",
+          "summary": "Can explain a user story as a short statement of who needs what and why, written from the user's perspective."
+        },
+        {
+          "id": "nov-7",
+          "name": "Outputs versus outcomes",
+          "aliases": [
+            "output vs outcome"
+          ],
+          "bloom": "C2",
+          "summary": "Can distinguish features shipped (outputs) from changes in user behaviour or business results (outcomes)."
+        },
+        {
+          "id": "nov-6",
+          "name": "Product roadmap purpose",
+          "aliases": [
+            "roadmap"
+          ],
+          "bloom": "C2",
+          "summary": "Can explain a roadmap as a communication of direction and planned outcomes over time, and who it is for."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-7",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The product manager is the boss of the engineering and design team who tells them what to build.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A roadmap is a fixed schedule of features with committed delivery dates.",
+          "concepts": [
+            "nov-6"
+          ]
+        },
+        {
+          "text": "Shipping more features means the product is succeeding.",
+          "concepts": [
+            "nov-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Writing acceptance criteria",
+          "aliases": [
+            "definition of done criteria",
+            "Given When Then"
+          ],
+          "bloom": "C3",
+          "summary": "Can write testable acceptance criteria for a user story so that the team knows when it is complete."
+        },
+        {
+          "id": "adb-2",
+          "name": "MoSCoW prioritisation",
+          "aliases": [
+            "Must Should Could Won't"
+          ],
+          "bloom": "C3",
+          "summary": "Can sort backlog items into Must, Should, Could and Won't have for a defined release scope."
+        },
+        {
+          "id": "adb-3",
+          "name": "RICE scoring",
+          "aliases": [
+            "Reach Impact Confidence Effort"
+          ],
+          "bloom": "C3",
+          "summary": "Can calculate RICE scores as reach times impact times confidence divided by effort and rank items by them."
+        },
+        {
+          "id": "adb-4",
+          "name": "Kano model categories",
+          "aliases": [
+            "Kano model",
+            "basic, performance, delight features"
+          ],
+          "bloom": "C2",
+          "summary": "Can classify features as basic expectations, performance features or delighters and explain how satisfaction responds to each."
+        },
+        {
+          "id": "adb-5",
+          "name": "Product requirements document",
+          "aliases": [
+            "PRD",
+            "product spec"
+          ],
+          "bloom": "C3",
+          "summary": "Can draft a PRD covering problem, goals, target users, scope, requirements and open questions."
+        },
+        {
+          "id": "adb-6",
+          "name": "Now-Next-Later roadmap",
+          "aliases": [
+            "theme-based roadmap"
+          ],
+          "bloom": "C3",
+          "summary": "Can build a roadmap organised by time horizons and themes rather than dated feature lists."
+        },
+        {
+          "id": "adb-7",
+          "name": "Basic product metrics",
+          "aliases": [
+            "KPIs",
+            "active users, retention, conversion"
+          ],
+          "bloom": "C2",
+          "summary": "Can define common metrics such as active users, conversion, retention and churn and say what each tells you."
+        },
+        {
+          "id": "adb-8",
+          "name": "Story splitting",
+          "aliases": [
+            "slicing stories",
+            "INVEST"
+          ],
+          "bloom": "C3",
+          "summary": "Can split large stories into small, independent, valuable slices that fit within a sprint."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-8"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "nov-4",
+          "adb-3"
+        ],
+        [
+          "nov-6",
+          "adb-6"
+        ],
+        [
+          "nov-7",
+          "adb-7"
+        ],
+        [
+          "adb-1",
+          "adb-5"
+        ],
+        [
+          "nov-3",
+          "adb-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Everything in a MoSCoW list can be labelled Must have, because stakeholders consider it all important.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "A RICE score is an objective answer, so the highest score must be built first.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "A PRD must be a long, complete document that is finished before development starts.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Product strategy formulation",
+          "aliases": [
+            "product strategy"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse market, users and company goals to choose a coherent set of bets that connect vision to roadmap."
+        },
+        {
+          "id": "cmp-3",
+          "name": "North Star and input metrics",
+          "aliases": [
+            "north star metric",
+            "metric tree"
+          ],
+          "bloom": "C4",
+          "summary": "Can break a north star metric into driver metrics and analyse which levers the team can influence."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Outcome-based OKRs",
+          "aliases": [
+            "OKRs",
+            "objectives and key results"
+          ],
+          "bloom": "C3",
+          "summary": "Can write objectives with measurable key results that express outcomes rather than tasks, and cascade them from company goals."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Product-market fit assessment",
+          "aliases": [
+            "PMF",
+            "product market fit"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse retention curves, survey signals and growth patterns to judge whether a product has achieved fit."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Discovery and validation experiments",
+          "aliases": [
+            "product discovery",
+            "assumption testing"
+          ],
+          "bloom": "C3",
+          "summary": "Can identify risky assumptions and choose prototypes, interviews or tests to validate value, usability and feasibility cheaply."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Stakeholder alignment and trade-offs",
+          "aliases": [
+            "stakeholder management",
+            "saying no"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse competing stakeholder demands and negotiate scope trade-offs using evidence and strategy."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Go-to-market plan",
+          "aliases": [
+            "GTM plan",
+            "launch plan"
+          ],
+          "bloom": "C3",
+          "summary": "Can build a launch plan covering target segment, positioning, pricing, channels and success measures."
+        },
+        {
+          "id": "cmp-8",
+          "name": "A/B test interpretation",
+          "aliases": [
+            "experiment analysis",
+            "split testing"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse experiment results including sample size, significance and guardrail metrics before deciding to ship."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-4"
+        ],
+        [
+          "adb-4",
+          "cmp-5"
+        ],
+        [
+          "adb-5",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-6"
+        ],
+        [
+          "cmp-4",
+          "cmp-7"
+        ],
+        [
+          "cmp-5",
+          "cmp-8"
+        ],
+        [
+          "adb-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Key results are a list of deliverables to be completed by the end of the quarter.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "Product-market fit is a single moment that, once reached, never needs to be revisited.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "An A/B test that shows a lift in the primary metric should always be shipped.",
+          "concepts": [
+            "cmp-8"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Portfolio and investment allocation",
+          "aliases": [
+            "portfolio prioritisation",
+            "resource allocation"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate how to split capacity across core improvements, growth bets and technical health against strategic goals."
+        },
+        {
+          "id": "prf-2",
+          "name": "Evaluating prioritisation frameworks",
+          "aliases": [
+            "framework selection",
+            "framework limits"
+          ],
+          "bloom": "C5",
+          "summary": "Can judge when RICE, MoSCoW, Kano or cost of delay fits a decision and where each distorts it."
+        },
+        {
+          "id": "prf-3",
+          "name": "Pricing and packaging decisions",
+          "aliases": [
+            "pricing strategy",
+            "monetisation"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate pricing models and tiers against value delivered, willingness to pay and segment behaviour."
+        },
+        {
+          "id": "prf-4",
+          "name": "Launch readiness and rollout strategy",
+          "aliases": [
+            "staged rollout",
+            "launch decision"
+          ],
+          "bloom": "C5",
+          "summary": "Can assess launch risk and choose between beta, staged rollout or full launch with go and no-go criteria."
+        },
+        {
+          "id": "prf-5",
+          "name": "Unit economics and growth loops",
+          "aliases": [
+            "LTV CAC",
+            "growth model"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse customer lifetime value, acquisition cost, payback and loops to find sustainable growth levers."
+        },
+        {
+          "id": "prf-6",
+          "name": "Segmentation and positioning choices",
+          "aliases": [
+            "target segment",
+            "positioning"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate which customer segments to prioritise and defend a positioning against competitors."
+        },
+        {
+          "id": "prf-7",
+          "name": "Roadmap communication and governance",
+          "aliases": [
+            "roadmap governance",
+            "executive communication"
+          ],
+          "bloom": "C5",
+          "summary": "Can judge how to tailor roadmap commitments and uncertainty for executives, sales and engineering and revise them as evidence changes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "adb-3",
+          "prf-2"
+        ],
+        [
+          "adb-2",
+          "prf-2"
+        ],
+        [
+          "adb-4",
+          "prf-2"
+        ],
+        [
+          "cmp-6",
+          "prf-2"
+        ],
+        [
+          "cmp-4",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "cmp-8",
+          "prf-4"
+        ],
+        [
+          "cmp-3",
+          "prf-5"
+        ],
+        [
+          "cmp-4",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "cmp-6",
+          "prf-7"
+        ],
+        [
+          "adb-6",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Pricing can be set after launch by adding a margin to cost.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "A prioritisation framework removes the need for judgement.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "A launch is complete when the feature ships, with no further ownership needed.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Designing the product operating model",
+          "aliases": [
+            "product operating model",
+            "product org design"
+          ],
+          "bloom": "C6",
+          "summary": "Can design team structures, decision rights and planning cadences that let product teams deliver outcomes at scale."
+        },
+        {
+          "id": "exp-2",
+          "name": "Creating multi-year product strategy",
+          "aliases": [
+            "long-term strategy",
+            "strategic bets"
+          ],
+          "bloom": "C6",
+          "summary": "Can create a differentiated multi-year strategy with explicit bets, moats and kill criteria."
+        },
+        {
+          "id": "exp-3",
+          "name": "New product and market entry",
+          "aliases": [
+            "zero to one",
+            "new market bets"
+          ],
+          "bloom": "C6",
+          "summary": "Can design a staged approach to establish a new product or enter a market, including investment gates."
+        },
+        {
+          "id": "exp-4",
+          "name": "Platform and ecosystem strategy",
+          "aliases": [
+            "platform product",
+            "ecosystem"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate when to build a platform, the role of partners and network effects, and the trade-offs for internal and external users."
+        },
+        {
+          "id": "exp-5",
+          "name": "Metric system and incentive design",
+          "aliases": [
+            "goal design",
+            "metrics governance"
+          ],
+          "bloom": "C6",
+          "summary": "Can design a coherent system of metrics, OKRs and incentives that avoids gaming and misaligned optimisation."
+        },
+        {
+          "id": "exp-6",
+          "name": "Portfolio sunsetting and pivot decisions",
+          "aliases": [
+            "pivot",
+            "sunset",
+            "end of life"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate evidence to pivot, persevere, merge or retire products, handling sunk cost and customer migration."
+        },
+        {
+          "id": "exp-7",
+          "name": "Coaching product leaders",
+          "aliases": [
+            "product coaching",
+            "product leadership"
+          ],
+          "bloom": "C6",
+          "summary": "Can build product management capability by creating coaching practices, hiring standards and decision-quality reviews."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "prf-5",
+          "exp-2"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ],
+        [
+          "exp-2",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "cmp-2",
+          "exp-5"
+        ],
+        [
+          "cmp-3",
+          "exp-5"
+        ],
+        [
+          "prf-2",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "prf-4",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A pivot means the product has failed and the team should have avoided it.",
+          "concepts": [
+            "exp-6"
+          ]
+        },
+        {
+          "text": "Good strategy is a detailed plan that predicts the market for several years.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Tying incentives directly to a single metric reliably produces the desired behaviour.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

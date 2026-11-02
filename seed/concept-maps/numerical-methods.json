@@ -1,0 +1,666 @@
+{
+  "version": 1,
+  "topic": "numerical-methods",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "calculus",
+    "linear-algebra",
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Floating-point representation",
+          "aliases": [
+            "floating point numbers",
+            "IEEE 754 basics"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that computers store reals as finite-precision binary floating-point numbers with limited range and spacing, so most reals are only approximated."
+        },
+        {
+          "id": "nov-2",
+          "name": "Absolute and relative error",
+          "aliases": [
+            "error measures"
+          ],
+          "bloom": "C1",
+          "summary": "Define and compute absolute and relative error between an exact and an approximate value."
+        },
+        {
+          "id": "nov-3",
+          "name": "Round-off versus truncation error",
+          "aliases": [
+            "rounding error vs discretization error"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish errors from finite-precision arithmetic from errors caused by approximating a process with a finite one."
+        },
+        {
+          "id": "nov-4",
+          "name": "Iterative approximation idea",
+          "aliases": [
+            "successive approximation"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that many problems are solved by generating a sequence of improving approximations until a stopping tolerance is met."
+        },
+        {
+          "id": "nov-5",
+          "name": "Bisection method",
+          "aliases": [
+            "interval halving"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how bisection brackets a root of a continuous function with a sign change and halves the interval each step."
+        },
+        {
+          "id": "nov-6",
+          "name": "Machine epsilon",
+          "aliases": [
+            "unit roundoff"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that machine epsilon gives the relative spacing of floating-point numbers near 1 and bounds relative rounding error."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Computers represent decimal numbers like 0.1 exactly.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A smaller absolute error always means a more accurate answer regardless of the size of the true value.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Round-off and truncation error are the same thing and both vanish with a better algorithm.",
+          "concepts": [
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Newton's method for roots",
+          "aliases": [
+            "Newton-Raphson"
+          ],
+          "bloom": "C3",
+          "summary": "Implement Newton's iteration using the derivative and recognise when it converges quickly or fails."
+        },
+        {
+          "id": "adb-2",
+          "name": "Secant method",
+          "aliases": [
+            "derivative-free root finding"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the secant iteration to find roots without computing derivatives."
+        },
+        {
+          "id": "adb-3",
+          "name": "Convergence tolerance and stopping criteria",
+          "aliases": [
+            "stopping tests"
+          ],
+          "bloom": "C3",
+          "summary": "Choose and implement stopping tests based on step size, residual and iteration limits."
+        },
+        {
+          "id": "adb-4",
+          "name": "Polynomial interpolation",
+          "aliases": [
+            "Lagrange interpolation"
+          ],
+          "bloom": "C3",
+          "summary": "Construct the polynomial through given data points using Lagrange or Newton form."
+        },
+        {
+          "id": "adb-5",
+          "name": "Trapezoidal and Simpson rules",
+          "aliases": [
+            "Newton-Cotes quadrature"
+          ],
+          "bloom": "C3",
+          "summary": "Approximate definite integrals with the composite trapezoidal and Simpson rules."
+        },
+        {
+          "id": "adb-6",
+          "name": "Finite difference derivatives",
+          "aliases": [
+            "forward and central differences"
+          ],
+          "bloom": "C3",
+          "summary": "Approximate derivatives with forward, backward and central difference formulas."
+        },
+        {
+          "id": "adb-7",
+          "name": "Gaussian elimination",
+          "aliases": [
+            "row reduction with back substitution"
+          ],
+          "bloom": "C3",
+          "summary": "Solve a linear system by forward elimination and back substitution."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-4",
+          "adb-3"
+        ],
+        [
+          "nov-3",
+          "adb-6"
+        ],
+        [
+          "nov-2",
+          "adb-5"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "nov-1",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Newton's method converges to a root from any starting guess.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Making the step size h in a finite difference as small as possible always gives the best derivative estimate.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "A small difference between successive iterates guarantees a small error in the root.",
+          "concepts": [
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Order of convergence analysis",
+          "aliases": [
+            "convergence rates"
+          ],
+          "bloom": "C4",
+          "summary": "Determine and compare linear, superlinear and quadratic convergence of iterative methods from error sequences."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Truncation error via Taylor series",
+          "aliases": [
+            "local error derivation"
+          ],
+          "bloom": "C4",
+          "summary": "Derive error orders of difference and quadrature formulas using Taylor expansions."
+        },
+        {
+          "id": "cmp-3",
+          "name": "LU factorization with pivoting",
+          "aliases": [
+            "LU decomposition",
+            "partial pivoting"
+          ],
+          "bloom": "C3",
+          "summary": "Factor a matrix as PA=LU and reuse the factors to solve multiple right-hand sides while avoiding unstable pivots."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Condition number",
+          "aliases": [
+            "problem conditioning"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how sensitive a problem's output is to input perturbations, including matrix condition number."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Numerical stability of algorithms",
+          "aliases": [
+            "backward stability"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish ill-conditioned problems from unstable algorithms and identify causes such as cancellation."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Splines and interpolation error",
+          "aliases": [
+            "cubic splines",
+            "Runge phenomenon"
+          ],
+          "bloom": "C4",
+          "summary": "Explain why high-degree equispaced polynomial interpolation oscillates and when piecewise splines are preferable."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Gaussian quadrature",
+          "aliases": [
+            "Gauss-Legendre"
+          ],
+          "bloom": "C3",
+          "summary": "Apply Gauss-Legendre rules and explain why optimally placed nodes give higher exactness degree."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Iterative linear solvers",
+          "aliases": [
+            "Jacobi and Gauss-Seidel"
+          ],
+          "bloom": "C3",
+          "summary": "Implement Jacobi and Gauss-Seidel iterations and check convergence via diagonal dominance."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-3"
+        ],
+        [
+          "nov-6",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "adb-4",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-7"
+        ],
+        [
+          "adb-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A tiny residual guarantees an accurate solution of a linear system.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Using higher-degree interpolating polynomials always improves accuracy.",
+          "concepts": [
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "Gaussian elimination without pivoting is safe whenever the matrix is nonsingular.",
+          "concepts": [
+            "cmp-3",
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Error budgeting and method selection",
+          "aliases": [
+            "choosing numerical methods"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate competing methods against accuracy, cost, robustness and problem structure and justify a choice."
+        },
+        {
+          "id": "prf-2",
+          "name": "Adaptive quadrature",
+          "aliases": [
+            "adaptive integration"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how error estimates drive adaptive subdivision for integrands with local difficulty."
+        },
+        {
+          "id": "prf-3",
+          "name": "Hybrid root finders",
+          "aliases": [
+            "Brent's method",
+            "safeguarded Newton"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate combinations of bracketing and fast methods that retain guaranteed convergence."
+        },
+        {
+          "id": "prf-4",
+          "name": "Krylov and conjugate gradient methods",
+          "aliases": [
+            "CG",
+            "GMRES"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how Krylov subspace methods solve large sparse systems and how convergence depends on spectrum."
+        },
+        {
+          "id": "prf-5",
+          "name": "Preconditioning",
+          "aliases": [
+            "preconditioners"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate preconditioners that reduce effective condition number to speed iterative convergence."
+        },
+        {
+          "id": "prf-6",
+          "name": "Least squares via QR and SVD",
+          "aliases": [
+            "linear least squares",
+            "normal equations"
+          ],
+          "bloom": "C4",
+          "summary": "Compare normal equations, QR and SVD for least squares in terms of stability and rank deficiency."
+        },
+        {
+          "id": "prf-7",
+          "name": "Sparse matrix computation",
+          "aliases": [
+            "sparse storage and fill-in"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse storage formats and fill-in effects on cost of direct solvers for sparse systems."
+        },
+        {
+          "id": "prf-8",
+          "name": "Richardson extrapolation",
+          "aliases": [
+            "Romberg integration"
+          ],
+          "bloom": "C4",
+          "summary": "Use error expansions to combine coarse and fine results into higher-order estimates and diagnose convergence."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-7",
+          "prf-2"
+        ],
+        [
+          "cmp-8",
+          "prf-4"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "cmp-3",
+          "prf-6"
+        ],
+        [
+          "cmp-4",
+          "prf-6"
+        ],
+        [
+          "cmp-3",
+          "prf-7"
+        ],
+        [
+          "cmp-2",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Solving least squares through the normal equations is as accurate as QR.",
+          "concepts": [
+            "prf-6"
+          ]
+        },
+        {
+          "text": "Conjugate gradient works for any square matrix.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Adaptive methods always beat fixed-step methods regardless of integrand smoothness or cost.",
+          "concepts": [
+            "prf-2",
+            "prf-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Backward error analysis",
+          "aliases": [
+            "rounding error analysis"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate algorithms by proving or assessing that computed results are exact for slightly perturbed inputs."
+        },
+        {
+          "id": "exp-2",
+          "name": "Verification and validation of numerics",
+          "aliases": [
+            "convergence testing",
+            "method of manufactured solutions"
+          ],
+          "bloom": "C5",
+          "summary": "Design convergence studies and tests with known solutions to verify implementations and error claims."
+        },
+        {
+          "id": "exp-3",
+          "name": "Designing custom numerical algorithms",
+          "aliases": [
+            "algorithm construction"
+          ],
+          "bloom": "C6",
+          "summary": "Create tailored schemes that exploit problem structure such as symmetry, singularities or oscillation."
+        },
+        {
+          "id": "exp-4",
+          "name": "Mixed-precision strategies",
+          "aliases": [
+            "iterative refinement"
+          ],
+          "bloom": "C6",
+          "summary": "Design workflows combining low- and high-precision arithmetic, such as iterative refinement, balancing speed and accuracy."
+        },
+        {
+          "id": "exp-5",
+          "name": "Eigenvalue algorithms",
+          "aliases": [
+            "QR algorithm",
+            "power iteration"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate power, inverse and QR-based eigenvalue methods for accuracy, cost and structure."
+        },
+        {
+          "id": "exp-6",
+          "name": "Interval and rigorous error bounds",
+          "aliases": [
+            "interval arithmetic",
+            "validated numerics"
+          ],
+          "bloom": "C5",
+          "summary": "Assess when guaranteed enclosures are needed and what they cost compared to heuristic error estimates."
+        },
+        {
+          "id": "exp-7",
+          "name": "Performance-aware numerical software",
+          "aliases": [
+            "high-performance numerical libraries"
+          ],
+          "bloom": "C6",
+          "summary": "Create implementations that balance accuracy with memory access, parallelism and library use such as BLAS and LAPACK."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-3"
+        ],
+        [
+          "exp-1",
+          "exp-4"
+        ],
+        [
+          "prf-6",
+          "exp-5"
+        ],
+        [
+          "prf-4",
+          "exp-5"
+        ],
+        [
+          "prf-8",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-6"
+        ],
+        [
+          "prf-7",
+          "exp-7"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Double precision is always enough, so numerical error can be ignored in production code.",
+          "concepts": [
+            "exp-1",
+            "exp-4"
+          ]
+        },
+        {
+          "text": "If a convergence plot shows the expected order, the implementation is proven correct.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Hand-written algorithms are generally preferable to established libraries for performance.",
+          "concepts": [
+            "exp-7",
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

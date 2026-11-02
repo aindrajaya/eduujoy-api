@@ -1,0 +1,752 @@
+{
+  "version": 1,
+  "topic": "signals-and-systems",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": true,
+  "dependsOnTopics": [
+    "calculus",
+    "electrical-circuits",
+    "linear-algebra"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Continuous versus discrete-time signals",
+          "aliases": [
+            "analog vs digital signals",
+            "CT and DT signals"
+          ],
+          "bloom": "C1",
+          "summary": "Distinguish signals defined for all real time x(t) from sequences x[n] defined only at integer indices, and give examples of each."
+        },
+        {
+          "id": "nov-2",
+          "name": "Basic signal operations",
+          "aliases": [
+            "time shifting and scaling",
+            "time reversal"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how shifting, reversing and scaling the time axis and scaling amplitude change the graph of a signal."
+        },
+        {
+          "id": "nov-3",
+          "name": "Standard test signals",
+          "aliases": [
+            "sinusoid, exponential, step",
+            "elementary signals"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise and sketch the unit step, ramp, rectangular pulse, real and complex exponentials and sinusoids."
+        },
+        {
+          "id": "nov-4",
+          "name": "Unit impulse function",
+          "aliases": [
+            "Dirac delta",
+            "Kronecker delta",
+            "unit sample"
+          ],
+          "bloom": "C2",
+          "summary": "Explain the continuous delta and discrete unit sample and the sifting property that lets a signal be built from shifted impulses."
+        },
+        {
+          "id": "nov-5",
+          "name": "Even, odd and periodic signals",
+          "aliases": [
+            "signal symmetry",
+            "periodicity"
+          ],
+          "bloom": "C2",
+          "summary": "Classify a signal as even, odd or periodic and identify its period or fundamental frequency."
+        },
+        {
+          "id": "nov-6",
+          "name": "System as input-output mapping",
+          "aliases": [
+            "system block",
+            "signal processor"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a system as a rule that maps an input signal to an output signal, with examples such as an RC circuit or a moving average."
+        },
+        {
+          "id": "nov-7",
+          "name": "Energy and power of signals",
+          "aliases": [
+            "signal energy",
+            "average power"
+          ],
+          "bloom": "C2",
+          "summary": "Explain energy and average power of a signal and distinguish energy signals from power signals."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ],
+        [
+          "nov-3",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A discrete-time signal is just a continuous signal with small steps, so it is defined between the integer sample points.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "The unit impulse is a very tall pulse whose value at zero is simply infinity, so it has no defined meaning.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "The sum of any two periodic signals is always periodic.",
+          "concepts": [
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Linearity and time invariance",
+          "aliases": [
+            "LTI property",
+            "superposition and shift invariance"
+          ],
+          "bloom": "C3",
+          "summary": "Test a given system for linearity and time invariance by applying superposition and input shifts."
+        },
+        {
+          "id": "adb-3",
+          "name": "Impulse response",
+          "aliases": [
+            "h(t)",
+            "h[n]",
+            "unit sample response"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that the response of an LTI system to a unit impulse fully characterises the system."
+        },
+        {
+          "id": "adb-2",
+          "name": "Causality and stability of systems",
+          "aliases": [
+            "BIBO stability",
+            "causal systems"
+          ],
+          "bloom": "C3",
+          "summary": "Determine whether a system is causal, memoryless or BIBO stable from its equation or response."
+        },
+        {
+          "id": "adb-4",
+          "name": "Convolution integral and sum",
+          "aliases": [
+            "convolution",
+            "y = x * h"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the output of an LTI system by flipping, shifting, multiplying and integrating or summing for simple signals."
+        },
+        {
+          "id": "adb-5",
+          "name": "Convolution properties",
+          "aliases": [
+            "commutative, associative, distributive",
+            "cascade and parallel systems"
+          ],
+          "bloom": "C3",
+          "summary": "Apply commutativity, associativity and distributivity of convolution to combine cascaded and parallel systems."
+        },
+        {
+          "id": "adb-6",
+          "name": "Step response",
+          "aliases": [
+            "unit step response"
+          ],
+          "bloom": "C3",
+          "summary": "Obtain the step response as the running integral or sum of the impulse response and read off settling behaviour."
+        },
+        {
+          "id": "adb-7",
+          "name": "Difference and differential equations",
+          "aliases": [
+            "LCCDE",
+            "linear constant-coefficient equations"
+          ],
+          "bloom": "C3",
+          "summary": "Describe simple LTI systems with linear constant-coefficient equations and find homogeneous and particular solutions."
+        },
+        {
+          "id": "adb-8",
+          "name": "Complex exponentials as eigenfunctions",
+          "aliases": [
+            "eigenfunctions of LTI systems"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that an LTI system maps e^{st} or z^n to a scaled copy of itself, motivating frequency-domain analysis."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "nov-4",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-3",
+          "adb-2"
+        ],
+        [
+          "adb-4",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-7"
+        ],
+        [
+          "adb-4",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A system whose output is a straight line in the input, such as y = 2x + 3, is linear.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Convolution is just pointwise multiplication of the input and the impulse response.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "A bounded impulse response is enough for BIBO stability.",
+          "concepts": [
+            "adb-2",
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Fourier series representation",
+          "aliases": [
+            "trigonometric and exponential Fourier series",
+            "harmonic decomposition"
+          ],
+          "bloom": "C3",
+          "summary": "Compute Fourier series coefficients of periodic signals and reconstruct them from harmonics."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Continuous-time Fourier transform",
+          "aliases": [
+            "CTFT",
+            "spectrum of aperiodic signals"
+          ],
+          "bloom": "C3",
+          "summary": "Compute and interpret the Fourier transform of common aperiodic signals using the definition and tables."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Fourier transform properties",
+          "aliases": [
+            "time-frequency duality",
+            "shift, scaling and modulation"
+          ],
+          "bloom": "C3",
+          "summary": "Use linearity, time shift, modulation, scaling, differentiation and the convolution theorem to find transforms and outputs."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Frequency response of LTI systems",
+          "aliases": [
+            "H(jω)",
+            "magnitude and phase response"
+          ],
+          "bloom": "C4",
+          "summary": "Relate the frequency response to the impulse response and predict the output of a system for sinusoidal inputs."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Laplace transform and ROC",
+          "aliases": [
+            "s-domain",
+            "region of convergence"
+          ],
+          "bloom": "C3",
+          "summary": "Compute Laplace transforms and inverse transforms, tracking the region of convergence for causal and anticausal signals."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Transfer function poles and zeros",
+          "aliases": [
+            "H(s)",
+            "pole-zero plot"
+          ],
+          "bloom": "C4",
+          "summary": "Derive a transfer function from a differential equation and infer stability and causality from pole locations and ROC."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Discrete-time Fourier transform",
+          "aliases": [
+            "DTFT",
+            "periodic spectrum"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the DTFT of sequences and explain why it is periodic in frequency with period 2π."
+        },
+        {
+          "id": "cmp-8",
+          "name": "z-transform and ROC",
+          "aliases": [
+            "Z transform",
+            "H(z)"
+          ],
+          "bloom": "C3",
+          "summary": "Compute z-transforms and inverses, link pole positions relative to the unit circle to stability, and solve difference equations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-8",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-7",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-2",
+          "cmp-7"
+        ],
+        [
+          "cmp-7",
+          "cmp-8"
+        ],
+        [
+          "cmp-5",
+          "cmp-8"
+        ],
+        [
+          "adb-2",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The Fourier transform of a signal exists for every signal, including growing exponentials.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "The Laplace transform expression alone identifies the signal, without specifying the region of convergence.",
+          "concepts": [
+            "cmp-5",
+            "cmp-8"
+          ]
+        },
+        {
+          "text": "A system with a pole in the right half-plane is always unstable, regardless of the ROC.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Sampling theorem and aliasing",
+          "aliases": [
+            "Nyquist-Shannon theorem",
+            "Nyquist rate"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the spectrum of an impulse-sampled signal to show when reconstruction is possible and how aliasing arises."
+        },
+        {
+          "id": "prf-2",
+          "name": "Ideal and practical reconstruction",
+          "aliases": [
+            "D/A conversion",
+            "zero-order hold",
+            "interpolation"
+          ],
+          "bloom": "C4",
+          "summary": "Compare sinc interpolation with zero-order hold and quantify the distortion each introduces."
+        },
+        {
+          "id": "prf-3",
+          "name": "Discrete Fourier transform and FFT",
+          "aliases": [
+            "DFT",
+            "spectral leakage",
+            "windowing"
+          ],
+          "bloom": "C4",
+          "summary": "Relate the DFT to samples of the DTFT and analyse leakage, resolution and zero padding in spectral estimates."
+        },
+        {
+          "id": "prf-4",
+          "name": "Circular versus linear convolution",
+          "aliases": [
+            "fast convolution",
+            "overlap-add"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when DFT multiplication yields linear convolution and choose transform lengths to avoid wraparound."
+        },
+        {
+          "id": "prf-5",
+          "name": "Filter specification and design",
+          "aliases": [
+            "lowpass, highpass, bandpass design",
+            "ideal vs realisable filters"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate trade-offs among passband ripple, transition width and stopband attenuation when choosing a filter."
+        },
+        {
+          "id": "prf-6",
+          "name": "FIR and IIR filter structures",
+          "aliases": [
+            "finite and infinite impulse response",
+            "linear-phase filters"
+          ],
+          "bloom": "C4",
+          "summary": "Compare FIR and IIR filters in terms of stability, phase linearity, order and computational cost."
+        },
+        {
+          "id": "prf-7",
+          "name": "Group delay and phase distortion",
+          "aliases": [
+            "linear phase",
+            "phase delay"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how nonlinear phase response distorts waveforms through group delay variation."
+        },
+        {
+          "id": "prf-8",
+          "name": "Bode plots and system response",
+          "aliases": [
+            "asymptotic magnitude plots",
+            "first and second-order systems"
+          ],
+          "bloom": "C4",
+          "summary": "Sketch and interpret Bode plots for first- and second-order systems and relate them to time-domain response."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "cmp-8",
+          "prf-6"
+        ],
+        [
+          "prf-5",
+          "prf-6"
+        ],
+        [
+          "cmp-4",
+          "prf-7"
+        ],
+        [
+          "cmp-6",
+          "prf-8"
+        ],
+        [
+          "cmp-4",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Sampling at exactly twice the highest frequency always guarantees perfect reconstruction.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Aliasing can be removed digitally after sampling.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Zero padding before a DFT increases the true frequency resolution.",
+          "concepts": [
+            "prf-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Time-frequency uncertainty trade-off",
+          "aliases": [
+            "Gabor limit",
+            "duration-bandwidth product"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how limits on joint time and frequency localisation constrain analysis, windowing and filter design."
+        },
+        {
+          "id": "exp-2",
+          "name": "Optimal filter design methods",
+          "aliases": [
+            "Parks-McClellan",
+            "equiripple design",
+            "bilinear transform"
+          ],
+          "bloom": "C6",
+          "summary": "Design FIR and IIR filters to meet specifications using equiripple, window and bilinear methods and justify the choice."
+        },
+        {
+          "id": "exp-3",
+          "name": "Multirate signal processing",
+          "aliases": [
+            "decimation and interpolation",
+            "polyphase filters"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and design sample-rate conversion systems, including anti-aliasing and anti-imaging filters."
+        },
+        {
+          "id": "exp-4",
+          "name": "State-space representation",
+          "aliases": [
+            "state-variable models",
+            "matrix system description"
+          ],
+          "bloom": "C5",
+          "summary": "Model LTI systems in state-space form and relate eigenvalues of the state matrix to transfer function poles and stability."
+        },
+        {
+          "id": "exp-5",
+          "name": "Stochastic signals and spectra",
+          "aliases": [
+            "power spectral density",
+            "Wiener-Khinchin",
+            "random signals through LTI systems"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how random signals and noise are shaped by LTI systems using autocorrelation and power spectral density."
+        },
+        {
+          "id": "exp-6",
+          "name": "Matched and Wiener filtering",
+          "aliases": [
+            "optimal detection",
+            "least-squares filter"
+          ],
+          "bloom": "C6",
+          "summary": "Design filters that maximise signal-to-noise ratio or minimise mean-square error for a stated signal and noise model."
+        },
+        {
+          "id": "exp-7",
+          "name": "Time-frequency and wavelet analysis",
+          "aliases": [
+            "STFT",
+            "spectrogram",
+            "wavelet transform"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when short-time Fourier or wavelet methods are more appropriate than global Fourier analysis for nonstationary signals."
+        },
+        {
+          "id": "exp-8",
+          "name": "Finite word-length effects",
+          "aliases": [
+            "quantisation noise",
+            "coefficient sensitivity",
+            "limit cycles"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how quantisation of coefficients and arithmetic affects filter performance and choose structures to mitigate it."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-1",
+          "exp-3"
+        ],
+        [
+          "prf-8",
+          "exp-4"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "exp-5",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-8"
+        ],
+        [
+          "exp-2",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A transform that is sharper in both time and frequency can always be obtained with a better window.",
+          "concepts": [
+            "exp-1",
+            "exp-7"
+          ]
+        },
+        {
+          "text": "Decimating a signal by M is just discarding samples, with no need for prior filtering.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "A filter designed with infinite-precision coefficients will behave identically when implemented in fixed-point arithmetic.",
+          "concepts": [
+            "exp-8"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,658 @@
+{
+  "version": 1,
+  "topic": "bayesian-statistics",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": true,
+  "dependsOnTopics": [
+    "probability",
+    "statistics"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Prior, likelihood, posterior",
+          "aliases": [
+            "Bayesian ingredients"
+          ],
+          "bloom": "C1",
+          "summary": "Name and describe the prior, likelihood and posterior as the three parts of a Bayesian update."
+        },
+        {
+          "id": "nov-2",
+          "name": "Bayes' theorem for events",
+          "aliases": [
+            "Bayes' rule"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how Bayes' theorem reverses a conditional probability by combining P(B|A), P(A) and P(B)."
+        },
+        {
+          "id": "nov-3",
+          "name": "Probability as degree of belief",
+          "aliases": [
+            "subjective probability"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that Bayesians use probability to express uncertainty about unknown quantities, not only long-run frequencies."
+        },
+        {
+          "id": "nov-4",
+          "name": "Parameters as random quantities",
+          "aliases": [
+            "unknown parameter distribution"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that an unknown parameter is described by a probability distribution that reflects what is currently known."
+        },
+        {
+          "id": "nov-5",
+          "name": "Updating beliefs with data",
+          "aliases": [
+            "belief revision"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how a posterior after one batch of data can serve as the prior for the next."
+        },
+        {
+          "id": "nov-6",
+          "name": "Base rate and diagnostic reasoning",
+          "aliases": [
+            "base rate",
+            "medical test example"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why a positive test result depends on the prevalence as well as sensitivity and specificity."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "P(hypothesis | data) is the same as P(data | hypothesis).",
+          "concepts": [
+            "nov-2",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "A positive result from an accurate test means the condition is almost certainly present, regardless of how rare it is.",
+          "concepts": [
+            "nov-6"
+          ]
+        },
+        {
+          "text": "The prior is just a guess that the data will simply overwrite, so it does not matter.",
+          "concepts": [
+            "nov-1",
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Grid approximation of a posterior",
+          "aliases": [
+            "unnormalised posterior",
+            "grid method"
+          ],
+          "bloom": "C3",
+          "summary": "Compute a posterior for one parameter on a grid of values by multiplying prior and likelihood at each point and normalising."
+        },
+        {
+          "id": "adb-2",
+          "name": "Beta-binomial conjugate update",
+          "aliases": [
+            "beta prior for proportions"
+          ],
+          "bloom": "C3",
+          "summary": "Update a Beta prior with binomial data to obtain a Beta posterior by adding successes and failures."
+        },
+        {
+          "id": "adb-3",
+          "name": "Choosing a simple prior",
+          "aliases": [
+            "prior specification"
+          ],
+          "bloom": "C3",
+          "summary": "Pick a flat, weakly informative or informative prior for a proportion and justify the choice from context."
+        },
+        {
+          "id": "adb-4",
+          "name": "Credible interval",
+          "aliases": [
+            "posterior interval"
+          ],
+          "bloom": "C3",
+          "summary": "Compute and interpret an interval that contains the parameter with stated posterior probability."
+        },
+        {
+          "id": "adb-5",
+          "name": "Posterior summaries",
+          "aliases": [
+            "posterior mean, median, mode"
+          ],
+          "bloom": "C3",
+          "summary": "Report posterior mean, median and mode (MAP) and say when they differ."
+        },
+        {
+          "id": "adb-6",
+          "name": "Prior strength as pseudo-observations",
+          "aliases": [
+            "prior sample size"
+          ],
+          "bloom": "C3",
+          "summary": "Interpret prior parameters as equivalent prior data and see how sample size shifts weight toward the likelihood."
+        },
+        {
+          "id": "adb-7",
+          "name": "Posterior predictive for next observation",
+          "aliases": [
+            "predictive probability"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate the probability of a future outcome by averaging over the posterior in a simple model."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-4"
+        ],
+        [
+          "adb-2",
+          "adb-5"
+        ],
+        [
+          "adb-2",
+          "adb-6"
+        ],
+        [
+          "adb-2",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A 95% credible interval means that in 95% of repeated experiments the interval would cover the true value.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "A flat prior is completely objective and adds no assumptions.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "The posterior mean and the most likely value are always the same.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Conjugate families beyond beta-binomial",
+          "aliases": [
+            "gamma-Poisson, normal-normal"
+          ],
+          "bloom": "C3",
+          "summary": "Derive and apply conjugate updates for Poisson rates and normal means with known variance."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Prior sensitivity analysis",
+          "aliases": [
+            "robustness to prior"
+          ],
+          "bloom": "C4",
+          "summary": "Compare posteriors under different reasonable priors to judge how much conclusions depend on them."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Highest density intervals",
+          "aliases": [
+            "HDI",
+            "HPD"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish equal-tailed from highest density intervals and choose between them for skewed posteriors."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Bayesian hypothesis comparison",
+          "aliases": [
+            "Bayes factor",
+            "posterior odds"
+          ],
+          "bloom": "C4",
+          "summary": "Compare two hypotheses using Bayes factors and posterior odds and analyse their sensitivity to priors."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Markov chain Monte Carlo sampling",
+          "aliases": [
+            "MCMC",
+            "Metropolis"
+          ],
+          "bloom": "C3",
+          "summary": "Explain and apply sampling from an unnormalised posterior with Metropolis-style algorithms."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Bayesian linear regression",
+          "aliases": [
+            "regression with priors"
+          ],
+          "bloom": "C3",
+          "summary": "Specify priors on coefficients and noise, and interpret the resulting posterior over regression parameters."
+        },
+        {
+          "id": "cmp-7",
+          "name": "MCMC convergence diagnostics",
+          "aliases": [
+            "trace plots, R-hat"
+          ],
+          "bloom": "C4",
+          "summary": "Assess chains using trace plots, multiple chains, R-hat and effective sample size."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Posterior predictive checking",
+          "aliases": [
+            "model checking"
+          ],
+          "bloom": "C4",
+          "summary": "Simulate data from the fitted model and compare to observed data to find misfit."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "adb-3",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "adb-1",
+          "cmp-4"
+        ],
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-1",
+          "cmp-5"
+        ],
+        [
+          "cmp-6",
+          "cmp-5"
+        ],
+        [
+          "adb-1",
+          "cmp-6"
+        ],
+        [
+          "cmp-6",
+          "cmp-7"
+        ],
+        [
+          "adb-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A Bayes factor is the probability that the hypothesis is true.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "If the MCMC trace looks noisy and the run finished, the posterior samples are reliable.",
+          "concepts": [
+            "cmp-6",
+            "cmp-7"
+          ]
+        },
+        {
+          "text": "With enough data prior sensitivity is irrelevant in every model.",
+          "concepts": [
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Hierarchical models and partial pooling",
+          "aliases": [
+            "multilevel models"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how group-level priors shrink group estimates and trade off between complete and no pooling."
+        },
+        {
+          "id": "prf-2",
+          "name": "Hamiltonian Monte Carlo behaviour",
+          "aliases": [
+            "HMC, NUTS"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why gradient-based samplers scale better and diagnose divergences and poor geometry."
+        },
+        {
+          "id": "prf-3",
+          "name": "Model comparison with predictive criteria",
+          "aliases": [
+            "LOO, WAIC"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate competing models using cross-validated predictive performance and justify the selection."
+        },
+        {
+          "id": "prf-4",
+          "name": "Prior predictive checks for prior design",
+          "aliases": [
+            "weakly informative priors"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate priors by simulating from the prior predictive distribution and judging plausibility."
+        },
+        {
+          "id": "prf-5",
+          "name": "Generalised linear models in Bayesian form",
+          "aliases": [
+            "logistic and Poisson regression"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse Bayesian logistic and count models, including link functions and coefficient interpretation."
+        },
+        {
+          "id": "prf-6",
+          "name": "Decision-theoretic use of posteriors",
+          "aliases": [
+            "loss functions, expected utility"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate actions by minimising posterior expected loss and justify the choice of loss."
+        },
+        {
+          "id": "prf-7",
+          "name": "Reparameterisation for sampling",
+          "aliases": [
+            "non-centred parameterisation"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when reparameterising a model removes funnel-shaped posteriors and improves sampling."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-2"
+        ],
+        [
+          "cmp-8",
+          "prf-3"
+        ],
+        [
+          "cmp-2",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "adb-5",
+          "prf-6"
+        ],
+        [
+          "prf-1",
+          "prf-7"
+        ],
+        [
+          "prf-2",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Hierarchical models just average groups together and hide real differences between them.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "The model with the best in-sample fit is the best model.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Divergent transitions in HMC can be ignored if R-hat looks fine.",
+          "concepts": [
+            "prf-2",
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Bayesian workflow design",
+          "aliases": [
+            "iterative model building"
+          ],
+          "bloom": "C6",
+          "summary": "Design an iterative workflow of model building, fitting, checking and revision for a new problem."
+        },
+        {
+          "id": "exp-2",
+          "name": "Approximate inference trade-offs",
+          "aliases": [
+            "variational inference, Laplace"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when variational or Laplace approximations are acceptable versus exact MCMC, and their known biases."
+        },
+        {
+          "id": "exp-3",
+          "name": "Nonparametric Bayesian models",
+          "aliases": [
+            "Gaussian processes, Dirichlet process"
+          ],
+          "bloom": "C6",
+          "summary": "Construct flexible models with priors over functions or distributions for problems where parametric forms fail."
+        },
+        {
+          "id": "exp-4",
+          "name": "Simulation-based calibration",
+          "aliases": [
+            "SBC",
+            "fake-data checks"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate whether an inference procedure is correct by recovering parameters from simulated data."
+        },
+        {
+          "id": "exp-5",
+          "name": "Weak identifiability of parameters",
+          "aliases": [
+            "weak identification"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when parameters are only weakly identified by the data and how much the prior then drives the posterior."
+        },
+        {
+          "id": "exp-6",
+          "name": "Latent-variable models for missing data and measurement error",
+          "aliases": [
+            "latent variable models"
+          ],
+          "bloom": "C6",
+          "summary": "Build models that jointly handle missingness or measurement error by treating the true values as latent variables."
+        },
+        {
+          "id": "exp-7",
+          "name": "Communicating Bayesian results",
+          "aliases": [
+            "uncertainty reporting"
+          ],
+          "bloom": "C5",
+          "summary": "Critique and craft reports of posterior uncertainty, assumptions and decisions for non-specialist stakeholders."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "prf-2",
+          "exp-2"
+        ],
+        [
+          "prf-1",
+          "exp-3"
+        ],
+        [
+          "exp-1",
+          "exp-4"
+        ],
+        [
+          "prf-4",
+          "exp-5"
+        ],
+        [
+          "prf-1",
+          "exp-6"
+        ],
+        [
+          "prf-5",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-7"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Variational inference gives the same posterior as MCMC, only faster.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "If the sampler converges, the model must be a good description of reality.",
+          "concepts": [
+            "exp-1",
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Nonparametric Bayesian models have no assumptions because they have no fixed parameters.",
+          "concepts": [
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

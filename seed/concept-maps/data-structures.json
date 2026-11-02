@@ -1,0 +1,739 @@
+{
+  "version": 1,
+  "topic": "data-structures",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Contiguous array storage and indexing",
+          "aliases": [
+            "array",
+            "fixed-size array"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that an array stores elements contiguously so any element is reached by index in constant time, and that its size is fixed once allocated."
+        },
+        {
+          "id": "nov-2",
+          "name": "Linked list nodes and pointers",
+          "aliases": [
+            "singly linked list",
+            "node chain"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a singly linked list as nodes holding a value and a reference to the next node, reached only by following links from the head."
+        },
+        {
+          "id": "nov-3",
+          "name": "Stack last-in first-out",
+          "aliases": [
+            "LIFO stack",
+            "push and pop"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a stack adds and removes only at one end, so the most recently pushed item is the first popped."
+        },
+        {
+          "id": "nov-4",
+          "name": "Queue first-in first-out",
+          "aliases": [
+            "FIFO queue",
+            "enqueue and dequeue"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a queue adds at the back and removes from the front, so items leave in arrival order."
+        },
+        {
+          "id": "nov-5",
+          "name": "Cost of insertion and lookup",
+          "aliases": [
+            "operation cost",
+            "Big-O of operations"
+          ],
+          "bloom": "C2",
+          "summary": "Recall in rough terms that array indexing is constant time while searching an unsorted sequence or inserting in the middle takes time proportional to the number of elements."
+        },
+        {
+          "id": "nov-6",
+          "name": "Key-value lookup with hash tables",
+          "aliases": [
+            "dictionary",
+            "map",
+            "hash map"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that a hash table stores key-value pairs and finds a value by its key without scanning all entries."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A linked list lets you reach the nth element as fast as an array does.",
+          "concepts": [
+            "nov-1",
+            "nov-2",
+            "nov-5"
+          ]
+        },
+        {
+          "text": "A stack and a queue are the same structure because both hold items in order.",
+          "concepts": [
+            "nov-3",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "A hash table keeps its keys in sorted order.",
+          "concepts": [
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Dynamic array resizing",
+          "aliases": [
+            "growable array",
+            "vector",
+            "array list"
+          ],
+          "bloom": "C3",
+          "summary": "Implement an array that doubles its capacity when full and explain why appends are cheap on average."
+        },
+        {
+          "id": "adb-2",
+          "name": "Linked list insertion and deletion",
+          "aliases": [
+            "list pointer manipulation",
+            "node splicing"
+          ],
+          "bloom": "C3",
+          "summary": "Insert and delete nodes in singly linked lists by rewiring references, handling head and empty-list cases."
+        },
+        {
+          "id": "adb-3",
+          "name": "Doubly linked lists and tail pointers",
+          "aliases": [
+            "doubly linked list",
+            "prev and next links"
+          ],
+          "bloom": "C3",
+          "summary": "Use previous links and a tail reference to make removal at a known node and appends at the end constant time."
+        },
+        {
+          "id": "adb-4",
+          "name": "Stack and queue implementations",
+          "aliases": [
+            "array-backed stack",
+            "circular buffer queue",
+            "linked queue"
+          ],
+          "bloom": "C3",
+          "summary": "Build stacks and queues on arrays or linked lists, including a circular buffer, with constant-time operations."
+        },
+        {
+          "id": "adb-5",
+          "name": "Deque operations",
+          "aliases": [
+            "double-ended queue",
+            "deque"
+          ],
+          "bloom": "C2",
+          "summary": "Use a deque to add and remove at both ends and recognise when it replaces a stack or queue."
+        },
+        {
+          "id": "adb-6",
+          "name": "Hashing and collision handling",
+          "aliases": [
+            "hash function",
+            "chaining",
+            "open addressing"
+          ],
+          "bloom": "C3",
+          "summary": "Apply a hash function to map keys to buckets and resolve collisions with chaining or probing."
+        },
+        {
+          "id": "adb-7",
+          "name": "Choosing a structure by operation costs",
+          "aliases": [
+            "structure selection",
+            "cost comparison"
+          ],
+          "bloom": "C3",
+          "summary": "Pick between array, linked list, stack, queue and hash table for a small task by comparing the costs of its main operations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "adb-1"
+        ],
+        [
+          "nov-2",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "nov-3",
+          "adb-4"
+        ],
+        [
+          "nov-4",
+          "adb-4"
+        ],
+        [
+          "adb-1",
+          "adb-4"
+        ],
+        [
+          "adb-3",
+          "adb-5"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "nov-6",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-7"
+        ],
+        [
+          "adb-3",
+          "adb-7"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Appending to a dynamic array is always constant time in the worst case.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Deleting a node from a singly linked list is constant time given only the node's value.",
+          "concepts": [
+            "adb-2",
+            "adb-3"
+          ]
+        },
+        {
+          "text": "A good hash function eliminates collisions entirely.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Hash table load factor and rehashing",
+          "aliases": [
+            "load factor",
+            "resizing hash table"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how load factor affects probe lengths and chain lengths, and why tables rehash into a larger array to keep operations near constant time."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Binary search tree operations",
+          "aliases": [
+            "BST",
+            "binary search tree"
+          ],
+          "bloom": "C3",
+          "summary": "Implement search, insertion and deletion in a binary search tree, including the cases for deleting nodes with zero, one or two children."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Tree traversal orders",
+          "aliases": [
+            "in-order",
+            "pre-order",
+            "post-order",
+            "level-order"
+          ],
+          "bloom": "C3",
+          "summary": "Perform in-order, pre-order, post-order and level-order traversals and state what each is useful for, such as in-order yielding sorted keys."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Binary heap and priority queue",
+          "aliases": [
+            "min-heap",
+            "max-heap",
+            "priority queue"
+          ],
+          "bloom": "C3",
+          "summary": "Implement a binary heap in an array with sift-up and sift-down to support insertion and extraction of the extreme element in logarithmic time."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Graph adjacency list and matrix",
+          "aliases": [
+            "adjacency representation",
+            "graph storage"
+          ],
+          "bloom": "C4",
+          "summary": "Compare adjacency lists and matrices in memory use and in the cost of edge lookup and neighbour iteration for sparse and dense graphs."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Trie prefix storage",
+          "aliases": [
+            "prefix tree",
+            "digital tree"
+          ],
+          "bloom": "C3",
+          "summary": "Build a trie that stores strings by character along paths and use it for lookup and prefix queries in time proportional to key length."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Tree height and degeneration",
+          "aliases": [
+            "unbalanced tree",
+            "skewed BST"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how insertion order determines binary search tree height and why sorted insertions degrade operations to linear time."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "adb-2",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-2",
+          "cmp-7"
+        ],
+        [
+          "adb-1",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-2",
+          "cmp-5"
+        ],
+        [
+          "adb-1",
+          "cmp-5"
+        ],
+        [
+          "adb-6",
+          "cmp-6"
+        ],
+        [
+          "cmp-2",
+          "cmp-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A binary search tree always gives logarithmic-time search.",
+          "concepts": [
+            "cmp-2",
+            "cmp-7"
+          ]
+        },
+        {
+          "text": "A heap keeps all its elements in sorted order, so iterating its array gives sorted output.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "An adjacency matrix is always the better graph representation because edge lookup is constant time.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "AVL rotations and balance factors",
+          "aliases": [
+            "AVL tree",
+            "height-balanced tree"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how balance factors detect imbalance after updates and how single and double rotations restore height balance while preserving order."
+        },
+        {
+          "id": "prf-2",
+          "name": "Red-black tree invariants",
+          "aliases": [
+            "red-black tree",
+            "colouring rules"
+          ],
+          "bloom": "C4",
+          "summary": "Explain the colour and black-height invariants of red-black trees and how recolouring and rotations maintain them, bounding height at about twice the optimum."
+        },
+        {
+          "id": "prf-3",
+          "name": "Amortised analysis of structures",
+          "aliases": [
+            "amortised cost",
+            "aggregate analysis"
+          ],
+          "bloom": "C4",
+          "summary": "Use amortised reasoning to justify costs of dynamic array growth and hash table rehashing, distinguishing them from worst-case and average-case bounds."
+        },
+        {
+          "id": "prf-4",
+          "name": "Collision strategy trade-offs",
+          "aliases": [
+            "probing vs chaining",
+            "cache behaviour of hashing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate linear probing, double hashing and chaining by clustering, deletion handling, memory overhead and cache locality."
+        },
+        {
+          "id": "prf-5",
+          "name": "Heap construction and heapsort",
+          "aliases": [
+            "build-heap",
+            "heapify"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why bottom-up heap construction takes linear time and how it supports in-place heapsort and top-k selection."
+        },
+        {
+          "id": "prf-6",
+          "name": "Memory layout and cache effects",
+          "aliases": [
+            "locality of reference",
+            "cache-friendly structures"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how contiguity and pointer chasing affect real performance so that an array can beat a linked list despite equal asymptotic costs."
+        },
+        {
+          "id": "prf-7",
+          "name": "Balanced tree versus hash table choice",
+          "aliases": [
+            "ordered map vs hash map"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when ordered operations such as range queries and predecessor lookup justify balanced trees over hash tables, given worst-case guarantees and memory."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-7",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "adb-1",
+          "prf-3"
+        ],
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "cmp-1",
+          "prf-4"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "prf-3",
+          "prf-5"
+        ],
+        [
+          "adb-4",
+          "prf-6"
+        ],
+        [
+          "cmp-5",
+          "prf-6"
+        ],
+        [
+          "prf-2",
+          "prf-7"
+        ],
+        [
+          "prf-4",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "AVL and red-black trees are equally strictly balanced, so they perform identically.",
+          "concepts": [
+            "prf-1",
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Amortised constant time means every single operation is fast.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Two structures with the same Big-O costs will perform the same in practice.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Designing structures for workload",
+          "aliases": [
+            "workload-driven design",
+            "custom data structure design"
+          ],
+          "bloom": "C6",
+          "summary": "Design or compose a structure from an access pattern, such as combining a hash table with a linked list to get constant-time least-recently-used eviction."
+        },
+        {
+          "id": "exp-2",
+          "name": "Evaluating adversarial and worst-case inputs",
+          "aliases": [
+            "hash flooding",
+            "algorithmic complexity attacks"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate structures against adversarial input, including hash collision attacks, and choose randomised hashing or balanced trees to bound worst-case behaviour."
+        },
+        {
+          "id": "exp-3",
+          "name": "Cache-aware and external-memory trees",
+          "aliases": [
+            "B-tree",
+            "B+ tree",
+            "disk-oriented trees"
+          ],
+          "bloom": "C5",
+          "summary": "Assess why wide-node trees such as B-trees minimise block transfers and when they beat binary trees in memory hierarchies."
+        },
+        {
+          "id": "exp-4",
+          "name": "Probabilistic and approximate structures",
+          "aliases": [
+            "Bloom filter",
+            "skip list",
+            "count-min sketch"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate skip lists and Bloom filters by their expected costs, error rates and memory use against deterministic structures."
+        },
+        {
+          "id": "exp-5",
+          "name": "Concurrent and persistent structures",
+          "aliases": [
+            "lock-free structures",
+            "immutable data structures",
+            "structural sharing"
+          ],
+          "bloom": "C6",
+          "summary": "Design or select structures that stay correct under concurrent access or keep older versions via structural sharing, weighing the overhead against simpler locking."
+        },
+        {
+          "id": "exp-6",
+          "name": "Graph representation for large-scale use",
+          "aliases": [
+            "compressed sparse row",
+            "edge list design"
+          ],
+          "bloom": "C6",
+          "summary": "Create a graph storage scheme such as compressed sparse rows that fits the graph's density, update rate and traversal pattern."
+        },
+        {
+          "id": "exp-7",
+          "name": "Proving invariants and bounds",
+          "aliases": [
+            "correctness proofs",
+            "potential method"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and justify a structure's correctness and complexity bounds by stating invariants and using potential-function arguments."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-3"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "prf-6",
+          "exp-5"
+        ],
+        [
+          "cmp-5",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "prf-3",
+          "exp-7"
+        ],
+        [
+          "prf-2",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Expected-case guarantees are enough in every deployment, so worst-case behaviour can be ignored.",
+          "concepts": [
+            "exp-2",
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Lock-free structures are always faster than lock-based ones.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Binary trees are optimal for any large dataset, so B-trees are only a database detail.",
+          "concepts": [
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

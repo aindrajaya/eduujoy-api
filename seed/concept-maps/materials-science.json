@@ -1,0 +1,689 @@
+{
+  "version": 1,
+  "topic": "materials-science",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "general-chemistry",
+    "engineering-mechanics"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-2",
+          "name": "Bonding types in solids",
+          "aliases": [
+            "metallic ionic covalent bonds"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how metallic, ionic, covalent and secondary bonds arise and how bond type relates to general properties like conductivity and melting point."
+        },
+        {
+          "id": "nov-1",
+          "name": "Material classes and their traits",
+          "aliases": [
+            "metals ceramics polymers composites"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the four main material classes and the typical properties that distinguish each, such as ductility in metals, hardness and brittleness in ceramics, and low density in polymers."
+        },
+        {
+          "id": "nov-3",
+          "name": "Crystalline versus amorphous structure",
+          "aliases": [
+            "crystal vs glass",
+            "long-range order"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish ordered crystalline arrangements from amorphous ones and describe how this affects behaviour."
+        },
+        {
+          "id": "nov-4",
+          "name": "Unit cells and common lattices",
+          "aliases": [
+            "FCC BCC HCP",
+            "crystal structures"
+          ],
+          "bloom": "C1",
+          "summary": "Identify the FCC, BCC and HCP unit cells and state their coordination and atomic packing."
+        },
+        {
+          "id": "nov-5",
+          "name": "Stress and strain definitions",
+          "aliases": [
+            "engineering stress",
+            "engineering strain"
+          ],
+          "bloom": "C2",
+          "summary": "Define engineering stress and strain and explain why normalising force and length makes results comparable between specimens."
+        },
+        {
+          "id": "nov-6",
+          "name": "Elastic versus plastic deformation",
+          "aliases": [
+            "reversible deformation",
+            "permanent deformation"
+          ],
+          "bloom": "C2",
+          "summary": "Explain the difference between recoverable and permanent deformation and relate it to atomic bonds stretching versus atoms slipping."
+        },
+        {
+          "id": "nov-7",
+          "name": "Basic property vocabulary",
+          "aliases": [
+            "strength hardness ductility toughness"
+          ],
+          "bloom": "C1",
+          "summary": "Define strength, stiffness, hardness, ductility, toughness and brittleness as distinct properties."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-1"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ],
+        [
+          "nov-6",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Strong materials are automatically tough.",
+          "concepts": [
+            "nov-7"
+          ]
+        },
+        {
+          "text": "Glass is a slow-flowing liquid at room temperature, which is why old windows are thicker at the bottom.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Stiffness and strength mean the same thing.",
+          "concepts": [
+            "nov-7",
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-2",
+          "name": "Hooke's law and elastic modulus",
+          "aliases": [
+            "Young's modulus",
+            "linear elasticity"
+          ],
+          "bloom": "C3",
+          "summary": "Apply E to compute elastic deflection or strain under a given load, including Poisson's ratio effects."
+        },
+        {
+          "id": "adb-1",
+          "name": "Reading stress-strain curves",
+          "aliases": [
+            "tensile test curve"
+          ],
+          "bloom": "C3",
+          "summary": "Extract Young's modulus, yield strength, ultimate tensile strength, elongation and fracture point from a tensile curve."
+        },
+        {
+          "id": "adb-3",
+          "name": "Point defects and dislocations",
+          "aliases": [
+            "vacancies",
+            "line defects"
+          ],
+          "bloom": "C2",
+          "summary": "Describe vacancies, interstitials, substitutional atoms and dislocations as imperfections that govern properties."
+        },
+        {
+          "id": "adb-4",
+          "name": "Slip and plastic deformation in metals",
+          "aliases": [
+            "dislocation glide",
+            "slip systems"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how dislocation motion on slip systems allows metals to deform plastically at stresses far below the theoretical value."
+        },
+        {
+          "id": "adb-5",
+          "name": "Grain structure and grain boundaries",
+          "aliases": [
+            "polycrystalline",
+            "grain size"
+          ],
+          "bloom": "C2",
+          "summary": "Describe polycrystalline microstructure and how grain boundaries impede dislocation motion."
+        },
+        {
+          "id": "adb-6",
+          "name": "Reading binary phase diagrams",
+          "aliases": [
+            "isomorphous diagram",
+            "lever rule"
+          ],
+          "bloom": "C3",
+          "summary": "Identify phases present and their compositions at a given temperature and apply the lever rule to find phase fractions."
+        },
+        {
+          "id": "adb-7",
+          "name": "Thermal and electrical property basics",
+          "aliases": [
+            "conductivity",
+            "thermal expansion"
+          ],
+          "bloom": "C2",
+          "summary": "Relate conductivity, thermal expansion and specific heat to bonding and structure across material classes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "nov-2",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Yield strength is the stress at which a material breaks.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Metals are strong because their crystals are perfect.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "In a phase diagram, the lever rule gives the composition of the phases rather than their relative amounts.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Strengthening mechanisms in metals",
+          "aliases": [
+            "work hardening",
+            "solid solution strengthening"
+          ],
+          "bloom": "C3",
+          "summary": "Apply grain refinement, solid solution, strain hardening and precipitation strengthening to raise strength and predict the ductility trade-off."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Eutectic and eutectoid reactions",
+          "aliases": [
+            "Fe-Fe3C diagram",
+            "pearlite formation"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the iron-carbon diagram to predict equilibrium microstructures such as ferrite, pearlite and cementite."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Diffusion and Arrhenius kinetics",
+          "aliases": [
+            "Fick's laws",
+            "thermally activated processes"
+          ],
+          "bloom": "C3",
+          "summary": "Use Fick's laws and the temperature dependence of diffusion to estimate rates of processes such as carburising."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Heat treatment of steels",
+          "aliases": [
+            "quenching tempering",
+            "TTT diagrams"
+          ],
+          "bloom": "C4",
+          "summary": "Use TTT and CCT diagrams to analyse how cooling rate yields pearlite, bainite or martensite and how tempering adjusts properties."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Polymer structure and thermal behaviour",
+          "aliases": [
+            "thermoplastic thermoset",
+            "glass transition"
+          ],
+          "bloom": "C3",
+          "summary": "Relate chain length, crosslinking, crystallinity and the glass transition temperature to polymer stiffness and processing."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Ceramic fracture and flaw statistics",
+          "aliases": [
+            "Griffith criterion",
+            "Weibull"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why ceramics fail in tension from flaws and why strength varies between nominally identical specimens."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Fracture toughness and stress concentration",
+          "aliases": [
+            "K_IC",
+            "notch effect"
+          ],
+          "bloom": "C4",
+          "summary": "Apply stress concentration factors and fracture toughness to judge whether a cracked component will fracture."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Fatigue and creep failure",
+          "aliases": [
+            "S-N curve",
+            "time-dependent deformation"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret S-N curves and creep curves to analyse failure under cyclic loads and sustained high-temperature loads."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-2",
+          "cmp-4"
+        ],
+        [
+          "cmp-6",
+          "cmp-7"
+        ],
+        [
+          "adb-1",
+          "cmp-7"
+        ],
+        [
+          "cmp-3",
+          "cmp-8"
+        ],
+        [
+          "cmp-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Increasing strength always improves a material's performance, with no cost to ductility or toughness.",
+          "concepts": [
+            "cmp-1",
+            "cmp-7"
+          ]
+        },
+        {
+          "text": "Quenched steel is simply harder because it is cooled colder, rather than because of the phase formed.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "A component loaded below its yield strength will never fail.",
+          "concepts": [
+            "cmp-8",
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-2",
+          "name": "Composite micromechanics",
+          "aliases": [
+            "rule of mixtures",
+            "fibre reinforcement"
+          ],
+          "bloom": "C4",
+          "summary": "Predict composite stiffness and strength with iso-strain and iso-stress bounds and analyse the roles of fibre length, orientation and interface."
+        },
+        {
+          "id": "prf-1",
+          "name": "Property-based material selection",
+          "aliases": [
+            "Ashby charts",
+            "performance indices"
+          ],
+          "bloom": "C5",
+          "summary": "Derive performance indices for a function, objective and constraints and use property charts to rank candidates."
+        },
+        {
+          "id": "prf-3",
+          "name": "Viscoelasticity in polymers",
+          "aliases": [
+            "relaxation modulus",
+            "time-temperature superposition"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse stress relaxation, creep and temperature dependence of polymer response using viscoelastic models."
+        },
+        {
+          "id": "prf-4",
+          "name": "Corrosion mechanisms and control",
+          "aliases": [
+            "galvanic corrosion",
+            "passivation"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse electrochemical corrosion types and evaluate protection via coatings, cathodic protection, alloying or design."
+        },
+        {
+          "id": "prf-5",
+          "name": "Electronic and band properties",
+          "aliases": [
+            "semiconductors",
+            "band theory"
+          ],
+          "bloom": "C4",
+          "summary": "Explain conductor, semiconductor and insulator behaviour via band structure and doping and how temperature and impurities change conductivity."
+        },
+        {
+          "id": "prf-6",
+          "name": "Fatigue life and damage tolerance",
+          "aliases": [
+            "Paris law",
+            "crack growth"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate fatigue life using crack growth laws and decide inspection intervals or design changes."
+        },
+        {
+          "id": "prf-7",
+          "name": "Process-structure-property links",
+          "aliases": [
+            "casting forging sintering",
+            "additive manufacturing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how casting, forming, powder processing and additive manufacturing alter microstructure and resulting properties."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-7",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "cmp-8",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "prf-2",
+          "prf-1"
+        ],
+        [
+          "cmp-4",
+          "prf-7"
+        ],
+        [
+          "cmp-3",
+          "prf-7"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The best material is the one with the highest value of a single property such as strength.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Composite properties are simply the average of fibre and matrix properties regardless of loading direction.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Corrosion resistant metals such as stainless steel are immune to corrosion in all environments.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Multi-objective material trade-offs",
+          "aliases": [
+            "constrained optimisation",
+            "Pareto selection"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate competing objectives such as cost, mass, sustainability and risk to justify a material choice under uncertainty."
+        },
+        {
+          "id": "exp-2",
+          "name": "Hybrid and architected materials",
+          "aliases": [
+            "sandwich panels",
+            "lattice structures"
+          ],
+          "bloom": "C6",
+          "summary": "Design hybrids that fill empty regions of property space by combining materials and geometry."
+        },
+        {
+          "id": "exp-3",
+          "name": "Microstructure design for target properties",
+          "aliases": [
+            "alloy design",
+            "microstructural engineering"
+          ],
+          "bloom": "C6",
+          "summary": "Specify composition, processing route and heat treatment to produce a microstructure that meets a property set."
+        },
+        {
+          "id": "exp-4",
+          "name": "Failure analysis and forensics",
+          "aliases": [
+            "fractography",
+            "root cause analysis"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose a service failure from fracture surfaces, microstructure and loading history and judge the root cause."
+        },
+        {
+          "id": "exp-5",
+          "name": "Life-cycle and sustainability assessment",
+          "aliases": [
+            "embodied energy",
+            "recyclability"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate materials by embodied energy, emissions, recyclability and end-of-life across the product life cycle."
+        },
+        {
+          "id": "exp-6",
+          "name": "Extreme environment materials",
+          "aliases": [
+            "high temperature alloys",
+            "radiation damage"
+          ],
+          "bloom": "C6",
+          "summary": "Design or select materials for extreme temperature, radiation or aggressive chemical conditions, integrating creep, oxidation and degradation."
+        },
+        {
+          "id": "exp-7",
+          "name": "Computational and data-driven methods",
+          "aliases": [
+            "CALPHAD",
+            "materials informatics"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the reliability of modelling and machine learning predictions of properties and decide how to validate them experimentally."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-2",
+          "exp-2"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "cmp-4",
+          "exp-3"
+        ],
+        [
+          "prf-6",
+          "exp-4"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "prf-4",
+          "exp-6"
+        ],
+        [
+          "cmp-8",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Failure analysis can usually identify one single cause, so design and processing need not be considered together.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Recyclable or bio-based materials are always the more sustainable choice.",
+          "concepts": [
+            "exp-5",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Computational predictions can replace experimental validation once a model is calibrated.",
+          "concepts": [
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

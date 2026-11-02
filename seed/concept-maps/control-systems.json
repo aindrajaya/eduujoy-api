@@ -1,0 +1,730 @@
+{
+  "version": 1,
+  "topic": "control-systems",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": true,
+  "dependsOnTopics": [
+    "signals-and-systems",
+    "differential-equations"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Open-loop versus closed-loop control",
+          "aliases": [
+            "feedback vs feedforward"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how feedback from a measured output corrects errors, in contrast to open-loop control that applies inputs without measuring the result."
+        },
+        {
+          "id": "nov-2",
+          "name": "Plant, controller, sensor, actuator",
+          "aliases": [
+            "loop components"
+          ],
+          "bloom": "C1",
+          "summary": "Identify the roles of each element in a feedback loop and name the reference, error, control and output signals."
+        },
+        {
+          "id": "nov-3",
+          "name": "Block diagram elements",
+          "aliases": [
+            "summing junction",
+            "signal flow blocks"
+          ],
+          "bloom": "C2",
+          "summary": "Read block diagrams with blocks, summing junctions and pickoff points and describe the signal flow they represent."
+        },
+        {
+          "id": "nov-4",
+          "name": "Transfer function of a plant",
+          "aliases": [
+            "Laplace-domain model",
+            "G(s)"
+          ],
+          "bloom": "C2",
+          "summary": "Understand a transfer function as the ratio of output to input Laplace transforms with zero initial conditions."
+        },
+        {
+          "id": "nov-5",
+          "name": "Poles and zeros of a transfer function",
+          "aliases": [
+            "roots of denominator and numerator"
+          ],
+          "bloom": "C1",
+          "summary": "Define poles and zeros as roots of the denominator and numerator and locate them on the s-plane."
+        },
+        {
+          "id": "nov-6",
+          "name": "Step response features",
+          "aliases": [
+            "rise time",
+            "overshoot",
+            "settling time"
+          ],
+          "bloom": "C2",
+          "summary": "Describe rise time, peak overshoot, settling time and steady-state value on a step response plot."
+        },
+        {
+          "id": "nov-7",
+          "name": "Stability as bounded response",
+          "aliases": [
+            "BIBO stability intuition"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a stable system's response to bounded inputs stays bounded and decays to equilibrium when disturbed."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ],
+        [
+          "nov-4",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Feedback control always makes a system faster and more stable.",
+          "concepts": [
+            "nov-1",
+            "nov-7"
+          ]
+        },
+        {
+          "text": "A transfer function describes the system's response to one specific input such as a step.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Overshoot and rise time are the same thing, both describing how quickly the output reaches the target.",
+          "concepts": [
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Block diagram reduction",
+          "aliases": [
+            "series, parallel, feedback reduction"
+          ],
+          "bloom": "C3",
+          "summary": "Simplify block diagrams with series, parallel and feedback rules to obtain closed-loop transfer functions such as G/(1+GH)."
+        },
+        {
+          "id": "adb-2",
+          "name": "First-order time constant and DC gain",
+          "aliases": [
+            "time constant",
+            "DC gain"
+          ],
+          "bloom": "C3",
+          "summary": "Compute time constant and DC gain from a first-order transfer function and predict its step response."
+        },
+        {
+          "id": "adb-3",
+          "name": "Damping ratio and natural frequency",
+          "aliases": [
+            "second-order response",
+            "underdamped, overdamped"
+          ],
+          "bloom": "C3",
+          "summary": "Use damping ratio and natural frequency to classify underdamped, critically damped and overdamped responses and estimate overshoot and settling time."
+        },
+        {
+          "id": "adb-4",
+          "name": "Pole location and response",
+          "aliases": [
+            "s-plane mapping"
+          ],
+          "bloom": "C3",
+          "summary": "Relate pole positions in the s-plane to decay rate, oscillation frequency and stability of the time response."
+        },
+        {
+          "id": "adb-5",
+          "name": "Routh-Hurwitz stability test",
+          "aliases": [
+            "Routh array"
+          ],
+          "bloom": "C3",
+          "summary": "Build a Routh array from a characteristic polynomial to count right-half-plane roots and find gain ranges for stability."
+        },
+        {
+          "id": "adb-6",
+          "name": "Steady-state error and system type",
+          "aliases": [
+            "error constants",
+            "Kp Kv Ka"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the final value theorem and error constants to compute steady-state error for step, ramp and parabolic inputs by system type."
+        },
+        {
+          "id": "adb-7",
+          "name": "Proportional gain effect on closed-loop poles",
+          "aliases": [
+            "P controller",
+            "gain variation"
+          ],
+          "bloom": "C3",
+          "summary": "Predict how raising proportional gain moves closed-loop poles and changes speed, overshoot and steady-state error of a simple loop."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "nov-5",
+          "adb-4"
+        ],
+        [
+          "nov-7",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-7"
+        ],
+        [
+          "adb-3",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Increasing proportional gain indefinitely improves performance without any downside.",
+          "concepts": [
+            "adb-7"
+          ]
+        },
+        {
+          "text": "Steady-state error can be found only by simulating the response, not analytically.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "A system with all poles in the left half-plane has no overshoot.",
+          "concepts": [
+            "adb-4",
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Root locus construction rules",
+          "aliases": [
+            "root locus sketching"
+          ],
+          "bloom": "C3",
+          "summary": "Sketch a root locus using branches, real-axis segments, asymptotes, breakaway points and angles of departure."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Root locus gain selection",
+          "aliases": [
+            "design from locus"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the locus to choose a gain that meets damping and settling targets and recognise when no gain can."
+        },
+        {
+          "id": "cmp-3",
+          "name": "PID controller terms",
+          "aliases": [
+            "proportional integral derivative"
+          ],
+          "bloom": "C3",
+          "summary": "Apply P, I and D actions and predict how each affects rise time, overshoot, settling and steady-state error."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Frequency response and Bode plots",
+          "aliases": [
+            "magnitude and phase plots"
+          ],
+          "bloom": "C3",
+          "summary": "Construct and read asymptotic Bode magnitude and phase plots from a transfer function."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Gain and phase margins",
+          "aliases": [
+            "stability margins"
+          ],
+          "bloom": "C4",
+          "summary": "Determine gain and phase margins from Bode plots and relate them to closed-loop stability and damping."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Nyquist stability criterion",
+          "aliases": [
+            "encirclements of -1"
+          ],
+          "bloom": "C4",
+          "summary": "Use encirclements of -1 by the Nyquist plot and open-loop RHP poles to determine closed-loop stability."
+        },
+        {
+          "id": "cmp-7",
+          "name": "PID tuning heuristics",
+          "aliases": [
+            "Ziegler-Nichols",
+            "manual tuning"
+          ],
+          "bloom": "C3",
+          "summary": "Tune PID gains using Ziegler-Nichols rules or manual iteration and judge the resulting response."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Sensitivity and disturbance rejection",
+          "aliases": [
+            "S and T functions"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse sensitivity and complementary sensitivity to explain disturbance rejection and noise tradeoffs."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-3",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-3"
+        ],
+        [
+          "adb-6",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-7"
+        ],
+        [
+          "adb-4",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "adb-4",
+          "cmp-6"
+        ],
+        [
+          "cmp-5",
+          "cmp-8"
+        ],
+        [
+          "adb-1",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Derivative action improves any loop and is safe with noisy measurements.",
+          "concepts": [
+            "cmp-3",
+            "cmp-8"
+          ]
+        },
+        {
+          "text": "Positive gain and phase margins computed from the Bode plot guarantee stability for any plant.",
+          "concepts": [
+            "cmp-5",
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "Ziegler-Nichols tuning yields optimal, well-damped responses.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Lead compensator design",
+          "aliases": [
+            "phase lead"
+          ],
+          "bloom": "C4",
+          "summary": "Design a lead compensator to add phase near crossover and improve transient response and margins."
+        },
+        {
+          "id": "prf-2",
+          "name": "Lag compensator design",
+          "aliases": [
+            "phase lag"
+          ],
+          "bloom": "C4",
+          "summary": "Design a lag compensator to raise low-frequency gain and reduce steady-state error without disturbing crossover phase."
+        },
+        {
+          "id": "prf-3",
+          "name": "Loop shaping",
+          "aliases": [
+            "frequency-domain design"
+          ],
+          "bloom": "C5",
+          "summary": "Shape the open-loop frequency response to meet bandwidth, margin, tracking and noise specifications together."
+        },
+        {
+          "id": "prf-4",
+          "name": "Fundamental performance limitations",
+          "aliases": [
+            "Bode integral",
+            "RHP zero limits"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how right-half-plane zeros, delays and the waterfall effect limit achievable bandwidth and sensitivity."
+        },
+        {
+          "id": "prf-5",
+          "name": "Integrator windup and anti-windup",
+          "aliases": [
+            "actuator saturation"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose windup under actuator saturation and select anti-windup schemes such as clamping or back-calculation."
+        },
+        {
+          "id": "prf-6",
+          "name": "PID derivative filtering and setpoint weighting",
+          "aliases": [
+            "practical PID",
+            "derivative filter"
+          ],
+          "bloom": "C4",
+          "summary": "Implement PID with derivative filtering and setpoint weighting while analysing their effects on noise amplification and setpoint response."
+        },
+        {
+          "id": "prf-7",
+          "name": "Time delay in feedback loops",
+          "aliases": [
+            "dead time",
+            "Pade approximation"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the phase penalty of delay and apply Pade approximation or Smith-predictor ideas to loop design."
+        },
+        {
+          "id": "prf-8",
+          "name": "Two-degree-of-freedom control",
+          "aliases": [
+            "prefilter",
+            "feedforward"
+          ],
+          "bloom": "C5",
+          "summary": "Separate tracking from disturbance rejection using prefilters or feedforward and justify the structure chosen."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-8",
+          "prf-3"
+        ],
+        [
+          "cmp-8",
+          "prf-4"
+        ],
+        [
+          "cmp-7",
+          "prf-5"
+        ],
+        [
+          "cmp-3",
+          "prf-6"
+        ],
+        [
+          "cmp-5",
+          "prf-7"
+        ],
+        [
+          "prf-3",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A lead compensator can be made arbitrarily strong to gain unlimited phase and bandwidth.",
+          "concepts": [
+            "prf-1",
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Anti-windup is only needed if the integral gain is too high.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Right-half-plane zeros can be cancelled by placing a pole at the same location in the controller.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-4",
+          "name": "Linearisation validity and gain scheduling",
+          "aliases": [
+            "gain scheduling",
+            "operating points"
+          ],
+          "bloom": "C5",
+          "summary": "Assess when linearised models are valid and design schedules or alternatives when nonlinearity breaks the assumptions."
+        },
+        {
+          "id": "exp-3",
+          "name": "Cascade and multi-loop architecture design",
+          "aliases": [
+            "cascade control",
+            "multi-loop design"
+          ],
+          "bloom": "C6",
+          "summary": "Create cascade and multi-loop architectures with inner and outer loops suited to a plant's structure and time-scale separation."
+        },
+        {
+          "id": "exp-5",
+          "name": "Model identification for design",
+          "aliases": [
+            "frequency response identification"
+          ],
+          "bloom": "C6",
+          "summary": "Develop plant models from experimental frequency or step data and quantify uncertainty for controller design."
+        },
+        {
+          "id": "exp-1",
+          "name": "Robust stability and uncertainty",
+          "aliases": [
+            "multiplicative uncertainty",
+            "small gain theorem"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate whether a design remains stable under modelled plant uncertainty using the small gain theorem and sensitivity bounds."
+        },
+        {
+          "id": "exp-2",
+          "name": "Conflicting specification prioritisation",
+          "aliases": [
+            "requirements trade-offs"
+          ],
+          "bloom": "C5",
+          "summary": "Critique conflicting requirements on speed, robustness, noise, actuator effort and cost, and justify prioritisation."
+        },
+        {
+          "id": "exp-6",
+          "name": "Sampling and computation delay effects on margins",
+          "aliases": [
+            "sampling",
+            "discretisation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how sampling, quantisation and computation delay erode margins and choose discretisation methods and rates."
+        },
+        {
+          "id": "exp-7",
+          "name": "Controller validation and commissioning",
+          "aliases": [
+            "test plan",
+            "verification"
+          ],
+          "bloom": "C6",
+          "summary": "Create simulation and hardware test plans, including margin measurement and worst-case cases, to verify and tune a deployed loop."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "exp-5",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-8",
+          "exp-3"
+        ],
+        [
+          "prf-6",
+          "exp-3"
+        ],
+        [
+          "exp-4",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "exp-6",
+          "exp-7"
+        ],
+        [
+          "exp-3",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A controller that works well in simulation will work on the real plant if the nominal margins are good.",
+          "concepts": [
+            "exp-1",
+            "exp-7"
+          ]
+        },
+        {
+          "text": "Sampling at just above twice the bandwidth is enough for digital control.",
+          "concepts": [
+            "exp-6"
+          ]
+        },
+        {
+          "text": "A single linear model identified at one operating point suffices across the whole range.",
+          "concepts": [
+            "exp-4",
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,718 @@
+{
+  "version": 1,
+  "topic": "react",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "javascript",
+    "html-css"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Components as UI building blocks",
+          "aliases": [
+            "React components",
+            "component model"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a React UI is built from reusable components, each a function that returns a description of part of the screen."
+        },
+        {
+          "id": "nov-2",
+          "name": "JSX syntax rules",
+          "aliases": [
+            "JSX",
+            "JSX markup"
+          ],
+          "bloom": "C2",
+          "summary": "Write JSX with a single root element, closed tags, className, and curly braces for embedding JavaScript expressions."
+        },
+        {
+          "id": "nov-3",
+          "name": "Props for passing data",
+          "aliases": [
+            "properties",
+            "component props"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that props are read-only inputs passed from a parent to a child component to customise its output."
+        },
+        {
+          "id": "nov-4",
+          "name": "Rendering component trees",
+          "aliases": [
+            "nesting components",
+            "component hierarchy"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that components are nested to form a tree and that the root is mounted into a DOM node to display the app."
+        },
+        {
+          "id": "nov-5",
+          "name": "Conditional rendering with expressions",
+          "aliases": [
+            "conditional UI",
+            "ternary rendering"
+          ],
+          "bloom": "C2",
+          "summary": "Show or hide JSX using if statements, ternaries and the logical AND operator."
+        },
+        {
+          "id": "nov-6",
+          "name": "Rendering lists with map",
+          "aliases": [
+            "list rendering",
+            "array to elements"
+          ],
+          "bloom": "C2",
+          "summary": "Turn an array of data into a list of elements using map and understand that each item needs a key."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "JSX is HTML that the browser reads directly.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "A child component can change the props it receives.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Component names can start with a lowercase letter and still be treated as components.",
+          "concepts": [
+            "nov-1",
+            "nov-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "State with useState",
+          "aliases": [
+            "component state",
+            "state hook"
+          ],
+          "bloom": "C3",
+          "summary": "Add state to a function component, read it and update it with the setter so the component re-renders."
+        },
+        {
+          "id": "adb-2",
+          "name": "Event handlers",
+          "aliases": [
+            "event handling",
+            "onClick handlers"
+          ],
+          "bloom": "C3",
+          "summary": "Attach handler functions to elements via props such as onClick and onChange, passing the function rather than calling it."
+        },
+        {
+          "id": "adb-3",
+          "name": "Controlled form inputs",
+          "aliases": [
+            "controlled components",
+            "form state binding"
+          ],
+          "bloom": "C3",
+          "summary": "Bind an input's value to state and update it in onChange so React is the source of truth for the form."
+        },
+        {
+          "id": "adb-4",
+          "name": "Keys for list items",
+          "aliases": [
+            "key prop",
+            "list keys"
+          ],
+          "bloom": "C3",
+          "summary": "Choose stable, unique keys from the data so React can match list items between renders."
+        },
+        {
+          "id": "adb-5",
+          "name": "Lifting state up",
+          "aliases": [
+            "shared state",
+            "state lifting"
+          ],
+          "bloom": "C3",
+          "summary": "Move state to the closest common parent of components that need it and pass it down with props and callbacks."
+        },
+        {
+          "id": "adb-6",
+          "name": "Immutable state updates",
+          "aliases": [
+            "updating objects and arrays in state"
+          ],
+          "bloom": "C3",
+          "summary": "Update object and array state by creating new copies with spread, map and filter instead of mutating."
+        },
+        {
+          "id": "adb-7",
+          "name": "Class components and lifecycle",
+          "aliases": [
+            "class components",
+            "this.state"
+          ],
+          "bloom": "C2",
+          "summary": "Read a class component with this.props, this.state, setState and basic lifecycle methods and map it to the function equivalent."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "nov-6",
+          "adb-4"
+        ],
+        [
+          "adb-1",
+          "adb-5"
+        ],
+        [
+          "nov-3",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Calling the state setter changes the state variable immediately within the current function run.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Writing onClick={handle()} attaches the handler to the click.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Using the array index as key is always fine.",
+          "concepts": [
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Rendering and re-rendering cycle",
+          "aliases": [
+            "render and commit",
+            "render phase"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when and why components re-render, distinguishing the render phase from the commit to the DOM."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Effects with useEffect",
+          "aliases": [
+            "side effects",
+            "useEffect hook"
+          ],
+          "bloom": "C3",
+          "summary": "Use effects to synchronise a component with external systems, with correct dependency arrays and cleanup functions."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Virtual DOM reconciliation",
+          "aliases": [
+            "diffing",
+            "reconciliation algorithm"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how React diffs successive element trees by type and key to apply minimal DOM updates."
+        },
+        {
+          "id": "cmp-4",
+          "name": "State batching and updater functions",
+          "aliases": [
+            "functional updates",
+            "snapshot state"
+          ],
+          "bloom": "C4",
+          "summary": "Reason about state as a per-render snapshot and use updater functions when the next value depends on the previous one."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Component composition with children",
+          "aliases": [
+            "children prop",
+            "composition over inheritance"
+          ],
+          "bloom": "C3",
+          "summary": "Design flexible components that accept children and other elements as props instead of relying on inheritance."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Custom hooks for reuse",
+          "aliases": [
+            "custom hook extraction"
+          ],
+          "bloom": "C3",
+          "summary": "Extract stateful logic shared by components into custom hooks that follow the rules of hooks."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Refs and DOM access",
+          "aliases": [
+            "useRef",
+            "escape hatch"
+          ],
+          "bloom": "C3",
+          "summary": "Use refs for DOM nodes and mutable values that do not affect rendering, and know when not to."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Deciding where state lives",
+          "aliases": [
+            "state structure",
+            "derived state"
+          ],
+          "bloom": "C4",
+          "summary": "Decide what is state versus derived data and structure state to avoid duplication and contradiction."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-3"
+        ],
+        [
+          "nov-6",
+          "cmp-3"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "nov-3",
+          "cmp-5"
+        ],
+        [
+          "cmp-2",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-8"
+        ],
+        [
+          "cmp-2",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The virtual DOM makes React faster than direct DOM manipulation in every case.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "A re-render means the browser DOM is fully rebuilt.",
+          "concepts": [
+            "cmp-1",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "An effect with an empty dependency array is the right place for any logic, and omitting dependencies is harmless.",
+          "concepts": [
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Context for shared data",
+          "aliases": [
+            "useContext",
+            "Context API"
+          ],
+          "bloom": "C4",
+          "summary": "Evaluate when context avoids prop drilling and analyse how its updates re-render consumers."
+        },
+        {
+          "id": "prf-2",
+          "name": "Reducer-based state management",
+          "aliases": [
+            "useReducer",
+            "reducer pattern"
+          ],
+          "bloom": "C4",
+          "summary": "Model complex state transitions as actions and a pure reducer and choose it over multiple useState calls."
+        },
+        {
+          "id": "prf-3",
+          "name": "Render performance optimisation",
+          "aliases": [
+            "memoisation",
+            "React.memo useMemo useCallback"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when memoisation pays off, diagnose needless re-renders with profiling and avoid premature optimisation."
+        },
+        {
+          "id": "prf-4",
+          "name": "Data fetching in effects",
+          "aliases": [
+            "async effects",
+            "fetch lifecycle"
+          ],
+          "bloom": "C4",
+          "summary": "Handle loading, error and race conditions when fetching data, with cancellation or ignore flags."
+        },
+        {
+          "id": "prf-5",
+          "name": "Component API design",
+          "aliases": [
+            "props design",
+            "compound components"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and shape component interfaces using compound components, render props and controlled versus uncontrolled patterns."
+        },
+        {
+          "id": "prf-6",
+          "name": "Error boundaries and Suspense",
+          "aliases": [
+            "error boundary",
+            "lazy loading"
+          ],
+          "bloom": "C4",
+          "summary": "Contain rendering failures with error boundaries and split code with lazy and Suspense fallbacks."
+        },
+        {
+          "id": "prf-7",
+          "name": "Testing components by behaviour",
+          "aliases": [
+            "React Testing Library",
+            "component tests"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate tests that exercise components through user-visible behaviour rather than implementation details."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-8",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-4",
+          "prf-2"
+        ],
+        [
+          "cmp-8",
+          "prf-2"
+        ],
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "cmp-3",
+          "prf-3"
+        ],
+        [
+          "cmp-2",
+          "prf-4"
+        ],
+        [
+          "cmp-6",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "cmp-6",
+          "prf-5"
+        ],
+        [
+          "cmp-2",
+          "prf-6"
+        ],
+        [
+          "cmp-5",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Wrapping every component in memo and every function in useCallback always improves performance.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Context is a full state management replacement that never causes extra re-renders.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Error boundaries catch errors thrown in event handlers and async code.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Architecture of large React apps",
+          "aliases": [
+            "app architecture",
+            "feature structure"
+          ],
+          "bloom": "C6",
+          "summary": "Design the structure of a large single-page app, including module boundaries, routing and state ownership."
+        },
+        {
+          "id": "exp-2",
+          "name": "State management strategy selection",
+          "aliases": [
+            "server state vs client state",
+            "state libraries"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate trade-offs between local state, context, external stores and server-state caching for a given application."
+        },
+        {
+          "id": "exp-3",
+          "name": "Concurrent rendering model",
+          "aliases": [
+            "concurrent React",
+            "transitions"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how interruptible rendering, transitions and deferred values affect responsiveness and component purity requirements."
+        },
+        {
+          "id": "exp-4",
+          "name": "Server rendering and hydration",
+          "aliases": [
+            "SSR",
+            "server components"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate client, server and hybrid rendering strategies and their effects on hydration, performance and complexity."
+        },
+        {
+          "id": "exp-5",
+          "name": "Design system component libraries",
+          "aliases": [
+            "reusable component library",
+            "shared UI library"
+          ],
+          "bloom": "C6",
+          "summary": "Create a reusable, accessible, well-typed component library with stable APIs and versioning."
+        },
+        {
+          "id": "exp-6",
+          "name": "Performance and accessibility auditing",
+          "aliases": [
+            "profiling",
+            "a11y review"
+          ],
+          "bloom": "C5",
+          "summary": "Judge an app's rendering performance and accessibility with profiling data and audits and prioritise fixes."
+        },
+        {
+          "id": "exp-7",
+          "name": "Migration and refactoring strategy",
+          "aliases": [
+            "legacy migration",
+            "incremental adoption"
+          ],
+          "bloom": "C6",
+          "summary": "Plan incremental migration of class-based or legacy codebases to modern patterns with controlled risk."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-1"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-2"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ],
+        [
+          "prf-6",
+          "exp-3"
+        ],
+        [
+          "prf-6",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "prf-3",
+          "exp-6"
+        ],
+        [
+          "prf-7",
+          "exp-7"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A single global store is the best place for all application state.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Server rendering always improves performance and removes the need for client-side work.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Concurrent features make rendering faster by running code on parallel threads.",
+          "concepts": [
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

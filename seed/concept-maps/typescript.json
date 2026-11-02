@@ -1,0 +1,729 @@
+{
+  "version": 1,
+  "topic": "typescript",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "javascript"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Static versus runtime typing",
+          "aliases": [
+            "compile-time checking"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that TypeScript checks types at compile time and then erases them, so the emitted JavaScript contains no type information."
+        },
+        {
+          "id": "nov-2",
+          "name": "Primitive type annotations",
+          "aliases": [
+            "basic types"
+          ],
+          "bloom": "C1",
+          "summary": "Recall and write annotations for string, number, boolean, null, undefined and arrays on variables and parameters."
+        },
+        {
+          "id": "nov-3",
+          "name": "Type inference",
+          "aliases": [
+            "inferred types"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how the compiler infers types from initial values so that annotations are not needed everywhere."
+        },
+        {
+          "id": "nov-4",
+          "name": "Function parameter and return types",
+          "aliases": [
+            "typed functions"
+          ],
+          "bloom": "C2",
+          "summary": "Annotate function parameters and return values and understand the errors raised when calls do not match."
+        },
+        {
+          "id": "nov-5",
+          "name": "Object type literals",
+          "aliases": [
+            "inline object types"
+          ],
+          "bloom": "C2",
+          "summary": "Describe the shape of an object with property names and types, including optional properties."
+        },
+        {
+          "id": "nov-6",
+          "name": "Compiling with tsc",
+          "aliases": [
+            "TypeScript compiler",
+            "transpilation"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that tsc type-checks .ts files and emits .js files, and read basic compiler error messages."
+        },
+        {
+          "id": "nov-7",
+          "name": "The any type",
+          "aliases": [
+            "any"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that any switches off type checking for a value and why it undermines safety."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "TypeScript types are checked while the program runs and protect against bad data at runtime.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Every variable must have an explicit type annotation.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Using any is a harmless way to make errors go away.",
+          "concepts": [
+            "nov-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Interfaces and type aliases",
+          "aliases": [
+            "interface vs type"
+          ],
+          "bloom": "C3",
+          "summary": "Define named object shapes with interface and type, and apply them to parameters and variables."
+        },
+        {
+          "id": "adb-2",
+          "name": "Union types",
+          "aliases": [
+            "union"
+          ],
+          "bloom": "C3",
+          "summary": "Combine types with | to accept several possible values and handle each case."
+        },
+        {
+          "id": "adb-3",
+          "name": "Type narrowing",
+          "aliases": [
+            "type guards",
+            "typeof narrowing"
+          ],
+          "bloom": "C3",
+          "summary": "Use typeof, instanceof, equality and truthiness checks to narrow a union to a specific type within a branch."
+        },
+        {
+          "id": "adb-4",
+          "name": "Literal types and enums",
+          "aliases": [
+            "string literal types",
+            "enum"
+          ],
+          "bloom": "C2",
+          "summary": "Restrict values to specific constants using literal unions or enums and choose between them."
+        },
+        {
+          "id": "adb-5",
+          "name": "Typed arrays and tuples",
+          "aliases": [
+            "tuple types"
+          ],
+          "bloom": "C3",
+          "summary": "Type arrays and fixed-length tuples and apply them to function arguments and return values."
+        },
+        {
+          "id": "adb-6",
+          "name": "Optional and readonly properties",
+          "aliases": [
+            "optional chaining types",
+            "readonly"
+          ],
+          "bloom": "C3",
+          "summary": "Mark properties optional or readonly and handle possibly undefined values safely."
+        },
+        {
+          "id": "adb-7",
+          "name": "Typing classes",
+          "aliases": [
+            "class members",
+            "access modifiers"
+          ],
+          "bloom": "C3",
+          "summary": "Annotate class properties and methods, use public, private and readonly modifiers, and implement interfaces."
+        },
+        {
+          "id": "adb-8",
+          "name": "Strict null checking",
+          "aliases": [
+            "strictNullChecks"
+          ],
+          "bloom": "C3",
+          "summary": "Handle null and undefined explicitly when strict null checks are enabled."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-2",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-4"
+        ],
+        [
+          "nov-2",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-7"
+        ],
+        [
+          "adb-2",
+          "adb-8"
+        ],
+        [
+          "adb-3",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Interfaces and type aliases are completely interchangeable in every situation.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "A union type value lets you use any member of any of its types without checks.",
+          "concepts": [
+            "adb-2",
+            "adb-3"
+          ]
+        },
+        {
+          "text": "The private modifier makes a class member inaccessible at runtime.",
+          "concepts": [
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Generic functions and constraints",
+          "aliases": [
+            "generics",
+            "extends constraint"
+          ],
+          "bloom": "C3",
+          "summary": "Write functions with type parameters and constrain them with extends so types flow from input to output."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Generic interfaces and classes",
+          "aliases": [
+            "generic types"
+          ],
+          "bloom": "C3",
+          "summary": "Define reusable containers and APIs parameterised by type, with defaults where useful."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Discriminated unions",
+          "aliases": [
+            "tagged unions"
+          ],
+          "bloom": "C4",
+          "summary": "Model variants with a shared literal tag and use it for exhaustive narrowing, including a never check."
+        },
+        {
+          "id": "cmp-5",
+          "name": "keyof and indexed access",
+          "aliases": [
+            "keyof",
+            "typeof operator",
+            "lookup types"
+          ],
+          "bloom": "C4",
+          "summary": "Use keyof, typeof and T[K] to tie property names and value types together safely."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Built-in utility types",
+          "aliases": [
+            "Partial",
+            "Pick",
+            "Omit",
+            "Record"
+          ],
+          "bloom": "C3",
+          "summary": "Apply Partial, Required, Pick, Omit, Record and ReturnType to derive types from existing ones."
+        },
+        {
+          "id": "cmp-6",
+          "name": "tsconfig compiler options",
+          "aliases": [
+            "tsconfig.json",
+            "strict mode"
+          ],
+          "bloom": "C3",
+          "summary": "Configure target, module, strict and include settings and analyse how each changes checking and output."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Unknown versus any",
+          "aliases": [
+            "unknown type"
+          ],
+          "bloom": "C4",
+          "summary": "Contrast unknown with any and narrow unknown values before use, such as parsed JSON."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Declaration files and modules",
+          "aliases": [
+            "d.ts",
+            "@types",
+            "ES modules"
+          ],
+          "bloom": "C3",
+          "summary": "Use .d.ts files and @types packages to type JavaScript libraries and organise code with typed imports and exports."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-2"
+        ],
+        [
+          "nov-4",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-3"
+        ],
+        [
+          "cmp-5",
+          "cmp-4"
+        ],
+        [
+          "adb-8",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-7"
+        ],
+        [
+          "nov-7",
+          "cmp-7"
+        ],
+        [
+          "nov-6",
+          "cmp-6"
+        ],
+        [
+          "cmp-6",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Type assertions with as convert values and make them safe at runtime.",
+          "concepts": [
+            "cmp-7"
+          ]
+        },
+        {
+          "text": "Generics are only needed for collections like arrays.",
+          "concepts": [
+            "cmp-1",
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "Turning on strict mode changes the generated JavaScript.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Conditional types and infer",
+          "aliases": [
+            "conditional types"
+          ],
+          "bloom": "C4",
+          "summary": "Write types that branch on type relationships and extract parts of types with infer."
+        },
+        {
+          "id": "prf-2",
+          "name": "Mapped types",
+          "aliases": [
+            "key remapping",
+            "homomorphic mapped types"
+          ],
+          "bloom": "C4",
+          "summary": "Transform every property of a type with mapped types, modifiers and key remapping."
+        },
+        {
+          "id": "prf-3",
+          "name": "Template literal types",
+          "aliases": [
+            "string manipulation types"
+          ],
+          "bloom": "C4",
+          "summary": "Build string types from unions and patterns to model keys, routes and event names."
+        },
+        {
+          "id": "prf-4",
+          "name": "Distributive conditional behaviour",
+          "aliases": [
+            "distribution over unions"
+          ],
+          "bloom": "C4",
+          "summary": "Predict how conditional types distribute over unions and when to prevent it."
+        },
+        {
+          "id": "prf-5",
+          "name": "Structural typing and variance",
+          "aliases": [
+            "covariance",
+            "contravariance",
+            "assignability"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate assignability using structural rules, and reason about covariance and contravariance in function parameters."
+        },
+        {
+          "id": "prf-6",
+          "name": "Overloads and type predicates",
+          "aliases": [
+            "function overloads",
+            "user-defined type guards",
+            "asserts"
+          ],
+          "bloom": "C5",
+          "summary": "Choose between overloads, generics and custom guards to give call sites precise types."
+        },
+        {
+          "id": "prf-7",
+          "name": "Type-safe API design",
+          "aliases": [
+            "inference-friendly APIs"
+          ],
+          "bloom": "C5",
+          "summary": "Judge and design function and library signatures that infer well and prevent invalid states."
+        },
+        {
+          "id": "prf-8",
+          "name": "Project references and build performance",
+          "aliases": [
+            "incremental builds",
+            "composite projects"
+          ],
+          "bloom": "C4",
+          "summary": "Structure multi-package repositories with project references and diagnose slow type checking."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "cmp-4",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "adb-4",
+          "prf-3"
+        ],
+        [
+          "prf-1",
+          "prf-7"
+        ],
+        [
+          "prf-5",
+          "prf-7"
+        ],
+        [
+          "adb-3",
+          "prf-6"
+        ],
+        [
+          "cmp-6",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "TypeScript uses nominal typing, so two types with the same shape are incompatible unless one declares the other.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Conditional types always evaluate a union as a whole rather than per member.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "More complex types always make code safer and better.",
+          "concepts": [
+            "prf-7",
+            "prf-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Type-level programming limits",
+          "aliases": [
+            "recursive types",
+            "type-level computation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when recursive and computed types are justified given depth limits, compile cost and readability."
+        },
+        {
+          "id": "exp-2",
+          "name": "Soundness trade-offs",
+          "aliases": [
+            "unsoundness",
+            "escape hatches"
+          ],
+          "bloom": "C5",
+          "summary": "Assess where TypeScript is deliberately unsound, such as bivariance, array covariance and assertions, and mitigate the risks."
+        },
+        {
+          "id": "exp-3",
+          "name": "Runtime validation bridging",
+          "aliases": [
+            "schema validation",
+            "branded types"
+          ],
+          "bloom": "C6",
+          "summary": "Design boundaries that link runtime validation of external data with static types, using schemas and branded types."
+        },
+        {
+          "id": "exp-4",
+          "name": "Library typing and declaration authoring",
+          "aliases": [
+            "declaration merging",
+            "module augmentation"
+          ],
+          "bloom": "C6",
+          "summary": "Create declaration files and public type surfaces for libraries, using merging and augmentation and keeping them compatible across releases."
+        },
+        {
+          "id": "exp-5",
+          "name": "Compiler API and tooling",
+          "aliases": [
+            "language service",
+            "custom transformers"
+          ],
+          "bloom": "C6",
+          "summary": "Build tools such as analysers or code generators on the compiler and language service APIs."
+        },
+        {
+          "id": "exp-6",
+          "name": "Migration strategy for codebases",
+          "aliases": [
+            "incremental adoption",
+            "JS to TS migration"
+          ],
+          "bloom": "C6",
+          "summary": "Plan staged migration of large JavaScript codebases using allowJs, checkJs and tightening strictness over time."
+        },
+        {
+          "id": "exp-7",
+          "name": "Type design standards and review",
+          "aliases": [
+            "team conventions",
+            "type architecture"
+          ],
+          "bloom": "C5",
+          "summary": "Establish and critique team conventions for type design, strictness and lint rules that balance safety with productivity."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-2"
+        ],
+        [
+          "cmp-7",
+          "exp-3"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "cmp-8",
+          "exp-4"
+        ],
+        [
+          "prf-2",
+          "exp-4"
+        ],
+        [
+          "prf-8",
+          "exp-5"
+        ],
+        [
+          "cmp-6",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-7"
+        ],
+        [
+          "exp-6",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "If the code compiles with no errors, it is guaranteed free of type-related runtime errors.",
+          "concepts": [
+            "exp-2",
+            "exp-3"
+          ]
+        },
+        {
+          "text": "The most precise possible type is always the best design for a public API.",
+          "concepts": [
+            "exp-1",
+            "exp-4"
+          ]
+        },
+        {
+          "text": "A JavaScript codebase must be fully converted in one pass to benefit from TypeScript.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

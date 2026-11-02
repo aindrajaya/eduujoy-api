@@ -1,0 +1,731 @@
+{
+  "version": 1,
+  "topic": "aws",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "cloud-computing-fundamentals",
+    "linux-command-line"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Regions and Availability Zones",
+          "aliases": [
+            "AWS global infrastructure",
+            "AZs"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a region is a geographic area made of multiple isolated availability zones and why resources are placed in a specific region."
+        },
+        {
+          "id": "nov-2",
+          "name": "Console and account root user",
+          "aliases": [
+            "AWS Management Console",
+            "root account"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise how to sign in to the console, find services, and know that the root user is a special all-powerful identity to be protected."
+        },
+        {
+          "id": "nov-3",
+          "name": "EC2 instances and AMIs",
+          "aliases": [
+            "virtual servers",
+            "Amazon Machine Image"
+          ],
+          "bloom": "C2",
+          "summary": "Describe an EC2 instance as a virtual server launched from an AMI with a chosen instance type."
+        },
+        {
+          "id": "nov-4",
+          "name": "S3 buckets and objects",
+          "aliases": [
+            "Simple Storage Service",
+            "object storage"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that S3 stores objects identified by keys inside globally uniquely named buckets rather than files in a filesystem."
+        },
+        {
+          "id": "nov-5",
+          "name": "IAM users and permissions",
+          "aliases": [
+            "Identity and Access Management",
+            "IAM identities"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that IAM controls who can do what in an account and that new users start with no permissions."
+        },
+        {
+          "id": "nov-6",
+          "name": "Managed service categories",
+          "aliases": [
+            "compute storage database networking services"
+          ],
+          "bloom": "C1",
+          "summary": "Name which AWS service fits each broad role: RDS and DynamoDB for databases, Lambda for serverless code, CloudFront for content delivery, Route 53 for DNS, CloudWatch for monitoring."
+        },
+        {
+          "id": "nov-7",
+          "name": "Pay-as-you-go billing and Free Tier",
+          "aliases": [
+            "AWS pricing basics"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that resources incur charges while running or stored and that the Free Tier has limits."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-7"
+        ],
+        [
+          "nov-4",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Resources created in one region automatically appear and work in every other region.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Stopping or ignoring a resource means AWS charges nothing for it.",
+          "concepts": [
+            "nov-7",
+            "nov-3",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "The root user should be used for everyday administration.",
+          "concepts": [
+            "nov-2",
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "AWS CLI configuration and use",
+          "aliases": [
+            "aws cli",
+            "named profiles"
+          ],
+          "bloom": "C3",
+          "summary": "Configure credentials and a default region with profiles and run commands such as listing buckets or describing instances."
+        },
+        {
+          "id": "adb-3",
+          "name": "Security groups",
+          "aliases": [
+            "instance firewall rules"
+          ],
+          "bloom": "C3",
+          "summary": "Write inbound and outbound rules that allow only needed ports and sources, knowing groups are stateful allow-lists."
+        },
+        {
+          "id": "adb-2",
+          "name": "Launching and connecting to EC2",
+          "aliases": [
+            "key pairs",
+            "SSH to instance"
+          ],
+          "bloom": "C3",
+          "summary": "Launch an instance with a key pair and security group, connect over SSH, and stop, start or terminate it."
+        },
+        {
+          "id": "adb-4",
+          "name": "S3 access and storage classes",
+          "aliases": [
+            "bucket permissions",
+            "versioning"
+          ],
+          "bloom": "C3",
+          "summary": "Upload and retrieve objects, keep buckets private by default, enable versioning, and choose a storage class by access pattern."
+        },
+        {
+          "id": "adb-5",
+          "name": "IAM policies and groups",
+          "aliases": [
+            "JSON policies",
+            "managed policies"
+          ],
+          "bloom": "C3",
+          "summary": "Attach policies with Effect, Action and Resource to groups and users to grant least privilege for simple tasks."
+        },
+        {
+          "id": "adb-6",
+          "name": "Basic RDS and DynamoDB use",
+          "aliases": [
+            "managed databases"
+          ],
+          "bloom": "C3",
+          "summary": "Create a managed relational database or a DynamoDB table and connect an application to it."
+        },
+        {
+          "id": "adb-7",
+          "name": "CloudWatch metrics and alarms",
+          "aliases": [
+            "basic monitoring"
+          ],
+          "bloom": "C3",
+          "summary": "View built-in metrics and logs and set an alarm on a threshold such as CPU utilisation."
+        },
+        {
+          "id": "adb-8",
+          "name": "Simple Lambda functions",
+          "aliases": [
+            "serverless functions"
+          ],
+          "bloom": "C3",
+          "summary": "Write and invoke a small function triggered by an event such as an S3 upload."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-2"
+        ],
+        [
+          "adb-3",
+          "adb-2"
+        ],
+        [
+          "nov-4",
+          "adb-4"
+        ],
+        [
+          "nov-5",
+          "adb-5"
+        ],
+        [
+          "nov-6",
+          "adb-6"
+        ],
+        [
+          "nov-6",
+          "adb-7"
+        ],
+        [
+          "nov-6",
+          "adb-8"
+        ],
+        [
+          "adb-5",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Opening a security group to 0.0.0.0/0 on all ports is an acceptable way to get things working.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Putting access keys in code or on an instance is a normal way to authenticate.",
+          "concepts": [
+            "adb-1",
+            "adb-5"
+          ]
+        },
+        {
+          "text": "Data on an EC2 instance's instance store or terminated root volume is always preserved.",
+          "concepts": [
+            "adb-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "VPC design with subnets and routing",
+          "aliases": [
+            "Virtual Private Cloud",
+            "route tables"
+          ],
+          "bloom": "C3",
+          "summary": "Build a VPC with public and private subnets across AZs, route tables, an internet gateway and NAT gateway."
+        },
+        {
+          "id": "cmp-2",
+          "name": "IAM roles and temporary credentials",
+          "aliases": [
+            "instance profiles",
+            "STS",
+            "assume role"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when to use roles with trust policies so services and applications get temporary credentials instead of long-lived keys."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Load balancing and Auto Scaling",
+          "aliases": [
+            "ELB",
+            "ALB",
+            "Auto Scaling groups"
+          ],
+          "bloom": "C4",
+          "summary": "Distribute traffic across instances in multiple AZs and scale capacity by policy using health checks."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Route 53 routing and DNS records",
+          "aliases": [
+            "hosted zones",
+            "routing policies"
+          ],
+          "bloom": "C3",
+          "summary": "Configure hosted zones and records with alias targets and choose simple, weighted, latency or failover routing."
+        },
+        {
+          "id": "cmp-5",
+          "name": "CloudFront distribution with S3 origin",
+          "aliases": [
+            "CDN caching",
+            "edge locations"
+          ],
+          "bloom": "C3",
+          "summary": "Serve content through CloudFront with caching behaviours, origin access control and HTTPS."
+        },
+        {
+          "id": "cmp-6",
+          "name": "RDS high availability and backups",
+          "aliases": [
+            "Multi-AZ",
+            "read replicas",
+            "snapshots"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish Multi-AZ failover from read replicas and plan automated backups and restores."
+        },
+        {
+          "id": "cmp-7",
+          "name": "DynamoDB key and access design",
+          "aliases": [
+            "partition key",
+            "capacity modes"
+          ],
+          "bloom": "C4",
+          "summary": "Choose partition and sort keys from access patterns and pick on-demand or provisioned capacity."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Logs-based troubleshooting with CloudWatch",
+          "aliases": [
+            "CloudWatch Logs",
+            "log groups"
+          ],
+          "bloom": "C4",
+          "summary": "Use logs, metrics and alarms together to diagnose failures in deployed applications."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "cmp-1"
+        ],
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-3"
+        ],
+        [
+          "adb-5",
+          "cmp-2"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-4",
+          "cmp-5"
+        ],
+        [
+          "adb-6",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "adb-6",
+          "cmp-7"
+        ],
+        [
+          "adb-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A subnet is public simply because it is named public, regardless of its route table.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "A Multi-AZ RDS standby can be used to serve read traffic and improve read performance.",
+          "concepts": [
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "DynamoDB can be modelled like a relational database and queried flexibly on any attribute efficiently.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Least-privilege policy evaluation",
+          "aliases": [
+            "permission boundaries",
+            "SCPs",
+            "explicit deny"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how identity policies, resource policies, boundaries and organisation SCPs combine, with explicit deny winning, and tighten policies accordingly."
+        },
+        {
+          "id": "prf-2",
+          "name": "Multi-AZ resilient architecture",
+          "aliases": [
+            "high availability design",
+            "fault tolerance"
+          ],
+          "bloom": "C5",
+          "summary": "Assess an architecture for single points of failure and choose redundancy across AZs and regions to meet availability goals."
+        },
+        {
+          "id": "prf-3",
+          "name": "Infrastructure as code with CloudFormation",
+          "aliases": [
+            "stacks",
+            "templates",
+            "change sets"
+          ],
+          "bloom": "C4",
+          "summary": "Define environments as templates, review change sets, and reason about stack updates and drift."
+        },
+        {
+          "id": "prf-4",
+          "name": "Serverless event-driven design",
+          "aliases": [
+            "Lambda with SQS SNS API Gateway"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when to use Lambda with queues, topics and APIs, accounting for concurrency, timeouts and cold starts."
+        },
+        {
+          "id": "prf-5",
+          "name": "Encryption and key management",
+          "aliases": [
+            "KMS",
+            "encryption at rest and in transit"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate use of KMS keys, key policies and TLS to protect data in S3, RDS and DynamoDB."
+        },
+        {
+          "id": "prf-6",
+          "name": "Cost analysis and optimisation",
+          "aliases": [
+            "Reserved Instances",
+            "Savings Plans",
+            "Spot"
+          ],
+          "bloom": "C5",
+          "summary": "Compare on-demand, Savings Plans and Spot options, right-size resources, and use cost tools to find waste."
+        },
+        {
+          "id": "prf-7",
+          "name": "Private connectivity and VPC endpoints",
+          "aliases": [
+            "PrivateLink",
+            "VPC peering",
+            "Transit Gateway"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse ways to connect VPCs and reach AWS services privately without traversing the internet."
+        },
+        {
+          "id": "prf-8",
+          "name": "Observability and audit trails",
+          "aliases": [
+            "CloudTrail",
+            "CloudWatch dashboards",
+            "AWS Config"
+          ],
+          "bloom": "C4",
+          "summary": "Combine metrics, logs, traces and CloudTrail records to detect problems and investigate changes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-2"
+        ],
+        [
+          "cmp-6",
+          "prf-2"
+        ],
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "adb-8",
+          "prf-4"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "prf-1",
+          "prf-5"
+        ],
+        [
+          "cmp-1",
+          "prf-7"
+        ],
+        [
+          "cmp-8",
+          "prf-8"
+        ],
+        [
+          "prf-2",
+          "prf-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "An Allow in any attached policy is enough to grant access even if another policy explicitly denies it.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Spreading instances across multiple AZs alone makes an application fully highly available.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Serverless functions scale without limit and cost less than other options in every workload.",
+          "concepts": [
+            "prf-4",
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Multi-account governance strategy",
+          "aliases": [
+            "AWS Organizations",
+            "landing zone",
+            "guardrails"
+          ],
+          "bloom": "C6",
+          "summary": "Design an account structure with organisational units, SCP guardrails, centralised logging and identity federation."
+        },
+        {
+          "id": "exp-2",
+          "name": "Disaster recovery strategy selection",
+          "aliases": [
+            "RPO and RTO",
+            "pilot light",
+            "warm standby"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate backup-restore, pilot light, warm standby and active-active designs against RPO, RTO and cost."
+        },
+        {
+          "id": "exp-3",
+          "name": "Well-Architected trade-off review",
+          "aliases": [
+            "Well-Architected Framework",
+            "pillars"
+          ],
+          "bloom": "C5",
+          "summary": "Critique a workload across the pillars and justify trade-offs between reliability, security, performance, cost and operations."
+        },
+        {
+          "id": "exp-4",
+          "name": "Global architecture design",
+          "aliases": [
+            "multi-region",
+            "global tables",
+            "latency-based routing"
+          ],
+          "bloom": "C6",
+          "summary": "Create multi-region designs combining Route 53, CloudFront and replicated data stores, accounting for consistency and failover."
+        },
+        {
+          "id": "exp-5",
+          "name": "Secure CI/CD and deployment pipelines",
+          "aliases": [
+            "blue-green",
+            "canary deployment",
+            "CodePipeline"
+          ],
+          "bloom": "C6",
+          "summary": "Design automated pipelines with safe rollout strategies, scoped deployment roles and rollback."
+        },
+        {
+          "id": "exp-6",
+          "name": "Threat detection and incident response",
+          "aliases": [
+            "GuardDuty",
+            "Security Hub",
+            "forensics"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate detective controls and construct response runbooks for compromised credentials or exposed resources."
+        },
+        {
+          "id": "exp-7",
+          "name": "Scaling limits and performance tuning",
+          "aliases": [
+            "service quotas",
+            "throttling",
+            "hot partitions"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose bottlenecks from quotas, throttling and data distribution and redesign to remove them."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-2",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-4"
+        ],
+        [
+          "prf-3",
+          "exp-5"
+        ],
+        [
+          "prf-8",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-3"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "prf-4",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Having Multi-AZ resources removes the need for a cross-region disaster recovery plan.",
+          "concepts": [
+            "exp-2",
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Active-active multi-region is always the best design regardless of cost and complexity.",
+          "concepts": [
+            "exp-2",
+            "exp-4",
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Tight perimeter controls make detective monitoring and incident runbooks unnecessary.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

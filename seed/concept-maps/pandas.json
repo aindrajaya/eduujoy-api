@@ -1,0 +1,743 @@
+{
+  "version": 1,
+  "topic": "pandas",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "python"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Series as labeled array",
+          "aliases": [
+            "pandas Series",
+            "1D labeled data"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that a Series is a one-dimensional array of values paired with an index of labels and a single dtype."
+        },
+        {
+          "id": "nov-2",
+          "name": "DataFrame as table",
+          "aliases": [
+            "pandas DataFrame",
+            "tabular structure"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a DataFrame is a two-dimensional table of rows and columns where each column is a Series sharing a common index."
+        },
+        {
+          "id": "nov-3",
+          "name": "Reading files into DataFrames",
+          "aliases": [
+            "read_csv",
+            "loading data"
+          ],
+          "bloom": "C2",
+          "summary": "Load a CSV or similar file into a DataFrame and understand what the resulting object represents."
+        },
+        {
+          "id": "nov-4",
+          "name": "Inspecting a DataFrame",
+          "aliases": [
+            "head, info, describe",
+            "data overview"
+          ],
+          "bloom": "C2",
+          "summary": "Use head, shape, info, dtypes and describe to understand a dataset's size, columns, types and basic statistics."
+        },
+        {
+          "id": "nov-5",
+          "name": "Column selection",
+          "aliases": [
+            "selecting columns",
+            "bracket indexing"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that selecting one column gives a Series while selecting a list of columns gives a DataFrame."
+        },
+        {
+          "id": "nov-6",
+          "name": "Index and column labels",
+          "aliases": [
+            "index",
+            "columns attribute"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that rows are identified by index labels and columns by names, and that both are accessible as attributes."
+        },
+        {
+          "id": "nov-7",
+          "name": "Column dtypes",
+          "aliases": [
+            "data types",
+            "int float object"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that each column has a dtype such as int64, float64, object or datetime64 that determines which operations work."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-4",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A DataFrame is just a Python list of lists with no extra structure.",
+          "concepts": [
+            "nov-2",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "Selecting a single column with brackets returns a DataFrame.",
+          "concepts": [
+            "nov-5"
+          ]
+        },
+        {
+          "text": "Reading a CSV file keeps the file open and edits to the DataFrame change the file on disk.",
+          "concepts": [
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Label versus position indexing",
+          "aliases": [
+            "loc and iloc",
+            "label-based selection"
+          ],
+          "bloom": "C3",
+          "summary": "Select rows and columns with loc by label and iloc by integer position, and know when each is appropriate."
+        },
+        {
+          "id": "adb-2",
+          "name": "Boolean mask filtering",
+          "aliases": [
+            "conditional filtering",
+            "row filtering"
+          ],
+          "bloom": "C3",
+          "summary": "Filter rows with boolean conditions combined using &, | and ~ with parentheses, and with isin."
+        },
+        {
+          "id": "adb-3",
+          "name": "Creating and modifying columns",
+          "aliases": [
+            "derived columns",
+            "assign"
+          ],
+          "bloom": "C3",
+          "summary": "Add or transform columns using vectorized arithmetic, assignment and rename or drop."
+        },
+        {
+          "id": "adb-4",
+          "name": "Missing value handling",
+          "aliases": [
+            "NaN handling",
+            "dropna fillna"
+          ],
+          "bloom": "C3",
+          "summary": "Detect missing values with isna and treat them with dropna or fillna depending on context."
+        },
+        {
+          "id": "adb-5",
+          "name": "Sorting and ranking",
+          "aliases": [
+            "sort_values",
+            "sort_index"
+          ],
+          "bloom": "C3",
+          "summary": "Order rows by one or more columns and index labels, ascending or descending."
+        },
+        {
+          "id": "adb-6",
+          "name": "Summary statistics and counts",
+          "aliases": [
+            "value_counts",
+            "mean sum aggregates"
+          ],
+          "bloom": "C2",
+          "summary": "Compute column aggregates and frequency counts, such as mean, sum, nunique and value_counts, to summarize data."
+        },
+        {
+          "id": "adb-7",
+          "name": "Writing data out",
+          "aliases": [
+            "to_csv",
+            "saving results"
+          ],
+          "bloom": "C3",
+          "summary": "Save a DataFrame to a file with control over the index and chosen columns."
+        },
+        {
+          "id": "adb-8",
+          "name": "Type conversion and string methods",
+          "aliases": [
+            "astype",
+            "str accessor"
+          ],
+          "bloom": "C3",
+          "summary": "Convert column dtypes with astype and clean text columns using the str accessor."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-3"
+        ],
+        [
+          "nov-7",
+          "adb-4"
+        ],
+        [
+          "adb-3",
+          "adb-5"
+        ],
+        [
+          "nov-4",
+          "adb-6"
+        ],
+        [
+          "nov-7",
+          "adb-8"
+        ],
+        [
+          "nov-3",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Use and and or to combine multiple filter conditions on a DataFrame.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "iloc slices include the end position just like loc label slices.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Methods like sort_values or dropna change the original DataFrame in place by default.",
+          "concepts": [
+            "adb-4",
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Split-apply-combine with groupby",
+          "aliases": [
+            "groupby",
+            "group aggregation"
+          ],
+          "bloom": "C3",
+          "summary": "Group rows by one or more keys and apply aggregations to produce per-group summaries."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Multiple and named aggregations",
+          "aliases": [
+            "agg",
+            "named aggregation"
+          ],
+          "bloom": "C3",
+          "summary": "Apply several functions to different columns in one groupby with agg and name the outputs."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Merging and joining tables",
+          "aliases": [
+            "merge",
+            "join types"
+          ],
+          "bloom": "C4",
+          "summary": "Combine DataFrames on keys with inner, left, right and outer joins and analyze how each affects the row count."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Concatenation of frames",
+          "aliases": [
+            "concat",
+            "stacking frames"
+          ],
+          "bloom": "C3",
+          "summary": "Stack DataFrames vertically or side by side and handle index alignment and mismatched columns."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Pivoting and reshaping",
+          "aliases": [
+            "pivot_table",
+            "melt"
+          ],
+          "bloom": "C4",
+          "summary": "Convert between wide and long layouts with pivot_table, melt, stack and unstack to suit an analysis."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Datetime handling",
+          "aliases": [
+            "to_datetime",
+            "dt accessor"
+          ],
+          "bloom": "C3",
+          "summary": "Parse dates, extract components with the dt accessor, and compute time differences."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Index alignment in operations",
+          "aliases": [
+            "automatic alignment",
+            "label alignment"
+          ],
+          "bloom": "C4",
+          "summary": "Predict how arithmetic between Series or DataFrames aligns on index labels and produces NaN for mismatches."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Data cleaning workflow",
+          "aliases": [
+            "duplicates and validation",
+            "cleaning pipeline"
+          ],
+          "bloom": "C4",
+          "summary": "Detect and resolve duplicates, inconsistent categories and outliers, and validate results systematically."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-1",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-1",
+          "cmp-5"
+        ],
+        [
+          "adb-8",
+          "cmp-6"
+        ],
+        [
+          "adb-1",
+          "cmp-7"
+        ],
+        [
+          "adb-4",
+          "cmp-8"
+        ],
+        [
+          "adb-8",
+          "cmp-8"
+        ],
+        [
+          "cmp-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A merge always returns the same number of rows as the left table.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Groupby computes results immediately when called, before any aggregation is specified.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Arithmetic between two Series matches values by position, not by index label.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Transform and filter on groups",
+          "aliases": [
+            "groupby transform",
+            "group filter"
+          ],
+          "bloom": "C4",
+          "summary": "Use transform, filter and apply on groups to add group-level features without collapsing rows, and choose among them."
+        },
+        {
+          "id": "prf-2",
+          "name": "Copy versus view semantics",
+          "aliases": [
+            "SettingWithCopy",
+            "chained assignment"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose when assignments modify the original or a copy, and avoid chained assignment by using loc or explicit copies."
+        },
+        {
+          "id": "prf-3",
+          "name": "Vectorization versus apply",
+          "aliases": [
+            "vectorized operations",
+            "row-wise apply"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when to use vectorized operations instead of apply or loops based on clarity and speed."
+        },
+        {
+          "id": "prf-4",
+          "name": "Memory-efficient dtypes",
+          "aliases": [
+            "categorical dtype",
+            "downcasting"
+          ],
+          "bloom": "C5",
+          "summary": "Judge and apply categorical, nullable and downcast numeric dtypes to reduce memory use with correct semantics."
+        },
+        {
+          "id": "prf-5",
+          "name": "MultiIndex data manipulation",
+          "aliases": [
+            "hierarchical index",
+            "multi-level index"
+          ],
+          "bloom": "C4",
+          "summary": "Select, slice, reshape and reset hierarchical indexes produced by grouping and pivoting."
+        },
+        {
+          "id": "prf-6",
+          "name": "Time series resampling and windows",
+          "aliases": [
+            "resample",
+            "rolling windows"
+          ],
+          "bloom": "C4",
+          "summary": "Resample time series to other frequencies and compute rolling, expanding and shifted calculations."
+        },
+        {
+          "id": "prf-7",
+          "name": "Method chaining pipelines",
+          "aliases": [
+            "pipe",
+            "chained transformations"
+          ],
+          "bloom": "C5",
+          "summary": "Structure readable, reproducible transformations as method chains using assign, query and pipe."
+        },
+        {
+          "id": "prf-8",
+          "name": "Merge validation and diagnostics",
+          "aliases": [
+            "merge validate",
+            "indicator"
+          ],
+          "bloom": "C5",
+          "summary": "Check key uniqueness and unmatched rows during merges to detect silent row duplication or loss."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "adb-1",
+          "prf-2"
+        ],
+        [
+          "adb-3",
+          "prf-3"
+        ],
+        [
+          "nov-7",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "cmp-1",
+          "prf-5"
+        ],
+        [
+          "cmp-6",
+          "prf-6"
+        ],
+        [
+          "prf-3",
+          "prf-7"
+        ],
+        [
+          "prf-2",
+          "prf-7"
+        ],
+        [
+          "cmp-3",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Using apply with a row-wise function is just as fast as a vectorized operation.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Chained indexing such as df[mask]['col'] = value reliably updates the original DataFrame.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Converting every string column to category is always beneficial regardless of cardinality.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-2",
+          "name": "Performance profiling and optimization",
+          "aliases": [
+            "profiling pandas code",
+            "bottleneck analysis"
+          ],
+          "bloom": "C5",
+          "summary": "Profile pipelines to find bottlenecks and choose between vectorization, indexing, dtype changes and algorithmic restructuring."
+        },
+        {
+          "id": "exp-1",
+          "name": "Scaling beyond memory",
+          "aliases": [
+            "chunked processing",
+            "out-of-core analysis"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate chunked reading, column selection, columnar formats and alternative engines when data exceeds memory."
+        },
+        {
+          "id": "exp-3",
+          "name": "Designing reusable data pipelines",
+          "aliases": [
+            "pipeline architecture",
+            "testable transformations"
+          ],
+          "bloom": "C6",
+          "summary": "Design modular, tested and idempotent transformation functions with explicit schemas for production use."
+        },
+        {
+          "id": "exp-4",
+          "name": "Data validation and schema contracts",
+          "aliases": [
+            "schema validation",
+            "data quality checks"
+          ],
+          "bloom": "C6",
+          "summary": "Create automated checks for types, ranges, uniqueness and referential integrity that fail loudly on bad data."
+        },
+        {
+          "id": "exp-5",
+          "name": "Custom extensions and accessors",
+          "aliases": [
+            "register accessor",
+            "extension arrays"
+          ],
+          "bloom": "C6",
+          "summary": "Extend pandas with custom accessors or extension types where built-in behavior does not fit a domain."
+        },
+        {
+          "id": "exp-6",
+          "name": "Choosing pandas versus alternatives",
+          "aliases": [
+            "tool selection",
+            "pandas vs SQL"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when pandas, SQL, NumPy or other dataframe engines best suit a task based on scale, semantics and team context."
+        },
+        {
+          "id": "exp-7",
+          "name": "Reproducible statistical analysis workflows",
+          "aliases": [
+            "analysis reproducibility",
+            "auditable analysis"
+          ],
+          "bloom": "C6",
+          "summary": "Build analyses that are deterministic and auditable, handling missing data, bias and sampling choices explicitly."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-1"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "prf-8",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "prf-4",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "exp-4",
+          "exp-7"
+        ],
+        [
+          "exp-3",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "If a dataset fits in memory, pandas performance is never a concern.",
+          "concepts": [
+            "exp-2",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Pandas is always the best tool for any tabular task, so alternatives are unnecessary.",
+          "concepts": [
+            "exp-6"
+          ]
+        },
+        {
+          "text": "Passing a few visual spot checks is enough to validate a data pipeline's output.",
+          "concepts": [
+            "exp-4",
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

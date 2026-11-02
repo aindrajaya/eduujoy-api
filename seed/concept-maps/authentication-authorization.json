@@ -1,0 +1,720 @@
+{
+  "version": 1,
+  "topic": "authentication-authorization",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "http",
+    "web-security"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Authentication versus authorization",
+          "aliases": [
+            "AuthN vs AuthZ",
+            "identity vs permission"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that authentication verifies who a user is while authorization decides what that verified user may do."
+        },
+        {
+          "id": "nov-3",
+          "name": "Why passwords are hashed",
+          "aliases": [
+            "password hashing",
+            "no plaintext storage"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why a server stores a one-way hash of a password rather than the password itself."
+        },
+        {
+          "id": "nov-2",
+          "name": "Credentials and authentication factors",
+          "aliases": [
+            "something you know/have/are",
+            "login factors"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that credentials such as passwords, devices and biometrics are grouped into knowledge, possession and inherence factors."
+        },
+        {
+          "id": "nov-4",
+          "name": "Session as login memory",
+          "aliases": [
+            "login session",
+            "stateful login"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that because HTTP is stateless, a server issues an identifier after login so later requests are recognised as the same user."
+        },
+        {
+          "id": "nov-5",
+          "name": "Cookies carrying session identifiers",
+          "aliases": [
+            "session cookie",
+            "Set-Cookie for login"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that a browser stores a session identifier in a cookie and sends it automatically with each request to that site."
+        },
+        {
+          "id": "nov-6",
+          "name": "Least privilege principle",
+          "aliases": [
+            "minimum necessary access",
+            "need to know"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why users and processes should receive only the permissions they need."
+        },
+        {
+          "id": "nov-7",
+          "name": "Multi-factor authentication purpose",
+          "aliases": [
+            "MFA",
+            "2FA"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that requiring a second independent factor limits damage when a password is stolen."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-7"
+        ],
+        [
+          "nov-3",
+          "nov-2"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Authentication and authorization are two names for the same thing.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Encrypting passwords and hashing them are the same, and a site should be able to show you your original password.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Once a user is logged in, the server automatically knows who they are on every request without any identifier being sent.",
+          "concepts": [
+            "nov-4",
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Salted password hashing",
+          "aliases": [
+            "salts",
+            "per-user salt"
+          ],
+          "bloom": "C3",
+          "summary": "Apply a unique random salt per password so identical passwords produce different hashes and precomputed tables fail."
+        },
+        {
+          "id": "adb-2",
+          "name": "Slow adaptive hash functions",
+          "aliases": [
+            "bcrypt",
+            "Argon2",
+            "scrypt",
+            "PBKDF2"
+          ],
+          "bloom": "C3",
+          "summary": "Choose a deliberately slow, tunable password hashing function instead of a fast general-purpose hash."
+        },
+        {
+          "id": "adb-3",
+          "name": "Login flow implementation",
+          "aliases": [
+            "login handler",
+            "credential check"
+          ],
+          "bloom": "C3",
+          "summary": "Implement a login endpoint that verifies a hash, creates a session and returns uniform error messages."
+        },
+        {
+          "id": "adb-4",
+          "name": "Secure cookie attributes",
+          "aliases": [
+            "HttpOnly",
+            "Secure flag",
+            "SameSite"
+          ],
+          "bloom": "C3",
+          "summary": "Set HttpOnly, Secure and SameSite on session cookies and explain the threat each one reduces."
+        },
+        {
+          "id": "adb-5",
+          "name": "Session lifecycle management",
+          "aliases": [
+            "logout",
+            "session expiry",
+            "session invalidation"
+          ],
+          "bloom": "C3",
+          "summary": "Create, expire and destroy sessions on the server so logout and timeouts truly end access."
+        },
+        {
+          "id": "adb-7",
+          "name": "Role-based access control basics",
+          "aliases": [
+            "RBAC",
+            "roles and permissions"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how assigning users to roles that bundle permissions simplifies access decisions."
+        },
+        {
+          "id": "adb-6",
+          "name": "Server-side permission checks",
+          "aliases": [
+            "enforce on server",
+            "access check per request"
+          ],
+          "bloom": "C3",
+          "summary": "Apply an authorization check on the server for every protected request rather than relying on hidden interface elements."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "nov-4",
+          "adb-5"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "nov-1",
+          "adb-6"
+        ],
+        [
+          "adb-7",
+          "adb-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Hashing passwords with SHA-256 is as good as bcrypt because both are secure hashes.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "A salt must be kept secret to be effective.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Hiding a button or menu link from unauthorised users is enough to protect a feature.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Session fixation and hijacking defenses",
+          "aliases": [
+            "session ID regeneration",
+            "session theft"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how session identifiers are stolen or imposed and apply regeneration on login, entropy and transport protection."
+        },
+        {
+          "id": "cmp-2",
+          "name": "CSRF protection mechanisms",
+          "aliases": [
+            "anti-CSRF tokens",
+            "SameSite defense"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why cookie-based authentication enables cross-site request forgery and choose tokens or SameSite policies to counter it."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Token-based authentication with JWT",
+          "aliases": [
+            "JSON Web Token",
+            "bearer tokens"
+          ],
+          "bloom": "C3",
+          "summary": "Apply signed tokens carrying claims, validating signature, algorithm, expiry and audience on each request."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Access and refresh token tradeoffs",
+          "aliases": [
+            "short-lived tokens",
+            "token rotation"
+          ],
+          "bloom": "C4",
+          "summary": "Compare stateless tokens with server sessions, including revocation difficulty and the use of short-lived access with refresh tokens."
+        },
+        {
+          "id": "cmp-5",
+          "name": "OAuth 2.0 authorization code flow",
+          "aliases": [
+            "OAuth roles",
+            "delegated authorization"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the authorization code flow with PKCE, identifying the resource owner, client, authorization server and resource server."
+        },
+        {
+          "id": "cmp-6",
+          "name": "OpenID Connect for login",
+          "aliases": [
+            "OIDC",
+            "ID token"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish OAuth authorization from OpenID Connect authentication and validate an ID token for sign-in."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Broken access control analysis",
+          "aliases": [
+            "IDOR",
+            "insecure direct object reference",
+            "horizontal privilege escalation"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse code for missing ownership and role checks that allow users to reach other users' resources."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Brute force and credential stuffing defense",
+          "aliases": [
+            "rate limiting",
+            "account lockout"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse automated guessing attacks and weigh rate limiting, lockout and breached-password checks as defenses."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-3",
+          "cmp-6"
+        ],
+        [
+          "adb-6",
+          "cmp-7"
+        ],
+        [
+          "adb-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A JWT is encrypted, so its contents are hidden from anyone who holds it.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "OAuth 2.0 is an authentication protocol that proves who the user is.",
+          "concepts": [
+            "cmp-5",
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "Storing a JWT in local storage is safer than a cookie because CSRF no longer applies, with no other risk.",
+          "concepts": [
+            "cmp-3",
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Attribute-based and policy-based access",
+          "aliases": [
+            "ABAC",
+            "policy engine",
+            "context-aware authorization"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when role models become too coarse and policies using user, resource and context attributes fit better."
+        },
+        {
+          "id": "prf-2",
+          "name": "Centralised authorization architecture",
+          "aliases": [
+            "policy decision point",
+            "policy enforcement point"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate designs that separate policy decision from enforcement and keep checks consistent across services."
+        },
+        {
+          "id": "prf-3",
+          "name": "Token validation and key management",
+          "aliases": [
+            "JWKS",
+            "key rotation",
+            "algorithm confusion"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate token verification practices, including key rotation, algorithm pinning and defenses against forged tokens."
+        },
+        {
+          "id": "prf-4",
+          "name": "Token revocation and lifetime strategy",
+          "aliases": [
+            "token introspection",
+            "revocation lists"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate revocation approaches such as introspection, denylists and short lifetimes against latency and risk requirements."
+        },
+        {
+          "id": "prf-5",
+          "name": "Passwordless and phishing-resistant authentication",
+          "aliases": [
+            "WebAuthn",
+            "passkeys",
+            "FIDO2"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how public-key credentials bound to an origin resist phishing compared with passwords and one-time codes."
+        },
+        {
+          "id": "prf-6",
+          "name": "Federated identity and SSO design",
+          "aliases": [
+            "SAML",
+            "single sign-on",
+            "identity provider"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate single sign-on designs, trust relationships and account-linking risks across identity providers."
+        },
+        {
+          "id": "prf-7",
+          "name": "Account recovery threat modelling",
+          "aliases": [
+            "password reset security",
+            "recovery flow abuse"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse reset and recovery flows as alternate authentication paths and identify weaknesses such as guessable or reusable links."
+        },
+        {
+          "id": "prf-8",
+          "name": "Service-to-service authentication",
+          "aliases": [
+            "machine identity",
+            "client credentials",
+            "mTLS"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate mechanisms for authenticating workloads, such as client credentials and mutual TLS, with scoped permissions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-3"
+        ],
+        [
+          "cmp-4",
+          "prf-4"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "adb-7",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-6",
+          "prf-6"
+        ],
+        [
+          "cmp-5",
+          "prf-8"
+        ],
+        [
+          "cmp-8",
+          "prf-7"
+        ],
+        [
+          "nov-7",
+          "prf-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Adding more roles always scales access control cleanly as an application grows.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Any valid signature on a token means the token is acceptable for this service.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "SMS one-time codes are as phishing-resistant as WebAuthn.",
+          "concepts": [
+            "prf-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Zero trust access architecture",
+          "aliases": [
+            "continuous verification",
+            "never trust network location"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate architectures that authenticate and authorize every request using identity, device and context rather than network position."
+        },
+        {
+          "id": "exp-2",
+          "name": "Authorization model design",
+          "aliases": [
+            "relationship-based access control",
+            "Zanzibar-style ReBAC",
+            "fine-grained permissions"
+          ],
+          "bloom": "C6",
+          "summary": "Design a scalable authorization model, choosing between role, attribute and relationship-based approaches for a product's sharing needs."
+        },
+        {
+          "id": "exp-3",
+          "name": "Identity protocol vulnerability assessment",
+          "aliases": [
+            "OAuth attack analysis",
+            "redirect URI abuse",
+            "token replay"
+          ],
+          "bloom": "C5",
+          "summary": "Assess an OAuth, OIDC or SAML deployment for flaws such as open redirects, missing state checks and token replay."
+        },
+        {
+          "id": "exp-4",
+          "name": "Sender-constrained tokens",
+          "aliases": [
+            "DPoP",
+            "token binding",
+            "proof of possession"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate binding tokens to a client key so that a stolen token cannot be replayed by another party."
+        },
+        {
+          "id": "exp-5",
+          "name": "Adaptive and risk-based authentication",
+          "aliases": [
+            "step-up authentication",
+            "risk scoring"
+          ],
+          "bloom": "C6",
+          "summary": "Design policies that raise authentication requirements based on risk signals while managing friction and false positives."
+        },
+        {
+          "id": "exp-6",
+          "name": "Multi-tenant identity architecture",
+          "aliases": [
+            "tenant isolation",
+            "B2B identity"
+          ],
+          "bloom": "C6",
+          "summary": "Design identity and authorization for multi-tenant systems that isolate tenants, delegate administration and support enterprise federation."
+        },
+        {
+          "id": "exp-7",
+          "name": "Authentication migration and incident response",
+          "aliases": [
+            "credential breach response",
+            "hash upgrade"
+          ],
+          "bloom": "C6",
+          "summary": "Plan migrations such as password hash upgrades or IdP changes and responses to credential or signing key compromise."
+        },
+        {
+          "id": "exp-8",
+          "name": "Authorization testing and auditing",
+          "aliases": [
+            "access control verification",
+            "audit logging"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate test strategies, audit logs and policy analysis that verify access rules hold across a system."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-2",
+          "exp-1"
+        ],
+        [
+          "prf-8",
+          "exp-1"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-4"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "prf-3",
+          "exp-7"
+        ],
+        [
+          "exp-2",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Placing services in a private network removes the need for per-request authentication and authorization.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "One authorization model such as RBAC fits every product without modification.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Using a standard protocol like OAuth makes a deployment secure regardless of how it is configured.",
+          "concepts": [
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

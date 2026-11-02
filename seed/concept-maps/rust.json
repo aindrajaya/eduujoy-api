@@ -1,0 +1,735 @@
+{
+  "version": 1,
+  "topic": "rust",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals",
+    "linux-command-line"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Cargo project workflow",
+          "aliases": [
+            "cargo new and run"
+          ],
+          "bloom": "C2",
+          "summary": "Create, build, run and check a Rust project with Cargo and explain what Cargo.toml and the src directory hold."
+        },
+        {
+          "id": "nov-2",
+          "name": "Immutable bindings and mutability",
+          "aliases": [
+            "let and let mut"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that variables are immutable by default and use mut to allow reassignment."
+        },
+        {
+          "id": "nov-3",
+          "name": "Scalar and compound types",
+          "aliases": [
+            "primitive types",
+            "tuples and arrays"
+          ],
+          "bloom": "C1",
+          "summary": "Recall integer, float, bool and char types plus tuples and fixed-size arrays, and how Rust infers types."
+        },
+        {
+          "id": "nov-4",
+          "name": "Functions and expressions",
+          "aliases": [
+            "expression-based syntax"
+          ],
+          "bloom": "C2",
+          "summary": "Write functions with typed parameters and return values and explain that the last expression without a semicolon is returned."
+        },
+        {
+          "id": "nov-5",
+          "name": "Control flow constructs",
+          "aliases": [
+            "if, loop, while, for"
+          ],
+          "bloom": "C2",
+          "summary": "Use if as an expression and choose between loop, while and for over ranges."
+        },
+        {
+          "id": "nov-6",
+          "name": "Ownership and move semantics",
+          "aliases": [
+            "ownership rules",
+            "moves"
+          ],
+          "bloom": "C2",
+          "summary": "State the rules that each value has one owner, ownership moves on assignment, and the value is dropped when the owner goes out of scope."
+        },
+        {
+          "id": "nov-7",
+          "name": "String and &str",
+          "aliases": [
+            "String vs string slice"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish the owned, growable String from the borrowed string slice &str."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-6",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Assigning a String to another variable copies it so both remain usable.",
+          "concepts": [
+            "nov-6",
+            "nov-7"
+          ]
+        },
+        {
+          "text": "A semicolon at the end of the last line of a function makes no difference to what it returns.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Variables in Rust are mutable like in most languages and mut is only a hint.",
+          "concepts": [
+            "nov-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Shared and mutable references",
+          "aliases": [
+            "borrowing",
+            "&T and &mut T"
+          ],
+          "bloom": "C3",
+          "summary": "Borrow values with & and &mut and apply the rule of many readers or one writer."
+        },
+        {
+          "id": "adb-2",
+          "name": "Structs and impl blocks",
+          "aliases": [
+            "methods",
+            "associated functions"
+          ],
+          "bloom": "C3",
+          "summary": "Define structs and implement methods and associated functions taking self, &self or &mut self."
+        },
+        {
+          "id": "adb-3",
+          "name": "Enums and pattern matching",
+          "aliases": [
+            "match",
+            "if let"
+          ],
+          "bloom": "C3",
+          "summary": "Model variants with data in enums and handle them exhaustively with match and if let."
+        },
+        {
+          "id": "adb-4",
+          "name": "Option and Result basics",
+          "aliases": [
+            "Option<T>",
+            "Result<T, E>"
+          ],
+          "bloom": "C3",
+          "summary": "Represent absence and failure with Option and Result and unpack them with match, unwrap_or and the ? operator."
+        },
+        {
+          "id": "adb-5",
+          "name": "Vec and HashMap collections",
+          "aliases": [
+            "vectors",
+            "hash maps"
+          ],
+          "bloom": "C3",
+          "summary": "Store, iterate and update data in Vec and HashMap while respecting ownership of the elements."
+        },
+        {
+          "id": "adb-6",
+          "name": "Slices",
+          "aliases": [
+            "array slices",
+            "&[T]"
+          ],
+          "bloom": "C2",
+          "summary": "Borrow a contiguous part of a collection or string as a slice without copying."
+        },
+        {
+          "id": "adb-7",
+          "name": "Modules and visibility",
+          "aliases": [
+            "mod and pub",
+            "use paths"
+          ],
+          "bloom": "C3",
+          "summary": "Organise code into modules, control visibility with pub and bring items into scope with use."
+        },
+        {
+          "id": "adb-8",
+          "name": "Copy versus Clone",
+          "aliases": [
+            "Copy trait",
+            "clone method"
+          ],
+          "bloom": "C2",
+          "summary": "Explain which types are copied implicitly and when an explicit clone is needed."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "nov-7",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-1",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "nov-6",
+          "adb-8"
+        ],
+        [
+          "adb-2",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A reference works like a C pointer, so any number of mutable references to the same value may exist at once.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Calling unwrap is the normal way to handle an Option or Result.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Cloning a value is free, so it is the right fix for every borrow checker error.",
+          "concepts": [
+            "adb-8",
+            "adb-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Lifetime annotations",
+          "aliases": [
+            "lifetime parameters",
+            "'a"
+          ],
+          "bloom": "C3",
+          "summary": "Annotate functions and structs with lifetime parameters to relate the validity of references and apply elision rules."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Traits and implementations",
+          "aliases": [
+            "trait definitions",
+            "impl Trait for"
+          ],
+          "bloom": "C3",
+          "summary": "Define traits with required and default methods and implement them for your own types."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Generics with trait bounds",
+          "aliases": [
+            "where clauses",
+            "monomorphisation"
+          ],
+          "bloom": "C4",
+          "summary": "Write generic functions and types constrained by trait bounds and analyse how they compile to specialised code."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Custom error types",
+          "aliases": [
+            "error enums",
+            "From for errors"
+          ],
+          "bloom": "C4",
+          "summary": "Design error enums implementing Display and Error with From conversions so the ? operator propagates them."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Iterators and closures",
+          "aliases": [
+            "iterator adapters",
+            "Fn traits"
+          ],
+          "bloom": "C4",
+          "summary": "Compose map, filter and collect pipelines and analyse how closures capture their environment."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Smart pointers Box and Rc",
+          "aliases": [
+            "Box<T>",
+            "Rc<T>",
+            "Deref"
+          ],
+          "bloom": "C3",
+          "summary": "Choose Box for heap allocation and recursive types and Rc for shared ownership within a single thread."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Unit and integration tests",
+          "aliases": [
+            "cargo test",
+            "#[test]"
+          ],
+          "bloom": "C3",
+          "summary": "Write unit tests in modules and integration tests in the tests directory and run them with cargo test."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Cargo dependencies and features",
+          "aliases": [
+            "crates.io",
+            "feature flags"
+          ],
+          "bloom": "C3",
+          "summary": "Add crates, manage Cargo.lock and workspaces and toggle optional features."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-2",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-4",
+          "cmp-4"
+        ],
+        [
+          "cmp-2",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ],
+        [
+          "adb-5",
+          "cmp-5"
+        ],
+        [
+          "adb-1",
+          "cmp-6"
+        ],
+        [
+          "adb-7",
+          "cmp-7"
+        ],
+        [
+          "nov-1",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Lifetime annotations extend how long a value lives.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Generics in Rust are resolved at runtime like virtual dispatch, so they cost performance.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Iterator adapters like map do work immediately and allocate a new collection at each step.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Interior mutability patterns",
+          "aliases": [
+            "RefCell",
+            "Cell",
+            "runtime borrow checking"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when Cell and RefCell move borrow checking to runtime and combine them with Rc safely."
+        },
+        {
+          "id": "prf-2",
+          "name": "Threads and message passing",
+          "aliases": [
+            "std::thread",
+            "mpsc channels"
+          ],
+          "bloom": "C4",
+          "summary": "Spawn threads, move data into them and coordinate with channels."
+        },
+        {
+          "id": "prf-3",
+          "name": "Shared state with Arc and Mutex",
+          "aliases": [
+            "Arc<Mutex<T>>",
+            "RwLock"
+          ],
+          "bloom": "C4",
+          "summary": "Share mutable state across threads with Arc and Mutex and reason about contention and deadlock."
+        },
+        {
+          "id": "prf-4",
+          "name": "Send and Sync marker traits",
+          "aliases": [
+            "thread safety traits"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how Send and Sync encode thread-safety at compile time and determine which types satisfy them."
+        },
+        {
+          "id": "prf-5",
+          "name": "Trait objects and dynamic dispatch",
+          "aliases": [
+            "dyn Trait",
+            "object safety"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate trait objects against generics in terms of flexibility, performance and object-safety limits."
+        },
+        {
+          "id": "prf-6",
+          "name": "Async and await model",
+          "aliases": [
+            "futures",
+            "async runtimes"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how futures are polled by a runtime and decide when async fits I/O-bound services."
+        },
+        {
+          "id": "prf-7",
+          "name": "Advanced trait features",
+          "aliases": [
+            "associated types",
+            "operator overloading"
+          ],
+          "bloom": "C4",
+          "summary": "Use associated types, default generic parameters, supertraits and the orphan rule to design coherent APIs."
+        },
+        {
+          "id": "prf-8",
+          "name": "Profiling and release optimisation",
+          "aliases": [
+            "release profile",
+            "benchmarking"
+          ],
+          "bloom": "C5",
+          "summary": "Measure performance with release builds and benchmarks and judge which optimisations are justified."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "cmp-3",
+          "prf-5"
+        ],
+        [
+          "cmp-2",
+          "prf-7"
+        ],
+        [
+          "cmp-5",
+          "prf-6"
+        ],
+        [
+          "prf-4",
+          "prf-6"
+        ],
+        [
+          "cmp-8",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Rust's type system prevents all concurrency bugs, including deadlocks and logic races.",
+          "concepts": [
+            "prf-3",
+            "prf-4"
+          ]
+        },
+        {
+          "text": "RefCell bypasses the borrow rules so they no longer apply.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Async code runs on multiple threads automatically and is always faster than threads.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Unsafe Rust and invariants",
+          "aliases": [
+            "unsafe blocks",
+            "raw pointers"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when unsafe is justified and state the invariants a safe wrapper must uphold to avoid undefined behaviour."
+        },
+        {
+          "id": "exp-2",
+          "name": "Foreign function interface",
+          "aliases": [
+            "FFI",
+            "extern C"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and build safe bindings to C libraries handling layout, ownership and error boundaries."
+        },
+        {
+          "id": "exp-3",
+          "name": "Declarative and procedural macros",
+          "aliases": [
+            "macro_rules",
+            "derive macros"
+          ],
+          "bloom": "C6",
+          "summary": "Create macros that remove boilerplate while keeping errors clear and hygiene intact."
+        },
+        {
+          "id": "exp-4",
+          "name": "Library API design",
+          "aliases": [
+            "idiomatic API",
+            "semver compatibility"
+          ],
+          "bloom": "C6",
+          "summary": "Design public crate APIs with ergonomic types, stable semver guarantees and sensible error and trait choices."
+        },
+        {
+          "id": "exp-5",
+          "name": "Pin and self-referential futures",
+          "aliases": [
+            "Pin<T>",
+            "Unpin"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate why pinning is needed for async state machines and apply it correctly in custom futures."
+        },
+        {
+          "id": "exp-6",
+          "name": "Memory model and atomics",
+          "aliases": [
+            "atomic orderings",
+            "lock-free structures"
+          ],
+          "bloom": "C5",
+          "summary": "Choose atomic memory orderings and judge whether lock-free designs are worth their complexity."
+        },
+        {
+          "id": "exp-7",
+          "name": "Verifying unsafe code",
+          "aliases": [
+            "Miri",
+            "fuzzing",
+            "sanitizers"
+          ],
+          "bloom": "C5",
+          "summary": "Assess the soundness of unsafe code with Miri, fuzzing and property tests."
+        },
+        {
+          "id": "exp-8",
+          "name": "Embedded and no_std design",
+          "aliases": [
+            "no_std",
+            "core and alloc"
+          ],
+          "bloom": "C6",
+          "summary": "Architect libraries that work without the standard library, relying on core and optional alloc."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "prf-6",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Unsafe code turns off the borrow checker and all of Rust's safety rules inside the block.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "If code with unsafe compiles and passes tests, it is sound.",
+          "concepts": [
+            "exp-1",
+            "exp-7"
+          ]
+        },
+        {
+          "text": "Relaxed atomic ordering is always safe and fastest, so it can be used everywhere.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

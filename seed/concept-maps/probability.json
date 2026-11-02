@@ -1,0 +1,691 @@
+{
+  "version": 1,
+  "topic": "probability",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": true,
+  "dependsOnTopics": [
+    "algebra"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Sample space and outcomes",
+          "aliases": [
+            "possible outcomes",
+            "outcome set"
+          ],
+          "bloom": "C1",
+          "summary": "List all possible outcomes of a simple experiment such as a coin toss, die roll or card draw."
+        },
+        {
+          "id": "nov-2",
+          "name": "Events as outcome subsets",
+          "aliases": [
+            "event",
+            "favourable outcomes"
+          ],
+          "bloom": "C2",
+          "summary": "Describe an event as a subset of the sample space and identify which outcomes belong to it."
+        },
+        {
+          "id": "nov-6",
+          "name": "Standard dice, coins and cards",
+          "aliases": [
+            "52-card deck",
+            "fair die"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the structure of a fair coin, six-sided die and 52-card deck (suits, ranks, face cards)."
+        },
+        {
+          "id": "nov-3",
+          "name": "Classical probability formula",
+          "aliases": [
+            "equally likely outcomes",
+            "favourable over total"
+          ],
+          "bloom": "C2",
+          "summary": "Compute probability as favourable outcomes divided by total equally likely outcomes and explain why."
+        },
+        {
+          "id": "nov-4",
+          "name": "Probability scale and complement",
+          "aliases": [
+            "complementary event",
+            "not A"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret probabilities between 0 and 1 and use P(not A) = 1 - P(A)."
+        },
+        {
+          "id": "nov-5",
+          "name": "Relative frequency interpretation",
+          "aliases": [
+            "experimental probability",
+            "empirical probability"
+          ],
+          "bloom": "C2",
+          "summary": "Explain probability as the long-run proportion of times an event occurs in repeated trials."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-6",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "After several heads in a row, tails is more likely on the next toss.",
+          "concepts": [
+            "nov-5",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Any two outcomes of an experiment are equally likely, so the probability of a sum of 7 with two dice equals that of a sum of 2.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A probability of 1/2 means the event will happen exactly once in every two trials.",
+          "concepts": [
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Addition rule for events",
+          "aliases": [
+            "union probability",
+            "P(A or B)"
+          ],
+          "bloom": "C3",
+          "summary": "Apply P(A or B) = P(A) + P(B) - P(A and B), including the mutually exclusive case."
+        },
+        {
+          "id": "adb-2",
+          "name": "Multiplication rule for independent events",
+          "aliases": [
+            "independent events",
+            "P(A and B)"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the probability of joint events by multiplying when events are independent, and check independence."
+        },
+        {
+          "id": "adb-3",
+          "name": "Tree diagrams",
+          "aliases": [
+            "probability trees"
+          ],
+          "bloom": "C3",
+          "summary": "Build and read tree diagrams to find probabilities of sequences of events, with or without replacement."
+        },
+        {
+          "id": "adb-4",
+          "name": "Counting principle and factorials",
+          "aliases": [
+            "multiplication principle",
+            "rule of product"
+          ],
+          "bloom": "C3",
+          "summary": "Count outcomes of multi-step procedures by multiplying choices and use factorial notation."
+        },
+        {
+          "id": "adb-5",
+          "name": "Permutations versus combinations",
+          "aliases": [
+            "nPr",
+            "nCr",
+            "ordered and unordered selections"
+          ],
+          "bloom": "C3",
+          "summary": "Choose between and calculate nPr and nCr according to whether order matters."
+        },
+        {
+          "id": "adb-6",
+          "name": "Two-way tables and Venn diagrams",
+          "aliases": [
+            "Venn diagram",
+            "contingency table"
+          ],
+          "bloom": "C2",
+          "summary": "Organise overlapping events in Venn diagrams and two-way tables to read off probabilities."
+        },
+        {
+          "id": "adb-7",
+          "name": "Conditional probability definition",
+          "aliases": [
+            "P(A|B)",
+            "given that"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate P(A|B) = P(A and B)/P(B) from tables and trees and interpret it as a restricted sample space."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ],
+        [
+          "adb-3",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Mutually exclusive events are the same as independent events.",
+          "concepts": [
+            "adb-1",
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Combinations and permutations of the same selection give the same count, so order never matters.",
+          "concepts": [
+            "adb-5"
+          ]
+        },
+        {
+          "text": "The probability of having a disease given a positive test is the same as the probability of a positive test given the disease, so the two can be swapped.",
+          "concepts": [
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-2",
+          "name": "Law of total probability",
+          "aliases": [
+            "partition of sample space"
+          ],
+          "bloom": "C3",
+          "summary": "Split an event over a partition of the sample space and sum weighted conditional probabilities."
+        },
+        {
+          "id": "cmp-1",
+          "name": "Bayes' theorem",
+          "aliases": [
+            "Bayes rule",
+            "posterior probability"
+          ],
+          "bloom": "C3",
+          "summary": "Use Bayes' theorem to reverse conditional probabilities, as in diagnostic test problems, using total probability for the denominator."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Testing independence of events",
+          "aliases": [
+            "independence check",
+            "P(A and B) = P(A)P(B)"
+          ],
+          "bloom": "C4",
+          "summary": "Test whether events are independent by comparing joint and product probabilities, and distinguish pairwise from mutual independence."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Random variables and distributions",
+          "aliases": [
+            "probability mass function",
+            "PMF",
+            "discrete random variable"
+          ],
+          "bloom": "C3",
+          "summary": "Define a discrete random variable and build and validate its probability distribution table."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Expected value and variance",
+          "aliases": [
+            "mean",
+            "standard deviation",
+            "E(X)",
+            "Var(X)"
+          ],
+          "bloom": "C3",
+          "summary": "Compute E(X), Var(X) and standard deviation from a distribution and interpret them."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Binomial distribution",
+          "aliases": [
+            "Bernoulli trials",
+            "B(n,p)"
+          ],
+          "bloom": "C3",
+          "summary": "Recognise binomial settings and compute probabilities, mean np and variance np(1-p)."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Counting with repetition and restrictions",
+          "aliases": [
+            "arrangements with repeats",
+            "restricted selections"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse counting problems with repeated items, restrictions or complements to choose a valid method."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-7",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-1"
+        ],
+        [
+          "adb-2",
+          "cmp-3"
+        ],
+        [
+          "adb-7",
+          "cmp-3"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "adb-2",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A positive result on a 99% accurate test means a 99% chance of having the condition, regardless of how rare it is.",
+          "concepts": [
+            "cmp-1",
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "The expected value must be a value the random variable can actually take.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Any experiment with two outcomes is binomial, even if trials are dependent or the probability changes.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Poisson distribution",
+          "aliases": [
+            "Poisson process",
+            "rare events model"
+          ],
+          "bloom": "C4",
+          "summary": "Model counts of events in a fixed interval with rate lambda, and decide when Poisson fits better than binomial."
+        },
+        {
+          "id": "prf-3",
+          "name": "Continuous random variables and density",
+          "aliases": [
+            "probability density function",
+            "PDF",
+            "CDF"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret probability as area under a density, and relate density to the cumulative distribution function."
+        },
+        {
+          "id": "prf-2",
+          "name": "Normal distribution and z-scores",
+          "aliases": [
+            "Gaussian",
+            "bell curve",
+            "standardisation"
+          ],
+          "bloom": "C4",
+          "summary": "Standardise values and use the normal curve and its 68-95-99.7 behaviour to find probabilities and quantiles."
+        },
+        {
+          "id": "prf-4",
+          "name": "Approximating binomial distributions",
+          "aliases": [
+            "normal approximation",
+            "Poisson approximation",
+            "continuity correction"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when normal or Poisson approximations to the binomial are valid and apply continuity correction."
+        },
+        {
+          "id": "prf-5",
+          "name": "Linearity of expectation",
+          "aliases": [
+            "indicator variables",
+            "sum of expectations"
+          ],
+          "bloom": "C4",
+          "summary": "Use indicator variables and linearity of expectation, even for dependent variables, to solve counting-expectation problems."
+        },
+        {
+          "id": "prf-6",
+          "name": "Variance of sums and covariance",
+          "aliases": [
+            "variance of independent sum",
+            "covariance"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how variance of a sum depends on independence and covariance, and how scaling transforms mean and variance."
+        },
+        {
+          "id": "prf-7",
+          "name": "Law of large numbers",
+          "aliases": [
+            "LLN",
+            "sample mean convergence"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how sample averages converge to the expected value and what this does and does not guarantee."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "prf-3",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-4"
+        ],
+        [
+          "prf-2",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "prf-5",
+          "prf-6"
+        ],
+        [
+          "cmp-5",
+          "prf-7"
+        ],
+        [
+          "cmp-3",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The law of large numbers means deviations from expected results must be 'corrected' by opposite results.",
+          "concepts": [
+            "prf-7"
+          ]
+        },
+        {
+          "text": "For a continuous variable, P(X = x) is the height of the density curve at x.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "The variance of a sum is always the sum of the variances.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Central limit theorem reasoning",
+          "aliases": [
+            "CLT",
+            "sampling distribution of the mean"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when the CLT justifies normal approximations for sums and means and assess its limits with heavy tails or small samples."
+        },
+        {
+          "id": "exp-2",
+          "name": "Modelling choice among distributions",
+          "aliases": [
+            "distribution selection",
+            "model fit"
+          ],
+          "bloom": "C5",
+          "summary": "Critique and select a distribution (binomial, Poisson, normal, other) for a real situation by testing its assumptions."
+        },
+        {
+          "id": "exp-3",
+          "name": "Bayesian updating with priors",
+          "aliases": [
+            "prior and posterior",
+            "sequential updating"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how prior choice and sequential evidence shape posterior beliefs, including base-rate neglect."
+        },
+        {
+          "id": "exp-4",
+          "name": "Probability paradoxes and fallacies",
+          "aliases": [
+            "Monty Hall",
+            "birthday problem",
+            "prosecutor's fallacy"
+          ],
+          "bloom": "C5",
+          "summary": "Resolve counterintuitive problems by rigorous conditional reasoning and identify the flawed intuition behind each."
+        },
+        {
+          "id": "exp-5",
+          "name": "Probability bounds and inequalities",
+          "aliases": [
+            "Markov inequality",
+            "Chebyshev inequality",
+            "tail bounds"
+          ],
+          "bloom": "C5",
+          "summary": "Apply and compare Markov and Chebyshev bounds to guarantee tail probabilities without knowing the full distribution."
+        },
+        {
+          "id": "exp-6",
+          "name": "Simulation and Monte Carlo design",
+          "aliases": [
+            "Monte Carlo method",
+            "random simulation"
+          ],
+          "bloom": "C6",
+          "summary": "Design simulations to estimate probabilities and expectations, and judge their error from sample size."
+        },
+        {
+          "id": "exp-7",
+          "name": "Constructing probability models",
+          "aliases": [
+            "model building",
+            "probabilistic modelling"
+          ],
+          "bloom": "C6",
+          "summary": "Create a probability model for a novel problem, such as a random walk or queue, by defining sample space, variables and assumptions and deriving results."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-2"
+        ],
+        [
+          "cmp-1",
+          "exp-3"
+        ],
+        [
+          "cmp-1",
+          "exp-4"
+        ],
+        [
+          "adb-7",
+          "exp-4"
+        ],
+        [
+          "prf-6",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-7"
+        ],
+        [
+          "exp-6",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The central limit theorem says that any dataset becomes normally distributed once it is large enough.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "In the Monty Hall problem, the two remaining doors are equally likely so switching makes no difference.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "A very small probability of the evidence given innocence equals a very small probability of innocence given the evidence.",
+          "concepts": [
+            "exp-3",
+            "exp-4"
+          ]
+        }
+      ]
+    }
+  ]
+}

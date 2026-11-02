@@ -1,0 +1,662 @@
+{
+  "version": 1,
+  "topic": "web-security",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "http",
+    "javascript",
+    "sql"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Threat model and attacker goals",
+          "aliases": [
+            "attack surface",
+            "adversary thinking"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that web apps are attacked through user-controlled input and name common goals such as data theft, account takeover and defacement."
+        },
+        {
+          "id": "nov-2",
+          "name": "Never trust client input",
+          "aliases": [
+            "untrusted input",
+            "client-side data is attacker-controlled"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why every value in requests, including headers, cookies and hidden fields, can be forged by an attacker."
+        },
+        {
+          "id": "nov-3",
+          "name": "SQL injection basics",
+          "aliases": [
+            "SQLi",
+            "query injection"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how concatenating user input into a SQL string lets an attacker change the query's meaning."
+        },
+        {
+          "id": "nov-4",
+          "name": "Cross-site scripting basics",
+          "aliases": [
+            "XSS",
+            "script injection"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how unescaped user content rendered in a page can run attacker JavaScript in a victim's browser."
+        },
+        {
+          "id": "nov-6",
+          "name": "Authentication versus authorization",
+          "aliases": [
+            "authn vs authz",
+            "who you are vs what you may do"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish verifying identity from deciding what an identified user may access."
+        },
+        {
+          "id": "nov-5",
+          "name": "Cross-site request forgery basics",
+          "aliases": [
+            "CSRF",
+            "session riding"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a malicious site can make a logged-in user's browser send unwanted requests because cookies are attached automatically."
+        },
+        {
+          "id": "nov-7",
+          "name": "HTTPS and password hygiene",
+          "aliases": [
+            "TLS in transit",
+            "password storage basics"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that HTTPS protects data in transit and that passwords must never be stored in plain text."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-6",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Client-side JavaScript validation is enough to keep malicious input out.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Using HTTPS means the application itself is secure against injection and XSS.",
+          "concepts": [
+            "nov-7",
+            "nov-3",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Only large or famous sites are attacked, so small apps need little security.",
+          "concepts": [
+            "nov-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Parameterized queries",
+          "aliases": [
+            "prepared statements",
+            "bound parameters"
+          ],
+          "bloom": "C3",
+          "summary": "Apply parameterized queries so user data is sent separately from SQL code."
+        },
+        {
+          "id": "adb-3",
+          "name": "Stored, reflected and DOM XSS",
+          "aliases": [
+            "XSS types"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish the three XSS types by where the payload is stored and where it is injected."
+        },
+        {
+          "id": "adb-2",
+          "name": "Context-aware output encoding",
+          "aliases": [
+            "output escaping",
+            "HTML escaping"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the correct encoding for HTML body, attribute, URL and JavaScript contexts when rendering user data."
+        },
+        {
+          "id": "adb-5",
+          "name": "Secure password hashing",
+          "aliases": [
+            "salted hashing",
+            "bcrypt and argon2"
+          ],
+          "bloom": "C3",
+          "summary": "Store passwords using a slow, salted hash designed for passwords rather than a fast general hash."
+        },
+        {
+          "id": "adb-6",
+          "name": "Session cookie flags",
+          "aliases": [
+            "HttpOnly Secure",
+            "cookie attributes"
+          ],
+          "bloom": "C3",
+          "summary": "Set HttpOnly, Secure and SameSite on session cookies and explain what each prevents."
+        },
+        {
+          "id": "adb-4",
+          "name": "CSRF tokens and SameSite cookies",
+          "aliases": [
+            "anti-CSRF token",
+            "SameSite attribute"
+          ],
+          "bloom": "C3",
+          "summary": "Apply synchronizer tokens and the SameSite cookie attribute to block forged cross-site requests."
+        },
+        {
+          "id": "adb-7",
+          "name": "Server-side access checks",
+          "aliases": [
+            "authorization enforcement",
+            "IDOR basics"
+          ],
+          "bloom": "C3",
+          "summary": "Check on the server that the current user may access each requested object, rather than hiding links."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "nov-4",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-4"
+        ],
+        [
+          "nov-7",
+          "adb-5"
+        ],
+        [
+          "adb-6",
+          "adb-4"
+        ],
+        [
+          "nov-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Escaping quotes in user input is a reliable fix for SQL injection.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "HTML-escaping output once is enough for every place the data is later used.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Hashing passwords with plain SHA-256 is secure enough.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Content Security Policy design",
+          "aliases": [
+            "CSP",
+            "script-src policy"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse an application's resource needs to build a CSP that limits script execution and reduces XSS impact."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Session management flaws",
+          "aliases": [
+            "session fixation",
+            "session hijacking"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse session handling for fixation, weak IDs, missing rotation after login and poor expiry or logout."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Security misconfiguration review",
+          "aliases": [
+            "insecure defaults",
+            "hardening"
+          ],
+          "bloom": "C3",
+          "summary": "Find and fix default credentials, verbose errors, exposed admin interfaces and missing security headers."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Broken access control analysis",
+          "aliases": [
+            "IDOR",
+            "privilege escalation"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse endpoints for horizontal and vertical privilege escalation and missing function-level checks."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Server-side request forgery",
+          "aliases": [
+            "SSRF"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how user-supplied URLs make the server reach internal resources and apply allow-list defenses."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Other injection classes",
+          "aliases": [
+            "command injection",
+            "NoSQL injection",
+            "template injection"
+          ],
+          "bloom": "C3",
+          "summary": "Recognise and prevent OS command, NoSQL, LDAP and template injection using the same separation of code and data."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Secure file upload handling",
+          "aliases": [
+            "upload validation",
+            "path traversal"
+          ],
+          "bloom": "C3",
+          "summary": "Validate upload type, size and name, store files outside the web root and prevent path traversal."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Dependency vulnerability management",
+          "aliases": [
+            "vulnerable components",
+            "software composition analysis"
+          ],
+          "bloom": "C3",
+          "summary": "Track and update third-party libraries using scanners and lock files to avoid known vulnerabilities."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-4"
+        ],
+        [
+          "adb-1",
+          "cmp-6"
+        ],
+        [
+          "nov-2",
+          "cmp-5"
+        ],
+        [
+          "nov-2",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A CSP makes output encoding unnecessary.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Using an ORM or framework makes an app immune to injection.",
+          "concepts": [
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "Checking a file's extension or Content-Type header is enough to make uploads safe.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Threat modelling web applications",
+          "aliases": [
+            "STRIDE",
+            "data flow analysis"
+          ],
+          "bloom": "C4",
+          "summary": "Decompose an application into trust boundaries and data flows to systematically identify threats."
+        },
+        {
+          "id": "prf-2",
+          "name": "Authentication architecture evaluation",
+          "aliases": [
+            "OAuth OIDC",
+            "MFA design",
+            "SSO"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate login designs including MFA, OAuth 2.0/OpenID Connect flows, reset flows and credential stuffing defenses."
+        },
+        {
+          "id": "prf-3",
+          "name": "Token security trade-offs",
+          "aliases": [
+            "JWT pitfalls",
+            "session vs token"
+          ],
+          "bloom": "C5",
+          "summary": "Judge cookie sessions versus bearer tokens, including storage risks, revocation and signature validation errors."
+        },
+        {
+          "id": "prf-4",
+          "name": "Same-origin policy and CORS",
+          "aliases": [
+            "cross-origin resource sharing",
+            "origin isolation"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how same-origin policy and CORS configuration can expose or protect data and where misconfiguration leaks."
+        },
+        {
+          "id": "prf-5",
+          "name": "Business logic and race flaws",
+          "aliases": [
+            "logic vulnerabilities",
+            "TOCTOU"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse workflows for abuse such as price tampering, skipped steps and race conditions that scanners miss."
+        },
+        {
+          "id": "prf-6",
+          "name": "Security testing strategy",
+          "aliases": [
+            "SAST DAST",
+            "penetration testing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the strengths and gaps of code review, static analysis, dynamic scanning and manual testing for a given app."
+        },
+        {
+          "id": "prf-7",
+          "name": "Deserialization and XXE risks",
+          "aliases": [
+            "insecure deserialization",
+            "XML external entities"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how untrusted serialized data and XML parsers can lead to code execution or file disclosure."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-2",
+          "prf-3"
+        ],
+        [
+          "cmp-4",
+          "prf-2"
+        ],
+        [
+          "cmp-3",
+          "prf-4"
+        ],
+        [
+          "cmp-6",
+          "prf-7"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "prf-1",
+          "prf-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A JWT is secure simply because it is signed, so its claims and algorithm need no further checks.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "CORS protects a server from requests sent by other sites.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Passing an automated scanner means the application is secure.",
+          "concepts": [
+            "prf-6",
+            "prf-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Secure-by-design architecture",
+          "aliases": [
+            "defense in depth",
+            "least privilege design"
+          ],
+          "bloom": "C6",
+          "summary": "Design application architecture with layered controls, least privilege and secure defaults that make whole bug classes hard to introduce."
+        },
+        {
+          "id": "exp-2",
+          "name": "Security guardrails in frameworks",
+          "aliases": [
+            "secure libraries",
+            "paved road"
+          ],
+          "bloom": "C6",
+          "summary": "Create safe-by-default APIs and templates, such as auto-escaping and typed query builders, that remove the need for per-developer vigilance."
+        },
+        {
+          "id": "exp-3",
+          "name": "Risk-based vulnerability prioritisation",
+          "aliases": [
+            "risk assessment",
+            "CVSS in context"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate findings by exploitability, exposure and business impact to decide what to fix first and what risk to accept."
+        },
+        {
+          "id": "exp-4",
+          "name": "Advanced browser attack chaining",
+          "aliases": [
+            "XSS filter bypass",
+            "mutation XSS",
+            "exploit chains"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how seemingly minor flaws such as sanitizer bypass, open redirects and cache poisoning combine into serious exploits."
+        },
+        {
+          "id": "exp-5",
+          "name": "Secure SDLC and DevSecOps programme",
+          "aliases": [
+            "shift-left security",
+            "security pipeline"
+          ],
+          "bloom": "C6",
+          "summary": "Design a development lifecycle integrating threat modelling, automated checks, review gates and secrets management."
+        },
+        {
+          "id": "exp-6",
+          "name": "Incident detection and response",
+          "aliases": [
+            "logging and monitoring",
+            "WAF tuning"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate logging, anomaly detection and WAF strategy and plan response to web application compromises."
+        },
+        {
+          "id": "exp-7",
+          "name": "Security standards and assurance",
+          "aliases": [
+            "OWASP ASVS",
+            "compliance mapping"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate an application against standards like OWASP ASVS and use them to set verifiable requirements."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-5"
+        ],
+        [
+          "exp-3",
+          "exp-5"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "cmp-1",
+          "exp-4"
+        ],
+        [
+          "exp-5",
+          "exp-7"
+        ],
+        [
+          "cmp-3",
+          "exp-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A web application firewall can substitute for fixing vulnerable code.",
+          "concepts": [
+            "exp-6",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Every high-severity CVSS finding must be fixed before any lower-scored one regardless of context.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Moving security checks to a final pre-release audit is as effective as integrating them throughout development.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

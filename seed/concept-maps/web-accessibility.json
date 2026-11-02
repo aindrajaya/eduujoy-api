@@ -1,0 +1,693 @@
+{
+  "version": 1,
+  "topic": "web-accessibility",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "html-css"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Disability types and web barriers",
+          "aliases": [
+            "permanent temporary situational disability"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how visual, auditory, motor and cognitive disabilities, whether permanent, temporary or situational, lead to different barriers on web pages."
+        },
+        {
+          "id": "nov-2",
+          "name": "Assistive technology types",
+          "aliases": [
+            "screen readers",
+            "assistive tech"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the main assistive technologies such as screen readers, magnifiers, switch devices and voice control, and what each does."
+        },
+        {
+          "id": "nov-3",
+          "name": "POUR principles",
+          "aliases": [
+            "perceivable operable understandable robust"
+          ],
+          "bloom": "C2",
+          "summary": "Explain the four WCAG principles of Perceivable, Operable, Understandable and Robust with an example of each."
+        },
+        {
+          "id": "nov-4",
+          "name": "Text alternatives for images",
+          "aliases": [
+            "alt text",
+            "alt attribute"
+          ],
+          "bloom": "C2",
+          "summary": "Understand why images need an alt attribute and what makes alt text useful versus redundant."
+        },
+        {
+          "id": "nov-5",
+          "name": "Headings and page structure",
+          "aliases": [
+            "heading hierarchy",
+            "document outline"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how heading levels give a page a navigable outline for screen reader users."
+        },
+        {
+          "id": "nov-6",
+          "name": "Keyboard-only operation",
+          "aliases": [
+            "keyboard access",
+            "tab navigation"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that all functionality must be usable with the keyboard alone, using Tab, Enter, Space and arrow keys."
+        },
+        {
+          "id": "nov-7",
+          "name": "Colour contrast basics",
+          "aliases": [
+            "text contrast",
+            "legibility"
+          ],
+          "bloom": "C1",
+          "summary": "Remember that text needs sufficient contrast with its background and that colour alone should not convey meaning."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-3",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Accessibility only matters for blind users.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Every image needs a long descriptive alt text.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Accessible pages must be plain, text-only versions of the site.",
+          "concepts": [
+            "nov-3",
+            "nov-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Semantic landmark elements",
+          "aliases": [
+            "landmarks",
+            "nav main header footer"
+          ],
+          "bloom": "C3",
+          "summary": "Apply header, nav, main, aside and footer elements so assistive tech users can jump between page regions."
+        },
+        {
+          "id": "adb-2",
+          "name": "Decorative versus informative images",
+          "aliases": [
+            "empty alt",
+            "alt decision"
+          ],
+          "bloom": "C3",
+          "summary": "Choose between descriptive alt text, empty alt and alternatives for functional images such as linked icons."
+        },
+        {
+          "id": "adb-3",
+          "name": "Accessible form labels",
+          "aliases": [
+            "label for",
+            "form controls"
+          ],
+          "bloom": "C3",
+          "summary": "Associate every form control with a visible label using label elements and group related controls with fieldset and legend."
+        },
+        {
+          "id": "adb-4",
+          "name": "Meaningful link text",
+          "aliases": [
+            "link purpose",
+            "descriptive links"
+          ],
+          "bloom": "C3",
+          "summary": "Write link text that makes sense out of context instead of phrases like click here."
+        },
+        {
+          "id": "adb-5",
+          "name": "Visible focus indication",
+          "aliases": [
+            "focus outline",
+            "focus styles"
+          ],
+          "bloom": "C3",
+          "summary": "Keep or restyle the focus indicator so keyboard users can see where they are."
+        },
+        {
+          "id": "adb-6",
+          "name": "Native interactive elements",
+          "aliases": [
+            "button vs div",
+            "native controls"
+          ],
+          "bloom": "C3",
+          "summary": "Use button and a elements instead of clickable divs to get keyboard and role behaviour for free."
+        },
+        {
+          "id": "adb-7",
+          "name": "WCAG contrast ratios",
+          "aliases": [
+            "4.5:1",
+            "contrast checker"
+          ],
+          "bloom": "C3",
+          "summary": "Check text and UI colours against WCAG ratio thresholds using a contrast tool."
+        },
+        {
+          "id": "adb-8",
+          "name": "Page language and title",
+          "aliases": [
+            "lang attribute",
+            "title element"
+          ],
+          "bloom": "C2",
+          "summary": "Understand why lang and a unique descriptive title help screen readers and navigation."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-5"
+        ],
+        [
+          "nov-6",
+          "adb-6"
+        ],
+        [
+          "nov-7",
+          "adb-7"
+        ],
+        [
+          "nov-2",
+          "adb-3"
+        ],
+        [
+          "nov-2",
+          "adb-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A placeholder can replace a visible label.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Removing the focus outline is fine because it looks cleaner.",
+          "concepts": [
+            "adb-5"
+          ]
+        },
+        {
+          "text": "A div with a click handler is as accessible as a button.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Accessible name computation",
+          "aliases": [
+            "accessible name",
+            "name and role"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how browsers derive an element's accessible name from content, labels and ARIA attributes."
+        },
+        {
+          "id": "cmp-2",
+          "name": "ARIA roles and properties",
+          "aliases": [
+            "WAI-ARIA",
+            "aria-label aria-labelledby"
+          ],
+          "bloom": "C3",
+          "summary": "Apply ARIA roles, states and properties only where native HTML cannot express the semantics."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Focus order and management",
+          "aliases": [
+            "tabindex",
+            "focus control"
+          ],
+          "bloom": "C3",
+          "summary": "Keep DOM order logical, use tabindex 0 and -1 correctly and move focus programmatically for dialogs and route changes."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Accessible form errors",
+          "aliases": [
+            "error identification",
+            "validation messages"
+          ],
+          "bloom": "C3",
+          "summary": "Identify errors in text, link them to fields with aria-describedby and announce them to assistive tech."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Live regions for dynamic updates",
+          "aliases": [
+            "aria-live",
+            "status messages"
+          ],
+          "bloom": "C3",
+          "summary": "Use aria-live regions and status roles to announce content changes without moving focus."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Responsive and zoom support",
+          "aliases": [
+            "reflow",
+            "text resize"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse layouts for reflow at 400% zoom, text resizing and touch target size."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Motion and media alternatives",
+          "aliases": [
+            "captions",
+            "prefers-reduced-motion"
+          ],
+          "bloom": "C3",
+          "summary": "Provide captions, transcripts and pause controls, and respect reduced-motion preferences."
+        },
+        {
+          "id": "cmp-8",
+          "name": "WCAG conformance levels",
+          "aliases": [
+            "A AA AAA",
+            "success criteria"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish levels A, AA and AAA and map success criteria to defects found on a page."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-2",
+          "cmp-5"
+        ],
+        [
+          "nov-3",
+          "cmp-8"
+        ],
+        [
+          "adb-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Adding ARIA always improves accessibility.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "Positive tabindex values are a good way to set tab order.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Colour-only red borders are enough to signal form errors.",
+          "concepts": [
+            "cmp-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Custom widget keyboard patterns",
+          "aliases": [
+            "ARIA Authoring Practices",
+            "composite widgets"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse and implement expected keyboard interaction and ARIA states for tabs, menus, comboboxes and dialogs."
+        },
+        {
+          "id": "prf-2",
+          "name": "Manual screen reader testing",
+          "aliases": [
+            "NVDA VoiceOver testing",
+            "assistive tech audit"
+          ],
+          "bloom": "C4",
+          "summary": "Test flows with screen readers and keyboard, and interpret what announcements reveal about the accessibility tree."
+        },
+        {
+          "id": "prf-3",
+          "name": "Automated testing limits",
+          "aliases": [
+            "axe Lighthouse",
+            "linting"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate what automated checkers can and cannot detect and combine them with manual review."
+        },
+        {
+          "id": "prf-4",
+          "name": "Accessibility tree inspection",
+          "aliases": [
+            "browser devtools accessibility",
+            "computed roles"
+          ],
+          "bloom": "C4",
+          "summary": "Use devtools to inspect roles, names and states and diagnose mismatches with the DOM."
+        },
+        {
+          "id": "prf-5",
+          "name": "Defect severity prioritisation",
+          "aliases": [
+            "issue triage",
+            "impact assessment"
+          ],
+          "bloom": "C5",
+          "summary": "Judge defects by user impact, affected journeys and WCAG level to prioritise remediation."
+        },
+        {
+          "id": "prf-6",
+          "name": "Accessible single-page apps",
+          "aliases": [
+            "SPA routing",
+            "dynamic content focus"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how client-side routing and dynamic rendering break focus, titles and announcements, and fix them."
+        },
+        {
+          "id": "prf-7",
+          "name": "Cognitive accessibility patterns",
+          "aliases": [
+            "plain language",
+            "consistent navigation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate designs for consistency, clear instructions, timeouts and error prevention that reduce cognitive load."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "cmp-1",
+          "prf-4"
+        ],
+        [
+          "cmp-8",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-5"
+        ],
+        [
+          "prf-3",
+          "prf-5"
+        ],
+        [
+          "cmp-3",
+          "prf-6"
+        ],
+        [
+          "cmp-5",
+          "prf-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Passing an automated scan means a page is accessible.",
+          "concepts": [
+            "prf-3",
+            "prf-5"
+          ]
+        },
+        {
+          "text": "If it works in one screen reader, it works in all of them.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Custom widgets are accessible once they have the right ARIA role.",
+          "concepts": [
+            "prf-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Accessibility in design systems",
+          "aliases": [
+            "accessible component library",
+            "design tokens"
+          ],
+          "bloom": "C6",
+          "summary": "Design reusable components and tokens with built-in accessibility contracts, documentation and tests."
+        },
+        {
+          "id": "exp-2",
+          "name": "Accessibility process integration",
+          "aliases": [
+            "shift left",
+            "CI accessibility gates"
+          ],
+          "bloom": "C6",
+          "summary": "Build workflows that embed accessibility into requirements, design review, CI checks and release criteria."
+        },
+        {
+          "id": "exp-3",
+          "name": "Interpreting WCAG ambiguity",
+          "aliases": [
+            "success criteria interpretation",
+            "edge cases"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate borderline cases against the intent of success criteria and justify conformance decisions."
+        },
+        {
+          "id": "exp-4",
+          "name": "Legal and conformance reporting",
+          "aliases": [
+            "VPAT ACR",
+            "accessibility statement"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate conformance evidence and produce accurate reports and statements referencing regulations such as the ADA, Section 508 and the EN 301 549 standard."
+        },
+        {
+          "id": "exp-5",
+          "name": "Usability testing with disabled users",
+          "aliases": [
+            "inclusive research",
+            "participatory testing"
+          ],
+          "bloom": "C6",
+          "summary": "Plan and run research with disabled participants and turn findings into design change."
+        },
+        {
+          "id": "exp-6",
+          "name": "Assistive tech compatibility strategy",
+          "aliases": [
+            "support matrix",
+            "cross-AT testing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate trade-offs and define a supported browser and assistive technology matrix, handling inconsistencies and workarounds."
+        },
+        {
+          "id": "exp-7",
+          "name": "Accessible complex data visualisation",
+          "aliases": [
+            "accessible charts",
+            "non-visual data access"
+          ],
+          "bloom": "C6",
+          "summary": "Create accessible alternatives for charts, maps and canvas content, such as data tables and descriptions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "prf-5",
+          "exp-2"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "prf-2",
+          "exp-5"
+        ],
+        [
+          "prf-2",
+          "exp-6"
+        ],
+        [
+          "prf-4",
+          "exp-6"
+        ],
+        [
+          "prf-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Accessibility is a one-off audit done before launch.",
+          "concepts": [
+            "exp-2",
+            "exp-4"
+          ]
+        },
+        {
+          "text": "A VPAT or conformance claim proves real-world usability.",
+          "concepts": [
+            "exp-4",
+            "exp-5"
+          ]
+        },
+        {
+          "text": "A design system's accessible components guarantee accessible pages.",
+          "concepts": [
+            "exp-1",
+            "exp-2"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,687 @@
+{
+  "version": 1,
+  "topic": "clean-code-refactoring",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals",
+    "software-testing"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Readability as code goal",
+          "aliases": [
+            "code is read more than written"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why code is read far more often than it is written and why readable code lowers the cost of change."
+        },
+        {
+          "id": "nov-2",
+          "name": "Intention-revealing names",
+          "aliases": [
+            "meaningful names"
+          ],
+          "bloom": "C2",
+          "summary": "Choose variable, function and class names that state what a thing is or does without needing a comment."
+        },
+        {
+          "id": "nov-3",
+          "name": "Consistent formatting and layout",
+          "aliases": [
+            "code style",
+            "indentation conventions"
+          ],
+          "bloom": "C1",
+          "summary": "Recall how consistent indentation, spacing and line length help readers see code structure."
+        },
+        {
+          "id": "nov-4",
+          "name": "Small single-purpose functions",
+          "aliases": [
+            "short functions",
+            "do one thing"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why a function should do one thing and be short enough to understand at a glance."
+        },
+        {
+          "id": "nov-5",
+          "name": "Magic numbers and named constants",
+          "aliases": [
+            "magic literals"
+          ],
+          "bloom": "C2",
+          "summary": "Recognise unexplained literal values and understand why replacing them with named constants clarifies meaning."
+        },
+        {
+          "id": "nov-6",
+          "name": "Refactoring definition",
+          "aliases": [
+            "behavior-preserving restructuring"
+          ],
+          "bloom": "C1",
+          "summary": "State that refactoring changes internal structure without changing observable behavior."
+        },
+        {
+          "id": "nov-7",
+          "name": "Comments versus self-explaining code",
+          "aliases": [
+            "useful comments"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish comments that explain why from comments that merely restate or excuse unclear code."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-7"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Short names are better because they are quicker to type.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Clean code just means code that looks neat and is heavily commented.",
+          "concepts": [
+            "nov-3",
+            "nov-7"
+          ]
+        },
+        {
+          "text": "Refactoring means rewriting code or adding features while tidying up.",
+          "concepts": [
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Extract Function move",
+          "aliases": [
+            "extract method"
+          ],
+          "bloom": "C3",
+          "summary": "Pull a coherent block of code into a well-named function and replace the original with a call."
+        },
+        {
+          "id": "adb-2",
+          "name": "Rename refactoring",
+          "aliases": [
+            "rename variable or function"
+          ],
+          "bloom": "C3",
+          "summary": "Rename identifiers across the code, ideally with tool support, to better express intent."
+        },
+        {
+          "id": "adb-3",
+          "name": "Duplicated code and DRY",
+          "aliases": [
+            "don't repeat yourself",
+            "copy-paste code"
+          ],
+          "bloom": "C3",
+          "summary": "Spot repeated logic and consolidate it into a single shared function or constant."
+        },
+        {
+          "id": "adb-4",
+          "name": "Basic code smells",
+          "aliases": [
+            "long function smell",
+            "long parameter list"
+          ],
+          "bloom": "C2",
+          "summary": "Recognise common smells such as long functions, long parameter lists, duplicated code and dead code as signals to investigate."
+        },
+        {
+          "id": "adb-5",
+          "name": "Tests as refactoring safety net",
+          "aliases": [
+            "refactor under test",
+            "green-to-green"
+          ],
+          "bloom": "C3",
+          "summary": "Run existing tests before and after each small change to confirm behavior stays the same."
+        },
+        {
+          "id": "adb-6",
+          "name": "Small incremental steps",
+          "aliases": [
+            "tiny refactoring steps"
+          ],
+          "bloom": "C3",
+          "summary": "Break a restructuring into tiny steps, each leaving the code working, instead of one big change."
+        },
+        {
+          "id": "adb-7",
+          "name": "Guard clauses and nesting reduction",
+          "aliases": [
+            "early return",
+            "replace nested conditional with guard clauses"
+          ],
+          "bloom": "C3",
+          "summary": "Flatten deeply nested conditionals by handling edge cases early with guard clauses."
+        },
+        {
+          "id": "adb-8",
+          "name": "Removing dead code",
+          "aliases": [
+            "unused code deletion"
+          ],
+          "bloom": "C3",
+          "summary": "Delete unused variables, functions and commented-out code, relying on version control to recover it."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-2",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-5"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "nov-4",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-7"
+        ],
+        [
+          "adb-4",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Any code smell is a bug that must be fixed immediately.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "If the code runs and passes tests, it does not need refactoring.",
+          "concepts": [
+            "adb-5",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Any two similar-looking pieces of code should always be merged.",
+          "concepts": [
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Object-oriented and structural smells",
+          "aliases": [
+            "feature envy",
+            "large class",
+            "shotgun surgery",
+            "primitive obsession"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose smells like feature envy, large classes, primitive obsession and shotgun surgery and relate each to the design problem behind it."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Single Responsibility and cohesion",
+          "aliases": [
+            "SRP",
+            "high cohesion"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse whether a class or module has one reason to change and split it when responsibilities are mixed."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Move and Extract Class",
+          "aliases": [
+            "move method",
+            "extract class"
+          ],
+          "bloom": "C3",
+          "summary": "Relocate behavior or data to the class where it belongs and extract new classes to restore cohesion."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Replace conditional with polymorphism",
+          "aliases": [
+            "strategy replace switch",
+            "type-code replacement"
+          ],
+          "bloom": "C3",
+          "summary": "Replace repeated type-based conditionals with polymorphic objects or strategies when variants keep growing."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Coupling and dependency reduction",
+          "aliases": [
+            "loose coupling",
+            "Law of Demeter"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how dependencies between units make change costly and reduce them with narrower interfaces and fewer reach-through calls."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Introduce parameter object",
+          "aliases": [
+            "parameter object",
+            "data clumps"
+          ],
+          "bloom": "C3",
+          "summary": "Group parameters that travel together into one object to shorten signatures and give the concept a name."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Characterization tests for legacy code",
+          "aliases": [
+            "pinning tests",
+            "golden master"
+          ],
+          "bloom": "C4",
+          "summary": "Write tests that capture current behavior of untested code so it can be refactored safely."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Error handling clarity",
+          "aliases": [
+            "exceptions over error codes"
+          ],
+          "bloom": "C3",
+          "summary": "Separate error handling from main logic and use exceptions or explicit result types instead of ambiguous return codes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-1",
+          "cmp-3"
+        ],
+        [
+          "adb-7",
+          "cmp-4"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "cmp-2",
+          "cmp-5"
+        ],
+        [
+          "adb-4",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-7"
+        ],
+        [
+          "adb-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Single Responsibility means a class should have only one method.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "Every switch statement should be replaced with polymorphism.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Legacy code without tests cannot be refactored until it is rewritten.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Refactoring trade-off evaluation",
+          "aliases": [
+            "when to refactor",
+            "cost-benefit of refactoring"
+          ],
+          "bloom": "C5",
+          "summary": "Judge whether a refactoring is worth its cost, weighing upcoming change, risk, and team context."
+        },
+        {
+          "id": "prf-3",
+          "name": "Preparatory and opportunistic refactoring",
+          "aliases": [
+            "boy scout rule",
+            "make the change easy"
+          ],
+          "bloom": "C4",
+          "summary": "Choose when to refactor before a feature, during it, or in a separate pass, and keep refactoring commits separate from behavior changes."
+        },
+        {
+          "id": "prf-4",
+          "name": "Branch by abstraction and seams",
+          "aliases": [
+            "seams",
+            "parallel change",
+            "expand and contract"
+          ],
+          "bloom": "C4",
+          "summary": "Use seams and parallel-change techniques to migrate code or interfaces in steps while the system keeps working."
+        },
+        {
+          "id": "prf-5",
+          "name": "Hotspot and metrics analysis",
+          "aliases": [
+            "churn and complexity",
+            "cyclomatic complexity"
+          ],
+          "bloom": "C4",
+          "summary": "Combine change frequency from history with complexity measures to find where refactoring pays off, while treating metrics as hints."
+        },
+        {
+          "id": "prf-2",
+          "name": "Technical debt management",
+          "aliases": [
+            "technical debt",
+            "debt prioritisation"
+          ],
+          "bloom": "C5",
+          "summary": "Distinguish deliberate from accidental debt and prioritise paydown by interest paid in slowed work and defects."
+        },
+        {
+          "id": "prf-6",
+          "name": "Over-abstraction and premature generalisation",
+          "aliases": [
+            "speculative generality",
+            "YAGNI",
+            "wrong abstraction"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when an abstraction or deduplication adds more coupling than it removes and inline it back."
+        },
+        {
+          "id": "prf-7",
+          "name": "Refactoring in code review",
+          "aliases": [
+            "reviewing for maintainability"
+          ],
+          "bloom": "C5",
+          "summary": "Assess a change for readability and design quality and give actionable feedback that separates preference from real maintainability issues."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-4"
+        ],
+        [
+          "cmp-1",
+          "prf-5"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "cmp-4",
+          "prf-6"
+        ],
+        [
+          "prf-6",
+          "prf-7"
+        ],
+        [
+          "prf-5",
+          "prf-2"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Code metrics such as complexity scores objectively show which code is bad.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Technical debt is just bad code written by careless developers.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Removing all duplication is always an improvement.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Large-scale architectural refactoring",
+          "aliases": [
+            "strangler fig",
+            "monolith decomposition"
+          ],
+          "bloom": "C6",
+          "summary": "Design an incremental migration strategy that reshapes system structure while continuously delivering."
+        },
+        {
+          "id": "exp-2",
+          "name": "Refactoring strategy design",
+          "aliases": [
+            "refactoring roadmap",
+            "migration planning"
+          ],
+          "bloom": "C6",
+          "summary": "Create a plan that sequences refactorings, safety nets and checkpoints to reach a target design across teams."
+        },
+        {
+          "id": "exp-3",
+          "name": "Team code quality standards",
+          "aliases": [
+            "coding conventions",
+            "definition of clean"
+          ],
+          "bloom": "C6",
+          "summary": "Establish team conventions, automated linting and review practices that sustain quality without stifling judgment."
+        },
+        {
+          "id": "exp-4",
+          "name": "Automated refactoring tooling",
+          "aliases": [
+            "codemods",
+            "AST-based refactoring",
+            "automated migration"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and build automated, syntax-aware transformations for safe changes across a large codebase."
+        },
+        {
+          "id": "exp-5",
+          "name": "Design principles trade-off critique",
+          "aliases": [
+            "principles in tension",
+            "SOLID critique"
+          ],
+          "bloom": "C5",
+          "summary": "Critique how principles like DRY, SRP and abstraction conflict in context and justify a design choice."
+        },
+        {
+          "id": "exp-6",
+          "name": "Changeability and cost-of-change reasoning",
+          "aliases": [
+            "evolutionary design",
+            "designing for change"
+          ],
+          "bloom": "C5",
+          "summary": "Assess which design decisions are costly to reverse and focus structure and flexibility there."
+        },
+        {
+          "id": "exp-7",
+          "name": "Coaching clean code practice",
+          "aliases": [
+            "mentoring refactoring",
+            "teaching code quality"
+          ],
+          "bloom": "C6",
+          "summary": "Develop others' refactoring judgment through pairing, katas and feedback that builds shared standards."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "prf-6",
+          "exp-5"
+        ],
+        [
+          "exp-5",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A large, rewrite-from-scratch project is a safer way to fix a messy system than incremental refactoring.",
+          "concepts": [
+            "exp-1",
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Enforcing strict linting rules and style guides is enough to produce maintainable code.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Following clean code principles consistently always yields the best design.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

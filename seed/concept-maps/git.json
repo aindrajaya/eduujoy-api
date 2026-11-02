@@ -1,0 +1,690 @@
+{
+  "version": 1,
+  "topic": "git",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Repository and working tree",
+          "aliases": [
+            "repo",
+            "working directory"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that a repository stores a project's full history and that the working tree holds the current editable files."
+        },
+        {
+          "id": "nov-2",
+          "name": "Commits as snapshots",
+          "aliases": [
+            "commit",
+            "snapshot"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a commit records a snapshot of the project with a message, author and link to its parent."
+        },
+        {
+          "id": "nov-3",
+          "name": "Staging area workflow",
+          "aliases": [
+            "index",
+            "git add"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how changes move from the working tree to the staging area to a commit using add and commit."
+        },
+        {
+          "id": "nov-4",
+          "name": "Inspecting status and history",
+          "aliases": [
+            "git status",
+            "git log",
+            "git diff"
+          ],
+          "bloom": "C2",
+          "summary": "Use status, log and diff to see what has changed and what has been recorded."
+        },
+        {
+          "id": "nov-5",
+          "name": "Local versus remote repositories",
+          "aliases": [
+            "clone",
+            "remote"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish a local repository from a remote one and explain that cloning copies the full history."
+        },
+        {
+          "id": "nov-6",
+          "name": "Writing commit messages",
+          "aliases": [
+            "commit message"
+          ],
+          "bloom": "C2",
+          "summary": "Understand why a commit message should briefly say what changed and why."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Git and GitHub are the same thing.",
+          "concepts": [
+            "nov-5"
+          ]
+        },
+        {
+          "text": "Git add saves the file to the repository as a commit.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A commit stores only the lines that changed rather than a snapshot of the project.",
+          "concepts": [
+            "nov-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Branch creation and switching",
+          "aliases": [
+            "git branch",
+            "git switch",
+            "checkout"
+          ],
+          "bloom": "C3",
+          "summary": "Create branches and switch between them to work on changes in isolation."
+        },
+        {
+          "id": "adb-2",
+          "name": "Push, fetch and pull",
+          "aliases": [
+            "git push",
+            "git pull",
+            "git fetch"
+          ],
+          "bloom": "C3",
+          "summary": "Sync commits with a remote and tell fetch apart from pull."
+        },
+        {
+          "id": "adb-3",
+          "name": "Merging branches",
+          "aliases": [
+            "git merge",
+            "fast-forward"
+          ],
+          "bloom": "C3",
+          "summary": "Merge one branch into another and recognise fast-forward versus merge-commit outcomes."
+        },
+        {
+          "id": "adb-4",
+          "name": "Resolving simple merge conflicts",
+          "aliases": [
+            "conflict markers"
+          ],
+          "bloom": "C3",
+          "summary": "Read conflict markers, choose the correct content and complete the merge."
+        },
+        {
+          "id": "adb-5",
+          "name": "Ignoring files with gitignore",
+          "aliases": [
+            ".gitignore"
+          ],
+          "bloom": "C3",
+          "summary": "Keep build output, dependencies and secrets out of version control using ignore patterns."
+        },
+        {
+          "id": "adb-6",
+          "name": "Undoing uncommitted changes",
+          "aliases": [
+            "git restore",
+            "git reset file"
+          ],
+          "bloom": "C3",
+          "summary": "Discard working-tree edits or unstage files without touching commits."
+        },
+        {
+          "id": "adb-7",
+          "name": "Amending the last commit",
+          "aliases": [
+            "commit --amend"
+          ],
+          "bloom": "C2",
+          "summary": "Fix the most recent local commit's message or content before sharing it."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-6"
+        ],
+        [
+          "nov-2",
+          "adb-7"
+        ],
+        [
+          "nov-4",
+          "adb-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Git pull only downloads changes and never alters my working branch.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "A merge conflict means something has broken and the repository is damaged.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Adding a file to gitignore removes it from the repository if it is already tracked.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Commit graph and references",
+          "aliases": [
+            "DAG",
+            "HEAD",
+            "refs"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse history as a graph of commits where branches, tags and HEAD are movable pointers."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Rebasing versus merging",
+          "aliases": [
+            "git rebase"
+          ],
+          "bloom": "C4",
+          "summary": "Compare how rebase and merge integrate work and the history each produces."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Interactive rebase cleanup",
+          "aliases": [
+            "rebase -i",
+            "squash",
+            "fixup"
+          ],
+          "bloom": "C3",
+          "summary": "Reorder, squash and reword local commits to produce a clean, reviewable history."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Reset, revert and restore",
+          "aliases": [
+            "git reset",
+            "git revert"
+          ],
+          "bloom": "C4",
+          "summary": "Choose among reset modes and revert based on whether history is shared and what must be preserved."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Recovery with reflog",
+          "aliases": [
+            "git reflog"
+          ],
+          "bloom": "C3",
+          "summary": "Find and restore lost commits after a bad reset, rebase or deleted branch."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Stashing and cherry-picking",
+          "aliases": [
+            "git stash",
+            "git cherry-pick"
+          ],
+          "bloom": "C3",
+          "summary": "Shelve unfinished work and apply individual commits to another branch."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Tracking branches and upstreams",
+          "aliases": [
+            "upstream",
+            "origin/main"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how remote-tracking branches relate to local ones and diagnose ahead/behind/diverged states."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Pull request workflow",
+          "aliases": [
+            "code review",
+            "feature branch workflow"
+          ],
+          "bloom": "C3",
+          "summary": "Use short-lived feature branches, pull requests and review to integrate changes into a shared branch."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "cmp-1"
+        ],
+        [
+          "adb-3",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "adb-2",
+          "cmp-8"
+        ],
+        [
+          "cmp-1",
+          "cmp-8"
+        ],
+        [
+          "cmp-8",
+          "cmp-6"
+        ],
+        [
+          "adb-1",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Branches are separate copies of the code rather than pointers to commits.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Git reset --hard is always safe because Git keeps everything.",
+          "concepts": [
+            "cmp-4",
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Rebase is always better than merge because it gives a cleaner history.",
+          "concepts": [
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Branching strategy selection",
+          "aliases": [
+            "trunk-based development",
+            "Gitflow"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate trunk-based, Gitflow and similar strategies against team size, release cadence and risk."
+        },
+        {
+          "id": "prf-2",
+          "name": "Rewriting shared history safely",
+          "aliases": [
+            "force-with-lease",
+            "force push"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when rewriting published history is acceptable and use force-with-lease and team coordination to limit damage."
+        },
+        {
+          "id": "prf-3",
+          "name": "Bisecting regressions",
+          "aliases": [
+            "git bisect"
+          ],
+          "bloom": "C4",
+          "summary": "Locate the commit that introduced a bug using binary search, ideally automated with a test script."
+        },
+        {
+          "id": "prf-4",
+          "name": "Complex conflict resolution",
+          "aliases": [
+            "rerere",
+            "three-way merge"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse conflicts using the merge base and both sides, and reuse resolutions across repeated rebases."
+        },
+        {
+          "id": "prf-5",
+          "name": "Worktrees and submodules",
+          "aliases": [
+            "git worktree",
+            "submodule",
+            "subtree"
+          ],
+          "bloom": "C4",
+          "summary": "Choose among worktrees, submodules and subtrees for parallel checkouts and nested dependencies."
+        },
+        {
+          "id": "prf-6",
+          "name": "Hooks and automated checks",
+          "aliases": [
+            "pre-commit",
+            "CI gates"
+          ],
+          "bloom": "C5",
+          "summary": "Assess where local hooks, server-side rules and CI should enforce quality and message conventions."
+        },
+        {
+          "id": "prf-7",
+          "name": "Signed commits and provenance",
+          "aliases": [
+            "GPG signing",
+            "SSH signing"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how commit signing verifies authorship and judge when to require it."
+        },
+        {
+          "id": "prf-8",
+          "name": "Removing sensitive data from history",
+          "aliases": [
+            "filter-repo",
+            "leaked secrets"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate remediation of committed secrets, including rotation and history rewriting."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-2",
+          "prf-2"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "cmp-2",
+          "prf-4"
+        ],
+        [
+          "cmp-7",
+          "prf-5"
+        ],
+        [
+          "cmp-6",
+          "prf-6"
+        ],
+        [
+          "prf-2",
+          "prf-8"
+        ],
+        [
+          "cmp-1",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Deleting a leaked secret in a new commit removes the exposure.",
+          "concepts": [
+            "prf-8"
+          ]
+        },
+        {
+          "text": "One branching model such as Gitflow suits every team.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Client-side hooks guarantee that rules are enforced for everyone.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Git object model internals",
+          "aliases": [
+            "blobs trees commits",
+            "content-addressable storage"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate behaviour and performance through the model of content-addressed blobs, trees, commits and tags."
+        },
+        {
+          "id": "exp-2",
+          "name": "Packfiles and repository maintenance",
+          "aliases": [
+            "gc",
+            "pack",
+            "delta compression"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose repository size and speed issues using packing, garbage collection and maintenance tasks."
+        },
+        {
+          "id": "exp-3",
+          "name": "Scaling large repositories",
+          "aliases": [
+            "partial clone",
+            "sparse checkout",
+            "monorepo"
+          ],
+          "bloom": "C6",
+          "summary": "Design workflows for very large repositories using partial clones, sparse checkout and shallow history."
+        },
+        {
+          "id": "exp-4",
+          "name": "Custom merge strategies and drivers",
+          "aliases": [
+            "merge drivers",
+            "gitattributes"
+          ],
+          "bloom": "C6",
+          "summary": "Create attribute-based merge, diff and filter rules for special file types."
+        },
+        {
+          "id": "exp-5",
+          "name": "Repository migration and history surgery",
+          "aliases": [
+            "filter-repo",
+            "svn migration",
+            "repo split"
+          ],
+          "bloom": "C6",
+          "summary": "Plan migrations, splits and merges of repositories while preserving meaningful history and references."
+        },
+        {
+          "id": "exp-6",
+          "name": "Team Git policy design",
+          "aliases": [
+            "governance",
+            "branch protection"
+          ],
+          "bloom": "C6",
+          "summary": "Design branch protection, review, signing and release tagging policies that fit an organisation's risk profile."
+        },
+        {
+          "id": "exp-7",
+          "name": "Plumbing commands and scripting",
+          "aliases": [
+            "rev-parse",
+            "update-ref",
+            "hash-object"
+          ],
+          "bloom": "C5",
+          "summary": "Use low-level commands to script reliable tooling and inspect or repair repository state."
+        }
+      ],
+      "prerequisites": [
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "prf-8",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "prf-1",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "prf-7",
+          "exp-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Git stores history as a chain of diffs between versions.",
+          "concepts": [
+            "exp-1",
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Shallow or partial clones are just smaller full clones with no workflow trade-offs.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Rewriting history with filter tools leaves old commits unreachable everywhere immediately.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,689 @@
+{
+  "version": 1,
+  "topic": "linear-algebra",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "algebra"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Vectors as arrows and lists",
+          "aliases": [
+            "vector representation",
+            "coordinate vectors"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise a vector as both a geometric arrow and an ordered list of numbers, and read its components."
+        },
+        {
+          "id": "nov-2",
+          "name": "Vector addition and scaling",
+          "aliases": [
+            "linear operations on vectors",
+            "scalar multiplication"
+          ],
+          "bloom": "C2",
+          "summary": "Add vectors componentwise and multiply by scalars, and explain what each does geometrically."
+        },
+        {
+          "id": "nov-3",
+          "name": "Linear combinations",
+          "aliases": [
+            "weighted sums of vectors"
+          ],
+          "bloom": "C2",
+          "summary": "Form and interpret sums of scaled vectors as new vectors reachable from given ones."
+        },
+        {
+          "id": "nov-4",
+          "name": "Matrices as rectangular arrays",
+          "aliases": [
+            "matrix notation",
+            "matrix entries"
+          ],
+          "bloom": "C1",
+          "summary": "Identify matrix size, rows, columns and entries, and recognise special forms such as identity, zero and diagonal."
+        },
+        {
+          "id": "nov-6",
+          "name": "Matrix-vector product",
+          "aliases": [
+            "Ax",
+            "matrix times vector"
+          ],
+          "bloom": "C2",
+          "summary": "Compute Ax as a linear combination of the columns of A and as row-wise dot products."
+        },
+        {
+          "id": "nov-5",
+          "name": "Systems of linear equations",
+          "aliases": [
+            "linear systems",
+            "simultaneous equations"
+          ],
+          "bloom": "C2",
+          "summary": "Write a system of equations in matrix form Ax = b and explain what a solution means."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ],
+        [
+          "nov-6",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A vector is only an arrow and cannot be described by a list of numbers, or vice versa.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A matrix times a vector is computed by multiplying corresponding entries one by one.",
+          "concepts": [
+            "nov-6"
+          ]
+        },
+        {
+          "text": "A system of linear equations always has exactly one solution.",
+          "concepts": [
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Gaussian elimination",
+          "aliases": [
+            "row reduction",
+            "row echelon form"
+          ],
+          "bloom": "C3",
+          "summary": "Apply elementary row operations to reduce an augmented matrix to echelon or reduced echelon form and solve the system."
+        },
+        {
+          "id": "adb-2",
+          "name": "Solution set types",
+          "aliases": [
+            "consistent and inconsistent systems",
+            "free variables"
+          ],
+          "bloom": "C3",
+          "summary": "Use pivots and free variables to decide whether a system has no, one or infinitely many solutions and describe them parametrically."
+        },
+        {
+          "id": "adb-3",
+          "name": "Matrix multiplication",
+          "aliases": [
+            "matrix product",
+            "composition of matrices"
+          ],
+          "bloom": "C3",
+          "summary": "Multiply compatible matrices, check dimensions, and know that the product is generally not commutative."
+        },
+        {
+          "id": "adb-4",
+          "name": "Transpose and special matrices",
+          "aliases": [
+            "symmetric matrix",
+            "matrix transpose"
+          ],
+          "bloom": "C2",
+          "summary": "Compute transposes and recognise symmetric, triangular and diagonal matrices and the rule (AB)^T = B^T A^T."
+        },
+        {
+          "id": "adb-5",
+          "name": "Matrix inverse",
+          "aliases": [
+            "invertible matrix",
+            "inverse by row reduction"
+          ],
+          "bloom": "C3",
+          "summary": "Find the inverse of a square matrix by row reducing [A | I] and use it to solve Ax = b."
+        },
+        {
+          "id": "adb-6",
+          "name": "Dot product and length",
+          "aliases": [
+            "inner product",
+            "norm"
+          ],
+          "bloom": "C3",
+          "summary": "Compute dot products, vector lengths and angles, and test whether two vectors are perpendicular."
+        },
+        {
+          "id": "adb-7",
+          "name": "Linear transformations as matrices",
+          "aliases": [
+            "matrix transformations",
+            "geometric maps"
+          ],
+          "bloom": "C3",
+          "summary": "Describe how a matrix rotates, scales, reflects or shears the plane and read the matrix from the images of basis vectors."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-1",
+          "adb-5"
+        ],
+        [
+          "adb-3",
+          "adb-5"
+        ],
+        [
+          "nov-2",
+          "adb-6"
+        ],
+        [
+          "adb-3",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Matrix multiplication is commutative, so AB = BA.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Every square matrix has an inverse.",
+          "concepts": [
+            "adb-5"
+          ]
+        },
+        {
+          "text": "The inverse of a matrix is found by taking the reciprocal of each entry.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Linear independence",
+          "aliases": [
+            "dependent vectors"
+          ],
+          "bloom": "C3",
+          "summary": "Test whether vectors are independent by checking whether Ax = 0 has only the trivial solution."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Span and subspaces",
+          "aliases": [
+            "vector subspace",
+            "column space"
+          ],
+          "bloom": "C3",
+          "summary": "Determine the span of a set of vectors and verify whether a set is a subspace by closure under addition and scaling."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Basis and dimension",
+          "aliases": [
+            "coordinates relative to a basis"
+          ],
+          "bloom": "C4",
+          "summary": "Identify a basis of a subspace, find its dimension and express vectors in coordinates relative to it."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Null space and column space",
+          "aliases": [
+            "kernel",
+            "image",
+            "fundamental subspaces"
+          ],
+          "bloom": "C4",
+          "summary": "Compute bases for the null space and column space of a matrix and interpret them in terms of solutions and outputs."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Rank and rank-nullity",
+          "aliases": [
+            "rank-nullity theorem"
+          ],
+          "bloom": "C4",
+          "summary": "Use rank + nullity = number of columns to analyse solvability and invertibility of a matrix."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Determinants",
+          "aliases": [
+            "determinant computation",
+            "cofactor expansion"
+          ],
+          "bloom": "C3",
+          "summary": "Compute determinants by cofactor expansion or row reduction and interpret them as signed volume scaling and an invertibility test."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Orthogonality and projections",
+          "aliases": [
+            "orthogonal projection",
+            "orthogonal complement"
+          ],
+          "bloom": "C4",
+          "summary": "Project a vector onto a line or subspace and relate orthogonal complements to row space and null space."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-3"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "adb-1",
+          "cmp-6"
+        ],
+        [
+          "adb-6",
+          "cmp-7"
+        ],
+        [
+          "cmp-4",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Any set of vectors that spans a space is a basis for it.",
+          "concepts": [
+            "cmp-2",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "The column space of the row-reduced matrix is the same as the column space of the original matrix.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "The determinant of A + B equals det A + det B.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Eigenvalues and eigenvectors",
+          "aliases": [
+            "characteristic polynomial",
+            "eigenpairs"
+          ],
+          "bloom": "C4",
+          "summary": "Find eigenvalues from det(A - λI) = 0, compute eigenspaces, and interpret them as directions preserved by a transformation."
+        },
+        {
+          "id": "prf-4",
+          "name": "Gram-Schmidt and QR",
+          "aliases": [
+            "orthonormal basis",
+            "QR factorization"
+          ],
+          "bloom": "C4",
+          "summary": "Build an orthonormal basis from independent vectors and use QR factorization to organise the result."
+        },
+        {
+          "id": "prf-5",
+          "name": "Least squares",
+          "aliases": [
+            "normal equations",
+            "best-fit solution"
+          ],
+          "bloom": "C5",
+          "summary": "Solve inconsistent systems by projecting b onto the column space via A^T A x = A^T b and judge the fit."
+        },
+        {
+          "id": "prf-7",
+          "name": "Change of basis",
+          "aliases": [
+            "similar matrices",
+            "basis transformation"
+          ],
+          "bloom": "C4",
+          "summary": "Represent a linear map in different bases and recognise that similar matrices share eigenvalues, trace and determinant."
+        },
+        {
+          "id": "prf-2",
+          "name": "Diagonalization",
+          "aliases": [
+            "similarity transformation",
+            "A = PDP^-1"
+          ],
+          "bloom": "C4",
+          "summary": "Decide when a matrix is diagonalizable and use A = PDP^-1 to compute powers and understand dynamics."
+        },
+        {
+          "id": "prf-3",
+          "name": "Algebraic versus geometric multiplicity",
+          "aliases": [
+            "defective matrices"
+          ],
+          "bloom": "C4",
+          "summary": "Compare multiplicities of an eigenvalue to diagnose defective matrices that cannot be diagonalized."
+        },
+        {
+          "id": "prf-6",
+          "name": "Spectral theorem for symmetric matrices",
+          "aliases": [
+            "orthogonal diagonalization"
+          ],
+          "bloom": "C4",
+          "summary": "Explain why symmetric real matrices have real eigenvalues and orthonormal eigenvectors and use A = QΛQ^T."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "prf-7",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-5"
+        ],
+        [
+          "prf-2",
+          "prf-6"
+        ],
+        [
+          "prf-4",
+          "prf-6"
+        ],
+        [
+          "cmp-3",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Every square matrix is diagonalizable.",
+          "concepts": [
+            "prf-2",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Matrices with the same eigenvalues are always similar.",
+          "concepts": [
+            "prf-1",
+            "prf-7"
+          ]
+        },
+        {
+          "text": "Eigenvalues of a real matrix are always real numbers.",
+          "concepts": [
+            "prf-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Singular value decomposition",
+          "aliases": [
+            "SVD",
+            "A = UΣV^T"
+          ],
+          "bloom": "C5",
+          "summary": "Derive and interpret A = UΣV^T for any matrix, linking singular values to A^T A and to the geometry of the map."
+        },
+        {
+          "id": "exp-2",
+          "name": "Low-rank approximation",
+          "aliases": [
+            "Eckart-Young theorem",
+            "truncated SVD"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate truncated SVD as the optimal rank-k approximation and judge truncation levels for compression or denoising."
+        },
+        {
+          "id": "exp-3",
+          "name": "Pseudoinverse",
+          "aliases": [
+            "Moore-Penrose inverse"
+          ],
+          "bloom": "C5",
+          "summary": "Construct the pseudoinverse from the SVD and use it to give minimum-norm least-squares solutions for any system."
+        },
+        {
+          "id": "exp-4",
+          "name": "Conditioning and numerical stability",
+          "aliases": [
+            "condition number",
+            "ill-conditioned systems"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how the condition number governs error amplification and choose stable algorithms such as QR or SVD over normal equations."
+        },
+        {
+          "id": "exp-5",
+          "name": "Jordan form and generalized eigenvectors",
+          "aliases": [
+            "Jordan canonical form"
+          ],
+          "bloom": "C5",
+          "summary": "Analyse defective matrices through Jordan blocks and explain their effect on matrix powers and exponentials."
+        },
+        {
+          "id": "exp-6",
+          "name": "Positive definite matrices",
+          "aliases": [
+            "quadratic forms",
+            "definiteness"
+          ],
+          "bloom": "C5",
+          "summary": "Characterise definiteness through eigenvalues, pivots and quadratic forms, and connect it to optimisation and Cholesky factorization."
+        },
+        {
+          "id": "exp-7",
+          "name": "Modelling with spectral methods",
+          "aliases": [
+            "PCA",
+            "Markov chains",
+            "principal components"
+          ],
+          "bloom": "C6",
+          "summary": "Design spectral models such as PCA or Markov steady states, choosing the decomposition that suits the problem."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-3"
+        ],
+        [
+          "exp-1",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "prf-3",
+          "exp-5"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "exp-2",
+          "exp-7"
+        ],
+        [
+          "exp-6",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Singular values are just the absolute values of the eigenvalues of A.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "A small determinant means a matrix is ill-conditioned.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Solving least squares through the normal equations is always as accurate as using QR or SVD.",
+          "concepts": [
+            "exp-4",
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

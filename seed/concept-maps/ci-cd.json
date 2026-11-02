@@ -1,0 +1,702 @@
+{
+  "version": 1,
+  "topic": "ci-cd",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "git",
+    "software-testing",
+    "linux-command-line"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Continuous integration idea",
+          "aliases": [
+            "CI"
+          ],
+          "bloom": "C1",
+          "summary": "Explain that CI means merging changes often and automatically building and testing each one to catch problems early."
+        },
+        {
+          "id": "nov-3",
+          "name": "Pipeline stages and jobs",
+          "aliases": [
+            "Build test deploy stages"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a pipeline as an ordered series of stages made of jobs, such as build, test and deploy, each passing or failing."
+        },
+        {
+          "id": "nov-2",
+          "name": "Delivery versus deployment",
+          "aliases": [
+            "Continuous delivery vs continuous deployment"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish continuous delivery, where releases are ready to ship on demand, from continuous deployment, where every passing change goes live automatically."
+        },
+        {
+          "id": "nov-4",
+          "name": "Pipeline triggers",
+          "aliases": [
+            "Push trigger",
+            "Pull request trigger"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the events that start a pipeline, such as a push, a pull request, a tag or a schedule."
+        },
+        {
+          "id": "nov-5",
+          "name": "Build artifacts",
+          "aliases": [
+            "Build outputs",
+            "Binaries and packages"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that an artifact is the packaged output of a build, such as a binary or container image, that later stages test and deploy."
+        },
+        {
+          "id": "nov-6",
+          "name": "Pipeline as code",
+          "aliases": [
+            "Config-as-code",
+            "YAML pipeline definition"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that the pipeline is defined in a versioned file kept in the repository alongside the code."
+        },
+        {
+          "id": "nov-7",
+          "name": "Runners and agents",
+          "aliases": [
+            "Build agents",
+            "CI workers"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that pipeline jobs execute on runners, which are separate machines or containers, not on the developer's laptop."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-2"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-6",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A green pipeline means the software has no bugs.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Continuous delivery and continuous deployment are the same thing.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "CI is just a tool you install rather than a practice of merging and verifying changes frequently.",
+          "concepts": [
+            "nov-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Writing a basic pipeline file",
+          "aliases": [
+            "Workflow definition",
+            "Pipeline YAML"
+          ],
+          "bloom": "C3",
+          "summary": "Write a working pipeline definition with triggers, jobs and steps that checks out code, builds it and runs the tests."
+        },
+        {
+          "id": "adb-2",
+          "name": "Automated test gating",
+          "aliases": [
+            "Quality gates",
+            "Fail-fast tests"
+          ],
+          "bloom": "C3",
+          "summary": "Configure the pipeline so failing tests or lint checks stop later stages and block merging."
+        },
+        {
+          "id": "adb-3",
+          "name": "Storing and passing artifacts",
+          "aliases": [
+            "Artifact upload",
+            "Artifact registry"
+          ],
+          "bloom": "C3",
+          "summary": "Publish build outputs and pass them between jobs so the same artifact tested is the one deployed."
+        },
+        {
+          "id": "adb-4",
+          "name": "Dependency caching",
+          "aliases": [
+            "Build cache",
+            "Cache keys"
+          ],
+          "bloom": "C3",
+          "summary": "Cache downloaded dependencies with keys based on lockfiles to speed up runs without stale results."
+        },
+        {
+          "id": "adb-5",
+          "name": "Pipeline environment variables",
+          "aliases": [
+            "Pipeline variables",
+            "Env config"
+          ],
+          "bloom": "C2",
+          "summary": "Use variables to configure jobs and keep environment-specific values out of the pipeline logic."
+        },
+        {
+          "id": "adb-6",
+          "name": "Basic secrets handling",
+          "aliases": [
+            "CI secrets",
+            "Masked variables"
+          ],
+          "bloom": "C3",
+          "summary": "Store credentials in the CI system's secret store, inject them at runtime and keep them out of the repository and logs."
+        },
+        {
+          "id": "adb-7",
+          "name": "Reading pipeline logs",
+          "aliases": [
+            "Debugging failed builds",
+            "Build log triage"
+          ],
+          "bloom": "C3",
+          "summary": "Locate the failing step in a run's logs and reproduce the failure locally to fix it."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-4"
+        ],
+        [
+          "adb-1",
+          "adb-5"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "It is safe to commit secrets to the repository if the repository is private.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "Caching always makes builds faster and never causes incorrect results.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Masking a secret in logs makes it impossible to leak.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-4",
+          "name": "Build once, deploy many",
+          "aliases": [
+            "Immutable artifacts"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why rebuilding per environment breaks traceability and how immutable, versioned artifacts avoid this."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Pipeline parallelism and matrices",
+          "aliases": [
+            "Matrix builds",
+            "Parallel jobs"
+          ],
+          "bloom": "C3",
+          "summary": "Run independent jobs in parallel and use matrices to test across versions or platforms while managing total run time."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Test pyramid in pipelines",
+          "aliases": [
+            "Test stage ordering"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse where unit, integration and end-to-end tests belong in the pipeline to balance speed and confidence."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Flaky test handling",
+          "aliases": [
+            "Non-deterministic tests"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose intermittent failures and decide to fix, quarantine or retry them without eroding trust in the pipeline."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Containerised build and deploy",
+          "aliases": [
+            "Docker image pipeline"
+          ],
+          "bloom": "C3",
+          "summary": "Build a container image in the pipeline, tag it by version or commit and push it to a registry for deployment."
+        },
+        {
+          "id": "cmp-1",
+          "name": "Multi-environment promotion",
+          "aliases": [
+            "Dev staging production flow",
+            "Environment promotion"
+          ],
+          "bloom": "C3",
+          "summary": "Design a pipeline that promotes one built artifact through environments, with per-environment configuration and approvals."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Deployment strategies",
+          "aliases": [
+            "Rolling, blue-green, canary"
+          ],
+          "bloom": "C4",
+          "summary": "Compare rolling, blue-green and canary deployments in terms of downtime, risk and resource cost, and pick one for a case."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Rollback mechanisms",
+          "aliases": [
+            "Redeploy previous version",
+            "Roll forward"
+          ],
+          "bloom": "C3",
+          "summary": "Implement rollback by redeploying a previous artifact and decide when rolling forward is better."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-4",
+          "cmp-3"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-2",
+          "cmp-6"
+        ],
+        [
+          "cmp-6",
+          "cmp-7"
+        ],
+        [
+          "adb-1",
+          "cmp-5"
+        ],
+        [
+          "adb-3",
+          "cmp-8"
+        ],
+        [
+          "cmp-8",
+          "cmp-1"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Rebuilding the code for each environment is fine because it is the same source.",
+          "concepts": [
+            "cmp-4",
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Rollback is always just redeploying the old version, even when database schema changes are involved.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Automatically retrying flaky tests until they pass solves the flakiness.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-2",
+          "name": "Short-lived credentials",
+          "aliases": [
+            "OIDC federation",
+            "Workload identity"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why short-lived, identity-based credentials are safer than long-lived stored keys and how pipelines obtain them."
+        },
+        {
+          "id": "prf-1",
+          "name": "Pipeline security hardening",
+          "aliases": [
+            "Supply chain security",
+            "CI threat modelling"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate pipeline risks such as untrusted pull request code, over-privileged tokens and compromised dependencies, and apply least privilege."
+        },
+        {
+          "id": "prf-3",
+          "name": "Progressive delivery with feature flags",
+          "aliases": [
+            "Decoupling deploy from release",
+            "Feature toggles"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate using feature flags and staged exposure to separate deployment from release and limit blast radius."
+        },
+        {
+          "id": "prf-4",
+          "name": "Automated release verification",
+          "aliases": [
+            "Smoke tests",
+            "Automated rollback triggers"
+          ],
+          "bloom": "C5",
+          "summary": "Judge which health checks and metrics should gate a release and trigger automatic rollback."
+        },
+        {
+          "id": "prf-5",
+          "name": "Database migration in pipelines",
+          "aliases": [
+            "Schema change deployment",
+            "Expand and contract"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how to apply schema changes safely using backward-compatible expand and contract steps."
+        },
+        {
+          "id": "prf-6",
+          "name": "Pipeline performance optimisation",
+          "aliases": [
+            "Build time reduction",
+            "Incremental builds"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the critical path of a pipeline and cut feedback time through caching, test selection and parallelism."
+        },
+        {
+          "id": "prf-7",
+          "name": "Artifact provenance and signing",
+          "aliases": [
+            "SBOM",
+            "Signed artifacts"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how signing, provenance records and dependency scanning establish trust in what is deployed."
+        },
+        {
+          "id": "prf-8",
+          "name": "Reusable pipeline templates",
+          "aliases": [
+            "Shared workflows",
+            "Pipeline libraries"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how to share and version pipeline logic across repositories without hindering team autonomy."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-1"
+        ],
+        [
+          "cmp-2",
+          "prf-3"
+        ],
+        [
+          "cmp-3",
+          "prf-4"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "cmp-3",
+          "prf-5"
+        ],
+        [
+          "cmp-5",
+          "prf-6"
+        ],
+        [
+          "cmp-4",
+          "prf-7"
+        ],
+        [
+          "prf-1",
+          "prf-7"
+        ],
+        [
+          "adb-1",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Running pipelines only on trusted branches removes the need to worry about pipeline security.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Deploying a feature to production and releasing it to users must be the same event.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "A database migration can be rolled back as simply as application code.",
+          "concepts": [
+            "prf-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Delivery performance metrics",
+          "aliases": [
+            "DORA metrics",
+            "Four key metrics"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate a delivery process using deployment frequency, lead time, change failure rate and recovery time, and avoid gaming them."
+        },
+        {
+          "id": "exp-2",
+          "name": "Pipeline architecture design",
+          "aliases": [
+            "Delivery platform design",
+            "Monorepo versus polyrepo pipelines"
+          ],
+          "bloom": "C6",
+          "summary": "Design pipeline architecture for many services and teams, covering monorepo change detection, dependency ordering and shared infrastructure."
+        },
+        {
+          "id": "exp-3",
+          "name": "GitOps and declarative delivery",
+          "aliases": [
+            "Pull-based deployment",
+            "Reconciliation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate pull-based, reconciled deployment from a Git source of truth against push-based pipelines."
+        },
+        {
+          "id": "exp-4",
+          "name": "Governance and compliance automation",
+          "aliases": [
+            "Policy as code",
+            "Audit trails"
+          ],
+          "bloom": "C6",
+          "summary": "Create controls such as policy checks, approvals and audit evidence that satisfy compliance without slowing delivery."
+        },
+        {
+          "id": "exp-5",
+          "name": "Resilient release engineering",
+          "aliases": [
+            "Release safety design",
+            "Incident-informed pipelines"
+          ],
+          "bloom": "C6",
+          "summary": "Design release processes that bound blast radius, support multi-region rollout and improve from incident learnings."
+        },
+        {
+          "id": "exp-6",
+          "name": "CI/CD platform trade-offs",
+          "aliases": [
+            "Build versus buy",
+            "Self-hosted runners"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate hosted versus self-hosted runners, tooling and cost against security, scale and maintenance needs."
+        },
+        {
+          "id": "exp-7",
+          "name": "Pipeline reliability engineering",
+          "aliases": [
+            "Pipeline SLOs",
+            "CI observability"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and improve pipeline reliability and observability by treating the delivery system as a product with its own objectives."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-6",
+          "exp-7"
+        ],
+        [
+          "prf-4",
+          "exp-5"
+        ],
+        [
+          "prf-3",
+          "exp-5"
+        ],
+        [
+          "prf-8",
+          "exp-2"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "prf-1",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Maximising deployment frequency alone shows a healthy delivery process.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "GitOps is just a CI/CD pipeline with a different name and removes the need for any pipeline.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Strict manual approvals for every release are the best way to guarantee compliance and safety.",
+          "concepts": [
+            "exp-4",
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

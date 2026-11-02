@@ -1,0 +1,709 @@
+{
+  "version": 1,
+  "topic": "kubernetes",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "docker",
+    "linux-command-line",
+    "computer-networking"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Cluster, nodes and control plane",
+          "aliases": [
+            "Kubernetes architecture",
+            "cluster components"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a cluster is made of worker nodes running workloads and a control plane (API server, etcd, scheduler, controllers) that manages desired state, with a kubelet on each node."
+        },
+        {
+          "id": "nov-2",
+          "name": "Pods as smallest unit",
+          "aliases": [
+            "Pod",
+            "pod basics"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a pod wraps one or more containers sharing network and storage, and is the unit Kubernetes schedules."
+        },
+        {
+          "id": "nov-3",
+          "name": "Declarative desired state",
+          "aliases": [
+            "desired state",
+            "reconciliation"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that you declare what you want and controllers continually work to make actual state match it."
+        },
+        {
+          "id": "nov-4",
+          "name": "YAML manifest structure",
+          "aliases": [
+            "manifest fields",
+            "apiVersion kind metadata spec"
+          ],
+          "bloom": "C2",
+          "summary": "Recognise and read the apiVersion, kind, metadata and spec fields of a Kubernetes manifest."
+        },
+        {
+          "id": "nov-5",
+          "name": "Basic kubectl commands",
+          "aliases": [
+            "kubectl get describe",
+            "kubectl apply"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the commands to create, list, inspect and delete objects with kubectl (apply, get, describe, delete)."
+        },
+        {
+          "id": "nov-6",
+          "name": "Labels and selectors",
+          "aliases": [
+            "labels",
+            "selector matching"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that labels are key-value tags on objects and selectors use them to group and target objects."
+        },
+        {
+          "id": "nov-7",
+          "name": "Namespaces for grouping",
+          "aliases": [
+            "namespace",
+            "virtual cluster partition"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that namespaces partition resources within one cluster and that names are unique per namespace."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-6",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A pod is the same thing as a container and always holds exactly one container.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Kubernetes runs on the nodes only, and the control plane is just an optional dashboard.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Namespaces give strong security isolation between workloads by default.",
+          "concepts": [
+            "nov-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "ReplicaSets and replica counts",
+          "aliases": [
+            "ReplicaSet",
+            "replicas"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a ReplicaSet keeps a specified number of matching pods running and replaces failed ones."
+        },
+        {
+          "id": "adb-2",
+          "name": "Deployments managing pods",
+          "aliases": [
+            "Deployment",
+            "deployment manifest"
+          ],
+          "bloom": "C3",
+          "summary": "Write and apply a Deployment manifest and scale it, understanding it manages ReplicaSets that manage pods."
+        },
+        {
+          "id": "adb-3",
+          "name": "Services and ClusterIP",
+          "aliases": [
+            "Service",
+            "service discovery"
+          ],
+          "bloom": "C3",
+          "summary": "Create a Service that selects pods by label to give a stable virtual IP and DNS name for reaching them."
+        },
+        {
+          "id": "adb-4",
+          "name": "Service types NodePort LoadBalancer",
+          "aliases": [
+            "NodePort",
+            "LoadBalancer",
+            "service exposure"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish ClusterIP, NodePort and LoadBalancer Services and when each exposes a workload."
+        },
+        {
+          "id": "adb-5",
+          "name": "ConfigMaps for configuration",
+          "aliases": [
+            "ConfigMap",
+            "env and volume config"
+          ],
+          "bloom": "C3",
+          "summary": "Inject non-sensitive configuration into pods as environment variables or mounted files using ConfigMaps."
+        },
+        {
+          "id": "adb-6",
+          "name": "Secrets for sensitive data",
+          "aliases": [
+            "Secret",
+            "secret injection"
+          ],
+          "bloom": "C3",
+          "summary": "Create Secrets and consume them in pods via environment variables or volumes."
+        },
+        {
+          "id": "adb-7",
+          "name": "Logs and exec debugging",
+          "aliases": [
+            "kubectl logs",
+            "kubectl exec"
+          ],
+          "bloom": "C3",
+          "summary": "Use kubectl logs, exec, describe and events to diagnose why a pod is failing or pending."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "adb-2",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Secrets are encrypted, so base64 values in a Secret are safe from anyone who can read them.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "You should create bare pods directly for production because Deployments add unnecessary overhead.",
+          "concepts": [
+            "adb-2",
+            "adb-1"
+          ]
+        },
+        {
+          "text": "A Service's ClusterIP is reachable from outside the cluster.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Rolling update strategy",
+          "aliases": [
+            "rolling updates",
+            "maxSurge maxUnavailable"
+          ],
+          "bloom": "C3",
+          "summary": "Configure and perform rolling updates of a Deployment, tuning maxSurge and maxUnavailable."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Rollout history and rollback",
+          "aliases": [
+            "kubectl rollout undo",
+            "revision history"
+          ],
+          "bloom": "C3",
+          "summary": "Monitor rollouts, inspect revision history and roll back a failed release."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Liveness readiness startup probes",
+          "aliases": [
+            "probes",
+            "health checks"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse what each probe type does and choose probes so that restarts and traffic routing behave correctly."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Resource requests and limits",
+          "aliases": [
+            "CPU memory requests",
+            "limits",
+            "QoS"
+          ],
+          "bloom": "C4",
+          "summary": "Set requests and limits and analyse their effect on scheduling, throttling, OOM kills and QoS classes."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Ingress routing",
+          "aliases": [
+            "Ingress",
+            "Ingress controller"
+          ],
+          "bloom": "C3",
+          "summary": "Define Ingress rules for host and path HTTP routing to Services, requiring an Ingress controller."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Horizontal Pod Autoscaler",
+          "aliases": [
+            "HPA",
+            "autoscaling"
+          ],
+          "bloom": "C3",
+          "summary": "Configure an HPA to scale replicas on metrics such as CPU utilisation relative to requests."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Persistent volumes and claims",
+          "aliases": [
+            "PV",
+            "PVC",
+            "StorageClass"
+          ],
+          "bloom": "C3",
+          "summary": "Provide durable storage to pods using PersistentVolumeClaims and StorageClasses."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Helm charts and releases",
+          "aliases": [
+            "Helm",
+            "values.yaml"
+          ],
+          "bloom": "C3",
+          "summary": "Install, upgrade and roll back Helm releases and override chart values."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-3"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "cmp-3",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-5"
+        ],
+        [
+          "adb-2",
+          "cmp-7"
+        ],
+        [
+          "adb-5",
+          "cmp-8"
+        ],
+        [
+          "adb-2",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A failing readiness probe restarts the container.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "HPA scales on actual CPU usage alone, regardless of whether requests are set.",
+          "concepts": [
+            "cmp-6",
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Creating an Ingress resource alone makes traffic flow, with no controller needed.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "StatefulSet identity and storage",
+          "aliases": [
+            "StatefulSet",
+            "stable network identity"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how StatefulSets give pods stable names, ordered rollout and per-pod volumes, and when to choose them over Deployments."
+        },
+        {
+          "id": "prf-2",
+          "name": "Headless services for stateful apps",
+          "aliases": [
+            "headless Service",
+            "per-pod DNS"
+          ],
+          "bloom": "C4",
+          "summary": "Use headless Services to provide per-pod DNS records for peer discovery in stateful workloads."
+        },
+        {
+          "id": "prf-3",
+          "name": "Scheduling constraints and affinity",
+          "aliases": [
+            "node affinity",
+            "taints tolerations",
+            "topology spread"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and apply selectors, affinity, taints and spread constraints to place pods for availability and isolation."
+        },
+        {
+          "id": "prf-4",
+          "name": "RBAC and service accounts",
+          "aliases": [
+            "Role",
+            "RoleBinding",
+            "ServiceAccount"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse and design least-privilege access with Roles, bindings and service accounts."
+        },
+        {
+          "id": "prf-5",
+          "name": "Network policies",
+          "aliases": [
+            "NetworkPolicy",
+            "pod traffic rules"
+          ],
+          "bloom": "C4",
+          "summary": "Restrict pod-to-pod traffic with NetworkPolicies, understanding they need a supporting network plugin."
+        },
+        {
+          "id": "prf-6",
+          "name": "Pod disruption budgets",
+          "aliases": [
+            "PDB",
+            "voluntary disruption"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how PodDisruptionBudgets protect availability during drains and upgrades."
+        },
+        {
+          "id": "prf-7",
+          "name": "Helm chart templating",
+          "aliases": [
+            "Helm templates",
+            "chart authoring"
+          ],
+          "bloom": "C5",
+          "summary": "Author and review charts with templates, helpers and values that stay reusable and safe to upgrade."
+        },
+        {
+          "id": "prf-8",
+          "name": "Systematic troubleshooting workflow",
+          "aliases": [
+            "debugging pods",
+            "CrashLoopBackOff diagnosis"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose failures such as CrashLoopBackOff, ImagePullBackOff, Pending and failing Services by tracing events, logs, selectors and endpoints."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "prf-4"
+        ],
+        [
+          "cmp-7",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-4",
+          "prf-3"
+        ],
+        [
+          "adb-3",
+          "prf-5"
+        ],
+        [
+          "prf-3",
+          "prf-6"
+        ],
+        [
+          "cmp-8",
+          "prf-7"
+        ],
+        [
+          "cmp-3",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A PodDisruptionBudget prevents involuntary failures such as node crashes.",
+          "concepts": [
+            "prf-6"
+          ]
+        },
+        {
+          "text": "NetworkPolicies work on any cluster regardless of the network plugin.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "StatefulSets make a database highly available and consistent automatically.",
+          "concepts": [
+            "prf-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Control plane internals",
+          "aliases": [
+            "API server etcd scheduler",
+            "controller loop internals"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how API server, etcd, scheduler and controller manager interact and how their failure modes affect the cluster."
+        },
+        {
+          "id": "exp-2",
+          "name": "Custom resources and operators",
+          "aliases": [
+            "CRD",
+            "operator pattern"
+          ],
+          "bloom": "C6",
+          "summary": "Design CustomResourceDefinitions and controllers that encode operational knowledge for an application."
+        },
+        {
+          "id": "exp-3",
+          "name": "Admission control and policy",
+          "aliases": [
+            "admission webhooks",
+            "policy enforcement"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate admission controllers and policy engines to enforce security and governance rules."
+        },
+        {
+          "id": "exp-4",
+          "name": "Multi-tenancy and cluster design",
+          "aliases": [
+            "tenancy",
+            "cluster topology"
+          ],
+          "bloom": "C6",
+          "summary": "Design cluster and namespace topology balancing isolation, quotas, cost and blast radius."
+        },
+        {
+          "id": "exp-5",
+          "name": "Autoscaling at cluster level",
+          "aliases": [
+            "cluster autoscaler",
+            "VPA",
+            "event-driven scaling"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how HPA, VPA and node autoscaling interact and design capacity strategies."
+        },
+        {
+          "id": "exp-6",
+          "name": "Progressive delivery and GitOps",
+          "aliases": [
+            "canary",
+            "blue-green",
+            "GitOps"
+          ],
+          "bloom": "C6",
+          "summary": "Design release pipelines using canary, blue-green and Git-driven reconciliation beyond basic rolling updates."
+        },
+        {
+          "id": "exp-7",
+          "name": "Upgrades and disaster recovery",
+          "aliases": [
+            "cluster upgrade",
+            "etcd backup",
+            "restore"
+          ],
+          "bloom": "C5",
+          "summary": "Plan and evaluate cluster upgrade, version skew and backup and restore strategies."
+        },
+        {
+          "id": "exp-8",
+          "name": "Observability and reliability engineering",
+          "aliases": [
+            "metrics logging tracing",
+            "SLOs"
+          ],
+          "bloom": "C6",
+          "summary": "Design monitoring, alerting and capacity practices that make workloads and the platform reliable."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-8",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "cmp-6",
+          "exp-5"
+        ],
+        [
+          "cmp-4",
+          "exp-5"
+        ],
+        [
+          "cmp-1",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "prf-8",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Running more replicas always guarantees high availability regardless of scheduling and dependencies.",
+          "concepts": [
+            "exp-4",
+            "exp-8"
+          ]
+        },
+        {
+          "text": "HPA and VPA can safely scale the same pods on the same metric at the same time.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Operators are only needed for databases and replace the need to understand Kubernetes primitives.",
+          "concepts": [
+            "exp-2"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,715 @@
+{
+  "version": 1,
+  "topic": "nextjs",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "react"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "File-based routing with app directory",
+          "aliases": [
+            "App Router routes",
+            "folder-based routing"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that folders under app define URL segments and that a page file makes a segment publicly reachable."
+        },
+        {
+          "id": "nov-2",
+          "name": "Page and layout files",
+          "aliases": [
+            "page.js",
+            "layout.js"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how page files render route UI and layout files wrap pages and persist across navigation."
+        },
+        {
+          "id": "nov-3",
+          "name": "Server Components by default",
+          "aliases": [
+            "React Server Components",
+            "RSC default"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that components in the App Router render on the server by default and send no component JavaScript to the client."
+        },
+        {
+          "id": "nov-4",
+          "name": "Client Components and use client",
+          "aliases": [
+            "use client directive",
+            "client boundary"
+          ],
+          "bloom": "C2",
+          "summary": "Recognise when the use client directive is needed, such as for state, effects and event handlers."
+        },
+        {
+          "id": "nov-5",
+          "name": "Navigation with next/link",
+          "aliases": [
+            "Link component",
+            "client-side navigation"
+          ],
+          "bloom": "C2",
+          "summary": "Use the Link component to navigate between routes without a full page reload."
+        },
+        {
+          "id": "nov-6",
+          "name": "Dynamic route segments",
+          "aliases": [
+            "bracket folders",
+            "[slug] routes"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a folder named in square brackets captures a URL part as a parameter."
+        },
+        {
+          "id": "nov-7",
+          "name": "Optimised images with next/image",
+          "aliases": [
+            "Image component"
+          ],
+          "bloom": "C1",
+          "summary": "Remember that the Image component resizes, lazy-loads and serves modern formats and requires dimensions or fill to avoid layout shift."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Next.js is a separate language or replacement for React rather than a framework built on top of it.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Any file inside the app folder automatically becomes a route.",
+          "concepts": [
+            "nov-1",
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Every component needs use client to be interactive or to work at all.",
+          "concepts": [
+            "nov-3",
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Reading dynamic route params",
+          "aliases": [
+            "params prop",
+            "searchParams"
+          ],
+          "bloom": "C3",
+          "summary": "Access path params and search params in pages and use them to load the right data."
+        },
+        {
+          "id": "adb-2",
+          "name": "Async data fetching in server components",
+          "aliases": [
+            "fetch in server components",
+            "async components"
+          ],
+          "bloom": "C3",
+          "summary": "Write async server components that await fetch calls or database queries directly."
+        },
+        {
+          "id": "adb-3",
+          "name": "Nested layouts and route groups",
+          "aliases": [
+            "parentheses folders",
+            "shared layouts"
+          ],
+          "bloom": "C3",
+          "summary": "Compose nested layouts and use route groups to organise routes or split layouts without changing URLs."
+        },
+        {
+          "id": "adb-4",
+          "name": "Loading and error UI files",
+          "aliases": [
+            "loading.js",
+            "error.js",
+            "not-found.js"
+          ],
+          "bloom": "C3",
+          "summary": "Apply special files to show loading states, handle errors and render not-found pages per segment."
+        },
+        {
+          "id": "adb-5",
+          "name": "Passing server data to client components",
+          "aliases": [
+            "props across boundary",
+            "serialisable props"
+          ],
+          "bloom": "C3",
+          "summary": "Pass serialisable props from server to client components and compose them using children."
+        },
+        {
+          "id": "adb-6",
+          "name": "Metadata API",
+          "aliases": [
+            "generateMetadata",
+            "SEO metadata"
+          ],
+          "bloom": "C3",
+          "summary": "Set static and dynamic page titles and descriptions using metadata exports."
+        },
+        {
+          "id": "adb-7",
+          "name": "Programmatic navigation hooks",
+          "aliases": [
+            "useRouter",
+            "usePathname",
+            "redirect"
+          ],
+          "bloom": "C3",
+          "summary": "Use navigation hooks in client components and redirect in server code to change routes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-2"
+        ],
+        [
+          "nov-2",
+          "adb-3"
+        ],
+        [
+          "nov-2",
+          "adb-4"
+        ],
+        [
+          "nov-4",
+          "adb-5"
+        ],
+        [
+          "nov-2",
+          "adb-6"
+        ],
+        [
+          "nov-4",
+          "adb-7"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "You must use useEffect to fetch data in the App Router.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Route groups in parentheses add a segment to the URL.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Any value, including functions, can be passed as props from a server to a client component.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Rendering strategies SSG SSR ISR",
+          "aliases": [
+            "static vs dynamic rendering",
+            "incremental static regeneration"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse a route's data needs to choose between static, dynamic and revalidated rendering."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Fetch caching and revalidation",
+          "aliases": [
+            "revalidate",
+            "revalidatePath",
+            "revalidateTag"
+          ],
+          "bloom": "C4",
+          "summary": "Control cache behaviour of data fetches with time-based and on-demand revalidation and reason about staleness."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Server Actions for mutations",
+          "aliases": [
+            "use server",
+            "form actions"
+          ],
+          "bloom": "C3",
+          "summary": "Implement mutations and form handling with server actions, including validation and revalidating affected data."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Route handlers",
+          "aliases": [
+            "route.js",
+            "API routes in app router"
+          ],
+          "bloom": "C3",
+          "summary": "Build HTTP endpoints with route files exporting method handlers and decide when they are preferable to server actions."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Streaming with Suspense",
+          "aliases": [
+            "streaming SSR",
+            "loading boundaries"
+          ],
+          "bloom": "C4",
+          "summary": "Split slow data into Suspense boundaries so the page streams progressively."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Pages Router data functions",
+          "aliases": [
+            "getServerSideProps",
+            "getStaticProps",
+            "getStaticPaths"
+          ],
+          "bloom": "C4",
+          "summary": "Compare getServerSideProps and getStaticProps in the Pages Router with App Router equivalents to read and migrate legacy code."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Static params generation",
+          "aliases": [
+            "generateStaticParams"
+          ],
+          "bloom": "C3",
+          "summary": "Prerender dynamic routes at build time and control behaviour for unlisted params."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Environment variables and exposure",
+          "aliases": [
+            "NEXT_PUBLIC",
+            "env files"
+          ],
+          "bloom": "C3",
+          "summary": "Keep secrets server-only and expose only NEXT_PUBLIC variables to the browser bundle."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-3"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-2",
+          "cmp-4"
+        ],
+        [
+          "adb-4",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "adb-1",
+          "cmp-7"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "getServerSideProps works inside app directory pages.",
+          "concepts": [
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "Server actions are only a convenience and do not create public endpoints needing authorisation checks.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "ISR re-renders the page on every request so content is always fresh.",
+          "concepts": [
+            "cmp-1",
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Middleware request interception",
+          "aliases": [
+            "middleware.js",
+            "edge middleware"
+          ],
+          "bloom": "C4",
+          "summary": "Use middleware matchers to redirect, rewrite or modify headers and judge what belongs there versus in route code."
+        },
+        {
+          "id": "prf-2",
+          "name": "Authentication and authorisation placement",
+          "aliases": [
+            "auth in Next.js",
+            "session checks"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate where to verify sessions so that data access is protected at the data layer rather than only in layouts or middleware."
+        },
+        {
+          "id": "prf-3",
+          "name": "Caching layers interplay",
+          "aliases": [
+            "Data Cache",
+            "Full Route Cache",
+            "Router Cache"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose stale or unexpectedly dynamic output by tracing request memoisation, data cache, full route cache and client router cache."
+        },
+        {
+          "id": "prf-4",
+          "name": "Server and client boundary design",
+          "aliases": [
+            "component composition",
+            "bundle size"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate where to place client boundaries to minimise bundle size while preserving interactivity."
+        },
+        {
+          "id": "prf-5",
+          "name": "Performance optimisation",
+          "aliases": [
+            "Core Web Vitals",
+            "next/font",
+            "next/script"
+          ],
+          "bloom": "C5",
+          "summary": "Assess and improve LCP, CLS and INP using image, font and script optimisation and code splitting."
+        },
+        {
+          "id": "prf-6",
+          "name": "Runtimes Node and Edge",
+          "aliases": [
+            "edge runtime",
+            "runtime config"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the constraints of Edge versus Node runtimes for each route and choose accordingly."
+        },
+        {
+          "id": "prf-7",
+          "name": "Parallel and intercepting routes",
+          "aliases": [
+            "@slot",
+            "modal routes"
+          ],
+          "bloom": "C4",
+          "summary": "Model advanced UI patterns such as modals and dashboards using parallel slots and intercepting routes."
+        },
+        {
+          "id": "prf-8",
+          "name": "Vercel deployment and previews",
+          "aliases": [
+            "Vercel platform",
+            "preview deployments",
+            "environment scopes"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how a Next.js app maps onto Vercel serverless functions, static assets, preview deployments and environment scopes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-2",
+          "prf-3"
+        ],
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "adb-5",
+          "prf-4"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "prf-1",
+          "prf-6"
+        ],
+        [
+          "adb-3",
+          "prf-7"
+        ],
+        [
+          "cmp-8",
+          "prf-8"
+        ],
+        [
+          "cmp-1",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Checking authentication in a layout is enough to protect all data beneath it.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Middleware can run any Node API and is the right place for heavy logic like database queries.",
+          "concepts": [
+            "prf-1",
+            "prf-6"
+          ]
+        },
+        {
+          "text": "Putting use client at the top of a page is harmless for performance.",
+          "concepts": [
+            "prf-4",
+            "prf-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Rendering architecture trade-offs",
+          "aliases": [
+            "partial prerendering",
+            "hybrid rendering"
+          ],
+          "bloom": "C5",
+          "summary": "Judge static, dynamic and partially prerendered designs for a product by cost, freshness, latency and complexity."
+        },
+        {
+          "id": "exp-2",
+          "name": "Cache strategy design",
+          "aliases": [
+            "tag-based invalidation",
+            "cache architecture"
+          ],
+          "bloom": "C6",
+          "summary": "Design tag and path invalidation schemes across data sources, CDN and client so freshness guarantees are explicit."
+        },
+        {
+          "id": "exp-3",
+          "name": "Self-hosting and portability",
+          "aliases": [
+            "standalone output",
+            "custom cache handler"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate running Next.js outside Vercel, including standalone output, shared caches across instances and platform feature gaps."
+        },
+        {
+          "id": "exp-4",
+          "name": "Monorepo and large-app structure",
+          "aliases": [
+            "Turborepo",
+            "modular architecture"
+          ],
+          "bloom": "C6",
+          "summary": "Design project structure, shared packages and build pipelines that scale across teams."
+        },
+        {
+          "id": "exp-5",
+          "name": "Observability and failure handling",
+          "aliases": [
+            "instrumentation",
+            "error monitoring",
+            "tracing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate instrumentation, tracing and error boundaries to detect and diagnose production issues in server and client code."
+        },
+        {
+          "id": "exp-6",
+          "name": "Security hardening",
+          "aliases": [
+            "CSP",
+            "CSRF",
+            "server action security"
+          ],
+          "bloom": "C5",
+          "summary": "Assess threats such as data leakage across the server-client boundary, CSRF on actions and missing headers, and apply mitigations."
+        },
+        {
+          "id": "exp-7",
+          "name": "Migration strategy Pages to App",
+          "aliases": [
+            "incremental adoption",
+            "upgrade plan"
+          ],
+          "bloom": "C6",
+          "summary": "Plan an incremental migration from Pages Router to App Router with coexistence, risk control and verification."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-8",
+          "exp-3"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "prf-2",
+          "exp-6"
+        ],
+        [
+          "cmp-6",
+          "exp-7"
+        ],
+        [
+          "prf-4",
+          "exp-7"
+        ],
+        [
+          "prf-8",
+          "exp-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Next.js apps only run well on Vercel and cannot be self-hosted with full features.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Maximising static generation is always the best architecture regardless of data freshness needs.",
+          "concepts": [
+            "exp-1",
+            "exp-2"
+          ]
+        },
+        {
+          "text": "A migration to the App Router must be done all at once because the two routers cannot coexist.",
+          "concepts": [
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

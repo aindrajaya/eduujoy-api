@@ -1,0 +1,731 @@
+{
+  "version": 1,
+  "topic": "postgresql",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "sql"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Client-server architecture",
+          "aliases": [
+            "postmaster",
+            "server process model"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a Postgres server process manages databases and serves client connections, each handled by a separate backend process."
+        },
+        {
+          "id": "nov-2",
+          "name": "Cluster, database, schema hierarchy",
+          "aliases": [
+            "database cluster",
+            "schemas"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish a cluster, the databases within it, and the schemas and tables within each database."
+        },
+        {
+          "id": "nov-5",
+          "name": "Roles and login privileges",
+          "aliases": [
+            "users and roles",
+            "CREATE ROLE"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that users and groups are both roles and that the LOGIN attribute lets a role connect."
+        },
+        {
+          "id": "nov-6",
+          "name": "Core built-in data types",
+          "aliases": [
+            "integer text timestamptz boolean"
+          ],
+          "bloom": "C2",
+          "summary": "Choose among basic types such as integer, text, numeric, boolean, date and timestamptz for simple columns."
+        },
+        {
+          "id": "nov-7",
+          "name": "Installing and starting Postgres",
+          "aliases": [
+            "initdb",
+            "package install"
+          ],
+          "bloom": "C1",
+          "summary": "Describe how a cluster is initialised and how the server is started and stopped on a system."
+        },
+        {
+          "id": "nov-3",
+          "name": "Connecting with psql",
+          "aliases": [
+            "psql client",
+            "connection string"
+          ],
+          "bloom": "C1",
+          "summary": "Connect to a database using psql with host, port, user and database parameters and run a query."
+        },
+        {
+          "id": "nov-4",
+          "name": "psql meta-commands",
+          "aliases": [
+            "backslash commands",
+            "\\dt"
+          ],
+          "bloom": "C1",
+          "summary": "Recall common commands such as \\l, \\c, \\dt, \\d and \\q to inspect and navigate a database."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-7",
+          "nov-3"
+        ],
+        [
+          "nov-5",
+          "nov-3"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A Postgres database and a Postgres server are the same thing.",
+          "concepts": [
+            "nov-1",
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Roles and users are different kinds of objects in Postgres.",
+          "concepts": [
+            "nov-5"
+          ]
+        },
+        {
+          "text": "You can query across multiple databases in the same cluster with a simple schema-qualified name.",
+          "concepts": [
+            "nov-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Serial and identity columns",
+          "aliases": [
+            "sequences",
+            "GENERATED AS IDENTITY"
+          ],
+          "bloom": "C3",
+          "summary": "Generate surrogate keys using identity columns or sequences and explain why gaps can occur."
+        },
+        {
+          "id": "adb-2",
+          "name": "Timestamp with time zone",
+          "aliases": [
+            "timestamptz",
+            "time zone handling"
+          ],
+          "bloom": "C3",
+          "summary": "Store and query timestamps with timestamptz and apply session time zone settings correctly."
+        },
+        {
+          "id": "adb-3",
+          "name": "Array columns",
+          "aliases": [
+            "array type",
+            "ANY operator",
+            "unnest"
+          ],
+          "bloom": "C3",
+          "summary": "Define array columns, index into them, and query them using ANY, containment operators and unnest."
+        },
+        {
+          "id": "adb-4",
+          "name": "JSONB storage and operators",
+          "aliases": [
+            "jsonb",
+            "->, ->>, @>"
+          ],
+          "bloom": "C3",
+          "summary": "Store JSON documents in jsonb and extract or filter values using the arrow and containment operators."
+        },
+        {
+          "id": "adb-5",
+          "name": "Basic B-tree indexes",
+          "aliases": [
+            "CREATE INDEX",
+            "btree"
+          ],
+          "bloom": "C3",
+          "summary": "Create a B-tree index on a column to speed up equality and range lookups."
+        },
+        {
+          "id": "adb-6",
+          "name": "Reading simple EXPLAIN output",
+          "aliases": [
+            "EXPLAIN",
+            "query plan"
+          ],
+          "bloom": "C2",
+          "summary": "Read an EXPLAIN plan to tell whether a query uses a sequential scan or an index scan."
+        },
+        {
+          "id": "adb-7",
+          "name": "Granting privileges",
+          "aliases": [
+            "GRANT",
+            "REVOKE"
+          ],
+          "bloom": "C3",
+          "summary": "Grant and revoke table and schema privileges to roles to give least-privilege access."
+        },
+        {
+          "id": "adb-8",
+          "name": "Logical backup with pg_dump",
+          "aliases": [
+            "pg_dump",
+            "pg_restore",
+            "psql restore"
+          ],
+          "bloom": "C3",
+          "summary": "Take a logical dump of a database and restore it into another database."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-3"
+        ],
+        [
+          "nov-6",
+          "adb-4"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "nov-5",
+          "adb-7"
+        ],
+        [
+          "nov-3",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Sequence-generated ids are always gap-free.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "timestamptz stores the time zone alongside the value.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Creating an index guarantees the planner will use it.",
+          "concepts": [
+            "adb-5",
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "EXPLAIN ANALYZE interpretation",
+          "aliases": [
+            "actual vs estimated rows",
+            "BUFFERS"
+          ],
+          "bloom": "C4",
+          "summary": "Compare estimated and actual row counts, timings and buffer usage to find the costly step in a plan."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Multicolumn and partial indexes",
+          "aliases": [
+            "composite index",
+            "partial index",
+            "covering index INCLUDE"
+          ],
+          "bloom": "C3",
+          "summary": "Design composite, partial and covering indexes whose column order and predicates match query patterns."
+        },
+        {
+          "id": "cmp-4",
+          "name": "GIN indexes for JSONB and arrays",
+          "aliases": [
+            "GIN",
+            "jsonb_path_ops"
+          ],
+          "bloom": "C3",
+          "summary": "Apply GIN indexes to speed up containment and membership queries on jsonb and arrays."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Transaction isolation levels",
+          "aliases": [
+            "read committed",
+            "repeatable read",
+            "serializable"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse which anomalies each isolation level permits and choose a level for a workload."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Row-level locking",
+          "aliases": [
+            "SELECT FOR UPDATE",
+            "SKIP LOCKED",
+            "deadlock"
+          ],
+          "bloom": "C3",
+          "summary": "Use explicit row locks and diagnose lock waits and deadlocks in concurrent transactions."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Planner statistics and ANALYZE",
+          "aliases": [
+            "pg_stats",
+            "default_statistics_target"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how table statistics drive row estimates and how stale statistics produce bad plans."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Join and scan strategies",
+          "aliases": [
+            "nested loop",
+            "hash join",
+            "merge join",
+            "bitmap scan"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why the planner picks particular scan and join methods for given data sizes and indexes."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Configuration parameters",
+          "aliases": [
+            "postgresql.conf",
+            "shared_buffers",
+            "work_mem"
+          ],
+          "bloom": "C3",
+          "summary": "Adjust core settings such as shared_buffers and work_mem and know which need a reload or restart."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-3"
+        ],
+        [
+          "adb-4",
+          "cmp-4"
+        ],
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-7",
+          "cmp-2"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A sequential scan is always slower than an index scan.",
+          "concepts": [
+            "cmp-2",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Column order in a multicolumn index does not matter.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Read committed isolation gives each transaction a stable snapshot for its whole duration.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "MVCC and tuple visibility",
+          "aliases": [
+            "xmin xmax",
+            "snapshots",
+            "dead tuples"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how row versions, transaction ids and snapshots produce concurrency without read locks and leave dead tuples."
+        },
+        {
+          "id": "prf-2",
+          "name": "Vacuum and autovacuum tuning",
+          "aliases": [
+            "VACUUM",
+            "bloat",
+            "freeze"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate autovacuum behaviour and tune thresholds to control bloat and prevent transaction id wraparound."
+        },
+        {
+          "id": "prf-3",
+          "name": "Write-ahead log and checkpoints",
+          "aliases": [
+            "WAL",
+            "checkpoint tuning",
+            "fsync"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how WAL ensures durability and how checkpoint settings trade recovery time against write load."
+        },
+        {
+          "id": "prf-4",
+          "name": "Streaming replication",
+          "aliases": [
+            "physical replication",
+            "replicas",
+            "failover"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse primary-standby replication, replication lag and the consistency tradeoffs of synchronous versus asynchronous modes."
+        },
+        {
+          "id": "prf-5",
+          "name": "Point-in-time recovery",
+          "aliases": [
+            "PITR",
+            "base backup",
+            "WAL archiving"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate a backup strategy combining base backups and WAL archiving to meet recovery objectives."
+        },
+        {
+          "id": "prf-6",
+          "name": "Table partitioning",
+          "aliases": [
+            "declarative partitioning",
+            "partition pruning"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when and how to partition tables and verify that partition pruning works for queries."
+        },
+        {
+          "id": "prf-7",
+          "name": "Query diagnosis with statistics views",
+          "aliases": [
+            "pg_stat_statements",
+            "pg_stat_activity"
+          ],
+          "bloom": "C4",
+          "summary": "Use statistics views and pg_stat_statements to find slow queries, blocked sessions and unused indexes."
+        },
+        {
+          "id": "prf-8",
+          "name": "Extensions and index types",
+          "aliases": [
+            "CREATE EXTENSION",
+            "BRIN",
+            "GiST",
+            "pg_trgm"
+          ],
+          "bloom": "C5",
+          "summary": "Select extensions and index types such as BRIN, GiST or trigram for a given data and access pattern."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "prf-3",
+          "prf-5"
+        ],
+        [
+          "cmp-2",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "cmp-4",
+          "prf-8"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "VACUUM FULL is the normal way to keep tables healthy and should be run regularly.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "A streaming replica is a backup that makes point-in-time recovery unnecessary.",
+          "concepts": [
+            "prf-4",
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Partitioning a table always improves query performance.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-2",
+          "name": "Logical replication and zero-downtime migration",
+          "aliases": [
+            "publications subscriptions",
+            "major version upgrade"
+          ],
+          "bloom": "C6",
+          "summary": "Plan upgrades and schema migrations using logical replication with minimal downtime."
+        },
+        {
+          "id": "exp-3",
+          "name": "Capacity and workload modelling",
+          "aliases": [
+            "connection pooling",
+            "pgbouncer",
+            "sizing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate connection limits, pooling modes and hardware sizing against a projected workload."
+        },
+        {
+          "id": "exp-1",
+          "name": "High-availability architecture design",
+          "aliases": [
+            "failover orchestration",
+            "Patroni-style HA",
+            "split brain"
+          ],
+          "bloom": "C6",
+          "summary": "Design a high-availability topology with automated failover that avoids split brain and meets stated recovery goals."
+        },
+        {
+          "id": "exp-4",
+          "name": "Planner cost model tuning",
+          "aliases": [
+            "random_page_cost",
+            "extended statistics",
+            "plan hints"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and correct planner misestimates using extended statistics, cost parameters and query rewrites."
+        },
+        {
+          "id": "exp-5",
+          "name": "Sharding and scale-out strategy",
+          "aliases": [
+            "horizontal scaling",
+            "foreign data wrappers",
+            "Citus"
+          ],
+          "bloom": "C5",
+          "summary": "Assess scale-out options such as read replicas, partition-based sharding and foreign data wrappers for a given system."
+        },
+        {
+          "id": "exp-6",
+          "name": "Security hardening and row-level security",
+          "aliases": [
+            "pg_hba.conf",
+            "RLS",
+            "TLS",
+            "SCRAM"
+          ],
+          "bloom": "C6",
+          "summary": "Create a security design combining authentication rules, TLS, least privilege and row-level security policies."
+        },
+        {
+          "id": "exp-7",
+          "name": "Custom extension and function design",
+          "aliases": [
+            "PL/pgSQL",
+            "C extensions",
+            "custom types"
+          ],
+          "bloom": "C6",
+          "summary": "Create custom functions, types or extensions where built-in features fall short, weighing maintenance cost."
+        },
+        {
+          "id": "exp-8",
+          "name": "Incident diagnosis and recovery",
+          "aliases": [
+            "corruption",
+            "wraparound emergency",
+            "lock storms"
+          ],
+          "bloom": "C5",
+          "summary": "Judge root causes in production incidents such as lock pileups, bloat or replication breakage and choose recovery actions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-2"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "prf-6",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-5"
+        ],
+        [
+          "prf-8",
+          "exp-7"
+        ],
+        [
+          "prf-2",
+          "exp-8"
+        ],
+        [
+          "prf-5",
+          "exp-8"
+        ],
+        [
+          "exp-3",
+          "exp-1"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Adding more connections or a bigger max_connections value increases throughput.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Logical replication copies schema changes and sequences automatically.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Automated failover is safe as long as a standby can be promoted quickly.",
+          "concepts": [
+            "exp-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

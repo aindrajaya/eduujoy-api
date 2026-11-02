@@ -1,0 +1,724 @@
+{
+  "version": 1,
+  "topic": "nodejs",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "javascript",
+    "asynchronous-javascript"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Node as server-side runtime",
+          "aliases": [
+            "Node runtime",
+            "JavaScript outside the browser"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that Node.js runs JavaScript on the V8 engine outside the browser and exposes system APIs such as files and networking instead of the DOM."
+        },
+        {
+          "id": "nov-2",
+          "name": "Running scripts from terminal",
+          "aliases": [
+            "node command",
+            "REPL"
+          ],
+          "bloom": "C1",
+          "summary": "Run a file with the node command and use the REPL to try out expressions."
+        },
+        {
+          "id": "nov-3",
+          "name": "CommonJS require and exports",
+          "aliases": [
+            "require",
+            "module.exports"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how require loads another file or built-in module and how module.exports determines what a file shares."
+        },
+        {
+          "id": "nov-4",
+          "name": "package.json and dependencies",
+          "aliases": [
+            "package manifest",
+            "npm install"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that package.json describes a project and its dependencies, and that npm install fetches them into node_modules."
+        },
+        {
+          "id": "nov-5",
+          "name": "npm scripts",
+          "aliases": [
+            "npm run",
+            "scripts field"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that the scripts field names shell commands that can be run with npm run, such as start and test."
+        },
+        {
+          "id": "nov-6",
+          "name": "Built-in core modules",
+          "aliases": [
+            "core modules",
+            "standard library"
+          ],
+          "bloom": "C1",
+          "summary": "Name core modules such as fs, path, http and os that ship with Node and need no installation."
+        },
+        {
+          "id": "nov-7",
+          "name": "The process object basics",
+          "aliases": [
+            "process.argv",
+            "process.env"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that process gives access to command-line arguments, environment variables and the current working directory."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Node.js is a programming language rather than a runtime for JavaScript.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Browser globals like window and document are available in Node.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Core modules like fs must be installed with npm before use.",
+          "concepts": [
+            "nov-6",
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Reading and writing files with fs",
+          "aliases": [
+            "fs.readFile",
+            "fs.promises"
+          ],
+          "bloom": "C3",
+          "summary": "Read, write and append files using callback, promise and sync variants of fs and choose the non-blocking form in servers."
+        },
+        {
+          "id": "adb-2",
+          "name": "Portable paths with path",
+          "aliases": [
+            "path.join",
+            "path.resolve",
+            "__dirname"
+          ],
+          "bloom": "C3",
+          "summary": "Build file paths with path.join and path.resolve and __dirname rather than concatenating strings."
+        },
+        {
+          "id": "adb-3",
+          "name": "ES modules in Node",
+          "aliases": [
+            "import export",
+            "type module",
+            "mjs"
+          ],
+          "bloom": "C3",
+          "summary": "Write import and export syntax and enable ES modules through the .mjs extension or the type field, noting differences from CommonJS."
+        },
+        {
+          "id": "adb-4",
+          "name": "Semantic versioning and lockfiles",
+          "aliases": [
+            "semver",
+            "package-lock.json",
+            "caret range"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret version ranges such as ^ and ~ and explain why a lockfile pins exact installed versions."
+        },
+        {
+          "id": "adb-5",
+          "name": "Dev versus runtime dependencies",
+          "aliases": [
+            "devDependencies",
+            "dependencies"
+          ],
+          "bloom": "C3",
+          "summary": "Place packages in dependencies or devDependencies according to whether production code needs them."
+        },
+        {
+          "id": "adb-6",
+          "name": "Basic HTTP server",
+          "aliases": [
+            "http.createServer",
+            "request and response"
+          ],
+          "bloom": "C3",
+          "summary": "Create a server with http.createServer that reads the request method and URL and writes a status, headers and body."
+        },
+        {
+          "id": "adb-7",
+          "name": "Buffers and binary data",
+          "aliases": [
+            "Buffer.from",
+            "Uint8Array"
+          ],
+          "bloom": "C2",
+          "summary": "Create Buffers from strings and convert them back with an encoding such as utf8 or base64."
+        },
+        {
+          "id": "adb-8",
+          "name": "Event loop ordering basics",
+          "aliases": [
+            "nextTick",
+            "setImmediate",
+            "event loop"
+          ],
+          "bloom": "C2",
+          "summary": "Predict the order of synchronous code, timers, promises and I/O callbacks at a basic level."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "nov-7",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "nov-4",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "nov-6",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-7"
+        ],
+        [
+          "adb-6",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Relative paths in fs calls resolve from the script's folder rather than the current working directory.",
+          "concepts": [
+            "adb-1",
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Using readFileSync is fine in a request handler because it is simpler.",
+          "concepts": [
+            "adb-1",
+            "adb-6"
+          ]
+        },
+        {
+          "text": "require and import can be mixed freely in any file with no restrictions.",
+          "concepts": [
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Express routing",
+          "aliases": [
+            "app.get",
+            "Router",
+            "route parameters"
+          ],
+          "bloom": "C3",
+          "summary": "Define routes by method and path, read params, query and body, and organise them with Router."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Middleware chain and next",
+          "aliases": [
+            "app.use",
+            "middleware order"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how middleware runs in registration order and how calling next, responding or throwing controls the flow."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Express error handling",
+          "aliases": [
+            "error middleware",
+            "four-argument handler"
+          ],
+          "bloom": "C4",
+          "summary": "Centralise errors with four-argument middleware and forward async failures to it correctly."
+        },
+        {
+          "id": "cmp-4",
+          "name": "REST API design",
+          "aliases": [
+            "resource endpoints",
+            "HTTP status codes"
+          ],
+          "bloom": "C3",
+          "summary": "Model resources with nouns, correct methods and meaningful status codes, and validate input before use."
+        },
+        {
+          "id": "cmp-5",
+          "name": "EventEmitter pattern",
+          "aliases": [
+            "events module",
+            "on and emit"
+          ],
+          "bloom": "C3",
+          "summary": "Register listeners with on and once, emit events with arguments, and handle the special error event."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Streams and piping",
+          "aliases": [
+            "Readable",
+            "Writable",
+            "pipe"
+          ],
+          "bloom": "C4",
+          "summary": "Process large data in chunks with readable and writable streams and connect them with pipe or pipeline."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Environment configuration",
+          "aliases": [
+            "process.env",
+            "dotenv"
+          ],
+          "bloom": "C3",
+          "summary": "Keep ports, credentials and settings in environment variables rather than in source code."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Building CLI tools",
+          "aliases": [
+            "argv parsing",
+            "bin field",
+            "shebang"
+          ],
+          "bloom": "C3",
+          "summary": "Build a command-line tool that parses arguments, sets exit codes and is exposed through the bin field with a shebang."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "adb-7",
+          "cmp-6"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "nov-7",
+          "cmp-7"
+        ],
+        [
+          "nov-7",
+          "cmp-8"
+        ],
+        [
+          "nov-4",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Middleware order does not matter in Express.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "Throwing inside an async route handler is always caught by Express error middleware.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Reading a whole file into memory is equivalent to streaming it for large files.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Event loop phases",
+          "aliases": [
+            "libuv",
+            "timers poll check phases"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how libuv phases, the microtask queue and process.nextTick determine callback ordering and starvation."
+        },
+        {
+          "id": "prf-2",
+          "name": "Backpressure in streams",
+          "aliases": [
+            "highWaterMark",
+            "drain event"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose memory growth caused by ignoring write return values and apply drain handling or pipeline to fix it."
+        },
+        {
+          "id": "prf-3",
+          "name": "Worker threads and clustering",
+          "aliases": [
+            "worker_threads",
+            "cluster",
+            "child_process"
+          ],
+          "bloom": "C5",
+          "summary": "Choose between worker threads, cluster and child processes for CPU-bound work or multi-core scaling."
+        },
+        {
+          "id": "prf-4",
+          "name": "Authentication and security middleware",
+          "aliases": [
+            "JWT",
+            "helmet",
+            "rate limiting"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate session and token authentication, input validation and header and rate-limit protections for an API."
+        },
+        {
+          "id": "prf-5",
+          "name": "Testing Node services",
+          "aliases": [
+            "node:test",
+            "supertest",
+            "mocking"
+          ],
+          "bloom": "C4",
+          "summary": "Design unit and HTTP integration tests that isolate I/O with mocks or test servers."
+        },
+        {
+          "id": "prf-6",
+          "name": "Profiling and memory leaks",
+          "aliases": [
+            "heap snapshot",
+            "--inspect",
+            "clinic"
+          ],
+          "bloom": "C4",
+          "summary": "Use the inspector, CPU profiles and heap snapshots to locate blocking code and leaks."
+        },
+        {
+          "id": "prf-7",
+          "name": "Graceful shutdown and process signals",
+          "aliases": [
+            "SIGTERM",
+            "uncaughtException"
+          ],
+          "bloom": "C5",
+          "summary": "Judge how to handle signals, close servers and drain connections, and why to restart after uncaught exceptions."
+        },
+        {
+          "id": "prf-8",
+          "name": "Module resolution and interop",
+          "aliases": [
+            "exports field",
+            "dual package",
+            "dynamic import"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how Node resolves modules and how the exports map, dynamic import and CJS-ESM interop affect packages."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-8",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "cmp-2",
+          "prf-4"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "prf-1",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "adb-3",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Node.js is single-threaded in every respect, so it cannot use multiple cores or threads.",
+          "concepts": [
+            "prf-3",
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Async functions make CPU-heavy work non-blocking.",
+          "concepts": [
+            "prf-1",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Catching uncaughtException and carrying on keeps the process safe.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Scalable service architecture",
+          "aliases": [
+            "stateless services",
+            "horizontal scaling"
+          ],
+          "bloom": "C6",
+          "summary": "Design stateless Node services with queues, caching and load balancing that scale and fail gracefully."
+        },
+        {
+          "id": "exp-2",
+          "name": "Performance tradeoff evaluation",
+          "aliases": [
+            "benchmarking",
+            "latency throughput"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate frameworks, serialization and concurrency choices using reproducible benchmarks and latency percentiles."
+        },
+        {
+          "id": "exp-3",
+          "name": "Native addons and N-API",
+          "aliases": [
+            "node-gyp",
+            "WebAssembly",
+            "addons"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when native addons or WebAssembly justify their build and portability costs."
+        },
+        {
+          "id": "exp-4",
+          "name": "Custom stream implementations",
+          "aliases": [
+            "Transform streams",
+            "object mode"
+          ],
+          "bloom": "C6",
+          "summary": "Create Transform and custom streams that respect backpressure and error propagation for data pipelines."
+        },
+        {
+          "id": "exp-5",
+          "name": "Observability design",
+          "aliases": [
+            "structured logging",
+            "tracing",
+            "metrics"
+          ],
+          "bloom": "C6",
+          "summary": "Build logging, metrics and distributed tracing, including AsyncLocalStorage context, into services."
+        },
+        {
+          "id": "exp-6",
+          "name": "Package publishing and supply chain",
+          "aliases": [
+            "npm publish",
+            "provenance",
+            "dependency audit"
+          ],
+          "bloom": "C6",
+          "summary": "Design and publish reusable packages with sound versioning, exports and dependency vetting."
+        },
+        {
+          "id": "exp-7",
+          "name": "V8 and runtime internals",
+          "aliases": [
+            "JIT",
+            "garbage collection",
+            "deoptimization"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how V8 compilation, hidden classes and garbage collection affect code performance and memory."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-7"
+        ],
+        [
+          "prf-2",
+          "exp-4"
+        ],
+        [
+          "prf-8",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-5"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Rewriting hot paths in native code always yields net speedups.",
+          "concepts": [
+            "exp-3",
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Adding more Node processes always improves throughput linearly.",
+          "concepts": [
+            "exp-1",
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Micro-benchmarks of isolated functions reliably predict production performance.",
+          "concepts": [
+            "exp-2",
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

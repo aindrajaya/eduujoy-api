@@ -1,0 +1,748 @@
+{
+  "version": 1,
+  "topic": "mathematical-optimization",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "multivariable-calculus",
+    "linear-algebra"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Objective function and decision variables",
+          "aliases": [
+            "cost function",
+            "criterion"
+          ],
+          "bloom": "C1",
+          "summary": "Identify the quantity to be maximized or minimized and the variables one is free to choose."
+        },
+        {
+          "id": "nov-2",
+          "name": "Constraints and feasible set",
+          "aliases": [
+            "feasible region",
+            "restrictions"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how equality and inequality constraints restrict choices and define the set of feasible points."
+        },
+        {
+          "id": "nov-3",
+          "name": "Minimization versus maximization",
+          "aliases": [
+            "min-max duality of sign"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that maximizing f is equivalent to minimizing -f and that both share the same optimal points."
+        },
+        {
+          "id": "nov-4",
+          "name": "Local and global optima",
+          "aliases": [
+            "local minimum",
+            "global minimum"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish a point that is best in its neighbourhood from one that is best over the entire feasible set."
+        },
+        {
+          "id": "nov-5",
+          "name": "Translating word problems into models",
+          "aliases": [
+            "problem formulation",
+            "mathematical modelling"
+          ],
+          "bloom": "C2",
+          "summary": "Turn a verbal problem such as maximizing area with fixed perimeter into variables, an objective and constraints."
+        },
+        {
+          "id": "nov-6",
+          "name": "Optimal value versus optimal point",
+          "aliases": [
+            "argmin vs min"
+          ],
+          "bloom": "C1",
+          "summary": "Distinguish the best objective value from the input at which it is attained."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The optimal value of the objective and the point where it is attained are the same thing.",
+          "concepts": [
+            "nov-6"
+          ]
+        },
+        {
+          "text": "Maximization and minimization are completely different problems needing unrelated methods.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A local minimum is always the lowest value the function can take.",
+          "concepts": [
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "First-order optimality condition",
+          "aliases": [
+            "stationary points",
+            "critical points",
+            "gradient equals zero"
+          ],
+          "bloom": "C3",
+          "summary": "Find candidate unconstrained optima by solving that the gradient equals zero."
+        },
+        {
+          "id": "adb-2",
+          "name": "Second-order test with Hessian",
+          "aliases": [
+            "second derivative test",
+            "Hessian classification"
+          ],
+          "bloom": "C3",
+          "summary": "Classify stationary points as minima, maxima or saddles using the definiteness of the Hessian."
+        },
+        {
+          "id": "adb-4",
+          "name": "Constraint substitution",
+          "aliases": [
+            "elimination of variables"
+          ],
+          "bloom": "C3",
+          "summary": "Solve simple equality-constrained problems by eliminating a variable using the constraint."
+        },
+        {
+          "id": "adb-5",
+          "name": "Graphical solution of two-variable LP",
+          "aliases": [
+            "graphical method",
+            "corner point method"
+          ],
+          "bloom": "C3",
+          "summary": "Sketch a polygonal feasible region and find the best vertex of a linear objective."
+        },
+        {
+          "id": "adb-6",
+          "name": "Gradient descent iteration",
+          "aliases": [
+            "steepest descent",
+            "x minus step times gradient"
+          ],
+          "bloom": "C3",
+          "summary": "Carry out update steps moving against the gradient with a chosen step size."
+        },
+        {
+          "id": "adb-7",
+          "name": "Existence of optima",
+          "aliases": [
+            "Weierstrass theorem",
+            "compactness"
+          ],
+          "bloom": "C2",
+          "summary": "Recognize that continuous functions on closed bounded sets attain optima while others may not."
+        },
+        {
+          "id": "adb-3",
+          "name": "Optimization on closed intervals",
+          "aliases": [
+            "extreme value theorem",
+            "boundary checking"
+          ],
+          "bloom": "C3",
+          "summary": "Find extrema of a function on a bounded domain by comparing interior critical points with boundary values."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-2",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-7",
+          "adb-3"
+        ],
+        [
+          "nov-5",
+          "adb-4"
+        ],
+        [
+          "nov-2",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Every point where the gradient is zero is a minimum.",
+          "concepts": [
+            "adb-1",
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Optima of a function on an interval always occur at critical points in the interior.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "A positive step size always guarantees gradient descent decreases the objective.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Lagrange multipliers for equality constraints",
+          "aliases": [
+            "Lagrangian method",
+            "method of Lagrange"
+          ],
+          "bloom": "C3",
+          "summary": "Set up and solve the Lagrangian stationarity system to find constrained extrema."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Geometric meaning of multipliers",
+          "aliases": [
+            "parallel gradients",
+            "shadow price"
+          ],
+          "bloom": "C4",
+          "summary": "Explain that gradients of objective and constraint are parallel at optimum and the multiplier measures sensitivity of the optimal value."
+        },
+        {
+          "id": "cmp-3",
+          "name": "KKT conditions",
+          "aliases": [
+            "Karush-Kuhn-Tucker",
+            "inequality constrained optimality"
+          ],
+          "bloom": "C4",
+          "summary": "Apply stationarity, primal and dual feasibility and complementary slackness to inequality-constrained problems."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Convex sets and functions",
+          "aliases": [
+            "convexity",
+            "Jensen inequality"
+          ],
+          "bloom": "C4",
+          "summary": "Test convexity via definition, Hessian semidefiniteness or composition rules and analyse its consequences."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Standard form linear programs",
+          "aliases": [
+            "LP standard form",
+            "slack variables"
+          ],
+          "bloom": "C3",
+          "summary": "Convert LPs to standard form using slack, surplus and split variables."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Simplex method",
+          "aliases": [
+            "simplex algorithm",
+            "pivoting"
+          ],
+          "bloom": "C3",
+          "summary": "Move between basic feasible solutions via pivots until optimality."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Step size and convergence in gradient methods",
+          "aliases": [
+            "line search",
+            "learning rate selection"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how step size, conditioning and line search affect convergence of gradient descent."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Newton's method for optimization",
+          "aliases": [
+            "Newton step",
+            "second-order method"
+          ],
+          "bloom": "C3",
+          "summary": "Use Hessian-based steps and compare their cost and speed with gradient descent."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-3"
+        ],
+        [
+          "adb-2",
+          "cmp-4"
+        ],
+        [
+          "adb-5",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "adb-6",
+          "cmp-7"
+        ],
+        [
+          "adb-2",
+          "cmp-8"
+        ],
+        [
+          "cmp-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Lagrange multiplier conditions alone identify the global optimum, not just candidates.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "In KKT conditions every inequality constraint must be active at the optimum.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "The simplex method moves through the interior of the feasible region.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Convex optimization problem structure",
+          "aliases": [
+            "convex programs",
+            "global optimality of local minima"
+          ],
+          "bloom": "C4",
+          "summary": "Recognize convex problems and exploit that local optima are global and KKT conditions are sufficient."
+        },
+        {
+          "id": "prf-2",
+          "name": "Lagrangian duality",
+          "aliases": [
+            "dual problem",
+            "weak duality"
+          ],
+          "bloom": "C4",
+          "summary": "Construct the dual function and problem and relate dual bounds to the primal optimum."
+        },
+        {
+          "id": "prf-3",
+          "name": "Strong duality and constraint qualifications",
+          "aliases": [
+            "Slater's condition",
+            "LICQ"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when strong duality and KKT necessity hold, and when they fail."
+        },
+        {
+          "id": "prf-4",
+          "name": "LP duality and sensitivity",
+          "aliases": [
+            "dual simplex",
+            "reduced costs"
+          ],
+          "bloom": "C4",
+          "summary": "Derive LP duals and interpret dual variables and complementary slackness for sensitivity analysis."
+        },
+        {
+          "id": "prf-5",
+          "name": "Convergence rate analysis",
+          "aliases": [
+            "linear and quadratic convergence",
+            "condition number"
+          ],
+          "bloom": "C5",
+          "summary": "Compare algorithms by convergence rates and the effect of conditioning of smooth strongly convex objectives."
+        },
+        {
+          "id": "prf-6",
+          "name": "Quasi-Newton and conjugate gradient",
+          "aliases": [
+            "BFGS",
+            "L-BFGS",
+            "conjugate directions"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how these methods approximate curvature cheaply and when to choose them."
+        },
+        {
+          "id": "prf-7",
+          "name": "Penalty and barrier methods",
+          "aliases": [
+            "interior point",
+            "augmented Lagrangian"
+          ],
+          "bloom": "C4",
+          "summary": "Convert constrained problems into sequences of unconstrained ones and understand interior-point ideas."
+        },
+        {
+          "id": "prf-8",
+          "name": "Stochastic gradient methods",
+          "aliases": [
+            "SGD",
+            "minibatch gradient"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate trade-offs of noisy gradient estimates, step schedules and batch size on large-scale problems."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "cmp-6",
+          "prf-4"
+        ],
+        [
+          "prf-2",
+          "prf-4"
+        ],
+        [
+          "cmp-7",
+          "prf-5"
+        ],
+        [
+          "cmp-8",
+          "prf-6"
+        ],
+        [
+          "prf-5",
+          "prf-6"
+        ],
+        [
+          "cmp-3",
+          "prf-7"
+        ],
+        [
+          "prf-5",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Strong duality holds for every optimization problem so the dual gap is always zero.",
+          "concepts": [
+            "prf-2",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Newton-type methods are always better than gradient methods regardless of problem size.",
+          "concepts": [
+            "prf-5",
+            "prf-6"
+          ]
+        },
+        {
+          "text": "Stochastic gradient descent converges with a constant step size to the exact minimizer.",
+          "concepts": [
+            "prf-8"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Choosing a problem class and reformulating",
+          "aliases": [
+            "modelling for tractability",
+            "convex relaxation"
+          ],
+          "bloom": "C6",
+          "summary": "Design reformulations or relaxations that turn hard problems into tractable LP, QP, conic or convex forms."
+        },
+        {
+          "id": "exp-2",
+          "name": "Conic and semidefinite programming",
+          "aliases": [
+            "SOCP",
+            "SDP",
+            "cone programs"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when second-order cone and semidefinite models capture a problem and how duality extends to cones."
+        },
+        {
+          "id": "exp-3",
+          "name": "Nonconvex landscape analysis",
+          "aliases": [
+            "saddle points",
+            "spurious local minima"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how saddles, local minima and initialization affect algorithm guarantees in nonconvex problems."
+        },
+        {
+          "id": "exp-4",
+          "name": "Integer and combinatorial optimization",
+          "aliases": [
+            "branch and bound",
+            "cutting planes",
+            "MILP"
+          ],
+          "bloom": "C5",
+          "summary": "Judge relaxation bounds, branching and cut strategies for discrete decision problems and their complexity."
+        },
+        {
+          "id": "exp-6",
+          "name": "Complexity lower bounds and acceleration",
+          "aliases": [
+            "Nesterov acceleration",
+            "oracle complexity"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate optimal first-order rates and when accelerated methods achieve them."
+        },
+        {
+          "id": "exp-5",
+          "name": "Proximal and splitting methods",
+          "aliases": [
+            "ADMM",
+            "proximal gradient",
+            "nonsmooth optimization"
+          ],
+          "bloom": "C6",
+          "summary": "Design algorithms for nonsmooth composite objectives using proximal operators and operator splitting."
+        },
+        {
+          "id": "exp-7",
+          "name": "Robust and stochastic optimization",
+          "aliases": [
+            "optimization under uncertainty",
+            "chance constraints"
+          ],
+          "bloom": "C6",
+          "summary": "Formulate models that handle uncertain data and justify the chosen uncertainty model and its tractable counterpart."
+        },
+        {
+          "id": "exp-8",
+          "name": "Algorithm and solver selection",
+          "aliases": [
+            "benchmarking solvers",
+            "numerical stability"
+          ],
+          "bloom": "C5",
+          "summary": "Choose and diagnose methods and solvers based on structure, scale, scaling and accuracy requirements."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-3"
+        ],
+        [
+          "prf-8",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "prf-5",
+          "exp-6"
+        ],
+        [
+          "exp-6",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "prf-3",
+          "exp-7"
+        ],
+        [
+          "exp-1",
+          "exp-8"
+        ],
+        [
+          "prf-6",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Any nonconvex problem is intractable and gradient methods on it are useless.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Rounding the solution of an LP relaxation yields an optimal integer solution.",
+          "concepts": [
+            "exp-4",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Robust optimization simply optimizes the average case over scenarios.",
+          "concepts": [
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}
