@@ -51,6 +51,8 @@ export interface ValidationResult {
 export const MIN_STEPS = 6;
 export const MAX_STEPS = 12;
 export const PASS_SCORE = 80;
+/** No step may ask for more than this (check (c): a 200-minute textbook step marked time realism down). */
+export const MAX_STEP_MINUTES = 90;
 const TIMESTAMP_SLACK_SEC = 30;
 
 /** Lowercase, punctuation to spaces, single spaces: how concept and prerequisite names compare. */
@@ -84,6 +86,7 @@ export function validatePath(input: ValidationInput): ValidationResult {
     if (step.checkpoint.items.length < 1 || step.checkpoint.items.length > 3) errors.push(`${at}'s checkpoint has ${step.checkpoint.items.length} items; it needs 1 to 3.`);
     if (step.checkpoint.passScore !== PASS_SCORE) errors.push(`${at}'s checkpoint pass score is ${step.checkpoint.passScore}; it must be ${PASS_SCORE}.`);
     if (!Number.isInteger(step.estMinutes) || step.estMinutes < 1) errors.push(`${at}'s estimated minutes must be a whole number of at least 1.`);
+    if (step.estMinutes > MAX_STEP_MINUTES) errors.push(`${at} takes ${step.estMinutes} minutes; keep every step to ${MAX_STEP_MINUTES} minutes or less, splitting it if needed.`);
 
     if (step.resources.length < 1 || step.resources.length > 3) errors.push(`${at} cites ${step.resources.length} resources; it needs 1 to 3.`);
     if (new Set(step.resources).size !== step.resources.length) errors.push(`${at} cites the same resource twice.`);

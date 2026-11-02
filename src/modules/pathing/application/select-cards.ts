@@ -1,5 +1,5 @@
 import { type ServedCard } from '../../discovery/application/ports/card.reader';
-import { normaliseConcept } from '../domain';
+import { MAX_STEP_MINUTES, normaliseConcept } from '../domain';
 
 export type ResourceFormat = 'video' | 'text' | 'papers';
 
@@ -19,6 +19,8 @@ export interface CardSelection {
   formatFallback: boolean;
   /** Cards dropped for not being in the path's language. */
   droppedForLanguage: number;
+  /** Texts too long for any step (over MAX_STEP_MINUTES of reading). */
+  droppedTooLong: number;
 }
 
 /**
@@ -27,13 +29,15 @@ export interface CardSelection {
  * preferred formats when at least MIN_FORMAT_CARDS match; otherwise all formats, flagged.
  */
 export function selectCards(cards: ServedCard[], options: { language: string; formats: ResourceFormat[] }): CardSelection {
-  const inLanguage = cards.filter((c) => c.language.toLowerCase() === options.language.toLowerCase());
-  if (options.formats.length === 0) return { cards: inLanguage, formatFallback: false, droppedForLanguage: cards.length - inLanguage.length };
+  // A text no step can hold (more than MAX_STEP_MINUTES of reading, and texts can't be cited in part) is left out.
+  const usable = cards.filter((c) => c.type === 'youtube' || c.readingMin === null || c.readingMin <= MAX_STEP_MINUTES);
+  const inLanguage = usable.filter((c) => c.language.toLowerCase() === options.language.toLowerCase());
+  if (options.formats.length === 0) return { cards: inLanguage, formatFallback: false, droppedForLanguage: usable.length - inLanguage.length, droppedTooLong: cards.length - usable.length };
   const wanted = new Set(options.formats.flatMap((f) => FORMAT_TYPES[f]));
   const matching = inLanguage.filter((c) => wanted.has(c.type));
   return matching.length >= MIN_FORMAT_CARDS
-    ? { cards: matching, formatFallback: false, droppedForLanguage: cards.length - inLanguage.length }
-    : { cards: inLanguage, formatFallback: true, droppedForLanguage: cards.length - inLanguage.length };
+    ? { cards: matching, formatFallback: false, droppedForLanguage: usable.length - inLanguage.length, droppedTooLong: cards.length - usable.length }
+    : { cards: inLanguage, formatFallback: true, droppedForLanguage: usable.length - inLanguage.length, droppedTooLong: cards.length - usable.length };
 }
 
 /**

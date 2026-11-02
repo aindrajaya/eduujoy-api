@@ -26,7 +26,7 @@ const card = (n: number, over: Partial<ServedCard> = {}): ServedCard => ({
 describe('selectCards (v2, after check (c))', () => {
   it('keeps only cards in the path language', () => {
     const out = selectCards([card(1), card(2, { language: 'id' }), card(3, { language: 'EN' })], { language: 'en', formats: [] });
-    expect(out).toEqual({ cards: [card(1), card(3, { language: 'EN' })], formatFallback: false, droppedForLanguage: 1 });
+    expect(out).toEqual({ cards: [card(1), card(3, { language: 'EN' })], formatFallback: false, droppedForLanguage: 1, droppedTooLong: 0 });
   });
 
   it(`honours the preferred formats when at least ${MIN_FORMAT_CARDS} cards match`, () => {
@@ -40,6 +40,14 @@ describe('selectCards (v2, after check (c))', () => {
     const out = selectCards([card(1, { type: 'youtube' }), card(2), card(3)], { language: 'en', formats: ['video'] });
     expect(out).toMatchObject({ formatFallback: true });
     expect(out.cards).toHaveLength(3);
+  });
+});
+
+describe('selectCards and the step cap', () => {
+  it('leaves out texts too long for any step, but keeps long videos (actions can point at a part)', () => {
+    const out = selectCards([card(1, { readingMin: 180 }), card(2, { readingMin: 90 }), card(3, { type: 'youtube', durationMin: 120, readingMin: null })], { language: 'en', formats: [] });
+    expect(out.cards.map((c) => c.resourceId)).toEqual(['r2', 'r3']);
+    expect(out.droppedTooLong).toBe(1);
   });
 });
 

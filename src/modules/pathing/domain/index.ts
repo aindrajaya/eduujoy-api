@@ -1,6 +1,7 @@
 export {
   type DraftAction,
   type DraftStep,
+  MAX_STEP_MINUTES,
   MAX_STEPS,
   MIN_STEPS,
   citedMinutes,

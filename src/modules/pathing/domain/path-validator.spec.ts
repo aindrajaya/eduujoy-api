@@ -168,6 +168,16 @@ describe('cited time (v2, after check (c))', () => {
   });
 });
 
+describe('the per-step cap', () => {
+  it('rejects a step over 90 minutes', () => {
+    const input = valid();
+    (input.steps[2] as DraftStep).estMinutes = 120;
+    expect(validatePath(input).errors).toContain('Step 3 takes 120 minutes; keep every step to 90 minutes or less, splitting it if needed.');
+    (input.steps[2] as DraftStep).estMinutes = 90;
+    expect(validatePath(input).errors).toEqual([]);
+  });
+});
+
 describe('validatePath at the top stage (pe-090: expert C5, no next stage)', () => {
   it('accepts an expert-band path from C5 to C6 and rejects one that never reaches C6', () => {
     const expert = (blooms: Bloom[]): ValidationInput => ({
