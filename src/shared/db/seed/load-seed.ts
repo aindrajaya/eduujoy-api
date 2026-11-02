@@ -1,12 +1,17 @@
 import { inArray, sql } from 'drizzle-orm';
 import { type Database } from '../database';
 import { diagnosticItems, topicPrerequisites, topics } from '../schema';
+import { retireRefusal, retirementCap, SeedRetireRefusedError } from './retire-policy';
 import { type SeedData } from './seed-data';
 
 export interface SeedResult {
   topics: number;
   prerequisites: number;
   items: number;
+  /** Seed keys of the items this run retired (no longer in the files), sorted. */
+  retired: string[];
+  /** Items that were retired and are back in the files (retired_at cleared). */
+  restored: number;
 }
 
 const CHUNK = 500;
@@ -18,11 +23,24 @@ function chunks<T>(rows: T[]): T[][] {
 }
 
 /**
- * Idempotent: topics upsert by slug and items by seed_key, so re-running converges on the files.
+ * Idempotent: topics upsert by slug and items by seed_key, so re-running converges on the files. Items
+ * that left the files are retired (inactive, kept); items that return are active again.
  * Embeddings are left alone; the catalog backfills them (A6).
  */
-export async function loadSeed(db: Database, data: SeedData): Promise<SeedResult> {
+export async function loadSeed(db: Database, data: SeedData, options: { expectRetired?: number } = {}): Promise<SeedResult> {
   return db.transaction(async (tx) => {
+    const fileKeys = data.items.map((item) => item.seedKey);
+    // Retirement only looks at topics the files contain: a partial load (one topic's bank) or a topic
+    // left out of the files never retires anything else.
+    const fileTopics = data.topics.map((t) => t.slug);
+    // Before any write: the active seed-topic items, and the retired ones the files bring back.
+    const before = await tx.execute<{ active: number; restoring: number }>(sql`
+      SELECT count(*) FILTER (WHERE i.retired_at IS NULL)::int AS active,
+             count(*) FILTER (WHERE i.retired_at IS NOT NULL AND i.seed_key = ANY(${sql.param(fileKeys)}::text[]))::int AS restoring
+        FROM diagnostic_items i JOIN topics t ON t.id = i.topic_id
+       WHERE t.origin = 'seed' AND i.seed_key IS NOT NULL AND t.slug = ANY(${sql.param(fileTopics)}::text[])`);
+    const activeSeedItems = before.rows[0]?.active ?? 0;
+    const restored = before.rows[0]?.restoring ?? 0;
     const ids = new Map<string, string>();
     for (const batch of chunks(data.topics)) {
       const rows = await tx
@@ -94,11 +112,38 @@ export async function loadSeed(db: Database, data: SeedData): Promise<SeedResult
             body: sql`excluded.body`,
             rubric: sql`excluded.rubric`,
             reviewed: sql`excluded.reviewed`,
+            // An item back in the files is active again.
+            retiredAt: null,
             updatedAt: sql`now()`,
           },
         });
     }
 
-    return { topics: data.topics.length, prerequisites: edges.length, items: data.items.length };
+    // Retire, never delete: items of the files' seed topics whose seed_key left the files (learner-topic
+    // items and items without a seed_key are out of scope). A refusal rolls back the whole seed.
+    const gone = await tx.execute<{ seed_key: string }>(sql`
+      SELECT i.seed_key FROM diagnostic_items i JOIN topics t ON t.id = i.topic_id
+       WHERE t.origin = 'seed' AND i.seed_key IS NOT NULL AND i.retired_at IS NULL
+         AND t.slug = ANY(${sql.param(fileTopics)}::text[])
+         AND NOT (i.seed_key = ANY(${sql.param(fileKeys)}::text[]))
+       ORDER BY i.seed_key
+         FOR UPDATE OF i`);
+    const retired = gone.rows.map((r) => r.seed_key);
+    const refusal = retireRefusal({ toRetire: retired.length, activeSeedItems, filesItems: fileKeys.length, expectRetired: options.expectRetired });
+    if (refusal) {
+      throw new SeedRetireRefusedError(refusal, {
+        toRetire: retired.length,
+        activeSeedItems,
+        filesItems: fileKeys.length,
+        cap: retirementCap(activeSeedItems),
+        expectRetired: options.expectRetired,
+        keys: retired,
+      });
+    }
+    if (retired.length > 0) {
+      await tx.execute(sql`UPDATE diagnostic_items SET retired_at = now(), updated_at = now() WHERE seed_key = ANY(${sql.param(retired)}::text[]) AND retired_at IS NULL`);
+    }
+
+    return { topics: data.topics.length, prerequisites: edges.length, items: data.items.length, retired, restored };
   });
 }
