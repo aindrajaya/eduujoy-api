@@ -106,7 +106,10 @@ describe('db:seed retires items that left the files (user decision, 2 Nov 2026)'
 
     expect(await refusal(without(['q1']))).toBe('expect_missing');
     expect(await refusal(without(['q1']), 2)).toBe('count_mismatch');
-    expect(await refusal(without(['q1', 'q2', 'q3']), 3)).toBe('over_cap');
+    // Over the cap needs files that are not short: three items leave, three new ones arrive (the count
+    // stays 250). Dropping three alone trips files_short first (247 < 250 - cap 2).
+    const renamed = edited.map((i) => (['q1', 'q2', 'q3'].includes(i.key) ? { ...i, key: `${i.key}-new`, seedKey: `${i.seedKey}-new` } : i));
+    expect(await refusal({ ...full, items: renamed }, 3)).toBe('over_cap');
     expect(await refusal({ ...full, items: edited.slice(0, 100) }, 150)).toBe('files_short');
     // Every refusal rolled the whole seed back: nothing retired, and the edit in the same run is gone.
     const now = await rows(slug);
@@ -125,5 +128,14 @@ describe('db:seed retires items that left the files (user decision, 2 Nov 2026)'
     expect((await rows(slug)).filter((r) => r.retiredAt !== null)).toEqual([]);
     const learnerItems = await db.select({ retiredAt: diagnosticItems.retiredAt }).from(diagnosticItems).where(inArray(diagnosticItems.topicId, [learner?.id ?? '']));
     expect(learnerItems.map((r) => r.retiredAt)).toEqual([null]);
+  });
+
+  it('never retires a topic whose items are absent from the files, even when the topic itself is listed', async () => {
+    const a = bank(`retire-${randomUUID().slice(0, 8)}`);
+    const b = bank(`retire-${randomUUID().slice(0, 8)}`, 30);
+    await loadSeed(db, { topics: [...a.topics, ...b.topics], items: [...a.items, ...b.items] });
+    // The e2e shape: the full taxonomy, one topic's bank. b's 30 items stay active and nothing is refused.
+    await expect(loadSeed(db, { topics: [...a.topics, ...b.topics], items: a.items })).resolves.toMatchObject({ retired: [], restored: 0 });
+    expect((await rows(b.topics[0]?.slug ?? '')).filter((r) => r.retiredAt !== null)).toEqual([]);
   });
 });

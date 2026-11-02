@@ -30,9 +30,10 @@ function chunks<T>(rows: T[]): T[][] {
 export async function loadSeed(db: Database, data: SeedData, options: { expectRetired?: number } = {}): Promise<SeedResult> {
   return db.transaction(async (tx) => {
     const fileKeys = data.items.map((item) => item.seedKey);
-    // Retirement only looks at topics the files contain: a partial load (one topic's bank) or a topic
-    // left out of the files never retires anything else.
-    const fileTopics = data.topics.map((t) => t.slug);
+    // Retirement only looks at topics that have items in the files: a partial load (the taxonomy plus one
+    // topic's bank), a topic left out, or a missing item file never retires another topic's items. A
+    // topic's whole bank is therefore never retired by deleting its file (conservative by design).
+    const fileTopics = [...new Set(data.items.map((item) => item.topic))];
     // Before any write: the active seed-topic items, and the retired ones the files bring back.
     const before = await tx.execute<{ active: number; restoring: number }>(sql`
       SELECT count(*) FILTER (WHERE i.retired_at IS NULL)::int AS active,
