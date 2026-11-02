@@ -652,15 +652,15 @@
         },
         {
           "id": "b",
-          "label": "The first makes the ab group optional, while the second requires at least one ab"
+          "label": "The first makes the group optional; the second needs one"
         },
         {
           "id": "c",
-          "label": "The first matches a and b in either order, while the second needs ab in order"
+          "label": "The first allows ba as well, but the second needs ab"
         },
         {
           "id": "d",
-          "label": "The first matches ab exactly once, while the second repeats it one or more times"
+          "label": "The first matches ab once, while the second repeats it"
         }
       ],
       "answerKey": {
@@ -1386,11 +1386,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A fails because a capturing group keeps only the last repetition and the text is rejected"
+          "label": "A fails, since a capturing group cannot be repeated with +"
         },
         {
           "id": "b",
-          "label": "B matches the same text, but its `d` group is empty because non-capturing groups hide later ones"
+          "label": "B matches the same text, but its `d` group is empty because (?:) hides it"
         },
         {
           "id": "c",
@@ -1398,7 +1398,7 @@
         },
         {
           "id": "d",
-          "label": "A matches the whole text, but B matches only `cd` because non-capturing groups cannot repeat"
+          "label": "A matches all of it, but B matches only `cd` since (?:) cannot repeat"
         }
       ],
       "answerKey": {

@@ -534,15 +534,15 @@
         },
         {
           "id": "b",
-          "label": "Integers are stored on the stack, so the compiler skips ownership tracking for them"
+          "label": "Integers live on the stack, so ownership rules skip them"
         },
         {
           "id": "c",
-          "label": "Integers are immutable by default, so a second binding can safely share the same value"
+          "label": "Integers are immutable, so both bindings can share one value"
         },
         {
           "id": "d",
-          "label": "Integers are borrowed automatically on assignment, so the original binding stays valid"
+          "label": "Integers are borrowed automatically, so the original stays valid"
         }
       ],
       "answerKey": {
@@ -1373,15 +1373,15 @@
       "options": [
         {
           "id": "a",
-          "label": "A `Vec<T>` is limited to one element size, so the compiler rejects structs of different sizes unless `Box` copies each struct onto the heap"
+          "label": "`Vec<T>` needs equal element sizes, so `Box` is only there to pad every struct to the same size"
         },
         {
           "id": "b",
-          "label": "Trait bounds on `dyn Shape` are resolved at runtime, so each element is checked for `Shape` when it is pushed onto the `Vec`"
+          "label": "`dyn Shape` bounds are checked at runtime, so each element is tested for `Shape` when pushed"
         },
         {
           "id": "c",
-          "label": "Generic bounds like `T: Shape` accept only built-in types, while trait objects accept any user-defined struct that implements the trait"
+          "label": "`T: Shape` accepts only built-in types, while trait objects accept any user-defined struct implementing it"
         },
         {
           "id": "d",

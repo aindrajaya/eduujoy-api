@@ -155,15 +155,15 @@
         },
         {
           "id": "b",
-          "label": "Tasks that are written in separate source files and then compiled together"
+          "label": "Tasks written in separate source files, then compiled"
         },
         {
           "id": "c",
-          "label": "Tasks that never need to share any data or wait for any other task to finish"
+          "label": "Tasks that never share data or wait on one another"
         },
         {
           "id": "d",
-          "label": "Tasks that take turns on one core so that each makes progress over time"
+          "label": "Tasks taking turns on a single core so each makes progress"
         }
       ],
       "answerKey": {
@@ -367,7 +367,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It stops the scheduler from switching threads while any lock is held, so no thread is paused mid-wait"
+          "label": "It stops the scheduler from switching threads while a lock is held"
         },
         {
           "id": "b",
@@ -375,11 +375,11 @@
         },
         {
           "id": "c",
-          "label": "It lets two threads hold the same lock at once, so neither has to wait for the other"
+          "label": "It lets two threads hold the same lock, so neither must wait"
         },
         {
           "id": "d",
-          "label": "It makes each lock release itself after a short time limit, so waiting threads never block forever"
+          "label": "It makes each lock release itself after a timeout, so no thread blocks forever"
         }
       ],
       "answerKey": {
@@ -653,7 +653,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Waiting threads are released in the order they were created"
+          "label": "Waiting threads wake in creation order"
         },
         {
           "id": "b",
@@ -661,11 +661,11 @@
         },
         {
           "id": "c",
-          "label": "Guarded variables become private copies for every thread"
+          "label": "Each thread gets its own data copy"
         },
         {
           "id": "d",
-          "label": "Guarded code runs faster because it is pinned to one core"
+          "label": "Guarded code runs on one fast core"
         }
       ],
       "answerKey": {
@@ -1322,7 +1322,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The OS limits each process to about one runnable thread per core, so the extra threads sit blocked and add scheduler bookkeeping overhead"
+          "label": "The OS caps runnable threads at one per core, so extra threads just sit blocked"
         },
         {
           "id": "b",
@@ -1330,11 +1330,11 @@
         },
         {
           "id": "c",
-          "label": "Extra threads make each critical section run longer because the lock itself slows down as more waiters queue up on it"
+          "label": "More threads slow the lock itself, so each critical section runs longer than before"
         },
         {
           "id": "d",
-          "label": "Threads beyond the core count cannot be scheduled until the first four finish, so the extra threads only consume memory and stall"
+          "label": "Threads beyond the core count cannot run until the first four finish, wasting memory"
         }
       ],
       "answerKey": {

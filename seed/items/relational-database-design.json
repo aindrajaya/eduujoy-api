@@ -11,11 +11,11 @@
       "options": [
         {
           "id": "a",
-          "label": "It links each row to matching rows in a table in another database"
+          "label": "It links rows to another table"
         },
         {
           "id": "b",
-          "label": "It lists every column that the table has"
+          "label": "It lists the table's columns"
         },
         {
           "id": "c",
@@ -465,15 +465,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Phone numbers are a multi-valued type; add a phone4 column and then rename the columns to a general scheme"
+          "label": "Phone numbers are multi-valued; just add a phone4 column"
         },
         {
           "id": "b",
-          "label": "Searches are slow because the columns are unindexed; add an index on each phone column to fix both problems"
+          "label": "The searches are slow because the columns lack indexes; index each phone column"
         },
         {
           "id": "c",
-          "label": "The phone columns are too narrow for some numbers; widen them to a larger text type so a fourth fits"
+          "label": "The phone columns are too narrow; widen them to a bigger text type"
         },
         {
           "id": "d",
@@ -1353,15 +1353,15 @@
         },
         {
           "id": "b",
-          "label": "It violates 2NF, because subject depends on tutor, which is only part of the key"
+          "label": "It violates 2NF, because subject depends on only part of the key"
         },
         {
           "id": "c",
-          "label": "It violates 1NF, because the tutor column repeats across rows and so is a repeating group"
+          "label": "It violates 1NF, because tutor values repeat across several rows"
         },
         {
           "id": "d",
-          "label": "It is in BCNF, because every non-key attribute depends on the whole key and nothing else"
+          "label": "It is in BCNF, because every attribute depends on the whole key"
         }
       ],
       "answerKey": {
@@ -1626,7 +1626,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`subject` depends on only part of the key, which is a 2NF failure that 3NF would also reject outright, so the table cannot be in 3NF"
+          "label": "`subject` depends on only part of a candidate key, which is a 2NF failure, so 3NF is also violated here"
         },
         {
           "id": "b",
@@ -1634,11 +1634,11 @@
         },
         {
           "id": "c",
-          "label": "The table repeats several teachers per subject, which 3NF allows as a repeating group but BCNF forbids as a violation of atomicity"
+          "label": "The table has repeating groups of teachers per subject, which 3NF tolerates but BCNF forbids as non-atomic data"
         },
         {
           "id": "d",
-          "label": "BCNF differs from 3NF only for tables with a single-column key, and this table has a composite key, so the two forms coincide here"
+          "label": "BCNF differs from 3NF only for single-column keys, and this composite key makes the two forms coincide here"
         }
       ],
       "answerKey": {

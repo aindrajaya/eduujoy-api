@@ -1120,15 +1120,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The subnet block is written below the VPC block in the same file"
+          "label": "The subnet block comes after the VPC block"
         },
         {
           "id": "b",
-          "label": "The subnet sets `vpc_id = \"vpc-main\"` and the VPC is named `main`"
+          "label": "The subnet sets `vpc_id = \"vpc-main\"`"
         },
         {
           "id": "c",
-          "label": "The subnet and VPC share identical `tags` block values"
+          "label": "Both resources use the same `tags` values"
         },
         {
           "id": "d",
@@ -1626,15 +1626,15 @@
         },
         {
           "id": "b",
-          "label": "The provider is buggy and miscalculates capacity, so a version upgrade alone would remove the diff"
+          "label": "The provider miscalculates capacity, so upgrading it would remove the diff"
         },
         {
           "id": "c",
-          "label": "The scaling policy was created outside the code, so Terraform must destroy it before planning"
+          "label": "The scaling policy was made outside Terraform, so plan must destroy it"
         },
         {
           "id": "d",
-          "label": "The state backend is losing writes at night, so Terraform forgets the real capacity before each plan"
+          "label": "The state backend loses writes overnight, so Terraform forgets live capacity"
         }
       ],
       "answerKey": {
@@ -1842,15 +1842,15 @@
         },
         {
           "id": "b",
-          "label": "It is acceptable as written, but only if the module is kept in a separate repository from every caller that uses it"
+          "label": "It is fine as written, because a thin wrapper keeps every caller flexible and needs no upkeep"
         },
         {
           "id": "c",
-          "label": "It should be split into one module per argument, so that each individual setting can be versioned and released independently"
+          "label": "It should be split into one module per argument so each setting can be versioned on its own"
         },
         {
           "id": "d",
-          "label": "It is ideal, because exposing every argument means callers will rarely need to edit the module or request changes to it"
+          "label": "It is ideal, since exposing every argument means callers never need to change the module again"
         }
       ],
       "answerKey": {

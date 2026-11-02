@@ -155,15 +155,15 @@
         },
         {
           "id": "b",
-          "label": "A user whose repeated failed requests get blocked by a rate limiter"
+          "label": "A user who gets blocked after too many requests"
         },
         {
           "id": "c",
-          "label": "A database write that fails and must be retried by the client"
+          "label": "A database write that fails and must be retried"
         },
         {
           "id": "d",
-          "label": "A server that is slower than the other servers behind a load balancer"
+          "label": "A server that runs slower than the other servers"
         }
       ],
       "answerKey": {
@@ -1246,11 +1246,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The database became slower under load, so cached entries are invalidated sooner than before"
+          "label": "A slower database is invalidating cached entries sooner than before"
         },
         {
           "id": "b",
-          "label": "The cache's TTL was set too low relative to the read traffic, so entries expire before reuse"
+          "label": "The TTL is too low, so entries expire before they get reused"
         },
         {
           "id": "c",
@@ -1258,7 +1258,7 @@
         },
         {
           "id": "d",
-          "label": "The cache ran out of memory and began evicting entries far faster than they are being read"
+          "label": "The cache is out of memory and evicts entries faster than read"
         }
       ],
       "answerKey": {
@@ -1285,15 +1285,15 @@
         },
         {
           "id": "b",
-          "label": "The browser cache is ignoring server responses for profile pages and serving a stored copy"
+          "label": "The browser served a cached copy of the profile page"
         },
         {
           "id": "c",
-          "label": "The primary database rejected the write at first and silently retried it a few seconds later"
+          "label": "The primary rejected the write and retried it seconds later"
         },
         {
           "id": "d",
-          "label": "The load balancer dropped the write request on some connections and the client resent it"
+          "label": "The load balancer dropped the write and the client resent it later"
         }
       ],
       "answerKey": {
@@ -1466,15 +1466,15 @@
         },
         {
           "id": "b",
-          "label": "Network latency between the app servers and the cache rises periodically on the minute, delaying cache reads until timeouts fire and fall back to the database"
+          "label": "Network latency to the cache rises each minute, so reads time out and fall back to the database"
         },
         {
           "id": "c",
-          "label": "A scheduled job on the database runs every minute, such as a backup or statistics refresh, and competes with the page queries for CPU"
+          "label": "A scheduled database job, such as a backup, runs every minute and competes for CPU"
         },
         {
           "id": "d",
-          "label": "The cache evicts the hot key early under memory pressure, so the next requests must reload it from the database"
+          "label": "The cache evicts the hot key early under memory pressure, so requests reload it from the database"
         }
       ],
       "answerKey": {

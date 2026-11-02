@@ -648,15 +648,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The number 42, unchanged, available immediately to the caller"
+          "label": "The plain number 42, returned immediately"
         },
         {
           "id": "b",
-          "label": "undefined, unless the function body contains an await"
+          "label": "undefined, since no await is used"
         },
         {
           "id": "c",
-          "label": "A callback function that the caller must invoke to get 42"
+          "label": "A callback that the caller must invoke"
         },
         {
           "id": "d",
@@ -2346,11 +2346,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep the code and add `await Promise.resolve()` between the lines so any rejection is observed before it can be reported"
+          "label": "Keep the code and add `await Promise.resolve()` between the two loads so b is observed early"
         },
         {
           "id": "b",
-          "label": "`try { const x = await loadA(); const y = await loadB(); } catch (e) { /* handle */ }`, so each await is handled in turn"
+          "label": "`try { const x = await loadA(); const y = await loadB(); } catch (e) { /* handle */ }`"
         },
         {
           "id": "c",
@@ -2358,7 +2358,7 @@
         },
         {
           "id": "d",
-          "label": "Keep the code and wrap those four lines in one try/catch, since the catch will handle the rejection of both promises"
+          "label": "Keep the four lines and wrap them in one try/catch so a rejection from b is also caught"
         }
       ],
       "answerKey": {

@@ -358,7 +358,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Waits for a background goroutine to close the file later"
+          "label": "Runs Close in a new goroutine"
         },
         {
           "id": "b",
@@ -366,11 +366,11 @@
         },
         {
           "id": "c",
-          "label": "Runs Close only if the function returns an error value"
+          "label": "Runs Close only when the function errors"
         },
         {
           "id": "d",
-          "label": "Closes the file immediately, then reopens it on return"
+          "label": "Closes the file now and reopens it on return"
         }
       ],
       "answerKey": {
@@ -460,11 +460,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Integer variables can only be declared inside `main`, so other scopes need a function call"
+          "label": "Integers can only be declared inside `main`, not elsewhere"
         },
         {
           "id": "b",
-          "label": "Package-level names must be declared with `const`, because variables need a function"
+          "label": "Package-level names must be declared with `const` only"
         },
         {
           "id": "c",
@@ -472,7 +472,7 @@
         },
         {
           "id": "d",
-          "label": "The name x is reserved at package level, so any other name would compile with `:=`"
+          "label": "The name `x` is reserved at package level, but other names work with `:=`"
         }
       ],
       "answerKey": {
@@ -2267,7 +2267,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Run the fetches sequentially in a loop and break on the first error, which trivially satisfies the cancellation requirement"
+          "label": "Fetch the URLs one at a time in a loop and break out of it on the first error that occurs"
         },
         {
           "id": "b",
@@ -2275,11 +2275,11 @@
         },
         {
           "id": "c",
-          "label": "Start a goroutine per URL with a `sync.WaitGroup` and write errors into a shared `err` variable that all goroutines assign"
+          "label": "Start a goroutine per URL with a `sync.WaitGroup`, store errors in a shared `err` variable, and return it after `wg.Wait()`"
         },
         {
           "id": "d",
-          "label": "Start a goroutine per URL and return the first value read from an unbuffered error channel, leaving the others to finish"
+          "label": "Start a goroutine per URL and return the first error read from an unbuffered channel, without waiting for others"
         }
       ],
       "answerKey": {

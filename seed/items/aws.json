@@ -1202,7 +1202,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Scale out straight to the maximum of 10, since any breach launches the full capacity"
+          "label": "Scale out to the maximum of 10 instances right away"
         },
         {
           "id": "b",
@@ -1210,11 +1210,11 @@
         },
         {
           "id": "c",
-          "label": "Do nothing until CPU exceeds 90%, since policies wait for a large breach"
+          "label": "Wait until CPU passes 90% before adding any instances"
         },
         {
           "id": "d",
-          "label": "Add one instance per cycle until the alarm clears, like simple scaling"
+          "label": "Add one instance per cycle, as simple scaling does"
         }
       ],
       "answerKey": {
@@ -1272,7 +1272,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The execution role lacks dynamodb:GetItem permission, so DynamoDB silently drops the requests until they time out"
+          "label": "The execution role lacks dynamodb:GetItem permission, so calls hang"
         },
         {
           "id": "b",
@@ -1280,11 +1280,11 @@
         },
         {
           "id": "c",
-          "label": "The function's security group blocks inbound traffic from DynamoDB, so the responses to its calls never arrive"
+          "label": "The security group blocks inbound responses from DynamoDB"
         },
         {
           "id": "d",
-          "label": "DynamoDB tables must be in the same subnet as the function, and the table sits outside the private subnets"
+          "label": "DynamoDB tables must sit in the same subnet as the function"
         }
       ],
       "answerKey": {
