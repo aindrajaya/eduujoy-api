@@ -43,7 +43,8 @@ export class SubmitDiagnosticAnswers {
     // Someone else's diagnostic is 404, as on GET, so ids aren't probeable.
     const existing = isUuid(command.diagnosticId) ? await this.repo.findById(command.diagnosticId) : null;
     if (!existing || existing.userId !== command.userId) throw new DiagnosticNotFoundError();
-    const bank = await this.repo.loadBank(existing.topicId);
+    // Items this session already holds stay answerable even if retired since (never re-picked).
+    const bank = await this.repo.loadBank(existing.topicId, [...existing.state.engine.served, ...existing.state.engine.current]);
     const items = bank.map((s) => s.item);
     const byId = new Map(bank.map((s) => [s.item.id, s] as const));
 

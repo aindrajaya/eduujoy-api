@@ -1,5 +1,5 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { and, eq, ne, sql } from 'drizzle-orm';
+import { and, eq, inArray, isNull, ne, or, sql } from 'drizzle-orm';
 import { z } from 'zod';
 import { DATABASE, type Database, type Tx } from '../../../shared/db';
 import { diagnosticAnswerReplays, diagnosticAnswers, diagnosticItems, diagnosticSessions, placements } from '../../../shared/db/schema/assessment';
@@ -14,6 +14,8 @@ import {
   type StoredState,
 } from '../application/ports/diagnostic.repository';
 import { cellAt, cellIndex, type Placement } from '../domain/diagnostic';
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 // Item bodies come from seed files or reviewers; anything malformed is skipped, never served.
 const bodySchema = z.object({
@@ -41,11 +43,18 @@ export class DrizzleDiagnosticRepository implements DiagnosticRepository {
 
   constructor(@Inject(DATABASE) private readonly db: Database) {}
 
-  async loadBank(topicId: string): Promise<ServedItem[]> {
+  async loadBank(topicId: string, keep: readonly string[] = []): Promise<ServedItem[]> {
+    const held = keep.filter((id) => UUID.test(id));
     const rows = await this.db
       .select()
       .from(diagnosticItems)
-      .where(and(eq(diagnosticItems.topicId, topicId), ne(diagnosticItems.kind, 'short_answer')));
+      .where(
+        and(
+          eq(diagnosticItems.topicId, topicId),
+          ne(diagnosticItems.kind, 'short_answer'),
+          held.length ? or(isNull(diagnosticItems.retiredAt), inArray(diagnosticItems.id, held)) : isNull(diagnosticItems.retiredAt),
+        ),
+      );
     const served: ServedItem[] = [];
     for (const row of rows) {
       const cell = cellIndex(row.stage, row.bloom);

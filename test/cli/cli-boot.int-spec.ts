@@ -31,7 +31,14 @@ describe('CLI boot (integration)', () => {
   it.each(CLIS)('$script loads and wires under tsx', async ({ file, args, out }) => {
     const { stdout } = await run(process.execPath, ['--import', 'tsx', file, ...args, '--check'], { cwd: ROOT, env: { ...process.env, LOG_LEVEL: 'silent' } });
 
-    expect(stdout.trim()).toBe(out);
+    expect(stdout.trim()).toEqual(out);
+  }, 60_000);
+
+  // `--prod` must parse in every CLI (db:seed's strict parser rejected it before 2 Nov 2026).
+  it.each(CLIS)('$script accepts --prod', async ({ file, args, out }) => {
+    const { stdout } = await run(process.execPath, ['--import', 'tsx', file, ...args, '--prod', '--check'], { cwd: ROOT, env: { ...process.env, LOG_LEVEL: 'silent' } });
+
+    expect(stdout.trim()).toEqual(out);
   }, 60_000);
 
   // User decision (23 Oct 2026): every CLI that connects refuses eduujoy-prod unless `--prod` is passed.

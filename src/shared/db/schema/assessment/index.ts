@@ -44,6 +44,11 @@ export const diagnosticItems = pgTable(
     rubric: jsonb('rubric'),
     reviewed: boolean('reviewed').notNull().default(false),
     seedKey: text('seed_key'),
+    /**
+     * Set when the item left the seed files (db:seed, user decision 2 Nov 2026): never served to a new
+     * session or picked again, but the row stays for history and for sessions that already hold it.
+     */
+    retiredAt: timestamp('retired_at', { withTimezone: true }),
     ...withCreatedAt,
     ...withUpdatedAt,
   },
