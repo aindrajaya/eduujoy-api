@@ -1,14 +1,16 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import Anthropic from '@anthropic-ai/sdk';
-import { inArray } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 import { Pool } from 'pg';
 import { type ServedCard } from '../../src/modules/discovery/application/ports/card.reader';
 import { ServedCardsQuery } from '../../src/modules/discovery/application/served-cards.query';
 import { DrizzleCardReader } from '../../src/modules/discovery/infrastructure/drizzle-card.reader';
 import { designPath } from '../../src/modules/pathing/application/design-loop';
 import { ClaudePathDesigner } from '../../src/modules/pathing/infrastructure/claude-path-designer';
-import { BANDS, targetStage } from '../../src/modules/pathing/domain';
+import { BANDS, type Stage, targetStage } from '../../src/modules/pathing/domain';
+import { type DesignedStep } from '../../src/modules/pathing/application/ports/path-designer';
+import { type z } from 'zod';
 import { PromptRegistry, type StructuredGenerator, wrapUntrusted } from '../../src/shared/ai';
 import { ClaudeStructuredGenerator } from '../../src/shared/ai/claude/claude.generator';
 import { DrizzleLlmCallRecorder } from '../../src/shared/ai/metering/llm-call.recorder';
@@ -35,6 +37,8 @@ import { CASE_RESERVE_USD, type CaseResult, caseStages, DIMENSIONS, estimate, ty
 
 const JUDGE_MODEL = 'claude-sonnet-5-5';
 const JUDGE_PROMPT = 'path-judge';
+/** A re-judge may not start a case unless the run has this much of its cap left. */
+const JUDGE_RESERVE_USD = 0.08;
 
 
 function env(name: string): string {
@@ -96,6 +100,12 @@ async function main(): Promise<void> {
     const file = evalFile.parse(JSON.parse(readFileSync(resolve(arg('cases', join(__dirname, '..', '..', 'seed', '_eval', 'path-eval-v1.json'))), 'utf8')));
     const cases = selectCases(file.cases, { smoke, ids });
     if (cases.length === 0) throw new Error('No cases selected');
+
+    const rejudgeReport = arg('rejudge', '');
+    if (rejudgeReport) {
+      await rejudge(run, rejudgeReport, cases, capUsd);
+      return;
+    }
 
     const slugs = [...new Set(cases.map((c) => c.topic))];
     const rows = await run.db.select({ id: topics.id, slug: topics.slug, name: topics.canonicalName, domain: topics.domain }).from(topics).where(inArray(topics.slug, slugs));
@@ -197,7 +207,28 @@ async function evaluate(run: EvalRun, c: EvalCase, topic: { id: string; name: st
     return { ...base, scores: null, costUsd: round(run.meter.take().reduce((n, x) => n + x.costUsd, 0)) };
   }
 
-  const path = outcome.designed.steps.map((s) => ({
+  const output = await judge(run, c, topic, target, outcome.designed.steps, byAlias);
+  const scores = Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].score])) as CaseResult['scores'];
+  return {
+    ...base,
+    scores,
+    reasons: Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].reason])),
+    missingConcepts: output.missingConcepts,
+    misconceptionsReinforced: output.misconceptionsReinforced,
+    costUsd: round(run.meter.take().reduce((n, x) => n + x.costUsd, 0)),
+  };
+}
+
+/** The judge's verdict on one designed path against the case's reference (shared by runs and --rejudge). */
+async function judge(
+  run: EvalRun,
+  c: EvalCase,
+  topic: { name: string },
+  target: Stage,
+  steps: DesignedStep[],
+  byAlias: Map<string, ServedCard>,
+): Promise<z.infer<typeof judgeSchema>> {
+  const path = steps.map((s) => ({
     n: s.n,
     bloom: s.bloom,
     objective: s.objective,
@@ -223,22 +254,65 @@ async function evaluate(run: EvalRun, c: EvalCase, topic: { id: string; name: st
   const { output } = await run.generator.generate({
     stage: 'eval',
     model: JUDGE_MODEL,
-    prompt: run.prompts.get(JUDGE_PROMPT),
+    prompt: run.prompts.get(JUDGE_PROMPT, judgeVersion()),
     input,
     schema: judgeSchema,
     maxTokens: 4_000,
     effort: 'medium',
     budgetScope: 'operator',
   });
-  const scores = Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].score])) as CaseResult['scores'];
-  return {
-    ...base,
-    scores,
-    reasons: Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].reason])),
-    missingConcepts: output.missingConcepts,
-    misconceptionsReinforced: output.misconceptionsReinforced,
-    costUsd: round(run.meter.take().reduce((n, x) => n + x.costUsd, 0)),
-  };
+  return output;
+}
+
+/** `--judge-version v1` re-judges with an earlier yardstick; the latest by default. */
+function judgeVersion(): string | undefined {
+  const v = arg('judge-version', '');
+  return v ? v : undefined;
+}
+
+/**
+ * `--rejudge <report.json>`: the judge alone, on the paths a report saved (lead, 2 Nov 2026), so a
+ * yardstick change is measured apart from a designer change. Each saved alias is mapped back to its card
+ * (by title, among the pool's cards); a case whose saved pool can't be fully found is skipped.
+ */
+async function rejudge(run: EvalRun, reportPath: string, cases: EvalCase[], capUsd: number): Promise<void> {
+  const report = JSON.parse(readFileSync(resolve(reportPath), 'utf8')) as { results: (Record<string, unknown> & { id: string; path?: DesignedStep[]; pool?: { alias: string; title: string }[] })[] };
+  const results: (CaseResult & Record<string, unknown>)[] = [];
+  for (const saved of report.results) {
+    const c = cases.find((x) => x.id === saved.id);
+    if (!c || !saved.path || !saved.pool) {
+      process.stdout.write(`${saved.id}: skipped (no saved path)\n`);
+      continue;
+    }
+    if (run.meter.total + JUDGE_RESERVE_USD > capUsd) break;
+    const [topic] = await run.db.select({ id: topics.id, name: topics.canonicalName, domain: topics.domain }).from(topics).where(eq(topics.slug, c.topic));
+    if (!topic) continue;
+    const cards: ServedCard[] = [];
+    for (const stage of caseStages(c)) for (const card of (await run.served.pool(topic.id, stage)).cards) if (!cards.some((x) => x.resourceId === card.resourceId)) cards.push(card);
+    // The saved pool, not today's selection (which may filter differently): each alias back to its card.
+    const byAlias = new Map<string, ServedCard>();
+    for (const p of saved.pool) {
+      const card = cards.find((x) => x.title === p.title);
+      if (card) byAlias.set(p.alias, card);
+    }
+    if (byAlias.size !== saved.pool.length) {
+      process.stdout.write(`${saved.id}: skipped (the pool changed since the run)\n`);
+      continue;
+    }
+    run.meter.take();
+    const output = await judge(run, c, topic, targetStage(c.placement.stage), saved.path, byAlias);
+    const scores = Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].score])) as CaseResult['scores'];
+    const costUsd = round(run.meter.take().reduce((n, x) => n + x.costUsd, 0));
+    results.push({ id: c.id, scores, badLinks: 0, reasons: Object.fromEntries(DIMENSIONS.map((d) => [d, output[d].reason])), missingConcepts: output.missingConcepts, misconceptionsReinforced: output.misconceptionsReinforced, costUsd, before: saved['scores'] });
+    process.stdout.write(`${c.id} ${c.topic}: ${DIMENSIONS.map((d) => scores?.[d]).join('/')} (was ${DIMENSIONS.map((d) => (saved['scores'] as Record<string, number> | null)?.[d] ?? '-').join('/')}) ($${costUsd})\n`);
+  }
+  const gate = summarise(results);
+  const summary = { at: new Date().toISOString(), rejudged: reportPath, judgeVersion: run.prompts.get(JUDGE_PROMPT, judgeVersion()).version, ...gate, totalSpentUsd: round(run.meter.total), capUsd };
+  const dir = join(__dirname, '..', '..', '.smoke');
+  mkdirSync(dir, { recursive: true });
+  const out = join(dir, `eval-paths-rejudge-${summary.at.replace(/[:.]/g, '-')}.json`);
+  writeFileSync(out, `${JSON.stringify({ summary, results }, null, 2)}\n`);
+  process.stdout.write(`\n${JSON.stringify(summary)}\nReport: ${out}\n`);
 }
 
 main().catch((error: unknown) => {
