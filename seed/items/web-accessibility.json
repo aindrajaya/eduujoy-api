@@ -860,7 +860,7 @@
       "stage": "advanced_beginner",
       "bloom": "C3",
       "kind": "single_choice",
-      "prompt": "You need an icon-only search button containing an SVG magnifier. Which markup gives it an accessible name?",
+      "prompt": "You need an icon-only search button containing an SVG magnifier. It must have an accessible name and work with the keyboard by default. Which markup does this?",
       "options": [
         {
           "id": "a",
@@ -903,11 +903,11 @@
         },
         {
           "id": "b",
-          "label": "Move focus to the dialog but do not restore it on close"
+          "label": "Move focus into the dialog, then leave it on the page's first element on close"
         },
         {
           "id": "c",
-          "label": "Leave focus on the button and rely on the dialog's title"
+          "label": "Leave focus on the button and rely on the dialog's title being announced"
         },
         {
           "id": "d",
@@ -1713,19 +1713,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The tooltip is acceptable because hover content is exempt for pointer users who can re-hover"
+          "label": "The tooltip is acceptable because hover content is exempt for pointer users who can simply re-hover it"
         },
         {
           "id": "b",
-          "label": "The tooltip needs role=\"alert\" so that magnifier software keeps it visible while the pointer moves"
+          "label": "The tooltip needs role=\"alert\" so that magnifier software keeps it visible while the pointer moves away"
         },
         {
           "id": "c",
-          "label": "The tooltip fails because its text is under 4.5:1 contrast, which makes magnifiers hide it"
+          "label": "The tooltip fails mainly because its text is under 4.5:1 contrast, which makes magnifiers hide the text"
         },
         {
           "id": "d",
-          "label": "The tooltip is not hoverable or focus-triggered, so it cannot be persistently read or dismissed"
+          "label": "The tooltip fails because it can't be hovered or focused, so it can't be read persistently or dismissed"
         }
       ],
       "answerKey": {
@@ -2151,7 +2151,7 @@
         },
         {
           "id": "d",
-          "label": "Wrap the whole app in `aria-live=\"polite\"` so each swapped view is read out in full automatically"
+          "label": "Wrap the whole app in `aria-live=\"polite\"` so each swapped view is read out in full without disturbing the user's keyboard position"
         }
       ],
       "answerKey": {
@@ -2355,19 +2355,19 @@
       "options": [
         {
           "id": "a",
-          "label": "A `div role=\"checkbox\"` with an icon swap and `title=\"Mute\"`, which exposes state but needs custom Space-key handling"
+          "label": "A `div role=\"checkbox\"` with `tabindex=\"0\"`, an icon swap and `aria-checked` toggled on click, with the Space key handled in script"
         },
         {
           "id": "b",
-          "label": "An icon `button` that swaps its SVG and `alt` text only, leaving no programmatic state beyond the changed image"
+          "label": "An icon `button` that swaps its SVG and the image `alt` text between Mute and Unmute, so the changed image conveys the state"
         },
         {
           "id": "c",
-          "label": "A `button` with fixed `aria-label=\"Mute\"` and `aria-pressed` toggled between true and false so state is exposed without renaming"
+          "label": "A `button` with fixed `aria-label=\"Mute\"` and `aria-pressed` toggled between true and false, exposing state without renaming"
         },
         {
           "id": "d",
-          "label": "A `button` whose `aria-label` flips between Mute and Unmute while `aria-pressed` also toggles, so both cues are given"
+          "label": "A `button` whose `aria-label` flips between Mute and Unmute while `aria-pressed` also toggles, so both cues are given at once"
         }
       ],
       "answerKey": {

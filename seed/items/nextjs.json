@@ -477,11 +477,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Add `\"use client\"` to the whole page so that all its data fetching moves into the browser"
+          "label": "Add `\"use client\"` to the top of the page file, so the whole page becomes a Client Component"
         },
         {
           "id": "b",
-          "label": "Rename the page file to `page.client.js` so Next.js treats it as interactive"
+          "label": "Add `export const dynamic = \"force-dynamic\"` to the page so hooks are allowed during rendering"
         },
         {
           "id": "c",
@@ -723,15 +723,15 @@
       "options": [
         {
           "id": "a",
-          "label": "It fails to build because server components cannot read request information"
+          "label": "It fails to build because server components cannot read incoming request information such as cookies"
         },
         {
           "id": "b",
-          "label": "It is rendered only in the browser because cookies live on the client"
+          "label": "It is rendered only in the browser because cookies are stored on the client and the server can't see them"
         },
         {
           "id": "c",
-          "label": "It is rendered once at build time and the same HTML is sent to everyone"
+          "label": "It is rendered once at build time and the same HTML is sent to every visitor"
         },
         {
           "id": "d",
@@ -973,11 +973,11 @@
         },
         {
           "id": "b",
-          "label": "At the top of the page file, so the button can use state"
+          "label": "At the top of the page file, so the button and the page can both use state"
         },
         {
           "id": "c",
-          "label": "At the top of the database helper module the page calls"
+          "label": "At the top of the database helper module the page calls, so its queries stay marked"
         },
         {
           "id": "d",
@@ -2142,15 +2142,15 @@
         },
         {
           "id": "b",
-          "label": "Expose a Route Handler with a documented request and response contract, and call it from both clients"
+          "label": "Expose a Route Handler with a documented request/response contract and call it from both clients"
         },
         {
           "id": "c",
-          "label": "Use a Server Action, because its generated endpoint URL is a stable public API"
+          "label": "Use a Server Action, because Next.js exposes each action at a stable public URL that mobile clients can call"
         },
         {
           "id": "d",
-          "label": "Use a Server Action, because the mobile app can import and invoke it directly"
+          "label": "Use a Server Action, because the native mobile app can import the function and invoke it directly at runtime"
         }
       ],
       "answerKey": {

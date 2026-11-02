@@ -1141,23 +1141,23 @@
       "stage": "competent",
       "bloom": "C3",
       "kind": "single_choice",
-      "prompt": "Ziegler-Nichols closed-loop tuning gives ultimate gain `Ku = 12` and ultimate period `Pu = 2 s`. Using the classic PID rules (`Kp = 0.6*Ku`, `Ti = Pu/2`, `Td = Pu/8`), what is the integral gain `Ki = Kp/Ti`?",
+      "prompt": "Ziegler-Nichols closed-loop tuning gives ultimate gain `Ku = 12` and ultimate period `Pu = 4 s`. Using the classic PID rules (`Kp = 0.6*Ku`, `Ti = Pu/2`, `Td = Pu/8`), what is the integral gain `Ki = Kp/Ti`?",
       "options": [
         {
           "id": "a",
-          "label": "14.4"
-        },
-        {
-          "id": "b",
-          "label": "1.8"
-        },
-        {
-          "id": "c",
           "label": "7.2"
         },
         {
-          "id": "d",
+          "id": "b",
+          "label": "0.9"
+        },
+        {
+          "id": "c",
           "label": "3.6"
+        },
+        {
+          "id": "d",
+          "label": "1.8"
         }
       ],
       "answerKey": {
@@ -1446,19 +1446,16 @@
         },
         {
           "id": "e",
-          "label": "Adding a left-half-plane zero well below crossover"
+          "label": "Adding a lag compensator whose phase dip is near crossover"
         }
       ],
       "answerKey": {
         "optionIds": [
           "a",
-          "b"
+          "b",
+          "e"
         ]
       },
-      "rubric": [
-        "Delay adds phase lag proportional to frequency, and a higher crossover on a plant with falling phase lowers phase margin.",
-        "Lead, a lower crossover and an LHP zero all add or recover phase at crossover."
-      ],
       "reviewed": false
     },
     {
@@ -1684,7 +1681,7 @@
         },
         {
           "id": "b",
-          "label": "The gain margin at K = 10 is 6 dB, since K is half of 20."
+          "label": "The gain margin at K = 10 is 3 dB, since K = 10 is half of the critical gain 20."
         },
         {
           "id": "c",
@@ -1900,7 +1897,7 @@
         },
         {
           "id": "b",
-          "label": "Replace feedback with feedforward alone, since the flow is measured and a model-based compensation needs no correction loop."
+          "label": "Replace feedback with feedforward alone, since the flow is measured and a model-based compensation needs no correction loop at all."
         },
         {
           "id": "c",
@@ -1908,7 +1905,7 @@
         },
         {
           "id": "d",
-          "label": "Add feedforward from the measured flow through an approximate inverse model, and keep feedback to remove the residual model error."
+          "label": "Add feedforward from measured flow through an approximate inverse model, and keep feedback to trim the residual error."
         }
       ],
       "answerKey": {
@@ -2219,19 +2216,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Add derivative action with Td = 20 s so the controller cancels the dead time"
+          "label": "Add derivative action with Td = 20 s so the controller cancels the dead time and removes the delay's phase lag"
         },
         {
           "id": "b",
-          "label": "Replace the PI by pure proportional control, since overshoot comes from integral action alone"
+          "label": "Replace the PI by pure proportional control, since the overshoot comes from integral action alone and P is delay-insensitive"
         },
         {
           "id": "c",
-          "label": "Raise Kp substantially so the output reaches setpoint before the dead time can influence the loop dynamics at all"
+          "label": "Raise Kp substantially so the output reaches setpoint before the dead time can affect the loop and overshoot falls"
         },
         {
           "id": "d",
-          "label": "Retune with lambda/IMC rules, using a closed-loop time constant at least the dead time, trading speed for robustness"
+          "label": "Retune with lambda/IMC rules, setting the closed-loop time constant at least the dead time, trading speed for robustness"
         }
       ],
       "answerKey": {

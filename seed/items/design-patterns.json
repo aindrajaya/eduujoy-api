@@ -970,15 +970,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Write subclasses for each combination, such as `EncryptedCompressedStream` and `CompressedEncryptedStream`"
+          "label": "Write a subclass for each combination, such as `EncryptedCompressedStream` and `CompressedEncryptedStream`, each extending a base stream"
         },
         {
           "id": "b",
-          "label": "Add boolean flags to `DataStream` and branch on them inside every `read()` call"
+          "label": "Add boolean flags such as `encrypt` and `compress` to `DataStream` and branch on them inside every `read()` call"
         },
         {
           "id": "c",
-          "label": "Create a singleton `StreamManager` that always applies the layers in one fixed order"
+          "label": "Create a singleton `StreamManager` that always applies the encryption and compression layers in one fixed order"
         },
         {
           "id": "d",
@@ -1263,11 +1263,11 @@
         },
         {
           "id": "c",
-          "label": "Behaviour is fixed at construction time; wrap the document in a decorator for each status"
+          "label": "Behaviour is fixed once the object is constructed; wrap the document in a decorator for each status"
         },
         {
           "id": "d",
-          "label": "Status-dependent behaviour is scattered across methods; extract one State class per status and delegate"
+          "label": "Status-dependent behaviour is duplicated in methods; extract a State class per status and delegate"
         }
       ],
       "answerKey": {
@@ -1541,19 +1541,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The compressing decorator is wrapped by another decorator, and wrapped decorators fall back to a pass-through mode."
+          "label": "The compressing decorator is wrapped by another decorator, and any wrapped decorator falls back to a pass-through mode."
         },
         {
           "id": "b",
-          "label": "Writes reach the outer decorator first, so data is encrypted before compression, and ciphertext is nearly incompressible."
+          "label": "Writes reach the outer decorator first, so data is encrypted before compression and ciphertext is nearly incompressible."
         },
         {
           "id": "c",
-          "label": "Decorators must be stacked with the cheapest operation outermost, otherwise the inner one silently disables itself."
+          "label": "Decorators must be stacked with the cheapest operation outermost, otherwise the inner one silently disables itself at runtime."
         },
         {
           "id": "d",
-          "label": "Each decorator copies the data into its own buffer, so the compressor only sees a small fragment of every write."
+          "label": "Each decorator copies the data into its own small buffer, so the compressor only sees a tiny fragment of every single write."
         }
       ],
       "answerKey": {

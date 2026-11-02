@@ -612,15 +612,15 @@
         },
         {
           "id": "b",
-          "label": "Four binary labels where exactly two are set to 1 per input"
+          "label": "Four binary labels where exactly one is set to 1 and the rest are 0"
         },
         {
           "id": "c",
-          "label": "Four raw scores that can be any real number, read as distances"
+          "label": "Four raw scores that can be any real number, read as logit values"
         },
         {
           "id": "d",
-          "label": "Four independent probabilities, each between 0 and 1, summing to 4"
+          "label": "Four independent probabilities, each between 0 and 1, with no fixed sum"
         }
       ],
       "answerKey": {
@@ -1260,11 +1260,11 @@
         },
         {
           "id": "b",
-          "label": "Gradients vanished in early layers, so weights froze and became NaN"
+          "label": "Gradients vanished in early layers, so weights froze and then became NaN"
         },
         {
           "id": "c",
-          "label": "The batch is too large, so averaged gradients cancel and give NaN"
+          "label": "The batch is too large, so averaged gradients cancel out and give NaN"
         },
         {
           "id": "d",
@@ -1753,7 +1753,7 @@
       "options": [
         {
           "id": "a",
-          "label": "LayerNorm over the feature dimension of each token"
+          "label": "LayerNorm over the feature dimension of each token, because its statistics come from that token alone"
         },
         {
           "id": "b",
@@ -1761,7 +1761,7 @@
         },
         {
           "id": "c",
-          "label": "No normalisation at all, using a smaller learning rate so that activations stay bounded across layers"
+          "label": "GroupNorm over groups of channels pooled across all tokens in the batch, because it removes the need for large batches"
         },
         {
           "id": "d",

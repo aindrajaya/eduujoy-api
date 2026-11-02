@@ -358,15 +358,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Traffic is reduced so fewer servers are needed overall"
+          "label": "Traffic is spread out so fewer servers are needed overall"
         },
         {
           "id": "b",
-          "label": "Capacity grows for the peak and shrinks afterward, so you pay less"
+          "label": "Capacity grows for the peak and shrinks after, so you pay less"
         },
         {
           "id": "c",
-          "label": "Visitors are moved to a competitor's servers at peak times"
+          "label": "Extra visitors are queued until the shop's fixed servers are free"
         },
         {
           "id": "d",
@@ -508,7 +508,7 @@
         },
         {
           "id": "c",
-          "label": "Private cloud"
+          "label": "FaaS"
         },
         {
           "id": "d",
@@ -582,7 +582,7 @@
         },
         {
           "id": "d",
-          "label": "It lets several isolated virtual machines share one physical server's hardware"
+          "label": "It lets several isolated virtual machines share one server's hardware"
         }
       ],
       "answerKey": {
@@ -724,7 +724,7 @@
         },
         {
           "id": "c",
-          "label": "The provider, because it owns the physical servers that the VM runs on"
+          "label": "The provider, because it owns and operates the physical servers and hypervisor that the VM runs on"
         },
         {
           "id": "d",
@@ -747,7 +747,7 @@
       "stage": "advanced_beginner",
       "bloom": "C3",
       "kind": "single_choice",
-      "prompt": "A VM costs 0.10 dollars per hour on demand. A developer runs it 8 hours a day for 30 days and stops it each evening, with no other charges. What is the compute cost?",
+      "prompt": "A VM costs 0.10 dollars per hour on demand and is billed only while running. A developer runs it 8 hours a day for 30 days and stops it each evening, with no other charges. What is the compute cost?",
       "options": [
         {
           "id": "a",
@@ -922,11 +922,11 @@
       "stage": "advanced_beginner",
       "bloom": "C3",
       "kind": "multi_choice",
-      "prompt": "A development VM is used only on weekdays from 9 to 5. Which actions would reduce its monthly cost? Select all that apply.",
+      "prompt": "A development VM is used only on weekdays from 9 to 5. Its earlier test VMs were deleted but left their disks unattached and still billed. Which actions would reduce monthly cost? Select all that apply.",
       "options": [
         {
           "id": "a",
-          "label": "Delete disks left unattached from earlier test VMs"
+          "label": "Delete the unattached disks left behind by the earlier test VMs"
         },
         {
           "id": "b",
@@ -967,19 +967,19 @@
       "options": [
         {
           "id": "a",
-          "label": "IaaS, so they control the OS and can install the module"
+          "label": "IaaS, because the team manages the guest OS on rented virtual machines"
         },
         {
           "id": "b",
-          "label": "SaaS, so the vendor delivers the application ready to use"
+          "label": "SaaS, because the vendor delivers the application ready to use today"
         },
         {
           "id": "c",
-          "label": "PaaS, so the platform runs their code on its own runtime"
+          "label": "PaaS, because the platform patches and runs the OS and runtime for them"
         },
         {
           "id": "d",
-          "label": "Serverless functions, so the provider manages all runtime settings"
+          "label": "Serverless functions, because the provider scales and runs the code on demand"
         }
       ],
       "answerKey": {
@@ -1710,19 +1710,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Per-use pricing favours spiky or low load; at constant high load it exceeds an always-on VM, and cold starts add latency"
+          "label": "Per-use pricing suits spiky load; at constant high load it costs more than an always-on VM, and cold starts slow first requests"
         },
         {
           "id": "b",
-          "label": "Functions cannot scale beyond one instance, so the extra cost comes from retries on a single overloaded worker"
+          "label": "Functions cannot scale beyond a single instance, so the extra cost comes from retries piling up on one overloaded worker process"
         },
         {
           "id": "c",
-          "label": "Serverless platforms bill for idle time between invocations, which dominates total cost at high request rates"
+          "label": "Serverless platforms bill for idle time between invocations, and that idle charge dominates total cost once request rates are high"
         },
         {
           "id": "d",
-          "label": "Slow first requests show the functions share hardware with other tenants, which also raises their unit prices"
+          "label": "Slow first requests show the functions share hardware with other tenants, and that shared hosting also raises their unit prices"
         }
       ],
       "answerKey": {
@@ -2136,19 +2136,19 @@
       "options": [
         {
           "id": "a",
-          "label": "B, because containers eliminate the need for any capacity limits, so cost stays flat regardless of spike size"
+          "label": "B, because containers remove capacity limits entirely, so cost stays flat however large the spike becomes"
         },
         {
           "id": "b",
-          "label": "A, because VMs always scale faster than containers since they have dedicated operating systems booting in parallel"
+          "label": "A, because full VMs isolate each workload better, so they absorb a sudden spike with less latency risk"
         },
         {
           "id": "c",
-          "label": "A, because a spike shorter than boot time is absorbed automatically by autoscaling policies without latency effects"
+          "label": "A, because autoscaling policies add VMs as load rises, so users see no delay even while new VMs boot"
         },
         {
           "id": "d",
-          "label": "B, because fast scale-out with a warm pool covers the spike before slow VM boot would leave users waiting"
+          "label": "B, because fast scale-out plus a warm pool covers the spike while VMs would still be booting"
         }
       ],
       "answerKey": {
@@ -2242,11 +2242,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Two zones with fixed instance counts and sticky sessions on local disk, so each user stays on one server"
+          "label": "Two zones with fixed instance counts and sticky sessions on local disk, so each user stays pinned to one server"
         },
         {
           "id": "b",
-          "label": "Stateless instances in an autoscaling group across multiple availability zones, with sessions in a replicated external store"
+          "label": "Stateless instances in an autoscaling group across multiple zones, with sessions in a replicated external store"
         },
         {
           "id": "c",
@@ -2254,7 +2254,7 @@
         },
         {
           "id": "d",
-          "label": "Autoscaling instances in one zone holding sessions in local memory, relying on the load balancer for zone failure"
+          "label": "Autoscaling instances in one zone holding sessions in local memory, relying on the load balancer to recover from a zone failure"
         }
       ],
       "answerKey": {
@@ -2417,11 +2417,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Share one administrator credential across all engineers for speed"
+          "label": "Give each engineer the shared administrator account so access can be audited by team rather than by person"
         },
         {
           "id": "b",
-          "label": "Increase VM size so the database never fails"
+          "label": "Move to a larger database instance size so the single database has enough capacity headroom to avoid outages"
         },
         {
           "id": "c",

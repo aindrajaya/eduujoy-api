@@ -542,7 +542,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Checking that a signed-in user may delete a particular invoice"
+          "label": "Checking that a signed-in user may delete an invoice"
         },
         {
           "id": "b",
@@ -753,15 +753,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep the pre-login session ID so the user's cart is preserved"
+          "label": "Keep the pre-login session ID and copy the cart into it, so the user's cart is preserved"
         },
         {
           "id": "b",
-          "label": "Put the user ID in the URL so the session survives across pages"
+          "label": "Keep the pre-login session ID but mark it as authenticated and set the HttpOnly flag on its cookie"
         },
         {
           "id": "c",
-          "label": "Extend the old session's expiry to 30 days for convenience"
+          "label": "Extend the old session's expiry to 30 days so the user is not logged out"
         },
         {
           "id": "d",
@@ -1722,11 +1722,11 @@
         },
         {
           "id": "b",
-          "label": "The orders service accepts an identity claim from any caller without verifying that it came from the gateway"
+          "label": "The orders service accepts an identity claim from any caller without verifying it came from the gateway"
         },
         {
           "id": "c",
-          "label": "The gateway's JWT validation is weak, because it should have rejected the tester's direct request"
+          "label": "The gateway's JWT validation is weak, because it should have rejected the tester's direct request to the service"
         },
         {
           "id": "d",
@@ -2183,11 +2183,11 @@
         },
         {
           "id": "b",
-          "label": "Say 'no account with that email' for unknown addresses so typos are fixed"
+          "label": "Say 'no account with that email' for unknown addresses so users can fix typos"
         },
         {
           "id": "c",
-          "label": "Add a security question whose answer the user set at signup"
+          "label": "Add a security question, such as a first pet's name, answered at signup"
         },
         {
           "id": "d",

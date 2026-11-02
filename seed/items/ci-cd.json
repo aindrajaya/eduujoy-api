@@ -795,7 +795,7 @@
       "stage": "advanced_beginner",
       "bloom": "C3",
       "kind": "single_choice",
-      "prompt": "You need to order these pipeline steps for a web service: (1) deploy, (2) run tests, (3) check out code, (4) build container image, (5) push image to registry. Which order is correct?",
+      "prompt": "You need to order these pipeline steps for a web service: (1) deploy, (2) run unit tests on the source code, (3) check out code, (4) build container image, (5) push image to registry. Which order is correct, so that nothing is built, pushed or deployed from untested code?",
       "options": [
         {
           "id": "a",
@@ -975,19 +975,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Add `needs: test` to the deploy job so it waits for a successful test job"
+          "label": "Add `needs: test` to the deploy job so it waits for a passing test job"
         },
         {
           "id": "b",
-          "label": "Run the workflow twice, so the second run deploys only if the first run passed"
+          "label": "Add a `timeout-minutes` limit to the deploy job so it is cancelled if tests take too long to finish"
         },
         {
           "id": "c",
-          "label": "Move the deploy commands into the test job's last step and remove the `if` conditions"
+          "label": "Move the deploy commands into the last step of the test job so both run in the same runner environment"
         },
         {
           "id": "d",
-          "label": "Set `continue-on-error: true` on the test job so failures are reported separately"
+          "label": "Set `continue-on-error: true` on the test job so a failing test no longer blocks later jobs in the run"
         }
       ],
       "answerKey": {
@@ -2263,7 +2263,7 @@
         },
         {
           "id": "c",
-          "label": "Build once, record the image digest, deploy that digest to every environment with config injected at deploy time, prod gated"
+          "label": "Build once, record the digest, deploy that digest to every environment with config injected at deploy time, prod gated"
         },
         {
           "id": "d",
@@ -2290,7 +2290,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Key on the commit SHA so the cache is always exact, caching node_modules and restoring from the previous commit's key"
+          "label": "Key on the commit SHA so the cache is always exact, caching node_modules and restoring from the previous commit's key as a fallback"
         },
         {
           "id": "b",

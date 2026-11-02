@@ -686,7 +686,7 @@
         },
         {
           "id": "c",
-          "label": "A sinusoidal input never produces new frequencies at the output"
+          "label": "A sinusoidal input produces an output at the same frequency, only scaled in amplitude and shifted in phase"
         },
         {
           "id": "d",
@@ -719,7 +719,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Both tones are reduced equally, since they began with equal amplitude"
+          "label": "Both tones are reduced by the same factor, since they began with equal amplitude"
         },
         {
           "id": "b",
@@ -731,7 +731,7 @@
         },
         {
           "id": "d",
-          "label": "The 5 kHz tone is unchanged and the 200 Hz tone is strongly reduced"
+          "label": "The 5 kHz tone passes nearly unchanged and the 200 Hz tone is strongly reduced"
         }
       ],
       "answerKey": {
@@ -1743,15 +1743,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Symmetric-coefficient FIR, which gives constant group delay and has no feedback"
+          "label": "Symmetric-coefficient FIR, giving constant group delay with no feedback"
         },
         {
           "id": "b",
-          "label": "Chebyshev IIR, since passband ripple lowers the group delay variation"
+          "label": "Chebyshev IIR, since its passband ripple lowers the group delay variation across the band"
         },
         {
           "id": "c",
-          "label": "Butterworth IIR, whose flat magnitude response means no waveform distortion"
+          "label": "Butterworth IIR, whose maximally flat magnitude response means no waveform distortion"
         },
         {
           "id": "d",
@@ -1954,11 +1954,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Bessel, since near-constant group delay limits overshoot at the cost of slow roll-off"
+          "label": "Bessel, since near-constant group delay limits overshoot despite slow roll-off"
         },
         {
           "id": "b",
-          "label": "Butterworth, since flat magnitude means the pulse shape is not distorted"
+          "label": "Butterworth, since its maximally flat magnitude passes the pulse without distorting its shape or adding overshoot"
         },
         {
           "id": "c",
@@ -1989,11 +1989,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Overlap-add with FFT blocks, using FFT length at least block length plus 2047, so each block's tail is added into the next"
+          "label": "Overlap-add with FFT blocks, using FFT length at least block length plus 2047"
         },
         {
           "id": "b",
-          "label": "Decimate the input by 2048 before filtering, because this cuts the multiplications per output sample while keeping the result exact"
+          "label": "Lowpass and decimate the input by 2048 before filtering, cutting multiplications per output sample while the output stays exact"
         },
         {
           "id": "c",
@@ -2059,19 +2059,19 @@
       "options": [
         {
           "id": "a",
-          "label": "It is safe, because the cancellation is exact and the unstable pole disappears from the system, leaving only the stable pole at -2"
+          "label": "It is safe, because the cancellation is exact on paper and the unstable pole at s=1 vanishes from the cascade, leaving only the stable pole at -2"
         },
         {
           "id": "b",
-          "label": "It is unsafe, because a zero in the right half-plane always makes the cascade unstable regardless of any pole cancellation"
+          "label": "It is unsafe, because a zero in the right half-plane always makes the cascade unstable regardless of any pole cancellation that might occur"
         },
         {
           "id": "c",
-          "label": "Input-output behaviour looks stable, but the cancelled unstable mode stays internally and grows from any initial state or mismatch, so it is unsafe"
+          "label": "The input-output map looks stable, but the cancelled unstable mode persists internally and grows from initial states or mismatch, so it is unsafe"
         },
         {
           "id": "d",
-          "label": "It is safe, because BIBO stability depends only on the simplified transfer function, so internal modes cannot affect the physical outputs"
+          "label": "It is safe, because BIBO stability depends only on the simplified transfer function, so hidden internal modes cannot affect any physical signal in the system"
         }
       ],
       "answerKey": {
@@ -2205,19 +2205,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Elliptic filter, since its steepest roll-off needs the lowest order and the passband ripple is small enough to be ignored"
+          "label": "Elliptic filter, since its steepest roll-off needs the lowest order and the small passband ripple can be ignored for ECG work"
         },
         {
           "id": "b",
-          "label": "Chebyshev type I filter, since equiripple passband gives sharper cutoff than Butterworth and the ripple preserves pulse shape"
+          "label": "Chebyshev type I filter, since its equiripple passband gives a sharper cutoff than Butterworth and the ripple does not alter pulse shape"
         },
         {
           "id": "c",
-          "label": "Low-order Bessel filter, since near-constant group delay preserves QRS shape and the wide transition band suits 16 kHz oversampling"
+          "label": "Low-order Bessel filter, since near-constant group delay preserves QRS shape and the wide transition band suits oversampling"
         },
         {
           "id": "d",
-          "label": "Butterworth filter, since maximally flat magnitude means the waveform is passed with no distortion in the passband at all"
+          "label": "Butterworth filter, since its maximally flat magnitude means the waveform passes with no distortion anywhere in the passband"
         }
       ],
       "answerKey": {

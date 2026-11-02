@@ -323,7 +323,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It makes inserts faster and uses less storage"
+          "label": "It makes inserts faster because rows are kept in sorted order"
         },
         {
           "id": "b",
@@ -504,7 +504,7 @@
         },
         {
           "id": "b",
-          "label": "Many-to-many, stored with a junction table holding both keys"
+          "label": "Many-to-many, stored with a junction table of both keys"
         },
         {
           "id": "c",
@@ -512,7 +512,7 @@
         },
         {
           "id": "d",
-          "label": "Many-to-many, stored with a list of IDs in one column"
+          "label": "Many-to-many, stored as a list of course IDs in one column"
         }
       ],
       "answerKey": {
@@ -640,7 +640,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The index duplicates each row, which fills the disk quickly"
+          "label": "The index stores a full duplicate of each row, so every write has to fill much more disk space"
         },
         {
           "id": "b",
@@ -786,7 +786,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Add a surrogate id column and keep the rest as it is"
+          "label": "Add a surrogate id column to grades and keep student_name there"
         },
         {
           "id": "b",
@@ -794,11 +794,11 @@
         },
         {
           "id": "c",
-          "label": "Copy student_name into the courses table as well"
+          "label": "Copy student_name into the courses table keyed by course_id"
         },
         {
           "id": "d",
-          "label": "Remove student_name and keep only the IDs and grade"
+          "label": "Remove student_name from grades and store it nowhere else"
         }
       ],
       "answerKey": {
@@ -1045,7 +1045,7 @@
         },
         {
           "id": "d",
-          "label": "`order_items(order_id, product_id, qty)` plus `names(order_id, product_name)`"
+          "label": "`order_items(order_id, product_id, product_name)` plus `quantities(order_id, qty)`"
         }
       ],
       "answerKey": {
@@ -1803,7 +1803,7 @@
       "stage": "proficient",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "A dashboard reads order totals about 1000 times per write. Criteria: a total must never disagree with its line items, and reads must not be stale. Which approach best satisfies these?",
+      "prompt": "A dashboard reads order totals about 1000 times per write, and summing line items on each read is too slow. Criteria: a total must never disagree with its line items, and reads must not be stale. Which approach best satisfies these?",
       "options": [
         {
           "id": "a",
@@ -1815,11 +1815,11 @@
         },
         {
           "id": "c",
-          "label": "Store `orders.total` and let each application service update it, since services already know the line items"
+          "label": "Store `orders.total` and let each application service update it after changing lines, since services already know the line items"
         },
         {
           "id": "d",
-          "label": "Store `orders.total` and update it by trigger in the same transaction as each line change, so the two cannot drift"
+          "label": "Store `orders.total` and update it by trigger in the same transaction as each line change"
         }
       ],
       "answerKey": {
@@ -1889,7 +1889,7 @@
         },
         {
           "id": "d",
-          "label": "`ON DELETE SET NULL`, so invoices survive and simply lose the link to the customer who was removed"
+          "label": "`ON DELETE SET NULL`, so invoices survive for the 7 years and only the customer reference is cleared when the customer is removed"
         }
       ],
       "answerKey": {

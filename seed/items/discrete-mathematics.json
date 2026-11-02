@@ -11,19 +11,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Same as q is true"
+          "label": "True, because q is false and a false conclusion makes it vacuous"
         },
         {
           "id": "b",
-          "label": "True"
+          "label": "True, because the implication fails only when p is false"
         },
         {
           "id": "c",
-          "label": "Undefined"
+          "label": "Undefined, because the hypothesis and conclusion disagree"
         },
         {
           "id": "d",
-          "label": "False"
+          "label": "False, because a true hypothesis leads to a false conclusion"
         }
       ],
       "answerKey": {
@@ -647,7 +647,7 @@
         },
         {
           "id": "c",
-          "label": "P(k) is true for many tested values of k"
+          "label": "P(k) is true for every one of the many values of k that were tested"
         },
         {
           "id": "d",
@@ -1203,19 +1203,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Substitute n = k+1 into the formula and check it for several values"
+          "label": "Substitute n = k+1 into the formula and check that it holds for several values of k"
         },
         {
           "id": "b",
-          "label": "Assume the formula for k+1 and derive the one for k"
+          "label": "Assume the formula holds for k+1 and work backwards to derive the formula for k"
         },
         {
           "id": "c",
-          "label": "Verify the formula for n = k+2 as well"
+          "label": "Verify the formula directly for n = k+2, since the step needs two cases"
         },
         {
           "id": "d",
-          "label": "Write the sum to k+1 as k(k+1)/2 + (k+1) and simplify to (k+1)(k+2)/2"
+          "label": "Write the sum to k+1 as k(k+1)/2 + (k+1), then simplify to (k+1)(k+2)/2"
         }
       ],
       "answerKey": {
@@ -1413,19 +1413,19 @@
       "options": [
         {
           "id": "a",
-          "label": "The proof needs a and b both odd"
+          "label": "The proof needs a and b both odd, since lowest terms forces both to be odd"
         },
         {
           "id": "b",
-          "label": "Squaring gives a^2 = 2b^2, so a is even"
+          "label": "Squaring gives a^2 = 2b^2, so a^2 is even and hence a is even"
         },
         {
           "id": "c",
-          "label": "The contradiction arises because 2 is prime only"
+          "label": "The contradiction arises because 2 is prime, so sqrt(2) cannot be a ratio of integers"
         },
         {
           "id": "d",
-          "label": "Then b must be even too, contradicting lowest terms"
+          "label": "Writing a = 2k gives b^2 = 2k^2, so b is even too, contradicting lowest terms"
         }
       ],
       "answerKey": {
@@ -1695,19 +1695,19 @@
       "options": [
         {
           "id": "a",
-          "label": "60 is wrong because it drops position order, so each word should be counted once for every choice of letters"
+          "label": "60 is wrong because it drops position order, so each word should be counted once for every choice of letters used"
         },
         {
           "id": "b",
-          "label": "60 comes from dividing 720 by 6 letters, which treats rotations of the same word as one arrangement"
+          "label": "60 comes from dividing 720 by 6 letters, which treats cyclic shifts of the same word as one arrangement"
         },
         {
           "id": "c",
-          "label": "720 treats the three As and two Ns as distinguishable, so each word is counted 3!·2! = 12 times; 60 divides that out"
+          "label": "720 counts the three As and two Ns as distinguishable, so each word appears 3!·2! = 12 times; 60 divides that out"
         },
         {
           "id": "d",
-          "label": "720 is correct and 60 is too small, since identical letters still occupy different positions in the word"
+          "label": "720 is correct and 60 is too small, since identical letters still occupy different positions in the word and so give different words"
         }
       ],
       "answerKey": {
@@ -1761,7 +1761,7 @@
       "stage": "proficient",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "Criteria: count the ways to give 10 identical tokens to 4 distinct players, each receiving at least one. Which argument is sound?",
+      "prompt": "Count the ways to give 10 identical tokens to 4 distinct players, each receiving at least one. Which argument is sound?",
       "options": [
         {
           "id": "a",
@@ -1769,15 +1769,15 @@
         },
         {
           "id": "b",
-          "label": "Give each player one token, then distribute the other 6 freely: C(9,3) = 84"
+          "label": "Give each player one token first, leaving 6 identical tokens to place freely among 4 players: C(9,3) = 84"
         },
         {
           "id": "c",
-          "label": "Distribute all 10 tokens freely among 4 players, giving C(13,3) = 286, which also covers the at-least-one rule"
+          "label": "Distribute all 10 tokens freely among 4 players with stars and bars, C(13,3) = 286, then note the at-least-one rule is met"
         },
         {
           "id": "d",
-          "label": "Each token independently picks a player, so the count is 4^10, and at-least-one is enforced automatically"
+          "label": "Each token independently picks one of the 4 players, giving 4^10 outcomes, and this already ensures everyone gets one"
         }
       ],
       "answerKey": {
@@ -1831,7 +1831,7 @@
       "stage": "proficient",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "Criteria: the formula must express that holding a badge and not being banned are both necessary for entry. Policy: 'Nobody enters unless they hold a badge and are not banned.' Which formalization is best?",
+      "prompt": "Criteria: the formula must express that holding a badge and not being banned are both necessary for entry. Policy: 'Nobody enters unless they hold a badge and are not banned.' Which formalization best meets the criteria?",
       "options": [
         {
           "id": "a",
@@ -1843,7 +1843,7 @@
         },
         {
           "id": "c",
-          "label": "¬enter → (badge ∧ ¬banned)"
+          "label": "¬(badge ∧ ¬banned) → enter"
         },
         {
           "id": "d",
@@ -1870,19 +1870,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Flawed: it assumes each a is related to some b; the empty relation on a nonempty set is symmetric and transitive yet not reflexive"
+          "label": "Flawed: it assumes each a is related to some b; the empty relation on a nonempty set is symmetric and transitive but not reflexive"
         },
         {
           "id": "b",
-          "label": "Sound: every symmetric transitive relation is reflexive, because symmetry and transitivity together always lead back to a"
+          "label": "Sound: symmetry and transitivity together bring any related pair back to a, so every element is related to itself in such a relation"
         },
         {
           "id": "c",
-          "label": "Flawed: transitivity needs three distinct elements a, b, c, so aRb and bRa cannot be chained into the conclusion aRa"
+          "label": "Flawed: transitivity requires three distinct elements a, b, c, so aRb and bRa cannot be chained to give the conclusion aRa at all"
         },
         {
           "id": "d",
-          "label": "Flawed: symmetry only applies when a ≠ b, so the step from aRb to bRa is unjustified whenever the elements are equal"
+          "label": "Flawed: symmetry holds only for distinct elements a and b, so the step from aRb to bRa is unjustified when a and b are equal"
         }
       ],
       "answerKey": {
@@ -2046,7 +2046,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Wrong: the roots are 1 and 3, so the sequence grows like 3^n and a_2 equals 5"
+          "label": "Wrong: the roots are 1 and 3, so the sequence grows like 3^n and a_2 equals 5 by the recurrence"
         },
         {
           "id": "b",
@@ -2058,7 +2058,7 @@
         },
         {
           "id": "d",
-          "label": "Wrong: the roots are 1 and 2, giving a_n = 2^n, and the claim already fails at a_2 = 4"
+          "label": "Wrong: the roots are 1 and 2, giving a_n = 2^n, so the claim fails at a_2 = 4"
         }
       ],
       "answerKey": {

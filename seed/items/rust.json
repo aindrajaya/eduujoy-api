@@ -495,7 +495,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It still works, because both names share one read-only copy"
+          "label": "It still works, because both names share one read-only copy of the text"
         },
         {
           "id": "b",
@@ -647,7 +647,7 @@
         },
         {
           "id": "d",
-          "label": "It type-checks and borrow-checks the code faster, without making a binary"
+          "label": "It type-checks and borrow-checks code without producing a binary"
         }
       ],
       "answerKey": {
@@ -948,7 +948,7 @@
       "stage": "advanced_beginner",
       "bloom": "C3",
       "kind": "scenario",
-      "prompt": "A learner writes a helper that returns the longer of two string slices: `fn longest(a: &str, b: &str) -> &str { if a.len() > b.len() { a } else { b } }`. The compiler reports a 'missing lifetime specifier'. Which fix works?",
+      "prompt": "A learner writes a helper that returns the longer of two string slices: `fn longest(a: &str, b: &str) -> &str { if a.len() > b.len() { a } else { b } }`. The compiler reports a 'missing lifetime specifier'. Which change fixes the error while the function still returns a borrowed `&str` and does not allocate?",
       "options": [
         {
           "id": "a",
@@ -1241,11 +1241,11 @@
         },
         {
           "id": "c",
-          "label": "`push` moves `v` into the method, so `first` points at moved data"
+          "label": "`push` takes `self` by value, so `v` is moved into the call and `first` then points at moved-out data"
         },
         {
           "id": "d",
-          "label": "`push` needs a mutable borrow while `first`, a shared borrow used later, is still live, and it could reallocate the buffer"
+          "label": "`push` needs `&mut v` while shared borrow `first` is still used later, and it may reallocate the buffer"
         }
       ],
       "answerKey": {
@@ -1904,7 +1904,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Accept `&str` input and return `&str` slices tied to it with a lifetime, so fields are not copied"
+          "label": "Borrow verbatim fields as `&str` slices tied to the input lifetime, and allocate a `String` only for the few fields that need unescaping"
         },
         {
           "id": "b",

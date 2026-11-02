@@ -478,15 +478,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The `SELECT *` forces Postgres to lock the whole table"
+          "label": "SELECT * makes Postgres take a lock on the whole table while it reads"
         },
         {
           "id": "b",
-          "label": "Sequential scans always run slowly regardless of table size"
+          "label": "Seq Scans are slow on large tables because they read rows from disk in random order"
         },
         {
           "id": "c",
-          "label": "Postgres cannot filter by text columns without a cast"
+          "label": "Postgres cannot compare a text column to a literal without casting every value first"
         },
         {
           "id": "d",
@@ -626,11 +626,11 @@
         },
         {
           "id": "c",
-          "label": "Writers overwrite rows in place while readers retry until it ends"
+          "label": "Writers overwrite rows in place, so readers retry until the write commits"
         },
         {
           "id": "d",
-          "label": "Readers take table locks that queue behind any pending writers"
+          "label": "Readers take shared table locks that queue behind any pending writers"
         }
       ],
       "answerKey": {
@@ -729,7 +729,7 @@
         },
         {
           "id": "b",
-          "label": "Indexes on integer columns are ignored until the table is clustered"
+          "label": "Indexes on integer columns are not used until the table has been clustered on them"
         },
         {
           "id": "c",
@@ -861,7 +861,7 @@
       "stage": "advanced_beginner",
       "bloom": "C3",
       "kind": "single_choice",
-      "prompt": "In psql, which command lists the tables in the current schema?",
+      "prompt": "You have just connected to a database with psql and want to see which tables exist in the current schema before writing a query. Which command do you run?",
       "options": [
         {
           "id": "a",
@@ -943,11 +943,11 @@
         },
         {
           "id": "c",
-          "label": "`EXPLAIN orders;`"
+          "label": "`EXPLAIN SELECT * FROM orders;`"
         },
         {
           "id": "d",
-          "label": "`REINDEX TABLE orders;`"
+          "label": "`VACUUM FULL orders;`"
         }
       ],
       "answerKey": {
@@ -1115,7 +1115,7 @@
         },
         {
           "id": "b",
-          "label": "The server retries the failed INSERT, SELECT returns 1, and COMMIT saves one row"
+          "label": "The second INSERT is skipped as a duplicate, SELECT returns 1, and COMMIT saves one row"
         },
         {
           "id": "c",
@@ -1819,7 +1819,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`REPEATABLE READ`, because all statements share one snapshot and a read-only transaction won't hit serialization failures"
+          "label": "`REPEATABLE READ`, because all statements share one snapshot and read-only work won't hit serialization failures"
         },
         {
           "id": "b",
@@ -1969,7 +1969,7 @@
         },
         {
           "id": "b",
-          "label": "Periodic physical base backups plus continuous WAL archiving, enabling point-in-time recovery to a chosen timestamp"
+          "label": "Periodic base backups plus continuous WAL archiving, enabling point-in-time recovery to a chosen timestamp"
         },
         {
           "id": "c",

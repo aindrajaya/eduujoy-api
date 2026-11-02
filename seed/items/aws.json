@@ -647,7 +647,7 @@
         },
         {
           "id": "b",
-          "label": "Routine work such as OS patching, automated backups and failover setup"
+          "label": "Routine work like OS patching, automated backups and failover"
         },
         {
           "id": "c",
@@ -1675,7 +1675,7 @@
         },
         {
           "id": "e",
-          "label": "The identity policy is attached to a group rather than the user, which makes it ignored"
+          "label": "The bucket policy has no Allow for the user, so the identity policy alone is ignored"
         }
       ],
       "answerKey": {
@@ -1840,7 +1840,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Classic Load Balancer, because it supports path routing with a single listener for every service"
+          "label": "Classic Load Balancer, because its single listener can route requests by URL path and attach AWS WAF web ACLs"
         },
         {
           "id": "b",
@@ -1871,19 +1871,19 @@
       "stage": "proficient",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "A service needs RTO of 15 minutes and RPO of seconds after a regional outage, with a budget that rules out full active-active. Which disaster recovery strategy best fits?",
+      "prompt": "A service needs an RTO of 15 minutes and an RPO of seconds after a regional outage, and the team cannot rely on launching and configuring new compute during the outage. Budget rules out full active-active. Which disaster recovery strategy best fits?",
       "options": [
         {
           "id": "a",
-          "label": "Pilot light with only the database replicated, because compute can always be rebuilt within fifteen minutes"
+          "label": "Pilot light with only the database replicated, because compute can be launched from images after the failover"
         },
         {
           "id": "b",
-          "label": "Backup and restore, because snapshots copied cross-region are cheapest and recover within the RTO"
+          "label": "Backup and restore, because snapshots copied cross-region are cheapest and can be restored after failover"
         },
         {
           "id": "c",
-          "label": "Cold standby with infrastructure code stored, because it has zero running cost and fast deployment"
+          "label": "Cold standby with infrastructure code stored, because it has zero running cost and deploys after failover"
         },
         {
           "id": "d",

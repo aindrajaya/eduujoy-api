@@ -539,7 +539,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Search sends an HTTP GET to Catalog and retries until it gets a response"
+          "label": "Search sends an HTTP GET to Catalog and retries until it gets a response back"
         },
         {
           "id": "b",
@@ -547,11 +547,11 @@
         },
         {
           "id": "c",
-          "label": "Checkout calls the Tax service over REST and waits for the returned amount"
+          "label": "Checkout calls the Tax service over REST and waits for the returned tax amount"
         },
         {
           "id": "d",
-          "label": "Cart calls Pricing through a gRPC request and blocks until the reply arrives"
+          "label": "Cart calls Pricing through a gRPC request and blocks until the reply arrives back"
         }
       ],
       "answerKey": {
@@ -617,7 +617,7 @@
         },
         {
           "id": "c",
-          "label": "It gives clients one entry point and routes requests to the right service"
+          "label": "It gives clients one entry point and routes requests to services"
         },
         {
           "id": "d",
@@ -656,7 +656,7 @@
         },
         {
           "id": "d",
-          "label": "One service per database table, so each table has a dedicated owner"
+          "label": "One service per database table, so each table has exactly one owning service"
         }
       ],
       "answerKey": {
@@ -1884,7 +1884,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Open after the first failure and stay open until an engineer resets it after reviewing the logs"
+          "label": "Open after the first failure and stay open until an engineer resets it after reviewing the logs and confirming the fix"
         },
         {
           "id": "b",
@@ -1896,7 +1896,7 @@
         },
         {
           "id": "d",
-          "label": "Open after repeated failures and fail the whole page with an error, so users know to retry later"
+          "label": "Open after repeated failures and fail the whole page with an error, so users know to retry a little later"
         }
       ],
       "answerKey": {
@@ -2104,11 +2104,11 @@
         },
         {
           "id": "b",
-          "label": "Some services call each other over HTTP synchronously when the user needs an immediate answer to a request"
+          "label": "Some services call each other over HTTP synchronously, so a slow downstream service can delay the response the user is waiting for"
         },
         {
           "id": "c",
-          "label": "Each service has its own repository and CI pipeline even though engineers often review code across teams"
+          "label": "Each service has its own repository and CI pipeline even though engineers often review code across teams and share some conventions"
         },
         {
           "id": "d",
@@ -2289,7 +2289,7 @@
         },
         {
           "id": "c",
-          "label": "Return both fields, move consumers over at their own pace using contract tests, then remove the old field"
+          "label": "Return both fields, let consumers migrate at their own pace under contract tests, then drop the old one"
         },
         {
           "id": "d",
@@ -2351,19 +2351,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Send the email first, since customers like early confirmation and a compensation can send an apology email"
+          "label": "Send the email first, since the customer gets immediate feedback and an apology email can compensate if a later step fails"
         },
         {
           "id": "b",
-          "label": "Charge, send the email, then reserve, since money is the riskiest step and the email can be recalled later"
+          "label": "Charge first, then email, then reserve, since payment is the riskiest step and the email only needs to follow a successful charge"
         },
         {
           "id": "c",
-          "label": "Reserve, charge, then send the email last, only after all compensable steps have succeeded"
+          "label": "Reserve, charge, then send the email last, since the irreversible step should run only after all compensable steps have succeeded"
         },
         {
           "id": "d",
-          "label": "Run all three steps in parallel, since this shortens the saga and compensations undo whichever steps fail"
+          "label": "Run all three steps in parallel, since this shortens the saga and compensating transactions can undo whichever steps fail"
         }
       ],
       "answerKey": {
