@@ -59,6 +59,15 @@ describe('assertSafeTestDatabase', () => {
     }).toThrow(/pooled/);
   });
 
+  it('refuses a prod test URL even when the app URLs are elsewhere, with no override (lead gate, 23 Oct 2026)', () => {
+    const prod = 'postgresql://owner:secret@ep-raspy-recipe-bamuza67.c-8.eu-central-1.aws.neon.tech/neondb?sslmode=require';
+    const dev = 'postgresql://owner:secret@ep-cold-dew-ba8tyrlc.c-8.eu-central-1.aws.neon.tech/neondb?sslmode=require';
+    expect(() => { assertSafeTestDatabase(prod, [dev, dev], {}); }).toThrow(/DATABASE_URL_TEST is the prod database \(ep-raspy-recipe-bamuza67\)/);
+    expect(() => { assertSafeTestDatabase(prod, [undefined, undefined], {}); }).toThrow(UnsafeTestDatabaseError);
+    expect(() => { assertSafeTestDatabase(dev, [undefined], { PROD_DATABASE_ENDPOINTS: 'ep-cold-dew-ba8tyrlc' }); }).toThrow(UnsafeTestDatabaseError);
+    expect(() => { assertSafeTestDatabase(prod, [dev], {}); }).not.toThrow(/secret/);
+  });
+
   it('never includes credentials in the error message', () => {
     let message = '';
     try {

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { isProdDatabase } from '../db/prod-endpoints';
 
 const originList = z
   .string()
@@ -29,6 +30,8 @@ export const envSchema = z
     // Set by Koyeb for GitHub deployments at build and run time (koyeb.com/docs/build-and-deploy/environment-variables).
     KOYEB_GIT_SHA: z.preprocess((v) => (v === '' ? undefined : v), z.string().regex(/^[0-9a-f]{7,64}$/i).optional()),
     DATABASE_URL: z.string().regex(/^postgres(ql)?:\/\/\S+$/, { error: 'must be a postgres:// connection string' }),
+    /** Extra prod endpoint ids (comma-separated) on top of the built-in list (shared/db/prod-endpoints). */
+    PROD_DATABASE_ENDPOINTS: z.string().optional(),
     DATABASE_SCHEMA: z
       .string()
       .regex(/^[a-z_][a-z0-9_]{0,62}$/)
@@ -67,6 +70,10 @@ export const envSchema = z
   .superRefine((env, ctx) => {
     if (env.LEMONSQUEEZY_VARIANT_SUBSCRIPTION === env.LEMONSQUEEZY_VARIANT_CREDIT_PACK) {
       ctx.addIssue({ code: 'custom', path: ['LEMONSQUEEZY_VARIANT_CREDIT_PACK'], message: 'must differ from the subscription variant' });
+    }
+    // A local or test app on prod's database would run its job workers and sweeps against live data.
+    if (env.NODE_ENV !== 'production' && isProdDatabase(env.DATABASE_URL, env.PROD_DATABASE_ENDPOINTS)) {
+      ctx.addIssue({ code: 'custom', path: ['DATABASE_URL'], message: 'is the prod database; only NODE_ENV=production may use it' });
     }
     if (env.NODE_ENV !== 'production') return;
     if (env.APP_ORIGIN.some((origin) => !origin.startsWith('https://'))) {
