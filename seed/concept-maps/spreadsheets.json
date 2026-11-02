@@ -1,0 +1,660 @@
+{
+  "version": 1,
+  "topic": "spreadsheets",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Cells, rows, columns, ranges",
+          "aliases": [
+            "cell references",
+            "A1 notation"
+          ],
+          "bloom": "C1",
+          "summary": "Identify cells by column-row address and describe ranges, rows, columns and worksheets in a workbook."
+        },
+        {
+          "id": "nov-2",
+          "name": "Entering and editing data",
+          "aliases": [
+            "data entry"
+          ],
+          "bloom": "C2",
+          "summary": "Enter text, numbers and dates into cells and understand how the spreadsheet interprets and displays each type."
+        },
+        {
+          "id": "nov-3",
+          "name": "Basic number and text formatting",
+          "aliases": [
+            "cell formatting"
+          ],
+          "bloom": "C2",
+          "summary": "Apply number, currency, percent, date and alignment formats and explain that formatting changes display rather than the stored value."
+        },
+        {
+          "id": "nov-4",
+          "name": "Simple formulas with operators",
+          "aliases": [
+            "arithmetic formulas"
+          ],
+          "bloom": "C2",
+          "summary": "Write formulas starting with an equals sign using +, -, *, / and cell references so results update when inputs change."
+        },
+        {
+          "id": "nov-5",
+          "name": "Core summary functions",
+          "aliases": [
+            "SUM",
+            "AVERAGE",
+            "MIN",
+            "MAX"
+          ],
+          "bloom": "C2",
+          "summary": "Use SUM, AVERAGE, MIN, MAX and COUNT on a range and explain what each returns."
+        },
+        {
+          "id": "nov-6",
+          "name": "Row and column layout adjustments",
+          "aliases": [
+            "resize, insert, delete"
+          ],
+          "bloom": "C1",
+          "summary": "Insert, delete, resize, hide and freeze rows and columns to make a sheet readable."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Typing a calculated result into a cell is the same as using a formula.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Formatting a cell as a percent or currency changes the underlying number.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A cell's displayed text is always exactly what is stored in it.",
+          "concepts": [
+            "nov-2",
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Relative and absolute references",
+          "aliases": [
+            "dollar sign anchoring",
+            "$A$1"
+          ],
+          "bloom": "C3",
+          "summary": "Copy formulas using relative, absolute and mixed references and predict how addresses change."
+        },
+        {
+          "id": "adb-2",
+          "name": "Sorting data",
+          "aliases": [
+            "sort ascending descending",
+            "multi-level sort"
+          ],
+          "bloom": "C3",
+          "summary": "Sort a data table by one or more columns while keeping rows intact."
+        },
+        {
+          "id": "adb-3",
+          "name": "Filtering data",
+          "aliases": [
+            "AutoFilter"
+          ],
+          "bloom": "C3",
+          "summary": "Filter a table by text, number or date criteria to show only matching rows without deleting others."
+        },
+        {
+          "id": "adb-4",
+          "name": "Conditional logic with IF",
+          "aliases": [
+            "IF function"
+          ],
+          "bloom": "C3",
+          "summary": "Write IF formulas with comparison operators to return different results depending on a condition."
+        },
+        {
+          "id": "adb-5",
+          "name": "Conditional aggregation functions",
+          "aliases": [
+            "SUMIF",
+            "COUNTIF",
+            "AVERAGEIF"
+          ],
+          "bloom": "C3",
+          "summary": "Use SUMIF, COUNTIF and AVERAGEIF to total or count only cells meeting a criterion."
+        },
+        {
+          "id": "adb-6",
+          "name": "Basic chart creation",
+          "aliases": [
+            "column, line, pie charts"
+          ],
+          "bloom": "C3",
+          "summary": "Create column, line and pie charts from a range and add titles, axis labels and legends."
+        },
+        {
+          "id": "adb-7",
+          "name": "Conditional formatting rules",
+          "aliases": [
+            "highlight rules"
+          ],
+          "bloom": "C3",
+          "summary": "Apply rules that highlight cells by value, threshold or duplicate status."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-4"
+        ],
+        [
+          "nov-5",
+          "adb-5"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "nov-5",
+          "adb-6"
+        ],
+        [
+          "adb-4",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Sorting a single column on its own is safe even when neighboring columns hold related data.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Filtering a table deletes the rows that are hidden.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Copying a formula always keeps pointing at the same cells it originally referenced.",
+          "concepts": [
+            "adb-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Lookup functions",
+          "aliases": [
+            "VLOOKUP",
+            "XLOOKUP",
+            "INDEX MATCH"
+          ],
+          "bloom": "C3",
+          "summary": "Retrieve values from a table by key using lookup functions, choosing exact match and handling missing keys."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Nested and combined logic",
+          "aliases": [
+            "AND OR IFS nested IF"
+          ],
+          "bloom": "C4",
+          "summary": "Combine IF with AND, OR and other functions to model multi-condition rules and analyse where they fail."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Text and date functions",
+          "aliases": [
+            "LEFT, MID, TEXTJOIN, DATEDIF"
+          ],
+          "bloom": "C3",
+          "summary": "Clean, split and combine text and calculate with dates using text and date functions."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Structured data preparation",
+          "aliases": [
+            "tidy table layout",
+            "data cleaning"
+          ],
+          "bloom": "C4",
+          "summary": "Organize data as a flat table with one header row, consistent types and no blanks or merged cells, and diagnose issues that break analysis."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Pivot table construction",
+          "aliases": [
+            "PivotTable"
+          ],
+          "bloom": "C4",
+          "summary": "Build pivot tables with row, column, value and filter fields to summarize a dataset by category."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Data validation controls",
+          "aliases": [
+            "dropdown lists",
+            "input rules"
+          ],
+          "bloom": "C3",
+          "summary": "Restrict cell entries with lists and rules to prevent invalid input."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Formula error diagnosis",
+          "aliases": [
+            "#REF!, #N/A, #VALUE!",
+            "trace precedents"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret error values and use auditing tools to locate and fix formula problems."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Chart selection and design",
+          "aliases": [
+            "choosing chart type"
+          ],
+          "bloom": "C4",
+          "summary": "Choose chart types suited to the comparison being made and remove misleading or cluttered design."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "cmp-5",
+          "cmp-4"
+        ],
+        [
+          "adb-5",
+          "cmp-4"
+        ],
+        [
+          "adb-3",
+          "cmp-5"
+        ],
+        [
+          "adb-6",
+          "cmp-8"
+        ],
+        [
+          "nov-4",
+          "cmp-7"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Pivot tables update automatically the moment source data changes.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Merging cells and leaving blank rows makes data tables cleaner for analysis.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Approximate-match lookup is fine as a default on unsorted data.",
+          "concepts": [
+            "cmp-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-2",
+          "name": "Named ranges and structured tables",
+          "aliases": [
+            "Excel Tables",
+            "named ranges"
+          ],
+          "bloom": "C4",
+          "summary": "Use tables and named ranges so formulas stay readable and expand automatically as data grows."
+        },
+        {
+          "id": "prf-1",
+          "name": "Dynamic array formulas",
+          "aliases": [
+            "FILTER, UNIQUE, SORT, spill ranges"
+          ],
+          "bloom": "C4",
+          "summary": "Use array-returning functions that spill results and analyse when they outperform copied formulas."
+        },
+        {
+          "id": "prf-3",
+          "name": "Pivot calculations and slicers",
+          "aliases": [
+            "calculated fields",
+            "slicers",
+            "grouping"
+          ],
+          "bloom": "C4",
+          "summary": "Extend pivot tables with grouping, calculated fields, percent-of measures and slicers for interactive analysis."
+        },
+        {
+          "id": "prf-4",
+          "name": "Model structure and assumptions",
+          "aliases": [
+            "inputs calculations outputs"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and design workbooks that separate inputs, calculations and outputs and document assumptions."
+        },
+        {
+          "id": "prf-5",
+          "name": "What-if and sensitivity analysis",
+          "aliases": [
+            "Goal Seek",
+            "scenarios",
+            "data tables"
+          ],
+          "bloom": "C5",
+          "summary": "Use Goal Seek and scenario tools to test how changing inputs affects results and judge reliability."
+        },
+        {
+          "id": "prf-6",
+          "name": "Cross-sheet and external data",
+          "aliases": [
+            "importing, linking workbooks",
+            "Power Query",
+            "IMPORTRANGE"
+          ],
+          "bloom": "C4",
+          "summary": "Combine data from multiple sheets, files or imports and manage refresh and link risks."
+        },
+        {
+          "id": "prf-7",
+          "name": "Dashboard design",
+          "aliases": [
+            "summary dashboards"
+          ],
+          "bloom": "C5",
+          "summary": "Assess and assemble charts, pivots and key figures into a clear dashboard that answers specific questions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "cmp-4",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-1"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "cmp-1",
+          "prf-6"
+        ],
+        [
+          "prf-3",
+          "prf-7"
+        ],
+        [
+          "cmp-8",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A workbook that produces the right number today is a sound model.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Goal Seek proves the answer is realistic, not just mathematically achievable.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Linked external data is always current and safe from broken links.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Reusable formula patterns",
+          "aliases": [
+            "LET, LAMBDA, custom functions"
+          ],
+          "bloom": "C6",
+          "summary": "Design reusable calculations with LET, LAMBDA or named functions that reduce duplication and error."
+        },
+        {
+          "id": "exp-2",
+          "name": "Automation with macros and scripts",
+          "aliases": [
+            "VBA",
+            "Apps Script",
+            "Office Scripts"
+          ],
+          "bloom": "C6",
+          "summary": "Create macros or scripts to automate repetitive workbook tasks and judge when automation is warranted."
+        },
+        {
+          "id": "exp-3",
+          "name": "Workbook performance optimization",
+          "aliases": [
+            "calculation speed",
+            "volatile functions"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate causes of slow workbooks, such as volatile functions and whole-column array calculations, and redesign for speed."
+        },
+        {
+          "id": "exp-4",
+          "name": "Spreadsheet risk and auditing",
+          "aliases": [
+            "error control",
+            "model review"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate workbooks for hidden errors, hard-coded values and logic flaws using systematic review and checks."
+        },
+        {
+          "id": "exp-5",
+          "name": "Collaboration and access governance",
+          "aliases": [
+            "sharing permissions",
+            "version history",
+            "protection"
+          ],
+          "bloom": "C5",
+          "summary": "Judge and set protection, permissions and versioning practices for shared workbooks."
+        },
+        {
+          "id": "exp-6",
+          "name": "Choosing the right tool",
+          "aliases": [
+            "spreadsheet vs database"
+          ],
+          "bloom": "C5",
+          "summary": "Decide when a spreadsheet is the right tool versus a database, BI tool or code, based on scale, integrity and repeatability."
+        },
+        {
+          "id": "exp-7",
+          "name": "Designing templates for others",
+          "aliases": [
+            "reusable workbook design"
+          ],
+          "bloom": "C6",
+          "summary": "Build self-explanatory templates with validation, guidance and protection so non-experts can use them correctly."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "exp-4",
+          "exp-7"
+        ],
+        [
+          "prf-4",
+          "exp-7"
+        ],
+        [
+          "exp-5",
+          "exp-7"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "exp-4",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Any spreadsheet problem is best solved by adding more formulas or macros.",
+          "concepts": [
+            "exp-2",
+            "exp-6"
+          ]
+        },
+        {
+          "text": "Formulas that return no errors are correct.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Sheet protection or hiding is a secure way to guard sensitive data.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

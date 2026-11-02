@@ -1,0 +1,707 @@
+{
+  "version": 1,
+  "topic": "discrete-mathematics",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "algebra"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Set notation and membership",
+          "aliases": [
+            "sets",
+            "set basics"
+          ],
+          "bloom": "C1",
+          "summary": "Read and write sets using roster and set-builder notation and decide whether an element belongs to a set or a set is a subset of another."
+        },
+        {
+          "id": "nov-2",
+          "name": "Set operations and Venn diagrams",
+          "aliases": [
+            "union intersection complement"
+          ],
+          "bloom": "C2",
+          "summary": "Compute and explain union, intersection, difference and complement and represent them with Venn diagrams."
+        },
+        {
+          "id": "nov-3",
+          "name": "Propositions and logical connectives",
+          "aliases": [
+            "propositional logic",
+            "logical operators"
+          ],
+          "bloom": "C2",
+          "summary": "Identify statements that are true or false and explain the meaning of AND, OR, NOT, implication and biconditional."
+        },
+        {
+          "id": "nov-4",
+          "name": "Truth tables",
+          "aliases": [
+            "truth table construction"
+          ],
+          "bloom": "C2",
+          "summary": "Build a truth table for a compound proposition and read off when it is true or false."
+        },
+        {
+          "id": "nov-5",
+          "name": "Functions as mappings",
+          "aliases": [
+            "function definition",
+            "domain and codomain"
+          ],
+          "bloom": "C2",
+          "summary": "Explain a function as a rule assigning each domain element exactly one codomain element, distinguishing domain, codomain and range."
+        },
+        {
+          "id": "nov-6",
+          "name": "Counting by sum and product",
+          "aliases": [
+            "rule of sum",
+            "rule of product",
+            "multiplication principle"
+          ],
+          "bloom": "C2",
+          "summary": "Explain when to add and when to multiply counts of choices in simple counting problems."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The empty set and the set containing the empty set are the same thing.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "The implication 'if P then Q' is false whenever P is false.",
+          "concepts": [
+            "nov-3",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "In ordinary logic, 'or' means exactly one of the two is true.",
+          "concepts": [
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Logical equivalence and De Morgan",
+          "aliases": [
+            "De Morgan's laws",
+            "tautology"
+          ],
+          "bloom": "C3",
+          "summary": "Apply equivalences such as De Morgan's laws and the contrapositive to rewrite statements and recognize tautologies and contradictions."
+        },
+        {
+          "id": "adb-2",
+          "name": "Quantifiers and negation",
+          "aliases": [
+            "universal and existential quantifiers",
+            "predicate logic basics"
+          ],
+          "bloom": "C3",
+          "summary": "Translate statements into predicates with for-all and there-exists and correctly negate them."
+        },
+        {
+          "id": "adb-3",
+          "name": "Relations and their properties",
+          "aliases": [
+            "reflexive symmetric transitive",
+            "binary relations"
+          ],
+          "bloom": "C3",
+          "summary": "Represent relations as sets of pairs and test them for reflexivity, symmetry, antisymmetry and transitivity."
+        },
+        {
+          "id": "adb-4",
+          "name": "Injective, surjective and bijective functions",
+          "aliases": [
+            "one-to-one onto",
+            "function types"
+          ],
+          "bloom": "C3",
+          "summary": "Classify functions as one-to-one, onto or both and use composition and inverses of bijections."
+        },
+        {
+          "id": "adb-5",
+          "name": "Permutations and combinations",
+          "aliases": [
+            "n choose k",
+            "arrangements and selections"
+          ],
+          "bloom": "C3",
+          "summary": "Compute counts of ordered and unordered selections with and without repetition and choose the right formula."
+        },
+        {
+          "id": "adb-6",
+          "name": "Direct proof",
+          "aliases": [
+            "proof by direct argument"
+          ],
+          "bloom": "C3",
+          "summary": "Write a direct proof of a simple statement from definitions, such as properties of even and odd integers."
+        },
+        {
+          "id": "adb-7",
+          "name": "Divisibility and modular congruence",
+          "aliases": [
+            "modular arithmetic",
+            "congruence mod n"
+          ],
+          "bloom": "C3",
+          "summary": "Use divisibility, remainders and congruence mod n to compute sums, products and powers of residues."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-2"
+        ],
+        [
+          "nov-1",
+          "adb-3"
+        ],
+        [
+          "nov-5",
+          "adb-4"
+        ],
+        [
+          "nov-6",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-2",
+          "adb-6"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The negation of 'for all x, P(x)' is 'for all x, not P(x)'.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "A relation that is symmetric and transitive must also be reflexive.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Order matters in combinations just as it does in permutations.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Proof by contradiction and contrapositive",
+          "aliases": [
+            "indirect proof",
+            "reductio ad absurdum"
+          ],
+          "bloom": "C3",
+          "summary": "Choose and carry out contrapositive or contradiction proofs, such as irrationality of the square root of 2."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Mathematical induction",
+          "aliases": [
+            "weak induction",
+            "proof by induction"
+          ],
+          "bloom": "C3",
+          "summary": "Prove statements over the natural numbers with a base case and an inductive step using the inductive hypothesis."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Strong induction",
+          "aliases": [
+            "complete induction"
+          ],
+          "bloom": "C4",
+          "summary": "Decide when strong induction is needed and use several earlier cases in the inductive step."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Equivalence relations and partitions",
+          "aliases": [
+            "equivalence classes"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how an equivalence relation splits a set into classes and connect it to partitions, including congruence classes."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Inclusion-exclusion principle",
+          "aliases": [
+            "inclusion exclusion",
+            "PIE"
+          ],
+          "bloom": "C4",
+          "summary": "Count elements of unions of overlapping sets by alternating sums of intersection sizes."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Pigeonhole principle",
+          "aliases": [
+            "Dirichlet box principle"
+          ],
+          "bloom": "C4",
+          "summary": "Identify the pigeons and holes in a problem and apply basic and generalized pigeonhole arguments."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Solving linear recurrences",
+          "aliases": [
+            "recurrence relations",
+            "characteristic equation"
+          ],
+          "bloom": "C4",
+          "summary": "Set up recurrences from problems and solve first-order and linear homogeneous second-order ones by iteration or characteristic roots."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Modular inverses and the Euclidean algorithm",
+          "aliases": [
+            "gcd",
+            "extended Euclid"
+          ],
+          "bloom": "C3",
+          "summary": "Compute gcds and modular inverses and solve linear congruences."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "adb-7",
+          "cmp-4"
+        ],
+        [
+          "adb-5",
+          "cmp-5"
+        ],
+        [
+          "nov-2",
+          "cmp-5"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-2",
+          "cmp-7"
+        ],
+        [
+          "adb-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "In an induction proof, the inductive step may assume the statement for all n, including the one being proved.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "The base case is a formality and can be skipped when the inductive step works.",
+          "concepts": [
+            "cmp-2",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "The pigeonhole principle tells you which hole holds multiple pigeons.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Nested quantifiers and proof strategy",
+          "aliases": [
+            "multiple quantifiers",
+            "quantifier order"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how the order of nested quantifiers changes meaning and pick proof strategies for statements with several quantifiers."
+        },
+        {
+          "id": "prf-2",
+          "name": "Structural induction",
+          "aliases": [
+            "induction on recursive definitions"
+          ],
+          "bloom": "C4",
+          "summary": "Prove properties of recursively defined sets, strings and trees by induction over their construction."
+        },
+        {
+          "id": "prf-3",
+          "name": "Generating functions for counting",
+          "aliases": [
+            "ordinary generating functions"
+          ],
+          "bloom": "C5",
+          "summary": "Use generating functions to count selections with constraints and to solve recurrences, judging when they beat direct methods."
+        },
+        {
+          "id": "prf-4",
+          "name": "Non-homogeneous recurrences and divide-and-conquer",
+          "aliases": [
+            "master theorem recurrences",
+            "particular solutions"
+          ],
+          "bloom": "C5",
+          "summary": "Solve recurrences with forcing terms and evaluate solution methods for divide-and-conquer cost recurrences."
+        },
+        {
+          "id": "prf-5",
+          "name": "Binomial identities and combinatorial proof",
+          "aliases": [
+            "double counting",
+            "bijective proof"
+          ],
+          "bloom": "C5",
+          "summary": "Establish identities by counting one set in two ways or by building a bijection, and compare with algebraic proofs."
+        },
+        {
+          "id": "prf-6",
+          "name": "Cardinality and countability",
+          "aliases": [
+            "infinite sets",
+            "diagonal argument"
+          ],
+          "bloom": "C4",
+          "summary": "Compare sizes of sets via bijections, show sets are countable, and use the diagonal argument to show uncountability."
+        },
+        {
+          "id": "prf-7",
+          "name": "Number-theoretic theorems and applications",
+          "aliases": [
+            "Fermat's little theorem",
+            "Chinese remainder theorem",
+            "RSA"
+          ],
+          "bloom": "C5",
+          "summary": "Apply Fermat, Euler and the Chinese remainder theorem and evaluate their use in modular computation and RSA-style cryptography."
+        },
+        {
+          "id": "prf-8",
+          "name": "Partial orders and lattices",
+          "aliases": [
+            "posets",
+            "Hasse diagrams"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse partial orders using Hasse diagrams, extremal elements, chains and antichains."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "prf-1"
+        ],
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "adb-5",
+          "prf-5"
+        ],
+        [
+          "adb-4",
+          "prf-6"
+        ],
+        [
+          "cmp-8",
+          "prf-7"
+        ],
+        [
+          "cmp-4",
+          "prf-7"
+        ],
+        [
+          "cmp-4",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "For all x there exists y is logically the same as there exists y for all x.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "All infinite sets have the same size.",
+          "concepts": [
+            "prf-6"
+          ]
+        },
+        {
+          "text": "Fermat's little theorem holds for any modulus, not only primes.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Formal proof design and evaluation",
+          "aliases": [
+            "proof critique",
+            "choosing proof technique"
+          ],
+          "bloom": "C5",
+          "summary": "Judge the validity, rigour and elegance of proofs, spot subtle flaws, and select the most suitable technique for a new claim."
+        },
+        {
+          "id": "exp-2",
+          "name": "Asymptotic analysis of recurrences",
+          "aliases": [
+            "recurrence bounds",
+            "Akra-Bazzi"
+          ],
+          "bloom": "C5",
+          "summary": "Derive and justify tight bounds for irregular recurrences and compare methods such as substitution, recursion trees and generating functions."
+        },
+        {
+          "id": "exp-3",
+          "name": "Probabilistic and extremal methods",
+          "aliases": [
+            "probabilistic method",
+            "extremal combinatorics"
+          ],
+          "bloom": "C6",
+          "summary": "Design existence arguments using expected values or extremal choices to prove combinatorial results without construction."
+        },
+        {
+          "id": "exp-4",
+          "name": "Generalized pigeonhole and Ramsey theory",
+          "aliases": [
+            "Ramsey numbers",
+            "Ramsey's theorem"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate Ramsey-type guarantees of structure in large systems and construct arguments or bounds for small cases."
+        },
+        {
+          "id": "exp-5",
+          "name": "Inclusion-exclusion with Möbius inversion",
+          "aliases": [
+            "Möbius function",
+            "derangements"
+          ],
+          "bloom": "C5",
+          "summary": "Generalize inclusion-exclusion to posets and use it for derangements, sieve counts and inversion formulas."
+        },
+        {
+          "id": "exp-6",
+          "name": "Formal logic and decidability limits",
+          "aliases": [
+            "first-order logic semantics",
+            "completeness and incompleteness"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the expressive power and limits of propositional and first-order logic, including satisfiability, completeness and undecidability."
+        },
+        {
+          "id": "exp-7",
+          "name": "Modelling problems discretely",
+          "aliases": [
+            "discrete model construction",
+            "problem formalization"
+          ],
+          "bloom": "C6",
+          "summary": "Create discrete models of real problems by choosing sets, relations, recurrences or counting structures and justify the choice."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-2",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-2"
+        ],
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "prf-5",
+          "exp-3"
+        ],
+        [
+          "cmp-6",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "prf-8",
+          "exp-5"
+        ],
+        [
+          "cmp-5",
+          "exp-5"
+        ],
+        [
+          "prf-1",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A probabilistic existence proof gives an efficient way to construct the object.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Ramsey numbers are easy to compute exactly once the general bounds are known.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Any true statement in first-order arithmetic can be proven from a fixed axiom system.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,714 @@
+{
+  "version": 1,
+  "topic": "go",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Packages and main function",
+          "aliases": [
+            "package main",
+            "program entry point"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that every Go file belongs to a package and that an executable starts at func main in package main."
+        },
+        {
+          "id": "nov-2",
+          "name": "Variable declaration forms",
+          "aliases": [
+            "var and short declaration",
+            ":= operator"
+          ],
+          "bloom": "C2",
+          "summary": "Explain the difference between var declarations and the := short form and when each is allowed."
+        },
+        {
+          "id": "nov-3",
+          "name": "Basic built-in types",
+          "aliases": [
+            "int string bool float64"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise Go's basic types and understand that Go does not convert between them implicitly."
+        },
+        {
+          "id": "nov-4",
+          "name": "Zero values",
+          "aliases": [
+            "default initial values"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that every declared variable has a defined zero value such as 0, empty string, false or nil."
+        },
+        {
+          "id": "nov-5",
+          "name": "Control flow with for and if",
+          "aliases": [
+            "for loop",
+            "switch statement"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that for is the only loop keyword and how if and switch work without parentheses."
+        },
+        {
+          "id": "nov-6",
+          "name": "Functions and multiple returns",
+          "aliases": [
+            "func declaration",
+            "multiple return values"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how to declare functions with typed parameters and return several values."
+        },
+        {
+          "id": "nov-7",
+          "name": "Go command basics",
+          "aliases": [
+            "go run",
+            "go build",
+            "gofmt"
+          ],
+          "bloom": "C1",
+          "summary": "Recall what go run, go build and gofmt do and use them to compile and format a program."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-1",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Go converts between numeric types automatically, so adding an int to a float64 just works.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "The := operator can be used anywhere, including at package level outside functions.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Go has while and do-while loops in addition to for.",
+          "concepts": [
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Slices and backing arrays",
+          "aliases": [
+            "slice header",
+            "append"
+          ],
+          "bloom": "C3",
+          "summary": "Use slices, len, cap and append, understanding that slices reference an underlying array."
+        },
+        {
+          "id": "adb-2",
+          "name": "Maps",
+          "aliases": [
+            "hash map",
+            "comma-ok idiom"
+          ],
+          "bloom": "C3",
+          "summary": "Create and use maps, check key presence with the comma-ok form, and know nil maps cannot be written to."
+        },
+        {
+          "id": "adb-3",
+          "name": "Structs and methods",
+          "aliases": [
+            "struct types",
+            "method receivers"
+          ],
+          "bloom": "C3",
+          "summary": "Define struct types and attach methods to them using value or pointer receivers."
+        },
+        {
+          "id": "adb-4",
+          "name": "Pointers and value semantics",
+          "aliases": [
+            "pass by value",
+            "address-of and dereference"
+          ],
+          "bloom": "C3",
+          "summary": "Apply & and * and predict when a function receives a copy versus a reference to data."
+        },
+        {
+          "id": "adb-5",
+          "name": "Error values and returns",
+          "aliases": [
+            "error interface",
+            "if err != nil"
+          ],
+          "bloom": "C3",
+          "summary": "Return and check error values explicitly following the standard if err != nil pattern."
+        },
+        {
+          "id": "adb-6",
+          "name": "Defer statements",
+          "aliases": [
+            "defer",
+            "deferred calls"
+          ],
+          "bloom": "C3",
+          "summary": "Use defer to run cleanup such as closing files, knowing it executes in last-in-first-out order at function return."
+        },
+        {
+          "id": "adb-7",
+          "name": "Modules and imports",
+          "aliases": [
+            "go.mod",
+            "go mod init"
+          ],
+          "bloom": "C2",
+          "summary": "Create a module, import standard and third-party packages and understand exported capitalised names."
+        },
+        {
+          "id": "adb-8",
+          "name": "Range loops over collections",
+          "aliases": [
+            "for range"
+          ],
+          "bloom": "C3",
+          "summary": "Iterate over slices, maps, strings and channels with range and interpret the index and value it yields."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-8"
+        ],
+        [
+          "adb-2",
+          "adb-8"
+        ],
+        [
+          "nov-6",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-6",
+          "adb-5"
+        ],
+        [
+          "nov-6",
+          "adb-6"
+        ],
+        [
+          "nov-1",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Assigning one slice to another copies the underlying data.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "A method with a value receiver can modify the original struct.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Go uses exceptions, so errors are caught with try/catch.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Interfaces and implicit satisfaction",
+          "aliases": [
+            "structural typing",
+            "interface types"
+          ],
+          "bloom": "C3",
+          "summary": "Define small interfaces and use types that satisfy them implicitly without an implements declaration."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Error wrapping and inspection",
+          "aliases": [
+            "errors.Is",
+            "errors.As",
+            "%w"
+          ],
+          "bloom": "C4",
+          "summary": "Wrap errors with %w and analyse chains using errors.Is and errors.As to decide how to handle failures."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Goroutines",
+          "aliases": [
+            "go statement",
+            "concurrent execution"
+          ],
+          "bloom": "C3",
+          "summary": "Start goroutines and reason about their lifetime relative to the main function."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Channels and select",
+          "aliases": [
+            "buffered channels",
+            "select statement"
+          ],
+          "bloom": "C4",
+          "summary": "Communicate between goroutines using buffered and unbuffered channels and select, analysing blocking behaviour."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Synchronisation with sync package",
+          "aliases": [
+            "WaitGroup",
+            "Mutex"
+          ],
+          "bloom": "C3",
+          "summary": "Use WaitGroup and Mutex to coordinate goroutines and protect shared state."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Table-driven testing",
+          "aliases": [
+            "testing package",
+            "go test"
+          ],
+          "bloom": "C3",
+          "summary": "Write tests with the testing package using table-driven cases and subtests."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Type assertions and switches",
+          "aliases": [
+            "type switch",
+            "empty interface"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse interface values dynamically using type assertions and type switches."
+        },
+        {
+          "id": "cmp-8",
+          "name": "HTTP servers with net/http",
+          "aliases": [
+            "http.Handler",
+            "ServeMux"
+          ],
+          "bloom": "C3",
+          "summary": "Build a simple HTTP service using handlers, a mux and JSON encoding."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ],
+        [
+          "adb-3",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "cmp-1",
+          "cmp-8"
+        ],
+        [
+          "cmp-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A type must explicitly declare that it implements an interface.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "The program waits for all goroutines to finish before main exits.",
+          "concepts": [
+            "cmp-3",
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Unbuffered channel sends never block.",
+          "concepts": [
+            "cmp-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Context cancellation and deadlines",
+          "aliases": [
+            "context.Context",
+            "timeouts"
+          ],
+          "bloom": "C4",
+          "summary": "Propagate cancellation, deadlines and request-scoped values through call chains and evaluate where they must be honoured."
+        },
+        {
+          "id": "prf-2",
+          "name": "Concurrency patterns",
+          "aliases": [
+            "worker pool",
+            "fan-out fan-in",
+            "pipeline"
+          ],
+          "bloom": "C5",
+          "summary": "Choose between worker pools, pipelines and fan-out/fan-in designs and justify the choice."
+        },
+        {
+          "id": "prf-3",
+          "name": "Goroutine leaks and races",
+          "aliases": [
+            "data race",
+            "race detector"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose data races and leaked goroutines using the race detector and reasoning about channel ownership."
+        },
+        {
+          "id": "prf-4",
+          "name": "Interface design principles",
+          "aliases": [
+            "accept interfaces return structs",
+            "small interfaces"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate where interfaces belong and how large they should be to keep code decoupled and testable."
+        },
+        {
+          "id": "prf-5",
+          "name": "Generics and constraints",
+          "aliases": [
+            "type parameters",
+            "constraints"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when type parameters and constraints improve code over interfaces or duplication."
+        },
+        {
+          "id": "prf-6",
+          "name": "Benchmarking and profiling",
+          "aliases": [
+            "pprof",
+            "testing.B"
+          ],
+          "bloom": "C4",
+          "summary": "Measure performance with benchmarks and pprof and identify bottlenecks before optimising."
+        },
+        {
+          "id": "prf-7",
+          "name": "Package and project layout",
+          "aliases": [
+            "internal packages",
+            "cmd layout"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how to structure packages, internal directories and dependencies for maintainable modules."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-8",
+          "prf-1"
+        ],
+        [
+          "cmp-4",
+          "prf-2"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "cmp-1",
+          "prf-4"
+        ],
+        [
+          "cmp-1",
+          "prf-5"
+        ],
+        [
+          "cmp-6",
+          "prf-6"
+        ],
+        [
+          "adb-7",
+          "prf-7"
+        ],
+        [
+          "prf-4",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Generics should replace interfaces wherever possible.",
+          "concepts": [
+            "prf-5",
+            "prf-4"
+          ]
+        },
+        {
+          "text": "A mutex-free program using goroutines is safe if it appears to give the right output in testing.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Adding more goroutines always makes a program faster.",
+          "concepts": [
+            "prf-2",
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Scheduler and memory model",
+          "aliases": [
+            "GMP scheduler",
+            "happens-before"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate concurrent code against the Go memory model and the runtime scheduler's behaviour."
+        },
+        {
+          "id": "exp-2",
+          "name": "Garbage collector tuning",
+          "aliases": [
+            "GC pacing",
+            "GOGC"
+          ],
+          "bloom": "C5",
+          "summary": "Assess allocation behaviour and escape analysis to reduce GC pressure and judge when tuning is warranted."
+        },
+        {
+          "id": "exp-3",
+          "name": "Designing public APIs",
+          "aliases": [
+            "API stability",
+            "module versioning"
+          ],
+          "bloom": "C6",
+          "summary": "Design exported package APIs and version them with semantic import rules to remain compatible over time."
+        },
+        {
+          "id": "exp-4",
+          "name": "Concurrency architecture design",
+          "aliases": [
+            "structured concurrency",
+            "backpressure"
+          ],
+          "bloom": "C6",
+          "summary": "Create service architectures that handle backpressure, graceful shutdown and bounded concurrency."
+        },
+        {
+          "id": "exp-5",
+          "name": "Unsafe and reflection trade-offs",
+          "aliases": [
+            "reflect package",
+            "unsafe.Pointer"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when reflection or unsafe is justified and the risks they introduce."
+        },
+        {
+          "id": "exp-6",
+          "name": "Observability and production hardening",
+          "aliases": [
+            "structured logging",
+            "metrics and tracing"
+          ],
+          "bloom": "C6",
+          "summary": "Design logging, metrics, tracing and failure handling so Go services can be operated reliably."
+        },
+        {
+          "id": "exp-7",
+          "name": "Tooling and code generation",
+          "aliases": [
+            "go generate",
+            "static analysis"
+          ],
+          "bloom": "C6",
+          "summary": "Create custom linters, generators and build workflows that enforce team conventions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-2",
+          "exp-4"
+        ],
+        [
+          "prf-1",
+          "exp-4"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "exp-4",
+          "exp-6"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Tuning GC settings is the first step to making a Go service fast.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Using unsafe or reflection is fine for speed gains without measuring.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Graceful shutdown is handled automatically when the process receives a signal.",
+          "concepts": [
+            "exp-4",
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

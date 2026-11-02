@@ -1,0 +1,674 @@
+{
+  "version": 1,
+  "topic": "integral-calculus",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "differential-calculus"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Antiderivative as reverse differentiation",
+          "aliases": [
+            "primitive function",
+            "inverse derivative"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise that an antiderivative of f is a function F whose derivative is f, and recall that it is not unique."
+        },
+        {
+          "id": "nov-2",
+          "name": "Indefinite integral and constant",
+          "aliases": [
+            "general antiderivative",
+            "+C"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that the indefinite integral represents a whole family of antiderivatives differing by a constant C."
+        },
+        {
+          "id": "nov-3",
+          "name": "Basic power rule for integrals",
+          "aliases": [
+            "reverse power rule"
+          ],
+          "bloom": "C2",
+          "summary": "Understand and state that the integral of x^n is x^(n+1)/(n+1) + C for n not equal to -1, and why n = -1 is excluded."
+        },
+        {
+          "id": "nov-5",
+          "name": "Area under a curve idea",
+          "aliases": [
+            "accumulated area",
+            "signed area"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a definite integral measures signed area between a curve and the x-axis, with area below the axis counting negative."
+        },
+        {
+          "id": "nov-6",
+          "name": "Linearity of integration",
+          "aliases": [
+            "sum and constant multiple rules"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that integrals split over sums and pull out constant factors, so terms can be integrated one at a time."
+        },
+        {
+          "id": "nov-4",
+          "name": "Standard integral formulas",
+          "aliases": [
+            "table of integrals",
+            "elementary antiderivatives"
+          ],
+          "bloom": "C1",
+          "summary": "Recall antiderivatives of sin x, cos x, e^x, 1/x and sec^2 x by reversing known derivative rules."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-6",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The integral of 1/x is x^0/0 by the power rule, or is simply ln x with no absolute value needed.",
+          "concepts": [
+            "nov-3",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "The constant C can be dropped because it does not affect the answer.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "A definite integral always gives a positive area.",
+          "concepts": [
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Riemann sums",
+          "aliases": [
+            "left, right and midpoint sums",
+            "rectangle approximation"
+          ],
+          "bloom": "C3",
+          "summary": "Compute left, right and midpoint sums over a partition to approximate the area under a curve."
+        },
+        {
+          "id": "adb-2",
+          "name": "Definite integral as limit",
+          "aliases": [
+            "limit of Riemann sums"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret the definite integral as the limit of Riemann sums as the partition width goes to zero."
+        },
+        {
+          "id": "adb-3",
+          "name": "Properties of definite integrals",
+          "aliases": [
+            "additivity",
+            "reversing limits"
+          ],
+          "bloom": "C3",
+          "summary": "Apply rules such as reversing limits, splitting intervals and comparison to evaluate and simplify definite integrals."
+        },
+        {
+          "id": "adb-4",
+          "name": "Fundamental Theorem evaluation",
+          "aliases": [
+            "FTC part 2",
+            "Newton-Leibniz formula"
+          ],
+          "bloom": "C3",
+          "summary": "Evaluate a definite integral as F(b) - F(a) using an antiderivative."
+        },
+        {
+          "id": "adb-5",
+          "name": "Accumulation function derivative",
+          "aliases": [
+            "FTC part 1",
+            "derivative of integral"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the fact that d/dx of the integral from a to x of f(t) dt equals f(x), including with a variable upper limit via the chain rule."
+        },
+        {
+          "id": "adb-6",
+          "name": "Basic u-substitution",
+          "aliases": [
+            "change of variable",
+            "substitution rule"
+          ],
+          "bloom": "C3",
+          "summary": "Choose u so that an inner function and its derivative appear, and integrate in terms of u."
+        },
+        {
+          "id": "adb-7",
+          "name": "Net change interpretation",
+          "aliases": [
+            "total change from rate"
+          ],
+          "bloom": "C3",
+          "summary": "Use the integral of a rate of change to find net change such as displacement from velocity."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "nov-4",
+          "adb-4"
+        ],
+        [
+          "adb-2",
+          "adb-4"
+        ],
+        [
+          "adb-2",
+          "adb-5"
+        ],
+        [
+          "nov-4",
+          "adb-6"
+        ],
+        [
+          "adb-4",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A Riemann sum gives the exact area for any number of rectangles.",
+          "concepts": [
+            "adb-1",
+            "adb-2"
+          ]
+        },
+        {
+          "text": "When using u-substitution on a definite integral, the original x-limits can be kept after changing to u.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "The integral of velocity gives total distance travelled rather than net displacement.",
+          "concepts": [
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Integration by parts",
+          "aliases": [
+            "product rule reversed",
+            "LIATE method"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the formula integral u dv = uv - integral v du, choosing u and dv sensibly, including repeated use and cyclic cases."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Trigonometric integrals",
+          "aliases": [
+            "powers of sine and cosine",
+            "trig identities in integration"
+          ],
+          "bloom": "C3",
+          "summary": "Integrate products and powers of trig functions using identities and substitution."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Partial fraction decomposition",
+          "aliases": [
+            "rational function integration"
+          ],
+          "bloom": "C3",
+          "summary": "Decompose a rational function into simpler fractions with linear and repeated factors and integrate each term."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Trigonometric substitution",
+          "aliases": [
+            "trig sub",
+            "sqrt(a^2 - x^2) substitution"
+          ],
+          "bloom": "C4",
+          "summary": "Select a sine, tangent or secant substitution based on the radical form and convert back to x using a reference triangle."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Area between curves",
+          "aliases": [
+            "region between graphs"
+          ],
+          "bloom": "C4",
+          "summary": "Set up integrals for regions between curves by identifying intersections, upper and lower functions, and when to integrate in y."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Volumes by disks and washers",
+          "aliases": [
+            "solids of revolution",
+            "disk method"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse a region and axis of rotation to build a disk or washer integral for the volume."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Method selection for integrals",
+          "aliases": [
+            "choosing integration technique"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse an integrand's form to decide among substitution, parts, partial fractions and trig substitution."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-4"
+        ],
+        [
+          "adb-6",
+          "cmp-3"
+        ],
+        [
+          "adb-4",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "cmp-3",
+          "cmp-7"
+        ],
+        [
+          "cmp-4",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The integral of a product is the product of the integrals.",
+          "concepts": [
+            "cmp-1",
+            "cmp-7"
+          ]
+        },
+        {
+          "text": "Partial fractions can be applied directly to any rational function, even when the numerator degree is at least the denominator degree.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Area between curves is always the integral of the right-hand function minus the left-hand function, regardless of which is on top.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Shell method",
+          "aliases": [
+            "cylindrical shells"
+          ],
+          "bloom": "C4",
+          "summary": "Derive and apply shell integrals for volumes of revolution and compare when shells or washers give a simpler setup."
+        },
+        {
+          "id": "prf-2",
+          "name": "Arc length and surface area",
+          "aliases": [
+            "length of a curve",
+            "surface of revolution"
+          ],
+          "bloom": "C4",
+          "summary": "Set up arc length integrals using the square root of 1 + (f')^2 and extend to surface area of revolution."
+        },
+        {
+          "id": "prf-3",
+          "name": "Improper integrals",
+          "aliases": [
+            "infinite limits",
+            "unbounded integrands"
+          ],
+          "bloom": "C4",
+          "summary": "Evaluate integrals with infinite limits or discontinuities by taking limits and decide convergence or divergence."
+        },
+        {
+          "id": "prf-4",
+          "name": "Comparison tests for improper integrals",
+          "aliases": [
+            "direct comparison",
+            "limit comparison for integrals"
+          ],
+          "bloom": "C5",
+          "summary": "Judge convergence of an integral without computing it by comparing with p-integrals and other known cases."
+        },
+        {
+          "id": "prf-5",
+          "name": "Sequences and series convergence",
+          "aliases": [
+            "partial sums",
+            "infinite series"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish convergence of a sequence from convergence of a series through its partial sums, using geometric and p-series as benchmarks."
+        },
+        {
+          "id": "prf-6",
+          "name": "Divergence and integral tests",
+          "aliases": [
+            "nth-term test",
+            "Cauchy integral test"
+          ],
+          "bloom": "C4",
+          "summary": "Apply the nth-term test and the integral test, checking its positivity, continuity and decreasing conditions."
+        },
+        {
+          "id": "prf-7",
+          "name": "Comparison and ratio tests",
+          "aliases": [
+            "direct comparison",
+            "limit comparison",
+            "root test"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate which of comparison, limit comparison, ratio or root tests suits a series and justify the conclusion."
+        },
+        {
+          "id": "prf-8",
+          "name": "Alternating series and absolute convergence",
+          "aliases": [
+            "conditional convergence",
+            "Leibniz test"
+          ],
+          "bloom": "C5",
+          "summary": "Assess alternating series with the alternating series test and classify them as absolutely or conditionally convergent."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "adb-4",
+          "prf-3"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "prf-5",
+          "prf-6"
+        ],
+        [
+          "prf-3",
+          "prf-6"
+        ],
+        [
+          "prf-6",
+          "prf-7"
+        ],
+        [
+          "prf-7",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "If the terms of a series tend to zero, the series must converge.",
+          "concepts": [
+            "prf-5",
+            "prf-6"
+          ]
+        },
+        {
+          "text": "An integral from -infinity to infinity of an odd function is automatically zero.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "The ratio test being inconclusive (limit equal to 1) means the series diverges.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Rigour of Riemann integrability",
+          "aliases": [
+            "integrability criteria",
+            "Darboux sums"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate whether a function is Riemann integrable using upper and lower sums, and recognise that continuous or bounded functions with finitely many discontinuities qualify."
+        },
+        {
+          "id": "exp-2",
+          "name": "Proof of the Fundamental Theorem",
+          "aliases": [
+            "FTC proof",
+            "mean value theorem for integrals"
+          ],
+          "bloom": "C5",
+          "summary": "Critique and reconstruct the proof linking differentiation and integration via the mean value theorem for integrals."
+        },
+        {
+          "id": "exp-3",
+          "name": "Numerical integration error analysis",
+          "aliases": [
+            "trapezoid and Simpson's rule error",
+            "quadrature"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate trapezoidal and Simpson's rules by deriving or applying error bounds and choosing step size for a target accuracy."
+        },
+        {
+          "id": "exp-4",
+          "name": "Integrals without elementary antiderivatives",
+          "aliases": [
+            "non-elementary integrals",
+            "special functions"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when an integral such as e^(-x^2) has no closed form and select series or numerical approaches instead."
+        },
+        {
+          "id": "exp-5",
+          "name": "Power series integration",
+          "aliases": [
+            "term-by-term integration",
+            "Taylor series integration"
+          ],
+          "bloom": "C6",
+          "summary": "Construct power series for integrands and integrate term by term within the radius of convergence to obtain series for functions and values."
+        },
+        {
+          "id": "exp-6",
+          "name": "Taylor remainder and error bounds",
+          "aliases": [
+            "Lagrange remainder",
+            "alternating series error bound"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate approximation accuracy using Taylor remainder and alternating series bounds to justify a truncation."
+        },
+        {
+          "id": "exp-7",
+          "name": "Modelling with integrals",
+          "aliases": [
+            "applied integral setup",
+            "custom integral formulation"
+          ],
+          "bloom": "C6",
+          "summary": "Design integral models for quantities such as work, mass, probability, centroids or fluid force by slicing and accumulating."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "adb-4",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "cmp-7",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "exp-5",
+          "exp-6"
+        ],
+        [
+          "exp-4",
+          "exp-5"
+        ],
+        [
+          "cmp-6",
+          "exp-7"
+        ],
+        [
+          "prf-2",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Every continuous function has an antiderivative expressible in elementary functions.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Term-by-term integration of a power series is valid on any interval, even outside the radius of convergence.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Simpson's rule is always more accurate than the trapezoid rule regardless of the function's smoothness.",
+          "concepts": [
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

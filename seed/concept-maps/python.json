@@ -1,0 +1,756 @@
+{
+  "version": 1,
+  "topic": "python",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Indentation-based block syntax",
+          "aliases": [
+            "significant whitespace",
+            "code blocks"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that consistent indentation, not braces, defines blocks and recognise an IndentationError."
+        },
+        {
+          "id": "nov-5",
+          "name": "Conditionals and loops",
+          "aliases": [
+            "if/elif/else",
+            "for loop",
+            "while loop"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how if statements, for loops over iterables and while loops control the flow of a program."
+        },
+        {
+          "id": "nov-6",
+          "name": "Defining and calling functions",
+          "aliases": [
+            "def",
+            "return values"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how def creates a function with parameters and a return value, and how calling it runs the body."
+        },
+        {
+          "id": "nov-7",
+          "name": "Running scripts and printing",
+          "aliases": [
+            "print",
+            "input",
+            "interpreter"
+          ],
+          "bloom": "C1",
+          "summary": "Recall how to run a .py file or the interactive interpreter and use print and input."
+        },
+        {
+          "id": "nov-2",
+          "name": "Variables and dynamic typing",
+          "aliases": [
+            "names and values",
+            "assignment"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that names are bound to objects of built-in types such as int, float, str and bool, and that types belong to values rather than names."
+        },
+        {
+          "id": "nov-3",
+          "name": "Lists and tuples",
+          "aliases": [
+            "sequences",
+            "list vs tuple"
+          ],
+          "bloom": "C2",
+          "summary": "Describe ordered sequences, indexing and slicing, and the difference between mutable lists and immutable tuples."
+        },
+        {
+          "id": "nov-4",
+          "name": "Dicts and sets",
+          "aliases": [
+            "dictionary",
+            "set",
+            "mapping"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that dicts map unique keys to values and sets hold unique unordered items, and recall their literal syntax."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ],
+        [
+          "nov-7",
+          "nov-2"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Indentation in Python is only for readability and can be changed freely without affecting behaviour.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A tuple can be changed in place just like a list.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A variable must be declared with a fixed type before it is used.",
+          "concepts": [
+            "nov-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "List comprehensions",
+          "aliases": [
+            "list comps",
+            "comprehension syntax"
+          ],
+          "bloom": "C3",
+          "summary": "Write list, dict and set comprehensions with conditions to build collections from iterables."
+        },
+        {
+          "id": "adb-2",
+          "name": "Function arguments and defaults",
+          "aliases": [
+            "keyword arguments",
+            "*args and **kwargs"
+          ],
+          "bloom": "C3",
+          "summary": "Use positional, keyword and default parameters plus *args and **kwargs when writing and calling functions."
+        },
+        {
+          "id": "adb-3",
+          "name": "Exception handling with try/except",
+          "aliases": [
+            "try except finally",
+            "raising exceptions"
+          ],
+          "bloom": "C3",
+          "summary": "Catch specific exceptions with try/except/else/finally and raise errors deliberately."
+        },
+        {
+          "id": "adb-4",
+          "name": "Reading and writing files",
+          "aliases": [
+            "open",
+            "with statement",
+            "file I/O"
+          ],
+          "bloom": "C3",
+          "summary": "Open, read and write text files using the with statement so they are closed automatically."
+        },
+        {
+          "id": "adb-5",
+          "name": "Importing modules",
+          "aliases": [
+            "import",
+            "from import",
+            "standard library use"
+          ],
+          "bloom": "C3",
+          "summary": "Import standard library modules and names and call their functions, and structure code across your own module files."
+        },
+        {
+          "id": "adb-6",
+          "name": "Basic standard library usage",
+          "aliases": [
+            "os",
+            "sys",
+            "json",
+            "datetime"
+          ],
+          "bloom": "C3",
+          "summary": "Use os and sys for paths and arguments, json to serialise data and datetime to handle dates."
+        },
+        {
+          "id": "adb-7",
+          "name": "Virtual environments and pip",
+          "aliases": [
+            "venv",
+            "pip install",
+            "requirements.txt"
+          ],
+          "bloom": "C3",
+          "summary": "Create a venv, activate it and install third-party packages with pip."
+        },
+        {
+          "id": "adb-8",
+          "name": "String methods and formatting",
+          "aliases": [
+            "f-strings",
+            "str.split"
+          ],
+          "bloom": "C2",
+          "summary": "Use common string methods and f-strings to transform and format text."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-6",
+          "adb-5"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "adb-5",
+          "adb-7"
+        ],
+        [
+          "nov-2",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A bare except clause is the best way to make code robust because it catches everything.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "A default argument such as an empty list is created fresh on every call.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Files do not need to be closed because Python always writes data immediately.",
+          "concepts": [
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Object identity and mutability",
+          "aliases": [
+            "references",
+            "copy vs deepcopy",
+            "is vs =="
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how aliasing, shallow and deep copies, and mutable versus immutable objects affect program behaviour."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Classes and instances",
+          "aliases": [
+            "__init__",
+            "methods",
+            "self",
+            "attributes"
+          ],
+          "bloom": "C3",
+          "summary": "Define classes with attributes and methods and distinguish instance from class attributes."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Inheritance and special methods",
+          "aliases": [
+            "dunder methods",
+            "super",
+            "__repr__"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when to use inheritance with super() and implement dunder methods such as __repr__, __eq__ and __len__."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Generators and iterators",
+          "aliases": [
+            "yield",
+            "iterator protocol",
+            "generator expressions"
+          ],
+          "bloom": "C4",
+          "summary": "Explain the iterator protocol and use yield and generator expressions to process data lazily."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Scope and closures",
+          "aliases": [
+            "LEGB",
+            "nonlocal",
+            "global"
+          ],
+          "bloom": "C4",
+          "summary": "Trace name resolution through local, enclosing, global and built-in scopes and explain how closures capture variables."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Decorators",
+          "aliases": [
+            "function wrappers",
+            "@ syntax",
+            "functools.wraps"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how a decorator wraps a function, and write one that preserves metadata with functools.wraps."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Collections module and containers",
+          "aliases": [
+            "defaultdict",
+            "Counter",
+            "deque",
+            "namedtuple"
+          ],
+          "bloom": "C3",
+          "summary": "Choose among defaultdict, Counter, deque and namedtuple for counting, grouping and queue tasks."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Packages and module layout",
+          "aliases": [
+            "__init__.py",
+            "__name__ == '__main__'",
+            "import paths"
+          ],
+          "bloom": "C4",
+          "summary": "Organise code into packages, understand how Python finds modules via sys.path, and use the main guard."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-4"
+        ],
+        [
+          "adb-2",
+          "cmp-5"
+        ],
+        [
+          "cmp-6",
+          "cmp-5"
+        ],
+        [
+          "nov-6",
+          "cmp-6"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "nov-3",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-8"
+        ],
+        [
+          "nov-4",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Assigning one list to another variable makes an independent copy.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "A generator stores all its values in memory like a list.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Attributes defined at class level are always separate per instance.",
+          "concepts": [
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Context managers",
+          "aliases": [
+            "with protocol",
+            "__enter__ __exit__",
+            "contextlib"
+          ],
+          "bloom": "C4",
+          "summary": "Implement context managers via dunder methods or contextlib to guarantee resource cleanup and judge when to use them."
+        },
+        {
+          "id": "prf-2",
+          "name": "Dataclasses and typing hints",
+          "aliases": [
+            "type annotations",
+            "dataclasses",
+            "typing module"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when annotations and dataclasses improve clarity and how static type checkers use them, given hints are not enforced at runtime."
+        },
+        {
+          "id": "prf-3",
+          "name": "Custom exception design",
+          "aliases": [
+            "exception hierarchy",
+            "exception chaining",
+            "raise from"
+          ],
+          "bloom": "C5",
+          "summary": "Design exception hierarchies and use chaining to produce meaningful error handling across layers."
+        },
+        {
+          "id": "prf-4",
+          "name": "Descriptors and properties",
+          "aliases": [
+            "@property",
+            "attribute access",
+            "__getattr__"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how properties and the descriptor protocol control attribute access and validation."
+        },
+        {
+          "id": "prf-5",
+          "name": "Concurrency models and the GIL",
+          "aliases": [
+            "threading",
+            "multiprocessing",
+            "asyncio",
+            "global interpreter lock"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate threads, processes and asyncio for I/O-bound versus CPU-bound work given the GIL."
+        },
+        {
+          "id": "prf-6",
+          "name": "Testing with pytest and unittest",
+          "aliases": [
+            "unit tests",
+            "fixtures",
+            "mocking"
+          ],
+          "bloom": "C4",
+          "summary": "Write and structure unit tests with fixtures and mocks and analyse what they do and do not verify."
+        },
+        {
+          "id": "prf-7",
+          "name": "Profiling and performance tuning",
+          "aliases": [
+            "cProfile",
+            "timeit",
+            "algorithmic complexity"
+          ],
+          "bloom": "C5",
+          "summary": "Measure with timeit and cProfile and judge optimisations by evidence rather than intuition."
+        },
+        {
+          "id": "prf-8",
+          "name": "Dependency and packaging management",
+          "aliases": [
+            "pyproject.toml",
+            "pinning versions",
+            "building packages"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate approaches to pinning dependencies and packaging a project for reproducible installs."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-2",
+          "prf-2"
+        ],
+        [
+          "adb-3",
+          "prf-3"
+        ],
+        [
+          "cmp-3",
+          "prf-3"
+        ],
+        [
+          "cmp-2",
+          "prf-4"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "cmp-2",
+          "prf-6"
+        ],
+        [
+          "cmp-1",
+          "prf-7"
+        ],
+        [
+          "adb-7",
+          "prf-8"
+        ],
+        [
+          "cmp-8",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Python threads give true parallel speed-up for CPU-bound code.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Type hints are checked and enforced by the interpreter at runtime.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Optimising code without measuring is the quickest way to make it faster.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Metaclasses and class creation",
+          "aliases": [
+            "type()",
+            "__init_subclass__",
+            "class decorators"
+          ],
+          "bloom": "C6",
+          "summary": "Design class-construction hooks using metaclasses, __init_subclass__ or class decorators and judge when simpler tools suffice."
+        },
+        {
+          "id": "exp-2",
+          "name": "Data model protocol design",
+          "aliases": [
+            "duck typing",
+            "abstract base classes",
+            "protocols"
+          ],
+          "bloom": "C6",
+          "summary": "Create APIs that integrate with Python's data model through dunder methods, ABCs and structural protocols."
+        },
+        {
+          "id": "exp-3",
+          "name": "CPython memory and execution internals",
+          "aliases": [
+            "reference counting",
+            "garbage collector",
+            "bytecode"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how reference counting, cyclic garbage collection and bytecode execution affect behaviour and performance."
+        },
+        {
+          "id": "exp-4",
+          "name": "Advanced asynchronous architecture",
+          "aliases": [
+            "event loop",
+            "structured concurrency",
+            "async generators"
+          ],
+          "bloom": "C6",
+          "summary": "Design robust asynchronous systems with correct cancellation, backpressure and mixing of blocking code."
+        },
+        {
+          "id": "exp-5",
+          "name": "Extending Python with native code",
+          "aliases": [
+            "C extensions",
+            "ctypes",
+            "cffi",
+            "Cython"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate options for native extensions against pure Python and decide when the integration cost is justified."
+        },
+        {
+          "id": "exp-6",
+          "name": "Library API and compatibility design",
+          "aliases": [
+            "public API",
+            "deprecation policy",
+            "semantic versioning"
+          ],
+          "bloom": "C6",
+          "summary": "Create stable, well-documented library interfaces with deliberate deprecation and compatibility strategies."
+        },
+        {
+          "id": "exp-7",
+          "name": "Import system customisation",
+          "aliases": [
+            "importlib",
+            "import hooks",
+            "lazy imports"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how finders, loaders and import hooks work and when customising imports is appropriate."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "cmp-3",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-2"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "exp-3",
+          "exp-5"
+        ],
+        [
+          "prf-8",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "cmp-8",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Metaclasses are the standard way to customise classes and should be used often.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Reference counting alone frees all unused objects, so garbage collection never matters.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Using async and await makes any code faster, including blocking or CPU-heavy code.",
+          "concepts": [
+            "exp-4"
+          ]
+        }
+      ]
+    }
+  ]
+}

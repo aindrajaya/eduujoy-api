@@ -1,0 +1,685 @@
+{
+  "version": 1,
+  "topic": "corporate-finance",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "accounting-fundamentals",
+    "financial-statement-analysis"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Firm's financial objective",
+          "aliases": [
+            "shareholder value maximisation"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that corporate finance decisions aim to maximise firm value for owners, and distinguish this from maximising accounting profit."
+        },
+        {
+          "id": "nov-2",
+          "name": "Three core financial decisions",
+          "aliases": [
+            "investment financing and dividend decisions"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the investment, financing and payout decisions and what each asks a manager to decide."
+        },
+        {
+          "id": "nov-3",
+          "name": "Time value of money",
+          "aliases": [
+            "TVM"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why a dollar today is worth more than a dollar later because of earning capacity and risk."
+        },
+        {
+          "id": "nov-4",
+          "name": "Present and future value",
+          "aliases": [
+            "discounting and compounding"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how compounding moves a sum forward and discounting brings it back to today at a given rate."
+        },
+        {
+          "id": "nov-5",
+          "name": "Risk and required return",
+          "aliases": [
+            "risk-return tradeoff"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that riskier cash flows demand higher expected returns from investors."
+        },
+        {
+          "id": "nov-6",
+          "name": "Debt versus equity",
+          "aliases": [
+            "sources of capital"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that debt is a contractual borrowing with interest while equity is ownership with residual claims."
+        },
+        {
+          "id": "nov-7",
+          "name": "Cash flow versus profit",
+          "aliases": [
+            "cash is king"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why finance values cash flows rather than accounting earnings."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-1",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A company's goal is to maximise its accounting profit each year.",
+          "concepts": [
+            "nov-1",
+            "nov-7"
+          ]
+        },
+        {
+          "text": "Money's value over time changes only because of inflation.",
+          "concepts": [
+            "nov-3",
+            "nov-5"
+          ]
+        },
+        {
+          "text": "Debt is always cheaper and therefore always better than equity.",
+          "concepts": [
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Annuities and perpetuities",
+          "aliases": [
+            "level cash flow streams"
+          ],
+          "bloom": "C3",
+          "summary": "Compute present and future values of level and growing payment streams using standard formulas."
+        },
+        {
+          "id": "adb-5",
+          "name": "Incremental project cash flows",
+          "aliases": [
+            "relevant cash flows"
+          ],
+          "bloom": "C3",
+          "summary": "Build project cash flows from only incremental items, including working capital, capex and after-tax operating flows, and ignore sunk costs."
+        },
+        {
+          "id": "adb-2",
+          "name": "Net present value calculation",
+          "aliases": [
+            "NPV"
+          ],
+          "bloom": "C3",
+          "summary": "Discount a project's forecast cash flows at the required return and accept it when the NPV is positive."
+        },
+        {
+          "id": "adb-3",
+          "name": "Internal rate of return",
+          "aliases": [
+            "IRR"
+          ],
+          "bloom": "C3",
+          "summary": "Find the discount rate that sets NPV to zero and compare it to the required return."
+        },
+        {
+          "id": "adb-4",
+          "name": "Payback and simple rules",
+          "aliases": [
+            "payback period",
+            "discounted payback"
+          ],
+          "bloom": "C2",
+          "summary": "Calculate payback periods and explain why they ignore value beyond the cutoff or the time value."
+        },
+        {
+          "id": "adb-6",
+          "name": "Cost of debt and equity",
+          "aliases": [
+            "component costs of capital"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the after-tax cost of debt and a basic cost of equity from observed yields or dividends."
+        },
+        {
+          "id": "adb-7",
+          "name": "Working capital cycle",
+          "aliases": [
+            "cash conversion cycle"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate days inventory, receivables and payables and combine them into the cash conversion cycle."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-4"
+        ],
+        [
+          "nov-7",
+          "adb-5"
+        ],
+        [
+          "adb-5",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-6"
+        ],
+        [
+          "nov-6",
+          "adb-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Sunk costs and allocated overhead should be included in a project's cash flows.",
+          "concepts": [
+            "adb-5"
+          ]
+        },
+        {
+          "text": "A project with a short payback period is always a good investment.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "IRR is the return the firm will actually earn on reinvested cash flows.",
+          "concepts": [
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "NPV versus IRR conflicts",
+          "aliases": [
+            "multiple IRRs and ranking conflicts"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose when IRR and NPV disagree because of scale, timing or non-conventional cash flows and resolve it in favour of NPV."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Capital rationing and comparison",
+          "aliases": [
+            "profitability index",
+            "equivalent annual annuity"
+          ],
+          "bloom": "C3",
+          "summary": "Rank projects under a budget constraint or unequal lives using profitability index and equivalent annual annuity."
+        },
+        {
+          "id": "cmp-3",
+          "name": "CAPM and beta",
+          "aliases": [
+            "capital asset pricing model"
+          ],
+          "bloom": "C3",
+          "summary": "Estimate cost of equity from the risk-free rate, equity beta and market risk premium and explain systematic risk."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Weighted average cost of capital",
+          "aliases": [
+            "WACC"
+          ],
+          "bloom": "C3",
+          "summary": "Compute WACC using market-value weights and after-tax debt cost, and use it as the discount rate for average-risk projects."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Sensitivity and scenario analysis",
+          "aliases": [
+            "break-even analysis"
+          ],
+          "bloom": "C4",
+          "summary": "Test how NPV changes with key assumptions to identify the drivers of project risk."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Tax shield and leverage",
+          "aliases": [
+            "Modigliani-Miller with taxes"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why capital structure is irrelevant without frictions and how interest tax shields change value."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Working capital financing policy",
+          "aliases": [
+            "short-term financing"
+          ],
+          "bloom": "C4",
+          "summary": "Compare aggressive and conservative funding of current assets and the trade-off of cost, liquidity and risk."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Dividend and repurchase choices",
+          "aliases": [
+            "payout policy"
+          ],
+          "bloom": "C3",
+          "summary": "Describe how dividends and buybacks distribute cash and evaluate their effect on shareholders' wealth."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "adb-2",
+          "cmp-2"
+        ],
+        [
+          "adb-6",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-6",
+          "cmp-4"
+        ],
+        [
+          "adb-2",
+          "cmp-5"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "adb-7",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The project with the highest IRR is always the one that adds the most value.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "A firm's WACC is the correct discount rate for every project it undertakes.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Equity is free or cheaper than debt because dividends are optional.",
+          "concepts": [
+            "cmp-3",
+            "cmp-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Project-specific discount rates",
+          "aliases": [
+            "divisional cost of capital",
+            "pure-play beta"
+          ],
+          "bloom": "C4",
+          "summary": "Unlever and relever comparable-firm betas to set discount rates that match each project's business risk."
+        },
+        {
+          "id": "prf-3",
+          "name": "Adjusted present value",
+          "aliases": [
+            "APV"
+          ],
+          "bloom": "C4",
+          "summary": "Value a project by adding financing side effects to its all-equity NPV when capital structure changes."
+        },
+        {
+          "id": "prf-4",
+          "name": "Real options in investment",
+          "aliases": [
+            "managerial flexibility",
+            "option to expand or abandon"
+          ],
+          "bloom": "C5",
+          "summary": "Judge how options to delay, expand or abandon add value that static NPV misses."
+        },
+        {
+          "id": "prf-5",
+          "name": "Simulation and risk-adjusted valuation",
+          "aliases": [
+            "Monte Carlo analysis",
+            "certainty equivalents"
+          ],
+          "bloom": "C5",
+          "summary": "Assess project risk using probabilistic simulation and decide how to treat it in rates versus cash flows."
+        },
+        {
+          "id": "prf-6",
+          "name": "Agency problems in finance",
+          "aliases": [
+            "managers versus shareholders conflict"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how conflicts among managers, shareholders and creditors distort investment and financing choices."
+        },
+        {
+          "id": "prf-2",
+          "name": "Trade-off and pecking order",
+          "aliases": [
+            "capital structure theories"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate a firm's leverage using tax benefits, distress costs, agency costs and information asymmetry."
+        },
+        {
+          "id": "prf-7",
+          "name": "Capital issuance and signalling",
+          "aliases": [
+            "seasoned equity offering",
+            "financing announcements"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret issuance costs and market reactions to debt, equity and payout announcements."
+        },
+        {
+          "id": "prf-8",
+          "name": "Optimal cash management",
+          "aliases": [
+            "liquidity and credit policy"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate credit terms, inventory and cash holdings by weighing carrying costs against shortage costs."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-2"
+        ],
+        [
+          "cmp-6",
+          "prf-3"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "cmp-5",
+          "prf-4"
+        ],
+        [
+          "prf-6",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-7"
+        ],
+        [
+          "cmp-7",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Using the firm's WACC is fine even when a project's risk differs sharply from the firm's.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Static NPV already captures the value of managerial flexibility.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Raising leverage always lowers WACC and so always raises firm value.",
+          "concepts": [
+            "prf-2",
+            "prf-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Designing capital allocation frameworks",
+          "aliases": [
+            "capital budgeting governance"
+          ],
+          "bloom": "C6",
+          "summary": "Create a firm-wide process for generating, screening, approving and auditing investments that limits bias and gaming."
+        },
+        {
+          "id": "exp-2",
+          "name": "Critiquing valuation assumptions",
+          "aliases": [
+            "terminal value and discount rate scrutiny"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate forecasts, terminal values and discount rates in a valuation to expose where most value is concentrated."
+        },
+        {
+          "id": "exp-3",
+          "name": "Optimal capital structure design",
+          "aliases": [
+            "target leverage policy"
+          ],
+          "bloom": "C6",
+          "summary": "Construct a financing policy that sets target leverage, debt maturity and covenants for a specific firm's risks and growth options."
+        },
+        {
+          "id": "exp-4",
+          "name": "Financial flexibility and risk management",
+          "aliases": [
+            "hedging policy",
+            "liquidity buffers"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when hedging and liquidity reserves protect investment capacity and when they destroy value."
+        },
+        {
+          "id": "exp-5",
+          "name": "Corporate restructuring and M&A valuation",
+          "aliases": [
+            "mergers and acquisitions",
+            "LBO"
+          ],
+          "bloom": "C5",
+          "summary": "Appraise acquisitions, spin-offs and leveraged buyouts by separating synergies, control premia and financing effects."
+        },
+        {
+          "id": "exp-6",
+          "name": "Payout policy under uncertainty",
+          "aliases": [
+            "dividend strategy"
+          ],
+          "bloom": "C6",
+          "summary": "Design payout policy that balances investment needs, signalling, taxes and investor clienteles."
+        },
+        {
+          "id": "exp-7",
+          "name": "International corporate finance",
+          "aliases": [
+            "cross-border investment and currency risk"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate foreign projects by handling exchange rates, country risk and differing tax regimes consistently in cash flows and discount rates."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-2"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ],
+        [
+          "prf-8",
+          "exp-4"
+        ],
+        [
+          "exp-2",
+          "exp-5"
+        ],
+        [
+          "prf-3",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-6"
+        ],
+        [
+          "prf-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A sophisticated valuation model gives a precise answer, so the judgement behind inputs matters little.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Hedging always creates value for shareholders because it reduces volatility.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Acquisitions create value whenever the target is profitable or earnings per share rises.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

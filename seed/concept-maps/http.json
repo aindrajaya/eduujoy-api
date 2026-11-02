@@ -1,0 +1,650 @@
+{
+  "version": 1,
+  "topic": "http",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "computer-networking"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Client-server request-response model",
+          "aliases": [
+            "request/response cycle"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a client sends a request to a server, which returns exactly one response, and that HTTP is initiated by the client."
+        },
+        {
+          "id": "nov-2",
+          "name": "URL structure",
+          "aliases": [
+            "web address anatomy"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the parts of a URL: scheme, host, port, path, query string and fragment."
+        },
+        {
+          "id": "nov-3",
+          "name": "Request methods GET and POST",
+          "aliases": [
+            "HTTP verbs"
+          ],
+          "bloom": "C2",
+          "summary": "Describe that GET retrieves a resource while POST submits data for processing."
+        },
+        {
+          "id": "nov-5",
+          "name": "Message anatomy",
+          "aliases": [
+            "start line, headers, body"
+          ],
+          "bloom": "C2",
+          "summary": "Describe that a message has a start line, header fields and an optional body."
+        },
+        {
+          "id": "nov-4",
+          "name": "Status code classes",
+          "aliases": [
+            "response code families"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that 2xx means success, 3xx redirection, 4xx client error and 5xx server error, and know 200, 404 and 500."
+        },
+        {
+          "id": "nov-6",
+          "name": "HTTP versus HTTPS",
+          "aliases": [
+            "secure HTTP"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that HTTPS is HTTP carried over an encrypted connection that protects data from eavesdropping."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-5",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "HTTP and the Internet or the web are the same thing.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A 404 status code means the server is down.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "POST is secure because the data is not shown in the URL.",
+          "concepts": [
+            "nov-3",
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Common request headers",
+          "aliases": [
+            "Host, User-Agent, Accept"
+          ],
+          "bloom": "C3",
+          "summary": "Read and set headers such as Host, User-Agent, Accept and Authorization to shape a request."
+        },
+        {
+          "id": "adb-2",
+          "name": "Content-Type and body encoding",
+          "aliases": [
+            "media types",
+            "MIME types"
+          ],
+          "bloom": "C3",
+          "summary": "Match Content-Type and Content-Length to bodies such as form data, JSON and HTML."
+        },
+        {
+          "id": "adb-3",
+          "name": "Method semantics PUT DELETE",
+          "aliases": [
+            "PUT, DELETE, PATCH, HEAD"
+          ],
+          "bloom": "C3",
+          "summary": "Choose among GET, POST, PUT, PATCH, DELETE and HEAD for a given operation on a resource."
+        },
+        {
+          "id": "adb-4",
+          "name": "Redirects with Location",
+          "aliases": [
+            "301 302 redirects"
+          ],
+          "bloom": "C3",
+          "summary": "Follow and produce 301, 302 and 307/308 redirects using the Location header."
+        },
+        {
+          "id": "adb-5",
+          "name": "Cookies basics",
+          "aliases": [
+            "Set-Cookie",
+            "Cookie header"
+          ],
+          "bloom": "C3",
+          "summary": "Use Set-Cookie and Cookie to keep state such as a session across stateless requests."
+        },
+        {
+          "id": "adb-6",
+          "name": "Inspecting traffic with tools",
+          "aliases": [
+            "curl and browser dev tools"
+          ],
+          "bloom": "C3",
+          "summary": "Use curl and browser developer tools to view and send requests and read responses."
+        },
+        {
+          "id": "adb-7",
+          "name": "Query strings and parameters",
+          "aliases": [
+            "URL parameters"
+          ],
+          "bloom": "C2",
+          "summary": "Encode parameters in the query string with percent-encoding and read them on the server side."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "nov-4",
+          "adb-4"
+        ],
+        [
+          "adb-1",
+          "adb-5"
+        ],
+        [
+          "nov-5",
+          "adb-6"
+        ],
+        [
+          "nov-2",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Cookies are programs that can run on the user's computer.",
+          "concepts": [
+            "adb-5"
+          ]
+        },
+        {
+          "text": "PUT and POST are interchangeable.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Any redirect status code behaves the same way and preserves the method.",
+          "concepts": [
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Safe and idempotent methods",
+          "aliases": [
+            "idempotency"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse which methods are safe or idempotent and what that implies for retries and caches."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Cache validation with ETag",
+          "aliases": [
+            "conditional requests",
+            "If-None-Match"
+          ],
+          "bloom": "C3",
+          "summary": "Use ETag, Last-Modified and conditional headers to get 304 Not Modified responses."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Cache-Control directives",
+          "aliases": [
+            "max-age, no-store, no-cache"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how max-age, no-cache, no-store, public and private determine what may be cached and for how long."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Cookie attributes and sessions",
+          "aliases": [
+            "Secure, HttpOnly, SameSite"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how Domain, Path, Expires, Secure, HttpOnly and SameSite affect scope and security of session cookies."
+        },
+        {
+          "id": "cmp-5",
+          "name": "TLS handshake and certificates",
+          "aliases": [
+            "HTTPS trust chain"
+          ],
+          "bloom": "C4",
+          "summary": "Trace how TLS negotiates keys and how certificates and authorities authenticate the server."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Connection management",
+          "aliases": [
+            "keep-alive",
+            "persistent connections"
+          ],
+          "bloom": "C3",
+          "summary": "Explain persistent connections and their effect on latency compared with a new connection per request."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Content negotiation and compression",
+          "aliases": [
+            "Accept-Encoding",
+            "gzip"
+          ],
+          "bloom": "C3",
+          "summary": "Use Accept headers and Content-Encoding to select representation, language and compression."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Diagnosing 4xx and 5xx errors",
+          "aliases": [
+            "error debugging"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish 400, 401, 403, 404, 429, 502 and 503 and locate the likely fault from traces."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-5",
+          "cmp-4"
+        ],
+        [
+          "nov-6",
+          "cmp-5"
+        ],
+        [
+          "adb-1",
+          "cmp-7"
+        ],
+        [
+          "adb-6",
+          "cmp-8"
+        ],
+        [
+          "adb-1",
+          "cmp-2"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "no-cache means the response is never stored.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "HttpOnly cookies protect against all cross-site attacks.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Idempotent means the response is the same every time.",
+          "concepts": [
+            "cmp-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "HTTP/2 multiplexing",
+          "aliases": [
+            "binary framing",
+            "streams"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how HTTP/2 streams, binary framing and header compression remove HTTP/1.1 head-of-line blocking at the HTTP layer."
+        },
+        {
+          "id": "prf-2",
+          "name": "HTTP/3 over QUIC",
+          "aliases": [
+            "QUIC transport"
+          ],
+          "bloom": "C4",
+          "summary": "Compare HTTP/3 over QUIC and UDP with HTTP/2 over TCP regarding loss, handshake and connection migration."
+        },
+        {
+          "id": "prf-3",
+          "name": "CORS and same-origin policy",
+          "aliases": [
+            "cross-origin requests",
+            "preflight"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how the same-origin policy and CORS headers and preflights govern cross-origin browser requests."
+        },
+        {
+          "id": "prf-5",
+          "name": "Authentication schemes",
+          "aliases": [
+            "Basic, Bearer, OAuth tokens"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate Basic, bearer token and cookie-based authentication for their security tradeoffs."
+        },
+        {
+          "id": "prf-6",
+          "name": "Web security headers",
+          "aliases": [
+            "HSTS, CSP"
+          ],
+          "bloom": "C5",
+          "summary": "Judge the protection provided by HSTS, CSP and related headers against threats such as downgrade and injection."
+        },
+        {
+          "id": "prf-7",
+          "name": "Proxies and intermediaries",
+          "aliases": [
+            "reverse proxy, gateway"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how proxies, load balancers and gateways alter requests, using Forwarded and X-Forwarded-For."
+        },
+        {
+          "id": "prf-4",
+          "name": "Caching strategy with CDNs",
+          "aliases": [
+            "shared caches",
+            "Vary"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate cache layers, Vary, and invalidation approaches such as fingerprinted URLs for a given site."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-4",
+          "prf-3"
+        ],
+        [
+          "cmp-3",
+          "prf-4"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "cmp-5",
+          "prf-6"
+        ],
+        [
+          "cmp-6",
+          "prf-7"
+        ],
+        [
+          "prf-7",
+          "prf-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "CORS protects the server from unauthorised requests.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "HTTP/2 makes all head-of-line blocking disappear.",
+          "concepts": [
+            "prf-1",
+            "prf-2"
+          ]
+        },
+        {
+          "text": "HTTPS alone makes a web application secure.",
+          "concepts": [
+            "prf-6",
+            "prf-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Designing resource APIs",
+          "aliases": [
+            "REST design",
+            "API design"
+          ],
+          "bloom": "C6",
+          "summary": "Design HTTP APIs with coherent resources, method semantics, status codes, pagination and error formats."
+        },
+        {
+          "id": "exp-2",
+          "name": "API evolution and compatibility",
+          "aliases": [
+            "versioning"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate versioning, content negotiation and deprecation strategies for evolving APIs without breaking clients."
+        },
+        {
+          "id": "exp-3",
+          "name": "Performance optimisation strategy",
+          "aliases": [
+            "web performance tuning"
+          ],
+          "bloom": "C6",
+          "summary": "Design a delivery strategy combining protocol version, caching, compression, prioritisation and preloading from measured latency."
+        },
+        {
+          "id": "exp-4",
+          "name": "Request smuggling and desync",
+          "aliases": [
+            "HTTP parsing attacks"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how inconsistent parsing of message framing between proxies and servers enables smuggling attacks and how to mitigate them."
+        },
+        {
+          "id": "exp-5",
+          "name": "Resilient retries and rate limiting",
+          "aliases": [
+            "backoff, idempotency keys"
+          ],
+          "bloom": "C6",
+          "summary": "Design retry, timeout, backoff, idempotency-key and rate-limit behaviour using 429 and Retry-After."
+        },
+        {
+          "id": "exp-6",
+          "name": "Streaming and real-time delivery",
+          "aliases": [
+            "SSE, WebSockets, chunked"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate chunked transfer, server-sent events, long polling and WebSocket upgrade for real-time needs."
+        },
+        {
+          "id": "exp-7",
+          "name": "Protocol standards reasoning",
+          "aliases": [
+            "RFC interpretation"
+          ],
+          "bloom": "C5",
+          "summary": "Judge implementation behaviour against HTTP specifications and resolve ambiguities in real-world interoperability."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-4",
+          "exp-3"
+        ],
+        [
+          "prf-1",
+          "exp-3"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "cmp-1",
+          "exp-5"
+        ],
+        [
+          "cmp-8",
+          "exp-5"
+        ],
+        [
+          "prf-1",
+          "exp-6"
+        ],
+        [
+          "adb-3",
+          "exp-1"
+        ],
+        [
+          "cmp-8",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A RESTful API must use only GET, POST, PUT and DELETE with strict CRUD mapping.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Retrying failed requests is always safe if the client backs off.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Request smuggling is only a flaw in server code, not in how components interact.",
+          "concepts": [
+            "exp-4"
+          ]
+        }
+      ]
+    }
+  ]
+}

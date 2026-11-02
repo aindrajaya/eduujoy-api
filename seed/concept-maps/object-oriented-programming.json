@@ -1,0 +1,718 @@
+{
+  "version": 1,
+  "topic": "object-oriented-programming",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Classes and objects",
+          "aliases": [
+            "class vs instance",
+            "blueprint and instance"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a class defines a template of data and behaviour and that objects are individual instances created from it."
+        },
+        {
+          "id": "nov-2",
+          "name": "Attributes and methods",
+          "aliases": [
+            "fields and member functions",
+            "properties and behaviours"
+          ],
+          "bloom": "C1",
+          "summary": "Identify attributes as the data an object holds and methods as the operations it can perform."
+        },
+        {
+          "id": "nov-3",
+          "name": "Constructors and initialisation",
+          "aliases": [
+            "constructor",
+            "object creation"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how a constructor sets an object's initial state when it is created."
+        },
+        {
+          "id": "nov-4",
+          "name": "Object state and identity",
+          "aliases": [
+            "instance state",
+            "object identity"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that each object has its own state and that two objects with equal data are still distinct objects."
+        },
+        {
+          "id": "nov-5",
+          "name": "Calling methods on objects",
+          "aliases": [
+            "message sending",
+            "method invocation"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that using an object means invoking its methods, which read or change its state."
+        },
+        {
+          "id": "nov-6",
+          "name": "Self reference",
+          "aliases": [
+            "this",
+            "self"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that this or self refers to the current object inside its methods."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A class and an object are the same thing.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Two objects with the same attribute values are the same object.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Changing an attribute in one object changes it in every object of that class.",
+          "concepts": [
+            "nov-2",
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Encapsulation and access control",
+          "aliases": [
+            "information hiding",
+            "private members"
+          ],
+          "bloom": "C3",
+          "summary": "Apply private fields and public methods so that an object's state is changed only through a controlled interface."
+        },
+        {
+          "id": "adb-2",
+          "name": "Getters, setters and validation",
+          "aliases": [
+            "accessors and mutators"
+          ],
+          "bloom": "C3",
+          "summary": "Write accessors and mutators that enforce rules on state instead of exposing raw fields."
+        },
+        {
+          "id": "adb-3",
+          "name": "Inheritance and subclassing",
+          "aliases": [
+            "is-a relationship",
+            "extending a class"
+          ],
+          "bloom": "C3",
+          "summary": "Create a subclass that reuses and extends a superclass's attributes and methods."
+        },
+        {
+          "id": "adb-4",
+          "name": "Method overriding",
+          "aliases": [
+            "overriding",
+            "redefining behaviour"
+          ],
+          "bloom": "C3",
+          "summary": "Override an inherited method in a subclass and call the superclass version when needed."
+        },
+        {
+          "id": "adb-5",
+          "name": "Basic polymorphism",
+          "aliases": [
+            "subtype polymorphism",
+            "substitutability"
+          ],
+          "bloom": "C3",
+          "summary": "Use a superclass-typed reference to call methods whose behaviour depends on the actual object type."
+        },
+        {
+          "id": "adb-6",
+          "name": "Class-level members",
+          "aliases": [
+            "static members",
+            "class variables"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish data and methods that belong to the class from those that belong to each instance."
+        },
+        {
+          "id": "adb-7",
+          "name": "Composition between objects",
+          "aliases": [
+            "has-a relationship",
+            "object collaboration"
+          ],
+          "bloom": "C3",
+          "summary": "Build objects that hold references to other objects and delegate work to them."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-1",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "nov-2",
+          "adb-6"
+        ],
+        [
+          "nov-5",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Making fields private is only about hiding them and does not protect the object's consistency.",
+          "concepts": [
+            "adb-1",
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Inheritance is the best way to reuse any code.",
+          "concepts": [
+            "adb-3",
+            "adb-7"
+          ]
+        },
+        {
+          "text": "Overriding a method and overloading a method are the same thing.",
+          "concepts": [
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Abstract classes and interfaces",
+          "aliases": [
+            "abstraction",
+            "contracts",
+            "protocols"
+          ],
+          "bloom": "C3",
+          "summary": "Define abstract types that specify behaviour without implementation and implement them in concrete classes."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Dynamic dispatch",
+          "aliases": [
+            "late binding",
+            "runtime method resolution"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how the method executed is chosen at runtime from the object's actual class."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Composition over inheritance",
+          "aliases": [
+            "favour composition",
+            "delegation"
+          ],
+          "bloom": "C4",
+          "summary": "Compare inheritance and composition for a design and choose based on coupling and flexibility."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Liskov substitution principle",
+          "aliases": [
+            "LSP",
+            "behavioural subtyping"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse whether a subclass can stand in for its superclass without breaking the expectations of callers."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Responsibility-driven class design",
+          "aliases": [
+            "single responsibility",
+            "cohesion"
+          ],
+          "bloom": "C4",
+          "summary": "Decompose a problem into classes with focused responsibilities and high cohesion."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Coupling and dependencies",
+          "aliases": [
+            "loose coupling",
+            "dependency between classes"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how dependencies between classes affect changeability and reduce them through abstractions."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Object relationships in UML",
+          "aliases": [
+            "class diagrams",
+            "association aggregation composition"
+          ],
+          "bloom": "C3",
+          "summary": "Model classes and their associations, aggregations and inheritance in class diagrams."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Equality, copying and immutability",
+          "aliases": [
+            "equals and hashing",
+            "shallow vs deep copy",
+            "value objects"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish identity from value equality, shallow from deep copies, and know when to make objects immutable."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-3"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "adb-1",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "adb-7",
+          "cmp-7"
+        ],
+        [
+          "nov-4",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "An interface is just an abstract class with no code, so the two are interchangeable.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "If a subclass compiles and overrides all methods, it is a valid substitute for its parent.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Deep inheritance hierarchies show good object-oriented design.",
+          "concepts": [
+            "cmp-3",
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "SOLID principles in tension",
+          "aliases": [
+            "SOLID",
+            "design principles trade-offs"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate a design against the SOLID principles and judge where applying one conflicts with another or with simplicity."
+        },
+        {
+          "id": "prf-2",
+          "name": "Creational design patterns",
+          "aliases": [
+            "factory",
+            "builder",
+            "singleton"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when factory, builder or singleton patterns solve object-creation problems and what costs they bring."
+        },
+        {
+          "id": "prf-3",
+          "name": "Behavioural design patterns",
+          "aliases": [
+            "strategy",
+            "observer",
+            "template method"
+          ],
+          "bloom": "C4",
+          "summary": "Select and apply strategy, observer or template method to vary behaviour without altering clients."
+        },
+        {
+          "id": "prf-4",
+          "name": "Structural design patterns",
+          "aliases": [
+            "decorator",
+            "adapter",
+            "facade"
+          ],
+          "bloom": "C4",
+          "summary": "Use adapter, decorator or facade to compose and integrate objects while keeping interfaces stable."
+        },
+        {
+          "id": "prf-5",
+          "name": "Dependency injection and inversion",
+          "aliases": [
+            "dependency inversion",
+            "inversion of control"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate designs that depend on abstractions supplied from outside to improve testability and flexibility."
+        },
+        {
+          "id": "prf-6",
+          "name": "Refactoring toward better design",
+          "aliases": [
+            "code smells",
+            "refactoring"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose design smells such as god classes and feature envy and judge refactorings that fix them."
+        },
+        {
+          "id": "prf-7",
+          "name": "Designing for testability",
+          "aliases": [
+            "mocking collaborators",
+            "test doubles"
+          ],
+          "bloom": "C4",
+          "summary": "Structure classes so collaborators can be replaced by test doubles and behaviour verified in isolation."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "cmp-1",
+          "prf-2"
+        ],
+        [
+          "cmp-3",
+          "prf-3"
+        ],
+        [
+          "cmp-2",
+          "prf-3"
+        ],
+        [
+          "cmp-3",
+          "prf-4"
+        ],
+        [
+          "cmp-6",
+          "prf-5"
+        ],
+        [
+          "prf-1",
+          "prf-5"
+        ],
+        [
+          "cmp-5",
+          "prf-6"
+        ],
+        [
+          "prf-5",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Design patterns should be applied wherever possible because they make any design better.",
+          "concepts": [
+            "prf-2",
+            "prf-3",
+            "prf-4"
+          ]
+        },
+        {
+          "text": "A singleton is a harmless way to share global access to an object.",
+          "concepts": [
+            "prf-2",
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Following every SOLID principle maximally always yields the best design.",
+          "concepts": [
+            "prf-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Fit of object-oriented paradigm",
+          "aliases": [
+            "paradigm selection",
+            "OOP vs functional vs procedural"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when an object-oriented approach suits a problem compared with functional, procedural or data-oriented styles."
+        },
+        {
+          "id": "exp-2",
+          "name": "Domain-driven object modelling",
+          "aliases": [
+            "domain model",
+            "aggregates and entities"
+          ],
+          "bloom": "C6",
+          "summary": "Create a rich domain model with entities, value objects and aggregates that express business rules and invariants."
+        },
+        {
+          "id": "exp-3",
+          "name": "Designing extensible frameworks",
+          "aliases": [
+            "API design",
+            "extension points",
+            "library design"
+          ],
+          "bloom": "C6",
+          "summary": "Design class hierarchies and interfaces for libraries that third parties can extend without breaking them."
+        },
+        {
+          "id": "exp-4",
+          "name": "Evolving hierarchies and compatibility",
+          "aliases": [
+            "fragile base class",
+            "API evolution"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how changes to base classes and public interfaces ripple to subclasses and clients, and plan safe evolution."
+        },
+        {
+          "id": "exp-5",
+          "name": "Object design under concurrency",
+          "aliases": [
+            "thread-safe objects",
+            "immutability for concurrency"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate object designs for shared mutable state hazards and choose immutability, confinement or synchronisation."
+        },
+        {
+          "id": "exp-6",
+          "name": "Architectural use of objects",
+          "aliases": [
+            "layered architecture",
+            "hexagonal architecture",
+            "object boundaries"
+          ],
+          "bloom": "C6",
+          "summary": "Create system architectures that place object boundaries and dependencies to isolate domain logic from infrastructure."
+        },
+        {
+          "id": "exp-7",
+          "name": "Anemic versus rich models",
+          "aliases": [
+            "anemic domain model",
+            "behaviour with data"
+          ],
+          "bloom": "C5",
+          "summary": "Critique designs that separate data from behaviour and justify where each style is appropriate."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-2"
+        ],
+        [
+          "cmp-8",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ],
+        [
+          "cmp-4",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "cmp-8",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "prf-5",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Object-oriented design is always the right choice for large systems.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Modelling every real-world noun as a class produces a good domain model.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Wrapping fields in getters and setters makes an object safe to share between threads.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

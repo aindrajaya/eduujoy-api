@@ -1,0 +1,626 @@
+{
+  "version": 1,
+  "topic": "javascript",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Variable declarations let const",
+          "aliases": [
+            "let and const"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how let, const and var declare variables and choose const by default and let when reassignment is needed."
+        },
+        {
+          "id": "nov-2",
+          "name": "Primitive and object types",
+          "aliases": [
+            "JS data types"
+          ],
+          "bloom": "C1",
+          "summary": "Recall JavaScript's primitive types, objects, arrays and the typeof operator."
+        },
+        {
+          "id": "nov-3",
+          "name": "Strict versus loose equality",
+          "aliases": [
+            "== vs ==="
+          ],
+          "bloom": "C2",
+          "summary": "Explain why === avoids type coercion and what truthy and falsy values are."
+        },
+        {
+          "id": "nov-4",
+          "name": "Function declarations and expressions",
+          "aliases": [
+            "defining functions"
+          ],
+          "bloom": "C2",
+          "summary": "Write and call functions with parameters and return values, including function expressions."
+        },
+        {
+          "id": "nov-5",
+          "name": "Template literals",
+          "aliases": [
+            "backtick strings"
+          ],
+          "bloom": "C2",
+          "summary": "Build strings with interpolated expressions and multiline text using backticks."
+        },
+        {
+          "id": "nov-6",
+          "name": "Object and array literals",
+          "aliases": [
+            "literals"
+          ],
+          "bloom": "C2",
+          "summary": "Create objects and arrays and access their members with dot and bracket notation."
+        },
+        {
+          "id": "nov-7",
+          "name": "Console output and debugging",
+          "aliases": [
+            "console.log"
+          ],
+          "bloom": "C1",
+          "summary": "Use console methods to inspect values and read basic error messages."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "const makes the value completely immutable, even for objects and arrays.",
+          "concepts": [
+            "nov-1",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "== and === behave the same way.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "typeof null returns 'null' and arrays have the type 'array'.",
+          "concepts": [
+            "nov-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Arrow function syntax",
+          "aliases": [
+            "arrow functions"
+          ],
+          "bloom": "C3",
+          "summary": "Write arrow functions with implicit returns and recognise when they are appropriate."
+        },
+        {
+          "id": "adb-2",
+          "name": "Destructuring and spread",
+          "aliases": [
+            "rest and spread"
+          ],
+          "bloom": "C3",
+          "summary": "Extract values from arrays and objects and copy or merge them using spread and rest syntax."
+        },
+        {
+          "id": "adb-3",
+          "name": "Map filter reduce",
+          "aliases": [
+            "array higher-order methods"
+          ],
+          "bloom": "C3",
+          "summary": "Transform, select and aggregate arrays with map, filter and reduce instead of manual loops."
+        },
+        {
+          "id": "adb-4",
+          "name": "JSON parsing and serialising",
+          "aliases": [
+            "JSON.parse stringify"
+          ],
+          "bloom": "C3",
+          "summary": "Convert between objects and JSON strings and know what values JSON cannot represent."
+        },
+        {
+          "id": "adb-5",
+          "name": "Block scope and hoisting",
+          "aliases": [
+            "var hoisting",
+            "temporal dead zone"
+          ],
+          "bloom": "C2",
+          "summary": "Predict how var, let and const are scoped and hoisted, including the temporal dead zone."
+        },
+        {
+          "id": "adb-6",
+          "name": "DOM selection and modification",
+          "aliases": [
+            "querySelector",
+            "DOM manipulation"
+          ],
+          "bloom": "C3",
+          "summary": "Select elements and change their text, attributes, classes and styles."
+        },
+        {
+          "id": "adb-7",
+          "name": "Event listeners",
+          "aliases": [
+            "addEventListener"
+          ],
+          "bloom": "C3",
+          "summary": "Attach handlers to elements and use the event object to respond to user actions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "nov-6",
+          "adb-4"
+        ],
+        [
+          "nov-1",
+          "adb-5"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "map modifies the original array in place.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "let and const variables are not hoisted at all.",
+          "concepts": [
+            "adb-5"
+          ]
+        },
+        {
+          "text": "Spread creates a deep copy of nested objects.",
+          "concepts": [
+            "adb-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Lexical scope and closures",
+          "aliases": [
+            "closures"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how functions retain access to variables of their defining scope and use this for private state."
+        },
+        {
+          "id": "cmp-2",
+          "name": "this binding rules",
+          "aliases": [
+            "this keyword"
+          ],
+          "bloom": "C4",
+          "summary": "Determine the value of this from call-site, call/apply/bind, and arrow function lexical binding."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Prototype chain lookup",
+          "aliases": [
+            "prototypal inheritance"
+          ],
+          "bloom": "C4",
+          "summary": "Trace property lookup along the prototype chain and distinguish own from inherited properties."
+        },
+        {
+          "id": "cmp-4",
+          "name": "ES6 class syntax",
+          "aliases": [
+            "classes",
+            "extends"
+          ],
+          "bloom": "C3",
+          "summary": "Define classes with constructors, methods, static members and inheritance via extends and super."
+        },
+        {
+          "id": "cmp-5",
+          "name": "ES module import export",
+          "aliases": [
+            "ES modules"
+          ],
+          "bloom": "C3",
+          "summary": "Organise code with named and default exports and imports and understand module scope."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Event propagation and delegation",
+          "aliases": [
+            "bubbling",
+            "capturing"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse capture and bubble phases and use delegation to handle events on dynamic elements."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Shallow versus deep copying",
+          "aliases": [
+            "object cloning"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish reference sharing, shallow copies and deep copies and pick a suitable cloning approach."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "nov-6",
+          "cmp-3"
+        ],
+        [
+          "adb-7",
+          "cmp-6"
+        ],
+        [
+          "adb-2",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Closures capture the value of a variable at creation time rather than the variable itself.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "JavaScript classes work like classes in Java, copying methods into instances.",
+          "concepts": [
+            "cmp-3",
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "this refers to the function itself or the lexical scope where it is defined, in every function type.",
+          "concepts": [
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Prototype-based design tradeoffs",
+          "aliases": [
+            "Object.create patterns"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate classes, factory functions, and Object.create composition for a given design."
+        },
+        {
+          "id": "prf-2",
+          "name": "Module design and dependencies",
+          "aliases": [
+            "module boundaries"
+          ],
+          "bloom": "C5",
+          "summary": "Assess module structure, circular imports, live bindings and side effects at import time."
+        },
+        {
+          "id": "prf-3",
+          "name": "Functional composition patterns",
+          "aliases": [
+            "currying",
+            "pure functions"
+          ],
+          "bloom": "C4",
+          "summary": "Compose pure functions, currying and higher-order utilities and judge when they improve clarity."
+        },
+        {
+          "id": "prf-4",
+          "name": "Immutability strategies",
+          "aliases": [
+            "immutable updates"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate approaches such as spread updates, Object.freeze and non-mutating array methods for avoiding shared-state bugs."
+        },
+        {
+          "id": "prf-5",
+          "name": "Property descriptors and getters",
+          "aliases": [
+            "defineProperty",
+            "accessors"
+          ],
+          "bloom": "C4",
+          "summary": "Use property descriptors, getters, setters and enumerability to control object behaviour."
+        },
+        {
+          "id": "prf-6",
+          "name": "Symbols and iteration protocols",
+          "aliases": [
+            "iterators",
+            "Symbol.iterator"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how iterables and iterators power for...of, spread and destructuring, and implement custom ones."
+        },
+        {
+          "id": "prf-7",
+          "name": "DOM performance and reflow",
+          "aliases": [
+            "layout thrashing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate DOM update strategies such as batching, fragments and avoiding forced layout."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "cmp-3",
+          "prf-5"
+        ],
+        [
+          "adb-2",
+          "prf-6"
+        ],
+        [
+          "cmp-6",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Object.freeze makes nested objects deeply immutable.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Functional style with map and reduce is always faster and clearer than loops.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Imported bindings are copies of the exported values.",
+          "concepts": [
+            "prf-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Language semantics critique",
+          "aliases": [
+            "coercion and quirks design"
+          ],
+          "bloom": "C5",
+          "summary": "Judge the impact of coercion, hoisting and this quirks on code style and enforce safer conventions."
+        },
+        {
+          "id": "exp-2",
+          "name": "Metaprogramming with Proxy",
+          "aliases": [
+            "Proxy and Reflect"
+          ],
+          "bloom": "C6",
+          "summary": "Design objects with Proxy and Reflect traps for validation or observation while weighing costs."
+        },
+        {
+          "id": "exp-3",
+          "name": "Library API architecture",
+          "aliases": [
+            "API design"
+          ],
+          "bloom": "C6",
+          "summary": "Create a coherent, extensible, module-based API using appropriate patterns for inheritance, composition and configuration."
+        },
+        {
+          "id": "exp-4",
+          "name": "Memory leaks and garbage collection",
+          "aliases": [
+            "memory management"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose leaks from closures, detached DOM nodes and lingering listeners and evaluate fixes."
+        },
+        {
+          "id": "exp-5",
+          "name": "Engine optimisation awareness",
+          "aliases": [
+            "hidden classes",
+            "JIT"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how object shape stability and type consistency affect engine optimisation without premature tuning."
+        },
+        {
+          "id": "exp-6",
+          "name": "Custom event architectures",
+          "aliases": [
+            "CustomEvent",
+            "event-driven design"
+          ],
+          "bloom": "C6",
+          "summary": "Design decoupled component communication using custom events and a clear listener lifecycle."
+        },
+        {
+          "id": "exp-7",
+          "name": "Conventions and style standards",
+          "aliases": [
+            "code standards",
+            "linting rules"
+          ],
+          "bloom": "C6",
+          "summary": "Create team conventions and lint configurations that prevent known language pitfalls."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-5",
+          "exp-2"
+        ],
+        [
+          "prf-1",
+          "exp-3"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "cmp-1",
+          "exp-4"
+        ],
+        [
+          "prf-1",
+          "exp-5"
+        ],
+        [
+          "cmp-6",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Garbage collection means JavaScript programs cannot leak memory.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Micro-optimising code by hand is the best way to speed up JavaScript.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Proxies are a free abstraction with no performance or semantic cost.",
+          "concepts": [
+            "exp-2"
+          ]
+        }
+      ]
+    }
+  ]
+}

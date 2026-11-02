@@ -1,0 +1,734 @@
+{
+  "version": 1,
+  "topic": "hypothesis-testing",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": true,
+  "dependsOnTopics": [
+    "statistics",
+    "probability"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Null and alternative hypotheses",
+          "aliases": [
+            "H0 and H1",
+            "H0 and Ha"
+          ],
+          "bloom": "C2",
+          "summary": "State a research question as a null hypothesis of no effect and an alternative hypothesis describing the effect being looked for."
+        },
+        {
+          "id": "nov-2",
+          "name": "Sample versus population claims",
+          "aliases": [
+            "inference from samples"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a test uses a sample to judge a claim about a population, so the result carries uncertainty."
+        },
+        {
+          "id": "nov-3",
+          "name": "Test statistic",
+          "aliases": [
+            "standardised sample result"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a test statistic as a number summarising how far the sample result lies from what the null hypothesis predicts."
+        },
+        {
+          "id": "nov-4",
+          "name": "P-value meaning",
+          "aliases": [
+            "probability value",
+            "p value"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret a p-value as how probable data at least this extreme would be if the null hypothesis were true."
+        },
+        {
+          "id": "nov-5",
+          "name": "Significance level alpha",
+          "aliases": [
+            "alpha",
+            "significance threshold"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that alpha is a threshold chosen in advance, often 0.05, against which the p-value is compared."
+        },
+        {
+          "id": "nov-6",
+          "name": "Reject or fail to reject",
+          "aliases": [
+            "decision rule",
+            "test conclusion"
+          ],
+          "bloom": "C2",
+          "summary": "Turn a p-value and alpha into a decision to reject or not reject the null hypothesis, worded correctly."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The p-value is the probability that the null hypothesis is true.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Failing to reject the null hypothesis proves the null hypothesis is true.",
+          "concepts": [
+            "nov-6",
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A result with p below 0.05 proves the effect is real and important.",
+          "concepts": [
+            "nov-5",
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "One-tailed versus two-tailed tests",
+          "aliases": [
+            "directional tests",
+            "tails"
+          ],
+          "bloom": "C3",
+          "summary": "Choose a one- or two-sided alternative from the question asked and compute the matching p-value."
+        },
+        {
+          "id": "adb-2",
+          "name": "Type I and Type II errors",
+          "aliases": [
+            "false positive and false negative",
+            "alpha and beta errors"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish rejecting a true null from missing a false null and relate each to alpha and beta."
+        },
+        {
+          "id": "adb-3",
+          "name": "One-sample z-test with known sigma",
+          "aliases": [
+            "z-test for a mean"
+          ],
+          "bloom": "C3",
+          "summary": "Run a z-test for a mean when the population standard deviation is known, computing the z statistic and its p-value."
+        },
+        {
+          "id": "adb-4",
+          "name": "One-sample t-test for unknown sigma",
+          "aliases": [
+            "Student's t-test for a mean",
+            "t-test"
+          ],
+          "bloom": "C3",
+          "summary": "Test a mean against a hypothesised value when the standard deviation is estimated, using the t statistic and degrees of freedom."
+        },
+        {
+          "id": "adb-5",
+          "name": "Critical values and rejection regions",
+          "aliases": [
+            "critical region",
+            "critical value approach"
+          ],
+          "bloom": "C3",
+          "summary": "Find the cutoff for a given alpha and decide by checking whether the test statistic falls in the rejection region."
+        },
+        {
+          "id": "adb-6",
+          "name": "Test for a proportion",
+          "aliases": [
+            "one-proportion z-test"
+          ],
+          "bloom": "C3",
+          "summary": "Test a sample proportion against a claimed population proportion using the normal approximation."
+        },
+        {
+          "id": "adb-7",
+          "name": "Confidence interval link",
+          "aliases": [
+            "CI and test duality"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a two-sided test at alpha agrees with whether the hypothesised value lies inside the (1-alpha) confidence interval."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-3",
+          "adb-5"
+        ],
+        [
+          "adb-3",
+          "adb-6"
+        ],
+        [
+          "adb-4",
+          "adb-7"
+        ],
+        [
+          "adb-5",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A one-tailed test can be chosen after seeing which direction the data went.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Alpha is the probability that the null hypothesis is true when we reject it.",
+          "concepts": [
+            "adb-2",
+            "nov-5"
+          ]
+        },
+        {
+          "text": "A z-test is appropriate whenever the sample is large, even when the standard deviation has been estimated from the data.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Two-sample t-tests",
+          "aliases": [
+            "independent samples t-test",
+            "Welch's t-test"
+          ],
+          "bloom": "C3",
+          "summary": "Compare the means of two independent groups, choosing pooled or Welch variants and computing the statistic correctly."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Paired t-test",
+          "aliases": [
+            "dependent samples test",
+            "matched pairs test"
+          ],
+          "bloom": "C3",
+          "summary": "Analyse before-after or matched data by testing the mean of the within-pair differences."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Chi-square test of independence",
+          "aliases": [
+            "contingency table test",
+            "chi-square association test"
+          ],
+          "bloom": "C3",
+          "summary": "Compute expected counts from a contingency table and test whether two categorical variables are associated."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Chi-square goodness of fit",
+          "aliases": [
+            "goodness-of-fit test"
+          ],
+          "bloom": "C3",
+          "summary": "Compare observed category counts with those expected under a specified distribution."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Test assumptions and diagnostics",
+          "aliases": [
+            "checking assumptions",
+            "validity conditions"
+          ],
+          "bloom": "C4",
+          "summary": "Check independence, normality, equal variance and expected-count conditions and judge when they are violated."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Effect size measures",
+          "aliases": [
+            "Cohen's d",
+            "practical significance"
+          ],
+          "bloom": "C4",
+          "summary": "Separate statistical from practical significance by quantifying the magnitude of an effect."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Statistical power",
+          "aliases": [
+            "power of a test",
+            "1 minus beta"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how sample size, effect size, alpha and variability determine the chance of detecting a real effect."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Choosing the appropriate test",
+          "aliases": [
+            "test selection",
+            "test decision tree"
+          ],
+          "bloom": "C4",
+          "summary": "Select a test from the data type, number of groups, pairing and the question asked."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-1",
+          "cmp-5"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "adb-2",
+          "cmp-7"
+        ],
+        [
+          "cmp-6",
+          "cmp-7"
+        ],
+        [
+          "cmp-1",
+          "cmp-8"
+        ],
+        [
+          "cmp-3",
+          "cmp-8"
+        ],
+        [
+          "cmp-5",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "An independent two-sample t-test is fine for before-and-after measurements on the same subjects.",
+          "concepts": [
+            "cmp-1",
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "A significant chi-square test shows that one variable causes the other.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "A tiny p-value means the effect is large.",
+          "concepts": [
+            "cmp-6",
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "ANOVA and F-test",
+          "aliases": [
+            "analysis of variance",
+            "one-way ANOVA"
+          ],
+          "bloom": "C4",
+          "summary": "Compare more than two group means by partitioning variance and interpreting the F statistic."
+        },
+        {
+          "id": "prf-2",
+          "name": "Multiple comparisons correction",
+          "aliases": [
+            "Bonferroni",
+            "false discovery rate",
+            "family-wise error"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how many tests inflate false positives and choose a correction such as Bonferroni or FDR control."
+        },
+        {
+          "id": "prf-3",
+          "name": "Post-hoc pairwise testing",
+          "aliases": [
+            "Tukey HSD",
+            "post hoc tests"
+          ],
+          "bloom": "C4",
+          "summary": "Follow a significant ANOVA with controlled pairwise comparisons to locate which groups differ."
+        },
+        {
+          "id": "prf-4",
+          "name": "Nonparametric alternatives",
+          "aliases": [
+            "rank-based tests",
+            "Mann-Whitney",
+            "Wilcoxon"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when rank-based tests are preferable to t-tests given outliers, skew or ordinal data."
+        },
+        {
+          "id": "prf-5",
+          "name": "Permutation and bootstrap tests",
+          "aliases": [
+            "resampling tests",
+            "randomisation tests"
+          ],
+          "bloom": "C4",
+          "summary": "Build a null distribution by resampling to test hypotheses without relying on parametric assumptions."
+        },
+        {
+          "id": "prf-6",
+          "name": "Power analysis and sample size",
+          "aliases": [
+            "sample size planning",
+            "a priori power"
+          ],
+          "bloom": "C5",
+          "summary": "Plan a study by determining the sample size needed for a target power given an expected effect size."
+        },
+        {
+          "id": "prf-7",
+          "name": "P-hacking and researcher degrees of freedom",
+          "aliases": [
+            "data dredging",
+            "forking paths"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how flexible analysis choices and selective reporting invalidate p-values."
+        },
+        {
+          "id": "prf-8",
+          "name": "Equivalence and non-inferiority testing",
+          "aliases": [
+            "TOST",
+            "two one-sided tests"
+          ],
+          "bloom": "C5",
+          "summary": "Test whether an effect is small enough to be negligible rather than merely not significant."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "cmp-6",
+          "prf-6"
+        ],
+        [
+          "adb-2",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-7"
+        ],
+        [
+          "cmp-7",
+          "prf-8"
+        ],
+        [
+          "adb-7",
+          "prf-8"
+        ],
+        [
+          "cmp-1",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Running several t-tests between all pairs of groups is equivalent to a single ANOVA.",
+          "concepts": [
+            "prf-1",
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Nonparametric tests make no assumptions at all and are always safer than t-tests.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "A non-significant result shows two treatments are equivalent.",
+          "concepts": [
+            "prf-8",
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Neyman-Pearson versus Fisher frameworks",
+          "aliases": [
+            "NHST foundations",
+            "inductive behaviour versus evidence"
+          ],
+          "bloom": "C5",
+          "summary": "Critique the hybrid null hypothesis significance testing practice by contrasting Fisher's evidential p-values with Neyman-Pearson error-rate decisions."
+        },
+        {
+          "id": "exp-2",
+          "name": "Bayesian alternatives to testing",
+          "aliases": [
+            "Bayes factors",
+            "posterior probabilities"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate Bayes factors and posterior inference against frequentist tests for answering what the data say about a hypothesis."
+        },
+        {
+          "id": "exp-3",
+          "name": "Sequential and adaptive testing",
+          "aliases": [
+            "optional stopping",
+            "alpha spending",
+            "group sequential designs"
+          ],
+          "bloom": "C6",
+          "summary": "Design experiments with interim looks that keep error rates valid, using alpha-spending or sequential methods."
+        },
+        {
+          "id": "exp-4",
+          "name": "Replication and meta-analytic evidence",
+          "aliases": [
+            "reproducibility",
+            "publication bias"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how publication bias, low power and replication results affect the credibility of significant findings."
+        },
+        {
+          "id": "exp-5",
+          "name": "Likelihood ratio, Wald and score tests",
+          "aliases": [
+            "asymptotic tests",
+            "LRT"
+          ],
+          "bloom": "C5",
+          "summary": "Compare the large-sample tests derived from the likelihood and decide which suits a given model."
+        },
+        {
+          "id": "exp-6",
+          "name": "Robust testing under violated assumptions",
+          "aliases": [
+            "heteroscedasticity-robust inference",
+            "robust standard errors"
+          ],
+          "bloom": "C6",
+          "summary": "Design analyses that keep valid error rates under dependence, unequal variance or non-normality, verified by simulation."
+        },
+        {
+          "id": "exp-7",
+          "name": "Pre-registration and analysis planning",
+          "aliases": [
+            "registered reports",
+            "analysis plan"
+          ],
+          "bloom": "C6",
+          "summary": "Create a pre-specified analysis and testing protocol that separates confirmatory from exploratory inference."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "prf-8",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-6",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "exp-4",
+          "exp-7"
+        ],
+        [
+          "prf-7",
+          "exp-7"
+        ],
+        [
+          "prf-5",
+          "exp-6"
+        ],
+        [
+          "cmp-5",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "prf-1",
+          "exp-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Peeking at interim results and stopping once p drops below 0.05 is harmless as long as the final p-value is reported.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "A Bayes factor and a p-value measure the same thing and always lead to the same conclusion.",
+          "concepts": [
+            "exp-2",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Pre-registration forbids any exploratory analysis.",
+          "concepts": [
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

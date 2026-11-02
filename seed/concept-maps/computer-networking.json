@@ -1,0 +1,746 @@
+{
+  "version": 1,
+  "topic": "computer-networking",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Network nodes and links",
+          "aliases": [
+            "hosts and links"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that a network is made of hosts, intermediate devices and links, and name common examples such as LAN, WAN and the internet."
+        },
+        {
+          "id": "nov-2",
+          "name": "Protocols as shared rules",
+          "aliases": [
+            "network protocol"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a protocol is an agreed set of message formats and rules that lets different machines communicate."
+        },
+        {
+          "id": "nov-3",
+          "name": "Layered model idea",
+          "aliases": [
+            "OSI model",
+            "TCP/IP model"
+          ],
+          "bloom": "C2",
+          "summary": "Describe why networking is split into layers and name the layers of the TCP/IP and OSI models in order."
+        },
+        {
+          "id": "nov-4",
+          "name": "Packets and encapsulation",
+          "aliases": [
+            "packet switching",
+            "headers"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that data is broken into packets, each wrapped in headers added by successive layers."
+        },
+        {
+          "id": "nov-5",
+          "name": "IP and MAC addresses",
+          "aliases": [
+            "logical and physical address"
+          ],
+          "bloom": "C1",
+          "summary": "Distinguish an IP address (logical, network-level) from a MAC address (hardware, link-level) and recognise their formats."
+        },
+        {
+          "id": "nov-6",
+          "name": "Client-server communication",
+          "aliases": [
+            "request and response"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how a client sends a request to a server that listens and replies, such as a browser fetching a web page."
+        },
+        {
+          "id": "nov-7",
+          "name": "Common network devices",
+          "aliases": [
+            "switch",
+            "router",
+            "access point"
+          ],
+          "bloom": "C1",
+          "summary": "Name the role of a switch, router, modem and wireless access point in a home or office network."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-7"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The internet and the World Wide Web are the same thing.",
+          "concepts": [
+            "nov-1",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "A router and a switch do the same job and the terms are interchangeable.",
+          "concepts": [
+            "nov-7"
+          ]
+        },
+        {
+          "text": "Data travels between computers as one continuous stream rather than as separate packets.",
+          "concepts": [
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "IPv4 address structure",
+          "aliases": [
+            "dotted decimal",
+            "network and host portion"
+          ],
+          "bloom": "C2",
+          "summary": "Read an IPv4 address in dotted decimal and split it into network and host parts using a subnet mask."
+        },
+        {
+          "id": "adb-2",
+          "name": "Private and public addresses",
+          "aliases": [
+            "RFC 1918",
+            "NAT"
+          ],
+          "bloom": "C3",
+          "summary": "Identify private address ranges and explain how NAT lets many private hosts share one public address."
+        },
+        {
+          "id": "adb-3",
+          "name": "TCP versus UDP",
+          "aliases": [
+            "transport protocols"
+          ],
+          "bloom": "C3",
+          "summary": "Choose between TCP and UDP for a given application based on reliability, ordering and latency needs."
+        },
+        {
+          "id": "adb-4",
+          "name": "Ports and sockets",
+          "aliases": [
+            "port numbers",
+            "well-known ports"
+          ],
+          "bloom": "C3",
+          "summary": "Use port numbers to identify services and match well-known ports such as 80, 443 and 53 to their protocols."
+        },
+        {
+          "id": "adb-5",
+          "name": "DNS name resolution",
+          "aliases": [
+            "domain name lookup"
+          ],
+          "bloom": "C3",
+          "summary": "Trace how a hostname is translated into an IP address and recognise common record types A, AAAA, CNAME and MX."
+        },
+        {
+          "id": "adb-6",
+          "name": "DHCP address assignment",
+          "aliases": [
+            "dynamic host configuration"
+          ],
+          "bloom": "C3",
+          "summary": "Describe how a host obtains an address, gateway and DNS server automatically, and apply it to a simple LAN."
+        },
+        {
+          "id": "adb-8",
+          "name": "Default gateway role",
+          "aliases": [
+            "first-hop router"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that traffic to addresses outside the local network is sent to the default gateway."
+        },
+        {
+          "id": "adb-7",
+          "name": "Basic connectivity tools",
+          "aliases": [
+            "ping",
+            "traceroute",
+            "ipconfig"
+          ],
+          "bloom": "C3",
+          "summary": "Use ping, traceroute and interface configuration commands to check reachability and view addressing."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-6",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-8"
+        ],
+        [
+          "adb-8",
+          "adb-7"
+        ],
+        [
+          "adb-5",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "UDP is simply a worse version of TCP and should never be used.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "A port number identifies a computer rather than a service on it.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Private IP addresses can be reached directly from anywhere on the internet.",
+          "concepts": [
+            "adb-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "CIDR and subnet design",
+          "aliases": [
+            "subnetting",
+            "prefix length"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate network address, broadcast address and usable host range, and divide an address block into subnets that fit requirements."
+        },
+        {
+          "id": "cmp-2",
+          "name": "IP routing decisions",
+          "aliases": [
+            "routing table",
+            "longest prefix match"
+          ],
+          "bloom": "C3",
+          "summary": "Determine the next hop for a packet by applying longest prefix match against a routing table."
+        },
+        {
+          "id": "cmp-3",
+          "name": "ARP and local delivery",
+          "aliases": [
+            "address resolution protocol"
+          ],
+          "bloom": "C3",
+          "summary": "Explain how ARP maps IP addresses to MAC addresses on a LAN and how frames are delivered within a subnet."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Switching and VLANs",
+          "aliases": [
+            "MAC address table",
+            "virtual LAN"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how switches learn MAC addresses and forward frames, and how VLANs segment broadcast domains."
+        },
+        {
+          "id": "cmp-5",
+          "name": "TCP connection mechanics",
+          "aliases": [
+            "three-way handshake",
+            "flow control"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse connection setup and teardown, sequence numbers, acknowledgements, windowing and retransmission."
+        },
+        {
+          "id": "cmp-6",
+          "name": "DNS resolution hierarchy",
+          "aliases": [
+            "recursive and authoritative servers",
+            "caching"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the roles of resolvers, root, TLD and authoritative servers and the effect of TTL caching."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Systematic connectivity troubleshooting",
+          "aliases": [
+            "layered troubleshooting"
+          ],
+          "bloom": "C4",
+          "summary": "Isolate a fault by working through layers, testing the link, address, gateway, DNS and service in turn."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Firewalls and access rules",
+          "aliases": [
+            "ACL",
+            "packet filtering"
+          ],
+          "bloom": "C3",
+          "summary": "Write and interpret basic allow and deny rules based on addresses, protocols and ports."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-8",
+          "cmp-2"
+        ],
+        [
+          "nov-5",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-3",
+          "cmp-5"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "adb-7",
+          "cmp-7"
+        ],
+        [
+          "cmp-2",
+          "cmp-7"
+        ],
+        [
+          "cmp-6",
+          "cmp-7"
+        ],
+        [
+          "adb-4",
+          "cmp-8"
+        ],
+        [
+          "cmp-1",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A switch forwards traffic based on IP addresses.",
+          "concepts": [
+            "cmp-4",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "A failed ping proves the destination host is down.",
+          "concepts": [
+            "cmp-7",
+            "cmp-8"
+          ]
+        },
+        {
+          "text": "Splitting a network into VLANs automatically lets the VLANs communicate with each other.",
+          "concepts": [
+            "cmp-4",
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Dynamic routing protocols",
+          "aliases": [
+            "OSPF",
+            "RIP",
+            "link-state vs distance-vector"
+          ],
+          "bloom": "C4",
+          "summary": "Compare distance-vector and link-state protocols and analyse convergence and metric behaviour."
+        },
+        {
+          "id": "prf-2",
+          "name": "BGP and inter-domain routing",
+          "aliases": [
+            "autonomous systems",
+            "path vector"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how autonomous systems exchange reachability through BGP and how policy shapes path choice."
+        },
+        {
+          "id": "prf-3",
+          "name": "TCP congestion control",
+          "aliases": [
+            "slow start",
+            "AIMD"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how slow start, congestion avoidance and loss response govern throughput and fairness."
+        },
+        {
+          "id": "prf-4",
+          "name": "Packet capture analysis",
+          "aliases": [
+            "Wireshark",
+            "tcpdump"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose faults such as retransmissions, resets and DNS failures by reading captured packets."
+        },
+        {
+          "id": "prf-5",
+          "name": "Secure transport with TLS",
+          "aliases": [
+            "HTTPS",
+            "certificates"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how TLS provides confidentiality, integrity and authentication, including certificate chain validation."
+        },
+        {
+          "id": "prf-6",
+          "name": "IPv6 addressing and transition",
+          "aliases": [
+            "dual stack",
+            "SLAAC"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse IPv6 address types, autoconfiguration and the trade-offs of dual stack and tunnelling."
+        },
+        {
+          "id": "prf-7",
+          "name": "Network performance metrics",
+          "aliases": [
+            "latency",
+            "bandwidth",
+            "jitter"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate throughput, latency, loss and jitter measurements to locate bottlenecks and judge fitness for applications."
+        },
+        {
+          "id": "prf-8",
+          "name": "Load balancing and NAT design",
+          "aliases": [
+            "reverse proxy",
+            "high availability"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate load balancing, NAT and redundancy designs against availability and complexity trade-offs."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "cmp-1",
+          "prf-6"
+        ],
+        [
+          "prf-3",
+          "prf-7"
+        ],
+        [
+          "prf-4",
+          "prf-7"
+        ],
+        [
+          "adb-2",
+          "prf-8"
+        ],
+        [
+          "prf-7",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "More bandwidth always means lower latency and faster page loads.",
+          "concepts": [
+            "prf-7",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "BGP picks the shortest or fastest path automatically.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "IPv6 is just IPv4 with longer addresses and works identically.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Scalable network architecture design",
+          "aliases": [
+            "hierarchical design",
+            "spine-leaf"
+          ],
+          "bloom": "C6",
+          "summary": "Design a network topology that balances scale, resilience, cost and manageability for stated requirements."
+        },
+        {
+          "id": "exp-2",
+          "name": "Routing policy and traffic engineering",
+          "aliases": [
+            "BGP policy",
+            "path control"
+          ],
+          "bloom": "C6",
+          "summary": "Create routing policies that steer traffic to meet performance, cost and failover goals."
+        },
+        {
+          "id": "exp-3",
+          "name": "Protocol design trade-offs",
+          "aliases": [
+            "QUIC",
+            "HTTP/3"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how protocols such as QUIC change head-of-line blocking, handshake cost and middlebox compatibility versus TCP."
+        },
+        {
+          "id": "exp-4",
+          "name": "Network security architecture",
+          "aliases": [
+            "segmentation",
+            "zero trust"
+          ],
+          "bloom": "C6",
+          "summary": "Design layered defences covering segmentation, filtering, DDoS resilience and spoofing prevention."
+        },
+        {
+          "id": "exp-5",
+          "name": "Overlay and virtual networking",
+          "aliases": [
+            "VXLAN",
+            "VPN",
+            "SDN"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate tunnelling, overlays and software-defined control for cloud and multi-site networks."
+        },
+        {
+          "id": "exp-6",
+          "name": "Failure diagnosis in complex networks",
+          "aliases": [
+            "root cause analysis"
+          ],
+          "bloom": "C5",
+          "summary": "Judge evidence from multiple layers and vantage points to find root causes of intermittent or partial failures."
+        },
+        {
+          "id": "exp-7",
+          "name": "Capacity planning and resilience",
+          "aliases": [
+            "redundancy",
+            "failure domains"
+          ],
+          "bloom": "C6",
+          "summary": "Create capacity and failover plans using traffic models, failure domains and convergence requirements."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-8",
+          "exp-1"
+        ],
+        [
+          "prf-2",
+          "exp-2"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "cmp-8",
+          "exp-4"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "prf-4",
+          "exp-6"
+        ],
+        [
+          "prf-7",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "prf-7",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Adding redundant links and devices always improves availability.",
+          "concepts": [
+            "exp-7",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "A VPN or encrypted tunnel makes traffic fully secure and anonymous end to end.",
+          "concepts": [
+            "exp-5",
+            "exp-4"
+          ]
+        },
+        {
+          "text": "A perimeter firewall alone is sufficient network security.",
+          "concepts": [
+            "exp-4"
+          ]
+        }
+      ]
+    }
+  ]
+}

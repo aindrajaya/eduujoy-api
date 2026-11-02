@@ -1,0 +1,674 @@
+{
+  "version": 1,
+  "topic": "docker",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "linux-command-line"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Image versus container",
+          "aliases": [
+            "images and containers"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that an image is a read-only packaged template and a container is a running (or stopped) instance created from it."
+        },
+        {
+          "id": "nov-2",
+          "name": "Pulling and listing images",
+          "aliases": [
+            "docker pull",
+            "docker images"
+          ],
+          "bloom": "C1",
+          "summary": "Recall how to fetch an image from a registry by name and tag and list local images."
+        },
+        {
+          "id": "nov-3",
+          "name": "Running a container",
+          "aliases": [
+            "docker run"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that docker run creates and starts a container from an image and runs its default command."
+        },
+        {
+          "id": "nov-4",
+          "name": "Container lifecycle commands",
+          "aliases": [
+            "docker ps",
+            "docker stop",
+            "docker rm"
+          ],
+          "bloom": "C1",
+          "summary": "Remember the commands to list, stop, start and remove containers and distinguish running from stopped ones."
+        },
+        {
+          "id": "nov-5",
+          "name": "Image tags",
+          "aliases": [
+            "image name and tag",
+            "latest tag"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a tag labels a version of an image in the form repository:tag and that omitting it defaults to latest."
+        },
+        {
+          "id": "nov-6",
+          "name": "Dockerfile as build recipe",
+          "aliases": [
+            "Dockerfile"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a Dockerfile is a text file of instructions from which docker build produces an image."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A container is a full virtual machine with its own kernel.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Stopping a container deletes it.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "The latest tag always points to the newest version of an image.",
+          "concepts": [
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Core Dockerfile instructions",
+          "aliases": [
+            "FROM RUN COPY"
+          ],
+          "bloom": "C3",
+          "summary": "Write a Dockerfile using FROM, WORKDIR, COPY, RUN and EXPOSE to package a simple application."
+        },
+        {
+          "id": "adb-2",
+          "name": "CMD versus ENTRYPOINT",
+          "aliases": [
+            "default command",
+            "entrypoint"
+          ],
+          "bloom": "C3",
+          "summary": "Apply CMD for overridable default commands and ENTRYPOINT for the fixed executable, and predict how arguments to docker run combine with them."
+        },
+        {
+          "id": "adb-3",
+          "name": "Building and tagging images",
+          "aliases": [
+            "docker build",
+            "build context"
+          ],
+          "bloom": "C3",
+          "summary": "Run docker build with a tag and build context to produce a named image."
+        },
+        {
+          "id": "adb-4",
+          "name": "Port mapping",
+          "aliases": [
+            "publish ports",
+            "-p flag"
+          ],
+          "bloom": "C3",
+          "summary": "Use -p host:container to make a containerized service reachable from the host."
+        },
+        {
+          "id": "adb-5",
+          "name": "Environment variables and run options",
+          "aliases": [
+            "-e",
+            "-d",
+            "--name",
+            "--rm"
+          ],
+          "bloom": "C3",
+          "summary": "Use flags to run detached, name containers, remove on exit and pass environment variables."
+        },
+        {
+          "id": "adb-6",
+          "name": "Bind mounts and volumes",
+          "aliases": [
+            "-v",
+            "named volumes"
+          ],
+          "bloom": "C3",
+          "summary": "Persist or share data by mounting a host directory or a named volume into a container."
+        },
+        {
+          "id": "adb-7",
+          "name": "Logs and exec inspection",
+          "aliases": [
+            "docker logs",
+            "docker exec"
+          ],
+          "bloom": "C2",
+          "summary": "Use docker logs and docker exec to see output and run commands inside a running container."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-4"
+        ],
+        [
+          "nov-3",
+          "adb-5"
+        ],
+        [
+          "nov-3",
+          "adb-6"
+        ],
+        [
+          "nov-4",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Data written inside a container persists after the container is removed.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "EXPOSE in a Dockerfile publishes the port to the host.",
+          "concepts": [
+            "adb-1",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "CMD and ENTRYPOINT are interchangeable and behave the same.",
+          "concepts": [
+            "adb-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Layers and build cache",
+          "aliases": [
+            "image layers",
+            "layer caching"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how each instruction creates a layer and how cache invalidation propagates to later layers, then order instructions to maximise reuse."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Multi-stage builds",
+          "aliases": [
+            "builder stage",
+            "COPY --from"
+          ],
+          "bloom": "C3",
+          "summary": "Separate build and runtime stages so only needed artifacts are copied into a small final image."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Bridge networks and name resolution",
+          "aliases": [
+            "user-defined bridge",
+            "container DNS"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how containers on a user-defined bridge network reach each other by name and how this differs from the default bridge."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Compose service definitions",
+          "aliases": [
+            "docker-compose.yml",
+            "services"
+          ],
+          "bloom": "C3",
+          "summary": "Describe multi-container applications in a compose file with image or build, ports, environment, volumes and depends_on."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Compose lifecycle commands",
+          "aliases": [
+            "compose up",
+            "compose down"
+          ],
+          "bloom": "C3",
+          "summary": "Start, stop, rebuild and tear down a compose project, including removing volumes deliberately."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Dockerignore and context size",
+          "aliases": [
+            ".dockerignore"
+          ],
+          "bloom": "C3",
+          "summary": "Exclude unneeded files from the build context to speed builds and avoid leaking files into images."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Publishing to Docker Hub",
+          "aliases": [
+            "docker push",
+            "docker login"
+          ],
+          "bloom": "C3",
+          "summary": "Log in, tag an image with a repository name and push it to Docker Hub so others can pull it."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Debugging failing containers",
+          "aliases": [
+            "exit codes",
+            "docker inspect"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose crashes using logs, exit codes, inspect output and interactive shells."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-6",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "adb-3",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-7"
+        ],
+        [
+          "adb-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "depends_on guarantees the dependency service is ready to accept connections.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Deleting a file in a later RUN layer shrinks the image.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Containers must use localhost to reach other containers on the same network.",
+          "concepts": [
+            "cmp-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Image size and layer optimisation",
+          "aliases": [
+            "slim images",
+            "chained RUN"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate base image choices and layer strategies to trade off size, build speed and debuggability."
+        },
+        {
+          "id": "prf-2",
+          "name": "Secrets and configuration handling",
+          "aliases": [
+            "build args",
+            "secrets"
+          ],
+          "bloom": "C5",
+          "summary": "Judge where configuration belongs among ARG, ENV, env files and secrets, and avoid baking credentials into layers."
+        },
+        {
+          "id": "prf-3",
+          "name": "Non-root and least privilege",
+          "aliases": [
+            "USER instruction",
+            "container security"
+          ],
+          "bloom": "C5",
+          "summary": "Assess and reduce risk by running as a non-root user, dropping capabilities and using read-only filesystems."
+        },
+        {
+          "id": "prf-4",
+          "name": "Health checks and restart policies",
+          "aliases": [
+            "HEALTHCHECK",
+            "restart policy"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how health checks and restart policies affect availability and startup ordering in compose."
+        },
+        {
+          "id": "prf-5",
+          "name": "Compose environments and overrides",
+          "aliases": [
+            "override files",
+            "profiles"
+          ],
+          "bloom": "C4",
+          "summary": "Structure compose files with overrides, profiles and variable substitution for dev and production differences."
+        },
+        {
+          "id": "prf-6",
+          "name": "Signal handling and PID 1",
+          "aliases": [
+            "exec form",
+            "graceful shutdown"
+          ],
+          "bloom": "C4",
+          "summary": "Explain why exec-form commands and init handling matter for receiving SIGTERM and shutting down cleanly."
+        },
+        {
+          "id": "prf-7",
+          "name": "Tagging and versioning strategy",
+          "aliases": [
+            "immutable tags",
+            "digests"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate tagging schemes and digest pinning for reproducibility and safe rollbacks."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "adb-5",
+          "prf-2"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "cmp-8",
+          "prf-4"
+        ],
+        [
+          "adb-2",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "adb-1",
+          "prf-3"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Secrets passed with ARG or deleted in a later layer are safe from image inspection.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Processes in containers run as an unprivileged user by default.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Shell-form CMD handles SIGTERM just as well as exec form.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Reproducible and cacheable CI builds",
+          "aliases": [
+            "BuildKit cache",
+            "CI image builds"
+          ],
+          "bloom": "C6",
+          "summary": "Design build pipelines with cache mounts, remote cache and pinned inputs for fast, deterministic images."
+        },
+        {
+          "id": "exp-2",
+          "name": "Supply chain integrity",
+          "aliases": [
+            "image signing",
+            "SBOM",
+            "vulnerability scanning"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate provenance, scanning, signing and base image trust policies for images entering production."
+        },
+        {
+          "id": "exp-3",
+          "name": "Multi-architecture images",
+          "aliases": [
+            "multi-platform builds",
+            "manifest lists"
+          ],
+          "bloom": "C6",
+          "summary": "Create images that run on several CPU architectures using multi-platform builds and manifests."
+        },
+        {
+          "id": "exp-4",
+          "name": "Isolation internals",
+          "aliases": [
+            "namespaces",
+            "cgroups"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the guarantees and limits of container isolation based on namespaces, cgroups and shared kernel, and set resource limits accordingly."
+        },
+        {
+          "id": "exp-5",
+          "name": "Storage and network driver trade-offs",
+          "aliases": [
+            "overlay2",
+            "storage drivers",
+            "network drivers"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when to use volumes, tmpfs, host or macvlan networking and understand copy-on-write storage costs."
+        },
+        {
+          "id": "exp-6",
+          "name": "Container platform design standards",
+          "aliases": [
+            "base image policy",
+            "Dockerfile standards"
+          ],
+          "bloom": "C6",
+          "summary": "Create team standards and templated Dockerfiles and compose setups that balance security, size and developer experience."
+        },
+        {
+          "id": "exp-7",
+          "name": "Moving beyond single-host Docker",
+          "aliases": [
+            "orchestration migration"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when compose on one host stops being sufficient and what must change to move to an orchestrator."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "prf-7",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-4"
+        ],
+        [
+          "cmp-3",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "prf-5",
+          "exp-7"
+        ],
+        [
+          "prf-4",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Containers provide the same isolation strength as virtual machines.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Scanning an image once at build time keeps it secure over its lifetime.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "An image built on one CPU architecture runs unchanged on any other.",
+          "concepts": [
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

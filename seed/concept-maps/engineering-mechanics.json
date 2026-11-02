@@ -1,0 +1,708 @@
+{
+  "version": 1,
+  "topic": "engineering-mechanics",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "classical-mechanics",
+    "trigonometry",
+    "linear-algebra"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Force as a vector",
+          "aliases": [
+            "force vector",
+            "force magnitude and direction"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise force as a quantity with magnitude, direction and point of application, and state its units and line of action."
+        },
+        {
+          "id": "nov-2",
+          "name": "Newton's first and third laws",
+          "aliases": [
+            "equilibrium law",
+            "action-reaction"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a body at rest has zero net force and that contact forces occur in equal and opposite pairs."
+        },
+        {
+          "id": "nov-3",
+          "name": "Resolving forces into components",
+          "aliases": [
+            "force components",
+            "rectangular components"
+          ],
+          "bloom": "C2",
+          "summary": "Break a force into perpendicular x and y components and rebuild it from them using trigonometry."
+        },
+        {
+          "id": "nov-4",
+          "name": "Resultant of concurrent forces",
+          "aliases": [
+            "vector addition of forces",
+            "parallelogram law"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how several forces acting at one point combine into a single equivalent force."
+        },
+        {
+          "id": "nov-5",
+          "name": "Moment of a force",
+          "aliases": [
+            "torque",
+            "turning effect"
+          ],
+          "bloom": "C2",
+          "summary": "Describe the moment as force times perpendicular distance about a point and give its sense as clockwise or counterclockwise."
+        },
+        {
+          "id": "nov-6",
+          "name": "Rigid body and particle idealisation",
+          "aliases": [
+            "rigid body model",
+            "particle model"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that statics treats bodies as non-deforming and when a body can be modelled as a particle."
+        },
+        {
+          "id": "nov-7",
+          "name": "Common support types",
+          "aliases": [
+            "pin, roller, fixed support"
+          ],
+          "bloom": "C1",
+          "summary": "Name pin, roller and fixed supports and recall which reaction forces or moments each can provide."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-6",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A body at rest has no forces acting on it.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "A moment depends only on the size of the force, not on where it acts.",
+          "concepts": [
+            "nov-5"
+          ]
+        },
+        {
+          "text": "The magnitude of a resultant is always the arithmetic sum of the force magnitudes.",
+          "concepts": [
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-2",
+          "name": "Free-body diagram construction",
+          "aliases": [
+            "FBD",
+            "isolating a body"
+          ],
+          "bloom": "C3",
+          "summary": "Isolate a body and draw all applied and reaction forces on it with chosen axes and dimensions."
+        },
+        {
+          "id": "adb-1",
+          "name": "Particle equilibrium equations",
+          "aliases": [
+            "concurrent force equilibrium",
+            "ΣFx=0, ΣFy=0"
+          ],
+          "bloom": "C3",
+          "summary": "Apply force sums in each direction to find unknown forces or angles for a particle in equilibrium."
+        },
+        {
+          "id": "adb-3",
+          "name": "Moment by vector cross product",
+          "aliases": [
+            "r × F",
+            "Varignon's theorem"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the moment of a force about a point using perpendicular distance, components via Varignon, or the cross product."
+        },
+        {
+          "id": "adb-4",
+          "name": "Couples and couple moments",
+          "aliases": [
+            "force couple",
+            "pure moment"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate the moment of a couple and apply that it is the same about every point."
+        },
+        {
+          "id": "adb-6",
+          "name": "Distributed load replacement",
+          "aliases": [
+            "equivalent point load",
+            "uniform and triangular loads"
+          ],
+          "bloom": "C3",
+          "summary": "Replace a distributed load with an equivalent resultant acting at the centroid of the load diagram."
+        },
+        {
+          "id": "adb-5",
+          "name": "Equilibrium of rigid bodies in 2D",
+          "aliases": [
+            "ΣF=0, ΣM=0",
+            "planar equilibrium"
+          ],
+          "bloom": "C3",
+          "summary": "Use the three planar equilibrium equations to solve for support reactions of a single rigid body."
+        },
+        {
+          "id": "adb-7",
+          "name": "Two-force members",
+          "aliases": [
+            "two-force body"
+          ],
+          "bloom": "C2",
+          "summary": "Recognise that a member loaded at two points only carries force along the line joining them."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "adb-2",
+          "adb-1"
+        ],
+        [
+          "nov-7",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-2",
+          "adb-5"
+        ],
+        [
+          "adb-3",
+          "adb-5"
+        ],
+        [
+          "adb-6",
+          "adb-5"
+        ],
+        [
+          "adb-2",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A free-body diagram should include the forces the body exerts on its surroundings.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "The moment of a couple depends on the point about which it is taken.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "A distributed load acts at the midpoint of the beam regardless of its shape.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Equivalent force-couple systems",
+          "aliases": [
+            "resultant of a force system",
+            "reduction of a system"
+          ],
+          "bloom": "C3",
+          "summary": "Reduce any force and couple system to a single resultant force and couple at a chosen point, or to a single force."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Three-dimensional equilibrium",
+          "aliases": [
+            "3D rigid body equilibrium",
+            "six equilibrium equations"
+          ],
+          "bloom": "C3",
+          "summary": "Use vector force and moment sums to solve for reactions of bodies in space, with correct 3D support reactions."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Static determinacy and constraints",
+          "aliases": [
+            "statically indeterminate",
+            "improper constraints"
+          ],
+          "bloom": "C4",
+          "summary": "Compare unknowns to equations to classify a body as determinate, indeterminate or improperly constrained."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Truss idealisation and zero-force members",
+          "aliases": [
+            "ideal truss assumptions",
+            "zero force members"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse truss assumptions (pinned joints, loads at joints) and identify zero-force members by joint inspection."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Method of joints",
+          "aliases": [
+            "joint equilibrium of truss"
+          ],
+          "bloom": "C3",
+          "summary": "Solve for tension or compression in each truss member by applying particle equilibrium joint by joint."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Method of sections",
+          "aliases": [
+            "Ritter method",
+            "truss section cut"
+          ],
+          "bloom": "C3",
+          "summary": "Cut a truss through chosen members and use moment and force equilibrium of one part to find specific member forces."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Centroids by integration and composite areas",
+          "aliases": [
+            "centroid of composite shapes",
+            "first moment of area"
+          ],
+          "bloom": "C3",
+          "summary": "Locate centroids and centers of gravity of lines, areas and composite bodies using first moments."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-3"
+        ],
+        [
+          "adb-7",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "adb-1",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "adb-6",
+          "cmp-7"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Every member of a truss must carry load, so zero-force members can be removed.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "A member force assumed in the wrong direction means the analysis has failed.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "The method of sections can cut through at most three members regardless of the geometry.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Frames and machines analysis",
+          "aliases": [
+            "multi-force members",
+            "dismembering frames"
+          ],
+          "bloom": "C4",
+          "summary": "Separate a frame into members, apply Newton's third law at pins, and solve for internal pin forces and reactions."
+        },
+        {
+          "id": "prf-2",
+          "name": "Coulomb dry friction",
+          "aliases": [
+            "static and kinetic friction",
+            "friction laws"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish friction as an unknown force up to μsN from impending slip with F=μsN, and analyse sliding versus tipping."
+        },
+        {
+          "id": "prf-3",
+          "name": "Wedges, screws and belt friction",
+          "aliases": [
+            "belt friction equation",
+            "wedge analysis"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse wedges, screws and belts using friction angles and the relation T2=T1 e^(μβ)."
+        },
+        {
+          "id": "prf-4",
+          "name": "Area moments of inertia",
+          "aliases": [
+            "second moment of area",
+            "parallel-axis theorem"
+          ],
+          "bloom": "C4",
+          "summary": "Compute second moments of areas by integration and composite shapes using the parallel-axis theorem."
+        },
+        {
+          "id": "prf-5",
+          "name": "Product of inertia and principal axes",
+          "aliases": [
+            "Mohr's circle for inertia",
+            "rotated axes"
+          ],
+          "bloom": "C4",
+          "summary": "Transform inertia values to rotated axes and find principal axes and principal moments."
+        },
+        {
+          "id": "prf-6",
+          "name": "Fluid pressure and distributed resultants",
+          "aliases": [
+            "hydrostatic force on surfaces",
+            "Pappus theorems"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate resultant forces from varying pressure on flat surfaces and use Pappus-Guldinus theorems to judge solution routes."
+        },
+        {
+          "id": "prf-7",
+          "name": "Solution strategy and checking",
+          "aliases": [
+            "choosing equilibrium equations",
+            "sanity checks"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate alternative equation choices, moment points and limiting cases to judge and verify a statics solution."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "adb-5",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "adb-6",
+          "prf-6"
+        ],
+        [
+          "prf-1",
+          "prf-7"
+        ],
+        [
+          "prf-2",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Friction force always equals μN, even when the body is not about to slip.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "In a frame, pin forces on adjoining members need not be equal and opposite.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Moment of inertia of an area depends only on its area, not on its distribution about the axis.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Modelling real structures as idealisations",
+          "aliases": [
+            "assumption critique",
+            "structural modelling"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when rigid-body, pin-joint, point-load and frictional assumptions are valid and estimate the error when they are not."
+        },
+        {
+          "id": "exp-2",
+          "name": "Indeterminate structures by compatibility",
+          "aliases": [
+            "redundant reactions",
+            "deformation compatibility"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how adding deformation compatibility to equilibrium resolves redundancies and where statics alone fails."
+        },
+        {
+          "id": "exp-3",
+          "name": "Virtual work and stability",
+          "aliases": [
+            "principle of virtual work",
+            "stable equilibrium"
+          ],
+          "bloom": "C5",
+          "summary": "Judge equilibrium and its stability of mechanisms using virtual work and potential energy as alternatives to free-body analysis."
+        },
+        {
+          "id": "exp-4",
+          "name": "Cables and funicular shapes",
+          "aliases": [
+            "catenary and parabolic cable",
+            "funicular polygon"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the shape and tension of cables under distributed and concentrated loads and the link to arches."
+        },
+        {
+          "id": "exp-5",
+          "name": "Design of a load-resisting system",
+          "aliases": [
+            "structure synthesis",
+            "load path design"
+          ],
+          "bloom": "C6",
+          "summary": "Design a truss, frame or support arrangement that carries specified loads with justified member layout and constraints."
+        },
+        {
+          "id": "exp-6",
+          "name": "Optimising for efficiency and safety",
+          "aliases": [
+            "load paths and safety factors",
+            "robust design"
+          ],
+          "bloom": "C6",
+          "summary": "Create design variants and evaluate them for member forces, friction margins, tipping stability and sensitivity to load uncertainty."
+        },
+        {
+          "id": "exp-7",
+          "name": "Computational statics formulations",
+          "aliases": [
+            "matrix method for trusses",
+            "equilibrium as linear system"
+          ],
+          "bloom": "C6",
+          "summary": "Formulate equilibrium of a general truss or frame as a linear system and judge its solvability from rank and conditioning."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "cmp-3",
+          "exp-2"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "prf-6",
+          "exp-4"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-5"
+        ],
+        [
+          "exp-5",
+          "exp-6"
+        ],
+        [
+          "prf-3",
+          "exp-6"
+        ],
+        [
+          "cmp-3",
+          "exp-7"
+        ],
+        [
+          "prf-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Equilibrium equations are enough to solve any structure that is in equilibrium.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "A structure that satisfies equilibrium is automatically stable.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "A cable under its own weight forms a parabola exactly.",
+          "concepts": [
+            "exp-4"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,701 @@
+{
+  "version": 1,
+  "topic": "regular-expressions",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Literal character matching",
+          "aliases": [
+            "plain text patterns"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise that most characters in a pattern match themselves and that a pattern is searched for within a string."
+        },
+        {
+          "id": "nov-2",
+          "name": "Metacharacters and escaping",
+          "aliases": [
+            "special characters",
+            "backslash escape"
+          ],
+          "bloom": "C2",
+          "summary": "Explain which characters have special meaning and use a backslash to match them literally."
+        },
+        {
+          "id": "nov-3",
+          "name": "Dot wildcard",
+          "aliases": [
+            "any character"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that the dot matches any single character except usually a newline."
+        },
+        {
+          "id": "nov-4",
+          "name": "Character classes",
+          "aliases": [
+            "character sets",
+            "bracket expressions"
+          ],
+          "bloom": "C2",
+          "summary": "Read and explain sets like [abc], ranges like [a-z] and negated sets like [^0-9] as matching one character from a set."
+        },
+        {
+          "id": "nov-5",
+          "name": "Shorthand classes",
+          "aliases": [
+            "\\d \\w \\s"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that \\d, \\w and \\s match digits, word characters and whitespace and that uppercase versions negate them."
+        },
+        {
+          "id": "nov-6",
+          "name": "Basic quantifiers",
+          "aliases": [
+            "repetition operators",
+            "*, +, ?"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how *, + and ? repeat the preceding item zero or more, one or more, or zero or one times."
+        },
+        {
+          "id": "nov-7",
+          "name": "Match versus no match",
+          "aliases": [
+            "test result"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret whether a pattern finds a match in a sample string and which part of the text was matched."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ],
+        [
+          "nov-1",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A regular expression is the same as a shell glob, so * means any characters on its own.",
+          "concepts": [
+            "nov-3",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "A pattern must match the whole string to be considered a match.",
+          "concepts": [
+            "nov-1",
+            "nov-7"
+          ]
+        },
+        {
+          "text": "Inside square brackets, [abc] matches the sequence abc.",
+          "concepts": [
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Anchors",
+          "aliases": [
+            "^ and $",
+            "start and end of line"
+          ],
+          "bloom": "C3",
+          "summary": "Use ^ and $ to tie a pattern to the start and end of a string or line so it validates whole input."
+        },
+        {
+          "id": "adb-2",
+          "name": "Word boundaries",
+          "aliases": [
+            "\\b"
+          ],
+          "bloom": "C3",
+          "summary": "Use \\b to match whole words rather than substrings."
+        },
+        {
+          "id": "adb-4",
+          "name": "Capturing groups",
+          "aliases": [
+            "parentheses",
+            "subpatterns"
+          ],
+          "bloom": "C3",
+          "summary": "Group parts of a pattern with parentheses to apply quantifiers to them and to extract the matched text."
+        },
+        {
+          "id": "adb-3",
+          "name": "Alternation",
+          "aliases": [
+            "OR operator",
+            "pipe"
+          ],
+          "bloom": "C3",
+          "summary": "Use | to match one of several alternatives and understand its low precedence."
+        },
+        {
+          "id": "adb-5",
+          "name": "Counted quantifiers",
+          "aliases": [
+            "{n,m}",
+            "interval quantifiers"
+          ],
+          "bloom": "C3",
+          "summary": "Use {n}, {n,} and {n,m} to specify exact or bounded repetition counts."
+        },
+        {
+          "id": "adb-6",
+          "name": "Replacement with backreferences",
+          "aliases": [
+            "substitution",
+            "$1 in replacement"
+          ],
+          "bloom": "C3",
+          "summary": "Rewrite text by inserting captured groups into a replacement string."
+        },
+        {
+          "id": "adb-7",
+          "name": "Regex flags",
+          "aliases": [
+            "modifiers",
+            "case-insensitive, global"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how flags such as case-insensitive, global and multiline change matching behaviour."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-5"
+        ],
+        [
+          "nov-2",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-3"
+        ],
+        [
+          "adb-4",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The pattern cat|dog anchored as ^cat|dog$ requires the whole string to be cat or dog.",
+          "concepts": [
+            "adb-1",
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Without the global flag a replace changes every occurrence.",
+          "concepts": [
+            "adb-7",
+            "adb-6"
+          ]
+        },
+        {
+          "text": "^ and $ always match the start and end of each line.",
+          "concepts": [
+            "adb-1",
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Greedy versus lazy quantifiers",
+          "aliases": [
+            "non-greedy matching",
+            "reluctant quantifiers"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how greedy quantifiers take as much as possible and use lazy forms like *? to match the shortest span."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Non-capturing and named groups",
+          "aliases": [
+            "(?:...)",
+            "(?<name>...)"
+          ],
+          "bloom": "C3",
+          "summary": "Choose non-capturing groups for grouping only and named groups to make extraction readable."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Backreferences in patterns",
+          "aliases": [
+            "\\1",
+            "repeated text matching"
+          ],
+          "bloom": "C3",
+          "summary": "Match repeated text such as doubled words by referring back to an earlier group inside the pattern."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Lookahead and lookbehind",
+          "aliases": [
+            "lookarounds",
+            "zero-width assertions"
+          ],
+          "bloom": "C4",
+          "summary": "Use positive and negative lookarounds to require or forbid context without consuming it."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Matching engine API usage",
+          "aliases": [
+            "find, match, findall, split"
+          ],
+          "bloom": "C3",
+          "summary": "Choose between full match, search, find-all, split and replace operations in a language's regex library."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Decomposing a pattern",
+          "aliases": [
+            "reading complex regex",
+            "debugging patterns"
+          ],
+          "bloom": "C4",
+          "summary": "Break a complex pattern into parts and test it against matching and non-matching samples to locate faults."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Multiline and dotall modes",
+          "aliases": [
+            "line-anchored matching",
+            "s flag"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how multiline and dotall modes change anchors and the dot when matching across lines."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "adb-1",
+          "cmp-4"
+        ],
+        [
+          "adb-7",
+          "cmp-5"
+        ],
+        [
+          "adb-6",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "adb-7",
+          "cmp-7"
+        ],
+        [
+          "nov-3",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Lookaheads consume characters and so appear in the matched text.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "A lazy quantifier finds the best or shortest match overall rather than the shortest from the current start position.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Parentheses are only for grouping and have no effect on the captured results.",
+          "concepts": [
+            "cmp-2",
+            "cmp-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Backtracking behaviour",
+          "aliases": [
+            "backtracking engine",
+            "NFA matching"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how a backtracking engine tries alternatives and why match order and quantifier choice affect results and speed."
+        },
+        {
+          "id": "prf-2",
+          "name": "Catastrophic backtracking",
+          "aliases": [
+            "ReDoS",
+            "exponential blow-up"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate patterns with nested or overlapping quantifiers for exponential-time risk and judge their danger on untrusted input."
+        },
+        {
+          "id": "prf-3",
+          "name": "Possessive quantifiers and atomic groups",
+          "aliases": [
+            "(?>...)",
+            "no backtracking"
+          ],
+          "bloom": "C4",
+          "summary": "Use possessive and atomic constructs to prevent needless backtracking and understand when they change results."
+        },
+        {
+          "id": "prf-4",
+          "name": "Unicode-aware matching",
+          "aliases": [
+            "Unicode properties",
+            "code points"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how encodings, normalisation, and property classes like \\p{L} affect what \\w, case folding and the dot match."
+        },
+        {
+          "id": "prf-5",
+          "name": "Engine flavour differences",
+          "aliases": [
+            "PCRE, POSIX, RE2, JavaScript dialects"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how dialects differ in supported syntax and semantics and judge portability of a pattern."
+        },
+        {
+          "id": "prf-6",
+          "name": "Regex versus parser choice",
+          "aliases": [
+            "limits of regular languages"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when regex is the right tool and when nested or context-sensitive formats such as HTML require a real parser."
+        },
+        {
+          "id": "prf-7",
+          "name": "Validation pattern design",
+          "aliases": [
+            "input validation tradeoffs"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate validation patterns for false positives and negatives, such as emails and dates, and decide how strict to be."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "prf-2",
+          "prf-5"
+        ],
+        [
+          "cmp-6",
+          "prf-7"
+        ],
+        [
+          "prf-4",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Regex can reliably parse arbitrary nested HTML or balanced brackets.",
+          "concepts": [
+            "prf-6"
+          ]
+        },
+        {
+          "text": "All regex engines run in linear time regardless of pattern.",
+          "concepts": [
+            "prf-1",
+            "prf-2",
+            "prf-5"
+          ]
+        },
+        {
+          "text": "A single regex can fully validate an email address according to the specification.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Automata theory foundations",
+          "aliases": [
+            "regular languages",
+            "NFA and DFA"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate regex features against finite automata, explaining which constructs keep a language regular and which exceed it."
+        },
+        {
+          "id": "exp-2",
+          "name": "Linear-time engine trade-offs",
+          "aliases": [
+            "DFA matching",
+            "RE2 design"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when to choose non-backtracking engines for guaranteed performance and what features such engines give up."
+        },
+        {
+          "id": "exp-3",
+          "name": "ReDoS-resistant pattern design",
+          "aliases": [
+            "safe regex design",
+            "defensive matching"
+          ],
+          "bloom": "C6",
+          "summary": "Design patterns and surrounding controls such as timeouts and input limits that keep untrusted-input matching safe."
+        },
+        {
+          "id": "exp-4",
+          "name": "Regex-based tokenizer design",
+          "aliases": [
+            "lexer construction",
+            "scanner design"
+          ],
+          "bloom": "C6",
+          "summary": "Create a tokenizer from ordered regex rules, handling longest-match and priority conflicts."
+        },
+        {
+          "id": "exp-5",
+          "name": "Maintainable regex architecture",
+          "aliases": [
+            "readable patterns",
+            "verbose mode composition"
+          ],
+          "bloom": "C6",
+          "summary": "Create patterns that are composed, commented, tested and documented so teams can maintain them."
+        },
+        {
+          "id": "exp-6",
+          "name": "Large-scale text transformation strategy",
+          "aliases": [
+            "log processing pipelines",
+            "bulk refactoring"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate approaches to bulk searching and rewriting, weighing regex, structured parsing and tooling for correctness and speed."
+        },
+        {
+          "id": "exp-7",
+          "name": "Regex test strategy",
+          "aliases": [
+            "property-based regex testing",
+            "fuzzing patterns"
+          ],
+          "bloom": "C6",
+          "summary": "Create test suites with adversarial, boundary and fuzzed inputs that expose false matches and performance faults."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "exp-2",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "exp-5",
+          "exp-7"
+        ],
+        [
+          "exp-3",
+          "exp-7"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Modern regex with backreferences and lookarounds still describes only regular languages.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Switching to a linear-time engine lets you keep every feature, including backreferences.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Tests that pass on typical inputs show a pattern is safe.",
+          "concepts": [
+            "exp-7",
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

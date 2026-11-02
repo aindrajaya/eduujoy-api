@@ -1,0 +1,663 @@
+{
+  "version": 1,
+  "topic": "concurrency-parallelism",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals",
+    "operating-systems"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Concurrency versus parallelism",
+          "aliases": [
+            "concurrent vs parallel"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that concurrency is structuring work as overlapping tasks while parallelism is literally executing tasks at the same instant on multiple cores."
+        },
+        {
+          "id": "nov-2",
+          "name": "Threads and processes",
+          "aliases": [
+            "thread vs process"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a process as an isolated program instance with its own memory and a thread as an execution path sharing its process's memory."
+        },
+        {
+          "id": "nov-3",
+          "name": "Shared mutable state",
+          "aliases": [
+            "shared memory"
+          ],
+          "bloom": "C2",
+          "summary": "Recognise that data accessible and modifiable by several threads is the root of most concurrency bugs."
+        },
+        {
+          "id": "nov-4",
+          "name": "Nondeterministic interleaving",
+          "aliases": [
+            "thread scheduling order",
+            "nondeterminism"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that the scheduler may interleave instructions of different threads in varying orders, so results can differ between runs."
+        },
+        {
+          "id": "nov-5",
+          "name": "Race condition",
+          "aliases": [
+            "data race",
+            "race"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a race condition occurs when the outcome depends on the timing of unsynchronised accesses to shared data."
+        },
+        {
+          "id": "nov-6",
+          "name": "Starting and joining threads",
+          "aliases": [
+            "spawn and join",
+            "thread creation"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that threads are started to run a function and joined to wait for their completion."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Concurrent programs always run faster than sequential ones.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "If a program gave the right answer once, it has no race condition.",
+          "concepts": [
+            "nov-4",
+            "nov-5"
+          ]
+        },
+        {
+          "text": "Threads in the same program each have their own separate copy of all variables.",
+          "concepts": [
+            "nov-2",
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Critical sections and mutual exclusion",
+          "aliases": [
+            "critical section",
+            "mutex principle"
+          ],
+          "bloom": "C3",
+          "summary": "Identify code that touches shared data and protect it so only one thread executes it at a time."
+        },
+        {
+          "id": "adb-2",
+          "name": "Locks and mutexes",
+          "aliases": [
+            "mutex",
+            "lock acquire release"
+          ],
+          "bloom": "C3",
+          "summary": "Use a lock to guard shared data, acquiring before access and always releasing afterwards, including on error paths."
+        },
+        {
+          "id": "adb-3",
+          "name": "Atomic operations",
+          "aliases": [
+            "atomics",
+            "atomic increment"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that an atomic operation completes indivisibly and why a plain increment is not atomic."
+        },
+        {
+          "id": "adb-4",
+          "name": "Deadlock",
+          "aliases": [
+            "circular wait"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how threads each holding a lock the other needs wait forever."
+        },
+        {
+          "id": "adb-5",
+          "name": "Thread-safe code",
+          "aliases": [
+            "thread safety"
+          ],
+          "bloom": "C3",
+          "summary": "Judge and make simple functions and data structures safe to call from multiple threads."
+        },
+        {
+          "id": "adb-6",
+          "name": "Thread pools and tasks",
+          "aliases": [
+            "worker pool",
+            "executor"
+          ],
+          "bloom": "C3",
+          "summary": "Submit units of work to a fixed pool of workers instead of creating a thread per task."
+        },
+        {
+          "id": "adb-7",
+          "name": "Producer-consumer queues",
+          "aliases": [
+            "blocking queue",
+            "work queue"
+          ],
+          "bloom": "C3",
+          "summary": "Pass work between threads through a thread-safe queue rather than sharing raw variables."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-4"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-5"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ],
+        [
+          "adb-2",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Locking every method of a class automatically makes any use of it correct.",
+          "concepts": [
+            "adb-2",
+            "adb-5"
+          ]
+        },
+        {
+          "text": "A single statement like counter++ is atomic.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Deadlock only happens when many threads are involved.",
+          "concepts": [
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Coffman deadlock conditions",
+          "aliases": [
+            "deadlock necessary conditions"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse a deadlock by identifying mutual exclusion, hold and wait, no preemption and circular wait."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Lock ordering and avoidance",
+          "aliases": [
+            "lock hierarchy",
+            "try-lock timeouts"
+          ],
+          "bloom": "C3",
+          "summary": "Prevent deadlocks by imposing a global lock order, shrinking lock scope or using try-lock with timeouts."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Condition variables and signalling",
+          "aliases": [
+            "wait notify",
+            "monitors"
+          ],
+          "bloom": "C3",
+          "summary": "Coordinate threads waiting for a state change using condition variables, rechecking predicates in a loop."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Semaphores and barriers",
+          "aliases": [
+            "counting semaphore",
+            "synchronisation primitives"
+          ],
+          "bloom": "C3",
+          "summary": "Choose semaphores, latches or barriers to limit access or synchronise phases of work."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Memory visibility and ordering",
+          "aliases": [
+            "memory model",
+            "happens-before"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why one thread may not see another's writes without synchronisation and how happens-before guarantees fix this."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Starvation and livelock",
+          "aliases": [
+            "liveness failures"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish deadlock from starvation and livelock and diagnose each from symptoms."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Immutability and confinement",
+          "aliases": [
+            "thread confinement",
+            "immutable data"
+          ],
+          "bloom": "C3",
+          "summary": "Avoid locking by sharing only immutable data or keeping mutable data owned by one thread."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Futures and async results",
+          "aliases": [
+            "promises",
+            "futures"
+          ],
+          "bloom": "C3",
+          "summary": "Represent a pending result with a future and compose or await it without blocking unnecessarily."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-3",
+          "cmp-5"
+        ],
+        [
+          "cmp-2",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-7"
+        ],
+        [
+          "adb-6",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A condition variable wait can use an if check because wakeups always mean the condition holds.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Without a lock, a write by one thread becomes visible to others immediately.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Using volatile or similar flags makes compound operations thread-safe.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-2",
+          "name": "Actor and message-passing models",
+          "aliases": [
+            "actors",
+            "CSP channels"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate message passing with actors or channels against shared-memory locking for a given problem."
+        },
+        {
+          "id": "prf-3",
+          "name": "Lock-free and wait-free techniques",
+          "aliases": [
+            "compare-and-swap",
+            "CAS"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse compare-and-swap based structures, including the ABA problem and the trade-offs against locks."
+        },
+        {
+          "id": "prf-4",
+          "name": "Lock contention and granularity",
+          "aliases": [
+            "coarse vs fine locking",
+            "read-write locks"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate coarse, fine-grained and read-write locking choices by their contention and complexity costs."
+        },
+        {
+          "id": "prf-5",
+          "name": "Scalability limits",
+          "aliases": [
+            "Amdahl's law",
+            "speedup"
+          ],
+          "bloom": "C5",
+          "summary": "Use Amdahl's law and overhead analysis to judge how much parallelism will actually speed a workload."
+        },
+        {
+          "id": "prf-7",
+          "name": "CPU-bound versus I/O-bound workloads",
+          "aliases": [
+            "workload classification"
+          ],
+          "bloom": "C4",
+          "summary": "Classify workloads and match them to threads, processes or async I/O accordingly."
+        },
+        {
+          "id": "prf-1",
+          "name": "Event loops and async/await",
+          "aliases": [
+            "cooperative concurrency",
+            "single-threaded async"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how an event loop interleaves non-blocking tasks on one thread and where blocking calls stall it."
+        },
+        {
+          "id": "prf-6",
+          "name": "Backpressure and cancellation",
+          "aliases": [
+            "flow control",
+            "structured concurrency"
+          ],
+          "bloom": "C5",
+          "summary": "Design pipelines that bound queues, propagate cancellation and clean up resources when tasks fail."
+        },
+        {
+          "id": "prf-8",
+          "name": "Cache effects and false sharing",
+          "aliases": [
+            "cache coherence",
+            "false sharing"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how cache-line sharing between cores degrades parallel performance."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-8",
+          "prf-1"
+        ],
+        [
+          "cmp-7",
+          "prf-2"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "cmp-2",
+          "prf-4"
+        ],
+        [
+          "prf-7",
+          "prf-1"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "prf-1",
+          "prf-6"
+        ],
+        [
+          "cmp-5",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Async/await code runs in parallel on multiple cores by default.",
+          "concepts": [
+            "prf-1",
+            "prf-7"
+          ]
+        },
+        {
+          "text": "Lock-free algorithms are always faster than lock-based ones.",
+          "concepts": [
+            "prf-3",
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Adding more threads always improves throughput until cores run out.",
+          "concepts": [
+            "prf-5",
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Formal concurrency correctness",
+          "aliases": [
+            "linearizability",
+            "safety and liveness"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate designs against safety and liveness properties and linearizability using invariants and formal reasoning."
+        },
+        {
+          "id": "exp-2",
+          "name": "Hardware memory models",
+          "aliases": [
+            "relaxed memory ordering",
+            "memory barriers"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when acquire-release or relaxed atomics are valid given language and hardware reordering rules."
+        },
+        {
+          "id": "exp-3",
+          "name": "Concurrent data structure design",
+          "aliases": [
+            "lock-free queue design",
+            "concurrent collections"
+          ],
+          "bloom": "C6",
+          "summary": "Create concurrent data structures balancing correctness, progress guarantees and scalability, including safe memory reclamation."
+        },
+        {
+          "id": "exp-4",
+          "name": "Systematic concurrency testing",
+          "aliases": [
+            "race detectors",
+            "model checking"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and apply race detectors, stress tests, deterministic schedulers and model checking to find rare interleavings."
+        },
+        {
+          "id": "exp-5",
+          "name": "Concurrency architecture selection",
+          "aliases": [
+            "model selection",
+            "concurrency design trade-offs"
+          ],
+          "bloom": "C6",
+          "summary": "Design a system-level concurrency architecture combining threads, async, actors and processes to meet latency and throughput goals."
+        },
+        {
+          "id": "exp-6",
+          "name": "Distributed concurrency hazards",
+          "aliases": [
+            "distributed coordination",
+            "consensus basics"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how partial failure, unreliable clocks and message reordering change local concurrency assumptions across machines."
+        },
+        {
+          "id": "exp-7",
+          "name": "Production concurrency diagnosis",
+          "aliases": [
+            "debugging hangs",
+            "contention profiling"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose live hangs, tail latency and contention using thread dumps, profilers and tracing, and judge the fix."
+        }
+      ],
+      "prerequisites": [
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "exp-1",
+          "exp-4"
+        ],
+        [
+          "prf-2",
+          "exp-5"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "exp-5",
+          "exp-6"
+        ],
+        [
+          "exp-4",
+          "exp-7"
+        ],
+        [
+          "prf-8",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Passing a large number of stress-test runs proves a concurrent program is correct.",
+          "concepts": [
+            "exp-4",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "On modern hardware, sequential consistency can be assumed for ordinary memory accesses.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Distributed locks behave like local mutexes and give the same guarantees.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

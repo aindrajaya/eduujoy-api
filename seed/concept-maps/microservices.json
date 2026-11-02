@@ -1,0 +1,715 @@
+{
+  "version": 1,
+  "topic": "microservices",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "system-design",
+    "rest-api-design",
+    "docker"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Monolith versus microservices",
+          "aliases": [
+            "monolithic vs service-based architecture"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a single deployable application differs from a set of small services that are deployed and scaled independently."
+        },
+        {
+          "id": "nov-2",
+          "name": "Independent deployability",
+          "aliases": [
+            "separate release cycles"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that each service can be built, released and scaled without redeploying the others."
+        },
+        {
+          "id": "nov-4",
+          "name": "Service responsibility and size",
+          "aliases": [
+            "single business capability",
+            "service granularity"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a service as focused on one business capability rather than a technical layer or arbitrary line count."
+        },
+        {
+          "id": "nov-3",
+          "name": "Database per service",
+          "aliases": [
+            "service-owned data",
+            "decentralised data management"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that each service owns its data and other services access it only through the service's API."
+        },
+        {
+          "id": "nov-5",
+          "name": "Synchronous service calls",
+          "aliases": [
+            "request-response between services",
+            "HTTP calls between services"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that services can call each other over the network with request-response protocols such as REST."
+        },
+        {
+          "id": "nov-6",
+          "name": "Benefits and costs trade-off",
+          "aliases": [
+            "microservices pros and cons"
+          ],
+          "bloom": "C2",
+          "summary": "Explain the main benefits (independent scaling, team autonomy, fault isolation) and costs (network latency, operational complexity, distributed failures)."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Microservices are always better than a monolith.",
+          "concepts": [
+            "nov-1",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "A service is a microservice simply because it is small in lines of code.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Several services can safely share one database as long as each uses its own tables.",
+          "concepts": [
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Bounded context decomposition",
+          "aliases": [
+            "domain-driven service boundaries",
+            "splitting by business domain"
+          ],
+          "bloom": "C3",
+          "summary": "Apply domain-driven design to draw service boundaries around bounded contexts in a simple business domain."
+        },
+        {
+          "id": "adb-2",
+          "name": "API gateway routing",
+          "aliases": [
+            "edge service",
+            "single entry point"
+          ],
+          "bloom": "C3",
+          "summary": "Configure a gateway to route client requests to services and handle cross-cutting concerns such as authentication and rate limiting."
+        },
+        {
+          "id": "adb-4",
+          "name": "Asynchronous messaging basics",
+          "aliases": [
+            "message queue communication",
+            "publish-subscribe"
+          ],
+          "bloom": "C3",
+          "summary": "Use a message broker with queues or topics so that services communicate without waiting for each other."
+        },
+        {
+          "id": "adb-5",
+          "name": "Contract-based service APIs",
+          "aliases": [
+            "API contracts",
+            "versioned service interfaces"
+          ],
+          "bloom": "C3",
+          "summary": "Define and version service interfaces so that changes do not break consumers."
+        },
+        {
+          "id": "adb-6",
+          "name": "Containerised service deployment",
+          "aliases": [
+            "one container per service",
+            "service packaging"
+          ],
+          "bloom": "C3",
+          "summary": "Package and run each service as its own container with its own configuration and dependencies."
+        },
+        {
+          "id": "adb-3",
+          "name": "Service discovery",
+          "aliases": [
+            "service registry",
+            "dynamic service lookup"
+          ],
+          "bloom": "C3",
+          "summary": "Use a registry or platform DNS so that services find each other when instances change address."
+        },
+        {
+          "id": "adb-7",
+          "name": "Distributed logging and tracing",
+          "aliases": [
+            "correlation IDs",
+            "centralised logs"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how correlation IDs and centralised logs let you follow a request across services."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-3"
+        ],
+        [
+          "nov-5",
+          "adb-4"
+        ],
+        [
+          "nov-2",
+          "adb-5"
+        ],
+        [
+          "nov-2",
+          "adb-6"
+        ],
+        [
+          "adb-6",
+          "adb-3"
+        ],
+        [
+          "nov-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Services should be split by technical layer, such as one for the UI, one for business logic and one for data.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "The API gateway is the place to put all business logic shared between services.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Asynchronous messaging is just a faster version of synchronous calls.",
+          "concepts": [
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Context mapping and ownership",
+          "aliases": [
+            "context map",
+            "team-aligned boundaries"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse relationships between contexts and teams, including upstream/downstream dependencies and anti-corruption layers, to refine boundaries."
+        },
+        {
+          "id": "cmp-2",
+          "name": "REST versus gRPC trade-offs",
+          "aliases": [
+            "protocol selection",
+            "RPC versus HTTP APIs"
+          ],
+          "bloom": "C4",
+          "summary": "Compare REST, gRPC and messaging for a given interaction in terms of coupling, performance, typing and client needs."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Eventual consistency handling",
+          "aliases": [
+            "BASE consistency",
+            "consistency without distributed transactions"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse where data across services may be temporarily stale and design workflows and user experience to tolerate it."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Circuit breaker and timeouts",
+          "aliases": [
+            "fault tolerance patterns",
+            "retry and bulkhead"
+          ],
+          "bloom": "C3",
+          "summary": "Apply timeouts, retries with backoff and circuit breakers to stop failures from cascading between services."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Idempotent message handling",
+          "aliases": [
+            "at-least-once delivery handling",
+            "deduplication"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse delivery guarantees and make consumers idempotent so that duplicates and redelivery do not corrupt state."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Saga pattern",
+          "aliases": [
+            "distributed transaction coordination",
+            "compensating transactions"
+          ],
+          "bloom": "C3",
+          "summary": "Implement multi-service business transactions as a sequence of local transactions with compensating actions, using choreography or orchestration."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Event-driven data propagation",
+          "aliases": [
+            "domain events",
+            "data replication via events"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how services publish domain events and maintain local read copies of data owned by others."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "nov-3",
+          "cmp-3"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-6",
+          "cmp-4"
+        ],
+        [
+          "adb-4",
+          "cmp-6"
+        ],
+        [
+          "nov-5",
+          "cmp-5"
+        ],
+        [
+          "adb-4",
+          "cmp-7"
+        ],
+        [
+          "cmp-3",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Retrying failed calls always improves reliability.",
+          "concepts": [
+            "cmp-5",
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "A saga gives the same isolation and atomicity guarantees as a database transaction.",
+          "concepts": [
+            "cmp-4",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "A message broker guarantees each message is delivered exactly once, so consumers need no duplicate handling.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Strangler fig migration",
+          "aliases": [
+            "incremental monolith decomposition",
+            "step-by-step migration"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and sequence the incremental extraction of capabilities from a monolith behind a routing facade, deciding what to extract first."
+        },
+        {
+          "id": "prf-2",
+          "name": "Data separation during migration",
+          "aliases": [
+            "splitting a shared database",
+            "database decomposition"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse approaches such as shared-schema stages, synchronisation and change data capture for pulling data out of a monolith database."
+        },
+        {
+          "id": "prf-3",
+          "name": "Transactional outbox pattern",
+          "aliases": [
+            "outbox and relay",
+            "reliable event publishing"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how writing events to an outbox in the same local transaction avoids losing or inventing events when updating state and publishing."
+        },
+        {
+          "id": "prf-4",
+          "name": "CQRS and read models",
+          "aliases": [
+            "command query responsibility segregation",
+            "query composition"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when separate read models or API composition are justified for queries spanning multiple services."
+        },
+        {
+          "id": "prf-5",
+          "name": "Observability and SLO design",
+          "aliases": [
+            "distributed tracing",
+            "service level objectives"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse metrics, traces and logs to find bottlenecks and failure sources, and set service-level objectives."
+        },
+        {
+          "id": "prf-6",
+          "name": "Consumer-driven contract testing",
+          "aliases": [
+            "contract tests",
+            "test strategy for services"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate a testing strategy that balances unit, contract, integration and end-to-end tests across services."
+        },
+        {
+          "id": "prf-7",
+          "name": "Service-to-service security",
+          "aliases": [
+            "zero-trust service security",
+            "mutual TLS and tokens"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how authentication, authorisation and token propagation work between services behind a gateway."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "cmp-6",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "adb-7",
+          "prf-5"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "adb-5",
+          "prf-6"
+        ],
+        [
+          "adb-2",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Migrating to microservices should start with a full rewrite of the monolith.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Publishing an event right after committing to the database is reliable enough without an outbox.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "End-to-end tests alone are sufficient to verify that services work together.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Architecture fitness evaluation",
+          "aliases": [
+            "microservices suitability assessment",
+            "monolith versus services decision"
+          ],
+          "bloom": "C5",
+          "summary": "Judge whether microservices, a modular monolith or a hybrid best fits an organisation's scale, team structure and domain volatility."
+        },
+        {
+          "id": "exp-2",
+          "name": "Boundary evolution and refactoring",
+          "aliases": [
+            "merging and splitting services",
+            "fixing distributed monoliths"
+          ],
+          "bloom": "C5",
+          "summary": "Critique existing boundaries and decide when to merge, split or re-draw services to remove coupling and chatty communication."
+        },
+        {
+          "id": "exp-3",
+          "name": "Resilience and chaos strategy",
+          "aliases": [
+            "failure injection",
+            "capacity and degradation design"
+          ],
+          "bloom": "C6",
+          "summary": "Design a resilience programme with graceful degradation, load shedding and failure-injection experiments across a service landscape."
+        },
+        {
+          "id": "exp-4",
+          "name": "Consistency model design",
+          "aliases": [
+            "cross-service invariants",
+            "consistency trade-off design"
+          ],
+          "bloom": "C6",
+          "summary": "Design how business invariants are enforced across services, choosing between sagas, reservation patterns, and relaxed or redefined rules."
+        },
+        {
+          "id": "exp-5",
+          "name": "Platform and governance design",
+          "aliases": [
+            "internal developer platform",
+            "paved road"
+          ],
+          "bloom": "C6",
+          "summary": "Create shared platform capabilities and governance, such as templates, standards and deployment pipelines, that keep many teams autonomous yet consistent."
+        },
+        {
+          "id": "exp-6",
+          "name": "Event schema evolution strategy",
+          "aliases": [
+            "schema compatibility",
+            "event versioning"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate compatibility rules, schema registries and versioning approaches so that producers and consumers evolve independently."
+        },
+        {
+          "id": "exp-7",
+          "name": "Cost and organisational impact",
+          "aliases": [
+            "Conway's law alignment",
+            "total cost of ownership"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the operational cost and team-topology effects of a service architecture, including Conway's law and cognitive load."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-1"
+        ],
+        [
+          "cmp-1",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "cmp-5",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-3"
+        ],
+        [
+          "cmp-4",
+          "exp-4"
+        ],
+        [
+          "prf-3",
+          "exp-4"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "prf-6",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "cmp-7",
+          "exp-6"
+        ],
+        [
+          "prf-3",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "If services are deployed separately, the architecture is automatically loosely coupled.",
+          "concepts": [
+            "exp-2",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Every cross-service business rule must be enforced with strong consistency to be correct.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Team structure has little effect on service architecture, which is purely a technical choice.",
+          "concepts": [
+            "exp-7",
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

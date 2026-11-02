@@ -1,0 +1,743 @@
+{
+  "version": 1,
+  "topic": "graphql",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "http",
+    "javascript"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Client-specified data selection",
+          "aliases": [
+            "asking for exactly what you need"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a GraphQL client lists the fields it wants and the response mirrors that shape, avoiding fixed server-defined payloads."
+        },
+        {
+          "id": "nov-2",
+          "name": "Single endpoint model",
+          "aliases": [
+            "one /graphql endpoint"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how all operations go to one endpoint, with the operation in the request body rather than in the URL path and HTTP method."
+        },
+        {
+          "id": "nov-3",
+          "name": "Schema as contract",
+          "aliases": [
+            "GraphQL schema"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that the schema defines the types and operations available and acts as the contract between client and server."
+        },
+        {
+          "id": "nov-4",
+          "name": "Scalar and object types",
+          "aliases": [
+            "built-in scalars",
+            "object types"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the built-in scalars (Int, Float, String, Boolean, ID) and that object types group named fields."
+        },
+        {
+          "id": "nov-5",
+          "name": "Query field selection",
+          "aliases": [
+            "basic query syntax",
+            "selection set"
+          ],
+          "bloom": "C2",
+          "summary": "Read and write a simple query with nested selection sets and understand the JSON response it returns."
+        },
+        {
+          "id": "nov-6",
+          "name": "Three operation types",
+          "aliases": [
+            "query mutation subscription"
+          ],
+          "bloom": "C1",
+          "summary": "Name query, mutation and subscription and state what each is for: reading, writing and receiving live updates."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "GraphQL is a database or storage technology.",
+          "concepts": [
+            "nov-3",
+            "nov-1"
+          ]
+        },
+        {
+          "text": "GraphQL needs a separate URL for each resource like REST.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "A GraphQL query returns all fields of an object automatically.",
+          "concepts": [
+            "nov-1",
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Arguments and variables",
+          "aliases": [
+            "query variables",
+            "field arguments"
+          ],
+          "bloom": "C3",
+          "summary": "Pass arguments to fields and use typed variables with a separate variables payload instead of string-building queries."
+        },
+        {
+          "id": "adb-2",
+          "name": "Non-null and list modifiers",
+          "aliases": [
+            "nullability",
+            "! and []"
+          ],
+          "bloom": "C2",
+          "summary": "Read type notation such as [String!]! and predict what nullability means for a response."
+        },
+        {
+          "id": "adb-4",
+          "name": "Aliases and fragments",
+          "aliases": [
+            "named fragments",
+            "field aliases"
+          ],
+          "bloom": "C3",
+          "summary": "Use aliases to rename or repeat fields and fragments to reuse selection sets."
+        },
+        {
+          "id": "adb-5",
+          "name": "Schema definition language",
+          "aliases": [
+            "SDL",
+            "type definitions"
+          ],
+          "bloom": "C3",
+          "summary": "Write a small schema in SDL defining object types, Query and Mutation root types, enums and relationships."
+        },
+        {
+          "id": "adb-3",
+          "name": "Mutations with input types",
+          "aliases": [
+            "input objects",
+            "writing data"
+          ],
+          "bloom": "C3",
+          "summary": "Write mutations that take input object types and select the fields of the changed data in the response."
+        },
+        {
+          "id": "adb-6",
+          "name": "Resolver basics",
+          "aliases": [
+            "field resolvers",
+            "resolver functions"
+          ],
+          "bloom": "C3",
+          "summary": "Implement a resolver function per field that receives parent, arguments and context and returns data."
+        },
+        {
+          "id": "adb-7",
+          "name": "GraphQL error responses",
+          "aliases": [
+            "errors array",
+            "partial data"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret the response's data and errors keys, including that HTTP 200 can still carry errors."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-5",
+          "adb-3"
+        ],
+        [
+          "nov-5",
+          "adb-4"
+        ],
+        [
+          "nov-3",
+          "adb-5"
+        ],
+        [
+          "adb-2",
+          "adb-5"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "nov-6",
+          "adb-3"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Fields in a schema are nullable only if marked with an exclamation mark.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Any failed GraphQL operation returns a 4xx or 5xx HTTP status.",
+          "concepts": [
+            "adb-7"
+          ]
+        },
+        {
+          "text": "Variables are just string interpolation done by the client library.",
+          "concepts": [
+            "adb-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Resolver chain execution",
+          "aliases": [
+            "execution model",
+            "parent-child resolution"
+          ],
+          "bloom": "C4",
+          "summary": "Trace how the executor resolves fields level by level, passing each parent result to child resolvers, and analyse the cost."
+        },
+        {
+          "id": "cmp-2",
+          "name": "N+1 problem and batching",
+          "aliases": [
+            "DataLoader",
+            "batch loading"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose N+1 queries caused by per-item resolvers and fix them with request-scoped batching and caching."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Interfaces and unions",
+          "aliases": [
+            "abstract types",
+            "polymorphic types"
+          ],
+          "bloom": "C3",
+          "summary": "Model polymorphic data with interfaces and unions and query them using inline fragments and __typename."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Context and authorization",
+          "aliases": [
+            "auth in resolvers",
+            "context object"
+          ],
+          "bloom": "C3",
+          "summary": "Place authentication data in context and enforce authorization in resolvers or business logic layer rather than only at the edge."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Pagination patterns",
+          "aliases": [
+            "cursor pagination",
+            "connections"
+          ],
+          "bloom": "C4",
+          "summary": "Compare offset and cursor-based pagination and design list fields using the connection pattern with edges and pageInfo."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Subscriptions over persistent connections",
+          "aliases": [
+            "real-time updates",
+            "pub/sub"
+          ],
+          "bloom": "C3",
+          "summary": "Implement a subscription that streams events from a pub/sub source over a persistent transport such as WebSocket."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Client-side caching",
+          "aliases": [
+            "normalized cache",
+            "cache by id"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how clients normalise results by type and id and how this affects cache updates after mutations."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Error and null propagation",
+          "aliases": [
+            "null bubbling",
+            "partial failures"
+          ],
+          "bloom": "C4",
+          "summary": "Predict how an error in a non-null field bubbles up to the nearest nullable parent and design schemas accordingly."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-3"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "adb-6",
+          "cmp-4"
+        ],
+        [
+          "adb-2",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-5"
+        ],
+        [
+          "adb-3",
+          "cmp-6"
+        ],
+        [
+          "adb-6",
+          "cmp-6"
+        ],
+        [
+          "adb-7",
+          "cmp-8"
+        ],
+        [
+          "adb-2",
+          "cmp-8"
+        ],
+        [
+          "cmp-3",
+          "cmp-7"
+        ],
+        [
+          "adb-7",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "GraphQL automatically prevents N+1 database queries.",
+          "concepts": [
+            "cmp-1",
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "Hiding a field from the UI is sufficient authorization.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Offset pagination is always fine for large, changing lists.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Schema design principles",
+          "aliases": [
+            "demand-driven schema",
+            "domain modelling"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate schema designs against client needs, naming consistency and domain language rather than mirroring database tables."
+        },
+        {
+          "id": "prf-2",
+          "name": "Mutation payload design",
+          "aliases": [
+            "payload types",
+            "typed errors"
+          ],
+          "bloom": "C5",
+          "summary": "Judge designs for mutation inputs and payloads, including returning typed domain errors versus top-level errors."
+        },
+        {
+          "id": "prf-3",
+          "name": "Query cost and depth limiting",
+          "aliases": [
+            "complexity analysis",
+            "query depth limit"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse abuse risks from deeply nested or expensive queries and apply depth, complexity and timeout limits."
+        },
+        {
+          "id": "prf-4",
+          "name": "Persisted queries and caching",
+          "aliases": [
+            "APQ",
+            "HTTP caching of queries"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how persisted queries and CDN or response caching work given POST-based operations and personalised data."
+        },
+        {
+          "id": "prf-5",
+          "name": "Schema evolution and deprecation",
+          "aliases": [
+            "versionless API",
+            "@deprecated"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate changes as breaking or non-breaking and manage them with additive change and deprecation instead of versions."
+        },
+        {
+          "id": "prf-6",
+          "name": "Federation and schema composition",
+          "aliases": [
+            "schema stitching",
+            "federated graph"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how multiple services contribute to one graph through stitching or federation and the tradeoffs in ownership."
+        },
+        {
+          "id": "prf-7",
+          "name": "Observability and performance tracing",
+          "aliases": [
+            "resolver tracing",
+            "field-level metrics"
+          ],
+          "bloom": "C4",
+          "summary": "Use per-field tracing and operation-level metrics to locate slow resolvers and track client usage."
+        },
+        {
+          "id": "prf-8",
+          "name": "Introspection and security hardening",
+          "aliases": [
+            "disabling introspection",
+            "input validation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate exposure from introspection, batching and verbose errors and choose appropriate hardening for each environment."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-8",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "prf-1",
+          "prf-5"
+        ],
+        [
+          "prf-5",
+          "prf-6"
+        ],
+        [
+          "cmp-2",
+          "prf-7"
+        ],
+        [
+          "prf-3",
+          "prf-8"
+        ],
+        [
+          "cmp-4",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A GraphQL schema should map one-to-one to database tables.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "GraphQL needs API versions like v1 and v2 for any change.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Disabling introspection is enough to secure a GraphQL API.",
+          "concepts": [
+            "prf-8"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Graph architecture governance",
+          "aliases": [
+            "schema governance",
+            "API review process"
+          ],
+          "bloom": "C6",
+          "summary": "Design an organisation-wide process for schema ownership, review, linting and change validation against real client traffic."
+        },
+        {
+          "id": "exp-2",
+          "name": "Federation architecture tradeoffs",
+          "aliases": [
+            "gateway vs monolith",
+            "supergraph design"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when a federated gateway, a single server or a backend-for-frontend fits, weighing latency, ownership and failure modes."
+        },
+        {
+          "id": "exp-3",
+          "name": "Incremental delivery with defer and stream",
+          "aliases": [
+            "@defer",
+            "@stream"
+          ],
+          "bloom": "C5",
+          "summary": "Assess incremental delivery of response parts and its effects on client rendering, caching and transport."
+        },
+        {
+          "id": "exp-4",
+          "name": "Custom directives and schema tooling",
+          "aliases": [
+            "schema transforms",
+            "code generation"
+          ],
+          "bloom": "C6",
+          "summary": "Create directives, schema transforms and code generation pipelines that enforce conventions and type safety end to end."
+        },
+        {
+          "id": "exp-5",
+          "name": "Query planning and execution optimisation",
+          "aliases": [
+            "lookahead",
+            "query planner"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate strategies such as field lookahead, join pushdown and parallel fetching to cut backend load and latency."
+        },
+        {
+          "id": "exp-6",
+          "name": "Resilience and rate limiting design",
+          "aliases": [
+            "cost-based rate limiting",
+            "partial failure strategy"
+          ],
+          "bloom": "C6",
+          "summary": "Design cost-based rate limiting, timeouts and fallbacks that degrade gracefully when downstream services fail."
+        },
+        {
+          "id": "exp-7",
+          "name": "Choosing GraphQL versus alternatives",
+          "aliases": [
+            "GraphQL vs REST vs gRPC"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when GraphQL, REST or RPC best suits a product given caching, tooling, team structure and client diversity."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-5",
+          "exp-1"
+        ],
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "prf-7",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-3"
+        ],
+        [
+          "cmp-7",
+          "exp-3"
+        ],
+        [
+          "prf-1",
+          "exp-4"
+        ],
+        [
+          "exp-1",
+          "exp-4"
+        ],
+        [
+          "cmp-2",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "prf-3",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "prf-4",
+          "exp-7"
+        ],
+        [
+          "exp-2",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Federation is always better than a single GraphQL server.",
+          "concepts": [
+            "exp-2",
+            "exp-7"
+          ]
+        },
+        {
+          "text": "GraphQL is a replacement that makes REST obsolete in every case.",
+          "concepts": [
+            "exp-7"
+          ]
+        },
+        {
+          "text": "Request-count-based rate limiting is adequate for GraphQL.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

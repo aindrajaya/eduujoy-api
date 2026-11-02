@@ -1,0 +1,642 @@
+{
+  "version": 1,
+  "topic": "functional-programming",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": true,
+  "dependsOnTopics": [
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-2",
+          "name": "Side effects",
+          "aliases": [
+            "external state changes"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise actions such as mutating variables, printing, or writing files as side effects that make code less predictable."
+        },
+        {
+          "id": "nov-1",
+          "name": "Pure functions",
+          "aliases": [
+            "side-effect-free functions"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a pure function always returns the same output for the same input and changes nothing outside itself."
+        },
+        {
+          "id": "nov-3",
+          "name": "Immutable data",
+          "aliases": [
+            "immutability",
+            "unchangeable values"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that values are not modified in place and that updates produce new values instead."
+        },
+        {
+          "id": "nov-4",
+          "name": "Functions as values",
+          "aliases": [
+            "first-class functions"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that functions can be stored in variables, passed as arguments, and returned like any other value."
+        },
+        {
+          "id": "nov-5",
+          "name": "Expressions versus statements",
+          "aliases": [
+            "expression-oriented code"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish expressions that produce values from statements that perform actions, and see why functional style favours expressions."
+        },
+        {
+          "id": "nov-6",
+          "name": "Anonymous functions",
+          "aliases": [
+            "lambdas",
+            "function literals"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise the syntax of an unnamed function written inline and know when it is used."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "nov-1"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A function that prints output is still pure as long as it returns the right value.",
+          "concepts": [
+            "nov-1",
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Immutable data means a variable name can never be used again.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Functional programming simply means using functions, which every language already does.",
+          "concepts": [
+            "nov-1",
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-2",
+          "name": "Higher-order functions",
+          "aliases": [
+            "functions taking functions"
+          ],
+          "bloom": "C3",
+          "summary": "Write and use functions that accept or return other functions to parameterise behaviour."
+        },
+        {
+          "id": "adb-1",
+          "name": "Map, filter and reduce",
+          "aliases": [
+            "map/filter/fold",
+            "collection transformations"
+          ],
+          "bloom": "C3",
+          "summary": "Apply map, filter and reduce to transform, select and aggregate collections without explicit loops."
+        },
+        {
+          "id": "adb-3",
+          "name": "Closures",
+          "aliases": [
+            "lexical closures",
+            "captured variables"
+          ],
+          "bloom": "C3",
+          "summary": "Use a function that remembers variables from the scope where it was defined, for example to build configurable functions."
+        },
+        {
+          "id": "adb-4",
+          "name": "Function composition",
+          "aliases": [
+            "composing functions"
+          ],
+          "bloom": "C3",
+          "summary": "Combine small functions so the output of one feeds the input of the next to build larger behaviour."
+        },
+        {
+          "id": "adb-5",
+          "name": "Recursion over data",
+          "aliases": [
+            "recursive iteration"
+          ],
+          "bloom": "C3",
+          "summary": "Replace loops with recursive functions that have a base case and a recursive case on lists or trees."
+        },
+        {
+          "id": "adb-6",
+          "name": "Copy-on-update techniques",
+          "aliases": [
+            "non-destructive updates"
+          ],
+          "bloom": "C3",
+          "summary": "Update lists, maps and records by creating modified copies using spread, concat or similar operations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "adb-2",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-6"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-4"
+        ],
+        [
+          "nov-1",
+          "adb-4"
+        ],
+        [
+          "nov-5",
+          "adb-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Map and filter modify the original collection in place.",
+          "concepts": [
+            "adb-1",
+            "adb-6"
+          ]
+        },
+        {
+          "text": "Reduce is only for summing numbers.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "A closure copies the values of the captured variables at creation time.",
+          "concepts": [
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Currying and partial application",
+          "aliases": [
+            "currying",
+            "partial functions"
+          ],
+          "bloom": "C3",
+          "summary": "Transform multi-argument functions into chains of single-argument functions and fix some arguments to derive specialised functions."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Point-free pipelines",
+          "aliases": [
+            "tacit style",
+            "pipe and compose"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse and build data-transformation pipelines, judging when omitting explicit arguments helps or hurts readability."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Tail recursion and stack use",
+          "aliases": [
+            "tail-call optimisation",
+            "stack depth"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when recursion grows the call stack and rewrite it with an accumulator in tail position."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Persistent data structures",
+          "aliases": [
+            "structural sharing"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how immutable collections share structure between versions to make updates efficient."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Explicit error handling types",
+          "aliases": [
+            "Option and Result",
+            "Maybe and Either"
+          ],
+          "bloom": "C3",
+          "summary": "Represent absence and failure as values such as Option or Result rather than exceptions or nulls."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Functional core, imperative shell",
+          "aliases": [
+            "separating pure logic from I/O"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse a program and restructure it so pure decision logic sits in a core and I/O sits in a thin outer layer, improving testability."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Lazy evaluation and iterators",
+          "aliases": [
+            "laziness",
+            "generators"
+          ],
+          "bloom": "C3",
+          "summary": "Use deferred computation to process large or infinite sequences and know when evaluation actually occurs."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-3"
+        ],
+        [
+          "adb-6",
+          "cmp-4"
+        ],
+        [
+          "nov-2",
+          "cmp-6"
+        ],
+        [
+          "adb-4",
+          "cmp-6"
+        ],
+        [
+          "adb-1",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Currying and partial application are the same thing.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Immutable collections must be fully copied on every update, so they are always slow.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Point-free style is always more readable than naming arguments.",
+          "concepts": [
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Functors and mappable containers",
+          "aliases": [
+            "functor",
+            "fmap"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse types that support mapping a function over their contents while preserving structure, and check the functor laws."
+        },
+        {
+          "id": "prf-2",
+          "name": "Monads for sequencing",
+          "aliases": [
+            "monad",
+            "flatMap",
+            "bind"
+          ],
+          "bloom": "C4",
+          "summary": "Use flatMap or bind to chain computations that may fail or carry context, and explain how they flatten nested containers."
+        },
+        {
+          "id": "prf-3",
+          "name": "Applicative validation",
+          "aliases": [
+            "applicative functors"
+          ],
+          "bloom": "C4",
+          "summary": "Combine independent effectful values, for example accumulating all validation errors rather than stopping at the first."
+        },
+        {
+          "id": "prf-4",
+          "name": "Referential transparency and equational reasoning",
+          "aliases": [
+            "substitution model"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate whether an expression can be replaced by its value and use this to justify refactors and optimisations."
+        },
+        {
+          "id": "prf-5",
+          "name": "Algebraic data types",
+          "aliases": [
+            "sum and product types",
+            "ADTs"
+          ],
+          "bloom": "C4",
+          "summary": "Model domains with sum and product types so illegal states are unrepresentable, and consume them with pattern matching."
+        },
+        {
+          "id": "prf-6",
+          "name": "Effect modelling with IO",
+          "aliases": [
+            "IO type",
+            "effect systems"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate approaches that represent side effects as values that are described first and run at the program boundary."
+        },
+        {
+          "id": "prf-7",
+          "name": "Property-based testing",
+          "aliases": [
+            "generative testing"
+          ],
+          "bloom": "C5",
+          "summary": "Judge and write properties that should hold for all inputs, using generated data to test pure functions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "nov-1",
+          "prf-4"
+        ],
+        [
+          "cmp-6",
+          "prf-6"
+        ],
+        [
+          "prf-2",
+          "prf-6"
+        ],
+        [
+          "cmp-6",
+          "prf-7"
+        ],
+        [
+          "prf-4",
+          "prf-7"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A monad is just a container or a way to perform side effects.",
+          "concepts": [
+            "prf-2",
+            "prf-6"
+          ]
+        },
+        {
+          "text": "Property-based tests replace all example-based tests.",
+          "concepts": [
+            "prf-7"
+          ]
+        },
+        {
+          "text": "Pure functional code cannot perform I/O at all.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Paradigm trade-off evaluation",
+          "aliases": [
+            "functional versus imperative judgement"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate where functional techniques help or hurt in a given system considering performance, team skill, and domain."
+        },
+        {
+          "id": "exp-2",
+          "name": "Free monads and interpreters",
+          "aliases": [
+            "free structures",
+            "program as data"
+          ],
+          "bloom": "C6",
+          "summary": "Design programs as data or abstract algebras that separate description from multiple interpreters."
+        },
+        {
+          "id": "exp-3",
+          "name": "Monad transformers and effect stacks",
+          "aliases": [
+            "transformers",
+            "effect composition"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate ways of combining several effects, such as state, errors and reader, against alternatives like effect handlers."
+        },
+        {
+          "id": "exp-4",
+          "name": "Optics for immutable updates",
+          "aliases": [
+            "lenses",
+            "prisms",
+            "traversals"
+          ],
+          "bloom": "C6",
+          "summary": "Design composable accessors that read and update deeply nested immutable structures."
+        },
+        {
+          "id": "exp-5",
+          "name": "Type-level domain design",
+          "aliases": [
+            "type-driven design",
+            "GADTs"
+          ],
+          "bloom": "C6",
+          "summary": "Create type designs that encode invariants so the compiler rejects invalid programs."
+        },
+        {
+          "id": "exp-6",
+          "name": "Functional architecture patterns",
+          "aliases": [
+            "event sourcing with folds",
+            "functional reactive programming"
+          ],
+          "bloom": "C6",
+          "summary": "Design systems whose state is a fold over events or streams, with side effects pushed to the boundary."
+        },
+        {
+          "id": "exp-7",
+          "name": "Performance and memory analysis",
+          "aliases": [
+            "fusion and allocation costs",
+            "space leaks"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate allocation, laziness-induced space leaks and fusion in functional code and decide on optimisations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "cmp-4",
+          "exp-4"
+        ],
+        [
+          "prf-1",
+          "exp-4"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "cmp-7",
+          "exp-7"
+        ],
+        [
+          "cmp-4",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Functional code is always slower than imperative code because of immutability.",
+          "concepts": [
+            "exp-7",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Stacking monad transformers is always the best way to combine effects.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "A stronger type system removes the need for runtime validation and testing.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,671 @@
+{
+  "version": 1,
+  "topic": "infrastructure-as-code",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "cloud-computing-fundamentals",
+    "git",
+    "linux-command-line"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Manual versus code-defined infrastructure",
+          "aliases": [
+            "ClickOps vs IaC"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why defining resources in files is more repeatable and auditable than configuring them by hand in a console."
+        },
+        {
+          "id": "nov-2",
+          "name": "Declarative versus imperative styles",
+          "aliases": [
+            "desired state vs step-by-step"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish describing the desired end state from scripting the steps to reach it."
+        },
+        {
+          "id": "nov-3",
+          "name": "Resources and their attributes",
+          "aliases": [
+            "resource blocks"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise that a configuration is made of resources of a given type with named attributes, such as a virtual machine or a network."
+        },
+        {
+          "id": "nov-4",
+          "name": "Configuration files in version control",
+          "aliases": [
+            "infrastructure repo"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that infrastructure code is stored in Git so changes are tracked, reviewed and reversible."
+        },
+        {
+          "id": "nov-5",
+          "name": "Plan then apply workflow",
+          "aliases": [
+            "preview and deploy",
+            "dry run"
+          ],
+          "bloom": "C2",
+          "summary": "Describe the cycle of writing code, previewing the proposed changes and then applying them."
+        },
+        {
+          "id": "nov-6",
+          "name": "Reproducible environments",
+          "aliases": [
+            "repeatable environments"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how the same code can create identical dev, test and production environments."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Infrastructure as code is just a shell script that runs commands in order.",
+          "concepts": [
+            "nov-2",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Once infrastructure is written as code, nobody needs to understand the underlying cloud services.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Applying the code twice will create two copies of every resource.",
+          "concepts": [
+            "nov-5",
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Input variables and outputs",
+          "aliases": [
+            "parameters",
+            "variables and outputs"
+          ],
+          "bloom": "C3",
+          "summary": "Parameterise a configuration with variables and expose values such as addresses through outputs."
+        },
+        {
+          "id": "adb-2",
+          "name": "Idempotency",
+          "aliases": [
+            "idempotent apply"
+          ],
+          "bloom": "C2",
+          "summary": "Explain and observe that re-applying unchanged code leaves infrastructure unchanged."
+        },
+        {
+          "id": "adb-3",
+          "name": "State as record of reality",
+          "aliases": [
+            "state file",
+            "infrastructure state"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that the tool keeps state mapping code resources to real resources and uses it to compute changes."
+        },
+        {
+          "id": "adb-4",
+          "name": "Reading a change plan",
+          "aliases": [
+            "plan output",
+            "diff review"
+          ],
+          "bloom": "C3",
+          "summary": "Interpret a plan to identify what will be created, updated or destroyed."
+        },
+        {
+          "id": "adb-5",
+          "name": "Resource dependencies",
+          "aliases": [
+            "implicit dependencies",
+            "dependency graph"
+          ],
+          "bloom": "C3",
+          "summary": "Use references between resources so they are created in the correct order."
+        },
+        {
+          "id": "adb-7",
+          "name": "Provider configuration and authentication",
+          "aliases": [
+            "providers",
+            "cloud credentials"
+          ],
+          "bloom": "C3",
+          "summary": "Configure a provider and authenticate it to a cloud account with limited permissions."
+        },
+        {
+          "id": "adb-6",
+          "name": "Secrets kept out of code",
+          "aliases": [
+            "credential handling"
+          ],
+          "bloom": "C3",
+          "summary": "Keep passwords and keys out of committed files by using environment variables or a secrets store."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-4"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-5"
+        ],
+        [
+          "nov-3",
+          "adb-7"
+        ],
+        [
+          "adb-7",
+          "adb-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Editing a resource in the cloud console is harmless because the code will simply pick up the change.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "If the plan shows a change, it only modifies the resource in place.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Private repositories make it safe to commit secrets in configuration files.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Reusable modules",
+          "aliases": [
+            "modules",
+            "composable components"
+          ],
+          "bloom": "C3",
+          "summary": "Package related resources into modules with clear inputs and outputs and reuse them across configurations."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Remote state and locking",
+          "aliases": [
+            "remote backend",
+            "state lock"
+          ],
+          "bloom": "C3",
+          "summary": "Store state in a shared backend with locking so teams do not corrupt it by concurrent runs."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Environment separation",
+          "aliases": [
+            "multi-environment layout",
+            "workspaces"
+          ],
+          "bloom": "C4",
+          "summary": "Structure code and state to isolate dev, staging and production while sharing common modules."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Configuration drift",
+          "aliases": [
+            "drift detection"
+          ],
+          "bloom": "C4",
+          "summary": "Detect and analyse differences between declared and actual infrastructure and decide how to reconcile them."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Importing existing resources",
+          "aliases": [
+            "state import",
+            "adopting resources"
+          ],
+          "bloom": "C3",
+          "summary": "Bring manually created resources under code management without recreating them."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Pipeline-driven changes",
+          "aliases": [
+            "CI/CD for infrastructure",
+            "GitOps workflow"
+          ],
+          "bloom": "C3",
+          "summary": "Run validation, plan and apply through a pipeline with pull request review."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Replacement versus in-place update",
+          "aliases": [
+            "destructive changes",
+            "forces replacement"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse which attribute changes force resource replacement and their impact on data and availability."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-3",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-3"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "adb-3",
+          "cmp-5"
+        ],
+        [
+          "cmp-2",
+          "cmp-6"
+        ],
+        [
+          "adb-4",
+          "cmp-6"
+        ],
+        [
+          "adb-4",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Copying the same configuration folder for each environment is as maintainable as using shared modules.",
+          "concepts": [
+            "cmp-1",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Storing state in the Git repository is the best way to share it with the team.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "Drift only happens when someone is careless, so it does not need monitoring.",
+          "concepts": [
+            "cmp-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Automated infrastructure testing",
+          "aliases": [
+            "policy and integration tests",
+            "IaC testing"
+          ],
+          "bloom": "C4",
+          "summary": "Combine static analysis, unit-style checks and ephemeral integration deployments to catch defects before production."
+        },
+        {
+          "id": "prf-2",
+          "name": "Policy as code",
+          "aliases": [
+            "guardrails",
+            "compliance as code"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and encode security and cost rules that automatically block non-compliant changes."
+        },
+        {
+          "id": "prf-3",
+          "name": "State blast radius design",
+          "aliases": [
+            "state decomposition",
+            "stack boundaries"
+          ],
+          "bloom": "C5",
+          "summary": "Judge how to split state and stacks by lifecycle, ownership and risk to limit the impact of a bad change."
+        },
+        {
+          "id": "prf-4",
+          "name": "Module versioning and contracts",
+          "aliases": [
+            "semantic versioning of modules",
+            "module interfaces"
+          ],
+          "bloom": "C5",
+          "summary": "Assess module interface stability and use versioning to roll out changes safely across consumers."
+        },
+        {
+          "id": "prf-5",
+          "name": "Safe refactoring of live infrastructure",
+          "aliases": [
+            "state moves",
+            "renaming resources"
+          ],
+          "bloom": "C4",
+          "summary": "Restructure code and move resources in state without causing destruction or recreation."
+        },
+        {
+          "id": "prf-6",
+          "name": "Immutable versus mutable infrastructure",
+          "aliases": [
+            "immutable infrastructure",
+            "golden images"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate replacing resources against patching them in place, and how image building and configuration management fit in."
+        },
+        {
+          "id": "prf-7",
+          "name": "Zero-downtime rollout strategies",
+          "aliases": [
+            "blue-green",
+            "create before destroy"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse lifecycle rules and deployment patterns that change infrastructure without interrupting service."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-3",
+          "prf-3"
+        ],
+        [
+          "cmp-2",
+          "prf-3"
+        ],
+        [
+          "cmp-1",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "prf-3",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "prf-6",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A successful plan guarantees the apply will succeed and behave correctly.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "One large state for everything is simplest and therefore safest.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Renaming a resource in code is purely cosmetic.",
+          "concepts": [
+            "prf-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-2",
+          "name": "Multi-account governance architecture",
+          "aliases": [
+            "landing zone",
+            "multi-cloud strategy"
+          ],
+          "bloom": "C6",
+          "summary": "Create an account, permission and pipeline structure that scales across teams, regions and possibly providers."
+        },
+        {
+          "id": "exp-1",
+          "name": "Platform engineering with IaC",
+          "aliases": [
+            "self-service infrastructure",
+            "internal platform"
+          ],
+          "bloom": "C6",
+          "summary": "Design paved-road modules and self-service workflows that let teams provision safely without central bottlenecks."
+        },
+        {
+          "id": "exp-3",
+          "name": "Tool selection trade-offs",
+          "aliases": [
+            "IaC tool evaluation",
+            "general-purpose language vs DSL"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate declarative DSLs, general-purpose-language tools and cloud-native templates against organisational needs."
+        },
+        {
+          "id": "exp-4",
+          "name": "State security and recovery",
+          "aliases": [
+            "state disaster recovery",
+            "state hygiene"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate protection, access control and recovery procedures for state that contains sensitive data."
+        },
+        {
+          "id": "exp-5",
+          "name": "Custom providers and extensions",
+          "aliases": [
+            "writing providers",
+            "API integration"
+          ],
+          "bloom": "C6",
+          "summary": "Build providers or extensions that manage resources from APIs not covered by existing tooling."
+        },
+        {
+          "id": "exp-6",
+          "name": "Continuous reconciliation and automated remediation",
+          "aliases": [
+            "controllers",
+            "self-healing infrastructure"
+          ],
+          "bloom": "C6",
+          "summary": "Design systems that continuously compare and correct actual state against declared intent, with human override."
+        },
+        {
+          "id": "exp-7",
+          "name": "Migration of legacy estates",
+          "aliases": [
+            "brownfield adoption",
+            "IaC rollout strategy"
+          ],
+          "bloom": "C5",
+          "summary": "Judge sequencing, risk and tooling for bringing a large manually built estate under code incrementally."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "prf-2",
+          "exp-1"
+        ],
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-5"
+        ],
+        [
+          "cmp-4",
+          "exp-6"
+        ],
+        [
+          "prf-2",
+          "exp-6"
+        ],
+        [
+          "cmp-5",
+          "exp-7"
+        ],
+        [
+          "prf-5",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Automatic remediation of all drift is always desirable.",
+          "concepts": [
+            "exp-6"
+          ]
+        },
+        {
+          "text": "Adopting one IaC tool across the whole organisation removes the need for governance and conventions.",
+          "concepts": [
+            "exp-1",
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Legacy estates should be imported in one big-bang effort to reach full coverage quickly.",
+          "concepts": [
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

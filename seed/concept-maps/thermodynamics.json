@@ -1,0 +1,785 @@
+{
+  "version": 1,
+  "topic": "thermodynamics",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "calculus",
+    "classical-mechanics"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-2",
+          "name": "Celsius, Fahrenheit and Kelvin",
+          "aliases": [
+            "temperature scales",
+            "absolute temperature"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the three temperature scales, convert between them, and identify absolute zero as the zero of the Kelvin scale."
+        },
+        {
+          "id": "nov-1",
+          "name": "Temperature and thermal equilibrium",
+          "aliases": [
+            "zeroth law",
+            "thermal contact"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that temperature determines the direction of heat flow and that objects in thermal equilibrium share the same temperature, as stated by the zeroth law."
+        },
+        {
+          "id": "nov-3",
+          "name": "Heat versus temperature",
+          "aliases": [
+            "heat as energy transfer"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish heat as energy transferred because of a temperature difference from temperature as a measure of thermal state."
+        },
+        {
+          "id": "nov-4",
+          "name": "Specific heat capacity",
+          "aliases": [
+            "heat capacity",
+            "Q = mcΔT"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that different materials need different amounts of heat per unit mass to change temperature, and relate this to Q = mcΔT."
+        },
+        {
+          "id": "nov-5",
+          "name": "Latent heat and phase change",
+          "aliases": [
+            "heat of fusion",
+            "heat of vaporisation"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how heat absorbed or released during melting, boiling or freezing changes the phase without changing the temperature."
+        },
+        {
+          "id": "nov-6",
+          "name": "Heat transfer modes",
+          "aliases": [
+            "conduction convection radiation"
+          ],
+          "bloom": "C1",
+          "summary": "Name and describe conduction, convection and radiation as ways thermal energy moves."
+        },
+        {
+          "id": "nov-7",
+          "name": "Pressure, volume and temperature of gases",
+          "aliases": [
+            "gas variables",
+            "state variables"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a gas by its pressure, volume, temperature and amount, and explain qualitatively how they change together."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "nov-1"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Heat and temperature are the same thing.",
+          "concepts": [
+            "nov-3",
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Adding heat to a substance always raises its temperature.",
+          "concepts": [
+            "nov-5",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Cold is a substance that flows from one object to another, instead of heat flowing from hot to cold.",
+          "concepts": [
+            "nov-3",
+            "nov-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Ideal gas law",
+          "aliases": [
+            "PV = nRT",
+            "equation of state"
+          ],
+          "bloom": "C3",
+          "summary": "Apply PV = nRT with absolute temperature to find an unknown state variable for a gas sample."
+        },
+        {
+          "id": "adb-2",
+          "name": "Calorimetry problems",
+          "aliases": [
+            "heat balance",
+            "mixing problems"
+          ],
+          "bloom": "C3",
+          "summary": "Use energy conservation with specific and latent heats to find final temperatures or masses when bodies exchange heat."
+        },
+        {
+          "id": "adb-4",
+          "name": "Work done by expanding gas",
+          "aliases": [
+            "PΔV work",
+            "pV work"
+          ],
+          "bloom": "C3",
+          "summary": "Compute work for constant-pressure changes as PΔV and interpret it as area under a pV diagram."
+        },
+        {
+          "id": "adb-3",
+          "name": "First law of thermodynamics",
+          "aliases": [
+            "ΔU = Q − W",
+            "energy conservation"
+          ],
+          "bloom": "C3",
+          "summary": "Apply ΔU = Q − W with consistent sign conventions to track heat, work and internal energy of a system."
+        },
+        {
+          "id": "adb-5",
+          "name": "Internal energy of ideal gas",
+          "aliases": [
+            "kinetic theory energy",
+            "equipartition"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that internal energy of an ideal gas depends only on temperature and relates to molecular kinetic energy."
+        },
+        {
+          "id": "adb-6",
+          "name": "Molar heat capacities Cv and Cp",
+          "aliases": [
+            "heat capacity at constant volume",
+            "heat capacity at constant pressure"
+          ],
+          "bloom": "C3",
+          "summary": "Use Cv and Cp to compute heat for constant-volume and constant-pressure processes and explain why Cp exceeds Cv."
+        },
+        {
+          "id": "adb-7",
+          "name": "Reading pV diagrams",
+          "aliases": [
+            "state diagrams",
+            "process paths"
+          ],
+          "bloom": "C3",
+          "summary": "Identify isobaric, isochoric and other processes on a pV diagram and read off work and state changes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-7",
+          "adb-1"
+        ],
+        [
+          "nov-2",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-5"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "adb-3",
+          "adb-6"
+        ],
+        [
+          "adb-4",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The ideal gas law can be used with temperature in Celsius.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Work done by a gas is always positive regardless of the sign convention or whether it expands or compresses.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Heat and work are properties stored in a system, like internal energy.",
+          "concepts": [
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Isothermal process analysis",
+          "aliases": [
+            "constant temperature expansion",
+            "isotherm"
+          ],
+          "bloom": "C3",
+          "summary": "Compute work W = nRT ln(V2/V1) and show that heat in equals work out for an ideal gas isotherm."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Adiabatic process analysis",
+          "aliases": [
+            "reversible adiabat",
+            "PV^γ = const"
+          ],
+          "bloom": "C3",
+          "summary": "Use PV^γ = constant and TV^(γ−1) = constant to find states and work when no heat is exchanged."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Heat engine and efficiency",
+          "aliases": [
+            "thermal efficiency",
+            "cyclic engine"
+          ],
+          "bloom": "C3",
+          "summary": "Compute efficiency as net work over heat input for a cycle and account for heat rejected to a cold reservoir."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Refrigerators and heat pumps",
+          "aliases": [
+            "coefficient of performance",
+            "COP"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate coefficients of performance for refrigerators and heat pumps from heat and work flows."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Second law statements",
+          "aliases": [
+            "Kelvin-Planck",
+            "Clausius statement"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the Kelvin-Planck and Clausius statements and show their equivalence and what they forbid."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Reversible and irreversible processes",
+          "aliases": [
+            "quasi-static processes",
+            "irreversibility"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish reversible idealisations from real irreversible processes and identify sources of irreversibility such as friction and finite temperature differences."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Entropy change calculation",
+          "aliases": [
+            "dS = dQ_rev/T",
+            "Clausius entropy"
+          ],
+          "bloom": "C3",
+          "summary": "Compute entropy changes for heating, phase changes and ideal gas processes using dS = dQ_rev/T."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Carnot cycle",
+          "aliases": [
+            "Carnot engine",
+            "ideal reversible cycle"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the four steps of the Carnot cycle and derive its efficiency 1 − Tc/Th."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-2"
+        ],
+        [
+          "adb-3",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-6",
+          "cmp-7"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "cmp-1",
+          "cmp-8"
+        ],
+        [
+          "cmp-2",
+          "cmp-8"
+        ],
+        [
+          "cmp-5",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "In an isothermal ideal gas process, no heat flows because the temperature is constant.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "A heat engine can reach 100% efficiency if friction is eliminated.",
+          "concepts": [
+            "cmp-3",
+            "cmp-5",
+            "cmp-8"
+          ]
+        },
+        {
+          "text": "Adiabatic means isothermal, so temperature stays constant.",
+          "concepts": [
+            "cmp-2",
+            "cmp-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Entropy increase principle",
+          "aliases": [
+            "entropy of universe",
+            "Clausius inequality"
+          ],
+          "bloom": "C4",
+          "summary": "Use total entropy change of system plus surroundings to decide whether a process is reversible, irreversible or impossible."
+        },
+        {
+          "id": "prf-2",
+          "name": "Carnot theorem and bounds",
+          "aliases": [
+            "maximum efficiency",
+            "Carnot limit"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate real engines and refrigerators against the Carnot limit and justify why no engine between two reservoirs can beat it."
+        },
+        {
+          "id": "prf-3",
+          "name": "Boltzmann microstate entropy",
+          "aliases": [
+            "S = k ln W",
+            "statistical entropy"
+          ],
+          "bloom": "C4",
+          "summary": "Relate entropy to the number of microstates via S = k ln W and explain macrostates as collections of microstates."
+        },
+        {
+          "id": "prf-5",
+          "name": "Thermodynamic potentials",
+          "aliases": [
+            "Gibbs free energy",
+            "Helmholtz free energy",
+            "enthalpy"
+          ],
+          "bloom": "C4",
+          "summary": "Choose among internal energy, enthalpy, Helmholtz and Gibbs free energies to predict spontaneity under given constraints."
+        },
+        {
+          "id": "prf-6",
+          "name": "Free expansion and mixing entropy",
+          "aliases": [
+            "Joule expansion",
+            "entropy of mixing"
+          ],
+          "bloom": "C4",
+          "summary": "Calculate entropy generated in irreversible free expansion and mixing by constructing a reversible path between the same states."
+        },
+        {
+          "id": "prf-7",
+          "name": "Third law and absolute entropy",
+          "aliases": [
+            "unattainability of absolute zero",
+            "Nernst"
+          ],
+          "bloom": "C4",
+          "summary": "Explain that entropy of a perfect crystal approaches zero at absolute zero and that absolute zero cannot be reached in finitely many steps."
+        },
+        {
+          "id": "prf-8",
+          "name": "Temperature-entropy diagrams",
+          "aliases": [
+            "TS diagram"
+          ],
+          "bloom": "C4",
+          "summary": "Use TS diagrams to read heat as area and compare cycles, identifying isentropic and isothermal segments."
+        },
+        {
+          "id": "prf-4",
+          "name": "Real engine cycles",
+          "aliases": [
+            "Otto cycle",
+            "Rankine cycle",
+            "Brayton cycle"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse Otto-type and similar cycles on pV or TS diagrams to derive efficiencies and locate losses."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-7",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "cmp-8",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "cmp-3",
+          "prf-4"
+        ],
+        [
+          "cmp-2",
+          "prf-4"
+        ],
+        [
+          "prf-8",
+          "prf-4"
+        ],
+        [
+          "cmp-7",
+          "prf-8"
+        ],
+        [
+          "prf-1",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "prf-1",
+          "prf-6"
+        ],
+        [
+          "prf-3",
+          "prf-7"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Entropy can never decrease anywhere, even within a subsystem.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Entropy is simply a measure of visible messiness rather than a count of accessible microstates.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Entropy does not change in a free expansion because no heat is exchanged.",
+          "concepts": [
+            "prf-6",
+            "prf-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Statistical ensembles and partition function",
+          "aliases": [
+            "canonical ensemble",
+            "Boltzmann distribution"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how the partition function generates thermodynamic quantities such as energy, entropy and free energy from microscopic spectra."
+        },
+        {
+          "id": "exp-2",
+          "name": "Gibbs entropy and information",
+          "aliases": [
+            "Shannon entropy",
+            "Gibbs formula"
+          ],
+          "bloom": "C5",
+          "summary": "Assess the equivalence between Gibbs entropy −kΣp ln p and information-theoretic entropy and its role in resolving Maxwell's demon."
+        },
+        {
+          "id": "exp-3",
+          "name": "Second law and arrow of time",
+          "aliases": [
+            "Loschmidt paradox",
+            "Poincaré recurrence"
+          ],
+          "bloom": "C5",
+          "summary": "Critically evaluate how time-reversible microscopic laws coexist with the statistical, probabilistic irreversibility of the second law."
+        },
+        {
+          "id": "exp-4",
+          "name": "Maxwell relations and response functions",
+          "aliases": [
+            "thermodynamic identities",
+            "Legendre transforms"
+          ],
+          "bloom": "C6",
+          "summary": "Derive relations among response functions such as Cp − Cv and compressibilities from potentials via Legendre transformation and Maxwell relations."
+        },
+        {
+          "id": "exp-5",
+          "name": "Finite-time and nonequilibrium engines",
+          "aliases": [
+            "endoreversible engine",
+            "Curzon-Ahlborn efficiency"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate efficiency at maximum power for engines with finite heat transfer rates and contrast it with Carnot efficiency."
+        },
+        {
+          "id": "exp-6",
+          "name": "Phase transition thermodynamics",
+          "aliases": [
+            "Clausius-Clapeyron",
+            "critical point",
+            "Landau theory"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate phase coexistence and transitions using Gibbs free energy, the Clausius-Clapeyron relation and critical behaviour."
+        },
+        {
+          "id": "exp-7",
+          "name": "Design of thermodynamic systems",
+          "aliases": [
+            "exergy analysis",
+            "cycle optimisation"
+          ],
+          "bloom": "C6",
+          "summary": "Design or optimise a thermal system using exergy and entropy generation analysis to justify trade-offs between efficiency, cost and irreversibility."
+        },
+        {
+          "id": "exp-8",
+          "name": "Fluctuation theorems",
+          "aliases": [
+            "Jarzynski equality",
+            "Crooks relation"
+          ],
+          "bloom": "C6",
+          "summary": "Construct arguments for how fluctuation theorems extend the second law to small systems far from equilibrium."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "prf-2",
+          "exp-5"
+        ],
+        [
+          "prf-4",
+          "exp-5"
+        ],
+        [
+          "prf-5",
+          "exp-6"
+        ],
+        [
+          "exp-4",
+          "exp-6"
+        ],
+        [
+          "exp-5",
+          "exp-7"
+        ],
+        [
+          "prf-1",
+          "exp-7"
+        ],
+        [
+          "exp-3",
+          "exp-8"
+        ],
+        [
+          "exp-1",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The second law is an absolute dynamical law that forbids any entropy-decreasing fluctuation in any system.",
+          "concepts": [
+            "exp-3",
+            "exp-8"
+          ]
+        },
+        {
+          "text": "Carnot efficiency is the practical target for engines operating at maximum power.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Information entropy and thermodynamic entropy are unrelated, merely sharing a name.",
+          "concepts": [
+            "exp-2"
+          ]
+        }
+      ]
+    }
+  ]
+}

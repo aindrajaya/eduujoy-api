@@ -1,0 +1,707 @@
+{
+  "version": 1,
+  "topic": "digital-logic",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "algebra"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Binary signals and logic levels",
+          "aliases": [
+            "binary values",
+            "high and low voltage"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that digital circuits represent information as two levels, 0 and 1, and relate them to voltage ranges."
+        },
+        {
+          "id": "nov-2",
+          "name": "Basic gate functions",
+          "aliases": [
+            "AND OR NOT gates",
+            "logic gates"
+          ],
+          "bloom": "C2",
+          "summary": "Explain what AND, OR and NOT gates output for each input combination and recognise their symbols."
+        },
+        {
+          "id": "nov-3",
+          "name": "Truth tables",
+          "aliases": [
+            "truth table construction"
+          ],
+          "bloom": "C2",
+          "summary": "Write and read a truth table listing every input combination and the resulting output of a gate or small circuit."
+        },
+        {
+          "id": "nov-4",
+          "name": "Derived gates NAND NOR XOR",
+          "aliases": [
+            "universal gates",
+            "exclusive OR"
+          ],
+          "bloom": "C2",
+          "summary": "Describe the behaviour of NAND, NOR, XOR and XNOR gates and how they relate to the basic gates."
+        },
+        {
+          "id": "nov-5",
+          "name": "Boolean expressions",
+          "aliases": [
+            "Boolean algebra notation",
+            "logic expressions"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret expressions using AND, OR and complement notation as descriptions of gate networks."
+        },
+        {
+          "id": "nov-6",
+          "name": "Number systems for logic",
+          "aliases": [
+            "binary hexadecimal conversion"
+          ],
+          "bloom": "C2",
+          "summary": "Convert between binary, decimal and hexadecimal to label input and output patterns."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The logic value 1 always means exactly 5 volts.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "An OR gate outputs 1 only when exactly one input is 1.",
+          "concepts": [
+            "nov-2",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "A NAND gate is simply an AND gate with the inputs inverted.",
+          "concepts": [
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Boolean algebra laws",
+          "aliases": [
+            "identities",
+            "distributive and absorption laws"
+          ],
+          "bloom": "C3",
+          "summary": "Apply identity, complement, distributive and absorption laws to rewrite expressions."
+        },
+        {
+          "id": "adb-2",
+          "name": "De Morgan's theorems",
+          "aliases": [
+            "De Morgan laws",
+            "bubble pushing"
+          ],
+          "bloom": "C3",
+          "summary": "Use De Morgan's theorems to convert between AND-type and OR-type forms and to push inversions through gates."
+        },
+        {
+          "id": "adb-3",
+          "name": "Sum of products and product of sums",
+          "aliases": [
+            "SOP POS",
+            "minterms and maxterms"
+          ],
+          "bloom": "C3",
+          "summary": "Derive canonical SOP and POS expressions from a truth table using minterms and maxterms."
+        },
+        {
+          "id": "adb-4",
+          "name": "Circuit from expression",
+          "aliases": [
+            "schematic drawing",
+            "gate-level implementation"
+          ],
+          "bloom": "C3",
+          "summary": "Draw a gate network from a Boolean expression and evaluate its output for given inputs."
+        },
+        {
+          "id": "adb-5",
+          "name": "NAND-only and NOR-only implementation",
+          "aliases": [
+            "universal gate realisation"
+          ],
+          "bloom": "C3",
+          "summary": "Rebuild a network using only NAND or only NOR gates."
+        },
+        {
+          "id": "adb-6",
+          "name": "Karnaugh maps up to four variables",
+          "aliases": [
+            "K-map",
+            "Karnaugh map grouping"
+          ],
+          "bloom": "C3",
+          "summary": "Fill a K-map from a truth table and group adjacent ones in powers of two to get a minimal SOP."
+        },
+        {
+          "id": "adb-7",
+          "name": "Don't-care conditions",
+          "aliases": [
+            "don't cares",
+            "X entries"
+          ],
+          "bloom": "C3",
+          "summary": "Use don't-care entries in K-maps to enlarge groups and simplify the result."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-2",
+          "adb-5"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-3",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "De Morgan's theorem says the complement of A AND B equals the complement of A AND the complement of B.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "K-map groups can be any size as long as they contain only ones.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "K-map rows and columns are ordered in plain binary counting order.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Quine-McCluskey minimisation",
+          "aliases": [
+            "tabular method",
+            "prime implicant tables"
+          ],
+          "bloom": "C3",
+          "summary": "Find prime and essential prime implicants systematically for functions with many variables."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Multiplexers and decoders",
+          "aliases": [
+            "MUX",
+            "demultiplexer",
+            "encoder"
+          ],
+          "bloom": "C3",
+          "summary": "Design and use multiplexers, decoders and encoders, including implementing functions with a MUX."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Half and full adders",
+          "aliases": [
+            "ripple-carry adder",
+            "binary addition circuit"
+          ],
+          "bloom": "C3",
+          "summary": "Build half and full adders and chain them into a multi-bit ripple-carry adder."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Two's complement arithmetic circuits",
+          "aliases": [
+            "subtractor",
+            "overflow detection"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how adders perform signed addition and subtraction and detect overflow."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Propagation delay and hazards",
+          "aliases": [
+            "glitches",
+            "static hazard"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how gate delays create glitches and how redundant terms remove static hazards."
+        },
+        {
+          "id": "cmp-6",
+          "name": "SR and D latches",
+          "aliases": [
+            "bistable",
+            "level-sensitive storage"
+          ],
+          "bloom": "C3",
+          "summary": "Explain and trace cross-coupled gate latches and the transparent D latch, including the forbidden SR state."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Edge-triggered flip-flops",
+          "aliases": [
+            "D flip-flop",
+            "JK flip-flop",
+            "T flip-flop"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish latches from edge-triggered D, JK and T flip-flops and predict outputs from timing diagrams."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Combinational HDL description",
+          "aliases": [
+            "Verilog assign",
+            "VHDL concurrent statements"
+          ],
+          "bloom": "C3",
+          "summary": "Describe combinational circuits in Verilog or VHDL using continuous assignments and simple processes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "adb-7",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-2",
+          "cmp-5"
+        ],
+        [
+          "adb-6",
+          "cmp-5"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-6",
+          "cmp-7"
+        ],
+        [
+          "cmp-2",
+          "cmp-8"
+        ],
+        [
+          "cmp-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A latch and a flip-flop are the same thing.",
+          "concepts": [
+            "cmp-6",
+            "cmp-7"
+          ]
+        },
+        {
+          "text": "A hazard-free minimal SOP is always obtained by choosing the fewest terms.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Carry out of the top bit always signals overflow in signed addition.",
+          "concepts": [
+            "cmp-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Synchronous counter design",
+          "aliases": [
+            "binary counter",
+            "modulo-N counter"
+          ],
+          "bloom": "C4",
+          "summary": "Design synchronous counters from flip-flop excitation tables and compare them with ripple counters."
+        },
+        {
+          "id": "prf-2",
+          "name": "Registers and shift registers",
+          "aliases": [
+            "parallel load",
+            "serial-in parallel-out"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse register structures with load, enable and shift control, and their use in data paths."
+        },
+        {
+          "id": "prf-3",
+          "name": "Finite state machine modelling",
+          "aliases": [
+            "Moore and Mealy machines",
+            "state diagrams"
+          ],
+          "bloom": "C4",
+          "summary": "Model sequential behaviour as Moore or Mealy machines with state diagrams and transition tables."
+        },
+        {
+          "id": "prf-4",
+          "name": "State assignment and implementation",
+          "aliases": [
+            "state encoding",
+            "one-hot encoding"
+          ],
+          "bloom": "C5",
+          "summary": "Choose state encodings and derive next-state and output logic, evaluating cost and speed trade-offs."
+        },
+        {
+          "id": "prf-5",
+          "name": "Setup hold and clock timing",
+          "aliases": [
+            "timing constraints",
+            "maximum clock frequency"
+          ],
+          "bloom": "C4",
+          "summary": "Calculate setup and hold slack and maximum clock frequency from flip-flop and logic delays."
+        },
+        {
+          "id": "prf-6",
+          "name": "Synthesisable sequential HDL",
+          "aliases": [
+            "clocked always block",
+            "VHDL clocked process"
+          ],
+          "bloom": "C5",
+          "summary": "Write and evaluate HDL for registers and FSMs that synthesise to the intended hardware, avoiding inferred latches."
+        },
+        {
+          "id": "prf-7",
+          "name": "Testbenches and simulation",
+          "aliases": [
+            "HDL verification",
+            "waveform checking"
+          ],
+          "bloom": "C5",
+          "summary": "Build testbenches that exercise a design and judge correctness from simulated waveforms."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-7",
+          "prf-1"
+        ],
+        [
+          "cmp-7",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "prf-1",
+          "prf-4"
+        ],
+        [
+          "cmp-7",
+          "prf-5"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "cmp-8",
+          "prf-6"
+        ],
+        [
+          "prf-3",
+          "prf-6"
+        ],
+        [
+          "prf-6",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A Mealy machine and a Moore machine always need the same number of states and respond at the same time.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Lowering the clock frequency fixes both setup and hold violations.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Blocking and nonblocking assignments are interchangeable in clocked HDL code.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Metastability and synchronisers",
+          "aliases": [
+            "clock domain crossing",
+            "two-flop synchroniser"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate metastability risk and design safe clock domain crossings using synchronisers and handshakes."
+        },
+        {
+          "id": "exp-2",
+          "name": "Fast adder architectures",
+          "aliases": [
+            "carry-lookahead",
+            "carry-select",
+            "prefix adder"
+          ],
+          "bloom": "C5",
+          "summary": "Compare carry-lookahead, carry-select and prefix adders on delay and area."
+        },
+        {
+          "id": "exp-3",
+          "name": "Datapath and control partitioning",
+          "aliases": [
+            "register transfer level design",
+            "ASM charts"
+          ],
+          "bloom": "C6",
+          "summary": "Design a system by separating datapath and FSM controller from an algorithmic specification."
+        },
+        {
+          "id": "exp-4",
+          "name": "Pipelining and retiming",
+          "aliases": [
+            "pipeline registers",
+            "throughput versus latency"
+          ],
+          "bloom": "C6",
+          "summary": "Insert pipeline stages and retime logic to raise clock rate while weighing latency, area and hazards."
+        },
+        {
+          "id": "exp-5",
+          "name": "Clocking and power trade-offs",
+          "aliases": [
+            "clock gating",
+            "clock skew",
+            "dynamic power"
+          ],
+          "bloom": "C5",
+          "summary": "Assess clock skew, gating and dynamic power effects on timing and reliability."
+        },
+        {
+          "id": "exp-6",
+          "name": "Design for testability and verification",
+          "aliases": [
+            "scan chains",
+            "formal checking",
+            "coverage"
+          ],
+          "bloom": "C6",
+          "summary": "Plan scan, assertions and coverage-driven verification so that a design can be tested and proven correct."
+        },
+        {
+          "id": "exp-7",
+          "name": "Synthesis and implementation trade-offs",
+          "aliases": [
+            "FPGA versus ASIC",
+            "resource sharing",
+            "logic optimisation"
+          ],
+          "bloom": "C5",
+          "summary": "Judge how synthesis constraints and target technology affect area, speed and structure, and restructure RTL accordingly."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-3"
+        ],
+        [
+          "prf-4",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "exp-2",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-7"
+        ],
+        [
+          "exp-3",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A two-flop synchroniser eliminates metastability completely.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Pipelining always improves overall performance because it shortens the clock period.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Passing simulation proves a design is correct and ready for hardware.",
+          "concepts": [
+            "exp-6",
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

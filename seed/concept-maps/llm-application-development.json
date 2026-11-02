@@ -1,0 +1,723 @@
+{
+  "version": 1,
+  "topic": "llm-application-development",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "python",
+    "rest-api-design"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Tokens and context window",
+          "aliases": [
+            "tokenization",
+            "context length"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that models read and produce tokens rather than words and that the context window caps the combined input and output size."
+        },
+        {
+          "id": "nov-2",
+          "name": "Chat message roles",
+          "aliases": [
+            "system user assistant messages"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how system, user and assistant messages structure a conversation request and shape the model's behaviour."
+        },
+        {
+          "id": "nov-3",
+          "name": "Calling a completion API",
+          "aliases": [
+            "chat completions request",
+            "LLM API call"
+          ],
+          "bloom": "C2",
+          "summary": "Understand the parts of an API request and response, including model name, messages, API key authentication and the returned text and usage."
+        },
+        {
+          "id": "nov-4",
+          "name": "Sampling parameters",
+          "aliases": [
+            "temperature",
+            "top-p",
+            "max tokens"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how temperature, top-p and max output tokens change the randomness and length of generated output."
+        },
+        {
+          "id": "nov-5",
+          "name": "Basic prompt clarity",
+          "aliases": [
+            "clear instructions",
+            "zero-shot prompting"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that specific instructions, context and a stated output format produce more reliable responses than vague requests."
+        },
+        {
+          "id": "nov-6",
+          "name": "Hallucination and model limits",
+          "aliases": [
+            "fabricated output",
+            "knowledge cutoff"
+          ],
+          "bloom": "C2",
+          "summary": "Recognise that models can produce confident but false output and lack knowledge of recent or private data."
+        },
+        {
+          "id": "nov-7",
+          "name": "Cost and latency drivers",
+          "aliases": [
+            "token pricing",
+            "response time"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that cost and response time grow with the number of input and output tokens and with model size."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The model looks up facts in a database, so its answers are always accurate.",
+          "concepts": [
+            "nov-6"
+          ]
+        },
+        {
+          "text": "Tokens are the same as words, so word count gives exact cost and limits.",
+          "concepts": [
+            "nov-1",
+            "nov-7"
+          ]
+        },
+        {
+          "text": "The model remembers earlier API calls on its own without being sent the conversation again.",
+          "concepts": [
+            "nov-2",
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Few-shot prompting",
+          "aliases": [
+            "in-context examples"
+          ],
+          "bloom": "C3",
+          "summary": "Apply worked input-output examples in a prompt to steer format, tone and task behaviour."
+        },
+        {
+          "id": "adb-2",
+          "name": "Prompt templates with variables",
+          "aliases": [
+            "parameterised prompts",
+            "prompt templating"
+          ],
+          "bloom": "C3",
+          "summary": "Build reusable prompts that insert user data into fixed instructions in code."
+        },
+        {
+          "id": "adb-3",
+          "name": "JSON output parsing",
+          "aliases": [
+            "structured output",
+            "JSON mode"
+          ],
+          "bloom": "C3",
+          "summary": "Request JSON output, parse it in Python and validate it against a schema such as a Pydantic model."
+        },
+        {
+          "id": "adb-4",
+          "name": "Streaming responses",
+          "aliases": [
+            "token streaming",
+            "server-sent events"
+          ],
+          "bloom": "C3",
+          "summary": "Consume partial output as it is generated to improve perceived latency in an application."
+        },
+        {
+          "id": "adb-5",
+          "name": "API error and rate-limit handling",
+          "aliases": [
+            "retries with backoff",
+            "timeouts"
+          ],
+          "bloom": "C3",
+          "summary": "Handle timeouts, rate limits and server errors with retries, exponential backoff and clear failures."
+        },
+        {
+          "id": "adb-6",
+          "name": "Multi-turn conversation state",
+          "aliases": [
+            "chat history management",
+            "message history"
+          ],
+          "bloom": "C3",
+          "summary": "Maintain and trim the message history sent on each call so conversations stay coherent within the context window."
+        },
+        {
+          "id": "adb-7",
+          "name": "Secret and key management",
+          "aliases": [
+            "API key security",
+            "environment variables"
+          ],
+          "bloom": "C2",
+          "summary": "Keep API keys out of source code and client-side code by using environment variables or a secrets store."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "nov-3",
+          "adb-4"
+        ],
+        [
+          "nov-3",
+          "adb-5"
+        ],
+        [
+          "nov-2",
+          "adb-6"
+        ],
+        [
+          "nov-1",
+          "adb-6"
+        ],
+        [
+          "nov-3",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Asking for JSON in the prompt guarantees the output is always valid and matches the schema.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Retrying immediately and repeatedly is the right way to handle rate limit errors.",
+          "concepts": [
+            "adb-5"
+          ]
+        },
+        {
+          "text": "Few-shot examples teach the model permanently, so they only need to be sent once.",
+          "concepts": [
+            "adb-1",
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Embeddings and semantic similarity",
+          "aliases": [
+            "vector embeddings",
+            "cosine similarity"
+          ],
+          "bloom": "C3",
+          "summary": "Use embedding vectors and a similarity measure to find text with related meaning."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Document chunking strategies",
+          "aliases": [
+            "text splitting",
+            "chunk overlap"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how chunk size, overlap and boundaries affect retrieval quality and choose a splitting approach for a corpus."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Vector store indexing and search",
+          "aliases": [
+            "vector database",
+            "top-k retrieval"
+          ],
+          "bloom": "C3",
+          "summary": "Store embeddings with metadata and query for top-k neighbours with filters."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Retrieval-augmented generation pipeline",
+          "aliases": [
+            "RAG",
+            "retrieve then generate"
+          ],
+          "bloom": "C4",
+          "summary": "Assemble ingestion, indexing, retrieval and grounded generation, and trace failures to the right stage."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Tool calling and function schemas",
+          "aliases": [
+            "function calling",
+            "tool use"
+          ],
+          "bloom": "C3",
+          "summary": "Define tool schemas, execute the calls the model requests and return results for the final answer."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Grounding and citation prompts",
+          "aliases": [
+            "source attribution",
+            "answer from context only"
+          ],
+          "bloom": "C4",
+          "summary": "Design prompts that restrict answers to retrieved context, cite sources and admit when information is missing."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Evaluation datasets and metrics",
+          "aliases": [
+            "test set",
+            "golden set",
+            "LLM evals"
+          ],
+          "bloom": "C4",
+          "summary": "Build a labelled test set and choose metrics such as exact match, retrieval recall and rubric scores to compare prompt changes."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Prompt injection risks",
+          "aliases": [
+            "untrusted input",
+            "jailbreaks"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how untrusted user or retrieved text can override instructions and apply basic mitigations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-4",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-5"
+        ],
+        [
+          "adb-6",
+          "cmp-5"
+        ],
+        [
+          "adb-3",
+          "cmp-7"
+        ],
+        [
+          "cmp-5",
+          "cmp-8"
+        ],
+        [
+          "cmp-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Larger chunks always improve RAG because they give the model more context.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "The model executes the functions itself when it makes a tool call.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Telling the model to use only the provided context completely eliminates hallucination.",
+          "concepts": [
+            "cmp-6",
+            "cmp-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Hybrid search and reranking",
+          "aliases": [
+            "BM25 plus vectors",
+            "cross-encoder reranker"
+          ],
+          "bloom": "C4",
+          "summary": "Combine keyword and vector retrieval and rerank candidates, judging the precision and latency trade-offs."
+        },
+        {
+          "id": "prf-2",
+          "name": "Query rewriting and decomposition",
+          "aliases": [
+            "query expansion",
+            "multi-hop retrieval"
+          ],
+          "bloom": "C4",
+          "summary": "Transform conversational or complex questions into effective retrieval queries."
+        },
+        {
+          "id": "prf-3",
+          "name": "Component-level RAG evaluation",
+          "aliases": [
+            "retrieval metrics",
+            "faithfulness scoring"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate retrieval (recall, MRR) and generation (faithfulness, relevance) separately to locate defects."
+        },
+        {
+          "id": "prf-4",
+          "name": "LLM-as-judge evaluation",
+          "aliases": [
+            "model-graded evals",
+            "rubric grading"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when model-based graders are valid by calibrating them against human labels and controlling for bias."
+        },
+        {
+          "id": "prf-5",
+          "name": "Agent loops and orchestration",
+          "aliases": [
+            "agentic workflows",
+            "multi-step tool use"
+          ],
+          "bloom": "C4",
+          "summary": "Design loops where the model plans and calls tools across steps, with step limits, state and error recovery."
+        },
+        {
+          "id": "prf-6",
+          "name": "Caching and cost optimisation",
+          "aliases": [
+            "prompt caching",
+            "model routing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate caching, model selection and prompt trimming to reduce cost and latency with acceptable quality."
+        },
+        {
+          "id": "prf-7",
+          "name": "Observability and tracing",
+          "aliases": [
+            "LLM logging",
+            "trace inspection"
+          ],
+          "bloom": "C4",
+          "summary": "Instrument calls to capture prompts, outputs, tool steps, latency and cost so failures can be diagnosed."
+        },
+        {
+          "id": "prf-8",
+          "name": "Guardrails and output validation",
+          "aliases": [
+            "safety filters",
+            "moderation"
+          ],
+          "bloom": "C5",
+          "summary": "Assess and apply input and output checks, schema validation and fallbacks for safety and reliability."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "prf-1",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "cmp-8",
+          "prf-8"
+        ],
+        [
+          "adb-5",
+          "prf-6"
+        ],
+        [
+          "prf-5",
+          "prf-7"
+        ],
+        [
+          "cmp-8",
+          "prf-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Vector search alone is always enough, so keyword search adds nothing.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "An LLM judge's scores are objective and need no validation against human judgement.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "A good end-to-end answer score shows both retrieval and generation are working.",
+          "concepts": [
+            "prf-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Architecture trade-off design",
+          "aliases": [
+            "RAG vs fine-tuning vs long context"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate whether prompting, retrieval, fine-tuning or long context best fits a requirement given cost, freshness and accuracy."
+        },
+        {
+          "id": "exp-2",
+          "name": "Fine-tuning and distillation decisions",
+          "aliases": [
+            "supervised fine-tuning",
+            "model distillation"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when adapting or distilling a model beats prompting and plan the data and evaluation needed."
+        },
+        {
+          "id": "exp-3",
+          "name": "Continuous evaluation pipelines",
+          "aliases": [
+            "regression evals in CI",
+            "online evaluation"
+          ],
+          "bloom": "C6",
+          "summary": "Create evaluation systems combining offline regression suites, production sampling and user feedback that gate releases."
+        },
+        {
+          "id": "exp-4",
+          "name": "Multi-agent system design",
+          "aliases": [
+            "agent orchestration architecture",
+            "supervisor pattern"
+          ],
+          "bloom": "C6",
+          "summary": "Design systems of cooperating agents with defined roles, shared state, permissions and failure containment."
+        },
+        {
+          "id": "exp-5",
+          "name": "Security threat modelling for LLMs",
+          "aliases": [
+            "agent security",
+            "data exfiltration defence"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate risks such as indirect prompt injection, excessive tool permissions and data leakage and design layered defences."
+        },
+        {
+          "id": "exp-6",
+          "name": "Reliability under model change",
+          "aliases": [
+            "model migration",
+            "version drift"
+          ],
+          "bloom": "C5",
+          "summary": "Assess the effect of model updates and provider outages and design pinning, fallbacks and migration tests."
+        },
+        {
+          "id": "exp-7",
+          "name": "Feedback-driven improvement loops",
+          "aliases": [
+            "data flywheel",
+            "error analysis"
+          ],
+          "bloom": "C6",
+          "summary": "Create processes that turn production failures and user signals into new test cases, prompt changes and training data."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "prf-8",
+          "exp-5"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-7"
+        ],
+        [
+          "prf-7",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Fine-tuning is the best way to add new knowledge to a model's answers.",
+          "concepts": [
+            "exp-1",
+            "exp-2"
+          ]
+        },
+        {
+          "text": "More agents with more autonomy always yield better results on complex tasks.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Once prompts pass the evaluation suite, behaviour stays stable across model updates.",
+          "concepts": [
+            "exp-6",
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

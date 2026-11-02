@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-02T20:20:28.552Z",
+  "model": "claude-sonnet-5-5",
+  "prompts": [
+    {
+      "name": "concept-map",
+      "version": "v1",
+      "file": "src/prompts/concept-map/v1.md"
+    },
+    {
+      "name": "concept-map-review",
+      "version": "v1",
+      "file": "src/prompts/concept-map-review/v1.md"
+    }
+  ],
+  "inputs": {
+    "files": [
+      "seed/topics.json",
+      "src/prompts/concept-map/v1.md",
+      "src/prompts/concept-map-review/v1.md"
+    ],
+    "fieldsSentPerTopic": [
+      "topics.json canonicalName",
+      "topics.json description",
+      "canonicalName of topics.json parent",
+      "canonicalName of each topics.json prerequisite"
+    ],
+    "codeFilled": [
+      "bloomBand (stage -> band constant)",
+      "dependsOnTopics (topics.json prerequisites)",
+      "language \"en\"",
+      "concept order (prerequisite order, computed)"
+    ]
+  },
+  "isolation": "seed/_eval and tools/seed/path-eval* were not read, nor their prompts or outputs. The generator reads inputs only through readInput (allow-list above); tools/seed/concept-maps.test.ts checks it. Note (lead, 3 Nov 2026): the topic description is also what the eval drafter saw; accepted as public catalogue text, nothing else added.",
+  "batches": [
+    "msgbatch_01Pxks3hDaN6pTcxBCywNYnE",
+    "msgbatch_01W19j3FyWU3Z9J16kEQzkbg",
+    "msgbatch_012nVcUwb2WDmuj9hT41BzoZ",
+    "msgbatch_01QCda3KGLXDYkVq9KW5uig6"
+  ],
+  "reviewMix": {
+    "keep": 2,
+    "revise": 12
+  }
+}
