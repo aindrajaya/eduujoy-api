@@ -3,6 +3,7 @@ export * from './card-rules';
 export * from './liveness';
 export * from './pool-plan';
 export * from './quota';
+export * from './serving-rules';
 export * from './sources';
 export * from './types';
 export { ResourceDead } from './events/resource-dead.event';
