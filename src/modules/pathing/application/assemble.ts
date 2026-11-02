@@ -35,6 +35,7 @@ export function aliasPool(cards: ServedCard[]): { design: DesignCard[]; validate
       prerequisites: c.prerequisites,
       concepts,
       keyTakeaways: c.keyTakeaways,
+      relevance: c.quality.relevance,
     });
     validate.push({
       alias,
