@@ -28,7 +28,7 @@ export class GetDiagnostic {
     if (!session || session.userId !== userId) throw new DiagnosticNotFoundError();
     const topic = await this.topics.execute(session.topicId);
     if (!topic) throw new DiagnosticNotFoundError();
-    const base = currentView(session, session.status === 'in_progress' ? await this.repo.loadBank(session.topicId) : []);
+    const base = currentView(session, session.status === 'in_progress' ? await this.repo.loadBank(session.topicId, [...session.state.engine.served, ...session.state.engine.current]) : []);
     const placement = session.status === 'completed' ? await this.repo.findPlacement(session.id) : null;
     return {
       ...base,

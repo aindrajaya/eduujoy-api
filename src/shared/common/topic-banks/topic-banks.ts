@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { and, inArray, ne } from 'drizzle-orm';
+import { and, inArray, isNull, ne } from 'drizzle-orm';
 import { DATABASE, type Database } from '../../db';
 import { diagnosticItems } from '../../db/schema/assessment';
 
@@ -25,7 +25,7 @@ export class DrizzleTopicBanks implements TopicBanks {
     const rows = await this.db
       .selectDistinct({ topicId: diagnosticItems.topicId })
       .from(diagnosticItems)
-      .where(and(inArray(diagnosticItems.topicId, ids), ne(diagnosticItems.kind, 'short_answer')));
+      .where(and(inArray(diagnosticItems.topicId, ids), ne(diagnosticItems.kind, 'short_answer'), isNull(diagnosticItems.retiredAt)));
     return new Set(rows.map((r) => r.topicId));
   }
 }

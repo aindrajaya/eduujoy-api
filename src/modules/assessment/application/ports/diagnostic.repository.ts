@@ -52,7 +52,11 @@ export interface AnswerReplay {
 
 export interface DiagnosticRepository {
   /** Gradable items (choice kinds with an answer key) for the topic. */
-  loadBank(topicId: string): Promise<ServedItem[]>;
+  /**
+   * The topic's active items, plus any retired ones whose ids are in `keep` (a session that already
+   * holds them finishes normally; they are already served, so the selector never picks them again).
+   */
+  loadBank(topicId: string, keep?: readonly string[]): Promise<ServedItem[]>;
   findById(id: string): Promise<SessionRecord | null>;
   findOpen(userId: string, topicId: string): Promise<SessionRecord | null>;
   /** Null when another request opened a session for this user and topic first. */

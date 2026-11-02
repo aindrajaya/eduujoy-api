@@ -32,8 +32,10 @@ class FakeRepo implements DiagnosticRepository {
   replays = new Map<string, AnswerReplay>();
   raceOnCreate = false;
 
-  loadBank(): Promise<ServedItem[]> {
-    return Promise.resolve(this.bank);
+  /** Retired items (db:seed): left out unless the session already holds them, like the Drizzle repo. */
+  readonly retired = new Set<string>();
+  loadBank(_topicId?: string, keep: readonly string[] = []): Promise<ServedItem[]> {
+    return Promise.resolve(this.bank.filter((s) => !this.retired.has(s.item.id) || keep.includes(s.item.id)));
   }
   findById(id: string): Promise<SessionRecord | null> {
     return Promise.resolve(this.sessions.get(id) ?? null);
@@ -186,6 +188,44 @@ describe('SubmitDiagnosticAnswers', () => {
     const session = t.repo.sessions.get(view.diagnosticId);
     if (session) t.repo.sessions.set(session.id, { ...session, status: 'completed' });
     await expect(t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers })).rejects.toThrow('already complete');
+  });
+});
+
+describe('retired items (user decision, 2 Nov 2026)', () => {
+  const answer = (id: string) => ({ itemId: id, optionIds: [Number(id.slice(1, id.indexOf('-'))) <= 5 ? 'b' : 'a'] });
+
+  it('never selects a retired item for a new diagnostic, in any batch', async () => {
+    const t = setup();
+    const ids = t.repo.bank.map((s) => s.item.id);
+    for (const id of ids.filter((_, i) => i % 3 === 0)) t.repo.retired.add(id);
+    const served: string[] = [];
+    let view = await t.start.execute(startCommand());
+    while (view.status === 'in_progress') {
+      served.push(...(view.items ?? []).map((i) => i.id));
+      view = await t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers: (view.items ?? []).map((i) => answer(i.id)) });
+    }
+    expect(served.length).toBeGreaterThan(0);
+    expect(served.filter((id) => t.repo.retired.has(id))).toEqual([]);
+  });
+
+  it('lets a diagnostic already holding an item that retires finish normally, and never serves it again', async () => {
+    const t = setup();
+    let view = await t.start.execute(startCommand());
+    const held = view.items?.[0]?.id ?? '';
+    t.repo.retired.add(held);
+
+    // Reloading still shows it, and the batch that holds it submits and scores.
+    const first = await t.get.execute('u1', view.diagnosticId);
+    expect(first.items?.map((i) => i.id)).toContain(held);
+    view = await t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers: (first.items ?? []).map((i) => answer(i.id)) });
+    expect(t.repo.answers.some((a) => a.itemId === held)).toBe(true);
+    const later: string[] = [];
+    while (view.status === 'in_progress') {
+      later.push(...(view.items ?? []).map((i) => i.id));
+      view = await t.submit.execute({ userId: 'u1', diagnosticId: view.diagnosticId, answers: (view.items ?? []).map((i) => answer(i.id)) });
+    }
+    expect(view.status).toBe('completed');
+    expect(later).not.toContain(held);
   });
 });
 
