@@ -58,7 +58,7 @@ export function selectCards(cards: ServedCard[], options: { language: string; fo
 }
 
 /** Concepts about the material rather than the topic (check (c) calibration: "Installation", "API Reference"). */
-const META_CONCEPTS = [
+export const META_CONCEPTS: readonly string[] = [
   'installation',
   'install',
   'setup',
