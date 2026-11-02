@@ -2346,11 +2346,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep the code and add `await Promise.resolve()` between the two loads so b is observed early"
+          "label": "Keep the code and add `await Promise.resolve()` between the lines so any rejection is observed before it can be reported"
         },
         {
           "id": "b",
-          "label": "`try { const x = await loadA(); const y = await loadB(); } catch (e) { /* handle */ }`"
+          "label": "`try { const x = await loadA(); const y = await loadB(); } catch (e) { /* handle */ }`, so each await is handled in turn"
         },
         {
           "id": "c",
@@ -2358,7 +2358,7 @@
         },
         {
           "id": "d",
-          "label": "Keep the four lines and wrap them in one try/catch so a rejection from b is also caught"
+          "label": "Keep the code and wrap those four lines in one try/catch, since the catch will handle the rejection of both promises"
         }
       ],
       "answerKey": {

@@ -1973,7 +1973,7 @@
       },
       "rubric": [
         "Aggregating at the item-to-order grain first avoids fan-out and keeps each metric at its correct grain.",
-        "COUNT(DISTINCT) fixes only one metric and DISTINCT on the output does not repair sums."
+        "COUNT(DISTINCT o.id) fixes only the order count while SUM(i.amount) stays inflated, and SELECT DISTINCT on the output cannot repair sums."
       ],
       "reviewed": false
     },
@@ -2056,15 +2056,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`LIMIT 50 OFFSET n` with an index on `created_at`, so the engine jumps straight to row n"
+          "label": "`LIMIT 50 OFFSET n` with an index on `created_at`, since the index lets the engine jump straight to row n without reading earlier rows"
         },
         {
           "id": "b",
-          "label": "Cache a total `COUNT(*)` and compute page numbers from it, so every page stays stable under inserts"
+          "label": "Cache a total `COUNT(*)` and compute page numbers from it, since a known total keeps every page stable even when new rows are inserted"
         },
         {
           "id": "c",
-          "label": "Keyset on `created_at` alone with `WHERE created_at < :last`, since strict comparison avoids repeats"
+          "label": "Keyset on `created_at` alone with `WHERE created_at < :last`, since a strict comparison on an indexed column prevents repeats and skips"
         },
         {
           "id": "d",

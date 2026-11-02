@@ -380,7 +380,7 @@
       },
       "rubric": [
         "Deferred calls run when the surrounding function returns.",
-        "Distractors misread the timing or condition."
+        "Distractors misread when or how the call runs: in a new goroutine, only on error, or closing now and reopening on return."
       ],
       "reviewed": false
     },
@@ -482,7 +482,7 @@
       },
       "rubric": [
         "`:=` is function-scope only; package level needs `var`.",
-        "Other options invent restrictions."
+        "The other options invent restrictions: integers are not limited to `main`, package-level names are not limited to `const`, and `x` is not a reserved name."
       ],
       "reviewed": false
     },
@@ -2267,7 +2267,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Fetch the URLs one at a time in a loop and break out of it on the first error that occurs"
+          "label": "Run the fetches sequentially in a loop and break on the first error, which trivially satisfies the cancellation requirement"
         },
         {
           "id": "b",
@@ -2275,11 +2275,11 @@
         },
         {
           "id": "c",
-          "label": "Start a goroutine per URL with a `sync.WaitGroup`, store errors in a shared `err` variable, and return it after `wg.Wait()`"
+          "label": "Start a goroutine per URL with a `sync.WaitGroup` and write errors into a shared `err` variable that all goroutines assign"
         },
         {
           "id": "d",
-          "label": "Start a goroutine per URL and return the first error read from an unbuffered channel, without waiting for others"
+          "label": "Start a goroutine per URL and return the first value read from an unbuffered error channel, leaving the others to finish"
         }
       ],
       "answerKey": {

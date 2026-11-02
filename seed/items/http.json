@@ -2304,15 +2304,15 @@
         },
         {
           "id": "b",
-          "label": "`SameSite=Lax; Domain=example.com`"
+          "label": "`SameSite=Lax; Domain=example.com`, since a wider Domain makes the cookie Secure"
         },
         {
           "id": "c",
-          "label": "`HttpOnly; SameSite=Strict`"
+          "label": "`HttpOnly; SameSite=Strict`, since Strict also allows cross-site link navigation to carry it"
         },
         {
           "id": "d",
-          "label": "`Secure; SameSite=None; Path=/`"
+          "label": "`Secure; SameSite=None`, with no HttpOnly so the SPA can read it"
         }
       ],
       "answerKey": {
@@ -2335,11 +2335,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Drop the old field and return only the new one, adding a `Warning` header for old clients"
+          "label": "Return the new field and drop the old one, then send `Warning` headers to old clients so they know to migrate to the new shape"
         },
         {
           "id": "b",
-          "label": "Change the shape on `POST` only, since GET responses are never cached by shared caches"
+          "label": "Change the shape for everyone on `POST` only, since GET responses are never cached and so cannot be mixed up by a shared cache"
         },
         {
           "id": "c",
@@ -2347,7 +2347,7 @@
         },
         {
           "id": "d",
-          "label": "Send `301` from `/v1/orders` to `/v2/orders` for all clients so they upgrade on redirect"
+          "label": "Return `301` from `/v1/orders` to `/v2/orders` for every client, so each client upgrades after following the redirect"
         }
       ],
       "answerKey": {

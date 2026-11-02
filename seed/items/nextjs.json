@@ -1144,7 +1144,7 @@
       "options": [
         {
           "id": "a",
-          "label": "In each `page.tsx`, importing a shared `Sidebar` component"
+          "label": "In each `page.tsx`, importing a shared Sidebar component so every dashboard page renders it"
         },
         {
           "id": "b",
@@ -1152,11 +1152,11 @@
         },
         {
           "id": "c",
-          "label": "In `app/layout.tsx`, shown only when `usePathname()` matches `/dashboard`"
+          "label": "In `app/layout.tsx`, shown only when `usePathname()` starts with `/dashboard`, so it also wraps unrelated routes"
         },
         {
           "id": "d",
-          "label": "In `app/dashboard/template.tsx`, rendering `{children}` beside it"
+          "label": "In `app/dashboard/template.tsx`, which wraps children and keeps its state between navigations"
         }
       ],
       "answerKey": {
@@ -2209,11 +2209,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep the cookie read in the root layout and add `revalidate = 3600` to each marketing page"
+          "label": "Keep the cookie read in the root layout and add `revalidate = 3600` to each marketing page so the CDN caches them for an hour"
         },
         {
           "id": "b",
-          "label": "Read the greeting from `localStorage` inside the root layout Server Component instead"
+          "label": "Replace `cookies()` with `localStorage` read in the root layout Server Component, so no request-time API is used on the server"
         },
         {
           "id": "c",
@@ -2221,7 +2221,7 @@
         },
         {
           "id": "d",
-          "label": "Set `dynamic = 'force-static'` on the root layout and keep reading `cookies()` there as is"
+          "label": "Set `dynamic = 'force-static'` on the root layout and keep reading `cookies()` there so every page below it is built statically"
         }
       ],
       "answerKey": {
@@ -2371,7 +2371,7 @@
       },
       "rubric": [
         "Form actions work as native form posts without JS, and the hooks add enhancement when JS runs.",
-        "Handlers that depend on JS events fail before hydration."
+        "Designs that rely on JS event handlers or effects, such as onSubmit with fetch, useEffect calls, or onClick outside a form, fail before hydration."
       ],
       "reviewed": false
     },

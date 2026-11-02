@@ -33,7 +33,7 @@
       },
       "rubric": [
         "A primary key uniquely identifies each row.",
-        "Distractors confuse keys with ordering, column lists or cross-database links."
+        "Distractors confuse keys with ordering, column lists or links to another table."
       ],
       "reviewed": false
     },
@@ -465,15 +465,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Phone numbers are multi-valued; just add a phone4 column"
+          "label": "Phone numbers are a multi-valued type; add a phone4 column and then rename the columns to a general scheme"
         },
         {
           "id": "b",
-          "label": "The searches are slow because the columns lack indexes; index each phone column"
+          "label": "Searches are slow because the columns are unindexed; add an index on each phone column to fix both problems"
         },
         {
           "id": "c",
-          "label": "The phone columns are too narrow; widen them to a bigger text type"
+          "label": "The phone columns are too narrow for some numbers; widen them to a larger text type so a fourth fits"
         },
         {
           "id": "d",
@@ -1371,7 +1371,7 @@
       },
       "rubric": [
         "Subject is a prime attribute, so 3NF holds, but the determinant tutor is not a candidate key, so BCNF fails.",
-        "No partial dependency on a non-prime attribute exists, and repeated values do not break 1NF."
+        "2NF is not violated, because subject is a prime attribute and no non-prime attribute depends on part of the key. Repeated tutor values do not break 1NF, and the tutor-to-subject dependency still breaks BCNF."
       ],
       "reviewed": false
     },

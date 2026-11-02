@@ -521,7 +521,7 @@
       },
       "rubric": [
         "It returns the same output for the same input and touches nothing outside itself.",
-        "Distractors hide a side effect (logging, a counter) or non-determinism (random)."
+        "Distractors hide a side effect (an alert, a counter) or non-determinism (the current time)."
       ],
       "reviewed": false
     },
@@ -1444,15 +1444,15 @@
       "options": [
         {
           "id": "a",
-          "label": "map and filter mutate the source in place; use a plain for loop instead"
+          "label": "map and filter mutate the source array in place, so copies pile up as it grows; switch to a for loop that avoids copies"
         },
         {
           "id": "b",
-          "label": "Each chained call leaks a closure per record; call the functions directly, not composed"
+          "label": "Chaining creates a new closure per record that is never freed, so memory climbs; avoid composition and call each function directly"
         },
         {
           "id": "c",
-          "label": "Impure functions make the runtime cache every result; wrap each step in memoization"
+          "label": "The functions are impure, so the runtime caches every result it computes; wrap each step in memoization to cut the cost"
         },
         {
           "id": "d",

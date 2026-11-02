@@ -155,15 +155,15 @@
         },
         {
           "id": "b",
-          "label": "Tasks written in separate source files, then compiled"
+          "label": "Tasks that are written in separate source files and then compiled together"
         },
         {
           "id": "c",
-          "label": "Tasks that never share data or wait on one another"
+          "label": "Tasks that never need to share any data or wait for any other task to finish"
         },
         {
           "id": "d",
-          "label": "Tasks taking turns on a single core so each makes progress"
+          "label": "Tasks that take turns on one core so that each makes progress over time"
         }
       ],
       "answerKey": {
@@ -1322,7 +1322,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The OS caps runnable threads at one per core, so extra threads just sit blocked"
+          "label": "The OS limits each process to about one runnable thread per core, so the extra threads sit blocked and add scheduler bookkeeping overhead"
         },
         {
           "id": "b",
@@ -1330,11 +1330,11 @@
         },
         {
           "id": "c",
-          "label": "More threads slow the lock itself, so each critical section runs longer than before"
+          "label": "Extra threads make each critical section run longer because the lock itself slows down as more waiters queue up on it"
         },
         {
           "id": "d",
-          "label": "Threads beyond the core count cannot run until the first four finish, wasting memory"
+          "label": "Threads beyond the core count cannot be scheduled until the first four finish, so the extra threads only consume memory and stall"
         }
       ],
       "answerKey": {

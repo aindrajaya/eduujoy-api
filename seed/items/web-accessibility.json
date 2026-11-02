@@ -851,7 +851,7 @@
       },
       "rubric": [
         "A skip link must come early in tab order and point to an existing id.",
-        "Distractors put it last, remove it from focus, or hide it from assistive tech."
+        "Distractors remove the link from the tab order with a negative tabindex, hide it from assistive tech with aria-hidden, or put it last in the body where keyboard users reach it too late."
       ],
       "reviewed": false
     },
@@ -1783,11 +1783,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Setting display:none on the text so it leaves the layout"
+          "label": "Set `display:none` on the text so it is removed from the page layout and no longer takes up visual space"
         },
         {
           "id": "b",
-          "label": "Setting visibility:hidden so the text keeps its space but is not shown"
+          "label": "Set `visibility:hidden` on the text so it keeps its layout space but is not shown to sighted users"
         },
         {
           "id": "c",
@@ -1795,7 +1795,7 @@
         },
         {
           "id": "d",
-          "label": "Setting font-size:0 with transparent color so nothing visible remains"
+          "label": "Set `font-size:0` and `color:transparent` on the text so that nothing visible remains on screen"
         }
       ],
       "answerKey": {

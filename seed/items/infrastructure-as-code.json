@@ -1120,15 +1120,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The subnet block comes after the VPC block"
+          "label": "The subnet block is written below the VPC block in the same file"
         },
         {
           "id": "b",
-          "label": "The subnet sets `vpc_id = \"vpc-main\"`"
+          "label": "The subnet sets `vpc_id = \"vpc-main\"` and the VPC is named `main`"
         },
         {
           "id": "c",
-          "label": "Both resources use the same `tags` values"
+          "label": "The subnet and VPC share identical `tags` block values"
         },
         {
           "id": "d",
@@ -1644,7 +1644,7 @@
       },
       "rubric": [
         "Attributes managed at runtime should be excluded, for example with `ignore_changes`.",
-        "Distractors blame state or provider rather than dual ownership."
+        "Distractors blame the provider, an external scaling policy, or the state backend rather than dual ownership of the attribute."
       ],
       "reviewed": false
     },
@@ -1860,7 +1860,7 @@
       },
       "rubric": [
         "A module earns its keep by encapsulating decisions such as encryption defaults and naming.",
-        "Pass-through wrappers add cost without abstraction; repo location is irrelevant."
+        "Pass-through wrappers add cost without abstraction; being flexible or exposing every argument does not make them maintainable."
       ],
       "reviewed": false
     },

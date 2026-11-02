@@ -552,7 +552,7 @@
       },
       "rubric": [
         "Simple types like i32 implement Copy, so assignment copies the value.",
-        "Distractors invent heap, auto-borrow or ownerless rules."
+        "Distractors invent stack-based exemptions, immutability-based sharing or automatic borrowing rules."
       ],
       "reviewed": false
     },
@@ -1373,15 +1373,15 @@
       "options": [
         {
           "id": "a",
-          "label": "`Vec<T>` needs equal element sizes, so `Box` is only there to pad every struct to the same size"
+          "label": "A `Vec<T>` is limited to one element size, so the compiler rejects structs of different sizes unless `Box` copies each struct onto the heap"
         },
         {
           "id": "b",
-          "label": "`dyn Shape` bounds are checked at runtime, so each element is tested for `Shape` when pushed"
+          "label": "Trait bounds on `dyn Shape` are resolved at runtime, so each element is checked for `Shape` when it is pushed onto the `Vec`"
         },
         {
           "id": "c",
-          "label": "`T: Shape` accepts only built-in types, while trait objects accept any user-defined struct implementing it"
+          "label": "Generic bounds like `T: Shape` accept only built-in types, while trait objects accept any user-defined struct that implements the trait"
         },
         {
           "id": "d",

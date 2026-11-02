@@ -155,15 +155,15 @@
         },
         {
           "id": "b",
-          "label": "A user who gets blocked after too many requests"
+          "label": "A user whose repeated failed requests get blocked by a rate limiter"
         },
         {
           "id": "c",
-          "label": "A database write that fails and must be retried"
+          "label": "A database write that fails and must be retried by the client"
         },
         {
           "id": "d",
-          "label": "A server that runs slower than the other servers"
+          "label": "A server that is slower than the other servers behind a load balancer"
         }
       ],
       "answerKey": {
@@ -1303,7 +1303,7 @@
       },
       "rubric": [
         "Asynchronous replication means a replica can briefly lag, so read-after-write may return stale data.",
-        "If writes were lost, a later refresh would not show new values."
+        "If the primary rejected the write or the load balancer dropped it, the new values would not appear on a later refresh unless the write was retried, and nothing here suggests that."
       ],
       "reviewed": false
     },
@@ -1484,7 +1484,7 @@
       },
       "rubric": [
         "The spike aligns with TTL expiry: a cache stampede sends many simultaneous misses to the database.",
-        "Eviction or network issues would not produce a regular 60-second pattern tied to the TTL."
+        "Cache network latency, memory-pressure eviction, or a scheduled database job would not line up so precisely with the 60-second TTL, and the 99% hit ratio argues against them."
       ],
       "reviewed": false
     },
