@@ -129,4 +129,13 @@ describe('db:seed retires items that left the files (user decision, 2 Nov 2026)'
     const learnerItems = await db.select({ retiredAt: diagnosticItems.retiredAt }).from(diagnosticItems).where(inArray(diagnosticItems.topicId, [learner?.id ?? '']));
     expect(learnerItems.map((r) => r.retiredAt)).toEqual([null]);
   });
+
+  it('never retires a topic whose items are absent from the files, even when the topic itself is listed', async () => {
+    const a = bank(`retire-${randomUUID().slice(0, 8)}`);
+    const b = bank(`retire-${randomUUID().slice(0, 8)}`, 30);
+    await loadSeed(db, { topics: [...a.topics, ...b.topics], items: [...a.items, ...b.items] });
+    // The e2e shape: the full taxonomy, one topic's bank. b's 30 items stay active and nothing is refused.
+    await expect(loadSeed(db, { topics: [...a.topics, ...b.topics], items: a.items })).resolves.toMatchObject({ retired: [], restored: 0 });
+    expect((await rows(b.topics[0]?.slug ?? '')).filter((r) => r.retiredAt !== null)).toEqual([]);
+  });
 });
