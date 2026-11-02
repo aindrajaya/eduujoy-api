@@ -25,29 +25,43 @@ const card = (n: number, over: Partial<ServedCard> = {}): ServedCard => ({
 
 describe('selectCards (v2, after check (c))', () => {
   it('keeps only cards in the path language', () => {
-    const out = selectCards([card(1), card(2, { language: 'id' }), card(3, { language: 'EN' })], { language: 'en', formats: [] });
-    expect(out).toEqual({ cards: [card(1), card(3, { language: 'EN' })], formatFallback: false, droppedForLanguage: 1, droppedTooLong: 0 });
+    const out = selectCards([card(1), card(2, { language: 'id' }), card(3, { language: 'EN' })], { language: 'en', formats: [], stepMax: 90 });
+    expect(out).toEqual({ cards: [card(1), card(3, { language: 'EN' })], formatFallback: false, droppedForLanguage: 1, droppedTooLong: 0, droppedStubs: 0 });
   });
 
   it(`honours the preferred formats when at least ${MIN_FORMAT_CARDS} cards match`, () => {
     const pool = [card(1, { type: 'youtube' }), card(2, { type: 'youtube' }), card(3, { type: 'youtube' }), card(4), card(5, { type: 'paper' })];
-    expect(selectCards(pool, { language: 'en', formats: ['video'] }).cards.map((c) => c.resourceId)).toEqual(['r1', 'r2', 'r3']);
+    expect(selectCards(pool, { language: 'en', formats: ['video'], stepMax: 90 }).cards.map((c) => c.resourceId)).toEqual(['r1', 'r2', 'r3']);
     // text means article, official docs and related pages.
-    expect(selectCards([card(1), card(2, { type: 'official_doc' }), card(3, { type: 'related' }), card(4, { type: 'youtube' })], { language: 'en', formats: ['text'] }).cards).toHaveLength(3);
+    expect(selectCards([card(1), card(2, { type: 'official_doc' }), card(3, { type: 'related' }), card(4, { type: 'youtube' })], { language: 'en', formats: ['text'], stepMax: 90 }).cards).toHaveLength(3);
   });
 
   it('falls back to every format, flagged, when too few match', () => {
-    const out = selectCards([card(1, { type: 'youtube' }), card(2), card(3)], { language: 'en', formats: ['video'] });
+    const out = selectCards([card(1, { type: 'youtube' }), card(2), card(3)], { language: 'en', formats: ['video'], stepMax: 90 });
     expect(out).toMatchObject({ formatFallback: true });
     expect(out.cards).toHaveLength(3);
   });
 });
 
-describe('selectCards and the step cap', () => {
-  it('leaves out texts too long for any step, but keeps long videos (actions can point at a part)', () => {
-    const out = selectCards([card(1, { readingMin: 180 }), card(2, { readingMin: 90 }), card(3, { type: 'youtube', durationMin: 120, readingMin: null })], { language: 'en', formats: [] });
-    expect(out.cards.map((c) => c.resourceId)).toEqual(['r2', 'r3']);
-    expect(out.droppedTooLong).toBe(1);
+describe('selectCards and the step cap (lead, 3 Nov 2026)', () => {
+  const chapters = [{ name: 'Part 1', start: '0:00', end: '20:00' }];
+  const video = (n: number, durationMin: number, over: Partial<ServedCard> = {}) => card(n, { type: 'youtube', durationMin, readingMin: null, ...over });
+
+  it('leaves out texts longer than one step, and long videos only when they have no timed chapters to split by', () => {
+    const out = selectCards([card(1, { readingMin: 50 }), card(2, { readingMin: 45 }), video(3, 120, { concepts: chapters }), video(4, 120), video(5, 40)], { language: 'en', formats: [], stepMax: 45 });
+    expect(out.cards.map((c) => c.resourceId)).toEqual(['r2', 'r3', 'r5']);
+    expect(out.droppedTooLong).toBe(2);
+    // Untimed chapters can't be pointed at.
+    expect(selectCards([video(1, 120, { concepts: [{ name: 'Part', start: null, end: null }] })], { language: 'en', formats: [], stepMax: 90 }).cards).toEqual([]);
+  });
+
+  it('drops docs and related pages under 3 minutes as stubs, but not short articles or unknown lengths', () => {
+    const out = selectCards(
+      [card(1, { type: 'official_doc', readingMin: 2 }), card(2, { type: 'related', readingMin: 1 }), card(3, { type: 'official_doc', readingMin: 3 }), card(4, { readingMin: 1 }), card(5, { type: 'related', readingMin: null })],
+      { language: 'en', formats: [], stepMax: 90 },
+    );
+    expect(out.cards.map((c) => c.resourceId)).toEqual(['r3', 'r4', 'r5']);
+    expect(out.droppedStubs).toBe(2);
   });
 });
 

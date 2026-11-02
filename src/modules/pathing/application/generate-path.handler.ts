@@ -7,7 +7,7 @@ import { GetTopicProfileQuery } from '../../catalog/application/get-topic-profil
 import { type ServedCard } from '../../discovery/application/ports/card.reader';
 import { RequestDiscovery } from '../../discovery/application/request-discovery.usecase';
 import { ServedCardsQuery } from '../../discovery/application/served-cards.query';
-import { PATH_LENGTH_WEEKS, PathGenerated, type Stage } from '../domain';
+import { PATH_LENGTH_WEEKS, PathGenerated, type Stage, stepMaxMinutes } from '../domain';
 import { aliasPool, assembleSteps } from './assemble';
 import { coreConcepts, selectCards } from './select-cards';
 import { designPath } from './design-loop';
@@ -72,10 +72,10 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
 
     const topic = await this.topics.execute(path.topicId);
     if (!topic) throw new NonRetryableJobError('Topic not found');
-    const selection = selectCards(cards, { language: this.settings.language, formats: payload.formats });
+    const weeklyHours = path.weeklyHours ?? 3;
+    const selection = selectCards(cards, { language: this.settings.language, formats: payload.formats, stepMax: stepMaxMinutes(weeklyHours) });
     if (selection.cards.length === 0) throw new NonRetryableJobError(`No usable resources in ${this.settings.language} for this topic and stage`);
     const { design, validate, byAlias } = aliasPool(selection.cards);
-    const weeklyHours = path.weeklyHours ?? 3;
     const request = {
       topic: { name: topic.canonicalName, domain: topic.domain ?? 'unknown' },
       placement: path.from,
@@ -83,6 +83,7 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
       goal: path.goal,
       weeklyHours,
       budgetMinutes: Math.round(weeklyHours * 60 * PATH_LENGTH_WEEKS),
+      stepMaxMinutes: stepMaxMinutes(weeklyHours),
       formats: payload.formats,
       cards: design,
       coreConcepts: coreConcepts(selection.cards, { stages: payload.stages, target: path.to.stage }),

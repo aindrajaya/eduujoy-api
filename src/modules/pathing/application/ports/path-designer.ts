@@ -25,6 +25,8 @@ export interface DesignRequest {
   goal: string | null;
   weeklyHours: number;
   budgetMinutes: number;
+  /** The longest step allowed (stepMaxMinutes of the weekly hours). */
+  stepMaxMinutes: number;
   formats: ('video' | 'text' | 'papers')[];
   cards: DesignCard[];
   /** The concepts the pool's cards teach, most common first (from the cards only, never eval data). */

@@ -2,7 +2,7 @@ import { type ServedCard } from '../../src/modules/discovery/application/ports/c
 import { aliasPool } from '../../src/modules/pathing/application/assemble';
 import { type DesignRequest } from '../../src/modules/pathing/application/ports/path-designer';
 import { type CardSelection, coreConcepts, selectCards } from '../../src/modules/pathing/application/select-cards';
-import { PATH_LENGTH_WEEKS, type PoolCard, targetStage } from '../../src/modules/pathing/domain';
+import { PATH_LENGTH_WEEKS, type PoolCard, stepMaxMinutes, targetStage } from '../../src/modules/pathing/domain';
 import { type EvalCase } from './path-eval-rules';
 
 /**
@@ -16,7 +16,7 @@ export function buildEvalRequest(
   cards: ServedCard[],
   language: string,
 ): { request: DesignRequest; validate: PoolCard[]; byAlias: Map<string, ServedCard>; selection: CardSelection } {
-  const selection = selectCards(cards, { language, formats: c.formats });
+  const selection = selectCards(cards, { language, formats: c.formats, stepMax: stepMaxMinutes(c.weeklyHours) });
   const { design, validate, byAlias } = aliasPool(selection.cards);
   const target = targetStage(c.placement.stage);
   const request: DesignRequest = {
@@ -26,6 +26,7 @@ export function buildEvalRequest(
     goal: c.goal,
     weeklyHours: c.weeklyHours,
     budgetMinutes: Math.round(c.weeklyHours * 60 * PATH_LENGTH_WEEKS),
+    stepMaxMinutes: stepMaxMinutes(c.weeklyHours),
     formats: c.formats,
     cards: design,
     coreConcepts: coreConcepts(selection.cards, { stages: target === c.placement.stage ? [target] : [c.placement.stage, target], target }),

@@ -53,6 +53,16 @@ export const MAX_STEPS = 12;
 export const PASS_SCORE = 80;
 /** No step may ask for more than this (check (c): a 200-minute textbook step marked time realism down). */
 export const MAX_STEP_MINUTES = 90;
+/** A resource may serve at most this many steps (lead, 3 Nov 2026: reuse marked resource fit down). */
+export const MAX_RESOURCE_STEPS = 2;
+
+/**
+ * The longest step a learner can take (lead, 3 Nov 2026): at most MAX_STEP_MINUTES, and at most half of
+ * one week's hours, so a step fits about two sittings.
+ */
+export function stepMaxMinutes(weeklyHours: number): number {
+  return Math.max(1, Math.min(MAX_STEP_MINUTES, Math.floor((weeklyHours * 60) / 2)));
+}
 const TIMESTAMP_SLACK_SEC = 30;
 
 /** Lowercase, punctuation to spaces, single spaces: how concept and prerequisite names compare. */
@@ -72,6 +82,7 @@ export function validatePath(input: ValidationInput): ValidationResult {
   const errors: string[] = [];
   const { steps } = input;
   const cards = new Map(input.pool.map((c) => [c.alias, c]));
+  const stepMax = stepMaxMinutes(input.weeklyHours);
 
   if (steps.length < MIN_STEPS || steps.length > MAX_STEPS) errors.push(`The path has ${steps.length} steps; it needs ${MIN_STEPS} to ${MAX_STEPS}.`);
   steps.forEach((step, i) => {
@@ -86,7 +97,7 @@ export function validatePath(input: ValidationInput): ValidationResult {
     if (step.checkpoint.items.length < 1 || step.checkpoint.items.length > 3) errors.push(`${at}'s checkpoint has ${step.checkpoint.items.length} items; it needs 1 to 3.`);
     if (step.checkpoint.passScore !== PASS_SCORE) errors.push(`${at}'s checkpoint pass score is ${step.checkpoint.passScore}; it must be ${PASS_SCORE}.`);
     if (!Number.isInteger(step.estMinutes) || step.estMinutes < 1) errors.push(`${at}'s estimated minutes must be a whole number of at least 1.`);
-    if (step.estMinutes > MAX_STEP_MINUTES) errors.push(`${at} takes ${step.estMinutes} minutes; keep every step to ${MAX_STEP_MINUTES} minutes or less, splitting it if needed.`);
+    if (step.estMinutes > stepMax) errors.push(`${at} takes ${step.estMinutes} minutes; keep every step to ${stepMax} minutes or less, splitting it if needed.`);
 
     if (step.resources.length < 1 || step.resources.length > 3) errors.push(`${at} cites ${step.resources.length} resources; it needs 1 to 3.`);
     if (new Set(step.resources).size !== step.resources.length) errors.push(`${at} cites the same resource twice.`);
@@ -103,6 +114,7 @@ export function validatePath(input: ValidationInput): ValidationResult {
     }
   }
 
+  errors.push(...reuseErrors(steps));
   errors.push(...citedTimeErrors(steps, cards));
   errors.push(...bloomErrors(input));
   errors.push(...prerequisiteErrors(steps, cards));
@@ -114,6 +126,15 @@ export function validatePath(input: ValidationInput): ValidationResult {
   const types = new Set(steps.flatMap((s) => s.resources).flatMap((a) => (cards.get(a) ? [cards.get(a)?.type] : [])));
   const flags: ValidationFlag[] = types.size < 3 ? ['few_resource_types'] : [];
   return { ok: errors.length === 0, errors, flags };
+}
+
+/** No resource serves more than MAX_RESOURCE_STEPS steps. */
+function reuseErrors(steps: DraftStep[]): string[] {
+  const used = new Map<string, number[]>();
+  for (const step of steps) for (const alias of new Set(step.resources)) used.set(alias, [...(used.get(alias) ?? []), step.n]);
+  return [...used.entries()]
+    .filter(([, at]) => at.length > MAX_RESOURCE_STEPS)
+    .map(([alias, at]) => `${alias} is cited in ${at.length} steps (${at.join(', ')}); a resource may serve at most ${MAX_RESOURCE_STEPS} steps, so use another listed resource.`);
 }
 
 /** Master rules 1–2: never down, at most one level up at a time (ZPD), ending on the band's top. */

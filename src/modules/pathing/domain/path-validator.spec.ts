@@ -1,4 +1,4 @@
-import { citedMinutes, type DraftStep, type PoolCard, validatePath, type ValidationInput } from './path-validator';
+import { citedMinutes, type DraftStep, MAX_RESOURCE_STEPS, type PoolCard, stepMaxMinutes, validatePath, type ValidationInput } from './path-validator';
 import { type Bloom, targetStage } from './vocab';
 
 const card = (alias: string, over: Partial<PoolCard> = {}): PoolCard => ({
@@ -15,6 +15,8 @@ const POOL: PoolCard[] = [
   card('r2', { type: 'article', concepts: [{ name: 'Effects', startSec: null, endSec: null }] }),
   card('r3', { type: 'official_doc', concepts: [{ name: 'Custom hooks', startSec: null, endSec: null }], prerequisites: ['effects'] }),
   card('r4', { type: 'article' }),
+  card('r5', { type: 'article' }),
+  card('r6', { type: 'article' }),
 ];
 
 const step = (n: number, bloom: Bloom, over: Partial<DraftStep> = {}): DraftStep => ({
@@ -40,8 +42,8 @@ const valid = (): ValidationInput => ({
     step(2, 'C3', { resources: ['r2'] }),
     step(3, 'C3', { resources: ['r3', 'r4'] }),
     step(4, 'C4'),
-    step(5, 'C4'),
-    step(6, 'C4'),
+    step(5, 'C4', { resources: ['r5'] }),
+    step(6, 'C4', { resources: ['r6'] }),
   ],
 });
 
@@ -136,8 +138,8 @@ describe('validatePath (A9 plan §2)', () => {
 
   it('flags, without failing, a path with fewer than 3 resource types', () => {
     const input = valid();
-    input.steps.forEach((s) => {
-      s.resources = ['r4'];
+    input.steps.forEach((s, i) => {
+      s.resources = [['r2', 'r2', 'r4', 'r4', 'r5', 'r6'][i] ?? 'r4'];
       s.actions = [{ text: 'Read' }];
     });
     expect(validatePath(input)).toEqual({ ok: true, errors: [], flags: ['few_resource_types'] });
@@ -176,6 +178,28 @@ describe('the per-step cap', () => {
     (input.steps[2] as DraftStep).estMinutes = 90;
     expect(validatePath(input).errors).toEqual([]);
   });
+
+  it('caps a step at half a week, at most 90 minutes (lead, 3 Nov 2026)', () => {
+    expect([1, 1.5, 2, 3, 10].map(stepMaxMinutes)).toEqual([30, 45, 60, 90, 90]);
+    const input = { ...valid(), weeklyHours: 1.5 };
+    (input.steps[2] as DraftStep).estMinutes = 46;
+    (input.steps[3] as DraftStep).estMinutes = 10;
+    expect(validatePath(input).errors).toEqual(['Step 3 takes 46 minutes; keep every step to 45 minutes or less, splitting it if needed.']);
+  });
+});
+
+describe('resource reuse (lead, 3 Nov 2026)', () => {
+  it(`lets a resource serve at most ${MAX_RESOURCE_STEPS} steps`, () => {
+    // r2 already serves step 2: a second step is fine.
+    expect(errorsOf((i) => ((i.steps[4] as DraftStep).resources = ['r2']))).toEqual([]);
+    const everywhere = (i: ValidationInput) => {
+      (i.steps[4] as DraftStep).resources = ['r4'];
+      (i.steps[5] as DraftStep).resources = ['r4'];
+    };
+    expect(errorsOf(everywhere)).toEqual([
+      'r4 is cited in 4 steps (3, 4, 5, 6); a resource may serve at most 2 steps, so use another listed resource.',
+    ]);
+  });
 });
 
 describe('validatePath at the top stage (pe-090: expert C5, no next stage)', () => {
@@ -184,7 +208,7 @@ describe('validatePath at the top stage (pe-090: expert C5, no next stage)', () 
       ...valid(),
       placementBloom: 'C5',
       target: targetStage('expert'),
-      steps: blooms.map((b, i) => step(i + 1, b, i === 0 ? { resources: ['r1'], actions: [{ text: 'Watch' }] } : {})),
+      steps: blooms.map((b, i) => step(i + 1, b, i === 0 ? { resources: ['r1'], actions: [{ text: 'Watch' }] } : { resources: [['r2', 'r4', 'r5', 'r6', 'r2'][i - 1] ?? 'r4'] })),
     });
     expect(validatePath(expert(['C5', 'C5', 'C6', 'C6', 'C6', 'C6'])).errors).toEqual([]);
     expect(validatePath(expert(['C5', 'C5', 'C5', 'C5', 'C5', 'C5'])).errors).toContain('The last step is C5; it must reach the top of the expert band (C6).');

@@ -1,5 +1,5 @@
 import { type ServedCard } from '../../discovery/application/ports/card.reader';
-import { MAX_STEP_MINUTES, normaliseConcept } from '../domain';
+import { normaliseConcept } from '../domain';
 
 export type ResourceFormat = 'video' | 'text' | 'papers';
 
@@ -12,6 +12,9 @@ const FORMAT_TYPES: Record<ResourceFormat, readonly ServedCard['type'][]> = {
 
 /** A preferred format becomes a hard filter only when the pool has at least this many matching cards. */
 export const MIN_FORMAT_CARDS = 3;
+/** Docs and related pages shorter than this are stubs (lead, 3 Nov 2026), not a step's material. */
+export const MIN_STUB_READING_MIN = 3;
+const STUB_TYPES: readonly ServedCard['type'][] = ['official_doc', 'related'];
 
 export interface CardSelection {
   cards: ServedCard[];
@@ -19,25 +22,39 @@ export interface CardSelection {
   formatFallback: boolean;
   /** Cards dropped for not being in the path's language. */
   droppedForLanguage: number;
-  /** Texts too long for any step (over MAX_STEP_MINUTES of reading). */
+  /** Resources too long for one step that cannot be split: texts, and videos without timed chapters. */
   droppedTooLong: number;
+  /** Docs and related pages under MIN_STUB_READING_MIN minutes. */
+  droppedStubs: number;
+}
+
+/** A video whose chapters carry times can be cited in parts (actions point at a chapter). */
+function hasTimedChapters(card: ServedCard): boolean {
+  return card.concepts.some((c) => c.start !== null && c.end !== null);
+}
+
+/** Fits a step of at most `stepMax` minutes, whole or by its timed chapters. */
+function fitsStep(card: ServedCard, stepMax: number): boolean {
+  if (card.type === 'youtube') return card.durationMin === null || card.durationMin <= stepMax || hasTimedChapters(card);
+  return card.readingMin === null || card.readingMin <= stepMax;
 }
 
 /**
- * The cards a path may use (v2, after check (c)): only those in the path's language (one setting,
- * default English, until the learner's language is a product decision), then only the learner's
- * preferred formats when at least MIN_FORMAT_CARDS match; otherwise all formats, flagged.
+ * The cards a path may use (v3, lead 3 Nov 2026): no stubs (docs and related pages under
+ * MIN_STUB_READING_MIN minutes); nothing longer than one step (`stepMax`, stepMaxMinutes) unless it is a
+ * video with timed chapters to cite in parts (texts are cited whole); only cards in the path's language
+ * (one setting, default English); then only the learner's preferred formats when at least
+ * MIN_FORMAT_CARDS match, otherwise all formats, flagged.
  */
-export function selectCards(cards: ServedCard[], options: { language: string; formats: ResourceFormat[] }): CardSelection {
-  // A text no step can hold (more than MAX_STEP_MINUTES of reading, and texts can't be cited in part) is left out.
-  const usable = cards.filter((c) => c.type === 'youtube' || c.readingMin === null || c.readingMin <= MAX_STEP_MINUTES);
+export function selectCards(cards: ServedCard[], options: { language: string; formats: ResourceFormat[]; stepMax: number }): CardSelection {
+  const notStub = cards.filter((c) => !(STUB_TYPES.includes(c.type) && c.readingMin !== null && c.readingMin < MIN_STUB_READING_MIN));
+  const usable = notStub.filter((c) => fitsStep(c, options.stepMax));
   const inLanguage = usable.filter((c) => c.language.toLowerCase() === options.language.toLowerCase());
-  if (options.formats.length === 0) return { cards: inLanguage, formatFallback: false, droppedForLanguage: usable.length - inLanguage.length, droppedTooLong: cards.length - usable.length };
+  const counts = { droppedForLanguage: usable.length - inLanguage.length, droppedTooLong: notStub.length - usable.length, droppedStubs: cards.length - notStub.length };
+  if (options.formats.length === 0) return { cards: inLanguage, formatFallback: false, ...counts };
   const wanted = new Set(options.formats.flatMap((f) => FORMAT_TYPES[f]));
   const matching = inLanguage.filter((c) => wanted.has(c.type));
-  return matching.length >= MIN_FORMAT_CARDS
-    ? { cards: matching, formatFallback: false, droppedForLanguage: usable.length - inLanguage.length, droppedTooLong: cards.length - usable.length }
-    : { cards: inLanguage, formatFallback: true, droppedForLanguage: usable.length - inLanguage.length, droppedTooLong: cards.length - usable.length };
+  return matching.length >= MIN_FORMAT_CARDS ? { cards: matching, formatFallback: false, ...counts } : { cards: inLanguage, formatFallback: true, ...counts };
 }
 
 /** Concepts about the material rather than the topic (check (c) calibration: "Installation", "API Reference"). */

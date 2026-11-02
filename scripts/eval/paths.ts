@@ -198,7 +198,7 @@ async function evaluate(run: EvalRun, c: EvalCase, topic: { id: string; name: st
     steps: outcome.designed.steps.length,
     totalMinutes: outcome.designed.steps.reduce((n, s) => n + s.estMinutes, 0),
     badLinks: invented,
-    selection: { cards: selection.cards.length, droppedForLanguage: selection.droppedForLanguage, formatFallback: selection.formatFallback, coreConcepts: request.coreConcepts },
+    selection: { cards: selection.cards.length, droppedForLanguage: selection.droppedForLanguage, droppedTooLong: selection.droppedTooLong, droppedStubs: selection.droppedStubs, formatFallback: selection.formatFallback, coreConcepts: request.coreConcepts },
     // The full designed path, for reviewing the judge's calibration (lead, 2 Nov 2026).
     path: outcome.designed.steps,
     pool: [...byAlias.entries()].map(([alias, card]) => ({ alias, type: card.type, language: card.language, title: card.title, durationMin: card.durationMin, readingMin: card.readingMin })),

@@ -98,7 +98,7 @@ export function renderRequest(r: DesignRequest): string {
     `Learner: ${r.placement.stage}, Bloom ${r.placement.bloom}`,
     `Path climbs the ${r.target} band (${band.bottom}–${band.top}); the last step must be ${band.top}.`,
     r.goal ? wrapUntrusted('learner-goal', r.goal) : 'Goal: none given',
-    `Weekly hours: ${r.weeklyHours}; time budget for the whole path: ${r.budgetMinutes} minutes.`,
+    `Weekly hours: ${r.weeklyHours}; time budget for the whole path: ${r.budgetMinutes} minutes; each step at most ${r.stepMaxMinutes} minutes.`,
     `Preferred formats: ${r.formats.length ? r.formats.join(', ') : 'any'}${r.formatFallback ? ' (too few resources in those formats, so others are included)' : ''}`,
     r.coreConcepts.length ? wrapUntrusted('core-concepts', r.coreConcepts.join('; ')) : 'Core concepts: none listed',
     '',
