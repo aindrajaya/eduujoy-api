@@ -3,6 +3,7 @@ export {
   type DraftStep,
   MAX_STEPS,
   MIN_STEPS,
+  citedMinutes,
   normaliseConcept,
   PASS_SCORE,
   type PoolCard,

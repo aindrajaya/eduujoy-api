@@ -1,4 +1,4 @@
-import { type DraftStep, type PoolCard, validatePath, type ValidationInput } from './path-validator';
+import { citedMinutes, type DraftStep, type PoolCard, validatePath, type ValidationInput } from './path-validator';
 import { type Bloom, targetStage } from './vocab';
 
 const card = (alias: string, over: Partial<PoolCard> = {}): PoolCard => ({
@@ -141,6 +141,30 @@ describe('validatePath (A9 plan §2)', () => {
       s.actions = [{ text: 'Read' }];
     });
     expect(validatePath(input)).toEqual({ ok: true, errors: [], flags: ['few_resource_types'] });
+  });
+});
+
+describe('cited time (v2, after check (c))', () => {
+  const pool: PoolCard[] = [
+    card('v', { type: 'youtube', durationSec: 41 * 60, concepts: [{ name: 'Part', startSec: 0, endSec: 41 * 60 }] }),
+    card('t', { type: 'article', readingMin: 12 }),
+  ];
+  const at = (resources: string[], estMinutes: number, actions: DraftStep['actions'] = [{ text: 'Do it' }]): DraftStep => step(1, 'C3', { resources, estMinutes, actions });
+  const cards = new Map(pool.map((c) => [c.alias, c]));
+
+  it('needs the full length of a cited resource that no action narrows', () => {
+    expect(citedMinutes(at(['v'], 18), cards)).toBe(41);
+    expect(citedMinutes(at(['v', 't'], 60), cards)).toBe(53);
+    expect(citedMinutes(at(['x'], 5), cards)).toBe(0);
+  });
+
+  it('counts only the ranges actions point at, when they do', () => {
+    expect(citedMinutes(at(['v'], 18, [{ text: 'Watch', resource: 'v', startSec: 60, endSec: 660 }, { text: 'Practise' }]), cards)).toBe(10);
+  });
+
+  it('rejects a step that estimates less than its resources take', () => {
+    const input = { ...valid(), pool, steps: valid().steps.map((s, i) => (i === 0 ? { ...s, resources: ['v'], actions: [{ text: 'Watch it' }], estMinutes: 18 } : { ...s, resources: ['t'], estMinutes: 30 })) };
+    expect(validatePath(input).errors).toContain('Step 1 estimates 18 minutes but its resources take 41; give it at least 41, or point its actions at the parts of the videos it needs.');
   });
 });
 

@@ -5,6 +5,8 @@ export interface PoolCard {
   alias: string;
   type: ResourceType;
   durationSec: number | null;
+  /** Reading time for text resources; null for videos or when unknown. */
+  readingMin?: number | null;
   prerequisites: string[];
   concepts: { name: string; startSec: number | null; endSec: number | null }[];
 }
@@ -98,6 +100,7 @@ export function validatePath(input: ValidationInput): ValidationResult {
     }
   }
 
+  errors.push(...citedTimeErrors(steps, cards));
   errors.push(...bloomErrors(input));
   errors.push(...prerequisiteErrors(steps, cards));
 
@@ -163,3 +166,31 @@ function timestampErrors(at: string, action: DraftAction, card: PoolCard): strin
   const overlaps = timed.some((c) => startSec < (c.endSec as number) + TIMESTAMP_SLACK_SEC && endSec > (c.startSec as number) - TIMESTAMP_SLACK_SEC);
   return timed.length > 0 && !overlaps ? [`${where} (${startSec}–${endSec}s) matches none of the video's chapters; point it at one of them.`] : [];
 }
+
+/**
+ * The minutes a step must at least allow for what it cites (v2, after check (c)): the video ranges its
+ * actions point at, or a cited resource's full length (video duration or reading time) when no action
+ * narrows it. Unknown lengths count 0.
+ */
+export function citedMinutes(step: DraftStep, cards: Map<string, PoolCard>): number {
+  let seconds = 0;
+  for (const alias of step.resources) {
+    const card = cards.get(alias);
+    if (!card) continue;
+    const ranges = step.actions.filter((a) => a.resource === alias && a.startSec != null && a.endSec != null && a.endSec > a.startSec);
+    if (ranges.length > 0) seconds += ranges.reduce((n, a) => n + ((a.endSec as number) - (a.startSec as number)), 0);
+    else if (card.durationSec !== null) seconds += card.durationSec;
+    else if (card.readingMin != null) seconds += card.readingMin * 60;
+  }
+  return Math.ceil(seconds / 60);
+}
+
+function citedTimeErrors(steps: DraftStep[], cards: Map<string, PoolCard>): string[] {
+  return steps.flatMap((step) => {
+    const needed = citedMinutes(step, cards);
+    return Number.isInteger(step.estMinutes) && step.estMinutes < needed
+      ? [`Step ${step.n} estimates ${step.estMinutes} minutes but its resources take ${needed}; give it at least ${needed}, or point its actions at the parts of the videos it needs.`]
+      : [];
+  });
+}
+
