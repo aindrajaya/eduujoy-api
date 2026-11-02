@@ -8,6 +8,7 @@ import { CatalogModule } from '../catalog/catalog.module';
 import { AnalyseResource } from './application/analyse-resource.handler';
 import { DiscoverResources } from './application/discover-resources.handler';
 import { CheckLiveness, LivenessSweep, sweepRequest } from './application/liveness.handlers';
+import { CARD_READER } from './application/ports/card.reader';
 import { DISCOVERY_CLOCK, DISCOVERY_REPOSITORY } from './application/ports/discovery.repository';
 import { LINK_CHECKER } from './application/ports/link-checker';
 import { PAPER_SEARCH } from './application/ports/paper-search';
@@ -16,7 +17,9 @@ import { RESOURCE_ANALYZER } from './application/ports/resource-analyzer';
 import { VIDEO_SEARCH } from './application/ports/video-search';
 import { WEB_DISCOVERY } from './application/ports/web-discovery';
 import { DISCOVERY_CAPS, RequestDiscovery } from './application/request-discovery.usecase';
+import { ServedCardsQuery } from './application/served-cards.query';
 import { ClaudeWebDiscovery } from './infrastructure/claude-web-discovery';
+import { DrizzleCardReader } from './infrastructure/drizzle-card.reader';
 import { DrizzleDiscoveryRepository } from './infrastructure/drizzle-discovery.repository';
 import { DrizzleQuotaCounter } from './infrastructure/drizzle-quota.counter';
 import { GeminiResourceAnalyzer } from './infrastructure/gemini-resource-analyzer';
@@ -38,6 +41,8 @@ import { YouTubeDataApiAdapter } from './infrastructure/youtube-data-api.adapter
     CheckLiveness,
     ReviewQueue,
     { provide: DISCOVERY_REPOSITORY, useClass: DrizzleDiscoveryRepository },
+    { provide: CARD_READER, useClass: DrizzleCardReader },
+    ServedCardsQuery,
     { provide: QUOTA_COUNTER, useClass: DrizzleQuotaCounter },
     { provide: DISCOVERY_CLOCK, useValue: () => new Date() },
     {
@@ -51,7 +56,7 @@ import { YouTubeDataApiAdapter } from './infrastructure/youtube-data-api.adapter
     { provide: WEB_DISCOVERY, useClass: ClaudeWebDiscovery },
     { provide: RESOURCE_ANALYZER, useClass: GeminiResourceAnalyzer },
   ],
-  exports: [RequestDiscovery],
+  exports: [RequestDiscovery, ServedCardsQuery],
 })
 export class DiscoveryModule implements OnModuleInit, OnApplicationBootstrap {
   constructor(

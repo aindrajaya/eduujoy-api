@@ -8,7 +8,12 @@ function setup(scope: 'free' | 'paid', exceeded: Partial<Record<BudgetScope, boo
   const queued: EnqueueRequest[] = [];
   const repo = { latestPool: () => Promise.resolve(null) } as unknown as DiscoveryRepository;
   const queue = {
-    enqueue: (r: EnqueueRequest) => (queued.push(r), Promise.resolve({ job: { id: 'j' }, created: true })),
+    // Like the real queue, an enqueued discovery counts toward its learner's jobs today.
+    enqueue: (r: EnqueueRequest) => {
+      queued.push(r);
+      if (r.userId) triggeredToday[r.userId] = (triggeredToday[r.userId] ?? 0) + 1;
+      return Promise.resolve({ job: { id: 'j' }, created: true });
+    },
     countForUser: (_type: string, userId: string) => Promise.resolve(triggeredToday[userId] ?? 0),
   } as unknown as JobQueue;
   const budget = { status: (s: BudgetScope) => Promise.resolve({ exceeded: exceeded[s] ?? false }) } as unknown as AiBudgetGuard;
@@ -57,6 +62,44 @@ describe('RequestDiscovery budget scopes (D1)', () => {
       const t = setup('free', {}, { 'u-1': 3 });
 
       await expect(t.request.execute({ ...input, userId: 'u-2' })).resolves.toBe('queued');
+    });
+  });
+
+  describe('paths (A9)', () => {
+    it('pre-warms the target stage first, then the placement stage, each under the cap', async () => {
+      const t = setup('paid', {});
+
+      await expect(t.request.forPlacement({ ...input, stage: 'advanced_beginner' })).resolves.toEqual(['queued', 'queued']);
+      expect(t.queued.map((q) => (q.payload as { stage: string }).stage)).toEqual(['competent', 'advanced_beginner']);
+    });
+
+    it("queues only the target stage when a free learner's cap allows one", async () => {
+      const t = setup('free', {});
+
+      await expect(t.request.forPlacement({ ...input, stage: 'competent' })).resolves.toEqual(['queued', 'deferred']);
+      expect(t.queued.map((q) => (q.payload as { stage: string }).stage)).toEqual(['proficient']);
+    });
+
+    it('has a single pool for novices and experts', async () => {
+      const novice = setup('paid', {});
+      await novice.request.forPlacement({ ...input, stage: 'novice' });
+      expect(novice.queued.map((q) => (q.payload as { stage: string }).stage)).toEqual(['novice']);
+      const expert = setup('paid', {});
+      await expert.request.forPlacement({ ...input, stage: 'expert' });
+      expect(expert.queued.map((q) => (q.payload as { stage: string }).stage)).toEqual(['expert']);
+    });
+
+    it("lets a charged path request past the cap, metered to the charge's scope", async () => {
+      const t = setup('free', {}, { 'u-1': 9 });
+
+      await expect(t.request.execute({ ...input, charged: { budgetScope: 'paid' } })).resolves.toBe('queued');
+      expect(t.queued[0]?.payload).toMatchObject({ budgetScope: 'paid' });
+    });
+
+    it('still refuses a charged request when its scope is over budget', async () => {
+      const t = setup('free', { paid: true });
+
+      await expect(t.request.execute({ ...input, charged: { budgetScope: 'paid' } })).resolves.toBe('over_budget');
     });
   });
 });

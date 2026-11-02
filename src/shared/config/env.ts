@@ -32,6 +32,13 @@ export const envSchema = z
     DATABASE_URL: z.string().regex(/^postgres(ql)?:\/\/\S+$/, { error: 'must be a postgres:// connection string' }),
     /** Extra prod endpoint ids (comma-separated) on top of the built-in list (shared/db/prod-endpoints). */
     PROD_DATABASE_ENDPOINTS: z.string().optional(),
+    /** The language a path's resources must be in (two-letter code), until the learner's language is decided. */
+    /**
+     * A9 behind a flag (user, 3 Nov 2026): off (the default) the pathing routes 404 as before A9, so
+     * nothing is reserved, enqueued or generated. Gate B (≥ 4.0 on every dimension) turns it on.
+     */
+    PATH_BUILDING_ENABLED: z.enum(['true', 'false']).default('false').transform((v) => v === 'true'),
+    PATH_RESOURCE_LANGUAGE: z.string().regex(/^[a-z]{2}$/, { error: 'must be a two-letter language code' }).default('en'),
     DATABASE_SCHEMA: z
       .string()
       .regex(/^[a-z_][a-z0-9_]{0,62}$/)

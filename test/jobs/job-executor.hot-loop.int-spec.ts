@@ -70,4 +70,55 @@ describe('JobExecutor: no hot loop while a type is saturated (integration)', () 
     await executor.stop();
     expect(repo.claims).toBeLessThan(15);
   });
+
+  it('backs off rechecking a due row the claim keeps skipping, warns once, and does not spin', async () => {
+    const type = `skip-${randomUUID().slice(0, 8)}`;
+    const calls: number[] = [];
+    // A row that is due but that claimNext never takes (another instance holding it, or a bug).
+    class SkippingRepository extends JobRepository {
+      override claimNext(): ReturnType<JobRepository['claimNext']> {
+        return Promise.resolve(undefined);
+      }
+      override msUntilNextDue(...args: Parameters<JobRepository['msUntilNextDue']>): ReturnType<JobRepository['msUntilNextDue']> {
+        calls.push(Date.now());
+        return super.msUntilNextDue(...args);
+      }
+    }
+    const repo = new SkippingRepository(testDb(client));
+    const warn = jest.spyOn(Logger.prototype, 'warn').mockImplementation(() => undefined);
+    warn.mockClear();
+    const executor = new JobExecutor(repo, new JobSignals(), { problemBaseUrl: 'http://localhost:3000', dueRecheck: { baseMs: 20, maxMs: 160, warnMs: 50 } });
+    executor.register({ type, concurrency: 1, timeoutMs: 1_000, parse: (p) => p, run: () => Promise.resolve({ resultRef: '/never' }) });
+    await repo.enqueue({ type, idempotencyKey: randomUUID(), payload: {}, runAfter: new Date(Date.now() - 1000) });
+
+    await executor.start();
+    await new Promise((r) => setTimeout(r, 1_500));
+    await executor.stop();
+
+    // 20, 40, 80, then 160 ms each: about a dozen checks in 1.5 s, not one every 20 ms (75).
+    expect(calls.length).toBeGreaterThanOrEqual(5);
+    expect(calls.length).toBeLessThanOrEqual(16);
+    const gaps = calls.slice(1).map((t, i) => t - (calls[i] as number));
+    expect(gaps.at(-1)).toBeGreaterThanOrEqual(140);
+    expect(warn.mock.calls.filter(([, msg]) => msg === 'A due job keeps going unclaimed; rechecking with backoff')).toHaveLength(1);
+  });
+
+  it('counts a row as due exactly when claimNext would take it (one claimability predicate)', async () => {
+    const repo = new JobRepository(testDb(client));
+    const statuses = ['queued', 'failed', 'running', 'succeeded', 'dead'] as const;
+    for (const status of statuses) {
+      const type = `pred-${status}-${randomUUID().slice(0, 8)}`;
+      const { job } = await repo.enqueue({ type, idempotencyKey: randomUUID(), payload: {}, runAfter: new Date(Date.now() - 1000) });
+      await client.query('update jobs set status = $1 where id = $2', [status, job.id]);
+
+      const untilDue = await repo.msUntilNextDue([type]);
+      const due = untilDue !== null && untilDue <= 0;
+      const claimed = await repo.claimNext([type]);
+      // Both sides agree, and only queued and failed rows are claimable.
+      expect({ status, due, claimed: claimed?.id === job.id }).toEqual({ status, due: status === 'queued' || status === 'failed', claimed: due });
+      // A type outside the list is neither due nor claimable.
+      expect(await repo.msUntilNextDue([`${type}-other`])).toBeNull();
+    }
+  });
 });
+

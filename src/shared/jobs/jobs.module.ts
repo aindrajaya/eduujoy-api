@@ -1,5 +1,6 @@
 import { Global, Module, type OnApplicationBootstrap, type OnApplicationShutdown } from '@nestjs/common';
 import { AppConfig } from '../config';
+import { JOB_EVENTS_HEARTBEAT_MS, JobEventsController } from './job-events.controller';
 import { JobExecutor } from './job-executor';
 import { JobQueue, JobSignals } from './job-queue';
 import { JobRepository } from './job.repository';
@@ -10,7 +11,9 @@ import { JobRepository } from './job.repository';
  */
 @Global()
 @Module({
+  controllers: [JobEventsController],
   providers: [
+    { provide: JOB_EVENTS_HEARTBEAT_MS, useValue: 20_000 },
     JobRepository,
     JobSignals,
     { provide: JobQueue, inject: [JobRepository, JobSignals], useFactory: (repo: JobRepository, signals: JobSignals) => new JobQueue(repo, signals) },

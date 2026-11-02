@@ -3,7 +3,7 @@ import { DocumentBuilder, type OpenAPIObject, SwaggerModule } from '@nestjs/swag
 import { PROBLEM_SCHEMAS } from './schemas';
 
 /** The frozen contract version this build implements (docs/contract/openapi.v0.yaml). */
-export const CONTRACT_VERSION = '0.9.1-v0';
+export const CONTRACT_VERSION = '0.10.0-v0';
 
 function sortKeys(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(sortKeys);
@@ -47,6 +47,14 @@ function closeRequestSchemas(document: OpenAPIObject): void {
   }
 }
 
+/**
+ * Object-level keywords the swagger decorators can't express, per schema name. Each one is also
+ * enforced at runtime by its route (StepPatchRequest: an empty body is 400).
+ */
+const SCHEMA_KEYWORDS: Record<string, Record<string, unknown>> = {
+  StepPatchRequest: { minProperties: 1 },
+};
+
 export function buildOpenApiDocument(app: INestApplication): OpenAPIObject {
   const config = new DocumentBuilder()
     .setOpenAPIVersion('3.1.0')
@@ -65,5 +73,7 @@ export function buildOpenApiDocument(app: INestApplication): OpenAPIObject {
     schemas: { ...document.components?.schemas, ...PROBLEM_SCHEMAS },
   };
   closeRequestSchemas(document);
+  const schemas = (document.components.schemas ?? {}) as Record<string, Record<string, unknown>>;
+  for (const [name, keywords] of Object.entries(SCHEMA_KEYWORDS)) if (schemas[name]) Object.assign(schemas[name], keywords);
   return sortKeys(document) as OpenAPIObject;
 }

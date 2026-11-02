@@ -3,7 +3,7 @@ import { Logger } from '@nestjs/common';
 import { type Client } from 'pg';
 import { AiBudgetExceededError } from '../../src/shared/ai/errors';
 import { JobExecutor } from '../../src/shared/jobs/job-executor';
-import { type JobHandler, NonRetryableJobError } from '../../src/shared/jobs/job-handler';
+import { type JobHandler, NonRetryableJobError, RescheduleJob } from '../../src/shared/jobs/job-handler';
 import { JobQueue, JobSignals } from '../../src/shared/jobs/job-queue';
 import { JobRepository } from '../../src/shared/jobs/job.repository';
 import { type JobEvent } from '../../src/shared/jobs/job.types';
@@ -232,6 +232,84 @@ describe('JobExecutor (integration)', () => {
     const statuses = await Promise.all(ids.map(async (id) => (await repo.findById(id))?.status));
     expect(statuses.every((st) => st === 'queued' || st === 'succeeded')).toBe(true);
     expect(errors.mock.calls.filter(([, msg]) => msg === 'Job pump failed')).toEqual([]);
+    errors.mockRestore();
+  });
+
+  it('reschedules without using an attempt, runs again when due, and wakeWaiting makes it due at once', async () => {
+    let runs = 0;
+    const h = handler({
+      run: (p) => {
+        runs += 1;
+        if (runs < 3) return Promise.reject(new RescheduleJob(runs === 1 ? 100 : 60 * 60_000, 'pool not ready'));
+        return Promise.resolve({ resultRef: `/v1/paths/${p.n}` });
+      },
+    });
+    executor.register(h);
+    await executor.start();
+
+    const { job } = await queue.enqueue({ type: h.type, idempotencyKey: randomUUID(), payload: { n: 4, topicId: 't-1' }, maxAttempts: 1 });
+    // Run 1 waits 100 ms and runs again on the timer; run 2 waits an hour, so only a wake brings run 3.
+    for (const until = Date.now() + 10_000; runs < 2; ) {
+      if (Date.now() > until) throw new Error(`second run never happened: ${JSON.stringify(await repo.findById(job.id))}`);
+      await sleep(25);
+    }
+    await executor.idle();
+    const waiting = await repo.findById(job.id);
+    expect(waiting).toMatchObject({ status: 'queued', attempts: 0, lockedAt: null });
+    expect(await queue.wakeWaiting(h.type, { topicId: 'other' })).toBe(0);
+    expect(await queue.wakeWaiting(h.type, { topicId: 't-1' })).toBe(1);
+
+    // maxAttempts 1, yet it ran three times: waiting never used the attempt.
+    expect(await waitFor(job.id, ['succeeded'])).toMatchObject({ attempts: 1, result: { resultRef: '/v1/paths/4' } });
+    await executor.idle();
+    expect(runs).toBe(3);
+    expect(events.map((e) => e.type)).toEqual(['completed']);
+  });
+
+  it('fails a job that keeps waiting past maxWaitMs with SERVICE_UNAVAILABLE, then calls onDead once', async () => {
+    const dead: { payload: { n: number }; jobId: string; error: unknown }[] = [];
+    const h = handler({
+      maxWaitMs: 300,
+      run: () => Promise.reject(new RescheduleJob(100, 'pool for t-9 not ready')),
+      onDead: (payload, info) => {
+        dead.push({ payload, ...info });
+        return Promise.resolve();
+      },
+    });
+    executor.register(h);
+    await executor.start();
+
+    const { job } = await queue.enqueue({ type: h.type, idempotencyKey: randomUUID(), payload: { n: 9 } });
+    const failed = await waitFor(job.id, ['dead']);
+    await executor.idle();
+
+    expect(failed.error).toMatch(/^Gave up waiting after 300 ms: pool for t-9 not ready$/);
+    const event = events.find((e) => e.type === 'failed');
+    expect(event?.data).toMatchObject({ jobId: job.id, retryable: false, problem: { code: 'SERVICE_UNAVAILABLE', status: 503, detail: 'Please try again later.' } });
+    expect(JSON.stringify(event?.data)).not.toContain('t-9');
+    expect(dead).toHaveLength(1);
+    expect(dead[0]).toMatchObject({ payload: { n: 9 }, jobId: job.id });
+  });
+
+  it('calls onDead when attempts run out, not on a retry, and logs a throwing hook', async () => {
+    const errors = jest.spyOn(Logger.prototype, 'error').mockImplementation(() => undefined);
+    const calls: string[] = [];
+    const h = handler({
+      run: () => Promise.reject(new Error('upstream down')),
+      onDead: (_p, info) => {
+        calls.push(info.jobId);
+        return Promise.reject(new Error('refund failed'));
+      },
+    });
+    executor.register(h);
+    await executor.start();
+
+    const { job } = await queue.enqueue({ type: h.type, idempotencyKey: randomUUID(), payload: { n: 1 }, maxAttempts: 2 });
+    await waitFor(job.id, ['dead']);
+    await executor.idle();
+
+    expect(calls).toEqual([job.id]);
+    expect(errors.mock.calls.some(([, msg]) => msg === 'Job onDead hook failed')).toBe(true);
     errors.mockRestore();
   });
 

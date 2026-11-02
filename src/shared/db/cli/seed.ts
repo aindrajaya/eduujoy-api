@@ -4,6 +4,7 @@ import { parseArgs } from 'node:util';
 import { Client } from 'pg';
 import { createDatabase, type Database } from '../database';
 import { describeError } from '../redact';
+import { loadConceptMaps, readConceptMaps } from '../seed/concept-maps';
 import { loadSeed } from '../seed/load-seed';
 import { SeedRetireRefusedError } from '../seed/retire-policy';
 import { parseSeed, readSeedFiles } from '../seed/seed-data';
@@ -16,6 +17,8 @@ import { guardConnection } from './guard';
 // Items that left the files are retired (inactive, never served to new sessions, rows kept): when any
 // would retire, --expect-retired must name the exact count (the dry run prints it). A short --dir, or
 // more than 1% (at most 200) of the active seed items, is refused with nothing written.
+// Concept maps (seed/concept-maps) are upserted onto their seed topics after the items; additive, a map
+// that left the files keeps its row.
 /** The resolved --dir, for the refusal message's [wrong key] marks. */
 let seedDir = resolve('seed');
 
@@ -38,12 +41,13 @@ async function main(): Promise<void> {
   const dir = resolve(values.dir);
   seedDir = dir;
   const data = parseSeed(readSeedFiles(dir));
+  const maps = readConceptMaps(dir);
   const expectRaw = values['expect-retired'];
   if (expectRaw !== undefined && !/^\d{1,6}$/.test(expectRaw)) throw new Error('--expect-retired must be a whole number');
   const expectRetired = expectRaw === undefined ? undefined : Number(expectRaw);
   // `--check` validates the seed and proves the script loads under its runner, without connecting.
   if (values.check) {
-    process.stdout.write(`db:seed: ok (${data.topics.length} topics)\n`);
+    process.stdout.write(`db:seed: ok (${data.topics.length} topics, ${maps.length} concept maps)\n`);
     return;
   }
 
@@ -55,11 +59,13 @@ async function main(): Promise<void> {
     const dryRun = values['dry-run'];
     const report = async (exec: Database): Promise<void> => {
       const result = await loadSeed(exec, data, expectRetired === undefined ? {} : { expectRetired });
+      const mapped = await loadConceptMaps(exec, maps);
       const counts = await topicCounts(exec);
       process.stdout.write(
         `${dryRun ? 'DRY RUN (rolled back): would seed' : 'Seeded'} from ${values.dir}: ${result.topics} topics, ${result.prerequisites} prerequisite edges, ` +
           `${result.items} diagnostic items. Seed topics in database: ${counts.seed} (plus ${counts.other} learner or reviewer topics)\n` +
-          `${dryRun ? 'Would retire' : 'Retired'} ${result.retired.length} item(s) no longer in the files; ${result.restored} retired item(s) back in the files are active again.\n`,
+          `${dryRun ? 'Would retire' : 'Retired'} ${result.retired.length} item(s) no longer in the files; ${result.restored} retired item(s) back in the files are active again.\n` +
+          `Concept maps: ${mapped.loaded} in the files, ${mapped.changed} ${dryRun ? 'would be written' : 'written'} (new or changed).\n`,
       );
       printKeys(result.retired, wrongKeyItems(dir));
       // Only seed topics are checked: learner-created topics are legitimate in prod (23 Oct 2026, the prod

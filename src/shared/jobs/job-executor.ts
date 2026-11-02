@@ -1,7 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { toProblem } from '../common/problem/problem';
 import { type JobSignals } from './job-queue';
-import { type JobEventListener, type JobHandler, NonRetryableJobError } from './job-handler';
+import { type JobEventListener, type JobHandler, JobWaitExpiredError, NonRetryableJobError, RescheduleJob } from './job-handler';
 import { type JobRepository } from './job.repository';
 import { type JobEventType, type JobRecord } from './job.types';
 
@@ -22,11 +22,22 @@ export interface ExecutorOptions {
    * and scheduling the retry, so a run and its retry don't overlap.
    */
   abortGraceMs?: number;
+  /**
+   * Rechecks of a job that is due but was not claimed back off from `baseMs`, doubling to `maxMs`,
+   * with one warning once a wait passes `warnMs`; any claim resets it. Defaults 250 ms, 30 s, 5 s.
+   */
+  dueRecheck?: { baseMs: number; maxMs: number; warnMs: number };
   /** Finished jobs (and their events) are pruned after this long; checked on start and daily. */
   retentionMs?: number;
   clock?: () => Date;
   random?: () => number;
 }
+
+/** JobHandler.maxWaitMs default (A9: a path waits at most 30 minutes for its resources). */
+const DEFAULT_MAX_WAIT_MS = 30 * 60_000;
+
+/** scheduleNext's backoff for a job that is due but was not claimed (ExecutorOptions.dueRecheck). */
+const DUE_RECHECK = { baseMs: 250, maxMs: 30_000, warnMs: 5_000 };
 
 class TimeoutError extends Error {
   override name = 'JobTimeoutError';
@@ -57,6 +68,9 @@ export class JobExecutor {
   private pumpTask: Promise<void> = Promise.resolve();
   private pumpAgain = false;
   private stopped = true;
+  /** Consecutive rechecks of a due job that no claim took (scheduleNext backoff). */
+  private dueMisses = 0;
+  private dueWarned = false;
 
   constructor(
     private readonly repo: JobRepository,
@@ -74,9 +88,13 @@ export class JobExecutor {
     this.handlers.set(handler.type, handler);
   }
 
-  /** Subscribe to persisted job events (A9 streams them over SSE). */
-  onEvent(listener: JobEventListener): void {
+  /** Subscribe to persisted job events (A9 streams them over SSE); returns the unsubscribe. */
+  onEvent(listener: JobEventListener): () => void {
     this.listeners.push(listener);
+    return () => {
+      const i = this.listeners.indexOf(listener);
+      if (i >= 0) this.listeners.splice(i, 1);
+    };
   }
 
   /** Resume on boot: requeue jobs whose process is gone (stale locks), then run. */
@@ -167,6 +185,8 @@ export class JobExecutor {
         for (;;) {
           const job = await this.repo.claimNext(this.typesWithFreeSlots());
           if (!job) break;
+          this.dueMisses = 0;
+          this.dueWarned = false;
           if (this.stopped) {
             // Claimed while stop() ran: hand it straight back rather than start work during shutdown.
             if (job.lockedAt) await this.repo.release([{ id: job.id, lockedAt: job.lockedAt }]);
@@ -194,16 +214,29 @@ export class JobExecutor {
   }
 
   /**
-   * Arms one timer for the earliest *future* run_after among types with a free slot. Saturated types
-   * need no timer (a finishing job pumps), and due-now jobs were just claimed, so this can't spin.
+   * Arms one timer for the earliest run_after among types with a free slot. Saturated types need no
+   * timer (a finishing job pumps). A job already due but not claimed (it fell due after the claim
+   * missed it, or another instance holds its row) is rechecked with backoff, so a row the claim keeps
+   * skipping can't poll the database several times a second or keep Neon from suspending.
    */
   private async scheduleNext(): Promise<void> {
     clearTimeout(this.timer);
     const untilDue = await this.repo.msUntilNextDue(this.typesWithFreeSlots());
     if (untilDue === null || this.stopped) return;
-    const delay = Math.max(0, Math.min(Math.ceil(untilDue), 2 ** 31 - 1));
+    const delay = untilDue <= 0 ? this.dueRecheckDelay() : Math.min(Math.ceil(untilDue), 2 ** 31 - 1);
     this.timer = setTimeout(() => void this.pump(), delay);
     this.timer.unref();
+  }
+
+  private dueRecheckDelay(): number {
+    const { baseMs, maxMs, warnMs } = this.options.dueRecheck ?? DUE_RECHECK;
+    const delay = Math.min(maxMs, baseMs * 2 ** Math.min(this.dueMisses, 30));
+    this.dueMisses += 1;
+    if (delay > warnMs && !this.dueWarned) {
+      this.dueWarned = true;
+      this.logger.warn({ misses: this.dueMisses, delayMs: delay }, 'A due job keeps going unclaimed; rechecking with backoff');
+    }
+    return delay;
   }
 
   private launch(job: JobRecord): void {
@@ -253,12 +286,26 @@ export class JobExecutor {
       await this.emit(job.id, 'completed', { jobId: job.id, ...outcome });
       this.logger.log({ jobId: job.id, type: job.type, attempt: job.attempts, ms: this.now().getTime() - started }, 'Job succeeded');
     } catch (error) {
+      if (error instanceof RescheduleJob) {
+        await this.reschedule(job, claim, handler, error);
+        return;
+      }
       if (error instanceof TimeoutError && run) await this.settleOrGrace(job.id, run);
       const retryable = !(error instanceof NonRetryableJobError) && job.attempts < job.maxAttempts;
       await this.finishFailed(job, claim, error, retryable);
     } finally {
       clearTimeout(timer);
     }
+  }
+
+  /** RescheduleJob: wait without using an attempt, or fail for good once past the handler's maxWaitMs. */
+  private async reschedule(job: JobRecord, claim: Claim, handler: JobHandler, request: RescheduleJob): Promise<void> {
+    const maxWaitMs = handler.maxWaitMs ?? DEFAULT_MAX_WAIT_MS;
+    if (await this.repo.reschedule(claim, Math.max(0, request.delayMs), maxWaitMs)) {
+      this.logger.log({ jobId: job.id, type: job.type, delayMs: request.delayMs, reason: request.message }, 'Job rescheduled');
+      return;
+    }
+    await this.finishFailed(job, claim, new JobWaitExpiredError(`Gave up waiting after ${maxWaitMs} ms: ${request.message}`), false);
   }
 
   /** Waits for an aborted run to settle, at most abortGraceMs; its late outcome is ignored either way. */
@@ -301,6 +348,18 @@ export class JobExecutor {
       instance: `/v1/jobs/${job.id}`,
     });
     await this.emit(job.id, 'failed', { jobId: job.id, retryable: false, problem: body });
+    await this.notifyDead(job, error);
+  }
+
+  /** JobHandler.onDead, best effort; skipped when the payload itself is unparseable. */
+  private async notifyDead(job: JobRecord, error: unknown): Promise<void> {
+    const handler = this.handlers.get(job.type);
+    if (!handler?.onDead) return;
+    try {
+      await handler.onDead(handler.parse(job.payload), { jobId: job.id, error });
+    } catch (hookError) {
+      this.logger.error({ jobId: job.id, type: job.type, err: hookError instanceof Error ? hookError : new Error(String(hookError)) }, 'Job onDead hook failed');
+    }
   }
 
   /** Exponential backoff, capped, with ±50% jitter (factor in [0.5, 1.5)). */

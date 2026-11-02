@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Eduujoy API
-  version: 0.9.1-v0
+  version: 0.10.0-v0
   summary: Frozen v0 contract for the Eduujoy MVP.
   description: |
     Frozen v0 contract, written from PRD-API Section 7 (endpoints), Section 8 and master PRD
@@ -342,6 +342,11 @@ paths:
         '401': { $ref: '#/components/responses/Unauthorized' }
         '402': { $ref: '#/components/responses/QuotaExceeded' }
         '403': { $ref: '#/components/responses/Forbidden' }
+        '404':
+          description: Unknown placement, or a placement that is not the caller's (code NOT_FOUND).
+          content:
+            application/problem+json:
+              schema: { $ref: '#/components/schemas/Problem' }
         '409': { $ref: '#/components/responses/Conflict' }
         '429': { $ref: '#/components/responses/TooManyRequests' }
         '503': { $ref: '#/components/responses/BudgetExceeded' }
@@ -374,6 +379,9 @@ paths:
       tags: [pathing]
       operationId: pathsGet
       summary: Read one path with steps and resources.
+      description: |
+        404 also while the path is still being generated: a generating path is not a Path yet.
+        Follow the `jobId` from POST /v1/paths over GET /v1/jobs/{id}/events until it completes.
       parameters:
         - $ref: '#/components/parameters/IdPath'
         - $ref: '#/components/parameters/IfNoneMatch'

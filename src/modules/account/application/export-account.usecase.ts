@@ -18,8 +18,9 @@ export class ExportAccount {
     @Inject(ACCOUNT_DATA.progress) progress: AccountDataContributor,
     @Inject(ACCOUNT_DATA.billing) billing: AccountDataContributor,
     @Inject(ACCOUNT_DATA.catalog) catalog: AccountDataContributor,
+    @Inject(ACCOUNT_DATA.pathing) pathing: AccountDataContributor,
   ) {
-    this.contributors = [identity, assessment, progress, billing, catalog];
+    this.contributors = [identity, assessment, progress, billing, catalog, pathing];
   }
 
   async execute(userId: string): Promise<Record<string, unknown>> {

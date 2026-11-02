@@ -112,10 +112,27 @@ export class FakeBillingRepository implements BillingRepository {
       entitlement: this.entitlements.get(input.userId) ?? null,
       balance: this.balance(input.userId),
       usedPathsBetween: (from, to) =>
-        Promise.resolve(this.ledger.filter((r) => r.userId === input.userId && r.reason === 'path' && r.delta === 0 && r.createdAt >= from && r.createdAt < to).length),
+        Promise.resolve(
+          this.ledger.filter(
+            (r) =>
+              r.userId === input.userId &&
+              r.reason === 'path' &&
+              r.delta === 0 &&
+              r.createdAt >= from &&
+              r.createdAt < to &&
+              !this.ledger.some((x) => x.reason === 'refund' && x.externalRef === r.externalRef),
+          ).length,
+        ),
     });
     if (charge !== 'exceeded') this.insert({ userId: input.userId, delta: charge === 'plan' ? 0 : -1, reason: 'path', externalRef: ref });
     return charge;
+  }
+
+  refundPath(input: { userId: string; pathRef: string }): Promise<'refunded' | 'duplicate' | 'not_charged'> {
+    const ref = `path:${input.pathRef}`;
+    const charge = this.ledger.find((r) => r.userId === input.userId && r.reason === 'path' && r.externalRef === ref);
+    if (!charge) return Promise.resolve('not_charged');
+    return Promise.resolve(this.insert({ userId: input.userId, delta: -charge.delta, reason: 'refund', externalRef: ref }) ? 'refunded' : 'duplicate');
   }
 }
 

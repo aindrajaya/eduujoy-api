@@ -6,6 +6,14 @@ import { type EnqueueRequest, type EnqueueResult, type JobEvent, type JobEventTy
 
 const CLAIMABLE = ['queued', 'failed'] as const;
 
+/**
+ * Waiting jobs of `types` that claimNext may take once due. claimNext and msUntilNextDue share it, so
+ * the timer never waits on a row the claim would skip (a mismatch would re-arm forever).
+ */
+function claimable(types: string[]): ReturnType<typeof and> {
+  return and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types));
+}
+
 @Injectable()
 export class JobRepository {
   constructor(@Inject(DATABASE) private readonly db: Database) {}
@@ -48,7 +56,7 @@ export class JobRepository {
     const candidate = this.db
       .select({ id: jobs.id })
       .from(jobs)
-      .where(and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types), lte(jobs.runAfter, sql`now()`)))
+      .where(and(claimable(types), lte(jobs.runAfter, sql`now()`)))
       .orderBy(asc(jobs.runAfter), asc(jobs.createdAt))
       .limit(1)
       .for('update', { skipLocked: true });
@@ -88,6 +96,39 @@ export class JobRepository {
       .where(this.owned(claim))
       .returning({ id: jobs.id });
     return rows.length > 0;
+  }
+
+  /**
+   * RescheduleJob: back to `queued` without using the attempt, due after `delayMs` but never later
+   * than the wait deadline (created_at + maxWaitMs), so the last check lands on the deadline. False
+   * when the deadline has passed (the caller fails the job) or the run no longer holds its lock.
+   */
+  async reschedule(claim: { id: string; lockedAt: Date }, delayMs: number, maxWaitMs: number): Promise<boolean> {
+    const deadline = sql`${jobs.createdAt} + make_interval(secs => ${maxWaitMs / 1000})`;
+    const rows = await this.db
+      .update(jobs)
+      .set({
+        status: 'queued',
+        attempts: sql`greatest(${jobs.attempts} - 1, 0)`,
+        runAfter: sql`least(now() + make_interval(secs => ${delayMs / 1000}), ${deadline})`,
+        lockedAt: null,
+      })
+      .where(and(this.owned(claim), sql`now() < ${deadline}`))
+      .returning({ id: jobs.id });
+    return rows.length > 0;
+  }
+
+  /**
+   * Makes rescheduled jobs of `type` whose payload contains `match` (jsonb @>) due now, e.g. the
+   * path jobs waiting on a topic's pool once its resources are ready. Returns how many it woke.
+   */
+  async wakeWaiting(type: string, match: Record<string, unknown>): Promise<number> {
+    const rows = await this.db
+      .update(jobs)
+      .set({ runAfter: sql`now()` })
+      .where(and(eq(jobs.type, type), eq(jobs.status, 'queued'), gt(jobs.runAfter, sql`now()`), sql`${jobs.payload} @> ${JSON.stringify(match)}::jsonb`))
+      .returning({ id: jobs.id });
+    return rows.length;
   }
 
   /** On stop: put this instance's unfinished claims back in the queue (attempts kept). */
@@ -131,23 +172,20 @@ export class JobRepository {
   }
 
   /**
-   * Milliseconds until the earliest *future* run_after among waiting jobs of `types` (database clock),
-   * for the executor's next timer. Jobs already due are not counted: either a slot frees up (and the
-   * finishing job pumps) or they were just claimed.
+   * Milliseconds until the earliest run_after among waiting jobs of `types` (database clock), for the
+   * executor's next timer; zero or negative when one is already due. A job can fall due between the
+   * claim that missed it and this query (a short RescheduleJob delay against Neon latency), so due
+   * jobs count too, or nothing would ever wake for them.
    */
   async msUntilNextDue(types: string[]): Promise<number | null> {
     if (types.length === 0) return null;
     const [row] = await this.db
       .select({ ms: sql<string | null>`extract(epoch from (min(${jobs.runAfter}) - now())) * 1000` })
       .from(jobs)
-      .where(and(inArray(jobs.status, [...CLAIMABLE]), inArray(jobs.type, types), gt(jobs.runAfter, sql`now()`)));
+      .where(claimable(types));
     return row?.ms == null ? null : Number(row.ms);
   }
 
-  /**
-   * Account deletion (A13): removes the learner's jobs that aren't running (their events cascade).
-   * A running job finishes on its own; deleting the user then sets its user_id to null.
-   */
   /** Jobs of one type a user triggered since `since` (any status; finished jobs are kept 30 days). */
   async countForUser(type: string, userId: string, since: Date): Promise<number> {
     const [row] = await this.db
@@ -157,6 +195,10 @@ export class JobRepository {
     return row?.n ?? 0;
   }
 
+  /**
+   * Account deletion (A13): removes the learner's jobs that aren't running (their events cascade).
+   * A running job finishes on its own; deleting the user then sets its user_id to null.
+   */
   async deleteForUser(userId: string, exec: DbExecutor = this.db): Promise<number> {
     const rows = await exec
       .delete(jobs)

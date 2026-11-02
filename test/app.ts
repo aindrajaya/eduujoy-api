@@ -9,9 +9,11 @@ import { PAPER_SEARCH } from '../src/modules/discovery/application/ports/paper-s
 import { RESOURCE_ANALYZER } from '../src/modules/discovery/application/ports/resource-analyzer';
 import { VIDEO_SEARCH } from '../src/modules/discovery/application/ports/video-search';
 import { WEB_DISCOVERY } from '../src/modules/discovery/application/ports/web-discovery';
+import { FakePathDesigner } from '../src/modules/pathing/application/pathing.fakes';
+import { PATH_DESIGNER } from '../src/modules/pathing/application/ports/path-designer';
 import { EMBEDDER, STRUCTURED_GENERATOR, WEB_SEARCHER } from '../src/shared/ai';
 import { configureApp } from '../src/shared/common/http';
-import { AppConfig } from '../src/shared/config';
+import { AppConfig, parseEnv } from '../src/shared/config';
 
 export type TestApp = NestExpressApplication;
 
@@ -44,7 +46,9 @@ function withOutboundFakes(builder: TestingModuleBuilder): TestingModuleBuilder 
     .overrideProvider(LINK_CHECKER)
     .useValue(new FakeLinkChecker(null))
     .overrideProvider(RESOURCE_ANALYZER)
-    .useValue(new FakeResourceAnalyzer());
+    .useValue(new FakeResourceAnalyzer())
+    .overrideProvider(PATH_DESIGNER)
+    .useValue(new FakePathDesigner());
 }
 
 /** Boots the real app stack; `override` swaps providers (for example external clients) for fakes. */
@@ -56,4 +60,9 @@ export async function createTestApp(
   configureApp(app, app.get(AppConfig));
   await app.init();
   return app;
+}
+
+/** Turns path building on (A9 ships with PATH_BUILDING_ENABLED off): for the specs that exercise it. */
+export function withPathBuilding(builder: TestingModuleBuilder): TestingModuleBuilder {
+  return builder.overrideProvider(AppConfig).useValue(new AppConfig({ ...parseEnv(process.env), PATH_BUILDING_ENABLED: true }));
 }

@@ -7,4 +7,5 @@ export const ACCOUNT_DATA = {
   progress: Symbol('ProgressAccountData'),
   billing: Symbol('BillingAccountData'),
   catalog: Symbol('CatalogAccountData'),
+  pathing: Symbol('PathingAccountData'),
 } as const;

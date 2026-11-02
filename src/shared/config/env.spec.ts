@@ -39,6 +39,13 @@ describe('parseEnv', () => {
     expect(env.LOG_LEVEL).toBe('info');
   });
 
+  it('keeps path building off unless PATH_BUILDING_ENABLED is exactly "true" (user, 3 Nov 2026)', () => {
+    expect(parseEnv(valid).PATH_BUILDING_ENABLED).toBe(false);
+    expect(parseEnv({ ...valid, PATH_BUILDING_ENABLED: 'false' }).PATH_BUILDING_ENABLED).toBe(false);
+    expect(parseEnv({ ...valid, PATH_BUILDING_ENABLED: 'true' }).PATH_BUILDING_ENABLED).toBe(true);
+    for (const typo of ['1', 'yes', 'TRUE', '']) expect(() => parseEnv({ ...valid, PATH_BUILDING_ENABLED: typo })).toThrow(EnvValidationError);
+  });
+
   it('applies defaults for PORT and NODE_ENV', () => {
     const env = parseEnv({ ...valid, NODE_ENV: undefined, PORT: undefined });
 

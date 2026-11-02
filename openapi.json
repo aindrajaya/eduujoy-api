@@ -1,6 +1,23 @@
 {
   "components": {
     "schemas": {
+      "ActionDoneDto": {
+        "additionalProperties": false,
+        "properties": {
+          "done": {
+            "type": "boolean"
+          },
+          "n": {
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "n",
+          "done"
+        ],
+        "type": "object"
+      },
       "BloomLevel": {
         "enum": [
           "C1",
@@ -44,6 +61,88 @@
         },
         "required": [
           "url"
+        ],
+        "type": "object"
+      },
+      "Checkpoint": {
+        "properties": {
+          "attempts": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CheckpointItem"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "lastScore": {
+            "nullable": true,
+            "type": "integer"
+          },
+          "passScore": {
+            "default": 80,
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "rubric": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "items",
+          "passScore"
+        ],
+        "type": "object"
+      },
+      "CheckpointItem": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "single_choice",
+              "multi_choice",
+              "short_answer",
+              "open"
+            ],
+            "type": "string"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/CheckpointItemOptionDto"
+            },
+            "type": "array"
+          },
+          "prompt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "prompt"
+        ],
+        "type": "object"
+      },
+      "CheckpointItemOptionDto": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label"
         ],
         "type": "object"
       },
@@ -325,6 +424,39 @@
         ],
         "type": "object"
       },
+      "JobAccepted": {
+        "properties": {
+          "eventsUrl": {
+            "type": "string"
+          },
+          "jobId": {
+            "type": "string"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/JobStatus"
+              }
+            ]
+          }
+        },
+        "required": [
+          "jobId",
+          "status",
+          "eventsUrl"
+        ],
+        "type": "object"
+      },
+      "JobStatus": {
+        "enum": [
+          "queued",
+          "running",
+          "succeeded",
+          "failed",
+          "dead"
+        ],
+        "type": "string"
+      },
       "LoginRequest": {
         "additionalProperties": false,
         "properties": {
@@ -400,6 +532,251 @@
         "required": [
           "id",
           "email"
+        ],
+        "type": "object"
+      },
+      "Path": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "currentStep": {
+            "description": "The first step that is not done yet, so Today renders from the list alone. Null when the path is not active or every step is done.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PathStepSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "from": {
+            "$ref": "#/components/schemas/Position"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "generating",
+              "active",
+              "completed",
+              "failed",
+              "under_review"
+            ],
+            "type": "string"
+          },
+          "steps": {
+            "description": "6–12 generated steps, plus any inserted remedial steps.",
+            "items": {
+              "$ref": "#/components/schemas/PathStep"
+            },
+            "minItems": 6,
+            "type": "array"
+          },
+          "stepsDone": {
+            "type": "integer"
+          },
+          "stepsTotal": {
+            "type": "integer"
+          },
+          "to": {
+            "$ref": "#/components/schemas/Position"
+          },
+          "topic": {
+            "$ref": "#/components/schemas/Topic"
+          },
+          "totalHours": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "topic",
+          "from",
+          "to",
+          "status",
+          "createdAt",
+          "steps"
+        ],
+        "type": "object"
+      },
+      "PathCreateRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "goal": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "placementId": {
+            "type": "string"
+          },
+          "weeklyHours": {
+            "maximum": 40,
+            "minimum": 1,
+            "type": "number"
+          }
+        },
+        "required": [
+          "placementId"
+        ],
+        "type": "object"
+      },
+      "PathListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PathSummary"
+            },
+            "type": "array"
+          },
+          "nextCursor": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "type": "object"
+      },
+      "PathStep": {
+        "properties": {
+          "actions": {
+            "items": {
+              "$ref": "#/components/schemas/StepActionDto"
+            },
+            "type": "array"
+          },
+          "bloom": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BloomLevel"
+              }
+            ]
+          },
+          "checkpoint": {
+            "$ref": "#/components/schemas/Checkpoint"
+          },
+          "difficulty": {
+            "enum": [
+              "too_easy",
+              "ok",
+              "too_hard",
+              null
+            ],
+            "nullable": true,
+            "type": "string"
+          },
+          "doneWhen": {
+            "type": "string"
+          },
+          "estMinutes": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "id": {
+            "type": "string"
+          },
+          "n": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "objective": {
+            "type": "string"
+          },
+          "remedial": {
+            "default": false,
+            "type": "boolean"
+          },
+          "resources": {
+            "items": {
+              "$ref": "#/components/schemas/Resource"
+            },
+            "maxItems": 3,
+            "minItems": 1,
+            "type": "array"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StepStatus"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "n",
+          "objective",
+          "bloom",
+          "actions",
+          "resources",
+          "checkpoint",
+          "doneWhen",
+          "estMinutes",
+          "status"
+        ],
+        "type": "object"
+      },
+      "PathSummary": {
+        "properties": {
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "currentStep": {
+            "description": "The first step that is not done yet, so Today renders from the list alone. Null when the path is not active or every step is done.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PathStepSummary"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "from": {
+            "$ref": "#/components/schemas/Position"
+          },
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "generating",
+              "active",
+              "completed",
+              "failed",
+              "under_review"
+            ],
+            "type": "string"
+          },
+          "stepsDone": {
+            "type": "integer"
+          },
+          "stepsTotal": {
+            "type": "integer"
+          },
+          "to": {
+            "$ref": "#/components/schemas/Position"
+          },
+          "topic": {
+            "$ref": "#/components/schemas/Topic"
+          },
+          "totalHours": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "topic",
+          "from",
+          "to",
+          "status",
+          "createdAt"
         ],
         "type": "object"
       },
@@ -572,11 +949,166 @@
         ],
         "type": "object"
       },
+      "Resource": {
+        "description": "Public view of a ResourceCard (US-04).",
+        "properties": {
+          "bloomLevels": {
+            "items": {
+              "$ref": "#/components/schemas/BloomLevel"
+            },
+            "type": "array"
+          },
+          "concepts": {
+            "items": {
+              "$ref": "#/components/schemas/ResourceConcept"
+            },
+            "type": "array"
+          },
+          "durationMin": {
+            "nullable": true,
+            "type": "integer"
+          },
+          "id": {
+            "type": "string"
+          },
+          "keyTakeaways": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 5,
+            "type": "array"
+          },
+          "language": {
+            "type": "string"
+          },
+          "prerequisites": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "published": {
+            "format": "date",
+            "nullable": true,
+            "type": "string"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/ResourceQuality"
+          },
+          "readingMin": {
+            "nullable": true,
+            "type": "integer"
+          },
+          "source": {
+            "type": "string"
+          },
+          "stage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DreyfusStage"
+              }
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ResourceType"
+              }
+            ]
+          },
+          "url": {
+            "format": "uri",
+            "type": "string"
+          },
+          "whyThis": {
+            "type": "string"
+          },
+          "youtubeId": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "url",
+          "title",
+          "source",
+          "stage",
+          "bloomLevels"
+        ],
+        "type": "object"
+      },
+      "ResourceConcept": {
+        "properties": {
+          "end": {
+            "nullable": true,
+            "pattern": "^\\d{1,2}:\\d{2}(:\\d{2})?$",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "nullable": true,
+            "pattern": "^\\d{1,2}:\\d{2}(:\\d{2})?$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
       "ResourceFormat": {
         "enum": [
           "video",
           "text",
           "papers"
+        ],
+        "type": "string"
+      },
+      "ResourceQuality": {
+        "properties": {
+          "accuracySignals": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "recency": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "relevance": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "teaching": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "relevance",
+          "accuracySignals",
+          "recency",
+          "teaching"
+        ],
+        "type": "object"
+      },
+      "ResourceType": {
+        "enum": [
+          "youtube",
+          "article",
+          "official_doc",
+          "paper",
+          "related"
         ],
         "type": "string"
       },
@@ -603,6 +1135,63 @@
           }
         },
         "type": "object"
+      },
+      "StepActionDto": {
+        "properties": {
+          "done": {
+            "type": "boolean"
+          },
+          "n": {
+            "type": "integer"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "n",
+          "text",
+          "done"
+        ],
+        "type": "object"
+      },
+      "StepPatchRequest": {
+        "additionalProperties": false,
+        "minProperties": 1,
+        "properties": {
+          "actionsDone": {
+            "items": {
+              "$ref": "#/components/schemas/ActionDoneDto"
+            },
+            "maxItems": 50,
+            "type": "array"
+          },
+          "difficulty": {
+            "enum": [
+              "too_easy",
+              "ok",
+              "too_hard"
+            ],
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "completed",
+              "skipped"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "StepStatus": {
+        "enum": [
+          "locked",
+          "active",
+          "completed",
+          "skipped"
+        ],
+        "type": "string"
       },
       "Topic": {
         "properties": {
@@ -772,7 +1361,7 @@
     "contact": {},
     "description": "Generated from the NestJS app; checked against docs/contract/openapi.v0.yaml by `pnpm openapi:check`.",
     "title": "Eduujoy API",
-    "version": "0.9.1-v0"
+    "version": "0.10.0-v0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -1648,6 +2237,99 @@
         ]
       }
     },
+    "/v1/jobs/{id}/events": {
+      "get": {
+        "operationId": "jobsEvents",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Last-Event-ID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Event stream.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "enum": [
+                    "no-cache"
+                  ],
+                  "type": "string"
+                }
+              },
+              "X-Accel-Buffering": {
+                "schema": {
+                  "enum": [
+                    "no"
+                  ],
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "403": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not the owner, missing role or CSRF rejected."
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not found (code NOT_FOUND)."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Job progress stream (SSE).",
+        "tags": [
+          "jobs"
+        ]
+      }
+    },
     "/v1/me": {
       "delete": {
         "description": "Requires a sign-in (password or Google, not a token refresh) within the last 10 minutes.\nOtherwise 401 with code `REAUTH_REQUIRED`: the client must not try a refresh for it (a\nrefresh keeps the original sign-in time); it asks the learner to sign in again, then retries.\n",
@@ -1763,6 +2445,446 @@
         "summary": "Download all my personal data as JSON (GDPR-level export, master PRD §12; PRD-API §12).",
         "tags": [
           "auth"
+        ]
+      }
+    },
+    "/v1/paths": {
+      "get": {
+        "operationId": "pathsList",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "maximum": 50,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "maxLength": 256,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Only paths with this status, for example `active` for the Today screen.",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "enum": [
+                "generating",
+                "active",
+                "completed",
+                "failed",
+                "under_review"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "topicId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "If-None-Match",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathListResponse"
+                }
+              }
+            },
+            "description": "Paths, newest first.",
+            "headers": {
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "List my paths.",
+        "tags": [
+          "pathing"
+        ]
+      },
+      "post": {
+        "operationId": "pathsCreate",
+        "parameters": [
+          {
+            "description": "Retries of the same request reuse it.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 128,
+              "minLength": 8,
+              "type": "string"
+            }
+          },
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PathCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobAccepted"
+                }
+              }
+            },
+            "description": "Job accepted. Stream progress from `GET /v1/jobs/{jobId}/events`."
+          },
+          "400": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            },
+            "description": "Validation failed; `errors` maps to form fields."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "402": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Plan quota or credits exhausted (code QUOTA_EXCEEDED)."
+          },
+          "403": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not the owner, missing role or CSRF rejected."
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Unknown placement, or a placement that is not the caller's (code NOT_FOUND)."
+          },
+          "409": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Conflict."
+          },
+          "429": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Rate limited (code RATE_LIMITED).",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "503": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Daily AI budget reached for cold topics (code AI_BUDGET_EXCEEDED).",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds until the next UTC midnight, when the daily budget resets (at least 1).",
+                "schema": {
+                  "minimum": 1,
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Request a path; asynchronous (FR-13).",
+        "tags": [
+          "pathing"
+        ]
+      }
+    },
+    "/v1/paths/{id}": {
+      "get": {
+        "description": "404 also while the path is still being generated: a generating path is not a Path yet.\nFollow the `jobId` from POST /v1/paths over GET /v1/jobs/{id}/events until it completes.\n",
+        "operationId": "pathsGet",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "If-None-Match",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Path"
+                }
+              }
+            },
+            "description": "Path.",
+            "headers": {
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not modified."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "403": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not the owner, missing role or CSRF rejected."
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not found (code NOT_FOUND)."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Read one path with its steps and resources.",
+        "tags": [
+          "pathing"
+        ]
+      }
+    },
+    "/v1/steps/{id}": {
+      "patch": {
+        "operationId": "stepsUpdate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "maxLength": 64,
+              "type": "string"
+            }
+          },
+          {
+            "description": "CSRF guard for unsafe methods.",
+            "in": "header",
+            "name": "X-Requested-With",
+            "required": true,
+            "schema": {
+              "enum": [
+                "eduujoy"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StepPatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathStep"
+                }
+              }
+            },
+            "description": "Updated step."
+          },
+          "400": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            },
+            "description": "Validation failed; `errors` maps to form fields."
+          },
+          "401": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not signed in or session expired (code UNAUTHENTICATED)."
+          },
+          "403": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not the owner, missing role or CSRF rejected."
+          },
+          "404": {
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "description": "Not found (code NOT_FOUND)."
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "summary": "Mark actions done, rate difficulty (US-08), change step status.",
+        "tags": [
+          "pathing"
         ]
       }
     },

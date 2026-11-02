@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { eq } from 'drizzle-orm';
 import { type Client } from 'pg';
 import { DrizzleBillingRepository } from '../../src/modules/billing/infrastructure/drizzle-billing.repository';
+import { DrizzleQuotaRepository } from '../../src/modules/billing/infrastructure/drizzle-quota.repository';
 import { billingEvents, creditLedger, entitlements } from '../../src/shared/db/schema/billing';
 import { users } from '../../src/shared/db/schema/identity';
 import { connectTestClient, testDb, type TestDb } from '../db/connect';
@@ -138,5 +139,44 @@ describe('DrizzleBillingRepository (integration)', () => {
       await Promise.all(clients.map((c) => c.end()));
     }
     expect(await balance(userId)).toBe(0);
+  });
+
+  it('refunds a path once: a credit comes back, a plan slot frees up, and nothing is charged twice (A9)', async () => {
+    const userId = await user();
+    await repo.grantPurchase({ userId, credits: 1, orderRef: `ls-order:${randomUUID()}` });
+    const window = [new Date(0), new Date(Date.now() + 60_000)] as const;
+    // One plan slot this period, then credits.
+    const decide = async (state: { balance: number; usedPathsBetween: (a: Date, b: Date) => Promise<number> }) => {
+      if ((await state.usedPathsBetween(...window)) < 1) return 'plan' as const;
+      return state.balance > 0 ? ('credit' as const) : ('exceeded' as const);
+    };
+    const quota = new DrizzleQuotaRepository(db);
+
+    await expect(repo.reservePath({ userId, pathRef: 'a' }, decide)).resolves.toBe('plan');
+    await expect(repo.reservePath({ userId, pathRef: 'b' }, decide)).resolves.toBe('credit');
+    await expect(repo.reservePath({ userId, pathRef: 'c' }, decide)).resolves.toBe('exceeded');
+    expect(await balance(userId)).toBe(0);
+    expect(await quota.countPlanCoveredPaths(userId, ...window)).toBe(1);
+
+    // The credit-paid path and the plan-paid path fail for good: each is refunded exactly once.
+    await expect(repo.refundPath({ userId, pathRef: 'b' })).resolves.toBe('refunded');
+    await expect(repo.refundPath({ userId, pathRef: 'b' })).resolves.toBe('duplicate');
+    await expect(repo.refundPath({ userId, pathRef: 'a' })).resolves.toBe('refunded');
+    await expect(repo.refundPath({ userId, pathRef: 'a' })).resolves.toBe('duplicate');
+    await expect(repo.refundPath({ userId, pathRef: 'never-charged' })).resolves.toBe('not_charged');
+    await expect(repo.refundPath({ userId: await user(), pathRef: 'a' })).resolves.toBe('not_charged');
+    expect(await balance(userId)).toBe(1);
+    expect(await quota.countPlanCoveredPaths(userId, ...window)).toBe(0);
+
+    // Re-charging a refunded path returns its earlier charge and writes nothing; a new path uses the freed slot.
+    await expect(repo.reservePath({ userId, pathRef: 'a' }, decide)).resolves.toBe('plan');
+    await expect(repo.reservePath({ userId, pathRef: 'd' }, decide)).resolves.toBe('plan');
+    await expect(repo.reservePath({ userId, pathRef: 'e' }, decide)).resolves.toBe('credit');
+    expect(await balance(userId)).toBe(0);
+    const rows = await db.select({ reason: creditLedger.reason, ref: creditLedger.externalRef, delta: creditLedger.delta }).from(creditLedger).where(eq(creditLedger.userId, userId));
+    expect(rows.filter((r) => r.reason === 'refund').sort((x, y) => (x.ref ?? '').localeCompare(y.ref ?? ''))).toEqual([
+      { reason: 'refund', ref: 'path:a', delta: 0 },
+      { reason: 'refund', ref: 'path:b', delta: 1 },
+    ]);
   });
 });
