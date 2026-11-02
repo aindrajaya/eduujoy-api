@@ -722,15 +722,15 @@
         },
         {
           "id": "b",
-          "label": "The signature stays valid after logout because the server only re-signs tokens when the user logs in again"
+          "label": "The signature stays valid after logout until the server re-signs the token"
         },
         {
           "id": "c",
-          "label": "Logout deletes the token from the database, but a cache keeps serving the stale copy until it is refreshed"
+          "label": "Logout deletes the token from the database, but a cache keeps serving the old copy"
         },
         {
           "id": "d",
-          "label": "JWTs are bound to the user's IP address at login, and that address has not changed since the user signed in"
+          "label": "JWTs are bound to the user's IP address at login, and that address has not changed"
         }
       ],
       "answerKey": {
@@ -753,15 +753,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Keep the pre-login session ID and copy the cart into it, so the user's cart is preserved"
+          "label": "Keep the old session ID and copy the cart into it"
         },
         {
           "id": "b",
-          "label": "Keep the pre-login session ID but mark it as authenticated and set the HttpOnly flag on its cookie"
+          "label": "Keep the old session ID and mark it as authenticated"
         },
         {
           "id": "c",
-          "label": "Extend the old session's expiry to 30 days so the user is not logged out"
+          "label": "Extend the old session's expiry so the user stays signed in"
         },
         {
           "id": "d",
@@ -1329,15 +1329,15 @@
         },
         {
           "id": "b",
-          "label": "The consent screen is skipped for returning users, so attackers can bypass the approval step and obtain codes"
+          "label": "Consent screen is skipped for returning users, so attackers bypass approval"
         },
         {
           "id": "c",
-          "label": "The token endpoint accepts the client ID without a secret, so attackers can exchange codes they have intercepted"
+          "label": "Token endpoint accepts the client ID without a secret, so intercepted codes can be redeemed"
         },
         {
           "id": "d",
-          "label": "Authorization codes travel in the query string, which exposes them to anyone who can read the browser's address bar"
+          "label": "Authorization codes travel in the query string, so anyone reading the address bar sees them"
         }
       ],
       "answerKey": {
@@ -1347,7 +1347,7 @@
       },
       "rubric": [
         "Redirect URIs must be compared by exact match; prefix matching lets lookalike hosts receive codes.",
-        "The other options misattribute the leak to normal protocol features."
+        "The other options point to secondary features (skipped consent, a missing client secret, codes in the query string) that don't explain how attackers receive victims' codes."
       ],
       "reviewed": false
     },
@@ -2039,11 +2039,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Authorization code flow with a client secret embedded in the bundle, since the secret authenticates the app to the token endpoint"
+          "label": "Authorization code flow with a client secret embedded in the bundle to authenticate the app"
         },
         {
           "id": "b",
-          "label": "Resource owner password credentials flow, since the app collects credentials itself and avoids redirect interception entirely"
+          "label": "Resource owner password credentials flow, so the app avoids redirects entirely"
         },
         {
           "id": "c",
@@ -2051,7 +2051,7 @@
         },
         {
           "id": "d",
-          "label": "Implicit flow, because the access token returns directly in the redirect and no code exchange exists to intercept"
+          "label": "Implicit flow, since the token returns in the redirect and no code exists to intercept"
         }
       ],
       "answerKey": {

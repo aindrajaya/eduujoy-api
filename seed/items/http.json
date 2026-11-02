@@ -1594,11 +1594,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The session expired between the click and the refresh because no Max-Age was set, so the browser dropped the cookie after the first request"
+          "label": "With no Max-Age set, the cookie expires after the first request; the refresh logs in again"
         },
         {
           "id": "b",
-          "label": "HttpOnly prevents the cookie being sent on navigations that start from outside the browser, such as links opened from an email client"
+          "label": "HttpOnly blocks the cookie on navigations that start outside the browser, such as email links"
         },
         {
           "id": "c",
@@ -1606,7 +1606,7 @@
         },
         {
           "id": "d",
-          "label": "Secure cookies are only sent once the TLS session is resumed, so the first request after a click goes out without the cookie"
+          "label": "Secure cookies are sent only after TLS session resumption, so the first request goes out without it"
         }
       ],
       "answerKey": {
@@ -1701,7 +1701,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The CDN ignored the immutable directive and served a different file to those users, so the origin should purge its edge caches after every deploy"
+          "label": "The CDN ignored immutable and served a different file to those users, so the origin must purge edge caches"
         },
         {
           "id": "b",
@@ -1709,11 +1709,11 @@
         },
         {
           "id": "c",
-          "label": "The server sent no ETag validator, so browsers fell back to caching the script indefinitely and the server must add an ETag header to fix it"
+          "label": "Without an ETag validator, browsers cached the script indefinitely, so the server must add an ETag header"
         },
         {
           "id": "d",
-          "label": "A hard refresh sends the request as POST rather than GET, which bypasses the stale copy that normal reloads keep serving from cache"
+          "label": "A hard refresh sends POST instead of GET, which skips the stale copy that normal reloads keep serving"
         }
       ],
       "answerKey": {

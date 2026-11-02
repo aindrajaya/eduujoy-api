@@ -262,11 +262,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Browsers render real heading elements faster than styled divs, which helps users on slow connections"
+          "label": "Browsers render real headings faster than styled divs on slow connections"
         },
         {
           "id": "b",
-          "label": "Search engines mostly skip text outside heading tags, so styled divs can hurt a page's ranking"
+          "label": "Search engines ignore text outside heading tags, so divs hurt page ranking"
         },
         {
           "id": "c",
@@ -274,7 +274,7 @@
         },
         {
           "id": "d",
-          "label": "Headings are the main way to change font size in a way that respects user zoom settings"
+          "label": "Headings are the only way to set font sizes that respect zoom"
         }
       ],
       "answerKey": {
@@ -829,7 +829,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Put `<a href=\"#main\" tabindex=\"-1\">Skip to main content</a>` first in `<body>`, with `<main id=\"main\">` further down the page"
+          "label": "Put `<a href=\"#main\" tabindex=\"-1\">Skip to main content</a>` first in `<body>`, with `<main id=\"main\">`"
         },
         {
           "id": "b",
@@ -837,11 +837,11 @@
         },
         {
           "id": "c",
-          "label": "Put `<a href=\"#main\" aria-hidden=\"true\">Skip to main content</a>` first in `<body>`, with `<main id=\"main\">` below it"
+          "label": "Put `<a href=\"#main\" aria-hidden=\"true\">Skip to main content</a>` first in `<body>`"
         },
         {
           "id": "d",
-          "label": "Put `<a href=\"#main\">Skip to main content</a>` as the last element in `<body>`, with `<main id=\"main\">` above it"
+          "label": "Put `<a href=\"#main\">Skip to main content</a>` last in `<body>`, with `<main id=\"main\">`"
         }
       ],
       "answerKey": {
@@ -851,7 +851,7 @@
       },
       "rubric": [
         "A skip link must come early in tab order and point to an existing id.",
-        "Distractors put it last, remove it from focus, or hide it from assistive tech."
+        "Distractors remove the link from the tab order with a negative tabindex, hide it from assistive tech with aria-hidden, or put it last in the body where keyboard users reach it too late."
       ],
       "reviewed": false
     },
@@ -1251,15 +1251,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The list needs `role=\"presentation\"` so its items are hidden from the accessibility tree"
+          "label": "The list needs `role=\"presentation\"` on its items"
         },
         {
           "id": "b",
-          "label": "`aria-haspopup` should be `true` rather than `listbox`, so the popup type is announced"
+          "label": "`aria-haspopup` must be `true`, not `listbox`"
         },
         {
           "id": "c",
-          "label": "`tabindex=\"-1\"` is missing on the button, so it never receives focus from the keyboard"
+          "label": "`tabindex=\"-1\"` is missing from the button element"
         },
         {
           "id": "d",

@@ -1528,15 +1528,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The event payload is occasionally too large, so the broker silently rejects the message after the order transaction has already committed"
+          "label": "The event payload is too large, so the broker silently rejects it after the order has committed"
         },
         {
           "id": "b",
-          "label": "The broker uses topics instead of queues, so some consumers are never subscribed to receive the event when it is published"
+          "label": "The broker uses topics, not queues, so some consumers are never subscribed to the event"
         },
         {
           "id": "c",
-          "label": "The order service uses an ORM, which delays commits until after the publish call has returned and so reorders the two steps"
+          "label": "The ORM delays the commit until after the publish call returns, which reorders the two steps"
         },
         {
           "id": "d",

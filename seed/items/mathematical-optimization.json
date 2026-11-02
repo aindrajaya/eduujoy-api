@@ -2235,7 +2235,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`10 <= x <= 50` and `0 <= x <= 0`, joined by OR"
+          "label": "`10 <= x <= 50` OR `x = 0`, no binary"
         },
         {
           "id": "b",
@@ -2243,11 +2243,11 @@
         },
         {
           "id": "c",
-          "label": "`x(x-10) >= 0` and `x <= 50` with x >= 0"
+          "label": "`x(x-10) >= 0`, `x <= 50`"
         },
         {
           "id": "d",
-          "label": "`x <= 50y` and `x >= 10(1-y)` with y binary"
+          "label": "`10(1-y) <= x <= 50y`, y binary"
         }
       ],
       "answerKey": {
@@ -2257,7 +2257,7 @@
       },
       "rubric": [
         "With y=0, x is forced to 0; with y=1, x lies in [10,50], and all constraints are linear.",
-        "The second option forces x>=10 when y=0; the third is nonlinear; the fourth is not a linear constraint set."
+        "The option with 10(1-y) forces x>=10 when y=0 (and x=0 is infeasible there); the quadratic option is nonlinear; the OR option without a binary is not a linear constraint set."
       ],
       "reviewed": false
     },

@@ -43,3 +43,10 @@ Actual cost of every paid run, from API usage at catalog list prices. Hard stop 
 | 2026-11-02 20:10 | concept-maps-draft | batch | 6 | 1249 | 1598 | 7990 | 27157 | $0.1394 | msgbatch_01W19j3FyWU3Z9J16kEQzkbg |
 | 2026-11-02 20:13 | concept-maps-draft | batch | 1 | 211 | 0 | 1598 | 4971 | $0.0251 | msgbatch_012nVcUwb2WDmuj9hT41BzoZ |
 | 2026-11-02 20:20 | concept-maps-review | batch | 14 | 66118 | 1655 | 21515 | 62924 | $0.3839 | msgbatch_01QCda3KGLXDYkVq9KW5uig6 |
+| 2026-11-02 20:33 | length-round --sample | standard | 5 | 1602 | 662 | 2648 | 500 | $0.0101 | v1 |
+| 2026-11-02 20:41 | length-round | batch | 332 | 128801 | 1324 | 218460 | 52771 | $0.4052 | msgbatch_01URTwYzd3nDf3ijBSdTo5p1 |
+| 2026-11-02 20:49 | length-round | batch | 74 | 29533 | 0 | 48988 | 8351 | $0.0737 | msgbatch_01WkWUeC5Lob5DQ6YiKnVpCk |
+| 2026-11-02 21:46 | rubric-fix-rewrite --sample | standard | 5 | 2924 | 698 | 2792 | 189 | $0.0098 | v1 |
+| 2026-11-02 21:47 | rubric-fix-verify --sample | standard | 5 | 2072 | 526 | 2104 | 165 | $0.0073 | v1 |
+| 2026-11-02 21:53 | rubric-fix-rewrite | batch | 283 | 176535 | 1396 | 196138 | 14626 | $0.2612 | msgbatch_01QzsgJ5THuKu91Ffyz91FUq |
+| 2026-11-02 22:14 | rubric-fix-verify | batch | 283 | 126840 | 526 | 148332 | 9591 | $0.1829 | msgbatch_01BZMYBnNuSGyVPTdazdNyD8 |

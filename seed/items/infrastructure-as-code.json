@@ -1626,15 +1626,15 @@
         },
         {
           "id": "b",
-          "label": "The provider is buggy and miscalculates capacity, so a version upgrade alone would remove the diff"
+          "label": "The provider miscalculates capacity, so upgrading it would remove the diff"
         },
         {
           "id": "c",
-          "label": "The scaling policy was created outside the code, so Terraform must destroy it before planning"
+          "label": "The scaling policy was made outside Terraform, so plan must destroy it"
         },
         {
           "id": "d",
-          "label": "The state backend is losing writes at night, so Terraform forgets the real capacity before each plan"
+          "label": "The state backend loses writes overnight, so Terraform forgets live capacity"
         }
       ],
       "answerKey": {
@@ -1644,7 +1644,7 @@
       },
       "rubric": [
         "Attributes managed at runtime should be excluded, for example with `ignore_changes`.",
-        "Distractors blame state or provider rather than dual ownership."
+        "Distractors blame the provider, an external scaling policy, or the state backend rather than dual ownership of the attribute."
       ],
       "reviewed": false
     },
@@ -1842,15 +1842,15 @@
         },
         {
           "id": "b",
-          "label": "It is acceptable as written, but only if the module is kept in a separate repository from every caller that uses it"
+          "label": "It is fine as written, because a thin wrapper keeps every caller flexible and needs no upkeep"
         },
         {
           "id": "c",
-          "label": "It should be split into one module per argument, so that each individual setting can be versioned and released independently"
+          "label": "It should be split into one module per argument so each setting can be versioned on its own"
         },
         {
           "id": "d",
-          "label": "It is ideal, because exposing every argument means callers will rarely need to edit the module or request changes to it"
+          "label": "It is ideal, since exposing every argument means callers never need to change the module again"
         }
       ],
       "answerKey": {
@@ -1860,7 +1860,7 @@
       },
       "rubric": [
         "A module earns its keep by encapsulating decisions such as encryption defaults and naming.",
-        "Pass-through wrappers add cost without abstraction; repo location is irrelevant."
+        "Pass-through wrappers add cost without abstraction; being flexible or exposing every argument does not make them maintainable."
       ],
       "reviewed": false
     },

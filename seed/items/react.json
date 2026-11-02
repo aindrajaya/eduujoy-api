@@ -2195,11 +2195,11 @@
       "options": [
         {
           "id": "a",
-          "label": "Pass `data` through context, because memo skips renders only for components that receive no props from the parent"
+          "label": "Pass `data` through context, since memo only skips renders when no props come from the parent"
         },
         {
           "id": "b",
-          "label": "Memo is unreliable for components that take object props, so remove it and gate the work inside a `useEffect` instead"
+          "label": "Remove memo, since it cannot handle object props, and run the work in a `useEffect`"
         },
         {
           "id": "c",
@@ -2207,7 +2207,7 @@
         },
         {
           "id": "d",
-          "label": "Replace memo with `useCallback`, because that hook caches prop objects and keeps their references stable across renders"
+          "label": "Swap memo for `useCallback`, because it caches prop objects and keeps their references stable"
         }
       ],
       "answerKey": {

@@ -1951,7 +1951,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Switch each INNER JOIN to a LEFT JOIN so that every customer keeps its original row count, with no duplicated order rows"
+          "label": "Change each INNER JOIN to a LEFT JOIN so no order rows get duplicated"
         },
         {
           "id": "b",
@@ -1959,11 +1959,11 @@
         },
         {
           "id": "c",
-          "label": "Change to `COUNT(DISTINCT o.id)` and keep the single join, since the repeated rows then no longer affect either metric"
+          "label": "Use COUNT(DISTINCT o.id) and keep the single join, since duplicates then no longer matter for either metric"
         },
         {
           "id": "d",
-          "label": "Add `SELECT DISTINCT` on top of the whole query so that repeated customer rows are collapsed into one row per customer"
+          "label": "Wrap the whole query in SELECT DISTINCT to collapse the repeated rows for each customer"
         }
       ],
       "answerKey": {
@@ -1973,7 +1973,7 @@
       },
       "rubric": [
         "Aggregating at the item-to-order grain first avoids fan-out and keeps each metric at its correct grain.",
-        "COUNT(DISTINCT) fixes only one metric and DISTINCT on the output does not repair sums."
+        "COUNT(DISTINCT o.id) fixes only the order count while SUM(i.amount) stays inflated, and SELECT DISTINCT on the output cannot repair sums."
       ],
       "reviewed": false
     },
@@ -2337,7 +2337,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A `CHECK` constraint comparing each new `email` against other rows where `deleted_at` is null"
+          "label": "A `CHECK` constraint that compares `email` with other live rows"
         },
         {
           "id": "b",
@@ -2345,11 +2345,11 @@
         },
         {
           "id": "c",
-          "label": "A unique constraint on `(email, deleted_at)`, so a deleted row always differs from a live one"
+          "label": "A unique constraint on `(email, deleted_at)` so each row differs"
         },
         {
           "id": "d",
-          "label": "A trigger that counts live rows with the same email before each insert, with no index backing it"
+          "label": "A trigger that counts live rows with the same email before insert"
         }
       ],
       "answerKey": {

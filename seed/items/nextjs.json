@@ -1355,15 +1355,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The list should be fetched in `useEffect` on the client, because Server Components cannot show data that changed after build time"
+          "label": "The list must be fetched in `useEffect`, since Server Components can't show post-build changes"
         },
         {
           "id": "b",
-          "label": "The action should return the new row to the browser, because the page re-renders only from values the action returns"
+          "label": "The action must return the new row, since the page only re-renders from returned values"
         },
         {
           "id": "c",
-          "label": "The action needs to be declared inside a Client Component, because only client code can trigger a re-render of the list page"
+          "label": "The action must live in a Client Component"
         },
         {
           "id": "d",
@@ -2349,7 +2349,7 @@
       "options": [
         {
           "id": "a",
-          "label": "A Client Component form calling `fetch` in an `onSubmit` handler that always uses `preventDefault`, with errors held in `useState` and the new comment added to local state at once"
+          "label": "A Client Component form using `fetch` in `onSubmit` with `preventDefault`, with `useState` for errors and the new comment"
         },
         {
           "id": "b",
@@ -2357,11 +2357,11 @@
         },
         {
           "id": "c",
-          "label": "A Route Handler called from `useEffect` after the user finishes typing, with the response stored in state so the new comment and any errors render immediately"
+          "label": "A Route Handler called from `useEffect` once typing stops, with the response saved in state to render errors and the comment"
         },
         {
           "id": "d",
-          "label": "A Server Action called only from an `onClick` handler on a plain button outside any form, wrapped in `useTransition` so the pending comment renders instantly"
+          "label": "A Server Action called from an `onClick` on a button outside any form, wrapped in `useTransition` to show the comment"
         }
       ],
       "answerKey": {
@@ -2371,7 +2371,7 @@
       },
       "rubric": [
         "Form actions work as native form posts without JS, and the hooks add enhancement when JS runs.",
-        "Handlers that depend on JS events fail before hydration."
+        "Designs that rely on JS event handlers or effects, such as onSubmit with fetch, useEffect calls, or onClick outside a form, fail before hydration."
       ],
       "reviewed": false
     },

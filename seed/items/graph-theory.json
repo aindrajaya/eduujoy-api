@@ -1808,15 +1808,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Kruskal with full sorting, since O(E log E) is competitive and the union-find step adds little cost"
+          "label": "Kruskal with full edge sorting, since O(E log E) is fast enough on dense graphs"
         },
         {
           "id": "b",
-          "label": "Prim with a binary heap, since O(E log V) grows more slowly than O(V^2) once the graph has many edges"
+          "label": "Prim with a binary heap, since O(E log V) always beats O(V^2) on any dense graph"
         },
         {
           "id": "c",
-          "label": "Dijkstra from one vertex, since the shortest-path tree it builds is a minimum spanning tree when weights are positive"
+          "label": "Dijkstra from one vertex, since its shortest-path tree is always a minimum spanning tree"
         },
         {
           "id": "d",
@@ -1830,7 +1830,7 @@
       },
       "rubric": [
         "On dense graphs E is near V^2, so array-based Prim at O(V^2) beats heap-based O(E log V) and Kruskal's sorting.",
-        "Distractors apply heap or sorting advantages that hold only for sparse graphs, or confuse shortest-path trees with MSTs."
+        "Distractors claim heap or sorting approaches are fast enough or always better on dense graphs, though their advantage holds only for sparse graphs, or confuse shortest-path trees with MSTs."
       ],
       "reviewed": false
     },

@@ -1246,11 +1246,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The database became slower under load, so cached entries are invalidated sooner than before"
+          "label": "A slower database is invalidating cached entries sooner than before"
         },
         {
           "id": "b",
-          "label": "The cache's TTL was set too low relative to the read traffic, so entries expire before reuse"
+          "label": "The TTL is too low, so entries expire before they get reused"
         },
         {
           "id": "c",
@@ -1258,7 +1258,7 @@
         },
         {
           "id": "d",
-          "label": "The cache ran out of memory and began evicting entries far faster than they are being read"
+          "label": "The cache is out of memory and evicts entries faster than read"
         }
       ],
       "answerKey": {
@@ -1285,15 +1285,15 @@
         },
         {
           "id": "b",
-          "label": "The browser cache is ignoring server responses for profile pages and serving a stored copy"
+          "label": "The browser served a cached copy of the profile page"
         },
         {
           "id": "c",
-          "label": "The primary database rejected the write at first and silently retried it a few seconds later"
+          "label": "The primary rejected the write and retried it seconds later"
         },
         {
           "id": "d",
-          "label": "The load balancer dropped the write request on some connections and the client resent it"
+          "label": "The load balancer dropped the write and the client resent it later"
         }
       ],
       "answerKey": {
@@ -1303,7 +1303,7 @@
       },
       "rubric": [
         "Asynchronous replication means a replica can briefly lag, so read-after-write may return stale data.",
-        "If writes were lost, a later refresh would not show new values."
+        "If the primary rejected the write or the load balancer dropped it, the new values would not appear on a later refresh unless the write was retried, and nothing here suggests that."
       ],
       "reviewed": false
     },
@@ -1466,15 +1466,15 @@
         },
         {
           "id": "b",
-          "label": "Network latency between the app servers and the cache rises periodically on the minute, delaying cache reads until timeouts fire and fall back to the database"
+          "label": "Network latency to the cache rises each minute, so reads time out and fall back to the database"
         },
         {
           "id": "c",
-          "label": "A scheduled job on the database runs every minute, such as a backup or statistics refresh, and competes with the page queries for CPU"
+          "label": "A scheduled database job, such as a backup, runs every minute and competes for CPU"
         },
         {
           "id": "d",
-          "label": "The cache evicts the hot key early under memory pressure, so the next requests must reload it from the database"
+          "label": "The cache evicts the hot key early under memory pressure, so requests reload it from the database"
         }
       ],
       "answerKey": {
@@ -1484,7 +1484,7 @@
       },
       "rubric": [
         "The spike aligns with TTL expiry: a cache stampede sends many simultaneous misses to the database.",
-        "Eviction or network issues would not produce a regular 60-second pattern tied to the TTL."
+        "Cache network latency, memory-pressure eviction, or a scheduled database job would not line up so precisely with the 60-second TTL, and the 99% hit ratio argues against them."
       ],
       "reviewed": false
     },

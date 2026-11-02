@@ -534,15 +534,15 @@
         },
         {
           "id": "b",
-          "label": "Integers are stored on the stack, so the compiler skips ownership tracking for them"
+          "label": "Integers live on the stack, so ownership rules skip them"
         },
         {
           "id": "c",
-          "label": "Integers are immutable by default, so a second binding can safely share the same value"
+          "label": "Integers are immutable, so both bindings can share one value"
         },
         {
           "id": "d",
-          "label": "Integers are borrowed automatically on assignment, so the original binding stays valid"
+          "label": "Integers are borrowed automatically, so the original stays valid"
         }
       ],
       "answerKey": {
@@ -552,7 +552,7 @@
       },
       "rubric": [
         "Simple types like i32 implement Copy, so assignment copies the value.",
-        "Distractors invent heap, auto-borrow or ownerless rules."
+        "Distractors invent stack-based exemptions, immutability-based sharing or automatic borrowing rules."
       ],
       "reviewed": false
     },

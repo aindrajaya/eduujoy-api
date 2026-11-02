@@ -1386,11 +1386,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A fails because a capturing group keeps only the last repetition and the text is rejected"
+          "label": "A fails, since a capturing group cannot be repeated with +"
         },
         {
           "id": "b",
-          "label": "B matches the same text, but its `d` group is empty because non-capturing groups hide later ones"
+          "label": "B matches the same text, but its `d` group is empty because (?:) hides it"
         },
         {
           "id": "c",
@@ -1398,7 +1398,7 @@
         },
         {
           "id": "d",
-          "label": "A matches the whole text, but B matches only `cd` because non-capturing groups cannot repeat"
+          "label": "A matches all of it, but B matches only `cd` since (?:) cannot repeat"
         }
       ],
       "answerKey": {
@@ -1408,7 +1408,7 @@
       },
       "rubric": [
         "Both match `ababcd`, but B's non-capturing group takes no number, so `(d)` becomes group 1.",
-        "Distractors claim differences in what is matched, which grouping does not change."
+        "Distractors claim differences in what is matched, such as A failing, B matching only `cd`, or an empty `d` group, but grouping only changes numbering."
       ],
       "reviewed": false
     },

@@ -367,7 +367,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It stops the scheduler from switching threads while any lock is held, so no thread is paused mid-wait"
+          "label": "It stops the scheduler from switching threads while a lock is held"
         },
         {
           "id": "b",
@@ -375,11 +375,11 @@
         },
         {
           "id": "c",
-          "label": "It lets two threads hold the same lock at once, so neither has to wait for the other"
+          "label": "It lets two threads hold the same lock, so neither must wait"
         },
         {
           "id": "d",
-          "label": "It makes each lock release itself after a short time limit, so waiting threads never block forever"
+          "label": "It makes each lock release itself after a timeout, so no thread blocks forever"
         }
       ],
       "answerKey": {
@@ -653,7 +653,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Waiting threads are released in the order they were created"
+          "label": "Waiting threads wake in creation order"
         },
         {
           "id": "b",
@@ -661,11 +661,11 @@
         },
         {
           "id": "c",
-          "label": "Guarded variables become private copies for every thread"
+          "label": "Each thread gets its own data copy"
         },
         {
           "id": "d",
-          "label": "Guarded code runs faster because it is pinned to one core"
+          "label": "Guarded code runs on one fast core"
         }
       ],
       "answerKey": {

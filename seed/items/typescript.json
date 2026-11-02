@@ -288,15 +288,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Convert the string to NaN"
+          "label": "Convert it to NaN"
         },
         {
           "id": "b",
-          "label": "Widen count to string | number"
+          "label": "Widen to string | number"
         },
         {
           "id": "c",
-          "label": "Run it and throw at runtime"
+          "label": "Throw an error at runtime"
         },
         {
           "id": "d",
@@ -1387,15 +1387,15 @@
       "options": [
         {
           "id": "a",
-          "label": "The `User` interface is erased at compile time, so `JSON.parse` cannot build the objects at runtime"
+          "label": "`User` is erased at compile time, so `JSON.parse` cannot build the objects"
         },
         {
           "id": "b",
-          "label": "Strict mode strips type assertions from the compiled output, so the parsed data is never checked"
+          "label": "Strict mode removes type assertions, so parsed data is never checked"
         },
         {
           "id": "c",
-          "label": "`as User[]` converts each parsed element into a `User` at runtime, and the crash comes from a failed conversion"
+          "label": "`as User[]` converts each parsed item into a `User`, and that conversion fails"
         },
         {
           "id": "d",
@@ -1409,7 +1409,7 @@
       },
       "rubric": [
         "Type assertions are compile-time only; the parsed data is never validated.",
-        "Distractors assume assertions convert data or that erasure breaks parsing."
+        "Distractors assume assertions convert data at runtime, that erasure stops parsing from building objects, or that strict mode is what leaves parsed data unchecked."
       ],
       "reviewed": false
     },

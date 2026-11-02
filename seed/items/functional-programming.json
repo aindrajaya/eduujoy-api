@@ -499,11 +499,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`function f(x) { return x * Math.random(); }`"
+          "label": "`function f(x) { return x + Date.now(); }`"
         },
         {
           "id": "b",
-          "label": "`function f(x) { count++; return x * 2; }`"
+          "label": "`function f(x) { n++; return x }`"
         },
         {
           "id": "c",
@@ -511,7 +511,7 @@
         },
         {
           "id": "d",
-          "label": "`function f(x) { console.log(x); return x * 2; }`"
+          "label": "`function f(x) { alert(x); return x; }`"
         }
       ],
       "answerKey": {
@@ -521,7 +521,7 @@
       },
       "rubric": [
         "It returns the same output for the same input and touches nothing outside itself.",
-        "Distractors hide a side effect (logging, a counter) or non-determinism (random)."
+        "Distractors hide a side effect (an alert, a counter) or non-determinism (the current time)."
       ],
       "reviewed": false
     },
@@ -1975,15 +1975,15 @@
         },
         {
           "id": "b",
-          "label": "Subtraction on integers, with identity 0 for each chunk"
+          "label": "Integer subtraction, identity 0"
         },
         {
           "id": "c",
-          "label": "Pairwise mean of two values, with identity 0 for each chunk"
+          "label": "Pairwise mean of two values, identity 0"
         },
         {
           "id": "d",
-          "label": "Integer division on integers, with identity 1 for each chunk"
+          "label": "Integer division, identity 1 per chunk, any order"
         }
       ],
       "answerKey": {

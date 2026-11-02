@@ -477,15 +477,15 @@
         },
         {
           "id": "b",
-          "label": "The set speed is too far from the starting speed, so the error is too large"
+          "label": "The step in set speed was too large for the controller"
         },
         {
           "id": "c",
-          "label": "Sensor noise has increased in proportion to the gain and is being amplified"
+          "label": "Higher gain amplified sensor noise into oscillation"
         },
         {
           "id": "d",
-          "label": "The actuator saturated and stopped responding to the controller's commands"
+          "label": "The actuator saturated and ignored the controller output"
         }
       ],
       "answerKey": {
@@ -495,7 +495,7 @@
       },
       "rubric": [
         "Raising gain can push poles across the imaginary axis, causing growing oscillation, i.e. instability.",
-        "The loop is proportional only, so integral saturation does not apply, and noise would not cause smooth growth."
+        "The step size is not the cause, since the same step gave a stable response at lower gain; noise or actuator saturation would not produce smooth, steadily growing oscillation tied to the gain increase."
       ],
       "reviewed": false
     },
