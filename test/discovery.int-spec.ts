@@ -163,7 +163,7 @@ describe('discovery (integration, A8 Verify)', () => {
     expect(p.ready.every((e) => e.status === 'ready')).toBe(true);
     // Two search.list calls per discovery.
     expect(p.videos.searches).toHaveLength(20);
-  }, 120_000);
+  }, 300_000); // 10 topics of writes to the Neon test branch: local runs to Frankfurt need the headroom.
 
   it('the YouTube guard stops at 90 calls a day and falls back to web-search videos confirmed by videos.list', async () => {
     const day = new Date('2026-11-02T18:00:00Z');

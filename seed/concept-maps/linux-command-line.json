@@ -1,0 +1,675 @@
+{
+  "version": 1,
+  "topic": "linux-command-line",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Shell and prompt",
+          "aliases": [
+            "terminal",
+            "command prompt"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise the shell as a text interface that reads commands and shows output, and read the parts of a prompt."
+        },
+        {
+          "id": "nov-2",
+          "name": "Filesystem directory tree",
+          "aliases": [
+            "directory hierarchy",
+            "file tree"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that files live in a single tree rooted at / with directories nested inside, including the home directory."
+        },
+        {
+          "id": "nov-3",
+          "name": "Absolute and relative paths",
+          "aliases": [
+            "path types",
+            "pathnames"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish paths starting at / from paths relative to the current directory, and use . and .. correctly."
+        },
+        {
+          "id": "nov-5",
+          "name": "Command structure",
+          "aliases": [
+            "command options and arguments",
+            "command syntax"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a command as a program name followed by options and arguments, such as ls -l /etc."
+        },
+        {
+          "id": "nov-4",
+          "name": "Navigation commands",
+          "aliases": [
+            "pwd ls cd",
+            "directory navigation"
+          ],
+          "bloom": "C2",
+          "summary": "Use pwd, ls and cd to find where you are, list contents and move between directories."
+        },
+        {
+          "id": "nov-6",
+          "name": "Getting help",
+          "aliases": [
+            "man pages",
+            "--help"
+          ],
+          "bloom": "C1",
+          "summary": "Look up a command's usage with man and --help and find key facts in the output."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-5",
+          "nov-4"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Linux commands and file names are not case sensitive, so File.txt and file.txt are the same file.",
+          "concepts": [
+            "nov-2",
+            "nov-5"
+          ]
+        },
+        {
+          "text": "The cd command changes directory only for the single command that follows it.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "A leading slash on a path is optional and makes no difference to where it points.",
+          "concepts": [
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "File and directory manipulation",
+          "aliases": [
+            "cp mv rm mkdir",
+            "file management commands"
+          ],
+          "bloom": "C3",
+          "summary": "Create, copy, move, rename and delete files and directories with mkdir, touch, cp, mv and rm."
+        },
+        {
+          "id": "adb-2",
+          "name": "Viewing file contents",
+          "aliases": [
+            "cat less head tail",
+            "text inspection"
+          ],
+          "bloom": "C3",
+          "summary": "Choose cat, less, head or tail to read all or part of a text file."
+        },
+        {
+          "id": "adb-3",
+          "name": "Wildcards and globbing",
+          "aliases": [
+            "glob patterns",
+            "filename expansion"
+          ],
+          "bloom": "C3",
+          "summary": "Use *, ? and [ ] patterns so the shell expands them to matching file names."
+        },
+        {
+          "id": "adb-4",
+          "name": "Permission bits",
+          "aliases": [
+            "rwx permissions",
+            "file modes"
+          ],
+          "bloom": "C2",
+          "summary": "Read the read, write and execute bits for owner, group and others in ls -l output."
+        },
+        {
+          "id": "adb-5",
+          "name": "Changing permissions",
+          "aliases": [
+            "chmod usage",
+            "setting modes"
+          ],
+          "bloom": "C3",
+          "summary": "Use chmod with symbolic and octal modes to grant or remove access on files."
+        },
+        {
+          "id": "adb-6",
+          "name": "Redirection basics",
+          "aliases": [
+            "output redirection",
+            "> and >>"
+          ],
+          "bloom": "C3",
+          "summary": "Send command output to files with > and >>, and read input from files with <."
+        },
+        {
+          "id": "adb-7",
+          "name": "Pipes",
+          "aliases": [
+            "pipelines",
+            "| operator"
+          ],
+          "bloom": "C3",
+          "summary": "Connect the output of one command to the input of another using |."
+        },
+        {
+          "id": "adb-8",
+          "name": "Searching text with grep",
+          "aliases": [
+            "pattern search",
+            "grep command"
+          ],
+          "bloom": "C3",
+          "summary": "Find lines matching a pattern in files or piped input using grep and common flags."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ],
+        [
+          "adb-2",
+          "adb-8"
+        ],
+        [
+          "adb-7",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "rm moves files to a trash folder from which they can be restored.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Using > to redirect output appends to the file rather than overwriting it.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "Wildcards such as * are interpreted by each command, not by the shell.",
+          "concepts": [
+            "adb-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Standard streams and file descriptors",
+          "aliases": [
+            "stdin stdout stderr",
+            "stream redirection"
+          ],
+          "bloom": "C3",
+          "summary": "Redirect stdout and stderr separately or together using 2>, 2>&1 and /dev/null."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Text-processing filters",
+          "aliases": [
+            "sort uniq cut wc",
+            "filter utilities"
+          ],
+          "bloom": "C4",
+          "summary": "Combine sort, uniq, cut, tr and wc in pipelines to summarise and reshape text data."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Shell variables and environment",
+          "aliases": [
+            "environment variables",
+            "export and PATH"
+          ],
+          "bloom": "C3",
+          "summary": "Set shell variables, export them to child processes, and explain how PATH resolves commands."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Quoting and expansion",
+          "aliases": [
+            "quotes and substitution",
+            "parameter and command expansion"
+          ],
+          "bloom": "C4",
+          "summary": "Predict how single quotes, double quotes, variable expansion and $(...) change what a command receives."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Script structure and execution",
+          "aliases": [
+            "shell script basics",
+            "shebang and executable scripts"
+          ],
+          "bloom": "C3",
+          "summary": "Write a script with a shebang line, make it executable, and run it with arguments $1, $2 and $@."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Exit status",
+          "aliases": [
+            "return codes",
+            "$? and && ||"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret exit codes and chain commands with && and || based on success or failure."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Conditionals and loops",
+          "aliases": [
+            "if and for constructs",
+            "control flow"
+          ],
+          "bloom": "C3",
+          "summary": "Use if, test expressions, for and while to branch and repeat in scripts."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Process management",
+          "aliases": [
+            "jobs and signals",
+            "ps kill"
+          ],
+          "bloom": "C3",
+          "summary": "List processes, run jobs in the background, and stop them with kill and signals."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "adb-7",
+          "cmp-2"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-7",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Single and double quotes behave identically in the shell.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Redirecting with > also captures error messages.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "A variable set in a shell is automatically visible to every program it starts.",
+          "concepts": [
+            "cmp-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Regular expressions in tools",
+          "aliases": [
+            "regex with grep and sed",
+            "pattern matching"
+          ],
+          "bloom": "C4",
+          "summary": "Compose basic and extended regular expressions and judge which match a given text."
+        },
+        {
+          "id": "prf-2",
+          "name": "Stream editing with sed and awk",
+          "aliases": [
+            "sed awk",
+            "field and line processing"
+          ],
+          "bloom": "C4",
+          "summary": "Transform text with sed substitutions and awk field-based programs, choosing the right tool."
+        },
+        {
+          "id": "prf-3",
+          "name": "Robust find and xargs usage",
+          "aliases": [
+            "find exec",
+            "file search pipelines"
+          ],
+          "bloom": "C4",
+          "summary": "Select files by name, type, size or time with find and act on them safely, including names with spaces."
+        },
+        {
+          "id": "prf-4",
+          "name": "Defensive scripting options",
+          "aliases": [
+            "set -euo pipefail",
+            "strict mode"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how set -e, -u and pipefail change failure handling and decide when to use them."
+        },
+        {
+          "id": "prf-5",
+          "name": "Functions and argument handling",
+          "aliases": [
+            "shell functions",
+            "getopts parsing"
+          ],
+          "bloom": "C4",
+          "summary": "Structure scripts with functions, local variables and option parsing for reusable tools."
+        },
+        {
+          "id": "prf-6",
+          "name": "Special permissions and ownership",
+          "aliases": [
+            "setuid sticky bit",
+            "umask and chown"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse setuid, setgid, sticky bit, umask and chown effects on shared file access."
+        },
+        {
+          "id": "prf-7",
+          "name": "Scheduling and automation",
+          "aliases": [
+            "cron jobs",
+            "periodic tasks"
+          ],
+          "bloom": "C5",
+          "summary": "Schedule recurring tasks with cron, accounting for its minimal environment and logging."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-8",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-8",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "adb-5",
+          "prf-6"
+        ],
+        [
+          "cmp-3",
+          "prf-7"
+        ],
+        [
+          "prf-5",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Shell globs and regular expressions use the same syntax, so * means the same in both.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Piping find output into xargs is always safe regardless of file names.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "set -e makes a script stop on every possible error in every context.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Script security hardening",
+          "aliases": [
+            "safe scripting practices",
+            "injection avoidance"
+          ],
+          "bloom": "C5",
+          "summary": "Assess scripts for injection, unsafe temp files, unquoted expansion and privilege risks, and fix them."
+        },
+        {
+          "id": "exp-2",
+          "name": "Advanced shell features",
+          "aliases": [
+            "process substitution",
+            "here documents and traps"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when to use process substitution, here documents, arrays and traps for cleanup."
+        },
+        {
+          "id": "exp-3",
+          "name": "Pipeline performance design",
+          "aliases": [
+            "efficient pipelines",
+            "tool selection tradeoffs"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate pipeline designs for speed and memory, avoiding needless processes and large intermediate files."
+        },
+        {
+          "id": "exp-4",
+          "name": "Portable shell scripting",
+          "aliases": [
+            "POSIX sh compatibility",
+            "bashisms"
+          ],
+          "bloom": "C5",
+          "summary": "Distinguish POSIX sh from Bash-specific features and decide what portability a script requires."
+        },
+        {
+          "id": "exp-5",
+          "name": "Command-line tool design",
+          "aliases": [
+            "building CLI utilities",
+            "Unix philosophy tools"
+          ],
+          "bloom": "C6",
+          "summary": "Design composable tools with clear interfaces, stdin and stdout use, exit codes and usage text."
+        },
+        {
+          "id": "exp-6",
+          "name": "Automation framework creation",
+          "aliases": [
+            "maintenance toolkits",
+            "workflow orchestration scripts"
+          ],
+          "bloom": "C6",
+          "summary": "Create tested, logged and idempotent automation that combines scripts, scheduling and error reporting."
+        },
+        {
+          "id": "exp-7",
+          "name": "Diagnosing with system tools",
+          "aliases": [
+            "strace lsof troubleshooting",
+            "performance debugging"
+          ],
+          "bloom": "C5",
+          "summary": "Diagnose misbehaving processes and scripts using tools such as strace, lsof, top and journal logs."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "cmp-4",
+          "exp-1"
+        ],
+        [
+          "cmp-1",
+          "exp-2"
+        ],
+        [
+          "prf-5",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "exp-2",
+          "exp-4"
+        ],
+        [
+          "exp-4",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-6"
+        ],
+        [
+          "exp-5",
+          "exp-6"
+        ],
+        [
+          "cmp-8",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A script that works in Bash will work in any shell that runs it.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Quoting variables is only a style choice and never affects security.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Shell pipelines are always the best choice for any data processing task regardless of scale.",
+          "concepts": [
+            "exp-3",
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

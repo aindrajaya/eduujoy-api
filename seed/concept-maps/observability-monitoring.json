@@ -1,0 +1,735 @@
+{
+  "version": 1,
+  "topic": "observability-monitoring",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals",
+    "linux-command-line",
+    "computer-networking"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-2",
+          "name": "Three telemetry signals",
+          "aliases": [
+            "metrics logs traces",
+            "pillars of observability"
+          ],
+          "bloom": "C1",
+          "summary": "Name metrics, logs and traces and state what kind of information each one provides."
+        },
+        {
+          "id": "nov-1",
+          "name": "Monitoring versus observability",
+          "aliases": [
+            "monitoring vs observability"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that monitoring watches for known failure conditions while observability lets you ask new questions about system behaviour from its outputs."
+        },
+        {
+          "id": "nov-3",
+          "name": "Metrics and time series",
+          "aliases": [
+            "time-series data",
+            "numeric measurements"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a metric as a numeric measurement sampled over time, such as CPU use, request count or error rate."
+        },
+        {
+          "id": "nov-4",
+          "name": "Log entries and levels",
+          "aliases": [
+            "log levels",
+            "log messages"
+          ],
+          "bloom": "C2",
+          "summary": "Read a log line, identify its timestamp, severity level and message, and explain what each level is for."
+        },
+        {
+          "id": "nov-5",
+          "name": "Health checks and uptime",
+          "aliases": [
+            "liveness checks",
+            "up/down checks"
+          ],
+          "bloom": "C1",
+          "summary": "Explain how a simple health check or ping reports whether a service is up and what it cannot tell you."
+        },
+        {
+          "id": "nov-6",
+          "name": "Dashboards and alerts purpose",
+          "aliases": [
+            "dashboards",
+            "alerting"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish a dashboard for human exploration from an alert that notifies someone when action is needed."
+        },
+        {
+          "id": "nov-7",
+          "name": "Host resource metrics",
+          "aliases": [
+            "CPU memory disk network metrics",
+            "system metrics"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret basic CPU, memory, disk and network usage figures for a machine and recognise saturation."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-7"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-1"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Observability is just another word for monitoring dashboards.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "If the health check passes, users must be having a good experience.",
+          "concepts": [
+            "nov-5"
+          ]
+        },
+        {
+          "text": "High CPU usage always means something is broken.",
+          "concepts": [
+            "nov-7",
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Metric types",
+          "aliases": [
+            "counter gauge histogram"
+          ],
+          "bloom": "C3",
+          "summary": "Choose between counter, gauge and histogram for a given measurement and use each correctly."
+        },
+        {
+          "id": "adb-2",
+          "name": "Metric labels and cardinality",
+          "aliases": [
+            "tags",
+            "dimensions"
+          ],
+          "bloom": "C3",
+          "summary": "Add labels to metrics to slice data by dimension while avoiding labels with unbounded values."
+        },
+        {
+          "id": "adb-3",
+          "name": "Structured logging",
+          "aliases": [
+            "JSON logs",
+            "key-value logs"
+          ],
+          "bloom": "C3",
+          "summary": "Emit logs as structured key-value fields so they can be filtered and searched by machine."
+        },
+        {
+          "id": "adb-4",
+          "name": "Basic instrumentation with a library",
+          "aliases": [
+            "adding metrics to code",
+            "client library"
+          ],
+          "bloom": "C3",
+          "summary": "Add counters, gauges and timers to application code and expose them for collection."
+        },
+        {
+          "id": "adb-5",
+          "name": "Scrape versus push collection",
+          "aliases": [
+            "pull vs push",
+            "metrics collection models"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a collector pulls metrics from endpoints versus applications pushing data, and when each fits."
+        },
+        {
+          "id": "adb-6",
+          "name": "Rates and percentiles",
+          "aliases": [
+            "requests per second",
+            "p95 p99",
+            "latency percentiles"
+          ],
+          "bloom": "C3",
+          "summary": "Compute and read request rates and latency percentiles rather than relying on raw counter values or averages."
+        },
+        {
+          "id": "adb-7",
+          "name": "Threshold alert rules",
+          "aliases": [
+            "static thresholds",
+            "basic alerting"
+          ],
+          "bloom": "C3",
+          "summary": "Write a simple alert rule with a threshold and duration that fires on a clear symptom."
+        },
+        {
+          "id": "adb-8",
+          "name": "Log search and filtering",
+          "aliases": [
+            "log querying",
+            "grep logs"
+          ],
+          "bloom": "C3",
+          "summary": "Find relevant entries in centralised logs using time ranges, fields and text filters."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-4",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ],
+        [
+          "adb-3",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Average latency is enough to describe how fast a service is for users.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "Adding more labels to a metric is free and always makes it more useful.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "A counter's raw value is meaningful on its own, rather than its rate of change.",
+          "concepts": [
+            "adb-1",
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Distributed tracing spans",
+          "aliases": [
+            "traces and spans",
+            "trace context"
+          ],
+          "bloom": "C3",
+          "summary": "Instrument a request path so that spans with parent-child relationships form a trace across services."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Context propagation and correlation IDs",
+          "aliases": [
+            "trace ID propagation",
+            "request IDs"
+          ],
+          "bloom": "C3",
+          "summary": "Pass trace or request identifiers across service boundaries and into logs to link signals for one request."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Golden signals and RED/USE",
+          "aliases": [
+            "four golden signals",
+            "RED method",
+            "USE method"
+          ],
+          "bloom": "C4",
+          "summary": "Select latency, traffic, errors and saturation, or RED and USE, to structure what to measure for a service or resource."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Service level indicators and objectives",
+          "aliases": [
+            "SLI",
+            "SLO",
+            "service levels"
+          ],
+          "bloom": "C4",
+          "summary": "Define an SLI from user-facing behaviour and set an SLO target, analysing what it implies for reliability."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Dashboard design",
+          "aliases": [
+            "effective dashboards",
+            "visualisation"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse and organise dashboards so that panels answer specific questions and reveal problems quickly."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Actionable alerting",
+          "aliases": [
+            "symptom-based alerts",
+            "alert fatigue"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish alerts that need human action from noise, and favour symptom-based alerts over cause-based ones."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Incident triage with telemetry",
+          "aliases": [
+            "debugging with metrics logs traces",
+            "incident investigation"
+          ],
+          "bloom": "C4",
+          "summary": "Move from an alert to a narrowed cause by correlating metrics, logs and traces systematically."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Log aggregation pipelines",
+          "aliases": [
+            "log shipping",
+            "centralised logging"
+          ],
+          "bloom": "C3",
+          "summary": "Set up agents and pipelines that collect, parse, enrich and store logs from many hosts."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-3",
+          "cmp-2"
+        ],
+        [
+          "adb-6",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ],
+        [
+          "adb-7",
+          "cmp-6"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "cmp-2",
+          "cmp-7"
+        ],
+        [
+          "cmp-5",
+          "cmp-7"
+        ],
+        [
+          "adb-8",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Alert on every metric that could indicate a problem so nothing is missed.",
+          "concepts": [
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "An SLO of 100% is the right goal for a reliable service.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Traces replace the need for logs and metrics.",
+          "concepts": [
+            "cmp-1",
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Error budgets and burn rate alerts",
+          "aliases": [
+            "multi-window burn rate",
+            "error budget policy"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate alerting based on error budget consumption speed and choose windows that balance speed and precision."
+        },
+        {
+          "id": "prf-2",
+          "name": "Cardinality and cost management",
+          "aliases": [
+            "telemetry cost",
+            "metric explosion"
+          ],
+          "bloom": "C5",
+          "summary": "Assess the storage and query cost of telemetry and decide what to drop, aggregate or keep."
+        },
+        {
+          "id": "prf-4",
+          "name": "Vendor-neutral instrumentation standards",
+          "aliases": [
+            "OpenTelemetry",
+            "telemetry standards"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how a common instrumentation API and collector decouple application code from backends."
+        },
+        {
+          "id": "prf-3",
+          "name": "Sampling strategies for traces",
+          "aliases": [
+            "head sampling",
+            "tail sampling"
+          ],
+          "bloom": "C5",
+          "summary": "Compare head and tail sampling and judge which retains the traces needed for diagnosis at acceptable cost."
+        },
+        {
+          "id": "prf-5",
+          "name": "High-cardinality event analysis",
+          "aliases": [
+            "wide events",
+            "exploratory debugging"
+          ],
+          "bloom": "C4",
+          "summary": "Use wide, context-rich events to slice by arbitrary dimensions and find unknown-unknown causes."
+        },
+        {
+          "id": "prf-6",
+          "name": "Alert quality evaluation",
+          "aliases": [
+            "alert review",
+            "signal-to-noise"
+          ],
+          "bloom": "C5",
+          "summary": "Review alerts by precision, recall, detection time and actionability, and retire or redesign poor ones."
+        },
+        {
+          "id": "prf-7",
+          "name": "Blameless postmortem analysis",
+          "aliases": [
+            "incident review",
+            "root cause analysis"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate incidents to find contributing factors and turn the findings into observability improvements."
+        },
+        {
+          "id": "prf-8",
+          "name": "Monitoring dependencies and synthetic checks",
+          "aliases": [
+            "synthetic monitoring",
+            "black-box probing"
+          ],
+          "bloom": "C4",
+          "summary": "Combine black-box probes with internal metrics to detect failures in dependencies and user journeys."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "adb-2",
+          "prf-2"
+        ],
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "cmp-2",
+          "prf-4"
+        ],
+        [
+          "prf-4",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-5"
+        ],
+        [
+          "cmp-6",
+          "prf-6"
+        ],
+        [
+          "prf-1",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "cmp-3",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Collecting and keeping all telemetry at full fidelity is always the safest approach.",
+          "concepts": [
+            "prf-2",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Random head sampling reliably keeps the slow or erroring traces you need.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Postmortems should identify the single person or root cause that failed.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Observability strategy design",
+          "aliases": [
+            "observability architecture",
+            "telemetry strategy"
+          ],
+          "bloom": "C6",
+          "summary": "Design an organisation-wide telemetry architecture that balances coverage, cost, latency and ownership."
+        },
+        {
+          "id": "exp-2",
+          "name": "Scalable telemetry backend architecture",
+          "aliases": [
+            "metrics storage scaling",
+            "long-term storage"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate sharding, federation, downsampling and retention designs for metrics, log and trace backends."
+        },
+        {
+          "id": "exp-3",
+          "name": "Anomaly detection and automated diagnosis",
+          "aliases": [
+            "automated anomaly detection",
+            "AIOps"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when statistical or learned detection beats static thresholds and how to limit false positives."
+        },
+        {
+          "id": "exp-4",
+          "name": "SLO programme and reliability governance",
+          "aliases": [
+            "SLO adoption",
+            "reliability policy"
+          ],
+          "bloom": "C6",
+          "summary": "Create SLO practices and error budget policies that guide product and engineering trade-offs across teams."
+        },
+        {
+          "id": "exp-5",
+          "name": "Observability of complex failure modes",
+          "aliases": [
+            "emergent failures",
+            "cascading failures"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate instrumentation needed to expose cascading failures, retry storms, queueing effects and partial outages."
+        },
+        {
+          "id": "exp-6",
+          "name": "Observability-driven development",
+          "aliases": [
+            "designing for observability",
+            "testing in production"
+          ],
+          "bloom": "C6",
+          "summary": "Create development, release and testing practices that build observability in and use it to verify changes safely."
+        },
+        {
+          "id": "exp-7",
+          "name": "Telemetry pipeline reliability and security",
+          "aliases": [
+            "monitoring the monitoring",
+            "telemetry privacy"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how to keep telemetry pipelines reliable, independent of the systems they watch, and free of sensitive data."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-2",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-3"
+        ],
+        [
+          "prf-1",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "prf-8",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Machine-learning anomaly detection removes the need for well-designed SLO alerts.",
+          "concepts": [
+            "exp-3",
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Buying a single observability platform solves the observability problem.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "The monitoring stack can safely share the same failure domain as the production system.",
+          "concepts": [
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

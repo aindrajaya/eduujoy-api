@@ -1,0 +1,714 @@
+{
+  "version": 1,
+  "topic": "differential-calculus",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "functions-and-graphs",
+    "trigonometry"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Intuitive limit of a function",
+          "aliases": [
+            "limit idea",
+            "limit as x approaches a"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a limit describes the value a function approaches as the input nears a point, regardless of the value at that point."
+        },
+        {
+          "id": "nov-2",
+          "name": "One-sided limits",
+          "aliases": [
+            "left-hand limit",
+            "right-hand limit"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish left and right approach and state that a two-sided limit exists only when both agree."
+        },
+        {
+          "id": "nov-3",
+          "name": "Continuity at a point",
+          "aliases": [
+            "continuous function"
+          ],
+          "bloom": "C2",
+          "summary": "State the three conditions for continuity (defined, limit exists, equal) and recognise breaks in a graph."
+        },
+        {
+          "id": "nov-4",
+          "name": "Average rate of change",
+          "aliases": [
+            "difference quotient",
+            "secant slope"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret the slope of a secant line as average rate of change over an interval."
+        },
+        {
+          "id": "nov-5",
+          "name": "Instantaneous rate and tangent",
+          "aliases": [
+            "tangent slope",
+            "derivative idea"
+          ],
+          "bloom": "C2",
+          "summary": "Describe the derivative as the slope of the tangent line, obtained as secant slopes approach a limit."
+        },
+        {
+          "id": "nov-6",
+          "name": "Derivative notation",
+          "aliases": [
+            "f'(x)",
+            "dy/dx",
+            "Leibniz notation"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise and read f'(x), dy/dx and d/dx as notations for the derivative."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The limit of a function at a point is always just the function's value at that point.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "If a limit exists at a point, the function must be defined there.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "The derivative is the slope between two separate points on the graph, not a limiting value.",
+          "concepts": [
+            "nov-4",
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Evaluating limits algebraically",
+          "aliases": [
+            "limit laws",
+            "factoring and rationalising limits"
+          ],
+          "bloom": "C3",
+          "summary": "Compute limits using limit laws, substitution, factoring, and conjugates to remove indeterminate 0/0 forms."
+        },
+        {
+          "id": "adb-2",
+          "name": "Limits at infinity",
+          "aliases": [
+            "end behaviour",
+            "horizontal asymptotes"
+          ],
+          "bloom": "C3",
+          "summary": "Find limits as x grows without bound and identify horizontal asymptotes of rational functions."
+        },
+        {
+          "id": "adb-3",
+          "name": "Limit definition of derivative",
+          "aliases": [
+            "first principles",
+            "difference quotient limit"
+          ],
+          "bloom": "C3",
+          "summary": "Compute f'(x) as the limit of (f(x+h)-f(x))/h for simple polynomial and rational functions."
+        },
+        {
+          "id": "adb-4",
+          "name": "Power and constant rules",
+          "aliases": [
+            "sum rule",
+            "basic differentiation rules"
+          ],
+          "bloom": "C3",
+          "summary": "Differentiate polynomials and power functions term by term using the power, constant multiple and sum rules."
+        },
+        {
+          "id": "adb-5",
+          "name": "Product and quotient rules",
+          "aliases": [
+            "product rule",
+            "quotient rule"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the product and quotient rules correctly to differentiate products and ratios of functions."
+        },
+        {
+          "id": "adb-6",
+          "name": "Tangent line equations",
+          "aliases": [
+            "equation of tangent",
+            "linear approximation line"
+          ],
+          "bloom": "C3",
+          "summary": "Write the equation of the tangent line at a point using the derivative as slope."
+        },
+        {
+          "id": "adb-7",
+          "name": "Differentiability and continuity",
+          "aliases": [
+            "corners and cusps",
+            "non-differentiable points"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that differentiability implies continuity but not conversely, recognising corners, cusps and vertical tangents."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "adb-1"
+        ],
+        [
+          "nov-2",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-5",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-4",
+          "adb-6"
+        ],
+        [
+          "nov-3",
+          "adb-7"
+        ],
+        [
+          "adb-3",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A 0/0 form means the limit does not exist.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "The derivative of a product is the product of the derivatives.",
+          "concepts": [
+            "adb-5"
+          ]
+        },
+        {
+          "text": "A continuous function is always differentiable.",
+          "concepts": [
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Chain rule",
+          "aliases": [
+            "composite differentiation"
+          ],
+          "bloom": "C3",
+          "summary": "Differentiate composite functions by multiplying the outer derivative evaluated at the inner function by the inner derivative."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Trigonometric derivatives",
+          "aliases": [
+            "derivatives of sin and cos",
+            "derivatives of tan sec"
+          ],
+          "bloom": "C3",
+          "summary": "Differentiate all six trig functions and combine them with product, quotient and chain rules."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Exponential and logarithmic derivatives",
+          "aliases": [
+            "derivative of e^x",
+            "derivative of ln x"
+          ],
+          "bloom": "C3",
+          "summary": "Differentiate e^x, a^x, ln x and log_a x, including composite forms."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Implicit differentiation",
+          "aliases": [
+            "implicit derivatives"
+          ],
+          "bloom": "C3",
+          "summary": "Differentiate relations in x and y by treating y as a function of x and solving for dy/dx."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Logarithmic differentiation",
+          "aliases": [
+            "log differentiation"
+          ],
+          "bloom": "C3",
+          "summary": "Use logarithms to differentiate products, quotients and variable exponents like x^x."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Related rates",
+          "aliases": [
+            "related rate problems"
+          ],
+          "bloom": "C4",
+          "summary": "Model a situation with a relation between changing quantities and differentiate in time to link their rates."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Higher-order derivatives",
+          "aliases": [
+            "second derivative",
+            "acceleration"
+          ],
+          "bloom": "C3",
+          "summary": "Compute second and higher derivatives and interpret the second derivative as rate of change of slope."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-3"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "adb-4",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "In the chain rule you can skip the inner derivative, e.g. d/dx sin(3x) = cos(3x).",
+          "concepts": [
+            "cmp-1",
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "The derivative of a^x is x·a^(x-1), as with the power rule.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "In related rates you should substitute the specific numerical values before differentiating with respect to time.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "L'Hôpital's rule",
+          "aliases": [
+            "L'Hospital's rule",
+            "indeterminate forms"
+          ],
+          "bloom": "C4",
+          "summary": "Decide when 0/0 or ∞/∞ forms permit differentiating numerator and denominator, and convert other indeterminate forms to those."
+        },
+        {
+          "id": "prf-2",
+          "name": "Intermediate Value Theorem",
+          "aliases": [
+            "IVT"
+          ],
+          "bloom": "C4",
+          "summary": "Use continuity on a closed interval to justify the existence of roots and intermediate values."
+        },
+        {
+          "id": "prf-3",
+          "name": "Mean Value Theorem",
+          "aliases": [
+            "MVT",
+            "Rolle's theorem"
+          ],
+          "bloom": "C4",
+          "summary": "Verify hypotheses and use the theorem to guarantee a point where the tangent slope equals the average slope."
+        },
+        {
+          "id": "prf-4",
+          "name": "Critical points and first-derivative test",
+          "aliases": [
+            "increasing decreasing intervals",
+            "local extrema"
+          ],
+          "bloom": "C4",
+          "summary": "Find critical points and use sign changes of f' to classify local maxima and minima."
+        },
+        {
+          "id": "prf-5",
+          "name": "Concavity and second-derivative test",
+          "aliases": [
+            "inflection points",
+            "concave up and down"
+          ],
+          "bloom": "C4",
+          "summary": "Use the sign of f'' to determine concavity, locate inflection points and classify critical points."
+        },
+        {
+          "id": "prf-6",
+          "name": "Absolute extrema on intervals",
+          "aliases": [
+            "extreme value theorem",
+            "global max and min"
+          ],
+          "bloom": "C4",
+          "summary": "Find global extrema on a closed interval by comparing critical-point and endpoint values."
+        },
+        {
+          "id": "prf-7",
+          "name": "Optimisation modelling",
+          "aliases": [
+            "applied max-min problems"
+          ],
+          "bloom": "C5",
+          "summary": "Build an objective function with constraints, find the optimum, and justify that it is a maximum or minimum."
+        },
+        {
+          "id": "prf-8",
+          "name": "Curve sketching synthesis",
+          "aliases": [
+            "graph analysis",
+            "asymptotes and intercepts"
+          ],
+          "bloom": "C5",
+          "summary": "Combine domain, intercepts, asymptotes, monotonicity and concavity to sketch and justify a function's graph."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "prf-1"
+        ],
+        [
+          "cmp-7",
+          "prf-1"
+        ],
+        [
+          "adb-7",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-5"
+        ],
+        [
+          "prf-4",
+          "prf-6"
+        ],
+        [
+          "prf-6",
+          "prf-7"
+        ],
+        [
+          "prf-5",
+          "prf-8"
+        ],
+        [
+          "adb-2",
+          "prf-8"
+        ],
+        [
+          "prf-6",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "L'Hôpital's rule can be applied to any limit, and it means differentiating the quotient with the quotient rule.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Wherever f'(c)=0 there must be a local maximum or minimum.",
+          "concepts": [
+            "prf-4",
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Wherever f''(c)=0 there is an inflection point.",
+          "concepts": [
+            "prf-5",
+            "prf-8"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Formal epsilon-delta limits",
+          "aliases": [
+            "epsilon-delta proof",
+            "rigorous limit definition"
+          ],
+          "bloom": "C5",
+          "summary": "Construct and evaluate epsilon-delta arguments to prove limits and judge their correctness."
+        },
+        {
+          "id": "exp-2",
+          "name": "Proofs of differentiation rules",
+          "aliases": [
+            "deriving product and chain rules"
+          ],
+          "bloom": "C6",
+          "summary": "Derive the product, quotient and chain rules from the limit definition and critique flawed proofs."
+        },
+        {
+          "id": "exp-3",
+          "name": "Consequences of the MVT",
+          "aliases": [
+            "MVT corollaries",
+            "zero derivative implies constant"
+          ],
+          "bloom": "C5",
+          "summary": "Use the MVT to prove that functions with zero derivative are constant and that sign of f' determines monotonicity."
+        },
+        {
+          "id": "exp-4",
+          "name": "Linearisation and differentials",
+          "aliases": [
+            "linear approximation",
+            "error estimation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the accuracy of tangent-line approximations and propagate small errors using differentials."
+        },
+        {
+          "id": "exp-5",
+          "name": "Taylor polynomial approximation",
+          "aliases": [
+            "Taylor's theorem",
+            "Maclaurin polynomial"
+          ],
+          "bloom": "C6",
+          "summary": "Construct Taylor polynomials and use the remainder to bound approximation error and to evaluate limits."
+        },
+        {
+          "id": "exp-6",
+          "name": "Pathological functions and counterexamples",
+          "aliases": [
+            "Weierstrass function",
+            "x^2 sin(1/x)"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how counterexamples show the limits of theorems, such as differentiable functions with discontinuous derivatives."
+        },
+        {
+          "id": "exp-7",
+          "name": "Inverse function differentiation",
+          "aliases": [
+            "derivative of inverse",
+            "inverse trig derivatives"
+          ],
+          "bloom": "C6",
+          "summary": "Derive derivatives of inverse functions and inverse trig functions from the inverse derivative relation."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-2",
+          "exp-1"
+        ],
+        [
+          "adb-3",
+          "exp-2"
+        ],
+        [
+          "cmp-1",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ],
+        [
+          "adb-6",
+          "exp-4"
+        ],
+        [
+          "exp-4",
+          "exp-5"
+        ],
+        [
+          "prf-1",
+          "exp-5"
+        ],
+        [
+          "exp-3",
+          "exp-5"
+        ],
+        [
+          "adb-7",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-6"
+        ],
+        [
+          "cmp-4",
+          "exp-7"
+        ],
+        [
+          "cmp-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "If f is differentiable, then f' must be continuous.",
+          "concepts": [
+            "exp-6"
+          ]
+        },
+        {
+          "text": "A Taylor series of a smooth function always converges to the function.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Tangent-line approximation error is the same size regardless of distance from the base point or curvature.",
+          "concepts": [
+            "exp-4",
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

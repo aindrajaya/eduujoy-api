@@ -1,0 +1,731 @@
+{
+  "version": 1,
+  "topic": "asynchronous-javascript",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "javascript"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Synchronous versus asynchronous execution",
+          "aliases": [
+            "sync vs async",
+            "blocking vs non-blocking"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that synchronous code runs line by line and blocks, while asynchronous work is started now and finishes later without halting other code."
+        },
+        {
+          "id": "nov-2",
+          "name": "Single-threaded execution model",
+          "aliases": [
+            "one thread",
+            "single thread"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that JavaScript runs one piece of code at a time on a single main thread, so long tasks freeze the page."
+        },
+        {
+          "id": "nov-3",
+          "name": "Callback functions",
+          "aliases": [
+            "callbacks",
+            "callback"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a callback as a function passed to another function to be called later, when work completes."
+        },
+        {
+          "id": "nov-4",
+          "name": "Timers with setTimeout",
+          "aliases": [
+            "setTimeout",
+            "setInterval",
+            "delayed execution"
+          ],
+          "bloom": "C2",
+          "summary": "Recall how setTimeout and setInterval schedule a function to run after a delay and how clearTimeout cancels it."
+        },
+        {
+          "id": "nov-5",
+          "name": "Common asynchronous sources",
+          "aliases": [
+            "async operations",
+            "async APIs"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise typical asynchronous operations such as network requests, timers, file access and user events."
+        },
+        {
+          "id": "nov-6",
+          "name": "Promise states and meaning",
+          "aliases": [
+            "pending fulfilled rejected",
+            "promise basics"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a promise represents a future value and is pending, then either fulfilled with a value or rejected with a reason."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "setTimeout with a delay of 0 runs the function immediately, before the next line of code.",
+          "concepts": [
+            "nov-4",
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Asynchronous code runs at the same time as other JavaScript code on separate threads.",
+          "concepts": [
+            "nov-2",
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A line of code after an asynchronous call will wait until that call has finished.",
+          "concepts": [
+            "nov-1",
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Consuming promises with then and catch",
+          "aliases": [
+            "then",
+            "catch",
+            "finally",
+            "promise handlers"
+          ],
+          "bloom": "C3",
+          "summary": "Use then, catch and finally to handle the result, error and cleanup of a promise."
+        },
+        {
+          "id": "adb-2",
+          "name": "Promise chaining",
+          "aliases": [
+            "chaining then",
+            "sequential promises"
+          ],
+          "bloom": "C3",
+          "summary": "Chain then calls, returning values or promises, so that each step receives the previous step's result."
+        },
+        {
+          "id": "adb-3",
+          "name": "Async and await syntax",
+          "aliases": [
+            "async functions",
+            "await keyword"
+          ],
+          "bloom": "C3",
+          "summary": "Write async functions that use await to pause until a promise settles and always return a promise."
+        },
+        {
+          "id": "adb-4",
+          "name": "Fetching data with fetch",
+          "aliases": [
+            "fetch API",
+            "HTTP requests",
+            "response.json"
+          ],
+          "bloom": "C3",
+          "summary": "Request data using fetch and parse the response body with json(), handling its promise-based steps."
+        },
+        {
+          "id": "adb-5",
+          "name": "Error handling with try/catch",
+          "aliases": [
+            "try catch async",
+            "async error handling"
+          ],
+          "bloom": "C3",
+          "summary": "Wrap awaited calls in try/catch to handle rejections and failed requests."
+        },
+        {
+          "id": "adb-6",
+          "name": "Callback error-first convention",
+          "aliases": [
+            "error-first callbacks",
+            "Node-style callbacks"
+          ],
+          "bloom": "C2",
+          "summary": "Read and write callbacks whose first argument carries an error, and handle it before using the result."
+        },
+        {
+          "id": "adb-7",
+          "name": "Creating promises with constructor",
+          "aliases": [
+            "new Promise",
+            "resolve and reject",
+            "promisifying"
+          ],
+          "bloom": "C3",
+          "summary": "Wrap a callback-based operation in new Promise, calling resolve or reject appropriately."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-5"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-3",
+          "adb-6"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ],
+        [
+          "nov-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "fetch rejects its promise when the server responds with an HTTP error such as 404 or 500.",
+          "concepts": [
+            "adb-4",
+            "adb-5"
+          ]
+        },
+        {
+          "text": "Using await makes the whole program stop and wait, blocking the main thread.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "A then handler's return value is ignored, so there is no need to return a promise inside a chain.",
+          "concepts": [
+            "adb-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Event loop, call stack and queues",
+          "aliases": [
+            "event loop",
+            "task queue",
+            "callback queue"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how the call stack, Web APIs and task queue interact to decide when callbacks run."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Microtasks versus macrotasks",
+          "aliases": [
+            "microtask queue",
+            "promise jobs",
+            "task ordering"
+          ],
+          "bloom": "C4",
+          "summary": "Predict the output order of code mixing promise callbacks, timers and synchronous statements."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Parallel execution with Promise.all",
+          "aliases": [
+            "Promise.all",
+            "concurrent promises"
+          ],
+          "bloom": "C3",
+          "summary": "Start independent tasks together and await them with Promise.all, understanding its fail-fast behaviour."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Promise combinators",
+          "aliases": [
+            "Promise.allSettled",
+            "Promise.race",
+            "Promise.any"
+          ],
+          "bloom": "C4",
+          "summary": "Choose among all, allSettled, race and any based on how results and failures should be combined."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Sequential versus parallel awaiting",
+          "aliases": [
+            "await in loops",
+            "serial vs parallel"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when awaiting in a loop serialises work needlessly and restructure it for appropriate concurrency."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Error propagation through chains",
+          "aliases": [
+            "rejection propagation",
+            "rethrowing",
+            "unhandled rejection"
+          ],
+          "bloom": "C4",
+          "summary": "Trace how errors and rejections travel through chains and async functions and where they must be caught."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Cancellation with AbortController",
+          "aliases": [
+            "AbortController",
+            "abort signal",
+            "request timeout"
+          ],
+          "bloom": "C3",
+          "summary": "Cancel fetch requests and implement timeouts using an AbortController signal."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-1",
+          "cmp-2"
+        ],
+        [
+          "adb-3",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "adb-2",
+          "cmp-6"
+        ],
+        [
+          "adb-4",
+          "cmp-7"
+        ],
+        [
+          "cmp-4",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Promise.all runs the promises in parallel on multiple threads.",
+          "concepts": [
+            "cmp-3",
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "A setTimeout callback with zero delay runs before an already resolved promise's then callback.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "Promise.all waits for every promise and returns partial results even if one rejects.",
+          "concepts": [
+            "cmp-3",
+            "cmp-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Concurrency limiting and pooling",
+          "aliases": [
+            "throttling concurrency",
+            "worker pool",
+            "batching requests"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and implement limits on simultaneous asynchronous tasks to avoid overloading servers or resources."
+        },
+        {
+          "id": "prf-2",
+          "name": "Retry with backoff",
+          "aliases": [
+            "exponential backoff",
+            "retry logic",
+            "resilient requests"
+          ],
+          "bloom": "C5",
+          "summary": "Judge which failures merit retries and design retry strategies with delays and caps."
+        },
+        {
+          "id": "prf-3",
+          "name": "Race conditions in async code",
+          "aliases": [
+            "stale responses",
+            "async race",
+            "interleaving"
+          ],
+          "bloom": "C4",
+          "summary": "Identify how interleaved async operations produce out-of-order results or shared-state bugs and guard against them."
+        },
+        {
+          "id": "prf-4",
+          "name": "Async iteration and generators",
+          "aliases": [
+            "for await of",
+            "async generators",
+            "async iterators"
+          ],
+          "bloom": "C4",
+          "summary": "Consume and produce sequences of asynchronous values using for await...of and async generators."
+        },
+        {
+          "id": "prf-5",
+          "name": "Unhandled rejection diagnosis",
+          "aliases": [
+            "unhandledrejection",
+            "floating promises",
+            "missing await"
+          ],
+          "bloom": "C4",
+          "summary": "Find forgotten awaits and uncaught rejections and decide on global handling and logging."
+        },
+        {
+          "id": "prf-6",
+          "name": "Blocking the event loop",
+          "aliases": [
+            "long tasks",
+            "main thread blocking",
+            "yielding"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate CPU-heavy work that starves the loop and choose chunking or Web Workers to offload it."
+        },
+        {
+          "id": "prf-7",
+          "name": "Debounce and async caching",
+          "aliases": [
+            "debouncing",
+            "promise memoisation",
+            "request deduplication"
+          ],
+          "bloom": "C5",
+          "summary": "Choose debouncing, caching of in-flight promises and deduplication to reduce redundant async work."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-2"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "adb-3",
+          "prf-4"
+        ],
+        [
+          "cmp-6",
+          "prf-5"
+        ],
+        [
+          "cmp-1",
+          "prf-6"
+        ],
+        [
+          "prf-3",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Web Workers share variables with the main thread, so offloaded work needs no message passing.",
+          "concepts": [
+            "prf-6"
+          ]
+        },
+        {
+          "text": "Since JavaScript is single-threaded, race conditions cannot occur.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Retrying every failed request immediately is always the safest way to be resilient.",
+          "concepts": [
+            "prf-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-2",
+          "name": "Evaluating async abstractions",
+          "aliases": [
+            "promises vs observables",
+            "streams vs promises",
+            "event emitters"
+          ],
+          "bloom": "C5",
+          "summary": "Compare promises, callbacks, event emitters, observables and streams and justify the right fit for a problem."
+        },
+        {
+          "id": "exp-1",
+          "name": "Designing async architecture",
+          "aliases": [
+            "async API design",
+            "concurrency architecture"
+          ],
+          "bloom": "C6",
+          "summary": "Design module and API boundaries that expose cancellation, errors, progress and concurrency control consistently."
+        },
+        {
+          "id": "exp-3",
+          "name": "Building promise utilities",
+          "aliases": [
+            "custom promise library",
+            "promise polyfill",
+            "scheduler implementation"
+          ],
+          "bloom": "C6",
+          "summary": "Implement utilities such as a promise polyfill, task queue or limiter that obey the Promises/A+ semantics."
+        },
+        {
+          "id": "exp-4",
+          "name": "Structured concurrency patterns",
+          "aliases": [
+            "task scoping",
+            "cancellation propagation",
+            "lifecycle management"
+          ],
+          "bloom": "C6",
+          "summary": "Create patterns where child async tasks are scoped, cancelled and cleaned up together with their parent."
+        },
+        {
+          "id": "exp-5",
+          "name": "Runtime differences in scheduling",
+          "aliases": [
+            "Node event loop phases",
+            "process.nextTick",
+            "setImmediate",
+            "browser vs Node"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how browser and Node.js scheduling differ and how that affects ordering and performance."
+        },
+        {
+          "id": "exp-6",
+          "name": "Testing and observability of async code",
+          "aliases": [
+            "fake timers",
+            "async testing",
+            "tracing"
+          ],
+          "bloom": "C5",
+          "summary": "Assess strategies for deterministic async tests, fake timers, tracing and diagnosing flaky timing issues."
+        },
+        {
+          "id": "exp-7",
+          "name": "Streaming and backpressure",
+          "aliases": [
+            "streams",
+            "backpressure",
+            "ReadableStream"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how streaming data with backpressure controls memory and throughput compared with buffering whole results."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-2",
+          "exp-1"
+        ],
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-1"
+        ],
+        [
+          "cmp-2",
+          "exp-3"
+        ],
+        [
+          "prf-1",
+          "exp-3"
+        ],
+        [
+          "cmp-7",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "cmp-1",
+          "exp-5"
+        ],
+        [
+          "cmp-2",
+          "exp-5"
+        ],
+        [
+          "exp-5",
+          "exp-6"
+        ],
+        [
+          "prf-4",
+          "exp-7"
+        ],
+        [
+          "prf-6",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Promises are always the best abstraction, so streams and observables add nothing for repeated or large data.",
+          "concepts": [
+            "exp-2",
+            "exp-7"
+          ]
+        },
+        {
+          "text": "Event loop ordering is identical in browsers and Node.js, so scheduling code is portable.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Adding timeouts and retries at every layer of a system makes it more reliable.",
+          "concepts": [
+            "exp-1",
+            "exp-4"
+          ]
+        }
+      ]
+    }
+  ]
+}

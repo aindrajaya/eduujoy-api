@@ -1,0 +1,664 @@
+{
+  "version": 1,
+  "topic": "react-hooks",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "react"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Hooks as function component features",
+          "aliases": [
+            "what hooks are"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that hooks are special functions starting with 'use' that let function components hold state and use React features without classes."
+        },
+        {
+          "id": "nov-2",
+          "name": "Rules of Hooks",
+          "aliases": [
+            "hook call rules"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that hooks must be called only at the top level of components or custom hooks, never inside conditions, loops or nested functions."
+        },
+        {
+          "id": "nov-3",
+          "name": "useState state variable and setter",
+          "aliases": [
+            "useState"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that useState returns the current value and a setter function, and that calling the setter triggers a re-render."
+        },
+        {
+          "id": "nov-4",
+          "name": "State persists between renders",
+          "aliases": [
+            "state preservation"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that state is kept by React across renders while ordinary local variables are reset on every call."
+        },
+        {
+          "id": "nov-5",
+          "name": "Initial state value",
+          "aliases": [
+            "useState initial argument"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that the argument to useState is used only on the first render to set the initial value."
+        },
+        {
+          "id": "nov-6",
+          "name": "Controlled inputs with state",
+          "aliases": [
+            "form input state"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how an input's value and onChange handler are tied to a state variable."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Changing a state variable directly, such as count = count + 1, updates the screen.",
+          "concepts": [
+            "nov-3",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Hooks can be called anywhere in a component, including inside if statements or loops.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Hooks only work in class components or are just a replacement syntax for this.state.",
+          "concepts": [
+            "nov-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Functional state updates",
+          "aliases": [
+            "updater function",
+            "setState callback"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the form setState(prev => next) when the new state depends on the previous state."
+        },
+        {
+          "id": "adb-2",
+          "name": "Immutable updates of objects and arrays",
+          "aliases": [
+            "state immutability"
+          ],
+          "bloom": "C3",
+          "summary": "Update object and array state by creating new copies with spread or array methods rather than mutating in place."
+        },
+        {
+          "id": "adb-3",
+          "name": "useEffect for side effects",
+          "aliases": [
+            "effect hook"
+          ],
+          "bloom": "C3",
+          "summary": "Use useEffect to run side effects such as fetching data or updating the document title after render."
+        },
+        {
+          "id": "adb-4",
+          "name": "Dependency array behaviour",
+          "aliases": [
+            "effect dependencies"
+          ],
+          "bloom": "C3",
+          "summary": "Choose no array, an empty array or a list of values to control when an effect re-runs."
+        },
+        {
+          "id": "adb-5",
+          "name": "Effect cleanup functions",
+          "aliases": [
+            "effect cleanup"
+          ],
+          "bloom": "C3",
+          "summary": "Return a cleanup function from an effect to remove subscriptions, timers or listeners."
+        },
+        {
+          "id": "adb-6",
+          "name": "Lazy state initialisation",
+          "aliases": [
+            "lazy initial state"
+          ],
+          "bloom": "C2",
+          "summary": "Pass a function to useState so an expensive initial value is computed only on the first render."
+        },
+        {
+          "id": "adb-7",
+          "name": "useRef for mutable values and DOM nodes",
+          "aliases": [
+            "ref object",
+            "useRef"
+          ],
+          "bloom": "C3",
+          "summary": "Use useRef to hold a value that persists without causing re-renders or to access a DOM element."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-6"
+        ],
+        [
+          "nov-1",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-3",
+          "adb-5"
+        ],
+        [
+          "nov-4",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Calling setState updates the variable immediately, so the next line sees the new value.",
+          "concepts": [
+            "adb-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Pushing onto a state array and then calling the setter with the same array will trigger a re-render.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "useEffect with an empty dependency array runs on every render.",
+          "concepts": [
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Stale closures in hooks",
+          "aliases": [
+            "captured values",
+            "stale state"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how event handlers and effects capture the values from the render in which they were created, and fix stale values."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Exhaustive dependencies",
+          "aliases": [
+            "exhaustive-deps",
+            "dependency correctness"
+          ],
+          "bloom": "C4",
+          "summary": "Determine the correct dependency list for an effect and restructure code instead of suppressing the lint rule."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Data fetching in effects",
+          "aliases": [
+            "fetch race conditions"
+          ],
+          "bloom": "C3",
+          "summary": "Implement fetching in useEffect with loading and error state and guard against race conditions using cleanup or abort signals."
+        },
+        {
+          "id": "cmp-4",
+          "name": "useReducer state machines",
+          "aliases": [
+            "useReducer"
+          ],
+          "bloom": "C3",
+          "summary": "Use a reducer and dispatched actions to manage state with several related transitions."
+        },
+        {
+          "id": "cmp-5",
+          "name": "useContext for shared values",
+          "aliases": [
+            "context hook"
+          ],
+          "bloom": "C3",
+          "summary": "Provide a value with a context provider and read it in descendants with useContext, avoiding prop drilling."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Writing custom hooks",
+          "aliases": [
+            "custom hook extraction"
+          ],
+          "bloom": "C3",
+          "summary": "Extract reusable stateful logic into functions beginning with 'use' that compose built-in hooks."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Effects versus event handlers",
+          "aliases": [
+            "when to use effects"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish logic that belongs in event handlers or render calculation from logic that truly needs an effect to synchronise with an external system."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Derived state versus stored state",
+          "aliases": [
+            "avoid redundant state"
+          ],
+          "bloom": "C4",
+          "summary": "Decide when a value should be computed during render from existing state or props rather than stored in separate state."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-3"
+        ],
+        [
+          "adb-4",
+          "cmp-3"
+        ],
+        [
+          "adb-2",
+          "cmp-4"
+        ],
+        [
+          "nov-3",
+          "cmp-5"
+        ],
+        [
+          "adb-3",
+          "cmp-6"
+        ],
+        [
+          "cmp-2",
+          "cmp-7"
+        ],
+        [
+          "nov-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Omitting a dependency from the array is fine because the effect will always see the latest values anyway.",
+          "concepts": [
+            "cmp-2",
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Syncing props into state with an effect is the normal way to compute derived values.",
+          "concepts": [
+            "cmp-8",
+            "cmp-7"
+          ]
+        },
+        {
+          "text": "Two components using the same custom hook share the same state.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Memoization with useMemo and useCallback",
+          "aliases": [
+            "useMemo",
+            "useCallback"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when caching a computed value or function identity preserves referential equality and actually avoids work."
+        },
+        {
+          "id": "prf-2",
+          "name": "React.memo and referential stability",
+          "aliases": [
+            "memoised components",
+            "prop identity"
+          ],
+          "bloom": "C4",
+          "summary": "Trace how unstable object and function props defeat React.memo and decide which stabilisations are needed."
+        },
+        {
+          "id": "prf-3",
+          "name": "Evaluating optimisation cost",
+          "aliases": [
+            "premature memoization"
+          ],
+          "bloom": "C5",
+          "summary": "Judge by measurement with the profiler whether memoization is worth its complexity or if restructuring components is better."
+        },
+        {
+          "id": "prf-4",
+          "name": "Context performance and splitting",
+          "aliases": [
+            "context re-renders"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how context value changes re-render all consumers and choose splitting, memoised values or state colocation in response."
+        },
+        {
+          "id": "prf-5",
+          "name": "Imperative handles with refs",
+          "aliases": [
+            "forwardRef",
+            "useImperativeHandle"
+          ],
+          "bloom": "C4",
+          "summary": "Use ref forwarding and useImperativeHandle to expose a limited imperative API from a child component."
+        },
+        {
+          "id": "prf-6",
+          "name": "Layout effects and timing",
+          "aliases": [
+            "useLayoutEffect"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the render, commit, layout effect and passive effect order to choose useLayoutEffect for DOM measurement before paint."
+        },
+        {
+          "id": "prf-7",
+          "name": "External stores with useSyncExternalStore",
+          "aliases": [
+            "useSyncExternalStore"
+          ],
+          "bloom": "C4",
+          "summary": "Subscribe to non-React state sources safely so that concurrent rendering does not show inconsistent values."
+        },
+        {
+          "id": "prf-8",
+          "name": "Strict Mode double invocation",
+          "aliases": [
+            "effect re-run in development"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret why Strict Mode re-runs renders and effects in development and use it to expose impure renders and missing cleanup."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-4"
+        ],
+        [
+          "adb-7",
+          "prf-5"
+        ],
+        [
+          "adb-3",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "adb-5",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Wrapping every function in useCallback and every value in useMemo makes an app faster.",
+          "concepts": [
+            "prf-1",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "useMemo guarantees the value will never be recomputed.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "useCallback prevents a child from re-rendering by itself, even if the child is not memoised.",
+          "concepts": [
+            "prf-1",
+            "prf-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Hooks implementation model",
+          "aliases": [
+            "hook call order",
+            "fiber hook list"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate code against the model that React stores hook state per component instance in call order, explaining why the rules of hooks exist."
+        },
+        {
+          "id": "exp-2",
+          "name": "Concurrent rendering and hook safety",
+          "aliases": [
+            "concurrent-safe hooks"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how interruptible renders, transitions and deferred values constrain purity of render and effects."
+        },
+        {
+          "id": "exp-3",
+          "name": "Transitions and deferred values",
+          "aliases": [
+            "useTransition",
+            "useDeferredValue"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when to mark updates as non-urgent with useTransition or useDeferredValue to keep interfaces responsive."
+        },
+        {
+          "id": "exp-4",
+          "name": "Custom hook API design",
+          "aliases": [
+            "hook library design"
+          ],
+          "bloom": "C6",
+          "summary": "Design custom hooks with stable return identities, clear contracts, composability and minimal dependency on call-site details."
+        },
+        {
+          "id": "exp-5",
+          "name": "Event-like effect patterns",
+          "aliases": [
+            "useEffectEvent",
+            "latest ref pattern"
+          ],
+          "bloom": "C6",
+          "summary": "Create solutions that read the latest values inside effects without re-synchronising, using event-effect or latest-ref patterns."
+        },
+        {
+          "id": "exp-6",
+          "name": "Choosing state architecture",
+          "aliases": [
+            "state management selection"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate hooks-only state, reducers with context, server-state libraries and external stores for a given app's needs."
+        },
+        {
+          "id": "exp-7",
+          "name": "Testing and debugging hooks",
+          "aliases": [
+            "renderHook",
+            "hook debugging"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate strategies to test custom hooks and diagnose render loops, stale values and leaked effects using the profiler and devtools."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "cmp-6",
+          "exp-4"
+        ],
+        [
+          "prf-1",
+          "exp-4"
+        ],
+        [
+          "cmp-1",
+          "exp-5"
+        ],
+        [
+          "prf-4",
+          "exp-6"
+        ],
+        [
+          "prf-7",
+          "exp-6"
+        ],
+        [
+          "exp-4",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Hooks are magic and track state by variable name or by the component's source location.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "useTransition makes the slow work itself run faster.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Effects can be made safe by simply omitting dependencies when a value should be read without re-running.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

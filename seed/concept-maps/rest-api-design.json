@@ -1,0 +1,685 @@
+{
+  "version": 1,
+  "topic": "rest-api-design",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "http",
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Resources and URIs",
+          "aliases": [
+            "resource identifiers",
+            "endpoints as nouns"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a REST API models things as resources, each identified by a URI such as /users/42."
+        },
+        {
+          "id": "nov-2",
+          "name": "Collections and single items",
+          "aliases": [
+            "collection resources",
+            "item resources"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise the pattern of a plural collection URI (/orders) and an item URI (/orders/17) beneath it."
+        },
+        {
+          "id": "nov-3",
+          "name": "HTTP methods as actions",
+          "aliases": [
+            "verbs",
+            "GET POST PUT DELETE"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how GET, POST, PUT, PATCH and DELETE express reading, creating, replacing, updating and removing resources."
+        },
+        {
+          "id": "nov-4",
+          "name": "Status code classes",
+          "aliases": [
+            "2xx 4xx 5xx",
+            "response codes"
+          ],
+          "bloom": "C1",
+          "summary": "Remember that 2xx means success, 3xx redirection, 4xx client error and 5xx server error, and recall common codes like 200, 201, 404 and 500."
+        },
+        {
+          "id": "nov-5",
+          "name": "JSON representations",
+          "aliases": [
+            "JSON payloads",
+            "resource representation"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a resource is exchanged as a representation, typically JSON, separate from the server's internal storage."
+        },
+        {
+          "id": "nov-6",
+          "name": "Statelessness",
+          "aliases": [
+            "stateless requests"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that each request carries all information needed to process it, so the server keeps no client session between calls."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "REST is the same thing as HTTP or JSON, so any API that uses them is RESTful.",
+          "concepts": [
+            "nov-5",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "URIs should contain verbs like /getUser or /deleteOrder to say what they do.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A response is successful whenever the server replies, so 200 is fine for everything.",
+          "concepts": [
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Resource naming conventions",
+          "aliases": [
+            "URI naming",
+            "plural nouns"
+          ],
+          "bloom": "C3",
+          "summary": "Apply consistent naming: plural lowercase nouns, hyphenated words, no verbs, and no file extensions."
+        },
+        {
+          "id": "adb-2",
+          "name": "Nested resources and relationships",
+          "aliases": [
+            "sub-resources",
+            "hierarchical URIs"
+          ],
+          "bloom": "C3",
+          "summary": "Model relationships with paths like /customers/5/orders and judge when to keep nesting shallow."
+        },
+        {
+          "id": "adb-3",
+          "name": "Safe and idempotent methods",
+          "aliases": [
+            "idempotency of methods",
+            "method semantics"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish safe methods from idempotent ones and say which of GET, PUT, DELETE and POST has which property."
+        },
+        {
+          "id": "adb-4",
+          "name": "Choosing correct status codes",
+          "aliases": [
+            "status code selection"
+          ],
+          "bloom": "C3",
+          "summary": "Pick codes such as 201 with Location, 204, 400, 401, 403, 404 and 409 to match what actually happened."
+        },
+        {
+          "id": "adb-5",
+          "name": "Query parameters for filtering",
+          "aliases": [
+            "filtering and sorting",
+            "query strings"
+          ],
+          "bloom": "C3",
+          "summary": "Use query parameters to filter, sort and select fields on a collection rather than creating new endpoints."
+        },
+        {
+          "id": "adb-6",
+          "name": "Basic pagination",
+          "aliases": [
+            "limit and offset",
+            "page parameters"
+          ],
+          "bloom": "C3",
+          "summary": "Return large collections in pages using limit/offset or page parameters along with total or next-page information."
+        },
+        {
+          "id": "adb-7",
+          "name": "Consistent error response body",
+          "aliases": [
+            "error payload",
+            "error format"
+          ],
+          "bloom": "C3",
+          "summary": "Return errors in a uniform JSON structure with a code, message and details alongside the proper status code."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "adb-1"
+        ],
+        [
+          "nov-2",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "nov-4",
+          "adb-4"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-2",
+          "adb-5"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "adb-4",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "POST and PUT are interchangeable for creating resources.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Deeper URI nesting always gives a clearer API, so /a/1/b/2/c/3/d/4 is good design.",
+          "concepts": [
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Using 200 with an error message in the body is acceptable, so the status code need not reflect failure.",
+          "concepts": [
+            "adb-4",
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "PUT versus PATCH semantics",
+          "aliases": [
+            "partial update",
+            "full replacement"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when full replacement (PUT) or partial update (PATCH, merge patch or JSON Patch) fits an update and its effect on idempotency."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Cursor-based pagination",
+          "aliases": [
+            "keyset pagination",
+            "opaque cursors"
+          ],
+          "bloom": "C4",
+          "summary": "Compare offset and cursor pagination in terms of consistency under inserts, performance and navigation, and design cursor responses."
+        },
+        {
+          "id": "cmp-3",
+          "name": "API versioning strategies",
+          "aliases": [
+            "URI versioning",
+            "header versioning"
+          ],
+          "bloom": "C4",
+          "summary": "Contrast URI, header and media-type versioning and decide which changes are breaking versus backward compatible."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Problem Details error format",
+          "aliases": [
+            "RFC 9457",
+            "application/problem+json"
+          ],
+          "bloom": "C3",
+          "summary": "Structure errors using the standard problem details fields (type, title, status, detail, instance) with field-level validation errors."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Authentication and authorization design",
+          "aliases": [
+            "API auth",
+            "bearer tokens"
+          ],
+          "bloom": "C3",
+          "summary": "Design API access with bearer tokens or API keys, and separate 401 authentication failures from 403 permission failures."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Idempotency keys for POST",
+          "aliases": [
+            "safe retries",
+            "Idempotency-Key header"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how retries cause duplicate creations and use an idempotency key so POST can be retried safely."
+        },
+        {
+          "id": "cmp-7",
+          "name": "HTTP caching with validators",
+          "aliases": [
+            "ETag",
+            "conditional requests"
+          ],
+          "bloom": "C3",
+          "summary": "Use Cache-Control, ETag and If-None-Match/If-Match to enable caching and prevent lost updates."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Modelling non-CRUD actions",
+          "aliases": [
+            "action endpoints",
+            "state transitions"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse options such as sub-resources or state fields for operations like cancel or publish that do not map neatly to CRUD."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "adb-2",
+          "cmp-3"
+        ],
+        [
+          "adb-7",
+          "cmp-4"
+        ],
+        [
+          "adb-4",
+          "cmp-5"
+        ],
+        [
+          "adb-3",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "adb-1",
+          "cmp-8"
+        ],
+        [
+          "adb-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "PATCH is just another name for PUT and behaves identically.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Versioning is only needed when you remove a field; adding fields or changing meaning never breaks clients.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "401 and 403 mean the same thing and either can be used for any access failure.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Hypermedia and HATEOAS trade-offs",
+          "aliases": [
+            "HATEOAS",
+            "hypermedia links"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the Richardson maturity model and when hypermedia links justify their cost for discoverability and decoupling."
+        },
+        {
+          "id": "prf-2",
+          "name": "Evolution without breaking clients",
+          "aliases": [
+            "backward compatibility",
+            "deprecation policy"
+          ],
+          "bloom": "C5",
+          "summary": "Judge change strategies such as additive changes, tolerant readers, Sunset and Deprecation headers, and migration timelines."
+        },
+        {
+          "id": "prf-3",
+          "name": "Rate limiting and quotas",
+          "aliases": [
+            "throttling",
+            "429 Too Many Requests"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse rate limiting schemes and communicate limits through 429, Retry-After and rate limit headers."
+        },
+        {
+          "id": "prf-4",
+          "name": "Long-running operations",
+          "aliases": [
+            "asynchronous requests",
+            "202 Accepted"
+          ],
+          "bloom": "C4",
+          "summary": "Design asynchronous operations using 202, a status resource and polling or callbacks rather than blocking requests."
+        },
+        {
+          "id": "prf-5",
+          "name": "Concurrency control",
+          "aliases": [
+            "optimistic locking",
+            "If-Match"
+          ],
+          "bloom": "C4",
+          "summary": "Apply optimistic concurrency with ETags and 412 or 409 responses to analyse and prevent conflicting writes."
+        },
+        {
+          "id": "prf-6",
+          "name": "Bulk and batch operations",
+          "aliases": [
+            "batch endpoints",
+            "partial success"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate designs for bulk create or update, including partial-success reporting such as 207 versus all-or-nothing."
+        },
+        {
+          "id": "prf-7",
+          "name": "Contract-first with OpenAPI",
+          "aliases": [
+            "OpenAPI specification",
+            "API description"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate describing an API in an OpenAPI document to drive documentation, validation, mocks and contract testing."
+        },
+        {
+          "id": "prf-8",
+          "name": "Webhooks and event notification",
+          "aliases": [
+            "callbacks",
+            "server-to-client events"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse webhook design including signed payloads, retries, ordering and delivery guarantees."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-2"
+        ],
+        [
+          "cmp-4",
+          "prf-3"
+        ],
+        [
+          "cmp-8",
+          "prf-4"
+        ],
+        [
+          "cmp-7",
+          "prf-5"
+        ],
+        [
+          "cmp-6",
+          "prf-6"
+        ],
+        [
+          "cmp-4",
+          "prf-7"
+        ],
+        [
+          "prf-4",
+          "prf-8"
+        ],
+        [
+          "cmp-6",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "An API is truly RESTful as soon as it uses resource URIs and HTTP methods, even without hypermedia.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Bulk endpoints should always be atomic, since partial success is confusing and wrong.",
+          "concepts": [
+            "prf-6"
+          ]
+        },
+        {
+          "text": "A generated OpenAPI document is documentation enough and needs no design review or contract testing.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "API style selection",
+          "aliases": [
+            "REST vs GraphQL vs gRPC",
+            "protocol choice"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when REST, GraphQL, gRPC or event-driven interfaces best fit given clients, performance, coupling and team constraints."
+        },
+        {
+          "id": "exp-2",
+          "name": "API governance and style guides",
+          "aliases": [
+            "design standards",
+            "API linting"
+          ],
+          "bloom": "C6",
+          "summary": "Create organisation-wide design guidelines and automated linting that keep many teams' APIs consistent."
+        },
+        {
+          "id": "exp-3",
+          "name": "Designing for the client experience",
+          "aliases": [
+            "developer experience",
+            "API usability"
+          ],
+          "bloom": "C6",
+          "summary": "Create APIs whose naming, defaults, errors, SDKs and documentation minimise time to first successful call."
+        },
+        {
+          "id": "exp-4",
+          "name": "Resource granularity and aggregation",
+          "aliases": [
+            "chatty APIs",
+            "backend for frontend"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate coarse versus fine-grained resources, embedding and expansion, and aggregation layers to balance round trips and coupling."
+        },
+        {
+          "id": "exp-5",
+          "name": "Long-term API lifecycle management",
+          "aliases": [
+            "API product management",
+            "sunsetting"
+          ],
+          "bloom": "C6",
+          "summary": "Create lifecycle plans covering design review, versioning policy, deprecation, telemetry-driven change and retirement."
+        },
+        {
+          "id": "exp-6",
+          "name": "Security threat modelling for APIs",
+          "aliases": [
+            "API security risks",
+            "OWASP API Top 10"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate an API design against threats such as broken object-level authorisation, mass assignment and excessive data exposure."
+        },
+        {
+          "id": "exp-7",
+          "name": "Consistency and scale trade-offs",
+          "aliases": [
+            "eventual consistency in APIs",
+            "distributed API design"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how eventual consistency, caching layers and replication shape the guarantees an API can honestly promise."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-7",
+          "exp-2"
+        ],
+        [
+          "cmp-4",
+          "exp-3"
+        ],
+        [
+          "prf-6",
+          "exp-4"
+        ],
+        [
+          "prf-2",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-5"
+        ],
+        [
+          "cmp-5",
+          "exp-6"
+        ],
+        [
+          "prf-5",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "REST is always the best choice, and GraphQL or gRPC are merely fashionable replacements.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Strict consistency rules matter less than flexibility, so each team should design its API freely.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Authentication on every endpoint is enough, with no need for per-object authorisation checks.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

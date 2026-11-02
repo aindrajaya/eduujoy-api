@@ -1,0 +1,685 @@
+{
+  "version": 1,
+  "topic": "graph-theory",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "discrete-mathematics"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Vertices and edges",
+          "aliases": [
+            "nodes and links"
+          ],
+          "bloom": "C1",
+          "summary": "Name the parts of a graph and describe a graph as a set of vertices with a set of edges joining pairs of them."
+        },
+        {
+          "id": "nov-2",
+          "name": "Degree of a vertex",
+          "aliases": [
+            "vertex degree"
+          ],
+          "bloom": "C2",
+          "summary": "Compute the degree of each vertex and explain that it counts the edge ends meeting at that vertex."
+        },
+        {
+          "id": "nov-3",
+          "name": "Directed and undirected edges",
+          "aliases": [
+            "digraphs"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish edges that can be traversed both ways from arcs with a direction, and draw each kind."
+        },
+        {
+          "id": "nov-4",
+          "name": "Weighted graphs",
+          "aliases": [
+            "edge weights",
+            "edge costs"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that weights attach numeric costs or distances to edges and read them off a diagram."
+        },
+        {
+          "id": "nov-5",
+          "name": "Paths and cycles",
+          "aliases": [
+            "walks",
+            "closed paths"
+          ],
+          "bloom": "C2",
+          "summary": "Define a path as a sequence of adjacent edges and a cycle as a closed path with no repeated vertices, and identify them in a drawing."
+        },
+        {
+          "id": "nov-6",
+          "name": "Connectedness",
+          "aliases": [
+            "connected graph",
+            "components"
+          ],
+          "bloom": "C2",
+          "summary": "Decide whether a small graph is connected and identify its connected components."
+        },
+        {
+          "id": "nov-7",
+          "name": "Handshaking lemma",
+          "aliases": [
+            "degree sum formula"
+          ],
+          "bloom": "C2",
+          "summary": "State that the sum of degrees equals twice the number of edges and explain why."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The way a graph is drawn, including edge lengths and crossings, is part of what the graph is.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "A vertex's degree is the number of vertices in the graph.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Edges in a graph always have a direction.",
+          "concepts": [
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Adjacency matrix representation",
+          "aliases": [
+            "adjacency matrix"
+          ],
+          "bloom": "C3",
+          "summary": "Build the adjacency matrix of a graph and read degrees and edges from it."
+        },
+        {
+          "id": "adb-2",
+          "name": "Adjacency list representation",
+          "aliases": [
+            "adjacency lists"
+          ],
+          "bloom": "C3",
+          "summary": "Write an adjacency list for a graph and choose between list and matrix based on graph density."
+        },
+        {
+          "id": "adb-3",
+          "name": "Breadth-first search",
+          "aliases": [
+            "BFS"
+          ],
+          "bloom": "C3",
+          "summary": "Trace BFS with a queue on a graph, giving the visiting order and the levels from the start vertex."
+        },
+        {
+          "id": "adb-4",
+          "name": "Depth-first search",
+          "aliases": [
+            "DFS"
+          ],
+          "bloom": "C3",
+          "summary": "Trace DFS with a stack or recursion, giving the visiting order and the backtracking steps."
+        },
+        {
+          "id": "adb-5",
+          "name": "Trees and forests",
+          "aliases": [
+            "acyclic graphs"
+          ],
+          "bloom": "C2",
+          "summary": "Recognise a tree as a connected acyclic graph and use the fact that a tree on n vertices has n-1 edges."
+        },
+        {
+          "id": "adb-6",
+          "name": "Euler circuits and trails",
+          "aliases": [
+            "Eulerian circuit",
+            "Euler path"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the degree conditions to decide whether a connected graph has an Euler circuit or trail and construct one."
+        },
+        {
+          "id": "adb-7",
+          "name": "Subgraphs and complete graphs",
+          "aliases": [
+            "Kn",
+            "induced subgraph"
+          ],
+          "bloom": "C2",
+          "summary": "Identify subgraphs and use the count n(n-1)/2 for the edges of a complete graph."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-4"
+        ],
+        [
+          "nov-5",
+          "adb-5"
+        ],
+        [
+          "nov-7",
+          "adb-6"
+        ],
+        [
+          "nov-6",
+          "adb-6"
+        ],
+        [
+          "nov-1",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "BFS and DFS visit vertices in the same order, so either one can be used for any purpose.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "An adjacency matrix is always the better representation because lookup is constant time.",
+          "concepts": [
+            "adb-1",
+            "adb-2"
+          ]
+        },
+        {
+          "text": "An Euler circuit visits every vertex exactly once.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Dijkstra's shortest path algorithm",
+          "aliases": [
+            "Dijkstra"
+          ],
+          "bloom": "C3",
+          "summary": "Run Dijkstra with a priority queue on a graph with nonnegative weights and recover the shortest path tree."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Minimum spanning trees",
+          "aliases": [
+            "MST",
+            "Kruskal and Prim"
+          ],
+          "bloom": "C3",
+          "summary": "Compute a minimum spanning tree with Kruskal's or Prim's algorithm and justify each edge choice."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Hamilton cycles",
+          "aliases": [
+            "Hamiltonian circuit"
+          ],
+          "bloom": "C4",
+          "summary": "Contrast Hamilton cycles with Euler circuits, use sufficient conditions such as Dirac's theorem, and explain why no simple degree test exists."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Bipartite graphs",
+          "aliases": [
+            "two-colourable graphs"
+          ],
+          "bloom": "C4",
+          "summary": "Test bipartiteness through BFS two-colouring or the absence of odd cycles."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Graph coloring basics",
+          "aliases": [
+            "chromatic number",
+            "vertex colouring"
+          ],
+          "bloom": "C3",
+          "summary": "Colour a graph properly, apply greedy colouring, and bound the chromatic number using cliques and maximum degree."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Topological ordering of DAGs",
+          "aliases": [
+            "topological sort"
+          ],
+          "bloom": "C3",
+          "summary": "Order the vertices of a directed acyclic graph so all edges point forward, using DFS finishing times or in-degree removal."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Complexity of graph traversals",
+          "aliases": [
+            "O(V+E)"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the running time of BFS, DFS and Dijkstra in terms of vertices and edges under each representation."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "nov-4",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-2"
+        ],
+        [
+          "nov-4",
+          "cmp-2"
+        ],
+        [
+          "adb-6",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "adb-4",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-7"
+        ],
+        [
+          "adb-4",
+          "cmp-7"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Dijkstra's algorithm works correctly with negative edge weights as long as there is no negative cycle.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "A minimum spanning tree gives the shortest path between every pair of vertices.",
+          "concepts": [
+            "cmp-2",
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "A graph with all degrees even is guaranteed to have a Hamilton cycle.",
+          "concepts": [
+            "cmp-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Correctness of greedy graph algorithms",
+          "aliases": [
+            "cut property proof",
+            "MST correctness"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate proofs of Prim, Kruskal and Dijkstra using the cut property and invariants about settled vertices."
+        },
+        {
+          "id": "prf-2",
+          "name": "Planar graphs and Euler's formula",
+          "aliases": [
+            "planarity",
+            "V-E+F=2"
+          ],
+          "bloom": "C4",
+          "summary": "Use V-E+F=2 to derive edge bounds and show that K5 and K3,3 are nonplanar."
+        },
+        {
+          "id": "prf-3",
+          "name": "Kuratowski and planarity testing",
+          "aliases": [
+            "Kuratowski's theorem",
+            "Wagner's theorem"
+          ],
+          "bloom": "C5",
+          "summary": "Judge planarity by finding subdivisions or minors of K5 or K3,3 and relate it to the four colour theorem."
+        },
+        {
+          "id": "prf-4",
+          "name": "Maximum flow and Ford-Fulkerson",
+          "aliases": [
+            "network flow",
+            "augmenting paths"
+          ],
+          "bloom": "C4",
+          "summary": "Model a capacitated network, find a maximum flow with augmenting paths in a residual graph, and track flow conservation."
+        },
+        {
+          "id": "prf-5",
+          "name": "Max-flow min-cut theorem",
+          "aliases": [
+            "min cut"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate a flow's optimality by exhibiting a cut of equal capacity and explain why the two values coincide."
+        },
+        {
+          "id": "prf-6",
+          "name": "Bipartite matching and Hall's theorem",
+          "aliases": [
+            "maximum matching",
+            "Hall's marriage theorem"
+          ],
+          "bloom": "C4",
+          "summary": "Find maximum matchings via augmenting paths or flow reduction and decide perfect matchings with Hall's condition."
+        },
+        {
+          "id": "prf-7",
+          "name": "Shortest paths with negative weights",
+          "aliases": [
+            "Bellman-Ford",
+            "Floyd-Warshall"
+          ],
+          "bloom": "C4",
+          "summary": "Choose among Bellman-Ford, Floyd-Warshall and Dijkstra and detect negative cycles."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "cmp-1",
+          "prf-7"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "cmp-4",
+          "prf-6"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "prf-4",
+          "prf-6"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-3"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Greedily pushing flow along any path without ever undoing flow yields a maximum flow.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "A graph is planar only if it contains no K5 as a subgraph, with no need to consider subdivisions.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "A maximal matching, one that cannot be extended by adding an edge, is always a maximum matching.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Reductions to flow and matching",
+          "aliases": [
+            "flow modelling"
+          ],
+          "bloom": "C6",
+          "summary": "Design reductions of problems such as project selection, edge-disjoint paths and assignment to max flow or matching."
+        },
+        {
+          "id": "exp-2",
+          "name": "Weighted matching and assignment",
+          "aliases": [
+            "Hungarian algorithm",
+            "min-cost flow"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate and select algorithms for minimum-cost perfect matching and min-cost flow, using dual potentials."
+        },
+        {
+          "id": "exp-3",
+          "name": "NP-hardness of graph problems",
+          "aliases": [
+            "hard graph problems"
+          ],
+          "bloom": "C5",
+          "summary": "Assess why Hamilton cycle, 3-colouring, clique and vertex cover are NP-complete and what that implies for algorithm choice."
+        },
+        {
+          "id": "exp-4",
+          "name": "Approximation and heuristics for graphs",
+          "aliases": [
+            "TSP approximation",
+            "vertex cover approximation"
+          ],
+          "bloom": "C6",
+          "summary": "Design and justify approximation or heuristic algorithms, such as the MST-based metric TSP 2-approximation, with guarantees."
+        },
+        {
+          "id": "exp-5",
+          "name": "Strongly connected components",
+          "aliases": [
+            "Tarjan",
+            "Kosaraju"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate linear-time SCC algorithms and use the condensation DAG to structure analysis of directed graphs."
+        },
+        {
+          "id": "exp-6",
+          "name": "Treewidth and structural parameters",
+          "aliases": [
+            "tree decomposition"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when bounded treewidth or other structure makes NP-hard graph problems tractable through dynamic programming."
+        },
+        {
+          "id": "exp-7",
+          "name": "Extremal and probabilistic graph arguments",
+          "aliases": [
+            "Turan, Ramsey, random graphs"
+          ],
+          "bloom": "C6",
+          "summary": "Construct proofs using extremal bounds, Ramsey-type arguments or the probabilistic method to show existence of graph structures."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-5",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "cmp-3",
+          "exp-3"
+        ],
+        [
+          "cmp-5",
+          "exp-3"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "cmp-2",
+          "exp-4"
+        ],
+        [
+          "cmp-6",
+          "exp-5"
+        ],
+        [
+          "adb-4",
+          "exp-5"
+        ],
+        [
+          "exp-3",
+          "exp-6"
+        ],
+        [
+          "prf-2",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Because Hamilton cycle is NP-complete, no algorithm can solve it on any realistic instance.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Approximation algorithms for NP-hard graph problems give optimal answers on small inputs.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Min-cost flow cannot be solved in polynomial time because it generalises shortest paths and flows.",
+          "concepts": [
+            "exp-2"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,696 @@
+{
+  "version": 1,
+  "topic": "software-testing",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-2",
+          "name": "Expected versus actual result",
+          "aliases": [
+            "test oracle basics"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a test as running code with a given input and comparing the actual output to an expected output."
+        },
+        {
+          "id": "nov-3",
+          "name": "Test case anatomy",
+          "aliases": [
+            "arrange act assert",
+            "given when then"
+          ],
+          "bloom": "C2",
+          "summary": "Identify the setup, action and assertion parts of a simple test and what each does."
+        },
+        {
+          "id": "nov-4",
+          "name": "Pass, fail and error",
+          "aliases": [
+            "test outcomes"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the difference between a test passing, failing an assertion, and erroring due to an unexpected exception."
+        },
+        {
+          "id": "nov-6",
+          "name": "Bugs, defects and failures",
+          "aliases": [
+            "fault error failure"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the terms for a mistake in code, the faulty state it causes, and the visible failure."
+        },
+        {
+          "id": "nov-1",
+          "name": "Purpose of testing",
+          "aliases": [
+            "why test software"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that testing gathers evidence about whether software meets expectations and finds defects, but cannot prove the absence of bugs."
+        },
+        {
+          "id": "nov-5",
+          "name": "Manual versus automated testing",
+          "aliases": [
+            "automated tests"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish manual checks from automated tests and explain why automated tests are repeatable and fast to rerun."
+        },
+        {
+          "id": "nov-7",
+          "name": "Test levels overview",
+          "aliases": [
+            "testing pyramid levels"
+          ],
+          "bloom": "C2",
+          "summary": "Name unit, integration and end-to-end tests and describe in one line what scope each one covers."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "nov-1"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "If all tests pass, the software has no bugs.",
+          "concepts": [
+            "nov-1",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Testing is only something done by a separate QA person after the code is finished.",
+          "concepts": [
+            "nov-1",
+            "nov-5"
+          ]
+        },
+        {
+          "text": "A test that fails always means the code under test is wrong.",
+          "concepts": [
+            "nov-2",
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Writing unit tests with a framework",
+          "aliases": [
+            "xUnit style tests",
+            "test runner usage"
+          ],
+          "bloom": "C3",
+          "summary": "Write and run unit tests using a testing framework, with assertions, test discovery and readable failure messages."
+        },
+        {
+          "id": "adb-2",
+          "name": "Test fixtures and setup",
+          "aliases": [
+            "setup and teardown",
+            "fixtures"
+          ],
+          "bloom": "C3",
+          "summary": "Use setup and teardown to create a known starting state and clean up after each test."
+        },
+        {
+          "id": "adb-3",
+          "name": "Boundary and edge cases",
+          "aliases": [
+            "boundary values",
+            "edge case testing"
+          ],
+          "bloom": "C3",
+          "summary": "Choose inputs at limits such as empty, zero, maximum and off-by-one values to expose common defects."
+        },
+        {
+          "id": "adb-4",
+          "name": "Testing error handling",
+          "aliases": [
+            "exception assertions"
+          ],
+          "bloom": "C3",
+          "summary": "Write tests asserting that invalid input or failing operations raise the expected errors."
+        },
+        {
+          "id": "adb-5",
+          "name": "Test independence and determinism",
+          "aliases": [
+            "isolated tests",
+            "repeatable tests"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why each test should run alone, in any order, and give the same result every time."
+        },
+        {
+          "id": "adb-6",
+          "name": "Descriptive test naming",
+          "aliases": [
+            "test naming conventions"
+          ],
+          "bloom": "C3",
+          "summary": "Name tests so a failure report states the scenario and the expected behaviour."
+        },
+        {
+          "id": "adb-7",
+          "name": "Basic test-driven development cycle",
+          "aliases": [
+            "red green refactor",
+            "TDD"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the red-green-refactor loop to implement a small function by writing a failing test first."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-1",
+          "adb-4"
+        ],
+        [
+          "adb-2",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-7"
+        ],
+        [
+          "adb-5",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Tests can safely share and modify global state as long as they all pass when run together.",
+          "concepts": [
+            "adb-2",
+            "adb-5"
+          ]
+        },
+        {
+          "text": "Testing a few typical inputs is enough to show a function works.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "In TDD you write all the tests for the whole program before writing any code.",
+          "concepts": [
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Test doubles taxonomy",
+          "aliases": [
+            "mocks stubs fakes spies",
+            "dummy stub spy mock fake"
+          ],
+          "bloom": "C3",
+          "summary": "Choose among dummies, stubs, fakes, spies and mocks according to what a test needs to control or observe."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Isolating dependencies by injection",
+          "aliases": [
+            "dependency injection for testability",
+            "seams"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse code for hard-wired dependencies and restructure it with injection so collaborators can be substituted in tests."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Integration test design",
+          "aliases": [
+            "component integration testing"
+          ],
+          "bloom": "C4",
+          "summary": "Design tests that exercise real interactions between modules, databases or services and decide which parts to keep real."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Equivalence partitioning and boundaries",
+          "aliases": [
+            "black-box test design",
+            "partition testing"
+          ],
+          "bloom": "C3",
+          "summary": "Divide an input space into classes that behave alike and pick representative and boundary values from each."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Code coverage metrics",
+          "aliases": [
+            "line coverage",
+            "branch coverage"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret statement, branch and condition coverage and analyse what a coverage figure does and does not reveal."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Behaviour versus implementation testing",
+          "aliases": [
+            "testing public behaviour",
+            "brittle tests"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish tests that assert observable behaviour from tests coupled to internals and explain why the latter break on refactoring."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Diagnosing flaky tests",
+          "aliases": [
+            "non-deterministic tests",
+            "intermittent failures"
+          ],
+          "bloom": "C4",
+          "summary": "Identify causes of flakiness such as timing, shared state, ordering and randomness and isolate them."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Continuous integration test runs",
+          "aliases": [
+            "CI test automation"
+          ],
+          "bloom": "C3",
+          "summary": "Run the automated suite on every change in a CI pipeline and act on failures promptly."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "adb-1",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-7"
+        ],
+        [
+          "cmp-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "100% code coverage means the code is fully tested and correct.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Every dependency should be mocked in every test.",
+          "concepts": [
+            "cmp-1",
+            "cmp-3",
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "A flaky test can just be rerun until it passes, since it is not a real problem.",
+          "concepts": [
+            "cmp-7",
+            "cmp-8"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Test pyramid trade-offs",
+          "aliases": [
+            "testing pyramid",
+            "testing trophy"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the balance of unit, integration and end-to-end tests for a system by cost, speed, confidence and fragility."
+        },
+        {
+          "id": "prf-2",
+          "name": "End-to-end test strategy",
+          "aliases": [
+            "UI testing",
+            "system tests"
+          ],
+          "bloom": "C5",
+          "summary": "Judge which user journeys deserve end-to-end tests and design them to be stable, using controlled data and waits on conditions."
+        },
+        {
+          "id": "prf-3",
+          "name": "Contract testing",
+          "aliases": [
+            "consumer-driven contracts",
+            "API contract tests"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how contract tests verify agreements between services without full integrated environments."
+        },
+        {
+          "id": "prf-4",
+          "name": "Property-based testing",
+          "aliases": [
+            "generative testing",
+            "invariant testing"
+          ],
+          "bloom": "C4",
+          "summary": "Express invariants of code as properties checked against many generated inputs, and interpret shrunk counterexamples."
+        },
+        {
+          "id": "prf-5",
+          "name": "Mutation testing",
+          "aliases": [
+            "mutation score"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate test suite strength by whether it detects injected faults, and compare this with coverage."
+        },
+        {
+          "id": "prf-6",
+          "name": "Risk-based test prioritisation",
+          "aliases": [
+            "risk-based testing",
+            "deciding what to test"
+          ],
+          "bloom": "C5",
+          "summary": "Decide where to focus testing effort by weighing failure impact, likelihood and change frequency."
+        },
+        {
+          "id": "prf-7",
+          "name": "Testing legacy code",
+          "aliases": [
+            "characterization tests",
+            "golden master"
+          ],
+          "bloom": "C4",
+          "summary": "Add characterization tests and create seams so untested code can be changed safely."
+        },
+        {
+          "id": "prf-8",
+          "name": "Test data management",
+          "aliases": [
+            "test data builders",
+            "test data strategy"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse approaches to building, seeding and isolating test data so tests stay readable and independent."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-3",
+          "prf-3"
+        ],
+        [
+          "cmp-4",
+          "prf-4"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "prf-1",
+          "prf-6"
+        ],
+        [
+          "cmp-2",
+          "prf-7"
+        ],
+        [
+          "cmp-3",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The more end-to-end tests a suite has, the better, because they are the most realistic.",
+          "concepts": [
+            "prf-1",
+            "prf-2"
+          ]
+        },
+        {
+          "text": "A high mutation score or coverage figure should be maximised everywhere as the goal of testing.",
+          "concepts": [
+            "prf-5",
+            "prf-6"
+          ]
+        },
+        {
+          "text": "Property-based testing replaces example-based tests.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Designing a test strategy",
+          "aliases": [
+            "organisation test strategy",
+            "test policy"
+          ],
+          "bloom": "C6",
+          "summary": "Create a coherent strategy across teams that sets test levels, ownership, quality gates and feedback speed for an architecture."
+        },
+        {
+          "id": "exp-2",
+          "name": "Architecting for testability",
+          "aliases": [
+            "design for testability",
+            "testable architecture"
+          ],
+          "bloom": "C6",
+          "summary": "Design system structure, such as ports and adapters and observability hooks, so behaviour can be verified cheaply."
+        },
+        {
+          "id": "exp-3",
+          "name": "Evaluating test suite economics",
+          "aliases": [
+            "test ROI",
+            "maintenance cost of tests"
+          ],
+          "bloom": "C5",
+          "summary": "Assess the cost of writing, running and maintaining tests against the defects they prevent, and retire low-value tests."
+        },
+        {
+          "id": "exp-4",
+          "name": "Testing distributed and concurrent systems",
+          "aliases": [
+            "concurrency testing",
+            "fault injection",
+            "chaos testing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate techniques such as deterministic scheduling, fault injection and simulation for finding races and partial-failure bugs."
+        },
+        {
+          "id": "exp-5",
+          "name": "Testing in production",
+          "aliases": [
+            "canary releases",
+            "feature flags testing",
+            "observability-based verification"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when monitoring, canaries and staged rollouts complement pre-release tests and what risks they carry."
+        },
+        {
+          "id": "exp-6",
+          "name": "Building test infrastructure",
+          "aliases": [
+            "test tooling",
+            "test harness design"
+          ],
+          "bloom": "C6",
+          "summary": "Create fast, parallel, hermetic test infrastructure and custom harnesses, including flaky test quarantine and selection of affected tests."
+        },
+        {
+          "id": "exp-7",
+          "name": "Testing non-functional qualities",
+          "aliases": [
+            "performance testing",
+            "security testing",
+            "load testing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate approaches for verifying performance, reliability and security properties and their limits as evidence."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "prf-7",
+          "exp-2"
+        ],
+        [
+          "prf-5",
+          "exp-3"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-4"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "prf-8",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-6"
+        ],
+        [
+          "prf-2",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Good testing before release removes the need for monitoring and production verification.",
+          "concepts": [
+            "exp-5",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Testability is something that can be added afterwards by writing more tests, not through design.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "A single organisation-wide test ratio or coverage target suits every system.",
+          "concepts": [
+            "exp-1",
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,733 @@
+{
+  "version": 1,
+  "topic": "java",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "JDK, JRE and JVM roles",
+          "aliases": [
+            "Java platform components"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that the JDK provides tools like javac, the JRE provides what is needed to run programs, and the JVM executes bytecode."
+        },
+        {
+          "id": "nov-3",
+          "name": "Primitive and reference types",
+          "aliases": [
+            "static typing basics"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish primitives such as int and boolean from reference types such as String and understand that variable types are fixed at compile time."
+        },
+        {
+          "id": "nov-4",
+          "name": "Class structure and main method",
+          "aliases": [
+            "public static void main"
+          ],
+          "bloom": "C1",
+          "summary": "Recall how a class is declared in a file of the same name and how main serves as the program entry point."
+        },
+        {
+          "id": "nov-2",
+          "name": "Compile and run cycle",
+          "aliases": [
+            "javac and java commands"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how javac turns .java source into .class bytecode that the java launcher runs on a JVM."
+        },
+        {
+          "id": "nov-5",
+          "name": "Objects and constructors",
+          "aliases": [
+            "instantiation with new"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a class is a blueprint, and new calls a constructor to create an object with its own fields."
+        },
+        {
+          "id": "nov-6",
+          "name": "Methods, fields and access modifiers",
+          "aliases": [
+            "public private members"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how instance members hold state and behaviour and how public and private control visibility."
+        },
+        {
+          "id": "nov-7",
+          "name": "Compiler error reading",
+          "aliases": [
+            "type errors and syntax errors"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret common javac messages such as missing symbol or incompatible types to locate the cause."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-4",
+          "nov-2"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Java source code is run directly by the computer's processor after compiling.",
+          "concepts": [
+            "nov-1",
+            "nov-2"
+          ]
+        },
+        {
+          "text": "The JVM and the JDK are the same thing.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "Assigning one object variable to another copies the object itself.",
+          "concepts": [
+            "nov-3",
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Inheritance and method overriding",
+          "aliases": [
+            "extends and super"
+          ],
+          "bloom": "C3",
+          "summary": "Use extends, super and @Override to specialise a class and reuse behaviour from a superclass."
+        },
+        {
+          "id": "adb-2",
+          "name": "Interfaces and implementation",
+          "aliases": [
+            "implements"
+          ],
+          "bloom": "C3",
+          "summary": "Define an interface and implement it in classes, programming against the interface type."
+        },
+        {
+          "id": "adb-3",
+          "name": "Abstract classes",
+          "aliases": [
+            "abstract methods"
+          ],
+          "bloom": "C2",
+          "summary": "Use abstract classes to share partial implementation while forcing subclasses to supply abstract methods."
+        },
+        {
+          "id": "adb-4",
+          "name": "Polymorphism and dynamic dispatch",
+          "aliases": [
+            "runtime method selection"
+          ],
+          "bloom": "C3",
+          "summary": "Apply a supertype reference to hold subclass objects and predict which overridden method runs."
+        },
+        {
+          "id": "adb-5",
+          "name": "ArrayList usage",
+          "aliases": [
+            "List operations"
+          ],
+          "bloom": "C3",
+          "summary": "Add, get, remove and iterate over an ArrayList, including with the enhanced for loop."
+        },
+        {
+          "id": "adb-7",
+          "name": "Equals and hashCode contract",
+          "aliases": [
+            "object equality"
+          ],
+          "bloom": "C3",
+          "summary": "Use equals to compare content instead of ==, and see why equal objects need equal hash codes in HashMap keys."
+        },
+        {
+          "id": "adb-6",
+          "name": "HashMap usage",
+          "aliases": [
+            "key-value maps"
+          ],
+          "bloom": "C3",
+          "summary": "Store, look up and iterate key-value pairs in a HashMap and handle missing keys."
+        },
+        {
+          "id": "adb-8",
+          "name": "Try-catch and checked exceptions",
+          "aliases": [
+            "exception handling"
+          ],
+          "bloom": "C3",
+          "summary": "Handle or declare checked exceptions with try, catch, finally and throws."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-4"
+        ],
+        [
+          "adb-2",
+          "adb-4"
+        ],
+        [
+          "nov-3",
+          "adb-5"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "adb-7",
+          "adb-6"
+        ],
+        [
+          "nov-7",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Using == on two Strings or objects compares their contents.",
+          "concepts": [
+            "adb-7"
+          ]
+        },
+        {
+          "text": "A class can extend several classes as long as it is careful.",
+          "concepts": [
+            "adb-1",
+            "adb-2"
+          ]
+        },
+        {
+          "text": "The method that runs is chosen by the declared type of the variable rather than the actual object.",
+          "concepts": [
+            "adb-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Generic classes and methods",
+          "aliases": [
+            "type parameters"
+          ],
+          "bloom": "C3",
+          "summary": "Write and use generic types and methods so type errors are caught at compile time without casts."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Bounded types and wildcards",
+          "aliases": [
+            "extends super wildcards",
+            "PECS"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when to use bounded type parameters and ? extends or ? super wildcards for flexible APIs."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Lambdas and functional interfaces",
+          "aliases": [
+            "Function Predicate Consumer"
+          ],
+          "bloom": "C3",
+          "summary": "Write lambdas and method references that target functional interfaces such as Predicate and Function."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Stream pipelines",
+          "aliases": [
+            "map filter collect"
+          ],
+          "bloom": "C4",
+          "summary": "Decompose data processing into source, intermediate operations and a terminal operation, including collectors like groupingBy."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Collections framework selection",
+          "aliases": [
+            "List Set Map choice"
+          ],
+          "bloom": "C4",
+          "summary": "Choose between ArrayList, LinkedList, HashSet, TreeMap and others based on ordering, uniqueness and performance."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Custom and unchecked exceptions",
+          "aliases": [
+            "exception design"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish checked from unchecked exceptions and design custom exceptions with try-with-resources for cleanup."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Maven or Gradle project builds",
+          "aliases": [
+            "dependency management",
+            "pom.xml",
+            "build.gradle"
+          ],
+          "bloom": "C3",
+          "summary": "Use a build tool to declare dependencies, run the build lifecycle and tests, and package a JAR."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Immutability and Optional",
+          "aliases": [
+            "immutable objects"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how immutable classes and Optional reduce null-related errors and shared-state bugs."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-5",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "adb-5",
+          "cmp-5"
+        ],
+        [
+          "adb-6",
+          "cmp-5"
+        ],
+        [
+          "adb-7",
+          "cmp-5"
+        ],
+        [
+          "adb-8",
+          "cmp-6"
+        ],
+        [
+          "nov-2",
+          "cmp-7"
+        ],
+        [
+          "cmp-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A List<Dog> can be passed where a List<Animal> is expected because Dog extends Animal.",
+          "concepts": [
+            "cmp-1",
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "Streams store data like a collection and can be reused after a terminal operation.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Generic type information is fully available at runtime.",
+          "concepts": [
+            "cmp-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Type erasure consequences",
+          "aliases": [
+            "generics at runtime"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how erasure limits generic arrays, instanceof checks and overloads, and why bridge methods and unchecked warnings appear."
+        },
+        {
+          "id": "prf-2",
+          "name": "Class loading and bytecode structure",
+          "aliases": [
+            "classloaders",
+            "javap"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how class loaders load, link and initialise classes and read bytecode with javap to explain behaviour."
+        },
+        {
+          "id": "prf-3",
+          "name": "Garbage collection and memory model",
+          "aliases": [
+            "heap stack",
+            "GC"
+          ],
+          "bloom": "C4",
+          "summary": "Reason about heap versus stack, object reachability, and how collector choice and allocation patterns affect latency and throughput."
+        },
+        {
+          "id": "prf-5",
+          "name": "API and class design tradeoffs",
+          "aliases": [
+            "composition over inheritance"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate choices between inheritance, composition, interfaces with default methods and sealed hierarchies."
+        },
+        {
+          "id": "prf-6",
+          "name": "Concurrency primitives and visibility",
+          "aliases": [
+            "threads synchronized volatile"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse race conditions and visibility problems and apply synchronized, volatile, atomics and concurrent collections."
+        },
+        {
+          "id": "prf-4",
+          "name": "Stream performance and parallelism",
+          "aliases": [
+            "parallel streams"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when sequential, parallel or plain loop approaches are appropriate given statefulness, side effects and workload."
+        },
+        {
+          "id": "prf-7",
+          "name": "Multi-module dependency management",
+          "aliases": [
+            "dependency conflicts",
+            "BOM"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate dependency scopes, transitive conflicts and version management in multi-module Maven or Gradle builds."
+        },
+        {
+          "id": "prf-8",
+          "name": "Profiling and diagnosing performance",
+          "aliases": [
+            "JFR",
+            "heap dumps"
+          ],
+          "bloom": "C4",
+          "summary": "Use profilers, thread dumps and heap dumps to find the cause of slowness, leaks and deadlocks."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-1"
+        ],
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "nov-1",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-4",
+          "prf-4"
+        ],
+        [
+          "prf-6",
+          "prf-4"
+        ],
+        [
+          "adb-4",
+          "prf-5"
+        ],
+        [
+          "cmp-8",
+          "prf-5"
+        ],
+        [
+          "cmp-5",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "prf-3",
+          "prf-8"
+        ],
+        [
+          "prf-6",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Parallel streams always make processing faster.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Garbage collection means memory leaks are impossible in Java.",
+          "concepts": [
+            "prf-3",
+            "prf-8"
+          ]
+        },
+        {
+          "text": "Synchronizing every method makes a class thread-safe and efficient.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "JIT compilation and optimisation",
+          "aliases": [
+            "HotSpot",
+            "tiered compilation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how JIT inlining, escape analysis and warm-up shape performance and the validity of benchmarks."
+        },
+        {
+          "id": "exp-2",
+          "name": "Java Memory Model happens-before",
+          "aliases": [
+            "JMM"
+          ],
+          "bloom": "C5",
+          "summary": "Judge the correctness of concurrent code by reasoning with happens-before rules, safe publication and reordering."
+        },
+        {
+          "id": "exp-3",
+          "name": "Microbenchmark design",
+          "aliases": [
+            "JMH"
+          ],
+          "bloom": "C5",
+          "summary": "Assess and design benchmarks that avoid dead-code elimination, constant folding and warm-up artefacts."
+        },
+        {
+          "id": "exp-4",
+          "name": "Designing library and framework APIs",
+          "aliases": [
+            "public API evolution"
+          ],
+          "bloom": "C6",
+          "summary": "Create APIs that remain binary and source compatible, using generics, interfaces, sealed types and modules deliberately."
+        },
+        {
+          "id": "exp-5",
+          "name": "Bytecode manipulation and reflection",
+          "aliases": [
+            "annotation processing",
+            "instrumentation"
+          ],
+          "bloom": "C6",
+          "summary": "Design solutions using reflection, annotation processors, proxies or agents, weighing their cost and safety."
+        },
+        {
+          "id": "exp-6",
+          "name": "Concurrency architecture choices",
+          "aliases": [
+            "virtual threads",
+            "executors",
+            "CompletableFuture"
+          ],
+          "bloom": "C6",
+          "summary": "Design concurrent systems choosing among platform threads, virtual threads, executors and async composition for a workload."
+        },
+        {
+          "id": "exp-7",
+          "name": "Reproducible build and release engineering",
+          "aliases": [
+            "custom plugins",
+            "CI builds"
+          ],
+          "bloom": "C6",
+          "summary": "Create reproducible, cached builds with custom plugins, versioning and release pipelines across large codebases."
+        },
+        {
+          "id": "exp-8",
+          "name": "JVM tuning and production diagnostics",
+          "aliases": [
+            "GC tuning",
+            "JVM flags"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate GC selection and JVM flag settings against production metrics and justify tuning decisions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-2",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "prf-1",
+          "exp-4"
+        ],
+        [
+          "prf-2",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-7"
+        ],
+        [
+          "prf-3",
+          "exp-8"
+        ],
+        [
+          "prf-8",
+          "exp-8"
+        ],
+        [
+          "exp-1",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Java benchmark results from a single short run reflect steady-state performance.",
+          "concepts": [
+            "exp-1",
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Tuning JVM flags is a reliable substitute for fixing allocation or design problems.",
+          "concepts": [
+            "exp-8"
+          ]
+        },
+        {
+          "text": "Virtual threads speed up CPU-bound work.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,756 @@
+{
+  "version": 1,
+  "topic": "system-design",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "computer-networking",
+    "relational-database-design",
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Functional versus non-functional requirements",
+          "aliases": [
+            "requirements gathering",
+            "scope clarification"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish what a system must do from qualities like latency, availability and scale, and clarify both before designing."
+        },
+        {
+          "id": "nov-2",
+          "name": "Client-server request flow",
+          "aliases": [
+            "request path",
+            "end-to-end request"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a user request travels from client through DNS, load balancer, application servers and data store and back."
+        },
+        {
+          "id": "nov-3",
+          "name": "Vertical versus horizontal scaling",
+          "aliases": [
+            "scale up vs scale out"
+          ],
+          "bloom": "C2",
+          "summary": "Explain the difference between adding power to one machine and adding more machines, and the limits of each."
+        },
+        {
+          "id": "nov-4",
+          "name": "Latency, throughput and availability",
+          "aliases": [
+            "performance metrics",
+            "response time and QPS"
+          ],
+          "bloom": "C1",
+          "summary": "Define latency, throughput and availability and state the units used to express each."
+        },
+        {
+          "id": "nov-5",
+          "name": "Stateless application servers",
+          "aliases": [
+            "stateless services"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why keeping session state out of app servers makes them easy to replicate and replace."
+        },
+        {
+          "id": "nov-6",
+          "name": "Load balancer role",
+          "aliases": [
+            "traffic distribution",
+            "LB"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how a load balancer spreads requests over servers and removes unhealthy ones."
+        },
+        {
+          "id": "nov-7",
+          "name": "Cache purpose",
+          "aliases": [
+            "caching idea",
+            "in-memory cache"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a cache stores frequently read data in fast storage to cut latency and database load."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "nov-6"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-5",
+          "nov-6"
+        ],
+        [
+          "nov-4",
+          "nov-7"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Scaling a system just means buying a bigger server.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Adding more servers automatically makes a system faster and more available.",
+          "concepts": [
+            "nov-3",
+            "nov-5",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "A design can start immediately without asking clarifying questions about requirements.",
+          "concepts": [
+            "nov-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Back-of-envelope capacity estimation",
+          "aliases": [
+            "capacity planning",
+            "napkin math"
+          ],
+          "bloom": "C3",
+          "summary": "Estimate QPS, storage and bandwidth from user counts, usage rates and object sizes using powers of ten."
+        },
+        {
+          "id": "adb-2",
+          "name": "Read-heavy versus write-heavy workloads",
+          "aliases": [
+            "read/write ratio"
+          ],
+          "bloom": "C3",
+          "summary": "Use the read-to-write ratio of a product to decide where to focus optimisation."
+        },
+        {
+          "id": "adb-3",
+          "name": "Load balancing algorithms",
+          "aliases": [
+            "round robin",
+            "least connections"
+          ],
+          "bloom": "C3",
+          "summary": "Choose between round robin, least connections and hashing for a given traffic pattern."
+        },
+        {
+          "id": "adb-4",
+          "name": "Cache-aside and write strategies",
+          "aliases": [
+            "write-through",
+            "write-back",
+            "lazy loading"
+          ],
+          "bloom": "C3",
+          "summary": "Apply cache-aside, write-through and write-back patterns and describe what each does on reads and writes."
+        },
+        {
+          "id": "adb-5",
+          "name": "Cache eviction policies",
+          "aliases": [
+            "LRU",
+            "LFU",
+            "TTL"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how LRU, LFU and TTL decide what to remove from a full cache."
+        },
+        {
+          "id": "adb-6",
+          "name": "CDN for static content",
+          "aliases": [
+            "content delivery network",
+            "edge caching"
+          ],
+          "bloom": "C3",
+          "summary": "Decide which assets to serve from edge locations to cut latency for distant users."
+        },
+        {
+          "id": "adb-7",
+          "name": "SQL versus NoSQL selection",
+          "aliases": [
+            "database choice",
+            "relational vs key-value"
+          ],
+          "bloom": "C3",
+          "summary": "Pick a relational or NoSQL store based on data model, query patterns and scale needs."
+        },
+        {
+          "id": "adb-8",
+          "name": "API design for services",
+          "aliases": [
+            "REST endpoints",
+            "API contract"
+          ],
+          "bloom": "C3",
+          "summary": "Define simple endpoints, parameters and responses for a product's core operations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-1",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-3"
+        ],
+        [
+          "nov-7",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "nov-7",
+          "adb-6"
+        ],
+        [
+          "adb-2",
+          "adb-7"
+        ],
+        [
+          "nov-1",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Estimation must be exact to be useful.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "A cache always returns correct, current data.",
+          "concepts": [
+            "adb-4",
+            "adb-5"
+          ]
+        },
+        {
+          "text": "NoSQL is always faster and more scalable than a relational database.",
+          "concepts": [
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Database replication topologies",
+          "aliases": [
+            "leader-follower",
+            "primary-replica",
+            "multi-leader"
+          ],
+          "bloom": "C3",
+          "summary": "Set up leader-follower and multi-leader replication and explain read scaling and failover behaviour."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Sharding strategies",
+          "aliases": [
+            "partitioning",
+            "range vs hash sharding"
+          ],
+          "bloom": "C4",
+          "summary": "Compare range, hash and directory-based partitioning and their effects on hotspots and queries."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Consistent hashing",
+          "aliases": [
+            "hash ring",
+            "virtual nodes"
+          ],
+          "bloom": "C3",
+          "summary": "Use a hash ring with virtual nodes to add or remove nodes while moving little data."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Message queues and async processing",
+          "aliases": [
+            "producer-consumer",
+            "message broker",
+            "pub/sub"
+          ],
+          "bloom": "C3",
+          "summary": "Decouple producers from consumers with queues to absorb bursts and handle slow work asynchronously."
+        },
+        {
+          "id": "cmp-5",
+          "name": "CAP theorem trade-offs",
+          "aliases": [
+            "consistency availability partition tolerance"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how a system must trade consistency against availability when a network partition occurs."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Consistency models",
+          "aliases": [
+            "strong consistency",
+            "eventual consistency"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish strong and eventual consistency and judge which a feature can tolerate."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Unique ID generation",
+          "aliases": [
+            "ID generator",
+            "snowflake IDs"
+          ],
+          "bloom": "C3",
+          "summary": "Generate unique, roughly sortable IDs across many servers without a single bottleneck."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Indexing and denormalisation trade-offs",
+          "aliases": [
+            "read optimisation",
+            "denormalized data"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when indexes or duplicated data speed up reads at the cost of write complexity."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "cmp-5"
+        ],
+        [
+          "adb-7",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "adb-7",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-3"
+        ],
+        [
+          "nov-5",
+          "cmp-4"
+        ],
+        [
+          "cmp-2",
+          "cmp-7"
+        ],
+        [
+          "adb-2",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "CAP means you pick any two of three properties at all times.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Replicas make a database both faster for writes and fully consistent.",
+          "concepts": [
+            "cmp-1",
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "Hashing keys with modulo N is fine when nodes are added or removed.",
+          "concepts": [
+            "cmp-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Hotspot and skew mitigation",
+          "aliases": [
+            "hot keys",
+            "celebrity problem"
+          ],
+          "bloom": "C4",
+          "summary": "Diagnose uneven load from popular keys and mitigate it with key splitting, caching or fan-out changes."
+        },
+        {
+          "id": "prf-2",
+          "name": "Fan-out on write versus read",
+          "aliases": [
+            "push vs pull feed",
+            "news feed generation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate push, pull and hybrid feed generation against follower counts and freshness needs."
+        },
+        {
+          "id": "prf-3",
+          "name": "Delivery semantics and idempotency",
+          "aliases": [
+            "at-least-once",
+            "exactly-once",
+            "dedup"
+          ],
+          "bloom": "C5",
+          "summary": "Judge at-most-once, at-least-once and effectively-once processing and design idempotent consumers."
+        },
+        {
+          "id": "prf-4",
+          "name": "Cache stampede and invalidation",
+          "aliases": [
+            "thundering herd",
+            "cache coherence"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse cache invalidation risks and prevent stampedes with locking, request coalescing or jittered TTLs."
+        },
+        {
+          "id": "prf-5",
+          "name": "Failure handling patterns",
+          "aliases": [
+            "retries",
+            "circuit breaker",
+            "timeouts",
+            "backoff"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate timeouts, retries with backoff, circuit breakers and load shedding to stop cascading failures."
+        },
+        {
+          "id": "prf-6",
+          "name": "Real-time communication design",
+          "aliases": [
+            "WebSockets",
+            "long polling",
+            "chat delivery"
+          ],
+          "bloom": "C4",
+          "summary": "Compare polling, long polling and persistent connections for chat or notifications, including presence and ordering."
+        },
+        {
+          "id": "prf-7",
+          "name": "Quorum reads and writes",
+          "aliases": [
+            "R+W>N",
+            "tunable consistency"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate quorum settings to balance consistency, latency and availability in replicated stores."
+        },
+        {
+          "id": "prf-8",
+          "name": "Capacity and bottleneck analysis",
+          "aliases": [
+            "bottleneck identification",
+            "scaling plan"
+          ],
+          "bloom": "C4",
+          "summary": "Use estimates to find the first component to saturate and justify the next scaling step."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-4",
+          "prf-2"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-4",
+          "prf-3"
+        ],
+        [
+          "adb-5",
+          "prf-4"
+        ],
+        [
+          "cmp-6",
+          "prf-4"
+        ],
+        [
+          "nov-6",
+          "prf-5"
+        ],
+        [
+          "cmp-1",
+          "prf-7"
+        ],
+        [
+          "cmp-6",
+          "prf-7"
+        ],
+        [
+          "cmp-4",
+          "prf-6"
+        ],
+        [
+          "adb-1",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Retrying failed requests always improves reliability.",
+          "concepts": [
+            "prf-5",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Exactly-once delivery is achievable by the broker alone without idempotent consumers.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Fan-out on write is always better for news feeds.",
+          "concepts": [
+            "prf-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-2",
+          "name": "Conflict resolution strategies",
+          "aliases": [
+            "CRDTs",
+            "last-write-wins",
+            "vector clocks"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate last-write-wins, vector clocks and CRDTs for reconciling concurrent writes."
+        },
+        {
+          "id": "exp-1",
+          "name": "Multi-region architecture design",
+          "aliases": [
+            "geo-replication",
+            "active-active",
+            "global deployment"
+          ],
+          "bloom": "C6",
+          "summary": "Design active-active or active-passive multi-region systems with explicit latency, conflict and failover plans."
+        },
+        {
+          "id": "exp-3",
+          "name": "Trade-off justification under constraints",
+          "aliases": [
+            "design rationale",
+            "decision making"
+          ],
+          "bloom": "C5",
+          "summary": "Weigh alternatives against stated requirements, cost and team capacity, and defend the choice with numbers."
+        },
+        {
+          "id": "exp-4",
+          "name": "Evolutionary scaling roadmap",
+          "aliases": [
+            "incremental architecture",
+            "migration plan"
+          ],
+          "bloom": "C6",
+          "summary": "Create a staged path from a simple single-region design to a large-scale one with triggers for each step."
+        },
+        {
+          "id": "exp-5",
+          "name": "SLO-driven reliability design",
+          "aliases": [
+            "error budgets",
+            "SLA SLO SLI"
+          ],
+          "bloom": "C6",
+          "summary": "Derive SLOs and error budgets from user needs and design redundancy, observability and degradation to meet them."
+        },
+        {
+          "id": "exp-6",
+          "name": "Distributed transactions and sagas",
+          "aliases": [
+            "two-phase commit",
+            "saga pattern",
+            "outbox"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate two-phase commit, sagas and the outbox pattern for cross-service data integrity."
+        },
+        {
+          "id": "exp-7",
+          "name": "Cost and efficiency optimisation",
+          "aliases": [
+            "cost modelling",
+            "tiered storage"
+          ],
+          "bloom": "C5",
+          "summary": "Assess storage tiering, compression and compute choices to reduce cost without breaking requirements."
+        },
+        {
+          "id": "exp-8",
+          "name": "Novel system composition",
+          "aliases": [
+            "designing unfamiliar systems",
+            "architecture synthesis"
+          ],
+          "bloom": "C6",
+          "summary": "Combine known building blocks to design a system for an unfamiliar problem and test it against failure scenarios."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-7",
+          "exp-2"
+        ],
+        [
+          "cmp-5",
+          "exp-1"
+        ],
+        [
+          "exp-2",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "prf-3",
+          "exp-6"
+        ],
+        [
+          "prf-8",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-8"
+        ],
+        [
+          "prf-8",
+          "exp-7"
+        ],
+        [
+          "exp-1",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Two-phase commit is a cheap way to get cross-service consistency at any scale.",
+          "concepts": [
+            "exp-6"
+          ]
+        },
+        {
+          "text": "Last-write-wins is safe because it never loses data.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "A good design should include every scaling technique from the start.",
+          "concepts": [
+            "exp-4",
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,667 @@
+{
+  "version": 1,
+  "topic": "relational-database-design",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "sql"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-2",
+          "name": "Entities and attributes",
+          "aliases": [
+            "entity types",
+            "data modeling basics"
+          ],
+          "bloom": "C2",
+          "summary": "Identify the real-world entities in a set of requirements and the attributes that describe each one."
+        },
+        {
+          "id": "nov-1",
+          "name": "Tables, rows and columns",
+          "aliases": [
+            "relations",
+            "tuples and attributes"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise that a relational schema stores each kind of thing in a table whose rows are records and whose columns are typed attributes."
+        },
+        {
+          "id": "nov-3",
+          "name": "Primary keys",
+          "aliases": [
+            "PK",
+            "row identifier"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a primary key uniquely identifies each row and must be unique and never null."
+        },
+        {
+          "id": "nov-4",
+          "name": "Foreign keys",
+          "aliases": [
+            "FK",
+            "referencing column"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a foreign key stores another table's key value to link rows across tables."
+        },
+        {
+          "id": "nov-5",
+          "name": "Relationship cardinality",
+          "aliases": [
+            "one-to-many",
+            "one-to-one",
+            "many-to-many"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish one-to-one, one-to-many and many-to-many relationships between entities."
+        },
+        {
+          "id": "nov-6",
+          "name": "Redundancy and anomalies",
+          "aliases": [
+            "update anomaly",
+            "duplicate data problems"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how repeating the same facts in many rows leads to inconsistencies when data is changed."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-1"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A database table is just like a spreadsheet, so putting everything into one wide table is fine.",
+          "concepts": [
+            "nov-1",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "A primary key must be a single meaningful value like a name or email.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A foreign key is just a column with the same name as another table's column.",
+          "concepts": [
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Entity-relationship diagrams",
+          "aliases": [
+            "ERD",
+            "ER modeling"
+          ],
+          "bloom": "C3",
+          "summary": "Draw an ER diagram from a requirements description showing entities, attributes and relationships with cardinality."
+        },
+        {
+          "id": "adb-4",
+          "name": "Natural versus surrogate keys",
+          "aliases": [
+            "synthetic keys",
+            "auto-increment IDs"
+          ],
+          "bloom": "C2",
+          "summary": "Compare keys derived from real data with generated identifiers and pick one for simple cases."
+        },
+        {
+          "id": "adb-5",
+          "name": "Column data types",
+          "aliases": [
+            "type selection"
+          ],
+          "bloom": "C3",
+          "summary": "Choose suitable data types for columns such as exact decimals for money, dates for dates and text lengths."
+        },
+        {
+          "id": "adb-6",
+          "name": "Basic column constraints",
+          "aliases": [
+            "NOT NULL",
+            "UNIQUE",
+            "CHECK",
+            "DEFAULT"
+          ],
+          "bloom": "C3",
+          "summary": "Apply NOT NULL, UNIQUE, CHECK and DEFAULT constraints to enforce simple rules in the schema."
+        },
+        {
+          "id": "adb-7",
+          "name": "First normal form",
+          "aliases": [
+            "1NF",
+            "atomic values"
+          ],
+          "bloom": "C3",
+          "summary": "Remove repeating groups and multi-valued columns so each cell holds one atomic value."
+        },
+        {
+          "id": "adb-2",
+          "name": "Junction tables",
+          "aliases": [
+            "bridge table",
+            "associative entity",
+            "link table"
+          ],
+          "bloom": "C3",
+          "summary": "Resolve a many-to-many relationship into two one-to-many relationships using a junction table, including attributes of the relationship."
+        },
+        {
+          "id": "adb-3",
+          "name": "Mapping ER to tables",
+          "aliases": [
+            "logical schema derivation"
+          ],
+          "bloom": "C3",
+          "summary": "Translate an ER diagram into tables with keys and foreign keys placed on the correct side of each relationship."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-4"
+        ],
+        [
+          "nov-6",
+          "adb-7"
+        ],
+        [
+          "adb-7",
+          "adb-2"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Storing a comma-separated list of IDs in one column is a fine way to model a many-to-many relationship.",
+          "concepts": [
+            "adb-2",
+            "adb-7"
+          ]
+        },
+        {
+          "text": "In a one-to-many relationship the foreign key goes on the 'one' side.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Prices are best stored in floating-point columns.",
+          "concepts": [
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Functional dependencies",
+          "aliases": [
+            "FDs",
+            "determinants"
+          ],
+          "bloom": "C4",
+          "summary": "Identify which attributes determine others in a table and use that to find candidate keys."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Second and third normal form",
+          "aliases": [
+            "2NF",
+            "3NF",
+            "partial and transitive dependencies"
+          ],
+          "bloom": "C4",
+          "summary": "Detect partial and transitive dependencies in a table and decompose it into 2NF and 3NF."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Boyce-Codd normal form",
+          "aliases": [
+            "BCNF"
+          ],
+          "bloom": "C4",
+          "summary": "Decide whether every determinant is a candidate key and decompose when it is not."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Referential actions",
+          "aliases": [
+            "ON DELETE CASCADE",
+            "ON UPDATE",
+            "foreign key actions"
+          ],
+          "bloom": "C3",
+          "summary": "Select cascade, restrict or set-null behaviour for foreign keys according to the lifecycle of the data."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Composite keys",
+          "aliases": [
+            "compound keys"
+          ],
+          "bloom": "C3",
+          "summary": "Use multi-column keys where the identity of a row depends on several attributes, and reference them correctly."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Index fundamentals for schemas",
+          "aliases": [
+            "B-tree indexes",
+            "index design"
+          ],
+          "bloom": "C4",
+          "summary": "Choose indexes for foreign keys and frequent filters, weighing read speed against write cost and storage."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Modeling hierarchies and optional data",
+          "aliases": [
+            "self-reference",
+            "nullable columns",
+            "subtypes"
+          ],
+          "bloom": "C4",
+          "summary": "Represent trees, optional attributes and subtypes using self-referencing keys, nullable columns or separate tables."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-7",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-4"
+        ],
+        [
+          "adb-2",
+          "cmp-5"
+        ],
+        [
+          "adb-6",
+          "cmp-6"
+        ],
+        [
+          "nov-4",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A table with a single-column primary key is automatically in third normal form.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "ON DELETE CASCADE is a safe default for every foreign key.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Adding an index to every column makes the database faster.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Lossless and dependency-preserving decomposition",
+          "aliases": [
+            "lossless join",
+            "dependency preservation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate a decomposition for whether it reconstructs the original data exactly and keeps constraints enforceable."
+        },
+        {
+          "id": "prf-2",
+          "name": "Higher normal forms",
+          "aliases": [
+            "4NF",
+            "5NF",
+            "multivalued dependencies"
+          ],
+          "bloom": "C4",
+          "summary": "Recognise multivalued and join dependencies and decide when fourth or fifth normal form is warranted."
+        },
+        {
+          "id": "prf-3",
+          "name": "Deliberate denormalization",
+          "aliases": [
+            "controlled redundancy",
+            "derived columns"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when adding redundancy or summary data is justified by read patterns and how to keep it consistent."
+        },
+        {
+          "id": "prf-4",
+          "name": "Composite and covering indexes",
+          "aliases": [
+            "multicolumn index",
+            "index column order",
+            "partial index"
+          ],
+          "bloom": "C5",
+          "summary": "Design multicolumn, covering and partial indexes by assessing column order and query patterns."
+        },
+        {
+          "id": "prf-5",
+          "name": "Surrogate key trade-offs",
+          "aliases": [
+            "UUID vs integer keys",
+            "key strategy"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate integer, UUID and natural keys regarding index size, locality, portability and uniqueness guarantees."
+        },
+        {
+          "id": "prf-6",
+          "name": "Temporal and history modeling",
+          "aliases": [
+            "audit tables",
+            "slowly changing data",
+            "soft delete"
+          ],
+          "bloom": "C5",
+          "summary": "Choose among versioned rows, effective-date ranges, audit tables and soft deletes to retain history."
+        },
+        {
+          "id": "prf-7",
+          "name": "Integrity beyond declared constraints",
+          "aliases": [
+            "triggers",
+            "assertions",
+            "deferred constraints"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse rules that simple constraints cannot express and decide between triggers, deferred checks and application logic."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-2",
+          "prf-3"
+        ],
+        [
+          "cmp-6",
+          "prf-4"
+        ],
+        [
+          "adb-4",
+          "prf-5"
+        ],
+        [
+          "cmp-4",
+          "prf-6"
+        ],
+        [
+          "cmp-4",
+          "prf-7"
+        ],
+        [
+          "adb-6",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Denormalization is always a sign of poor design.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Any decomposition into smaller tables is safe as long as each table is in normal form.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "A composite index on (a, b) serves queries filtering on b alone equally well.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Workload-driven schema evaluation",
+          "aliases": [
+            "access pattern analysis",
+            "schema review"
+          ],
+          "bloom": "C5",
+          "summary": "Critique a schema against realistic read and write workloads, data volumes and growth, and prioritise changes by impact."
+        },
+        {
+          "id": "exp-2",
+          "name": "Schema evolution strategy",
+          "aliases": [
+            "migrations",
+            "backward-compatible changes",
+            "expand and contract"
+          ],
+          "bloom": "C6",
+          "summary": "Plan staged, backward-compatible schema migrations that avoid downtime and data loss on live systems."
+        },
+        {
+          "id": "exp-3",
+          "name": "Partitioning and sharding design",
+          "aliases": [
+            "table partitioning",
+            "shard keys"
+          ],
+          "bloom": "C6",
+          "summary": "Design partition or shard keys and schema layout that scale while keeping keys, constraints and joins workable."
+        },
+        {
+          "id": "exp-4",
+          "name": "Multi-tenant schema patterns",
+          "aliases": [
+            "tenant isolation",
+            "shared schema vs separate schema"
+          ],
+          "bloom": "C6",
+          "summary": "Create a tenancy model by weighing shared tables, separate schemas and separate databases for isolation, cost and complexity."
+        },
+        {
+          "id": "exp-5",
+          "name": "Flexible and semi-structured columns",
+          "aliases": [
+            "JSON columns",
+            "EAV",
+            "entity-attribute-value"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when JSON columns or EAV beat relational modeling and what integrity and query power is lost."
+        },
+        {
+          "id": "exp-6",
+          "name": "Relational versus analytical modeling",
+          "aliases": [
+            "OLTP vs OLAP",
+            "star schema"
+          ],
+          "bloom": "C5",
+          "summary": "Judge how transactional normalized designs differ from dimensional models and when each fits."
+        },
+        {
+          "id": "exp-7",
+          "name": "Design standards and governance",
+          "aliases": [
+            "naming conventions",
+            "schema documentation",
+            "design review"
+          ],
+          "bloom": "C6",
+          "summary": "Establish conventions, documentation and review practices so a team's schemas stay consistent and maintainable."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-3",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-5",
+          "exp-3"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "prf-3",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Storing everything in JSON columns removes the need for schema design.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Sharding is a free way to scale that leaves queries and constraints unchanged.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "A star schema is just a more normalized version of the transactional schema.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

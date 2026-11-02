@@ -1,0 +1,747 @@
+{
+  "version": 1,
+  "topic": "machine-learning",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "python",
+    "statistics",
+    "linear-algebra"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Features, labels and examples",
+          "aliases": [
+            "input variables and targets",
+            "X and y"
+          ],
+          "bloom": "C1",
+          "summary": "Identify rows as examples, columns as features, and the target column as the label in a tabular dataset."
+        },
+        {
+          "id": "nov-2",
+          "name": "Supervised versus unsupervised learning",
+          "aliases": [
+            "labelled vs unlabelled learning"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how learning from labelled data (prediction) differs from finding structure in unlabelled data."
+        },
+        {
+          "id": "nov-3",
+          "name": "Classification versus regression",
+          "aliases": [
+            "discrete vs continuous targets"
+          ],
+          "bloom": "C2",
+          "summary": "Decide whether a problem predicts a category or a numeric value based on the target."
+        },
+        {
+          "id": "nov-5",
+          "name": "Model fitting and prediction",
+          "aliases": [
+            "training a model",
+            "fit and predict"
+          ],
+          "bloom": "C2",
+          "summary": "Describe training as learning parameters from data and prediction as applying the fitted model to new examples."
+        },
+        {
+          "id": "nov-4",
+          "name": "Train and test split",
+          "aliases": [
+            "holdout set",
+            "data splitting"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why a model is fitted on one part of the data and evaluated on held-out data."
+        },
+        {
+          "id": "nov-6",
+          "name": "Accuracy as a basic metric",
+          "aliases": [
+            "proportion correct"
+          ],
+          "bloom": "C1",
+          "summary": "Define accuracy as the fraction of correct predictions and compute it from predictions and true labels."
+        },
+        {
+          "id": "nov-7",
+          "name": "Overfitting intuition",
+          "aliases": [
+            "memorizing training data"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how a model can do well on training data yet poorly on new data because it memorized noise."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-5",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-7"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A model with high training accuracy is necessarily a good model.",
+          "concepts": [
+            "nov-6",
+            "nov-7",
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Machine learning always needs labelled data.",
+          "concepts": [
+            "nov-2"
+          ]
+        },
+        {
+          "text": "Any problem with numbers in the target column is a regression problem, even when the numbers are class codes.",
+          "concepts": [
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-3",
+          "name": "Feature scaling",
+          "aliases": [
+            "standardization",
+            "normalization"
+          ],
+          "bloom": "C3",
+          "summary": "Apply standardization or min-max scaling and know which methods depend on feature scale."
+        },
+        {
+          "id": "adb-4",
+          "name": "Confusion matrix metrics",
+          "aliases": [
+            "precision and recall",
+            "F1 score"
+          ],
+          "bloom": "C3",
+          "summary": "Build a confusion matrix and compute precision, recall and F1 from true/false positives and negatives."
+        },
+        {
+          "id": "adb-5",
+          "name": "Encoding categorical features",
+          "aliases": [
+            "one-hot encoding",
+            "ordinal encoding"
+          ],
+          "bloom": "C3",
+          "summary": "Convert categorical columns to numeric form using one-hot or ordinal encoding as appropriate."
+        },
+        {
+          "id": "adb-6",
+          "name": "Hyperparameters versus parameters",
+          "aliases": [
+            "model settings vs learned values"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish values learned from data from settings such as tree depth or k that are chosen beforehand."
+        },
+        {
+          "id": "adb-1",
+          "name": "Decision tree splitting",
+          "aliases": [
+            "recursive partitioning",
+            "tree induction"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a tree chooses feature thresholds that reduce impurity such as Gini or entropy, and read a fitted tree."
+        },
+        {
+          "id": "adb-2",
+          "name": "k-nearest neighbours prediction",
+          "aliases": [
+            "kNN",
+            "instance-based learning"
+          ],
+          "bloom": "C3",
+          "summary": "Apply kNN by finding the k closest examples under a distance and voting or averaging their labels."
+        },
+        {
+          "id": "adb-7",
+          "name": "Missing value handling",
+          "aliases": [
+            "imputation"
+          ],
+          "bloom": "C3",
+          "summary": "Apply simple imputation strategies such as median or most frequent and recognise their effect."
+        },
+        {
+          "id": "adb-8",
+          "name": "k-means clustering procedure",
+          "aliases": [
+            "centroid clustering"
+          ],
+          "bloom": "C3",
+          "summary": "Run k-means by alternating assignment to nearest centroid and centroid updates until convergence."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "nov-5",
+          "adb-2"
+        ],
+        [
+          "adb-3",
+          "adb-2"
+        ],
+        [
+          "adb-3",
+          "adb-8"
+        ],
+        [
+          "nov-6",
+          "adb-4"
+        ],
+        [
+          "adb-6",
+          "adb-1"
+        ],
+        [
+          "adb-6",
+          "adb-2"
+        ],
+        [
+          "adb-5",
+          "adb-2"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Decision trees and kNN need feature scaling in the same way.",
+          "concepts": [
+            "adb-3",
+            "adb-1",
+            "adb-2"
+          ]
+        },
+        {
+          "text": "Accuracy is a reliable metric on any dataset, including heavily imbalanced ones.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Encoding categories as integers 1, 2, 3 is always harmless for distance-based models.",
+          "concepts": [
+            "adb-5",
+            "adb-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Cross-validation",
+          "aliases": [
+            "k-fold CV",
+            "stratified folds"
+          ],
+          "bloom": "C3",
+          "summary": "Use k-fold and stratified cross-validation to estimate generalization and compare models."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Bias-variance tradeoff",
+          "aliases": [
+            "underfitting and overfitting diagnosis"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse errors as bias and variance and use learning curves to diagnose underfitting or overfitting."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Regularization",
+          "aliases": [
+            "L1 and L2 penalties",
+            "complexity control"
+          ],
+          "bloom": "C3",
+          "summary": "Apply penalties or complexity limits such as L1, L2, pruning and depth limits to reduce variance."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Random forests and bagging",
+          "aliases": [
+            "bootstrap aggregation",
+            "ensemble of trees"
+          ],
+          "bloom": "C3",
+          "summary": "Explain and apply bagging with random feature subsets to reduce the variance of trees."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Data leakage",
+          "aliases": [
+            "train-test contamination",
+            "target leakage"
+          ],
+          "bloom": "C4",
+          "summary": "Identify how information from test data or the target leaks into training and prevent it with pipelines."
+        },
+        {
+          "id": "cmp-6",
+          "name": "ROC curve and AUC",
+          "aliases": [
+            "ROC AUC",
+            "threshold analysis"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret ROC curves and AUC and relate decision thresholds to the precision-recall trade-off."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Hyperparameter search",
+          "aliases": [
+            "grid search",
+            "random search"
+          ],
+          "bloom": "C3",
+          "summary": "Tune hyperparameters with grid or random search inside cross-validation."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Feature engineering",
+          "aliases": [
+            "derived features",
+            "feature construction"
+          ],
+          "bloom": "C4",
+          "summary": "Construct and select features such as ratios, interactions and aggregates, and judge their usefulness."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "adb-6",
+          "cmp-7"
+        ],
+        [
+          "nov-7",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-1",
+          "cmp-4"
+        ],
+        [
+          "cmp-2",
+          "cmp-4"
+        ],
+        [
+          "cmp-1",
+          "cmp-5"
+        ],
+        [
+          "adb-4",
+          "cmp-6"
+        ],
+        [
+          "adb-5",
+          "cmp-8"
+        ],
+        [
+          "adb-3",
+          "cmp-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Scaling or imputing on the full dataset before splitting is fine because it uses no labels.",
+          "concepts": [
+            "cmp-5",
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "A higher ROC AUC means the model is better at every threshold and for any class balance.",
+          "concepts": [
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "Adding more trees to a random forest causes it to overfit more.",
+          "concepts": [
+            "cmp-4",
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Gradient boosting mechanics",
+          "aliases": [
+            "boosted trees",
+            "additive stagewise modelling"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how boosting fits trees sequentially to the gradient of the loss and how learning rate, depth and rounds interact."
+        },
+        {
+          "id": "prf-2",
+          "name": "SVM margins and kernels",
+          "aliases": [
+            "support vector machines",
+            "kernel trick"
+          ],
+          "bloom": "C4",
+          "summary": "Explain maximum margin, the role of C and support vectors, and how kernels such as RBF enable nonlinear boundaries."
+        },
+        {
+          "id": "prf-3",
+          "name": "PCA and variance explained",
+          "aliases": [
+            "principal components",
+            "dimensionality reduction"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret principal components as directions of maximal variance and choose the number of components."
+        },
+        {
+          "id": "prf-4",
+          "name": "Handling class imbalance",
+          "aliases": [
+            "resampling",
+            "class weights"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate class weights, resampling and threshold moving against the cost of errors."
+        },
+        {
+          "id": "prf-5",
+          "name": "Model comparison and selection",
+          "aliases": [
+            "nested cross-validation",
+            "model choice"
+          ],
+          "bloom": "C5",
+          "summary": "Judge models using nested cross-validation, variance across folds and metrics suited to the problem."
+        },
+        {
+          "id": "prf-6",
+          "name": "Choosing k and cluster validity",
+          "aliases": [
+            "silhouette score",
+            "elbow method"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate cluster quality and the choice of k using silhouette, inertia and stability."
+        },
+        {
+          "id": "prf-7",
+          "name": "Feature importance and interpretation",
+          "aliases": [
+            "permutation importance",
+            "partial dependence"
+          ],
+          "bloom": "C4",
+          "summary": "Compare impurity-based and permutation importance and interpret model behaviour while recognising correlated-feature pitfalls."
+        },
+        {
+          "id": "prf-8",
+          "name": "Probability calibration",
+          "aliases": [
+            "calibrated probabilities",
+            "reliability curves"
+          ],
+          "bloom": "C5",
+          "summary": "Assess whether predicted probabilities match observed frequencies and choose a calibration method."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-2"
+        ],
+        [
+          "adb-3",
+          "prf-2"
+        ],
+        [
+          "adb-3",
+          "prf-3"
+        ],
+        [
+          "cmp-6",
+          "prf-4"
+        ],
+        [
+          "cmp-1",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-5"
+        ],
+        [
+          "adb-8",
+          "prf-6"
+        ],
+        [
+          "cmp-4",
+          "prf-7"
+        ],
+        [
+          "cmp-6",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Oversampling before the train-test split is a valid way to balance classes.",
+          "concepts": [
+            "prf-4",
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Impurity-based feature importance reliably shows which features truly drive predictions.",
+          "concepts": [
+            "prf-7"
+          ]
+        },
+        {
+          "text": "PCA components are always the most predictive directions for the target.",
+          "concepts": [
+            "prf-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Designing evaluation protocols",
+          "aliases": [
+            "validation strategy design",
+            "time-aware splits"
+          ],
+          "bloom": "C6",
+          "summary": "Design validation schemes such as grouped or time-based splits that match deployment conditions and avoid optimistic estimates."
+        },
+        {
+          "id": "exp-2",
+          "name": "Cost-sensitive decision framing",
+          "aliases": [
+            "metric-to-business mapping",
+            "utility-based thresholds"
+          ],
+          "bloom": "C5",
+          "summary": "Translate error costs and constraints into metrics and thresholds and justify the choice."
+        },
+        {
+          "id": "exp-3",
+          "name": "Diagnosing distribution shift",
+          "aliases": [
+            "covariate shift",
+            "concept drift"
+          ],
+          "bloom": "C5",
+          "summary": "Detect and evaluate covariate and concept drift and judge responses such as retraining or reweighting."
+        },
+        {
+          "id": "exp-4",
+          "name": "Boosting regularization and tuning strategy",
+          "aliases": [
+            "boosting hyperparameter strategy",
+            "early stopping"
+          ],
+          "bloom": "C5",
+          "summary": "Critique and choose boosting settings including shrinkage, subsampling and early stopping under a compute budget."
+        },
+        {
+          "id": "exp-5",
+          "name": "Ensembling and stacking design",
+          "aliases": [
+            "model stacking",
+            "blending"
+          ],
+          "bloom": "C6",
+          "summary": "Construct stacked or blended ensembles with out-of-fold predictions and judge when they add value."
+        },
+        {
+          "id": "exp-6",
+          "name": "Pipeline and feature system design",
+          "aliases": [
+            "reproducible ML pipeline",
+            "feature pipeline"
+          ],
+          "bloom": "C6",
+          "summary": "Create reproducible pipelines that couple preprocessing, features and models safely and prevent train-serve skew."
+        },
+        {
+          "id": "exp-7",
+          "name": "Uncertainty and statistical comparison",
+          "aliases": [
+            "confidence intervals for metrics",
+            "significance of model differences"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate whether metric differences between models are real using resampling and appropriate tests."
+        },
+        {
+          "id": "exp-8",
+          "name": "Choosing classical versus deep methods",
+          "aliases": [
+            "method selection for tabular data"
+          ],
+          "bloom": "C5",
+          "summary": "Justify model family choice for a tabular problem given data size, interpretability, latency and maintenance."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-5",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-2"
+        ],
+        [
+          "prf-8",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "prf-1",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-5"
+        ],
+        [
+          "cmp-5",
+          "exp-6"
+        ],
+        [
+          "prf-5",
+          "exp-7"
+        ],
+        [
+          "exp-4",
+          "exp-8"
+        ],
+        [
+          "exp-2",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Random k-fold cross-validation is a valid estimate of performance for any dataset, including time series or grouped data.",
+          "concepts": [
+            "exp-1",
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Stacking more diverse models always improves performance.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "A small difference in cross-validated score between two models proves one is better.",
+          "concepts": [
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

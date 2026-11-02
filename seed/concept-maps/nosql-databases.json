@@ -1,0 +1,729 @@
+{
+  "version": 1,
+  "topic": "nosql-databases",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Non-relational data store idea",
+          "aliases": [
+            "NoSQL definition",
+            "non-relational database"
+          ],
+          "bloom": "C1",
+          "summary": "Can state that NoSQL stores hold data in models other than fixed-schema relational tables and name why they emerged."
+        },
+        {
+          "id": "nov-2",
+          "name": "Key-value model",
+          "aliases": [
+            "key-value store"
+          ],
+          "bloom": "C2",
+          "summary": "Can explain that data is stored and retrieved as opaque values looked up by a unique key."
+        },
+        {
+          "id": "nov-3",
+          "name": "Document model",
+          "aliases": [
+            "document store",
+            "JSON documents"
+          ],
+          "bloom": "C2",
+          "summary": "Can explain that records are self-contained, nested documents (such as JSON) grouped into collections."
+        },
+        {
+          "id": "nov-4",
+          "name": "Wide-column model",
+          "aliases": [
+            "column-family store"
+          ],
+          "bloom": "C2",
+          "summary": "Can describe rows identified by keys holding sparse, flexible sets of columns grouped into column families."
+        },
+        {
+          "id": "nov-5",
+          "name": "Graph model",
+          "aliases": [
+            "property graph",
+            "nodes and edges"
+          ],
+          "bloom": "C2",
+          "summary": "Can describe data as nodes and relationships with properties, suited to highly connected data."
+        },
+        {
+          "id": "nov-6",
+          "name": "Flexible schema",
+          "aliases": [
+            "schemaless",
+            "schema-on-read"
+          ],
+          "bloom": "C2",
+          "summary": "Can explain that records in one collection may have different fields and the structure is enforced by the application rather than the database."
+        },
+        {
+          "id": "nov-7",
+          "name": "Matching model to use case",
+          "aliases": [
+            "choosing a data model"
+          ],
+          "bloom": "C2",
+          "summary": "Can match typical examples (caching, catalogues, time series, social networks) to the NoSQL family that fits them."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-7"
+        ],
+        [
+          "nov-3",
+          "nov-7"
+        ],
+        [
+          "nov-4",
+          "nov-7"
+        ],
+        [
+          "nov-5",
+          "nov-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "NoSQL means the database can never use SQL-like query languages or has no structure at all.",
+          "concepts": [
+            "nov-1",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "All NoSQL databases work the same way and are interchangeable.",
+          "concepts": [
+            "nov-2",
+            "nov-3",
+            "nov-4",
+            "nov-5"
+          ]
+        },
+        {
+          "text": "A flexible schema means the data has no schema at all.",
+          "concepts": [
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "CRUD operations on documents",
+          "aliases": [
+            "document insert, find, update, delete"
+          ],
+          "bloom": "C3",
+          "summary": "Can insert, read, update and delete documents and key-value entries using a store's basic API or shell."
+        },
+        {
+          "id": "adb-2",
+          "name": "Query filters and projections",
+          "aliases": [
+            "find with filter",
+            "field selection"
+          ],
+          "bloom": "C3",
+          "summary": "Can write queries with conditions, sorting, limits and field projections against a document collection."
+        },
+        {
+          "id": "adb-3",
+          "name": "Primary keys and partition keys",
+          "aliases": [
+            "row key",
+            "shard key basics"
+          ],
+          "bloom": "C2",
+          "summary": "Can explain that the key determines how records are located and distributed, and choose a sensible key for simple cases."
+        },
+        {
+          "id": "adb-4",
+          "name": "Embedding versus referencing",
+          "aliases": [
+            "nesting vs references"
+          ],
+          "bloom": "C3",
+          "summary": "Can model a one-to-many relationship either by embedding child data in a parent document or by storing references."
+        },
+        {
+          "id": "adb-5",
+          "name": "Secondary indexes",
+          "aliases": [
+            "document indexes"
+          ],
+          "bloom": "C3",
+          "summary": "Can create an index on a non-key field to speed up a query and recognise its write and storage cost."
+        },
+        {
+          "id": "adb-6",
+          "name": "Basic graph traversal queries",
+          "aliases": [
+            "graph pattern matching"
+          ],
+          "bloom": "C3",
+          "summary": "Can write a simple query that matches nodes and follows relationships to find connected items."
+        },
+        {
+          "id": "adb-7",
+          "name": "Replication and sharding terms",
+          "aliases": [
+            "replica, shard, node, cluster"
+          ],
+          "bloom": "C2",
+          "summary": "Can explain that replication copies data for availability and sharding splits data across nodes for scale."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-2",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-2",
+          "adb-3"
+        ],
+        [
+          "nov-4",
+          "adb-3"
+        ],
+        [
+          "nov-3",
+          "adb-4"
+        ],
+        [
+          "adb-2",
+          "adb-5"
+        ],
+        [
+          "nov-5",
+          "adb-6"
+        ],
+        [
+          "adb-3",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Queries in a document database are fast on any field without any indexing.",
+          "concepts": [
+            "adb-2",
+            "adb-5"
+          ]
+        },
+        {
+          "text": "Embedding is always better than referencing because there are no joins.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Replication and sharding are the same thing.",
+          "concepts": [
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Query-driven data modelling",
+          "aliases": [
+            "access-pattern design"
+          ],
+          "bloom": "C4",
+          "summary": "Can derive a data model from the application's list of queries rather than from entity normalisation."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Denormalisation and duplication trade-offs",
+          "aliases": [
+            "denormalization"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse where duplicating data speeds reads and what update-consistency burden it creates."
+        },
+        {
+          "id": "cmp-3",
+          "name": "CAP theorem",
+          "aliases": [
+            "consistency availability partition tolerance"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse what a system must give up between consistency and availability during a network partition."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Eventual versus strong consistency",
+          "aliases": [
+            "consistency models"
+          ],
+          "bloom": "C4",
+          "summary": "Can explain and compare eventual and strong consistency and predict what reads may return after writes."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Partition key selection",
+          "aliases": [
+            "shard key design",
+            "hot partitions"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse a candidate partition key for even distribution, query locality and hot-spot risk."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Aggregation pipelines",
+          "aliases": [
+            "aggregation framework",
+            "map-reduce"
+          ],
+          "bloom": "C3",
+          "summary": "Can build multi-stage aggregations that filter, group and transform documents."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Single-document atomicity and transactions",
+          "aliases": [
+            "multi-document transactions"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse which operations are atomic by default and when multi-record transactions are needed or costly."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Relational versus NoSQL selection",
+          "aliases": [
+            "SQL vs NoSQL"
+          ],
+          "bloom": "C4",
+          "summary": "Can compare relational and NoSQL options for a scenario on structure, queries, consistency and scale."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-3",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-5"
+        ],
+        [
+          "adb-2",
+          "cmp-6"
+        ],
+        [
+          "cmp-4",
+          "cmp-7"
+        ],
+        [
+          "cmp-2",
+          "cmp-8"
+        ],
+        [
+          "cmp-4",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "You should model NoSQL data by normalising entities first, exactly as in a relational design.",
+          "concepts": [
+            "cmp-1",
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "CAP means a system permanently picks only two of consistency, availability and partition tolerance.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "NoSQL databases do not support transactions or atomic operations at all.",
+          "concepts": [
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Tunable consistency and quorums",
+          "aliases": [
+            "read/write quorum",
+            "R+W>N"
+          ],
+          "bloom": "C4",
+          "summary": "Can reason about replica counts and read/write quorum settings to tune consistency against latency and availability."
+        },
+        {
+          "id": "prf-2",
+          "name": "Consistent hashing and rebalancing",
+          "aliases": [
+            "hash ring",
+            "data redistribution"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse how consistent hashing places data and limits movement when nodes join or leave."
+        },
+        {
+          "id": "prf-3",
+          "name": "Storage engines and LSM trees",
+          "aliases": [
+            "log-structured merge tree",
+            "B-tree vs LSM"
+          ],
+          "bloom": "C4",
+          "summary": "Can analyse how LSM-based and B-tree storage engines trade write throughput, read cost and compaction."
+        },
+        {
+          "id": "prf-4",
+          "name": "Conflict resolution strategies",
+          "aliases": [
+            "last-write-wins",
+            "vector clocks",
+            "CRDTs"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate approaches to resolving concurrent writes and their risk of data loss or complexity."
+        },
+        {
+          "id": "prf-5",
+          "name": "PACELC and latency trade-offs",
+          "aliases": [
+            "PACELC"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate how a system trades latency against consistency even when there is no partition."
+        },
+        {
+          "id": "prf-6",
+          "name": "Index and query performance diagnosis",
+          "aliases": [
+            "query plans",
+            "explain"
+          ],
+          "bloom": "C4",
+          "summary": "Can use query plans and metrics to diagnose slow queries and fix indexing or model problems."
+        },
+        {
+          "id": "prf-7",
+          "name": "Polyglot persistence design",
+          "aliases": [
+            "multi-store architecture"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate combining several data stores in one system and the cost of keeping them in sync."
+        },
+        {
+          "id": "prf-8",
+          "name": "Schema evolution and migration",
+          "aliases": [
+            "versioned documents"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate strategies for changing document structure in live systems without downtime or inconsistency."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "adb-5",
+          "prf-3"
+        ],
+        [
+          "prf-1",
+          "prf-4"
+        ],
+        [
+          "cmp-3",
+          "prf-5"
+        ],
+        [
+          "prf-1",
+          "prf-5"
+        ],
+        [
+          "adb-5",
+          "prf-6"
+        ],
+        [
+          "cmp-1",
+          "prf-6"
+        ],
+        [
+          "cmp-8",
+          "prf-7"
+        ],
+        [
+          "cmp-2",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Setting quorums to majority always guarantees linearizable reads.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Last-write-wins is a safe default because it never loses data.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Consistency trade-offs only matter during network partitions.",
+          "concepts": [
+            "prf-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Architecture selection under constraints",
+          "aliases": [
+            "technology evaluation"
+          ],
+          "bloom": "C5",
+          "summary": "Can judge and defend a data store choice against workload, consistency, cost, operational and team constraints."
+        },
+        {
+          "id": "exp-2",
+          "name": "Distributed correctness reasoning",
+          "aliases": [
+            "linearizability",
+            "isolation anomalies"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate a system's guarantees against anomalies such as stale reads, lost updates and write skew."
+        },
+        {
+          "id": "exp-3",
+          "name": "Multi-region replication design",
+          "aliases": [
+            "geo-distribution",
+            "cross-datacenter replication"
+          ],
+          "bloom": "C6",
+          "summary": "Can design a multi-region topology balancing latency, failover, data residency and conflict handling."
+        },
+        {
+          "id": "exp-4",
+          "name": "Capacity and scaling strategy",
+          "aliases": [
+            "capacity planning",
+            "scaling plan"
+          ],
+          "bloom": "C6",
+          "summary": "Can create a plan for growth covering sharding, rebalancing, hot-key mitigation and cost."
+        },
+        {
+          "id": "exp-5",
+          "name": "Event-driven derived data pipelines",
+          "aliases": [
+            "change data capture",
+            "event sourcing"
+          ],
+          "bloom": "C6",
+          "summary": "Can design pipelines that propagate changes into search, cache and analytic views with defined consistency."
+        },
+        {
+          "id": "exp-6",
+          "name": "Failure and resilience testing",
+          "aliases": [
+            "chaos testing",
+            "fault injection"
+          ],
+          "bloom": "C5",
+          "summary": "Can evaluate durability and recovery behaviour through failure scenarios, backups and restore drills."
+        },
+        {
+          "id": "exp-7",
+          "name": "Custom data model frameworks",
+          "aliases": [
+            "modelling guidelines"
+          ],
+          "bloom": "C6",
+          "summary": "Can create reusable modelling patterns and governance guidelines for teams working with NoSQL stores."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-2"
+        ],
+        [
+          "prf-1",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-3"
+        ],
+        [
+          "prf-2",
+          "exp-4"
+        ],
+        [
+          "prf-3",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "prf-8",
+          "exp-7"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Horizontal scaling a NoSQL database is automatic and needs no data model or key design effort.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Multi-region replication improves availability without any consistency or latency cost.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Derived stores populated from change streams are always immediately consistent with the source.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}

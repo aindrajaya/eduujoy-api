@@ -1,0 +1,723 @@
+{
+  "version": 1,
+  "topic": "sql",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Tables, rows and columns",
+          "aliases": [
+            "relational table structure",
+            "records and fields"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise that relational data is stored in tables of rows (records) and typed columns (fields) and describe what each represents."
+        },
+        {
+          "id": "nov-2",
+          "name": "Primary and foreign keys",
+          "aliases": [
+            "PK and FK",
+            "key columns"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a primary key uniquely identifies a row and how a foreign key references another table to link related data."
+        },
+        {
+          "id": "nov-3",
+          "name": "SELECT and FROM",
+          "aliases": [
+            "basic select statement",
+            "column retrieval"
+          ],
+          "bloom": "C2",
+          "summary": "Read and explain a query that retrieves chosen columns from a table, including the meaning of SELECT *."
+        },
+        {
+          "id": "nov-4",
+          "name": "Filtering with WHERE",
+          "aliases": [
+            "row filtering",
+            "WHERE clause"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that WHERE keeps only rows satisfying a condition built from comparison operators."
+        },
+        {
+          "id": "nov-5",
+          "name": "Sorting with ORDER BY",
+          "aliases": [
+            "ordering results",
+            "ASC and DESC"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how ORDER BY sorts result rows ascending or descending by one or more columns."
+        },
+        {
+          "id": "nov-6",
+          "name": "Common data types",
+          "aliases": [
+            "column types",
+            "integer text date types"
+          ],
+          "bloom": "C1",
+          "summary": "Recall the main column data types (integer, decimal, text, date/time, boolean) and what kind of value each stores."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A SQL table has a guaranteed row order, so rows come back in the order they were inserted without ORDER BY.",
+          "concepts": [
+            "nov-1",
+            "nov-5"
+          ]
+        },
+        {
+          "text": "SELECT changes or removes the data in the table it reads from.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A foreign key column must contain unique values just like a primary key.",
+          "concepts": [
+            "nov-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Compound conditions with AND/OR",
+          "aliases": [
+            "boolean logic in WHERE",
+            "logical operators"
+          ],
+          "bloom": "C3",
+          "summary": "Combine conditions using AND, OR, NOT and parentheses so the intended rows are selected."
+        },
+        {
+          "id": "adb-2",
+          "name": "Pattern, range and set predicates",
+          "aliases": [
+            "LIKE BETWEEN IN",
+            "special comparison operators"
+          ],
+          "bloom": "C3",
+          "summary": "Use LIKE, BETWEEN and IN to filter on text patterns, ranges and lists of values."
+        },
+        {
+          "id": "adb-3",
+          "name": "NULL handling",
+          "aliases": [
+            "missing values",
+            "IS NULL"
+          ],
+          "bloom": "C3",
+          "summary": "Test for missing values with IS NULL and understand that comparisons with NULL are neither true nor false."
+        },
+        {
+          "id": "adb-4",
+          "name": "Aggregate functions",
+          "aliases": [
+            "COUNT SUM AVG MIN MAX",
+            "summary functions"
+          ],
+          "bloom": "C3",
+          "summary": "Compute COUNT, SUM, AVG, MIN and MAX over a set of rows to answer summary questions."
+        },
+        {
+          "id": "adb-5",
+          "name": "Grouping with GROUP BY",
+          "aliases": [
+            "group aggregation",
+            "per-category summaries"
+          ],
+          "bloom": "C3",
+          "summary": "Produce one summary row per group by combining GROUP BY with aggregate functions."
+        },
+        {
+          "id": "adb-7",
+          "name": "Inserting, updating and deleting rows",
+          "aliases": [
+            "INSERT UPDATE DELETE",
+            "data modification statements"
+          ],
+          "bloom": "C3",
+          "summary": "Add, change and remove records using INSERT, UPDATE and DELETE, with a WHERE clause to limit the affected rows."
+        },
+        {
+          "id": "adb-8",
+          "name": "Aliases and DISTINCT",
+          "aliases": [
+            "AS keyword",
+            "removing duplicates"
+          ],
+          "bloom": "C2",
+          "summary": "Rename columns and tables with aliases and remove duplicate result rows with DISTINCT."
+        },
+        {
+          "id": "adb-6",
+          "name": "Inner joins on keys",
+          "aliases": [
+            "INNER JOIN",
+            "joining two tables"
+          ],
+          "bloom": "C3",
+          "summary": "Combine rows from two tables by matching a foreign key to a primary key using JOIN ... ON."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "nov-3",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "nov-2",
+          "adb-6"
+        ],
+        [
+          "adb-8",
+          "adb-6"
+        ],
+        [
+          "nov-4",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "WHERE column = NULL finds rows with missing values.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "UPDATE or DELETE without a WHERE clause only affects one row.",
+          "concepts": [
+            "adb-7"
+          ]
+        },
+        {
+          "text": "Any selected column can appear alongside aggregates in a GROUP BY query without being grouped.",
+          "concepts": [
+            "adb-4",
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Outer joins and unmatched rows",
+          "aliases": [
+            "LEFT JOIN",
+            "RIGHT JOIN",
+            "FULL OUTER JOIN"
+          ],
+          "bloom": "C3",
+          "summary": "Use LEFT, RIGHT and FULL joins to keep unmatched rows and identify them via NULLs."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Filtering groups with HAVING",
+          "aliases": [
+            "HAVING clause",
+            "post-aggregation filter"
+          ],
+          "bloom": "C3",
+          "summary": "Filter aggregated groups with HAVING and distinguish it from row-level filtering with WHERE."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Logical order of query evaluation",
+          "aliases": [
+            "clause execution order",
+            "query processing order"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse why clauses are evaluated in the order FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY and predict what aliases and filters are visible where."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Subqueries in WHERE and FROM",
+          "aliases": [
+            "nested queries",
+            "derived tables"
+          ],
+          "bloom": "C4",
+          "summary": "Write scalar, list and table subqueries and decide when a nested query answers a question better than a join."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Correlated subqueries and EXISTS",
+          "aliases": [
+            "EXISTS NOT EXISTS",
+            "row-dependent subquery"
+          ],
+          "bloom": "C4",
+          "summary": "Use correlated subqueries and EXISTS to test for related rows, and compare them with joins."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Set operations",
+          "aliases": [
+            "UNION INTERSECT EXCEPT",
+            "combining result sets"
+          ],
+          "bloom": "C3",
+          "summary": "Combine compatible result sets with UNION, UNION ALL, INTERSECT and EXCEPT."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Self joins and multi-table joins",
+          "aliases": [
+            "joining a table to itself",
+            "chained joins"
+          ],
+          "bloom": "C4",
+          "summary": "Model hierarchies and comparisons within one table and chain several joins, including many-to-many link tables."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Expressions and CASE",
+          "aliases": [
+            "conditional logic",
+            "CASE WHEN"
+          ],
+          "bloom": "C3",
+          "summary": "Use CASE, COALESCE and string, numeric and date functions to derive values inside queries."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "cmp-1"
+        ],
+        [
+          "adb-5",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-3"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "adb-6",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "adb-2",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "adb-3",
+          "cmp-8"
+        ],
+        [
+          "adb-4",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "HAVING and WHERE are interchangeable, so any condition can go in either.",
+          "concepts": [
+            "cmp-2",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "A column alias defined in SELECT can be used in the WHERE clause of the same query.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Filtering on the right-hand table in the WHERE clause of a LEFT JOIN still preserves unmatched left rows.",
+          "concepts": [
+            "cmp-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Window functions",
+          "aliases": [
+            "OVER clause",
+            "PARTITION BY"
+          ],
+          "bloom": "C4",
+          "summary": "Compute rankings, running totals and per-partition values with OVER, PARTITION BY and ORDER BY without collapsing rows."
+        },
+        {
+          "id": "prf-2",
+          "name": "Common table expressions",
+          "aliases": [
+            "WITH clause",
+            "CTE"
+          ],
+          "bloom": "C4",
+          "summary": "Structure complex queries into named, readable steps with CTEs and judge when they beat nested subqueries."
+        },
+        {
+          "id": "prf-3",
+          "name": "Recursive queries",
+          "aliases": [
+            "recursive CTE",
+            "hierarchy traversal"
+          ],
+          "bloom": "C4",
+          "summary": "Traverse hierarchical or graph-like data using recursive CTEs with an anchor and a recursive member."
+        },
+        {
+          "id": "prf-4",
+          "name": "Indexes and query performance",
+          "aliases": [
+            "index selection",
+            "query speed"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how indexes speed reads, slow writes and are used or ignored depending on the predicates."
+        },
+        {
+          "id": "prf-5",
+          "name": "Reading execution plans",
+          "aliases": [
+            "EXPLAIN",
+            "query plan analysis"
+          ],
+          "bloom": "C4",
+          "summary": "Interpret execution plans to find scans, join strategies and costly steps, then judge rewrites."
+        },
+        {
+          "id": "prf-6",
+          "name": "Transactions and ACID",
+          "aliases": [
+            "COMMIT ROLLBACK",
+            "atomic changes"
+          ],
+          "bloom": "C4",
+          "summary": "Group statements into transactions and analyse how atomicity, consistency, isolation and durability protect data."
+        },
+        {
+          "id": "prf-7",
+          "name": "Constraints and normalisation",
+          "aliases": [
+            "schema design",
+            "data integrity rules"
+          ],
+          "bloom": "C5",
+          "summary": "Judge schema designs using normal forms and enforce integrity with primary, foreign, unique, check and not-null constraints."
+        },
+        {
+          "id": "prf-8",
+          "name": "Rewriting queries for correctness",
+          "aliases": [
+            "query refactoring",
+            "join fan-out"
+          ],
+          "bloom": "C5",
+          "summary": "Detect and fix wrong results caused by join fan-out, duplicate counting and NULL semantics, and evaluate equivalent formulations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-5",
+          "prf-1"
+        ],
+        [
+          "cmp-4",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "cmp-3",
+          "prf-4"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "adb-7",
+          "prf-6"
+        ],
+        [
+          "nov-2",
+          "prf-7"
+        ],
+        [
+          "cmp-1",
+          "prf-8"
+        ],
+        [
+          "cmp-2",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Window functions and GROUP BY do the same thing and both collapse rows.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Adding more indexes always makes the database faster.",
+          "concepts": [
+            "prf-4"
+          ]
+        },
+        {
+          "text": "A CTE always materialises results and is therefore always faster than a subquery.",
+          "concepts": [
+            "prf-2",
+            "prf-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Isolation levels and concurrency anomalies",
+          "aliases": [
+            "dirty read",
+            "phantom read",
+            "MVCC"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate which isolation level prevents which anomalies and its trade-offs for throughput and correctness in a given workload."
+        },
+        {
+          "id": "exp-2",
+          "name": "Locking and deadlock design",
+          "aliases": [
+            "row locks",
+            "deadlock avoidance"
+          ],
+          "bloom": "C5",
+          "summary": "Assess locking behaviour and design access patterns that avoid contention and deadlocks."
+        },
+        {
+          "id": "exp-3",
+          "name": "Optimiser behaviour and statistics",
+          "aliases": [
+            "cost-based optimisation",
+            "cardinality estimates"
+          ],
+          "bloom": "C5",
+          "summary": "Judge how statistics and cardinality estimates drive plan choice and diagnose bad plans from misestimates."
+        },
+        {
+          "id": "exp-4",
+          "name": "Schema and index design for workloads",
+          "aliases": [
+            "physical design",
+            "covering and partial indexes"
+          ],
+          "bloom": "C6",
+          "summary": "Design schemas, composite, covering and partial indexes, and partitioning tailored to a specific read/write workload."
+        },
+        {
+          "id": "exp-5",
+          "name": "Denormalisation and analytical modelling",
+          "aliases": [
+            "star schema",
+            "reporting models"
+          ],
+          "bloom": "C6",
+          "summary": "Create dimensional or denormalised models for analytics and justify the departure from normal forms."
+        },
+        {
+          "id": "exp-6",
+          "name": "Safe large-scale data changes",
+          "aliases": [
+            "batched updates",
+            "online migrations"
+          ],
+          "bloom": "C6",
+          "summary": "Plan batched, idempotent and reversible bulk modifications and schema migrations that limit locking and risk."
+        },
+        {
+          "id": "exp-7",
+          "name": "SQL injection defence and access control",
+          "aliases": [
+            "parameterised queries",
+            "least privilege"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate code and permission setups for injection risk and apply parameterised statements and least-privilege roles."
+        },
+        {
+          "id": "exp-8",
+          "name": "Dialect portability and trade-offs",
+          "aliases": [
+            "vendor differences",
+            "standard SQL"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate which SQL features are standard versus engine-specific and choose approaches balancing portability and capability."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-5",
+          "exp-3"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-5"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "adb-7",
+          "exp-7"
+        ],
+        [
+          "prf-2",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The SERIALIZABLE isolation level should always be used because it is simply the safest and costs nothing.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Escaping quotes by hand is as reliable as using parameterised queries.",
+          "concepts": [
+            "exp-7"
+          ]
+        },
+        {
+          "text": "The optimiser always finds the best plan, so query shape and statistics never matter.",
+          "concepts": [
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

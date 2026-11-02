@@ -1,0 +1,659 @@
+{
+  "version": 1,
+  "topic": "differential-equations",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "differential-calculus",
+    "integral-calculus"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Differential equation and its order",
+          "aliases": [
+            "ODE",
+            "order of an equation"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise an equation containing an unknown function and its derivatives and state its order and whether it is ordinary."
+        },
+        {
+          "id": "nov-2",
+          "name": "Solutions as functions",
+          "aliases": [
+            "verifying a solution"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a solution is a function that satisfies the equation, and check a candidate by substituting it and its derivatives."
+        },
+        {
+          "id": "nov-3",
+          "name": "General versus particular solution",
+          "aliases": [
+            "family of solutions",
+            "arbitrary constant"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that integration introduces arbitrary constants giving a family of solutions, and that a particular solution picks one member."
+        },
+        {
+          "id": "nov-4",
+          "name": "Initial value problem",
+          "aliases": [
+            "IVP",
+            "initial condition"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how an initial condition fixes the constant and selects a single solution curve."
+        },
+        {
+          "id": "nov-5",
+          "name": "Direction field reading",
+          "aliases": [
+            "slope field"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret a slope field as showing the slope y' at each point and sketch how solution curves follow the arrows."
+        },
+        {
+          "id": "nov-6",
+          "name": "Rate-of-change modelling statements",
+          "aliases": [
+            "translating rates into equations"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a statement like 'rate proportional to amount' translates into an equation such as dy/dt = ky."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A differential equation has one single answer number rather than a function or family of functions.",
+          "concepts": [
+            "nov-2",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "The order of a differential equation is the highest power of the unknown function or derivative rather than the highest derivative.",
+          "concepts": [
+            "nov-1"
+          ]
+        },
+        {
+          "text": "The arbitrary constant can be dropped because it does not affect the solution.",
+          "concepts": [
+            "nov-3",
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Separation of variables",
+          "aliases": [
+            "separable equations"
+          ],
+          "bloom": "C3",
+          "summary": "Solve dy/dx = f(x)g(y) by moving each variable to one side and integrating both sides."
+        },
+        {
+          "id": "adb-2",
+          "name": "Exponential growth and decay",
+          "aliases": [
+            "dy/dt = ky",
+            "half-life model"
+          ],
+          "bloom": "C3",
+          "summary": "Apply y = y0 e^{kt} to population, radioactive decay and similar problems, determining k from data."
+        },
+        {
+          "id": "adb-3",
+          "name": "First-order linear form",
+          "aliases": [
+            "y' + p(x)y = q(x)",
+            "standard form"
+          ],
+          "bloom": "C2",
+          "summary": "Rewrite a first-order equation into standard linear form and identify p(x) and q(x)."
+        },
+        {
+          "id": "adb-4",
+          "name": "Integrating factor method",
+          "aliases": [
+            "integrating factor",
+            "mu(x)"
+          ],
+          "bloom": "C3",
+          "summary": "Multiply by e^{∫p dx} so the left side becomes a product-rule derivative, then integrate to solve."
+        },
+        {
+          "id": "adb-5",
+          "name": "Equilibrium solutions",
+          "aliases": [
+            "constant solutions",
+            "critical points"
+          ],
+          "bloom": "C3",
+          "summary": "Find constant solutions of an autonomous equation by setting y' = 0 and recognise those lost when dividing during separation."
+        },
+        {
+          "id": "adb-6",
+          "name": "Solving initial value problems",
+          "aliases": [
+            "fitting the constant"
+          ],
+          "bloom": "C3",
+          "summary": "Use the initial condition to find the constant in the general solution of a first-order equation."
+        },
+        {
+          "id": "adb-7",
+          "name": "Mixing tank models",
+          "aliases": [
+            "salt tank problem"
+          ],
+          "bloom": "C3",
+          "summary": "Set up and solve dQ/dt = rate in − rate out for a well-stirred tank with constant flows."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-6"
+        ],
+        [
+          "adb-1",
+          "adb-5"
+        ],
+        [
+          "adb-4",
+          "adb-7"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "After separating variables you can integrate only one side and put the constant anywhere without consequence.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "The integrating factor method works without first putting the equation in standard form with y' having coefficient 1.",
+          "concepts": [
+            "adb-3",
+            "adb-4"
+          ]
+        },
+        {
+          "text": "In a mixing problem the outflow concentration equals the inflow concentration.",
+          "concepts": [
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Exact equations and potential functions",
+          "aliases": [
+            "exact ODEs",
+            "M dx + N dy = 0"
+          ],
+          "bloom": "C3",
+          "summary": "Test exactness with M_y = N_x and construct the potential function F whose level curves are the solutions."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Existence and uniqueness theorem",
+          "aliases": [
+            "Picard–Lindelöf",
+            "interval of validity"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when an IVP has a unique solution using continuity of f and ∂f/∂y, and find the interval on which it exists."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Characteristic equation method",
+          "aliases": [
+            "constant-coefficient homogeneous",
+            "auxiliary equation"
+          ],
+          "bloom": "C3",
+          "summary": "Solve ay'' + by' + cy = 0 using roots of the characteristic polynomial: real distinct, repeated or complex."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Superposition and linear independence",
+          "aliases": [
+            "Wronskian",
+            "fundamental set"
+          ],
+          "bloom": "C4",
+          "summary": "Use the Wronskian to decide whether two solutions form a fundamental set and build the general solution from them."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Undetermined coefficients",
+          "aliases": [
+            "method of undetermined coefficients",
+            "guessing particular solution"
+          ],
+          "bloom": "C3",
+          "summary": "Find a particular solution of a nonhomogeneous equation by guessing a form based on the forcing term, adjusting for resonance with the homogeneous solution."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Qualitative analysis of autonomous equations",
+          "aliases": [
+            "phase line",
+            "stability of equilibria"
+          ],
+          "bloom": "C4",
+          "summary": "Use a phase line to classify equilibria as stable, unstable or semi-stable and predict long-term behaviour."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Spring-mass oscillator model",
+          "aliases": [
+            "damped harmonic oscillator",
+            "mechanical vibrations"
+          ],
+          "bloom": "C4",
+          "summary": "Relate the roots of the characteristic equation to undamped, underdamped, critically damped and overdamped motion."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-4",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "cmp-3",
+          "cmp-7"
+        ],
+        [
+          "cmp-5",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Any equation M dx + N dy = 0 can be solved by integrating M with respect to x and N with respect to y and adding the results.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Every IVP has a solution defined for all x.",
+          "concepts": [
+            "cmp-2"
+          ]
+        },
+        {
+          "text": "A repeated root of the characteristic equation gives only one solution, so the general solution has a single constant.",
+          "concepts": [
+            "cmp-3",
+            "cmp-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Laplace transform definition and properties",
+          "aliases": [
+            "Laplace transform",
+            "linearity and shifting"
+          ],
+          "bloom": "C4",
+          "summary": "Compute transforms from the integral definition and using linearity, the first shifting theorem and transforms of derivatives."
+        },
+        {
+          "id": "prf-2",
+          "name": "Solving IVPs by Laplace transform",
+          "aliases": [
+            "inverse Laplace",
+            "partial fractions in s"
+          ],
+          "bloom": "C4",
+          "summary": "Transform an IVP into an algebraic equation in s, solve it, and invert using partial fractions and tables."
+        },
+        {
+          "id": "prf-3",
+          "name": "Discontinuous and impulsive forcing",
+          "aliases": [
+            "step function",
+            "Dirac delta",
+            "second shifting theorem"
+          ],
+          "bloom": "C4",
+          "summary": "Model switched and impulsive inputs with unit step and delta functions and solve the resulting problems with transforms."
+        },
+        {
+          "id": "prf-4",
+          "name": "Convolution and transfer function",
+          "aliases": [
+            "convolution theorem",
+            "impulse response"
+          ],
+          "bloom": "C5",
+          "summary": "Express the response of a linear system to arbitrary forcing as a convolution with the impulse response and interpret the transfer function."
+        },
+        {
+          "id": "prf-5",
+          "name": "Variation of parameters",
+          "aliases": [
+            "particular solution by variation of parameters"
+          ],
+          "bloom": "C4",
+          "summary": "Construct a particular solution for general forcing using the Wronskian when undetermined coefficients does not apply."
+        },
+        {
+          "id": "prf-6",
+          "name": "Resonance and forced oscillation analysis",
+          "aliases": [
+            "resonance",
+            "beats",
+            "steady-state response"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how forcing frequency and damping determine amplitude, beats, resonance and transient versus steady-state behaviour."
+        },
+        {
+          "id": "prf-7",
+          "name": "Choosing a solution method",
+          "aliases": [
+            "method selection"
+          ],
+          "bloom": "C5",
+          "summary": "Judge which technique (separable, linear, exact, undetermined coefficients, variation of parameters, Laplace) is most efficient for a given equation and justify it."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-4"
+        ],
+        [
+          "cmp-4",
+          "prf-5"
+        ],
+        [
+          "cmp-5",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "cmp-5",
+          "prf-6"
+        ],
+        [
+          "prf-2",
+          "prf-7"
+        ],
+        [
+          "prf-5",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The Laplace transform of a product of functions is the product of their transforms.",
+          "concepts": [
+            "prf-1",
+            "prf-4"
+          ]
+        },
+        {
+          "text": "Laplace transforms only work for homogeneous equations or only for zero initial conditions.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Resonance occurs for any forcing frequency whenever damping is present, giving unbounded growth.",
+          "concepts": [
+            "prf-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Systems of linear ODEs",
+          "aliases": [
+            "matrix form x' = Ax",
+            "eigenvalue method"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate solution structure of x' = Ax through eigenvalues and eigenvectors and relate it to higher-order equations."
+        },
+        {
+          "id": "exp-2",
+          "name": "Phase plane classification",
+          "aliases": [
+            "nodes, saddles, spirals",
+            "stability of linear systems"
+          ],
+          "bloom": "C5",
+          "summary": "Judge stability and equilibrium type from trace and determinant of the system matrix."
+        },
+        {
+          "id": "exp-3",
+          "name": "Linearisation of nonlinear systems",
+          "aliases": [
+            "Jacobian linearisation",
+            "Hartman–Grobman"
+          ],
+          "bloom": "C5",
+          "summary": "Assess local behaviour near equilibria of nonlinear systems via the Jacobian and recognise when linearisation is inconclusive."
+        },
+        {
+          "id": "exp-4",
+          "name": "Power series solutions",
+          "aliases": [
+            "series solutions",
+            "ordinary point"
+          ],
+          "bloom": "C5",
+          "summary": "Derive series solutions about ordinary points via recurrence relations and evaluate their radius of convergence."
+        },
+        {
+          "id": "exp-5",
+          "name": "Numerical method error analysis",
+          "aliases": [
+            "Euler and Runge–Kutta",
+            "stiffness"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the accuracy, order and stability of Euler and Runge–Kutta schemes and diagnose stiff problems."
+        },
+        {
+          "id": "exp-7",
+          "name": "Bifurcation analysis",
+          "aliases": [
+            "parameter-dependent equilibria",
+            "saddle-node bifurcation"
+          ],
+          "bloom": "C6",
+          "summary": "Create bifurcation diagrams showing how equilibria and their stability change with a parameter."
+        },
+        {
+          "id": "exp-6",
+          "name": "Constructing models from phenomena",
+          "aliases": [
+            "mathematical modelling with ODEs",
+            "logistic and predator-prey models"
+          ],
+          "bloom": "C6",
+          "summary": "Design ODE models such as logistic growth with harvesting or predator-prey, justify assumptions and analyse their predictions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "exp-2",
+          "exp-3"
+        ],
+        [
+          "cmp-6",
+          "exp-7"
+        ],
+        [
+          "cmp-6",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-6"
+        ],
+        [
+          "exp-7",
+          "exp-6"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "adb-6",
+          "exp-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Linearisation always determines the stability of a nonlinear equilibrium, including centres.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "A smaller step size always makes a numerical ODE solver more accurate and stable regardless of the method.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "A fitted ODE model that matches observed data is therefore a correct description of the underlying mechanism.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

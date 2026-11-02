@@ -1,0 +1,733 @@
+{
+  "version": 1,
+  "topic": "fluid-mechanics",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "classical-mechanics",
+    "calculus"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Fluid versus solid behaviour",
+          "aliases": [
+            "what is a fluid"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that a fluid continuously deforms under shear stress and that liquids and gases differ mainly in compressibility and in filling their container."
+        },
+        {
+          "id": "nov-2",
+          "name": "Density and specific gravity",
+          "aliases": [
+            "mass density"
+          ],
+          "bloom": "C2",
+          "summary": "Explain density as mass per unit volume and compare fluids using specific gravity."
+        },
+        {
+          "id": "nov-3",
+          "name": "Pressure as force per area",
+          "aliases": [
+            "fluid pressure"
+          ],
+          "bloom": "C2",
+          "summary": "Understand pressure as normal force per unit area acting equally in all directions at a point in a static fluid."
+        },
+        {
+          "id": "nov-4",
+          "name": "Hydrostatic pressure variation",
+          "aliases": [
+            "pressure with depth",
+            "p = rho g h"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why pressure increases linearly with depth in a static fluid of constant density."
+        },
+        {
+          "id": "nov-5",
+          "name": "Gauge and absolute pressure",
+          "aliases": [
+            "atmospheric pressure reference"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish gauge pressure from absolute pressure and recognise atmospheric pressure as the reference."
+        },
+        {
+          "id": "nov-6",
+          "name": "Buoyancy and Archimedes' principle",
+          "aliases": [
+            "buoyant force"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that a submerged object feels an upward force equal to the weight of the fluid it displaces."
+        },
+        {
+          "id": "nov-7",
+          "name": "Streamlines and steady flow",
+          "aliases": [
+            "flow lines"
+          ],
+          "bloom": "C1",
+          "summary": "Recall what streamlines show and what steady flow means."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Pressure at a point in a fluid acts only downward.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Pressure at depth depends on the container's shape or the total amount of water.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Buoyant force depends on the object's weight rather than the displaced fluid's weight.",
+          "concepts": [
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Pascal's law and hydraulic systems",
+          "aliases": [
+            "hydraulic press"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the transmission of pressure changes in an enclosed fluid to calculate forces in hydraulic devices."
+        },
+        {
+          "id": "adb-2",
+          "name": "Manometer and barometer readings",
+          "aliases": [
+            "pressure measurement"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate pressure differences from fluid column heights in manometers and barometers."
+        },
+        {
+          "id": "adb-3",
+          "name": "Flotation and floating equilibrium",
+          "aliases": [
+            "floating objects"
+          ],
+          "bloom": "C3",
+          "summary": "Use buoyancy and density ratios to find the submerged fraction of a floating body."
+        },
+        {
+          "id": "adb-4",
+          "name": "Continuity equation",
+          "aliases": [
+            "mass conservation in flow",
+            "A1v1 = A2v2"
+          ],
+          "bloom": "C3",
+          "summary": "Apply conservation of mass to relate speed and cross-sectional area in incompressible pipe flow."
+        },
+        {
+          "id": "adb-5",
+          "name": "Volume and mass flow rate",
+          "aliases": [
+            "discharge"
+          ],
+          "bloom": "C3",
+          "summary": "Compute volumetric and mass flow rates from velocity, area and density."
+        },
+        {
+          "id": "adb-6",
+          "name": "Bernoulli's equation",
+          "aliases": [
+            "Bernoulli principle"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the relation between pressure, speed and height along a streamline for steady, inviscid, incompressible flow."
+        },
+        {
+          "id": "adb-7",
+          "name": "Viscosity as internal friction",
+          "aliases": [
+            "dynamic viscosity"
+          ],
+          "bloom": "C2",
+          "summary": "Explain viscosity as resistance to shear and how it differs between fluids and with temperature."
+        },
+        {
+          "id": "adb-8",
+          "name": "Laminar versus turbulent flow",
+          "aliases": [
+            "flow regimes"
+          ],
+          "bloom": "C2",
+          "summary": "Describe the qualitative difference between smooth layered flow and chaotic mixing flow."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-4",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-3"
+        ],
+        [
+          "nov-7",
+          "adb-4"
+        ],
+        [
+          "adb-4",
+          "adb-5"
+        ],
+        [
+          "adb-4",
+          "adb-6"
+        ],
+        [
+          "nov-5",
+          "adb-6"
+        ],
+        [
+          "adb-7",
+          "adb-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Fluid speeds up in a narrowing pipe because pressure must always rise there.",
+          "concepts": [
+            "adb-4",
+            "adb-6"
+          ]
+        },
+        {
+          "text": "Bernoulli's equation holds between any two points in a fluid regardless of friction or flow type.",
+          "concepts": [
+            "adb-6"
+          ]
+        },
+        {
+          "text": "Thicker-looking or denser fluids are always more viscous.",
+          "concepts": [
+            "adb-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Hydrostatic force on surfaces",
+          "aliases": [
+            "force on submerged plane",
+            "centre of pressure"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate the resultant hydrostatic force and its line of action on plane submerged surfaces."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Reynolds number",
+          "aliases": [
+            "Re",
+            "dimensionless flow ratio"
+          ],
+          "bloom": "C3",
+          "summary": "Compute Reynolds number and use it to predict laminar, transitional or turbulent flow in pipes."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Hagen-Poiseuille laminar pipe flow",
+          "aliases": [
+            "Poiseuille flow",
+            "parabolic velocity profile"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the parabolic velocity profile and flow-rate-pressure-drop relation for laminar pipe flow."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Major head loss in pipes",
+          "aliases": [
+            "Darcy-Weisbach",
+            "friction factor"
+          ],
+          "bloom": "C4",
+          "summary": "Calculate frictional head loss using the Darcy-Weisbach equation and friction factor from Moody chart or correlations."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Minor losses in fittings",
+          "aliases": [
+            "loss coefficients",
+            "K factors"
+          ],
+          "bloom": "C3",
+          "summary": "Include losses from valves, bends and area changes using loss coefficients."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Extended Bernoulli with pumps and losses",
+          "aliases": [
+            "energy equation",
+            "head form"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse a system using the energy equation in head form including pump head, turbine head and losses."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Momentum equation for control volumes",
+          "aliases": [
+            "integral momentum balance"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse forces on bends, nozzles and jets by applying momentum balance to a control volume."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Drag and boundary layer concepts",
+          "aliases": [
+            "drag coefficient",
+            "skin friction"
+          ],
+          "bloom": "C3",
+          "summary": "Use drag coefficients and distinguish friction drag from pressure drag with the boundary layer idea."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "cmp-1"
+        ],
+        [
+          "adb-6",
+          "cmp-2"
+        ],
+        [
+          "adb-7",
+          "cmp-3"
+        ],
+        [
+          "adb-8",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ],
+        [
+          "cmp-5",
+          "cmp-2"
+        ],
+        [
+          "cmp-6",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-7"
+        ],
+        [
+          "cmp-3",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Head loss in a pipe is caused by the fluid losing mass or speed rather than by viscous dissipation.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "Reynolds number transition at about 2000 is a sharp universal threshold.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "The friction factor is a constant of the fluid independent of flow and roughness.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Dimensional analysis and similarity",
+          "aliases": [
+            "Buckingham Pi",
+            "model testing"
+          ],
+          "bloom": "C4",
+          "summary": "Derive dimensionless groups and judge whether model tests are dynamically similar to a prototype."
+        },
+        {
+          "id": "prf-2",
+          "name": "Pipe network analysis",
+          "aliases": [
+            "parallel and series pipes"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse systems of series and parallel pipes and match pump curves to system curves."
+        },
+        {
+          "id": "prf-3",
+          "name": "Compressible flow fundamentals",
+          "aliases": [
+            "Mach number",
+            "choked flow"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse flows where density changes matter using Mach number, stagnation properties and choking."
+        },
+        {
+          "id": "prf-4",
+          "name": "Boundary layer separation and stall",
+          "aliases": [
+            "flow separation",
+            "adverse pressure gradient"
+          ],
+          "bloom": "C4",
+          "summary": "Explain how adverse pressure gradients cause separation and its effect on drag and lift."
+        },
+        {
+          "id": "prf-5",
+          "name": "Lift and circulation",
+          "aliases": [
+            "airfoil lift",
+            "Kutta condition"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse lift on airfoils through circulation and pressure distribution, not simplistic explanations."
+        },
+        {
+          "id": "prf-6",
+          "name": "Differential continuity and momentum",
+          "aliases": [
+            "differential form",
+            "Euler equations"
+          ],
+          "bloom": "C4",
+          "summary": "Derive and interpret the differential forms of mass and momentum conservation."
+        },
+        {
+          "id": "prf-7",
+          "name": "Potential flow models",
+          "aliases": [
+            "irrotational flow",
+            "stream function"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate when irrotational ideal-flow solutions using stream function and velocity potential are valid approximations."
+        },
+        {
+          "id": "prf-8",
+          "name": "Turbulence modelling choices",
+          "aliases": [
+            "RANS",
+            "eddy viscosity"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the suitability of time-averaged turbulence models and wall treatments for a given problem."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-3",
+          "prf-1"
+        ],
+        [
+          "cmp-8",
+          "prf-1"
+        ],
+        [
+          "cmp-2",
+          "prf-2"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "adb-6",
+          "prf-3"
+        ],
+        [
+          "cmp-8",
+          "prf-4"
+        ],
+        [
+          "prf-4",
+          "prf-5"
+        ],
+        [
+          "cmp-7",
+          "prf-6"
+        ],
+        [
+          "prf-6",
+          "prf-7"
+        ],
+        [
+          "prf-5",
+          "prf-7"
+        ],
+        [
+          "cmp-3",
+          "prf-8"
+        ],
+        [
+          "prf-6",
+          "prf-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Lift is explained solely by air needing to travel faster over the longer upper surface to meet at the trailing edge.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "Matching geometry alone makes a scale model behave like the prototype.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Potential flow predicts drag on bodies accurately.",
+          "concepts": [
+            "prf-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Navier-Stokes equations",
+          "aliases": [
+            "NS equations",
+            "viscous momentum equations"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate the terms, assumptions and well-posedness issues of the incompressible and compressible Navier-Stokes equations."
+        },
+        {
+          "id": "exp-2",
+          "name": "Exact and similarity solutions",
+          "aliases": [
+            "Couette flow",
+            "Stokes problems"
+          ],
+          "bloom": "C5",
+          "summary": "Judge and construct analytical solutions by reducing the Navier-Stokes equations under symmetry assumptions."
+        },
+        {
+          "id": "exp-3",
+          "name": "Vorticity dynamics",
+          "aliases": [
+            "vortex stretching",
+            "vorticity transport"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate flows through vorticity transport, stretching and circulation conservation."
+        },
+        {
+          "id": "exp-4",
+          "name": "Turbulence energy cascade",
+          "aliases": [
+            "Kolmogorov scales",
+            "spectra"
+          ],
+          "bloom": "C5",
+          "summary": "Assess turbulence through energy transfer across scales and the resolution demands it implies."
+        },
+        {
+          "id": "exp-5",
+          "name": "Choosing simulation fidelity",
+          "aliases": [
+            "DNS LES RANS",
+            "CFD strategy"
+          ],
+          "bloom": "C6",
+          "summary": "Design a simulation strategy balancing DNS, LES and RANS with mesh, numerics and validation."
+        },
+        {
+          "id": "exp-6",
+          "name": "Stability and transition theory",
+          "aliases": [
+            "hydrodynamic stability",
+            "Orr-Sommerfeld"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how perturbations grow and lead to transition in shear flows and boundary layers."
+        },
+        {
+          "id": "exp-7",
+          "name": "Asymptotic and perturbation methods",
+          "aliases": [
+            "boundary layer theory",
+            "lubrication theory"
+          ],
+          "bloom": "C6",
+          "summary": "Construct reduced models such as boundary-layer, lubrication and Stokes approximations through scaling arguments."
+        },
+        {
+          "id": "exp-8",
+          "name": "Flow experiment and model design",
+          "aliases": [
+            "validation design",
+            "measurement uncertainty"
+          ],
+          "bloom": "C6",
+          "summary": "Design experiments or validation campaigns, choosing similarity, instrumentation and uncertainty treatment."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "prf-8",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "exp-4",
+          "exp-5"
+        ],
+        [
+          "prf-8",
+          "exp-5"
+        ],
+        [
+          "exp-1",
+          "exp-6"
+        ],
+        [
+          "prf-4",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "prf-1",
+          "exp-7"
+        ],
+        [
+          "prf-1",
+          "exp-8"
+        ],
+        [
+          "exp-5",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Turbulence is random noise unrelated to the deterministic Navier-Stokes equations.",
+          "concepts": [
+            "exp-1",
+            "exp-4"
+          ]
+        },
+        {
+          "text": "A finer mesh and more computing power always make a CFD result more accurate.",
+          "concepts": [
+            "exp-5"
+          ]
+        },
+        {
+          "text": "Vorticity is created within the bulk of an inviscid fluid by pressure forces.",
+          "concepts": [
+            "exp-3"
+          ]
+        }
+      ]
+    }
+  ]
+}

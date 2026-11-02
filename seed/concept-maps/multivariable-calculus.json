@@ -1,0 +1,695 @@
+{
+  "version": 1,
+  "topic": "multivariable-calculus",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": true,
+  "dependsOnTopics": [
+    "differential-calculus",
+    "integral-calculus"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Functions of several variables",
+          "aliases": [
+            "multivariable functions",
+            "scalar fields"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise and evaluate functions of two or three inputs and describe their domain and range."
+        },
+        {
+          "id": "nov-2",
+          "name": "Graphs and level curves",
+          "aliases": [
+            "contour plots",
+            "level sets"
+          ],
+          "bloom": "C2",
+          "summary": "Interpret a surface z=f(x,y) and its level curves to read how the function changes."
+        },
+        {
+          "id": "nov-3",
+          "name": "Vectors in 2D and 3D",
+          "aliases": [
+            "position vectors",
+            "vector components"
+          ],
+          "bloom": "C1",
+          "summary": "Represent points and displacements as vectors and compute their sums, scalar multiples and lengths."
+        },
+        {
+          "id": "nov-4",
+          "name": "Dot and cross products",
+          "aliases": [
+            "scalar product",
+            "vector product"
+          ],
+          "bloom": "C2",
+          "summary": "Explain what the dot product (angle, projection) and cross product (perpendicular vector, area) measure."
+        },
+        {
+          "id": "nov-5",
+          "name": "Partial derivative meaning",
+          "aliases": [
+            "partial rate of change"
+          ],
+          "bloom": "C2",
+          "summary": "Explain a partial derivative as the rate of change in one variable while the others are held fixed."
+        },
+        {
+          "id": "nov-6",
+          "name": "Lines and planes in space",
+          "aliases": [
+            "parametric lines",
+            "plane equations"
+          ],
+          "bloom": "C2",
+          "summary": "Describe lines and planes in 3D using parametric and normal-vector equations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-6"
+        ],
+        [
+          "nov-1",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A partial derivative with respect to x measures the total change of the function as all variables change.",
+          "concepts": [
+            "nov-5"
+          ]
+        },
+        {
+          "text": "The cross product of two vectors is a number, like the dot product.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "Level curves of a function are the same as its cross-sections by vertical planes.",
+          "concepts": [
+            "nov-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Computing partial derivatives",
+          "aliases": [
+            "partial differentiation",
+            "higher-order partials"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate first and second partial derivatives, including mixed partials, by treating other variables as constants."
+        },
+        {
+          "id": "adb-2",
+          "name": "Tangent planes and linearisation",
+          "aliases": [
+            "linear approximation"
+          ],
+          "bloom": "C3",
+          "summary": "Find the tangent plane to a surface at a point and use it to approximate function values."
+        },
+        {
+          "id": "adb-3",
+          "name": "Gradient vector",
+          "aliases": [
+            "grad f",
+            "nabla f"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the gradient and state that it points in the direction of steepest increase and is normal to level curves."
+        },
+        {
+          "id": "adb-4",
+          "name": "Directional derivatives",
+          "aliases": [
+            "rate of change along a vector"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the rate of change in any unit direction as the dot product of the gradient with that direction."
+        },
+        {
+          "id": "adb-6",
+          "name": "Iterated double integrals",
+          "aliases": [
+            "double integrals over rectangles",
+            "Fubini's theorem"
+          ],
+          "bloom": "C3",
+          "summary": "Evaluate double integrals over rectangles and simple regions as iterated single integrals."
+        },
+        {
+          "id": "adb-7",
+          "name": "Parametric curves in space",
+          "aliases": [
+            "vector-valued functions"
+          ],
+          "bloom": "C2",
+          "summary": "Describe curves by vector functions r(t) and compute their tangent vectors and arc length."
+        },
+        {
+          "id": "adb-5",
+          "name": "Multivariable chain rule",
+          "aliases": [
+            "chain rule for several variables"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the chain rule to composite functions using tree diagrams to find derivatives with respect to underlying variables."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-4",
+          "adb-4"
+        ],
+        [
+          "adb-1",
+          "adb-5"
+        ],
+        [
+          "adb-7",
+          "adb-5"
+        ],
+        [
+          "nov-3",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The gradient is a scalar giving the slope of the function.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "The directional derivative does not depend on whether the direction vector is a unit vector.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "A double integral can be computed with the order of integration swapped without changing the limits, even over non-rectangular regions.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Optimisation with second-derivative test",
+          "aliases": [
+            "critical points",
+            "Hessian test"
+          ],
+          "bloom": "C3",
+          "summary": "Find critical points and classify them as maxima, minima or saddles using the second-derivative test."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Lagrange multipliers",
+          "aliases": [
+            "constrained optimisation"
+          ],
+          "bloom": "C3",
+          "summary": "Solve constrained extremum problems by setting the gradient of the objective parallel to the gradient of the constraint."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Double integrals over general regions",
+          "aliases": [
+            "type I and II regions"
+          ],
+          "bloom": "C4",
+          "summary": "Set up limits for non-rectangular regions and choose or reverse the order of integration."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Polar coordinate integration",
+          "aliases": [
+            "polar double integrals"
+          ],
+          "bloom": "C3",
+          "summary": "Convert a double integral to polar form including the factor r in dA."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Triple integrals",
+          "aliases": [
+            "volume integrals"
+          ],
+          "bloom": "C3",
+          "summary": "Set up and evaluate triple integrals for volumes and masses over 3D regions."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Cylindrical and spherical coordinates",
+          "aliases": [
+            "cylindrical coordinates",
+            "spherical coordinates"
+          ],
+          "bloom": "C4",
+          "summary": "Choose a suitable coordinate system for a region and convert integrals with the correct volume element."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Vector fields and divergence-curl",
+          "aliases": [
+            "divergence",
+            "curl"
+          ],
+          "bloom": "C3",
+          "summary": "Sketch vector fields and compute their divergence and curl."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-3",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "adb-6",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-7"
+        ],
+        [
+          "adb-1",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A point where all partial derivatives are zero is always a local maximum or minimum.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Converting to polar coordinates only requires substituting x=r cosθ and y=r sinθ, with dA becoming dr dθ.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "In spherical coordinates the volume element is simply dρ dφ dθ.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Change of variables with Jacobians",
+          "aliases": [
+            "Jacobian determinant",
+            "substitution in multiple integrals"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse a transformation, compute its Jacobian determinant and use it to rewrite integrals over a simpler region."
+        },
+        {
+          "id": "prf-2",
+          "name": "Line integrals",
+          "aliases": [
+            "scalar and vector line integrals",
+            "work integrals"
+          ],
+          "bloom": "C4",
+          "summary": "Evaluate line integrals of scalar and vector fields along parametrised curves and interpret them as mass or work."
+        },
+        {
+          "id": "prf-3",
+          "name": "Conservative fields and potentials",
+          "aliases": [
+            "path independence",
+            "fundamental theorem for line integrals"
+          ],
+          "bloom": "C4",
+          "summary": "Test whether a field is conservative, find a potential function and use it to evaluate line integrals."
+        },
+        {
+          "id": "prf-4",
+          "name": "Green's theorem",
+          "aliases": [
+            "Green's theorem in the plane"
+          ],
+          "bloom": "C4",
+          "summary": "Relate a line integral around a closed plane curve to a double integral and apply it in either direction."
+        },
+        {
+          "id": "prf-5",
+          "name": "Parametric surfaces and surface area",
+          "aliases": [
+            "surface parametrisation"
+          ],
+          "bloom": "C4",
+          "summary": "Parametrise surfaces and compute normal vectors and area through the cross product of tangent vectors."
+        },
+        {
+          "id": "prf-6",
+          "name": "Surface integrals and flux",
+          "aliases": [
+            "flux integrals"
+          ],
+          "bloom": "C4",
+          "summary": "Evaluate scalar surface integrals and flux of a vector field through oriented surfaces."
+        },
+        {
+          "id": "prf-7",
+          "name": "Stokes' and divergence theorems",
+          "aliases": [
+            "Gauss's theorem",
+            "Kelvin-Stokes theorem"
+          ],
+          "bloom": "C5",
+          "summary": "Apply Stokes' and the divergence theorem, judging when each simplifies a computation and checking orientation and hypotheses."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "adb-7",
+          "prf-2"
+        ],
+        [
+          "cmp-7",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "prf-2",
+          "prf-4"
+        ],
+        [
+          "cmp-3",
+          "prf-4"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "adb-7",
+          "prf-5"
+        ],
+        [
+          "nov-4",
+          "prf-5"
+        ],
+        [
+          "prf-5",
+          "prf-6"
+        ],
+        [
+          "prf-4",
+          "prf-7"
+        ],
+        [
+          "prf-6",
+          "prf-7"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The Jacobian factor is just the product of the partial derivatives, with no determinant needed.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "A field is conservative whenever the line integral is zero around one particular closed curve.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Green's theorem applies to any closed curve regardless of orientation or singularities inside the region.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Unifying integral theorems",
+          "aliases": [
+            "generalised Stokes theorem",
+            "differential forms view"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how the fundamental theorem, Green's, Stokes' and divergence theorems are instances of one boundary-integral principle."
+        },
+        {
+          "id": "exp-2",
+          "name": "Domain topology and closed versus exact fields",
+          "aliases": [
+            "simply connected domains",
+            "closed versus exact"
+          ],
+          "bloom": "C5",
+          "summary": "Judge how holes in a domain make curl-free fields non-conservative, as with the circulation of the angular field around the origin."
+        },
+        {
+          "id": "exp-3",
+          "name": "Curvilinear coordinates and scale factors",
+          "aliases": [
+            "orthogonal coordinates",
+            "general gradient divergence curl"
+          ],
+          "bloom": "C6",
+          "summary": "Derive gradient, divergence, curl and Laplacian in arbitrary orthogonal coordinates using scale factors."
+        },
+        {
+          "id": "exp-4",
+          "name": "Conservation laws from theorems",
+          "aliases": [
+            "continuity equation",
+            "Gauss's law derivation"
+          ],
+          "bloom": "C6",
+          "summary": "Derive integral and differential forms of physical laws such as continuity, Gauss's and Faraday's laws from the integral theorems."
+        },
+        {
+          "id": "exp-5",
+          "name": "Constrained optimisation analysis",
+          "aliases": [
+            "bordered Hessian",
+            "KKT intuition"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate second-order conditions and inequality constraints for multivariable optimisation and interpret multipliers as sensitivities."
+        },
+        {
+          "id": "exp-6",
+          "name": "Validity and regularity conditions",
+          "aliases": [
+            "Fubini conditions",
+            "smoothness hypotheses"
+          ],
+          "bloom": "C5",
+          "summary": "Critique when interchanging integrals, differentiating under the integral, or applying theorems fails due to singularities or lack of smoothness."
+        },
+        {
+          "id": "exp-7",
+          "name": "Modelling with fields and integrals",
+          "aliases": [
+            "applied vector calculus modelling"
+          ],
+          "bloom": "C6",
+          "summary": "Construct a multivariable model, choose coordinates and theorems, and design an efficient solution for a physical problem."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "prf-4",
+          "exp-2"
+        ],
+        [
+          "prf-1",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "exp-1",
+          "exp-4"
+        ],
+        [
+          "cmp-2",
+          "exp-5"
+        ],
+        [
+          "cmp-1",
+          "exp-5"
+        ],
+        [
+          "prf-1",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-7"
+        ],
+        [
+          "exp-4",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Zero curl on a domain is always enough for path independence, whatever the domain's shape.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "The Laplacian and divergence in curvilinear coordinates are found by just replacing x,y,z with the new coordinates in the Cartesian formulas.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Iterated integrals can always be swapped in order if the integrand is defined everywhere.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

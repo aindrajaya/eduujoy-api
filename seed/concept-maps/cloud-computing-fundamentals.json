@@ -1,0 +1,674 @@
+{
+  "version": 1,
+  "topic": "cloud-computing-fundamentals",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "computer-networking"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-6",
+          "name": "Data centres and servers",
+          "aliases": [
+            "provider data centers",
+            "physical infrastructure"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that cloud services run on providers' physical servers, storage and networks housed in large data centres."
+        },
+        {
+          "id": "nov-1",
+          "name": "Cloud computing definition",
+          "aliases": [
+            "what is the cloud",
+            "NIST cloud definition"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that cloud computing delivers shared computing resources over a network on demand, rented rather than owned."
+        },
+        {
+          "id": "nov-2",
+          "name": "Essential cloud characteristics",
+          "aliases": [
+            "NIST five characteristics",
+            "cloud traits"
+          ],
+          "bloom": "C2",
+          "summary": "Explain on-demand self-service, broad network access, resource pooling, rapid elasticity and measured service."
+        },
+        {
+          "id": "nov-3",
+          "name": "IaaS, PaaS, SaaS models",
+          "aliases": [
+            "service models",
+            "XaaS layers"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish infrastructure, platform and software as a service by what the provider supplies and what the customer manages."
+        },
+        {
+          "id": "nov-4",
+          "name": "Deployment models",
+          "aliases": [
+            "public private hybrid cloud",
+            "cloud deployment types"
+          ],
+          "bloom": "C2",
+          "summary": "Describe public, private, hybrid and multi-cloud deployments and who owns and uses each."
+        },
+        {
+          "id": "nov-5",
+          "name": "Pay-as-you-go pricing",
+          "aliases": [
+            "utility pricing",
+            "consumption-based billing",
+            "OpEx model"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that customers pay for metered usage instead of buying hardware upfront, shifting capital expense to operating expense."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-6",
+          "nov-1"
+        ],
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The cloud is a mysterious place with no physical hardware behind it.",
+          "concepts": [
+            "nov-1",
+            "nov-6"
+          ]
+        },
+        {
+          "text": "Cloud computing is just storing files online.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Cloud is always cheaper than running your own servers.",
+          "concepts": [
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Virtualization and hypervisors",
+          "aliases": [
+            "virtual machines",
+            "VM hypervisor",
+            "type 1 and type 2 hypervisors"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a hypervisor shares one physical host among isolated virtual machines, and tell type 1 from type 2."
+        },
+        {
+          "id": "adb-2",
+          "name": "Regions and availability zones",
+          "aliases": [
+            "AZ",
+            "geographic regions",
+            "fault domains"
+          ],
+          "bloom": "C3",
+          "summary": "Choose regions and zones for a simple workload, knowing a region contains multiple isolated zones."
+        },
+        {
+          "id": "adb-3",
+          "name": "Shared responsibility model",
+          "aliases": [
+            "shared security model",
+            "security of vs in the cloud"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the split of security duties between provider and customer for IaaS, PaaS and SaaS."
+        },
+        {
+          "id": "adb-4",
+          "name": "Elasticity versus scalability",
+          "aliases": [
+            "scaling up and out",
+            "vertical and horizontal scaling"
+          ],
+          "bloom": "C3",
+          "summary": "Distinguish scalability as capacity to grow from elasticity as automatic matching of capacity to demand, and apply vertical and horizontal scaling."
+        },
+        {
+          "id": "adb-5",
+          "name": "Matching service model to need",
+          "aliases": [
+            "choosing IaaS PaaS SaaS",
+            "service model selection"
+          ],
+          "bloom": "C3",
+          "summary": "Pick IaaS, PaaS or SaaS for a simple scenario based on required control and management effort."
+        },
+        {
+          "id": "adb-6",
+          "name": "Resource pooling and multi-tenancy",
+          "aliases": [
+            "multitenancy",
+            "shared infrastructure"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how many customers share pooled hardware while logically isolated from each other."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-6"
+        ],
+        [
+          "nov-2",
+          "adb-4"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "adb-1",
+          "adb-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The provider is responsible for securing everything you put in the cloud.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Elasticity and scalability mean the same thing.",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "A virtual machine is a separate physical computer.",
+          "concepts": [
+            "adb-1"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-2",
+          "name": "Cloud cost analysis",
+          "aliases": [
+            "TCO comparison",
+            "CapEx vs OpEx analysis",
+            "cost modelling"
+          ],
+          "bloom": "C4",
+          "summary": "Compare cloud and on-premises total cost of ownership, including usage patterns, data transfer and idle resources."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Pricing options trade-offs",
+          "aliases": [
+            "on-demand reserved spot pricing",
+            "committed use discounts"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse when on-demand, reserved or committed, and interruptible spot capacity fit different workloads."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Hybrid and multi-cloud rationale",
+          "aliases": [
+            "hybrid cloud drivers",
+            "multi-cloud trade-offs"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the drivers and costs of hybrid and multi-cloud, such as compliance, latency, resilience and added complexity."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Auto scaling policies",
+          "aliases": [
+            "autoscaling",
+            "scaling triggers",
+            "load balancing"
+          ],
+          "bloom": "C3",
+          "summary": "Configure scaling rules and load balancing that add or remove instances based on metrics."
+        },
+        {
+          "id": "cmp-1",
+          "name": "High availability across zones",
+          "aliases": [
+            "multi-AZ design",
+            "redundancy design",
+            "fault tolerance"
+          ],
+          "bloom": "C3",
+          "summary": "Design a workload that survives a zone failure by distributing redundant components across availability zones."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Data residency and compliance",
+          "aliases": [
+            "data sovereignty",
+            "regulatory regions"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how regulations and data location constrain region choice and service use."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Responsibility boundaries by service",
+          "aliases": [
+            "shared responsibility analysis",
+            "security ownership mapping"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse who owns patching, identity, data and configuration for a given service and find gaps."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-2",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-5"
+        ],
+        [
+          "nov-5",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "nov-4",
+          "cmp-4"
+        ],
+        [
+          "adb-2",
+          "cmp-6"
+        ],
+        [
+          "adb-3",
+          "cmp-7"
+        ],
+        [
+          "cmp-5",
+          "cmp-1"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Running in the cloud automatically makes an application highly available.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "Multi-cloud always improves resilience and lowers cost.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Autoscaling removes the need for capacity planning or cost monitoring.",
+          "concepts": [
+            "cmp-5",
+            "cmp-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Workload placement evaluation",
+          "aliases": [
+            "cloud suitability assessment",
+            "migration fit analysis"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate which workloads belong in public, private, hybrid or on-premises environments against technical and business criteria."
+        },
+        {
+          "id": "prf-2",
+          "name": "Migration strategy selection",
+          "aliases": [
+            "6 Rs",
+            "rehost replatform refactor"
+          ],
+          "bloom": "C5",
+          "summary": "Judge between rehost, replatform, refactor, replace and retire for an application, weighing effort against benefit."
+        },
+        {
+          "id": "prf-3",
+          "name": "Resilience and disaster recovery",
+          "aliases": [
+            "RTO RPO",
+            "DR strategies",
+            "backup and failover"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse recovery objectives and compare backup, pilot light, warm standby and active-active strategies across regions."
+        },
+        {
+          "id": "prf-4",
+          "name": "Vendor lock-in assessment",
+          "aliases": [
+            "portability analysis",
+            "lock-in risk"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate lock-in risk from proprietary services against portability costs and the benefits of managed services."
+        },
+        {
+          "id": "prf-5",
+          "name": "Cloud financial governance",
+          "aliases": [
+            "FinOps",
+            "cost allocation",
+            "tagging and budgets"
+          ],
+          "bloom": "C5",
+          "summary": "Assess cost controls such as tagging, budgets, showback and rightsizing for their effect on spending accountability."
+        },
+        {
+          "id": "prf-6",
+          "name": "Performance and latency trade-offs",
+          "aliases": [
+            "geographic latency",
+            "data gravity",
+            "egress costs"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how region distance, data gravity and egress charges shape architecture and performance."
+        },
+        {
+          "id": "prf-7",
+          "name": "Provider and service evaluation",
+          "aliases": [
+            "SLA analysis",
+            "provider selection criteria"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate providers and services by SLAs, compliance attestations, support and service fit."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-2",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "cmp-1",
+          "prf-3"
+        ],
+        [
+          "cmp-4",
+          "prf-4"
+        ],
+        [
+          "cmp-3",
+          "prf-5"
+        ],
+        [
+          "cmp-6",
+          "prf-6"
+        ],
+        [
+          "prf-4",
+          "prf-7"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Lifting and shifting an application to the cloud delivers cloud benefits unchanged.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "A provider's SLA guarantees your application will never go down.",
+          "concepts": [
+            "prf-7",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Avoiding lock-in is always worth the cost of using only generic services.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Cloud strategy design",
+          "aliases": [
+            "enterprise cloud strategy",
+            "cloud operating model"
+          ],
+          "bloom": "C6",
+          "summary": "Create an organisation-wide cloud strategy aligning deployment models, service models, governance and business goals."
+        },
+        {
+          "id": "exp-2",
+          "name": "Multi-region resilient architecture",
+          "aliases": [
+            "global architecture design",
+            "active-active design"
+          ],
+          "bloom": "C6",
+          "summary": "Design architectures spanning regions that meet stated availability, latency, consistency and cost targets."
+        },
+        {
+          "id": "exp-3",
+          "name": "Landing zone and governance framework",
+          "aliases": [
+            "cloud landing zone",
+            "guardrails",
+            "policy as code"
+          ],
+          "bloom": "C6",
+          "summary": "Create a multi-account governance framework with guardrails, identity boundaries and standard controls."
+        },
+        {
+          "id": "exp-4",
+          "name": "Cloud risk and compliance critique",
+          "aliases": [
+            "risk assessment",
+            "concentration risk",
+            "audit evaluation"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate risks such as provider concentration, misconfiguration and jurisdictional exposure, and justify mitigations."
+        },
+        {
+          "id": "exp-5",
+          "name": "Economic modelling of cloud",
+          "aliases": [
+            "unit economics",
+            "cloud business case"
+          ],
+          "bloom": "C5",
+          "summary": "Critique and build business cases and unit-cost models that test when cloud, repatriation or hybrid is justified."
+        },
+        {
+          "id": "exp-6",
+          "name": "Sustainability in cloud design",
+          "aliases": [
+            "green cloud",
+            "carbon-aware computing"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate energy efficiency and carbon impact of placement, utilisation and architecture choices."
+        },
+        {
+          "id": "exp-7",
+          "name": "Cloud portfolio evolution",
+          "aliases": [
+            "cloud maturity",
+            "technology radar",
+            "exit strategy"
+          ],
+          "bloom": "C6",
+          "summary": "Create a roadmap and exit strategy that adapt the cloud portfolio as services, costs and regulations change."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-1",
+          "exp-1"
+        ],
+        [
+          "prf-5",
+          "exp-1"
+        ],
+        [
+          "prf-3",
+          "exp-2"
+        ],
+        [
+          "prf-6",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "exp-3",
+          "exp-4"
+        ],
+        [
+          "prf-5",
+          "exp-5"
+        ],
+        [
+          "prf-2",
+          "exp-5"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "exp-1",
+          "exp-7"
+        ],
+        [
+          "prf-4",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A single cloud strategy with one standard architecture fits every workload in an organisation.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Moving to the cloud transfers accountability for compliance and risk to the provider.",
+          "concepts": [
+            "exp-4",
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Cloud is inherently greener, so sustainability needs no design attention.",
+          "concepts": [
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

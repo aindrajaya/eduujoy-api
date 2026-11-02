@@ -1,0 +1,665 @@
+{
+  "version": 1,
+  "topic": "algorithms",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals",
+    "data-structures"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Algorithm as step-by-step procedure",
+          "aliases": [
+            "algorithm definition"
+          ],
+          "bloom": "C1",
+          "summary": "State that an algorithm is a finite, unambiguous sequence of steps that transforms input into output and solves a defined problem."
+        },
+        {
+          "id": "nov-2",
+          "name": "Linear search",
+          "aliases": [
+            "sequential search"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how checking each element in turn finds a target and why it may need to inspect every element."
+        },
+        {
+          "id": "nov-3",
+          "name": "Binary search on sorted data",
+          "aliases": [
+            "half-interval search"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how repeatedly halving a sorted range locates a target and why sortedness is required."
+        },
+        {
+          "id": "nov-4",
+          "name": "Counting steps as input grows",
+          "aliases": [
+            "operation counting",
+            "growth of work"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how the number of basic operations grows with input size rather than measuring seconds on one machine."
+        },
+        {
+          "id": "nov-5",
+          "name": "Simple sorting by comparison",
+          "aliases": [
+            "selection sort",
+            "bubble sort",
+            "insertion sort"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how a simple sort such as selection or insertion sort orders a list by comparing and moving elements."
+        },
+        {
+          "id": "nov-6",
+          "name": "Recursion as self-reference",
+          "aliases": [
+            "recursive function"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that a recursive function solves a problem by calling itself on a smaller instance until a base case stops it."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-1",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-1",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Binary search works on any list as long as you pick the middle element.",
+          "concepts": [
+            "nov-3"
+          ]
+        },
+        {
+          "text": "A faster-running program on my computer always means a better algorithm.",
+          "concepts": [
+            "nov-4"
+          ]
+        },
+        {
+          "text": "A recursive function does not need a base case because it stops when the work is done.",
+          "concepts": [
+            "nov-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Big O notation for growth rates",
+          "aliases": [
+            "asymptotic upper bound",
+            "O notation"
+          ],
+          "bloom": "C3",
+          "summary": "Express the running time of simple loops and code as O(1), O(log n), O(n), O(n log n) or O(n²) by dropping constants and lower-order terms."
+        },
+        {
+          "id": "adb-2",
+          "name": "Tracing recursive calls",
+          "aliases": [
+            "call stack tracing",
+            "recursion trace"
+          ],
+          "bloom": "C3",
+          "summary": "Trace recursive calls and returns, including the call stack, for functions like factorial and Fibonacci."
+        },
+        {
+          "id": "adb-3",
+          "name": "Mergesort",
+          "aliases": [
+            "merge sort"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the split, recursively sort and merge steps to sort a list in O(n log n) time."
+        },
+        {
+          "id": "adb-4",
+          "name": "Quicksort and partitioning",
+          "aliases": [
+            "quick sort",
+            "pivot partition"
+          ],
+          "bloom": "C3",
+          "summary": "Apply pivot selection and partitioning to sort a list recursively and recognise its typical and worst-case behaviour."
+        },
+        {
+          "id": "adb-5",
+          "name": "Iterative binary search implementation",
+          "aliases": [
+            "binary search coding",
+            "loop invariants for search"
+          ],
+          "bloom": "C3",
+          "summary": "Implement binary search correctly with proper bounds and midpoint updates, avoiding off-by-one errors."
+        },
+        {
+          "id": "adb-6",
+          "name": "Breadth-first and depth-first traversal",
+          "aliases": [
+            "BFS",
+            "DFS",
+            "graph traversal"
+          ],
+          "bloom": "C3",
+          "summary": "Apply BFS with a queue and DFS with a stack or recursion to visit all nodes of a graph or tree, tracking visited nodes."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-4",
+          "adb-1"
+        ],
+        [
+          "nov-6",
+          "adb-2"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-4"
+        ],
+        [
+          "nov-3",
+          "adb-5"
+        ],
+        [
+          "adb-2",
+          "adb-6"
+        ],
+        [
+          "nov-5",
+          "adb-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Big O gives the exact running time, so an O(n) algorithm is always faster than an O(n²) one.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Quicksort is always O(n log n).",
+          "concepts": [
+            "adb-4"
+          ]
+        },
+        {
+          "text": "Graph traversal does not need a visited set because graphs have no repeated nodes.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Recurrence relations and Master theorem",
+          "aliases": [
+            "solving recurrences",
+            "T(n) analysis"
+          ],
+          "bloom": "C4",
+          "summary": "Write the recurrence for a divide-and-conquer algorithm and solve it to derive its running time."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Best, worst and average case",
+          "aliases": [
+            "case analysis",
+            "expected running time"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse how input shape changes running time and distinguish worst-case from average or expected behaviour."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Divide and conquer design",
+          "aliases": [
+            "divide-and-conquer paradigm"
+          ],
+          "bloom": "C3",
+          "summary": "Decompose a problem into independent subproblems, solve them recursively and combine results, as in closest pair or maximum subarray."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Greedy choice strategy",
+          "aliases": [
+            "greedy algorithms",
+            "interval scheduling"
+          ],
+          "bloom": "C3",
+          "summary": "Build a solution by repeatedly taking the locally best choice, as in interval scheduling or Huffman coding."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Dynamic programming with overlapping subproblems",
+          "aliases": [
+            "DP",
+            "memoization and tabulation"
+          ],
+          "bloom": "C3",
+          "summary": "Solve problems like Fibonacci, knapsack and longest common subsequence by defining states and reusing stored subresults via memoization or tabulation."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Graph representation and traversal cost",
+          "aliases": [
+            "adjacency list vs matrix",
+            "O(V+E)"
+          ],
+          "bloom": "C4",
+          "summary": "Compare adjacency lists and matrices and derive the O(V+E) cost of BFS and DFS."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Dijkstra's shortest path algorithm",
+          "aliases": [
+            "Dijkstra",
+            "single-source shortest paths"
+          ],
+          "bloom": "C3",
+          "summary": "Compute shortest paths from a source in a graph with non-negative weights using a priority queue and edge relaxation."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "adb-1",
+          "cmp-2"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "cmp-1",
+          "cmp-3"
+        ],
+        [
+          "adb-3",
+          "cmp-3"
+        ],
+        [
+          "adb-6",
+          "cmp-7"
+        ],
+        [
+          "adb-6",
+          "cmp-6"
+        ],
+        [
+          "cmp-7",
+          "cmp-6"
+        ],
+        [
+          "adb-2",
+          "cmp-5"
+        ],
+        [
+          "cmp-3",
+          "cmp-5"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Dynamic programming is just recursion with a different name and gives no speedup.",
+          "concepts": [
+            "cmp-5"
+          ]
+        },
+        {
+          "text": "A greedy choice that looks best locally always yields the optimal solution.",
+          "concepts": [
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Dijkstra's algorithm works correctly with negative edge weights.",
+          "concepts": [
+            "cmp-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Proving greedy correctness",
+          "aliases": [
+            "exchange argument",
+            "greedy stays ahead"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate whether a greedy strategy is optimal using exchange arguments or greedy-stays-ahead proofs and find counterexamples when it is not."
+        },
+        {
+          "id": "prf-2",
+          "name": "Optimal substructure and DP formulation",
+          "aliases": [
+            "state design",
+            "DP recurrence"
+          ],
+          "bloom": "C4",
+          "summary": "Identify optimal substructure, define state and transitions, and choose an evaluation order including space optimization."
+        },
+        {
+          "id": "prf-3",
+          "name": "Amortized analysis",
+          "aliases": [
+            "amortised cost",
+            "aggregate and potential method"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the average cost per operation over a sequence, as with dynamic array doubling."
+        },
+        {
+          "id": "prf-4",
+          "name": "Shortest paths with negative weights",
+          "aliases": [
+            "Bellman-Ford",
+            "Floyd-Warshall",
+            "DAG shortest paths"
+          ],
+          "bloom": "C4",
+          "summary": "Choose among Dijkstra, Bellman-Ford, DAG relaxation and Floyd-Warshall based on weights, cycles and query type."
+        },
+        {
+          "id": "prf-5",
+          "name": "Sorting lower bound",
+          "aliases": [
+            "comparison sort bound",
+            "Omega(n log n)"
+          ],
+          "bloom": "C4",
+          "summary": "Explain the decision-tree argument that comparison sorts need Ω(n log n) and when linear-time non-comparison sorts apply."
+        },
+        {
+          "id": "prf-6",
+          "name": "Randomized quicksort analysis",
+          "aliases": [
+            "expected O(n log n)",
+            "random pivot"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how random pivot choice yields expected O(n log n) and compare pivot strategies."
+        },
+        {
+          "id": "prf-7",
+          "name": "Graph algorithm selection",
+          "aliases": [
+            "topological sort",
+            "minimum spanning tree",
+            "algorithm choice"
+          ],
+          "bloom": "C5",
+          "summary": "Select and justify algorithms such as topological sort, Kruskal, Prim, or BFS versus Dijkstra for a given graph problem."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-4",
+          "prf-1"
+        ],
+        [
+          "cmp-5",
+          "prf-2"
+        ],
+        [
+          "cmp-2",
+          "prf-3"
+        ],
+        [
+          "cmp-6",
+          "prf-4"
+        ],
+        [
+          "cmp-2",
+          "prf-5"
+        ],
+        [
+          "adb-4",
+          "prf-6"
+        ],
+        [
+          "cmp-2",
+          "prf-6"
+        ],
+        [
+          "cmp-7",
+          "prf-7"
+        ],
+        [
+          "prf-4",
+          "prf-7"
+        ],
+        [
+          "prf-1",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Amortized cost is the same as average-case cost over random inputs.",
+          "concepts": [
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Any sorting algorithm can beat O(n log n) with clever comparisons.",
+          "concepts": [
+            "prf-5"
+          ]
+        },
+        {
+          "text": "If a problem has optimal substructure, greedy will solve it.",
+          "concepts": [
+            "prf-1",
+            "prf-2"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "NP-completeness and reductions",
+          "aliases": [
+            "P vs NP",
+            "polynomial-time reduction"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate problem hardness by reducing known NP-complete problems to it and decide when exact algorithms are infeasible."
+        },
+        {
+          "id": "exp-2",
+          "name": "Approximation algorithms",
+          "aliases": [
+            "approximation ratio",
+            "heuristics with guarantees"
+          ],
+          "bloom": "C5",
+          "summary": "Judge approximation algorithms by their provable ratio, as for vertex cover or metric TSP."
+        },
+        {
+          "id": "exp-3",
+          "name": "Designing novel algorithms from structure",
+          "aliases": [
+            "algorithm design synthesis",
+            "problem reformulation"
+          ],
+          "bloom": "C6",
+          "summary": "Create new algorithms by modelling a problem as a graph, DP or divide-and-conquer structure and proving correctness and complexity."
+        },
+        {
+          "id": "exp-4",
+          "name": "Cache and real-world performance",
+          "aliases": [
+            "constant factors",
+            "memory hierarchy",
+            "external memory"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how constants, cache locality and hybrid designs like introsort or Timsort make asymptotically equal algorithms differ in practice."
+        },
+        {
+          "id": "exp-5",
+          "name": "Advanced analysis techniques",
+          "aliases": [
+            "potential method",
+            "probabilistic analysis",
+            "Akra-Bazzi"
+          ],
+          "bloom": "C5",
+          "summary": "Apply and critique advanced tools such as potential functions, probabilistic analysis and smoothed analysis to bound running time."
+        },
+        {
+          "id": "exp-6",
+          "name": "Network flow and matching",
+          "aliases": [
+            "max-flow min-cut",
+            "Ford-Fulkerson",
+            "bipartite matching"
+          ],
+          "bloom": "C6",
+          "summary": "Create reductions of problems like assignment and cuts to maximum flow and analyse the resulting algorithms."
+        },
+        {
+          "id": "exp-7",
+          "name": "Randomized and parallel algorithm design",
+          "aliases": [
+            "Las Vegas and Monte Carlo",
+            "parallel work and span"
+          ],
+          "bloom": "C6",
+          "summary": "Design randomized or parallel algorithms, specifying error probability or work and span tradeoffs."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-7",
+          "exp-3"
+        ],
+        [
+          "prf-5",
+          "exp-4"
+        ],
+        [
+          "prf-3",
+          "exp-5"
+        ],
+        [
+          "prf-7",
+          "exp-6"
+        ],
+        [
+          "prf-6",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "NP-complete means a problem cannot be solved, so it is pointless to try.",
+          "concepts": [
+            "exp-1",
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Asymptotically faster algorithms always win in practice.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Randomized algorithms are unreliable because they may return wrong answers.",
+          "concepts": [
+            "exp-7"
+          ]
+        }
+      ]
+    }
+  ]
+}

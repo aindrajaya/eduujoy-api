@@ -1,0 +1,708 @@
+{
+  "version": 1,
+  "topic": "quantum-mechanics",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": true,
+  "dependsOnTopics": [
+    "classical-mechanics",
+    "linear-algebra",
+    "differential-equations",
+    "probability"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-7",
+          "name": "Photoelectric effect and photon energy",
+          "aliases": [
+            "photons",
+            "E = hf",
+            "Planck constant"
+          ],
+          "bloom": "C1",
+          "summary": "Recall that light comes in photons of energy E = hf, which explains the photoelectric threshold, and that Planck's constant sets the scale of quantum effects."
+        },
+        {
+          "id": "nov-1",
+          "name": "Wave-particle duality",
+          "aliases": [
+            "matter waves",
+            "de Broglie hypothesis"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that light and matter show both wave-like and particle-like behaviour depending on the experiment, such as the double-slit experiment."
+        },
+        {
+          "id": "nov-2",
+          "name": "Energy quantization",
+          "aliases": [
+            "discrete energy levels",
+            "quanta"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that bound systems have only certain allowed energies and that energy exchange occurs in discrete amounts like E = hf."
+        },
+        {
+          "id": "nov-3",
+          "name": "Wavefunction and probability",
+          "aliases": [
+            "Born rule",
+            "probability amplitude"
+          ],
+          "bloom": "C2",
+          "summary": "Understand that the wavefunction encodes probability amplitudes and that |ψ|² gives probability density for finding a particle."
+        },
+        {
+          "id": "nov-4",
+          "name": "Superposition of states",
+          "aliases": [
+            "linear combination of states"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a system as a combination of several possible states until measured."
+        },
+        {
+          "id": "nov-5",
+          "name": "Measurement and collapse",
+          "aliases": [
+            "wavefunction collapse",
+            "state reduction"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that measurement yields one definite outcome with probabilities given by the state, and changes the state afterwards."
+        },
+        {
+          "id": "nov-6",
+          "name": "Heisenberg uncertainty principle",
+          "aliases": [
+            "uncertainty relation"
+          ],
+          "bloom": "C2",
+          "summary": "State that position and momentum cannot both be sharply defined, with Δx Δp ≥ ħ/2, as a property of quantum states."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-7",
+          "nov-2"
+        ],
+        [
+          "nov-7",
+          "nov-1"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "An electron is a tiny ball orbiting the nucleus like a planet.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Uncertainty arises only because measuring instruments disturb the system clumsily.",
+          "concepts": [
+            "nov-6"
+          ]
+        },
+        {
+          "text": "A superposed particle is really in one definite state that we just do not know.",
+          "concepts": [
+            "nov-4",
+            "nov-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-2",
+          "name": "Normalization of wavefunctions",
+          "aliases": [
+            "normalising ψ"
+          ],
+          "bloom": "C3",
+          "summary": "Compute the constant that makes the integral of |ψ|² equal one and use it to get probabilities."
+        },
+        {
+          "id": "adb-4",
+          "name": "Boundary conditions and quantization",
+          "aliases": [
+            "continuity of ψ",
+            "matching conditions"
+          ],
+          "bloom": "C3",
+          "summary": "Apply continuity and vanishing conditions on ψ to show how allowed energies arise."
+        },
+        {
+          "id": "adb-6",
+          "name": "Position and momentum operators",
+          "aliases": [
+            "x̂ and p̂",
+            "differential operators"
+          ],
+          "bloom": "C2",
+          "summary": "Represent position as multiplication and momentum as −iħ d/dx and use them to build observables."
+        },
+        {
+          "id": "adb-1",
+          "name": "Time-independent Schrödinger equation",
+          "aliases": [
+            "TISE",
+            "energy eigenvalue equation"
+          ],
+          "bloom": "C3",
+          "summary": "Write and use Hψ = Eψ for a given potential to find stationary states and energies."
+        },
+        {
+          "id": "adb-3",
+          "name": "Particle in an infinite well",
+          "aliases": [
+            "particle in a box"
+          ],
+          "bloom": "C3",
+          "summary": "Solve for the sinusoidal states and energies Eₙ ∝ n²/L² and compute probabilities in regions of the box."
+        },
+        {
+          "id": "adb-5",
+          "name": "Expectation values",
+          "aliases": [
+            "mean value of observable",
+            "⟨x⟩"
+          ],
+          "bloom": "C3",
+          "summary": "Calculate ⟨x⟩ and ⟨p⟩ by integrating ψ* with the relevant operator."
+        },
+        {
+          "id": "adb-7",
+          "name": "Free particle and plane waves",
+          "aliases": [
+            "de Broglie plane wave",
+            "e^{ikx}"
+          ],
+          "bloom": "C3",
+          "summary": "Describe free-particle solutions e^{i(kx−ωt)} with p = ħk and E = ħ²k²/2m."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-6",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-3"
+        ],
+        [
+          "adb-4",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-3"
+        ],
+        [
+          "adb-2",
+          "adb-5"
+        ],
+        [
+          "adb-6",
+          "adb-5"
+        ],
+        [
+          "adb-3",
+          "adb-5"
+        ],
+        [
+          "adb-6",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "The wavefunction ψ itself is the probability of finding the particle at x.",
+          "concepts": [
+            "adb-2",
+            "adb-5"
+          ]
+        },
+        {
+          "text": "The particle in a box has a zero-energy lowest state.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "The particle in a box spends equal time everywhere in every state.",
+          "concepts": [
+            "adb-3",
+            "adb-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Hermitian operators and eigenvalues",
+          "aliases": [
+            "observables as operators",
+            "eigenvalue problem"
+          ],
+          "bloom": "C3",
+          "summary": "Show that observables are Hermitian operators whose eigenvalues are real measurement outcomes and eigenfunctions are orthogonal."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Expansion in eigenstates",
+          "aliases": [
+            "completeness",
+            "Fourier coefficients"
+          ],
+          "bloom": "C3",
+          "summary": "Expand a state in an orthonormal eigenbasis and read off outcome probabilities as |cₙ|²."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Time evolution of superpositions",
+          "aliases": [
+            "time-dependent Schrödinger equation",
+            "TDSE"
+          ],
+          "bloom": "C3",
+          "summary": "Solve iħ∂ψ/∂t = Hψ by evolving a superposition of stationary states with phase factors e^{-iEₙt/ħ} and identify which quantities change in time."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Dirac bra-ket notation",
+          "aliases": [
+            "bras and kets",
+            "inner product notation"
+          ],
+          "bloom": "C3",
+          "summary": "Express states, inner products, projectors and operators in bra-ket form and translate to wavefunctions."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Finite wells and barrier tunneling",
+          "aliases": [
+            "quantum tunneling",
+            "evanescent waves"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse the classically forbidden decay of ψ and how transmission depends on barrier width and height."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Commutators and compatibility",
+          "aliases": [
+            "[A,B]",
+            "simultaneous eigenstates"
+          ],
+          "bloom": "C4",
+          "summary": "Use commutators to decide whether observables can be sharply defined together and to derive uncertainty relations."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Quantum harmonic oscillator",
+          "aliases": [
+            "QHO",
+            "ladder operators"
+          ],
+          "bloom": "C4",
+          "summary": "Derive the evenly spaced levels (n+½)ħω and analyse states using ladder operators and Hermite-Gaussian forms."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Spin-1/2 and Pauli matrices",
+          "aliases": [
+            "spin states",
+            "two-level system"
+          ],
+          "bloom": "C3",
+          "summary": "Represent spin-½ states as two-component spinors and compute measurement outcomes with Pauli matrices."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-1",
+          "cmp-4"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "cmp-7",
+          "cmp-5"
+        ],
+        [
+          "adb-1",
+          "cmp-5"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "cmp-4",
+          "cmp-8"
+        ],
+        [
+          "cmp-7",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A particle with energy below the barrier height cannot appear on the other side because it lacks the energy.",
+          "concepts": [
+            "cmp-6"
+          ]
+        },
+        {
+          "text": "A superposition of energy eigenstates has a definite energy that changes over time.",
+          "concepts": [
+            "cmp-2",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Spin is the literal rotation of a small spinning ball.",
+          "concepts": [
+            "cmp-8"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-2",
+          "name": "Angular momentum algebra",
+          "aliases": [
+            "L² and Lz",
+            "ladder operators for angular momentum"
+          ],
+          "bloom": "C4",
+          "summary": "Use commutation relations to derive angular momentum eigenvalues and the allowed l and m values."
+        },
+        {
+          "id": "prf-1",
+          "name": "Hydrogen atom solutions",
+          "aliases": [
+            "hydrogen orbitals",
+            "radial and angular solutions"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse separation of variables in a Coulomb potential, the quantum numbers n, l, m and the resulting orbitals and energies."
+        },
+        {
+          "id": "prf-3",
+          "name": "Angular momentum addition",
+          "aliases": [
+            "spin-orbit coupling",
+            "Clebsch-Gordan coefficients"
+          ],
+          "bloom": "C4",
+          "summary": "Combine angular momenta to find total j states and decide when a coupled or uncoupled basis is appropriate."
+        },
+        {
+          "id": "prf-4",
+          "name": "Time-independent perturbation theory",
+          "aliases": [
+            "perturbative corrections",
+            "Rayleigh-Schrödinger"
+          ],
+          "bloom": "C5",
+          "summary": "Compute and assess first- and second-order energy corrections and decide when degeneracy requires special treatment."
+        },
+        {
+          "id": "prf-5",
+          "name": "Variational method",
+          "aliases": [
+            "variational principle",
+            "trial wavefunction"
+          ],
+          "bloom": "C5",
+          "summary": "Choose trial wavefunctions to bound ground-state energy and evaluate the quality of the approximation."
+        },
+        {
+          "id": "prf-6",
+          "name": "Identical particles and exclusion",
+          "aliases": [
+            "fermions and bosons",
+            "Pauli exclusion principle"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse symmetric and antisymmetric many-particle states and their consequences for atomic structure."
+        },
+        {
+          "id": "prf-7",
+          "name": "Density matrices and mixed states",
+          "aliases": [
+            "density operator",
+            "statistical mixtures"
+          ],
+          "bloom": "C4",
+          "summary": "Distinguish pure superpositions from classical mixtures using the density operator and compute expectation values."
+        },
+        {
+          "id": "prf-8",
+          "name": "WKB approximation",
+          "aliases": [
+            "semiclassical approximation"
+          ],
+          "bloom": "C5",
+          "summary": "Apply semiclassical methods to estimate energy levels and tunneling rates and judge where they fail."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-2",
+          "prf-1"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "prf-1",
+          "prf-4"
+        ],
+        [
+          "prf-1",
+          "prf-6"
+        ],
+        [
+          "cmp-2",
+          "prf-5"
+        ],
+        [
+          "cmp-6",
+          "prf-8"
+        ],
+        [
+          "cmp-4",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Orbitals are literal paths electrons follow around the nucleus.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "A statistical mixture of states is the same thing as a quantum superposition.",
+          "concepts": [
+            "prf-7"
+          ]
+        },
+        {
+          "text": "Perturbation theory works whenever the perturbation is small in absolute terms, even with degenerate levels.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-2",
+          "name": "Entanglement and Bell inequalities",
+          "aliases": [
+            "nonlocal correlations",
+            "Bell's theorem"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how violations of Bell inequalities rule out local hidden-variable models without allowing signalling."
+        },
+        {
+          "id": "exp-3",
+          "name": "Decoherence and classical limit",
+          "aliases": [
+            "environment-induced decoherence",
+            "quantum-to-classical transition"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how environmental coupling suppresses interference and what it does and does not explain about collapse."
+        },
+        {
+          "id": "exp-1",
+          "name": "Measurement problem interpretations",
+          "aliases": [
+            "Copenhagen, many-worlds, Bohmian",
+            "collapse interpretations"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate competing interpretations by what they predict, assume and leave unexplained."
+        },
+        {
+          "id": "exp-4",
+          "name": "Time-dependent perturbation and transitions",
+          "aliases": [
+            "Fermi's golden rule",
+            "selection rules"
+          ],
+          "bloom": "C5",
+          "summary": "Judge the validity of transition-rate calculations and derive selection rules for driven systems."
+        },
+        {
+          "id": "exp-5",
+          "name": "Path integral formulation",
+          "aliases": [
+            "Feynman sum over histories",
+            "propagator"
+          ],
+          "bloom": "C6",
+          "summary": "Construct propagators as sums over paths and relate them to the Schrödinger picture and the classical limit."
+        },
+        {
+          "id": "exp-6",
+          "name": "Second quantization",
+          "aliases": [
+            "Fock space",
+            "creation and annihilation operators"
+          ],
+          "bloom": "C6",
+          "summary": "Build many-body models using creation and annihilation operators for bosons and fermions."
+        },
+        {
+          "id": "exp-7",
+          "name": "Scattering theory",
+          "aliases": [
+            "Born approximation",
+            "partial waves"
+          ],
+          "bloom": "C5",
+          "summary": "Choose between Born and partial-wave methods to compute cross sections and judge their regimes of validity."
+        },
+        {
+          "id": "exp-8",
+          "name": "Quantum information modelling",
+          "aliases": [
+            "qubits and gates",
+            "open-system models"
+          ],
+          "bloom": "C6",
+          "summary": "Design models of qubit systems including unitary gates, measurement and noise channels, and justify approximations."
+        }
+      ],
+      "prerequisites": [
+        [
+          "exp-2",
+          "exp-1"
+        ],
+        [
+          "exp-3",
+          "exp-1"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "prf-2",
+          "exp-7"
+        ],
+        [
+          "prf-6",
+          "exp-6"
+        ],
+        [
+          "exp-5",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-8"
+        ],
+        [
+          "exp-2",
+          "exp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Decoherence fully solves the measurement problem by itself.",
+          "concepts": [
+            "exp-3",
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Entanglement lets distant parties send information faster than light.",
+          "concepts": [
+            "exp-2"
+          ]
+        },
+        {
+          "text": "Observation by a conscious observer is required for collapse in all standard formulations.",
+          "concepts": [
+            "exp-1"
+          ]
+        }
+      ]
+    }
+  ]
+}

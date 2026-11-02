@@ -37,3 +37,9 @@ Actual cost of every paid run, from API usage at catalog list prices. Hard stop 
 | 2026-10-23 01:55 | path-eval-review | batch | 26 | 40607 | 0 | 44434 | 23337 | $0.1595 | msgbatch_01UDAUjoTeTqUJJzBADFNx4M |
 | 2026-11-02 09:28 | items-review | batch | 5000 | 2649737 | 228459 | 6866541 | 1106038 | $8.8088 | msgbatch_01FoMBBNaDZVG293VRiJ6txg |
 | 2026-11-02 09:37 | items-review | batch | 2793 | 1456739 | 2838 | 3960429 | 307534 | $3.1960 | msgbatch_01VCGD4HupSbmjJEUBP5B4e4 |
+| 2026-11-02 19:52 | concept-maps-draft --sample | standard | 3 | 414 | 1598 | 3196 | 13648 | $0.1416 | v1 |
+| 2026-11-02 19:53 | concept-maps-draft --sample | standard | 2 | 529 | 0 | 3196 | 7831 | $0.0797 | v1 |
+| 2026-11-02 20:01 | concept-maps-draft | batch | 157 | 22223 | 1598 | 249288 | 723346 | $3.6534 | msgbatch_01Pxks3hDaN6pTcxBCywNYnE |
+| 2026-11-02 20:10 | concept-maps-draft | batch | 6 | 1249 | 1598 | 7990 | 27157 | $0.1394 | msgbatch_01W19j3FyWU3Z9J16kEQzkbg |
+| 2026-11-02 20:13 | concept-maps-draft | batch | 1 | 211 | 0 | 1598 | 4971 | $0.0251 | msgbatch_012nVcUwb2WDmuj9hT41BzoZ |
+| 2026-11-02 20:20 | concept-maps-review | batch | 14 | 66118 | 1655 | 21515 | 62924 | $0.3839 | msgbatch_01QCda3KGLXDYkVq9KW5uig6 |

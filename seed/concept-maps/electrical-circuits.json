@@ -1,0 +1,706 @@
+{
+  "version": 1,
+  "topic": "electrical-circuits",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": true,
+  "dependsOnTopics": [
+    "algebra"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Voltage, current and resistance",
+          "aliases": [
+            "V, I and R",
+            "electrical quantities"
+          ],
+          "bloom": "C1",
+          "summary": "Define voltage as energy per charge, current as charge flow rate and resistance as opposition to current, with their units."
+        },
+        {
+          "id": "nov-2",
+          "name": "Closed circuit loop",
+          "aliases": [
+            "complete circuit path",
+            "circuit continuity"
+          ],
+          "bloom": "C2",
+          "summary": "Explain why current flows only in a complete conducting loop containing a source and how open and short circuits differ."
+        },
+        {
+          "id": "nov-3",
+          "name": "Ohm's law",
+          "aliases": [
+            "V=IR",
+            "resistance law"
+          ],
+          "bloom": "C2",
+          "summary": "Relate voltage, current and resistance with V=IR and rearrange it to find any one of the three."
+        },
+        {
+          "id": "nov-4",
+          "name": "Circuit symbols and schematics",
+          "aliases": [
+            "circuit diagram notation",
+            "schematic reading"
+          ],
+          "bloom": "C1",
+          "summary": "Recognise standard symbols for sources, resistors, capacitors, inductors, switches and ground and read a simple schematic."
+        },
+        {
+          "id": "nov-5",
+          "name": "Series and parallel connections",
+          "aliases": [
+            "series vs parallel",
+            "component arrangements"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish series (same current) from parallel (same voltage) arrangements and say what each does to current and voltage."
+        },
+        {
+          "id": "nov-6",
+          "name": "Electrical power",
+          "aliases": [
+            "P=VI",
+            "power dissipation"
+          ],
+          "bloom": "C2",
+          "summary": "Explain power as the rate of energy transfer and compute it with P=VI, I²R or V²/R."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-3"
+        ],
+        [
+          "nov-2",
+          "nov-5"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Current is used up as it flows through a resistor, so less current leaves than enters.",
+          "concepts": [
+            "nov-1",
+            "nov-2"
+          ]
+        },
+        {
+          "text": "A battery supplies a fixed current regardless of what is connected to it.",
+          "concepts": [
+            "nov-1",
+            "nov-3"
+          ]
+        },
+        {
+          "text": "Ohm's law means every component has constant resistance whatever the voltage across it.",
+          "concepts": [
+            "nov-3"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Equivalent resistance",
+          "aliases": [
+            "series and parallel resistor reduction",
+            "resistor combinations"
+          ],
+          "bloom": "C3",
+          "summary": "Reduce series and parallel resistor combinations step by step to a single equivalent resistance."
+        },
+        {
+          "id": "adb-2",
+          "name": "Voltage and current dividers",
+          "aliases": [
+            "divider rules",
+            "potential divider"
+          ],
+          "bloom": "C3",
+          "summary": "Apply divider formulas to find the voltage across or current through a branch without solving the full circuit."
+        },
+        {
+          "id": "adb-5",
+          "name": "Capacitor and inductor behaviour",
+          "aliases": [
+            "C and L basics",
+            "energy storage elements"
+          ],
+          "bloom": "C2",
+          "summary": "Describe a capacitor storing energy in an electric field (i=C dv/dt) and an inductor in a magnetic field (v=L di/dt)."
+        },
+        {
+          "id": "adb-6",
+          "name": "Ideal sources and loading",
+          "aliases": [
+            "voltage and current sources",
+            "real source with internal resistance"
+          ],
+          "bloom": "C2",
+          "summary": "Distinguish ideal voltage and current sources and explain how internal resistance makes a real source's output drop under load."
+        },
+        {
+          "id": "adb-7",
+          "name": "Passive sign convention",
+          "aliases": [
+            "current direction and polarity",
+            "reference directions"
+          ],
+          "bloom": "C3",
+          "summary": "Assign reference polarities and current directions consistently so that signs of power and voltage are interpreted correctly."
+        },
+        {
+          "id": "adb-3",
+          "name": "Kirchhoff's current law",
+          "aliases": [
+            "KCL",
+            "junction rule"
+          ],
+          "bloom": "C3",
+          "summary": "Apply conservation of charge at a node so that currents entering equal currents leaving."
+        },
+        {
+          "id": "adb-4",
+          "name": "Kirchhoff's voltage law",
+          "aliases": [
+            "KVL",
+            "loop rule"
+          ],
+          "bloom": "C3",
+          "summary": "Apply the fact that voltages around any closed loop sum to zero, with consistent sign conventions."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-5",
+          "adb-1"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "adb-7",
+          "adb-3"
+        ],
+        [
+          "adb-7",
+          "adb-4"
+        ],
+        [
+          "nov-6",
+          "adb-7"
+        ],
+        [
+          "nov-1",
+          "adb-7"
+        ],
+        [
+          "nov-1",
+          "adb-5"
+        ],
+        [
+          "nov-3",
+          "adb-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Parallel resistors add up like series resistors, so adding a parallel branch raises total resistance.",
+          "concepts": [
+            "adb-1"
+          ]
+        },
+        {
+          "text": "Current in a series circuit is shared out between components, so a component later in the chain gets less current.",
+          "concepts": [
+            "adb-3",
+            "adb-1"
+          ]
+        },
+        {
+          "text": "An ideal voltage source always delivers the same current no matter the load.",
+          "concepts": [
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Node-voltage analysis",
+          "aliases": [
+            "nodal analysis",
+            "node analysis"
+          ],
+          "bloom": "C3",
+          "summary": "Choose a reference node, write KCL equations in terms of node voltages and solve the resulting linear system."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Mesh-current analysis",
+          "aliases": [
+            "loop analysis",
+            "mesh analysis"
+          ],
+          "bloom": "C3",
+          "summary": "Assign mesh currents in a planar circuit, write KVL equations and solve for branch currents."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Superposition principle",
+          "aliases": [
+            "superposition theorem",
+            "one source at a time"
+          ],
+          "bloom": "C4",
+          "summary": "Find a response by summing contributions of each independent source acting alone, with others deactivated, in linear circuits."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Thevenin and Norton equivalents",
+          "aliases": [
+            "Thevenin theorem",
+            "Norton theorem",
+            "source transformation"
+          ],
+          "bloom": "C4",
+          "summary": "Replace a linear network seen from two terminals by a source with a series or parallel resistance and convert between the two forms."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Maximum power transfer",
+          "aliases": [
+            "load matching",
+            "matched load"
+          ],
+          "bloom": "C4",
+          "summary": "Show that a load receives maximum power from a source when its resistance equals the Thevenin resistance and analyse the efficiency cost."
+        },
+        {
+          "id": "cmp-6",
+          "name": "First-order RC and RL transients",
+          "aliases": [
+            "step response of RC and RL",
+            "time constant"
+          ],
+          "bloom": "C4",
+          "summary": "Derive and use exponential charging and discharging responses with time constants τ=RC and τ=L/R from initial and final conditions."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Dependent sources",
+          "aliases": [
+            "controlled sources",
+            "VCVS, CCCS"
+          ],
+          "bloom": "C3",
+          "summary": "Include voltage- or current-controlled sources in nodal, mesh and equivalent-circuit analysis."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "adb-4",
+          "cmp-2"
+        ],
+        [
+          "adb-1",
+          "cmp-1"
+        ],
+        [
+          "cmp-1",
+          "cmp-3"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-3",
+          "cmp-4"
+        ],
+        [
+          "adb-6",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-5"
+        ],
+        [
+          "adb-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-7"
+        ],
+        [
+          "cmp-2",
+          "cmp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Superposition can be used to add up the powers dissipated due to each source separately.",
+          "concepts": [
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "To deactivate sources in superposition or Thevenin, replace every source with an open circuit.",
+          "concepts": [
+            "cmp-3",
+            "cmp-4"
+          ]
+        },
+        {
+          "text": "Maximum power transfer means the circuit is operating at maximum efficiency.",
+          "concepts": [
+            "cmp-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-1",
+          "name": "Phasor representation",
+          "aliases": [
+            "phasors",
+            "complex amplitude"
+          ],
+          "bloom": "C4",
+          "summary": "Represent steady-state sinusoids as complex numbers carrying amplitude and phase and convert between time and phasor domains."
+        },
+        {
+          "id": "prf-2",
+          "name": "Impedance and admittance",
+          "aliases": [
+            "complex impedance",
+            "Z and Y"
+          ],
+          "bloom": "C4",
+          "summary": "Model R, L and C as complex impedances and combine them with series and parallel rules."
+        },
+        {
+          "id": "prf-3",
+          "name": "Phasor-domain circuit analysis",
+          "aliases": [
+            "AC nodal and mesh analysis",
+            "AC network theorems"
+          ],
+          "bloom": "C4",
+          "summary": "Apply KVL, KCL, nodal, mesh, Thevenin and superposition to AC circuits using complex arithmetic."
+        },
+        {
+          "id": "prf-4",
+          "name": "AC power and power factor",
+          "aliases": [
+            "real, reactive and apparent power",
+            "complex power"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate real, reactive and apparent power, and judge power-factor correction for a given load."
+        },
+        {
+          "id": "prf-5",
+          "name": "Resonance in RLC circuits",
+          "aliases": [
+            "series and parallel resonance",
+            "quality factor"
+          ],
+          "bloom": "C4",
+          "summary": "Analyse resonant frequency, Q factor and bandwidth of series and parallel RLC circuits."
+        },
+        {
+          "id": "prf-6",
+          "name": "Frequency response and filters",
+          "aliases": [
+            "transfer function",
+            "first-order filters",
+            "Bode magnitude plots"
+          ],
+          "bloom": "C5",
+          "summary": "Assess the magnitude and phase response of RC and RL networks and choose low-pass, high-pass or band-pass behaviour for a purpose."
+        },
+        {
+          "id": "prf-7",
+          "name": "Second-order transient response",
+          "aliases": [
+            "series RLC transient",
+            "damping"
+          ],
+          "bloom": "C4",
+          "summary": "Classify RLC step responses as overdamped, critically damped or underdamped from the characteristic equation."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-6",
+          "prf-1"
+        ],
+        [
+          "prf-1",
+          "prf-2"
+        ],
+        [
+          "prf-2",
+          "prf-3"
+        ],
+        [
+          "cmp-4",
+          "prf-3"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ],
+        [
+          "prf-3",
+          "prf-5"
+        ],
+        [
+          "prf-3",
+          "prf-6"
+        ],
+        [
+          "prf-5",
+          "prf-6"
+        ],
+        [
+          "cmp-6",
+          "prf-7"
+        ],
+        [
+          "prf-2",
+          "prf-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Phasor analysis describes the whole response, including the switch-on transient.",
+          "concepts": [
+            "prf-1",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Voltages across series elements in AC simply add as magnitudes, like in DC.",
+          "concepts": [
+            "prf-2",
+            "prf-3"
+          ]
+        },
+        {
+          "text": "Reactive power is wasted energy dissipated as heat in the load.",
+          "concepts": [
+            "prf-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Laplace transform of circuits with initial conditions",
+          "aliases": [
+            "s-domain circuit model",
+            "s-domain analysis"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when to transform a circuit to the s-domain, using initial-condition sources, to obtain complete transient and steady-state responses and transfer functions."
+        },
+        {
+          "id": "exp-2",
+          "name": "Pole-zero stability analysis",
+          "aliases": [
+            "poles and zeros",
+            "stability of circuit response"
+          ],
+          "bloom": "C5",
+          "summary": "Judge circuit behaviour, damping and stability from pole and zero locations of a transfer function."
+        },
+        {
+          "id": "exp-3",
+          "name": "Two-port network modelling",
+          "aliases": [
+            "two-port parameters",
+            "z, y and h parameters"
+          ],
+          "bloom": "C6",
+          "summary": "Construct and interconnect two-port parameter models to characterise subcircuits by terminal behaviour."
+        },
+        {
+          "id": "exp-4",
+          "name": "Three-phase power systems",
+          "aliases": [
+            "balanced three-phase circuits",
+            "wye and delta"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate balanced wye and delta three-phase circuits using per-phase analysis and line versus phase quantities."
+        },
+        {
+          "id": "exp-5",
+          "name": "Coupled inductors and transformers",
+          "aliases": [
+            "mutual inductance",
+            "ideal and non-ideal transformer"
+          ],
+          "bloom": "C5",
+          "summary": "Analyse mutually coupled circuits and judge transformer models for impedance matching and isolation."
+        },
+        {
+          "id": "exp-7",
+          "name": "Non-ideal component and parasitic effects",
+          "aliases": [
+            "parasitics",
+            "real component models",
+            "ESR and ESL"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate how resistance, parasitic capacitance and inductance, and ESR alter ideal circuit predictions at various frequencies."
+        },
+        {
+          "id": "exp-6",
+          "name": "Circuit design under constraints",
+          "aliases": [
+            "design trade-offs",
+            "component tolerance design"
+          ],
+          "bloom": "C6",
+          "summary": "Design a network to meet specifications while accounting for tolerances and for source and load impedance, using pole-zero and two-port models."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-7",
+          "exp-1"
+        ],
+        [
+          "prf-6",
+          "exp-1"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "prf-2",
+          "exp-3"
+        ],
+        [
+          "prf-3",
+          "exp-3"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "prf-1",
+          "exp-4"
+        ],
+        [
+          "prf-3",
+          "exp-5"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ],
+        [
+          "exp-3",
+          "exp-6"
+        ],
+        [
+          "exp-7",
+          "exp-6"
+        ],
+        [
+          "prf-5",
+          "exp-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Ideal lumped-element models remain accurate at any frequency and component size.",
+          "concepts": [
+            "exp-7",
+            "exp-6"
+          ]
+        },
+        {
+          "text": "Per-phase analysis works for any three-phase circuit, even unbalanced ones, without modification.",
+          "concepts": [
+            "exp-4"
+          ]
+        },
+        {
+          "text": "Any circuit with all poles in the left half-plane is automatically well-behaved, with no need to check damping or sensitivity.",
+          "concepts": [
+            "exp-2",
+            "exp-6"
+          ]
+        }
+      ]
+    }
+  ]
+}

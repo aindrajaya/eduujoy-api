@@ -1,0 +1,709 @@
+{
+  "version": 1,
+  "topic": "mobile-app-development",
+  "language": "en",
+  "promptVersion": "v1",
+  "reviewed": false,
+  "dependsOnTopics": [
+    "programming-fundamentals",
+    "object-oriented-programming",
+    "rest-api-design"
+  ],
+  "stages": [
+    {
+      "stage": "novice",
+      "bloomBand": [
+        "C1",
+        "C2"
+      ],
+      "concepts": [
+        {
+          "id": "nov-1",
+          "name": "Native versus cross-platform apps",
+          "aliases": [
+            "native vs hybrid"
+          ],
+          "bloom": "C2",
+          "summary": "Explain how native, cross-platform and web-based apps differ and what trade-offs each brings for a simple app."
+        },
+        {
+          "id": "nov-2",
+          "name": "App project structure",
+          "aliases": [
+            "project layout"
+          ],
+          "bloom": "C1",
+          "summary": "Identify the main parts of a mobile project: source code, resources, manifest or configuration, and build files."
+        },
+        {
+          "id": "nov-3",
+          "name": "Screens and UI components",
+          "aliases": [
+            "views",
+            "widgets"
+          ],
+          "bloom": "C2",
+          "summary": "Describe how a screen is composed from components such as text, buttons, images and input fields."
+        },
+        {
+          "id": "nov-6",
+          "name": "Touch input and events",
+          "aliases": [
+            "gestures",
+            "tap handling"
+          ],
+          "bloom": "C2",
+          "summary": "Understand how taps and gestures on components trigger event handlers in code."
+        },
+        {
+          "id": "nov-7",
+          "name": "Platform ecosystems and SDKs",
+          "aliases": [
+            "iOS and Android toolchains"
+          ],
+          "bloom": "C1",
+          "summary": "Name the main platforms, their languages and IDEs, and the role of the SDK."
+        },
+        {
+          "id": "nov-4",
+          "name": "Emulators and device testing",
+          "aliases": [
+            "simulator",
+            "running on device"
+          ],
+          "bloom": "C1",
+          "summary": "Recall how to run and view an app on an emulator, simulator or physical phone."
+        },
+        {
+          "id": "nov-5",
+          "name": "App lifecycle states",
+          "aliases": [
+            "foreground and background"
+          ],
+          "bloom": "C2",
+          "summary": "Explain that an app moves between running, background and terminated states and why this matters on phones."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-1",
+          "nov-2"
+        ],
+        [
+          "nov-2",
+          "nov-3"
+        ],
+        [
+          "nov-3",
+          "nov-6"
+        ],
+        [
+          "nov-2",
+          "nov-4"
+        ],
+        [
+          "nov-4",
+          "nov-5"
+        ],
+        [
+          "nov-7",
+          "nov-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A mobile app runs continuously like a desktop program once it has been opened.",
+          "concepts": [
+            "nov-5"
+          ]
+        },
+        {
+          "text": "An app written for Android will run unchanged on iOS.",
+          "concepts": [
+            "nov-1",
+            "nov-7"
+          ]
+        },
+        {
+          "text": "Testing in an emulator is enough to know the app works on real phones.",
+          "concepts": [
+            "nov-4"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "advanced_beginner",
+      "bloomBand": [
+        "C2",
+        "C3"
+      ],
+      "concepts": [
+        {
+          "id": "adb-1",
+          "name": "Layout containers and constraints",
+          "aliases": [
+            "stacks",
+            "flex layout",
+            "auto layout"
+          ],
+          "bloom": "C3",
+          "summary": "Arrange components with rows, columns and constraints so a screen looks right at different sizes."
+        },
+        {
+          "id": "adb-2",
+          "name": "Screen navigation stack",
+          "aliases": [
+            "navigation controller",
+            "back stack"
+          ],
+          "bloom": "C3",
+          "summary": "Move between screens, pass data to them and handle the back action using a navigation stack."
+        },
+        {
+          "id": "adb-3",
+          "name": "Component state and re-rendering",
+          "aliases": [
+            "UI state"
+          ],
+          "bloom": "C3",
+          "summary": "Hold changing values in state and update the screen when that state changes."
+        },
+        {
+          "id": "adb-4",
+          "name": "Lists and adapters",
+          "aliases": [
+            "recycler view",
+            "table view",
+            "list builder"
+          ],
+          "bloom": "C3",
+          "summary": "Display scrollable collections efficiently by binding data items to reusable row views."
+        },
+        {
+          "id": "adb-5",
+          "name": "Lifecycle callbacks",
+          "aliases": [
+            "onPause",
+            "viewDidAppear"
+          ],
+          "bloom": "C3",
+          "summary": "Place setup and cleanup code in the correct lifecycle callbacks of a screen or app."
+        },
+        {
+          "id": "adb-6",
+          "name": "Simple local persistence",
+          "aliases": [
+            "key-value storage",
+            "preferences"
+          ],
+          "bloom": "C3",
+          "summary": "Save and reload small settings or values using the platform's key-value storage."
+        },
+        {
+          "id": "adb-7",
+          "name": "Fetching remote data",
+          "aliases": [
+            "HTTP request from app",
+            "JSON parsing"
+          ],
+          "bloom": "C3",
+          "summary": "Call a REST endpoint asynchronously, parse the JSON and show the result on screen."
+        }
+      ],
+      "prerequisites": [
+        [
+          "nov-3",
+          "adb-1"
+        ],
+        [
+          "nov-3",
+          "adb-3"
+        ],
+        [
+          "adb-3",
+          "adb-4"
+        ],
+        [
+          "nov-5",
+          "adb-5"
+        ],
+        [
+          "adb-1",
+          "adb-2"
+        ],
+        [
+          "adb-3",
+          "adb-7"
+        ],
+        [
+          "adb-5",
+          "adb-6"
+        ],
+        [
+          "adb-4",
+          "adb-7"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Changing a variable that holds screen data automatically updates what the user sees.",
+          "concepts": [
+            "adb-3"
+          ]
+        },
+        {
+          "text": "Network calls can be made on the main UI thread without noticeable effect.",
+          "concepts": [
+            "adb-7"
+          ]
+        },
+        {
+          "text": "Data kept in memory survives the app being closed or the screen being rotated.",
+          "concepts": [
+            "adb-5",
+            "adb-6"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "competent",
+      "bloomBand": [
+        "C3",
+        "C4"
+      ],
+      "concepts": [
+        {
+          "id": "cmp-1",
+          "name": "Architecture patterns for apps",
+          "aliases": [
+            "MVVM",
+            "MVC",
+            "MVP"
+          ],
+          "bloom": "C4",
+          "summary": "Separate UI, presentation logic and data access, and analyse how a pattern such as MVVM organises responsibilities."
+        },
+        {
+          "id": "cmp-2",
+          "name": "Runtime permissions",
+          "aliases": [
+            "permission requests"
+          ],
+          "bloom": "C3",
+          "summary": "Request and handle permissions for camera, location or notifications, including denial and rationale flows."
+        },
+        {
+          "id": "cmp-3",
+          "name": "Device sensors and hardware APIs",
+          "aliases": [
+            "camera",
+            "GPS",
+            "location services"
+          ],
+          "bloom": "C3",
+          "summary": "Use device features such as location or camera through platform APIs while managing battery and privacy cost."
+        },
+        {
+          "id": "cmp-4",
+          "name": "Structured local databases",
+          "aliases": [
+            "SQLite",
+            "Room",
+            "Core Data"
+          ],
+          "bloom": "C3",
+          "summary": "Model, store and query structured data locally with a database layer and schema migrations."
+        },
+        {
+          "id": "cmp-5",
+          "name": "Concurrency and async work",
+          "aliases": [
+            "coroutines",
+            "async/await",
+            "background threads"
+          ],
+          "bloom": "C4",
+          "summary": "Run network and disk work off the main thread and diagnose problems such as race conditions and UI freezes."
+        },
+        {
+          "id": "cmp-6",
+          "name": "Repository and offline caching",
+          "aliases": [
+            "offline-first",
+            "data sync"
+          ],
+          "bloom": "C4",
+          "summary": "Combine remote and local sources behind a repository so the app works with poor or no connectivity."
+        },
+        {
+          "id": "cmp-7",
+          "name": "Handling errors and loading states",
+          "aliases": [
+            "error states",
+            "empty states"
+          ],
+          "bloom": "C3",
+          "summary": "Represent loading, success, empty and failure states and show appropriate feedback to the user."
+        },
+        {
+          "id": "cmp-8",
+          "name": "Push and local notifications",
+          "aliases": [
+            "FCM",
+            "APNs"
+          ],
+          "bloom": "C3",
+          "summary": "Implement notifications and understand how a push message reaches a device through the platform service."
+        }
+      ],
+      "prerequisites": [
+        [
+          "adb-3",
+          "cmp-1"
+        ],
+        [
+          "adb-7",
+          "cmp-5"
+        ],
+        [
+          "adb-6",
+          "cmp-4"
+        ],
+        [
+          "cmp-4",
+          "cmp-6"
+        ],
+        [
+          "cmp-5",
+          "cmp-6"
+        ],
+        [
+          "cmp-1",
+          "cmp-6"
+        ],
+        [
+          "cmp-5",
+          "cmp-7"
+        ],
+        [
+          "adb-5",
+          "cmp-2"
+        ],
+        [
+          "cmp-2",
+          "cmp-3"
+        ],
+        [
+          "cmp-2",
+          "cmp-8"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Putting all logic in the screen class is fine because the app is small.",
+          "concepts": [
+            "cmp-1"
+          ]
+        },
+        {
+          "text": "If the user denies a permission, the app can ask again as often as it likes and the feature still must work.",
+          "concepts": [
+            "cmp-2",
+            "cmp-3"
+          ]
+        },
+        {
+          "text": "Offline support just means catching the network error and showing a message.",
+          "concepts": [
+            "cmp-6",
+            "cmp-7"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "proficient",
+      "bloomBand": [
+        "C4",
+        "C5"
+      ],
+      "concepts": [
+        {
+          "id": "prf-2",
+          "name": "Authentication and secure storage",
+          "aliases": [
+            "token storage",
+            "keychain",
+            "keystore"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate sign-in flows and choose secure storage for tokens and sensitive data on the device."
+        },
+        {
+          "id": "prf-5",
+          "name": "Adaptive and accessible design",
+          "aliases": [
+            "responsive layouts",
+            "a11y",
+            "localisation"
+          ],
+          "bloom": "C5",
+          "summary": "Judge how well a design supports tablets, screen readers, dynamic text size and multiple languages."
+        },
+        {
+          "id": "prf-7",
+          "name": "Crash reporting and analytics",
+          "aliases": [
+            "telemetry",
+            "monitoring"
+          ],
+          "bloom": "C4",
+          "summary": "Instrument an app to analyse crashes and user behaviour while respecting privacy."
+        },
+        {
+          "id": "prf-1",
+          "name": "Performance profiling and optimisation",
+          "aliases": [
+            "jank",
+            "memory leaks",
+            "startup time"
+          ],
+          "bloom": "C4",
+          "summary": "Use profilers to find slow rendering, memory leaks and excess work, and fix their causes."
+        },
+        {
+          "id": "prf-8",
+          "name": "Dependency injection and modularity",
+          "aliases": [
+            "DI",
+            "modules"
+          ],
+          "bloom": "C5",
+          "summary": "Assess how injecting dependencies and splitting modules improves testability and build times."
+        },
+        {
+          "id": "prf-3",
+          "name": "Automated testing strategy",
+          "aliases": [
+            "unit UI tests",
+            "instrumented tests"
+          ],
+          "bloom": "C5",
+          "summary": "Decide what to cover with unit, integration and UI tests and judge the cost and reliability of each."
+        },
+        {
+          "id": "prf-4",
+          "name": "Build variants and CI/CD",
+          "aliases": [
+            "flavors",
+            "schemes",
+            "pipelines"
+          ],
+          "bloom": "C4",
+          "summary": "Configure environments, signing and automated builds so releases are repeatable."
+        },
+        {
+          "id": "prf-6",
+          "name": "Store release and review compliance",
+          "aliases": [
+            "App Store submission",
+            "Play Console"
+          ],
+          "bloom": "C4",
+          "summary": "Prepare listings, privacy declarations and staged rollouts, and analyse common causes of review rejection."
+        }
+      ],
+      "prerequisites": [
+        [
+          "cmp-1",
+          "prf-8"
+        ],
+        [
+          "prf-8",
+          "prf-3"
+        ],
+        [
+          "cmp-5",
+          "prf-1"
+        ],
+        [
+          "cmp-6",
+          "prf-2"
+        ],
+        [
+          "prf-4",
+          "prf-6"
+        ],
+        [
+          "prf-7",
+          "prf-1"
+        ],
+        [
+          "adb-1",
+          "prf-5"
+        ],
+        [
+          "prf-3",
+          "prf-4"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "Storing tokens in ordinary preferences is safe because other apps cannot read app storage.",
+          "concepts": [
+            "prf-2"
+          ]
+        },
+        {
+          "text": "Performance tuning should be done up front on every screen rather than guided by profiling.",
+          "concepts": [
+            "prf-1"
+          ]
+        },
+        {
+          "text": "Accessibility and localisation can be added at the end without redesign.",
+          "concepts": [
+            "prf-5"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "expert",
+      "bloomBand": [
+        "C5",
+        "C6"
+      ],
+      "concepts": [
+        {
+          "id": "exp-1",
+          "name": "Cross-platform strategy design",
+          "aliases": [
+            "shared code architecture",
+            "Kotlin Multiplatform",
+            "Flutter vs native"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate native, shared-logic and fully cross-platform approaches against product, team and performance constraints."
+        },
+        {
+          "id": "exp-2",
+          "name": "Scalable app architecture design",
+          "aliases": [
+            "modular architecture",
+            "clean architecture"
+          ],
+          "bloom": "C6",
+          "summary": "Design an app architecture that lets many teams ship features independently with clear boundaries."
+        },
+        {
+          "id": "exp-3",
+          "name": "Offline sync and conflict resolution",
+          "aliases": [
+            "eventual consistency",
+            "CRDT"
+          ],
+          "bloom": "C6",
+          "summary": "Create a synchronisation design that handles conflicts, retries and partial failure between device and server."
+        },
+        {
+          "id": "exp-4",
+          "name": "Release engineering and feature flags",
+          "aliases": [
+            "staged rollout",
+            "remote config"
+          ],
+          "bloom": "C6",
+          "summary": "Create a release process using flags, staged rollouts and rollback to reduce risk of shipping."
+        },
+        {
+          "id": "exp-5",
+          "name": "Mobile security threat modelling",
+          "aliases": [
+            "reverse engineering",
+            "certificate pinning"
+          ],
+          "bloom": "C5",
+          "summary": "Assess threats such as tampering, insecure transport and data leakage, and judge which defences are worth their cost."
+        },
+        {
+          "id": "exp-6",
+          "name": "Platform evolution and migration",
+          "aliases": [
+            "OS upgrades",
+            "deprecations",
+            "UI framework migration"
+          ],
+          "bloom": "C5",
+          "summary": "Judge when and how to adopt new OS APIs and migrate legacy code without breaking users."
+        },
+        {
+          "id": "exp-7",
+          "name": "Energy and resource budgeting",
+          "aliases": [
+            "battery optimisation",
+            "background execution limits"
+          ],
+          "bloom": "C5",
+          "summary": "Evaluate background work, networking and sensor use against battery, data and OS restrictions across a device range."
+        }
+      ],
+      "prerequisites": [
+        [
+          "prf-8",
+          "exp-2"
+        ],
+        [
+          "exp-1",
+          "exp-2"
+        ],
+        [
+          "cmp-6",
+          "exp-3"
+        ],
+        [
+          "prf-4",
+          "exp-4"
+        ],
+        [
+          "prf-7",
+          "exp-4"
+        ],
+        [
+          "prf-2",
+          "exp-5"
+        ],
+        [
+          "prf-1",
+          "exp-7"
+        ],
+        [
+          "exp-2",
+          "exp-6"
+        ]
+      ],
+      "misconceptions": [
+        {
+          "text": "A cross-platform framework always lowers cost compared with native development.",
+          "concepts": [
+            "exp-1"
+          ]
+        },
+        {
+          "text": "Last-write-wins is an adequate sync strategy for any data.",
+          "concepts": [
+            "exp-3"
+          ]
+        },
+        {
+          "text": "Obfuscation and certificate pinning make an app's secrets safe on the device.",
+          "concepts": [
+            "exp-5"
+          ]
+        }
+      ]
+    }
+  ]
+}
