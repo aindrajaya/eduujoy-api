@@ -88,6 +88,8 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
       cards: design,
       coreConcepts: coreConcepts(selection.cards, { stages: payload.stages, target: path.to.stage }),
       formatFallback: selection.formatFallback,
+      // Wired to the catalog's stored maps in the next commit (fix 4, production wiring).
+      conceptMap: null,
       jobId: ctx.jobId,
       budgetScope: payload.budgetScope,
       signal: ctx.signal,

@@ -20,7 +20,8 @@ import { loadDirectDatabaseUrl } from '../../src/shared/db/cli/env';
 import { guardPool, POOL_SETTINGS } from '../../src/shared/db/db.module';
 import { describeError } from '../../src/shared/db/redact';
 import { topics } from '../../src/shared/db/schema/catalog';
-import { buildEvalRequest } from './eval-request';
+import { buildEvalRequest, readConceptMap } from './eval-request';
+import { conceptMapCheck } from '../../src/shared/common/concept-map';
 import { CASE_RESERVE_USD, type CaseResult, caseStages, type Dimension, dimensionsFor, estimate, type EvalCase, evalFile, type JudgeOutput, judgeSchemaFor, poolsNeeded, selectCases, summarise } from './path-eval-rules';
 
 // Run by the user (A9, Q8): `pnpm eval:paths [--smoke] [--ids pe-001,pe-002] [--cases seed/_eval/path-eval-v1.json]
@@ -184,8 +185,9 @@ async function evaluate(run: EvalRun, c: EvalCase, topic: { id: string; name: st
     for (const card of (await run.served.pool(topic.id, stage)).cards) if (!cards.some((x) => x.resourceId === card.resourceId)) cards.push(card);
   }
   const target = targetStage(c.placement.stage);
-  const { request, validate, byAlias, selection } = buildEvalRequest(c, topic, cards, process.env['PATH_RESOURCE_LANGUAGE'] ?? 'en');
-  const outcome = await designPath(run.designer, request, { pool: validate, placementBloom: request.placement.bloom, target, weeklyHours: c.weeklyHours });
+  const map = process.argv.includes('--no-maps') ? null : readConceptMap(c.topic);
+  const { request, validate, byAlias, selection } = buildEvalRequest(c, topic, cards, process.env['PATH_RESOURCE_LANGUAGE'] ?? 'en', map);
+  const outcome = await designPath(run.designer, request, { pool: validate, placementBloom: request.placement.bloom, target, weeklyHours: c.weeklyHours, conceptMap: conceptMapCheck(request.conceptMap) });
   const invented = outcome.designed.steps.flatMap((s) => s.resources).filter((a) => !byAlias.has(a)).length;
   const base = {
     id: c.id,

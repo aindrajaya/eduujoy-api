@@ -38,6 +38,8 @@ export const designSchema = z.object({
         }),
         doneWhen: z.string().max(400),
         estMinutes: z.number().int().min(0).max(24 * 60),
+        /** Concept-map ids the step teaches (v5); empty when the request has no map, absent before v5. */
+        concepts: z.array(z.string().regex(/^[a-z]{3}-\d{1,2}$/)).max(12).default([]),
       }),
     )
     .min(1)
@@ -77,6 +79,18 @@ export class ClaudePathDesigner implements PathDesigner {
   }
 }
 
+/** The concept map for the path's stages: concepts with ids, prerequisite pairs, misconceptions. */
+function renderConceptMap(map: DesignRequest['conceptMap']): string[] {
+  if (!map || map.stages.length === 0) return ['Concept map: none for this topic'];
+  const lines = map.stages.flatMap((s) => [
+    `Stage ${s.stage}:`,
+    ...s.concepts.map((c) => `- ${c.id} ${c.name} (${c.bloom}${c.aliases.length ? `; also: ${c.aliases.join(', ')}` : ''}): ${c.summary}`),
+    ...(s.misconceptions.length ? [`Misconceptions to avoid: ${s.misconceptions.join(' | ')}`] : []),
+  ]);
+  const order = map.prerequisites.length ? map.prerequisites.map(([a, b]) => `${a} before ${b}`).join('; ') : 'none';
+  return [wrapUntrusted('concept-map', [...lines, `Prerequisites (hard rule): ${order}`].join('\n'))];
+}
+
 /** The user turn: facts as plain lines, every web- or learner-written text inside <data>. */
 export function renderRequest(r: DesignRequest): string {
   const band = BANDS[r.target];
@@ -101,6 +115,7 @@ export function renderRequest(r: DesignRequest): string {
     `Weekly hours: ${r.weeklyHours}; time budget for the whole path: ${r.budgetMinutes} minutes; each step at most ${r.stepMaxMinutes} minutes.`,
     `Preferred formats: ${r.formats.length ? r.formats.join(', ') : 'any'}${r.formatFallback ? ' (too few resources in those formats, so others are included)' : ''}`,
     r.coreConcepts.length ? wrapUntrusted('core-concepts', r.coreConcepts.join('; ')) : 'Core concepts: none listed',
+    ...renderConceptMap(r.conceptMap),
     '',
     `Resources (${r.cards.length}):`,
     ...cards,

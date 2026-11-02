@@ -1,6 +1,13 @@
-import { buildEvalRequest } from '../../scripts/eval/eval-request';
+import * as fs from 'node:fs';
+import { buildEvalRequest, CONCEPT_MAP_DIR, readConceptMap } from '../../scripts/eval/eval-request';
 import { type EvalCase } from '../../scripts/eval/path-eval-rules';
 import { renderRequest } from '../../src/modules/pathing/infrastructure/claude-path-designer';
+
+// Every file read in this spec is recorded (calls go through to the real fs).
+jest.mock('node:fs', () => {
+  const actual: typeof fs = jest.requireActual('node:fs');
+  return { ...actual, readFileSync: jest.fn((...args: Parameters<typeof actual.readFileSync>) => actual.readFileSync(...args)) };
+});
 
 const SENTINEL = 'SENTINEL-REFERENCE-7f3a';
 
@@ -56,5 +63,30 @@ describe('the eval designer input (lead, 2 Nov 2026: references must never reach
     expect(request).toMatchObject({ goal: 'Read scripts at work', weeklyHours: 2, target: 'novice' });
     // One card teaches Variables: below two shared concepts, single-card ones fill the list.
     expect(request.coreConcepts).toEqual(['Variables']);
+  });
+
+  it('with the concept map (user, 3 Nov 2026), reads only seed/concept-maps and still carries no reference text', () => {
+    const read = fs.readFileSync as unknown as jest.Mock;
+    read.mockClear();
+    const map = readConceptMap('python');
+    const files = read.mock.calls.map(([file]) => String(file));
+    expect(files).toEqual([`${CONCEPT_MAP_DIR}/python.json`]);
+    expect(files.some((f) => f.includes('_eval'))).toBe(false);
+
+    const { request } = buildEvalRequest(evalCase, { name: 'Python', domain: 'software' }, [card], 'en', map);
+    const rendered = renderRequest(request);
+    expect(JSON.stringify(request)).not.toContain(SENTINEL);
+    expect(rendered).not.toContain(SENTINEL);
+    // The map is there: the novice stage only (a novice target), with its ids.
+    expect(request.conceptMap?.stages.map((s) => s.stage)).toEqual(['novice']);
+    expect(rendered).toContain('nov-1 ');
+    expect(rendered).not.toContain('adb-1 ');
+  });
+
+  it('the maps record inputs from the public catalogue only, and none reads an eval file', () => {
+    const provenance = JSON.parse(fs.readFileSync(`${CONCEPT_MAP_DIR}/_provenance.json`, 'utf8')) as { inputs: { files: string[]; fieldsSentPerTopic: string[] } };
+    expect(provenance.inputs.files.filter((f) => f.includes('_eval'))).toEqual([]);
+    expect(provenance.inputs.fieldsSentPerTopic.join(' ')).not.toMatch(/mustCover|misconception|orderConstraint|reference/i);
+    expect(readConceptMap('../_eval/path-eval-v1')).toBeNull();
   });
 });

@@ -25,7 +25,7 @@ describe('schemas sent to Claude', () => {
   it('records what the fix strips from each (the before list for the inventory)', () => {
     const before = Object.fromEntries(Object.entries(CLAUDE_SCHEMAS).map(([name, schema]) => [name, claudeRejectedKeys(toStructuredSchema(schema))]));
     expect(before['catalog topic-normalise (Haiku)']).toEqual(['$.properties.aliases.maxItems']);
-    expect(before['pathing path-designer (Sonnet)']).toHaveLength(17);
+    expect(before['pathing path-designer (Sonnet)']).toHaveLength(18);
     expect(before['eval path-judge (Sonnet)']).toHaveLength(12);
     expect(before['eval path-judge v1/v2 (Sonnet)']).toHaveLength(10);
   });

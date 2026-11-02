@@ -28,6 +28,8 @@ export interface DraftStep {
   checkpoint: { items: unknown[]; rubric: string[]; passScore: number };
   doneWhen: string;
   estMinutes: number;
+  /** The concept-map ids the step teaches (designer v5); absent before v5. */
+  concepts?: string[];
 }
 
 export interface ValidationInput {
@@ -36,6 +38,8 @@ export interface ValidationInput {
   placementBloom: Bloom;
   target: Stage;
   weeklyHours: number;
+  /** The path's concept map: its concept ids and "a before b" pairs, a hard order rule (user, 3 Nov 2026). */
+  conceptMap?: { ids: string[]; prerequisites: [string, string][] } | null;
 }
 
 export type ValidationFlag = 'few_resource_types';
@@ -56,12 +60,15 @@ export const MAX_STEP_MINUTES = 90;
 /** A resource may serve at most this many steps (lead, 3 Nov 2026: reuse marked resource fit down). */
 export const MAX_RESOURCE_STEPS = 2;
 
+/** The step cap never drops below this (user, 3 Nov 2026: option B), so 31–45-minute resources stay usable at low hours. */
+export const MIN_STEP_CAP_MINUTES = 45;
+
 /**
- * The longest step a learner can take (lead, 3 Nov 2026): at most MAX_STEP_MINUTES, and at most half of
- * one week's hours, so a step fits about two sittings.
+ * The longest step a learner can take: half of one week's hours (about two sittings), at least
+ * MIN_STEP_CAP_MINUTES and at most MAX_STEP_MINUTES (user, 3 Nov 2026: min(90, max(45, h × 30))).
  */
 export function stepMaxMinutes(weeklyHours: number): number {
-  return Math.max(1, Math.min(MAX_STEP_MINUTES, Math.floor((weeklyHours * 60) / 2)));
+  return Math.min(MAX_STEP_MINUTES, Math.max(MIN_STEP_CAP_MINUTES, Math.floor((weeklyHours * 60) / 2)));
 }
 const TIMESTAMP_SLACK_SEC = 30;
 
@@ -115,6 +122,7 @@ export function validatePath(input: ValidationInput): ValidationResult {
   }
 
   errors.push(...reuseErrors(steps));
+  if (input.conceptMap) errors.push(...conceptMapErrors(steps, input.conceptMap));
   errors.push(...citedTimeErrors(steps, cards));
   errors.push(...bloomErrors(input));
   errors.push(...prerequisiteErrors(steps, cards));
@@ -126,6 +134,29 @@ export function validatePath(input: ValidationInput): ValidationResult {
   const types = new Set(steps.flatMap((s) => s.resources).flatMap((a) => (cards.get(a) ? [cards.get(a)?.type] : [])));
   const flags: ValidationFlag[] = types.size < 3 ? ['few_resource_types'] : [];
   return { ok: errors.length === 0, errors, flags };
+}
+
+/**
+ * Concept-map rules (user, 3 Nov 2026): a step names only the map's ids, and a prerequisite pair is a
+ * hard order rule: b is never taught in a step before the first step that teaches a. A pair whose a the
+ * path never teaches is fine (the learner may know it); the list's order is only a hint.
+ */
+function conceptMapErrors(steps: DraftStep[], map: { ids: string[]; prerequisites: [string, string][] }): string[] {
+  const known = new Set(map.ids);
+  const errors: string[] = [];
+  const first = new Map<string, number>();
+  for (const step of steps) {
+    for (const id of step.concepts ?? []) {
+      if (!known.has(id)) errors.push(`Step ${step.n} lists concept ${id}, which is not in the concept map; use only the map's ids.`);
+      else if (!first.has(id)) first.set(id, step.n);
+    }
+  }
+  for (const [a, b] of map.prerequisites) {
+    const at = first.get(a);
+    const bt = first.get(b);
+    if (at !== undefined && bt !== undefined && bt < at) errors.push(`Step ${bt} teaches ${b} before ${a}, which it depends on (first taught in step ${at}); reorder so ${a} comes first.`);
+  }
+  return errors;
 }
 
 /** No resource serves more than MAX_RESOURCE_STEPS steps. */

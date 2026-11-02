@@ -179,8 +179,8 @@ describe('the per-step cap', () => {
     expect(validatePath(input).errors).toEqual([]);
   });
 
-  it('caps a step at half a week, at most 90 minutes (lead, 3 Nov 2026)', () => {
-    expect([1, 1.5, 2, 3, 10].map(stepMaxMinutes)).toEqual([30, 45, 60, 90, 90]);
+  it('caps a step at half a week, at least 45 and at most 90 minutes (user, 3 Nov 2026: option B)', () => {
+    expect([0.5, 1, 1.5, 2, 3, 10].map(stepMaxMinutes)).toEqual([45, 45, 45, 60, 90, 90]);
     const input = { ...valid(), weeklyHours: 1.5 };
     (input.steps[2] as DraftStep).estMinutes = 46;
     (input.steps[3] as DraftStep).estMinutes = 10;
@@ -222,5 +222,27 @@ describe('targetStage', () => {
     expect(targetStage('competent')).toBe('proficient');
     expect(targetStage('proficient')).toBe('expert');
     expect(targetStage('expert')).toBe('expert');
+  });
+});
+
+describe('concept-map order (user, 3 Nov 2026)', () => {
+  const withMap = (concepts: string[][]): ValidationInput => {
+    const input = valid();
+    input.steps.forEach((s, i) => (s.concepts = concepts[i] ?? []));
+    input.conceptMap = { ids: ['nov-1', 'nov-2', 'adb-1'], prerequisites: [['nov-1', 'adb-1']] };
+    return input;
+  };
+
+  it('accepts a path that teaches a prerequisite first, or in the same step, or never', () => {
+    expect(validatePath(withMap([['nov-1'], [], ['adb-1']])).errors).toEqual([]);
+    expect(validatePath(withMap([['nov-1', 'adb-1']])).errors).toEqual([]);
+    expect(validatePath(withMap([['adb-1']])).errors).toEqual([]);
+  });
+
+  it('rejects b before a, and ids not in the map', () => {
+    expect(validatePath(withMap([['adb-1'], ['nov-1']])).errors).toEqual([
+      'Step 1 teaches adb-1 before nov-1, which it depends on (first taught in step 2); reorder so nov-1 comes first.',
+    ]);
+    expect(validatePath(withMap([['com-9']])).errors).toEqual(["Step 1 lists concept com-9, which is not in the concept map; use only the map's ids."]);
   });
 });

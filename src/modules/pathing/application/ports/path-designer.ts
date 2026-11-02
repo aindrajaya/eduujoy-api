@@ -1,4 +1,5 @@
 import { type BudgetScope } from '../../../../shared/ai';
+import { type PathConceptMap } from '../../../../shared/common/concept-map';
 import { type Bloom, type DraftStep, type ResourceType, type Stage } from '../../domain';
 
 export const PATH_DESIGNER = Symbol('PathDesigner');
@@ -33,6 +34,8 @@ export interface DesignRequest {
   coreConcepts: string[];
   /** The learner's formats couldn't be honoured (too few matching cards), so every format is in the pool. */
   formatFallback: boolean;
+  /** The topic's concept map for the path's stages (user, 3 Nov 2026); null when the topic has none. */
+  conceptMap: PathConceptMap | null;
   /** The validator's errors from the first attempt, for the one regeneration. */
   feedback?: string[];
   jobId?: string;
