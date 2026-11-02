@@ -7,6 +7,7 @@ import { runLengthRound } from './length-round';
 import { runPathEval, validatePathEval } from './path-eval';
 import { runRefine } from './refine';
 import { runReview } from './review';
+import { runRubricFix } from './rubric-fix';
 import { runTaxonomy } from './taxonomy';
 import { SEED_DIR, totalSpentUsd } from './ledger';
 import { SPEND_CAP_USD, usd } from './pricing';
@@ -22,6 +23,7 @@ import { SPEND_CAP_USD, usd } from './pricing';
 //   pnpm seed:path-eval --stage plan|draft|review|assemble [--only smoke|rest|all] [--dry-run] [--sample N] [--go] [--pregen file] [--expect-cases N]
 //   pnpm seed:path-eval-validate [--expect-cases N]
 //   pnpm seed:length-round --stage rewrite|apply [--dry-run] [--sample N] [--go]   (shortest-key cue: rewrite distractors only)
+//   pnpm seed:rubric-fix --stage rewrite|verify|finalize [--dry-run] [--sample N] [--go]   (rubrics after the length round)
 //   pnpm seed:validate [--dir seed] [--expect-topics N]
 //
 // Paid runs need --go and print their estimate first; --dry-run never calls the API.
@@ -102,12 +104,19 @@ async function main(): Promise<void> {
       await runLengthRound({ stage, dryRun: values['dry-run'], go: values.go, sample });
       return;
     }
+    case 'rubric-fix': {
+      const stage = values.stage;
+      if (stage !== 'rewrite' && stage !== 'verify' && stage !== 'finalize') throw new Error('--stage must be rewrite, verify or finalize');
+      const sample = values.sample === undefined ? undefined : positiveInt(values.sample, '--sample');
+      await runRubricFix({ stage, dryRun: values['dry-run'], go: values.go, sample });
+      return;
+    }
     case 'validate': {
       validate(values.dir ? resolve(values.dir) : SEED_DIR, values['expect-topics']);
       return;
     }
     default:
-      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, items, items-review, items-apply, topics-refine, length-round, path-eval, path-eval-validate, validate`);
+      throw new Error(`Unknown command "${command ?? ''}". Commands: taxonomy, items, items-review, items-apply, topics-refine, length-round, rubric-fix, path-eval, path-eval-validate, validate`);
   }
 }
 
