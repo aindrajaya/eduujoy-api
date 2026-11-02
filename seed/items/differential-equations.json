@@ -159,7 +159,7 @@
         },
         {
           "id": "c",
-          "label": "`r^2 - 5r = 6`"
+          "label": "`r^2 - 5r - 6 = 0`"
         },
         {
           "id": "d",
@@ -327,11 +327,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The initial condition always supplies the constant"
+          "label": "The initial condition is built into every general solution"
         },
         {
           "id": "b",
-          "label": "The equation always has exactly two possible solutions"
+          "label": "Each equation has one solution curve for every real number"
         },
         {
           "id": "c",
@@ -339,7 +339,7 @@
         },
         {
           "id": "d",
-          "label": "Constants are added to make the solution look neat"
+          "label": "The constant is only added to keep the solution tidy"
         }
       ],
       "answerKey": {
@@ -577,15 +577,15 @@
         },
         {
           "id": "b",
-          "label": "P grows at a rate proportional to the time, giving quadratic growth in t"
+          "label": "P grows at a rate proportional to the time elapsed, giving quadratic growth in t"
         },
         {
           "id": "c",
-          "label": "P grows by a fixed 0.03 every year, giving straight-line linear growth"
+          "label": "P grows by a fixed 0.03 every year, giving straight-line linear growth over time"
         },
         {
           "id": "d",
-          "label": "P grows at a rate proportional to its current size, giving exponential growth"
+          "label": "P grows at a rate proportional to its size, giving exponential growth"
         }
       ],
       "answerKey": {
@@ -1739,7 +1739,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Explicit Euler, because its single slope evaluation per step keeps the error small"
+          "label": "Explicit Euler, because the solution y is smooth and bounded by cos t, so h = 0.01 resolves it"
         },
         {
           "id": "b",
@@ -1751,7 +1751,7 @@
         },
         {
           "id": "d",
-          "label": "Classical RK4, because its fourth-order accuracy covers the large decay rate"
+          "label": "Classical RK4, because its stability region is wide enough to cover h = 0.01 here"
         }
       ],
       "answerKey": {
@@ -2367,23 +2367,23 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "A plant obeys y' = 2y + u with feedback u = -k y. The design requires the closed-loop response to decay like e^(-4t), a time constant of exactly 0.25 s. Which gain k meets it?",
+      "prompt": "A plant obeys y' = 2y + u + d, where d is a constant disturbance. The feedback is u = -k y. The design requires the closed-loop transient to decay like e^(-4t), a time constant of exactly 0.25 s, and the disturbance to shift the steady state without changing the decay rate. Which gain k should you choose?",
       "options": [
         {
           "id": "a",
-          "label": "k = 4"
+          "label": "k = 4, because the time constant 0.25 s means the pole must sit at -1/0.25 = -4 and k equals that decay rate"
         },
         {
           "id": "b",
-          "label": "k = -2"
+          "label": "k = -2, because the open-loop pole is +2 and the feedback must cancel it to reach a pole at -4"
         },
         {
           "id": "c",
-          "label": "k = 6"
+          "label": "k = 6, because the closed-loop pole 2 - k must equal -4 and the constant d does not move the pole"
         },
         {
           "id": "d",
-          "label": "k = 2"
+          "label": "k = 2, because the gain must cancel the open-loop pole at +2 so that the disturbance d is rejected"
         }
       ],
       "answerKey": {

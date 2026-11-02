@@ -617,7 +617,7 @@
         },
         {
           "id": "b",
-          "label": "It opens port 3000 on the host so outside clients can connect to the app"
+          "label": "It publishes port 3000 to the same port on the host so outside clients can connect to the app"
         },
         {
           "id": "c",
@@ -1000,7 +1000,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`COPY . .` last, with `RUN npm install` placed after it, so the cache is always reused on rebuilds"
+          "label": "`COPY . .` first, then `RUN npm install`, so the install layer is cached whenever the file list is unchanged"
         },
         {
           "id": "b",
@@ -1012,7 +1012,7 @@
         },
         {
           "id": "d",
-          "label": "`COPY . .` first, then `RUN npm install`, so every file exists when packages install"
+          "label": "`COPY . .` first, then `RUN npm install`, so every file exists when packages install and layers cache"
         }
       ],
       "answerKey": {
@@ -2107,7 +2107,7 @@
         },
         {
           "id": "c",
-          "label": "Use `RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm ci` and supply the secret at build time through BuildKit"
+          "label": "Use `RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm ci` and pass the secret with BuildKit"
         },
         {
           "id": "d",

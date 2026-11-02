@@ -112,7 +112,7 @@
       "stage": "novice",
       "bloom": "C1",
       "kind": "single_choice",
-      "prompt": "Which flip-flop has a single data input D whose value is copied to Q on the active clock edge?",
+      "prompt": "Which flip-flop copies its single data input to Q on the active clock edge, so that Q equals the previous input value after each edge?",
       "options": [
         {
           "id": "a",
@@ -1540,7 +1540,7 @@
         },
         {
           "id": "d",
-          "label": "Its output is combinational in the inputs as well as the state, so mid-cycle input changes pass straight to the output."
+          "label": "Its output depends combinationally on the inputs as well as the state, so mid-cycle input changes reach it."
         }
       ],
       "answerKey": {
@@ -1559,7 +1559,7 @@
       "stage": "proficient",
       "bloom": "C4",
       "kind": "single_choice",
-      "prompt": "A 4-bit asynchronous ripple counter (each flip-flop clocked by the previous stage's output, counting up) changes from 0111 to 1000. Which sequence of states can be observed on Q3Q2Q1Q0 during the change?",
+      "prompt": "A 4-bit asynchronous ripple counter (each flip-flop clocked by the previous stage's output, counting up) changes from 0111 to 1000. Ignoring the starting state, which sequence of states can be observed on Q3Q2Q1Q0 during the change, ending in the final state?",
       "options": [
         {
           "id": "a",
@@ -1602,7 +1602,7 @@
         },
         {
           "id": "b",
-          "label": "Raising the supply voltage is the only reliable fix, because hold margin depends on the flip-flop's setup time alone."
+          "label": "Raising the supply voltage will clear it, because faster gates shrink the flip-flop's required hold time below the skew in the path."
         },
         {
           "id": "c",
@@ -1610,7 +1610,7 @@
         },
         {
           "id": "d",
-          "label": "Changing the clock period will not clear it; adding delay on the data path is the usual fix, since hold is a same-edge race."
+          "label": "Changing the clock period will not clear it; adding data-path delay is the usual fix, since hold is a same-edge race."
         }
       ],
       "answerKey": {
@@ -1782,11 +1782,11 @@
         },
         {
           "id": "c",
-          "label": "Carry-lookahead adder from 4-bit groups with a second-level lookahead unit, trading modest extra gates for far fewer carry stages."
+          "label": "Carry-lookahead adder from 4-bit groups with a second-level lookahead unit, giving far fewer carry stages for modest extra gates."
         },
         {
           "id": "d",
-          "label": "Ripple-carry adder with upsized gates, because it has the smallest area and the delay is acceptable once gates are sized."
+          "label": "Ripple-carry adder with upsized gates, because it has the smallest area and its delay becomes acceptable once the gates are sized."
         }
       ],
       "answerKey": {
@@ -1879,7 +1879,7 @@
       "options": [
         {
           "id": "a",
-          "label": "4 gates: N1 = NAND(A,B); N2 = NAND(A,N1); N3 = NAND(B,N1); Y = NAND(N2,N3), sharing N1 as common input."
+          "label": "4 gates: N1 = NAND(A,B); N2 = NAND(A,N1); N3 = NAND(B,N1); Y = NAND(N2,N3)."
         },
         {
           "id": "b",
@@ -2205,15 +2205,15 @@
         },
         {
           "id": "b",
-          "label": "Switch to a 12-bit binary counter encoding, since fewer decoded state bits always give faster next-state logic"
+          "label": "Switch to a compact 4-bit encoding hand-assigned to minimise bit changes, since fewer state bits always give faster logic"
         },
         {
           "id": "c",
-          "label": "Switch to one-hot, since each next-state bit depends on few predecessors and logic depth shrinks at the cost of flops"
+          "label": "Switch to one-hot, since each next-state bit depends on few predecessors and depth shrinks at the cost of flops"
         },
         {
           "id": "d",
-          "label": "Switch to Gray encoding, since single-bit transitions reduce the logic depth of next-state functions"
+          "label": "Switch to Gray encoding, since single-bit transitions guarantee fewer LUT levels in every next-state function"
         }
       ],
       "answerKey": {

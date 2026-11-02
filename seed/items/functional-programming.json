@@ -612,7 +612,7 @@
         },
         {
           "id": "c",
-          "label": "`function greet() { return \"hi\"; }`"
+          "label": "`function total(xs) { return xs.length * 2; }`"
         },
         {
           "id": "d",
@@ -710,11 +710,11 @@
       "options": [
         {
           "id": "a",
-          "label": "The function is impure only because it returns a value instead of printing it"
+          "label": "The function is impure only because it returns a value instead of just printing it"
         },
         {
           "id": "b",
-          "label": "`return cart` makes a hidden copy, so older references become out of date"
+          "label": "`return cart` makes a hidden copy of the array, so older references become stale"
         },
         {
           "id": "c",
@@ -722,7 +722,7 @@
         },
         {
           "id": "d",
-          "label": "`push` changes the original array, so every variable pointing to it sees the new item"
+          "label": "`push` changes the original array, so every variable pointing to it sees the item"
         }
       ],
       "answerKey": {
@@ -1166,19 +1166,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`f(x) = x * 2`"
+          "label": "`const f = (x) => x * 2`"
         },
         {
           "id": "b",
-          "label": "`f(x) = x + Math.random()`"
+          "label": "`const f = (x) => x + Date.now() % 1`"
         },
         {
           "id": "c",
-          "label": "`f(list) = list.push(1)` mutating the argument"
+          "label": "`const f = (list) => { list.sort(); return list; }`"
         },
         {
           "id": "d",
-          "label": "`f(list) = list.concat([1])` returning a new list"
+          "label": "`const f = (list) => [...list].sort()`"
         }
       ],
       "answerKey": {
@@ -1241,7 +1241,7 @@
         },
         {
           "id": "b",
-          "label": "All closures capture the same function-scoped variable `i`, which is 3 after the loop"
+          "label": "All closures share one function-scoped `i`, which is 3 after the loop ends"
         },
         {
           "id": "c",
@@ -1650,15 +1650,15 @@
       "stage": "proficient",
       "bloom": "C4",
       "kind": "multi_choice",
-      "prompt": "Which of these functions are impure, based on how they behave? (a) reads a module-level `let rate` that other code reassigns, (b) builds a result with a local array and `push`, then returns it, (c) writes a line to the console and returns its input, (d) returns `Math.max(...nums)`. Select all that apply.",
+      "prompt": "Which of these functions are impure, based on how they behave? Select all that apply.",
       "options": [
         {
           "id": "a",
-          "label": "Reads a reassignable module-level `rate`"
+          "label": "Reads a reassignable module-level `rate` that other code can change"
         },
         {
           "id": "b",
-          "label": "Writes to the console and returns its input"
+          "label": "Writes a line to the console and returns its input"
         },
         {
           "id": "c",
@@ -1768,11 +1768,11 @@
         },
         {
           "id": "c",
-          "label": "Mutate one state object and store a log of inverse operations in a separate list"
+          "label": "Mutate one state object in place and keep a log of inverse operations to replay for undo"
         },
         {
           "id": "d",
-          "label": "Deep clone the full state on each edit so every snapshot is independent"
+          "label": "Deep clone the full state on each edit so every snapshot is fully independent"
         }
       ],
       "answerKey": {
@@ -2041,7 +2041,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Freeze the top-level object and mutate nested values, since freezing prevents every kind of change"
+          "label": "Freeze the top-level object and mutate nested values, since a frozen top level keeps earlier versions safe from later changes"
         },
         {
           "id": "b",
@@ -2049,11 +2049,11 @@
         },
         {
           "id": "c",
-          "label": "Deep copy the whole collection on every update, which isolates versions but costs linear time and memory each time"
+          "label": "Deep copy the whole collection on every update, so each saved version is fully isolated from later updates"
         },
         {
           "id": "d",
-          "label": "Mutate in place and keep a diff log, because immutable updates always cost more than any log could"
+          "label": "Mutate in place and record a reverse diff per update, so undo replays diffs instead of storing whole copies"
         }
       ],
       "answerKey": {
@@ -2248,7 +2248,7 @@
       "stage": "expert",
       "bloom": "C6",
       "kind": "single_choice",
-      "prompt": "Which implementation of `map(f, xs)` built only from `reduce` returns a new list in the original order without mutating `xs`?",
+      "prompt": "You must implement `map(f, xs)` using only `reduce`, so that it returns a new list in the original order, does not mutate `xs`, and is safe to call on a large input. Which implementation best meets the first two requirements while remaining a pure function?",
       "options": [
         {
           "id": "a",

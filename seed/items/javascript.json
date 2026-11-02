@@ -507,7 +507,7 @@
         },
         {
           "id": "c",
-          "label": "`const` makes the value deeply immutable, while `let` allows its contents to change"
+          "label": "`const` makes the value deeply immutable, so object properties cannot change, while `let` allows its contents to change"
         },
         {
           "id": "d",
@@ -715,7 +715,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`const` locks property values, but reassigning a whole object is a syntax mistake"
+          "label": "`const` locks property values, but reassigning a whole object is a syntax mistake that the parser rejects"
         },
         {
           "id": "b",
@@ -727,7 +727,7 @@
         },
         {
           "id": "d",
-          "label": "`const` fixes the binding to one object, but that object's properties can still change"
+          "label": "`const` fixes the binding to one object, but its properties can still change"
         }
       ],
       "answerKey": {
@@ -855,19 +855,19 @@
       "options": [
         {
           "id": "a",
-          "label": "`[3, 4, 5].map((sum, n) => sum + n)`"
+          "label": "`[3, 4, 5].map((sum, n) => sum + n, 0)`"
         },
         {
           "id": "b",
-          "label": "`[3, 4, 5].forEach((sum, n) => sum + n)`"
+          "label": "`[3, 4, 5].forEach((sum, n) => sum + n, 0)`"
         },
         {
           "id": "c",
-          "label": "`[3, 4, 5].reduce((sum, n) => sum + n, 0)`"
+          "label": "`[3, 4, 5].reduce((sum, n) => sum + n)`"
         },
         {
           "id": "d",
-          "label": "`[3, 4, 5].filter((sum, n) => sum + n)`"
+          "label": "`[3, 4, 5].filter((sum, n) => sum + n, 0)`"
         }
       ],
       "answerKey": {
@@ -1102,7 +1102,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`const f = counter.inc; f.call();`"
+          "label": "`const f = counter.inc; f.apply(undefined, []);`"
         },
         {
           "id": "b",

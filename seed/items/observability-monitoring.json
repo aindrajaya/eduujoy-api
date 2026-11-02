@@ -1283,19 +1283,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Network time between the two child spans, which spans never record"
+          "label": "Network latency between the two child spans, which is never recorded inside any span"
         },
         {
           "id": "b",
-          "label": "Sampling dropped about 580 ms of the trace, so the data is unreliable"
+          "label": "Sampling dropped about 580 ms of the trace, so the recorded span data is unreliable"
         },
         {
           "id": "c",
-          "label": "Time in the parent outside its instrumented children, such as uninstrumented work or waiting"
+          "label": "Parent time outside its instrumented children, such as uninstrumented work or waiting"
         },
         {
           "id": "d",
-          "label": "Clock drift between hosts, since child spans always include their own network transit time"
+          "label": "Clock drift between hosts, which inflates the parent span while child durations stay accurate"
         }
       ],
       "answerKey": {
@@ -2286,7 +2286,7 @@
         },
         {
           "id": "b",
-          "label": "Put the trace id in the payload body and start a new root trace in the consumer, then join traces by searching the id"
+          "label": "Put the trace id in the payload body and start a new root trace in the consumer, then join the traces afterwards by searching on that id"
         },
         {
           "id": "c",

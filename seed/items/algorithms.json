@@ -324,7 +324,7 @@
       "stage": "novice",
       "bloom": "C2",
       "kind": "single_choice",
-      "prompt": "Which growth rate becomes slowest as n gets very large?",
+      "prompt": "Which running time makes an algorithm slowest when n gets very large?",
       "options": [
         {
           "id": "a",
@@ -644,7 +644,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It splits the problem into independent halves that never repeat"
+          "label": "It splits the problem into independent halves that never repeat, so no work is shared"
         },
         {
           "id": "b",
@@ -656,7 +656,7 @@
         },
         {
           "id": "d",
-          "label": "It stores results of overlapping subproblems so each is computed only once"
+          "label": "It stores results of overlapping subproblems so each is computed once"
         }
       ],
       "answerKey": {
@@ -1207,11 +1207,11 @@
       "options": [
         {
           "id": "a",
-          "label": "For each element, binary search for target minus that element"
+          "label": "For each element, binary search the rest of the array for target minus that element"
         },
         {
           "id": "b",
-          "label": "Insert each element into a hash set and check complements"
+          "label": "Insert each element into a hash set and check whether its complement is already there"
         },
         {
           "id": "c",
@@ -1417,7 +1417,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The table has n*W cells, so memory also grows with the value of W"
+          "label": "Running time and table size are proportional to the numeric value of W, not to the length of its encoding"
         },
         {
           "id": "b",
@@ -1663,7 +1663,7 @@
         },
         {
           "id": "b",
-          "label": "Doubling W's bit-length can square the table size, so it is not polynomial in input size"
+          "label": "Because the bound is polynomial in the numeric value W, it is polynomial in the input size, since W is written in unary"
         },
         {
           "id": "c",
@@ -1804,19 +1804,19 @@
       "options": [
         {
           "id": "a",
-          "label": "Sound, since a worst-case bound is the only reliable basis and constants or memory are secondary concerns"
+          "label": "Sound, since a worst-case bound is the only reliable basis for choosing and constants or memory are secondary concerns"
         },
         {
           "id": "b",
-          "label": "Sound, since merge sort is also in place and faster than quicksort on every input distribution"
+          "label": "Sound, since merge sort is also in place and is faster than quicksort on every input distribution"
         },
         {
           "id": "c",
-          "label": "Unsound, since randomised quicksort has expected O(n log n) and sorts in place, with good cache behaviour"
+          "label": "Unsound, since randomised quicksort has expected O(n log n) and sorts in place with good cache use"
         },
         {
           "id": "d",
-          "label": "Unsound, since quicksort is actually O(n log n) in the worst case once a random pivot has been used"
+          "label": "Unsound, since quicksort is actually O(n log n) in the worst case once a random pivot has been chosen"
         }
       ],
       "answerKey": {
@@ -2375,11 +2375,11 @@
       "options": [
         {
           "id": "a",
-          "label": "A sparse table built once, answering each window maximum with two overlapping lookups"
+          "label": "A sparse table built once over the whole array, answering each window maximum with two overlapping lookups"
         },
         {
           "id": "b",
-          "label": "A max-heap with lazy deletion of expired entries, popping stale tops before reading each maximum"
+          "label": "A max-heap with lazy deletion of expired entries, popping stale tops before reading each window maximum"
         },
         {
           "id": "c",
@@ -2387,7 +2387,7 @@
         },
         {
           "id": "d",
-          "label": "A deque of indices with decreasing values: pop smaller values from the back, pop expired indices from the front"
+          "label": "A deque of indices with decreasing values, dropping smaller ones at the back and expired ones at the front"
         }
       ],
       "answerKey": {
@@ -2459,11 +2459,11 @@
         },
         {
           "id": "c",
-          "label": "A sorted array of strings, using binary search to find the prefix range, then scanning the range for top weights"
+          "label": "A sorted array of strings, using binary search to find the prefix range, then scanning that whole range with a size-5 min-heap to keep the top weights"
         },
         {
           "id": "d",
-          "label": "A trie where each node stores its precomputed top 5 completions, so a query walks the prefix and reads that list"
+          "label": "A trie whose nodes each store a precomputed top 5, so a query walks the prefix and reads that list"
         }
       ],
       "answerKey": {

@@ -1637,7 +1637,7 @@
       "options": [
         {
           "id": "a",
-          "label": "The median of the backends is too high, so average latency drives the slowness"
+          "label": "The backend median of 5 ms is too high, so average latency across calls drives the slowness"
         },
         {
           "id": "b",
@@ -1645,11 +1645,11 @@
         },
         {
           "id": "c",
-          "label": "Parallel calls add up their latencies, so the total is about 40 times the median"
+          "label": "Parallel calls add up their latencies, so the total is about 40 times the 5 ms median"
         },
         {
           "id": "d",
-          "label": "The network between services is saturated, which is the only cause of waiting for all"
+          "label": "Network saturation between the services is the cause, since waiting for all calls floods the links"
         }
       ],
       "answerKey": {
@@ -1748,7 +1748,7 @@
         },
         {
           "id": "b",
-          "label": "Let each web server track its own seat quota and sync quotas every minute"
+          "label": "Let each web server track its own seat quota in memory and sync the quotas between servers every minute"
         },
         {
           "id": "c",
@@ -1956,7 +1956,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Sender user ID, which groups a user's messages but splits conversations apart"
+          "label": "Sender user ID, which groups a user's messages but splits each conversation across many shards"
         },
         {
           "id": "b",
@@ -1964,11 +1964,11 @@
         },
         {
           "id": "c",
-          "label": "Message ID hash, which spreads writes evenly but scatters each conversation"
+          "label": "Message ID hash, which spreads writes evenly but scatters each conversation across all shards"
         },
         {
           "id": "d",
-          "label": "Conversation ID plus a time bucket, so reads stay local and large channels spread over buckets"
+          "label": "Conversation ID plus a time bucket, keeping recent reads local while big channels spread out"
         }
       ],
       "answerKey": {

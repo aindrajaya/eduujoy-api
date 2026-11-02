@@ -684,7 +684,7 @@
       "stage": "advanced_beginner",
       "bloom": "C2",
       "kind": "multi_choice",
-      "prompt": "Which of these are conditions that must all hold for a deadlock to occur? Select all that apply.",
+      "prompt": "Which of these are among the four conditions that must all hold for a deadlock to occur? Select all that apply.",
       "options": [
         {
           "id": "a",
@@ -760,7 +760,7 @@
       "stage": "advanced_beginner",
       "bloom": "C3",
       "kind": "single_choice",
-      "prompt": "Two threads each run `for i in range(1000): count += 1` on a shared `count` that starts at 0, with no lock. Which final value is possible?",
+      "prompt": "Two threads each run `for i in range(1000): count += 1` on a shared `count` that starts at 0, with no lock. Which final value is NOT possible?",
       "options": [
         {
           "id": "a",
@@ -768,7 +768,7 @@
         },
         {
           "id": "b",
-          "label": "Exactly 2000 every time, because both loops have equal length"
+          "label": "2000, because every read happened to see the latest value"
         },
         {
           "id": "c",
@@ -776,18 +776,14 @@
         },
         {
           "id": "d",
-          "label": "Exactly 1000, because the second thread's work is discarded"
+          "label": "1000, because both threads read stale values every time"
         }
       ],
       "answerKey": {
         "optionIds": [
-          "a"
+          "c"
         ]
       },
-      "rubric": [
-        "Lost updates make results below 2000 possible; it can never exceed 2000.",
-        "Distractors assume the loop is safe, or that updates are discarded wholesale or doubled."
-      ],
       "reviewed": false
     },
     {
@@ -935,7 +931,7 @@
       "stage": "advanced_beginner",
       "bloom": "C3",
       "kind": "multi_choice",
-      "prompt": "Several threads run at once. Which of these need a lock or other synchronisation? Select all that apply.",
+      "prompt": "Several threads run at once. Assume no thread-safety guarantees beyond the language's basic rules. Which of these need a lock or other synchronisation? Select all that apply.",
       "options": [
         {
           "id": "a",
@@ -1111,23 +1107,23 @@
       "stage": "competent",
       "bloom": "C3",
       "kind": "single_choice",
-      "prompt": "A producer puts 5 items quickly into a blocking queue with capacity 2. The consumer takes one item per second. What does the producer do when it tries to add the third item while the queue is full?",
+      "prompt": "A producer calls the queue's standard put operation to add 5 items quickly into a bounded blocking queue with capacity 2. The consumer takes one item per second. What happens to the producer when it tries to add the third item while the queue is full?",
       "options": [
         {
           "id": "a",
-          "label": "It grows the queue past capacity so the item fits"
+          "label": "It grows the queue past capacity so the third item fits"
         },
         {
           "id": "b",
-          "label": "It throws an error that ends the producer thread"
+          "label": "It throws a queue-full exception that ends the producer thread"
         },
         {
           "id": "c",
-          "label": "It silently drops the item and moves on to the next"
+          "label": "It silently discards the third item and goes on to the fourth"
         },
         {
           "id": "d",
-          "label": "It blocks until the consumer frees a slot"
+          "label": "It waits until the consumer removes an item and frees a slot"
         }
       ],
       "answerKey": {
@@ -1146,7 +1142,7 @@
       "stage": "competent",
       "bloom": "C3",
       "kind": "single_choice",
-      "prompt": "In CPython, you must speed up a CPU-bound image filter by using 4 cores. Which approach fits best?",
+      "prompt": "In CPython, you must speed up a CPU-bound image filter written in pure Python (no C extensions that release the GIL) by using 4 cores. Which approach fits best?",
       "options": [
         {
           "id": "a",
@@ -1392,23 +1388,23 @@
       "stage": "competent",
       "bloom": "C4",
       "kind": "single_choice",
-      "prompt": "A program has 20% strictly serial work and 80% perfectly parallelisable work. Using Amdahl's law, which is the best estimate of speedup on 8 cores?",
+      "prompt": "A program has 20% strictly serial work and 80% perfectly parallelisable work. Using Amdahl's law, which is the best estimate of speedup on 8 cores, and what limits it?",
       "options": [
         {
           "id": "a",
-          "label": "About 3.3x"
+          "label": "About 3.3x; the serial 20% caps the gain even with many cores"
         },
         {
           "id": "b",
-          "label": "About 6.4x"
+          "label": "About 6.4x; only the parallel 80% is sped up by 8, so 0.8 x 8"
         },
         {
           "id": "c",
-          "label": "About 5x"
+          "label": "About 5x; the speedup is the average of 8 cores and the 20% serial share"
         },
         {
           "id": "d",
-          "label": "About 8x"
+          "label": "About 8x; perfectly parallel work lets speedup match the core count"
         }
       ],
       "answerKey": {
@@ -1576,7 +1572,7 @@
         },
         {
           "id": "b",
-          "label": "The global interpreter lock lets only one thread execute Python bytecode at a time, so CPU-bound threads cannot run in parallel"
+          "label": "The global interpreter lock lets only one thread run Python bytecode at a time, so CPU-bound threads cannot run in parallel"
         },
         {
           "id": "c",

@@ -507,7 +507,7 @@
         },
         {
           "id": "b",
-          "label": "`==` compares object references, while `equals` compares the characters"
+          "label": "`==` compares object references, while `equals` compares characters"
         },
         {
           "id": "c",
@@ -1501,11 +1501,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`null`, because Sub's field initialisers run only after Base's constructor has finished"
+          "label": "`null`, because Sub's field initialisers run after Base's constructor finishes"
         },
         {
           "id": "b",
-          "label": "A `NullPointerException`, because `name` cannot be read during construction"
+          "label": "A `NullPointerException`, because `name` cannot be read while the object is still being constructed"
         },
         {
           "id": "c",
@@ -1532,7 +1532,7 @@
       "stage": "proficient",
       "bloom": "C4",
       "kind": "single_choice",
-      "prompt": "A list `[\"a\",\"b\",\"c\"]` is an `ArrayList<String>` iterated with a for-each loop that calls `list.remove(...)` on the current element. Which removal completes the loop without a `ConcurrentModificationException`?",
+      "prompt": "A list `[\"a\",\"b\",\"c\"]` is an `ArrayList<String>` iterated with a for-each loop that calls `list.remove(...)` on the current element. Removing which element during iteration lets the loop end normally without a `ConcurrentModificationException`?",
       "options": [
         {
           "id": "a",
@@ -1544,7 +1544,7 @@
         },
         {
           "id": "c",
-          "label": "None; every structural change during iteration is detected by the next call to next()"
+          "label": "Removing any one element when visited, because the modCount check runs only on hasNext()"
         },
         {
           "id": "d",
@@ -1676,11 +1676,11 @@
       "options": [
         {
           "id": "a",
-          "label": "`hashCode` returns the constant 1 for every point, so lookups skip the correct bucket"
+          "label": "`hashCode` returns the constant 1 for every point, so all points share one bucket and lookups can no longer find the stored entry"
         },
         {
           "id": "b",
-          "label": "`equals` compares x and y while `hashCode` uses only x, so lookups land in wrong buckets"
+          "label": "`equals` compares x and y while `hashCode` uses only x, so equal points can end up with different hash codes"
         },
         {
           "id": "c",
@@ -2064,7 +2064,7 @@
       "stage": "expert",
       "bloom": "C5",
       "kind": "single_choice",
-      "prompt": "Criteria: a utility copies elements from a source list into a destination list; it must accept a `List<Number>` destination with a `List<Integer>` source, and must stop the method from adding to the source. Which signature is best?",
+      "prompt": "Criteria: a generic utility copies elements from a source list into a destination list; it must accept a `List<Number>` destination with a `List<Integer>` source, and the compiler must prevent the method body from adding to the source. Which signature is best?",
       "options": [
         {
           "id": "a",
@@ -2249,7 +2249,7 @@
       "options": [
         {
           "id": "a",
-          "label": "Extend `HashMap` and override `removeEldestEntry` to return `size() > 100`, relying on hash order for eviction"
+          "label": "Extend `HashMap` and track recency in a separate `ArrayList` of keys, removing index 0 when the size exceeds 100"
         },
         {
           "id": "b",
@@ -2389,7 +2389,7 @@
       "options": [
         {
           "id": "a",
-          "label": "`Comparator.comparing(Person::name)`"
+          "label": "`Comparator.comparing(Person::name).thenComparingInt(Person::age)`"
         },
         {
           "id": "b",
@@ -2469,7 +2469,7 @@
         },
         {
           "id": "b",
-          "label": "Use `list.parallelStream().map(this::call)` and rely on the common pool's default size staying close to 20 threads"
+          "label": "Use `list.parallelStream().map(this::call).toList()` and rely on the common pool's default size staying close to 20 threads, with order kept by the stream"
         },
         {
           "id": "c",
@@ -2477,7 +2477,7 @@
         },
         {
           "id": "d",
-          "label": "Use `Executors.newSingleThreadExecutor()` and submit the tasks one after another, so input order is preserved by design"
+          "label": "Use `Executors.newSingleThreadExecutor()` and submit the tasks one after another, so order is preserved and a failed task never blocks the next"
         }
       ],
       "answerKey": {

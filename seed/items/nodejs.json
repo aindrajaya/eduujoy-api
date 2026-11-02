@@ -513,7 +513,7 @@
       "options": [
         {
           "id": "a",
-          "label": "It adds `add` to the global object for every file in the project"
+          "label": "It adds `add` to the global object so every file in the project can call it"
         },
         {
           "id": "b",
@@ -525,7 +525,7 @@
         },
         {
           "id": "d",
-          "label": "It makes `add` available to any file that calls `require` on this file"
+          "label": "It lets other files get `add` by calling `require` on this file"
         }
       ],
       "answerKey": {
@@ -1544,7 +1544,7 @@
         },
         {
           "id": "d",
-          "label": "`JSON.parse` of the large body runs synchronously on the main thread, so the event loop cannot serve other requests meanwhile"
+          "label": "`JSON.parse` of the body runs synchronously on the main thread, so the event loop cannot serve other requests meanwhile"
         }
       ],
       "answerKey": {
@@ -1641,7 +1641,7 @@
         },
         {
           "id": "b",
-          "label": "`write()` returns false when its buffer is full, but ignoring it keeps queueing chunks in memory because the reader is never paused"
+          "label": "`write()` returns false when its buffer is full, but ignoring it keeps queueing chunks because the reader is never paused"
         },
         {
           "id": "c",
@@ -1649,7 +1649,7 @@
         },
         {
           "id": "d",
-          "label": "The garbage collector cannot free Buffers, so memory grows with every chunk regardless of how the writer behaves"
+          "label": "The garbage collector cannot free Buffers that came from a file stream, so memory grows with every chunk whatever the writer does"
         }
       ],
       "answerKey": {
@@ -2042,7 +2042,7 @@
         },
         {
           "id": "c",
-          "label": "`rs.pipe(res)` alone, which handles backpressure and also destroys the source if the client disconnects"
+          "label": "`rs.pipe(res)` alone, which handles backpressure and also destroys the source stream if the client disconnects mid-transfer"
         },
         {
           "id": "d",
@@ -2354,15 +2354,15 @@
       "options": [
         {
           "id": "a",
-          "label": "Exponential backoff without jitter, generating a fresh request ID per attempt to track each retry"
+          "label": "Exponential backoff without jitter, generating a fresh request ID per attempt so each retry is tracked separately"
         },
         {
           "id": "b",
-          "label": "Retry forever at a fixed 1 s interval, because a constant rate cannot overload the API"
+          "label": "Retry forever at a fixed 1 s interval, because a constant rate per worker cannot overload the API"
         },
         {
           "id": "c",
-          "label": "Retry immediately up to 10 times, since fast retries minimise the window for duplicate charges"
+          "label": "Retry immediately up to 10 times, since fast retries minimise the window in which duplicate charges can occur"
         },
         {
           "id": "d",
