@@ -13,7 +13,7 @@ import { FakePathDesigner } from '../src/modules/pathing/application/pathing.fak
 import { PATH_DESIGNER } from '../src/modules/pathing/application/ports/path-designer';
 import { EMBEDDER, STRUCTURED_GENERATOR, WEB_SEARCHER } from '../src/shared/ai';
 import { configureApp } from '../src/shared/common/http';
-import { AppConfig } from '../src/shared/config';
+import { AppConfig, parseEnv } from '../src/shared/config';
 
 export type TestApp = NestExpressApplication;
 
@@ -60,4 +60,9 @@ export async function createTestApp(
   configureApp(app, app.get(AppConfig));
   await app.init();
   return app;
+}
+
+/** Turns path building on (A9 ships with PATH_BUILDING_ENABLED off): for the specs that exercise it. */
+export function withPathBuilding(builder: TestingModuleBuilder): TestingModuleBuilder {
+  return builder.overrideProvider(AppConfig).useValue(new AppConfig({ ...parseEnv(process.env), PATH_BUILDING_ENABLED: true }));
 }

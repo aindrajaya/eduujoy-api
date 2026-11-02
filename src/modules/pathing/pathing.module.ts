@@ -1,4 +1,4 @@
-import { Inject, Module, type OnApplicationBootstrap, type OnModuleInit } from '@nestjs/common';
+import { Inject, type MiddlewareConsumer, Module, type NestModule, type OnApplicationBootstrap, type OnModuleInit } from '@nestjs/common';
 import { ACCOUNT_DATA } from '../../shared/common/account';
 import { ReviewQueue } from '../../shared/common/review';
 import { AppConfig } from '../../shared/config';
@@ -20,6 +20,7 @@ import { WakeWaitingPaths } from './application/wake-waiting-paths.listener';
 import { ClaudePathDesigner } from './infrastructure/claude-path-designer';
 import { DrizzlePathRepository } from './infrastructure/drizzle-path.repository';
 import { PathingAccountData } from './infrastructure/pathing-account-data';
+import { PathBuildingGate } from './interface/path-building.gate';
 import { PathsController, StepsController } from './interface/paths.controller';
 
 /** Pathing (PRD-API §4, A9): path requests, the generate-path job, reads and step progress. */
@@ -43,7 +44,7 @@ import { PathsController, StepsController } from './interface/paths.controller';
   ],
   exports: [ACCOUNT_DATA.pathing],
 })
-export class PathingModule implements OnModuleInit, OnApplicationBootstrap {
+export class PathingModule implements NestModule, OnModuleInit, OnApplicationBootstrap {
   constructor(
     @Inject(JobExecutor) private readonly executor: JobExecutor,
     @Inject(EventBus) private readonly events: EventBus,
@@ -54,6 +55,10 @@ export class PathingModule implements OnModuleInit, OnApplicationBootstrap {
     @Inject(JobQueue) private readonly queue: JobQueue,
     @Inject(AppConfig) private readonly config: AppConfig,
   ) {}
+
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(PathBuildingGate).forRoutes(PathsController, StepsController);
+  }
 
   onModuleInit(): void {
     this.executor.register(this.generate);

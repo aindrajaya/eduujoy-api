@@ -21,7 +21,7 @@ import { ReservePath } from '../src/modules/billing/application/reserve-path.use
 import { PathRefundSweep } from '../src/modules/pathing/application/path-refund-sweep.handler';
 import { ReviewResolved } from '../src/shared/common/review';
 import { EventBus } from '../src/shared/events';
-import { createTestApp, type TestApp } from './app';
+import { createTestApp, type TestApp, withPathBuilding } from './app';
 import { learner, placement, readyPool, topic } from './pathing/fixtures';
 
 jest.setTimeout(60_000);
@@ -42,7 +42,7 @@ describe('paths (e2e, PRD-API §13 A9 Verify)', () => {
 
   beforeAll(async () => {
     designer = new FakePathDesigner();
-    app = await createTestApp((b) => b.overrideProvider(PATH_DESIGNER).useValue(designer));
+    app = await createTestApp((b) => withPathBuilding(b).overrideProvider(PATH_DESIGNER).useValue(designer));
     db = app.get<Database>(DATABASE);
   });
 
@@ -257,7 +257,11 @@ describe('paths (e2e, PRD-API §13 A9 Verify)', () => {
 
     const marked = await http().patch(`/v1/steps/${first?.id ?? ''}`).set(csrf).set('Cookie', cookie).send({ actionsDone: [{ n: 1, done: true }], difficulty: 'ok' });
     expect(marked.status).toBe(200);
-    expect(marked.body).toMatchObject({ id: first?.id, status: 'active', difficulty: 'ok', actions: [{ n: 1, done: true }], resources: [{ id: expect.any(String) as string }] });
+    expect(marked.body).toMatchObject({ id: first?.id, status: 'active', difficulty: 'ok', resources: [{ id: expect.any(String) as string }] });
+    // Step 1 may open with the designer's format-fallback note (select-cards), so check by number.
+    const actions = (marked.body as { actions: { n: number; done: boolean }[] }).actions;
+    expect(actions.find((a) => a.n === 1)?.done).toBe(true);
+    expect(actions.filter((a) => a.n !== 1).every((a) => !a.done)).toBe(true);
     expect((await http().patch(`/v1/steps/${second?.id ?? ''}`).set(csrf).set('Cookie', cookie).send({ status: 'completed' })).status).toBe(400);
     expect((await http().patch(`/v1/steps/${first?.id ?? ''}`).set(csrf).set('Cookie', cookie).send({})).status).toBe(400);
     const stranger = await signedIn();
@@ -274,7 +278,7 @@ describe('path refunds (e2e, user decision 23 Oct 2026)', () => {
   let db: Database;
 
   beforeAll(async () => {
-    app = await createTestApp();
+    app = await createTestApp(withPathBuilding);
     db = app.get<Database>(DATABASE);
   });
 
@@ -360,7 +364,7 @@ describe('paths when the AI budget is spent (e2e)', () => {
 
   beforeAll(async () => {
     const guard = { assertCanStart: () => Promise.reject(new AiBudgetExceededError(3.2, 3)), status: () => Promise.resolve({ exceeded: true }) };
-    app = await createTestApp((b) => b.overrideProvider(AiBudgetGuard).useValue(guard));
+    app = await createTestApp((b) => withPathBuilding(b).overrideProvider(AiBudgetGuard).useValue(guard));
     db = app.get<Database>(DATABASE);
   });
 
@@ -402,7 +406,7 @@ describe('paths on a cold pool (e2e)', () => {
 
   beforeAll(async () => {
     app = await createTestApp((b) =>
-      b.overrideProvider(WEB_DISCOVERY).useValue(web).overrideProvider(LINK_CHECKER).useValue(new FakeLinkChecker(200)).overrideProvider(EMBEDDER).useValue(embedder),
+      withPathBuilding(b).overrideProvider(WEB_DISCOVERY).useValue(web).overrideProvider(LINK_CHECKER).useValue(new FakeLinkChecker(200)).overrideProvider(EMBEDDER).useValue(embedder),
     );
     db = app.get<Database>(DATABASE);
   });
