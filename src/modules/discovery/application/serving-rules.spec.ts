@@ -1,4 +1,6 @@
-import { conceptMatches } from '../../../shared/common/concept-map';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { conceptMapSchema, conceptMatches, namesNearStage } from '../../../shared/common/concept-map';
 import { MIN_SERVED_CARDS, pageKind, type ServableCard, servedCards, serveDrop } from '../domain';
 
 // Titles and URLs are real served cards from the dev pools (3 Nov 2026).
@@ -43,26 +45,50 @@ const card = (title: string, stage: ServableCard['stage'], relevance: number, co
   concepts: concepts.map((name) => ({ name })),
 });
 
-describe('serveDrop', () => {
-  const names = ['Deployments', 'Services', 'Rolling updates'];
+// Real held and served cards from the dev pools (ep-noisy-mouse, 4 Nov 2026), with the real maps.
+const realMap = (slug: string) => conceptMapSchema.parse(JSON.parse(readFileSync(join(__dirname, '..', '..', '..', '..', 'seed', 'concept-maps', `${slug}.json`), 'utf8')));
 
-  it('drops a card two or more stages below the pool (real: novice overviews in the competent pool)', () => {
-    expect(serveDrop(card('Kubernetes Simply Explained', 'novice', 80, ['Deployments']), 'competent', names, conceptMatches)).toBe('stage');
-    expect(serveDrop(card('Kubernetes Best Practices and how to enforce them with Datree', 'advanced_beginner', 80, ['Deployments']), 'competent', names, conceptMatches)).toBeNull();
+describe('serveDrop: stage (2+ stages below the pool)', () => {
+  const names = namesNearStage(realMap('kubernetes'), 'competent');
+
+  it('holds a novice overview in the competent pool, keeps an advanced-beginner card', () => {
+    expect(serveDrop(card('Kubernetes Simply Explained', 'novice', 80, ['Kubernetes architecture']), 'competent', names, conceptMatches)).toBe('stage');
+    expect(serveDrop(card('Kubernetes Explained in 6 Minutes | k8s Architecture', 'novice', 82, []), 'competent', names, conceptMatches)).toBe('stage');
+    expect(serveDrop(card('Kubernetes Best Practices and how to enforce them with Datree', 'advanced_beginner', 80, ['Resource requests and limits']), 'competent', names, conceptMatches)).not.toBe('stage');
+  });
+});
+
+describe('serveDrop: relevance (< 70)', () => {
+  it('holds "Data Storytelling 101" (relevance 45) in the statistics competent pool', () => {
+    const c = card('Data Storytelling 101 | Think Like a Data Analyst', 'advanced_beginner', 45, ['Data Visualization vs. Data Storytelling', 'Exploratory Slicing by Dimensions'], 'https://www.youtube.com/watch?v=H79S8YDuYUU');
+    expect(serveDrop(c, 'competent', namesNearStage(realMap('statistics'), 'competent'), conceptMatches)).toBe('relevance');
+    // The floor applies with or without a map.
+    expect(serveDrop(c, 'competent', null, conceptMatches)).toBe('relevance');
+  });
+});
+
+describe('serveDrop: off-map (relevance < 85 and no map concept at the stage or either neighbour)', () => {
+  it('holds a learning-strategy video in python novice and a database-internals build in sql proficient', () => {
+    const python = namesNearStage(realMap('python'), 'novice');
+    const sql = namesNearStage(realMap('sql'), 'proficient');
+    expect(
+      serveDrop(card('How I Would Learn Python FAST (if I could start over)', 'novice', 82, ['5-Level Python Learning Pyramid', 'Problem-Solving Mindset vs Syntax Memorization', 'Cloud Development with Google Colab'], 'https://www.youtube.com/watch?v=mC4nyib2sfg'), 'novice', python, conceptMatches),
+    ).toBe('off_map');
+    expect(
+      serveDrop(card('Writing My Own Database From Scratch', 'proficient', 82, ['Naive Database Storage & Record Offsets', 'Slotted Page Architecture', 'Index-Organized Storage vs. Page Directories'], 'https://www.youtube.com/watch?v=5Pc18ge9ohI'), 'proficient', sql, conceptMatches),
+    ).toBe('off_map');
   });
 
-  it('applies the relevance floor, and the map test only below strong relevance', () => {
-    expect(serveDrop(card('Deployments', 'competent', 65, ['Deployments']), 'competent', names, conceptMatches)).toBe('relevance');
-    expect(serveDrop(card('A survey of scheduling', 'competent', 75, ['Scheduling algorithms']), 'competent', names, conceptMatches)).toBe('off_map');
-    expect(serveDrop(card('A survey of scheduling', 'competent', 88, ['Scheduling algorithms']), 'competent', names, conceptMatches)).toBeNull();
-    // Lexical match: containment counts (plural or stem variants alone do not; the matcher is a floor).
-    expect(serveDrop(card('Rolling updates in practice', 'competent', 75, ['Rolling updates and rollbacks']), 'competent', names, conceptMatches)).toBeNull();
-    // No map: no map test.
-    expect(serveDrop(card('A survey of scheduling', 'competent', 75, ['Scheduling algorithms']), 'competent', null, conceptMatches)).toBeNull();
+  it('serves the same card at relevance 85 or more, or when the topic has no map', () => {
+    const c = card('Writing My Own Database From Scratch', 'proficient', 85, ['Slotted Page Architecture'], 'https://www.youtube.com/watch?v=5Pc18ge9ohI');
+    expect(serveDrop(c, 'proficient', namesNearStage(realMap('sql'), 'proficient'), conceptMatches)).toBeNull();
+    expect(serveDrop({ ...c, quality: { relevance: 82 } }, 'proficient', null, conceptMatches)).toBeNull();
   });
+});
 
-  it('drops page kinds first', () => {
-    expect(serveDrop(card('Reference', 'competent', 95, ['Deployments'], 'https://kubernetes.io/docs/reference'), 'competent', names, conceptMatches)).toBe('page_kind');
+describe('serveDrop: page kinds come first', () => {
+  it('holds a docs index even at relevance 95', () => {
+    expect(serveDrop(card('Reference', 'competent', 95, ['Deployments'], 'https://kubernetes.io/docs/reference'), 'competent', namesNearStage(realMap('kubernetes'), 'competent'), conceptMatches)).toBe('page_kind');
   });
 });
 
@@ -76,16 +102,17 @@ describe('servedCards', () => {
   });
 
   it(`refills a pool under ${MIN_SERVED_CARDS} from its best dropped cards, never page kinds, and flags it`, () => {
+    // Real titles from the kubernetes competent pool.
     const cards = [
       card('Reference', 'competent', 99, [], 'https://kubernetes.io/docs/reference'),
-      card('Low', 'competent', 50),
-      card('Old', 'novice', 80),
-      card('K1', 'competent', 90),
-      card('K2', 'competent', 90),
-      card('K3', 'competent', 90),
+      card('Data Storytelling 101 | Think Like a Data Analyst', 'competent', 45),
+      card('Kubernetes Simply Explained', 'novice', 80),
+      card('Deployments', 'competent', 90),
+      card('Service', 'competent', 90),
+      card('Most Common Kubernetes Deployment Strategies (Examples & Code)', 'competent', 90),
     ];
     const out = servedCards(cards, 'competent', null, conceptMatches);
-    expect(out.cards.map((c) => c.title)).toEqual(['Low', 'Old', 'K1', 'K2', 'K3']);
+    expect(out.cards.map((c) => c.title)).toEqual(['Data Storytelling 101 | Think Like a Data Analyst', 'Kubernetes Simply Explained', 'Deployments', 'Service', 'Most Common Kubernetes Deployment Strategies (Examples & Code)']);
     expect(out).toMatchObject({ refilled: 2, flagged: true });
   });
 });
