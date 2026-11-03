@@ -10,6 +10,8 @@ import { type LlmCallEntry, type LlmCallRecorder } from './llm-call.recorder';
 export class TallyingRecorder implements LlmCallRecorder {
   total = 0;
   failures = 0;
+  /** Rows whose insert failed (the database dropped): retried by flushUnrecorded, never lost silently. */
+  readonly unrecorded: LlmCallEntry[] = [];
   private current: LlmCallEntry[] = [];
 
   constructor(
@@ -25,8 +27,25 @@ export class TallyingRecorder implements LlmCallRecorder {
       await this.inner.record(row);
     } catch (error) {
       this.failures += 1;
+      this.unrecorded.push(row);
       throw error;
     }
+  }
+
+  /**
+   * Retries the rows that failed to record (A8 pilot, 3 Nov 2026: a dropped connection must lose no
+   * metered spend). Each row is tried once per call; returns how many are still unrecorded.
+   */
+  async flushUnrecorded(): Promise<number> {
+    for (const row of [...this.unrecorded]) {
+      try {
+        await this.inner.record(row);
+        this.unrecorded.splice(this.unrecorded.indexOf(row), 1);
+      } catch {
+        // Still down: kept for the next try and for the run's report.
+      }
+    }
+    return this.unrecorded.length;
   }
 
   /** The rows recorded since the last call, then starts a new step. */

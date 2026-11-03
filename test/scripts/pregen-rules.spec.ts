@@ -1,4 +1,4 @@
-import { coldPoolsToday, poolStop } from '../../scripts/discovery/pregen-rules';
+import { coldPoolsToday, poolStop, REBUILD_GRACE_MS, rebuildPool } from '../../scripts/discovery/pregen-rules';
 
 describe('discovery:pregen stop rules (D1)', () => {
   const base = { spentUsd: 0, capUsd: 35, cold: true, searchesUsed: 0, guard: 90, reserve: 20 };
@@ -23,5 +23,20 @@ describe('discovery:pregen stop rules (D1)', () => {
     expect(coldPoolsToday(0, 90, 20)).toBe(35);
     expect(coldPoolsToday(40, 90, 20)).toBe(15);
     expect(coldPoolsToday(80, 90, 20)).toBe(0);
+  });
+});
+
+describe('rebuildPool (A8 pilot, 3 Nov 2026)', () => {
+  const DAY = 86_400_000;
+  const TTL = 30 * DAY;
+  const now = new Date('2026-11-03T12:00:00Z');
+  const builtAgo = (ms: number, status = 'ready') => ({ status, expiresAt: new Date(now.getTime() - ms + (status === 'thin' ? DAY : TTL)) });
+
+  it('rebuilds a pool built before the grace window, and keeps one built within it (a resumed --rebuild never pays twice)', () => {
+    expect(rebuildPool(builtAgo(11 * DAY), now, TTL, DAY)).toBe(true);
+    expect(rebuildPool(builtAgo(REBUILD_GRACE_MS), now, TTL, DAY)).toBe(true);
+    expect(rebuildPool(builtAgo(2 * 3600_000), now, TTL, DAY)).toBe(false);
+    expect(rebuildPool(builtAgo(2 * 3600_000, 'thin'), now, TTL, DAY)).toBe(false);
+    expect(rebuildPool(builtAgo(20 * 3600_000, 'thin'), now, TTL, DAY)).toBe(true);
   });
 });
