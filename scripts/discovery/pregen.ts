@@ -3,19 +3,21 @@ import { join, resolve } from 'node:path';
 import { inArray } from 'drizzle-orm';
 import { Pool } from 'pg';
 import { z } from 'zod';
-import { ANALYSE_RESOURCE_JOB } from '../../src/modules/discovery/application/jobs';
-import { pacificDay, STAGES, type Stage, YOUTUBE_SEARCH_GUARD, YOUTUBE_SEARCH_QUOTA } from '../../src/modules/discovery/domain';
+import { ANALYSE_RESOURCE_JOB, DAY_MS } from '../../src/modules/discovery/application/jobs';
+import { pacificDay, POOL_TTL_DAYS, STAGES, type Stage, YOUTUBE_SEARCH_GUARD, YOUTUBE_SEARCH_QUOTA } from '../../src/modules/discovery/domain';
 import { loadDirectDatabaseUrl } from '../../src/shared/db/cli/env';
 import { guardPool, POOL_SETTINGS } from '../../src/shared/db/db.module';
+import { isConnectionLost } from '../../src/shared/db/connection-errors';
 import { describeError } from '../../src/shared/db/redact';
 import { topics } from '../../src/shared/db/schema/catalog';
-import { ANALYSIS_RESERVE_USD, coldPoolsToday, poolStop, SEARCHES_PER_POOL } from './pregen-rules';
+import { ANALYSIS_RESERVE_USD, coldPoolsToday, poolStop, rebuildPool, SEARCHES_PER_POOL } from './pregen-rules';
 import { buildSmoke, ctx, env } from './runner';
 
 // Run by the user 1-3 days before beta, then every 30 days (YouTube's 30-day storage limit); D1 (user,
 // 23 Oct 2026; three stages and a $45 one-off ceiling): `pnpm discovery:pregen
 // [--topics scripts/discovery/pregen-topics.json] [--stages novice,advanced_beginner,competent] [--cap 45]
-// [--youtube-reserve 20] [--dry-run]`. An advanced-beginner learner's path also draws on the competent
+// [--youtube-reserve 20] [--dry-run] [--rebuild]`. `--rebuild` also builds a new version of ready pools,
+// keeping any built in the last 12 hours (so resuming never pays twice). An advanced-beginner learner's path also draws on the competent
 // pool (A9), hence three stages. A topic entry may name its own stages ({"slug", "stages"}), e.g. for
 // the pools an eval subset needs.
 // - Builds the shared topic + stage pools learners would otherwise pay for cold, metered under budget
@@ -49,6 +51,7 @@ type Plan = { slug: string; stage: Stage; action: 'skip-ready' | 'resume' | 'col
 async function main(): Promise<void> {
   const check = process.argv.includes('--check');
   const dryRun = process.argv.includes('--dry-run');
+  const rebuild = process.argv.includes('--rebuild');
   const capUsd = Number(arg('cap', '45'));
   const reserve = Number(arg('youtube-reserve', '20'));
   const stages = arg('stages', 'novice,advanced_beginner,competent').split(',').map((s) => s.trim());
@@ -89,7 +92,8 @@ async function main(): Promise<void> {
         const topicId = ids.get(slug) as string;
         const latest = await run.repo.latestPool(topicId, stage);
         const fresh = latest !== null && latest.expiresAt > now;
-        const action: Plan['action'] = fresh && latest.status === 'analysing' ? 'resume' : fresh ? 'skip-ready' : 'cold';
+        const keep = !rebuild || !rebuildPool(latest ?? { status: 'ready', expiresAt: now }, now, POOL_TTL_DAYS * DAY_MS, DAY_MS);
+        const action: Plan['action'] = fresh && latest.status === 'analysing' ? 'resume' : fresh && keep ? 'skip-ready' : 'cold';
         plans.push({ slug, stage, action, topicId, poolVersion: action === 'cold' ? (latest?.poolVersion ?? 0) + 1 : (latest?.poolVersion ?? 1) });
       }
     }
@@ -142,15 +146,23 @@ async function main(): Promise<void> {
           pool: settled?.status ?? 'missing',
           served: settled?.resourceIds.length ?? 0,
           costUsd: Math.round(calls.reduce((n, c) => n + c.costUsd, 0) * 1_000_000) / 1_000_000,
+          // Per provider: Claude web discovery, Gemini analysis (lead, 3 Nov 2026).
+          claudeUsd: Math.round(calls.filter((c) => c.provider === 'anthropic').reduce((n, c) => n + c.costUsd, 0) * 1_000_000) / 1_000_000,
+          geminiUsd: Math.round(calls.filter((c) => c.provider === 'google').reduce((n, c) => n + c.costUsd, 0) * 1_000_000) / 1_000_000,
           seconds: Math.round((Date.now() - started) / 1000),
         };
         report.push(row);
-        process.stdout.write(`${row.topic} (${row.stage}): ${row.action}, pool ${row.pool}, ${row.served} served, $${row.costUsd}\n`);
+        process.stdout.write(`${row.topic} (${row.stage}): ${row.action}, pool ${row.pool}, ${row.served} served, $${row.costUsd} (Claude $${row.claudeUsd}, Gemini $${row.geminiUsd})\n`);
       } catch (error) {
         if (error instanceof Stop) throw error;
         const calls = run.meter.take();
         const costUsd = Math.round(calls.reduce((n, c) => n + c.costUsd, 0) * 1_000_000) / 1_000_000;
         report.push({ topic: p.slug, stage: p.stage, action: p.action, error: describeError(error), costUsd });
+        // A lost database connection (3 Nov 2026) stops the run: the next pools would fail the same way.
+        // Finished pools are kept; this one resumes on the next run.
+        if (isConnectionLost(error)) {
+          throw new Stop(`database connection lost during ${p.slug} (${p.stage}): ${describeError(error)}. Resume with the same command: finished pools are skipped and this one resumes`);
+        }
         process.stdout.write(`${p.slug} (${p.stage}): FAILED, ${describeError(error)} ($${costUsd}); re-run to retry\n`);
       }
     }
@@ -159,6 +171,13 @@ async function main(): Promise<void> {
     stopped = error.message;
     process.stdout.write(`STOPPED: ${error.message}\n`);
   } finally {
+    // Spend whose llm_calls row failed to save (the connection dropped) is retried before exit; what
+    // still fails is written to the report, so no metered spend is lost.
+    let unrecorded = run.meter.unrecorded.length;
+    for (let attempt = 0; unrecorded > 0 && attempt < 3; attempt += 1) {
+      if (attempt > 0) await new Promise((r) => setTimeout(r, 2_000 * attempt));
+      unrecorded = await run.meter.flushUnrecorded();
+    }
     if (!dryRun) {
       const coldDone = report.filter((r) => r['action'] === 'cold' && !r['error']);
       const summary = {
@@ -171,15 +190,20 @@ async function main(): Promise<void> {
         totalSpentUsd: Math.round(run.meter.total * 1_000_000) / 1_000_000,
         capUsd,
         recordFailures: run.meter.failures,
+        // Calls still missing from llm_calls after the retries; listed in full in `unrecordedCalls`.
+        unrecordedCalls: unrecorded,
+        unrecordedUsd: Math.round(run.meter.unrecorded.reduce((n, c) => n + c.costUsd, 0) * 1_000_000) / 1_000_000,
       };
       const dir = join(__dirname, '..', '..', '.smoke');
       mkdirSync(dir, { recursive: true });
       const out = join(dir, `pregen-${summary.at.replace(/[:.]/g, '-')}.json`);
-      writeFileSync(out, `${JSON.stringify({ summary, pools: report }, null, 2)}\n`);
+      writeFileSync(out, `${JSON.stringify({ summary, pools: report, unrecordedCalls: run.meter.unrecorded }, null, 2)}\n`);
       process.stdout.write(`\n${JSON.stringify(summary)}\nReport: ${out}\n`);
       if (run.meter.failures > 0) process.exitCode = 1;
+      if (unrecorded > 0) process.stdout.write(`WARNING: ${unrecorded} call(s) ($${summary.unrecordedUsd}) are not in llm_calls; they are listed in the report.\n`);
     }
-    await pool.end();
+    // A dead connection can make ending the pool throw; the report is already on disk.
+    await pool.end().catch(() => undefined);
   }
 }
 

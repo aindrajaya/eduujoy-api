@@ -39,4 +39,19 @@ describe('TallyingRecorder', () => {
     expect(tally.failures).toBe(1);
     expect(tally.total).toBeCloseTo(0.05, 6);
   });
+
+  it('keeps rows that failed to record and writes them once the database is back (A8 pilot)', async () => {
+    let up = false;
+    const written: LlmCallEntry[] = [];
+    const flaky: LlmCallRecorder = { record: (e) => (up ? (written.push(e), Promise.resolve()) : Promise.reject(new Error('Connection terminated'))) };
+    const tally = new TallyingRecorder(flaky);
+
+    await expect(tally.record(entry(0.05))).rejects.toThrow('Connection terminated');
+    await expect(tally.record(entry(0.03))).rejects.toThrow();
+    expect(await tally.flushUnrecorded()).toBe(2);
+    up = true;
+    expect(await tally.flushUnrecorded()).toBe(0);
+    expect(written.map((e) => e.costUsd)).toEqual([0.05, 0.03]);
+    expect(tally.unrecorded).toEqual([]);
+  });
 });

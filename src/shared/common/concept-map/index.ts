@@ -54,3 +54,43 @@ export function pathConceptMap(map: ConceptMap, stages: readonly string[]): Path
     prerequisites: picked.flatMap((s) => s.prerequisites).filter(([a, b]) => ids.has(a) && ids.has(b)),
   };
 }
+
+const STOP = new Set(['a', 'an', 'the', 'of', 'and', 'or', 'to', 'in', 'on', 'for', 'with', 'vs', 'versus', 'how', 'what', 'why', 'using', 'use', 'basic', 'basics', 'its', 'their']);
+
+/** Lowercase, punctuation to spaces, single spaces (as pathing compares concept names). */
+export function normaliseConceptName(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}+#]+/gu, ' ')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
+function tokens(s: string): Set<string> {
+  return new Set(
+    normaliseConceptName(s)
+      .split(' ')
+      .filter((t) => t && !STOP.has(t)),
+  );
+}
+
+/** Lexical match of a concept name against map names and aliases: equal, contained (4+ chars), or token Jaccard ≥ 0.5. */
+export function conceptMatches(concept: string, names: readonly string[]): boolean {
+  const n = normaliseConceptName(concept);
+  const t = tokens(concept);
+  return names.some((x) => {
+    const m = normaliseConceptName(x);
+    if (m === n) return true;
+    if (Math.min(m.length, n.length) >= 4 && (m.includes(n) || n.includes(m))) return true;
+    const u = tokens(x);
+    const shared = [...t].filter((w) => u.has(w)).length;
+    return t.size > 0 && u.size > 0 && shared / new Set([...t, ...u]).size >= 0.5;
+  });
+}
+
+/** A map's concept names and aliases at `stage` and the stages either side of it. */
+export function namesNearStage(map: ConceptMap, stage: string): string[] {
+  const order = ['novice', 'advanced_beginner', 'competent', 'proficient', 'expert'];
+  const at = order.indexOf(stage);
+  return map.stages.filter((s) => Math.abs(order.indexOf(s.stage) - at) <= 1).flatMap((s) => s.concepts.flatMap((c) => [c.name, ...c.aliases]));
+}

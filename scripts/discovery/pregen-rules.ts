@@ -13,6 +13,20 @@ export function poolStop(input: { spentUsd: number; capUsd: number; cold: boolea
   return null;
 }
 
+/** A rebuild leaves alone a pool built this recently, so resuming `--rebuild` never pays for it twice. */
+export const REBUILD_GRACE_MS = 12 * 3600_000;
+
+/**
+ * Whether `--rebuild` should build a new version of this ready (or thin) pool (A8 pilot, 3 Nov 2026).
+ * Pools store no creation time, but their expiry was set at build time: ttlMs ahead for a ready pool,
+ * a day ahead for a thin one. A pool built within REBUILD_GRACE_MS (by this or an interrupted run) is kept.
+ */
+export function rebuildPool(pool: { status: string; expiresAt: Date }, now: Date, ttlMs: number, dayMs: number): boolean {
+  const lifetime = pool.status === 'thin' ? dayMs : ttlMs;
+  const builtAt = pool.expiresAt.getTime() - lifetime;
+  return now.getTime() - builtAt >= REBUILD_GRACE_MS;
+}
+
 /** Cold pools that still fit today's YouTube room. */
 export function coldPoolsToday(searchesUsed: number, guard: number, reserve: number): number {
   return Math.max(0, Math.floor((guard - reserve - searchesUsed) / SEARCHES_PER_POOL));
