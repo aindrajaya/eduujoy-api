@@ -10,7 +10,8 @@ import { GetConceptMapQuery } from '../../src/modules/catalog/application/get-co
 import { DrizzleConceptMapReader } from '../../src/modules/catalog/infrastructure/drizzle-concept-map.reader';
 import { designPath } from '../../src/modules/pathing/application/design-loop';
 import { ClaudePathDesigner } from '../../src/modules/pathing/infrastructure/claude-path-designer';
-import { BANDS, type Stage, targetStage } from '../../src/modules/pathing/domain';
+import { BANDS, type Stage, stepMaxMinutes, targetStage } from '../../src/modules/pathing/domain';
+import { usableInPreferredFormat } from '../../src/modules/pathing/application/select-cards';
 import { type DesignedStep } from '../../src/modules/pathing/application/ports/path-designer';
 import { PromptRegistry, type StructuredGenerator, wrapUntrusted } from '../../src/shared/ai';
 import { ClaudeStructuredGenerator } from '../../src/shared/ai/claude/claude.generator';
@@ -184,8 +185,10 @@ async function main(): Promise<void> {
 /** One case: the production design loop on the existing pools, then the judge. */
 async function evaluate(run: EvalRun, c: EvalCase, topic: { id: string; name: string; domain: string | null }): Promise<CaseResult & Record<string, unknown>> {
   const cards: ServedCard[] = [];
+  // As generate-path does: the learner's format is refilled first when the serving rules leave it short.
+  const usable = usableInPreferredFormat({ language: process.env['PATH_RESOURCE_LANGUAGE'] ?? 'en', formats: c.formats, stepMax: stepMaxMinutes(c.weeklyHours) });
   for (const stage of caseStages(c)) {
-    for (const card of (await run.served.pool(topic.id, stage)).cards) if (!cards.some((x) => x.resourceId === card.resourceId)) cards.push(card);
+    for (const card of (await run.served.pool(topic.id, stage, usable ? { usable } : undefined)).cards) if (!cards.some((x) => x.resourceId === card.resourceId)) cards.push(card);
   }
   const target = targetStage(c.placement.stage);
   const map = process.argv.includes('--no-maps') ? null : readConceptMap(c.topic);

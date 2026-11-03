@@ -57,6 +57,21 @@ export function selectCards(cards: ServedCard[], options: { language: string; fo
   return matching.length >= MIN_FORMAT_CARDS ? { cards: matching, formatFallback: false, ...counts } : { cards: inLanguage, formatFallback: true, ...counts };
 }
 
+/**
+ * Whether selectCards would keep this card for this learner in their preferred formats (in language,
+ * not a stub, fits a step, a wanted type). Discovery's serving rules use it to refill the learner's
+ * format first (lead, 4 Nov 2026); null when the learner has no format preference.
+ */
+export function usableInPreferredFormat(options: { language: string; formats: ResourceFormat[]; stepMax: number }): ((card: ServedCard) => boolean) | null {
+  if (options.formats.length === 0) return null;
+  const wanted = new Set(options.formats.flatMap((f) => FORMAT_TYPES[f]));
+  return (card) =>
+    wanted.has(card.type) &&
+    card.language.toLowerCase() === options.language.toLowerCase() &&
+    !(STUB_TYPES.includes(card.type) && card.readingMin !== null && card.readingMin < MIN_STUB_READING_MIN) &&
+    fitsStep(card, options.stepMax);
+}
+
 /** Concepts about the material rather than the topic (check (c) calibration: "Installation", "API Reference"). */
 export const META_CONCEPTS: readonly string[] = [
   'installation',

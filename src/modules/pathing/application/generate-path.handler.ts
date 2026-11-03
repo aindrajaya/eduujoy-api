@@ -11,7 +11,7 @@ import { RequestDiscovery } from '../../discovery/application/request-discovery.
 import { ServedCardsQuery } from '../../discovery/application/served-cards.query';
 import { PATH_LENGTH_WEEKS, PathGenerated, type Stage, stepMaxMinutes } from '../domain';
 import { aliasPool, assembleSteps } from './assemble';
-import { coreConcepts, selectCards } from './select-cards';
+import { coreConcepts, selectCards, usableInPreferredFormat } from './select-cards';
 import { designPath } from './design-loop';
 import { GENERATE_PATH_JOB, type GeneratePathPayload, generatePathPayload } from './jobs';
 import { stepView } from './path.view';
@@ -147,8 +147,10 @@ export class GeneratePath implements JobHandler<GeneratePathPayload> {
   private async pools(path: PathRecord, payload: GeneratePathPayload, ctx: JobContext): Promise<ServedCard[]> {
     const cards: ServedCard[] = [];
     const waiting: { stage: Stage; analysed: number; candidates: number }[] = [];
+    // The learner's format is refilled first when the serving rules leave it short (lead, 4 Nov 2026).
+    const usable = usableInPreferredFormat({ language: this.settings.language, formats: payload.formats, stepMax: stepMaxMinutes(path.weeklyHours ?? 3) });
     for (const stage of payload.stages) {
-      const { pool, cards: served } = await this.served.pool(path.topicId, stage);
+      const { pool, cards: served } = await this.served.pool(path.topicId, stage, usable ? { usable } : undefined);
       if (!pool || pool.expiresAt.getTime() <= Date.now()) {
         const outcome = await this.discovery.execute({ topicId: path.topicId, stage, userId: path.userId, charged: { budgetScope: payload.budgetScope } });
         if (outcome === 'over_budget') throw new ProblemException(503, 'AI_BUDGET_EXCEEDED', 'Daily AI budget reached', { detail: 'Try again after midnight UTC.' });

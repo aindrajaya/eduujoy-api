@@ -60,26 +60,56 @@ export function serveDrop(card: ServableCard, poolStage: Stage, mapNames: readon
   return null;
 }
 
+/** A learner's preferred formats need at least this many usable served cards (pathing's MIN_FORMAT_CARDS). */
+export const MIN_PREFERRED_CARDS = 3;
+
+/**
+ * The learner's preference, from the caller (pathing): which served cards it can actually use for this
+ * learner (format, language, length), so discovery needs no pathing rules of its own.
+ */
+export interface ServePreference<C> {
+  usable: (card: C) => boolean;
+}
+
 export function servedCards<C extends ServableCard>(
   cards: C[],
   poolStage: Stage,
   mapNames: readonly string[] | null,
   matches: (concept: string, names: readonly string[]) => boolean,
-): { cards: C[]; dropped: Record<ServeDrop, number>; refilled: number; flagged: boolean } {
+  prefer?: ServePreference<C>,
+): { cards: C[]; dropped: Record<ServeDrop, number>; refilled: number; formatRefilled: number; flagged: boolean } {
   const dropped: Record<ServeDrop, number> = { relevance: 0, off_map: 0, stage: 0, page_kind: 0 };
-  const kept: C[] = [];
+  const kept = new Set<C>();
   const spare: C[] = [];
+  const offMap: C[] = [];
   for (const card of cards) {
     const why = serveDrop(card, poolStage, mapNames, matches);
-    if (!why) kept.push(card);
+    if (!why) kept.add(card);
     else {
       dropped[why] += 1;
       if (why !== 'page_kind') spare.push(card);
+      if (why === 'off_map') offMap.push(card);
     }
   }
-  if (kept.length >= MIN_SERVED_CARDS || cards.length === 0) return { cards: kept, dropped, refilled: 0, flagged: false };
-  const refill = [...spare].sort((a, b) => b.quality.relevance - a.quality.relevance).slice(0, MIN_SERVED_CARDS - kept.length);
-  const back = new Set(refill);
-  // Keep the pool's order: the refilled cards stay where they were.
-  return { cards: cards.filter((c) => kept.includes(c) || back.has(c)), dropped, refilled: refill.length, flagged: true };
+  const byRelevance = (list: C[]): C[] => [...list].sort((a, b) => b.quality.relevance - a.quality.relevance);
+  let refilled = 0;
+  let formatRefilled = 0;
+  // The learner's format first (lead, 4 Nov 2026): too few usable cards in it, and pathing would fall back
+  // to every format. Only off-map holds may return: never page kinds, stage 2+ below, or relevance < 70.
+  if (prefer) {
+    const usable = [...kept].filter(prefer.usable).length;
+    for (const card of byRelevance(offMap).filter(prefer.usable).slice(0, Math.max(0, MIN_PREFERRED_CARDS - usable))) {
+      kept.add(card);
+      formatRefilled += 1;
+    }
+  }
+  // Then the served minimum, from the best held cards (never page kinds).
+  if (kept.size < MIN_SERVED_CARDS && cards.length > 0) {
+    for (const card of byRelevance(spare.filter((c) => !kept.has(c))).slice(0, MIN_SERVED_CARDS - kept.size)) {
+      kept.add(card);
+      refilled += 1;
+    }
+  }
+  // Keep the pool's order: returned cards stay where they were.
+  return { cards: cards.filter((c) => kept.has(c)), dropped, refilled, formatRefilled, flagged: refilled + formatRefilled > 0 };
 }
