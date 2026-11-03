@@ -1,37 +1,25 @@
-import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { Logger } from '@nestjs/common';
 import { sql } from 'drizzle-orm';
 import { Client } from 'pg';
-import { type ConceptMapSource, ServedCardsQuery } from '../../src/modules/discovery/application/served-cards.query';
+import { ServedCardsQuery } from '../../src/modules/discovery/application/served-cards.query';
 import { DrizzleCardReader } from '../../src/modules/discovery/infrastructure/drizzle-card.reader';
 import { type Stage } from '../../src/modules/discovery/domain';
 import { GetConceptMapQuery } from '../../src/modules/catalog/application/get-concept-map.query';
 import { DrizzleConceptMapReader } from '../../src/modules/catalog/infrastructure/drizzle-concept-map.reader';
-import { type ConceptMap, conceptMapSchema, conceptMatches } from '../../src/shared/common/concept-map';
+import { type ConceptMap, conceptMatches } from '../../src/shared/common/concept-map';
 import { createDatabase } from '../../src/shared/db';
 import { loadDirectDatabaseUrl } from '../../src/shared/db/cli/env';
 import { describeError } from '../../src/shared/db/redact';
 
-// Usage: pnpm discovery:serving-measure [--pools python:novice,sql:expert] [--maps-from-files] [--prod]
+// Usage: pnpm discovery:serving-measure [--pools python:novice,sql:expert] [--prod]
 // Read-only (the session is set read-only): for each latest pool, the analysed cards against what the
 // serving rules serve (domain serving-rules), why the rest are held back, the pool's coverage of its
 // stage's map concepts, and the pools under the served minimum. The A8 pilot's before and after
-// (lead, 3 Nov 2026) both use this reader. `--maps-from-files` reads seed/concept-maps instead of
-// topic_concept_maps (a database without migration 0017 yet); default is the database, like the app.
+// (lead, 3 Nov 2026) both use this reader. Maps come from topic_concept_maps, like the app.
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
   return i >= 0 ? process.argv[i + 1] : undefined;
-}
-
-function fileMaps(slugs: Map<string, string>): ConceptMapSource {
-  return {
-    execute: (topicId: string) => {
-      const file = join(__dirname, '..', '..', 'seed', 'concept-maps', `${slugs.get(topicId) ?? '-'}.json`);
-      return Promise.resolve(existsSync(file) ? conceptMapSchema.parse(JSON.parse(readFileSync(file, 'utf8'))) : null);
-    },
-  };
 }
 
 /** Share of the pool stage's own map concepts that at least one served card teaches. */
@@ -55,8 +43,7 @@ async function main(): Promise<void> {
       sql`SELECT DISTINCT d.topic_id, t.slug, d.stage FROM discovery_results d JOIN topics t ON t.id = d.topic_id WHERE d.status <> 'analysing' ORDER BY t.slug, d.stage`,
     );
     const rows = pools.rows.filter((p) => !wanted || wanted.includes(`${p.slug}:${p.stage}`));
-    const slugs = new Map(rows.map((p) => [p.topic_id, p.slug]));
-    const maps: ConceptMapSource = process.argv.includes('--maps-from-files') ? fileMaps(slugs) : new GetConceptMapQuery(new DrizzleConceptMapReader(db));
+    const maps = new GetConceptMapQuery(new DrizzleConceptMapReader(db));
     const reader = new DrizzleCardReader(db);
     const served = new ServedCardsQuery(reader, maps);
     let analysed = 0;

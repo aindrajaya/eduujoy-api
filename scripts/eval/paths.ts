@@ -6,6 +6,8 @@ import { Pool } from 'pg';
 import { type ServedCard } from '../../src/modules/discovery/application/ports/card.reader';
 import { ServedCardsQuery } from '../../src/modules/discovery/application/served-cards.query';
 import { DrizzleCardReader } from '../../src/modules/discovery/infrastructure/drizzle-card.reader';
+import { GetConceptMapQuery } from '../../src/modules/catalog/application/get-concept-map.query';
+import { DrizzleConceptMapReader } from '../../src/modules/catalog/infrastructure/drizzle-concept-map.reader';
 import { designPath } from '../../src/modules/pathing/application/design-loop';
 import { ClaudePathDesigner } from '../../src/modules/pathing/infrastructure/claude-path-designer';
 import { BANDS, type Stage, targetStage } from '../../src/modules/pathing/domain';
@@ -71,7 +73,8 @@ function build(client: Pool, anthropicKey: string): EvalRun {
   const anthropic = new ClaudeStructuredGenerator(new Anthropic({ apiKey: anthropicKey }));
   const generator: StructuredGenerator = new MeteredStructuredGenerator({ anthropic, google: anthropic }, meter);
   const designer = new ClaudePathDesigner(generator, prompts);
-  const served = new ServedCardsQuery(new DrizzleCardReader(db));
+  // The serving rules see each topic's map from topic_concept_maps, as in the app.
+  const served = new ServedCardsQuery(new DrizzleCardReader(db), new GetConceptMapQuery(new DrizzleConceptMapReader(db)));
   return { db, meter, prompts, generator, designer, served };
 }
 
