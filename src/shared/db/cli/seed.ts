@@ -13,7 +13,8 @@ import { loadDirectDatabaseUrl } from './env';
 import { guardConnection } from './guard';
 
 // Usage: pnpm db:seed [--dir seed] [--expect-topics 160] [--expect-retired N] [--dry-run] [--prod]
-// --dry-run loads everything in one transaction and rolls it back: real counts, nothing written.
+// --dry-run loads everything in one transaction and rolls it back: real counts, nothing written. It needs
+// no --expect-retired and prints the value to pass ("To apply: --expect-retired N").
 // Items that left the files are retired (inactive, never served to new sessions, rows kept): when any
 // would retire, --expect-retired must name the exact count (the dry run prints it). A short --dir, or
 // more than 1% (at most 200) of the active seed items, is refused with nothing written.
@@ -58,7 +59,8 @@ async function main(): Promise<void> {
     const db = createDatabase(client);
     const dryRun = values['dry-run'];
     const report = async (exec: Database): Promise<void> => {
-      const result = await loadSeed(exec, data, expectRetired === undefined ? {} : { expectRetired });
+      // A dry run needs no --expect-retired (lead, 3 Nov 2026): it prints the count to pass to the real run.
+      const result = await loadSeed(exec, data, { ...(expectRetired === undefined ? {} : { expectRetired }), dryRun });
       const mapped = await loadConceptMaps(exec, maps);
       const counts = await topicCounts(exec);
       process.stdout.write(
@@ -68,6 +70,13 @@ async function main(): Promise<void> {
           `Concept maps: ${mapped.loaded} in the files, ${mapped.changed} ${dryRun ? 'would be written' : 'written'} (new or changed).\n`,
       );
       printKeys(result.retired, wrongKeyItems(dir));
+      if (dryRun && result.retired.length > 0) {
+        process.stdout.write(
+          expectRetired !== undefined && expectRetired !== result.retired.length
+            ? `The real run would refuse: --expect-retired ${expectRetired}, but ${result.retired.length} would retire. To apply: --expect-retired ${result.retired.length}\n`
+            : `To apply: --expect-retired ${result.retired.length}\n`,
+        );
+      }
       // Only seed topics are checked: learner-created topics are legitimate in prod (23 Oct 2026, the prod
       // seed found 161 with one learner topic and failed).
       const expected = values['expect-topics'];

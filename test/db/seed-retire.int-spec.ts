@@ -74,6 +74,24 @@ describe('db:seed retires items that left the files (user decision, 2 Nov 2026)'
     await expect(loadSeed(db, less)).resolves.toMatchObject({ retired: [], restored: 0 });
   });
 
+  it('a dry run needs no --expect-retired: it reports the count, and the CLI rolls it back (lead, 3 Nov 2026)', async () => {
+    const slug = `retire-${randomUUID().slice(0, 8)}`;
+    const full = bank(slug);
+    await loadSeed(db, full);
+    const less = { ...full, items: full.items.filter((i) => i.key !== 'q4') };
+    let seen: string[] = [];
+    await db
+      .transaction(async (tx) => {
+        seen = (await loadSeed(tx, less, { dryRun: true })).retired;
+        throw new Error('rollback');
+      })
+      .catch(() => undefined);
+    expect(seen).toEqual([`${slug}:q4`]);
+    expect((await rows(slug)).filter((r) => r.retiredAt !== null)).toEqual([]);
+    // The real run still needs the exact count.
+    await expect(loadSeed(db, less)).rejects.toThrow(SeedRetireRefusedError);
+  });
+
   it('lets a session that already holds a retired item keep it, and serves a returning item again', async () => {
     const slug = `retire-${randomUUID().slice(0, 8)}`;
     const full = bank(slug);

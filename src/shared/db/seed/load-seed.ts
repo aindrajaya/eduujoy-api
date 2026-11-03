@@ -27,7 +27,7 @@ function chunks<T>(rows: T[]): T[][] {
  * that left the files are retired (inactive, kept); items that return are active again.
  * Embeddings are left alone; the catalog backfills them (A6).
  */
-export async function loadSeed(db: Database, data: SeedData, options: { expectRetired?: number } = {}): Promise<SeedResult> {
+export async function loadSeed(db: Database, data: SeedData, options: { expectRetired?: number; dryRun?: boolean } = {}): Promise<SeedResult> {
   return db.transaction(async (tx) => {
     const fileKeys = data.items.map((item) => item.seedKey);
     // Retirement only looks at topics that have items in the files: a partial load (the taxonomy plus one
@@ -130,7 +130,7 @@ export async function loadSeed(db: Database, data: SeedData, options: { expectRe
        ORDER BY i.seed_key
          FOR UPDATE OF i`);
     const retired = gone.rows.map((r) => r.seed_key);
-    const refusal = retireRefusal({ toRetire: retired.length, activeSeedItems, filesItems: fileKeys.length, expectRetired: options.expectRetired });
+    const refusal = retireRefusal({ toRetire: retired.length, activeSeedItems, filesItems: fileKeys.length, expectRetired: options.expectRetired, dryRun: options.dryRun });
     if (refusal) {
       throw new SeedRetireRefusedError(refusal, {
         toRetire: retired.length,

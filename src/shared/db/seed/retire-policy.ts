@@ -15,12 +15,14 @@ export type RetireRefusal = 'files_short' | 'over_cap' | 'expect_missing' | 'cou
  * Null when the run may retire `toRetire` items. A wrong --dir, a partial checkout or a seed_key format
  * change would otherwise retire the whole bank, so: the files must hold nearly as many items as the
  * database's active seed-topic items, the count must be under the cap, and when anything is retired
- * the caller must have stated the exact count (--expect-retired).
+ * the caller must have stated the exact count (--expect-retired). A dry run (which always rolls back)
+ * needs no count (lead, 3 Nov 2026): it is where the count comes from; the safety refusals still apply.
  */
-export function retireRefusal(input: { toRetire: number; activeSeedItems: number; filesItems: number; expectRetired: number | undefined }): RetireRefusal | null {
+export function retireRefusal(input: { toRetire: number; activeSeedItems: number; filesItems: number; expectRetired: number | undefined; dryRun?: boolean }): RetireRefusal | null {
   const cap = retirementCap(input.activeSeedItems);
   if (input.filesItems < input.activeSeedItems - cap) return 'files_short';
   if (input.toRetire > cap) return 'over_cap';
+  if (input.dryRun) return null;
   if (input.toRetire > 0 && input.expectRetired === undefined) return 'expect_missing';
   if (input.expectRetired !== undefined && input.toRetire !== input.expectRetired) return 'count_mismatch';
   return null;

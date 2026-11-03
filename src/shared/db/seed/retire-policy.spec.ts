@@ -20,6 +20,15 @@ describe('seed retirement policy (user decision, 2 Nov 2026)', () => {
     expect(retireRefusal({ ...base, toRetire: 0, expectRetired: 13 })).toBe('count_mismatch');
   });
 
+  it('needs no count in a dry run, but still refuses over the cap or from a short directory (lead, 3 Nov 2026)', () => {
+    expect(retireRefusal({ ...base, expectRetired: undefined, dryRun: true })).toBeNull();
+    expect(retireRefusal({ ...base, expectRetired: 12, dryRun: true })).toBeNull();
+    expect(retireRefusal({ ...base, toRetire: 113, filesItems: 11_200, expectRetired: undefined, dryRun: true })).toBe('over_cap');
+    expect(retireRefusal({ ...base, filesItems: 11_087, expectRetired: undefined, dryRun: true })).toBe('files_short');
+    // The real run keeps the exact-count rule.
+    expect(retireRefusal({ ...base, expectRetired: undefined, dryRun: false })).toBe('expect_missing');
+  });
+
   it('refuses over the cap and a short or partial directory, before the count', () => {
     expect(retireRefusal({ ...base, toRetire: 113, filesItems: 11_200, expectRetired: 113 })).toBe('over_cap');
     expect(retireRefusal({ ...base, filesItems: 11_087 })).toBe('files_short');
