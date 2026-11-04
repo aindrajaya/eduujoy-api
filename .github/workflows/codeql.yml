@@ -7,9 +7,12 @@ on:
   schedule:
     - cron: '23 4 * * 1'
 
+# Code scanning is not enabled on this private repository, so results are not uploaded to it (the
+# upload failed with "Resource not accessible by integration"). The SARIF is kept as an artifact and
+# the job fails on any result whose rule has security-severity >= 4.0 (medium or higher).
 permissions:
   contents: read
-  security-events: write
+  actions: read
 
 jobs:
   analyze:
@@ -21,3 +24,26 @@ jobs:
         with:
           languages: javascript-typescript
       - uses: github/codeql-action/analyze@v4
+        with:
+          upload: never
+          output: sarif-results
+      - name: Keep the SARIF
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codeql-sarif
+          path: sarif-results
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Fail on medium or higher findings
+        run: |
+          shopt -s nullglob
+          files=(sarif-results/*.sarif)
+          if [ ${#files[@]} -eq 0 ]; then echo "No SARIF produced"; exit 1; fi
+          findings=$(jq -r -f .github/codeql/severity-gate.jq "${files[@]}")
+          if [ -n "$findings" ]; then
+            echo "CodeQL findings with security-severity >= 4.0 (rule, severity, file:line):"
+            echo "$findings"
+            exit 1
+          fi
+          echo "No CodeQL finding with security-severity >= 4.0."
