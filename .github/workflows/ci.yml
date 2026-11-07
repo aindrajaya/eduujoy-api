@@ -87,6 +87,8 @@ jobs:
           build-args: APP_VERSION=${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      # Expected: one outbound 401 warning from the billing key-mode check. Boot runs it in the background
+      # (an A12 safety check that catches a test key in live mode); with the ci-dummy key it only logs.
       - name: Smoke test /health and /ready in the built image
         run: |
           docker run -d --name api --network host --env-file .github/ci/smoke-env.list eduujoy-api:ci
