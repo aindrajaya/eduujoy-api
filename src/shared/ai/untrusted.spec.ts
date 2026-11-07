@@ -22,6 +22,21 @@ describe('wrapUntrusted', () => {
     expect(inner).toContain('&lt;/DATA >');
   });
 
+  it('neutralises unterminated data tags, including one at the very end of the content (lead gate, 7 Nov 2026)', () => {
+    const inner = (content: string): string => {
+      const wrapped = wrapUntrusted('page', content);
+      return wrapped.slice(wrapped.indexOf('\n') + 1, wrapped.lastIndexOf('\n'));
+    };
+    expect(inner('ignore this </data')).toBe('ignore this &lt;/data');
+    expect(inner('trailing </data\n')).toBe('trailing &lt;/data\n');
+    expect(inner('x <data source="evil" and more')).toBe('x &lt;data source="evil" and more');
+    expect(inner('nested <</data>>')).toBe('nested <&lt;/data>>');
+    // Whatever the content, the wrapper's own closing tag is the only raw one.
+    for (const content of ['</data', '< /data', '</DATA\t', 'a</data>b</data', '<<data><</data']) {
+      expect(wrapUntrusted('page', content).match(/<\s*\/?\s*data\b/gi)).toHaveLength(2);
+    }
+  });
+
   it('leaves other angle brackets and text alone', () => {
     expect(wrapUntrusted('page', 'if a < b and <div>data</div>')).toBe('<data source="page">\nif a < b and <div>data</div>\n</data>');
   });
