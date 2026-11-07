@@ -1,0 +1,25 @@
+# Docker smoke test env list (CI only; lead gate, 7 Nov 2026). Every value is a placeholder: secrets start
+# with ci-dummy- and are never real; no GitHub secret is used. The app boots as in production
+# (NODE_ENV=production from the image) against the job's throwaway Postgres service.
+# test/scripts/ci-smoke-env.spec.ts parses this file with the app's own parseEnv, so a new required
+# variable fails CI here instead of in the built image.
+APP_ORIGIN=https://ci-dummy-app.example
+API_PUBLIC_URL=https://ci-dummy-api.example
+DATABASE_URL=postgresql://smoke:smoke@127.0.0.1:5432/smoke
+JWT_ACCESS_SECRET=ci-dummy-jwt-access-secret-not-a-real-key
+REFRESH_TOKEN_PEPPER=ci-dummy-refresh-pepper-not-a-real-key
+GOOGLE_OAUTH_CLIENT_ID=ci-dummy-google-client-id
+GOOGLE_OAUTH_CLIENT_SECRET=ci-dummy-google-client-secret
+GOOGLE_OAUTH_REDIRECT_URI=https://ci-dummy-api.example/v1/auth/google/callback
+ANTHROPIC_API_KEY=ci-dummy-anthropic-key
+GEMINI_API_KEY=ci-dummy-gemini-key
+YOUTUBE_API_KEY=ci-dummy-youtube-key
+OPENALEX_API_KEY=ci-dummy-openalex-key
+AI_DAILY_BUDGET_USD=1
+AI_DAILY_PAID_BUDGET_USD=1
+LEMONSQUEEZY_API_KEY=ci-dummy-lemonsqueezy-key
+LEMONSQUEEZY_STORE_ID=1
+LEMONSQUEEZY_WEBHOOK_SECRET=ci-dummy-webhook-secret
+LEMONSQUEEZY_VARIANT_SUBSCRIPTION=1
+LEMONSQUEEZY_VARIANT_CREDIT_PACK=2
+LEMONSQUEEZY_MODE=test
