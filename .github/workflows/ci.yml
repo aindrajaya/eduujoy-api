@@ -48,8 +48,35 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     needs: verify
+    # The built image boots as in production (NODE_ENV=production) against a throwaway Postgres with the
+    # schema migrated: boot enqueues the liveness and refund sweeps, so it needs the jobs table (lead
+    # gate, 7 Nov 2026). Every env value is a ci-dummy placeholder (.github/ci/smoke-env.list); no secret.
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.0-pg17
+        env:
+          POSTGRES_USER: smoke
+          POSTGRES_PASSWORD: smoke
+          POSTGRES_DB: smoke
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U smoke -d smoke"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 30
     steps:
       - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Migrate the smoke database
+        run: pnpm db:migrate
+        env:
+          DATABASE_URL_DIRECT: postgresql://smoke:smoke@127.0.0.1:5432/smoke
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v6
         with:
@@ -60,15 +87,15 @@ jobs:
           build-args: APP_VERSION=${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      - name: Smoke test /health in the built image
+      # Expected: one outbound 401 warning from the billing key-mode check. Boot runs it in the background
+      # (an A12 safety check that catches a test key in live mode); with the ci-dummy key it only logs.
+      - name: Smoke test /health and /ready in the built image
         run: |
-          docker run -d --name api -p 8000:8000 \
-            -e APP_ORIGIN=https://eduujoy.aindrajaya.my.id \
-            -e API_PUBLIC_URL=https://api.eduujoy.aindrajaya.my.id \
-            -e DATABASE_URL=postgresql://smoke:smoke@127.0.0.1:5432/smoke \
-            eduujoy-api:ci
-          for i in $(seq 1 30); do
-            curl -fsS http://localhost:8000/health && exit 0
+          docker run -d --name api --network host --env-file .github/ci/smoke-env.list eduujoy-api:ci
+          for _ in $(seq 1 30); do
+            if curl -fsS http://localhost:8000/health; then
+              curl -fsS http://localhost:8000/ready && exit 0
+            fi
             sleep 1
           done
           docker logs api
