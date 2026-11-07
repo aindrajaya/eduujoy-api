@@ -15,7 +15,9 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Unit, int (~6 min) and e2e (~8 min) against the Frankfurt test branch ran past 15 min on 4 Nov 2026
+    # (run 41754981195: every suite passed, cancelled 4 s into openapi:check).
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
