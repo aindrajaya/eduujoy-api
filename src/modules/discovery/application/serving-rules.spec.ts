@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { conceptMapSchema, conceptMatches, namesNearStage } from '../../../shared/common/concept-map';
-import { MIN_SERVED_CARDS, pageKind, type ServableCard, servedCards, serveDrop } from '../domain';
+import { MIN_SERVED_CARDS, pageKind, type ServableCard, servedCards, serveDrop, youtubeIdFromUrl } from '../domain';
 
 // Titles and URLs are real served cards from the dev pools (3 Nov 2026).
 describe('pageKind', () => {
@@ -119,12 +119,13 @@ describe('servedCards', () => {
 
 describe("servedCards: the learner's format first (lead, 4 Nov 2026)", () => {
   const typed = (title: string, stage: ServableCard['stage'], relevance: number, url?: string) => card(title, stage, relevance, ['Not on the map'], url);
-  const isText = (c: ServableCard) => !c.url.includes('youtube.com');
+  // A video by its id, not a host substring (CodeQL js/incomplete-url-substring-sanitization).
+  const isText = (c: ServableCard) => youtubeIdFromUrl(c.url) === null;
 
   it('returns only off-map holds of the learner format, best first, up to 3 usable, and flags the pool', () => {
     const names = namesNearStage(realMap('public-speaking'), 'novice');
     const cards = [
-      ...[1, 2, 3, 4, 5, 6].map((n) => card(`Video ${n}`, 'novice', 95, ['Speech anxiety'], `https://www.youtube.com/watch?v=${n}`)),
+      ...[1, 2, 3, 4, 5, 6].map((n) => card(`Video ${n}`, 'novice', 95, ['Speech anxiety'], `https://www.youtube.com/watch?v=abcdefghij${n}`)),
       card('Speech and Communication - OER By Discipline - LibGuides at Hillsborough College', 'novice', 70, ['OER Collections for Communication Studies'], 'https://libguides.hcfl.edu/c.php?g=1019668&p=7386194'),
       typed('An off-map guide', 'novice', 80, 'https://example.com/guide'),
       typed('Low relevance guide', 'novice', 60, 'https://example.com/low'),
