@@ -1,11 +1,16 @@
+/** Characters stripped from both ends of a topic key. Whitespace is already single spaces by then. */
+const EDGE_CHARS = new Set(' "\'`.,;:!?()[]{}-');
+
 /** Lower-case, NFKC, single spaces, no surrounding punctuation: the key for exact name and alias matches. */
 export function normaliseTopicText(text: string): string {
-  return text
-    .normalize('NFKC')
-    .toLowerCase()
-    .replace(/\s+/g, ' ')
-    .trim()
-    .replace(/^[\s"'`.,;:!?()[\]{}-]+|[\s"'`.,;:!?()[\]{}-]+$/g, '');
+  const key = text.normalize('NFKC').toLowerCase().replace(/\s+/g, ' ').trim();
+  // Two index scans instead of a `[...]+$` regex: the regex backtracks quadratically on long runs of
+  // punctuation inside the text (CodeQL js/polynomial-redos).
+  let start = 0;
+  let end = key.length;
+  while (start < end && EDGE_CHARS.has(key.charAt(start))) start += 1;
+  while (end > start && EDGE_CHARS.has(key.charAt(end - 1))) end -= 1;
+  return key.slice(start, end);
 }
 
 /** The learner text that is embedded as a query: NFKC, single spaces, trimmed, case kept. */

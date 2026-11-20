@@ -77,6 +77,20 @@ describe('topic text', () => {
     expect(normaliseTopicText('C++')).toBe('c++');
   });
 
+  it('strips only the outer punctuation and keeps what is inside the text', () => {
+    expect(normaliseTopicText('((Node.js))')).toBe('node.js');
+    expect(normaliseTopicText('- [what is] REST? -')).toBe('what is] rest');
+    expect(normaliseTopicText(' ?!., ')).toBe('');
+    expect(normaliseTopicText('')).toBe('');
+  });
+
+  it('normalises a long run of inner punctuation in linear time', () => {
+    const text = `a${'!'.repeat(200_000)}a`;
+    const started = performance.now();
+    expect(normaliseTopicText(text)).toBe(text);
+    expect(performance.now() - started).toBeLessThan(500);
+  });
+
   it('slugifies names, keeping C++ and C# distinct', () => {
     expect(slugify('Machine Learning: The Basics')).toBe('machine-learning-the-basics');
     expect(slugify('C++')).toBe('cpp');
